@@ -5,14 +5,6 @@ import Qt.labs.settings 1.0
 import QtQuick.Controls.Material 2.2
 
 ListModel {
-//    ListElement
-//    {
-//        label: "Theme"
-//        content: [
-//            ListElement { dark: "Dark" },
-//            ListElement { light: "Light" }
-//        ]
-//    }
 
     ListElement {
         label: "Background color"
