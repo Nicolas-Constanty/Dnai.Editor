@@ -13,15 +13,6 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += main.cpp \
-    acommand.cpp \
-    border.cpp \
-    commanddecorator.cpp \
-    commandmanager.cpp \
-    icommand.cpp \
-    MoveCommand.cpp \
-    node.cpp \
-    nodecanvas.cpp \
-    qtroundedrectitem.cpp
 
 RESOURCES += qml.qrc
 
@@ -42,13 +33,3 @@ FORMS += \
     ColorPickerForm.ui
 
 HEADERS += \
-    acommand.h \
-    border.h \
-    commanddecorator.h \
-    commandmanager.h \
-    debugdecorator.h \
-    icommand.h \
-    MoveCommand.h \
-    node.h \
-    nodecanvas.h \
-    qtroundedrectitem.h

@@ -1,25 +1,23 @@
 <RCC>
     <qresource prefix="/">
-        <file>main.qml</file>
-        <file>Page1.qml</file>
-        <file>Page1Form.ui.qml</file>
         <file>qtquickcontrols2.conf</file>
-        <file>SettingPanelForm.ui.qml</file>
-        <file>ThemePanel.qml</file>
-        <file>Container.qml</file>
-        <file>ColorPicker.qml</file>
-        <file>SettingPanel.qml</file>
-        <file>ColorPickerForm.ui.qml</file>
-        <file>ThemePanelForm.ui.qml</file>
-        <file>NodePanel.qml</file>
-        <file>NodePanelForm.ui.qml</file>
-        <file>BasePanel.qml</file>
-        <file>ColorPickerModel.qml</file>
-        <file>DropDown.qml</file>
-        <file>DropDownForm.ui.qml</file>
-        <file>ThemeModel.qml</file>
-        <file>LanguageModel.qml</file>
-        <file>LanguagePanel.qml</file>
-        <file>LanguagePanelForm.ui.qml</file>
+        <file>main.qml</file>
+        <file>Resources/Components/ColorPicker.qml</file>
+        <file>Resources/Components/Container.qml</file>
+        <file>Resources/Components/DropDown.qml</file>
+        <file>Resources/Components/ToolBarHeader.qml</file>
+        <file>Resources/Forms/ColorPickerForm.ui.qml</file>
+        <file>Resources/Forms/DropDownForm.ui.qml</file>
+        <file>Resources/Forms/LanguagePanelForm.ui.qml</file>
+        <file>Resources/Forms/NodePanelForm.ui.qml</file>
+        <file>Resources/Forms/SettingPanelForm.ui.qml</file>
+        <file>Resources/Forms/ThemePanelForm.ui.qml</file>
+        <file>Resources/Models/ColorPickerModel.qml</file>
+        <file>Resources/Models/LanguageModel.qml</file>
+        <file>Resources/Models/ThemeModel.qml</file>
+        <file>Resources/Panels/LanguagePanel.qml</file>
+        <file>Resources/Panels/NodePanel.qml</file>
+        <file>Resources/Panels/SettingPanel.qml</file>
+        <file>Resources/Panels/ThemePanel.qml</file>
     </qresource>
 </RCC>
