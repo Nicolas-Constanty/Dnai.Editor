@@ -11,8 +11,10 @@ Item {
     property alias button: selectButton
     property alias colorDialogRef: colorDialog
     property int mainHeight: 50
+    property alias colorSetting: settings.colorSelected
 
     Settings {
+        id: settings
         category: name
         property alias colorSelected: colorSelect.color
     }

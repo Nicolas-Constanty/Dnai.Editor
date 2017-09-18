@@ -9,6 +9,9 @@ import "../Components"
 Item {
     property alias colRef: column
     property alias rectRef: rectangle
+    property alias backgroudColorRef: backgroundColor
+    property alias gridColorRef: gridColor
+    property alias accentGridColorRef: accentGridColor
 
     ScrollView {
         id: rectangle
@@ -30,6 +33,7 @@ Item {
             }
 
             ColorPicker {
+                id: backgroundColor
                 name: "Background Color"
                 anchors.right: parent.right
                 anchors.rightMargin: 0
@@ -39,6 +43,7 @@ Item {
             }
 
             ColorPicker {
+                id: gridColor
                 name: "Fine Grid Color"
                 anchors.right: parent.right
                 anchors.rightMargin: 0
@@ -48,6 +53,7 @@ Item {
             }
 
             ColorPicker {
+                id: accentGridColor
                 name: "Coarse Grid Color"
                 anchors.right: parent.right
                 anchors.rightMargin: 0
