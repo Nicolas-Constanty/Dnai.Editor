@@ -7,6 +7,7 @@ import "../Panels"
 Item {
     id: item1
     property alias tabBar: bar
+    property alias themeTabRef: themeTab
     StackLayout {
         id: stack
         currentIndex: bar.currentIndex

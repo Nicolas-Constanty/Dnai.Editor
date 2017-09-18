@@ -1,4 +1,3 @@
-import QtQuick 2.0
 import QtQuick 2.9
 import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
@@ -7,9 +6,9 @@ import QtQuick.Dialogs 1.2
 import "../Panels"
 
 Item {
+    property alias menuEditRef: menuEdit
     ToolBar {
         width: parent.width
-        property alias menuEditRef: menuEdit
         Material.background: Material.color(Material.Grey, Material.Shade800)
         spacing: 0
         ScrollView {
@@ -57,6 +56,7 @@ Item {
 
                    Menu {
                        id: menuEdit
+                       property alias settingRef: settingPanel
                        MenuItem {
                            text: qsTr("Undo")
                        }
@@ -318,6 +318,7 @@ Item {
             closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutside
             contentItem: SettingPanel {
                 anchors.fill: parent
+                id: settingPanel
             }
     }
 

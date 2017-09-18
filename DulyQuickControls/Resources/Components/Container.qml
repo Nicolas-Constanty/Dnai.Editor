@@ -1,4 +1,4 @@
-import QtQuick 2.9
+import QtQuick 1.1
 
 Item {
     property alias innerElement : content.sourceComponent
