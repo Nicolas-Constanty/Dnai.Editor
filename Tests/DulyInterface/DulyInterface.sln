@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.12
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DulyInterface", "DulyInterface.vcxproj", "{57E135D2-CE1B-324F-9863-C3CA1A0F84DC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{57E135D2-CE1B-324F-9863-C3CA1A0F84DC}.Debug|x64.ActiveCfg = Debug|x64
+		{57E135D2-CE1B-324F-9863-C3CA1A0F84DC}.Debug|x64.Build.0 = Debug|x64
+		{57E135D2-CE1B-324F-9863-C3CA1A0F84DC}.Release|x64.ActiveCfg = Release|x64
+		{57E135D2-CE1B-324F-9863-C3CA1A0F84DC}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {96A76DFF-21F9-4B9D-8946-A013C42B74A9}
+	EndGlobalSection
+EndGlobal
