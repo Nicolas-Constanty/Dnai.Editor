@@ -2,6 +2,7 @@
 #define LINE_H
 
 #include <QtQuick/QQuickItem>
+#include <QtQuick/qsgnode.h>
 #include <QColor>
 
 class Line : public QQuickItem
@@ -31,6 +32,8 @@ public:
     void setP2(const QPointF &p);
     void setLineWidth(int lw);
     void setLineColor(const QColor &color);
+
+    static QSGGeometryNode *CreateRawLine(const QPointF &p1, const QPointF &p2, int lineWidth, const QColor &color);
 
 signals:
     void p1Changed(const QPointF &p);
