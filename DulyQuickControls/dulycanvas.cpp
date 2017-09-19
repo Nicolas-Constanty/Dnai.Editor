@@ -2,6 +2,8 @@
 #include <QtQuick/qsgflatcolormaterial.h>
 #include <QSGSimpleRectNode>
 
+#include <algorithm>
+
 #include "dulycanvas.h"
 #include "line.h"
 
@@ -10,6 +12,7 @@ DulyCanvas::DulyCanvas(QQuickItem *parent)
     , m_gridStep(15)
     , m_accentGridStep(150)
     , m_backgroundColor(Qt::transparent)
+    , m_scaleFactor(1)
 {
     setFlag(ItemHasContents, true);
 //    CreateGrid();
@@ -17,14 +20,12 @@ DulyCanvas::DulyCanvas(QQuickItem *parent)
 
 void DulyCanvas::CreateGrid()
 {
-
-   auto drawGrid =
-        [&](double gridStep, int lineWidth, const QColor &color)
+    m_lines.clear();
+    auto drawGrid = [&](double gridStep, int lineWidth, const QColor &color)
     {
-
+        gridStep *= m_scaleFactor;
+        lineWidth *= m_scaleFactor;
         QRectF windowRect = boundingRect();
-        qInfo() << windowRect.height();
-        qInfo() << windowRect.width();
         QPointF tl = mapToScene(windowRect.topLeft());
         QPointF br = mapToScene(windowRect.bottomRight());
 
@@ -36,13 +37,13 @@ void DulyCanvas::CreateGrid()
         // vertical lines
         for (int xi = int(left); xi <= int(right); ++xi)
         {
-            new Line(QPointF(xi * gridStep, bottom * gridStep), QPointF(xi * gridStep, top * gridStep), lineWidth, color, this);
+            m_lines.push_back(Line::CreateRawLine(QPointF(xi * gridStep, bottom * gridStep), QPointF(xi * gridStep, top * gridStep), lineWidth, color));
         }
 
         // horizontal lines
         for (int yi = int(bottom); yi <= int(top); ++yi)
         {
-            new Line(QPointF(left * gridStep, yi * gridStep), QPointF(right * gridStep, yi * gridStep), lineWidth, color, this);
+            m_lines.push_back(Line::CreateRawLine(QPointF(left * gridStep, yi * gridStep), QPointF(right * gridStep, yi * gridStep), lineWidth, color));
         }
     };
     drawGrid(m_gridStep, 1, m_gridColor);
@@ -103,6 +104,15 @@ void DulyCanvas::setBackgroundColor(const QColor &color)
     update();
 }
 
+void DulyCanvas::setScaleFactor(double scale)
+{
+    if (scale == m_scaleFactor)
+        return;
+    m_scaleFactor = scale;
+    emit scaleFactorChanged(scale);
+    update();
+}
+
 QSGNode *DulyCanvas::updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *)
 {
     QSGSimpleRectNode *n = static_cast<QSGSimpleRectNode *>(oldNode);
@@ -111,8 +121,15 @@ QSGNode *DulyCanvas::updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *)
     }
     n->setColor(m_backgroundColor);
     n->setRect(boundingRect());
+    if (m_lines.size() > 0 && oldNode)
+    {
+        n->removeAllChildNodes();
+        auto deleteNodes = [&](QSGGeometryNode *o) { delete o; return true; };
+        m_lines.remove_if(deleteNodes);
+    }
     CreateGrid();
-//    n->markDirty(QSGNode::DirtyGeometry);
+    auto setParent = [&](QSGGeometryNode *o) { n->appendChildNode(o); };
+    std::for_each(m_lines.begin(), m_lines.end(), setParent);
 
     return n;
 }

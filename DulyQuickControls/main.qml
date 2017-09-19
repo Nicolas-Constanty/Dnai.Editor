@@ -25,23 +25,24 @@ ApplicationWindow {
 
     }
 
+    MouseArea {
+        anchors.fill: parent
+        acceptedButtons: Qt.LeftButton | Qt.RightButton
+        onWheel: {
+            if (wheel.modifiers & Qt.ControlModifier) {
+                canvas.scaleFactor += 0.1 * wheel.angleDelta.y / 120;
+            }
+        }
+    }
     DulyCanvas {
         id: canvas
-        scale: 1
         anchors.fill: parent
         gridStep: 15
         gridColor: toolBar.menuEditRef.settingRef.themeTabRef.gridColorRef.colorSetting
         accentGridStep: 150
         accentGridColor: toolBar.menuEditRef.settingRef.themeTabRef.accentGridColorRef.colorSetting
         backgroundColor: toolBar.menuEditRef.settingRef.themeTabRef.backgroudColorRef.colorSetting
+
     }
-
-
-
-//    Line {
-//        lineWidth: 1
-//        p1: Qt.point(10,10)
-//        p2: Qt.point(20,20)
-//    }
 
 }

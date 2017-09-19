@@ -93,32 +93,44 @@ void Line::setLineColor(const QColor &color)
     update();
 }
 
-QSGNode *Line::updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *)
+QSGGeometryNode *Line::CreateRawLine(const QPointF &p1, const QPointF &p2, int lineWidth, const QColor &color)
 {
     QSGGeometryNode *node = 0;
     QSGGeometry *geometry = 0;
+
+    node = new QSGGeometryNode;
+    geometry = new QSGGeometry(QSGGeometry::defaultAttributes_Point2D(), 2);
+    geometry->setLineWidth(lineWidth);
+    geometry->setDrawingMode(QSGGeometry::DrawLineStrip);
+    node->setGeometry(geometry);
+    node->setFlag(QSGNode::OwnsGeometry);
+    QSGFlatColorMaterial *material = new QSGFlatColorMaterial;
+    material->setColor(color);
+    node->setMaterial(material);
+    node->setFlag(QSGNode::OwnsMaterial);
+
+    QSGGeometry::Point2D *vertices = geometry->vertexDataAsPoint2D();
+    vertices[0].set(p1.x(), p1.y());
+    vertices[1].set(p2.x(), p2.y());
+    return node;
+}
+
+QSGNode *Line::updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *)
+{
+    QSGGeometryNode *node = 0;
+
     setWidth(qFabs(m_p2.x() - m_p1.x()));
     setHeight(qFabs(m_p2.y() - m_p1.y()));
-
     if (!oldNode) {
-        node = new QSGGeometryNode;
-        geometry = new QSGGeometry(QSGGeometry::defaultAttributes_Point2D(), 2);
-        geometry->setLineWidth(m_lineWidth);
-        geometry->setDrawingMode(QSGGeometry::DrawLineStrip);
-        node->setGeometry(geometry);
-        node->setFlag(QSGNode::OwnsGeometry);
-        QSGFlatColorMaterial *material = new QSGFlatColorMaterial;
-        material->setColor(m_lineColor);
-        node->setMaterial(material);
-        node->setFlag(QSGNode::OwnsMaterial);
+        node = CreateRawLine(m_p1, m_p2, m_lineWidth, m_lineColor);
     } else {
         node = static_cast<QSGGeometryNode *>(oldNode);
-        geometry = node->geometry();
-        geometry->allocate(2);
+        QSGGeometry *geometry = node->geometry();
+        QSGGeometry::Point2D *vertices = geometry->vertexDataAsPoint2D();
+        vertices[0].set(m_p1.x(), m_p1.y());
+        vertices[1].set(m_p2.x(), m_p2.y());
     }
-    QSGGeometry::Point2D *vertices = geometry->vertexDataAsPoint2D();
-    vertices[0].set(m_p1.x(), m_p1.y());
-    vertices[1].set(m_p2.x(), m_p2.y());
+
     node->markDirty(QSGNode::DirtyGeometry);
 
     return node;
