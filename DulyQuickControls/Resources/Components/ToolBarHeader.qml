@@ -22,7 +22,7 @@ Item {
 
                    Menu {
                        id: menuFile
-
+                       y: parent.height
                        MenuItem {
                            text: qsTr("New window")
                        }
@@ -56,6 +56,7 @@ Item {
 
                    Menu {
                        id: menuEdit
+                       y: parent.height
                        property alias settingRef: settingPanel
                        MenuItem {
                            text: qsTr("Undo")
@@ -94,7 +95,7 @@ Item {
 
                    Menu {
                        id: menuView
-
+                        y: parent.height
                        MenuItem {
                            text: qsTr("Toogle full screen")
                        }
@@ -122,9 +123,9 @@ Item {
                ToolButton {
                    text: qsTr("Panes")
                    onClicked: menuPanes.open()
-
                    Menu {
                        id: menuPanes
+                       y: parent.height
 
                        MenuItem {
                            text: qsTr("Split left")
@@ -150,9 +151,9 @@ Item {
                ToolButton {
                    text: qsTr("Tab")
                    onClicked: menuTab.open()
-
                    Menu {
                        id: menuTab
+                       y: parent.height
 
                        MenuItem {
                            text: qsTr("Next tab")
@@ -175,9 +176,9 @@ Item {
                ToolButton {
                    text: qsTr("Viewport")
                    onClicked: viewportTab.open()
-
                    Menu {
                        id: viewportTab
+                       y: parent.height
 
                        MenuItem {
                            text: qsTr("Zoom in")
@@ -232,9 +233,9 @@ Item {
                ToolButton {
                    text: qsTr("Node")
                    onClicked: nodeTab.open()
-
                    Menu {
                        id: nodeTab
+                       y: parent.height
 
                        MenuItem {
                            text: qsTr("New node")
@@ -257,9 +258,9 @@ Item {
                ToolButton {
                    text: qsTr("Run")
                    onClicked: runTab.open()
-
                    Menu {
                        id: runTab
+                       y: parent.height
 
                        MenuItem {
                            text: qsTr("Build")
@@ -288,7 +289,7 @@ Item {
 
                    Menu {
                        id: cloudTab
-
+                        y: parent.height
                        MenuItem {
                            text: qsTr("Upload")
                        }

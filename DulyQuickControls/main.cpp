@@ -7,6 +7,7 @@
 #include "beziercurve.h"
 #include "line.h"
 #include "dulycanvas.h"
+#include "roundedrectangle.h"
 
 int main(int argc, char *argv[])
 {
@@ -16,6 +17,7 @@ int main(int argc, char *argv[])
     qmlRegisterType<BezierCurve>("CustomGeometry", 1, 0, "BezierCurve");
     qmlRegisterType<Line>("CustomGeometry", 1, 0, "Line");
     qmlRegisterType<DulyCanvas>("CustomGeometry", 1, 0, "DulyCanvas");
+    qmlRegisterType<RoundedRectangle>("CustomGeometry", 1, 0, "RoundedRectangle");
     app.setOrganizationName("Duly");
     app.setOrganizationDomain("Duly.com");
     app.setApplicationName("Duly Application");

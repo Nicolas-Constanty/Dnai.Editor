@@ -16,7 +16,9 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += main.cpp \
     dulycanvas.cpp \
     beziercurve.cpp \
-    line.cpp
+    line.cpp \
+    genericnode.cpp \
+    roundedrectangle.cpp
 
 RESOURCES += qml.qrc
 
@@ -38,4 +40,6 @@ FORMS +=
 HEADERS += \
     dulycanvas.h \
     beziercurve.h \
-    line.h
+    line.h \
+    genericnode.h \
+    roundedrectangle.h

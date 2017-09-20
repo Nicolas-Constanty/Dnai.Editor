@@ -54,7 +54,8 @@ void DulyCanvas::CreateGrid()
 
 DulyCanvas::~DulyCanvas()
 {
-
+    auto deleteNodes = [&](QSGGeometryNode *o) { delete o; return true; };
+    m_lines.remove_if(deleteNodes);
 }
 
 void DulyCanvas::setAccentGridStep(int step)
