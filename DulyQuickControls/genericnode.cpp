@@ -5,7 +5,7 @@
 
 #include "genericnode.h"
 
-GenericNode::GenericNode(QQuickItem *parent) : QQuickItem(parent)
+GenericNode::GenericNode(QQuickItem *parent) : RoundedRectangle(parent)
 {
 
 }

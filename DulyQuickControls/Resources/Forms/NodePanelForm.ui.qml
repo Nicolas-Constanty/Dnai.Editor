@@ -62,6 +62,30 @@ Item {
                 anchors.leftMargin: 0
                 height: 40
             }
+            ColorPicker {
+                name: "IntColor"
+                anchors.right: parent.right
+                anchors.rightMargin: 0
+                anchors.left: parent.left
+                anchors.leftMargin: 0
+                height: 40
+            }
+            ColorPicker {
+                name: "StringColor"
+                anchors.right: parent.right
+                anchors.rightMargin: 0
+                anchors.left: parent.left
+                anchors.leftMargin: 0
+                height: 40
+            }
+            ColorPicker {
+                name: "BoolColor"
+                anchors.right: parent.right
+                anchors.rightMargin: 0
+                anchors.left: parent.left
+                anchors.leftMargin: 0
+                height: 40
+            }
         }
     }
 }

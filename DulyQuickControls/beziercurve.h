@@ -68,7 +68,7 @@ public:
     BezierCurve(QQuickItem *parent = 0);
     ~BezierCurve();
 
-    QSGNode *updatePaintNode(QSGNode *, UpdatePaintNodeData *);
+    QSGNode *updatePaintNode(QSGNode *, UpdatePaintNodeData *) override;
 
     QPointF p1() const { return m_p1; }
     QPointF p2() const { return m_p2; }
@@ -99,5 +99,6 @@ private:
     QPointF m_p4;
 
     int m_segmentCount;
+    bool holdClick;
 };
 #endif // BEZIERCURVE_H

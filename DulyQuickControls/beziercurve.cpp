@@ -120,8 +120,8 @@ void BezierCurve::setSegmentCount(int count)
 
 QSGNode *BezierCurve::updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *)
 {
-    QSGGeometryNode *node = 0;
-    QSGGeometry *geometry = 0;
+    QSGGeometryNode *node = nullptr;
+    QSGGeometry *geometry = nullptr;
 
     if (!oldNode) {
         node = new QSGGeometryNode;
@@ -143,16 +143,16 @@ QSGNode *BezierCurve::updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *)
     QRectF bounds = boundingRect();
     QSGGeometry::Point2D *vertices = geometry->vertexDataAsPoint2D();
     for (int i = 0; i < m_segmentCount; ++i) {
-        qreal t = i / qreal(m_segmentCount - 1);
-        qreal invt = 1 - t;
+	    const qreal t = i / qreal(m_segmentCount - 1);
+	    const qreal invt = 1 - t;
 
         QPointF pos = invt * invt * invt * m_p1
                     + 3 * invt * invt * t * m_p2
                     + 3 * invt * t * t * m_p3
                     + t * t * t * m_p4;
 
-        float x = bounds.x() + pos.x() * bounds.width();
-        float y = bounds.y() + pos.y() * bounds.height();
+	    const float x = bounds.x() + pos.x() * bounds.width();
+	    const float y = bounds.y() + pos.y() * bounds.height();
 
         vertices[i].set(x, y);
     }
