@@ -3,7 +3,6 @@
 
 #include <QQuickItem>
 #include <QtQuick/qsgnode.h>
-#include <QtQuick/qsgflatcolormaterial.h>
 
 class RoundedRectangle : public QQuickItem
 {
@@ -12,7 +11,7 @@ class RoundedRectangle : public QQuickItem
     Q_PROPERTY(int roundedSegments READ roundedSegments WRITE setRoundedSegments NOTIFY roundedSegmentsChanged)
 public:
     RoundedRectangle(QQuickItem *parent = 0);
-    QSGNode *updatePaintNode(QSGNode *, UpdatePaintNodeData *);
+    QSGNode *updatePaintNode(QSGNode *, UpdatePaintNodeData *) override;
 
     double radius() const { return m_radius; }
     void setRadius(double radius);

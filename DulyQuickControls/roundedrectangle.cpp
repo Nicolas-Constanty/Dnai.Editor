@@ -30,20 +30,7 @@ void RoundedRectangle::setRadius(double radius)
 
 QSGNode *RoundedRectangle::updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *)
 {
-    qDebug() << "YAY";
-    QSGNode *node = 0;
-//    QSGGeometry *geometry = 0;
-
-    node = new QSGNode;
-//    geometry = new QSGGeometry(QSGGeometry::defaultAttributes_Point2D(), 4 * 5);
-//    geometry->setLineWidth(1);
-//    geometry->setDrawingMode(QSGGeometry::DrawTriangleStrip);
-//    node->setGeometry(geometry);
-//    node->setFlag(QSGNode::OwnsGeometry);
-//    QSGFlatColorMaterial *material = new QSGFlatColorMaterial;
-//    material->setColor(QColor(255, 0, 0));
-//    node->setMaterial(material);
-//    node->setFlag(QSGNode::OwnsMaterial);
+	QSGNode *node = new QSGNode;
 
     QSGGeometryNode *buffer = new QSGGeometryNode;
     QSGGeometry *bufferGeometry = new QSGGeometry(QSGGeometry::defaultAttributes_Point2D(), 4);
@@ -158,7 +145,7 @@ QSGGeometryNode *RoundedRectangle::DrawCorner(Corner type)
 
     QSGGeometry::Point2D *vertices = bufferGeometry->vertexDataAsPoint2D();
 
-    double offset;
+	double offset = 0;
     QPointF center;
     switch (type) {
         case Corner::TopLeft:
@@ -182,7 +169,7 @@ QSGGeometryNode *RoundedRectangle::DrawCorner(Corner type)
             offset = 0;
             break;
     }
-    double a = qDegreesToRadians(90.0 / m_roundedSegments);
+	const double a = qDegreesToRadians(90.0 / m_roundedSegments);
 
     vertices[0].set(center.x(), center.y());
     for (int i = 1; i < m_roundedSegments + 1; i++)

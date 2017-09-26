@@ -21,7 +21,7 @@ public:
     Line(const QPointF &p1, const QPointF &p2, int lineWidth, const QColor &color, QQuickItem *parent = 0);
     ~Line();
 
-    QSGNode *updatePaintNode(QSGNode *, UpdatePaintNodeData *);
+    QSGNode *updatePaintNode(QSGNode *, UpdatePaintNodeData *) override;
 
     QPointF p1() const { return m_p1; }
     QPointF p2() const { return m_p2; }

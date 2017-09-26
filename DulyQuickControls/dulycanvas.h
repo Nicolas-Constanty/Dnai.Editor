@@ -1,7 +1,6 @@
 #ifndef DULYCANVAS_H
 #define DULYCANVAS_H
 
-#include <QQuickItem>
 #include <QColor>
 #include <list>
 #include <memory>
@@ -24,7 +23,7 @@ public:
     DulyCanvas(QQuickItem *parent = 0);
     ~DulyCanvas();
 
-    QSGNode *updatePaintNode(QSGNode *, UpdatePaintNodeData *);
+    QSGNode *updatePaintNode(QSGNode *, UpdatePaintNodeData *) override;
 
     int gridStep() const { return m_gridStep; }
     int accentGridStep() const { return m_accentGridStep; }
@@ -32,7 +31,6 @@ public:
     QColor accentGridColor() const { return m_accentGridColor; }
     QColor backgroundColor() const { return m_backgroundColor; }
     double scaleFactor() const { return m_scaleFactor; }
-
 
     void setGridStep(int step);
     void setAccentGridStep(int step);

@@ -18,7 +18,13 @@ SOURCES += main.cpp \
     beziercurve.cpp \
     line.cpp \
     genericnode.cpp \
-    roundedrectangle.cpp
+    roundedrectangle.cpp \
+    link.cpp \
+    baseio.cpp \
+    input.cpp \
+    output.cpp \
+    ioquickitem.cpp \
+    io.cpp
 
 RESOURCES += qml.qrc
 
@@ -42,4 +48,14 @@ HEADERS += \
     beziercurve.h \
     line.h \
     genericnode.h \
-    roundedrectangle.h
+    roundedrectangle.h \
+    ilinkable.h \
+    observablelist.h \
+    link.h \
+    baseio.h \
+    resourcesnode.h \
+    linkabletype.h \
+    input.h \
+    output.h \
+    ioquickitem.h \
+    io.h

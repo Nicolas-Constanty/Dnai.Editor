@@ -33,21 +33,44 @@ ApplicationWindow {
 
     header: ToolBarHeader {
         id: toolBar
+
     }
 
-    MenuBar {
-        Menu {
-            title: "File"
-            MenuItem { text: "Open..." }
-            MenuItem { text: "Close" }
-        }
+    Label {
+        text: "Input Bool"
+        x: 200
+        y: parent.height / 2 - 40
+    }
+    Input {
+        x: 200
+        y: parent.height / 2
+        radius: 20
+        type: IOType.Bool
+    }
 
-        Menu {
-            title: "Edit"
-            MenuItem { text: "Cut" }
-            MenuItem { text: "Copy" }
-            MenuItem { text: "Paste" }
-        }
+    Label {
+        text: "Output Bool"
+        x: parent.width - 200
+        y: parent.height / 2 - 40
+    }
+    Output {
+        x: parent.width - 200
+        y: parent.height / 2
+        radius: 20
+        type: IOType.Bool
+
+    }
+
+    Label {
+        text: "Output Int"
+        x: parent.width - 200
+        y: parent.height / 2 - 150
+    }
+    Output {
+        x: parent.width - 200
+        y: parent.height / 2 - 100
+        radius: 20
+
     }
 
 //    MouseArea {
