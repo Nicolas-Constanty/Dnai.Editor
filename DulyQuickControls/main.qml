@@ -5,6 +5,7 @@ import QtQuick.Controls.Material 2.2
 import QtQuick.Dialogs 1.2
 import QtCharts 2.2
 import CustomGeometry 1.0
+import Qt.labs.platform 1.0
 
 import "Resources/Components"
 
@@ -20,20 +21,34 @@ ApplicationWindow {
     property double factor : 1.5
     id: root
 
-    RoundedRectangle {
-        width: 200
-        height: 100
-        radius: 50
-        roundedSegments: 16
-        x: parent.width / 2
-        y: parent.height / 2
-        antialiasing: true
+//    RoundedRectangle {
+//        width: 200
+//        height: 100
+//        radius: 50
+//        roundedSegments: 16
+//        x: parent.width / 2
+//        y: parent.height / 2
+//        antialiasing: true
+//    }
+
+    header: ToolBarHeader {
+        id: toolBar
     }
 
-//    header: ToolBarHeader {
-//        id: toolBar
+    MenuBar {
+        Menu {
+            title: "File"
+            MenuItem { text: "Open..." }
+            MenuItem { text: "Close" }
+        }
 
-//    }
+        Menu {
+            title: "Edit"
+            MenuItem { text: "Cut" }
+            MenuItem { text: "Copy" }
+            MenuItem { text: "Paste" }
+        }
+    }
 
 //    MouseArea {
 //        anchors.fill: parent
