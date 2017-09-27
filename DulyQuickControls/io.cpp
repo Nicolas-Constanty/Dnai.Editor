@@ -4,6 +4,7 @@
 #include <QSGSimpleRectNode>
 
 #include "io.h"
+#include "beziercurve.h"
 
 IO::IO(QQuickItem *parent) :
     QQuickItem(parent)
@@ -37,8 +38,11 @@ void IO::mousePressEvent(QMouseEvent *event)
 {
     if (event->button() == Qt::LeftButton && CheckCircle(event->pos()))
     {
-        qDebug() << "m_holdClick";
         m_holdClick = true;
+        auto b = new BezierCurve(this);
+        b->setPosition(QPoint(width() / 2, height() / 2));
+        b->setP1(QPoint(0,0));
+        m_currentCurve = b;
     }
 }
 
@@ -47,6 +51,14 @@ void IO::mouseReleaseEvent(QMouseEvent *event)
     if (event->button() == Qt::LeftButton)
     {
         m_holdClick = false;
+    }
+}
+
+void IO::mouseMoveEvent(QMouseEvent *event)
+{
+    if (m_holdClick)
+    {
+        m_currentCurve->setP4(event->pos());
     }
 }
 
@@ -84,6 +96,8 @@ QSGNode *IO::updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *)
 
     return node;
 }
+
+
 
 QSGGeometryNode *IO::CreateBackground() const
 {

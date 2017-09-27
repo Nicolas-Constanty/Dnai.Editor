@@ -2,17 +2,17 @@
 #define MOVECOMMAND_H
 
 #include "icommand.h"
-#include <QGraphicsItem>
+#include <QQuickItem>
 
 class MoveCommand : public ICommand
 {
 public:
-	MoveCommand(QGraphicsItem* w, const QPoint& vec);
+    MoveCommand(QQuickItem* w, const QPoint& vec);
 	void Execute() const override;
 	void UnExcute() const override;
 
 private:
-	QGraphicsItem* m_w;
+    QQuickItem* m_w;
 	QPoint m_vec;
 };
 

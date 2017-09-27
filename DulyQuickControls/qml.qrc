@@ -19,5 +19,7 @@
         <file>Resources/Panels/NodePanel.qml</file>
         <file>Resources/Panels/SettingPanel.qml</file>
         <file>Resources/Panels/ThemePanel.qml</file>
+        <file>Resources/Components/NodeForm.ui.qml</file>
+        <file>Resources/Components/Node.qml</file>
     </qresource>
 </RCC>

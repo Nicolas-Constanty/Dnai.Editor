@@ -20,57 +20,70 @@ ApplicationWindow {
     property double factor : 1.5
     id: root
 
-//    RoundedRectangle {
-//        width: 200
-//        height: 100
-//        radius: 50
-//        roundedSegments: 16
-//        x: parent.width / 2
-//        y: parent.height / 2
-//        antialiasing: true
+    RoundedRectangle {
+        width: 200
+        height: 100
+        radius: 50
+        roundedSegments: 16
+        x: parent.width / 2
+        y: parent.height / 2
+        antialiasing: true
+    }
+
+//    header: ToolBarHeader {
+//        id: toolBar
+
 //    }
 
-    header: ToolBarHeader {
-        id: toolBar
 
-    }
+//    TestNode {
+//        x: 500
+//        y: 500
+//        width: 300
+//        height: 200
+//    }
 
-    Label {
-        text: "Input Bool"
-        x: 200
-        y: parent.height / 2 - 40
-    }
-    Input {
-        x: 200
-        y: parent.height / 2
-        radius: 20
-        type: IOType.Bool
-    }
+//    Node {
+//        x: 100
+//        y:100
+//    }
 
-    Label {
-        text: "Output Bool"
-        x: parent.width - 200
-        y: parent.height / 2 - 40
-    }
-    Output {
-        x: parent.width - 200
-        y: parent.height / 2
-        radius: 20
-        type: IOType.Bool
+//    Label {
+//        text: "Input Bool"
+//        x: 200
+//        y: parent.height / 2 - 40
+//    }
+//    Input {
+//        x: 200
+//        y: parent.height / 2
+//        radius: 20
+//        type: IOType.Bool
+//    }
 
-    }
+//    Label {
+//        text: "Output Bool"
+//        x: parent.width - 200
+//        y: parent.height / 2 - 40
+//    }
+//    Output {
+//        x: parent.width - 200
+//        y: parent.height / 2
+//        radius: 20
+//        type: IOType.Bool
 
-    Label {
-        text: "Output Int"
-        x: parent.width - 200
-        y: parent.height / 2 - 150
-    }
-    Output {
-        x: parent.width - 200
-        y: parent.height / 2 - 100
-        radius: 20
+//    }
 
-    }
+//    Label {
+//        text: "Output Int"
+//        x: parent.width - 200
+//        y: parent.height / 2 - 150
+//    }
+//    Output {
+//        x: parent.width - 200
+//        y: parent.height / 2 - 100
+//        radius: 20
+
+//    }
 
 //    MouseArea {
 //        anchors.fill: parent
