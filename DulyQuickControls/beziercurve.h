@@ -100,5 +100,7 @@ private:
 
     int m_segmentCount;
     bool holdClick;
+    QVector2D m_scale;
+    QVector2D m_lastScale;
 };
 #endif // BEZIERCURVE_H

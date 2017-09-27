@@ -1,4 +1,4 @@
-QT += quick
+QT += qml quick quickcontrols2
 
 CONFIG += c++11
 
@@ -6,33 +6,40 @@ CONFIG += c++11
 # any feature of Qt which as been marked deprecated (the exact warnings
 # depend on your compiler). Please consult the documentation of the
 # deprecated API in order to know how to port your code away from it.
-DEFINES += QT_DEPRECATED_WARNINGS
+DEFINES += QT_DEPRECATED_WARNINGS QNANO_USE_RENDERNODE
 
 # You can also make your code fail to compile if you use deprecated APIs.
 # In order to do so, uncomment the following line.
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
-SOURCES += main.cpp \
-    dulycanvas.cpp \
+SOURCES += baseio.cpp \
     beziercurve.cpp \
-    line.cpp \
+    border.cpp \
+    commanddecorator.cpp \
+    commandmanager.cpp \
+    dulycanvas.cpp \
     genericnode.cpp \
-    roundedrectangle.cpp \
-    link.cpp \
-    baseio.cpp \
     input.cpp \
-    output.cpp \
+    io.cpp \
     ioquickitem.cpp \
-    io.cpp
+    line.cpp \
+    link.cpp \
+    main.cpp \
+    MoveCommand.cpp \
+    node.cpp \
+    output.cpp \
+    roundedrectangle.cpp \
+    nodepainter.cpp \
+    debugdecorator.cpp
 
 RESOURCES += qml.qrc
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
-QML_IMPORT_PATH =
+QML_IMPORT_PATH = QT_INSTALL_QML/QtQml/Models.2
 
 # Additional import path used to resolve QML modules just for Qt Quick Designer
-QML_DESIGNER_IMPORT_PATH =
+QML_DESIGNER_IMPORT_PATH = QT_INSTALL_QML/QtQml.2/Models
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -43,19 +50,26 @@ DISTFILES +=
 
 FORMS +=
 
-HEADERS += \
-    dulycanvas.h \
+HEADERS += baseio.h \
     beziercurve.h \
-    line.h \
+    border.h \
+    commanddecorator.h \
+    commandmanager.h \
+    debugdecorator.h \
     genericnode.h \
-    roundedrectangle.h \
+    icommand.h \
     ilinkable.h \
-    observablelist.h \
-    link.h \
-    baseio.h \
-    resourcesnode.h \
-    linkabletype.h \
     input.h \
-    output.h \
+    io.h \
     ioquickitem.h \
-    io.h
+    line.h \
+    link.h \
+    linkabletype.h \
+    MoveCommand.h \
+    node.h \
+    observablelist.h \
+    output.h \
+    resourcesnode.h \
+    roundedrectangle.h \
+    nodepainter.h \
+    dulycanvas.h

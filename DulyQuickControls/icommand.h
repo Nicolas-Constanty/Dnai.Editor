@@ -1,7 +1,7 @@
 #ifndef ICOMMAND_H
 #define ICOMMAND_H
 
-#include "iclonable.h"
+//#include "iclonable.h"
 
 class ICommand
 {

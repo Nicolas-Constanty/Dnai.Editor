@@ -1,7 +1,7 @@
 #include "MoveCommand.h"
 
 
-MoveCommand::MoveCommand(QGraphicsItem *w, const QPoint &vec)
+MoveCommand::MoveCommand(QQuickItem *w, const QPoint &vec)
 {
 	m_w = w;
 	m_vec = vec;
@@ -9,11 +9,11 @@ MoveCommand::MoveCommand(QGraphicsItem *w, const QPoint &vec)
 
 void MoveCommand::Execute() const
 {
-	m_w->setPos(m_w->pos() + m_vec);
+    m_w->setPosition(m_w->position() + m_vec);
 }
 
 void MoveCommand::UnExcute() const
 {
-	m_w->setPos(m_w->pos() - m_vec);
+    m_w->setPosition(m_w->position() - m_vec);
 }
 

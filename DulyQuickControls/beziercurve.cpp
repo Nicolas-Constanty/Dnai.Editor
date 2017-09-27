@@ -60,6 +60,8 @@ BezierCurve::BezierCurve(QQuickItem *parent)
     , m_p3(0, 1)
     , m_p4(1, 1)
     , m_segmentCount(32)
+    , m_scale(1.0, 1.0)
+    , m_lastScale(1,1)
 {
     setFlag(ItemHasContents, true);
 }
@@ -102,8 +104,20 @@ void BezierCurve::setP4(const QPointF &p)
 {
     if (p == m_p4)
         return;
+    if (p.x() < 0)
+        m_scale.setX(-1);
+    else
+        m_scale.setX(1);
+    if (p.y() < 0)
+        m_scale.setY(-1);
+    else
+        m_scale.setY(1);
 
-    m_p4 = p;
+    setWidth(qAbs(p.x()) + ((p.x() < 0)?1:-1) * position().x());
+    setHeight(qAbs(p.y()) + ((p.y() < 0)?1:-1) * position().y());
+//    m_p4 ;
+//    m_p2 = QPoint(m_p1.x() - (m_p1.x() - m_p4.x()) / 3, m_p2.y());
+//    m_p3 = QPoint(m_p1.x() + (m_p4.x() - m_p1.x()) / 3, m_p1.y());
     emit p4Changed(p);
     update();
 }
@@ -118,7 +132,7 @@ void BezierCurve::setSegmentCount(int count)
     update();
 }
 
-QSGNode *BezierCurve::updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *)
+QSGNode *BezierCurve::updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *data)
 {
     QSGGeometryNode *node = nullptr;
     QSGGeometry *geometry = nullptr;
@@ -139,6 +153,10 @@ QSGNode *BezierCurve::updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *)
         geometry = node->geometry();
         geometry->allocate(m_segmentCount);
     }
+    QMatrix4x4 matrix = data->transformNode->matrix();
+    matrix.scale((m_lastScale.x() != m_scale.x())?-1:1, (m_lastScale.y() != m_scale.y())?-1:1);
+    data->transformNode->setMatrix(matrix);
+    m_lastScale = m_scale;
 
     QRectF bounds = boundingRect();
     QSGGeometry::Point2D *vertices = geometry->vertexDataAsPoint2D();

@@ -7,6 +7,7 @@
 
 #include "baseio.h"
 #include "resourcesnode.h"
+#include "beziercurve.h"
 
 class IO : public QQuickItem
 {
@@ -39,6 +40,8 @@ private:
 protected:
     void mousePressEvent(QMouseEvent *event);
     void mouseReleaseEvent(QMouseEvent *event);
+    void mouseMoveEvent(QMouseEvent *event);
+
 
     DulyResources::IOType m_type;
     QSettings m_settings;
@@ -46,5 +49,6 @@ protected:
     BaseIO *m_io;
 
     bool m_holdClick;
+    BezierCurve *m_currentCurve;
 };
 #endif // IO_H

@@ -1,13 +1,16 @@
-#include <QtQuick/qsgnode.h>
 #include <QtQuick/qsgflatcolormaterial.h>
-#include <QSGSimpleRectNode>
+#include "nodepainter.h"
 
 
 #include "genericnode.h"
 
-GenericNode::GenericNode(QQuickItem *parent) : RoundedRectangle(parent)
+GenericNode::GenericNode(QQuickItem *parent) : QNanoQuickItem(parent), m_radius(10)
 {
+}
 
+QNanoQuickItemPainter* GenericNode::createItemPainter() const
+{
+	return new NodePainter(m_radius);
 }
 
 void GenericNode::setBackgroundColor(const QColor &color)
@@ -19,14 +22,11 @@ void GenericNode::setBackgroundColor(const QColor &color)
     update();
 }
 
-
-QSGNode *GenericNode::updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *)
+void GenericNode::setRadius(double radius)
 {
-    QSGSimpleRectNode *n = static_cast<QSGSimpleRectNode *>(oldNode);
-    if (!n) {
-       n = new QSGSimpleRectNode();
-    }
-    n->setColor(m_backgroundColor);
-    n->setRect(boundingRect());
-    return n;
+	if (radius == m_radius)
+		return;
+	m_radius = radius;
+	emit radiusChanged(radius);
+	update();
 }

@@ -1,5 +1,6 @@
 #include <QtGui>
 #include <QtQuick>
+#include <QQuickStyle>
 
 #include "beziercurve.h"
 #include "line.h"
@@ -7,12 +8,14 @@
 #include "roundedrectangle.h"
 #include "input.h"
 #include "output.h"
+#include "genericnode.h"
 
 int main(int argc, char *argv[])
 {
 
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     QGuiApplication app(argc, argv);
+    QQuickStyle::setStyle("Material");
     qmlRegisterType<BezierCurve>("CustomGeometry", 1, 0, "BezierCurve");
     qmlRegisterType<Line>("CustomGeometry", 1, 0, "Line");
     qmlRegisterType<DulyCanvas>("CustomGeometry", 1, 0, "DulyCanvas");
@@ -21,6 +24,7 @@ int main(int argc, char *argv[])
     qmlRegisterType<Input>("CustomGeometry", 1, 0, "Input");
     qmlRegisterType<Output>("CustomGeometry", 1, 0, "Output");
     qmlRegisterType<DulyResources>("CustomGeometry", 1, 0, "IOType");
+	qmlRegisterType<GenericNode>("CustomGeometry", 1, 0, "TestNode");
     app.setOrganizationName("Duly");
     app.setOrganizationDomain("Duly.com");
     app.setApplicationName("Duly Application");
