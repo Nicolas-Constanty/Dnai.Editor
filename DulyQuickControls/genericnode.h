@@ -2,8 +2,12 @@
 #define GENERICNODE_H
 
 #include <QQuickItem>
+#include "observablelist.h"
+#include "roundedrectangle.h"
+#include "input.h"
+#include "output.h"
 
-class GenericNode : public QQuickItem
+class GenericNode : public RoundedRectangle
 {
     Q_OBJECT
     Q_PROPERTY(QColor backgroundColor READ backgroundColor WRITE setBackgroundColor NOTIFY backgroundColorChanged)
@@ -20,7 +24,10 @@ signals:
 
 private:
     QColor m_backgroundColor;
-    QSGNode *updatePaintNode(QSGNode *, UpdatePaintNodeData *);
+    QSGNode *updatePaintNode(QSGNode *, UpdatePaintNodeData *) override;
+
+    ObservableList<Input *> m_inputs;
+    ObservableList<Output *> m_outputs;
 };
 
 #endif // GENERICNODE_H
