@@ -17,6 +17,7 @@ public:
 
 public slots:
     void connectionAccepted();
+    void onClientDisconnect();
 
 private:
     quint16 m_port;

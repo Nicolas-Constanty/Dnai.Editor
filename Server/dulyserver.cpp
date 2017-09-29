@@ -25,9 +25,22 @@ void DulyServer::start() {
     }
 }
 
+void DulyServer::onClientDisconnect() {
+    std::list<DulyCommunicationServer *>::iterator it = m_clients.begin();
+
+    while (it != m_clients.end()) {
+        if ((*it)->socket()->isOpen()) {
+            m_clients.erase(it);
+            return;
+        }
+    }
+}
+
 void DulyServer::connectionAccepted() {
     QTcpSocket *socket = this->nextPendingConnection();
     DulyCommunicationServer *newCommunication = new DulyCommunicationServer(socket);
+
+    connect(socket, SIGNAL(disconnected()), this, SLOT(onClientDisconnect()));
 
     newCommunication->start();
     m_clients.push_back(newCommunication);

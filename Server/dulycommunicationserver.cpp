@@ -16,6 +16,9 @@ DulyCommunicationServer &DulyCommunicationServer::operator=(DulyCommunicationSer
     return (*this);
 }
 
+QTcpSocket *DulyCommunicationServer::socket() {
+    return (m_socket);
+}
 
 void DulyCommunicationServer::start() {
     qDebug() << "[INFO] connection start !";
