@@ -1,7 +1,7 @@
 #include <QtQuick/qsgnode.h>
 #include <QtQuick/qsgflatcolormaterial.h>
 #include <QSGSimpleRectNode>
-
+#include <QtMath>
 #include <algorithm>
 
 #include "dulycanvas.h"
@@ -21,7 +21,7 @@ DulyCanvas::DulyCanvas(QQuickItem *parent)
 void DulyCanvas::CreateGrid()
 {
     m_lines.clear();
-    auto drawGrid = [&](double gridStep, int lineWidth, const QColor &color)
+	const auto drawGrid = [&](double gridStep, int lineWidth, const QColor &color)
     {
         gridStep *= m_scaleFactor;
         lineWidth *= m_scaleFactor;
@@ -29,10 +29,10 @@ void DulyCanvas::CreateGrid()
         QPointF tl = mapToScene(windowRect.topLeft());
         QPointF br = mapToScene(windowRect.bottomRight());
 
-        double left = std::floor(tl.x() / gridStep - 0.5);
-        double right = std::floor(br.x() / gridStep + 1.0);
-        double bottom = std::floor(tl.y() / gridStep - 0.5);
-        double top = std::floor(br.y() / gridStep + 1.0);
+        double left = qFloor(tl.x() / gridStep - 0.5);
+        double right = qFloor(br.x() / gridStep + 1.0);
+        double bottom = qFloor(tl.y() / gridStep - 0.5);
+        double top = qFloor(br.y() / gridStep + 1.0);
 
         // vertical lines
         for (int xi = int(left); xi <= int(right); ++xi)
@@ -54,7 +54,7 @@ void DulyCanvas::CreateGrid()
 
 DulyCanvas::~DulyCanvas()
 {
-    auto deleteNodes = [&](QSGGeometryNode *o) { delete o; return true; };
+	const auto deleteNodes = [&](QSGGeometryNode *o) { delete o; return true; };
     m_lines.remove_if(deleteNodes);
 }
 
@@ -125,11 +125,11 @@ QSGNode *DulyCanvas::updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *)
     if (m_lines.size() > 0 && oldNode)
     {
         n->removeAllChildNodes();
-        auto deleteNodes = [&](QSGGeometryNode *o) { delete o; return true; };
+	    const auto deleteNodes = [&](QSGGeometryNode *o) { delete o; return true; };
         m_lines.remove_if(deleteNodes);
     }
     CreateGrid();
-    auto setParent = [&](QSGGeometryNode *o) { n->appendChildNode(o); };
+	const auto setParent = [&](QSGGeometryNode *o) { n->appendChildNode(o); };
     std::for_each(m_lines.begin(), m_lines.end(), setParent);
 
     return n;
