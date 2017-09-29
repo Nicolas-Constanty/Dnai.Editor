@@ -16,6 +16,7 @@ public:
 
 public:
     void start();
+    QTcpSocket *socket();
 
 public slots:
     void onRead();
