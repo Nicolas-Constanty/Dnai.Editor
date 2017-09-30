@@ -1,16 +1,10 @@
 #include <QtQuick/qsgflatcolormaterial.h>
-#include "nodepainter.h"
 
 
 #include "genericnode.h"
 
-GenericNode::GenericNode(QQuickItem *parent) : QNanoQuickItem(parent), m_radius(10)
+GenericNode::GenericNode(QQuickItem *parent) : QQuickItem(parent), m_radius(10)
 {
-}
-
-QNanoQuickItemPainter* GenericNode::createItemPainter() const
-{
-	return new NodePainter(m_radius);
 }
 
 void GenericNode::setBackgroundColor(const QColor &color)

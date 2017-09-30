@@ -24,7 +24,6 @@ int main(int argc, char *argv[])
     qmlRegisterType<Input>("CustomGeometry", 1, 0, "Input");
     qmlRegisterType<Output>("CustomGeometry", 1, 0, "Output");
     qmlRegisterType<DulyResources>("CustomGeometry", 1, 0, "IOType");
-	qmlRegisterType<GenericNode>("CustomGeometry", 1, 0, "TestNode");
     app.setOrganizationName("Duly");
     app.setOrganizationDomain("Duly.com");
     app.setApplicationName("Duly Application");
