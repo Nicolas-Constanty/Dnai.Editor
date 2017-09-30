@@ -30,8 +30,9 @@ SOURCES += baseio.cpp \
     node.cpp \
     output.cpp \
     roundedrectangle.cpp \
-    nodepainter.cpp \
-    debugdecorator.cpp
+    debugdecorator.cpp \
+    qsgroundedrectanglenode.cpp \
+    qsgdefaultroundedrectangle.cpp
 
 RESOURCES += qml.qrc
 
@@ -71,5 +72,6 @@ HEADERS += baseio.h \
     output.h \
     resourcesnode.h \
     roundedrectangle.h \
-    nodepainter.h \
-    dulycanvas.h
+    dulycanvas.h \
+    qsgroundedrectanglenode.h \
+    qsgdefaultroundedrectangle.h

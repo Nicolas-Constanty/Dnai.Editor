@@ -22,13 +22,41 @@ ApplicationWindow {
 
     RoundedRectangle {
         width: 200
-        height: 100
-        radius: 50
-        roundedSegments: 16
+        height: 200
+        radius: 100
+        roundedSegments: 8
         x: parent.width / 2
         y: parent.height / 2
         antialiasing: true
+        border: 10
+        borderColor: Qt.rgba(1,1,0)
+        fillColor: Qt.rgba(1,0,1)
+//        bottomRight: false
+//        bottomLeft: false
+//        topLeft: false
+//        topRight: false
     }
+//    RoundedRectangle {
+//        width: 200
+//        height: 100
+//        radius: 100
+//        roundedSegments: 16
+//        x: parent.width / 2
+//        y: parent.height / 2 + 75
+//        antialiasing: true
+////        border: 4
+//        borderColor: Qt.rgba(1,1,0)
+//        fillColor: Qt.rgba(0,1,1)
+////        bottomRight: false
+////        bottomLeft: false
+//        topLeft: false
+//        topRight: false
+////        gradient: Gradient {
+////                GradientStop { position: 0.0; color: "red" }
+////                GradientStop { position: 0.33; color: "yellow" }
+////                GradientStop { position: 1.0; color: "green" }
+////            }
+//    }
 
 //    header: ToolBarHeader {
 //        id: toolBar
