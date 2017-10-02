@@ -116,8 +116,8 @@ int RoundedRectangle::GetNumberRoundedCorner() const
 QSGGeometryNode *RoundedRectangle::CreateBorder() const
 {
     int idx = -1;
-    const qreal h = height();
-    const qreal w = width();
+    const qreal h = (height() / 2.f - m_radius) / 2.f;
+    const qreal w = (width() + m_radius * 2.f) / 2.f;
     const float a = 0.5f * float(M_PI) / m_roundedSegments;
     const bool aa = antialiasing();
     const int nCorner = GetNumberRoundedCorner();
@@ -279,18 +279,18 @@ QSGGeometryNode *RoundedRectangle::CreateBorder() const
     return bufferBorder;
 }
 
-QSGNode *RoundedRectangle::updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *)
+QSGNode *RoundedRectangle::updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *data)
 {
     int idx = -1;
     const uint aaoffset = 1;
-    const qreal h = height();
-    const qreal w = width();
+    const qreal h = (height() / 2.f - m_radius) / 2.f;
+    const qreal w = (width() + m_radius * 2.f) / 2.f;
     const uchar r = m_fillColor.red();
     const uchar g = m_fillColor.green();
     const uchar b = m_fillColor.blue();
     const uchar alpha = m_fillColor.alpha();
     const int nCorner = GetNumberRoundedCorner();
-    const bool aa = antialiasing();
+    const bool aa = (m_border < 1) && antialiasing();
     const float a = 0.5f * float(M_PI) / m_roundedSegments;
     m_roundedSegments += (m_roundedSegments % 2 == 0)?0:1;
     const int nbVertice = (aa?28:20) + nCorner * (aa ? (m_roundedSegments * m_roundedSegments % 2 == 0 ? (4*m_roundedSegments + 1) : (4*(m_roundedSegments-1)+7)):(2 * m_roundedSegments + 1)) -1; /* 20 = 4 * 5 (nbVertice * nbRects) with aa 28 = 4 * 5 + 2 * 4 (nbVertice * nbRects + nbVerticeAA * (nbRects - 1)) */
@@ -395,5 +395,8 @@ QSGNode *RoundedRectangle::updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData
 
     if (m_border > 0)
         buffer->appendChildNode(CreateBorder());
+
+    Q_ASSERT(idx + 1 == nbVertice);
+
     return buffer;
 }
