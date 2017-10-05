@@ -27,6 +27,12 @@ public:
      */
     virtual QList<QQuickItem *> findFocused(const QPointF &point);
 
+	/**
+	 * \brief Return the list
+	 * \return QList<QQuickItem *> &
+	 */
+	QList<QQuickItem *> &getList();
+
 protected:
     QList<QQuickItem *> m_items;
 };

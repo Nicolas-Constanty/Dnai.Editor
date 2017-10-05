@@ -40,6 +40,28 @@ private:
 private:
     FocusManagerIo m_inputs;
     FocusManagerIo m_outputs;
+    QPointF m_offset;
+
+private:
+    void updateInputs();
+    void updateOutputs();
+
+protected:
+	/**
+	* \brief Override mouseMoveEvent
+	* \param event
+	*/
+	virtual void mouseMoveEvent(QMouseEvent *event) override;
+	/**
+	* \brief Override mousePressEvent
+	* \param event
+	*/
+	virtual void mousePressEvent(QMouseEvent *event) override;
+	/**
+	* \brief Override mouseReleaseEvent
+	* \param event
+	*/
+	virtual void mouseReleaseEvent(QMouseEvent *event) override;
 };
 
 #endif // GENERICNODE_H

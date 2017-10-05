@@ -24,7 +24,6 @@ Io::Io(QQuickItem *parent) :
     setAcceptHoverEvents(true);
     setAcceptedMouseButtons(Qt::AllButtons);
     setFlag(ItemAcceptsInputMethod, true);
-    installEventFilter(this);
     setAntialiasing(true);
 }
 

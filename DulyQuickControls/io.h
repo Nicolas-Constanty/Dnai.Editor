@@ -28,6 +28,7 @@ public:
 	explicit Io (QQuickItem *parent = nullptr);
     ~Io();
 	
+    virtual void updateLink() = 0;
 	/**
 	 * \brief Refresh BackendIo
 	 */

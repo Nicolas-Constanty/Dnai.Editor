@@ -1,6 +1,9 @@
 #include <QtQuick/qsgflatcolormaterial.h>
 #include <QSGSimpleRectNode>
 
+
+#include "input.h"
+#include "output.h"
 #include "dulycanvas.h"
 #include "genericnode.h"
 
@@ -9,6 +12,9 @@ GenericNode::GenericNode(QQuickItem *parent) :
 {
     DulyCanvas::Instance->focusManager().registerItem(this);
     setFlag(ItemHasContents, true);
+	setAcceptHoverEvents(true);
+	setAcceptedMouseButtons(Qt::LeftButton);
+	setFlag(ItemAcceptsInputMethod, true);
 }
 
 void GenericNode::setHeader(RoundedRectangle *h)
@@ -27,6 +33,52 @@ void GenericNode::setContent(RoundedRectangle *c)
     m_content = c;
     m_content->setParent(this);
     emit contentChanged(c);
+}
+
+void GenericNode::mouseMoveEvent(QMouseEvent* event)
+{
+    QPointF p(mapToItem(DulyCanvas::Instance, event->pos()) + m_offset);
+    setX(p.x());
+    setY(p.y());
+    updateInputs();
+    updateOutputs();
+}
+
+void GenericNode::updateInputs()
+{
+    auto list = m_inputs.getList();
+    for (int i = 0; i < list.size(); i++)
+    {
+        auto input = dynamic_cast<Input *>(list.at(i));
+        if (input && input->getBaseIo()->isLink())
+        {
+            input->updateLink();
+        }
+    }
+}
+
+void GenericNode::updateOutputs()
+{
+    auto list = m_outputs.getList();
+    for (int i = 0; i < list.size(); i++)
+    {
+        auto output = dynamic_cast<Output *>(list.at(i));
+        if (output && output->getBaseIo()->isLink())
+        {
+            output->updateLink();
+        }
+    }
+}
+
+void GenericNode::mousePressEvent(QMouseEvent* event)
+{
+    m_offset = QPointF(position() - mapToItem(DulyCanvas::Instance, event->pos()));
+}
+
+void GenericNode::mouseReleaseEvent(QMouseEvent *)
+{
+    m_offset.setX(0);
+    m_offset.setY(0);
 }
 
 QSGNode *GenericNode::updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *)

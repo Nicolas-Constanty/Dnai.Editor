@@ -7,9 +7,7 @@
 class OutputBackend : public BaseIo
 {
 public:
-	explicit OutputBackend(DulyResources::IOType type) : BaseIo() {
-        m_type = type;
-    }
+    explicit OutputBackend(DulyResources::IOType type, QQuickItem *parent);
 	
 	/**
 	* \brief Connect linkable together, create a link, and keep a reference on the visual curve
@@ -18,8 +16,6 @@ public:
 	* \return Link *
 	*/
     Link *connect(ALinkable *linkable, BezierCurve *curve) override;
-private:
-    OutputBackend() {}
 };
 
 class Output : public Io
@@ -45,6 +41,8 @@ public:
 	* \return Io *
 	*/
 	virtual Io *findIo(GenericNode *n, const QPointF &p) override;
+
+    virtual void updateLink() override;
 
 private:
 

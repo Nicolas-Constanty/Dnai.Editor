@@ -24,9 +24,9 @@ public:
     }
 	/**
      * \brief return all the list of Link
-     * \return ObservableList<Link *>
+     * \return QList<Link *>
      */
-    const ObservableList<Link *> &links() const { return m_links; }
+    const QList<Link *> &links() const { return m_links; }
 	
 	/**
 	* \brief Connect linkable together, create a link, and keep a reference on the visual curve
@@ -72,8 +72,9 @@ public:
      */
     virtual Link *getLink(ALinkable *linkable) const = 0;
 
+
 protected:
-    ObservableList<Link *> m_links;
+    QList<Link *> m_links;
 };
 
 #endif // ILINKABLE_H
