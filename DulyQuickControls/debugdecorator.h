@@ -5,10 +5,17 @@
 class DebugDecorator : public CommandDecorator
 {
 public:
-	DebugDecorator(ICommand *decoratedCommand);
+	explicit DebugDecorator(ICommand *decoratedCommand);
 
-	void Execute() const override;
-	void UnExcute() const override;
+	/**
+	* \brief Execute the command
+	*/
+	void execute() const override;
+	
+	/**
+	* \brief Reverse the command
+	*/
+	void unExcute() const override;
 
 };
 

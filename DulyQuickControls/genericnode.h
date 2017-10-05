@@ -1,40 +1,45 @@
 #ifndef GENERICNODE_H
 #define GENERICNODE_H
 
-#include <QQuickItem>
-#include "observablelist.h"
 #include "roundedrectangle.h"
-#include "input.h"
-#include "output.h"
+#include "focusmanager.h"
 
 class GenericNode : public QQuickItem
 {
 	Q_OBJECT
-    Q_PROPERTY(QColor backgroundColor READ backgroundColor WRITE setBackgroundColor NOTIFY backgroundColorChanged)
-    Q_PROPERTY(double radius READ radius WRITE setRadius NOTIFY radiusChanged)
+
+    Q_PROPERTY(RoundedRectangle *header READ header WRITE setHeader NOTIFY headerChanged)
+    Q_PROPERTY(RoundedRectangle *content READ content WRITE setContent NOTIFY contentChanged)
 
 public:
-	GenericNode(QQuickItem *parent = nullptr);
+	explicit GenericNode(QQuickItem *parent = nullptr);
+	/**
+	 * \brief Override updatePaintNode and draw a beautifull Node
+	 * \return QSGNode *
+	 */
+	virtual QSGNode *updatePaintNode(QSGNode *, UpdatePaintNodeData *) override;
 
+public:
+	FocusManagerIo &inputs() { return m_inputs; }
+	FocusManagerIo &outputs() { return m_outputs; }
+    RoundedRectangle *header() const { return m_header; }
+    RoundedRectangle *content() const { return m_content; }
 
-    QColor backgroundColor() const { return m_backgroundColor; }
-    void setBackgroundColor(const QColor & color);
-
-	double radius() const { return m_radius; }
-    void setRadius(double radius);
-
-
-
+public:
+    void setHeader(RoundedRectangle *h);
+    void setContent(RoundedRectangle *c);
+    
 signals:
-    void backgroundColorChanged(const QColor &color);
-    void radiusChanged(double r);
+    void headerChanged(RoundedRectangle *h);
+    void contentChanged(RoundedRectangle *c);
 
 private:
-    QColor m_backgroundColor;
+    RoundedRectangle *m_header;
+    RoundedRectangle *m_content;
 
-    ObservableList<Input *> m_inputs;
-    ObservableList<Output *> m_outputs;
-    double m_radius;
+private:
+    FocusManagerIo m_inputs;
+    FocusManagerIo m_outputs;
 };
 
 #endif // GENERICNODE_H

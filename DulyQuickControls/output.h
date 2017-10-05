@@ -4,25 +4,47 @@
 #include "baseio.h"
 #include "io.h"
 
-class OutputBackend : public BaseIO
+class OutputBackend : public BaseIo
 {
 public:
-    OutputBackend(DulyResources::IOType type) : BaseIO() {
+	explicit OutputBackend(DulyResources::IOType type) : BaseIo() {
         m_type = type;
     }
-
-    const std::shared_ptr<Link> &Connect(ALinkable *linkable) override;
+	
+	/**
+	* \brief Connect linkable together, create a link, and keep a reference on the visual curve
+	* \param linkable
+	* \param curve
+	* \return Link *
+	*/
+    Link *connect(ALinkable *linkable, BezierCurve *curve) override;
 private:
     OutputBackend() {}
 };
 
-class Output : public IO
+class Output : public Io
 {
 
 public:
-    Output (QQuickItem *parent = 0);
+	explicit Output (QQuickItem *parent = nullptr);
 
-    void refreshBackendIO() override;
+	/**
+	* \brief Refresh BackendIO for Output
+	*/
+	virtual void refreshBackendIo() override;
+
+	/**
+	* \brief Override componentComplete, and init some values
+	*/
+	virtual void componentComplete() override;
+
+	/**
+	* \brief Override findIo, return the IO under the point p of the Node n
+	* \param n
+	* \param p
+	* \return Io *
+	*/
+	virtual Io *findIo(GenericNode *n, const QPointF &p) override;
 
 private:
 

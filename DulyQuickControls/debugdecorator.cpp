@@ -6,13 +6,13 @@ DebugDecorator::DebugDecorator(ICommand* decoratedCommand) : CommandDecorator(de
 {
 }
 
-void DebugDecorator::Execute() const
+void DebugDecorator::execute() const
 {
 	qDebug() << "C++ Style Debug Message";
-	m_decoratedCommand->Execute();
+	m_decoratedCommand->execute();
 }
 
-void DebugDecorator::UnExcute() const
+void DebugDecorator::unExcute() const
 {
-	m_decoratedCommand->UnExcute();
+	m_decoratedCommand->unExcute();
 }

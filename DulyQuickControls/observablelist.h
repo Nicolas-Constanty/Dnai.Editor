@@ -10,6 +10,9 @@ class BaseObservable : public QObject
     Q_OBJECT
 public:
     explicit BaseObservable(QObject *parent = nullptr) : QObject(parent) {}
+	/**
+     * \brief Notification Type Enum
+     */
     enum NotificationType {
         AddItem,
         RemoveItem,
@@ -27,24 +30,44 @@ class ObservableList : public BaseObservable
 public:
     explicit ObservableList(QObject *parent = nullptr) : BaseObservable(parent) {}
 
-    bool Empty() const { return m_list.empty(); }
+	/**
+     * \brief is list is empty?
+     * \return bool
+     */
+    bool empty() const { return m_list.empty(); }
 
+	/**
+     * \brief return the std list
+     * \return std::list<T> &
+     */
     const std::list<T> &rawList() const {return m_list;}
 
-    void Add(const T &ref)
+	/**
+     * \brief add an item
+     * \param ref 
+     */
+    void add(const T &ref)
     {
         m_item = ref;
         m_list.push_back(ref);
         emit listChanged(NotificationType::AddItem);
     }
 
-    void Remove(const T &ref)
+	/**
+     * \brief remove an item
+     * \param ref 
+     */
+    void remove(const T &ref)
     {
         m_item = ref;
         m_list.remove(ref);
         emit listChanged(NotificationType::RemoveItem);
     }
-    void Clear()
+
+	/**
+     * \brief remove all item
+     */
+    void clear()
     {
         m_list.clear();
         emit listChanged(NotificationType::ClearList);

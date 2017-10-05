@@ -10,20 +10,43 @@
 #include "output.h"
 #include "genericnode.h"
 
+struct RegisterSettings
+{
+	RegisterSettings(const char* namespaceName, int version, int subVersion)
+		: namespaceName(namespaceName),
+		  version(version),
+		  subVersion(subVersion)
+	{
+	}
+
+	const char *namespaceName;
+	const int version;
+	const int subVersion;
+};
+
+void registerCustomGeometry()
+{
+	const RegisterSettings s = { "CustomGeometry", 1, 0 };
+
+	qmlRegisterType<BezierCurve>(s.namespaceName, s.version, s.subVersion, "BezierCurve");
+	qmlRegisterType<Line>(s.namespaceName, s.version, s.subVersion, "Line");
+	qmlRegisterType<DulyCanvas>(s.namespaceName, s.version, s.subVersion, "DulyCanvas");
+	qmlRegisterType<RoundedRectangle>(s.namespaceName, s.version, s.subVersion, "RoundedRectangle");
+	qmlRegisterType<GenericNode>(s.namespaceName, s.version, s.subVersion, "GenericNode");
+	qmlRegisterType<Input>(s.namespaceName, s.version, s.subVersion, "Input");
+	qmlRegisterType<Output>(s.namespaceName, s.version, s.subVersion, "Output");
+	qmlRegisterType<DulyResources>(s.namespaceName, s.version, s.subVersion, "IOType");
+}
+
 int main(int argc, char *argv[])
 {
 
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     QGuiApplication app(argc, argv);
     QQuickStyle::setStyle("Material");
-    qmlRegisterType<BezierCurve>("CustomGeometry", 1, 0, "BezierCurve");
-    qmlRegisterType<Line>("CustomGeometry", 1, 0, "Line");
-    qmlRegisterType<DulyCanvas>("CustomGeometry", 1, 0, "DulyCanvas");
-    qmlRegisterType<RoundedRectangle>("CustomGeometry", 1, 0, "RoundedRectangle");
-//    qmlRegisterType<Input>("CustomGeometry", 1, 0, "IO");
-    qmlRegisterType<Input>("CustomGeometry", 1, 0, "Input");
-    qmlRegisterType<Output>("CustomGeometry", 1, 0, "Output");
-    qmlRegisterType<DulyResources>("CustomGeometry", 1, 0, "IOType");
+    
+	registerCustomGeometry();
+
     app.setOrganizationName("Duly");
     app.setOrganizationDomain("Duly.com");
     app.setApplicationName("Duly Application");

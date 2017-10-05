@@ -1,78 +1,87 @@
 #include "link.h"
 #include "baseio.h"
+#include <QDebug>
 
-BaseIO::BaseIO() : m_type(DulyResources::IOType::Int)
+BaseIo::BaseIo() : m_type(DulyResources::IOType::Int)
 {
 
 }
 
-BaseIO::~BaseIO()
+BaseIo::~BaseIo()
 {
 
 }
 
-const std::shared_ptr<Link> &BaseIO::Connect(ALinkable *linkable)
+Link *BaseIo::connect(ALinkable *linkable, BezierCurve *curve)
 {
-    auto l = GetLink(linkable);
-    if (l.get() == nullptr)
+    auto l = getLink(linkable);
+    if (l == nullptr)
     {
-        l = std::make_shared<Link>(this, linkable);
-        m_links.Add(l);
-		linkable->AddLink(l);
+        l = new Link(this, linkable);
+        l->setCurve(curve);
+        m_links.add(l);
+		linkable->addLink(l);
         return l;
     }
     //TODO INSERT DEBUG "Link already exist"
     return l;
 }
 
-void BaseIO::Unlink(ALinkable *linkable)
+void BaseIo::unlink(ALinkable *linkable)
 {
-	const auto l = GetLink(linkable);
+	const auto l = getLink(linkable);
     if (l != nullptr)
     {
-		m_links.Remove(l);
-        linkable->RemoveLink(l);
+		m_links.remove(l);
+        linkable->removeLink(l);
     }
     //TODO INSERT DEBUG "Link doesn't exist"
 }
 
-void BaseIO::UnlinkAll()
+void BaseIo::unlinkAll()
 {
     auto l = m_links.rawList();
     for (auto i : l)
     {
-        i->L2->Unlink(this);
+        i->L2->unlink(this);
     }
-    m_links.Clear();
+    m_links.clear();
 }
 
-void BaseIO::AddLink(const std::shared_ptr<Link>& l)
+void BaseIo::addLink(Link *l)
 {
-	m_links.Add(l);
+	m_links.add(l);
 }
 
-void BaseIO::RemoveLink(const std::shared_ptr<Link>& l)
+void BaseIo::removeLink(Link *l)
 {
-	m_links.Remove(l);
+	m_links.remove(l);
 }
 
-bool BaseIO::IsLink()
+bool BaseIo::isLink()
 {
-    return m_links.Empty();
+    return m_links.empty();
 }
 
-void BaseIO::setType(DulyResources::IOType t)
+void BaseIo::setType(DulyResources::IOType t)
 {
     if (t == m_type)
         return;
     m_type = t;
 }
 
-const std::shared_ptr<Link> &BaseIO::GetLink(ALinkable *linkable) const
+DulyResources::IOType BaseIo::getType() const
+{
+	return m_type;
+}
+
+Link *BaseIo::getLink(ALinkable *linkable) const
 {
     auto ref = m_links.rawList();
-	const auto findFunc = [&](const std::shared_ptr<Link> l){
+    const auto findFunc = [&](auto *l){
         return ((l->L1 == this && l->L2 == linkable) || (l->L1 == linkable && l->L2 == this));
     };
-    return *std::find_if(ref.begin(), ref.end(), findFunc);
+	const auto it = std::find_if(ref.begin(), ref.end(), findFunc);
+    if (it == ref.end()) return nullptr;
+    return (*it);
 }

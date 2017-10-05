@@ -4,25 +4,38 @@
 #include "output.h"
 #include "input.h"
 
-const std::shared_ptr<Link> &OutputBackend::Connect(ALinkable *linkable)
+Link *OutputBackend::connect(ALinkable *linkable, BezierCurve *curve)
 {
 	const auto li = dynamic_cast<InputBackend *>(linkable);
-    if (li != nullptr && li->GetType() == GetType())
+
+    if (li != nullptr && li->getType() == getType())
     {
-        return BaseIO::Connect(linkable);
+        return BaseIo::connect(linkable, curve);
     }
     return nullptr;
 }
 
 Output::Output(QQuickItem *parent) :
-    IO(parent)
-{
+    Io(parent)
 
+{
+    m_io = new OutputBackend(m_type);
 }
 
-void Output::refreshBackendIO()
+void Output::refreshBackendIo()
 {
-//    if (m_io)
-//        delete m_io;
     m_io = new OutputBackend(m_type);
+}
+
+void Output::componentComplete()
+{
+    QQuickItem::componentComplete();
+	auto n = dynamic_cast<GenericNode *>(parentItem()->parentItem()->parentItem()->parentItem()->parentItem());
+    n->outputs().registerItem(this);
+}
+
+Io *Output::findIo(GenericNode *n, const QPointF &p)
+{
+    auto qlist = n->inputs().findFocused(p);
+    return (qlist.size() != 0)?dynamic_cast<Io*>(qlist.at(0)):nullptr;
 }

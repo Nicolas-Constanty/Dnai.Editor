@@ -7,27 +7,31 @@
 #include "dulycanvas.h"
 #include "line.h"
 
+DulyCanvas *DulyCanvas::Instance = nullptr;
+
 DulyCanvas::DulyCanvas(QQuickItem *parent)
     : QQuickItem(parent)
     , m_gridStep(15)
     , m_accentGridStep(150)
-    , m_backgroundColor(Qt::transparent)
     , m_scaleFactor(1)
+    , m_backgroundColor(Qt::transparent)
 {
     setFlag(ItemHasContents, true);
 //    CreateGrid();
+    if (Instance == nullptr)
+        Instance = this;
 }
 
-void DulyCanvas::CreateGrid()
+void DulyCanvas::createGrid()
 {
     m_lines.clear();
 	const auto drawGrid = [&](double gridStep, int lineWidth, const QColor &color)
     {
         gridStep *= m_scaleFactor;
         lineWidth *= m_scaleFactor;
-        QRectF windowRect = boundingRect();
-        QPointF tl = mapToScene(windowRect.topLeft());
-        QPointF br = mapToScene(windowRect.bottomRight());
+	    auto windowRect = boundingRect();
+	    auto tl = windowRect.topLeft();
+	    auto br = windowRect.bottomRight();
 
         double left = qFloor(tl.x() / gridStep - 0.5);
         double right = qFloor(br.x() / gridStep + 1.0);
@@ -35,13 +39,13 @@ void DulyCanvas::CreateGrid()
         double top = qFloor(br.y() / gridStep + 1.0);
 
         // vertical lines
-        for (int xi = int(left); xi <= int(right); ++xi)
+        for (auto xi = int(left); xi <= int(right); ++xi)
         {
             m_lines.push_back(Line::CreateRawLine(QPointF(xi * gridStep, bottom * gridStep), QPointF(xi * gridStep, top * gridStep), lineWidth, color));
         }
 
         // horizontal lines
-        for (int yi = int(bottom); yi <= int(top); ++yi)
+        for (auto yi = int(bottom); yi <= int(top); ++yi)
         {
             m_lines.push_back(Line::CreateRawLine(QPointF(left * gridStep, yi * gridStep), QPointF(right * gridStep, yi * gridStep), lineWidth, color));
         }
@@ -105,7 +109,7 @@ void DulyCanvas::setBackgroundColor(const QColor &color)
     update();
 }
 
-void DulyCanvas::setScaleFactor(double scale)
+void DulyCanvas::setScaleFactor(qreal scale)
 {
     if (scale == m_scaleFactor)
         return;
@@ -116,7 +120,7 @@ void DulyCanvas::setScaleFactor(double scale)
 
 QSGNode *DulyCanvas::updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *)
 {
-    QSGSimpleRectNode *n = static_cast<QSGSimpleRectNode *>(oldNode);
+	auto n = static_cast<QSGSimpleRectNode *>(oldNode);
     if (!n) {
        n = new QSGSimpleRectNode();
     }
@@ -128,9 +132,8 @@ QSGNode *DulyCanvas::updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *)
 	    const auto deleteNodes = [&](QSGGeometryNode *o) { delete o; return true; };
         m_lines.remove_if(deleteNodes);
     }
-    CreateGrid();
+    createGrid();
 	const auto setParent = [&](QSGGeometryNode *o) { n->appendChildNode(o); };
     std::for_each(m_lines.begin(), m_lines.end(), setParent);
-
     return n;
 }

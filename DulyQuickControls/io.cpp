@@ -1,78 +1,164 @@
 #include <QtQuick/qsgnode.h>
-#include <QtQuick/qsgflatcolormaterial.h>
 #include <QtMath>
-#include <QSGSimpleRectNode>
+#include <QSGVertexColorMaterial>
 
 #include "io.h"
 #include "beziercurve.h"
+#include "dulycanvas.h"
+#include "genericnode.h"
 
-IO::IO(QQuickItem *parent) :
+BaseIo *Io::CurrentHover = nullptr;
+
+Io::Io(QQuickItem *parent) :
     QQuickItem(parent)
+  , m_radius(5)
+  , m_borderWidth(3)
+  , m_nbSegments(32)
+  , m_fillColor(QColor(255, 255, 255))
+  , m_borderColor(QColor(0, 255, 0))
   , m_type(DulyResources::IOType::Int)
+
 {
-	IO::refreshBackendIO();
+	Io::refreshBackendIo();
     setFlag(ItemHasContents, true);
     setAcceptHoverEvents(true);
     setAcceptedMouseButtons(Qt::AllButtons);
     setFlag(ItemAcceptsInputMethod, true);
+    installEventFilter(this);
+    setAntialiasing(true);
 }
 
-IO::~IO()
+Io::~Io()
 {
-    qDebug() << "Hey";
 }
 
-bool IO::CheckCircle(const QPoint &p)
+void Io::refreshBackendIo()
 {
-    //https://stackoverflow.com/questions/481144/equation-for-testing-if-a-point-is-inside-a-circle
-    const double r = m_radius + m_radius / 2.5;
-    const double dx = qAbs(p.x() - r);
-    if (dx > r) return false;
-    const double dy = qAbs(p.y() - r);
-    if (dy > r) return false;
-    if (dx + dy <= r) return true;
-    return ( dx*dx + dy*dy <= r*r );
 }
 
-void IO::mousePressEvent(QMouseEvent *event)
+QSGNode *Io::updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *)
 {
-    if (event->button() == Qt::LeftButton && CheckCircle(event->pos()))
-    {
-        m_holdClick = true;
-        auto b = new BezierCurve(this);
-        b->setPosition(QPoint(width() / 2, height() / 2));
-        b->setP1(QPoint(0,0));
-        m_currentCurve = b;
+    const char r = m_fillColor.red();
+    const char g = m_fillColor.green();
+    const char b = m_fillColor.blue();
+    const char alpha = m_fillColor.alpha();
+    if (m_nbSegments != 0 && m_nbSegments % 2 != 0)
+        ++m_nbSegments;
+
+    const char rb = m_borderColor.red();
+    const char gb = m_borderColor.green();
+    const char bb = m_borderColor.blue();
+    const char alphab = m_borderColor.alpha();
+
+    const auto aa = antialiasing();
+    QSGGeometryNode *node;
+    QSGGeometry *geometry;
+
+    setWidth((m_radius + m_radius / 2.5f) * 2);
+    setHeight((m_radius + m_radius / 2.5f) * 2);
+    const uint nbVertices = (aa?(m_borderWidth > 0 ? 8.0f * (m_nbSegments + 1):4 * (m_nbSegments + 1)):(m_borderWidth > 0?6 * (m_nbSegments + 1):2.5f * (m_nbSegments + 1))) + 1;
+    if (!oldNode) {
+        node = new QSGGeometryNode;
+        geometry = new QSGGeometry(QSGGeometry::defaultAttributes_ColoredPoint2D(),  nbVertices);
+        geometry->setLineWidth(1);
+        geometry->setDrawingMode(QSGGeometry::DrawTriangleStrip);
+        node->setGeometry(geometry);
+        node->setFlag(QSGNode::OwnsGeometry);
+	    auto material = new QSGVertexColorMaterial;
+        material->setFlag(QSGMaterial::Blending);
+        node->setMaterial(material);
+        node->setFlag(QSGNode::OwnsMaterial);
+    } else {
+        node = static_cast<QSGGeometryNode *>(oldNode);
+        geometry = node->geometry();
+        geometry->allocate(nbVertices);
     }
-}
-
-void IO::mouseReleaseEvent(QMouseEvent *event)
-{
-    if (event->button() == Qt::LeftButton)
+    const auto cx = width() / 2;
+    const auto cy = height() / 2;
+    const auto a = float(2 * M_PI) / m_nbSegments;
+    const qreal aaoffset = 1;
+	const auto vertices = geometry->vertexDataAsColoredPoint2D();
+	auto idx = -1;
+    for (uint i = 0; i <= m_nbSegments; i++)
     {
-        m_holdClick = false;
+        if (aa)
+        {
+            if (i % 2 == 0)
+            {
+                vertices[++idx].set( cx, cy, r, g, b, alpha);
+
+                vertices[++idx].set( cx + m_radius * qFastCos(a * i), cy + m_radius * qFastSin(a * i), r, g, b, alpha);
+                vertices[++idx].set( cx + m_radius * qFastCos(a * (i + 1)), cy + m_radius * qFastSin(a * (i + 1)), r, g, b, alpha);
+                if (m_borderWidth > 0)
+                {
+                    vertices[++idx].set( cx + (m_radius + aaoffset) * qFastCos(a * i), cy +  (m_radius + aaoffset) * qFastSin(a * i), rb, gb, bb, alphab);
+                    vertices[++idx].set( cx + (m_radius + aaoffset) * qFastCos(a * (i + 1)), cy +  (m_radius + aaoffset) * qFastSin(a * (i + 1)), rb, gb, bb, alphab);
+
+                    vertices[++idx].set( cx + (m_radius + m_borderWidth - aaoffset) * qFastCos(a * i), cy + (m_radius + m_borderWidth - aaoffset) * qFastSin(a * i), rb, gb, bb, alphab);
+                    vertices[++idx].set( cx + (m_radius + m_borderWidth - aaoffset) * qFastCos(a * (i + 1)), cy + (m_radius + m_borderWidth - aaoffset) * qFastSin(a * (i + 1)), rb, gb, bb, alphab);
+
+                    vertices[++idx].set( cx + (m_radius + m_borderWidth) * qFastCos(a * i), cy + (m_radius + m_borderWidth) * qFastSin(a * i), 0, 0, 0, 0);
+                    vertices[++idx].set( cx + (m_radius + m_borderWidth) * qFastCos(a * (i + 1)), cy + (m_radius + m_borderWidth) * qFastSin(a * (i + 1)), 0, 0, 0, 0);
+                }
+                else
+                {
+                    vertices[++idx].set( cx + (m_radius + aaoffset) * qFastCos(a * i), cy +  (m_radius + aaoffset) * qFastSin(a * i), 0, 0, 0, 0);
+                    vertices[++idx].set( cx + (m_radius + aaoffset) * qFastCos(a * (i + 1)), cy +  (m_radius + aaoffset) * qFastSin(a * (i + 1)), 0, 0, 0, 0);
+                }
+            }
+            else
+            {
+                if (m_borderWidth > 0)
+                {
+                    vertices[++idx].set( cx + (m_radius + m_borderWidth) * qFastCos(a * (i + 1)), cy + (m_radius + m_borderWidth) * qFastSin(a * (i + 1)), 0, 0, 0, 0);
+
+                    vertices[++idx].set( cx + (m_radius + m_borderWidth - aaoffset) * qFastCos(a * i), cy + (m_radius + m_borderWidth - aaoffset) * qFastSin(a * i), rb, gb, bb, alphab);
+                    vertices[++idx].set( cx + (m_radius + m_borderWidth - aaoffset) * qFastCos(a * (i + 1)), cy + (m_radius + m_borderWidth - aaoffset) * qFastSin(a * (i + 1)), rb, gb, bb, alphab);
+
+                    vertices[++idx].set( cx + (m_radius + aaoffset) * qFastCos(a * i), cy +  (m_radius + aaoffset) * qFastSin(a * i), rb, gb, bb, alphab);
+                    vertices[++idx].set( cx + (m_radius + aaoffset) * qFastCos(a * (i + 1)), cy +  (m_radius + aaoffset) * qFastSin(a * (i + 1)), rb, gb, bb, alphab);
+                }
+                else
+                {
+                    vertices[++idx].set( cx + (m_radius + aaoffset) * qFastCos(a * (i + 1)), cy + (m_radius + aaoffset) * qFastSin(a * (i + 1)), 0, 0, 0, 0);
+                }
+                vertices[++idx].set( cx + m_radius * qFastCos(a * i), cy + m_radius * qFastSin(a * i), r, g, b, alpha);
+                vertices[++idx].set( cx + m_radius * qFastCos(a * (i + 1)), cy + m_radius * qFastSin(a * (i + 1)), r, g, b, alpha);
+            }
+        }
+        else
+        {
+            if (i % 2 == 0)
+            {
+                vertices[++idx].set( cx, cy, r, g, b, alpha);
+                vertices[++idx].set( cx + m_radius * qFastCos(a * i), cy + m_radius * qFastSin(a * i), r, g, b, alpha);
+                vertices[++idx].set( cx + m_radius * qFastCos(a * (i + 1)), cy + m_radius * qFastSin(a * (i + 1)), r, g, b, alpha);
+                if (m_borderWidth > 0)
+                {
+                    vertices[++idx].set( cx + m_radius * qFastCos(a * i), cy + m_radius * qFastSin(a * i), rb, gb, bb, alphab);
+                    vertices[++idx].set( cx + m_radius * qFastCos(a * (i + 1)), cy + m_radius * qFastSin(a * (i + 1)), rb, gb, bb, alphab);
+                    vertices[++idx].set( cx + (m_radius + m_borderWidth) * qFastCos(a * i), cy + (m_radius + m_borderWidth) * qFastSin(a * i), rb, gb, bb, alphab);
+                    vertices[++idx].set( cx + (m_radius + m_borderWidth) * qFastCos(a * (i + 1)), cy + (m_radius + m_borderWidth) * qFastSin(a * (i + 1)), rb, gb, bb, alphab);
+                }
+            }
+            else
+            {
+                if (m_borderWidth > 0)
+                {
+                    vertices[++idx].set( cx + (m_radius + m_borderWidth) * qFastCos(a * (i + 1)), cy + (m_radius + m_borderWidth) * qFastSin(a * (i + 1)), rb, gb, bb, alphab);
+                    vertices[++idx].set( cx + m_radius * qFastCos(a * i), cy + m_radius * qFastSin(a * i), rb, gb, bb, alphab);
+                    vertices[++idx].set( cx + m_radius * qFastCos(a * (i + 1)), cy + m_radius * qFastSin(a * (i + 1)), rb, gb, bb, alphab);
+                }
+                vertices[++idx].set( cx + m_radius * qFastCos(a * i), cy + m_radius * qFastSin(a * i), r, g, b, alpha);
+                vertices[++idx].set( cx + m_radius * qFastCos(a * (i + 1)), cy + m_radius * qFastSin(a * (i + 1)), r, g, b, alpha);
+            }
+        }
     }
+
+    return node;
 }
 
-void IO::mouseMoveEvent(QMouseEvent *event)
-{
-    if (m_holdClick)
-    {
-        m_currentCurve->setP4(event->pos());
-    }
-}
-
-void IO::setType(DulyResources::IOType type)
-{
-    if (type == m_type)
-        return;
-    m_type = type;
-    refreshBackendIO();
-    emit typeChanged(type);
-    update();
-}
-
-void IO::setRadius(double radius)
+void Io::setRadius(qreal radius)
 {
     if (radius == m_radius)
         return;
@@ -81,86 +167,109 @@ void IO::setRadius(double radius)
     update();
 }
 
-QSGNode *IO::updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *)
+void Io::setBorderWidth(qreal w)
 {
-    QSGSimpleRectNode *node = static_cast<QSGSimpleRectNode *>(oldNode);
-    if (!node) {
-       node = new QSGSimpleRectNode();
-    }
-    setWidth((m_radius + m_radius / 2.5) * 2);
-    setHeight((m_radius + m_radius / 2.5) * 2);
-    node->setColor(QColor(Qt::transparent));
-    node->setRect(boundingRect());
-    node->appendChildNode(CreateBorder());
-    node->appendChildNode(CreateBackground());
+    if (w == m_borderWidth)
+        return;
+    m_borderWidth = w;
+    emit borderWidthChanged(w);
+    update();
+}
 
-    return node;
+void Io::setNbSegments(uint n)
+{
+    if (n == m_nbSegments)
+        return;
+    m_nbSegments = n;
+    emit nbSegmentsChanged(n);
+    update();
+}
+
+void Io::setFillColor(const QColor &color)
+{
+    if (color == m_fillColor)
+        return;
+    m_fillColor = color;
+    emit fillColorChanged(color);
+    update();
+}
+
+void Io::setBorderColor(const QColor &color)
+{
+    if (color == m_borderColor)
+        return;
+    m_borderColor = color;
+    emit borderColorChanged(color);
+    update();
+}
+
+void Io::setType(DulyResources::IOType type)
+{
+    if (type == m_type)
+        return;
+    m_type = type;
+    refreshBackendIo();
+    emit typeChanged(type);
+    update();
 }
 
 
-
-QSGGeometryNode *IO::CreateBackground() const
+void Io::mouseMoveEvent(QMouseEvent *event)
 {
-	QSGGeometryNode *node = new QSGGeometryNode;
+	const auto p(mapToItem(DulyCanvas::Instance, event->pos()));
+    m_currentCurve->setP4(p);
+}
 
-	const double nbVertice = 64;
-    QSGGeometry *geometry = new QSGGeometry(QSGGeometry::defaultAttributes_Point2D(), nbVertice + 2);
-    geometry->setDrawingMode(QSGGeometry::DrawTriangleFan);
-    node->setGeometry(geometry);
-    node->setFlag(QSGNode::OwnsGeometry);
-    QSGFlatColorMaterial *material = new QSGFlatColorMaterial;
-    material->setColor(QColor(255, 255, 255));
-
-    node->setMaterial(material);
-    node->setFlag(QSGNode::OwnsMaterial);
-
-    QSGGeometry::Point2D *vertices = geometry->vertexDataAsPoint2D();
-	const double a = qDegreesToRadians( 360.0 / nbVertice );
-    const double offset = m_radius + m_radius / 2.5;
-    vertices[0].set(offset, offset);
-    for (int i = 0; i <= nbVertice; i++)
+void Io::mousePressEvent(QMouseEvent *event)
+{
+    if (event->button() == Qt::LeftButton && EventUtilities::isHoverCircle(m_radius, event))
     {
-        vertices[i+1].set(offset + m_radius * qCos(a * i), offset + m_radius * qSin(a * i));
+        m_holdClick = true;
+        auto b = new BezierCurve(DulyCanvas::Instance);
+        b->setPosition(mapToItem(DulyCanvas::Instance, position() + QPointF(width() / 2, height() / 2)));
+        b->setP1(QPoint(0,0));
+        m_currentCurve = b;
     }
-    return node;
 }
 
-QSGGeometryNode *IO::CreateBorder() const
+void Io::mouseReleaseEvent(QMouseEvent *event)
 {
-	QSGGeometryNode *node = new QSGGeometryNode;
-
-	const double nbVertice = 64;
-    QSGGeometry *geometry = new QSGGeometry(QSGGeometry::defaultAttributes_Point2D(), nbVertice + 2);
-    geometry->setDrawingMode(QSGGeometry::DrawTriangleFan);
-    node->setGeometry(geometry);
-    node->setFlag(QSGNode::OwnsGeometry);
-    QSGFlatColorMaterial *material = new QSGFlatColorMaterial;
-    switch (m_type) {
-        case DulyResources::IOType::Int:
-            material->setColor(m_settings.value("IntColor/colorSelected").value<QColor>());
-            break;
-        case DulyResources::IOType::String:
-            material->setColor(m_settings.value("StringColor/colorSelected").value<QColor>());
-            break;
-        case DulyResources::IOType::Bool:
-            material->setColor(m_settings.value("BoolColor/colorSelected").value<QColor>());
-            break;
-        default:
-            material->setColor(m_settings.value("theme/ColorStringNode").value<QColor>());
-            break;
-    }
-
-    node->setMaterial(material);
-    node->setFlag(QSGNode::OwnsMaterial);
-
-    QSGGeometry::Point2D *vertices = geometry->vertexDataAsPoint2D();
-	const double a = qDegreesToRadians( 360.0 / nbVertice );
-	const double r = m_radius + m_radius / 2.5;
-    vertices[0].set(r, r);
-    for (int i = 0; i <= nbVertice; i++)
+    if (event->button() != Qt::LeftButton)
+        return;
+	const auto p(mapToItem(DulyCanvas::Instance, event->pos()));
+    auto qlist = DulyCanvas::Instance->focusManager().findFocused(p);
+    if (qlist.size() == 0)
     {
-        vertices[i+1].set(r + r * qCos(a * i), r + r * qSin(a * i));
+        delete(m_currentCurve);
+        m_currentCurve = nullptr;
+        return;
     }
-
-    return node;
+	const auto node = dynamic_cast<GenericNode *>(qlist.at(0));
+    if (node && node != dynamic_cast<GenericNode *>(parentItem()->parentItem()->parentItem()->parentItem()->parentItem()))
+    {
+	    const auto p1(mapToItem(node, event->pos()));
+	    const auto io = findIo(node, p1);
+        if (io)
+        {
+	        const auto c = m_io->connect(io->getBaseIo(), m_currentCurve);
+            if (c == nullptr)
+                delete(m_currentCurve);
+            else
+            {
+	            const auto p2(
+                            io->parentItem()->parentItem()->parentItem()->parentItem()->parentItem()->position() +
+                            io->parentItem()->parentItem()->parentItem()->parentItem()->position() +
+                            io->parentItem()->parentItem()->parentItem()->position() +
+                            io->parentItem()->parentItem()->position() +
+                            io->parentItem()->position() + io->position() + QPointF(io->width() / 2, io->height() / 2));
+                m_currentCurve->setP4(p2);
+                m_currentCurve->setDotted(false);
+            }
+            m_currentCurve = nullptr;
+            return;
+        }
+    }
+    delete(m_currentCurve);
+    m_currentCurve = nullptr;
 }
+

@@ -3,11 +3,11 @@
 
 #include <QQuickItem>
 
-class IOQuickItem : public QQuickItem
+class IoQuickItem : public QQuickItem
 {
     Q_OBJECT
 public:
-    IOQuickItem(QQuickItem *parent = 0);
+	explicit IoQuickItem(QQuickItem *parent = nullptr);
 
 signals:
 

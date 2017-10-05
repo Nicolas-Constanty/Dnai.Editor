@@ -7,12 +7,12 @@ MoveCommand::MoveCommand(QQuickItem *w, const QPoint &vec)
 	m_vec = vec;
 }
 
-void MoveCommand::Execute() const
+void MoveCommand::execute() const
 {
     m_w->setPosition(m_w->position() + m_vec);
 }
 
-void MoveCommand::UnExcute() const
+void MoveCommand::unExcute() const
 {
     m_w->setPosition(m_w->position() - m_vec);
 }

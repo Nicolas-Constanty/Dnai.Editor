@@ -8,6 +8,8 @@ Item {
     id: item1
     property alias tabBar: bar
     property alias themeTabRef: themeTab
+    property alias nodeTabRef: nodeTab
+
     StackLayout {
         id: stack
         currentIndex: bar.currentIndex

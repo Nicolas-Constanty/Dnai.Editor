@@ -1,7 +1,7 @@
 #ifndef ILINKABLE_H
 #define ILINKABLE_H
 
-#include <memory>
+#include "beziercurve.h"
 #include "observablelist.h"
 
 class Link;
@@ -11,30 +11,69 @@ class ILinkable
 public:
 	virtual ~ILinkable() = default;
 
-    virtual void UnlinkAll() = 0;
+    virtual void unlinkAll() = 0;
 
-    virtual bool IsLink() = 0;
+    virtual bool isLink() = 0;
 };
 
 class ALinkable : public ILinkable
 {
 public:
     virtual ~ALinkable() {
-        m_links.Clear();
+        m_links.clear();
     }
-    const ObservableList<std::shared_ptr<Link>> &Links() const { return m_links; }
-    virtual const std::shared_ptr<Link> &Connect(ALinkable *linkable) = 0;
-    virtual void Unlink(ALinkable *linkable) = 0;
-	void UnlinkAll() override = 0;
-	virtual void AddLink(const std::shared_ptr<Link> &l) = 0;
-	virtual void RemoveLink(const std::shared_ptr<Link> &l) = 0;
-
-	bool IsLink() override = 0;
-
-    virtual const std::shared_ptr<Link> &GetLink(ALinkable *linkable) const = 0;
+	/**
+     * \brief return all the list of Link
+     * \return ObservableList<Link *>
+     */
+    const ObservableList<Link *> &links() const { return m_links; }
+	
+	/**
+	* \brief Connect linkable together, create a link, and keep a reference on the visual curve
+	* \param linkable
+	* \param curve
+	* \return Link *
+	*/
+    virtual Link *connect(ALinkable *linkable, BezierCurve *curve) = 0;
+	
+	/**
+	* \brief Break a link between linkable
+	* \param linkable
+	*/
+    virtual void unlink(ALinkable *linkable) = 0;
+	
+	/**
+	 * \brief Break all the links between linkable
+	 */
+	virtual void unlinkAll() override = 0;
+	
+	/**
+     * \brief Add a link
+     * \param l 
+     */
+    virtual void addLink(Link *l) = 0;
+	
+	/**
+     * \brief Remove a link
+     * \param l 
+     */
+    virtual void removeLink(Link *l) = 0;
+	
+	/**
+	 * \brief is linkable is actually
+	 * \return bool
+	 */
+	virtual bool isLink() override = 0;
+	
+	/**
+     * \brief return the link between this and linkable
+     * \param linkable 
+     * \return Link *
+     */
+    virtual Link *getLink(ALinkable *linkable) const = 0;
 
 protected:
-    ObservableList<std::shared_ptr<Link>> m_links;
+    ObservableList<Link *> m_links;
 };
 
 #endif // ILINKABLE_H

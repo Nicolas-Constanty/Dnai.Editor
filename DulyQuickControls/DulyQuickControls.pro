@@ -1,6 +1,6 @@
 QT += qml quick quickcontrols2
 
-CONFIG += c++11
+CONFIG += c++14
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which as been marked deprecated (the exact warnings
@@ -15,7 +15,6 @@ DEFINES += QT_DEPRECATED_WARNINGS QNANO_USE_RENDERNODE
 
 SOURCES += baseio.cpp \
     beziercurve.cpp \
-    border.cpp \
     commanddecorator.cpp \
     commandmanager.cpp \
     dulycanvas.cpp \
@@ -27,12 +26,11 @@ SOURCES += baseio.cpp \
     link.cpp \
     main.cpp \
     MoveCommand.cpp \
-    node.cpp \
     output.cpp \
     roundedrectangle.cpp \
     debugdecorator.cpp \
-    qsgroundedrectanglenode.cpp \
-    qsgdefaultroundedrectangle.cpp
+    eventutilities.cpp \
+    focusmanager.cpp
 
 RESOURCES += qml.qrc
 
@@ -53,7 +51,6 @@ FORMS +=
 
 HEADERS += baseio.h \
     beziercurve.h \
-    border.h \
     commanddecorator.h \
     commandmanager.h \
     debugdecorator.h \
@@ -67,11 +64,10 @@ HEADERS += baseio.h \
     link.h \
     linkabletype.h \
     MoveCommand.h \
-    node.h \
     observablelist.h \
     output.h \
     resourcesnode.h \
     roundedrectangle.h \
     dulycanvas.h \
-    qsgroundedrectanglenode.h \
-    qsgdefaultroundedrectangle.h
+    eventutilities.h \
+    focusmanager.h
