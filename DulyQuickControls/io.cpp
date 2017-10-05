@@ -234,7 +234,7 @@ void Io::mousePressEvent(QMouseEvent *event)
 
 void Io::mouseReleaseEvent(QMouseEvent *event)
 {
-    if (event->button() != Qt::LeftButton)
+    if (event->button() != Qt::LeftButton || m_currentCurve == nullptr)
         return;
 	const auto p(mapToItem(DulyCanvas::Instance, event->pos()));
     auto qlist = DulyCanvas::Instance->focusManager().findFocused(p);

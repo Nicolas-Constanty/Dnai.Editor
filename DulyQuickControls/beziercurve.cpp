@@ -256,7 +256,6 @@ QSGNode *BezierCurve::updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *dat
                 vertices[++idx].set(x1 + xUpaa, y1 + yUpaa, r1, g1, b1, alpha1);
             }
         }
-
     }
     return node;
 }
