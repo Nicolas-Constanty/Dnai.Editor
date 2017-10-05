@@ -40,16 +40,10 @@
     <ClCompile Include="MoveCommand.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="acommand.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="baseio.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="beziercurve.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="border.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="commanddecorator.cpp">
@@ -58,16 +52,19 @@
     <ClCompile Include="commandmanager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="debugdecorator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="dulycanvas.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="dulyscene.cpp">
+    <ClCompile Include="eventutilities.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="focusmanager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="genericnode.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="icommand.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="input.cpp">
@@ -88,142 +85,64 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\qnanopainter\libqnanopainter\nanovg\nanovg.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="node.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="nodecanvas.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="nodepainter.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="output.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\qnanopainter\libqnanopainter\qnanoboxgradient.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\qnanopainter\libqnanopainter\qnanocolor.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\qnanopainter\libqnanopainter\qnanofont.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\qnanopainter\libqnanopainter\qnanoimage.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\qnanopainter\libqnanopainter\qnanoimagepattern.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\qnanopainter\libqnanopainter\qnanolineargradient.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\qnanopainter\libqnanopainter\qnanopainter.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\qnanopainter\libqnanopainter\qnanoquickitem.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\qnanopainter\libqnanopainter\qnanoquickitempainter.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\qnanopainter\libqnanopainter\qnanoradialgradient.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="qtroundedrectitem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="roundedrectangle.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_beziercurve.cpp%3bDebug\moc_dulyscene.cpp">
+    <ClCompile Include="Debug\moc_dulycanvas.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="Release\moc_beziercurve.cpp%3bRelease\moc_dulyscene.cpp">
+    <ClCompile Include="Release\moc_dulycanvas.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_beziercurve.cpp%3bDebug\moc_dulycanvas.cpp">
+    <ClCompile Include="Debug\moc_ioquickitem.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="Release\moc_beziercurve.cpp%3bRelease\moc_dulycanvas.cpp">
+    <ClCompile Include="Release\moc_ioquickitem.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_beziercurve.cpp%3bDebug\moc_border.cpp">
+    <ClCompile Include="Debug\moc_io.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="Release\moc_beziercurve.cpp%3bRelease\moc_border.cpp">
+    <ClCompile Include="Release\moc_io.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_beziercurve.cpp%3bDebug\moc_beziercurve.cpp">
+    <ClCompile Include="Debug\moc_genericnode.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="Release\moc_beziercurve.cpp%3bRelease\moc_beziercurve.cpp">
+    <ClCompile Include="Release\moc_genericnode.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_beziercurve.cpp%3bDebug\moc_line.cpp">
+    <ClCompile Include="Debug\moc_resourcesnode.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="Release\moc_beziercurve.cpp%3bRelease\moc_line.cpp">
+    <ClCompile Include="Release\moc_resourcesnode.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_beziercurve.cpp%3bDebug\moc_ioquickitem.cpp">
+    <ClCompile Include="Debug\moc_observablelist.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="Release\moc_beziercurve.cpp%3bRelease\moc_ioquickitem.cpp">
+    <ClCompile Include="Release\moc_observablelist.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_beziercurve.cpp%3bDebug\moc_io.cpp">
+    <ClCompile Include="Debug\moc_line.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="Release\moc_beziercurve.cpp%3bRelease\moc_io.cpp">
+    <ClCompile Include="Release\moc_line.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_beziercurve.cpp%3bDebug\moc_genericnode.cpp">
+    <ClCompile Include="Debug\moc_roundedrectangle.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="Release\moc_beziercurve.cpp%3bRelease\moc_genericnode.cpp">
+    <ClCompile Include="Release\moc_roundedrectangle.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_beziercurve.cpp%3bDebug\moc_roundedrectangle.cpp">
+    <ClCompile Include="Debug\moc_beziercurve.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="Release\moc_beziercurve.cpp%3bRelease\moc_roundedrectangle.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_beziercurve.cpp%3bDebug\moc_resourcesnode.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_beziercurve.cpp%3bRelease\moc_resourcesnode.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_beziercurve.cpp%3bDebug\moc_qnanoquickitem.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_beziercurve.cpp%3bRelease\moc_qnanoquickitem.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_beziercurve.cpp%3bDebug\moc_observablelist.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_beziercurve.cpp%3bRelease\moc_observablelist.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_beziercurve.cpp%3bDebug\moc_nodepainter.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_beziercurve.cpp%3bRelease\moc_nodepainter.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_beziercurve.cpp%3bDebug\moc_node.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_beziercurve.cpp%3bRelease\moc_node.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\qrc_libqnanopainterdata.cpp">
+    <ClCompile Include="Release\moc_beziercurve.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\qrc_qml.cpp">
@@ -234,16 +153,10 @@
     <ClInclude Include="MoveCommand.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="acommand.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="baseio.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <CustomBuild Include="beziercurve.h">
-      <Filter>Header Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="border.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
     <ClInclude Include="commanddecorator.h">
@@ -258,9 +171,12 @@
     <CustomBuild Include="dulycanvas.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
-    <CustomBuild Include="dulyscene.h">
+    <ClInclude Include="eventutilities.h">
       <Filter>Header Files</Filter>
-    </CustomBuild>
+    </ClInclude>
+    <ClInclude Include="focusmanager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <CustomBuild Include="genericnode.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
@@ -288,61 +204,10 @@
     <ClInclude Include="linkabletype.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\qnanopainter\libqnanopainter\nanovg\nanovg.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <CustomBuild Include="node.h">
-      <Filter>Header Files</Filter>
-    </CustomBuild>
-    <ClInclude Include="nodecanvas.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <CustomBuild Include="nodepainter.h">
-      <Filter>Header Files</Filter>
-    </CustomBuild>
     <CustomBuild Include="observablelist.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
     <ClInclude Include="output.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\qnanopainter\libqnanopainter\qnanoboxgradient.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\qnanopainter\libqnanopainter\private\qnanobrush.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\qnanopainter\libqnanopainter\qnanocolor.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\qnanopainter\libqnanopainter\private\qnanodataelement.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\qnanopainter\libqnanopainter\qnanofont.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\qnanopainter\libqnanopainter\qnanoimage.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\qnanopainter\libqnanopainter\qnanoimagepattern.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\qnanopainter\libqnanopainter\qnanolineargradient.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\qnanopainter\libqnanopainter\qnanopainter.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <CustomBuild Include="src\qnanopainter\libqnanopainter\qnanoquickitem.h">
-      <Filter>Header Files</Filter>
-    </CustomBuild>
-    <ClInclude Include="src\qnanopainter\libqnanopainter\qnanoquickitempainter.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\qnanopainter\libqnanopainter\qnanoradialgradient.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="qtroundedrectitem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <CustomBuild Include="resourcesnode.h">
@@ -353,69 +218,18 @@
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="debug\moc_beziercurve.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="release\moc_beziercurve.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="debug\moc_dulycanvas.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="release\moc_dulycanvas.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="debug\moc_genericnode.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="release\moc_genericnode.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="debug\moc_io.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="release\moc_io.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="debug\moc_ioquickitem.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="release\moc_ioquickitem.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="debug\moc_line.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="release\moc_line.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="debug\moc_observablelist.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="release\moc_observablelist.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
     <CustomBuild Include="debug\moc_predefs.h.cbt">
       <Filter>Generated Files</Filter>
     </CustomBuild>
     <CustomBuild Include="release\moc_predefs.h.cbt">
       <Filter>Generated Files</Filter>
     </CustomBuild>
-    <ClCompile Include="debug\moc_resourcesnode.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="release\moc_resourcesnode.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="debug\moc_roundedrectangle.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="release\moc_roundedrectangle.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Components\BaseNode.qml">
+    <None Include="Resources\Components\AddNode.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\Components\AddNodeModel.qml">
       <Filter>Resource Files</Filter>
     </None>
     <None Include="Resources\Components\ColorPicker.qml">
@@ -445,37 +259,19 @@
     <None Include="Resources\Forms\LanguagePanelForm.ui.qml">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="Resources\Components\Node.qml">
+      <Filter>Resource Files</Filter>
+    </None>
     <None Include="Resources\Components\NodeForm.ui.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\Components\NodeModel.qml">
       <Filter>Resource Files</Filter>
     </None>
     <None Include="Resources\Panels\NodePanel.qml">
       <Filter>Resource Files</Filter>
     </None>
     <None Include="Resources\Forms\NodePanelForm.ui.qml">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="src\qnanopainter\libqnanopainter\data\Roboto-Bold.ttf">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="src\qnanopainter\libqnanopainter\data\Roboto-BoldItalic.ttf">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="src\qnanopainter\libqnanopainter\data\Roboto-Italic.ttf">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="src\qnanopainter\libqnanopainter\data\Roboto-Light.ttf">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="src\qnanopainter\libqnanopainter\data\Roboto-LightItalic.ttf">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="src\qnanopainter\libqnanopainter\data\Roboto-Regular.ttf">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="src\qnanopainter\libqnanopainter\data\Roboto-Thin.ttf">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="src\qnanopainter\libqnanopainter\data\Roboto-ThinItalic.ttf">
       <Filter>Resource Files</Filter>
     </None>
     <None Include="Resources\Panels\SettingPanel.qml">
@@ -496,9 +292,6 @@
     <None Include="Resources\Components\ToolBarHeader.qml">
       <Filter>Resource Files</Filter>
     </None>
-    <CustomBuild Include="src\qnanopainter\libqnanopainter\libqnanopainterdata.qrc">
-      <Filter>Resource Files</Filter>
-    </CustomBuild>
     <None Include="main.qml">
       <Filter>Resource Files</Filter>
     </None>

@@ -8,8 +8,16 @@ class MoveCommand : public ICommand
 {
 public:
     MoveCommand(QQuickItem* w, const QPoint& vec);
-	void Execute() const override;
-	void UnExcute() const override;
+
+	/**
+	* \brief Execute the command
+	*/
+	void execute() const override;
+
+	/**
+	* \brief Reverse the command
+	*/
+	void unExcute() const override;
 
 private:
     QQuickItem* m_w;

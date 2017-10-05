@@ -9,10 +9,29 @@ class CommandManager
 {
 public:
     CommandManager();
-	void RegisterCommand(ICommand* cmd);
-	void ExecAll();
-	void Redo(int levels);
-	void Undo(int levels);
+	
+	/**
+	 * \brief Register a command
+	 * \param cmd 
+	 */
+	void registerCommand(ICommand* cmd);
+	
+	/**
+	 * \brief Execute all the registers commands
+	 */
+	void execAll();
+	
+	/**
+	 * \brief Exectute the next command
+	 * \param levels 
+	 */
+	void redo(int levels);
+	
+	/**
+	 * \brief Execute the last command
+	 * \param levels 
+	 */
+	void undo(int levels);
 
 private:
 	std::stack<ICommand *> m_undoList;

@@ -95,21 +95,18 @@ void Line::setLineColor(const QColor &color)
 
 QSGGeometryNode *Line::CreateRawLine(const QPointF &p1, const QPointF &p2, int lineWidth, const QColor &color)
 {
-    QSGGeometryNode *node = 0;
-    QSGGeometry *geometry = 0;
-
-    node = new QSGGeometryNode;
-    geometry = new QSGGeometry(QSGGeometry::defaultAttributes_Point2D(), 2);
+	auto node = new QSGGeometryNode;
+	auto geometry = new QSGGeometry(QSGGeometry::defaultAttributes_Point2D(), 2);
     geometry->setLineWidth(lineWidth);
     geometry->setDrawingMode(QSGGeometry::DrawLineStrip);
     node->setGeometry(geometry);
     node->setFlag(QSGNode::OwnsGeometry);
-    QSGFlatColorMaterial *material = new QSGFlatColorMaterial;
+	auto material = new QSGFlatColorMaterial;
     material->setColor(color);
     node->setMaterial(material);
     node->setFlag(QSGNode::OwnsMaterial);
 
-    QSGGeometry::Point2D *vertices = geometry->vertexDataAsPoint2D();
+	const auto vertices = geometry->vertexDataAsPoint2D();
     vertices[0].set(p1.x(), p1.y());
     vertices[1].set(p2.x(), p2.y());
     return node;
@@ -117,7 +114,7 @@ QSGGeometryNode *Line::CreateRawLine(const QPointF &p1, const QPointF &p2, int l
 
 QSGNode *Line::updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *)
 {
-    QSGGeometryNode *node = 0;
+    QSGGeometryNode *node;
 
     setWidth(qFabs(m_p2.x() - m_p1.x()));
     setHeight(qFabs(m_p2.y() - m_p1.y()));
@@ -125,8 +122,8 @@ QSGNode *Line::updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *)
         node = CreateRawLine(m_p1, m_p2, m_lineWidth, m_lineColor);
     } else {
         node = static_cast<QSGGeometryNode *>(oldNode);
-        QSGGeometry *geometry = node->geometry();
-        QSGGeometry::Point2D *vertices = geometry->vertexDataAsPoint2D();
+	    auto geometry = node->geometry();
+	    const auto vertices = geometry->vertexDataAsPoint2D();
         vertices[0].set(m_p1.x(), m_p1.y());
         vertices[1].set(m_p2.x(), m_p2.y());
     }

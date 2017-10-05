@@ -7,6 +7,7 @@ import "../Panels"
 
 Item {
     property alias menuEditRef: menuEdit
+    property alias heightButton: toolButton.height
     ToolBar {
         width: parent.width
         Material.background: Material.color(Material.Grey, Material.Shade800)
@@ -17,6 +18,7 @@ Item {
                 spacing: 0
                anchors.fill: parent
                ToolButton {
+                   id: toolButton
                    text: qsTr("File")
                    onClicked: menuFile.open()
 

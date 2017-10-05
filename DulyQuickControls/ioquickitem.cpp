@@ -1,6 +1,6 @@
 #include "ioquickitem.h"
 
-IOQuickItem::IOQuickItem(QQuickItem *parent) : QQuickItem(parent)
+IoQuickItem::IoQuickItem(QQuickItem *parent) : QQuickItem(parent)
 {
 
 }

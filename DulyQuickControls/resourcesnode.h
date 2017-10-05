@@ -7,14 +7,17 @@ class DulyResources  : public QObject
 {
    Q_OBJECT
    public:
-    DulyResources(QObject *parent = 0) : QObject(parent) {}
+	explicit DulyResources(QObject *parent = nullptr) : QObject(parent) {}
     ~DulyResources() {}
+	/**
+     * \brief define all the handle type by the application
+     */
     enum IOType
     {
         Int,
         String,
         Bool,
-        Count
+        Count //Get the size of enum, must be at the end all the time!
     };
     Q_ENUM(IOType)
 };

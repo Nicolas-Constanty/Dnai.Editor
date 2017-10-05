@@ -7,7 +7,7 @@ CommandManager::CommandManager()
 
 }
 
-void CommandManager::RegisterCommand(ICommand *cmd)
+void CommandManager::registerCommand(ICommand *cmd)
 {
 #ifndef  Debug
 	m_doList.push(new DebugDecorator(cmd));
@@ -17,25 +17,25 @@ void CommandManager::RegisterCommand(ICommand *cmd)
 	
 }
 
-void CommandManager::ExecAll()
+void CommandManager::execAll()
 {
 	while (!m_doList.empty())
 	{
         ICommand *c = m_doList.front();
-        c->Execute();
+        c->execute();
         m_undoList.push(c);
 		m_doList.pop();
 	}
 }
 
-void CommandManager::Redo(int levels)
+void CommandManager::redo(int levels)
 {
 	for (int i = 1; i <= levels; i++)
 	{
 		if (!m_redoList.empty())
 		{
-			ICommand *command = m_redoList.top();
-			command->Execute();
+			auto command = m_redoList.top();
+			command->execute();
 			m_redoList.pop();
 			m_undoList.push(command);
 		}
@@ -43,14 +43,14 @@ void CommandManager::Redo(int levels)
 	}
 }
 
-void CommandManager::Undo(int levels)
+void CommandManager::undo(int levels)
 {
 	for (int i = 1; i <= levels; i++)
 	{
 		if (!m_undoList.empty())
 		{
-			ICommand *command = m_undoList.top();
-			command->Execute();
+			auto command = m_undoList.top();
+			command->execute();
 			m_undoList.pop();
 			m_redoList.push(command);
 		}

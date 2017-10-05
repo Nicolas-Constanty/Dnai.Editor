@@ -1,30 +1,23 @@
 #include <QtQuick/qsgnode.h>
-#include <QtQuick/qsgflatcolormaterial.h>
 #include <QtMath>
+#include <QSGVertexColorMaterial>
 
 #include "roundedrectangle.h"
-#include "qsgdefaultroundedrectangle.h"
+#include "dulycanvas.h"
 
 RoundedRectangle::RoundedRectangle(QQuickItem *parent) :
-    QQuickItem(parent),
-    m_roundedSegments(5),
-    m_topLeft(true),
-    m_topRight(true),
-    m_bottomLeft(true),
-    m_bottomRight(true),
-    m_borderColor(QColor(0,0,0)),
-    m_border(0)
+    QQuickItem(parent)
+    , m_border(0)
+    , m_radius(10)
+    , m_topLeft(true)
+    , m_topRight(true)
+    , m_bottomLeft(true)
+    , m_bottomRight(true)
+    , m_nbSegments(5)
+    , m_fillColor(QColor(20, 20, 20))
+    , m_borderColor(QColor(0, 0, 0))
 {
     setFlag(ItemHasContents, true);
-}
-
-void RoundedRectangle::setRoundedSegments(int segments)
-{
-    if (segments == m_roundedSegments)
-        return;
-    m_roundedSegments = segments;
-    emit roundedSegmentsChanged(segments);
-    update();
 }
 
 void RoundedRectangle::setRadius(qreal radius)
@@ -33,6 +26,15 @@ void RoundedRectangle::setRadius(qreal radius)
         return;
     m_radius = radius;
     emit radiusChanged(radius);
+    update();
+}
+
+void RoundedRectangle::setBorder(qreal b)
+{
+    if (m_border == b)
+        return;
+    m_border = b;
+    emit borderChanged(b);
     update();
 }
 
@@ -72,21 +74,12 @@ void RoundedRectangle::setBottomRight(bool value)
     update();
 }
 
-void RoundedRectangle::setBorder(qreal b)
+void RoundedRectangle::setRoundedSegments(uint segments)
 {
-    if (m_border == b)
+    if (segments == m_nbSegments)
         return;
-    m_border = b;
-    emit borderChanged(b);
-    update();
-}
-
-void RoundedRectangle::setBorderColor(const QColor &color)
-{
-    if (color == m_borderColor)
-        return;
-    m_borderColor = color;
-    emit borderColorChanged(color);
+    m_nbSegments = segments;
+    emit roundedSegmentsChanged(segments);
     update();
 }
 
@@ -99,7 +92,16 @@ void RoundedRectangle::setFillColor(const QColor &color)
     update();
 }
 
-int RoundedRectangle::GetNumberRoundedCorner() const
+void RoundedRectangle::setBorderColor(const QColor &color)
+{
+    if (color == m_borderColor)
+        return;
+    m_borderColor = color;
+    emit borderColorChanged(color);
+    update();
+}
+
+int RoundedRectangle::getNumberRoundedCorner() const
 {
     int count = 0;
     if (m_topLeft)
@@ -113,69 +115,70 @@ int RoundedRectangle::GetNumberRoundedCorner() const
     return count;
 }
 
-QSGGeometryNode *RoundedRectangle::CreateBorder() const
+QSGGeometryNode *RoundedRectangle::createBorder() const
 {
     int idx = -1;
-    const qreal h = (height() / 2.f - m_radius) / 2.f;
-    const qreal w = (width() + m_radius * 2.f) / 2.f;
-    const float a = 0.5f * float(M_PI) / m_roundedSegments;
+    const qreal h = (height() - m_radius * 2.f) / 2.f;
+    const qreal w = (width() - m_radius * 2.f) / 2.f;
+    const float a = 0.5f * float(M_PI) / m_nbSegments;
     const bool aa = antialiasing();
-    const int nCorner = GetNumberRoundedCorner();
+    const int nCorner = getNumberRoundedCorner();
     const uint aaoffset = 1;
     const uchar r = m_borderColor.red();
     const uchar g = m_borderColor.green();
     const uchar b = m_borderColor.blue();
     const uchar alpha = m_borderColor.alpha();
-    const uint nbVertice = (aa ? (m_roundedSegments % 2 == 0 ? (7.5 * m_roundedSegments) : (7.5 * (m_roundedSegments-1)+8) ) : m_roundedSegments) * nCorner + (aa?7*4+(m_topLeft?0:1):8) + (aa?0:-nCorner);
+    const uint nbVertice = (aa ? (m_nbSegments % 2 == 0 ? (7.5 * m_nbSegments) : (7.5 * (m_nbSegments-1)+8) ) : m_nbSegments) * nCorner + (aa?7*4+(m_topLeft?0:1):8) + (aa?0:-nCorner);
+    const QPointF center(w + m_radius, h + m_radius);
 
-    QSGGeometryNode *bufferBorder = new QSGGeometryNode;
+    QSGGeometryNode *nodeBorder = new QSGGeometryNode;
     QSGVertexColorMaterial *materialBorder = new QSGVertexColorMaterial;
-    QSGGeometry *bufferBorderGeometry = new QSGGeometry(QSGGeometry::defaultAttributes_ColoredPoint2D(), nbVertice);
+    QSGGeometry *nodeBorderGeometry = new QSGGeometry(QSGGeometry::defaultAttributes_ColoredPoint2D(), nbVertice);
     if (!aa)
-        bufferBorderGeometry->setLineWidth(m_border);
-    bufferBorderGeometry->setDrawingMode(aa ? QSGGeometry::DrawTriangleStrip : QSGGeometry::DrawLineStrip);
-    bufferBorder->setGeometry(bufferBorderGeometry);
-    bufferBorder->setFlag(QSGNode::OwnsGeometry, aa);
+        nodeBorderGeometry->setLineWidth(m_border);
+    nodeBorderGeometry->setDrawingMode(aa ? QSGGeometry::DrawTriangleStrip : QSGGeometry::DrawLineStrip);
+    nodeBorder->setGeometry(nodeBorderGeometry);
+    nodeBorder->setFlag(QSGNode::OwnsGeometry, aa);
     materialBorder->setFlag(QSGMaterial::Blending);
 
-    bufferBorder->setMaterial(materialBorder);
+    nodeBorder->setMaterial(materialBorder);
 
-    QSGGeometry::ColoredPoint2D *vertices = bufferBorderGeometry->vertexDataAsColoredPoint2D();
+    QSGGeometry::ColoredPoint2D *vertices = nodeBorderGeometry->vertexDataAsColoredPoint2D();
     if (!aa)
     {
         auto drawCircle = [&](qreal cx, qreal cy, float offset)
         {
-            for (int i = 0; i < m_roundedSegments; i++)
+            for (uint i = 0; i < m_nbSegments; i++)
                 vertices[++idx].set( cx + m_radius * qFastCos(a * i + offset), cy + m_radius * qFastSin(a * i + offset), r, g, b, alpha);
         };
         if (m_topLeft)
-            drawCircle(-w, -h, float(M_PI));
+            drawCircle(-w + center.x(), -h + center.y(), float(M_PI));
         else
-            vertices[++idx].set(-w -m_radius, -h - m_radius, r, g, b, alpha);
-        vertices[++idx].set(w, -h - m_radius, r, g, b, alpha);
+            vertices[++idx].set(-w + center.x()-m_radius, -h + center.y() - m_radius, r, g, b, alpha);
+        vertices[++idx].set(w + center.x(), -h + center.y() - m_radius, r, g, b, alpha);
         if (m_topRight)
-            drawCircle(w, -h, (float(M_PI) / 2.f) * 3.f);
+            drawCircle(w + center.x(), -h + center.y(), (float(M_PI) / 2.f) * 3.f);
         else
-            vertices[++idx].set(w + m_radius, -h -m_radius, r, g, b, alpha);
+            vertices[++idx].set(w + center.x() + m_radius, -h + center.y() -m_radius, r, g, b, alpha);
 
-        vertices[++idx].set(w + m_radius, h, r, g, b, alpha);
+        vertices[++idx].set(w + center.x() + m_radius, h + center.y(), r, g, b, alpha);
         if (m_bottomRight)
-            drawCircle(w, h, 0);
+            drawCircle(w + center.x(), h + center.y(), 0);
         else
-            vertices[++idx].set(w + m_radius, h + m_radius, r, g, b, alpha);
-        vertices[++idx].set(-w, h + m_radius, r, g, b, alpha);
+            vertices[++idx].set(w + center.x() + m_radius, h + center.y() + m_radius, r, g, b, alpha);
+        vertices[++idx].set(-w + center.x(), h + center.y() + m_radius, r, g, b, alpha);
         if (m_bottomLeft)
-            drawCircle(-w, h, float(M_PI) / 2.0f);
+            drawCircle(-w + center.x(), h + center.y(), float(M_PI) / 2.0f);
         else
-            vertices[++idx].set(-w - m_radius, h + m_radius, r, g, b, alpha);
-        vertices[++idx].set(-w -m_radius, -h + ((m_topLeft)?0:- m_radius), r, g, b, alpha);
+            vertices[++idx].set(-w + center.x() - m_radius, h + center.y() + m_radius, r, g, b, alpha);
+        vertices[++idx].set(-w + center.x() -m_radius, -h + center.y() + ((m_topLeft)?0:- m_radius), r, g, b, alpha);
     }
     else
     {
         const qreal mid = m_border / 2.f;
         auto drawCircle = [&](qreal cx, qreal cy, float offset, bool dir = true)
         {
-            for (int i = 0; i < m_roundedSegments; i++)
+            for (uint i = 0; i < m_nbSegments; i++)
             {
                 if ((i % 2 == 0 && dir) || (!dir && i % 2 != 0))
                 {
@@ -212,103 +215,112 @@ QSGGeometryNode *RoundedRectangle::CreateBorder() const
         };
 
         if (m_topLeft)
-            drawCircle(-w, -h, float(M_PI));
+            drawCircle(-w + center.x(), -h + center.y(), float(M_PI));
         else
-            vertices[++idx].set(-w + mid + aaoffset - m_radius, -h - m_radius + mid + aaoffset, m_fillColor.red(), m_fillColor.green(), m_fillColor.blue(), m_fillColor.alpha());
-        vertices[++idx].set(w + (m_topRight?0:-mid - aaoffset + m_radius), -h - m_radius + mid + aaoffset, m_fillColor.red(), m_fillColor.green(), m_fillColor.blue(), m_fillColor.alpha());
+            vertices[++idx].set(-w + center.x() + mid + aaoffset - m_radius, -h + center.y() - m_radius + mid + aaoffset, m_fillColor.red(), m_fillColor.green(), m_fillColor.blue(), m_fillColor.alpha());
+        vertices[++idx].set(w + center.x() + (m_topRight?0:-mid - aaoffset + m_radius), -h + center.y() - m_radius + mid + aaoffset, m_fillColor.red(), m_fillColor.green(), m_fillColor.blue(), m_fillColor.alpha());
 
         //Center
-        vertices[++idx].set(-w + (m_topLeft?0:mid - m_radius), -h - m_radius + mid, r, g, b, alpha);
-        vertices[++idx].set(w + (m_topRight?0:mid  + m_radius), -h - m_radius + mid, r, g, b, alpha);
-        vertices[++idx].set(-w + (m_topLeft?0:-mid - m_radius), -h - m_radius - mid, r, g, b, alpha);
-        vertices[++idx].set(w + (m_topRight?0:mid + m_radius), -h - m_radius - mid, r, g, b, alpha);
+        vertices[++idx].set(-w + center.x() + (m_topLeft?0:mid - m_radius), -h + center.y() - m_radius + mid, r, g, b, alpha);
+        vertices[++idx].set(w + center.x() + (m_topRight?0:mid  + m_radius), -h + center.y() - m_radius + mid, r, g, b, alpha);
+        vertices[++idx].set(-w + center.x() + (m_topLeft?0:-mid - m_radius), -h + center.y() - m_radius - mid, r, g, b, alpha);
+        vertices[++idx].set(w + center.x() + (m_topRight?0:mid + m_radius), -h + center.y() - m_radius - mid, r, g, b, alpha);
 
         //Outer
-        vertices[++idx].set(-w + (m_topLeft?0:-mid - aaoffset - m_radius), -h - m_radius - mid - aaoffset, 0, 0, 0, 0);
-        vertices[++idx].set(w + (m_topRight?0:mid + aaoffset + m_radius), -h - m_radius - mid - aaoffset, 0, 0, 0, 0);
+        vertices[++idx].set(-w + center.x() + (m_topLeft?0:-mid - aaoffset - m_radius), -h + center.y() - m_radius - mid - aaoffset, 0, 0, 0, 0);
+        vertices[++idx].set(w + center.x() + (m_topRight?0:mid + aaoffset + m_radius), -h + center.y() - m_radius - mid - aaoffset, 0, 0, 0, 0);
 
         if (m_topRight)
-            drawCircle(w, -h, (float(M_PI) / 2.f) * 3.f, false);
+            drawCircle(w + center.x(), -h + center.y(), (float(M_PI) / 2.f) * 3.f, false);
 
         //Outer
-        vertices[++idx].set(w + m_radius + mid + aaoffset, h + (m_bottomRight?0:mid + aaoffset + m_radius), 0, 0, 0, 0);
+        vertices[++idx].set(w + center.x() + m_radius + mid + aaoffset, h + center.y() + (m_bottomRight?0:mid + aaoffset + m_radius), 0, 0, 0, 0);
 
         //Center
-        vertices[++idx].set(w + m_radius + mid, -h + (m_topRight?0:-mid - m_radius), r, g, b, alpha);
-        vertices[++idx].set(w + m_radius + mid, h + (m_bottomRight?0:mid + m_radius), r, g, b, alpha);
-        vertices[++idx].set(w + m_radius - mid, -h + (m_topRight?0:mid - m_radius), r, g, b, alpha);
-        vertices[++idx].set(w + m_radius - mid, h + (m_bottomRight?0:-mid + m_radius), r, g, b, alpha);
+        vertices[++idx].set(w + center.x() + m_radius + mid, -h + center.y() + (m_topRight?0:-mid - m_radius), r, g, b, alpha);
+        vertices[++idx].set(w + center.x() + m_radius + mid, h + center.y() + (m_bottomRight?0:mid + m_radius), r, g, b, alpha);
+        vertices[++idx].set(w + center.x() + m_radius - mid, -h + center.y() + (m_topRight?0:mid - m_radius), r, g, b, alpha);
+        vertices[++idx].set(w + center.x() + m_radius - mid, h + center.y() + (m_bottomRight?0:-mid + m_radius), r, g, b, alpha);
 
         //Inner
-        vertices[++idx].set(w + m_radius - mid - aaoffset, -h + (m_topRight?0:mid + aaoffset - m_radius), m_fillColor.red(), m_fillColor.green(), m_fillColor.blue(), m_fillColor.alpha());
-        vertices[++idx].set(w + m_radius - mid - aaoffset, h + (m_bottomRight?0:-mid - aaoffset + m_radius), m_fillColor.red(), m_fillColor.green(), m_fillColor.blue(), m_fillColor.alpha());
+        vertices[++idx].set(w + center.x() + m_radius - mid - aaoffset, -h + center.y() + (m_topRight?0:mid + aaoffset - m_radius), m_fillColor.red(), m_fillColor.green(), m_fillColor.blue(), m_fillColor.alpha());
+        vertices[++idx].set(w + center.x() + m_radius - mid - aaoffset, h + center.y() + (m_bottomRight?0:-mid - aaoffset + m_radius), m_fillColor.red(), m_fillColor.green(), m_fillColor.blue(), m_fillColor.alpha());
 
         if (m_bottomRight)
-            drawCircle(w, h, 0);
+            drawCircle(w + center.x(), h + center.y(), 0);
 
         //Inner
-        vertices[++idx].set(-w + (m_bottomLeft?0:mid + aaoffset - m_radius), h + m_radius - mid - aaoffset, m_fillColor.red(), m_fillColor.green(), m_fillColor.blue(), m_fillColor.alpha());
+        vertices[++idx].set(-w + center.x() + (m_bottomLeft?0:mid + aaoffset - m_radius), h + center.y() + m_radius - mid - aaoffset, m_fillColor.red(), m_fillColor.green(), m_fillColor.blue(), m_fillColor.alpha());
 
         //Center
-        vertices[++idx].set(w + (m_bottomRight?0:-mid + m_radius), h + m_radius - mid, r, g, b, alpha);
-        vertices[++idx].set(-w + (m_bottomLeft?0:mid - m_radius), h + m_radius - mid, r, g, b, alpha);
-        vertices[++idx].set(w + (m_bottomRight?0:mid + m_radius), h + m_radius + mid, r, g, b, alpha);
-        vertices[++idx].set(-w + (m_bottomLeft?0:-mid - m_radius), h + m_radius + mid, r, g, b, alpha);
+        vertices[++idx].set(w + center.x() + (m_bottomRight?0:-mid + m_radius), h + center.y() + m_radius - mid, r, g, b, alpha);
+        vertices[++idx].set(-w + center.x() + (m_bottomLeft?0:mid - m_radius), h + center.y() + m_radius - mid, r, g, b, alpha);
+        vertices[++idx].set(w + center.x() + (m_bottomRight?0:mid + m_radius), h + center.y() + m_radius + mid, r, g, b, alpha);
+        vertices[++idx].set(-w + center.x() + (m_bottomLeft?0:-mid - m_radius), h + center.y() + m_radius + mid, r, g, b, alpha);
 
         //Outer
-        vertices[++idx].set(w + (m_bottomRight?0:mid + aaoffset + m_radius), h + m_radius + mid + aaoffset, 0, 0, 0, 0);
-        vertices[++idx].set(-w + (m_bottomLeft?0:-mid - aaoffset - m_radius), h + m_radius + mid + aaoffset, 0, 0, 0, 0);
+        vertices[++idx].set(w + center.x() + (m_bottomRight?0:mid + aaoffset + m_radius), h + center.y() + m_radius + mid + aaoffset, 0, 0, 0, 0);
+        vertices[++idx].set(-w + center.x() + (m_bottomLeft?0:-mid - aaoffset - m_radius), h  + center.y()+ m_radius + mid + aaoffset, 0, 0, 0, 0);
 
         if (m_bottomLeft)
-            drawCircle(-w, h, float(M_PI) / 2.0f, false);
+            drawCircle(-w + center.x(), h + center.y(), float(M_PI) / 2.0f, false);
 
         //Outer
-        vertices[++idx].set(-w - m_radius - mid - aaoffset, -h + (m_topLeft?0:-mid - aaoffset - m_radius), 0, 0, 0, 0);
+        vertices[++idx].set(-w + center.x() - m_radius - mid - aaoffset, -h + center.y() + (m_topLeft?0:-mid - aaoffset - m_radius), 0, 0, 0, 0);
 
         //Center
-        vertices[++idx].set(-w - m_radius - mid, h + (m_bottomLeft?0:mid + m_radius), r, g, b, alpha);
-        vertices[++idx].set(-w - m_radius - mid, -h + (m_topLeft?0:-mid - m_radius), r, g, b, alpha);
-        vertices[++idx].set(-w - m_radius + mid, h + (m_bottomLeft?0:-mid + m_radius), r, g, b, alpha);
-        vertices[++idx].set(-w - m_radius + mid, -h + (m_topLeft?0:mid - m_radius), r, g, b, alpha);
+        vertices[++idx].set(-w + center.x() - m_radius - mid, h + center.y() + (m_bottomLeft?0:mid + m_radius), r, g, b, alpha);
+        vertices[++idx].set(-w + center.x() - m_radius - mid, -h + center.y() + (m_topLeft?0:-mid - m_radius), r, g, b, alpha);
+        vertices[++idx].set(-w + center.x() - m_radius + mid, h + center.y() + (m_bottomLeft?0:-mid + m_radius), r, g, b, alpha);
+        vertices[++idx].set(-w + center.x() - m_radius + mid, -h + center.y() + (m_topLeft?0:mid - m_radius), r, g, b, alpha);
 
         //Inner
-        vertices[++idx].set(-w - m_radius + mid + aaoffset, h + (m_bottomLeft?0:-mid - aaoffset + m_radius), m_fillColor.red(), m_fillColor.green(), m_fillColor.blue(), m_fillColor.alpha());
-        vertices[++idx].set(-w - m_radius + mid + aaoffset, -h + (m_topLeft?0:mid + aaoffset - m_radius), m_fillColor.red(), m_fillColor.green(), m_fillColor.blue(), m_fillColor.alpha());
+        vertices[++idx].set(-w + center.x() - m_radius + mid + aaoffset, h + center.y() + (m_bottomLeft?0:-mid - aaoffset + m_radius), m_fillColor.red(), m_fillColor.green(), m_fillColor.blue(), m_fillColor.alpha());
+        vertices[++idx].set(-w + center.x() - m_radius + mid + aaoffset, -h + center.y() + (m_topLeft?0:mid + aaoffset - m_radius), m_fillColor.red(), m_fillColor.green(), m_fillColor.blue(), m_fillColor.alpha());
     }
 
-    return bufferBorder;
+    return nodeBorder;
 }
 
-QSGNode *RoundedRectangle::updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *data)
+QSGNode *RoundedRectangle::updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *)
 {
-    int idx = -1;
-    const uint aaoffset = 1;
-    const qreal h = (height() / 2.f - m_radius) / 2.f;
-    const qreal w = (width() + m_radius * 2.f) / 2.f;
+    QSGGeometryNode *node;
+    QSGGeometry *geometry;
+	auto idx = -1;
+    const auto aaoffset = 1;
+    const auto h = (height() - m_radius * 2.f) / 2.f;
+    const auto w = (width() - m_radius * 2.f) / 2.f;
     const uchar r = m_fillColor.red();
     const uchar g = m_fillColor.green();
     const uchar b = m_fillColor.blue();
     const uchar alpha = m_fillColor.alpha();
-    const int nCorner = GetNumberRoundedCorner();
-    const bool aa = (m_border < 1) && antialiasing();
-    const float a = 0.5f * float(M_PI) / m_roundedSegments;
-    m_roundedSegments += (m_roundedSegments % 2 == 0)?0:1;
-    const int nbVertice = (aa?28:20) + nCorner * (aa ? (m_roundedSegments * m_roundedSegments % 2 == 0 ? (4*m_roundedSegments + 1) : (4*(m_roundedSegments-1)+7)):(2 * m_roundedSegments + 1)) -1; /* 20 = 4 * 5 (nbVertice * nbRects) with aa 28 = 4 * 5 + 2 * 4 (nbVertice * nbRects + nbVerticeAA * (nbRects - 1)) */
+    const auto nCorner = getNumberRoundedCorner();
+    const auto aa = (m_border < 1) && antialiasing();
+    const auto a = 0.5f * float(M_PI) / m_nbSegments;
+    const QPointF center(w + m_radius, h + m_radius);
+    m_nbSegments += (m_nbSegments % 2 == 0)?0:1;
+    const int nbVertice = (aa?28:20) + nCorner * (aa ? (m_nbSegments * m_nbSegments % 2 == 0 ? (4*m_nbSegments + 1) : (4*(m_nbSegments-1)+7)):(2 * m_nbSegments + 1)) -1; /* 20 = 4 * 5 (nbVertice * nbRects) with aa 28 = 4 * 5 + 2 * 4 (nbVertice * nbRects + nbVerticeAA * (nbRects - 1)) */
 
-    QSGGeometryNode *buffer = new QSGGeometryNode;
-    QSGGeometry *bufferGeometry = new QSGGeometry(QSGGeometry::defaultAttributes_ColoredPoint2D(), nbVertice);
-    QSGVertexColorMaterial *material = new QSGVertexColorMaterial;
+    if (!oldNode) {
+        node = new QSGGeometryNode;
+        geometry = new QSGGeometry(QSGGeometry::defaultAttributes_ColoredPoint2D(), nbVertice);
+        geometry->setDrawingMode(aa?QSGGeometry::DrawTriangleStrip:QSGGeometry::DrawLineStrip);
+	    const auto material = new QSGVertexColorMaterial;
+        geometry->setDrawingMode(QSGGeometry::DrawTriangleStrip);
+        node->setGeometry(geometry);
+        node->setFlag(QSGNode::OwnsGeometry);
+        node->setMaterial(material);
+        node->setFlag(QSGNode::OwnsMaterial);
+    } else {
+        node = static_cast<QSGGeometryNode *>(oldNode);
+        geometry = node->geometry();
+        geometry->allocate(nbVertice);
+    }
 
-    bufferGeometry->setDrawingMode(QSGGeometry::DrawTriangleStrip);
-    buffer->setGeometry(bufferGeometry);
-    buffer->setFlag(QSGNode::OwnsGeometry);
-    buffer->setMaterial(material);
-    buffer->setFlag(QSGNode::OwnsMaterial);
+	auto vertices = geometry->vertexDataAsColoredPoint2D();
 
-    QSGGeometry::ColoredPoint2D *vertices = bufferGeometry->vertexDataAsColoredPoint2D();
-
-    auto drawCircle = [&](qreal cx, qreal cy, float offset) {
-        for (int i = 0; i < m_roundedSegments; i++)
+	const auto drawCircle = [&](qreal cx, qreal cy, float offset) {
+        for (uint i = 0; i < m_nbSegments; i++)
         {
             if (aa)
             {
@@ -338,65 +350,65 @@ QSGNode *RoundedRectangle::updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData
 
     //Top
     if (m_topLeft)
-        drawCircle(-w, -h, float(M_PI) / 2.0f * 2.0f);
+        drawCircle(-w + center.x(), -h + center.y(), float(M_PI) / 2.0f * 2.0f);
     if (aa)
     {
-        vertices[++idx].set( -w + (m_topLeft ? 0 : -m_radius), - h - m_radius - aaoffset, 0, 0, 0, 0);
-        vertices[++idx].set( w + (m_topRight ? 0 : m_radius), - h - m_radius - aaoffset, 0, 0, 0, 0);
+        vertices[++idx].set( -w + center.x() + (m_topLeft ? 0 : -m_radius), - h + center.y() - m_radius - aaoffset, 0, 0, 0, 0);
+        vertices[++idx].set( w + center.x() + (m_topRight ? 0 : m_radius), - h + center.y() - m_radius - aaoffset, 0, 0, 0, 0);
     }
-    vertices[++idx].set( -w + (m_topLeft ? 0 : -m_radius), - h - m_radius, r, g, b, alpha);
-    vertices[++idx].set( w + (m_topRight ? 0 : m_radius), - h - m_radius, r, g, b, alpha);
-    vertices[++idx].set( -w + (m_topLeft ? 0 : -m_radius), - h, r, g, b, alpha);
-    vertices[++idx].set( w + (m_topRight ? 0 : m_radius), - h, r, g, b, alpha);
+    vertices[++idx].set( -w + center.x() + (m_topLeft ? 0 : -m_radius), - h + center.y() - m_radius, r, g, b, alpha);
+    vertices[++idx].set( w + center.x() + (m_topRight ? 0 : m_radius), - h + center.y() - m_radius, r, g, b, alpha);
+    vertices[++idx].set( -w + center.x() + (m_topLeft ? 0 : -m_radius), - h + center.y(), r, g, b, alpha);
+    vertices[++idx].set( w + center.x() + (m_topRight ? 0 : m_radius), - h + center.y(), r, g, b, alpha);
     if (m_topRight)
-        drawCircle(w, -h, float(M_PI) / 2.0f * 3.0f);
+        drawCircle(w + center.x(), -h + center.y(), float(M_PI) / 2.0f * 3.0f);
 
     //Right
     if (aa)
     {
-        vertices[++idx].set( w + m_radius + aaoffset, - h, 0, 0, 0, 0);
-        vertices[++idx].set( w + m_radius + aaoffset, h, 0, 0, 0, 0);
+        vertices[++idx].set( w + center.x() + m_radius + aaoffset, - h + center.y(), 0, 0, 0, 0);
+        vertices[++idx].set( w + center.x() + m_radius + aaoffset, h + center.y(), 0, 0, 0, 0);
     }
-    vertices[++idx].set( w + m_radius, - h, r, g, b, alpha);
-    vertices[++idx].set( w + m_radius, h, r, g, b, alpha);
-    vertices[++idx].set( w, - h, r, g, b, alpha);
-    vertices[++idx].set( w, h, r, g, b, alpha);
+    vertices[++idx].set( w + center.x() + m_radius, - h + center.y(), r, g, b, alpha);
+    vertices[++idx].set( w + center.x() + m_radius, h + center.y(), r, g, b, alpha);
+    vertices[++idx].set( w + center.x(), - h + center.y(), r, g, b, alpha);
+    vertices[++idx].set( w + center.x(), h + center.y(), r, g, b, alpha);
 
     //Bottom
     if (m_bottomRight)
-        drawCircle(w, h, 0);
+        drawCircle(w + center.x(), h + center.y(), 0);
     if (aa)
     {
-        vertices[++idx].set( w + ((m_bottomRight)?0:m_radius), h + m_radius + aaoffset, 0, 0, 0, 0);
-        vertices[++idx].set( -w + ((m_bottomLeft)?0:-m_radius), h + m_radius + aaoffset, 0, 0, 0, 0);
+        vertices[++idx].set( w + center.x() + ((m_bottomRight)?0:m_radius), h + m_radius + aaoffset + center.y(), 0, 0, 0, 0);
+        vertices[++idx].set( -w + center.x() + ((m_bottomLeft)?0:-m_radius), h + m_radius + aaoffset + center.y(), 0, 0, 0, 0);
     }
-    vertices[++idx].set( w + (m_bottomRight ? 0 : m_radius), h + m_radius, r, g, b, alpha);
-    vertices[++idx].set( -w + (m_bottomLeft ? 0 : -m_radius), h + m_radius, r, g, b, alpha);
-    vertices[++idx].set( w + (m_bottomRight ? 0 : m_radius), h, r, g, b, alpha);
-    vertices[++idx].set( -w + (m_bottomLeft ? 0 : -m_radius), h, r, g, b, alpha);
+    vertices[++idx].set( w + center.x() + (m_bottomRight ? 0 : m_radius), h + m_radius + center.y(), r, g, b, alpha);
+    vertices[++idx].set( -w + center.x() + (m_bottomLeft ? 0 : -m_radius), h + m_radius + center.y(), r, g, b, alpha);
+    vertices[++idx].set( w + center.x() + (m_bottomRight ? 0 : m_radius), h + center.y(), r, g, b, alpha);
+    vertices[++idx].set( -w + center.x() + (m_bottomLeft ? 0 : -m_radius), h + center.y(), r, g, b, alpha);
     if (m_bottomLeft)
-        drawCircle(-w, h, float(M_PI) / 2.0f);
+        drawCircle(-w + center.x(), h + center.y(), float(M_PI) / 2.0f);
 
     //Left
     if (aa)
     {
-        vertices[++idx].set( -w - m_radius - aaoffset, h, 0, 0, 0, 0);
-        vertices[++idx].set( -w - m_radius - aaoffset, -h, 0, 0, 0, 0);
+        vertices[++idx].set( -w + center.x() - m_radius - aaoffset, h + center.y(), 0, 0, 0, 0);
+        vertices[++idx].set( -w + center.x() - m_radius - aaoffset, -h + center.y(), 0, 0, 0, 0);
     }
-    vertices[++idx].set( -w - m_radius, h, r, g, b, alpha);
-    vertices[++idx].set( -w - m_radius, -h, r, g, b, alpha);
-    vertices[++idx].set( -w, h, r, g, b, alpha);
-    vertices[++idx].set( -w, - h, r, g, b, alpha);
+    vertices[++idx].set( -w + center.x() - m_radius, h + center.y(), r, g, b, alpha);
+    vertices[++idx].set( -w + center.x() - m_radius, -h + center.y(), r, g, b, alpha);
+    vertices[++idx].set( -w + center.x(), h + center.y(), r, g, b, alpha);
+    vertices[++idx].set( -w + center.x(), - h + center.y(), r, g, b, alpha);
 
     //Center
-    vertices[++idx].set( w, -h, r, g, b, alpha);
-    vertices[++idx].set( -w, h, r, g, b, alpha);
-    vertices[++idx].set( w, h, r, g, b, alpha);
+    vertices[++idx].set( w + center.x(), -h + center.y(), r, g, b, alpha);
+    vertices[++idx].set( -w + center.x(), h + center.y(), r, g, b, alpha);
+    vertices[++idx].set( w + center.x(), h + center.y(), r, g, b, alpha);
 
     if (m_border > 0)
-        buffer->appendChildNode(CreateBorder());
+        node->appendChildNode(createBorder());
 
     Q_ASSERT(idx + 1 == nbVertice);
 
-    return buffer;
+    return node;
 }

@@ -1,3 +1,9 @@
+build-*/
+DulyQuickControls/x64/
+DulyQuickControls/release/
+DulyQuickControls/debug/
+DulyQuickControls/.vs/
+DulyQuickControls/DulyQuickControls.sln
 
 build-DulyQuickControls-Qt_5_9_1_for_UWP_64bit_MSVC_2017-Debug/
 

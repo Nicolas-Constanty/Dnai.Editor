@@ -1,60 +1,79 @@
 import QtQuick 2.4
 import QtQuick.Controls 2.2
+import CustomGeometry 1.0
 
-Item {
-    width: if (name.width > description.width)
-               name.width * 2
-           else
-               description.width * 2
-    height: 100
+GenericNode {
+    id: node
+    property alias inputs: _inputs.model
+    property alias outputs: _outputs.model
+    property alias inputDelegate: _inputs.delegate
+    property alias outputDelegate: _outputs.delegate
+    property alias description: _description.text
+    property alias name: _name.text
 
-    Rectangle {
-        id: rectangle
-        color: "#99000000"
+    content: contentNode
+    header: headerNode
+    width: headerNode.width
+    height: headerNode.height + contentNode.height
+    RoundedRectangle {
+        id: headerNode
+        width: if (_name.width > _description.width)
+                   _name.width * 1.5
+               else
+                   _description.width * 1.5
+        height: _name.height * 1.3 + _description.height * 1.3
+        bottomLeft: false
+        bottomRight: false
+        border: 1
         radius: 10
-        border.width: 1
-        anchors.fill: parent
-        border.color: "#000000"
-        gradient: Gradient {
-            GradientStop {
-                position: 0.0
-                color: "#848484"
-            }
-            GradientStop {
-                position: 1
-                color: "#99000000"
-            }
-        }
-
+        borderColor: "#7C7C7C"
+        fillColor: "#606060"
+        antialiasing: true
         Label {
-            id: name
+            id: _name
             text: "Node name"
             anchors.top: parent.top
             anchors.topMargin: 5
             anchors.horizontalCenter: parent.horizontalCenter
             verticalAlignment: Text.AlignVCenter
             horizontalAlignment: Text.AlignHCenter
-            Label {
-                id: description
-                text: "This is the node description"
-                font.italic: true
-                anchors.top: parent.top
-                anchors.topMargin: name.height
-                anchors.horizontalCenter: parent.horizontalCenter
-                verticalAlignment: Text.AlignVCenter
-                horizontalAlignment: Text.AlignHCenter
-            }
         }
-
-        Rectangle {
-            height: 1
-            color: "#000000"
-            width: parent.width - radius * 2
-            y: if (description.text != "")
-                   parent.radius + name.height + description.height
-               else
-                   parent.radius + name.height
-            x: radius
+        Label {
+            id: _description
+            text: "This is the node description"
+            font.italic: true
+            anchors.top: parent.top
+            anchors.topMargin: _name.height * 1.3
+            anchors.horizontalCenter: parent.horizontalCenter
+            verticalAlignment: Text.AlignVCenter
+            horizontalAlignment: Text.AlignHCenter
+        }
+    }
+    RoundedRectangle {
+        id: contentNode
+        width: headerNode.width
+        height: _inputs.count * 10 + 30
+        radius: headerNode.radius
+        border: headerNode.border
+        borderColor: headerNode.borderColor
+        fillColor: "#505050"
+        antialiasing: headerNode.antialiasing
+        topLeft: false
+        topRight: false
+        y: headerNode.height - headerNode.border
+        ListView {
+            id: _inputs
+            anchors.topMargin: 10
+            anchors.fill: parent
+            spacing: 10
+            interactive: false
+        }
+        ListView {
+            id: _outputs
+            anchors.topMargin: 10
+            anchors.fill: parent
+            spacing: 10
+            interactive: false
         }
     }
 }

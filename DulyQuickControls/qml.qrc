@@ -21,5 +21,8 @@
         <file>Resources/Panels/ThemePanel.qml</file>
         <file>Resources/Components/NodeForm.ui.qml</file>
         <file>Resources/Components/Node.qml</file>
+        <file>Resources/Components/AddNodeModel.qml</file>
+        <file>Resources/Components/AddNode.qml</file>
+        <file>Resources/Components/NodeModel.qml</file>
     </qresource>
 </RCC>

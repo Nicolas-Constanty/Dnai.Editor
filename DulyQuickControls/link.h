@@ -12,9 +12,15 @@ public:
 
 public:
     Link(ALinkable *l1, ALinkable *l2);
+	/**
+     * \brief Assign the visual object to the link
+     * \param curve 
+     */
+    void setCurve(BezierCurve *curve) { m_bezierCurve = curve; }
 
 private:
     Link();
+    BezierCurve *m_bezierCurve;
 };
 
 #endif // LINK_H
