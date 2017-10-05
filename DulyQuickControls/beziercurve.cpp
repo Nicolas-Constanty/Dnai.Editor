@@ -143,7 +143,9 @@ QSGNode *BezierCurve::updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *dat
     const auto aaoffset = 1.f;
     const auto pi2 = float(M_PI) / 2.f;
     const auto raa = radius + aaoffset;
-    const int nbVertices = aa ? (m_dotted ? 8 * (m_segmentCount / 2) : m_segmentCount * 7.5 ): m_segmentCount;
+    if (m_segmentCount % 2 != 0)
+        ++m_segmentCount;
+    const int nbVertices = aa ? (m_dotted ? 8 * (m_segmentCount / 2) : m_segmentCount * 7.5 - 7): m_segmentCount;
 
     if (m_segmentCount != 0 && m_segmentCount % 2 != 0)
         ++m_segmentCount;
