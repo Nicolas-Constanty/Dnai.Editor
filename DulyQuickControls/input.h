@@ -9,7 +9,7 @@
 class InputBackend : public BaseIo
 {
 public:
-	explicit InputBackend(DulyResources::IOType t);
+    explicit InputBackend(DulyResources::IOType t, QQuickItem *parent);
 	
 	/**
 	* \brief Connect linkable together, create a link, and keep a reference on the visual curve
@@ -18,16 +18,12 @@ public:
 	* \return Link *
 	*/
     Link *connect(ALinkable *linkable, BezierCurve *curve) override;
-
-private:
-    InputBackend() {}
 };
 
 class Input : public Io
 {
 public:
 	explicit Input (QQuickItem *parent = nullptr);
-
 
 	/**
 	* \brief Refresh BackendIO for Input
@@ -46,6 +42,6 @@ public:
 	* \return Io *
 	*/
 	virtual Io *findIo(GenericNode *n, const QPointF &p) override;
-
+    virtual void updateLink() override;
 };
 #endif // INPUT_H

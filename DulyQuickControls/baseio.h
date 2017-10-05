@@ -7,7 +7,7 @@
 class BaseIo : public ALinkable
 {
 public:
-    BaseIo();
+    BaseIo(DulyResources::IOType type, QQuickItem *parent);
     ~BaseIo();
 
 	/**
@@ -65,8 +65,11 @@ public:
 	*/
 	DulyResources::IOType getType() const;
 
+    QQuickItem *parent() const { return m_parent; }
+
 protected:
     DulyResources::IOType m_type;
+    QQuickItem *m_parent;
 };
 
 #endif // BASEIO_H

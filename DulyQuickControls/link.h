@@ -17,6 +17,7 @@ public:
      * \param curve 
      */
     void setCurve(BezierCurve *curve) { m_bezierCurve = curve; }
+	BezierCurve *curve() const { return m_bezierCurve; }
 
 private:
     Link();

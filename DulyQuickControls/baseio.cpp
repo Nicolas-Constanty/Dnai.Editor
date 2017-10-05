@@ -2,9 +2,9 @@
 #include "baseio.h"
 #include <QDebug>
 
-BaseIo::BaseIo() : m_type(DulyResources::IOType::Int)
+BaseIo::BaseIo(DulyResources::IOType type, QQuickItem *parent) : m_type(type)
 {
-
+    m_parent = parent;
 }
 
 BaseIo::~BaseIo()
@@ -19,7 +19,7 @@ Link *BaseIo::connect(ALinkable *linkable, BezierCurve *curve)
     {
         l = new Link(this, linkable);
         l->setCurve(curve);
-        m_links.add(l);
+        m_links.append(l);
 		linkable->addLink(l);
         return l;
     }
@@ -32,7 +32,7 @@ void BaseIo::unlink(ALinkable *linkable)
 	const auto l = getLink(linkable);
     if (l != nullptr)
     {
-		m_links.remove(l);
+        m_links.removeOne(l);
         linkable->removeLink(l);
     }
     //TODO INSERT DEBUG "Link doesn't exist"
@@ -40,7 +40,7 @@ void BaseIo::unlink(ALinkable *linkable)
 
 void BaseIo::unlinkAll()
 {
-    auto l = m_links.rawList();
+    auto l = m_links;
     for (auto i : l)
     {
         i->L2->unlink(this);
@@ -50,17 +50,17 @@ void BaseIo::unlinkAll()
 
 void BaseIo::addLink(Link *l)
 {
-	m_links.add(l);
+    m_links.append(l);
 }
 
 void BaseIo::removeLink(Link *l)
 {
-	m_links.remove(l);
+    m_links.removeOne(l);
 }
 
 bool BaseIo::isLink()
 {
-    return m_links.empty();
+    return !m_links.empty();
 }
 
 void BaseIo::setType(DulyResources::IOType t)
@@ -77,7 +77,7 @@ DulyResources::IOType BaseIo::getType() const
 
 Link *BaseIo::getLink(ALinkable *linkable) const
 {
-    auto ref = m_links.rawList();
+    auto ref = m_links;
     const auto findFunc = [&](auto *l){
         return ((l->L1 == this && l->L2 == linkable) || (l->L1 == linkable && l->L2 == this));
     };
