@@ -188,7 +188,7 @@ void Io::mousePressEvent(QMouseEvent *event)
         b->setPosition(mapToItem(DulyCanvas::Instance, position() + QPointF(width() / 2, height() / 2)));
         b->setP1(QPoint(0,0));
         b->setFillColor(m_fillColor);
-        QColor c((m_fillColor.red() < 205?m_fillColor.red() + 50:255),
+	    const QColor c((m_fillColor.red() < 205?m_fillColor.red() + 50:255),
                  (m_fillColor.green() < 205?m_fillColor.green()+50:255),
                  (m_fillColor.blue() < 205?m_fillColor.blue()+50:255),
                  m_fillColor.alpha());

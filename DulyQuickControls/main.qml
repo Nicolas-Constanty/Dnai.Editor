@@ -149,15 +149,22 @@ ApplicationWindow {
         accentGridColor: toolBar.menuEditRef.settingRef.themeTabRef.accentGridColorRef.colorSetting
         backgroundColor: toolBar.menuEditRef.settingRef.themeTabRef.backgroudColorRef.colorSetting
 
-        AddNode {
-           x: 700
-           y: 500
+        Flow {
+            radius: 100
+            borderWidth: 15
+            x: parent.width / 2
+            y: parent.height / 2
         }
 
-        AddNode {
-           x: 200
-           y: 200
-        }
+//        AddNode {
+//           x: 700
+//           y: 500
+//        }
+
+//        AddNode {
+//           x: 200
+//           y: 200
+//        }
     }
 
 }
