@@ -10,6 +10,9 @@ GenericNode {
     property alias outputDelegate: _outputs.delegate
     property alias description: _description.text
     property alias name: _name.text
+    property alias flowIn: node.flowIn
+    property alias flowOut: node.flowOut
+    property alias headerRef: headerNode
 
     content: contentNode
     header: headerNode

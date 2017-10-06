@@ -1,4 +1,4 @@
-#include "MoveCommand.h"
+#include "moveCommand.h"
 
 
 MoveCommand::MoveCommand(QQuickItem *w, const QPoint &vec)

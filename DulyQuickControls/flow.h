@@ -33,7 +33,7 @@ public:
 	DulyResources::FlowType type() const { return m_type; }
 
 public:
-	void setType(DulyResources::FlowType t);
+    void setType(DulyResources::FlowType t);
 
 signals:
 	void typeChanged(DulyResources::FlowType t);
@@ -42,7 +42,7 @@ private:
 	DulyResources::FlowType m_type;
 
 private:
-	FlowBackend *m_flow;
+    FlowBackend *m_flow;
 };
 
 #endif // FLOW_H

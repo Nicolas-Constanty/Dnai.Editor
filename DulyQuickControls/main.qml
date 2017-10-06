@@ -16,7 +16,7 @@ ApplicationWindow {
     height: 720
     minimumHeight: 150
     minimumWidth: 300
-    title: qsTr("Dully")
+    title: qsTr("Duly")
     Material.theme: Material.Dark
     Material.accent: Material.color(Material.DeepOrange, Material.Shade400)
     property double factor : 1.5
@@ -149,22 +149,22 @@ ApplicationWindow {
         accentGridColor: toolBar.menuEditRef.settingRef.themeTabRef.accentGridColorRef.colorSetting
         backgroundColor: toolBar.menuEditRef.settingRef.themeTabRef.backgroudColorRef.colorSetting
 
-        Flow {
-            radius: 100
-            borderWidth: 15
-            x: parent.width / 2
-            y: parent.height / 2
+//        Flow {
+//            radius: 100
+//            borderWidth: 15
+//            x: parent.width / 2
+//            y: parent.height / 2
+//        }
+
+        AddNode {
+           x: 700
+           y: 500
         }
 
-//        AddNode {
-//           x: 700
-//           y: 500
-//        }
-
-//        AddNode {
-//           x: 200
-//           y: 200
-//        }
+        AddNode {
+           x: 200
+           y: 200
+        }
     }
 
 }

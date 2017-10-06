@@ -11,10 +11,11 @@ CustomShape::CustomShape(QQuickItem * parent) :
 
 void CustomShape::setRadius(qreal radius)
 {
+
 	if (radius == m_radius)
 		return;
 	m_radius = radius;
-	emit radiusChanged(radius);
+    emit radiusChanged(radius);
 	update();
 }
 
