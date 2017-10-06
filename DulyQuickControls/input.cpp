@@ -20,12 +20,10 @@ Link *InputBackend::connect(ALinkable *linkable, BezierCurve *curve)
         auto l = getLink(linkable);
         if (l == nullptr)
         {
-            qDebug() << "Yay";
             m_links.clear();
             l = new Link(this, linkable);
             l->setCurve(curve);
             m_links.append(l);
-            qDebug() << this;
             linkable->addLink(l);
             return l;
         }

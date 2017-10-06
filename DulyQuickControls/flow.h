@@ -1,76 +1,48 @@
 #ifndef FLOW_H
 #define FLOW_H
 
-#include <QQuickItem>
 #include <QSGNode>
-#include "ilinkable.h"
+#include "baselinkable.h"
+#include "resourcesnode.h"
+#include "customshape.h"
 
-class FlowBackend : public ALinkable
+class FlowBackend : public BaseLinkable
 {
 public:
-    FlowBackend() {}
-    /**
-    * \brief Connect linkable together, create a link, and keep a reference on the visual curve
-    * \param linkable
-    * \param curve
-    * \return Link *
-    */
-    virtual Link *connect(ALinkable *linkable, BezierCurve *curve) override;
+	explicit FlowBackend(DulyResources::FlowType t, QQuickItem *parent);
+	
+	/**
+	* \brief return the IOType
+	*/
+	DulyResources::FlowType getType() const;
 
-    /**
-    * \brief Break a link between linkable
-    * \param linkable
-    */
-    virtual void unlink(ALinkable *linkable) override;
-
-    /**
-    * \brief Break all the links between linkable
-    */
-    virtual void unlinkAll() override;
-
-    /**
-    * \brief Add a link
-    * \param l
-    */
-    virtual void addLink(Link *l) override;
-
-    /**
-    * \brief Remove a link
-    * \param l
-    */
-    virtual void removeLink(Link *l) override;
-
-    /**
-    * \brief is linkable is actually
-    * \return bool
-    */
-    bool isLink() override;
-
-    /**
-    * \brief return the link between this and linkable
-    * \param linkable
-    * \return Link *
-    */
-    Link *getLink(ALinkable *linkable) const override;
+protected:
+	DulyResources::FlowType m_type;
 };
 
-class Flow : QQuickItem
+class Flow : public CustomShape
 {
     Q_OBJECT
+    Q_PROPERTY(DulyResources::FlowType type READ type WRITE setType NOTIFY typeChanged)
 
 public:
-    enum FlowType
-    {
-        Enter,
-        Exit
-    };
-    Q_ENUM(FlowType)
-
-    Q_PROPERTY(FlowType type READ type WRITE setType NOTIFY typeChanged)
-public:
-    Flow(QQuickItem *parent = nullptr);
+	explicit Flow(QQuickItem *parent = nullptr);
     virtual QSGNode *updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *) override;
 
+public:
+	DulyResources::FlowType type() const { return m_type; }
+
+public:
+	void setType(DulyResources::FlowType t);
+
+signals:
+	void typeChanged(DulyResources::FlowType t);
+
+private:
+	DulyResources::FlowType m_type;
+
+private:
+	FlowBackend *m_flow;
 };
 
 #endif // FLOW_H
