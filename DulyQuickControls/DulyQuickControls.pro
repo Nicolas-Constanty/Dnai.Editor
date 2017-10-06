@@ -30,7 +30,8 @@ SOURCES += baseio.cpp \
     roundedrectangle.cpp \
     debugdecorator.cpp \
     eventutilities.cpp \
-    focusmanager.cpp
+    focusmanager.cpp \
+    flow.cpp
 
 RESOURCES += qml.qrc
 
@@ -70,4 +71,5 @@ HEADERS += baseio.h \
     roundedrectangle.h \
     dulycanvas.h \
     eventutilities.h \
-    focusmanager.h
+    focusmanager.h \
+    flow.h
