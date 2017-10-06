@@ -7,6 +7,7 @@ class CustomShape : public QQuickItem
 {
     Q_OBJECT
 
+public:
 	Q_PROPERTY(qreal radius READ radius WRITE setRadius NOTIFY radiusChanged)
 	Q_PROPERTY(qreal borderWidth READ borderWidth WRITE setBorderWidth NOTIFY borderWidthChanged)
 	Q_PROPERTY(QColor fillColor READ fillColor WRITE setFillColor NOTIFY fillColorChanged)

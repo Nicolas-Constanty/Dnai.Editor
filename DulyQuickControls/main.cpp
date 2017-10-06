@@ -9,6 +9,7 @@
 #include "input.h"
 #include "output.h"
 #include "genericnode.h"
+#include "flow.h"
 
 struct RegisterSettings
 {
@@ -36,6 +37,7 @@ void registerCustomGeometry()
 	qmlRegisterType<Input>(s.namespaceName, s.version, s.subVersion, "Input");
 	qmlRegisterType<Output>(s.namespaceName, s.version, s.subVersion, "Output");
 	qmlRegisterType<DulyResources>(s.namespaceName, s.version, s.subVersion, "IOType");
+    qmlRegisterType<Flow>(s.namespaceName, s.version, s.subVersion, "Flow");
 }
 
 int main(int argc, char *argv[])
