@@ -13,10 +13,35 @@ NodeForm {
 //        anchors.fill: parent
 //        drag.target: parent
 //    }
+    id: nodeForm
     inputs: model.inputs
     outputs: model.outputs
     name: model.name
     description: model.description
+
+    Flow {
+        id: _flowIn
+        radius: 6
+        borderWidth: 3
+        antialiasing: true
+        x: radius
+        y: headerRef.height / 2 - radius - radius / 3
+        visible: model.flowIn
+    }
+
+    Flow {
+        id: _flowOut
+        radius: _flowIn.radius
+        borderWidth: _flowIn.borderWidth
+        antialiasing: _flowIn.antialiasing
+        x: parent.width - radius * 4
+        y: _flowIn.y
+        visible: model.flowOut
+    }
+
+    flowInItem: _flowIn
+    flowOutItem: _flowOut
+
     inputDelegate: Component {
         Item {
             width: 10
@@ -91,6 +116,5 @@ NodeForm {
                 }
             }
         }
-
     }
 }

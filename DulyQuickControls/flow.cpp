@@ -18,16 +18,29 @@ DulyResources::FlowType FlowBackend::getType() const
 Flow::Flow(QQuickItem* parent):
     CustomShape(parent)
     , m_type(DulyResources::FlowType::Enter)
-	, m_flow(nullptr)
+    , m_flow(nullptr)
 {
-	setFlag(ItemHasContents, true);
-	setAntialiasing(true);
+    setFlag(ItemHasContents, true);
+    m_radius = 8;
+    m_borderWidth = 2;
+    m_fillColor = QColor(96, 96, 96);
+    m_borderColor = QColor(255, 255, 255);
 }
 
 QSGNode* Flow::updatePaintNode(QSGNode* oldNode, UpdatePaintNodeData*)
 {
-	QSGGeometryNode *node;
-	QSGGeometry *geometry;
+    QSGGeometryNode *node;
+    QSGGeometry *geometry;
+    if (!isVisible())
+    {
+        if (oldNode)
+        {
+            node = static_cast<QSGGeometryNode *>(oldNode);
+            geometry = node->geometry();
+            geometry->allocate(0);
+        }
+        return nullptr;
+    }
 	const char r = m_fillColor.red();
 	const char g = m_fillColor.green();
 	const char b = m_fillColor.blue();
@@ -40,13 +53,13 @@ QSGNode* Flow::updatePaintNode(QSGNode* oldNode, UpdatePaintNodeData*)
 
 	const auto aa = antialiasing();
 	setWidth((m_radius + m_radius / 2.5f) * 2);
-	setHeight((m_radius + m_radius / 2.5f) * 2);
-	const auto nbQuarter = 3;
+    setHeight((m_radius + m_radius / 2.5f) * 2);
+    const auto nbQuarter = 3;
 	const uint nbVertices = 1 + (aa?(m_borderWidth > 0 ? 16 * nbQuarter: 9 * nbQuarter):(m_borderWidth > 0 ? 13 * nbQuarter : 5 * nbQuarter));
 	if (!oldNode) {
 		node = new QSGGeometryNode;
 		geometry = new QSGGeometry(QSGGeometry::defaultAttributes_ColoredPoint2D(), nbVertices);
-		geometry->setDrawingMode(QSGGeometry::DrawTriangleStrip);
+        geometry->setDrawingMode(QSGGeometry::DrawTriangleStrip);
 		node->setGeometry(geometry);
 		node->setFlag(QSGNode::OwnsGeometry);
 		auto material = new QSGVertexColorMaterial;
@@ -64,10 +77,10 @@ QSGNode* Flow::updatePaintNode(QSGNode* oldNode, UpdatePaintNodeData*)
 	auto idx = -1;
 	const auto cx = width() / 2;
 	const auto cy = height() / 2;
-	const auto aMin = qDegreesToRadians(5.f); // 5 deg
+    const auto aMin = qDegreesToRadians(10.f); // 5 deg
 	const auto aMax = qDegreesToRadians(360.f/nbQuarter);
-	const qreal aaoffset = 1;
-	auto a = 0.f;
+    const qreal aaoffset = 1;
+    auto a = 0.f;
 	const auto drawQuarter = [&]()
 	{
 		vertices[++idx].set(cx, cy, r, g, b, alpha);
@@ -76,8 +89,8 @@ QSGNode* Flow::updatePaintNode(QSGNode* oldNode, UpdatePaintNodeData*)
 		vertices[++idx].set(cx + m_radius * qFastCos(a - aMin), cy + m_radius * qFastSin(a - aMin), r, g, b, alpha);
 		if (m_borderWidth > 0)
 		{
-			vertices[++idx].set(cx + (m_radius - aaoffset) * qFastCos(a - aMax + aMin), cy + (m_radius - aaoffset) * qFastSin(a - aMax + aMin), rb, gb, bb, alphab);
-			vertices[++idx].set(cx + (m_radius - aaoffset) * qFastCos(a - aMin), cy + (m_radius - aaoffset) * qFastSin(a - aMin), rb, gb, bb, alphab);
+            vertices[++idx].set(cx + (m_radius + aaoffset) * qFastCos(a - aMax + aMin), cy + (m_radius + aaoffset) * qFastSin(a - aMax + aMin), rb, gb, bb, alphab);
+            vertices[++idx].set(cx + (m_radius + aaoffset) * qFastCos(a - aMin), cy + (m_radius + aaoffset) * qFastSin(a - aMin), rb, gb, bb, alphab);
 
 			vertices[++idx].set(cx + (m_radius + m_borderWidth) * qFastCos(a - aMax + aMin), cy + (m_radius + m_borderWidth) * qFastSin(a - aMax + aMin), rb, gb, bb, alphab);
 			vertices[++idx].set(cx + (m_radius + m_borderWidth) * qFastCos(a - aMin), cy + (m_radius + m_borderWidth) * qFastSin(a - aMin), rb, gb, bb, alphab);
@@ -89,11 +102,11 @@ QSGNode* Flow::updatePaintNode(QSGNode* oldNode, UpdatePaintNodeData*)
 
 				vertices[++idx].set(cx + (m_radius + m_borderWidth + aaoffset) * qFastCos(a + aMin), cy + (m_radius + m_borderWidth + aaoffset) * qFastSin(a + aMin), 0, 0, 0, 0);
 			}
-			vertices[++idx].set(cx + (m_radius + m_borderWidth) * qFastCos(a - aMin), cy + (m_radius + m_borderWidth) * qFastSin(a - aMin), rb, gb, bb, alphab);
-			vertices[++idx].set(cx + (m_radius + m_borderWidth) * qFastCos(a + aMin), cy + (m_radius + m_borderWidth) * qFastSin(a + aMin), rb, gb, bb, alphab);
+            vertices[++idx].set(cx + (m_radius + m_borderWidth) * qFastCos(a - aMin), cy + (m_radius + m_borderWidth) * qFastSin(a - aMin), rb, gb, bb, alphab);
+            vertices[++idx].set(cx + (m_radius + m_borderWidth) * qFastCos(a + aMin), cy + (m_radius + m_borderWidth) * qFastSin(a + aMin), rb, gb, bb, alphab);
 
-			vertices[++idx].set(cx + (m_radius - aaoffset) * qFastCos(a - aMin), cy + (m_radius - aaoffset) * qFastSin(a - aMin), rb, gb, bb, alphab);
-			vertices[++idx].set(cx + (m_radius - aaoffset) * qFastCos(a + aMin), cy + (m_radius - aaoffset) * qFastSin(a + aMin), rb, gb, bb, alphab);
+            vertices[++idx].set(cx + (m_radius + aaoffset) * qFastCos(a - aMin), cy + (m_radius + aaoffset) * qFastSin(a - aMin), rb, gb, bb, alphab);
+            vertices[++idx].set(cx + (m_radius + aaoffset) * qFastCos(a + aMin), cy + (m_radius + aaoffset) * qFastSin(a + aMin), rb, gb, bb, alphab);
 		}
 		else if (aa)
 		{
@@ -103,10 +116,10 @@ QSGNode* Flow::updatePaintNode(QSGNode* oldNode, UpdatePaintNodeData*)
 			vertices[++idx].set(cx + (m_radius + aaoffset) * qFastCos(a - aMin), cy + (m_radius + aaoffset) * qFastSin(a - aMin), 0, 0, 0, 0);
 			vertices[++idx].set(cx + (m_radius + aaoffset) * qFastCos(a + aMin), cy + (m_radius + aaoffset) * qFastSin(a + aMin), 0, 0, 0, 0);
 		}
-		vertices[++idx].set(cx + m_radius * qFastCos(a - aMin), cy + m_radius * qFastSin(a - aMin), r, g, b, alpha);
-		vertices[++idx].set(cx + m_radius * qFastCos(a + aMin), cy + m_radius * qFastSin(a + aMin), r, g, b, alpha);
+        vertices[++idx].set(cx + m_radius * qFastCos(a - aMin), cy + m_radius * qFastSin(a - aMin), r, g, b, alpha);
+        vertices[++idx].set(cx + m_radius * qFastCos(a + aMin), cy + m_radius * qFastSin(a + aMin), r, g, b, alpha);
 	};
-	for (auto i = 0; i < nbQuarter; i++)
+    for (auto i = 0; i < nbQuarter; i++)
 		drawQuarter();
 	vertices[++idx].set(cx, cy, r, g, b, alpha);
 

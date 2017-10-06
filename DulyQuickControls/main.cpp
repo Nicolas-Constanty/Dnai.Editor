@@ -37,6 +37,7 @@ void registerCustomGeometry()
 	qmlRegisterType<Input>(s.namespaceName, s.version, s.subVersion, "Input");
 	qmlRegisterType<Output>(s.namespaceName, s.version, s.subVersion, "Output");
 	qmlRegisterType<DulyResources>(s.namespaceName, s.version, s.subVersion, "IOType");
+//    qmlRegisterType<DulyResources>(s.namespaceName, s.version, s.subVersion, "IOType");
     qmlRegisterType<Flow>(s.namespaceName, s.version, s.subVersion, "Flow");
 }
 

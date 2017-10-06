@@ -17,6 +17,36 @@ GenericNode::GenericNode(QQuickItem *parent) :
 	setFlag(ItemAcceptsInputMethod, true);
 }
 
+void GenericNode::setFlowIn(bool f)
+{
+
+    if (f == m_flowIn)
+		return;
+    m_flowIn = f;
+}
+
+void GenericNode::setFlowOut(bool f)
+{
+    if (f == m_flowOut)
+		return;
+	m_flowOut = f;
+    emit flowOutChanged(f);
+}
+
+void GenericNode::setFlowInItem(Flow *f)
+{
+    if (f == m_flowInItem || nullptr)
+        return;
+    m_flowInItem = f;
+}
+
+void GenericNode::setFlowOutItem(Flow *f)
+{
+    if (f == m_flowOutItem || nullptr)
+        return;
+    m_flowOutItem = f;
+}
+
 void GenericNode::setHeader(RoundedRectangle *h)
 {
     if (h == m_header)
@@ -91,4 +121,10 @@ QSGNode *GenericNode::updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *)
     n->setRect(boundingRect());
 
     return n;
+}
+
+void GenericNode::componentComplete()
+{
+    QQuickItem::componentComplete();
+
 }
