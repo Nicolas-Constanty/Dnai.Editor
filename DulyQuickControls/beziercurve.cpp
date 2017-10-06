@@ -19,8 +19,6 @@ BezierCurve::BezierCurve(QQuickItem *parent)
 {
     setFlag(ItemHasContents, true);
     setAntialiasing(true);
-//    m_fillColor = m_settings.value("FilledConnectionColor/colorSelected").value<QColor>();
-//    m_dottedColor = m_settings.value("DottedConnectionColor/colorSelected").value<QColor>();
 }
 
 BezierCurve::~BezierCurve()

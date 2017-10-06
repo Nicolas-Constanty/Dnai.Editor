@@ -10,12 +10,8 @@
 BaseIo *Io::CurrentHover = nullptr;
 
 Io::Io(QQuickItem *parent) :
-    QQuickItem(parent)
-  , m_radius(5)
-  , m_borderWidth(3)
+    CustomShape(parent)
   , m_nbSegments(32)
-  , m_fillColor(QColor(255, 255, 255))
-  , m_borderColor(QColor(0, 255, 0))
   , m_type(DulyResources::IOType::Int)
 
 {
@@ -157,48 +153,12 @@ QSGNode *Io::updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *)
     return node;
 }
 
-void Io::setRadius(qreal radius)
-{
-    if (radius == m_radius)
-        return;
-    m_radius = radius;
-    emit radiusChanged(radius);
-    update();
-}
-
-void Io::setBorderWidth(qreal w)
-{
-    if (w == m_borderWidth)
-        return;
-    m_borderWidth = w;
-    emit borderWidthChanged(w);
-    update();
-}
-
 void Io::setNbSegments(uint n)
 {
     if (n == m_nbSegments)
         return;
     m_nbSegments = n;
     emit nbSegmentsChanged(n);
-    update();
-}
-
-void Io::setFillColor(const QColor &color)
-{
-    if (color == m_fillColor)
-        return;
-    m_fillColor = color;
-    emit fillColorChanged(color);
-    update();
-}
-
-void Io::setBorderColor(const QColor &color)
-{
-    if (color == m_borderColor)
-        return;
-    m_borderColor = color;
-    emit borderColorChanged(color);
     update();
 }
 
@@ -232,8 +192,6 @@ void Io::mousePressEvent(QMouseEvent *event)
                  (m_fillColor.green() < 205?m_fillColor.green()+50:255),
                  (m_fillColor.blue() < 205?m_fillColor.blue()+50:255),
                  m_fillColor.alpha());
-
-        qDebug() << m_fillColor.red();
         b->setDottedColor(c);
         m_currentCurve = b;
     }

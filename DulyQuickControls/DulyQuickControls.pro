@@ -31,7 +31,9 @@ SOURCES += baseio.cpp \
     debugdecorator.cpp \
     eventutilities.cpp \
     focusmanager.cpp \
-    flow.cpp
+    flow.cpp \
+    baselinkable.cpp \
+    customshape.cpp
 
 RESOURCES += qml.qrc
 
@@ -72,4 +74,6 @@ HEADERS += baseio.h \
     dulycanvas.h \
     eventutilities.h \
     focusmanager.h \
-    flow.h
+    flow.h \
+    baselinkable.h \
+    customshape.h
