@@ -17,13 +17,18 @@ addons:
             - libtool
             - cmake
             - pkg-config
+            - libxml2-dev
+            - libxslt1-dev
+            - libzip-dev
+            - libsqlite3-dev
+            - libusb-1.0-0-dev
+            - libssl-dev
+            - libssh2-1-dev
+            - libcurl4-openssl-dev
             # Not a duly-gui dependency, but a Qt dependency
             - mesa-common-dev
 
 before_install:
-    - if [ ! -e Qt ] ; then
-        mkdir Qt;
-    fi
     - if [ ! -e Qt/5.9.1 ] ; then
           rm -rf Qt ;
           wget http://download.qt.io/official_releases/qt/5.9/5.9.1/qt-opensource-linux-x64-5.9.1.run ;
