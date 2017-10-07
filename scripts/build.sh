@@ -1,2 +1,3 @@
-qmake -project
-make
+pwd;
+qmake -project;
+make;
