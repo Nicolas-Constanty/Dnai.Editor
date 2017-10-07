@@ -7,6 +7,7 @@ CustomShape::CustomShape(QQuickItem * parent) :
 	, m_fillColor(QColor(255, 255, 255))
 	, m_borderColor(QColor(0, 255, 0))
 {
+    setFlag(ItemHasContents, true);
 }
 
 void CustomShape::setRadius(qreal radius)

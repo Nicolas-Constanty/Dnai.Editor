@@ -24,9 +24,9 @@ public:
 
 public:
 	void setRadius(qreal radius);
-	void setBorderWidth(qreal w);
-	void setFillColor(const QColor &color);
-	void setBorderColor(const QColor &color);
+    virtual void setBorderWidth(qreal w);
+    virtual void setFillColor(const QColor &color);
+    virtual void setBorderColor(const QColor &color);
 
 signals:
 	void radiusChanged(qreal radius);

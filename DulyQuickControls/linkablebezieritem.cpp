@@ -68,6 +68,7 @@ void LinkableBezierItem::mouseReleaseEvent(QMouseEvent *event)
                 const auto p2(cs->getCanvasPos());
 				m_currentCurve->setP4(p2);
 				m_currentCurve->setDotted(false);
+                afterRealease(cs);
 			}
 			m_currentCurve = nullptr;
 			return;
@@ -77,3 +78,5 @@ void LinkableBezierItem::mouseReleaseEvent(QMouseEvent *event)
 	m_currentCurve = nullptr;
 }
 
+void LinkableBezierItem::afterRealease(LinkableBezierItem *)
+{}
