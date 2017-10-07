@@ -5,6 +5,7 @@ import QtQuick.Controls.Material 2.2
 import QtQuick.Dialogs 1.2
 import QtCharts 2.2
 import CustomGeometry 1.0
+import Qt.labs.platform 1.0
 
 import "Resources/Components"
 
