@@ -22,7 +22,7 @@ addons:
 
 before_install:
     - if [ ! -e Qt ] ; then
-        mkdir Qt
+        mkdir Qt;
     fi
     - if [ ! -e Qt/5.9.1 ] ; then
           rm -rf Qt ;
