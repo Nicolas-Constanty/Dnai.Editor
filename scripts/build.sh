@@ -1,5 +1,5 @@
 pwd;
 ls;
 cd ./Duly-GUI/DulyQuickControls/;
-qmake -project;
+qmake DulyQuickControls.pro;
 make;
