@@ -23,7 +23,9 @@ Link* FlowBackend::connect(ALinkable* linkable, BezierCurve* curve)
     const auto li = dynamic_cast<FlowBackend *>(linkable);
 	if (li != nullptr && li->getType() != getType())
     {
-		return BaseLinkable::connect(linkable, curve);
+        if (li->links().size())
+            li->unlinkAll();
+        return BaseLinkable::connect(linkable, curve);
 	}
 	return nullptr;
 }
@@ -31,12 +33,15 @@ Link* FlowBackend::connect(ALinkable* linkable, BezierCurve* curve)
 Flow::Flow(QQuickItem* parent):
     LinkableBezierItem(parent)
     , m_type(DulyResources::FlowType::Enter)
+    , m_saveFillColor(QColor(0,0,0,0))
+    , m_saveBorderColor(QColor(0,0,0,0))
+    , m_saveBorder(-1)
 {
     setFlag(ItemHasContents, true);
     m_radius = 8;
     m_borderWidth = 2;
-    m_fillColor = QColor(96, 96, 96);
-    m_borderColor = QColor(255, 255, 255);
+    setFillColor(QColor(96, 96, 96));
+    setBorderColor(QColor(255, 255, 255));
 }
 
 QSGNode* Flow::updatePaintNode(QSGNode* oldNode, UpdatePaintNodeData*)
@@ -165,12 +170,13 @@ const QColor& Flow::colorLink() const
 	return m_borderColor;
 }
 
-LinkableBezierItem* Flow::findLinkableBezierItem(GenericNode* n, const QPointF&)
+LinkableBezierItem* Flow::findLinkableBezierItem(GenericNode* n, const QPointF&p)
 {
-	if (m_type == DulyResources::FlowType::Exit)
+    if (m_type == DulyResources::FlowType::Exit && n->flowInItem()->contains(p - n->flowInItem()->position()))
 		return n->flowInItem();
-	else
+    else if (n->flowOutItem()->contains(p - n->flowOutItem()->position()))
 		return n->flowOutItem();
+    return nullptr;
 }
 
 void Flow::updateLink()
@@ -192,26 +198,51 @@ GenericNode* Flow::getNode() const
 
 void Flow::mousePressEvent(QMouseEvent* event)
 {
-	LinkableBezierItem::mousePressEvent(event);
-	if (m_currentCurve)
-        m_currentCurve->setLineWidth(3);
-}
-
-void Flow::mouseReleaseEvent(QMouseEvent* event)
-{
-    LinkableBezierItem::mouseReleaseEvent(event);
     if (m_linkable->isLink())
     {
-        setBorderWidth(0);
-        setFillColor(m_borderColor);
+        setBorderWidth(m_saveBorder);
+        setFillColor(m_saveFillColor);
         auto list = m_linkable->links();
         for (auto i = 0; i < list.size(); i++)
         {
             const auto l = list.at(i);
             auto f = dynamic_cast<Flow *>(dynamic_cast<FlowBackend *>(l->L1 != m_linkable ? l->L1 : l->L2)->parent());
-            f->setBorderWidth(0);
-            f->setFillColor(m_borderColor);
+            f->setBorderWidth(m_saveBorder);
+            f->setFillColor(m_saveFillColor);
         }
-
+        m_linkable->unlinkAll();
     }
+	LinkableBezierItem::mousePressEvent(event);
+	if (m_currentCurve)
+        m_currentCurve->setLineWidth(3);
+}
+
+void Flow::setFillColor(const QColor &color)
+{
+    LinkableBezierItem::setFillColor(color);
+    if (m_saveFillColor == QColor(0,0,0,0))
+        m_saveFillColor = m_fillColor;
+}
+
+void Flow::setBorderColor(const QColor &color)
+{
+    LinkableBezierItem::setBorderColor(color);
+    if (m_saveBorderColor == QColor(0,0,0,0))
+        m_saveBorderColor = m_borderColor;
+}
+
+void Flow::setBorderWidth(qreal w)
+{
+    LinkableBezierItem::setBorderWidth(w);
+    if (m_saveBorder == -1)
+        m_saveBorder = m_borderWidth;
+}
+
+void Flow::afterRealease(LinkableBezierItem *l)
+{
+    if (l == nullptr) return;
+    setBorderWidth(0);
+    setFillColor(m_borderColor);
+    l->setBorderWidth(0);
+    l->setFillColor(m_borderColor);
 }

@@ -52,6 +52,8 @@ protected:
 	*/
 	virtual void mouseReleaseEvent(QMouseEvent *event) override;
 
+    virtual void afterRealease(LinkableBezierItem *);
+
 protected:
 	ALinkable *m_linkable;
 

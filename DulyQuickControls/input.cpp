@@ -22,7 +22,7 @@ Link *InputBackend::connect(ALinkable *linkable, BezierCurve *curve)
         {
             if (m_links.size() > 0)
             {
-                delete m_links.at(0);
+                unlinkAll();
             }
             m_links.clear();
             l = new Link(this, linkable);

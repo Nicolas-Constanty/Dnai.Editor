@@ -29,24 +29,31 @@ Link *BaseLinkable::connect(ALinkable *linkable, BezierCurve *curve)
 
 void BaseLinkable::unlink(ALinkable *linkable)
 {
-	const auto l = getLink(linkable);
-	if (l != nullptr)
-	{
+    const auto l = getLink(linkable);
+    if (l != nullptr)
+    {
         m_links.removeOne(l);
-        linkable->removeLink(l);
         delete l;
-	}
+    }
+    m_links.removeAll(nullptr);
 	//TODO INSERT DEBUG "Link doesn't exist"
 }
 
 void BaseLinkable::unlinkAll()
 {
-	auto l = m_links;
-	for (auto i : l)
-	{
-        delete i;
-	}
-	m_links.clear();
+    while (!m_links.empty()) {
+        auto l = m_links.back();
+        if (l->L1 != this)
+        {
+            l->L1->unlink(this);
+            m_links.removeOne(l);
+        }
+        else
+        {
+            l->L2->unlink(this);
+            m_links.removeOne(l);
+        }
+    }
 }
 
 void BaseLinkable::addLink(Link *l)
@@ -61,7 +68,7 @@ void BaseLinkable::removeLink(Link *l)
 
 bool BaseLinkable::isLink()
 {
-	return !m_links.empty();
+    return !m_links.empty();
 }
 
 Link *BaseLinkable::getLink(ALinkable *linkable) const
