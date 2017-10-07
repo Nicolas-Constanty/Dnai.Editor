@@ -3,10 +3,13 @@
 
 #include "flow.h"
 #include "resourcesnode.h"
+#include "dulycanvas.h"
+#include "link.h"
+#include "genericnode.h"
 
-
-
-FlowBackend::FlowBackend(DulyResources::FlowType t, QQuickItem* parent) : BaseLinkable(parent), m_type(t)
+FlowBackend::FlowBackend(DulyResources::FlowType t, QQuickItem* parent) : 
+	BaseLinkable(parent),
+	m_type(t)
 {
 }
 
@@ -15,10 +18,19 @@ DulyResources::FlowType FlowBackend::getType() const
 	return m_type;
 }
 
+Link* FlowBackend::connect(ALinkable* linkable, BezierCurve* curve)
+{
+    const auto li = dynamic_cast<FlowBackend *>(linkable);
+	if (li != nullptr && li->getType() != getType())
+    {
+		return BaseLinkable::connect(linkable, curve);
+	}
+	return nullptr;
+}
+
 Flow::Flow(QQuickItem* parent):
-    CustomShape(parent)
+    LinkableBezierItem(parent)
     , m_type(DulyResources::FlowType::Enter)
-    , m_flow(nullptr)
 {
     setFlag(ItemHasContents, true);
     m_radius = 8;
@@ -128,12 +140,78 @@ QSGNode* Flow::updatePaintNode(QSGNode* oldNode, UpdatePaintNodeData*)
 
 void Flow::setType(DulyResources::FlowType t)
 {
-	if (t == m_type)
+    if (t == m_type && m_linkable != nullptr)
 		return;
 	m_type = t;
-	if (m_flow)
-		delete m_flow;
-	m_flow = new FlowBackend(t, this);
+    if (m_linkable)
+        delete m_linkable;
+    m_linkable = new FlowBackend(t, this);
 	emit typeChanged(t);
 	update();
+}
+
+void Flow::componentComplete()
+{
+	QQuickItem::componentComplete();
+}
+
+QPointF Flow::getCanvasPos() const
+{
+    return QPointF(parentItem()->position() + position() + QPointF(width() / 2, height() / 2));
+}
+
+const QColor& Flow::colorLink() const
+{
+	return m_borderColor;
+}
+
+LinkableBezierItem* Flow::findLinkableBezierItem(GenericNode* n, const QPointF&)
+{
+	if (m_type == DulyResources::FlowType::Exit)
+		return n->flowInItem();
+	else
+		return n->flowOutItem();
+}
+
+void Flow::updateLink()
+{
+	auto list = m_linkable->links();
+	for (auto i = 0; i < list.size(); i++)
+	{
+		const auto l = list.at(i);
+        l->curve()->setPosition(mapToItem(DulyCanvas::Instance, QPointF(width() / 2, height() / 2)));
+		const auto io = dynamic_cast<Flow *>(dynamic_cast<FlowBackend *>(l->L1 != m_linkable ? l->L1 : l->L2)->parent());
+		l->curve()->setP4(io->getCanvasPos());
+	}
+}
+
+GenericNode* Flow::getNode() const
+{
+	return dynamic_cast<GenericNode *>(parentItem());
+}
+
+void Flow::mousePressEvent(QMouseEvent* event)
+{
+	LinkableBezierItem::mousePressEvent(event);
+	if (m_currentCurve)
+        m_currentCurve->setLineWidth(3);
+}
+
+void Flow::mouseReleaseEvent(QMouseEvent* event)
+{
+    LinkableBezierItem::mouseReleaseEvent(event);
+    if (m_linkable->isLink())
+    {
+        setBorderWidth(0);
+        setFillColor(m_borderColor);
+        auto list = m_linkable->links();
+        for (auto i = 0; i < list.size(); i++)
+        {
+            const auto l = list.at(i);
+            auto f = dynamic_cast<Flow *>(dynamic_cast<FlowBackend *>(l->L1 != m_linkable ? l->L1 : l->L2)->parent());
+            f->setBorderWidth(0);
+            f->setFillColor(m_borderColor);
+        }
+
+    }
 }

@@ -23,6 +23,7 @@ void GenericNode::setFlowIn(bool f)
     if (f == m_flowIn)
 		return;
     m_flowIn = f;
+    emit flowInChanged(f);
 }
 
 void GenericNode::setFlowOut(bool f)
@@ -72,6 +73,10 @@ void GenericNode::mouseMoveEvent(QMouseEvent* event)
     setY(p.y());
     updateInputs();
     updateOutputs();
+    if (m_flowInItem && m_flowInItem->isVisible())
+        m_flowInItem->updateLink();
+    if (m_flowOutItem && m_flowOutItem->isVisible())
+        m_flowOutItem->updateLink();
 }
 
 void GenericNode::updateInputs()
@@ -80,7 +85,7 @@ void GenericNode::updateInputs()
     for (int i = 0; i < list.size(); i++)
     {
         auto input = dynamic_cast<Input *>(list.at(i));
-        if (input && input->getBaseIo()->isLink())
+        if (input && input->getLinkable()->isLink())
         {
             input->updateLink();
         }
@@ -93,7 +98,7 @@ void GenericNode::updateOutputs()
     for (int i = 0; i < list.size(); i++)
     {
         auto output = dynamic_cast<Output *>(list.at(i));
-        if (output && output->getBaseIo()->isLink())
+        if (output && output->getLinkable()->isLink())
         {
             output->updateLink();
         }

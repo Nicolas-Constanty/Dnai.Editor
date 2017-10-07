@@ -33,7 +33,8 @@ SOURCES += baseio.cpp \
     flow.cpp \
     baselinkable.cpp \
     customshape.cpp \
-    moveCommand.cpp
+    moveCommand.cpp \
+    linkablebezieritem.cpp
 
 RESOURCES += qml.qrc
 
@@ -76,4 +77,5 @@ HEADERS += baseio.h \
     flow.h \
     baselinkable.h \
     customshape.h \
-    moveCommand.h
+    moveCommand.h \
+    linkablebezieritem.h

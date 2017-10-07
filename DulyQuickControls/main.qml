@@ -165,6 +165,11 @@ ApplicationWindow {
            x: 200
            y: 200
         }
+
+        AddNode {
+           x: 200
+           y: 400
+        }
     }
 
 }

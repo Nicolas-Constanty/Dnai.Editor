@@ -14,7 +14,7 @@ BaseLinkable::~BaseLinkable()
 
 Link *BaseLinkable::connect(ALinkable *linkable, BezierCurve *curve)
 {
-	auto l = getLink(linkable);
+    auto l = getLink(linkable);
 	if (l == nullptr)
 	{
 		l = new Link(this, linkable);
@@ -24,7 +24,7 @@ Link *BaseLinkable::connect(ALinkable *linkable, BezierCurve *curve)
 		return l;
 	}
 	//TODO INSERT DEBUG "Link already exist"
-	return l;
+    return nullptr;
 }
 
 void BaseLinkable::unlink(ALinkable *linkable)
@@ -32,8 +32,9 @@ void BaseLinkable::unlink(ALinkable *linkable)
 	const auto l = getLink(linkable);
 	if (l != nullptr)
 	{
-		m_links.removeOne(l);
-		linkable->removeLink(l);
+        m_links.removeOne(l);
+        linkable->removeLink(l);
+        delete l;
 	}
 	//TODO INSERT DEBUG "Link doesn't exist"
 }
@@ -43,7 +44,7 @@ void BaseLinkable::unlinkAll()
 	auto l = m_links;
 	for (auto i : l)
 	{
-		i->L2->unlink(this);
+        delete i;
 	}
 	m_links.clear();
 }
@@ -65,11 +66,11 @@ bool BaseLinkable::isLink()
 
 Link *BaseLinkable::getLink(ALinkable *linkable) const
 {
-	auto ref = m_links;
-	const auto findFunc = [&](auto *l) {
-		return ((l->L1 == this && l->L2 == linkable) || (l->L1 == linkable && l->L2 == this));
-	};
-	const auto it = std::find_if(ref.begin(), ref.end(), findFunc);
-	if (it == ref.end()) return nullptr;
-	return (*it);
+    for (auto i = 0; i < m_links.size(); i++)
+    {
+        auto l = m_links.at(i);
+        if ((l->L1 == this && l->L2 == linkable) || (l->L1 == linkable && l->L2 == this))
+            return l;
+    }
+    return nullptr;
 }

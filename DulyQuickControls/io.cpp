@@ -3,23 +3,18 @@
 #include <QSGVertexColorMaterial>
 
 #include "io.h"
-#include "beziercurve.h"
 #include "dulycanvas.h"
-#include "genericnode.h"
 
 BaseIo *Io::CurrentHover = nullptr;
 
 Io::Io(QQuickItem *parent) :
-    CustomShape(parent)
+    LinkableBezierItem(parent)
   , m_nbSegments(32)
   , m_type(DulyResources::IOType::Int)
 
 {
 	Io::refreshBackendIo();
     setFlag(ItemHasContents, true);
-    setAcceptHoverEvents(true);
-    setAcceptedMouseButtons(Qt::AllButtons);
-    setFlag(ItemAcceptsInputMethod, true);
     setAntialiasing(true);
 }
 
@@ -172,69 +167,16 @@ void Io::setType(DulyResources::IOType type)
     update();
 }
 
-
-void Io::mouseMoveEvent(QMouseEvent *event)
+QPointF Io::getCanvasPos() const
 {
-	const auto p(mapToItem(DulyCanvas::Instance, event->pos()));
-    m_currentCurve->setP4(p);
+    return QPointF(parentItem()->parentItem()->parentItem()->parentItem()->parentItem()->position() +
+		parentItem()->parentItem()->parentItem()->parentItem()->position() +
+		parentItem()->parentItem()->parentItem()->position() +
+		parentItem()->parentItem()->position() +
+		parentItem()->position() + position() + QPointF(width() / 2, height() / 2));
 }
 
-void Io::mousePressEvent(QMouseEvent *event)
+GenericNode* Io::getNode() const
 {
-    if (event->button() == Qt::LeftButton && EventUtilities::isHoverCircle(m_radius, event))
-    {
-        m_holdClick = true;
-        auto b = new BezierCurve(DulyCanvas::Instance);
-        b->setPosition(mapToItem(DulyCanvas::Instance, position() + QPointF(width() / 2, height() / 2)));
-        b->setP1(QPoint(0,0));
-        b->setFillColor(m_fillColor);
-	    const QColor c((m_fillColor.red() < 205?m_fillColor.red() + 50:255),
-                 (m_fillColor.green() < 205?m_fillColor.green()+50:255),
-                 (m_fillColor.blue() < 205?m_fillColor.blue()+50:255),
-                 m_fillColor.alpha());
-        b->setDottedColor(c);
-        m_currentCurve = b;
-    }
+	return dynamic_cast<GenericNode *>(parentItem()->parentItem()->parentItem()->parentItem()->parentItem());
 }
-
-void Io::mouseReleaseEvent(QMouseEvent *event)
-{
-    if (event->button() != Qt::LeftButton || m_currentCurve == nullptr)
-        return;
-	const auto p(mapToItem(DulyCanvas::Instance, event->pos()));
-    auto qlist = DulyCanvas::Instance->focusManager().findFocused(p);
-    if (qlist.size() == 0)
-    {
-        delete(m_currentCurve);
-        m_currentCurve = nullptr;
-        return;
-    }
-	const auto node = dynamic_cast<GenericNode *>(qlist.at(0));
-    if (node && node != dynamic_cast<GenericNode *>(parentItem()->parentItem()->parentItem()->parentItem()->parentItem()))
-    {
-	    const auto p1(mapToItem(node, event->pos()));
-	    const auto io = findIo(node, p1);
-        if (io)
-        {
-	        const auto c = m_io->connect(io->getBaseIo(), m_currentCurve);
-            if (c == nullptr)
-                delete(m_currentCurve);
-            else
-            {
-	            const auto p2(
-                            io->parentItem()->parentItem()->parentItem()->parentItem()->parentItem()->position() +
-                            io->parentItem()->parentItem()->parentItem()->parentItem()->position() +
-                            io->parentItem()->parentItem()->parentItem()->position() +
-                            io->parentItem()->parentItem()->position() +
-                            io->parentItem()->position() + io->position() + QPointF(io->width() / 2, io->height() / 2));
-                m_currentCurve->setP4(p2);
-                m_currentCurve->setDotted(false);
-            }
-            m_currentCurve = nullptr;
-            return;
-        }
-    }
-    delete(m_currentCurve);
-    m_currentCurve = nullptr;
-}
-

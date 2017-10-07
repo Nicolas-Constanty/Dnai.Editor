@@ -41,7 +41,7 @@ public:
 	* \param p
 	* \return Io *
 	*/
-	virtual Io *findIo(GenericNode *n, const QPointF &p) override;
+	virtual LinkableBezierItem *findLinkableBezierItem(GenericNode *n, const QPointF &p) override;
     virtual void updateLink() override;
 };
 #endif // INPUT_H
