@@ -4,15 +4,7 @@ import CustomGeometry 1.0
 
 NodeForm {
     property NodeModel model
-//    Drag.active: dragArea.drag.active
-//    Drag.hotSpot.x: 10
-//    Drag.hotSpot.y: 10
 
-//    MouseArea {
-//        id: dragArea
-//        anchors.fill: parent
-//        drag.target: parent
-//    }
     id: nodeForm
     inputs: model.inputs
     outputs: model.outputs
@@ -27,16 +19,18 @@ NodeForm {
         x: radius
         y: headerRef.height / 2 - radius - radius / 3
         visible: model.flowIn
+        type: IOType.Enter
     }
 
     Flow {
         id: _flowOut
-        radius: _flowIn.radius
-        borderWidth: _flowIn.borderWidth
-        antialiasing: _flowIn.antialiasing
+        radius: 6
+        borderWidth: 3
+        antialiasing: true
         x: parent.width - radius * 4
-        y: _flowIn.y
+        y: headerRef.height / 2 - radius - radius / 3
         visible: model.flowOut
+        type: IOType.Exit
     }
 
     flowInItem: _flowIn

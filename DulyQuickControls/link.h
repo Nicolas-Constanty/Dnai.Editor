@@ -12,6 +12,7 @@ public:
 
 public:
     Link(ALinkable *l1, ALinkable *l2);
+    ~Link();
 	/**
      * \brief Assign the visual object to the link
      * \param curve 

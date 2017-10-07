@@ -1,10 +1,10 @@
 #ifndef FLOW_H
 #define FLOW_H
 
-#include <QSGNode>
 #include "baselinkable.h"
 #include "resourcesnode.h"
 #include "customshape.h"
+#include "linkablebezieritem.h"
 
 class FlowBackend : public BaseLinkable
 {
@@ -16,11 +16,13 @@ public:
 	*/
 	DulyResources::FlowType getType() const;
 
+	Link *connect(ALinkable* linkable, BezierCurve* curve) override;
+
 protected:
 	DulyResources::FlowType m_type;
 };
 
-class Flow : public CustomShape
+class Flow : public LinkableBezierItem
 {
     Q_OBJECT
     Q_PROPERTY(DulyResources::FlowType type READ type WRITE setType NOTIFY typeChanged)
@@ -34,15 +36,36 @@ public:
 
 public:
     void setType(DulyResources::FlowType t);
+	/**
+	* \brief Override componentComplete, and init some values
+	*/
+	virtual void componentComplete() override;
+
+    virtual QPointF getCanvasPos() const override;
+
+	virtual const QColor &colorLink() const override;
+
+	/**
+	* \brief Override findIo, return the IO under the point p of the Node n
+	* \param n
+	* \param p
+	* \return Io *
+	*/
+	virtual LinkableBezierItem *findLinkableBezierItem(GenericNode *n, const QPointF &p) override;
+	virtual void updateLink() override;
+	virtual GenericNode *getNode() const override;
 
 signals:
 	void typeChanged(DulyResources::FlowType t);
 
 private:
-	DulyResources::FlowType m_type;
+    DulyResources::FlowType m_type;
 
-private:
-    FlowBackend *m_flow;
+protected:
+	void mousePressEvent(QMouseEvent* event) override;
+
+    void mouseReleaseEvent(QMouseEvent* event) override;
+
 };
 
 #endif // FLOW_H
