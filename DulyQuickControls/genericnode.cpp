@@ -36,14 +36,14 @@ void GenericNode::setFlowOut(bool f)
 
 void GenericNode::setFlowInItem(Flow *f)
 {
-    if (f == m_flowInItem || nullptr)
+    if (f == m_flowInItem || f == nullptr)
         return;
     m_flowInItem = f;
 }
 
 void GenericNode::setFlowOutItem(Flow *f)
 {
-    if (f == m_flowOutItem || nullptr)
+    if (f == m_flowOutItem || f == nullptr)
         return;
     m_flowOutItem = f;
 }
