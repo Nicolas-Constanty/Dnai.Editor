@@ -41,6 +41,6 @@ before_install:
 script:
     - export CMAKE_PREFIX_PATH=$PWD/Qt/5.9.1/gcc_64/lib/cmake ;
       cd .. ;
-      bash -e ./duly-gui/scripts/build.sh -both
-    - env CTEST_OUTPUT_ON_FAILURE=1 make -C duly-gui/build check
+      bash -e ./Duly-GUI/scripts/build.sh -both
+    - env CTEST_OUTPUT_ON_FAILURE=1 make -C Duly-GUI/build check
 #    - env CTEST_OUTPUT_ON_FAILURE=1 make -C duly-gui/build-mobile check
