@@ -1,6 +1,6 @@
 pwd;
 ls;
 cd ./Duly-GUI/DulyQuickControls/;
-qmake-qt5 DulyQuickControls.pro;
+$CMAKE_PREFIX_PATH/../../bin/qmake DulyQuickControls.pro;
 ls
 make;
