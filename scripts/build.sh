@@ -1,2 +1,2 @@
-qmake
+qmake -project
 make
