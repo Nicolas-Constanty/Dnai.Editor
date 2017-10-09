@@ -53,11 +53,10 @@ public:
 	*/
 	virtual LinkableBezierItem *findLinkableBezierItem(GenericNode *n, const QPointF &p) override;
 	virtual void updateLink() override;
-	virtual GenericNode *getNode() const override;
-    virtual void setFillColor(const QColor &color) override;
-    virtual void setBorderColor(const QColor &color) override;
-    virtual void setBorderWidth(qreal w) override;
-    virtual void afterRealease(LinkableBezierItem *) override;
+    virtual GenericNode *getNode() const override;
+
+    virtual void setHover() override;
+    virtual void setLink(Link *) override;
 
 signals:
 	void typeChanged(DulyResources::FlowType t);
@@ -67,10 +66,8 @@ private:
 
 protected:
     void mousePressEvent(QMouseEvent* event) override;
+    virtual void afterRealease(Link *l) override;
 
-    QColor m_saveFillColor;
-    QColor m_saveBorderColor;
-    qreal  m_saveBorder;
 
 };
 

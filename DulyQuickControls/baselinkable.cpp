@@ -18,9 +18,7 @@ Link *BaseLinkable::connect(ALinkable *linkable, BezierCurve *curve)
 	if (l == nullptr)
 	{
 		l = new Link(this, linkable);
-		l->setCurve(curve);
-		m_links.append(l);
-		linkable->addLink(l);
+        l->setCurve(curve);
 		return l;
 	}
 	//TODO INSERT DEBUG "Link already exist"
@@ -33,7 +31,7 @@ void BaseLinkable::unlink(ALinkable *linkable)
     if (l != nullptr)
     {
         m_links.removeOne(l);
-        delete l;
+        l->ClearLink();
     }
     m_links.removeAll(nullptr);
 	//TODO INSERT DEBUG "Link doesn't exist"
@@ -43,16 +41,7 @@ void BaseLinkable::unlinkAll()
 {
     while (!m_links.empty()) {
         auto l = m_links.back();
-        if (l->L1 != this)
-        {
-            l->L1->unlink(this);
-            m_links.removeOne(l);
-        }
-        else
-        {
-            l->L2->unlink(this);
-            m_links.removeOne(l);
-        }
+        l->ClearLink();
     }
 }
 

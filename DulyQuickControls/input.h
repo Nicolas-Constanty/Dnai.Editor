@@ -43,5 +43,9 @@ public:
 	*/
 	virtual LinkableBezierItem *findLinkableBezierItem(GenericNode *n, const QPointF &p) override;
     virtual void updateLink() override;
+
+protected:
+    virtual void afterRealease(Link *l) override;
+
 };
 #endif // INPUT_H

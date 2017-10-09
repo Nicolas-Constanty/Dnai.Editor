@@ -24,11 +24,8 @@ Link *InputBackend::connect(ALinkable *linkable, BezierCurve *curve)
             {
                 unlinkAll();
             }
-            m_links.clear();
             l = new Link(this, linkable);
             l->setCurve(curve);
-            m_links.append(l);
-            linkable->addLink(l);
             return l;
         }
         //TODO INSERT DEBUG "Link already exist"
@@ -71,4 +68,10 @@ void Input::updateLink()
         const auto io = dynamic_cast<Output *>(dynamic_cast<BaseIo *>(l->L1 != m_linkable ?l->L1:l->L2)->parent());
         l->curve()->setP4(io->getCanvasPos());
 	}
+}
+
+void Input::afterRealease(Link *l)
+{
+    if (l == nullptr)
+        unlinkAll();
 }

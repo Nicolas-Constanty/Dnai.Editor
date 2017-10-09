@@ -337,5 +337,6 @@
     <None Include="qtquickcontrols2.conf">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
 </Project>

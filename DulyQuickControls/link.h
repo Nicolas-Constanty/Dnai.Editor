@@ -19,6 +19,7 @@ public:
      */
     void setCurve(BezierCurve *curve) { m_bezierCurve = curve; }
 	BezierCurve *curve() const { return m_bezierCurve; }
+    void ClearLink();
 
 private:
     Link();

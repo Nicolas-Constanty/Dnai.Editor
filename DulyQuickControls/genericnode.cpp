@@ -108,12 +108,18 @@ void GenericNode::updateOutputs()
 void GenericNode::mousePressEvent(QMouseEvent* event)
 {
     m_offset = QPointF(position() - mapToItem(DulyCanvas::Instance, event->pos()));
+    if (this != parentItem()->childItems().last())
+        stackAfter(parentItem()->childItems().last());
+    m_header->setBorderColor(QColor(255,170,0,255));
+    m_content->setBorderColor(QColor(255,170,0,255));
 }
 
 void GenericNode::mouseReleaseEvent(QMouseEvent *)
 {
     m_offset.setX(0);
     m_offset.setY(0);
+    m_header->resetBorderColor();
+    m_content->resetBorderColor();
 }
 
 QSGNode *GenericNode::updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *)

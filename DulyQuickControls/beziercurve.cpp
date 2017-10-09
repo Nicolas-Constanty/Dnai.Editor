@@ -259,3 +259,9 @@ QSGNode *BezierCurve::updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *dat
     }
     return node;
 }
+
+void BezierCurve::setBack()
+{
+    if (parentItem()->childItems().first() != this)
+        stackBefore(parentItem()->childItems().first());
+}

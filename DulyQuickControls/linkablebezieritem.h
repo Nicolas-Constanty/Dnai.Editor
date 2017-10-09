@@ -24,6 +24,8 @@ public:
 
     virtual const QColor &colorLink() const;
 
+    void unlinkAll();
+
 protected:
 	BezierCurve *m_currentCurve;
 
@@ -52,10 +54,22 @@ protected:
 	*/
 	virtual void mouseReleaseEvent(QMouseEvent *event) override;
 
-    virtual void afterRealease(LinkableBezierItem *);
+    virtual void afterRealease(Link *l);
+
+    virtual void setHover();
+    virtual void setNormal();
+    virtual void setLink(Link *);
+
+    enum LinkStatus {
+        Normal,
+        Hover,
+        Linked
+    };
 
 protected:
 	ALinkable *m_linkable;
+    LinkableBezierItem *m_currentHover;
+    LinkStatus m_status;
 
 };
 

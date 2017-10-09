@@ -45,6 +45,7 @@ NodeForm {
                 id: i
                 radius: 5
                 type: t
+                borderWidth: 3
                 borderColor: {
                     if (t == IOType.Int)
                         toolBar.menuEditRef.settingRef.nodeTabRef.intBorderColorRef.colorSetting
@@ -83,6 +84,7 @@ NodeForm {
                 id: o
                 radius: 5
                 type: t
+                borderWidth: 3
                 borderColor: {
                     if (t == IOType.Int)
                         toolBar.menuEditRef.settingRef.nodeTabRef.intBorderColorRef.colorSetting

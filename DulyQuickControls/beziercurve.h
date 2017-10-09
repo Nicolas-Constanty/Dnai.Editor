@@ -30,6 +30,8 @@ public:
 	 */
 	virtual QSGNode *updatePaintNode(QSGNode *, UpdatePaintNodeData *) override;
 
+    void setBack();
+
 public:
     QPointF p1() const { return m_p1; }
     QPointF p2() const { return m_p2; }
