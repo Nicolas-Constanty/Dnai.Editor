@@ -242,8 +242,9 @@ QSGGeometryNode *RoundedRectangle::createBorder() const
     return nodeBorder;
 }
 
-QSGNode *RoundedRectangle::updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *)
+QSGNode *RoundedRectangle::updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *data)
 {
+    CustomShape::updatePaintNode(oldNode, data);
     QSGGeometryNode *node;
     QSGGeometry *geometry;
 	auto idx = -1;
@@ -366,7 +367,11 @@ QSGNode *RoundedRectangle::updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData
     vertices[++idx].set( w + center.x(), h + center.y(), r, g, b, alpha);
 
     if (m_borderWidth > 0)
+    {
+        if (node->childCount() > 0)
+            node->removeAllChildNodes();
         node->appendChildNode(createBorder());
+    }
 
     Q_ASSERT(idx + 1 == nbVertice);
 

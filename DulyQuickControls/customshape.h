@@ -14,7 +14,8 @@ public:
 	Q_PROPERTY(QColor borderColor READ borderColor WRITE setBorderColor NOTIFY borderColorChanged)
 
 public:
-	explicit CustomShape(QQuickItem *parent = nullptr);
+    explicit CustomShape(QQuickItem *parent = nullptr);
+    virtual QSGNode *updatePaintNode(QSGNode *, UpdatePaintNodeData *) override;
 
 public:
 	qreal radius() const { return m_radius; }
@@ -28,6 +29,13 @@ public:
     virtual void setFillColor(const QColor &color);
     virtual void setBorderColor(const QColor &color);
 
+    void resetRadius();
+    void resetBorderWidth();
+    void resetBorderColor();
+    void resetFillColor();
+    void resetPos();
+    void resetShape();
+
 signals:
 	void radiusChanged(qreal radius);
 	void borderWidthChanged(qreal w);
@@ -40,6 +48,12 @@ protected:
 	qreal m_borderWidth;
 	QColor m_fillColor;
 	QColor m_borderColor;
+
+    qreal m_saveRadius;
+    qreal m_saveBorderWidth;
+    QColor m_saveFillColor;
+    QColor m_saveBorderColor;
+    QPointF m_savePos;
 };
 
 #endif // CUSTOMSHAPE_H

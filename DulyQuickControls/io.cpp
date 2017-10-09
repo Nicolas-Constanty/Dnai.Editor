@@ -4,6 +4,7 @@
 
 #include "io.h"
 #include "dulycanvas.h"
+#include "link.h"
 
 BaseIo *Io::CurrentHover = nullptr;
 
@@ -26,8 +27,9 @@ void Io::refreshBackendIo()
 {
 }
 
-QSGNode *Io::updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *)
+QSGNode *Io::updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *data)
 {
+    CustomShape::updatePaintNode(oldNode, data);
     const char r = m_fillColor.red();
     const char g = m_fillColor.green();
     const char b = m_fillColor.blue();
@@ -144,7 +146,7 @@ QSGNode *Io::updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *)
             }
         }
     }
-
+    node->markDirty(QSGNode::DirtyGeometry);
     return node;
 }
 
@@ -179,4 +181,23 @@ QPointF Io::getCanvasPos() const
 GenericNode* Io::getNode() const
 {
 	return dynamic_cast<GenericNode *>(parentItem()->parentItem()->parentItem()->parentItem()->parentItem());
+}
+
+void Io::setLink(Link *l)
+{
+    resetShape();
+    setFillColor(m_borderColor);
+    if (l == nullptr) return;
+    auto cs = dynamic_cast<Io *>(dynamic_cast<BaseIo*>(l->L1 != m_linkable ? l->L1 : l->L2)->parent());
+    cs->setLink(nullptr);
+    LinkableBezierItem::setLink(nullptr);
+}
+
+void Io::setHover()
+{
+    if (m_status == LinkStatus::Hover) return;
+    QColor c( m_borderColor );
+    setBorderColor(m_fillColor);
+    setFillColor(c);
+    LinkableBezierItem::setHover();
 }

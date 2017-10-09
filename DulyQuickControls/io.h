@@ -44,7 +44,6 @@ public:
 
     virtual GenericNode *getNode() const override;
 
-
 public:
     uint nbSegments() const { return m_nbSegments; }
     DulyResources::IOType type() const { return m_type; }
@@ -66,6 +65,9 @@ protected:
 protected:
     bool m_holdClick;
 
+    virtual void setHover() override;
+
+    virtual void setLink(Link *l) override;
 
 };
 #endif // IO_H
