@@ -34,7 +34,9 @@ SOURCES += baseio.cpp \
     baselinkable.cpp \
     customshape.cpp \
     moveCommand.cpp \
-    linkablebezieritem.cpp
+    linkablebezieritem.cpp \
+    scalableitem.cpp \
+    dulyscene.cpp
 
 RESOURCES += qml.qrc
 
@@ -78,4 +80,7 @@ HEADERS += baseio.h \
     baselinkable.h \
     customshape.h \
     moveCommand.h \
-    linkablebezieritem.h
+    linkablebezieritem.h \
+    scalableitem.h \
+    dulyscene.h \
+    iscalable.h

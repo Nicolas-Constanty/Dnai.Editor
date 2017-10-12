@@ -55,7 +55,7 @@ void Output::updateLink()
     for (auto i = 0; i < list.size(); i++)
     {
         const auto l = list.at(i);
-        l->curve()->setPosition(mapToItem(DulyCanvas::Instance, position() + QPointF(width() / 2, height() / 2)));
+        l->curve()->setRealPosition(getCanvasPos());
         const auto io = dynamic_cast<Input *>(dynamic_cast<BaseIo *>(l->L1 != m_linkable ?l->L1:l->L2)->parent());
         l->curve()->setP4(io->getCanvasPos());
     }

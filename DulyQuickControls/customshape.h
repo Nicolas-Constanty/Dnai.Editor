@@ -2,6 +2,7 @@
 #define CUSTOMSHAPE_H
 
 #include <QQuickItem>
+#include "scalableitem.h"
 
 class CustomShape : public QQuickItem
 {

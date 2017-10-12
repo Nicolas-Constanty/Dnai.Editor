@@ -6,14 +6,14 @@
 #include <memory>
 #include "line.h"
 #include "focusmanager.h"
+#include "scalableitem.h"
 
-class DulyCanvas : public QQuickItem
+class DulyCanvas : public ScalableItem
 {
     Q_OBJECT
 
     Q_PROPERTY(int gridStep READ gridStep WRITE setGridStep NOTIFY gridStepChanged)
     Q_PROPERTY(int accentGridStep READ accentGridStep WRITE setAccentGridStep NOTIFY accentGridStepChanged)
-    Q_PROPERTY(qreal scaleFactor READ scaleFactor WRITE setScaleFactor NOTIFY scaleFactorChanged)
 
     Q_PROPERTY(QColor gridColor READ gridColor WRITE setGridColor NOTIFY gridColorChanged)
     Q_PROPERTY(QColor accentGridColor READ accentGridColor WRITE setAccentGridColor NOTIFY accentGridColorChanged)
@@ -41,7 +41,6 @@ public:
 public:
     int gridStep() const { return m_gridStep; }
     int accentGridStep() const { return m_accentGridStep; }
-	qreal scaleFactor() const { return m_scaleFactor; }
 
     QColor gridColor() const { return m_gridColor; }
     QColor accentGridColor() const { return m_accentGridColor; }
@@ -53,7 +52,7 @@ public:
     void setGridColor(const QColor &color);
     void setAccentGridColor(const QColor &color);
     void setBackgroundColor(const QColor & color);
-    void setScaleFactor(qreal scale);
+    void setScaleFactor(qreal scale) override;
 
 
 signals:
@@ -62,12 +61,10 @@ signals:
     void gridColorChanged(const QColor &color);
     void accentGridColorChanged(const QColor &color);
     void backgroundColorChanged(const QColor &color);
-    void scaleFactorChanged(qreal scale);
 
 private:
     int m_gridStep;
     int m_accentGridStep;
-	qreal m_scaleFactor;
 
     QColor m_gridColor;
     QColor m_accentGridColor;

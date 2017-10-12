@@ -37,10 +37,10 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="MoveCommand.cpp">
+    <ClCompile Include="baseio.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="baseio.cpp">
+    <ClCompile Include="baselinkable.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="beziercurve.cpp">
@@ -50,6 +50,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="commandmanager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="customshape.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="debugdecorator.cpp">
@@ -85,7 +88,13 @@
     <ClCompile Include="link.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="linkablebezieritem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="moveCommand.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="output.cpp">
@@ -98,6 +107,48 @@
       <Filter>Generated Files</Filter>
     </ClCompile>
     <ClCompile Include="Release\moc_dulycanvas.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_customshape.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_customshape.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_ioquickitem.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_ioquickitem.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_io.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_io.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_roundedrectangle.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_roundedrectangle.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_resourcesnode.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_resourcesnode.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_observablelist.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_observablelist.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_line.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_line.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
     <ClCompile Include="Debug\moc_beziercurve.cpp">
@@ -118,66 +169,15 @@
     <ClCompile Include="Release\moc_flow.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_observablelist.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_observablelist.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_line.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_line.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_resourcesnode.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_resourcesnode.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_ioquickitem.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_ioquickitem.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_roundedrectangle.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_roundedrectangle.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_io.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_io.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
     <ClCompile Include="GeneratedFiles\qrc_qml.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="baselinkable.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_customshape.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_customshape.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="customshape.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="linkablebezieritem.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="MoveCommand.h">
+    <ClInclude Include="baseio.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="baseio.h">
+    <ClInclude Include="baselinkable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <CustomBuild Include="beziercurve.h">
@@ -189,6 +189,9 @@
     <ClInclude Include="commandmanager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <CustomBuild Include="customshape.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
     <ClInclude Include="debugdecorator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -228,7 +231,13 @@
     <ClInclude Include="link.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="linkablebezieritem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="linkabletype.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="moveCommand.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <CustomBuild Include="observablelist.h">
@@ -243,12 +252,6 @@
     <CustomBuild Include="roundedrectangle.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
-    <ClInclude Include="baselinkable.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="linkablebezieritem.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="debug\moc_predefs.h.cbt">
@@ -257,15 +260,27 @@
     <CustomBuild Include="release\moc_predefs.h.cbt">
       <Filter>Generated Files</Filter>
     </CustomBuild>
-    <CustomBuild Include="customshape.h">
-      <Filter>Header Files</Filter>
-    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Components\AddNode.qml">
+    <None Include="Resources\Nodes\Operator\BinaryOperator\AccessModel.qml">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="Resources\Components\AddNodeModel.qml">
+    <None Include="Resources\Nodes\Operator\BinaryOperator\AddNodeModel.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\Nodes\Operator\BinaryOperator\Logical\AndModel.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\Nodes\Operator\UnaryOperator\BNotModel.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\Nodes\Operator\BinaryOperator\BinaryAndModel.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\Nodes\Operator\BinaryOperatorModel.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\Nodes\Operator\BinaryOperator\BinaryOrModel.qml">
       <Filter>Resource Files</Filter>
     </None>
     <None Include="Resources\Components\ColorPicker.qml">
@@ -280,10 +295,31 @@
     <None Include="Resources\Components\Container.qml">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="Resources\Nodes\Operator\UnaryOperator\DecrementModel.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\Nodes\Operator\BinaryOperator\Logical\DifferentModel.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\Nodes\Operator\BinaryOperator\DivideModel.qml">
+      <Filter>Resource Files</Filter>
+    </None>
     <None Include="Resources\Components\DropDown.qml">
       <Filter>Resource Files</Filter>
     </None>
     <None Include="Resources\Forms\DropDownForm.ui.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\Nodes\Operator\BinaryOperator\Logical\EqualModel.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\Nodes\Operator\BinaryOperator\Logical\GreaterEqualModel.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\Nodes\Operator\BinaryOperator\Logical\GreaterModel.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\Nodes\Operator\UnaryOperator\IncrementModel.qml">
       <Filter>Resource Files</Filter>
     </None>
     <None Include="Resources\Models\LanguageModel.qml">
@@ -295,13 +331,31 @@
     <None Include="Resources\Forms\LanguagePanelForm.ui.qml">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="Resources\Nodes\Operator\BinaryOperator\LeftShiftModel.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\Nodes\Operator\BinaryOperator\Logical\LessEqualModel.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\Nodes\Operator\BinaryOperator\Logical\LessModel.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\Nodes\Operator\BinaryOperator\LogicalNodeModel.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\Nodes\Operator\BinaryOperator\ModuloModel.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\Nodes\Operator\BinaryOperator\MultiplicateModel.qml">
+      <Filter>Resource Files</Filter>
+    </None>
     <None Include="Resources\Components\Node.qml">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="Resources\Components\NodeForm.ui.qml">
+    <None Include="Resources\Forms\NodeForm.ui.qml">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="Resources\Components\NodeModel.qml">
+    <None Include="Resources\Nodes\NodeModel.qml">
       <Filter>Resource Files</Filter>
     </None>
     <None Include="Resources\Panels\NodePanel.qml">
@@ -310,10 +364,25 @@
     <None Include="Resources\Forms\NodePanelForm.ui.qml">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="Resources\Nodes\Operator\UnaryOperator\NotModel.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\Nodes\Operator\BinaryOperator\Logical\OrModel.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\Nodes\Operator\UnaryOperator\ReverseModel.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\Nodes\Operator\BinaryOperator\RightShiftModel.qml">
+      <Filter>Resource Files</Filter>
+    </None>
     <None Include="Resources\Panels\SettingPanel.qml">
       <Filter>Resource Files</Filter>
     </None>
     <None Include="Resources\Forms\SettingPanelForm.ui.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\Nodes\Operator\BinaryOperator\SubstractModel.qml">
       <Filter>Resource Files</Filter>
     </None>
     <None Include="Resources\Models\ThemeModel.qml">
@@ -328,6 +397,12 @@
     <None Include="Resources\Components\ToolBarHeader.qml">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="Resources\Nodes\Operator\UnaryOperatorModel.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\Nodes\Operator\BinaryOperator\XorModel.qml">
+      <Filter>Resource Files</Filter>
+    </None>
     <None Include="main.qml">
       <Filter>Resource Files</Filter>
     </None>
@@ -337,6 +412,5 @@
     <None Include="qtquickcontrols2.conf">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
 </Project>

@@ -6,14 +6,14 @@
 
 #include "dulycanvas.h"
 #include "line.h"
+#include "customshape.h"
 
 DulyCanvas *DulyCanvas::Instance = nullptr;
 
 DulyCanvas::DulyCanvas(QQuickItem *parent)
-    : QQuickItem(parent)
+    : ScalableItem(parent)
     , m_gridStep(15)
     , m_accentGridStep(150)
-    , m_scaleFactor(1)
     , m_backgroundColor(Qt::transparent)
 {
     setFlag(ItemHasContents, true);
@@ -109,10 +109,16 @@ void DulyCanvas::setBackgroundColor(const QColor &color)
 
 void DulyCanvas::setScaleFactor(qreal scale)
 {
-    if (scale == m_scaleFactor)
+    if (scale == m_scaleFactor || scale < 0.5f || scale > 2)
         return;
     m_scaleFactor = scale;
     emit scaleFactorChanged(scale);
+    for (auto i = 0; i < childItems().size(); i++)
+    {
+        auto child = dynamic_cast<ScalableItem *>(childItems().at(i));
+        if (child)
+            child->setScaleFactor(m_scaleFactor);
+	}
     update();
 }
 

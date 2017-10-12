@@ -8,13 +8,13 @@
 #include "genericnode.h"
 
 GenericNode::GenericNode(QQuickItem *parent) :
-    QQuickItem(parent)
+    ScalableItem(parent)
 {
     DulyCanvas::Instance->focusManager().registerItem(this);
     setFlag(ItemHasContents, true);
 	setAcceptHoverEvents(true);
 	setAcceptedMouseButtons(Qt::LeftButton);
-	setFlag(ItemAcceptsInputMethod, true);
+    setFlag(ItemAcceptsInputMethod, true);
 }
 
 void GenericNode::setFlowIn(bool f)
@@ -66,6 +66,19 @@ void GenericNode::setContent(RoundedRectangle *c)
     emit contentChanged(c);
 }
 
+void GenericNode::setScaleFactor(qreal s)
+{
+	if (s == m_scaleFactor)
+		return;
+    if (m_realPos == QPointF(-100000, -100000))
+		m_realPos = position();
+    m_scaleFactor = s;
+    setPosition(scalePos());
+	setScale(s);
+	emit scaleFactorChanged(s);
+	update();
+}
+
 void GenericNode::mouseMoveEvent(QMouseEvent* event)
 {
     QPointF p(mapToItem(DulyCanvas::Instance, event->pos()) + m_offset);
@@ -77,6 +90,7 @@ void GenericNode::mouseMoveEvent(QMouseEvent* event)
         m_flowInItem->updateLink();
     if (m_flowOutItem && m_flowOutItem->isVisible())
         m_flowOutItem->updateLink();
+    m_realPos = realPos();
 }
 
 void GenericNode::updateInputs()

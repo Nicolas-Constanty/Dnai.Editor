@@ -4,8 +4,9 @@
 #include "roundedrectangle.h"
 #include "focusmanager.h"
 #include "flow.h"
+#include "scalableitem.h"
 
-class GenericNode : public QQuickItem
+class GenericNode : public ScalableItem
 {
     Q_OBJECT
 
@@ -44,6 +45,7 @@ public:
     void setFlowOutItem(Flow *f);
     void setHeader(RoundedRectangle *h);
     void setContent(RoundedRectangle *c);
+	void setScaleFactor(qreal s) override;
     
 signals:
     void flowInChanged(bool f);
