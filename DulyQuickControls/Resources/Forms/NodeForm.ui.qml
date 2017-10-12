@@ -20,17 +20,20 @@ GenericNode {
     height: headerNode.height + contentNode.height
     RoundedRectangle {
         id: headerNode
-        width: if (_name.width > _description.width)
+        width: if (_name.width > _description.width && _name.width * 1.5 > 100)
                    _name.width * 1.5
-               else
+               else if (_description.width * 1.5 > 200)
                    _description.width * 1.5
+               else
+                   200
         height: _name.height * 1.3 + _description.height * 1.3
         bottomLeft: false
         bottomRight: false
+        topRight: false
         borderWidth: 1
         radius: 10
         borderColor: "#7C7C7C"
-        fillColor: "#606060"
+        fillColor: "#aa101010"
         antialiasing: true
         Label {
             id: _name
@@ -59,10 +62,11 @@ GenericNode {
         radius: headerNode.radius
         borderWidth: headerNode.borderWidth
         borderColor: headerNode.borderColor
-        fillColor: "#505050"
+        fillColor: "#aa000000"
         antialiasing: headerNode.antialiasing
         topLeft: false
         topRight: false
+        bottomLeft: false
         y: headerNode.height - headerNode.borderWidth
         ListView {
             id: _inputs

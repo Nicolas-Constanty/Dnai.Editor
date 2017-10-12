@@ -1,6 +1,4 @@
 import QtQuick 2.0
-import CustomGeometry 1.0
-
 
 Item {
     property string name: "Node name"
