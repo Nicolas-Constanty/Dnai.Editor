@@ -146,6 +146,7 @@ QSGNode *Io::updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *data)
             }
         }
     }
+    Q_ASSERT(idx + 1 == nbVertices);
     node->markDirty(QSGNode::DirtyGeometry);
     return node;
 }
@@ -171,16 +172,34 @@ void Io::setType(DulyResources::IOType type)
 
 QPointF Io::getCanvasPos() const
 {
-    return QPointF(parentItem()->parentItem()->parentItem()->parentItem()->parentItem()->position() +
-		parentItem()->parentItem()->parentItem()->parentItem()->position() +
-		parentItem()->parentItem()->parentItem()->position() +
-		parentItem()->parentItem()->position() +
-		parentItem()->position() + position() + QPointF(width() / 2, height() / 2));
+    auto si = dynamic_cast<ScalableItem *>(parentItem()->parentItem()->parentItem()->parentItem()->parentItem());
+    return QPointF(si->realPos() * si->scaleFactor() +
+        parentItem()->parentItem()->parentItem()->parentItem()->position() * si->scaleFactor()+
+        parentItem()->parentItem()->parentItem()->position() * si->scaleFactor() +
+        parentItem()->parentItem()->position() * si->scaleFactor()+
+        parentItem()->position() * si->scaleFactor() +
+        position() * si->scaleFactor() +
+        QPointF(width() / 2, height() / 2) * si->scaleFactor());
 }
 
 GenericNode* Io::getNode() const
 {
 	return dynamic_cast<GenericNode *>(parentItem()->parentItem()->parentItem()->parentItem()->parentItem());
+}
+
+qreal Io::scaleFactor() const
+{
+	return scale();
+}
+
+QPointF Io::scalePos() const
+{
+	return realPos() * scale() + QPointF((width() * scale() - width()) / 2, (height() * scale() - height()) / 2);
+}
+
+QPointF Io::realPos() const
+{
+	return (position() / scale()) + QPointF((width() / scale() - width()) / 2, (height() / scale() - height()) / 2);
 }
 
 void Io::setLink(Link *l)

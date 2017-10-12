@@ -15,8 +15,12 @@ class DulyResources  : public QObject
     enum IOType
     {
         Int,
+        Float,
+        Double,
         String,
         Bool,
+        Object,
+        Generic,
         Count //Get the size of enum, must be at the end all the time!
     };
     Q_ENUM(IOType)

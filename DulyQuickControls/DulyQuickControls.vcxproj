@@ -136,8 +136,13 @@
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="baseio.cpp" />
     <ClCompile Include="baselinkable.cpp" />
+    <ClCompile Include="beziercurve.cpp" />
+    <ClCompile Include="commanddecorator.cpp" />
+    <ClCompile Include="commandmanager.cpp" />
     <ClCompile Include="customshape.cpp" />
+    <ClCompile Include="debugdecorator.cpp" />
     <ClCompile Include="Debug\moc_beziercurve.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ClCompile>
@@ -171,30 +176,25 @@
     <ClCompile Include="Debug\moc_roundedrectangle.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="dulycanvas.cpp" />
+    <ClCompile Include="eventutilities.cpp" />
+    <ClCompile Include="flow.cpp" />
+    <ClCompile Include="focusmanager.cpp" />
     <ClCompile Include="GeneratedFiles\qrc_qml.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
       </PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
       </PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="linkablebezieritem.cpp" />
-    <ClCompile Include="MoveCommand.cpp" />
-    <ClCompile Include="baseio.cpp" />
-    <ClCompile Include="beziercurve.cpp" />
-    <ClCompile Include="commanddecorator.cpp" />
-    <ClCompile Include="commandmanager.cpp" />
-    <ClCompile Include="debugdecorator.cpp" />
-    <ClCompile Include="dulycanvas.cpp" />
-    <ClCompile Include="eventutilities.cpp" />
-    <ClCompile Include="flow.cpp" />
-    <ClCompile Include="focusmanager.cpp" />
     <ClCompile Include="genericnode.cpp" />
     <ClCompile Include="input.cpp" />
     <ClCompile Include="io.cpp" />
     <ClCompile Include="ioquickitem.cpp" />
     <ClCompile Include="line.cpp" />
     <ClCompile Include="link.cpp" />
+    <ClCompile Include="linkablebezieritem.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="moveCommand.cpp" />
     <ClCompile Include="output.cpp" />
     <ClCompile Include="Release\moc_beziercurve.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
@@ -232,20 +232,8 @@
     <ClCompile Include="roundedrectangle.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="baselinkable.h" />
-    <CustomBuild Include="customshape.h">
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Moc%27ing customshape.h...</Message>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DWIN64 -DQT_DEPRECATED_WARNINGS -DQNANO_USE_RENDERNODE -DQT_QUICKCONTROLS2_LIB -DQT_QUICK_LIB -DQT_GUI_LIB -DQT_QML_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB "-I." "-I$(QTDIR)\include" "-I$(QTDIR)\include\QtQuickControls2" "-I$(QTDIR)\include\QtQuick" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtANGLE" "-I$(QTDIR)\include\QtQml" "-I$(QTDIR)\include\QtNetwork" "-I$(QTDIR)\include\QtCore" "-I.\debug" "-I$(QTDIR)\mkspecs\win32-msvc"</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Moc%27ing customshape.h...</Message>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DWIN64 -DQT_DEPRECATED_WARNINGS -DQNANO_USE_RENDERNODE -DQT_NO_DEBUG -DQT_QUICKCONTROLS2_LIB -DQT_QUICK_LIB -DQT_GUI_LIB -DQT_QML_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DNDEBUG "-I." "-I$(QTDIR)\include" "-I$(QTDIR)\include\QtQuickControls2" "-I$(QTDIR)\include\QtQuick" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtANGLE" "-I$(QTDIR)\include\QtQml" "-I$(QTDIR)\include\QtNetwork" "-I$(QTDIR)\include\QtCore" "-I.\release" "-I$(QTDIR)\mkspecs\win32-msvc"</Command>
-    </CustomBuild>
-    <ClInclude Include="linkablebezieritem.h" />
-    <ClInclude Include="MoveCommand.h" />
     <ClInclude Include="baseio.h" />
+    <ClInclude Include="baselinkable.h" />
     <CustomBuild Include="beziercurve.h">
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DWIN64 -DQT_DEPRECATED_WARNINGS -DQNANO_USE_RENDERNODE -DQT_NO_DEBUG -DQT_QUICKCONTROLS2_LIB -DQT_QUICK_LIB -DQT_GUI_LIB -DQT_QML_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DNDEBUG "-I." "-I$(QTDIR)\include" "-I$(QTDIR)\include\QtQuickControls2" "-I$(QTDIR)\include\QtQuick" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtANGLE" "-I$(QTDIR)\include\QtQml" "-I$(QTDIR)\include\QtNetwork" "-I$(QTDIR)\include\QtCore" "-I.\release" "-I$(QTDIR)\mkspecs\win32-msvc"</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Moc%27ing beziercurve.h...</Message>
@@ -258,6 +246,16 @@
     </CustomBuild>
     <ClInclude Include="commanddecorator.h" />
     <ClInclude Include="commandmanager.h" />
+    <CustomBuild Include="customshape.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DWIN64 -DQT_DEPRECATED_WARNINGS -DQNANO_USE_RENDERNODE -DQT_NO_DEBUG -DQT_QUICKCONTROLS2_LIB -DQT_QUICK_LIB -DQT_GUI_LIB -DQT_QML_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DNDEBUG "-I." "-I$(QTDIR)\include" "-I$(QTDIR)\include\QtQuickControls2" "-I$(QTDIR)\include\QtQuick" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtANGLE" "-I$(QTDIR)\include\QtQml" "-I$(QTDIR)\include\QtNetwork" "-I$(QTDIR)\include\QtCore" "-I.\release" "-I$(QTDIR)\mkspecs\win32-msvc"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Moc%27ing customshape.h...</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DWIN64 -DQT_DEPRECATED_WARNINGS -DQNANO_USE_RENDERNODE -DQT_QUICKCONTROLS2_LIB -DQT_QUICK_LIB -DQT_GUI_LIB -DQT_QML_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB "-I." "-I$(QTDIR)\include" "-I$(QTDIR)\include\QtQuickControls2" "-I$(QTDIR)\include\QtQuick" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtANGLE" "-I$(QTDIR)\include\QtQml" "-I$(QTDIR)\include\QtNetwork" "-I$(QTDIR)\include\QtCore" "-I.\debug" "-I$(QTDIR)\mkspecs\win32-msvc"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Moc%27ing customshape.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+    </CustomBuild>
     <ClInclude Include="debugdecorator.h" />
     <CustomBuild Include="dulycanvas.h">
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DWIN64 -DQT_DEPRECATED_WARNINGS -DQNANO_USE_RENDERNODE -DQT_NO_DEBUG -DQT_QUICKCONTROLS2_LIB -DQT_QUICK_LIB -DQT_GUI_LIB -DQT_QML_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DNDEBUG "-I." "-I$(QTDIR)\include" "-I$(QTDIR)\include\QtQuickControls2" "-I$(QTDIR)\include\QtQuick" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtANGLE" "-I$(QTDIR)\include\QtQml" "-I$(QTDIR)\include\QtNetwork" "-I$(QTDIR)\include\QtCore" "-I.\release" "-I$(QTDIR)\mkspecs\win32-msvc"</Command>
@@ -325,7 +323,9 @@
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
     </CustomBuild>
     <ClInclude Include="link.h" />
+    <ClInclude Include="linkablebezieritem.h" />
     <ClInclude Include="linkabletype.h" />
+    <ClInclude Include="moveCommand.h" />
     <CustomBuild Include="observablelist.h">
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DWIN64 -DQT_DEPRECATED_WARNINGS -DQNANO_USE_RENDERNODE -DQT_NO_DEBUG -DQT_QUICKCONTROLS2_LIB -DQT_QUICK_LIB -DQT_GUI_LIB -DQT_QML_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DNDEBUG "-I." "-I$(QTDIR)\include" "-I$(QTDIR)\include\QtQuickControls2" "-I$(QTDIR)\include\QtQuick" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtANGLE" "-I$(QTDIR)\include\QtQml" "-I$(QTDIR)\include\QtNetwork" "-I$(QTDIR)\include\QtCore" "-I.\release" "-I$(QTDIR)\mkspecs\win32-msvc"</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Moc%27ing observablelist.h...</Message>
@@ -377,12 +377,31 @@
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <None Include="ClassDiagram1.cd" />
-    <None Include="Resources\Components\AddNode.qml">
+    <None Include="Resources\Nodes\Operator\BinaryOperator\AccessModel.qml">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </None>
-    <None Include="Resources\Components\AddNodeModel.qml">
+    <None Include="Resources\Nodes\Operator\BinaryOperator\AddNodeModel.qml">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </None>
+    <None Include="Resources\Nodes\Operator\BinaryOperator\Logical\AndModel.qml">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </None>
+    <None Include="Resources\Nodes\Operator\UnaryOperator\BNotModel.qml">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </None>
+    <None Include="Resources\Nodes\Operator\BinaryOperator\BinaryAndModel.qml">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </None>
+    <None Include="Resources\Nodes\Operator\BinaryOperatorModel.qml">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </None>
+    <None Include="Resources\Nodes\Operator\BinaryOperator\BinaryOrModel.qml">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </None>
@@ -402,11 +421,39 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </None>
+    <None Include="Resources\Nodes\Operator\UnaryOperator\DecrementModel.qml">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </None>
+    <None Include="Resources\Nodes\Operator\BinaryOperator\Logical\DifferentModel.qml">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </None>
+    <None Include="Resources\Nodes\Operator\BinaryOperator\DivideModel.qml">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </None>
     <None Include="Resources\Components\DropDown.qml">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </None>
     <None Include="Resources\Forms\DropDownForm.ui.qml">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </None>
+    <None Include="Resources\Nodes\Operator\BinaryOperator\Logical\EqualModel.qml">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </None>
+    <None Include="Resources\Nodes\Operator\BinaryOperator\Logical\GreaterEqualModel.qml">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </None>
+    <None Include="Resources\Nodes\Operator\BinaryOperator\Logical\GreaterModel.qml">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </None>
+    <None Include="Resources\Nodes\Operator\UnaryOperator\IncrementModel.qml">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </None>
@@ -422,15 +469,39 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </None>
+    <None Include="Resources\Nodes\Operator\BinaryOperator\LeftShiftModel.qml">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </None>
+    <None Include="Resources\Nodes\Operator\BinaryOperator\Logical\LessEqualModel.qml">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </None>
+    <None Include="Resources\Nodes\Operator\BinaryOperator\Logical\LessModel.qml">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </None>
+    <None Include="Resources\Nodes\Operator\BinaryOperator\LogicalNodeModel.qml">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </None>
+    <None Include="Resources\Nodes\Operator\BinaryOperator\ModuloModel.qml">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </None>
+    <None Include="Resources\Nodes\Operator\BinaryOperator\MultiplicateModel.qml">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </None>
     <None Include="Resources\Components\Node.qml">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </None>
-    <None Include="Resources\Components\NodeForm.ui.qml">
+    <None Include="Resources\Forms\NodeForm.ui.qml">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </None>
-    <None Include="Resources\Components\NodeModel.qml">
+    <None Include="Resources\Nodes\NodeModel.qml">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </None>
@@ -442,11 +513,31 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </None>
+    <None Include="Resources\Nodes\Operator\UnaryOperator\NotModel.qml">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </None>
+    <None Include="Resources\Nodes\Operator\BinaryOperator\Logical\OrModel.qml">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </None>
+    <None Include="Resources\Nodes\Operator\UnaryOperator\ReverseModel.qml">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </None>
+    <None Include="Resources\Nodes\Operator\BinaryOperator\RightShiftModel.qml">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </None>
     <None Include="Resources\Panels\SettingPanel.qml">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </None>
     <None Include="Resources\Forms\SettingPanelForm.ui.qml">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </None>
+    <None Include="Resources\Nodes\Operator\BinaryOperator\SubstractModel.qml">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </None>
@@ -466,17 +557,25 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </None>
+    <None Include="Resources\Nodes\Operator\UnaryOperatorModel.qml">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </None>
+    <None Include="Resources\Nodes\Operator\BinaryOperator\XorModel.qml">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </None>
     <None Include="main.qml">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </None>
     <CustomBuild Include="qml.qrc">
       <FileType>Document</FileType>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(FullPath);.\qtquickcontrols2.conf;.\main.qml;.\Resources\Components\ColorPicker.qml;.\Resources\Components\Container.qml;.\Resources\Components\DropDown.qml;.\Resources\Components\ToolBarHeader.qml;.\Resources\Forms\ColorPickerForm.ui.qml;.\Resources\Forms\DropDownForm.ui.qml;.\Resources\Forms\LanguagePanelForm.ui.qml;.\Resources\Forms\NodePanelForm.ui.qml;.\Resources\Forms\SettingPanelForm.ui.qml;.\Resources\Forms\ThemePanelForm.ui.qml;.\Resources\Models\ColorPickerModel.qml;.\Resources\Models\LanguageModel.qml;.\Resources\Models\ThemeModel.qml;.\Resources\Panels\LanguagePanel.qml;.\Resources\Panels\NodePanel.qml;.\Resources\Panels\SettingPanel.qml;.\Resources\Panels\ThemePanel.qml;.\Resources\Components\NodeForm.ui.qml;.\Resources\Components\Node.qml;.\Resources\Components\AddNodeModel.qml;.\Resources\Components\AddNode.qml;.\Resources\Components\NodeModel.qml;%(AdditionalInputs)</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(FullPath);.\qtquickcontrols2.conf;.\main.qml;.\Resources\Components\ColorPicker.qml;.\Resources\Components\Container.qml;.\Resources\Components\DropDown.qml;.\Resources\Components\ToolBarHeader.qml;.\Resources\Forms\ColorPickerForm.ui.qml;.\Resources\Forms\DropDownForm.ui.qml;.\Resources\Forms\LanguagePanelForm.ui.qml;.\Resources\Forms\NodePanelForm.ui.qml;.\Resources\Forms\SettingPanelForm.ui.qml;.\Resources\Forms\ThemePanelForm.ui.qml;.\Resources\Models\ColorPickerModel.qml;.\Resources\Models\LanguageModel.qml;.\Resources\Models\ThemeModel.qml;.\Resources\Panels\LanguagePanel.qml;.\Resources\Panels\NodePanel.qml;.\Resources\Panels\SettingPanel.qml;.\Resources\Panels\ThemePanel.qml;.\Resources\Components\Node.qml;.\Resources\Forms\NodeForm.ui.qml;.\Resources\Nodes\Operator\BinaryOperator\AccessModel.qml;.\Resources\Nodes\Operator\BinaryOperator\AddNodeModel.qml;.\Resources\Nodes\Operator\BinaryOperator\BinaryAndModel.qml;.\Resources\Nodes\Operator\BinaryOperator\BinaryOrModel.qml;.\Resources\Nodes\Operator\BinaryOperator\DivideModel.qml;.\Resources\Nodes\Operator\BinaryOperator\LeftShiftModel.qml;.\Resources\Nodes\Operator\BinaryOperator\ModuloModel.qml;.\Resources\Nodes\Operator\BinaryOperator\MultiplicateModel.qml;.\Resources\Nodes\Operator\BinaryOperator\RightShiftModel.qml;.\Resources\Nodes\Operator\BinaryOperator\SubstractModel.qml;.\Resources\Nodes\Operator\BinaryOperator\XorModel.qml;.\Resources\Nodes\Operator\BinaryOperatorModel.qml;.\Resources\Nodes\Operator\UnaryOperatorModel.qml;.\Resources\Nodes\NodeModel.qml;.\Resources\Nodes\Operator\BinaryOperator\LogicalNodeModel.qml;.\Resources\Nodes\Operator\BinaryOperator\Logical\AndModel.qml;.\Resources\Nodes\Operator\BinaryOperator\Logical\DifferentModel.qml;.\Resources\Nodes\Operator\BinaryOperator\Logical\EqualModel.qml;.\Resources\Nodes\Operator\BinaryOperator\Logical\GreaterEqualModel.qml;.\Resources\Nodes\Operator\BinaryOperator\Logical\GreaterModel.qml;.\Resources\Nodes\Operator\BinaryOperator\Logical\LessEqualModel.qml;.\Resources\Nodes\Operator\BinaryOperator\Logical\LessModel.qml;.\Resources\Nodes\Operator\BinaryOperator\Logical\OrModel.qml;.\Resources\Nodes\Operator\UnaryOperator\BNotModel.qml;.\Resources\Nodes\Operator\UnaryOperator\DecrementModel.qml;.\Resources\Nodes\Operator\UnaryOperator\IncrementModel.qml;.\Resources\Nodes\Operator\UnaryOperator\NotModel.qml;.\Resources\Nodes\Operator\UnaryOperator\ReverseModel.qml;%(AdditionalInputs)</AdditionalInputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">"$(QTDIR)\bin\rcc.exe" -name "%(Filename)" -no-compress "%(FullPath)" -o .\GeneratedFiles\qrc_%(Filename).cpp</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Rcc%27ing %(Identity)...</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles\qrc_%(Filename).cpp;%(Outputs)</Outputs>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(FullPath);.\qtquickcontrols2.conf;.\main.qml;.\Resources\Components\ColorPicker.qml;.\Resources\Components\Container.qml;.\Resources\Components\DropDown.qml;.\Resources\Components\ToolBarHeader.qml;.\Resources\Forms\ColorPickerForm.ui.qml;.\Resources\Forms\DropDownForm.ui.qml;.\Resources\Forms\LanguagePanelForm.ui.qml;.\Resources\Forms\NodePanelForm.ui.qml;.\Resources\Forms\SettingPanelForm.ui.qml;.\Resources\Forms\ThemePanelForm.ui.qml;.\Resources\Models\ColorPickerModel.qml;.\Resources\Models\LanguageModel.qml;.\Resources\Models\ThemeModel.qml;.\Resources\Panels\LanguagePanel.qml;.\Resources\Panels\NodePanel.qml;.\Resources\Panels\SettingPanel.qml;.\Resources\Panels\ThemePanel.qml;.\Resources\Components\NodeForm.ui.qml;.\Resources\Components\Node.qml;.\Resources\Components\AddNodeModel.qml;.\Resources\Components\AddNode.qml;.\Resources\Components\NodeModel.qml;%(AdditionalInputs)</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(FullPath);.\qtquickcontrols2.conf;.\main.qml;.\Resources\Components\ColorPicker.qml;.\Resources\Components\Container.qml;.\Resources\Components\DropDown.qml;.\Resources\Components\ToolBarHeader.qml;.\Resources\Forms\ColorPickerForm.ui.qml;.\Resources\Forms\DropDownForm.ui.qml;.\Resources\Forms\LanguagePanelForm.ui.qml;.\Resources\Forms\NodePanelForm.ui.qml;.\Resources\Forms\SettingPanelForm.ui.qml;.\Resources\Forms\ThemePanelForm.ui.qml;.\Resources\Models\ColorPickerModel.qml;.\Resources\Models\LanguageModel.qml;.\Resources\Models\ThemeModel.qml;.\Resources\Panels\LanguagePanel.qml;.\Resources\Panels\NodePanel.qml;.\Resources\Panels\SettingPanel.qml;.\Resources\Panels\ThemePanel.qml;.\Resources\Components\Node.qml;.\Resources\Forms\NodeForm.ui.qml;.\Resources\Nodes\Operator\BinaryOperator\AccessModel.qml;.\Resources\Nodes\Operator\BinaryOperator\AddNodeModel.qml;.\Resources\Nodes\Operator\BinaryOperator\BinaryAndModel.qml;.\Resources\Nodes\Operator\BinaryOperator\BinaryOrModel.qml;.\Resources\Nodes\Operator\BinaryOperator\DivideModel.qml;.\Resources\Nodes\Operator\BinaryOperator\LeftShiftModel.qml;.\Resources\Nodes\Operator\BinaryOperator\ModuloModel.qml;.\Resources\Nodes\Operator\BinaryOperator\MultiplicateModel.qml;.\Resources\Nodes\Operator\BinaryOperator\RightShiftModel.qml;.\Resources\Nodes\Operator\BinaryOperator\SubstractModel.qml;.\Resources\Nodes\Operator\BinaryOperator\XorModel.qml;.\Resources\Nodes\Operator\BinaryOperatorModel.qml;.\Resources\Nodes\Operator\UnaryOperatorModel.qml;.\Resources\Nodes\NodeModel.qml;.\Resources\Nodes\Operator\BinaryOperator\LogicalNodeModel.qml;.\Resources\Nodes\Operator\BinaryOperator\Logical\AndModel.qml;.\Resources\Nodes\Operator\BinaryOperator\Logical\DifferentModel.qml;.\Resources\Nodes\Operator\BinaryOperator\Logical\EqualModel.qml;.\Resources\Nodes\Operator\BinaryOperator\Logical\GreaterEqualModel.qml;.\Resources\Nodes\Operator\BinaryOperator\Logical\GreaterModel.qml;.\Resources\Nodes\Operator\BinaryOperator\Logical\LessEqualModel.qml;.\Resources\Nodes\Operator\BinaryOperator\Logical\LessModel.qml;.\Resources\Nodes\Operator\BinaryOperator\Logical\OrModel.qml;.\Resources\Nodes\Operator\UnaryOperator\BNotModel.qml;.\Resources\Nodes\Operator\UnaryOperator\DecrementModel.qml;.\Resources\Nodes\Operator\UnaryOperator\IncrementModel.qml;.\Resources\Nodes\Operator\UnaryOperator\NotModel.qml;.\Resources\Nodes\Operator\UnaryOperator\ReverseModel.qml;%(AdditionalInputs)</AdditionalInputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">"$(QTDIR)\bin\rcc.exe" -name "%(Filename)" -no-compress "%(FullPath)" -o .\GeneratedFiles\qrc_%(Filename).cpp</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Rcc%27ing %(Identity)...</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\GeneratedFiles\qrc_%(Filename).cpp;%(Outputs)</Outputs>

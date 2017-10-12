@@ -3,8 +3,9 @@
 
 #include <QtQuick/QQuickItem>
 #include <QSettings>
+#include "scalableitem.h"
 
-class BezierCurve : public QQuickItem
+class BezierCurve : public ScalableItem
 {
     Q_OBJECT
 
@@ -31,6 +32,7 @@ public:
 	virtual QSGNode *updatePaintNode(QSGNode *, UpdatePaintNodeData *) override;
 
     void setBack();
+    void setScaleFactor(qreal s) override;
 
 public:
     QPointF p1() const { return m_p1; }
@@ -58,6 +60,7 @@ public:
     void setFillColor(const QColor &color);
     void setDottedColor(const QColor &color);
 
+    void setRealPosition(const QPointF &pos);
 
 signals:
     void p1Changed(const QPointF &p);
@@ -90,6 +93,8 @@ private:
     QVector2D m_scale;
     QVector2D m_lastScale;
     QSettings m_settings;
+    qreal m_saveWidth;
+    qreal m_saveHeight;
 
 };
 #endif // BEZIERCURVE_H

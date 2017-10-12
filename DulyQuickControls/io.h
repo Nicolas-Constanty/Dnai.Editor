@@ -10,7 +10,7 @@
 #include "genericnode.h"
 #include "linkablebezieritem.h"
 
-class Io : public LinkableBezierItem
+class Io : public LinkableBezierItem, public IScalable
 {
     Q_OBJECT
     
@@ -43,6 +43,12 @@ public:
     virtual QPointF getCanvasPos() const override;
 
     virtual GenericNode *getNode() const override;
+
+//Interface implementation
+public:
+    virtual qreal scaleFactor() const override;
+    virtual QPointF scalePos() const override;
+    virtual QPointF realPos() const override;
 
 public:
     uint nbSegments() const { return m_nbSegments; }

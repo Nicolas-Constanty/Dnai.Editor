@@ -162,7 +162,11 @@ void Flow::componentComplete()
 
 QPointF Flow::getCanvasPos() const
 {
-    return QPointF(parentItem()->position() + position() + QPointF(width() / 2, height() / 2));
+    auto si = dynamic_cast<ScalableItem *>(parentItem());
+    return
+            QPointF(si->realPos() * si->scaleFactor()
+                    + position() * si->scaleFactor()
+                    + QPointF(width() / 2, height() / 2) * si->scaleFactor());
 }
 
 const QColor& Flow::colorLink() const
@@ -185,7 +189,7 @@ void Flow::updateLink()
 	for (auto i = 0; i < list.size(); i++)
 	{
 		const auto l = list.at(i);
-        l->curve()->setPosition(mapToItem(DulyCanvas::Instance, QPointF(width() / 2, height() / 2)));
+        l->curve()->setPosition(getCanvasPos());
 		const auto io = dynamic_cast<Flow *>(dynamic_cast<FlowBackend *>(l->L1 != m_linkable ? l->L1 : l->L2)->parent());
 		l->curve()->setP4(io->getCanvasPos());
 	}

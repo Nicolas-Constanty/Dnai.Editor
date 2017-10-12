@@ -58,7 +58,7 @@ void LinkableBezierItem::mousePressEvent(QMouseEvent *event)
     if (EventUtilities::isHoverCircle(m_radius, event))
     {
 		auto b = new BezierCurve(DulyCanvas::Instance);
-        b->setPosition(getCanvasPos());
+        b->setRealPosition(getCanvasPos());
 		b->setP1(QPoint(0, 0));
 		QColor cb(colorLink());
         b->setFillColor(cb);
@@ -120,7 +120,7 @@ void LinkableBezierItem::mouseReleaseEvent(QMouseEvent *event)
     m_currentCurve = nullptr;
 }
 
-void LinkableBezierItem::afterRealease(Link *l)
+void LinkableBezierItem::afterRealease(Link *)
 {}
 
 void LinkableBezierItem::setHover()

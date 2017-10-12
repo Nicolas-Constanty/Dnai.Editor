@@ -63,11 +63,6 @@ private:
      * \return int
      */
     int getNumberRoundedCorner() const;
-	/**
-     * \brief create the border and return the geometryNode
-     * \return QSGGeometryNode *
-     */
-    QSGGeometryNode *createBorder() const;
 
 };
 

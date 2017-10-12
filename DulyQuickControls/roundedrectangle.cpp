@@ -75,173 +75,6 @@ int RoundedRectangle::getNumberRoundedCorner() const
     return count;
 }
 
-QSGGeometryNode *RoundedRectangle::createBorder() const
-{
-    int idx = -1;
-    const qreal h = (height() - m_radius * 2.f) / 2.f;
-    const qreal w = (width() - m_radius * 2.f) / 2.f;
-    const float a = 0.5f * float(M_PI) / m_nbSegments;
-    const bool aa = antialiasing();
-    const int nCorner = getNumberRoundedCorner();
-    const uint aaoffset = 1;
-    const uchar r = m_borderColor.red();
-    const uchar g = m_borderColor.green();
-    const uchar b = m_borderColor.blue();
-    const uchar alpha = m_borderColor.alpha();
-    const uint nbVertice = (aa ? (m_nbSegments % 2 == 0 ? (7.5 * m_nbSegments) : (7.5 * (m_nbSegments-1)+8) ) : m_nbSegments) * nCorner + (aa?7*4+(m_topLeft?0:1):8) + (aa?0:-nCorner);
-    const QPointF center(w + m_radius, h + m_radius);
-
-    QSGGeometryNode *nodeBorder = new QSGGeometryNode;
-    QSGVertexColorMaterial *materialBorder = new QSGVertexColorMaterial;
-    QSGGeometry *nodeBorderGeometry = new QSGGeometry(QSGGeometry::defaultAttributes_ColoredPoint2D(), nbVertice);
-    if (!aa)
-        nodeBorderGeometry->setLineWidth(m_borderWidth);
-    nodeBorderGeometry->setDrawingMode(aa ? QSGGeometry::DrawTriangleStrip : QSGGeometry::DrawLineStrip);
-    nodeBorder->setGeometry(nodeBorderGeometry);
-    nodeBorder->setFlag(QSGNode::OwnsGeometry, aa);
-    materialBorder->setFlag(QSGMaterial::Blending);
-
-    nodeBorder->setMaterial(materialBorder);
-
-    QSGGeometry::ColoredPoint2D *vertices = nodeBorderGeometry->vertexDataAsColoredPoint2D();
-    if (!aa)
-    {
-	    const auto drawCircle = [&](qreal cx, qreal cy, float offset)
-        {
-            for (uint i = 0; i < m_nbSegments; i++)
-                vertices[++idx].set( cx + m_radius * qFastCos(a * i + offset), cy + m_radius * qFastSin(a * i + offset), r, g, b, alpha);
-        };
-        if (m_topLeft)
-            drawCircle(-w + center.x(), -h + center.y(), float(M_PI));
-        else
-            vertices[++idx].set(-w + center.x()-m_radius, -h + center.y() - m_radius, r, g, b, alpha);
-        vertices[++idx].set(w + center.x(), -h + center.y() - m_radius, r, g, b, alpha);
-        if (m_topRight)
-            drawCircle(w + center.x(), -h + center.y(), (float(M_PI) / 2.f) * 3.f);
-        else
-            vertices[++idx].set(w + center.x() + m_radius, -h + center.y() -m_radius, r, g, b, alpha);
-
-        vertices[++idx].set(w + center.x() + m_radius, h + center.y(), r, g, b, alpha);
-        if (m_bottomRight)
-            drawCircle(w + center.x(), h + center.y(), 0);
-        else
-            vertices[++idx].set(w + center.x() + m_radius, h + center.y() + m_radius, r, g, b, alpha);
-        vertices[++idx].set(-w + center.x(), h + center.y() + m_radius, r, g, b, alpha);
-        if (m_bottomLeft)
-            drawCircle(-w + center.x(), h + center.y(), float(M_PI) / 2.0f);
-        else
-            vertices[++idx].set(-w + center.x() - m_radius, h + center.y() + m_radius, r, g, b, alpha);
-        vertices[++idx].set(-w + center.x() -m_radius, -h + center.y() + ((m_topLeft)?0:- m_radius), r, g, b, alpha);
-    }
-    else
-    {
-        const qreal mid = m_borderWidth / 2.f;
-	    const auto drawCircle = [&](qreal cx, qreal cy, float offset, bool dir = true)
-        {
-            for (uint i = 0; i < m_nbSegments; i++)
-            {
-                if ((i % 2 == 0 && dir) || (!dir && i % 2 != 0))
-                {
-                    //Inner
-                    vertices[++idx].set( cx + (m_radius - mid - aaoffset) * qFastCos(a * i + offset), cy + (m_radius - mid - aaoffset) * qFastSin(a * i + offset), m_fillColor.red(), m_fillColor.green(), m_fillColor.blue(), m_fillColor.alpha());
-                    vertices[++idx].set( cx + (m_radius - mid - aaoffset) * qFastCos(a * (i + 1) + offset), cy + (m_radius - mid - aaoffset) * qFastSin(a * (i + 1) + offset), m_fillColor.red(), m_fillColor.green(), m_fillColor.blue(), m_fillColor.alpha());
-
-                    //Mid
-                    vertices[++idx].set( cx + (m_radius - mid) * qFastCos(a * i + offset), cy + (m_radius - mid) * qFastSin(a * i + offset), r, g, b, alpha);
-                    vertices[++idx].set( cx + (m_radius - mid) * qFastCos(a * (i + 1) + offset), cy + (m_radius - mid) * qFastSin(a * (i + 1) + offset), r, g, b, alpha);
-                    vertices[++idx].set( cx + (m_radius + mid) * qFastCos(a * i + offset), cy + (m_radius + mid) * qFastSin(a * i + offset), r, g, b, alpha);
-                    vertices[++idx].set( cx + (m_radius + mid) * qFastCos(a * (i + 1) + offset), cy + (m_radius + mid) * qFastSin(a * (i + 1) + offset), r, g, b, alpha);
-
-                    //Outer
-                    vertices[++idx].set( cx + (m_radius + mid + aaoffset) * qFastCos(a * i + offset), cy + (m_radius + mid + aaoffset) * qFastSin(a * i + offset), 0, 0, 0, 0);
-                    vertices[++idx].set( cx + (m_radius + mid + aaoffset) * qFastCos(a * (i + 1) + offset), cy + (m_radius + mid + aaoffset) * qFastSin(a * (i + 1) + offset), 0, 0, 0, 0);
-                }
-                else if ((i % 2 == 0 && !dir) || dir)
-                {
-                    //Outer
-                    vertices[++idx].set( cx + (m_radius + mid + aaoffset) * qFastCos(a * (i + 1) + offset), cy + (m_radius + mid + aaoffset) * qFastSin(a * (i + 1) + offset), 0, 0, 0, 0);
-
-                    //Center
-                    vertices[++idx].set( cx + (m_radius + mid) * qFastCos(a * i + offset), cy + (m_radius + mid) * qFastSin(a * i + offset), r, g, b, alpha);
-                    vertices[++idx].set( cx + (m_radius + mid) * qFastCos(a * (i + 1) + offset), cy + (m_radius + mid) * qFastSin(a * (i + 1) + offset), r, g, b, alpha);
-                    vertices[++idx].set( cx + (m_radius - mid) * qFastCos(a * i + offset), cy + (m_radius - mid) * qFastSin(a * i + offset), r, g, b, alpha);
-                    vertices[++idx].set( cx + (m_radius - mid) * qFastCos(a * (i + 1) + offset), cy + (m_radius - mid) * qFastSin(a * (i + 1) + offset), r, g, b, alpha);
-
-                    //Inner
-                    vertices[++idx].set( cx + (m_radius - mid - aaoffset) * qFastCos(a * i + offset), cy + (m_radius - mid - aaoffset) * qFastSin(a * i + offset), m_fillColor.red(), m_fillColor.green(), m_fillColor.blue(), m_fillColor.alpha());
-                    vertices[++idx].set( cx + (m_radius - mid - aaoffset) * qFastCos(a * (i + 1) + offset), cy + (m_radius - mid - aaoffset) * qFastSin(a * (i + 1) + offset), m_fillColor.red(), m_fillColor.green(), m_fillColor.blue(), m_fillColor.alpha());
-                }
-            }
-        };
-
-        if (m_topLeft)
-            drawCircle(-w + center.x(), -h + center.y(), float(M_PI));
-        else
-            vertices[++idx].set(-w + center.x() + mid + aaoffset - m_radius, -h + center.y() - m_radius + mid + aaoffset, m_fillColor.red(), m_fillColor.green(), m_fillColor.blue(), m_fillColor.alpha());
-        vertices[++idx].set(w + center.x() + (m_topRight?0:-mid - aaoffset + m_radius), -h + center.y() - m_radius + mid + aaoffset, m_fillColor.red(), m_fillColor.green(), m_fillColor.blue(), m_fillColor.alpha());
-
-        //Center
-        vertices[++idx].set(-w + center.x() + (m_topLeft?0:mid - m_radius), -h + center.y() - m_radius + mid, r, g, b, alpha);
-        vertices[++idx].set(w + center.x() + (m_topRight?0:mid  + m_radius), -h + center.y() - m_radius + mid, r, g, b, alpha);
-        vertices[++idx].set(-w + center.x() + (m_topLeft?0:-mid - m_radius), -h + center.y() - m_radius - mid, r, g, b, alpha);
-        vertices[++idx].set(w + center.x() + (m_topRight?0:mid + m_radius), -h + center.y() - m_radius - mid, r, g, b, alpha);
-
-        //Outer
-        vertices[++idx].set(-w + center.x() + (m_topLeft?0:-mid - aaoffset - m_radius), -h + center.y() - m_radius - mid - aaoffset, 0, 0, 0, 0);
-        vertices[++idx].set(w + center.x() + (m_topRight?0:mid + aaoffset + m_radius), -h + center.y() - m_radius - mid - aaoffset, 0, 0, 0, 0);
-
-        if (m_topRight)
-            drawCircle(w + center.x(), -h + center.y(), (float(M_PI) / 2.f) * 3.f, false);
-
-        //Outer
-        vertices[++idx].set(w + center.x() + m_radius + mid + aaoffset, h + center.y() + (m_bottomRight?0:mid + aaoffset + m_radius), 0, 0, 0, 0);
-
-        //Center
-        vertices[++idx].set(w + center.x() + m_radius + mid, -h + center.y() + (m_topRight?0:-mid - m_radius), r, g, b, alpha);
-        vertices[++idx].set(w + center.x() + m_radius + mid, h + center.y() + (m_bottomRight?0:mid + m_radius), r, g, b, alpha);
-        vertices[++idx].set(w + center.x() + m_radius - mid, -h + center.y() + (m_topRight?0:mid - m_radius), r, g, b, alpha);
-        vertices[++idx].set(w + center.x() + m_radius - mid, h + center.y() + (m_bottomRight?0:-mid + m_radius), r, g, b, alpha);
-
-        //Inner
-        vertices[++idx].set(w + center.x() + m_radius - mid - aaoffset, -h + center.y() + (m_topRight?0:mid + aaoffset - m_radius), m_fillColor.red(), m_fillColor.green(), m_fillColor.blue(), m_fillColor.alpha());
-        vertices[++idx].set(w + center.x() + m_radius - mid - aaoffset, h + center.y() + (m_bottomRight?0:-mid - aaoffset + m_radius), m_fillColor.red(), m_fillColor.green(), m_fillColor.blue(), m_fillColor.alpha());
-
-        if (m_bottomRight)
-            drawCircle(w + center.x(), h + center.y(), 0);
-
-        //Inner
-        vertices[++idx].set(-w + center.x() + (m_bottomLeft?0:mid + aaoffset - m_radius), h + center.y() + m_radius - mid - aaoffset, m_fillColor.red(), m_fillColor.green(), m_fillColor.blue(), m_fillColor.alpha());
-
-        //Center
-        vertices[++idx].set(w + center.x() + (m_bottomRight?0:-mid + m_radius), h + center.y() + m_radius - mid, r, g, b, alpha);
-        vertices[++idx].set(-w + center.x() + (m_bottomLeft?0:mid - m_radius), h + center.y() + m_radius - mid, r, g, b, alpha);
-        vertices[++idx].set(w + center.x() + (m_bottomRight?0:mid + m_radius), h + center.y() + m_radius + mid, r, g, b, alpha);
-        vertices[++idx].set(-w + center.x() + (m_bottomLeft?0:-mid - m_radius), h + center.y() + m_radius + mid, r, g, b, alpha);
-
-        //Outer
-        vertices[++idx].set(w + center.x() + (m_bottomRight?0:mid + aaoffset + m_radius), h + center.y() + m_radius + mid + aaoffset, 0, 0, 0, 0);
-        vertices[++idx].set(-w + center.x() + (m_bottomLeft?0:-mid - aaoffset - m_radius), h  + center.y()+ m_radius + mid + aaoffset, 0, 0, 0, 0);
-
-        if (m_bottomLeft)
-            drawCircle(-w + center.x(), h + center.y(), float(M_PI) / 2.0f, false);
-
-        //Outer
-        vertices[++idx].set(-w + center.x() - m_radius - mid - aaoffset, -h + center.y() + (m_topLeft?0:-mid - aaoffset - m_radius), 0, 0, 0, 0);
-
-        //Center
-        vertices[++idx].set(-w + center.x() - m_radius - mid, h + center.y() + (m_bottomLeft?0:mid + m_radius), r, g, b, alpha);
-        vertices[++idx].set(-w + center.x() - m_radius - mid, -h + center.y() + (m_topLeft?0:-mid - m_radius), r, g, b, alpha);
-        vertices[++idx].set(-w + center.x() - m_radius + mid, h + center.y() + (m_bottomLeft?0:-mid + m_radius), r, g, b, alpha);
-        vertices[++idx].set(-w + center.x() - m_radius + mid, -h + center.y() + (m_topLeft?0:mid - m_radius), r, g, b, alpha);
-
-        //Inner
-        vertices[++idx].set(-w + center.x() - m_radius + mid + aaoffset, h + center.y() + (m_bottomLeft?0:-mid - aaoffset + m_radius), m_fillColor.red(), m_fillColor.green(), m_fillColor.blue(), m_fillColor.alpha());
-        vertices[++idx].set(-w + center.x() - m_radius + mid + aaoffset, -h + center.y() + (m_topLeft?0:mid + aaoffset - m_radius), m_fillColor.red(), m_fillColor.green(), m_fillColor.blue(), m_fillColor.alpha());
-    }
-
-    return nodeBorder;
-}
-
 QSGNode *RoundedRectangle::updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *data)
 {
     CustomShape::updatePaintNode(oldNode, data);
@@ -255,13 +88,60 @@ QSGNode *RoundedRectangle::updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData
     const uchar g = m_fillColor.green();
     const uchar b = m_fillColor.blue();
     const uchar alpha = m_fillColor.alpha();
+
+    const uchar rb = m_borderColor.red();
+    const uchar gb = m_borderColor.green();
+    const uchar bb = m_borderColor.blue();
+    const uchar alphab = m_borderColor.alpha();
+
+	const uchar ra = 0;
+	const uchar ga = 0;
+	const uchar ba = 0;
+	const uchar alphaa = 0;
+
     const auto nCorner = getNumberRoundedCorner();
-    const auto aa = (m_borderWidth < 1) && antialiasing();
+    const auto aa = antialiasing();
     const auto a = 0.5f * float(M_PI) / m_nbSegments;
     const QPointF center(w + m_radius, h + m_radius);
     m_nbSegments += (m_nbSegments % 2 == 0)?0:1;
-    const int nbVertice = (aa?28:20) + nCorner * (aa ? (m_nbSegments * m_nbSegments % 2 == 0 ? (4*m_nbSegments + 1) : (4*(m_nbSegments-1)+7)):(2 * m_nbSegments + 1)) -1; /* 20 = 4 * 5 (nbVertice * nbRects) with aa 28 = 4 * 5 + 2 * 4 (nbVertice * nbRects + nbVerticeAA * (nbRects - 1)) */
+	// Corners
+	// Normal + AA + Border  (9 + 8) / 2 = 8.5f
+	// Normal + AA           (5 + 3) / 2 = 4
+	// Normal + Border       (7 + 5) / 2 = 6
+	// Normal                (3 + 2) / 2 = 2.5f
 
+	// Normal + AA + Border Total = (8.5 * (m_nbSegments -1)) * nCorner
+	// Normal + AA          Total = (4 * (m_nbSegments -1)) * nCorner
+	// Normal + Border      Total = (6 * (m_nbSegments -1)) * nCorner
+	// Normal               Total = (2.5 * (m_nbSegments -1)) * nCorner
+
+	// Normal + AA + Border 6 + 8 = 14
+	// Normal + AA          6 + 3 = 9
+	// Normal + Border      6 + 6 = 12
+	// Normal               6
+
+	// Normal + AA + Border Total = 14 * 4 - (4 - nCorner) * 2
+	// Normal + AA          Total = 9 * 4 - (4 - nCorner)
+	// Normal + Border      Total = 12 * 4 - (4 - nCorner) * 2
+	// Normal               Total = 6 * 4
+
+	//  Normal + AA + Border 
+	//							TOTAL =  (8.5 * (m_nbSegments -1)) * nCorner + 14 * 4 - (4 - nCorner) * 2 + 4
+	//  Normal + AA 
+	//							TOTAL =  (4 * (m_nbSegments -1)) * nCorner + 9 * 4 - (4 - nCorner) + 4
+	//  Normal + Border 
+	//							TOTAL =  (6 * (m_nbSegments -1)) * nCorner + 12 * 4 - (4 - nCorner) * 2 + 4
+	//  Normal 
+	//							TOTAL =  (2.5 * (m_nbSegments -1)) * nCorner + 6 * 4 + 4
+	const int nbVertice = (aa) ?
+		(m_borderWidth > 0 ?
+			(8.5f * (m_nbSegments - 2) + 8) * nCorner + (10 * 4) + 3 + (!m_topLeft?5:0) + (!m_topRight ? 4 : 0) + (!m_bottomRight ? 4 : 0) + (!m_bottomLeft ? 4 : 0) + nCorner :
+			(4 * (m_nbSegments - 2) + 4) * nCorner + 6 * 4 + 3 + (!m_topLeft ? 4 : 0) + (!m_topRight ? 3 : 0) + (!m_bottomRight ? 3 : 0) + (!m_bottomLeft ? 3 : 0) + nCorner)
+		:
+		(m_borderWidth > 0 ?
+			(6 * (m_nbSegments - 2) + 6) * nCorner + 8 * 4 + 3 + (!m_topLeft ? 3 : 0) + (!m_topRight ? 4 : 0) + (!m_bottomRight ? 4 : 0) + (!m_bottomLeft ? 4 : 0) + nCorner :
+			(2.5f * (m_nbSegments - 2) + 2) * nCorner + 4 * 4 + 3 + (!m_topLeft ? 3 : 0) + (!m_topRight ? 2 : 0) + (!m_bottomRight ? 2 : 0) + (!m_bottomLeft ? 2 : 0) + nCorner)
+		;
     if (!oldNode) {
         node = new QSGGeometryNode;
         geometry = new QSGGeometry(QSGGeometry::defaultAttributes_ColoredPoint2D(), nbVertice);
@@ -279,101 +159,297 @@ QSGNode *RoundedRectangle::updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData
     }
 
 	auto vertices = geometry->vertexDataAsColoredPoint2D();
+	const auto borderInner = m_radius + aaoffset;
+	const auto borderOuter = borderInner + m_borderWidth;
+    const auto outerAA = m_borderWidth > 0 ? borderOuter + aaoffset : borderInner;
 
-	const auto drawCircle = [&](qreal cx, qreal cy, float offset) {
-        for (uint i = 0; i < m_nbSegments; i++)
+//    //Center
+    vertices[++idx].set( w + center.x(), h + center.y(), r, g, b, alpha);
+    vertices[++idx].set( -w + center.x(), h + center.y(), r, g, b, alpha);
+	vertices[++idx].set(w + center.x(), -h + center.y(), r, g, b, alpha);
+	
+    const auto drawCircle = [&](qreal cx, qreal cy, float offset) {
+        for (uint i = 0; i < m_nbSegments - 1; i++)
         {
             if (aa)
             {
                 if (i % 2 == 0)
                 {
                     vertices[++idx].set( cx, cy, r, g, b, alpha);
+
                     vertices[++idx].set( cx + m_radius * qFastCos(a * i + offset), cy + m_radius * qFastSin(a * i + offset), r, g, b, alpha);
                     vertices[++idx].set( cx + m_radius * qFastCos(a * (i + 1) + offset), cy + m_radius * qFastSin(a * (i + 1) + offset), r, g, b, alpha);
-                    vertices[++idx].set( cx + (m_radius + aaoffset) * qFastCos(a * i + offset), cy + (m_radius + aaoffset) * qFastSin(a * i + offset), 0, 0, 0, 0);
-                    vertices[++idx].set( cx + (m_radius + aaoffset) * qFastCos(a * (i + 1) + offset), cy + (m_radius + aaoffset) * qFastSin(a * (i + 1) + offset), 0, 0, 0, 0);
+                    if (m_borderWidth > 0)
+                    {
+                        vertices[++idx].set( cx + (borderInner) * qFastCos(a * i + offset), cy + borderInner * qFastSin(a * i + offset), rb, gb, bb, alphab);
+                        vertices[++idx].set( cx + (borderInner) * qFastCos(a * (i + 1) + offset), cy +  borderInner * qFastSin(a * (i + 1) + offset), rb, gb, bb, alphab);
+
+                        vertices[++idx].set( cx + borderOuter * qFastCos(a * i + offset), cy + borderOuter * qFastSin(a * i + offset), rb, gb, bb, alphab);
+                        vertices[++idx].set( cx + borderOuter * qFastCos(a * (i + 1) + offset), cy + borderOuter * qFastSin(a * (i + 1) + offset), rb, gb, bb, alphab);
+
+                        vertices[++idx].set( cx + outerAA * qFastCos(a * i + offset), cy + outerAA * qFastSin(a * i + offset), ra, ga, ba, alphaa);
+                        vertices[++idx].set( cx + outerAA * qFastCos(a * (i + 1) + offset), cy + outerAA * qFastSin(a * (i + 1) + offset), ra, ga, ba, alphaa);
+                    }
+                    else
+                    {
+                        vertices[++idx].set( cx + outerAA * qFastCos(a * i + offset), cy + outerAA * qFastSin(a * i + offset), ra, ga, ba, alphaa);
+                        vertices[++idx].set( cx + outerAA * qFastCos(a * (i + 1) + offset), cy +  outerAA * qFastSin(a * (i + 1) + offset), ra, ga, ba, alphaa);
+                    }
                 }
                 else
                 {
-                    vertices[++idx].set( cx + (m_radius + aaoffset) * qFastCos(a * (i + 1) + offset), cy + (m_radius + aaoffset) * qFastSin(a * (i + 1) + offset), 0, 0, 0, 0);
+                    if (m_borderWidth > 0)
+                    {
+						vertices[++idx].set(cx + outerAA * qFastCos(a * (i) + offset), cy + outerAA * qFastSin(a * (i) + offset), ra, ga, ba, alphaa);
+						vertices[++idx].set( cx + outerAA * qFastCos(a * (i + 1) + offset), cy + outerAA * qFastSin(a * (i + 1) + offset), ra, ga, ba, alphaa);
+
+                        vertices[++idx].set( cx + borderOuter * qFastCos(a * i + offset), cy + borderOuter * qFastSin(a * i + offset), rb, gb, bb, alphab);
+                        vertices[++idx].set( cx + borderOuter * qFastCos(a * (i + 1) + offset), cy + borderOuter * qFastSin(a * (i + 1) + offset), rb, gb, bb, alphab);
+
+                        vertices[++idx].set( cx + borderInner * qFastCos(a * i + offset), cy +  borderInner * qFastSin(a * i + offset), rb, gb, bb, alphab);
+                        vertices[++idx].set( cx + borderInner * qFastCos(a * (i + 1) + offset), cy +  borderInner * qFastSin(a * (i + 1) + offset), rb, gb, bb, alphab);
+                    }
+                    else
+                    {
+						vertices[++idx].set(cx + outerAA * qFastCos(a * (i + 1) + offset), cy + outerAA * qFastSin(a * (i + 1) + offset), ra, ga, ba, alphaa);
+					}
                     vertices[++idx].set( cx + m_radius * qFastCos(a * i + offset), cy + m_radius * qFastSin(a * i + offset), r, g, b, alpha);
                     vertices[++idx].set( cx + m_radius * qFastCos(a * (i + 1) + offset), cy + m_radius * qFastSin(a * (i + 1) + offset), r, g, b, alpha);
                 }
             }
             else
             {
-                vertices[++idx].set( cx, cy, r, g, b, alpha);
-                vertices[++idx].set( cx + m_radius * qFastCos(a * i + offset), cy + m_radius * qFastSin(a * i + offset), r, g, b, alpha);
+                if (i % 2 == 0)
+                {
+                    vertices[++idx].set( cx, cy, r, g, b, alpha);
+                    vertices[++idx].set( cx + m_radius * qFastCos(a * i + offset), cy + m_radius * qFastSin(a * i + offset), r, g, b, alpha);
+                    vertices[++idx].set( cx + m_radius * qFastCos(a * (i + 1) + offset), cy + m_radius * qFastSin(a * (i + 1) + offset), r, g, b, alpha);
+                    if (m_borderWidth > 0)
+                    {
+                        vertices[++idx].set( cx + m_radius * qFastCos(a * i + offset), cy + m_radius * qFastSin(a * i + offset), rb, gb, bb, alphab);
+                        vertices[++idx].set( cx + m_radius * qFastCos(a * (i + 1) + offset), cy + m_radius * qFastSin(a * (i + 1) + offset), rb, gb, bb, alphab);
+						vertices[++idx].set(cx + borderOuter * qFastCos(a * i + offset), cy + borderOuter * qFastSin(a * i + offset), rb, gb, bb, alphab);
+						vertices[++idx].set(cx + borderOuter * qFastCos(a * (i + 1) + offset), cy + borderOuter * qFastSin(a * (i + 1) + offset), rb, gb, bb, alphab);
+                    }
+                }
+                else
+                {
+                    if (m_borderWidth > 0)
+                    {
+						vertices[++idx].set(cx + borderOuter * qFastCos(a * (i + 1) + offset), cy + borderOuter * qFastSin(a * (i + 1) + offset), rb, gb, bb, alphab);
+						vertices[++idx].set( cx + m_radius * qFastCos(a * i + offset), cy + m_radius * qFastSin(a * i + offset), rb, gb, bb, alphab);
+                        vertices[++idx].set( cx + m_radius * qFastCos(a * (i + 1) + offset), cy + m_radius * qFastSin(a * (i + 1) + offset), rb, gb, bb, alphab);
+                    }
+                    vertices[++idx].set( cx + m_radius * qFastCos(a * i + offset), cy + m_radius * qFastSin(a * i + offset), r, g, b, alpha);
+                    vertices[++idx].set( cx + m_radius * qFastCos(a * (i + 1) + offset), cy + m_radius * qFastSin(a * (i + 1) + offset), r, g, b, alpha);
+                }
             }
         }
-        vertices[++idx].set( cx, cy, r, g, b, alpha);
     };
-
+    bool value = false;
     //Top
     if (m_topLeft)
         drawCircle(-w + center.x(), -h + center.y(), float(M_PI) / 2.0f * 2.0f);
+    else
+        value = !value;
+
+	if (!m_topLeft)
+	{
+		vertices[++idx].set(-w + center.x(), -h + center.y(), r, g, b, alpha);
+		vertices[++idx].set(-w + center.x(), -h + center.y(), r, g, b, alpha);
+		vertices[++idx].set(-w + center.x() - m_radius, -h + center.y() - m_radius, r, g, b, alpha);
+	}
     if (aa)
-    {
-        vertices[++idx].set( -w + center.x() + (m_topLeft ? 0 : -m_radius), - h + center.y() - m_radius - aaoffset, 0, 0, 0, 0);
-        vertices[++idx].set( w + center.x() + (m_topRight ? 0 : m_radius), - h + center.y() - m_radius - aaoffset, 0, 0, 0, 0);
+    {	
+        if (m_borderWidth > 0)
+        {
+			if (!m_topLeft)
+			{
+				vertices[++idx].set(-w + center.x() - borderInner, -h + center.y() - borderInner, rb, gb, bb, alphab);
+				vertices[++idx].set(-w + center.x() - borderInner, -h + center.y() - borderInner, rb, gb, bb, alphab);
+			}
+			vertices[++idx].set(-w + center.x() - (m_topLeft ? 0 : outerAA), -h + center.y() - outerAA, ra, ga, ba, alphaa);
+            vertices[++idx].set(w + center.x() + (m_topRight ? 0 : outerAA), -h + center.y() - outerAA, ra, ga, ba, alphaa);
+
+            vertices[++idx].set(-w + center.x() - (m_topLeft ? 0 : borderOuter), -h + center.y() - borderOuter, rb, gb, bb, alphab);
+            vertices[++idx].set(w + center.x() + (m_topRight ? 0 : borderOuter), -h + center.y() - borderOuter, rb, gb, bb, alphab);
+
+            vertices[++idx].set(-w + center.x() - (m_topLeft ? 0 : borderInner), -h + center.y() - borderInner, rb, gb, bb, alphab);
+            vertices[++idx].set(w + center.x() + (m_topRight ? 0 : borderInner), -h + center.y() - borderInner, rb, gb, bb, alphab);
+        }
+        else
+        {
+			if (!m_topLeft)
+				vertices[++idx].set(-w + center.x() - borderOuter, -h + center.y() - borderOuter, rb, gb, bb, alphab);
+            vertices[++idx].set(-w + center.x() - (m_topLeft ? 0 : outerAA), -h + center.y() - outerAA, ra, ga, ba, alphaa);
+            vertices[++idx].set(w + center.x() + (m_topRight ? 0 : outerAA), -h + center.y() - outerAA, ra, ga, ba, alphaa);
+        }
     }
-    vertices[++idx].set( -w + center.x() + (m_topLeft ? 0 : -m_radius), - h + center.y() - m_radius, r, g, b, alpha);
-    vertices[++idx].set( w + center.x() + (m_topRight ? 0 : m_radius), - h + center.y() - m_radius, r, g, b, alpha);
-    vertices[++idx].set( -w + center.x() + (m_topLeft ? 0 : -m_radius), - h + center.y(), r, g, b, alpha);
-    vertices[++idx].set( w + center.x() + (m_topRight ? 0 : m_radius), - h + center.y(), r, g, b, alpha);
-    if (m_topRight)
-        drawCircle(w + center.x(), -h + center.y(), float(M_PI) / 2.0f * 3.0f);
+	else
+	{
+		if (m_borderWidth > 0)
+		{
+			vertices[++idx].set(-w + center.x() - (m_topLeft ? 0 : borderOuter), -h + center.y() - borderOuter, rb, gb, bb, alphab);
+			vertices[++idx].set(w + center.x() + (m_topRight ? 0 : borderOuter), -h + center.y() - borderOuter, rb, gb, bb, alphab);
 
-    //Right
-    if (aa)
-    {
-        vertices[++idx].set( w + center.x() + m_radius + aaoffset, - h + center.y(), 0, 0, 0, 0);
-        vertices[++idx].set( w + center.x() + m_radius + aaoffset, h + center.y(), 0, 0, 0, 0);
-    }
-    vertices[++idx].set( w + center.x() + m_radius, - h + center.y(), r, g, b, alpha);
-    vertices[++idx].set( w + center.x() + m_radius, h + center.y(), r, g, b, alpha);
-    vertices[++idx].set( w + center.x(), - h + center.y(), r, g, b, alpha);
-    vertices[++idx].set( w + center.x(), h + center.y(), r, g, b, alpha);
+			vertices[++idx].set(-w + center.x() - (m_topLeft ? 0 : (m_radius)), -h + center.y() - (m_radius), rb, gb, bb, alphab);
+			vertices[++idx].set(w + center.x() + (m_topRight ? 0 : (m_radius)), -h + center.y() - (m_radius), rb, gb, bb, alphab);
+		}
+	}
+    vertices[++idx].set(-w + center.x() - (m_topLeft ? 0 : (m_radius)), -h + center.y() - (m_radius), r, g, b, alpha);
+    vertices[++idx].set(w + center.x() + (m_topRight ? 0 : (m_radius)), -h + center.y() - (m_radius), r, g, b, alpha);
+    vertices[++idx].set(-w + center.x(), -h + center.y(), r, g, b, alpha);
+    vertices[++idx].set(w + center.x(), -h + center.y(), r, g, b, alpha);
 
-    //Bottom
-    if (m_bottomRight)
-        drawCircle(w + center.x(), h + center.y(), 0);
-    if (aa)
-    {
-        vertices[++idx].set( w + center.x() + ((m_bottomRight)?0:m_radius), h + m_radius + aaoffset + center.y(), 0, 0, 0, 0);
-        vertices[++idx].set( -w + center.x() + ((m_bottomLeft)?0:-m_radius), h + m_radius + aaoffset + center.y(), 0, 0, 0, 0);
-    }
-    vertices[++idx].set( w + center.x() + (m_bottomRight ? 0 : m_radius), h + m_radius + center.y(), r, g, b, alpha);
-    vertices[++idx].set( -w + center.x() + (m_bottomLeft ? 0 : -m_radius), h + m_radius + center.y(), r, g, b, alpha);
-    vertices[++idx].set( w + center.x() + (m_bottomRight ? 0 : m_radius), h + center.y(), r, g, b, alpha);
-    vertices[++idx].set( -w + center.x() + (m_bottomLeft ? 0 : -m_radius), h + center.y(), r, g, b, alpha);
-    if (m_bottomLeft)
-        drawCircle(-w + center.x(), h + center.y(), float(M_PI) / 2.0f);
+	if (m_topRight)
+		drawCircle(w + center.x(), -h + center.y(), float(M_PI) / 2.0f * 3.0f);
+	if (!m_topRight)
+	{
+		vertices[++idx].set(w + center.x(), -h + center.y(), r, g, b, alpha);
+		vertices[++idx].set(w + center.x() + m_radius, -h + center.y() - m_radius, r, g, b, alpha);
+	}
+	if (aa)
+	{
+		if (m_borderWidth > 0)
+		{
+			if (!m_topRight)
+			{
+				vertices[++idx].set(w + center.x() + borderInner, -h + center.y() - borderInner, rb, gb, bb, alphab);
+				vertices[++idx].set(w + center.x() + outerAA, -h + center.y() - (m_topRight ? 0 : outerAA), ra, ga, ba, alphaa);
+			}
+			vertices[++idx].set(w + center.x() + outerAA, -h + center.y() - (m_topRight ? 0 : outerAA), ra, ga, ba, alphaa);
+			vertices[++idx].set(w + center.x() + outerAA, h + center.y() + (m_bottomRight ? 0 : outerAA), ra, ga, ba, alphaa);
+			vertices[++idx].set(w + center.x() + borderOuter, -h + center.y() - (m_topRight ? 0 : borderOuter), rb, gb, bb, alphab);
+			vertices[++idx].set(w + center.x() + borderOuter, h + center.y() + (m_bottomRight ? 0 : borderOuter), rb, gb, bb, alphab);
+			vertices[++idx].set(w + center.x() + borderInner, -h + center.y() - (m_topRight ? 0 : borderInner), rb, gb, bb, alphab);
+			vertices[++idx].set(w + center.x() + borderInner, h + center.y() + (m_bottomRight ? 0 : borderInner), rb, gb, bb, alphab);
+		}
+		else
+		{
+			if (!m_topRight)
+				vertices[++idx].set(w + center.x() + borderInner, -h + center.y() - borderInner, rb, gb, bb, alphab);
+			vertices[++idx].set(w + center.x() + outerAA, -h + center.y() - (m_topRight ? 0 : outerAA), ra, ga, ba, alphaa);
+			vertices[++idx].set(w + center.x() + outerAA, h + center.y() + (m_bottomRight ? 0 : outerAA), ra, ga, ba, alphaa);
+		}
+	}
+	else if (m_borderWidth > 0)
+	{
+		if (!m_topRight)
+		{
+			vertices[++idx].set(w + center.x() + m_radius, -h + center.y() - m_radius, rb, gb, bb, alphab);
+			vertices[++idx].set(w + center.x() + borderOuter, -h + center.y() - (m_topRight ? 0 : borderOuter), rb, gb, bb, alphab);
+		}
+		vertices[++idx].set(w + center.x() + borderOuter, -h + center.y() - (m_topRight ? 0 : borderOuter), rb, gb, bb, alphab);
+		vertices[++idx].set(w + center.x() + borderOuter, h + center.y() + (m_bottomRight ? 0 : borderOuter), rb, gb, bb, alphab);
+		vertices[++idx].set(w + center.x() + m_radius, -h + center.y() - (m_topRight ? 0 : (m_radius)), rb, gb, bb, alphab);
+		vertices[++idx].set(w + center.x() + m_radius, h + center.y() + (m_bottomRight ? 0 : (m_radius)), rb, gb, bb, alphab);
+	}
+	vertices[++idx].set(w + center.x() + m_radius, -h + center.y() - (m_topRight ? 0 : (m_radius)), r, g, b, alpha);
+	vertices[++idx].set(w + center.x() + m_radius, h + center.y() + (m_bottomRight ? 0 : (m_radius)), r, g, b, alpha);
+	vertices[++idx].set(w + center.x(), -h + center.y(), r, g, b, alpha);
+	vertices[++idx].set(w + center.x(), h + center.y(), r, g, b, alpha);
 
-    //Left
-    if (aa)
-    {
-        vertices[++idx].set( -w + center.x() - m_radius - aaoffset, h + center.y(), 0, 0, 0, 0);
-        vertices[++idx].set( -w + center.x() - m_radius - aaoffset, -h + center.y(), 0, 0, 0, 0);
-    }
-    vertices[++idx].set( -w + center.x() - m_radius, h + center.y(), r, g, b, alpha);
-    vertices[++idx].set( -w + center.x() - m_radius, -h + center.y(), r, g, b, alpha);
-    vertices[++idx].set( -w + center.x(), h + center.y(), r, g, b, alpha);
-    vertices[++idx].set( -w + center.x(), - h + center.y(), r, g, b, alpha);
+	if (m_bottomRight)
+		drawCircle(w + center.x(), h + center.y(), 0);
+	if (!m_bottomRight)
+	{
+		vertices[++idx].set(w + center.x(), h + center.y(), r, g, b, alpha);
+		vertices[++idx].set(w + center.x() + m_radius, h + center.y() + m_radius, r, g, b, alpha);
+	}
+	if (aa)
+	{
+		if (m_borderWidth > 0)
+		{
+			if (!m_bottomRight)
+			{
+				vertices[++idx].set(w + center.x() + borderInner, h + center.y() + borderInner, rb, gb, bb, alphab);
+				vertices[++idx].set(w + center.x() + borderOuter, h + center.y() + borderOuter, rb, gb, bb, alphab);
+			}
+			vertices[++idx].set(w + center.x() + (m_bottomRight ? 0 : outerAA), h + center.y() + outerAA, ra, ga, ba, alphaa);
+			vertices[++idx].set(-w + center.x() - (m_bottomLeft ? 0 : outerAA), h + center.y() + outerAA, ra, ga, ba, alphaa);
 
-    //Center
-    vertices[++idx].set( w + center.x(), -h + center.y(), r, g, b, alpha);
-    vertices[++idx].set( -w + center.x(), h + center.y(), r, g, b, alpha);
-    vertices[++idx].set( w + center.x(), h + center.y(), r, g, b, alpha);
+			vertices[++idx].set(w + center.x() + (m_bottomRight ? 0 : borderOuter), h + center.y() + borderOuter, rb, gb, bb, alphab);
+			vertices[++idx].set(-w + center.x() - (m_bottomLeft ? 0 : borderOuter), h + center.y() + borderOuter, rb, gb, bb, alphab);
 
-    if (m_borderWidth > 0)
-    {
-        if (node->childCount() > 0)
-            node->removeAllChildNodes();
-        node->appendChildNode(createBorder());
-    }
+			vertices[++idx].set(w + center.x() + (m_bottomRight ? 0 : borderInner), h + center.y() + borderInner, rb, gb, bb, alphab);
+			vertices[++idx].set(-w + center.x() - (m_bottomLeft ? 0 : borderInner), h + center.y() + borderInner, rb, gb, bb, alphab);
+		}
+		else
+		{
+			if (!m_bottomRight)
+				vertices[++idx].set(w + center.x() + borderInner, h + center.y() + borderInner, rb, gb, bb, alphab);
+			vertices[++idx].set(w + center.x() + (m_bottomRight ? 0 : outerAA), h + center.y() + outerAA, ra, ga, ba, alphaa);
+			vertices[++idx].set(-w + center.x() - (m_bottomLeft ? 0 : outerAA), h + center.y() + outerAA, ra, ga, ba, alphaa);
+		}
+	}
+	else if (m_borderWidth > 0)
+	{
+		if (!m_bottomRight)
+		{
+			vertices[++idx].set(w + center.x() + m_radius, h + center.y() + m_radius, rb, gb, bb, alphab);
+			vertices[++idx].set(w + center.x() + (m_bottomRight ? 0 : borderOuter), h + center.y() + borderOuter, rb, gb, bb, alphab);
+		}
+		vertices[++idx].set(w + center.x() + (m_bottomRight ? 0 : borderOuter), h + center.y() + borderOuter, rb, gb, bb, alphab);
+		vertices[++idx].set(-w + center.x() - (m_bottomLeft ? 0 : borderOuter), h + center.y() + borderOuter, rb, gb, bb, alphab);
+		vertices[++idx].set(w + center.x() + (m_bottomRight ? 0 : (m_radius)), h + center.y() + (m_radius), rb, gb, bb, alphab);
+		vertices[++idx].set(-w + center.x() - (m_bottomLeft ? 0 : (m_radius)), h + center.y() + (m_radius), rb, gb, bb, alphab);
+	}
+	vertices[++idx].set(w + center.x() + (m_bottomRight ? 0 : (m_radius)), h + center.y() + (m_radius), r, g, b, alpha);
+	vertices[++idx].set(-w + center.x() - (m_bottomLeft ? 0 : (m_radius)), h + center.y() + (m_radius), r, g, b, alpha);
+	vertices[++idx].set(w + center.x(), h + center.y(), r, g, b, alpha);
+	vertices[++idx].set(-w + center.x(), h + center.y(), r, g, b, alpha);
 
-    Q_ASSERT(idx + 1 == nbVertice);
+	if (m_bottomLeft)
+		drawCircle(-w + center.x(), h + center.y(), float(M_PI) / 2.0f);
+	if (!m_bottomLeft)
+	{
+		vertices[++idx].set(-w + center.x(), h + center.y(), r, g, b, alpha);
+		vertices[++idx].set(-w + center.x() - m_radius, h + center.y() + m_radius, r, g, b, alpha);
+	}
+	if (aa)
+	{
+		if (m_borderWidth > 0)
+		{
+			if (!m_bottomLeft)
+			{
+				vertices[++idx].set(-w + center.x() - borderInner, h + center.y() + borderInner, rb, gb, bb, alphab);
+				vertices[++idx].set(-w + center.x() - borderOuter, h + center.y() + borderOuter, rb, gb, bb, alphab);
+			}
+			vertices[++idx].set(-w + center.x() - outerAA, h + center.y() + (m_bottomLeft ? 0 : outerAA), ra, ga, ba, alphaa);
+			vertices[++idx].set(-w + center.x() - outerAA, -h + center.y() - (m_topLeft ? 0 : outerAA), ra, ga, ba, alphaa);
 
-    return node;
+			vertices[++idx].set(-w + center.x() - borderOuter, h + center.y() + (m_bottomLeft ? 0 : borderOuter), rb, gb, bb, alphab);
+			vertices[++idx].set(-w + center.x() - borderOuter, -h + center.y() - (m_topLeft ? 0 : borderOuter), rb, gb, bb, alphab);
+
+			vertices[++idx].set(-w + center.x() - borderInner, h + center.y() + (m_bottomLeft ? 0 : borderInner), rb, gb, bb, alphab);
+			vertices[++idx].set(-w + center.x() - borderInner, -h + center.y() - (m_topLeft ? 0 : borderInner), rb, gb, bb, alphab);
+		}
+		else
+		{
+			if (!m_bottomLeft)
+				vertices[++idx].set(-w + center.x() - borderInner, h + center.y() + borderInner, rb, gb, bb, alphab);
+			vertices[++idx].set(-w + center.x() - outerAA, h + center.y() + (m_bottomLeft ? 0 : outerAA), ra, ga, ba, alphaa);
+			vertices[++idx].set(-w + center.x() - outerAA, -h + center.y() - (m_topLeft ? 0 : outerAA), ra, ga, ba, alphaa);
+		}
+	}
+	else if (m_borderWidth > 0)
+	{
+		if (!m_bottomLeft)
+		{
+			vertices[++idx].set(-w + center.x() - m_radius, h + center.y() + m_radius, rb, gb, bb, alpha);
+			vertices[++idx].set(-w + center.x() - borderOuter, h + center.y() + (m_bottomLeft ? 0 : borderOuter), rb, gb, bb, alphab);
+		}
+		vertices[++idx].set(-w + center.x() - borderOuter, h + center.y() + (m_bottomLeft ? 0 : borderOuter), rb, gb, bb, alphab);
+		vertices[++idx].set(-w + center.x() - borderOuter, -h + center.y() - (m_topLeft ? 0 : borderOuter), rb, gb, bb, alphab);
+		vertices[++idx].set(-w + center.x() - m_radius, h + center.y() + (m_bottomLeft ? 0 : (m_radius)), rb, gb, bb, alphab);
+		vertices[++idx].set(-w + center.x() - m_radius, -h + center.y() - (m_topLeft ? 0 : (m_radius)), rb, gb, bb, alphab);
+	}
+	vertices[++idx].set(-w + center.x() - m_radius, h + center.y() + (m_bottomLeft ? 0 : (m_radius)), r, g, b, alpha);
+	vertices[++idx].set(-w + center.x() - m_radius, -h + center.y() - (m_topLeft ? 0 : (m_radius)), r, g, b, alpha);
+	vertices[++idx].set(-w + center.x(), h + center.y(), r, g, b, alpha);
+	vertices[++idx].set(-w + center.x(), -h + center.y(), r, g, b, alpha);
+
+	Q_ASSERT(idx + 1 == nbVertice);
+
+	return  node;
 }

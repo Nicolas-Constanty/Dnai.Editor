@@ -5,7 +5,7 @@
 #include "beziercurve.h"
 
 BezierCurve::BezierCurve(QQuickItem *parent)
-    : QQuickItem(parent)
+    : ScalableItem(parent)
     , m_p1(0, 0)
     , m_p2(0.5, 0)
     , m_p3(0.5, 1)
@@ -29,7 +29,6 @@ void BezierCurve::setP1(const QPointF &p)
 {
     if (p == m_p1)
         return;
-
     m_p1 = p;
     emit p1Changed(p);
     update();
@@ -39,7 +38,6 @@ void BezierCurve::setP2(const QPointF &p)
 {
     if (p == m_p2)
         return;
-
     m_p2 = p;
     emit p2Changed(p);
     update();
@@ -49,7 +47,6 @@ void BezierCurve::setP3(const QPointF &p)
 {
     if (p == m_p3)
         return;
-
     m_p3 = p;
     emit p3Changed(p);
     update();
@@ -57,6 +54,7 @@ void BezierCurve::setP3(const QPointF &p)
 
 void BezierCurve::setP4(const QPointF &p)
 {
+    m_scaleFactor = static_cast<ScalableItem *>(parentItem())->scaleFactor();
     if (p == m_p4)
         return;
     if (p.x() < 0)
@@ -67,10 +65,11 @@ void BezierCurve::setP4(const QPointF &p)
         m_scale.setY(-1);
     else
         m_scale.setY(1);
-
-    setWidth(qAbs(p.x()) + ((p.x() < 0)?1:-1) * position().x());
-    setHeight(qAbs(p.y()) + ((p.y() < 0)?1:-1) * position().y());
-
+    setWidth(p.x() - position().x());
+    setHeight(p.y() - position().y());
+    m_saveHeight = height() / scaleFactor();
+    m_saveWidth = width() / scaleFactor();
+    m_realPos = position() / scaleFactor();
     emit p4Changed(p);
     update();
 }
@@ -127,7 +126,7 @@ QSGNode *BezierCurve::updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *dat
     QSGGeometryNode *node;
     QSGGeometry *geometry;
     const auto aa = antialiasing();
-    const auto radius = float(m_lineWidth) / 2.f;
+    const auto radius = float(m_lineWidth * scaleFactor()) / 2.f;
 
     const char r = m_dotted?m_dottedColor.red():m_fillColor.red();
     const char g = m_dotted?m_dottedColor.green():m_fillColor.green();
@@ -163,7 +162,7 @@ QSGNode *BezierCurve::updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *dat
         geometry = node->geometry();
         geometry->allocate(nbVertices);
     }
-	auto matrix = data->transformNode->matrix();
+    auto matrix = data->transformNode->matrix();
     matrix.scale((m_lastScale.x() != m_scale.x())?-1:1, (m_lastScale.y() != m_scale.y())?-1:1);
     data->transformNode->setMatrix(matrix);
     m_lastScale = m_scale;
@@ -257,6 +256,8 @@ QSGNode *BezierCurve::updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *dat
             }
         }
     }
+    Q_ASSERT(idx + 1 == nbVertices);
+
     return node;
 }
 
@@ -264,4 +265,24 @@ void BezierCurve::setBack()
 {
     if (parentItem()->childItems().first() != this)
         stackBefore(parentItem()->childItems().first());
+}
+
+void BezierCurve::setScaleFactor(qreal s)
+{
+    if (s == m_scaleFactor)
+        return;
+    if (m_realPos == QPointF(-100000, -100000))
+        m_realPos = position() / m_scaleFactor;
+    m_scaleFactor = s;
+    setWidth(m_saveWidth * s);
+    setHeight(m_saveHeight * s);
+    setPosition(m_realPos * m_scaleFactor);
+    emit scaleFactorChanged(s);
+    update();
+}
+
+void BezierCurve::setRealPosition(const QPointF &pos)
+{
+    m_realPos = pos / m_scaleFactor;
+    setPosition(pos);
 }
