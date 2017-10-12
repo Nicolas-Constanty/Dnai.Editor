@@ -1,5 +1,7 @@
 import QtQuick 2.4
 import QtQuick.Controls 2.2
+import "../Forms"
+import "../Nodes"
 import CustomGeometry 1.0
 
 NodeForm {
@@ -53,6 +55,8 @@ NodeForm {
                         toolBar.menuEditRef.settingRef.nodeTabRef.stringBorderColorRef.colorSetting
                     else if (t == IOType.Bool)
                         toolBar.menuEditRef.settingRef.nodeTabRef.boolBorderColorRef.colorSetting
+                    else if (t == IOType.Generic)
+                        toolBar.menuEditRef.settingRef.nodeTabRef.genericBorderColorRef.colorSetting
                 }
                 fillColor: {
                     if (t == IOType.Int)
@@ -60,7 +64,9 @@ NodeForm {
                     else if (t == IOType.String)
                         toolBar.menuEditRef.settingRef.nodeTabRef.stringColorRef.colorSetting
                     else if (t == IOType.Bool)
-                        toolBar.menuEditRef.settingRef.nodeTabRef.boolColorRef
+                        toolBar.menuEditRef.settingRef.nodeTabRef.boolColorRef.colorSetting
+                    else if (t == IOType.Generic)
+                        toolBar.menuEditRef.settingRef.nodeTabRef.genericColorRef.colorSetting
                 }
                 Label {
                     anchors.topMargin: - i.radius / 2
@@ -92,6 +98,8 @@ NodeForm {
                         toolBar.menuEditRef.settingRef.nodeTabRef.stringBorderColorRef.colorSetting
                     else if (t == IOType.Bool)
                         toolBar.menuEditRef.settingRef.nodeTabRef.boolBorderColorRef.colorSetting
+                    else if (t == IOType.Generic)
+                        toolBar.menuEditRef.settingRef.nodeTabRef.genericBorderColorRef.colorSetting
                 }
                 fillColor: {
                     if (t == IOType.Int)
@@ -100,6 +108,8 @@ NodeForm {
                         toolBar.menuEditRef.settingRef.nodeTabRef.stringColorRef.colorSetting
                     else if (t == IOType.Bool)
                         toolBar.menuEditRef.settingRef.nodeTabRef.boolColorRef.colorSetting
+                    else if (t == IOType.Generic)
+                        toolBar.menuEditRef.settingRef.nodeTabRef.genericColorRef.colorSetting
                 }
                 Label {
                     anchors.topMargin: - o.radius / 2
