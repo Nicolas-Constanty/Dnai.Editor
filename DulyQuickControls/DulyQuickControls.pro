@@ -2,6 +2,8 @@ QT += qml quick quickcontrols2
 
 CONFIG += c++14
 
+INCLUDEPATH += include/
+
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which as been marked deprecated (the exact warnings
 # depend on your compiler). Please consult the documentation of the
@@ -13,30 +15,31 @@ DEFINES += QT_DEPRECATED_WARNINGS QNANO_USE_RENDERNODE
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
-SOURCES += baseio.cpp \
-    beziercurve.cpp \
-    commanddecorator.cpp \
-    commandmanager.cpp \
-    dulycanvas.cpp \
-    genericnode.cpp \
-    input.cpp \
-    io.cpp \
-    ioquickitem.cpp \
-    line.cpp \
-    link.cpp \
-    main.cpp \
-    output.cpp \
-    roundedrectangle.cpp \
-    debugdecorator.cpp \
-    eventutilities.cpp \
-    focusmanager.cpp \
-    flow.cpp \
-    baselinkable.cpp \
-    customshape.cpp \
-    moveCommand.cpp \
-    linkablebezieritem.cpp \
-    scalableitem.cpp \
-    dulyscene.cpp
+SOURCES += src/baseio.cpp \
+    src/beziercurve.cpp \
+    src/dulycanvas.cpp \
+    src/genericnode.cpp \
+    src/input.cpp \
+    src/io.cpp \
+    src/ioquickitem.cpp \
+    src/line.cpp \
+    src/link.cpp \
+    src/main.cpp \
+    src/output.cpp \
+    src/roundedrectangle.cpp \
+    src/eventutilities.cpp \
+    src/focusmanager.cpp \
+    src/flow.cpp \
+    src/baselinkable.cpp \
+    src/customshape.cpp \
+    src/linkablebezieritem.cpp \
+    src/scalableitem.cpp \
+    src/dulyscene.cpp
+
+SOURCES += src/commands/moveCommand.cpp \
+    src/commands/commanddecorator.cpp \
+    src/commands/commandmanager.cpp \
+    src/commands/debugdecorator.cpp \
 
 RESOURCES += qml.qrc
 
@@ -55,32 +58,34 @@ DISTFILES +=
 
 FORMS +=
 
-HEADERS += baseio.h \
-    beziercurve.h \
-    commanddecorator.h \
-    commandmanager.h \
-    debugdecorator.h \
-    genericnode.h \
-    icommand.h \
-    ilinkable.h \
-    input.h \
-    io.h \
-    ioquickitem.h \
-    line.h \
-    link.h \
-    linkabletype.h \
-    observablelist.h \
-    output.h \
-    resourcesnode.h \
-    roundedrectangle.h \
-    dulycanvas.h \
-    eventutilities.h \
-    focusmanager.h \
-    flow.h \
-    baselinkable.h \
-    customshape.h \
-    moveCommand.h \
-    linkablebezieritem.h \
-    scalableitem.h \
-    dulyscene.h \
-    iscalable.h
+HEADERS += include/baseio.h \
+    include/beziercurve.h \
+    include/genericnode.h \
+    include/ilinkable.h \
+    include/input.h \
+    include/io.h \
+    include/ioquickitem.h \
+    include/line.h \
+    include/link.h \
+    include/linkabletype.h \
+    include/observablelist.h \
+    include/output.h \
+    include/resourcesnode.h \
+    include/roundedrectangle.h \
+    include/dulycanvas.h \
+    include/eventutilities.h \
+    include/focusmanager.h \
+    include/flow.h \
+    include/baselinkable.h \
+    include/customshape.h \
+    include/linkablebezieritem.h \
+    include/scalableitem.h \
+    include/dulyscene.h \
+    include/iscalable.h
+
+HEADERS += include/commands/commanddecorator.h \
+    include/commands/commandmanager.h \
+    include/commands/debugdecorator.h \
+    include/commands/icommand.h \
+    include/commands/moveCommand.h \
+

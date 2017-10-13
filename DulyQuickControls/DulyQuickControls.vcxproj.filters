@@ -37,71 +37,89 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="baseio.cpp">
+    <ClCompile Include="src\baseio.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="baselinkable.cpp">
+    <ClCompile Include="src\baselinkable.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="beziercurve.cpp">
+    <ClCompile Include="src\beziercurve.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="commanddecorator.cpp">
+    <ClCompile Include="src\commands\commanddecorator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="commandmanager.cpp">
+    <ClCompile Include="src\commands\commandmanager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="customshape.cpp">
+    <ClCompile Include="src\customshape.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="debugdecorator.cpp">
+    <ClCompile Include="src\commands\debugdecorator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="dulycanvas.cpp">
+    <ClCompile Include="src\dulycanvas.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="eventutilities.cpp">
+    <ClCompile Include="src\dulyscene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="flow.cpp">
+    <ClCompile Include="src\eventutilities.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="focusmanager.cpp">
+    <ClCompile Include="src\flow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="genericnode.cpp">
+    <ClCompile Include="src\focusmanager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="input.cpp">
+    <ClCompile Include="src\genericnode.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="io.cpp">
+    <ClCompile Include="src\input.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ioquickitem.cpp">
+    <ClCompile Include="src\io.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="line.cpp">
+    <ClCompile Include="src\ioquickitem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="link.cpp">
+    <ClCompile Include="src\line.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="linkablebezieritem.cpp">
+    <ClCompile Include="src\link.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="main.cpp">
+    <ClCompile Include="src\linkablebezieritem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="moveCommand.cpp">
+    <ClCompile Include="src\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="output.cpp">
+    <ClCompile Include="src\commands\moveCommand.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="roundedrectangle.cpp">
+    <ClCompile Include="src\output.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\roundedrectangle.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\scalableitem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_flow.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_flow.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_dulyscene.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_dulyscene.cpp">
+      <Filter>Generated Files</Filter>
     </ClCompile>
     <ClCompile Include="Debug\moc_dulycanvas.cpp">
       <Filter>Generated Files</Filter>
@@ -115,10 +133,34 @@
     <ClCompile Include="Release\moc_customshape.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
+    <ClCompile Include="Debug\moc_line.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_line.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
     <ClCompile Include="Debug\moc_ioquickitem.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
     <ClCompile Include="Release\moc_ioquickitem.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_beziercurve.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_beziercurve.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_scalableitem.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_scalableitem.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_roundedrectangle.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_roundedrectangle.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
     <ClCompile Include="Debug\moc_io.cpp">
@@ -127,10 +169,10 @@
     <ClCompile Include="Release\moc_io.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_roundedrectangle.cpp">
+    <ClCompile Include="Debug\moc_genericnode.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="Release\moc_roundedrectangle.cpp">
+    <ClCompile Include="Release\moc_genericnode.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
     <ClCompile Include="Debug\moc_resourcesnode.cpp">
@@ -145,114 +187,96 @@
     <ClCompile Include="Release\moc_observablelist.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_line.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_line.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_beziercurve.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_beziercurve.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_genericnode.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_genericnode.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_flow.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_flow.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
     <ClCompile Include="GeneratedFiles\qrc_qml.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="scalableitem.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="baseio.h">
+    <ClInclude Include="include\baseio.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="baselinkable.h">
+    <ClInclude Include="include\baselinkable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <CustomBuild Include="beziercurve.h">
+    <CustomBuild Include="include\beziercurve.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
-    <ClInclude Include="commanddecorator.h">
+    <ClInclude Include="include\commands\commanddecorator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="commandmanager.h">
+    <ClInclude Include="include\commands\commandmanager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <CustomBuild Include="customshape.h">
+    <CustomBuild Include="include\customshape.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
-    <ClInclude Include="debugdecorator.h">
+    <ClInclude Include="include\commands\debugdecorator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <CustomBuild Include="dulycanvas.h">
+    <CustomBuild Include="include\dulycanvas.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
-    <ClInclude Include="eventutilities.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <CustomBuild Include="flow.h">
+    <CustomBuild Include="include\dulyscene.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
-    <ClInclude Include="focusmanager.h">
+    <ClInclude Include="include\eventutilities.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <CustomBuild Include="genericnode.h">
+    <CustomBuild Include="include\flow.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
-    <ClInclude Include="icommand.h">
+    <ClInclude Include="include\focusmanager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ilinkable.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="input.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <CustomBuild Include="io.h">
+    <CustomBuild Include="include\genericnode.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
-    <CustomBuild Include="ioquickitem.h">
+    <ClInclude Include="include\commands\icommand.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ilinkable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\input.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <CustomBuild Include="include\io.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
-    <CustomBuild Include="line.h">
+    <CustomBuild Include="include\ioquickitem.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
-    <ClInclude Include="link.h">
+    <ClInclude Include="include\iscalable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="linkablebezieritem.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="linkabletype.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="moveCommand.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <CustomBuild Include="observablelist.h">
+    <CustomBuild Include="include\line.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
-    <ClInclude Include="output.h">
+    <ClInclude Include="include\link.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <CustomBuild Include="resourcesnode.h">
+    <ClInclude Include="include\linkablebezieritem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\linkabletype.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\commands\moveCommand.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <CustomBuild Include="include\observablelist.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
-    <CustomBuild Include="roundedrectangle.h">
+    <ClInclude Include="include\output.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <CustomBuild Include="include\resourcesnode.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="include\roundedrectangle.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="include\scalableitem.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
   </ItemGroup>
