@@ -286,3 +286,8 @@ void BezierCurve::setRealPosition(const QPointF &pos)
     m_realPos = pos / m_scaleFactor;
     setPosition(pos);
 }
+
+void BezierCurve::translatePos(const QPointF &p)
+{
+    setRealPosition(p + position());
+}

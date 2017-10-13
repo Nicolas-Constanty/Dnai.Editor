@@ -17,3 +17,9 @@ QPointF ScalableItem::realPos() const
 {
 	return (position() / m_scaleFactor) + QPointF((width() / m_scaleFactor - width()) / 2, (height() / m_scaleFactor - height()) / 2);
 }
+
+void ScalableItem::translatePos(const QPointF &p)
+{
+    m_realPos += p / m_scaleFactor;
+    setPosition(scalePos());
+}
