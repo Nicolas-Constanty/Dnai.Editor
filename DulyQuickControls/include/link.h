@@ -19,13 +19,13 @@ namespace duly_gui
 		* \brief Assign the visual object to the link
 		* \param curve
 		*/
-		void setCurve(BezierCurve *curve) { m_bezierCurve = curve; }
-		BezierCurve *curve() const { return m_bezierCurve; }
+        void setCurve(views::BezierCurve *curve) { m_bezierCurve = curve; }
+        views::BezierCurve *curve() const { return m_bezierCurve; }
 		void ClearLink();
 
 	private:
 		Link();
-		BezierCurve *m_bezierCurve;
+        views::BezierCurve *m_bezierCurve;
 	};
 }
 
