@@ -230,6 +230,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="roundedrectangle.cpp" />
+    <ClCompile Include="scalableitem.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="baseio.h" />
