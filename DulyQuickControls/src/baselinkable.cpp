@@ -14,7 +14,7 @@ namespace duly_gui
 
 	}
 
-	Link *BaseLinkable::connect(ALinkable *linkable, BezierCurve *curve)
+    Link *BaseLinkable::connect(ALinkable *linkable, views::BezierCurve *curve)
 	{
 		auto l = getLink(linkable);
 		if (l == nullptr)

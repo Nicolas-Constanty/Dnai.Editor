@@ -2,14 +2,14 @@
 #include <QtQuick>
 #include <QQuickStyle>
 
-#include "beziercurve.h"
-#include "line.h"
-#include "dulycanvas.h"
-#include "roundedrectangle.h"
-#include "input.h"
-#include "output.h"
-#include "genericnode.h"
-#include "flow.h"
+#include "views/beziercurve.h"
+#include "views/line.h"
+#include "views/dulycanvas.h"
+#include "views/roundedrectangle.h"
+#include "views/input.h"
+#include "views/output.h"
+#include "views/genericnode.h"
+#include "views/flow.h"
 
 struct RegisterSettings
 {
@@ -29,15 +29,15 @@ void registerCustomGeometry()
 {
 	const RegisterSettings s = { "CustomGeometry", 1, 0 };
 
-	qmlRegisterType<duly_gui::BezierCurve>(s.NamespaceName, s.version, s.subVersion, "BezierCurve");
-	qmlRegisterType<duly_gui::Line>(s.NamespaceName, s.version, s.subVersion, "Line");
-	qmlRegisterType<duly_gui::DulyCanvas>(s.NamespaceName, s.version, s.subVersion, "DulyCanvas");
-	qmlRegisterType<duly_gui::RoundedRectangle>(s.NamespaceName, s.version, s.subVersion, "RoundedRectangle");
-	qmlRegisterType<duly_gui::GenericNode>(s.NamespaceName, s.version, s.subVersion, "GenericNode");
-	qmlRegisterType<duly_gui::Input>(s.NamespaceName, s.version, s.subVersion, "Input");
-	qmlRegisterType<duly_gui::Output>(s.NamespaceName, s.version, s.subVersion, "Output");
+	qmlRegisterType<duly_gui::views::BezierCurve>(s.NamespaceName, s.version, s.subVersion, "BezierCurve");
+	qmlRegisterType<duly_gui::views::Line>(s.NamespaceName, s.version, s.subVersion, "Line");
+	qmlRegisterType<duly_gui::views::DulyCanvas>(s.NamespaceName, s.version, s.subVersion, "DulyCanvas");
+	qmlRegisterType<duly_gui::views::RoundedRectangle>(s.NamespaceName, s.version, s.subVersion, "RoundedRectangle");
+	qmlRegisterType<duly_gui::views::GenericNode>(s.NamespaceName, s.version, s.subVersion, "GenericNode");
+	qmlRegisterType<duly_gui::views::Input>(s.NamespaceName, s.version, s.subVersion, "Input");
+	qmlRegisterType<duly_gui::views::Output>(s.NamespaceName, s.version, s.subVersion, "Output");
     qmlRegisterType<DulyResources>(s.NamespaceName, s.version, s.subVersion, "IOType");
-    qmlRegisterType<duly_gui::Flow>(s.NamespaceName, s.version, s.subVersion, "Flow");
+    qmlRegisterType<duly_gui::views::Flow>(s.NamespaceName, s.version, s.subVersion, "Flow");
 }
 
 int main(int argc, char *argv[])

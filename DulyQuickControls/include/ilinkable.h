@@ -1,11 +1,13 @@
 #ifndef ILINKABLE_H
 #define ILINKABLE_H
-
-#include "beziercurve.h"
-#include "observablelist.h"
+#include <QtCore/QList>
 
 namespace duly_gui
 {
+    namespace views {
+        class BezierCurve;
+    }
+
 	class Link;
 
 	class ILinkable
@@ -36,7 +38,7 @@ namespace duly_gui
 		* \param curve
 		* \return Link *
 		*/
-		virtual Link *connect(ALinkable *linkable, BezierCurve *curve) = 0;
+		virtual Link *connect(ALinkable *linkable, views::BezierCurve *curve) = 0;
 
 		/**
 		* \brief Break a link between linkable

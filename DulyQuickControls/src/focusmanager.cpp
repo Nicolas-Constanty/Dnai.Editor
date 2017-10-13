@@ -1,5 +1,5 @@
 #include "focusmanager.h"
-#include "scalableitem.h"
+#include "views/scalableitem.h"
 
 namespace duly_gui
 {
@@ -27,7 +27,7 @@ namespace duly_gui
 	{
 		QList<QQuickItem *> items;
 		for (auto i = 0; i < m_items.size(); ++i) {
-			const auto item = static_cast<ScalableItem *>(m_items.at(i));
+            const auto item = static_cast<views::ScalableItem *>(m_items.at(i));
 			if (item->contains(point / item->scaleFactor() - item->realPos()))
 				items.append(item);
 		}
@@ -52,7 +52,7 @@ namespace duly_gui
 		QList<QQuickItem *> items;
 		for (auto i = 0; i < m_items.size(); ++i) {
 			auto item = m_items.at(i);
-			const auto si = dynamic_cast<ScalableItem *>(item->parentItem()->parentItem()->parentItem()->parentItem()->parentItem());
+            const auto si = dynamic_cast<views::ScalableItem *>(item->parentItem()->parentItem()->parentItem()->parentItem()->parentItem());
 			if (item->contains(point / si->scaleFactor()
 				- item->parentItem()->parentItem()->parentItem()->parentItem()->position() / si->scaleFactor()
 				- item->parentItem()->parentItem()->parentItem()->position() / si->scaleFactor()

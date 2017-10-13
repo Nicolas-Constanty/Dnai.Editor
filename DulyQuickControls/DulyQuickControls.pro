@@ -15,27 +15,30 @@ DEFINES += QT_DEPRECATED_WARNINGS QNANO_USE_RENDERNODE
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
+#CORE
 SOURCES += src/baseio.cpp \
-    src/beziercurve.cpp \
-    src/dulycanvas.cpp \
-    src/genericnode.cpp \
-    src/input.cpp \
-    src/io.cpp \
-    src/ioquickitem.cpp \
-    src/line.cpp \
     src/link.cpp \
     src/main.cpp \
-    src/output.cpp \
-    src/roundedrectangle.cpp \
     src/eventutilities.cpp \
     src/focusmanager.cpp \
-    src/flow.cpp \
     src/baselinkable.cpp \
-    src/customshape.cpp \
-    src/linkablebezieritem.cpp \
-    src/scalableitem.cpp \
     src/dulyscene.cpp
 
+#VIEWS
+SOURCES += src/views/beziercurve.cpp \
+    src/views/customshape.cpp \
+    src/views/dulycanvas.cpp \
+    src/views/flow.cpp \
+    src/views/genericnode.cpp \
+    src/views/input.cpp \
+    src/views/io.cpp \
+    src/views/line.cpp \
+    src/views/linkablebezieritem.cpp \
+    src/views/output.cpp \
+    src/views/roundedrectangle.cpp \
+    src/views/scalableitem.cpp \
+
+#COMMANDS
 SOURCES += src/commands/moveCommand.cpp \
     src/commands/commanddecorator.cpp \
     src/commands/commandmanager.cpp \
@@ -58,34 +61,35 @@ DISTFILES +=
 
 FORMS +=
 
+#CORE
 HEADERS += include/baseio.h \
-    include/beziercurve.h \
-    include/genericnode.h \
-    include/ilinkable.h \
-    include/input.h \
-    include/io.h \
-    include/ioquickitem.h \
-    include/line.h \
-    include/link.h \
-    include/linkabletype.h \
-    include/observablelist.h \
-    include/output.h \
-    include/resourcesnode.h \
-    include/roundedrectangle.h \
-    include/dulycanvas.h \
+    include/baselinkable.h \
+    include/dulyscene.h \
     include/eventutilities.h \
     include/focusmanager.h \
-    include/flow.h \
-    include/baselinkable.h \
-    include/customshape.h \
-    include/linkablebezieritem.h \
-    include/scalableitem.h \
-    include/dulyscene.h \
-    include/iscalable.h
+    include/ilinkable.h \
+    include/link.h \
+    include/linkabletype.h \
+    include/resourcesnode.h
 
+#VIEWS
+HEADERS += include/views/beziercurve.h \
+    include/views/customshape.h \
+    include/views/dulycanvas.h \
+    include/views/flow.h \
+    include/views/genericnode.h \
+    include/views/input.h \
+    include/views/io.h \
+    include/views/iscalable.h \
+    include/views/line.h \
+    include/views/linkablebezieritem.h \
+    include/views/output.h \
+    include/views/roundedrectangle.h \
+    include/views/scalableitem.h
+
+#COMMANDS
 HEADERS += include/commands/commanddecorator.h \
     include/commands/commandmanager.h \
     include/commands/debugdecorator.h \
     include/commands/icommand.h \
-    include/commands/moveCommand.h \
-
+    include/commands/moveCommand.h

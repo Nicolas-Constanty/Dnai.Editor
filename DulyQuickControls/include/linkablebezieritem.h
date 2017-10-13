@@ -1,10 +1,8 @@
 #ifndef LINKABLEBEZIERITEM_H
 #define LINKABLEBEZIERITEM_H
 
-#include "customshape.h"
-#include "beziercurve.h"
 #include "ilinkable.h"
-
+#include "views/customshape.h"
 
 namespace duly_gui
 {
@@ -13,6 +11,7 @@ namespace duly_gui
 	class LinkableBezierItem : public CustomShape
 	{
 	public:
+		virtual ~LinkableBezierItem() = default;
 		LinkableBezierItem(QQuickItem *parent = nullptr);
 		ALinkable *getLinkable() const { return m_linkable; }
 		virtual QPointF getCanvasPos() const = 0;
@@ -29,7 +28,7 @@ namespace duly_gui
 		void unlinkAll();
 
 	protected:
-		BezierCurve *m_currentCurve;
+                views::BezierCurve *m_currentCurve;
 
 	protected:
 		/**

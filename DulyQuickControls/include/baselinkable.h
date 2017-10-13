@@ -1,6 +1,7 @@
 #ifndef BASELINKABLE_H
 #define BASELINKABLE_H
 
+#include <QQuickItem>
 #include "ilinkable.h"
 
 namespace duly_gui {
@@ -16,7 +17,7 @@ namespace duly_gui {
 		* \param curve
 		* \return Link *
 		*/
-		virtual Link *connect(ALinkable *linkable, BezierCurve *curve) override;
+        virtual Link *connect(ALinkable *linkable, views::BezierCurve *curve) override;
 
 		/**
 		* \brief Break a link between linkable
