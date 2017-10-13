@@ -138,6 +138,8 @@ void GenericNode::mouseReleaseEvent(QMouseEvent *)
 
 QSGNode *GenericNode::updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *)
 {
+	if (m_realPos == QPointF(-100000, -100000))
+		m_realPos = position();
 	auto n = static_cast<QSGSimpleRectNode *>(oldNode);
     if (!n) {
        n = new QSGSimpleRectNode();

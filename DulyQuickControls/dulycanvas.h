@@ -74,6 +74,13 @@ private:
     void createGrid();
     FocusManager m_focusManager;
 	std::list<QSGGeometryNode *> m_lines;
+	QPointF	m_offset;
+	QPointF	m_gridOffset;
+
+
+protected:
+	void mousePressEvent(QMouseEvent* event) override;
+	void mouseMoveEvent(QMouseEvent* event) override;
 };
 
 #endif // DULYCANVAS_H

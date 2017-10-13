@@ -154,7 +154,6 @@ ApplicationWindow {
         accentGridColor: toolBar.menuEditRef.settingRef.themeTabRef.accentGridColorRef.colorSetting
         backgroundColor: toolBar.menuEditRef.settingRef.themeTabRef.backgroudColorRef.colorSetting
 
-
         Node {
            x: 0
            model: AccessModel {}

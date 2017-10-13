@@ -61,6 +61,7 @@ public:
     void setDottedColor(const QColor &color);
 
     void setRealPosition(const QPointF &pos);
+    void translatePos(const QPointF &) override;
 
 signals:
     void p1Changed(const QPointF &p);

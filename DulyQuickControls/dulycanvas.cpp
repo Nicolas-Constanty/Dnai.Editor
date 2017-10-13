@@ -17,6 +17,9 @@ DulyCanvas::DulyCanvas(QQuickItem *parent)
     , m_backgroundColor(Qt::transparent)
 {
     setFlag(ItemHasContents, true);
+    setAcceptHoverEvents(true);
+    setAcceptedMouseButtons(Qt::AllButtons);
+    setFlag(ItemAcceptsInputMethod, true);
 //    CreateGrid();
     if (Instance == nullptr)
         Instance = this;
@@ -33,26 +36,54 @@ void DulyCanvas::createGrid()
 	    auto tl = windowRect.topLeft();
 	    auto br = windowRect.bottomRight();
 
-        double left = qFloor(tl.x() / gridStep - 0.5);
-        double right = qFloor(br.x() / gridStep + 1.0);
-        double bottom = qFloor(tl.y() / gridStep - 0.5);
-        double top = qFloor(br.y() / gridStep + 1.0);
+        double left = qFloor(tl.x() / gridStep - 0.5) - 5 * gridStep;
+        double right = qFloor(br.x() / gridStep + 1.0) + 5 * gridStep;
+        double bottom = qFloor(tl.y() / gridStep - 0.5) - 5 * gridStep;
+        double top = qFloor(br.y() / gridStep + 1.0) + 5 * gridStep;
 
         // vertical lines
         for (auto xi = int(left); xi <= int(right); ++xi)
         {
-            m_lines.push_back(Line::CreateRawLine(QPointF(xi * gridStep, bottom * gridStep), QPointF(xi * gridStep, top * gridStep), lineWidth, color));
+            m_lines.push_back(
+                        Line::CreateRawLine(QPointF(xi * gridStep + m_gridOffset.x(), bottom * gridStep + m_gridOffset.y()),
+                                            QPointF(xi * gridStep + m_gridOffset.x(), top * gridStep + m_gridOffset.y()), lineWidth, color));
         }
 
         // horizontal lines
         for (auto yi = int(bottom); yi <= int(top); ++yi)
         {
-            m_lines.push_back(Line::CreateRawLine(QPointF(left * gridStep, yi * gridStep), QPointF(right * gridStep, yi * gridStep), lineWidth, color));
+            m_lines.push_back(Line::CreateRawLine(QPointF(left * gridStep + m_gridOffset.x(), yi * gridStep + m_gridOffset.y()),
+                                                  QPointF(right * gridStep + m_gridOffset.x(), yi * gridStep + m_gridOffset.y()),
+                                                  lineWidth, color));
         }
     };
     drawGrid(m_gridStep, 1, m_gridColor);
 
     drawGrid(m_accentGridStep, 2, m_accentGridColor);
+
+}
+
+void DulyCanvas::mousePressEvent(QMouseEvent* event)
+{
+	m_offset = event->pos();
+	//qDebug() << m_offset;
+}
+
+void DulyCanvas::mouseMoveEvent(QMouseEvent* event)
+{
+	//qDebug() << m_offset - event->pos();
+	m_gridOffset = (m_gridOffset + event->pos() - m_offset);
+	//qDebug() << m_offset - event->pos();
+
+	m_gridOffset.setX(static_cast<int>(m_gridOffset.x()) % (m_gridStep * 10));
+	m_gridOffset.setY(static_cast<int>(m_gridOffset.y()) % (m_gridStep * 10));
+	for (auto i = 0; i< childItems().size(); i++)
+	{
+		auto child = static_cast<ScalableItem *>(childItems().at(i));
+		child->translatePos(event->pos() - m_offset);
+	}
+	update();
+	m_offset = event->pos();
 
 }
 
@@ -141,3 +172,4 @@ QSGNode *DulyCanvas::updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *)
     std::for_each(m_lines.begin(), m_lines.end(), setParent);
     return n;
 }
+

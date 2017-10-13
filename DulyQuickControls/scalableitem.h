@@ -18,6 +18,7 @@ public:
     virtual void setScaleFactor(qreal s) = 0;
     virtual QPointF scalePos() const override;
     virtual QPointF realPos() const override;
+    virtual void translatePos(const QPointF &);
 
 signals:
 	void scaleFactorChanged(qreal scale);
