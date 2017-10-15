@@ -1,6 +1,5 @@
-#include <QtGui>
-#include <QtQuick>
-#include <QQuickStyle>
+#include <QGuiApplication>
+#include <QQmlApplicationEngine>
 
 #include "views/beziercurve.h"
 #include "views/line.h"
@@ -10,6 +9,9 @@
 #include "views/output.h"
 #include "views/genericnode.h"
 #include "views/flow.h"
+#include "views/console.h"
+#include "controllers/consolecontroller.h"
+#include "dulyapp.h"
 
 struct RegisterSettings
 {
@@ -27,7 +29,7 @@ struct RegisterSettings
 
 void registerCustomGeometry()
 {
-	const RegisterSettings s = { "CustomGeometry", 1, 0 };
+    const RegisterSettings s = { "CustomGeometry", 1, 0 };
 
 	qmlRegisterType<duly_gui::views::BezierCurve>(s.NamespaceName, s.version, s.subVersion, "BezierCurve");
 	qmlRegisterType<duly_gui::views::Line>(s.NamespaceName, s.version, s.subVersion, "Line");
@@ -40,14 +42,20 @@ void registerCustomGeometry()
     qmlRegisterType<duly_gui::views::Flow>(s.NamespaceName, s.version, s.subVersion, "Flow");
 }
 
+void registerDulyUtils()
+{
+    const RegisterSettings s = { "DulyUtils", 1, 0 };
+
+    qmlRegisterType<duly_gui::views::Console>(s.NamespaceName, s.version, s.subVersion, "Console");
+}
+
 int main(int argc, char *argv[])
 {
+    registerCustomGeometry();
+    registerDulyUtils();
 
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
-    QGuiApplication app(argc, argv);
-    QQuickStyle::setStyle("Material");
-    
-	registerCustomGeometry();
+    duly_gui::DulyApp app(argc, argv);
 
     app.setOrganizationName("Duly");
     app.setOrganizationDomain("Duly.com");

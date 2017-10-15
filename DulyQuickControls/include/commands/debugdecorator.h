@@ -15,11 +15,14 @@ namespace duly_gui
 			* \brief Execute the command
 			*/
 			void execute() const override;
-
+			void executeSave() override;
+			bool isSave() const override;
 			/**
 			* \brief Reverse the command
 			*/
 			void unExcute() const override;
+	
+			QString infos() const override;
 
 		};
 

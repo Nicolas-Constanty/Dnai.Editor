@@ -3,7 +3,6 @@ import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
 import QtQuick.Controls.Material 2.2
 import QtQuick.Dialogs 1.2
-import QtCharts 2.2
 import CustomGeometry 1.0
 
 import "Resources/Components"
@@ -286,21 +285,11 @@ ApplicationWindow {
             y: 0
             model: XorModel {}
         }
-//        RoundedRectangle {
-//            x: parent.width / 2
-//            y: parent.height / 2
-//            width: 300
-//            height: 300
-//            radius: 50
-////            borderWidth: 10
-//            borderColor: "#AA000000"
-//            fillColor: "#50505010"
-//            topLeft: false
-//            topRight: false
-////            bottomRight: false
-////            bottomLeft: false
-////            antialiasing: true
-//        }
+    }
+    ConsoleComponent {
+        width: parent.width
+        height: 200
+        y: parent.height - height
     }
 
 }

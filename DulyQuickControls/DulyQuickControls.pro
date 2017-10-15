@@ -1,4 +1,4 @@
-QT += qml quick quickcontrols2
+QT += qml quick
 
 CONFIG += c++14
 
@@ -22,7 +22,10 @@ SOURCES += src/baseio.cpp \
     src/eventutilities.cpp \
     src/focusmanager.cpp \
     src/baselinkable.cpp \
-    src/dulyscene.cpp
+    src/dulyscene.cpp \
+    src/dulyapp.cpp \
+    src/commands/movecommand.cpp \
+    src/commands/movenodecommand.cpp
 
 #VIEWS
 SOURCES += src/views/beziercurve.cpp \
@@ -37,20 +40,30 @@ SOURCES += src/views/beziercurve.cpp \
     src/views/output.cpp \
     src/views/roundedrectangle.cpp \
     src/views/scalableitem.cpp \
+    src/views/console.cpp \
+
 
 #COMMANDS
-SOURCES += src/commands/moveCommand.cpp \
+SOURCES += \
     src/commands/commanddecorator.cpp \
     src/commands/commandmanager.cpp \
     src/commands/debugdecorator.cpp \
+    src/commands/command.cpp \
+
+
+#CONTROLLERS
+SOURCES += src/controllers/inputcontroller.cpp \
+    src/controllers/outputcontroller.cpp \
+    src/controllers/consolecontroller.cpp \
+
 
 RESOURCES += qml.qrc
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
-QML_IMPORT_PATH = QT_INSTALL_QML/QtQml/Models.2
+QML_IMPORT_PATH =
 
 # Additional import path used to resolve QML modules just for Qt Quick Designer
-QML_DESIGNER_IMPORT_PATH = QT_INSTALL_QML/QtQml.2/Models
+QML_DESIGNER_IMPORT_PATH =
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -70,7 +83,10 @@ HEADERS += include/baseio.h \
     include/ilinkable.h \
     include/link.h \
     include/linkabletype.h \
-    include/resourcesnode.h
+    include/resourcesnode.h \
+    include/dulyapp.h \
+    include/commands/movenodecommand.h \
+    include/commands/movecommand.h
 
 #VIEWS
 HEADERS += include/views/beziercurve.h \
@@ -85,11 +101,19 @@ HEADERS += include/views/beziercurve.h \
     include/views/linkablebezieritem.h \
     include/views/output.h \
     include/views/roundedrectangle.h \
-    include/views/scalableitem.h
+    include/views/scalableitem.h \
+    include/views/console.h \
 
 #COMMANDS
 HEADERS += include/commands/commanddecorator.h \
     include/commands/commandmanager.h \
     include/commands/debugdecorator.h \
     include/commands/icommand.h \
-    include/commands/moveCommand.h
+    include/commands/command.h \
+
+
+#CONTROLLERS
+HEADERS += include/controllers/inputcontroller.h \
+    include/controllers/outputcontroller.h \
+    include/controllers/consolecontroller.h \
+

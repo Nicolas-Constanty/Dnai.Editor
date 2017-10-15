@@ -6,6 +6,8 @@
 #include "views/output.h"
 #include "views/dulycanvas.h"
 #include "views/genericnode.h"
+#include "commands/movenodecommand.h"
+#include "commands/commandmanager.h"
 
 namespace duly_gui
 {
@@ -84,20 +86,6 @@ namespace duly_gui
 			update();
 		}
 
-		void GenericNode::mouseMoveEvent(QMouseEvent* event)
-		{
-			QPointF p(mapToItem(DulyCanvas::Instance, event->pos()) + m_offset);
-			setX(p.x());
-			setY(p.y());
-			updateInputs();
-			updateOutputs();
-			if (m_flowInItem && m_flowInItem->isVisible())
-				m_flowInItem->updateLink();
-			if (m_flowOutItem && m_flowOutItem->isVisible())
-				m_flowOutItem->updateLink();
-			m_realPos = realPos();
-		}
-
 		void GenericNode::updateInputs()
 		{
 			auto list = m_inputs.getList();
@@ -131,14 +119,45 @@ namespace duly_gui
 				stackAfter(parentItem()->childItems().last());
 			m_header->setBorderColor(QColor(255, 170, 0, 255));
 			m_content->setBorderColor(QColor(255, 170, 0, 255));
+			m_holdClik = false;
 		}
+
+		void GenericNode::mouseMoveEvent(QMouseEvent* event)
+		{
+			const auto p(mapToItem(DulyCanvas::Instance, event->pos()) + m_offset);
+            if (!m_holdClik)
+            {
+                m_holdClik = true;
+                commands::CommandManager::Instance()->registerCommand(new commands::MoveNodeCommand(this, position(), true));
+            }
+            commands::CommandManager::Instance()->registerCommand(new commands::MoveNodeCommand(this, p));
+			commands::CommandManager::Instance()->execAll();
+		}
+
+        void GenericNode::Move(const QPointF &vec)
+        {
+            setPosition(vec);
+            updateInputs();
+            updateOutputs();
+            if (m_flowInItem && m_flowInItem->isVisible())
+                m_flowInItem->updateLink();
+            if (m_flowOutItem && m_flowOutItem->isVisible())
+                m_flowOutItem->updateLink();
+            m_realPos = realPos();
+        }
 
 		void GenericNode::mouseReleaseEvent(QMouseEvent *)
 		{
+            if (m_holdClik)
+            {
+                commands::CommandManager::Instance()->registerCommand(new commands::MoveNodeCommand(this, position(), true));
+				commands::CommandManager::Instance()->execAll();
+            }
 			m_offset.setX(0);
 			m_offset.setY(0);
 			m_header->resetBorderColor();
 			m_content->resetBorderColor();
+            m_holdClik = false;
 		}
 
 		QSGNode *GenericNode::updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *)

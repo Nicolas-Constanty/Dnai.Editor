@@ -79,6 +79,9 @@
     <ClCompile Include="src\views\input.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\controllers\inputcontroller.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="src\views\io.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -106,58 +109,10 @@
     <ClCompile Include="src\views\scalableitem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_customshape.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_customshape.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_beziercurve.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_beziercurve.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
     <ClCompile Include="Debug\moc_scalableitem.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
     <ClCompile Include="Release\moc_scalableitem.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_genericnode.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_genericnode.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_flow.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_flow.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_dulyscene.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_dulyscene.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_dulycanvas.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_dulycanvas.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_line.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_line.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_io.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_io.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
     <ClCompile Include="Debug\moc_roundedrectangle.cpp">
@@ -172,7 +127,73 @@
     <ClCompile Include="Release\moc_resourcesnode.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
+    <ClCompile Include="Debug\moc_line.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_line.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_dulycanvas.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_dulycanvas.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_customshape.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_customshape.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_beziercurve.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_beziercurve.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_flow.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_flow.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_dulyscene.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_dulyscene.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_io.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_io.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_genericnode.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_genericnode.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
     <ClCompile Include="GeneratedFiles\qrc_qml.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\controllers\outputcontroller.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\commands\command.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\controllers\consolecontroller.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\views\console.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_console.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_console.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -225,6 +246,9 @@
     <ClInclude Include="include\views\input.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\controllers\inputcontroller.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <CustomBuild Include="include\views\io.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
@@ -258,6 +282,15 @@
     <CustomBuild Include="include\views\scalableitem.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
+    <ClInclude Include="include\controllers\outputcontroller.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\commands\command.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\controllers\consolecontroller.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="debug\moc_predefs.h.cbt">
@@ -265,6 +298,9 @@
     </CustomBuild>
     <CustomBuild Include="release\moc_predefs.h.cbt">
       <Filter>Generated Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="include\views\console.h">
+      <Filter>Header Files</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
@@ -298,10 +334,19 @@
     <None Include="Resources\Models\ColorPickerModel.qml">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="Resources\Components\Console.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\Forms\ConsoleForm.ui.qml">
+      <Filter>Resource Files</Filter>
+    </None>
     <None Include="Resources\Components\Container.qml">
       <Filter>Resource Files</Filter>
     </None>
     <None Include="Resources\Nodes\Operator\UnaryOperator\DecrementModel.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\Panels\DefaultPanel.qml">
       <Filter>Resource Files</Filter>
     </None>
     <None Include="Resources\Nodes\Operator\BinaryOperator\Logical\DifferentModel.qml">
@@ -374,6 +419,9 @@
       <Filter>Resource Files</Filter>
     </None>
     <None Include="Resources\Nodes\Operator\BinaryOperator\Logical\OrModel.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\Components\Printer.qml">
       <Filter>Resource Files</Filter>
     </None>
     <None Include="Resources\Nodes\Operator\UnaryOperator\ReverseModel.qml">

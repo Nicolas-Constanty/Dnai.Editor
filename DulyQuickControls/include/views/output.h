@@ -1,27 +1,12 @@
 #ifndef OUTPUT_H
 #define OUTPUT_H
 
-#include "baseio.h"
 #include "io.h"
 
 namespace duly_gui
 {
 	namespace views
 	{
-		class OutputBackend : public BaseIo
-		{
-		public:
-			explicit OutputBackend(DulyResources::IoType type, QQuickItem *parent);
-
-			/**
-			* \brief Connect linkable together, create a link, and keep a reference on the visual curve
-			* \param linkable
-			* \param curve
-			* \return Link *
-			*/
-			Link *connect(ALinkable *linkable, BezierCurve *curve) override;
-		};
-
 		class Output : public Io
 		{
 
