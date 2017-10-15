@@ -3,6 +3,7 @@ language: c++
 dist: trusty
 
 cache:
+    timeout: 1000
     directories:
         - Qt
 
