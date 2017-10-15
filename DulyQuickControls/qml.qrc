@@ -49,5 +49,10 @@
         <file>Resources/Nodes/Operator/UnaryOperator/IncrementModel.qml</file>
         <file>Resources/Nodes/Operator/UnaryOperator/NotModel.qml</file>
         <file>Resources/Nodes/Operator/UnaryOperator/ReverseModel.qml</file>
+        <file>Resources/Components/Printer.qml</file>
+        <file>Resources/Forms/ConsoleForm.ui.qml</file>
+        <file>Resources/Panels/DefaultPanel.qml</file>
+        <file>Resources/Components/ConsoleComponent.qml</file>
+        <file>Resources/Images/WindowHandle.png</file>
     </qresource>
 </RCC>
