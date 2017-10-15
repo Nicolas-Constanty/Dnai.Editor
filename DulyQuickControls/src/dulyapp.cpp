@@ -17,7 +17,7 @@ namespace duly_gui {
 			commands::CommandManager::Instance()->undo(1);
             return true;
 		}
-        if (e->matches(QKeySequence::Redo))
+        else if (e->matches(QKeySequence::Redo))
         {
             commands::CommandManager::Instance()->redo(1);
             return true;
