@@ -20,7 +20,7 @@ namespace duly_gui
 		{
 			setFlag(ItemHasContents, true);
 			setAcceptHoverEvents(true);
-			setAcceptedMouseButtons(Qt::AllButtons);
+            setAcceptedMouseButtons(Qt::AllButtons);
 			setFlag(ItemAcceptsInputMethod, true);
 			//    CreateGrid();
 			if (Instance == nullptr)

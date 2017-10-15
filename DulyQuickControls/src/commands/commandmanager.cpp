@@ -5,9 +5,17 @@ namespace duly_gui
 {
 	namespace commands
 	{
-		CommandManager::CommandManager()
+		CommandManager *CommandManager::m_instance = nullptr;
+        CommandManager::CommandManager()
 		{
+		}
 
+		CommandManager* CommandManager::Instance()
+		{
+			if (m_instance)
+				return m_instance;
+			m_instance = new CommandManager();
+			return  m_instance;
 		}
 
 		void CommandManager::registerCommand(ICommand *cmd)
@@ -25,8 +33,13 @@ namespace duly_gui
 			while (!m_doList.empty())
 			{
 				ICommand *c = m_doList.front();
-				c->execute();
-				m_undoList.push(c);
+				if (c->isSave())
+				{
+					c->executeSave();
+					m_undoList.push(c);
+				}
+                else
+                    c->execute();
 				m_doList.pop();
 			}
 		}
@@ -38,7 +51,7 @@ namespace duly_gui
 				if (!m_redoList.empty())
 				{
 					auto command = m_redoList.top();
-					command->execute();
+					command->executeSave();
 					m_redoList.pop();
 					m_undoList.push(command);
 				}
@@ -53,7 +66,7 @@ namespace duly_gui
 				if (!m_undoList.empty())
 				{
 					auto command = m_undoList.top();
-					command->execute();
+					command->unExcute();
 					m_undoList.pop();
 					m_redoList.push(command);
 				}
@@ -61,5 +74,9 @@ namespace duly_gui
 			}
 		}
 
+		void CommandManager::setConsoleView(views::Console* consoleView)
+		{
+			m_console.setConsole(consoleView);
+		}
 	}
 }

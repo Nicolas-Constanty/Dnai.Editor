@@ -1,7 +1,7 @@
 #ifndef COMMANDDECORATOR_H
 #define COMMANDDECORATOR_H
 
-#include "icommand.h"
+#include "command.h"
 
 namespace duly_gui {
     namespace commands {

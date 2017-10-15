@@ -1,43 +1,27 @@
 #include <QtQuick/qsgflatcolormaterial.h>
 #include <QtMath>
 
+#include "link.h"
 #include "views/output.h"
 #include "views/input.h"
-#include "link.h"
 #include "views/genericnode.h"
 #include "views/dulycanvas.h"
+#include "controllers/outputcontroller.h"
 
 namespace duly_gui
 {
 	namespace views
 	{
-		OutputBackend::OutputBackend(DulyResources::IoType type, QQuickItem* parent)
-			: BaseIo(type, parent)
-		{
-		}
-
-		Link *OutputBackend::connect(ALinkable *linkable, BezierCurve *curve)
-		{
-			const auto li = dynamic_cast<InputBackend *>(linkable);
-
-			if (li != nullptr && li->getType() == getType())
-			{
-				li->unlinkAll();
-				return BaseIo::connect(linkable, curve);
-			}
-			return nullptr;
-		}
-
 		Output::Output(QQuickItem *parent) :
 			Io(parent)
 
 		{
-			m_linkable = new OutputBackend(m_type, this);
+			m_linkable = new controllers::OutputController(m_type, this);
 		}
 
 		void Output::refreshBackendIo()
 		{
-			m_linkable = new OutputBackend(m_type, this);
+			m_linkable = new controllers::OutputController(m_type, this);
 		}
 
 		void Output::componentComplete()

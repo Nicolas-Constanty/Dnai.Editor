@@ -1,27 +1,12 @@
 #ifndef INPUT_H
 #define INPUT_H
 
-#include "baseio.h"
 #include "io.h"
 
 namespace duly_gui
 {
 	namespace views
 	{
-		class InputBackend : public BaseIo
-		{
-		public:
-			explicit InputBackend(DulyResources::IoType t, QQuickItem *parent);
-
-			/**
-			* \brief Connect linkable together, create a link, and keep a reference on the visual curve
-			* \param linkable
-			* \param curve
-			* \return Link *
-			*/
-			Link *connect(ALinkable *linkable, BezierCurve *curve) override;
-		};
-
 		class Input : public Io
 		{
 		public:

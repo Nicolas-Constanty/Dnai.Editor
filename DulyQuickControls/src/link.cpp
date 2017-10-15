@@ -1,5 +1,6 @@
 #include  <stdexcept>
 #include "link.h"
+#include "views/beziercurve.h"
 
 namespace duly_gui
 {
