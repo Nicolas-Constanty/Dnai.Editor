@@ -196,6 +196,15 @@
     <ClCompile Include="Release\moc_console.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
+    <ClCompile Include="Debug\moc_consolecontroller.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_consolecontroller.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\dulyapp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\baseio.h">
@@ -288,7 +297,7 @@
     <ClInclude Include="include\commands\command.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\controllers\consolecontroller.h">
+    <ClInclude Include="include\dulyapp.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -300,6 +309,9 @@
       <Filter>Generated Files</Filter>
     </CustomBuild>
     <CustomBuild Include="include\views\console.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="include\controllers\consolecontroller.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
   </ItemGroup>
