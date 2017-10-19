@@ -1,0 +1,48 @@
+{
+    "name": "my_node",
+    "description": "description",
+    "context": "context::subcontext",
+    "function": "myfunction",
+    "pos": {
+        "x": 0,
+        "y": 0
+    },
+    "inputs": [
+        {
+            "uid": "in-123j83j2",
+            "name": "input1",
+            "type": "int",
+            "value?": 100,
+            "linked_uid?": "out-db45jjd2"
+        },
+        {
+            "uid": "in-5e98567g",
+            "name": "input2",
+            "type": "string",
+            "value?": "mystring",
+            "linked_uid?": "out-ferv35fd"
+        }
+    ],
+    "outputs": [
+        {
+            "uid": "out-hf56kk9f",
+            "name": "output1",
+            "type": "int",
+            "linked_uid?": "in-ee34552d"
+        }
+    ],
+    "flows": {
+        "in": [
+            {
+                "uid": "flowin-34fdds52",
+                "linked_uid": "flowout-76534fbh"
+            }
+        ],
+        "out": [
+            {
+                "uid": "flowin-34ftts52",
+                "linked_uid": "flowout-76534ftss"
+            }
+        ]
+    }
+}
