@@ -1,0 +1,32 @@
+{
+    "name": "Class",
+    "description": "description",
+    "variables": [
+        {
+            "name": "varname",
+            "type": "string",
+            "value?": "",
+            "internal?": true
+        }
+    ],
+    "functions": [
+        {
+            "path": "function",
+            "name": "myfunction_alias"
+        }
+    ],
+    "attributes": [
+        {
+            "name": "attributesname",
+            "type": "string",
+            "value?": "",
+            "internal?": true
+        }
+    ],
+    "methods": [
+        {
+            "path": "function",
+            "name": "myfunction_alias"
+        }
+    ]
+}
