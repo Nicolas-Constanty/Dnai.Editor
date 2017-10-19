@@ -19,8 +19,6 @@ BezierCurve::BezierCurve(QQuickItem *parent)
 {
     setFlag(ItemHasContents, true);
     setAntialiasing(true);
-    m_fillColor = m_settings.value("FilledConnectionColor/colorSelected").value<QColor>();
-    m_dottedColor = m_settings.value("DottedConnectionColor/colorSelected").value<QColor>();
 }
 
 BezierCurve::~BezierCurve()
@@ -143,14 +141,16 @@ QSGNode *BezierCurve::updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *dat
     const auto aaoffset = 1.f;
     const auto pi2 = float(M_PI) / 2.f;
     const auto raa = radius + aaoffset;
+    if (m_segmentCount % 2 != 0)
+        ++m_segmentCount;
+    const int nbVertices = aa ? (m_dotted ? 8 * (m_segmentCount / 2) : m_segmentCount * 7.5 - 7): m_segmentCount;
 
     if (m_segmentCount != 0 && m_segmentCount % 2 != 0)
         ++m_segmentCount;
 
     if (!oldNode) {
         node = new QSGGeometryNode;
-        geometry = new QSGGeometry(QSGGeometry::defaultAttributes_ColoredPoint2D(), ( aa ? m_segmentCount * 7.5 : m_segmentCount ));
-        geometry->setLineWidth(1);
+        geometry = new QSGGeometry(QSGGeometry::defaultAttributes_ColoredPoint2D(), nbVertices);
         geometry->setDrawingMode(aa?QSGGeometry::DrawTriangleStrip:QSGGeometry::DrawLineStrip);
         node->setGeometry(geometry);
         node->setFlag(QSGNode::OwnsGeometry);
@@ -161,16 +161,16 @@ QSGNode *BezierCurve::updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *dat
     } else {
         node = static_cast<QSGGeometryNode *>(oldNode);
         geometry = node->geometry();
-        geometry->allocate(( aa ? m_segmentCount * 7.5 : m_segmentCount ));
+        geometry->allocate(nbVertices);
     }
 	auto matrix = data->transformNode->matrix();
     matrix.scale((m_lastScale.x() != m_scale.x())?-1:1, (m_lastScale.y() != m_scale.y())?-1:1);
     data->transformNode->setMatrix(matrix);
     m_lastScale = m_scale;
 
-	const auto bounds = boundingRect();
+    const QRectF bounds = boundingRect();
 	const auto vertices = geometry->vertexDataAsColoredPoint2D();
-	auto idx = -1;
+    int idx = -1;
     for (uint i = 0; i <  m_segmentCount - (aa?1:0); i++)
     {
         if (!aa)
@@ -256,8 +256,6 @@ QSGNode *BezierCurve::updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *dat
                 vertices[++idx].set(x1 + xUpaa, y1 + yUpaa, r1, g1, b1, alpha1);
             }
         }
-
     }
-
     return node;
 }

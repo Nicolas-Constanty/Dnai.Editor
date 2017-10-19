@@ -6,36 +6,14 @@
 #include "dulycanvas.h"
 
 RoundedRectangle::RoundedRectangle(QQuickItem *parent) :
-    QQuickItem(parent)
-    , m_border(0)
-    , m_radius(10)
+    CustomShape(parent)
     , m_topLeft(true)
     , m_topRight(true)
     , m_bottomLeft(true)
     , m_bottomRight(true)
     , m_nbSegments(5)
-    , m_fillColor(QColor(20, 20, 20))
-    , m_borderColor(QColor(0, 0, 0))
 {
     setFlag(ItemHasContents, true);
-}
-
-void RoundedRectangle::setRadius(qreal radius)
-{
-    if (radius == m_radius)
-        return;
-    m_radius = radius;
-    emit radiusChanged(radius);
-    update();
-}
-
-void RoundedRectangle::setBorder(qreal b)
-{
-    if (m_border == b)
-        return;
-    m_border = b;
-    emit borderChanged(b);
-    update();
 }
 
 void RoundedRectangle::setTopLeft(bool value)
@@ -83,24 +61,6 @@ void RoundedRectangle::setRoundedSegments(uint segments)
     update();
 }
 
-void RoundedRectangle::setFillColor(const QColor &color)
-{
-    if (color == m_fillColor)
-        return;
-    m_fillColor = color;
-    emit fillColorChanged(color);
-    update();
-}
-
-void RoundedRectangle::setBorderColor(const QColor &color)
-{
-    if (color == m_borderColor)
-        return;
-    m_borderColor = color;
-    emit borderColorChanged(color);
-    update();
-}
-
 int RoundedRectangle::getNumberRoundedCorner() const
 {
     int count = 0;
@@ -135,7 +95,7 @@ QSGGeometryNode *RoundedRectangle::createBorder() const
     QSGVertexColorMaterial *materialBorder = new QSGVertexColorMaterial;
     QSGGeometry *nodeBorderGeometry = new QSGGeometry(QSGGeometry::defaultAttributes_ColoredPoint2D(), nbVertice);
     if (!aa)
-        nodeBorderGeometry->setLineWidth(m_border);
+        nodeBorderGeometry->setLineWidth(m_borderWidth);
     nodeBorderGeometry->setDrawingMode(aa ? QSGGeometry::DrawTriangleStrip : QSGGeometry::DrawLineStrip);
     nodeBorder->setGeometry(nodeBorderGeometry);
     nodeBorder->setFlag(QSGNode::OwnsGeometry, aa);
@@ -146,7 +106,7 @@ QSGGeometryNode *RoundedRectangle::createBorder() const
     QSGGeometry::ColoredPoint2D *vertices = nodeBorderGeometry->vertexDataAsColoredPoint2D();
     if (!aa)
     {
-        auto drawCircle = [&](qreal cx, qreal cy, float offset)
+	    const auto drawCircle = [&](qreal cx, qreal cy, float offset)
         {
             for (uint i = 0; i < m_nbSegments; i++)
                 vertices[++idx].set( cx + m_radius * qFastCos(a * i + offset), cy + m_radius * qFastSin(a * i + offset), r, g, b, alpha);
@@ -175,8 +135,8 @@ QSGGeometryNode *RoundedRectangle::createBorder() const
     }
     else
     {
-        const qreal mid = m_border / 2.f;
-        auto drawCircle = [&](qreal cx, qreal cy, float offset, bool dir = true)
+        const qreal mid = m_borderWidth / 2.f;
+	    const auto drawCircle = [&](qreal cx, qreal cy, float offset, bool dir = true)
         {
             for (uint i = 0; i < m_nbSegments; i++)
             {
@@ -295,7 +255,7 @@ QSGNode *RoundedRectangle::updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData
     const uchar b = m_fillColor.blue();
     const uchar alpha = m_fillColor.alpha();
     const auto nCorner = getNumberRoundedCorner();
-    const auto aa = (m_border < 1) && antialiasing();
+    const auto aa = (m_borderWidth < 1) && antialiasing();
     const auto a = 0.5f * float(M_PI) / m_nbSegments;
     const QPointF center(w + m_radius, h + m_radius);
     m_nbSegments += (m_nbSegments % 2 == 0)?0:1;
@@ -405,7 +365,7 @@ QSGNode *RoundedRectangle::updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData
     vertices[++idx].set( -w + center.x(), h + center.y(), r, g, b, alpha);
     vertices[++idx].set( w + center.x(), h + center.y(), r, g, b, alpha);
 
-    if (m_border > 0)
+    if (m_borderWidth > 0)
         node->appendChildNode(createBorder());
 
     Q_ASSERT(idx + 1 == nbVertice);

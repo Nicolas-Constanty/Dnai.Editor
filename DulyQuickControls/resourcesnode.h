@@ -20,6 +20,13 @@ class DulyResources  : public QObject
         Count //Get the size of enum, must be at the end all the time!
     };
     Q_ENUM(IOType)
+
+	enum FlowType
+	{
+		Enter,
+		Exit
+    };
+	Q_ENUM(FlowType)
 };
 
 

@@ -5,6 +5,12 @@ Link::Link(): L1(nullptr), L2(nullptr), m_bezierCurve(nullptr)
 {
 }
 
+Link::~Link()
+{
+    if (m_bezierCurve)
+        delete m_bezierCurve;
+}
+
 Link::Link(ALinkable *l1, ALinkable *l2): m_bezierCurve(nullptr)
 {
 	if (l1 == l2)

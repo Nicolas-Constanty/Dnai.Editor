@@ -1,4 +1,3 @@
-#include <QtQuick/qsgnode.h>
 #include <QtQuick/qsgflatcolormaterial.h>
 #include <QtMath>
 
@@ -6,10 +5,11 @@
 #include "input.h"
 #include "link.h"
 #include "genericnode.h"
+#include "dulycanvas.h"
 
-InputBackend::InputBackend(DulyResources::IOType t): BaseIo()
+InputBackend::InputBackend(DulyResources::IOType t, QQuickItem *parent)
+	: BaseIo(t, parent)
 {
-	m_type = t;
 }
 
 Link *InputBackend::connect(ALinkable *linkable, BezierCurve *curve)
@@ -20,15 +20,19 @@ Link *InputBackend::connect(ALinkable *linkable, BezierCurve *curve)
         auto l = getLink(linkable);
         if (l == nullptr)
         {
+            if (m_links.size() > 0)
+            {
+                unlinkAll();
+            }
             m_links.clear();
             l = new Link(this, linkable);
             l->setCurve(curve);
-            m_links.add(l);
+            m_links.append(l);
             linkable->addLink(l);
             return l;
         }
         //TODO INSERT DEBUG "Link already exist"
-        return l;
+        return nullptr;
     }
     return nullptr;
 }
@@ -36,12 +40,12 @@ Link *InputBackend::connect(ALinkable *linkable, BezierCurve *curve)
 Input::Input(QQuickItem *parent) :
     Io(parent)
 {
-    m_io = new InputBackend(m_type);
+    m_linkable = new InputBackend(m_type, this);
 }
 
 void Input::refreshBackendIo()
 {
-    m_io = new InputBackend(m_type);
+	m_linkable = new InputBackend(m_type, this);
 }
 
 void Input::componentComplete()
@@ -51,8 +55,20 @@ void Input::componentComplete()
     n->inputs().registerItem(this);
 }
 
-Io *Input::findIo(GenericNode *n, const QPointF &p)
+LinkableBezierItem* Input::findLinkableBezierItem(GenericNode* n, const QPointF& p)
 {
-    auto qlist = n->outputs().findFocused(p);
-    return (qlist.size() != 0)?dynamic_cast<Io*>(qlist.at(0)):nullptr;
+	auto qlist = n->outputs().findFocused(p);
+	return (qlist.size() != 0) ? dynamic_cast<Io*>(qlist.at(0)) : nullptr;
+}
+
+void Input::updateLink()
+{
+    auto list = m_linkable->links();
+	for (auto i = 0; i < list.size(); i++)
+    {
+		const auto l = list.at(i);
+		l->curve()->setPosition(mapToItem(DulyCanvas::Instance, position() + QPointF(width() / 2, height() / 2)));
+        const auto io = dynamic_cast<Output *>(dynamic_cast<BaseIo *>(l->L1 != m_linkable ?l->L1:l->L2)->parent());
+        l->curve()->setP4(io->getCanvasPos());
+	}
 }

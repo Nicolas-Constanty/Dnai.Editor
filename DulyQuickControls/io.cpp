@@ -3,28 +3,18 @@
 #include <QSGVertexColorMaterial>
 
 #include "io.h"
-#include "beziercurve.h"
 #include "dulycanvas.h"
-#include "genericnode.h"
 
 BaseIo *Io::CurrentHover = nullptr;
 
 Io::Io(QQuickItem *parent) :
-    QQuickItem(parent)
-  , m_radius(5)
-  , m_borderWidth(3)
+    LinkableBezierItem(parent)
   , m_nbSegments(32)
-  , m_fillColor(QColor(255, 255, 255))
-  , m_borderColor(QColor(0, 255, 0))
   , m_type(DulyResources::IOType::Int)
 
 {
 	Io::refreshBackendIo();
     setFlag(ItemHasContents, true);
-    setAcceptHoverEvents(true);
-    setAcceptedMouseButtons(Qt::AllButtons);
-    setFlag(ItemAcceptsInputMethod, true);
-    installEventFilter(this);
     setAntialiasing(true);
 }
 
@@ -158,48 +148,12 @@ QSGNode *Io::updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *)
     return node;
 }
 
-void Io::setRadius(qreal radius)
-{
-    if (radius == m_radius)
-        return;
-    m_radius = radius;
-    emit radiusChanged(radius);
-    update();
-}
-
-void Io::setBorderWidth(qreal w)
-{
-    if (w == m_borderWidth)
-        return;
-    m_borderWidth = w;
-    emit borderWidthChanged(w);
-    update();
-}
-
 void Io::setNbSegments(uint n)
 {
     if (n == m_nbSegments)
         return;
     m_nbSegments = n;
     emit nbSegmentsChanged(n);
-    update();
-}
-
-void Io::setFillColor(const QColor &color)
-{
-    if (color == m_fillColor)
-        return;
-    m_fillColor = color;
-    emit fillColorChanged(color);
-    update();
-}
-
-void Io::setBorderColor(const QColor &color)
-{
-    if (color == m_borderColor)
-        return;
-    m_borderColor = color;
-    emit borderColorChanged(color);
     update();
 }
 
@@ -213,63 +167,16 @@ void Io::setType(DulyResources::IOType type)
     update();
 }
 
-
-void Io::mouseMoveEvent(QMouseEvent *event)
+QPointF Io::getCanvasPos() const
 {
-	const auto p(mapToItem(DulyCanvas::Instance, event->pos()));
-    m_currentCurve->setP4(p);
+    return QPointF(parentItem()->parentItem()->parentItem()->parentItem()->parentItem()->position() +
+		parentItem()->parentItem()->parentItem()->parentItem()->position() +
+		parentItem()->parentItem()->parentItem()->position() +
+		parentItem()->parentItem()->position() +
+		parentItem()->position() + position() + QPointF(width() / 2, height() / 2));
 }
 
-void Io::mousePressEvent(QMouseEvent *event)
+GenericNode* Io::getNode() const
 {
-    if (event->button() == Qt::LeftButton && EventUtilities::isHoverCircle(m_radius, event))
-    {
-        m_holdClick = true;
-        auto b = new BezierCurve(DulyCanvas::Instance);
-        b->setPosition(mapToItem(DulyCanvas::Instance, position() + QPointF(width() / 2, height() / 2)));
-        b->setP1(QPoint(0,0));
-        m_currentCurve = b;
-    }
+	return dynamic_cast<GenericNode *>(parentItem()->parentItem()->parentItem()->parentItem()->parentItem());
 }
-
-void Io::mouseReleaseEvent(QMouseEvent *event)
-{
-    if (event->button() != Qt::LeftButton)
-        return;
-	const auto p(mapToItem(DulyCanvas::Instance, event->pos()));
-    auto qlist = DulyCanvas::Instance->focusManager().findFocused(p);
-    if (qlist.size() == 0)
-    {
-        delete(m_currentCurve);
-        m_currentCurve = nullptr;
-        return;
-    }
-	const auto node = dynamic_cast<GenericNode *>(qlist.at(0));
-    if (node && node != dynamic_cast<GenericNode *>(parentItem()->parentItem()->parentItem()->parentItem()->parentItem()))
-    {
-	    const auto p1(mapToItem(node, event->pos()));
-	    const auto io = findIo(node, p1);
-        if (io)
-        {
-	        const auto c = m_io->connect(io->getBaseIo(), m_currentCurve);
-            if (c == nullptr)
-                delete(m_currentCurve);
-            else
-            {
-	            const auto p2(
-                            io->parentItem()->parentItem()->parentItem()->parentItem()->parentItem()->position() +
-                            io->parentItem()->parentItem()->parentItem()->parentItem()->position() +
-                            io->parentItem()->parentItem()->parentItem()->position() +
-                            io->parentItem()->parentItem()->position() +
-                            io->parentItem()->position() + io->position() + QPointF(io->width() / 2, io->height() / 2));
-                m_currentCurve->setP4(p2);
-                m_currentCurve->setDotted(false);
-            }
-            m_currentCurve = nullptr;
-            return;
-        }
-    }
-    delete(m_currentCurve);
-    m_currentCurve = nullptr;
-}
-

@@ -25,12 +25,16 @@ SOURCES += baseio.cpp \
     line.cpp \
     link.cpp \
     main.cpp \
-    MoveCommand.cpp \
     output.cpp \
     roundedrectangle.cpp \
     debugdecorator.cpp \
     eventutilities.cpp \
-    focusmanager.cpp
+    focusmanager.cpp \
+    flow.cpp \
+    baselinkable.cpp \
+    customshape.cpp \
+    moveCommand.cpp \
+    linkablebezieritem.cpp
 
 RESOURCES += qml.qrc
 
@@ -63,11 +67,15 @@ HEADERS += baseio.h \
     line.h \
     link.h \
     linkabletype.h \
-    MoveCommand.h \
     observablelist.h \
     output.h \
     resourcesnode.h \
     roundedrectangle.h \
     dulycanvas.h \
     eventutilities.h \
-    focusmanager.h
+    focusmanager.h \
+    flow.h \
+    baselinkable.h \
+    customshape.h \
+    moveCommand.h \
+    linkablebezieritem.h
