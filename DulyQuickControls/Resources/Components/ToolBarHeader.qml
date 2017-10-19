@@ -30,9 +30,11 @@ Item {
                        }
                        MenuItem {
                            text: qsTr("New project")
+                           onClicked: newProjectPopup.open()
                        }
                        MenuItem {
                            text: qsTr("Open project")
+                           onClicked: openProjectPopup.open()
                        }
                        MenuItem {
                            text: qsTr("Save")
@@ -324,5 +326,34 @@ Item {
                 id: settingPanel
             }
     }
-
+    Popup {
+                id: newProjectPopup
+                x: parent.width / 2 - width / 2
+                y: parent.parent.height / 2 - height / 2
+                width: 640
+                height: 480
+                modal: true
+                focus: true
+                closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutside
+                contentItem: NewProject {
+                    anchors.fill: parent
+                    id: newFileProjectPanel
+                    popup: newProjectPopup
+                }
+        }
+        Popup {
+                id: openProjectPopup
+                x: parent.width / 2 - width / 2
+                y: parent.parent.height / 2 - height / 2
+                width: 640
+                height: 480
+                modal: true
+                focus: true
+                closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutside
+                contentItem: OpenProject {
+                    anchors.fill: parent
+                    id: openProjectPanel
+                    popup: openProjectPopup
+                }
+        }
 }
