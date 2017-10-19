@@ -3,7 +3,7 @@
 
 #include <QString>
 #include <QVariant>
-#include "common.h"
+#include "project/common.h"
 
 namespace duly_gui {
     namespace project {

@@ -1,6 +1,7 @@
 QT += qml quick
 
 CONFIG += c++14
+CONFIG += object_parallel_to_source
 
 INCLUDEPATH += include/
 
@@ -28,7 +29,6 @@ SOURCES += src/baseio.cpp \
     src/project.cpp \
     src/commands/movecommand.cpp \
     src/commands/movenodecommand.cpp \
-    src/project/function.cpp
 
 
 #VIEWS
@@ -66,10 +66,11 @@ SOURCES += src/project/common.cpp \
     src/project/class.cpp \
     src/project/node.cpp \
     src/project/variable.cpp \
-    src/project/link.cpp \
     src/project/input.cpp \
     src/project/output.cpp \
-    src/project/flow.cpp
+    src/project/flow.cpp \
+    src/project/function.cpp \
+    src/project/identity.cpp
 
 RESOURCES += qml.qrc
 
@@ -103,7 +104,6 @@ HEADERS += include/baseio.h \
     include/project.h \
     include/commands/movenodecommand.h \
     include/commands/movecommand.h \
-    include/project/function.h
 
 #VIEWS
 HEADERS += include/views/beziercurve.h \
@@ -141,7 +141,8 @@ HEADERS += include/project/common.h \
     include/project/class.h \
     include/project/node.h \
     include/project/variable.h \
-    include/project/link.h \
     include/project/input.h \
     include/project/output.h \
-    include/project/flow.h
+    include/project/flow.h \
+    include/project/function.h \
+    include/project/identity.h

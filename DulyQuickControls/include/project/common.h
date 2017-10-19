@@ -8,7 +8,7 @@ namespace duly_gui {
         class Common
         {
         public:
-            Common(QString const &, QString const &);
+            Common(/*QString const &, QString const &*/);
 
         private:
             QString _name;

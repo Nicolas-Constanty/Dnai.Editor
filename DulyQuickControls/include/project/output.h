@@ -1,12 +1,12 @@
 #ifndef PROJECT_OUTPUT_H
 #define PROJECT_OUTPUT_H
 
-#include "variable.h"
-#include "link.h"
+#include "project/variable.h"
+#include "project/identity.h"
 
 namespace duly_gui {
     namespace project {
-        class Output: public Variable, Link
+        class Output: public Variable, Identity
         {
         public:
             Output();
