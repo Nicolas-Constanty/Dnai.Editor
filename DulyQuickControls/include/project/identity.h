@@ -1,14 +1,14 @@
-#ifndef PROJECT_LINK_H
-#define PROJECT_LINK_H
+#ifndef PROJECT_IDENTITY_H
+#define PROJECT_IDENTITY_H
 
 #include <QString>
 
 namespace duly_gui {
     namespace project {
-        class Link
+        class Identity
         {
         public:
-            Link();
+            Identity();
 
         private:
             QString _uid;
@@ -17,4 +17,4 @@ namespace duly_gui {
     }
 }
 
-#endif // PROJECT_LINK_H
+#endif // PROJECT_IDENTITY_H

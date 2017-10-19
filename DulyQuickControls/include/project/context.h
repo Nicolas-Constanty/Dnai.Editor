@@ -2,9 +2,9 @@
 #define PROJECT_CONTEXT_H
 
 #include <QVector>
-#include "common.h"
-#include "variable.h"
-#include "function.h"
+#include "project/common.h"
+#include "project/variable.h"
+#include "project/function.h"
 
 namespace duly_gui {
     namespace project {

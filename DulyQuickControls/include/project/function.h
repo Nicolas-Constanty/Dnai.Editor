@@ -2,11 +2,11 @@
 #define PROJECT_FUNCTION_H
 
 #include <QVector>
-#include "common.h"
-#include "variable.h"
-#include "input.h"
-#include "output.h"
-#include "node.h"
+#include "project/common.h"
+#include "project/variable.h"
+#include "project/input.h"
+#include "project/output.h"
+#include "project/node.h"
 
 namespace duly_gui {
     namespace project {

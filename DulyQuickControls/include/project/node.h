@@ -3,15 +3,15 @@
 
 #include <QVector>
 #include <QVector2D>
-#include "common.h"
-#include "input.h"
-#include "output.h"
-#include "context.h"
-#include "function.h"
-#include "flow.h"
+#include "project/common.h"
+#include "project/input.h"
+#include "project/output.h"
+#include "project/flow.h"
 
 namespace duly_gui {
     namespace project {
+    class Context;
+    class Function;
         class Node: public Common
         {
         public:
@@ -19,7 +19,7 @@ namespace duly_gui {
         private:
             Context *_context;
             Function *_function;
-            QVector2D<int>  _position;
+            QVector2D _position;
             QVector<Input> _inputs;
             QVector<Output> _outputs;
             Flow _flow_in;

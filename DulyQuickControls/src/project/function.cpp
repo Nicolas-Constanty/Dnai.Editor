@@ -1,8 +1,8 @@
-#include "function.h"
+#include "project/function.h"
 
 namespace duly_gui {
     namespace project {
-        Fonction::Fonction()
+        Function::Function()
         {
 
         }

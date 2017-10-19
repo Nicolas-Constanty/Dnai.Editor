@@ -1,4 +1,4 @@
-#include "variable.h"
+#include "project/variable.h"
 
 namespace duly_gui {
     namespace project {

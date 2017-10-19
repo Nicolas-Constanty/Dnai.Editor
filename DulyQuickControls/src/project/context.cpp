@@ -1,4 +1,4 @@
-#include "context.h"
+#include "project/context.h"
 
 namespace duly_gui {
     namespace project {

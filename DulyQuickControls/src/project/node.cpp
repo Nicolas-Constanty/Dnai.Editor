@@ -1,4 +1,4 @@
-#include "node.h"
+#include "project/node.h"
 
 namespace duly_gui {
     namespace project {

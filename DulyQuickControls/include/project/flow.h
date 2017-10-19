@@ -1,11 +1,11 @@
 #ifndef PROJECT_FLOW_H
 #define PROJECT_FLOW_H
 
-#include "link.h"
+#include "project/identity.h"
 
 namespace duly_gui {
     namespace project {
-        class Flow: public Link
+        class Flow: public Identity
         {
         public:
             Flow();
