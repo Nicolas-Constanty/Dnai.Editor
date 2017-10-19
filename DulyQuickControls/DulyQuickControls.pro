@@ -27,7 +27,9 @@ SOURCES += src/baseio.cpp \
     src/manager.cpp \
     src/project.cpp \
     src/commands/movecommand.cpp \
-    src/commands/movenodecommand.cpp
+    src/commands/movenodecommand.cpp \
+    src/project/function.cpp
+
 
 #VIEWS
 SOURCES += src/views/beziercurve.cpp \
@@ -58,6 +60,16 @@ SOURCES += src/controllers/inputcontroller.cpp \
     src/controllers/outputcontroller.cpp \
     src/controllers/consolecontroller.cpp \
 
+#PROJECT
+SOURCES += src/project/common.cpp \
+    src/project/context.cpp \
+    src/project/class.cpp \
+    src/project/node.cpp \
+    src/project/variable.cpp \
+    src/project/link.cpp \
+    src/project/input.cpp \
+    src/project/output.cpp \
+    src/project/flow.cpp
 
 RESOURCES += qml.qrc
 
@@ -90,7 +102,8 @@ HEADERS += include/baseio.h \
     include/manager.h \
     include/project.h \
     include/commands/movenodecommand.h \
-    include/commands/movecommand.h
+    include/commands/movecommand.h \
+    include/project/function.h
 
 #VIEWS
 HEADERS += include/views/beziercurve.h \
@@ -121,3 +134,14 @@ HEADERS += include/controllers/inputcontroller.h \
     include/controllers/outputcontroller.h \
     include/controllers/consolecontroller.h \
 
+
+#PROJECT
+HEADERS += include/project/common.h \
+    include/project/context.h \
+    include/project/class.h \
+    include/project/node.h \
+    include/project/variable.h \
+    include/project/link.h \
+    include/project/input.h \
+    include/project/output.h \
+    include/project/flow.h
