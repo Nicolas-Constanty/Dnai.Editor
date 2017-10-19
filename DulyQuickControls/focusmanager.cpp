@@ -31,6 +31,11 @@ QList<QQuickItem *> FocusManager::findFocused(const QPointF &point)
     return items;
 }
 
+QList<QQuickItem*> &FocusManager::getList()
+{
+	return m_items;
+}
+
 FocusManagerIo::FocusManagerIo()
 {
 

@@ -10,6 +10,9 @@ GenericNode {
     property alias outputDelegate: _outputs.delegate
     property alias description: _description.text
     property alias name: _name.text
+    property alias flowIn: node.flowIn
+    property alias flowOut: node.flowOut
+    property alias headerRef: headerNode
 
     content: contentNode
     header: headerNode
@@ -24,7 +27,7 @@ GenericNode {
         height: _name.height * 1.3 + _description.height * 1.3
         bottomLeft: false
         bottomRight: false
-        border: 1
+        borderWidth: 1
         radius: 10
         borderColor: "#7C7C7C"
         fillColor: "#606060"
@@ -54,13 +57,13 @@ GenericNode {
         width: headerNode.width
         height: _inputs.count * 10 + 30
         radius: headerNode.radius
-        border: headerNode.border
+        borderWidth: headerNode.borderWidth
         borderColor: headerNode.borderColor
         fillColor: "#505050"
         antialiasing: headerNode.antialiasing
         topLeft: false
         topRight: false
-        y: headerNode.height - headerNode.border
+        y: headerNode.height - headerNode.borderWidth
         ListView {
             id: _inputs
             anchors.topMargin: 10
