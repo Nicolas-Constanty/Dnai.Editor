@@ -24,6 +24,8 @@ SOURCES += src/baseio.cpp \
     src/baselinkable.cpp \
     src/dulyscene.cpp \
     src/dulyapp.cpp \
+    src/manager.cpp \
+    src/project.cpp \
     src/commands/movecommand.cpp \
     src/commands/movenodecommand.cpp
 
@@ -85,6 +87,8 @@ HEADERS += include/baseio.h \
     include/linkabletype.h \
     include/resourcesnode.h \
     include/dulyapp.h \
+    include/manager.h \
+    include/project.h \
     include/commands/movenodecommand.h \
     include/commands/movecommand.h
 
