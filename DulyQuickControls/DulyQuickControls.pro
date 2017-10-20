@@ -60,17 +60,17 @@ SOURCES += src/controllers/inputcontroller.cpp \
     src/controllers/outputcontroller.cpp \
     src/controllers/consolecontroller.cpp \
 
-#PROJECT
-SOURCES += src/project/common.cpp \
-    src/project/context.cpp \
-    src/project/class.cpp \
-    src/project/node.cpp \
-    src/project/variable.cpp \
-    src/project/input.cpp \
-    src/project/output.cpp \
-    src/project/flow.cpp \
-    src/project/function.cpp \
-    src/project/identity.cpp
+#MODELS
+SOURCES += src/models/common.cpp \
+    src/models/context.cpp \
+    src/models/class.cpp \
+    src/models/node.cpp \
+    src/models/variable.cpp \
+    src/models/input.cpp \
+    src/models/output.cpp \
+    src/models/flow.cpp \
+    src/models/function.cpp \
+    src/models/identity.cpp
 
 RESOURCES += qml.qrc
 
@@ -135,14 +135,15 @@ HEADERS += include/controllers/inputcontroller.h \
     include/controllers/consolecontroller.h \
 
 
-#PROJECT
-HEADERS += include/project/common.h \
-    include/project/context.h \
-    include/project/class.h \
-    include/project/node.h \
-    include/project/variable.h \
-    include/project/input.h \
-    include/project/output.h \
-    include/project/flow.h \
-    include/project/function.h \
-    include/project/identity.h
+#MODELS
+HEADERS += include/models/common.h \
+    include/models/context.h \
+    include/models/class.h \
+    include/models/node.h \
+    include/models/variable.h \
+    include/models/input.h \
+    include/models/output.h \
+    include/models/flow.h \
+    include/models/function.h \
+    include/models/identity.h \
+    include/models/imodel.h
