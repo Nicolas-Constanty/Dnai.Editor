@@ -94,6 +94,7 @@ namespace duly_gui {
         }
 
         m_functions_index.append(model);
+        m_index.append(model);
 
         return model;
     }
