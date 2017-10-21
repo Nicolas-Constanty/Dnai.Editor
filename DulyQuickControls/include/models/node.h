@@ -16,11 +16,12 @@ namespace duly_gui {
         class Node: public Common, virtual public IModel
         {
         public:
-            Node(QString const &, QString const &, QVector2D const &);
+            Node(QString const &, QString const &, QVector2D const &, Function * = nullptr);
             virtual ~Node();
 
         private:
-            Context *m_context;
+            Function *m_parent;
+//            Context *m_context;
             Function *m_function;
             QVector2D m_position;
             QVector<Input*> m_inputs;
@@ -29,8 +30,10 @@ namespace duly_gui {
             QVector<Flow*> m_flows_out;
 
         public:
-            Context *context() const;
-            void setContext(Context *context);
+            Function *parent() const;
+            void setParent(Function *parent);
+//            Context *context() const;
+//            void setContext(Context *context);
             Function *function() const;
             void setFunction(Function *function);
             QVector2D position() const;

@@ -3,8 +3,8 @@
 
 namespace duly_gui {
     namespace models {
-        Class::Class(QString const &name, QString const &description)
-            : Common(name, description)
+        Class::Class(QString const &name, QString const &description, Context *parent)
+            : Common(name, description), m_parent(parent)
         {
 
         }
@@ -12,6 +12,16 @@ namespace duly_gui {
         Class::~Class()
         {
 
+        }
+        
+        Context *Class::parent() const
+        {
+            return m_parent;
+        }
+        
+        void Class::setParent(Context *parent)
+        {
+            m_parent = parent;
         }
         
         QVector<Variable*> Class::attributes() const

@@ -14,16 +14,21 @@ namespace duly_gui {
         class Function: public Common, virtual public IModel
         {
         public:
-            Function(QString const &, QString const &);
+            Function(QString const &, QString const &, Context * = nullptr);
             virtual ~Function();
 
         private:
+            Context *m_parent;
+
             QVector<Variable*> m_variables;
             QVector<Input*> m_inputs;
             QVector<Output*> m_outputs;
             QVector<Node*> m_nodes;
 
         public:
+            Context *parent() const;
+            void setParent(Context *parent);
+
             QVector<Variable*> variables() const;
             QVector<Input*> inputs() const;
             QVector<Output*> outputs() const;

@@ -27,6 +27,9 @@ namespace duly_gui {
     private:
         QFile &m_file;
 
+        QVector<models::Common*> m_index;
+        QVector<models::Function*> m_functions_index;
+
         QVector<models::Context*> m_contexts;
         QVector<models::Node*> m_nodes;
 
@@ -38,10 +41,10 @@ namespace duly_gui {
         models::Input *createInput(const QJsonObject &);
         models::Output *createOutput(const QJsonObject &);
         models::Flow *createFlow(const QJsonObject &);
-        models::Function *createFunction(const QJsonObject &);
-        models::Class *createClass(const QJsonObject &);
-        models::Context *createContext(const QJsonObject &);
-        models::Node *createNode(const QJsonObject &);
+        models::Function *createFunction(const QJsonObject &, models::Context *);
+        models::Class *createClass(const QJsonObject &, models::Context *);
+        models::Context *createContext(const QJsonObject &, models::Context *);
+        models::Node *createNode(const QJsonObject &, models::Function *);
 
 
         // IModel interface
