@@ -93,7 +93,7 @@ namespace duly_gui {
             model->nodes().append(this->createNode(node.toObject(), model));
         }
 
-        m_functions.append(model);
+        m_functions_index.append(model);
 
         return model;
     }
