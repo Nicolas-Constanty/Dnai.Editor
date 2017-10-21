@@ -12,7 +12,7 @@ Page {
 
     FileDialog {
         id: fileDialog
-        title: "Please choose a path"
+        title: "Please choose a project"
         folder: shortcuts.home
         selectMultiple: false
         nameFilters: ["Duly project (*.dulyproject)"]
