@@ -37,14 +37,14 @@ namespace duly_gui {
         QFile &file() const;
 
     private:
-        models::Variable *createVariable(const QJsonObject &);
-        models::Input *createInput(const QJsonObject &);
-        models::Output *createOutput(const QJsonObject &);
-        models::Flow *createFlow(const QJsonObject &);
-        models::Function *createFunction(const QJsonObject &, models::Context *);
-        models::Class *createClass(const QJsonObject &, models::Context *);
-        models::Context *createContext(const QJsonObject &, models::Context *);
-        models::Node *createNode(const QJsonObject &, models::Function *);
+        models::Variable *unserializeVariable(const QJsonObject &);
+        models::Input *unserializeInput(const QJsonObject &);
+        models::Output *unserializeOutput(const QJsonObject &);
+        models::Flow *unserializeFlow(const QJsonObject &);
+        models::Function *unserializeFunction(const QJsonObject &, models::Context *);
+        models::Class *unserializeClass(const QJsonObject &, models::Context *);
+        models::Context *unserializeContext(const QJsonObject &, models::Context *);
+        models::Node *unserializeNode(const QJsonObject &, models::Function *);
 
 
         // IModel interface
