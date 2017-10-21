@@ -99,9 +99,8 @@ namespace duly_gui {
     }
     models::Class *Project::createClass(const QJsonObject &obj, models::Context *parent)
     {
-        Q_UNUSED(parent);
-        //TODO parent for class
-        auto model = new models::Class(obj["name"].toString(), obj["description"].toString());
+        //TODO parent for class childs
+        auto model = new models::Class(obj["name"].toString(), obj["description"].toString(), parent);
 
         foreach (auto attribute, obj["attributes"].toArray()) {
             model->attributes().append(this->createVariable(attribute.toObject()));
