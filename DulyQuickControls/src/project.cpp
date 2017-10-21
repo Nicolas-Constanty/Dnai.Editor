@@ -27,7 +27,7 @@ namespace duly_gui {
         return m_file;
     }
 
-    models::Variable *Project::createVariable(const QJsonObject &obj)
+    models::Variable *Project::unserializeVariable(const QJsonObject &obj)
     {
         auto model = new models::Variable(
                     obj["name"].toString(),
@@ -38,7 +38,7 @@ namespace duly_gui {
 
         return model;
     }
-    models::Input *Project::createInput(const QJsonObject &obj)
+    models::Input *Project::unserializeInput(const QJsonObject &obj)
     {
         auto model = new models::Input(
                     obj["name"].toString(),
@@ -51,7 +51,7 @@ namespace duly_gui {
 
         return model;
     }
-    models::Output *Project::createOutput(const QJsonObject &obj)
+    models::Output *Project::unserializeOutput(const QJsonObject &obj)
     {
         auto model = new models::Output(
                     obj["name"].toString(),
@@ -64,7 +64,7 @@ namespace duly_gui {
 
         return model;
     }
-    models::Flow *Project::createFlow(const QJsonObject &obj)
+    models::Flow *Project::unserializeFlow(const QJsonObject &obj)
     {
         auto model = new models::Flow(
                     obj["uid"].toString(),
@@ -73,90 +73,91 @@ namespace duly_gui {
 
         return model;
     }
-    models::Function *Project::createFunction(const QJsonObject &obj, models::Context *parent)
+    models::Function *Project::unserializeFunction(const QJsonObject &obj, models::Context *parent)
     {
         auto model = new models::Function(obj["name"].toString(), obj["description"].toString(), parent);
 
         foreach (auto variable, obj["variables"].toArray()) {
-            model->variables().append(this->createVariable(variable.toObject()));
+            model->variables().append(this->unserializeVariable(variable.toObject()));
         }
 
         foreach (auto input, obj["inputs"].toArray()) {
-            model->inputs().append(this->createInput(input.toObject()));
+            model->inputs().append(this->unserializeInput(input.toObject()));
         }
 
         foreach (auto output, obj["outputs"].toArray()) {
-            model->outputs().append(this->createOutput(output.toObject()));
+            model->outputs().append(this->unserializeOutput(output.toObject()));
         }
 
         foreach (auto node, obj["nodes"].toArray()) {
-            model->nodes().append(this->createNode(node.toObject(), model));
+            model->nodes().append(this->unserializeNode(node.toObject(), model));
         }
 
         m_functions_index.append(model);
 
         return model;
     }
-    models::Class *Project::createClass(const QJsonObject &obj, models::Context *parent)
+    models::Class *Project::unserializeClass(const QJsonObject &obj, models::Context *parent)
     {
         //TODO parent for class childs
         auto model = new models::Class(obj["name"].toString(), obj["description"].toString(), parent);
 
         foreach (auto attribute, obj["attributes"].toArray()) {
-            model->attributes().append(this->createVariable(attribute.toObject()));
+            model->attributes().append(this->unserializeVariable(attribute.toObject()));
         }
 
         foreach (auto method, obj["methods"].toArray()) {
-            model->methods().append(this->createFunction(method.toObject(), nullptr));
+            model->methods().append(this->unserializeFunction(method.toObject(), nullptr));
         }
 
         foreach (auto variable, obj["variables"].toArray()) {
-            model->variables().append(this->createVariable(variable.toObject()));
+            model->variables().append(this->unserializeVariable(variable.toObject()));
         }
 
         foreach (auto function, obj["functions"].toArray()) {
-            model->functions().append(this->createFunction(function.toObject(), nullptr));
+            model->functions().append(this->unserializeFunction(function.toObject(), nullptr));
         }
 
         m_index.append(model);
 
         return model;
     }
-    models::Context *Project::createContext(const QJsonObject &obj, models::Context *parent)
+    models::Context *Project::unserializeContext(const QJsonObject &obj, models::Context *parent)
     {
-        auto model = new models::Context(obj["name"].toString(), obj["description"].toString());
+        auto model = new models::Context(obj["name"].toString(), obj["description"].toString(), parent);
 
         foreach (auto context, obj["contexts"].toArray()) {
-            model->contexts().append(this->createContext(context.toObject(), model));
+            model->contexts().append(this->unserializeContext(context.toObject(), model));
         }
 
         foreach (auto variable, obj["variables"].toArray()) {
-            model->variables().append(this->createVariable(variable.toObject()));
+            model->variables().append(this->unserializeVariable(variable.toObject()));
         }
 
         foreach (auto function, obj["functions"].toArray()) {
-            model->functions().append(this->createFunction(function.toObject(), model));
+            model->functions().append(this->unserializeFunction(function.toObject(), model));
         }
 
         m_index.append(model);
 
         return model;
     }
-    models::Node *Project::createNode(const QJsonObject &obj, models::Function *parent)
+    models::Node *Project::unserializeNode(const QJsonObject &obj, models::Function *parent)
     {
         auto position = obj["position"].toObject();
         auto model = new models::Node(
                     obj["name"].toString(),
                 obj["description"].toString(),
-                QVector2D(position["x"].toDouble(), position["y"].toDouble()), parent);
+                QVector2D(static_cast<float>(position["x"].toDouble()), static_cast<float>(position["y"].toDouble())),
+                parent);
         //model->setFunction(); //TODO find function
 
         foreach (auto input, obj["inputs"].toArray()) {
-            model->inputs().append(this->createInput(input.toObject()));
+            model->inputs().append(this->unserializeInput(input.toObject()));
         }
 
         foreach (auto output, obj["outputs"].toArray()) {
-            model->outputs().append(this->createOutput(output.toObject()));
+            model->outputs().append(this->unserializeOutput(output.toObject()));
         }
 
         m_index.append(model);
@@ -189,11 +190,11 @@ namespace duly_gui {
     void Project::unserialize(const QJsonObject &obj)
     {
         foreach (auto node, obj["nodes"].toArray()) {
-            m_nodes.append(this->createNode(node.toObject(), nullptr));
+            m_nodes.append(this->unserializeNode(node.toObject(), nullptr));
         }
 
         foreach (auto context, obj["contexts"].toArray()) {
-            m_contexts.append(this->createContext(context.toObject(), nullptr));
+            m_contexts.append(this->unserializeContext(context.toObject(), nullptr));
         }
     }
 }
