@@ -197,4 +197,40 @@ namespace duly_gui {
             m_contexts.append(this->unserializeContext(context.toObject(), nullptr));
         }
     }
+
+    QVector<models::Common *> Project::search(const QString &search, searchFunc func)
+    {
+        QVector<models::Common *> models;
+
+        foreach (auto model, m_index) {
+            if (func(model, search)) {
+                models.append(model);
+            }
+        }
+
+        return models;
+    }
+
+    QVector<models::Function *> Project::searchFunctions(const QString &search, searchFunctionsFunc func)
+    {
+        QVector<models::Function *> models;
+
+        foreach (auto model, m_functions_index) {
+            if (func(model, search)) {
+                models.append(model);
+            }
+        }
+
+        return models;
+    }
+
+    bool Project::defaultSearchFunc(models::Common *model, const QString &search)
+    {
+        return model->name().startsWith(search);
+    }
+
+    bool Project::defaultSearchFunctionsFunc(models::Function *model, const QString &search)
+    {
+        return model->name().startsWith(search);
+    }
 }
