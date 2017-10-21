@@ -3,8 +3,8 @@
 
 namespace duly_gui {
     namespace models {
-        Function::Function(QString const &name, QString const &description)
-            : Common(name, description)
+        Function::Function(QString const &name, QString const &description, Context *parent)
+            : Common(name, description), m_parent(parent)
         {
 
         }
@@ -13,12 +13,22 @@ namespace duly_gui {
         {
 
         }
-
+        
+        Context *Function::parent() const
+        {
+            return m_parent;
+        }
+        
+        void Function::setParent(Context *parent)
+        {
+            m_parent = parent;
+        }
+        
         QVector<Variable*> Function::variables() const
         {
             return m_variables;
         }
-
+        
         QVector<Input*> Function::inputs() const
         {
             return m_inputs;

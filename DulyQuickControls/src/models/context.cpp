@@ -3,8 +3,8 @@
 
 namespace duly_gui {
     namespace models {
-        Context::Context(QString const &name, QString const &description)
-            : Common(name, description)
+        Context::Context(QString const &name, QString const &description, Context *parent)
+            : Common(name, description), m_parent(parent)
         {
 
         }
@@ -12,6 +12,26 @@ namespace duly_gui {
         Context::~Context()
         {
 
+        }
+
+        Context *Context::parent() const
+        {
+            return m_parent;
+        }
+
+        void Context::setParent(Context *parent)
+        {
+            m_parent = parent;
+        }
+        
+        QVector<Context*> Context::contexts() const
+        {
+            return m_contexts;
+        }
+
+        QVector<Class *> Context::classes() const
+        {
+            return m_classes;
         }
         
         QVector<Variable*> Context::variables() const
@@ -23,12 +43,6 @@ namespace duly_gui {
         {
             return m_functions;
         }
-        
-        QVector<Context*> Context::contexts() const
-        {
-            return m_contexts;
-        }
-
 
         void Context::serialize(QJsonObject &obj) const
         {
@@ -38,6 +52,13 @@ namespace duly_gui {
             foreach (const Context *context, m_contexts) {
                 QJsonObject var;
                 context->serialize(var);
+                contexts.append(var);
+            }
+
+            QJsonArray classes;
+            foreach (const Class *classe, m_classes) {
+                QJsonObject var;
+                classe->serialize(var);
                 contexts.append(var);
             }
 
@@ -54,7 +75,9 @@ namespace duly_gui {
                 function->serialize(var);
                 functions.append(var);
             }
+
             obj["contexts"] = contexts;
+            obj["classes"] = classes;
             obj["variables"] = variables;
             obj["functions"] = functions;
         }

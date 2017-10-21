@@ -2,8 +2,8 @@
 
 namespace duly_gui {
     namespace models {
-        Node::Node(QString const &name, QString const &description, QVector2D const &position)
-            : Common(name, description), m_position(position)
+        Node::Node(QString const &name, QString const &description, QVector2D const &position, Function *parent)
+            : Common(name, description), m_parent(parent), m_position(position)
         {
 
         }
@@ -13,15 +13,25 @@ namespace duly_gui {
 
         }
         
-        Context *Node::context() const
+        Function *Node::parent() const
         {
-            return m_context;
+            return m_parent;
         }
-
-        void Node::setContext(Context *context)
+        
+        void Node::setParent(Function *parent)
         {
-            m_context = context;
+            m_parent = parent;
         }
+        
+        //        Context *Node::context() const
+        //        {
+        //            return m_context;
+        //        }
+        
+        //        void Node::setContext(Context *context)
+//        {
+//            m_context = context;
+//        }
 
         Function *Node::function() const
         {

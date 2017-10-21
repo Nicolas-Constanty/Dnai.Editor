@@ -12,16 +12,21 @@ namespace duly_gui {
         class Class: public Common, virtual public IModel
         {
         public:
-            Class(QString const &, QString const &);
+            Class(QString const &, QString const &, Context * = nullptr);
             virtual ~Class();
 
         private:
+            Context *m_parent;
+
             QVector<Variable*> m_attributes;
             QVector<Function*> m_methods;
             QVector<Variable*> m_variables;
             QVector<Function*> m_functions;
 
         public:
+            Context *parent() const;
+            void setParent(Context *parent);
+
             QVector<Variable*> attributes() const;
             QVector<Function*> methods() const;
             QVector<Variable*> variables() const;
