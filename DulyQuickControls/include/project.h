@@ -21,6 +21,9 @@ namespace duly_gui {
         Project(const QString &, const QString &, QFile &);
         virtual ~Project();
 
+        typedef bool (* searchFunc)(models::Common *, QString const &);
+        typedef bool (* searchFunctionsFunc)(models::Function *, QString const &);
+
     public:
         void save();
 
@@ -53,6 +56,12 @@ namespace duly_gui {
 
     public:
         void unserialize(const QJsonObject &);
+        QVector<models::Common*> search(QString const &, searchFunc = defaultSearchFunc);
+        QVector<models::Function*> searchFunctions(QString const &, searchFunctionsFunc = defaultSearchFunctionsFunc);
+
+    private:
+        static bool defaultSearchFunc(models::Common *, QString const &);
+        static bool defaultSearchFunctionsFunc(models::Function *, QString const &);
 
     };
 }
