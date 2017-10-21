@@ -7,12 +7,13 @@
 #include "models/input.h"
 #include "models/output.h"
 #include "models/flow.h"
+#include "models/imodel.h"
 
 namespace duly_gui {
     namespace models {
     class Context;
     class Function;
-        class Node: public Common
+        class Node: public Common, virtual public IModel
         {
         public:
             Node(QString const &, QString const &, QVector2D const &);

@@ -2,6 +2,7 @@
 #define PROJECT_H
 
 #include <QString>
+#include <QFile>
 #include <QJsonObject>
 #include "models/class.h"
 #include "models/context.h"
@@ -11,30 +12,28 @@
 #include "models/output.h"
 #include "models/node.h"
 #include "models/variable.h"
+#include "models/imodel.h"
 
 namespace duly_gui {
-    class Project
+    class Project: public models::Common, virtual public models::IModel
     {
     public:
-        Project(const QString &, const QString &);
+        Project(const QString &, const QString &, QFile &);
         virtual ~Project();
 
     public:
         void save();
 
     private:
-        QString m_name;
-        QString m_path;
+        QFile &m_file;
+
+        QVector<models::Context*> m_contexts;
+        QVector<models::Node*> m_nodes;
 
     public:
-        const QString &name() const;
-        void setName(const QString &name);
-
-        const QString &path() const;
-        void setPath(const QString &path);
+        QFile &file() const;
 
     private:
-
         models::Variable *createVariable(const QJsonObject &);
         models::Input *createInput(const QJsonObject &);
         models::Output *createOutput(const QJsonObject &);
@@ -43,6 +42,15 @@ namespace duly_gui {
         models::Class *createClass(const QJsonObject &);
         models::Context *createContext(const QJsonObject &);
         models::Node *createNode(const QJsonObject &);
+
+
+        // IModel interface
+    public:
+        virtual void serialize(QJsonObject &) const;
+
+    public:
+        void unserialize(const QJsonObject &);
+
     };
 }
 

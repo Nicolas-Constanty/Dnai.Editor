@@ -1,9 +1,10 @@
-#include "project.h"
-#include <QJsonObject>
+#include <QJsonDocument>
 #include <QJsonArray>
+#include "project.h"
 
 namespace duly_gui {
-    Project::Project(QString const &name, QString const &path): m_name(name), m_path(path)
+    Project::Project(QString const &name, QString const &description, QFile &file)
+        : models::Common(name, description), m_file(file)
     {
 
     }
@@ -15,27 +16,15 @@ namespace duly_gui {
 
     void    Project::save()
     {
+        QJsonObject obj;
+        serialize(obj);
 
+        m_file.write(QJsonDocument(obj).toJson());
     }
 
-    const QString &Project::path() const
+    QFile &Project::file() const
     {
-        return m_path;
-    }
-
-    void Project::setPath(const QString &path)
-    {
-        m_path = path;
-    }
-
-    const QString &Project::name() const
-    {
-        return m_name;
-    }
-
-    void Project::setName(const QString &name)
-    {
-        m_name = name;
+        return m_file;
     }
 
     models::Variable *Project::createVariable(const QJsonObject &obj)
@@ -132,8 +121,8 @@ namespace duly_gui {
     {
         auto model = new models::Context(obj["name"].toString(), obj["description"].toString());
 
-        foreach (auto contexte, obj["contexts"].toArray()) {
-            model->contexts().append(this->createContext(contexte.toObject()));
+        foreach (auto context, obj["contexts"].toArray()) {
+            model->contexts().append(this->createContext(context.toObject()));
         }
 
         foreach (auto variable, obj["variables"].toArray()) {
@@ -167,4 +156,36 @@ namespace duly_gui {
         return model;
     }
 
+    void Project::serialize(QJsonObject &obj) const
+    {
+        models::Common::serialize(obj);
+
+        QJsonArray contexts;
+        foreach (const models::Context *context, m_contexts) {
+            QJsonObject var;
+            context->serialize(var);
+            contexts.append(var);
+        }
+
+        QJsonArray nodes;
+        foreach (const models::Node *node, m_nodes) {
+            QJsonObject var;
+            node->serialize(var);
+            nodes.append(var);
+        }
+
+        obj["contexts"] = contexts;
+        obj["nodes"] = nodes;
+    }
+
+    void Project::unserialize(const QJsonObject &obj)
+    {
+        foreach (auto node, obj["nodes"].toArray()) {
+            m_nodes.append(this->createNode(node.toObject()));
+        }
+
+        foreach (auto context, obj["contexts"].toArray()) {
+            m_contexts.append(this->createContext(context.toObject()));
+        }
+    }
 }

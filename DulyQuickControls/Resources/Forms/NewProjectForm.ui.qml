@@ -10,6 +10,7 @@ Page {
     property alias createButton: createButton
     property alias projectPath: projectPath
     property alias projectName: projectName
+    property alias projectDescription: projectDescription
 
     FileDialog {
         id: fileDialog
@@ -61,6 +62,22 @@ Page {
                 anchors.left: nameLabel.right
                 anchors.right: parent.right
                 placeholderText: qsTr("Choose a project name")
+            }
+        }
+        RowLayout {
+            anchors.left: parent.left
+            anchors.right: parent.right
+            Label {
+                id: descriptionLabel
+                text: qsTr("Description : ")
+                anchors.left: parent.left
+            }
+            TextField {
+                id: projectDescription
+                anchors.leftMargin: 20
+                anchors.left: descriptionLabel.right
+                anchors.right: parent.right
+                placeholderText: qsTr("Choose a project description")
             }
         }
     }
