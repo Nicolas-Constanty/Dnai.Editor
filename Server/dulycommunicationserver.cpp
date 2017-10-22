@@ -1,9 +1,12 @@
+#include "headercommunication.h"
 #include "dulycommunicationserver.h"
 
 DulyCommunicationServer::DulyCommunicationServer(QTcpSocket *socket)
     : m_socket(socket)
 {
-
+    m_packageManager.registerEvent(ADDFunc(*this, &DulyCommunicationServer::onReceiveClientAuthentificationPackage, CLIENT_AUTHENTIFICATION_ID));
+    m_packageManager.registerEvent(ADDFunc(*this, &DulyCommunicationServer::onReceiveRegisterEvent, REGISTER_EVENT_ID));
+    m_packageManager.registerEvent(ADDFunc(*this, &DulyCommunicationServer::onReceiveSendEvent, SEND_EVENT_ID));
 }
 
 DulyCommunicationServer::DulyCommunicationServer(DulyCommunicationServer const &other) {
@@ -26,9 +29,24 @@ void DulyCommunicationServer::start() {
 }
 
 void DulyCommunicationServer::onRead() {
-    qDebug() << m_socket->readBufferSize();
-    // note that QByteArray can be casted to char * and const char *
-    QByteArray data = m_socket->readAll();
+    m_packageManager << m_socket->readAll();
+    m_packageManager.compute();
+}
 
-    qDebug() << data;
+void DulyCommunicationServer::send(void *data, size_t size) {
+    m_socket->write((char *)data, size);
+}
+
+// EVENTS
+
+void DulyCommunicationServer::onReceiveClientAuthentificationPackage(void *data, unsigned int size) {
+    qDebug() << "CLIENT_AUTHENTIFICATION_ID" << size;
+}
+
+void DulyCommunicationServer::onReceiveRegisterEvent(void *, unsigned int size) {
+     qDebug() << "REGISTER_EVENT_ID" << size;
+}
+
+void DulyCommunicationServer::onReceiveSendEvent(void *, unsigned int size) {
+     qDebug() << "SEND_EVENT_ID" << size;
 }
