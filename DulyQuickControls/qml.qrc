@@ -54,5 +54,9 @@
         <file>Resources/Panels/DefaultPanel.qml</file>
         <file>Resources/Components/ConsoleComponent.qml</file>
         <file>Resources/Images/WindowHandle.png</file>
+        <file>Resources/Forms/NewProjectForm.ui.qml</file>
+        <file>Resources/Forms/OpenProjectForm.ui.qml</file>
+        <file>Resources/Panels/NewProject.qml</file>
+        <file>Resources/Panels/OpenProject.qml</file>
     </qresource>
 </RCC>
