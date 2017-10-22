@@ -14,6 +14,8 @@ Item {
     property alias stringBorderColorRef: stringBorderColor
     property alias boolColorRef: boolColor
     property alias boolBorderColorRef: boolBorderColor
+    property alias genericColorRef: genericColor
+    property alias genericBorderColorRef: genericBorderColor
 
     ScrollView {
         id: rectangle
@@ -122,6 +124,25 @@ Item {
             ColorPicker {
                 id: boolBorderColor
                 name: "BorderBoolColor"
+                anchors.right: parent.right
+                anchors.rightMargin: 0
+                anchors.left: parent.left
+                anchors.leftMargin: 0
+                height: 40
+            }
+
+            ColorPicker {
+                id: genericColor
+                name: "GenericColor"
+                anchors.right: parent.right
+                anchors.rightMargin: 0
+                anchors.left: parent.left
+                anchors.leftMargin: 0
+                height: 40
+            }
+            ColorPicker {
+                id: genericBorderColor
+                name: "BorderGenericColor"
                 anchors.right: parent.right
                 anchors.rightMargin: 0
                 anchors.left: parent.left

@@ -1,6 +1,9 @@
-QT += qml quick quickcontrols2
+QT += qml quick
 
 CONFIG += c++14
+CONFIG += object_parallel_to_source
+
+INCLUDEPATH += include/
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which as been marked deprecated (the exact warnings
@@ -13,36 +16,69 @@ DEFINES += QT_DEPRECATED_WARNINGS QNANO_USE_RENDERNODE
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
-SOURCES += baseio.cpp \
-    beziercurve.cpp \
-    commanddecorator.cpp \
-    commandmanager.cpp \
-    dulycanvas.cpp \
-    genericnode.cpp \
-    input.cpp \
-    io.cpp \
-    ioquickitem.cpp \
-    line.cpp \
-    link.cpp \
-    main.cpp \
-    output.cpp \
-    roundedrectangle.cpp \
-    debugdecorator.cpp \
-    eventutilities.cpp \
-    focusmanager.cpp \
-    flow.cpp \
-    baselinkable.cpp \
-    customshape.cpp \
-    moveCommand.cpp \
-    linkablebezieritem.cpp
+#CORE
+SOURCES += src/baseio.cpp \
+    src/link.cpp \
+    src/main.cpp \
+    src/eventutilities.cpp \
+    src/focusmanager.cpp \
+    src/baselinkable.cpp \
+    src/dulyscene.cpp \
+    src/dulyapp.cpp \
+    src/manager.cpp \
+    src/project.cpp \
+    src/commands/movecommand.cpp \
+    src/commands/movenodecommand.cpp \
+
+
+#VIEWS
+SOURCES += src/views/beziercurve.cpp \
+    src/views/customshape.cpp \
+    src/views/dulycanvas.cpp \
+    src/views/flow.cpp \
+    src/views/genericnode.cpp \
+    src/views/input.cpp \
+    src/views/io.cpp \
+    src/views/line.cpp \
+    src/views/linkablebezieritem.cpp \
+    src/views/output.cpp \
+    src/views/roundedrectangle.cpp \
+    src/views/scalableitem.cpp \
+    src/views/console.cpp \
+
+
+#COMMANDS
+SOURCES += \
+    src/commands/commanddecorator.cpp \
+    src/commands/commandmanager.cpp \
+    src/commands/debugdecorator.cpp \
+    src/commands/command.cpp \
+
+
+#CONTROLLERS
+SOURCES += src/controllers/inputcontroller.cpp \
+    src/controllers/outputcontroller.cpp \
+    src/controllers/consolecontroller.cpp \
+
+#MODELS
+SOURCES += src/models/common.cpp \
+    src/models/context.cpp \
+    src/models/class.cpp \
+    src/models/node.cpp \
+    src/models/variable.cpp \
+    src/models/input.cpp \
+    src/models/output.cpp \
+    src/models/flow.cpp \
+    src/models/function.cpp \
+    src/models/identity.cpp
 
 RESOURCES += qml.qrc
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
-QML_IMPORT_PATH = QT_INSTALL_QML/QtQml/Models.2
+QML_IMPORT_PATH =
 
 # Additional import path used to resolve QML modules just for Qt Quick Designer
-QML_DESIGNER_IMPORT_PATH = QT_INSTALL_QML/QtQml.2/Models
+QML_DESIGNER_IMPORT_PATH =
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -53,29 +89,61 @@ DISTFILES +=
 
 FORMS +=
 
-HEADERS += baseio.h \
-    beziercurve.h \
-    commanddecorator.h \
-    commandmanager.h \
-    debugdecorator.h \
-    genericnode.h \
-    icommand.h \
-    ilinkable.h \
-    input.h \
-    io.h \
-    ioquickitem.h \
-    line.h \
-    link.h \
-    linkabletype.h \
-    observablelist.h \
-    output.h \
-    resourcesnode.h \
-    roundedrectangle.h \
-    dulycanvas.h \
-    eventutilities.h \
-    focusmanager.h \
-    flow.h \
-    baselinkable.h \
-    customshape.h \
-    moveCommand.h \
-    linkablebezieritem.h
+#CORE
+HEADERS += include/baseio.h \
+    include/baselinkable.h \
+    include/dulyscene.h \
+    include/eventutilities.h \
+    include/focusmanager.h \
+    include/ilinkable.h \
+    include/link.h \
+    include/linkabletype.h \
+    include/resourcesnode.h \
+    include/dulyapp.h \
+    include/manager.h \
+    include/project.h \
+    include/commands/movenodecommand.h \
+    include/commands/movecommand.h \
+
+#VIEWS
+HEADERS += include/views/beziercurve.h \
+    include/views/customshape.h \
+    include/views/dulycanvas.h \
+    include/views/flow.h \
+    include/views/genericnode.h \
+    include/views/input.h \
+    include/views/io.h \
+    include/views/iscalable.h \
+    include/views/line.h \
+    include/views/linkablebezieritem.h \
+    include/views/output.h \
+    include/views/roundedrectangle.h \
+    include/views/scalableitem.h \
+    include/views/console.h \
+
+#COMMANDS
+HEADERS += include/commands/commanddecorator.h \
+    include/commands/commandmanager.h \
+    include/commands/debugdecorator.h \
+    include/commands/icommand.h \
+    include/commands/command.h \
+
+
+#CONTROLLERS
+HEADERS += include/controllers/inputcontroller.h \
+    include/controllers/outputcontroller.h \
+    include/controllers/consolecontroller.h \
+
+
+#MODELS
+HEADERS += include/models/common.h \
+    include/models/context.h \
+    include/models/class.h \
+    include/models/node.h \
+    include/models/variable.h \
+    include/models/input.h \
+    include/models/output.h \
+    include/models/flow.h \
+    include/models/function.h \
+    include/models/identity.h \
+    include/models/imodel.h
