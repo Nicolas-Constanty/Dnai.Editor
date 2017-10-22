@@ -37,109 +37,82 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="MoveCommand.cpp">
+    <ClCompile Include="src\baseio.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="baseio.cpp">
+    <ClCompile Include="src\baselinkable.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="beziercurve.cpp">
+    <ClCompile Include="src\views\beziercurve.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="commanddecorator.cpp">
+    <ClCompile Include="src\commands\commanddecorator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="commandmanager.cpp">
+    <ClCompile Include="src\commands\commandmanager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="debugdecorator.cpp">
+    <ClCompile Include="src\views\customshape.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="dulycanvas.cpp">
+    <ClCompile Include="src\commands\debugdecorator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="eventutilities.cpp">
+    <ClCompile Include="src\views\dulycanvas.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="flow.cpp">
+    <ClCompile Include="src\dulyscene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="focusmanager.cpp">
+    <ClCompile Include="src\eventutilities.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="genericnode.cpp">
+    <ClCompile Include="src\views\flow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="input.cpp">
+    <ClCompile Include="src\focusmanager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="io.cpp">
+    <ClCompile Include="src\views\genericnode.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ioquickitem.cpp">
+    <ClCompile Include="src\views\input.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="line.cpp">
+    <ClCompile Include="src\controllers\inputcontroller.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="link.cpp">
+    <ClCompile Include="src\views\io.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="main.cpp">
+    <ClCompile Include="src\views\line.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="output.cpp">
+    <ClCompile Include="src\link.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="roundedrectangle.cpp">
+    <ClCompile Include="src\views\linkablebezieritem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_dulycanvas.cpp">
+    <ClCompile Include="src\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\commands\moveCommand.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\views\output.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\views\roundedrectangle.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\views\scalableitem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_scalableitem.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="Release\moc_dulycanvas.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_beziercurve.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_beziercurve.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_genericnode.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_genericnode.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_flow.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_flow.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_observablelist.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_observablelist.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_line.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_line.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_resourcesnode.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_resourcesnode.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_ioquickitem.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_ioquickitem.cpp">
+    <ClCompile Include="Release\moc_scalableitem.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
     <ClCompile Include="Debug\moc_roundedrectangle.cpp">
@@ -148,17 +121,23 @@
     <ClCompile Include="Release\moc_roundedrectangle.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_io.cpp">
+    <ClCompile Include="Debug\moc_resourcesnode.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="Release\moc_io.cpp">
+    <ClCompile Include="Release\moc_resourcesnode.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\qrc_qml.cpp">
+    <ClCompile Include="Debug\moc_line.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="baselinkable.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Release\moc_line.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_dulycanvas.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_dulycanvas.cpp">
+      <Filter>Generated Files</Filter>
     </ClCompile>
     <ClCompile Include="Debug\moc_customshape.cpp">
       <Filter>Generated Files</Filter>
@@ -166,87 +145,159 @@
     <ClCompile Include="Release\moc_customshape.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="customshape.cpp">
+    <ClCompile Include="Debug\moc_beziercurve.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_beziercurve.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_flow.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_flow.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_dulyscene.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_dulyscene.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_io.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_io.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_genericnode.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_genericnode.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\qrc_qml.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\controllers\outputcontroller.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="linkablebezieritem.cpp">
+    <ClCompile Include="src\commands\command.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\controllers\consolecontroller.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\views\console.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_console.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_console.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_consolecontroller.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_consolecontroller.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\dulyapp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="MoveCommand.h">
+    <ClInclude Include="include\baseio.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="baseio.h">
+    <ClInclude Include="include\baselinkable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <CustomBuild Include="beziercurve.h">
+    <CustomBuild Include="include\views\beziercurve.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
-    <ClInclude Include="commanddecorator.h">
+    <ClInclude Include="include\commands\commanddecorator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="commandmanager.h">
+    <ClInclude Include="include\commands\commandmanager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="debugdecorator.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <CustomBuild Include="dulycanvas.h">
+    <CustomBuild Include="include\views\customshape.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
-    <ClInclude Include="eventutilities.h">
+    <ClInclude Include="include\commands\debugdecorator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <CustomBuild Include="flow.h">
+    <CustomBuild Include="include\views\dulycanvas.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
-    <ClInclude Include="focusmanager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <CustomBuild Include="genericnode.h">
+    <CustomBuild Include="include\dulyscene.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
-    <ClInclude Include="icommand.h">
+    <ClInclude Include="include\eventutilities.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ilinkable.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="input.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <CustomBuild Include="io.h">
+    <CustomBuild Include="include\views\flow.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
-    <CustomBuild Include="ioquickitem.h">
-      <Filter>Header Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="line.h">
-      <Filter>Header Files</Filter>
-    </CustomBuild>
-    <ClInclude Include="link.h">
+    <ClInclude Include="include\focusmanager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="linkabletype.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <CustomBuild Include="observablelist.h">
+    <CustomBuild Include="include\views\genericnode.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
-    <ClInclude Include="output.h">
+    <ClInclude Include="include\commands\icommand.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <CustomBuild Include="resourcesnode.h">
-      <Filter>Header Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="roundedrectangle.h">
-      <Filter>Header Files</Filter>
-    </CustomBuild>
-    <ClInclude Include="baselinkable.h">
+    <ClInclude Include="include\ilinkable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="linkablebezieritem.h">
+    <ClInclude Include="include\views\input.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\controllers\inputcontroller.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <CustomBuild Include="include\views\io.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <ClInclude Include="include\views\iscalable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <CustomBuild Include="include\views\line.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <ClInclude Include="include\link.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\views\linkablebezieritem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\linkabletype.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\commands\moveCommand.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\views\output.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <CustomBuild Include="include\resourcesnode.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="include\views\roundedrectangle.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="include\views\scalableitem.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <ClInclude Include="include\controllers\outputcontroller.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\commands\command.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dulyapp.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -257,15 +308,33 @@
     <CustomBuild Include="release\moc_predefs.h.cbt">
       <Filter>Generated Files</Filter>
     </CustomBuild>
-    <CustomBuild Include="customshape.h">
+    <CustomBuild Include="include\views\console.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="include\controllers\consolecontroller.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Components\AddNode.qml">
+    <None Include="Resources\Nodes\Operator\BinaryOperator\AccessModel.qml">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="Resources\Components\AddNodeModel.qml">
+    <None Include="Resources\Nodes\Operator\BinaryOperator\AddNodeModel.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\Nodes\Operator\BinaryOperator\Logical\AndModel.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\Nodes\Operator\UnaryOperator\BNotModel.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\Nodes\Operator\BinaryOperator\BinaryAndModel.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\Nodes\Operator\BinaryOperatorModel.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\Nodes\Operator\BinaryOperator\BinaryOrModel.qml">
       <Filter>Resource Files</Filter>
     </None>
     <None Include="Resources\Components\ColorPicker.qml">
@@ -277,13 +346,43 @@
     <None Include="Resources\Models\ColorPickerModel.qml">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="Resources\Components\Console.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\Forms\ConsoleForm.ui.qml">
+      <Filter>Resource Files</Filter>
+    </None>
     <None Include="Resources\Components\Container.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\Nodes\Operator\UnaryOperator\DecrementModel.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\Panels\DefaultPanel.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\Nodes\Operator\BinaryOperator\Logical\DifferentModel.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\Nodes\Operator\BinaryOperator\DivideModel.qml">
       <Filter>Resource Files</Filter>
     </None>
     <None Include="Resources\Components\DropDown.qml">
       <Filter>Resource Files</Filter>
     </None>
     <None Include="Resources\Forms\DropDownForm.ui.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\Nodes\Operator\BinaryOperator\Logical\EqualModel.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\Nodes\Operator\BinaryOperator\Logical\GreaterEqualModel.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\Nodes\Operator\BinaryOperator\Logical\GreaterModel.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\Nodes\Operator\UnaryOperator\IncrementModel.qml">
       <Filter>Resource Files</Filter>
     </None>
     <None Include="Resources\Models\LanguageModel.qml">
@@ -295,13 +394,31 @@
     <None Include="Resources\Forms\LanguagePanelForm.ui.qml">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="Resources\Nodes\Operator\BinaryOperator\LeftShiftModel.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\Nodes\Operator\BinaryOperator\Logical\LessEqualModel.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\Nodes\Operator\BinaryOperator\Logical\LessModel.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\Nodes\Operator\BinaryOperator\LogicalNodeModel.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\Nodes\Operator\BinaryOperator\ModuloModel.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\Nodes\Operator\BinaryOperator\MultiplicateModel.qml">
+      <Filter>Resource Files</Filter>
+    </None>
     <None Include="Resources\Components\Node.qml">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="Resources\Components\NodeForm.ui.qml">
+    <None Include="Resources\Forms\NodeForm.ui.qml">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="Resources\Components\NodeModel.qml">
+    <None Include="Resources\Nodes\NodeModel.qml">
       <Filter>Resource Files</Filter>
     </None>
     <None Include="Resources\Panels\NodePanel.qml">
@@ -310,10 +427,28 @@
     <None Include="Resources\Forms\NodePanelForm.ui.qml">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="Resources\Nodes\Operator\UnaryOperator\NotModel.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\Nodes\Operator\BinaryOperator\Logical\OrModel.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\Components\Printer.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\Nodes\Operator\UnaryOperator\ReverseModel.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\Nodes\Operator\BinaryOperator\RightShiftModel.qml">
+      <Filter>Resource Files</Filter>
+    </None>
     <None Include="Resources\Panels\SettingPanel.qml">
       <Filter>Resource Files</Filter>
     </None>
     <None Include="Resources\Forms\SettingPanelForm.ui.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\Nodes\Operator\BinaryOperator\SubstractModel.qml">
       <Filter>Resource Files</Filter>
     </None>
     <None Include="Resources\Models\ThemeModel.qml">
@@ -328,6 +463,12 @@
     <None Include="Resources\Components\ToolBarHeader.qml">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="Resources\Nodes\Operator\UnaryOperatorModel.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\Nodes\Operator\BinaryOperator\XorModel.qml">
+      <Filter>Resource Files</Filter>
+    </None>
     <None Include="main.qml">
       <Filter>Resource Files</Filter>
     </None>
@@ -337,6 +478,5 @@
     <None Include="qtquickcontrols2.conf">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
 </Project>
