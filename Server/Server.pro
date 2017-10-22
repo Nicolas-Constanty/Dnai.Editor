@@ -13,7 +13,8 @@ TEMPLATE = app
 SOURCES += main.cpp \
     serverthread.cpp \
     dulyserver.cpp \
-    dulycommunicationserver.cpp
+    dulycommunicationserver.cpp \
+    packagemanager.cpp \
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which as been marked deprecated (the exact warnings
@@ -29,4 +30,9 @@ DEFINES += QT_DEPRECATED_WARNINGS
 HEADERS += \
     serverthread.h \
     dulyserver.h \
-    dulycommunicationserver.h
+    dulycommunicationserver.h \
+    packagemanager.h \
+    headercommunication.h \
+    authentificationpackage.h \
+    eventregisterpackage.h \
+    eventsendpackage.h
