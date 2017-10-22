@@ -12,6 +12,7 @@
 #include "views/console.h"
 #include "controllers/consolecontroller.h"
 #include "dulyapp.h"
+#include "manager.h"
 
 struct RegisterSettings
 {
@@ -49,10 +50,19 @@ void registerDulyUtils()
     qmlRegisterType<duly_gui::views::Console>(s.NamespaceName, s.version, s.subVersion, "Console");
 }
 
+static QObject *manager_singleton_provider(QQmlEngine *engine, QJSEngine *scriptEngine)
+{
+    Q_UNUSED(engine)
+    Q_UNUSED(scriptEngine)
+
+    return new duly_gui::Manager();
+}
+
 int main(int argc, char *argv[])
 {
     registerCustomGeometry();
     registerDulyUtils();
+    qmlRegisterSingletonType<duly_gui::Manager>("Tools", 1, 0, "Manager", manager_singleton_provider);
 
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     duly_gui::DulyApp app(argc, argv);
