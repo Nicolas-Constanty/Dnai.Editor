@@ -1,4 +1,4 @@
-import QtQuick 2.4
+import QtQuick 2.9
 import QtQuick.Dialogs 1.2
 import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
@@ -7,6 +7,7 @@ import QtQuick.Controls.Material 2.2
 Page {
     property alias fileDialog: fileDialog
     property alias chooseButton: pathButton
+    property alias cancelButton: cancelButton
     property alias createButton: createButton
     property alias projectPath: projectPath
     property alias projectName: projectName
@@ -18,6 +19,12 @@ Page {
         folder: shortcuts.home
         selectFolder: true
         selectMultiple: false
+    }
+    TabBar {
+        width: parent.width
+        TabButton {
+            text: qsTr("Create a new project")
+        }
     }
     ColumnLayout {
         width: parent.width - 40
@@ -84,6 +91,13 @@ Page {
 
     footer: ToolBar {
         Material.background: Material.color(Material.Grey, Material.Shade800)
+        ToolButton {
+            id: cancelButton
+            anchors.left: parent.left
+            leftPadding: 20
+            rightPadding: 20
+            text: qsTr("Cancel")
+        }
         ToolButton {
             id: createButton
             anchors.right: parent.right

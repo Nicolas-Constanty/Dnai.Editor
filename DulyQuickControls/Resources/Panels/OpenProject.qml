@@ -18,6 +18,11 @@ OpenProjectForm {
         if (projectPath.text) {
             Manager.loadProject(projectPath.text);
             popup.close()
+            projectPath.text = "";
         }
+    }
+    cancelButton.onClicked: function () {
+        popup.close()
+        projectPath.text = "";
     }
 }
