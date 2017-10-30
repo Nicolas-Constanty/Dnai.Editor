@@ -1,5 +1,6 @@
 #include <QDebug>
 #include "dulyserver.h"
+#include "eventmanager.h"
 
 DulyServer::DulyServer(quint16 port,
                        const QHostAddress &address,
@@ -25,22 +26,21 @@ void DulyServer::start() {
     }
 }
 
-void DulyServer::onClientDisconnect() {
-    std::list<DulyCommunicationServer *>::iterator it = m_clients.begin();
+void DulyServer::onClientDisconnected(DulyCommunicationServer *client) {
+    qDebug() << "[INFO] client disconnected";
+    EventManager::shared().removeClient(client);
+    m_clients.remove(client);
+}
 
-    while (it != m_clients.end()) {
-        if ((*it)->socket()->isOpen()) {
-            m_clients.erase(it);
-            return;
-        }
-    }
+void DulyServer::onClientDisconnect() {
 }
 
 void DulyServer::connectionAccepted() {
     QTcpSocket *socket = this->nextPendingConnection();
-    DulyCommunicationServer *newCommunication = new DulyCommunicationServer(socket);
+    DulyCommunicationServer *newCommunication = new DulyCommunicationServer(socket, &m_clients);
 
-    connect(socket, SIGNAL(disconnected()), this, SLOT(onClientDisconnect()));
+    connect(socket, SIGNAL(disconnected()), newCommunication, SLOT(onDisconnected()));
+    connect(newCommunication, SIGNAL(clientDisconnected(DulyCommunicationServer*)), this, SLOT(onClientDisconnected(DulyCommunicationServer*)));
 
     newCommunication->start();
     m_clients.push_back(newCommunication);

@@ -5,15 +5,13 @@
 #include <QSettings>
 #include "dulyserver.h"
 
-class ServerThread : public QThread
+class Server
 {
-    Q_OBJECT
+public:
+    Server();
 
 public:
-    ServerThread(QObject *object = 0);
-
-protected:
-    void run();
+    void start();
 
 private:
     DulyServer *m_dulyServer;

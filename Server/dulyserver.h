@@ -10,7 +10,7 @@ class DulyServer : public QTcpServer
     Q_OBJECT
 
 public:
-    DulyServer(quint16 port = 0, const QHostAddress &address = QHostAddress::Any, QObject *parent = Q_NULLPTR);
+    DulyServer(quint16 port = 0, const QHostAddress &address = QHostAddress::LocalHost, QObject *parent = Q_NULLPTR);
 
 public:
     void start();
@@ -18,6 +18,7 @@ public:
 public slots:
     void connectionAccepted();
     void onClientDisconnect();
+    void onClientDisconnected(DulyCommunicationServer *);
 
 private:
     quint16 m_port;
