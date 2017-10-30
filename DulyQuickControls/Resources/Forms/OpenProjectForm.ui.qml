@@ -7,6 +7,7 @@ import QtQuick.Controls.Material 2.2
 Page {
     property alias fileDialog: fileDialog
     property alias chooseButton: pathButton
+    property alias cancelButton: cancelButton
     property alias openButton: openButton
     property alias projectPath: projectPath
 
@@ -16,6 +17,12 @@ Page {
         folder: shortcuts.home
         selectMultiple: false
         nameFilters: ["Duly project (*.dulyproject)"]
+    }
+    TabBar {
+        width: parent.width
+        TabButton {
+            text: qsTr("Open a project")
+        }
     }
     ColumnLayout {
         width: parent.width - 40
@@ -36,7 +43,7 @@ Page {
                 anchors.rightMargin: 50
                 anchors.left: pathLabel.right
                 anchors.right: pathButton.left
-                placeholderText: qsTr("Choose a folder")
+                placeholderText: qsTr("Choose a project")
                 text: fileDialog.fileUrl
                 readOnly: true
             }
@@ -50,6 +57,13 @@ Page {
 
     footer: ToolBar {
         Material.background: Material.color(Material.Grey, Material.Shade800)
+        ToolButton {
+            id: cancelButton
+            anchors.left: parent.left
+            leftPadding: 20
+            rightPadding: 20
+            text: qsTr("Cancel")
+        }
         ToolButton {
             id: openButton
             anchors.right: parent.right

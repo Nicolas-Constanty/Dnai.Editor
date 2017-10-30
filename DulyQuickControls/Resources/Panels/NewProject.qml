@@ -17,6 +17,15 @@ NewProjectForm {
         if (projectPath.text && projectName.text) {
             Manager.createProject(projectName.text, projectDescription.text, projectPath.text);
             popup.close()
+            projectName.text = "";
+            projectDescription.text = "";
+            projectPath.text = "";
         }
+    }
+    cancelButton.onClicked: function () {
+        popup.close()
+        projectName.text = "";
+        projectDescription.text = "";
+        projectPath.text = "";
     }
 }
