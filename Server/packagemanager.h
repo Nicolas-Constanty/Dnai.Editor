@@ -4,29 +4,14 @@
 #include <QByteArray>
 #include <map>
 #include <functional>
+#include <QObject>
 
-class PackageManager
+class PackageManager : public QObject
 {
-
-private:
-    /*class FunctionInfo {
-    public:
-        FunctionInfo(std::function<void(void*)> func, unsigned int size) : func(func), size(size) {}
-        FunctionInfo(FunctionInfo const &other) {
-            *this = other;
-        }
-        FunctionInfo &operator=(FunctionInfo const &other) {
-            func = other.func;
-            size = other.size;
-            return *this;
-        }
-
-        std::function<void(void*)> func;
-        unsigned int size;
-    };*/
+    Q_OBJECT
 
 public:
-    PackageManager() {
+    PackageManager() : QObject(0) {
 
     }
 

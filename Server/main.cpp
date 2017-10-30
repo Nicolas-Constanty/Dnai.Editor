@@ -1,13 +1,13 @@
-#include "serverthread.h"
+#include "server.h"
 #include <QCoreApplication>
 
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
 
-    ServerThread serverThread;
+    Server server;
 
-    serverThread.start();
+    server.start();
 
     return a.exec();
 }
