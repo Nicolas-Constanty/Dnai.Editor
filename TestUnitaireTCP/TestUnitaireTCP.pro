@@ -4,20 +4,19 @@ QT += network
 
 CONFIG += c++11
 
-TARGET = TestUnitaireTCP
-CONFIG += console
+TARGET = EventClient
+CONFIG += staticlib
 CONFIG -= app_bundle
 
-TEMPLATE = app
+TEMPLATE = lib
 
 INCLUDEPATH += ../Server/
 
-SOURCES += main.cpp \
-    ../Server/packagemanager.cpp \
+SOURCES += ../Server/packagemanager.cpp \
     ../Server/dulycommunicationserver.cpp \
     createpackagefunction.cpp \
     clientcommunication.cpp \
-    testclass.cpp
+#    testclass.cpp
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which as been marked deprecated (the exact warnings
@@ -38,4 +37,4 @@ HEADERS += \
     ../Server/eventsendpackage.h \
     ../Server/authentificationpackage.h \
     clientcommunication.h \
-    testclass.h
+   # testclass.h
