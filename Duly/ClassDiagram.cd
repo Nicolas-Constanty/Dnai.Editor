@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="duly_gui::BaseIo" Collapsed="true">
+    <Position X="1.75" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACIAAAAAAAAAAAAAAAAAAAARAAAAAACAAAAAAAAAA=</HashCode>
+      <FileName>include\baseio.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="duly_gui::BaseLinkable" Collapsed="true">
+    <Position X="3" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAAAAAAAAABIgAAAAIAAAAAAKAAEAAAAAABAJAA=</HashCode>
+      <FileName>include\baselinkable.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="duly_gui::DulyApp" Collapsed="true">
+    <Position X="23" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAIAAAA=</HashCode>
+      <FileName>include\dulyapp.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="duly_gui::EventUtilities" Collapsed="true">
+    <Position X="21.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAEAAACAAAAEAAAAAAAAAAAA=</HashCode>
+      <FileName>include\eventutilities.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="duly_gui::FocusManager" Collapsed="true">
+    <Position X="0.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAABQAAABAAAAAAAAAAEAAAAAAAAAQAAIgAAAAA=</HashCode>
+      <FileName>include\focusmanager.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="duly_gui::FocusManagerIo" Collapsed="true">
+    <Position X="0.5" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAABAAAAAAAAAAAAAAAAAAAAAEAgAAAAAAAAAAA=</HashCode>
+      <FileName>include\focusmanager.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="duly_gui::Link" Collapsed="true">
+    <Position X="17.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AiAAAAAAAAAAAAAAAAIAABAAAAGAAAgAAAAAQAAAAAA=</HashCode>
+      <FileName>include\link.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="duly_gui::ILinkable" Collapsed="true">
+    <Position X="3" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAAEAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>include\ilinkable.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="duly_gui::ALinkable" Collapsed="true">
+    <Position X="3" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>DAAAAAAEAAAAAAAIgAAAAAAAAAAIAAAEAAAAAABAJAA=</HashCode>
+      <FileName>include\ilinkable.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="duly_gui::IScalable" Collapsed="true">
+    <Position X="5.25" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAEAAABAAA=</HashCode>
+      <FileName>include\views\iscalable.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="duly_gui::LinkableType&lt;T&gt;" Collapsed="true">
+    <Position X="19.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAAAAACAAAAIAAAAAAAQAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>include\linkabletype.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="duly_gui::DulyScene" Collapsed="true">
+    <Position X="19.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>include\dulyscene.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="duly_gui::commands::Command" Collapsed="true">
+    <Position X="8.5" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAABCAAAAAAAAAICAAMBAAAAAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>include\commands\command.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="duly_gui::commands::CommandDecorator" Collapsed="true">
+    <Position X="10.75" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>include\commands\commanddecorator.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="duly_gui::commands::CommandManager" Collapsed="true">
+    <Position X="17.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAACAAkgAAAAAAAAAEAAAEAAIAAAAAJQAgAAACAAAA=</HashCode>
+      <FileName>include\commands\commandmanager.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="duly_gui::commands::DebugDecorator" Collapsed="true">
+    <Position X="10.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAhCAAAAAAAAAACAAMAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>include\commands\debugdecorator.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="duly_gui::commands::ICommand" Collapsed="true">
+    <Position X="9.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABCEAAAAAAAAACAAMAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>include\commands\icommand.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="duly_gui::commands::MoveCommand" Collapsed="true">
+    <Position X="8.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABCAAAAAAAAAACAAEAAAAQAAAAAAAAAQAAAAAgAA=</HashCode>
+      <FileName>include\commands\moveCommand.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="duly_gui::controllers::OutputController" Collapsed="true">
+    <Position X="0.75" Y="10.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAACAAAAAAAA=</HashCode>
+      <FileName>include\controllers\outputcontroller.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="duly_gui::controllers::InputController" Collapsed="true">
+    <Position X="3" Y="10.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAgAAAAAAAAAAAAAIAAAAAAAAAAAA=</HashCode>
+      <FileName>include\controllers\inputcontroller.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="duly_gui::controllers::ConsoleController" Collapsed="true">
+    <Position X="21.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAQABABAAAAA=</HashCode>
+      <FileName>include\controllers\consolecontroller.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="duly_gui::views::BezierCurve" Collapsed="true">
+    <Position X="7.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CIRgkAAASFBLEigIPQAAAgAAoBEQICghiAERCAAA4AA=</HashCode>
+      <FileName>include\views\beziercurve.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="duly_gui::views::Input" Collapsed="true">
+    <Position X="4.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAIAAAAAAgAAAAAAAAkAAAAABAAAAAAAAAAAA=</HashCode>
+      <FileName>include\views\input.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="duly_gui::views::GenericNode" Collapsed="true">
+    <Position X="9.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAiQgQAIABBgAKCAJAAAQFYAA0QIFIQAMARQAQAGEI=</HashCode>
+      <FileName>include\views\genericnode.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="duly_gui::views::LinkableBezierItem" Collapsed="true">
+    <Position X="8.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAiAAIgBAAAAoICAAEABACAAQQFBAABAAAAQAAAA=</HashCode>
+      <FileName>include\views\linkablebezieritem.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="duly_gui::views::Output" Collapsed="true">
+    <Position X="1.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAAAAgAAAIAAAAgAAAAABAAAAAAAAAAAA=</HashCode>
+      <FileName>include\views\output.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="duly_gui::views::CustomShape" Collapsed="true">
+    <Position X="12.25" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACQAIwEAAgAIAIEEI4JEAAEoQCICBAAABAAA=</HashCode>
+      <FileName>include\views\customshape.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="duly_gui::views::DulyCanvas" Collapsed="true">
+    <Position X="12" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEDAEABBRAAIAAARAAAAgAQCQIAoAQAEhEpAAAlA=</HashCode>
+      <FileName>include\views\dulycanvas.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="duly_gui::views::FlowBackend" Collapsed="true">
+    <Position X="5.25" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAAAAAAAAgCAAAAAAAQAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>include\views\flow.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="duly_gui::views::Flow" Collapsed="true">
+    <Position X="2.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAIgAAIAAAAAAgAAAAAAAAABARQBBAABABAAQAAAA=</HashCode>
+      <FileName>include\views\flow.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="duly_gui::views::Console" Collapsed="true">
+    <Position X="19.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgCAAAIAAQCBAAAAAAAoAAAAAAAAAAA=</HashCode>
+      <FileName>include\views\console.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="duly_gui::views::Io" Collapsed="true">
+    <Position X="5.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAYAAAAAAgAAAAAAAAAIAAiFAFQBAAABAFAAQBAAA=</HashCode>
+      <FileName>include\views\io.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="duly_gui::views::Line" Collapsed="true">
+    <Position X="23" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAgAAACAABABgAMAAAAgAAAAEAIBAAgAABCEEBIAA=</HashCode>
+      <FileName>include\views\line.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="duly_gui::views::RoundedRectangle" Collapsed="true">
+    <Position X="15.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAgAEABAEBAAABAEAACAAQAACEAoAAAAAAABAALQEAA=</HashCode>
+      <FileName>include\views\roundedrectangle.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="duly_gui::views::ScalableItem" Collapsed="true">
+    <Position X="9.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIBgAAAAAAAAAAAQAAAAAAAAAAAEAAABgAA=</HashCode>
+      <FileName>include\views\scalableitem.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DulyResources" Collapsed="true">
+    <Position X="17.75" Y="1.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>include\resourcesnode.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="RegisterSettings" Collapsed="true">
+    <Position X="17.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgACACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAA=</HashCode>
+      <FileName>src\main.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
