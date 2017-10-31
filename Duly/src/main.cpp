@@ -14,6 +14,10 @@
 #include "dulyapp.h"
 #include "manager.h"
 
+#include "include/clientcommunication.h"
+#include "include/testconnection.h"
+#include <functional>
+
 struct RegisterSettings
 {
 	RegisterSettings(const char* namespaceName, int version, int subVersion)
@@ -58,6 +62,8 @@ static QObject *manager_singleton_provider(QQmlEngine *engine, QJSEngine *script
     return new duly_gui::Manager();
 }
 
+#include <QTimer>
+
 int main(int argc, char *argv[])
 {
     registerCustomGeometry();
@@ -78,5 +84,21 @@ int main(int argc, char *argv[])
         return -1;
 
     QSettings settings("folderName", "fileName");
+
+    // DEBUT CODE POUR LA COMMUNICATION CLIENT SERVER
+    ClientCommunication com(QHostAddress::LocalHost, 7777, "Duly GUI");
+    com.start();
+
+    TestConnection test(com);
+
+    com.registerEvent("YOLO", 4, std::bind(&TestConnection::onReceiveEventKoala, &test, std::placeholders::_1, std::placeholders::_2));
+
+    QTimer *timer = new QTimer();
+    QObject::connect(timer, SIGNAL(timeout()), &test, SLOT(update()));
+    timer->start(1000);
+    // FIN CODE COMMUNICATION SERVER
+
+
+
     return app.exec();
 }
