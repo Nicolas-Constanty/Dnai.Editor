@@ -13,16 +13,11 @@ ClientCommunication::ClientCommunication(QHostAddress addr,
 {
     qRegisterMetaType<unsigned int>();
     connect(this, SIGNAL(runStarted()), this, SLOT(onRunStarted()));
-   // connect(this, SIGNAL(sendEvent(QString,void*,uint)),
-   //         this, SLOT(onSendEvent(QString,void*,uint)), Qt::QueuedConnection);
 }
 
 void ClientCommunication::onRunStarted() {
- //   qDebug() << "onRunStarted start";
     connect(m_com, SIGNAL(receiveSendEventSignal(QByteArray *)),
             this, SLOT(onReceiveSendEventSignal(QByteArray *)), Qt::QueuedConnection);
-    //connect(m_com, SIGNAL(reveiveNewEventName(QString, unsigned int)),
-    //        this, SLOT(onReveiveNewEventName(QString, unsigned int)), Qt::QueuedConnection);
 }
 
 void ClientCommunication::onReceiveSendEventSignal(QByteArray *bytes) {
@@ -43,30 +38,31 @@ void ClientCommunication::onReceiveSendEventSignal(QByteArray *bytes) {
 
 }
 
-//void ClientCommunication::onReveiveNewEventName(QString name, unsigned int id) {
-    /*return;
+void ClientCommunication::sendEvent(QString const &name, void *data, unsigned int size) {
 
-    if (id < m_events.size()) {
-        return;
-     //   m_events[id] = EventCallBack(name, std::function<void (void *, unsigned int)>());
-    }
+    SendEventSendFromClientPackage *eventSendPackage = createEventSendFromClientPackage(name, data, size);
 
-    QList<EventCallBack>::iterator it = m_eventsUnk.begin();
-    while (it != m_eventsUnk.end()) {
-        if ((*it).name == name) {
-            m_events.push_back((*it));
-            m_eventsUnk.erase(it);
-            return;
-        }
-        ++it;
-    }
-    if (m_events.size() == id) {
-        m_events.push_back(EventCallBack(name, std::function<void (void *, unsigned int)>()));
-    } else {
-        qDebug() << "ERROR push_back event " << id << " name : " << name;
-    }
-    //m_events.push_back(EventCallBack(name, m_func));*/
-//}
+    emit m_com->sendDataAllocated(eventSendPackage, sizeof(SendEventSendFromClientPackage) + size);
+}
+
+void ClientCommunication::registerEvent(QString const &eventName,
+                   unsigned int size,
+                   std::function<void (void *, unsigned int)> func) {
+    static std::hash<std::string> h1;
+
+    size_t str_hash = h1(eventName.toStdString());
+
+    if (!m_com)
+        m_sem.acquire();
+
+
+    m_eventsRegister.emplace(str_hash, EventCallBack(eventName, func));
+
+    SendEventRegisterPackage *eventRegister2 = (SendEventRegisterPackage *)malloc(sizeof(SendEventRegisterPackage));
+    createEventRegisterPackage(*eventRegister2, eventName, size, true);
+    emit m_com->sendDataAllocated(eventRegister2, sizeof(*eventRegister2));
+}
+
 
 void ClientCommunication::run() {
    // qDebug() << "OK";
