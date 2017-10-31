@@ -8,15 +8,17 @@ TARGET = Server
 CONFIG += console
 CONFIG -= app_bundle
 
+INCLUDEPATH += include/
+
 TEMPLATE = app
 
-SOURCES += main.cpp \
-    dulyserver.cpp \
-    dulycommunicationserver.cpp \
-    packagemanager.cpp \
-    eventmanager.cpp \
-    ../TestUnitaireTCP/createpackagefunction.cpp \
-    server.cpp
+SOURCES += src/main.cpp \
+    src/dulyserver.cpp \
+    src/dulycommunicationserver.cpp \
+    src/packagemanager.cpp \
+    src/eventmanager.cpp \
+    src/createpackagefunction.cpp \
+    src/server.cpp
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which as been marked deprecated (the exact warnings
@@ -31,12 +33,12 @@ DEFINES += SERVER_MODE
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 HEADERS += \
-    dulyserver.h \
-    dulycommunicationserver.h \
-    packagemanager.h \
-    headercommunication.h \
-    authentificationpackage.h \
-    eventregisterpackage.h \
-    eventsendpackage.h \
-    eventmanager.h \
-    server.h
+    include/dulyserver.h \
+    include/dulycommunicationserver.h \
+    include/packagemanager.h \
+    include/headercommunication.h \
+    include/authentificationpackage.h \
+    include/eventregisterpackage.h \
+    include/eventsendpackage.h \
+    include/eventmanager.h \
+    include/server.h
