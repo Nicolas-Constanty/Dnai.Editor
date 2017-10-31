@@ -50,7 +50,7 @@ private:
 };*/
 
 #include <QTimer>
-int main(int argc, char *argv[])
+/*int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
     qRegisterMetaType<size_t>();
@@ -88,3 +88,4 @@ int main(int argc, char *argv[])
 
     return a.exec();
 }
+*/
