@@ -104,6 +104,7 @@ HEADERS += include/baseio.h \
     include/project.h \
     include/commands/movenodecommand.h \
     include/commands/movecommand.h \
+    include/testconnection.h
 
 #VIEWS
 HEADERS += include/views/beziercurve.h \
@@ -147,3 +148,8 @@ HEADERS += include/models/common.h \
     include/models/function.h \
     include/models/identity.h \
     include/models/imodel.h
+
+#LIB
+DEPENDPATH += $$PWD/lib/EventClient/
+INCLUDEPATH += $$PWD/lib/EventClient/
+LIBS += -L "$$PWD/lib/EventClient/Livraison" -lEventClient
