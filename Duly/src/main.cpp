@@ -16,6 +16,8 @@
 
 #include "include/clientcommunication.h"
 #include "include/testconnection.h"
+#include "include/eventconsumer.h"
+#include "include/clientmanager.h"
 #include <functional>
 
 struct RegisterSettings
@@ -31,6 +33,10 @@ struct RegisterSettings
 	const int version;
 	const int subVersion;
 };
+
+void registerCustomConnection() {
+    qmlRegisterType<EventConsumer>("Communication.EventConsumer", 1, 0, "EventConsumer");
+}
 
 void registerCustomGeometry()
 {
@@ -68,6 +74,8 @@ int main(int argc, char *argv[])
 {
     registerCustomGeometry();
     registerDulyUtils();
+    registerCustomConnection();
+
     qmlRegisterSingletonType<duly_gui::Manager>("Tools", 1, 0, "Manager", manager_singleton_provider);
 
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
@@ -75,6 +83,9 @@ int main(int argc, char *argv[])
 
     app.setOrganizationName("Duly");
     app.setOrganizationDomain("Duly.com");
+
+    ClientCommunication *com = ClientManager::shared().newClient(QHostAddress::LocalHost, 7777, "Duly GUI");
+
     app.setApplicationName("Duly Application");
 
     QQmlApplicationEngine engine;
@@ -86,16 +97,24 @@ int main(int argc, char *argv[])
     QSettings settings("folderName", "fileName");
 
     // DEBUT CODE POUR LA COMMUNICATION CLIENT SERVER
-    ClientCommunication com(QHostAddress::LocalHost, 7777, "Duly GUI");
-    com.start();
 
-    TestConnection test(com);
+//    ClientCommunication com(QHostAddress::LocalHost, 7777, "Duly GUI");
+//    com.start();
 
-    com.registerEvent("YOLO", 4, std::bind(&TestConnection::onReceiveEventKoala, &test, std::placeholders::_1, std::placeholders::_2));
+    TestConnection test(*com);
+
+   // com.registerEvent("YOLO", 4, std::bind(&TestConnection::onReceiveEventKoala, &test, std::placeholders::_1, std::placeholders::_2));
 
     QTimer *timer = new QTimer();
     QObject::connect(timer, SIGNAL(timeout()), &test, SLOT(update()));
     timer->start(1000);
+    QTimer *timer2 = new QTimer();
+    QObject::connect(timer2, SIGNAL(timeout()), &test, SLOT(updateTITI()));
+    timer2->start(3000);
+    QTimer *timer3 = new QTimer();
+    QObject::connect(timer3, SIGNAL(timeout()), &test, SLOT(updateTOTO()));
+    timer3->start(5000);
+
     // FIN CODE COMMUNICATION SERVER
 
 

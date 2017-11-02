@@ -12,7 +12,6 @@
 
 class Q_DECL_EXPORT ClientCommunication : public QThread
 {
-
     Q_OBJECT
 
 public:
