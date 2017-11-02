@@ -52,7 +52,6 @@ public slots:
         toto.c = 8;
         toto.d = 567890;
         toto.l = 'K';
-        qDebug() << sizeof(long);
         m_com.sendEvent("TOTO", &toto, sizeof(POPI));
     }
 

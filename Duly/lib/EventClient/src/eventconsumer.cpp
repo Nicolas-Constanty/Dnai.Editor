@@ -1,7 +1,7 @@
 #include <QDebug>
 #include <functional>
 #include "clientmanager.h"
-#include "eventconsumer.h"
+#include "include/eventconsumer.h"
 
 EventConsumer::EventConsumer(QObject *parent)
     : QObject(parent),
@@ -52,7 +52,6 @@ void EventConsumer::receiveData(void *data, unsigned int size) {
         {
             str[info.size] = '\0';
             var = QVariant(QString(str));
-            qDebug() << var;
             break;
         }
         case 'L':
@@ -103,11 +102,8 @@ void EventConsumer::onPropertiesInit() {
         QList<DescriptionParser::TypeParser> const &list = m_parser.getList();
         unsigned int size = 0;
         foreach (DescriptionParser::TypeParser const &info, list) {
-            //qDebug() << "---DATA---";
-            //qDebug() << info.firstLetter;
             size += info.size;
         }
-        // SIZE A CHANGER EN FONCTION DE LA DESCRIPTION
         m_com->registerEvent(m_eventName, size, std::bind(&EventConsumer::receiveData, this, std::placeholders::_1, std::placeholders::_2));
     }
 }
