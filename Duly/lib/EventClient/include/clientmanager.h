@@ -1,0 +1,4 @@
+#ifndef CLIENTMANAGER_H
+#define CLIENTMANAGER_H
+
+#endif // CLIENTMANAGER_H

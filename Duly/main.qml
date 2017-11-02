@@ -4,6 +4,7 @@ import QtQuick.Layouts 1.3
 import QtQuick.Controls.Material 2.2
 import QtQuick.Dialogs 1.2
 import CustomGeometry 1.0
+import Communication.EventConsumer 1.0
 
 import "Resources/Components"
 import "Resources/Nodes"
@@ -290,6 +291,36 @@ ApplicationWindow {
         width: parent.width
         height: 200
         y: parent.height - height
+    }
+
+    EventConsumer {
+        clientName: "Duly GUI"
+        description: "L2C100"
+        eventName: "KOALA"
+
+        onReceiveEvent: {
+            console.log(data)
+        }
+    }
+
+    EventConsumer {
+        clientName: "Duly GUI"
+        description: "F1D1S1L1C1"
+        eventName: "TOTO"
+
+        onReceiveEvent: {
+            console.log(data)
+        }
+    }
+
+    EventConsumer {
+        clientName: "Duly GUI"
+        description: "C1"
+        eventName: "TITI"
+
+        onReceiveEvent: {
+            console.log(data)
+        }
     }
 
 }

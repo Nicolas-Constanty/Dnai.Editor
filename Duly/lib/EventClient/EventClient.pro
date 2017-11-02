@@ -20,6 +20,9 @@ SOURCES += src/packagemanager.cpp \
     src/createpackagefunction.cpp \
     src/clientcommunication.cpp \
 #    testclass.cpp
+    src/eventconsumer.cpp \
+    src/clientmanager.cpp \
+    src/descriptionparser.cpp
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which as been marked deprecated (the exact warnings
@@ -41,3 +44,6 @@ HEADERS += \
     include/authentificationpackage.h \
     include/clientcommunication.h \
    # testclass.h
+    include/eventconsumer.h \
+    include/clientmanager.h \
+    include/descriptionparser.h
