@@ -309,7 +309,7 @@ ApplicationWindow {
         eventName: "TOTO"
 
         onReceiveEvent: {
-            console.log(data)
+            console.log(data[1])
         }
     }
 
