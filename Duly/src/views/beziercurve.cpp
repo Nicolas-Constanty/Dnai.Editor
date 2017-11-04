@@ -3,6 +3,7 @@
 #include <QSGVertexColorMaterial>
 
 #include "views/beziercurve.h"
+#include "views/dulycanvas.h"
 
 namespace duly_gui
 {
@@ -132,9 +133,9 @@ namespace duly_gui
 			const auto aa = antialiasing();
 			const auto radius = float(m_lineWidth * scaleFactor()) / 2.f;
 
-			const char r = m_dotted ? m_dottedColor.red() : m_fillColor.red();
-			const char g = m_dotted ? m_dottedColor.green() : m_fillColor.green();
-			const char b = m_dotted ? m_dottedColor.blue() : m_fillColor.blue();
+            const char r = m_dotted ? m_dottedColor.red() * m_dottedColor.alphaF() : m_fillColor.red() * m_fillColor.alphaF();
+            const char g = m_dotted ? m_dottedColor.green() * m_dottedColor.alphaF() : m_fillColor.green() * m_fillColor.alphaF();
+            const char b = m_dotted ? m_dottedColor.blue() * m_dottedColor.alphaF() : m_fillColor.blue() * m_fillColor.alphaF();
 			const char alpha = m_dotted ? m_dottedColor.alpha() : m_fillColor.alpha();
 
 			const char r1 = 0;
@@ -144,7 +145,7 @@ namespace duly_gui
 			const auto aaoffset = 1.f;
 			const auto pi2 = float(M_PI) / 2.f;
 			const auto raa = radius + aaoffset;
-			if (m_segmentCount % 2 != 0)
+            if (m_segmentCount % 2 != 0)
 				++m_segmentCount;
 			const int nbVertices = aa ? (m_dotted ? 8 * (m_segmentCount / 2) : m_segmentCount * 7.5 - 7) : m_segmentCount;
 
@@ -281,7 +282,7 @@ namespace duly_gui
 			m_scaleFactor = s;
 			setWidth(m_saveWidth * s);
 			setHeight(m_saveHeight * s);
-			setPosition(m_realPos * m_scaleFactor);
+//			setPosition(m_realPos * m_scaleFactor);
 			emit scaleFactorChanged(s);
 			update();
 		}

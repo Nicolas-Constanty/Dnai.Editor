@@ -1,10 +1,14 @@
 build-*/
-DulyQuickControls/x64/
-DulyQuickControls/release/
-DulyQuickControls/debug/
-DulyQuickControls/.vs/
-DulyQuickControls/DulyQuickControls.sln
+Duly/x64/
+Duly/release/
+Duly/debug/
+Duly/.vs/
+Duly/Duly.sln
 
-DulyQuickControls/ClassDiagram\.cd
+Duly/ClassDiagram\.cd
 
-DulyQuickControls/ClassDiagram1\.cd
+Duly/ClassDiagram1\.cd
+
+Duly/\.vs/Duly/v15/
+
+debug/

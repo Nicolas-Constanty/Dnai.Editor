@@ -1,4 +1,5 @@
 #include "views/scalableitem.h"
+#include "views/dulycanvas.h"
 
 namespace duly_gui
 {

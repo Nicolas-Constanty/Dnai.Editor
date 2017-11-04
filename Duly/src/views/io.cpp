@@ -177,13 +177,13 @@ namespace duly_gui
 		QPointF Io::getCanvasPos() const
 		{
 			auto si = dynamic_cast<ScalableItem *>(parentItem()->parentItem()->parentItem()->parentItem()->parentItem());
-			return QPointF(si->realPos() * si->scaleFactor() +
-				parentItem()->parentItem()->parentItem()->parentItem()->position() * si->scaleFactor() +
-				parentItem()->parentItem()->parentItem()->position() * si->scaleFactor() +
-				parentItem()->parentItem()->position() * si->scaleFactor() +
-				parentItem()->position() * si->scaleFactor() +
-				position() * si->scaleFactor() +
-				QPointF(width() / 2, height() / 2) * si->scaleFactor());
+            return QPointF(si->position() +
+                parentItem()->parentItem()->parentItem()->parentItem()->position()  +
+                parentItem()->parentItem()->parentItem()->position() +
+                parentItem()->parentItem()->position()  +
+                parentItem()->position() +
+                position() +
+                QPointF(width() / 2, height() / 2));
 		}
 
 		GenericNode* Io::getNode() const

@@ -44,7 +44,7 @@ namespace duly_gui
 				const auto l = list.at(i);
 				l->curve()->setRealPosition(getCanvasPos());
 				const auto io = dynamic_cast<Output *>(dynamic_cast<BaseIo *>(l->L1 != m_linkable ? l->L1 : l->L2)->parent());
-				l->curve()->setP4(io->getCanvasPos());
+                l->curve()->setP4(io->getCanvasPos());
 			}
 		}
 

@@ -30,7 +30,7 @@ namespace duly_gui
         QString MoveCommand::infos() const
         {
             QString adresse;
-            adresse.sprintf("%08p", m_w);
+            adresse.sprintf("%p", m_w);
             return m_name + "(" + m_w->metaObject()->className() + "(" + adresse + ")" + ", " + QString::number(m_vec.x()) + ", " + QString::number(m_vec.y()) + ")";
         }
     }

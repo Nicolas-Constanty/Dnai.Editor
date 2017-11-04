@@ -1,7 +1,8 @@
-import DulyUtils 1.0
 import QtQuick 2.4
 import QtQuick.Controls 2.0
+import QtQuick.Layouts 1.3
 import QtQuick.Controls.Material 2.0
+import DulyUtils 1.0
 
 Item {
     id: defaultPanel
@@ -12,6 +13,8 @@ Item {
     property alias heightInfoPanel: mainColumn.height
     property alias widthInfoPanel: mainColumn.width
     property alias heightItem: defaultPanel.height
+    property alias consoleMode: comboBox
+    property alias consoleRefMode: cons
 
     Rectangle {
         id: rectangle
@@ -47,14 +50,15 @@ Item {
                         anchors.left: parent.left
                         anchors.leftMargin: firstRow.spacing / 2
                         anchors.top: parent.top
-                        anchors.topMargin: 8
+                        anchors.topMargin: 4
                         Rectangle {
                             id: firstColumn
-                            width: childrenRect.width
-                            height: childrenRect.height
-                            color: "transparent"
+                            width: labelName.width
+                            height: parent.height
 
+                            color: "transparent"
                             Label {
+                                id: labelName
                                 font.pixelSize: 12
                                 text: defaultPanel.title
                                 rightPadding: 10
@@ -64,21 +68,40 @@ Item {
                                 topPadding: 0
                                 renderType: Text.QtRendering
                                 wrapMode: Text.NoWrap
+                                anchors.centerIn: parent
                             }
                         }
 
                         Rectangle {
-                            width: childrenRect.width
-                            height: childrenRect.height
+                            width: gridImage.width
+                            height: parent.height
                             color: "transparent"
                             Image {
-                                id: name
-                                width: rectangle.width - firstColumn.width - firstRow.spacing * 2
+                                id: gridImage
+                                width: rectangle.width - firstColumn.width
+                                       - firstRow.spacing * 4 - comboBox.width
                                 height: 16
                                 sourceSize.height: 16
                                 sourceSize.width: 16
                                 fillMode: Image.TileHorizontally
                                 source: "../Images/WindowHandle.png"
+                                anchors.centerIn: parent
+                            }
+                        }
+
+                        ComboBox {
+                            id: comboBox
+                            Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
+                            textRole: qsTr("")
+                            currentIndex: 0
+                            model: ListModel {
+                                id: listModel
+                                ListElement {
+                                    text: "Default"
+                                }
+                                ListElement {
+                                    text: "Verbose"
+                                }
                             }
                         }
                     }
@@ -91,7 +114,6 @@ Item {
                     Console {
                         id: cons
                     }
-
                     ListView {
                         id: textArea
                         anchors.rightMargin: 30

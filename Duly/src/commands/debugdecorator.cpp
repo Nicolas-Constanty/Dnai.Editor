@@ -1,6 +1,7 @@
 #include <QDebug>
 #include "commands/debugdecorator.h"
 #include "commands/commandmanager.h"
+#include "views/console.h"
 
 namespace duly_gui
 {
@@ -12,15 +13,21 @@ namespace duly_gui
 
 		void DebugDecorator::execute() const
 		{
-			qDebug() << infos();
-            CommandManager::Instance()->console().writeLine(infos());
+			const auto console = CommandManager::Instance()->console();
+			if (console.view()->mode() ==  views::Console::Verbose)
+			{
+				const auto message = "[Do]" + infos();
+				qDebug() << message;
+				console.writeLine(message);
+			}
 			m_decoratedCommand->execute();
 		}
 
 		void DebugDecorator::executeSave()
 		{
-			qDebug() << infos();
-			CommandManager::Instance()->console().writeLine("[#8BC34A]Save -> " + infos());
+            const auto message = "[#8BC34A]Save -> [Cmd]" + infos();
+            qDebug() << message;
+            CommandManager::Instance()->console().writeLine(message);
 			m_decoratedCommand->executeSave();
 		}
 
@@ -31,6 +38,13 @@ namespace duly_gui
 
 		void DebugDecorator::unExcute() const
 		{
+			const auto console = CommandManager::Instance()->console();
+			if (console.view()->mode() == views::Console::Verbose)
+			{
+				const auto message = "[Undo]" + infos();
+				qDebug() << message;
+				console.writeLine(message);
+			}
 			m_decoratedCommand->unExcute();
 		}
 

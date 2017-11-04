@@ -61,15 +61,15 @@ namespace duly_gui
 				}
 				return nullptr;
 			}
-			const char r = m_fillColor.red();
-			const char g = m_fillColor.green();
-			const char b = m_fillColor.blue();
-			const char alpha = m_fillColor.alpha();
+            const char r = m_fillColor.red() * m_fillColor.alphaF();
+            const char g = m_fillColor.green() * m_fillColor.alphaF();
+            const char b = m_fillColor.blue() * m_fillColor.alphaF();
+            const char alpha = m_fillColor.alpha();
 
-			const char rb = m_borderColor.red();
-			const char gb = m_borderColor.green();
-			const char bb = m_borderColor.blue();
-			const char alphab = m_borderColor.alpha();
+            const char rb = m_borderColor.red() * m_borderColor.alphaF();
+            const char gb = m_borderColor.green() * m_borderColor.alphaF();
+            const char bb = m_borderColor.blue() * m_borderColor.alphaF();
+            const char alphab = m_borderColor.alpha();
 
 			const auto aa = antialiasing();
 			setWidth((m_radius + m_radius / 2.5f) * 2);

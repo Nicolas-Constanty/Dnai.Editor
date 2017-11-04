@@ -1,0 +1,47 @@
+import QtQuick 2.9
+import QtQuick.Controls 2.2
+import QtQuick.Layouts 1.3
+import QtQuick.Controls.Material 2.2
+import QtQuick.Dialogs 1.2
+import CustomGeometry 1.0
+import QtGraphicalEffects 1.0
+
+import "Resources"
+import "Resources/Components"
+import "Resources/Nodes"
+import "Resources/Nodes/Operator"
+import "Resources/Nodes/Operator/BinaryOperator"
+import "Resources/Nodes/Operator/BinaryOperator/Logical"
+import "Resources/Nodes/Operator/UnaryOperator"
+
+ApplicationWindow {
+
+    visible: true
+    width: 1280
+    height: 720
+    minimumHeight: 150
+    minimumWidth: 300
+    title: qsTr("Duly")
+    Material.theme: Material.Dark
+    Material.accent: Material.color(Material.DeepOrange, Material.Shade400)
+    property double factor : 1.5
+    id: root
+    property ApplicationWindow appWindow : root
+    property ToolBarHeader toolBarHeader: layout.toolBarHeader
+    property ConsoleComponent debugConsole: layout.debugConsole
+    property alias layoutRef: layout
+
+//    Layout_1 {
+//        id: layout
+//        width: parent.width
+//        height: parent.height
+//        color: "transparent"
+//    }
+
+    LayoutClassic {
+        id: layout
+        width: parent.width
+        height: parent.height
+        color: "transparent"
+    }
+}

@@ -3,14 +3,14 @@
 #include "commands/commandmanager.h"
 
 namespace duly_gui {
-    DulyApp::DulyApp(int argc, char *argv[]) : QGuiApplication(argc, argv)
+    DulyApp::DulyApp(int & argc, char **argv) : QGuiApplication(argc, argv)
     {
         installEventFilter(this);
     }
 
-    bool DulyApp::eventFilter(QObject *object, QEvent *event)
+    bool DulyApp::eventFilter(QObject *o, QEvent *event)
     {
-        if (!event->KeyPress) return false;
+        if (!event || event->type() != QEvent::KeyPress) return QGuiApplication::eventFilter(o, event);
 		QKeyEvent *e = static_cast<QKeyEvent *>(event);
 		if (e->matches(QKeySequence::Undo))
         {
@@ -22,8 +22,6 @@ namespace duly_gui {
             commands::CommandManager::Instance()->redo(1);
             return true;
         }
-        return false;
+        return QGuiApplication::eventFilter(o, event);
     }
 }
-
-

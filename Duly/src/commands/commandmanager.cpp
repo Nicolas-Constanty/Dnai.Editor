@@ -20,38 +20,44 @@ namespace duly_gui
 
 		void CommandManager::registerCommand(ICommand *cmd)
 		{
-#ifndef  Debug
-			m_doList.push(new DebugDecorator(cmd));
-#else
-			m_doList.push(cmd);
-#endif
+			if (m_console.view() && m_console.view()->isVisible())
+                m_doList.push(new DebugDecorator(cmd));
+			else
+				m_doList.push(cmd);
 
+            while (!m_redoList.empty()) {
+	            const auto r = m_redoList.top();
+                delete r;
+                m_redoList.pop();
+            }
 		}
 
 		void CommandManager::execAll()
 		{
 			while (!m_doList.empty())
-			{
+            {
 				ICommand *c = m_doList.front();
 				if (c->isSave())
-				{
-					c->executeSave();
+                {
+                    c->executeSave();
 					m_undoList.push(c);
 				}
                 else
                     c->execute();
 				m_doList.pop();
-			}
+            }
 		}
 
 		void CommandManager::redo(int levels)
 		{
-			for (int i = 1; i <= levels; i++)
+            for (int i = 1; i <= levels; i++)
 			{
 				if (!m_redoList.empty())
 				{
-					auto command = m_redoList.top();
-					command->executeSave();
+                    auto command = m_redoList.top();
+                    if (m_console.view() && m_console.view()->isVisible() && !dynamic_cast<DebugDecorator *>(command))
+                        command = new DebugDecorator(command);
+                    command->execute();
 					m_redoList.pop();
 					m_undoList.push(command);
 				}
@@ -60,12 +66,14 @@ namespace duly_gui
 		}
 
 		void CommandManager::undo(int levels)
-		{
-			for (int i = 1; i <= levels; i++)
+        {
+            for (int i = 1; i <= levels; i++)
 			{
-				if (!m_undoList.empty())
+                if (!m_undoList.empty())
 				{
 					auto command = m_undoList.top();
+                    if (m_console.view() && m_console.view()->isVisible() && !dynamic_cast<DebugDecorator *>(command))
+                        command = new DebugDecorator(command);
 					command->unExcute();
 					m_undoList.pop();
 					m_redoList.push(command);
