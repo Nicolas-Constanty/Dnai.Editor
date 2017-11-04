@@ -28,7 +28,9 @@ namespace duly_gui
             */
             virtual QSGNode *updatePaintNode(QSGNode *, UpdatePaintNodeData *) override;
             virtual void componentComplete() override;
-            void Move(const QPointF &vec);
+            void move(const QPointF &vec);
+            const QPointF &startPos() const { return m_startPos; }
+            virtual bool contains(const QPointF &point) const override;
 
         public:
             FocusManagerIo &inputs() { return m_inputs; }
@@ -72,6 +74,7 @@ namespace duly_gui
             FocusManagerIo m_outputs;
             QPointF m_offset;
 			bool m_holdClik;
+	        QPointF m_startPos;
 
         private:
             void updateInputs();

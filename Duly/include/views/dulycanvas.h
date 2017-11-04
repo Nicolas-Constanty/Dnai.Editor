@@ -39,6 +39,8 @@ namespace duly_gui
 			* \return QSGNode *
 			*/
 			virtual QSGNode *updatePaintNode(QSGNode *, UpdatePaintNodeData *) override;
+			void moveCanvas(const QPointF& pos);
+			void zoom(const double& scale, const QPointF& offset);
 
 		public:
 			int gridStep() const { return m_gridStep; }
@@ -47,6 +49,9 @@ namespace duly_gui
 			QColor gridColor() const { return m_gridColor; }
 			QColor accentGridColor() const { return m_accentGridColor; }
 			QColor backgroundColor() const { return m_backgroundColor; }
+			const QPointF &totalOffset() const { return m_totalOffset; }
+			const QPointF &origin() const { return m_origin; }
+
 
 		public:
 			void setGridStep(int step);
@@ -71,6 +76,8 @@ namespace duly_gui
 			QColor m_gridColor;
 			QColor m_accentGridColor;
 			QColor m_backgroundColor;
+			bool m_hasMoved;
+			QPointF m_totalOffset;
 
 		private:
 			void createGrid();
@@ -78,11 +85,14 @@ namespace duly_gui
 			std::list<QSGGeometryNode *> m_lines;
 			QPointF	m_offset;
 			QPointF	m_gridOffset;
+			QPointF m_origin;
 
 
 		protected:
 			void mousePressEvent(QMouseEvent* event) override;
+			void mouseReleaseEvent(QMouseEvent* event) override;
 			void mouseMoveEvent(QMouseEvent* event) override;
+			void wheelEvent(QWheelEvent *event) override;
 		};
 	}
 }

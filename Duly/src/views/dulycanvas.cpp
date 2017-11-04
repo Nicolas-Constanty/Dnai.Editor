@@ -5,6 +5,9 @@
 #include <algorithm>
 
 #include "views/dulycanvas.h"
+#include "commands/movecanvascommand.h"
+#include "commands/commandmanager.h"
+#include "commands/zoomcanvascommand.h"
 
 namespace duly_gui
 {
@@ -21,10 +24,9 @@ namespace duly_gui
 			setFlag(ItemHasContents, true);
 			setAcceptHoverEvents(true);
             setAcceptedMouseButtons(Qt::AllButtons);
-			setFlag(ItemAcceptsInputMethod, true);
-			//    CreateGrid();
+            setFlag(ItemAcceptsInputMethod, true);
 			if (Instance == nullptr)
-				Instance = this;
+                Instance = this;
 		}
 
 		void DulyCanvas::createGrid()
@@ -33,31 +35,45 @@ namespace duly_gui
 			const auto drawGrid = [&](double gridStep, int lineWidth, const QColor &color)
 			{
 				gridStep *= m_scaleFactor;
-				lineWidth *= m_scaleFactor;
-				auto windowRect = boundingRect();
-				auto tl = windowRect.topLeft();
-				auto br = windowRect.bottomRight();
+                lineWidth *= m_scaleFactor;
 
-				double left = qFloor(tl.x() / gridStep - 0.5) - 5 * gridStep;
-				double right = qFloor(br.x() / gridStep + 1.0) + 5 * gridStep;
-				double bottom = qFloor(tl.y() / gridStep - 0.5) - 5 * gridStep;
-				double top = qFloor(br.y() / gridStep + 1.0) + 5 * gridStep;
-
+                const auto h = height();
+                const auto w = width();
+                const auto offsetX = m_gridOffset.x();
+                const auto offsetY = m_gridOffset.y();
 				// vertical lines
-				for (auto xi = int(left); xi <= int(right); ++xi)
-				{
-					m_lines.push_back(
-						Line::CreateRawLine(QPointF(xi * gridStep + m_gridOffset.x(), bottom * gridStep + m_gridOffset.y()),
-							QPointF(xi * gridStep + m_gridOffset.x(), top * gridStep + m_gridOffset.y()), lineWidth, color));
+                for (auto xi = 0; xi < w - offsetX; xi += gridStep)
+                {
+                    const auto x = xi + offsetX;
+                    if (x < 0)
+                        continue;
+                    if (xi == 0 && offsetX > 0)
+                    {
+                        auto xBack = x - gridStep;
+                        while (xBack > 0) {
+                            m_lines.push_back(Line::CreateRawLine(QPointF(xBack, 0), QPointF(xBack, h), lineWidth, color));
+                            xBack -= gridStep;
+                        }
+                    }
+                    m_lines.push_back(Line::CreateRawLine(QPointF(x, 0), QPointF(x, h), lineWidth, color));
 				}
 
 				// horizontal lines
-				for (auto yi = int(bottom); yi <= int(top); ++yi)
-				{
-					m_lines.push_back(Line::CreateRawLine(QPointF(left * gridStep + m_gridOffset.x(), yi * gridStep + m_gridOffset.y()),
-						QPointF(right * gridStep + m_gridOffset.x(), yi * gridStep + m_gridOffset.y()),
-						lineWidth, color));
-				}
+                for (auto yi = 0; yi < h - offsetY; yi += gridStep)
+                {
+                    const auto y =  yi + offsetY;
+                    if (y < 0)
+                        continue;
+                    if (yi == 0 && offsetY > 0)
+                    {
+                        auto yBack = y - gridStep;
+                        while (yBack > 0) {
+                            m_lines.push_back(Line::CreateRawLine(QPointF(0, yBack), QPointF(w, yBack), lineWidth, color));
+                            yBack -= gridStep;
+                        }
+                    }
+                    m_lines.push_back(Line::CreateRawLine(QPointF(0, y), QPointF(w, y), lineWidth, color));
+                }
 			};
 			drawGrid(m_gridStep, 1, m_gridColor);
 
@@ -67,26 +83,92 @@ namespace duly_gui
 
 		void DulyCanvas::mousePressEvent(QMouseEvent* event)
 		{
-			m_offset = event->pos();
-			//qDebug() << m_offset;
+            m_offset = event->pos();
+			m_totalOffset = QPointF(0,0);
+		}
+
+		void DulyCanvas::mouseReleaseEvent(QMouseEvent* event)
+		{
+			if (m_hasMoved)
+            {
+				m_hasMoved = false;
+				const auto c = new commands::MoveCanvasCommand(this, event->pos() - m_offset, true);
+				commands::CommandManager::Instance()->registerCommand(c);
+				commands::CommandManager::Instance()->execAll();
+			}
+			m_hasMoved = false;
 		}
 
 		void DulyCanvas::mouseMoveEvent(QMouseEvent* event)
-		{
-			//qDebug() << m_offset - event->pos();
-			m_gridOffset = (m_gridOffset + event->pos() - m_offset);
-			//qDebug() << m_offset - event->pos();
+        {
+			const auto offset = event->pos() - m_offset;
+			m_totalOffset += offset;
+			const auto c = new commands::MoveCanvasCommand(this, offset, false);
+			commands::CommandManager::Instance()->registerCommand(c);
+			commands::CommandManager::Instance()->execAll();
+			m_offset = event->pos();
+			m_hasMoved = true;
+		}
 
+		void DulyCanvas::moveCanvas(const QPointF &offset)
+		{
+			m_gridOffset = (m_gridOffset + offset);
 			m_gridOffset.setX(static_cast<int>(m_gridOffset.x()) % (m_gridStep * 10));
-			m_gridOffset.setY(static_cast<int>(m_gridOffset.y()) % (m_gridStep * 10));
+            m_gridOffset.setY(static_cast<int>(m_gridOffset.y()) % (m_gridStep * 10));
 			for (auto i = 0; i< childItems().size(); i++)
 			{
-				auto child = static_cast<ScalableItem *>(childItems().at(i));
-				child->translatePos(event->pos() - m_offset);
+                auto child = dynamic_cast<ScalableItem *>(childItems().at(i));
+				if (child)
+					child->translatePos(offset);
 			}
 			update();
-			m_offset = event->pos();
+		}
 
+        void DulyCanvas::wheelEvent(QWheelEvent *event)
+        {
+            if (event->modifiers() & Qt::ControlModifier)
+            {
+				const auto scale = scaleFactor() + 0.1 * event->angleDelta().y() / 120;
+				if (scale == m_scaleFactor || scale < 0.5f || scale > 2.1f)
+					return;
+				
+                const auto w = width() / 2;
+                const auto h = height() / 2;
+                const auto offset = (scale < m_scaleFactor ? 1 : -1) *
+                    QPointF((event->pos().x() - w) / w,
+                            (event->pos().y() - h) / h);
+                const auto c = new commands::ZoomCanvasCommand(this, scale, offset);
+				commands::CommandManager::Instance()->registerCommand(c);
+				commands::CommandManager::Instance()->execAll();
+            }
+        }
+
+		void DulyCanvas::zoom(const double &scale, const QPointF &offset)
+        {
+            setScaleFactor(scale);
+            const auto w = width();
+            const auto h = height();
+            for (auto i = 0; i < childItems().size(); i++)
+            {
+                auto child = dynamic_cast<ScalableItem *>(childItems().at(i));
+                if (child)
+                {
+                    child->setScaleFactor(m_scaleFactor);
+                }
+            }
+            auto rx = (h != 0) ? w / h : 1;
+            auto ry = (w != 0) ? h / w : 1;
+            if (rx > ry)
+            {
+                rx = 1;
+                ry = ry / rx;
+            }
+            else
+            {
+                ry = 1;
+                rx = rx / ry;
+            }
+            moveCanvas(QPointF(offset.x() * rx, offset.y() * ry) * 100);
 		}
 
 		DulyCanvas::~DulyCanvas()
@@ -142,22 +224,17 @@ namespace duly_gui
 
 		void DulyCanvas::setScaleFactor(qreal scale)
 		{
-			if (scale == m_scaleFactor || scale < 0.5f || scale > 2)
+			if (scale == m_scaleFactor || scale < 0.5f || scale > 2.1f)
 				return;
 			m_scaleFactor = scale;
-			emit scaleFactorChanged(scale);
-			for (auto i = 0; i < childItems().size(); i++)
-			{
-				auto child = dynamic_cast<ScalableItem *>(childItems().at(i));
-				if (child)
-					child->setScaleFactor(m_scaleFactor);
-			}
+            emit scaleFactorChanged(scale);
 			update();
 		}
 
 		QSGNode *DulyCanvas::updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *)
 		{
 			auto n = static_cast<QSGSimpleRectNode *>(oldNode);
+			m_origin = QPointF(width() / 2, height() / 2);
 			if (!n) {
 				n = new QSGSimpleRectNode();
 			}

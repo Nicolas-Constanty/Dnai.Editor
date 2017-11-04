@@ -6,6 +6,7 @@ namespace duly_gui
 	{
 		ConsoleController::ConsoleController()
 		{
+            m_view = nullptr;
 		}
 
 		void ConsoleController::writeLine(const QString& text) const
@@ -18,7 +19,7 @@ namespace duly_gui
 
         void ConsoleController::setConsole(views::Console *c)
         {
-            if (c == m_view)
+            if (c != nullptr && c == m_view)
                 return;
             m_view = c;
         }

@@ -107,6 +107,24 @@ Item {
                            text: qsTr("Toogle menu bar")
                        }
                        MenuItem {
+                           text: qsTr("Toogle left panel")
+                           onClicked: {
+                               if (root.layoutRef.leftPanel.state == "Visible")
+                                    root.layoutRef.leftPanel.state = "Invisible"
+                               else
+                                    root.layoutRef.leftPanel.state = "Visible"
+                           }
+                       }
+                       MenuItem {
+                           text: qsTr("Toogle right panel")
+                           onClicked: {
+                               if (root.layoutRef.rightPanel.state == "Visible")
+                                    root.layoutRef.rightPanel.state = "Invisible"
+                               else
+                                    root.layoutRef.rightPanel.state = "Visible"
+                           }
+                       }
+                       MenuItem {
                            text: qsTr("Font size up")
                        }
                        MenuItem {
@@ -117,6 +135,12 @@ Item {
                        }
                        MenuItem {
                            text: qsTr("Toogle console")
+                           onClicked: {
+                               if (root.debugConsole.state == "Visible")
+                                    root.debugConsole.state = "Invisible"
+                               else
+                                   root.debugConsole.state = "Visible"
+                           }
                        }
                        MenuItem {
                            text: qsTr("Toogle property panel")

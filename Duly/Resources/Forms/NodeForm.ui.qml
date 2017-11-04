@@ -67,7 +67,8 @@ GenericNode {
         topLeft: false
         topRight: false
         bottomLeft: false
-        y: headerNode.height - headerNode.borderWidth
+        anchors.top: headerNode.bottom
+        anchors.topMargin: headerNode.borderWidth + 1
         ListView {
             id: _inputs
             anchors.topMargin: 10

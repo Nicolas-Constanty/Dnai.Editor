@@ -15,7 +15,7 @@ namespace duly_gui
 			void writeLine(const QString& text) const;
 
             void setConsole(views::Console *c);
-            views::Console *console() const { return m_view; }
+            views::Console *view() const { return m_view; }
 
 		private:
             views::Console *m_view;
