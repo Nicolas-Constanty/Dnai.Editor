@@ -53,6 +53,14 @@
         <file>Resources/Forms/ConsoleForm.ui.qml</file>
         <file>Resources/Panels/DefaultPanel.qml</file>
         <file>Resources/Components/ConsoleComponent.qml</file>
+        <file>Resources/Components/PanelLeft.qml</file>
+        <file>Resources/Components/Panel.qml</file>
+        <file>Resources/Components/PanelRight.qml</file>
+        <file>Resources/Components/PanelTop.qml</file>
+        <file>Resources/LayoutClassic.qml</file>
+        <file>Resources/Components/FunctionComponent.qml</file>
+        <file>Resources/Layout_1.qml</file>
+        <file>Resources/Components/DeclarationComponent.qml</file>
         <file>Resources/Images/WindowHandle.png</file>
         <file>Resources/Forms/NewProjectForm.ui.qml</file>
         <file>Resources/Forms/OpenProjectForm.ui.qml</file>
