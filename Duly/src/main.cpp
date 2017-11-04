@@ -1,5 +1,7 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
+#include <QTimer>
+#include <functional>
 
 #include "views/beziercurve.h"
 #include "views/line.h"
@@ -18,7 +20,6 @@
 #include "include/testconnection.h"
 #include "include/eventconsumer.h"
 #include "include/clientmanager.h"
-#include <functional>
 
 struct RegisterSettings
 {
@@ -68,16 +69,18 @@ static QObject *manager_singleton_provider(QQmlEngine *engine, QJSEngine *script
     return new duly_gui::Manager();
 }
 
-#include <QTimer>
-
-int main(int argc, char *argv[])
+void registerQml()
 {
     registerCustomGeometry();
     registerDulyUtils();
     registerCustomConnection();
 
     qmlRegisterSingletonType<duly_gui::Manager>("Tools", 1, 0, "Manager", manager_singleton_provider);
+}
 
+int main(int argc, char *argv[])
+{
+    registerQml();
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     duly_gui::DulyApp app(argc, argv);
 
