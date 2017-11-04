@@ -44,4 +44,24 @@ ApplicationWindow {
         height: parent.height
         color: "transparent"
     }
+
+   EventConsumer {
+        clientName: "Duly GUI"
+        description: "F1D1S1L1C1"
+        eventName: "TOTO"
+
+        onReceiveEvent: {
+            console.log(data[1])
+        }
+    }
+
+    EventConsumer {
+        clientName: "Duly GUI"
+        description: "C1"
+        eventName: "TITI"
+
+        onReceiveEvent: {
+            console.log(data)
+        }
+    }
 }

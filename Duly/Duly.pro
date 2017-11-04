@@ -1,9 +1,10 @@
 QT += qml quick
 
 CONFIG += c++14
-CONFIG += object_parallel_to_source
 
 INCLUDEPATH += include/
+
+RC_FILE = duly.rc
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which as been marked deprecated (the exact warnings
@@ -25,11 +26,10 @@ SOURCES += src/baseio.cpp \
     src/baselinkable.cpp \
     src/dulyscene.cpp \
     src/dulyapp.cpp \
-    src/manager.cpp \
-    src/project.cpp \
     src/commands/movecommand.cpp \
     src/commands/movenodecommand.cpp \
-
+    src/commands/movecanvascommand.cpp \
+    src/commands/zoomcanvascommand.cpp
 
 #VIEWS
 SOURCES += src/views/beziercurve.cpp \
@@ -60,17 +60,6 @@ SOURCES += src/controllers/inputcontroller.cpp \
     src/controllers/outputcontroller.cpp \
     src/controllers/consolecontroller.cpp \
 
-#MODELS
-SOURCES += src/models/common.cpp \
-    src/models/context.cpp \
-    src/models/class.cpp \
-    src/models/node.cpp \
-    src/models/variable.cpp \
-    src/models/input.cpp \
-    src/models/output.cpp \
-    src/models/flow.cpp \
-    src/models/function.cpp \
-    src/models/identity.cpp
 
 RESOURCES += qml.qrc
 
@@ -100,10 +89,9 @@ HEADERS += include/baseio.h \
     include/linkabletype.h \
     include/resourcesnode.h \
     include/dulyapp.h \
-    include/manager.h \
-    include/project.h \
     include/commands/movenodecommand.h \
     include/commands/movecommand.h \
+    include/testconnection.h
 
 #VIEWS
 HEADERS += include/views/beziercurve.h \
@@ -134,7 +122,6 @@ HEADERS += include/controllers/inputcontroller.h \
     include/controllers/outputcontroller.h \
     include/controllers/consolecontroller.h \
 
-
 #MODELS
 HEADERS += include/models/common.h \
     include/models/context.h \
@@ -147,3 +134,8 @@ HEADERS += include/models/common.h \
     include/models/function.h \
     include/models/identity.h \
     include/models/imodel.h
+
+#LIB
+DEPENDPATH += $$PWD/lib/EventClient/
+INCLUDEPATH += $$PWD/lib/EventClient/
+LIBS += -L "$$PWD/lib/EventClient/Livraison" -lEventClient
