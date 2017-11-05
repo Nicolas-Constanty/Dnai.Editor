@@ -1,6 +1,7 @@
 QT += qml quick
 
 CONFIG += c++14
+CONFIG += object_parallel_to_source
 
 INCLUDEPATH += include/
 
@@ -29,7 +30,9 @@ SOURCES += src/baseio.cpp \
     src/commands/movecommand.cpp \
     src/commands/movenodecommand.cpp \
     src/commands/movecanvascommand.cpp \
-    src/commands/zoomcanvascommand.cpp
+    src/commands/zoomcanvascommand.cpp \
+    src/manager.cpp \
+    src/project.cpp \
 
 #VIEWS
 SOURCES += src/views/beziercurve.cpp \
@@ -60,6 +63,17 @@ SOURCES += src/controllers/inputcontroller.cpp \
     src/controllers/outputcontroller.cpp \
     src/controllers/consolecontroller.cpp \
 
+#MODELS
+SOURCES +=     src/models/class.cpp \
+    src/models/common.cpp \
+    src/models/context.cpp \
+    src/models/flow.cpp \
+    src/models/function.cpp \
+    src/models/identity.cpp \
+    src/models/input.cpp \
+    src/models/node.cpp \
+    src/models/output.cpp \
+    src/models/variable.cpp
 
 RESOURCES += qml.qrc
 
@@ -91,7 +105,9 @@ HEADERS += include/baseio.h \
     include/dulyapp.h \
     include/commands/movenodecommand.h \
     include/commands/movecommand.h \
-    include/testconnection.h
+    include/testconnection.h \
+    include/manager.h \
+    include/project.h
 
 #VIEWS
 HEADERS += include/views/beziercurve.h \
@@ -138,4 +154,4 @@ HEADERS += include/models/common.h \
 #LIB
 DEPENDPATH += $$PWD/lib/EventClient/
 INCLUDEPATH += $$PWD/lib/EventClient/
-LIBS += -L "$$PWD/lib/EventClient/Livraison" -lEventClient
+LIBS += -L "$$PWD/lib/" -lEventClient

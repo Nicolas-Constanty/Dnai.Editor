@@ -5,6 +5,7 @@ import QtQuick.Controls.Material 2.2
 import QtQuick.Dialogs 1.2
 import CustomGeometry 1.0
 import QtGraphicalEffects 1.0
+import Communication.EventConsumer 1.0
 
 import "Resources"
 import "Resources/Components"

@@ -12,3 +12,7 @@ Duly/ClassDiagram1\.cd
 Duly/\.vs/Duly/v15/
 
 debug/
+
+Duly/lib/libEventClient\.a
+
+Duly/lib/EventClient/Livraison/libEventClient\.a
