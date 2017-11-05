@@ -30,12 +30,6 @@ namespace duly_gui
 		QString Command::infos() const
 		{
 			return m_name + "()";
-		}
-
-
-		std::ostream& operator<<(std::ostream& os, const Command& c)
-		{
-            return  os << c.infos().constData();
-		}
+        }
 	}
 }

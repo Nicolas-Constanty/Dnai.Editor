@@ -24,8 +24,7 @@ namespace duly_gui
 
 			const QString &name() const { return m_name; }
 
-			QString infos() const override;
-			friend std::ostream& operator<<(std::ostream& os, const Command& dt);
+            QString infos() const override;
 
 		protected:
 			const QString m_name;

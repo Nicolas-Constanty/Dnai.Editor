@@ -7,6 +7,7 @@ CONFIG += c++11
 TARGET = EventClient
 CONFIG += staticlib
 CONFIG -= app_bundle
+DESTDIR = ../
 
 TEMPLATE = lib
 
