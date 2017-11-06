@@ -14,7 +14,7 @@ namespace duly_gui {
      class Context;
     }
     namespace models {
-        class Context: public Common, public ARegister<::duly_gui::views::Context>, virtual public IModel
+        class Context: public Common, public ARegister<views::Context>, virtual public IModel
         {
         public:
             Context(QString const &, QString const &, Context * = nullptr);
