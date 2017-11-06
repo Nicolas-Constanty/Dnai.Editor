@@ -30,10 +30,10 @@ public:
     void setVariableContainer(QQuickItem *item);
 
 signals:
-    contextContainerChanged(QQuickItem *item);
-    classContainerChanged(QQuickItem *item);
-    functionContainerChanged(QQuickItem *item);
-    variableContainerChanged(QQuickItem *item);
+    void contextContainerChanged(QQuickItem *item);
+    void classContainerChanged(QQuickItem *item);
+    void functionContainerChanged(QQuickItem *item);
+    void variableContainerChanged(QQuickItem *item);
 
 private:
     const models::Context &m_model;
