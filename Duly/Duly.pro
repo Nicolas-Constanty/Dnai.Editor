@@ -156,7 +156,8 @@ HEADERS += include/models/common.h \
     include/models/flow.h \
     include/models/function.h \
     include/models/identity.h \
-    include/models/imodel.h
+    include/models/imodel.h \
+    include/models/aregister.h
 
 #LIB
 DEPENDPATH += $$PWD/lib/EventClient/
