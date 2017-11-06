@@ -1,7 +1,9 @@
 QT += qml quick
 
+SUBDIRS = $$PWD/lib/EventClient/
 CONFIG += c++14
 CONFIG += object_parallel_to_source
+CONFIG += ordered
 
 INCLUDEPATH += include/
 
@@ -33,6 +35,8 @@ SOURCES += src/baseio.cpp \
     src/commands/zoomcanvascommand.cpp \
     src/manager.cpp \
     src/project.cpp \
+    src/views/context.cpp \
+    src/views/class.cpp
 
 #VIEWS
 SOURCES += src/views/beziercurve.cpp \
@@ -107,7 +111,10 @@ HEADERS += include/baseio.h \
     include/commands/movecommand.h \
     include/testconnection.h \
     include/manager.h \
-    include/project.h
+    include/project.h \
+    include/views/context.h \
+    include/views/class.h \
+    include/views.h
 
 #VIEWS
 HEADERS += include/views/beziercurve.h \
