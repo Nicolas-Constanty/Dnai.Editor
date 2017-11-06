@@ -3,6 +3,7 @@ import QtQuick.Controls 2.2
 import "../Forms"
 import "../Nodes"
 import CustomGeometry 1.0
+import CustomViews 1.0
 
 NodeForm {
     property NodeModel model
