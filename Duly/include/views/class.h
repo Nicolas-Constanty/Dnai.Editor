@@ -27,9 +27,9 @@ public:
     void setVariableContainer(QQuickItem *item);
 
 signals:
-    classContainerChanged(QQuickItem *item);
-    functionContainerChanged(QQuickItem *item);
-    variableContainerChanged(QQuickItem *item);
+    void classContainerChanged(QQuickItem *item);
+    void functionContainerChanged(QQuickItem *item);
+    void variableContainerChanged(QQuickItem *item);
 
 private:
     const models::Class &m_model;
