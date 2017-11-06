@@ -151,7 +151,12 @@ namespace duly_gui {
                 obj["description"].toString(),
                 QVector2D(static_cast<float>(position["x"].toDouble()), static_cast<float>(position["y"].toDouble())),
                 parent);
-        //model->setFunction(); //TODO find function
+
+        auto functions_found = this->searchFunctions(obj["function"].toString(), [] (models::Function *model, QString const &search) -> bool {
+            return model->name() == search;
+        });
+
+        model->setFunction(functions_found.first());
 
         foreach (auto input, obj["inputs"].toArray()) {
             model->inputs().append(this->unserializeInput(input.toObject()));
@@ -159,6 +164,14 @@ namespace duly_gui {
 
         foreach (auto output, obj["outputs"].toArray()) {
             model->outputs().append(this->unserializeOutput(output.toObject()));
+        }
+
+        foreach (auto flow_in, obj["flows_in"].toArray()) {
+            model->flows_in().append(this->unserializeFlow(flow_in.toObject()));
+        }
+
+        foreach (auto flow_out, obj["flows_out"].toArray()) {
+            model->flows_out().append(this->unserializeFlow(flow_out.toObject()));
         }
 
         m_index.append(model);
