@@ -102,9 +102,13 @@ int main(int argc, char *argv[])
 
     TestConnection test(*com);
 
-   // com.registerEvent("YOLO", 4, std::bind(&TestConnection::onReceiveEventKoala, &test, std::placeholders::_1, std::placeholders::_2));
+    com->registerEvent("POPOLE", 4, std::bind(&TestConnection::onReceiveEventPopole, &test, std::placeholders::_1, std::placeholders::_2));
 
     QTimer *timer = new QTimer();
+      QObject::connect(timer, SIGNAL(timeout()), &test, SLOT(update()));
+      timer->start(1000);
+
+  /*  QTimer *timer = new QTimer();
     QObject::connect(timer, SIGNAL(timeout()), &test, SLOT(update()));
     timer->start(1000);
     QTimer *timer2 = new QTimer();
@@ -112,7 +116,7 @@ int main(int argc, char *argv[])
     timer2->start(3000);
     QTimer *timer3 = new QTimer();
     QObject::connect(timer3, SIGNAL(timeout()), &test, SLOT(updateTOTO()));
-    timer3->start(5000);
+    timer3->start(5000);*/
 
     // FIN CODE COMMUNICATION SERVER
 
