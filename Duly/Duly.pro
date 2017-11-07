@@ -5,8 +5,6 @@ CONFIG += c++14
 CONFIG += object_parallel_to_source
 CONFIG += ordered
 
-#QMAKE_MAC_SDK = macosx10.12
-
 INCLUDEPATH += include/
 
 RC_FILE = duly.rc
