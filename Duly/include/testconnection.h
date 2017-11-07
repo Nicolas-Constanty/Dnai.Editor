@@ -31,12 +31,15 @@ public slots:
 
 
     void update() {
-        POPO toto;
+       /* POPO toto;
         toto.a = 123;
         toto.b = 1;
         memset(toto.c, 0, sizeof(toto.c));
         memcpy(toto.c, "YOLOLOLOLO", sizeof("YOLOLOLOLO"));
-        m_com.sendEvent("KOALA", &toto, sizeof(POPO));
+        m_com.sendEvent("KOALA", &toto, sizeof(POPO));*/
+        qDebug() << "SEND";
+        int u = 1234;
+         m_com.sendEvent("POPOLE", &u, 4);
     }
 
     void updateTITI() {
@@ -62,6 +65,12 @@ public:
 
         qDebug() << "receive KOALA event :";
         qDebug() << *newData;
+    }
+
+    void onReceiveEventPopole(void *data, unsigned int size) {
+        qDebug() << "receive POPOLE event";
+        int *intLol = (int *)data;
+        qDebug() << *intLol;
     }
 
 private:
