@@ -4,11 +4,11 @@
 #include <QString>
 #include "headercommunication.h"
 
-typedef struct {
+typedef struct __attribute__((packed)) {
     char name[256];
 } AuthentificationPackage;
 
-typedef struct {
+typedef struct __attribute__((packed)) {
     HeaderCommunication header;
     AuthentificationPackage auth;
 } SendAuthenticatePackage;

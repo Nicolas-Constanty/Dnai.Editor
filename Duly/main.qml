@@ -46,7 +46,7 @@ ApplicationWindow {
         color: "transparent"
     }
 
-   EventConsumer {
+/*   EventConsumer {
         clientName: "Duly GUI"
         description: "F1D1S1L1C1"
         eventName: "TOTO"
@@ -64,5 +64,5 @@ ApplicationWindow {
         onReceiveEvent: {
             console.log(data)
         }
-    }
+    }*/
 }

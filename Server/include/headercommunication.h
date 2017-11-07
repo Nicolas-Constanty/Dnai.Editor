@@ -1,7 +1,7 @@
 #ifndef HEADERCOMMUNICATION_H
 #define HEADERCOMMUNICATION_H
 
-typedef struct {
+typedef struct __attribute__((packed)) {
     int magicNumber;
     unsigned int packageSize;
     unsigned int id;

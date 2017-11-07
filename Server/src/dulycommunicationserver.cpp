@@ -108,6 +108,7 @@ void DulyCommunicationServer::onReceiveClientAuthentificationPackage(void *data,
 void DulyCommunicationServer::onReceiveRegisterEvent(void *data, unsigned int size) {
 #if SERVER_MODE
      if (size != sizeof(EventRegisterPackage)) {
+         qDebug() << "[WARNING] wrong size " << size << " != " << sizeof(EventRegisterPackage);
          return;
      }
      EventRegisterPackage *eventRegister = (EventRegisterPackage *)data;

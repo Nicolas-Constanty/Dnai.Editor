@@ -4,23 +4,23 @@
 #include <QString>
 #include "headercommunication.h"
 
-typedef struct {
+typedef struct __attribute__((packed)) {
     char eventName[256];
     unsigned int eventSize;
     char        enable;
 } EventRegisterPackage;
 
-typedef struct {
+typedef struct __attribute__((packed)) {
     char eventName[256];
     unsigned int id;
 } EventRegisterPackageAnswerServer;
 
-typedef struct {
+typedef struct __attribute__((packed)) {
     HeaderCommunication header;
     EventRegisterPackageAnswerServer eventRegister;
 } SendEventRegisterPackageAnswerServer;
 
-typedef struct {
+typedef struct __attribute__((packed)) {
     HeaderCommunication header;
     EventRegisterPackage eventRegister;
 } SendEventRegisterPackage;

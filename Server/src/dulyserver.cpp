@@ -39,6 +39,8 @@ void DulyServer::connectionAccepted() {
     QTcpSocket *socket = this->nextPendingConnection();
     DulyCommunicationServer *newCommunication = new DulyCommunicationServer(socket, &m_clients);
 
+    qDebug() << "[INFO] new connection !";
+
     connect(socket, SIGNAL(disconnected()), newCommunication, SLOT(onDisconnected()));
     connect(newCommunication, SIGNAL(clientDisconnected(DulyCommunicationServer*)), this, SLOT(onClientDisconnected(DulyCommunicationServer*)));
 
