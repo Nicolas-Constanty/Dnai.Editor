@@ -7,10 +7,14 @@
 #include "models/function.h"
 #include "models/class.h"
 #include "models/imodel.h"
+#include "models/aregister.h"
 
 namespace duly_gui {
+    namespace views {
+     class Context;
+    }
     namespace models {
-        class Context: public Common, virtual public IModel
+        class Context: public Common, public ARegister<views::Context>, virtual public IModel
         {
         public:
             Context(QString const &, QString const &, Context * = nullptr);

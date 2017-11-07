@@ -3,15 +3,8 @@
 #include <QTimer>
 #include <functional>
 
-#include "views/beziercurve.h"
-#include "views/line.h"
-#include "views/dulycanvas.h"
-#include "views/roundedrectangle.h"
-#include "views/input.h"
-#include "views/output.h"
-#include "views/genericnode.h"
-#include "views/flow.h"
-#include "views/console.h"
+#include "views.h"
+
 #include "controllers/consolecontroller.h"
 #include "dulyapp.h"
 #include "manager.h"
@@ -24,11 +17,7 @@
 struct RegisterSettings
 {
 	RegisterSettings(const char* namespaceName, int version, int subVersion)
-		: NamespaceName(namespaceName),
-		  version(version),
-		  subVersion(subVersion)
-	{
-	}
+        : NamespaceName(namespaceName), version(version), subVersion(subVersion) {}
 
 	const char *NamespaceName;
 	const int version;
@@ -39,19 +28,25 @@ void registerCustomConnection() {
     qmlRegisterType<EventConsumer>("Communication.EventConsumer", 1, 0, "EventConsumer");
 }
 
+void registerCustomViews()
+{
+    const RegisterSettings s = { "CustomViews", 1, 0 };
+
+    qmlRegisterType<duly_gui::views::DulyCanvas>(s.NamespaceName, s.version, s.subVersion, "DulyCanvas");
+    qmlRegisterType<duly_gui::views::GenericNode>(s.NamespaceName, s.version, s.subVersion, "GenericNode");
+    qmlRegisterType<duly_gui::views::Input>(s.NamespaceName, s.version, s.subVersion, "Input");
+    qmlRegisterType<duly_gui::views::Output>(s.NamespaceName, s.version, s.subVersion, "Output");
+    qmlRegisterType<duly_gui::views::Flow>(s.NamespaceName, s.version, s.subVersion, "Flow");
+}
 void registerCustomGeometry()
 {
     const RegisterSettings s = { "CustomGeometry", 1, 0 };
 
 	qmlRegisterType<duly_gui::views::BezierCurve>(s.NamespaceName, s.version, s.subVersion, "BezierCurve");
 	qmlRegisterType<duly_gui::views::Line>(s.NamespaceName, s.version, s.subVersion, "Line");
-	qmlRegisterType<duly_gui::views::DulyCanvas>(s.NamespaceName, s.version, s.subVersion, "DulyCanvas");
 	qmlRegisterType<duly_gui::views::RoundedRectangle>(s.NamespaceName, s.version, s.subVersion, "RoundedRectangle");
-	qmlRegisterType<duly_gui::views::GenericNode>(s.NamespaceName, s.version, s.subVersion, "GenericNode");
-	qmlRegisterType<duly_gui::views::Input>(s.NamespaceName, s.version, s.subVersion, "Input");
-	qmlRegisterType<duly_gui::views::Output>(s.NamespaceName, s.version, s.subVersion, "Output");
+    qmlRegisterType<duly_gui::views::DulyCanvas>(s.NamespaceName, s.version, s.subVersion, "DulyCanvas");
     qmlRegisterType<DulyResources>(s.NamespaceName, s.version, s.subVersion, "IOType");
-    qmlRegisterType<duly_gui::views::Flow>(s.NamespaceName, s.version, s.subVersion, "Flow");
 }
 
 void registerDulyUtils()
@@ -71,6 +66,7 @@ static QObject *manager_singleton_provider(QQmlEngine *engine, QJSEngine *script
 
 void registerQml()
 {
+    registerCustomViews();
     registerCustomGeometry();
     registerDulyUtils();
     registerCustomConnection();

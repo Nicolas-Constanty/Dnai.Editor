@@ -25,23 +25,7 @@ DulyCanvas {
         y: 200
         model: AddNodeModel{}
     }
-    transformOrigin: Item.Center
 
-//    RoundedRectangle {
-//        id:test
-//        anchors.top: canvas.top
-//        anchors.topMargin: margin
-//        anchors.left: canvas.left
-//        anchors.leftMargin: margin
-//        anchors.right: canvas.right
-//        anchors.rightMargin: margin
-//        height: 200
-//        borderWidth: 10
-//        radius: 50
-//        borderColor: "#80C8E6C9"
-//        fillColor: "#501B5E20"
-//        antialiasing: true
-//    }
     Rectangle {
         x: parent.width / 2
         y: parent.height / 2
