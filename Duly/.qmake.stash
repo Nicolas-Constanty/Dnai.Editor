@@ -17,3 +17,22 @@ QMAKE_CXX.LIBDIRS = \
     C:/Qt/Tools/mingw530_32/lib/gcc \
     C:/Qt/Tools/mingw530_32/i686-w64-mingw32/lib \
     C:/Qt/Tools/mingw530_32/lib
+QMAKE_MAC_SDK.macosx.--show-sdk-path = /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk
+QMAKE_MAC_SDK.macosx.--show-sdk-platform-path = /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform
+QMAKE_MAC_SDK.macosx.--show-sdk-version = 10.12
+QMAKE_MAC_SDK.macx-clang.macosx.QMAKE_CC = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang
+QMAKE_MAC_SDK.macx-clang.macosx.QMAKE_CXX = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++
+QMAKE_MAC_SDK.macx-clang.macosx.QMAKE_FIX_RPATH = \
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/install_name_tool \
+    -id
+QMAKE_MAC_SDK.macx-clang.macosx.QMAKE_AR = \
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ar \
+    cq
+QMAKE_MAC_SDK.macx-clang.macosx.QMAKE_RANLIB = \
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ranlib \
+    -s
+QMAKE_MAC_SDK.macx-clang.macosx.QMAKE_LINK = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++
+QMAKE_MAC_SDK.macx-clang.macosx.QMAKE_LINK_SHLIB = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++
+QMAKE_MAC_SDK.macx-clang.macosx.QMAKE_ACTOOL = /Applications/Xcode.app/Contents/Developer/usr/bin/actool
+QMAKE_XCODE_DEVELOPER_PATH = /Applications/Xcode.app/Contents/Developer
+QMAKE_XCODE_VERSION = 8.3.3
