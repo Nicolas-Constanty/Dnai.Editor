@@ -1,9 +1,7 @@
 QT += qml quick
 
-SUBDIRS = $$PWD/lib/EventClient/
 CONFIG += c++14
 CONFIG += object_parallel_to_source
-CONFIG += ordered
 
 INCLUDEPATH += include/
 
@@ -156,9 +154,12 @@ HEADERS += include/models/common.h \
     include/models/flow.h \
     include/models/function.h \
     include/models/identity.h \
-    include/models/imodel.h
+    include/models/imodel.h \
+    include/models/aregister.h
 
 #LIB
-DEPENDPATH += $$PWD/lib/EventClient/
-INCLUDEPATH += $$PWD/lib/EventClient/
-LIBS += -L "$$PWD/lib/" -lEventClient
+DEPENDPATH += $$PWD/../lib/event_client/
+INCLUDEPATH += $$PWD/../lib/event_client/
+
+LIBS += -L "$$PWD/../lib/" -lEventClient
+message($$PWD)

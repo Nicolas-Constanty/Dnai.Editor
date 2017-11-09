@@ -2,25 +2,22 @@ QT += core
 QT -= gui
 QT += network
 
-CONFIG += c++11
+CONFIG += c++14
 
 TARGET = EventClient
 CONFIG += staticlib
 CONFIG -= app_bundle
-DESTDIR = ../
+DESTDIR = $$PWD/../
 
 TEMPLATE = lib
 
 
 INCLUDEPATH += include/
 
-#INCLUDEPATH += ../Server/
-
 SOURCES += src/packagemanager.cpp \
     src/dulycommunicationserver.cpp \
     src/createpackagefunction.cpp \
     src/clientcommunication.cpp \
-#    testclass.cpp
     src/eventconsumer.cpp \
     src/clientmanager.cpp \
     src/descriptionparser.cpp

@@ -18,3 +18,5 @@ Duly/lib/libEventClient\.a
 Duly/lib/EventClient/Livraison/libEventClient\.a
 .DS_Sto*
 Duly/Duly\.pro\.user
+
+*.user
