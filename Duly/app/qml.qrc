@@ -66,5 +66,10 @@
         <file>resources/Forms/OpenProjectForm.ui.qml</file>
         <file>resources/Panels/NewProject.qml</file>
         <file>resources/Panels/OpenProject.qml</file>
+        <file>resources/Components/ContextContainer.qml</file>
+        <file>resources/Forms/ContainerForm.ui.qml</file>
+        <file>resources/Components/ClassContainer.qml</file>
+        <file>resources/Components/VariableContainer.qml</file>
+        <file>resources/Components/FunctionContainer.qml</file>
     </qresource>
 </RCC>
