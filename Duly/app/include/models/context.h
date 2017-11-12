@@ -29,6 +29,18 @@ namespace duly_gui {
             QList<Variable*> variables() const;
             QList<Function*> functions() const;
 
+        public:
+            void addContext(Context *);
+            void addClass(Class *);
+            void addVariable(Variable *);
+            void addFunction(Function *);
+
+        public:
+            void removeContext(Context *);
+            void removeClass(Class *);
+            void removeVariable(Variable *);
+            void removeFunction(Function *);
+
             // IModel interface
         public:
             virtual void serialize(QJsonObject &) const;

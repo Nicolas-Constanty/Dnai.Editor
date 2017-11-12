@@ -34,6 +34,46 @@ namespace duly_gui {
             return m_functions;
         }
 
+        void Context::addContext(Context *model)
+        {
+            m_contexts.push_back(model);
+        }
+
+        void Context::addClass(Class *model)
+        {
+            m_classes.push_back(model);
+        }
+
+        void Context::addVariable(Variable *model)
+        {
+            m_variables.push_back(model);
+        }
+
+        void Context::addFunction(Function *model)
+        {
+            m_functions.push_back(model);
+        }
+
+        void Context::removeContext(Context *model)
+        {
+            m_contexts.removeOne(model);
+        }
+
+        void Context::removeClass(Class *model)
+        {
+            m_classes.removeOne(model);
+        }
+
+        void Context::removeVariable(Variable *model)
+        {
+            m_variables.removeOne(model);
+        }
+
+        void Context::removeFunction(Function *model)
+        {
+            m_functions.removeOne(model);
+        }
+
         void Context::serialize(QJsonObject &obj) const
         {
             Common::serialize(obj);
