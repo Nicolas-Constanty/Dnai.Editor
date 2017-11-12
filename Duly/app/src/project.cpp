@@ -6,7 +6,6 @@ namespace duly_gui {
     Project::Project(QString const &name, QString const &description, QFile &file)
         : models::Common(name, description), m_file(file), m_main(new models::Context("Duly", "main"))
     {
-
     }
 
     Project::~Project()
@@ -159,15 +158,19 @@ namespace duly_gui {
         auto model = new models::Context(obj["name"].toString(), obj["description"].toString(), parent);
 
         foreach (auto context, obj["contexts"].toArray()) {
-            model->contexts().append(this->unserializeContext(context.toObject(), model));
+            model->addContext(this->unserializeContext(context.toObject(), model));
+        }
+
+        foreach (auto classe, obj["classes"].toArray()) {
+            model->addClass(this->unserializeClass(classe.toObject(), model));
         }
 
         foreach (auto variable, obj["variables"].toArray()) {
-            model->variables().append(this->unserializeVariable(variable.toObject()));
+            model->addVariable(this->unserializeVariable(variable.toObject()));
         }
 
         foreach (auto function, obj["functions"].toArray()) {
-            model->functions().append(this->unserializeFunction(function.toObject(), model));
+            model->addFunction(this->unserializeFunction(function.toObject(), model));
         }
 
         m_index.append(model);
