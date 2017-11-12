@@ -52,6 +52,7 @@ namespace duly_gui {
 
     public:
         QFile &file() const;
+        const models::Context *main() const;
         QJsonObject data() const;
 
     private:

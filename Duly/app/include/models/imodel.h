@@ -8,6 +8,8 @@ namespace duly_gui {
         class IModel
         {
         public:
+            virtual ~IModel() {}
+        public:
             virtual void serialize(QJsonObject &) const = 0;
         };
     }

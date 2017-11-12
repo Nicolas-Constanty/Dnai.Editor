@@ -22,6 +22,11 @@ namespace duly_gui {
         m_file.write(QJsonDocument(obj).toJson());
     }
 
+    const models::Context *Project::main() const
+    {
+        return m_main;
+    }
+
     QJsonObject Project::data() const
     {
         return QJsonObject {
