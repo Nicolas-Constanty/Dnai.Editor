@@ -7,13 +7,14 @@ import CustomGeometry 1.0
 import QtGraphicalEffects 1.0
 import Communication.EventConsumer 1.0
 
-import "Resources"
-import "Resources/Components"
-import "Resources/Nodes"
-import "Resources/Nodes/Operator"
-import "Resources/Nodes/Operator/BinaryOperator"
-import "Resources/Nodes/Operator/BinaryOperator/Logical"
-import "Resources/Nodes/Operator/UnaryOperator"
+
+import "resources"
+import "resources/Components"
+import "resources/Nodes"
+import "resources/Nodes/Operator"
+import "resources/Nodes/Operator/BinaryOperator"
+import "resources/Nodes/Operator/BinaryOperator/Logical"
+import "resources/Nodes/Operator/UnaryOperator"
 
 ApplicationWindow {
 
