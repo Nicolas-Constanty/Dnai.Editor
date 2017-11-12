@@ -162,4 +162,3 @@ DEPENDPATH += $$PWD/../lib/event_client/
 INCLUDEPATH += $$PWD/../lib/event_client/
 
 LIBS += -L "$$PWD/../lib/" -lEventClient
-message($$PWD)
