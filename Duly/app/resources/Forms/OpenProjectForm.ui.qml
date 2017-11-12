@@ -10,6 +10,7 @@ Page {
     property alias cancelButton: cancelButton
     property alias openButton: openButton
     property alias projectPath: projectPath
+    property alias viewData: viewData
 
     FileDialog {
         id: fileDialog
@@ -51,6 +52,28 @@ Page {
                 id: pathButton
                 anchors.right: parent.right
                 text: qsTr("Choose")
+            }
+        }
+        RowLayout {
+            anchors.left: parent.left
+            anchors.right: parent.right
+            Rectangle {
+                width: parent.width
+                height: viewData.count * 18
+                color: "#80FFFFFF"
+                radius: 10
+                ListView {
+                    id: list
+                    anchors.fill: parent
+                    anchors.topMargin: 10
+                    anchors.leftMargin: 15
+                    model: ListModel {
+                        id:viewData
+                    }
+                    delegate: Text {
+                            text: field + ": " + value
+                        }
+                }
             }
         }
     }

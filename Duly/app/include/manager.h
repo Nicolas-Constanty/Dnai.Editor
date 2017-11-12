@@ -19,7 +19,12 @@ namespace duly_gui {
 
     public:
         Q_INVOKABLE void createProject(const QString &, const QString &, const QString &);
-        Q_INVOKABLE void loadProject(const QString &);
+        Q_INVOKABLE QJsonObject loadProjectData(const QString &);
+        Q_INVOKABLE void openProject(const QString &);
+        Q_INVOKABLE void openProject(Project *);
+
+    private:
+         Project *loadProject(const QString &);
     };
 }
 

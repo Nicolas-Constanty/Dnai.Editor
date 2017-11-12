@@ -19,7 +19,6 @@ namespace duly_gui {
 
     void Manager::createProject(const QString &name, const QString &description, const QString &path)
     {
-
         auto fileUrl = QUrl(QDir(path).filePath(name) + project_extension);
         QFile file(fileUrl.toLocalFile());
         if (!file.open(QIODevice::ReadWrite)) {
@@ -32,20 +31,37 @@ namespace duly_gui {
         m_project->save();
     }
 
-    void Manager::loadProject(const QString &path)
+    QJsonObject Manager::loadProjectData(const QString &path)
+    {
+        Project *project = this->loadProject(path);
+        return (project != nullptr) ? project->data() : QJsonObject {};
+    }
+
+    Project * Manager::loadProject(const QString &path)
     {
         QFile file(QUrl(path).toLocalFile());
 
         if (!file.open(QIODevice::ReadWrite)) {
             qWarning("Couldn't open file.");
-            return;
+            return nullptr;
         }
 
         QByteArray data = file.readAll();
 
         QJsonObject obj(QJsonDocument::fromJson(data).object());
 
-        m_project = new Project(obj["name"].toString(), obj["description"].toString(), file);
-        m_project->unserialize(obj);
+        Project *project = new Project(obj["name"].toString(), obj["description"].toString(), file);
+        project->unserialize(obj);
+        return project;
+    }
+
+    void Manager::openProject(const QString &path)
+    {
+        m_project = this->loadProject(path);
+    }
+
+    void Manager::openProject(Project *project)
+    {
+        m_project = project;
     }
 }
