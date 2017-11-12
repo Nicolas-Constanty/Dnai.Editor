@@ -4,7 +4,7 @@
 
 namespace duly_gui {
     Project::Project(QString const &name, QString const &description, QFile &file)
-        : models::Common(name, description), m_file(file)
+        : models::Common(name, description), m_file(file), m_main(new models::Context("Duly", "main"))
     {
 
     }
@@ -22,6 +22,25 @@ namespace duly_gui {
         m_file.write(QJsonDocument(obj).toJson());
     }
 
+    QJsonObject Project::data() const
+    {
+        return QJsonObject {
+            {"name", name()},
+            {"description", description()},
+            {"count", QJsonObject {
+                    {"contexts", count.contexts},
+                    {"classes", count.classes},
+                    {"nodes", count.nodes},
+                    {"functions", count.functions},
+                    {"variables", count.variables},
+                    {"inputs", count.inputs},
+                    {"outputs", count.outputs},
+                    {"flows", count.flows}
+                }
+            }
+        };
+    }
+
     QFile &Project::file() const
     {
         return m_file;
@@ -29,6 +48,7 @@ namespace duly_gui {
 
     models::Variable *Project::unserializeVariable(const QJsonObject &obj)
     {
+        ++count.variables;
         auto model = new models::Variable(
                     obj["name"].toString(),
                     obj["description"].toString(),
@@ -40,6 +60,7 @@ namespace duly_gui {
     }
     models::Input *Project::unserializeInput(const QJsonObject &obj)
     {
+        ++count.inputs;
         auto model = new models::Input(
                     obj["name"].toString(),
                     obj["description"].toString(),
@@ -53,6 +74,7 @@ namespace duly_gui {
     }
     models::Output *Project::unserializeOutput(const QJsonObject &obj)
     {
+        ++count.outputs;
         auto model = new models::Output(
                     obj["name"].toString(),
                     obj["description"].toString(),
@@ -66,6 +88,7 @@ namespace duly_gui {
     }
     models::Flow *Project::unserializeFlow(const QJsonObject &obj)
     {
+        ++count.flows;
         auto model = new models::Flow(
                     obj["uid"].toString(),
                     obj["linked_uid"].toString()
@@ -75,6 +98,7 @@ namespace duly_gui {
     }
     models::Function *Project::unserializeFunction(const QJsonObject &obj, models::Context *parent)
     {
+        ++count.functions;
         auto model = new models::Function(obj["name"].toString(), obj["description"].toString(), parent);
 
         foreach (auto variable, obj["variables"].toArray()) {
@@ -100,6 +124,7 @@ namespace duly_gui {
     }
     models::Class *Project::unserializeClass(const QJsonObject &obj, models::Context *parent)
     {
+        ++count.classes;
         //TODO parent for class childs
         auto model = new models::Class(obj["name"].toString(), obj["description"].toString(), parent);
 
@@ -125,6 +150,7 @@ namespace duly_gui {
     }
     models::Context *Project::unserializeContext(const QJsonObject &obj, models::Context *parent)
     {
+        ++count.contexts;
         auto model = new models::Context(obj["name"].toString(), obj["description"].toString(), parent);
 
         foreach (auto context, obj["contexts"].toArray()) {
@@ -145,6 +171,7 @@ namespace duly_gui {
     }
     models::Node *Project::unserializeNode(const QJsonObject &obj, models::Function *parent)
     {
+        ++count.nodes;
         auto position = obj["position"].toObject();
         auto model = new models::Node(
                     obj["name"].toString(),
@@ -182,34 +209,14 @@ namespace duly_gui {
     void Project::serialize(QJsonObject &obj) const
     {
         models::Common::serialize(obj);
-
-        QJsonArray contexts;
-        foreach (const models::Context *context, m_contexts) {
-            QJsonObject var;
-            context->serialize(var);
-            contexts.append(var);
-        }
-
-        QJsonArray nodes;
-        foreach (const models::Node *node, m_nodes) {
-            QJsonObject var;
-            node->serialize(var);
-            nodes.append(var);
-        }
-
-        obj["contexts"] = contexts;
-        obj["nodes"] = nodes;
+        QJsonObject main;
+        m_main->serialize(main);
+        obj["main"] = main;
     }
 
     void Project::unserialize(const QJsonObject &obj)
     {
-        foreach (auto node, obj["nodes"].toArray()) {
-            m_nodes.append(this->unserializeNode(node.toObject(), nullptr));
-        }
-
-        foreach (auto context, obj["contexts"].toArray()) {
-            m_contexts.append(this->unserializeContext(context.toObject(), nullptr));
-        }
+        m_main = this->unserializeContext(obj["main"].toObject(), nullptr);
     }
 
     QVector<models::Common *> Project::search(const QString &search, searchFunc func)

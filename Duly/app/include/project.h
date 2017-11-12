@@ -15,6 +15,19 @@
 #include "models/imodel.h"
 
 namespace duly_gui {
+struct Count {
+    int contexts = 0;
+    int classes = 0;
+    int nodes = 0;
+    int functions = 0;
+    int variables = 0;
+    int inputs = 0;
+    int outputs = 0;
+    int flows = 0;
+};
+}
+
+namespace duly_gui {
     class Project: public models::Common, virtual public models::IModel
     {
     public:
@@ -33,11 +46,13 @@ namespace duly_gui {
         QVector<models::Common*> m_index;
         QVector<models::Function*> m_functions_index;
 
-        QVector<models::Context*> m_contexts;
-        QVector<models::Node*> m_nodes;
+        models::Context const *m_main;
+
+        Count count;
 
     public:
         QFile &file() const;
+        QJsonObject data() const;
 
     private:
         models::Variable *unserializeVariable(const QJsonObject &);
