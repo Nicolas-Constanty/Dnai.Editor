@@ -2,8 +2,8 @@
 
 namespace duly_gui {
     namespace models {
-        Common::Common(QString const &name, QString const &description)
-            : m_name(name), m_description(description)
+        Common::Common(QString const &name, QString const &description, QObject *parent)
+            : QObject(parent), m_name(name), m_description(description)
         {
 
         }
