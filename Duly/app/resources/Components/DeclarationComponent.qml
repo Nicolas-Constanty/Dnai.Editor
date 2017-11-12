@@ -18,12 +18,36 @@ DulyCanvas {
     accentGridColor: toolBar.menuEditRef.settingRef.themeTabRef.accentGridColorRef.colorSetting
     backgroundColor: toolBar.menuEditRef.settingRef.themeTabRef.backgroudColorRef.colorSetting
 
-    Node {
-        model: AddNodeModel{}
+    ContextContainer {
+        id: contextContainer
+        anchors.topMargin: 20
+        anchors.top: parent.top
+        anchors.left: parent.left
+        anchors.right: parent.right
     }
-    Node {
-        y: 200
-        model: AddNodeModel{}
+
+    ClassContainer {
+        id: classContainer
+        anchors.topMargin: 20
+        anchors.top: contextContainer.bottom
+        anchors.left: parent.left
+        anchors.right: parent.right
+    }
+
+    VariableContainer {
+        id: variableContainer
+        anchors.topMargin: 20
+        anchors.top: classContainer.bottom
+        anchors.left: parent.left
+        anchors.right: parent.right
+    }
+
+    FunctionContainer {
+        id: methodContainer
+        anchors.topMargin: 20
+        anchors.top: variableContainer.bottom
+        anchors.left: parent.left
+        anchors.right: parent.right
     }
 
     Rectangle {
