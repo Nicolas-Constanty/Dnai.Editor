@@ -75,7 +75,8 @@ SOURCES +=     src/models/class.cpp \
     src/models/input.cpp \
     src/models/node.cpp \
     src/models/output.cpp \
-    src/models/variable.cpp
+    src/models/variable.cpp \
+    src/models/list/listmodelcontext.cpp
 
 RESOURCES += qml.qrc
 
@@ -156,7 +157,7 @@ HEADERS += include/models/common.h \
     include/models/identity.h \
     include/models/imodel.h \
     include/models/aregister.h \
-    include/models/listmodel.h
+    include/models/list/listmodelcontext.h
 
 #LIB
 DEPENDPATH += $$PWD/../lib/event_client/
