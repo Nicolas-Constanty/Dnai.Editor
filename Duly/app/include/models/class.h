@@ -6,14 +6,13 @@
 #include "models/variable.h"
 #include "models/function.h"
 #include "models/imodel.h"
-#include "models/aregister.h"
 
 namespace duly_gui {
     namespace views {
         class Class;
     }
     namespace models {
-        class Class: public Common, public ARegister<views::Class>, virtual public IModel
+        class Class: public Common, virtual public IModel
         {
         public:
             Class(QString const &, QString const &, Context * = nullptr);

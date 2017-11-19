@@ -7,7 +7,6 @@
 #include "models/function.h"
 #include "models/class.h"
 #include "models/imodel.h"
-#include "models/aregister.h"
 
 namespace duly_gui {
     namespace models {
