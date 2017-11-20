@@ -161,7 +161,7 @@ namespace duly_gui {
 
         IClone *Node::clone() const
         {
-            return new Node(name(), description(), position(), parent());
+            return new Node(name(), description(), position());
         }
     }
 }

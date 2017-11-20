@@ -114,7 +114,7 @@ namespace duly_gui {
 
         IClone *Context::clone() const
         {
-            return new Context(name(), description(), parent());
+            return new Context(name(), description());
         }
     }
 }
