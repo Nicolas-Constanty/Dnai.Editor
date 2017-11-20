@@ -106,19 +106,19 @@ namespace duly_gui {
         auto model = new models::Function(obj["name"].toString(), obj["description"].toString(), parent);
 
         foreach (auto variable, obj["variables"].toArray()) {
-            model->variables().append(this->unserializeVariable(variable.toObject()));
+            model->addVariable(this->unserializeVariable(variable.toObject()));
         }
 
         foreach (auto input, obj["inputs"].toArray()) {
-            model->inputs().append(this->unserializeInput(input.toObject()));
+            model->addInput(this->unserializeInput(input.toObject()));
         }
 
         foreach (auto output, obj["outputs"].toArray()) {
-            model->outputs().append(this->unserializeOutput(output.toObject()));
+            model->addOutput(this->unserializeOutput(output.toObject()));
         }
 
         foreach (auto node, obj["nodes"].toArray()) {
-            model->nodes().append(this->unserializeNode(node.toObject(), model));
+            model->addNode(this->unserializeNode(node.toObject(), model));
         }
 
         m_functions_index.append(model);
@@ -133,19 +133,19 @@ namespace duly_gui {
         auto model = new models::Class(obj["name"].toString(), obj["description"].toString(), parent);
 
         foreach (auto attribute, obj["attributes"].toArray()) {
-            model->attributes().append(this->unserializeVariable(attribute.toObject()));
+            model->addAttribute(this->unserializeVariable(attribute.toObject()));
         }
 
         foreach (auto method, obj["methods"].toArray()) {
-            model->methods().append(this->unserializeFunction(method.toObject(), nullptr));
+            model->addMethod(this->unserializeFunction(method.toObject(), nullptr));
         }
 
         foreach (auto variable, obj["variables"].toArray()) {
-            model->variables().append(this->unserializeVariable(variable.toObject()));
+            model->addVariable(this->unserializeVariable(variable.toObject()));
         }
 
         foreach (auto function, obj["functions"].toArray()) {
-            model->functions().append(this->unserializeFunction(function.toObject(), nullptr));
+            model->addFunction(this->unserializeFunction(function.toObject(), nullptr));
         }
 
         m_index.append(model);
@@ -194,19 +194,19 @@ namespace duly_gui {
         model->setFunction(functions_found.first());
 
         foreach (auto input, obj["inputs"].toArray()) {
-            model->inputs().append(this->unserializeInput(input.toObject()));
+            model->addInput(this->unserializeInput(input.toObject()));
         }
 
         foreach (auto output, obj["outputs"].toArray()) {
-            model->outputs().append(this->unserializeOutput(output.toObject()));
+            model->addOutput(this->unserializeOutput(output.toObject()));
         }
 
         foreach (auto flow_in, obj["flows_in"].toArray()) {
-            model->flows_in().append(this->unserializeFlow(flow_in.toObject()));
+            model->addFlowIn(this->unserializeFlow(flow_in.toObject()));
         }
 
         foreach (auto flow_out, obj["flows_out"].toArray()) {
-            model->flows_out().append(this->unserializeFlow(flow_out.toObject()));
+            model->addFlowOut(this->unserializeFlow(flow_out.toObject()));
         }
 
         m_index.append(model);
