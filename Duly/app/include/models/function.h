@@ -37,6 +37,10 @@ namespace duly_gui {
             // IModel interface
         public:
             virtual void serialize(QJsonObject &) const;
+
+            // IClone interface
+        private:
+            IClone *clone() const;
         };
     }
 }

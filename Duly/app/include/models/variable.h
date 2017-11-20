@@ -19,6 +19,7 @@ namespace duly_gui {
             bool m_internal;
 //            QVariant value;
 
+        public:
             QString type() const;
             void setType(const QString &type);
 
@@ -29,6 +30,10 @@ namespace duly_gui {
             // IModel interface
         public:
             virtual void serialize(QJsonObject &) const;
+
+            // IClone interface
+        private:
+            IClone *clone() const;
         };
     }
 }
