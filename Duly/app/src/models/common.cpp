@@ -41,7 +41,7 @@ namespace duly_gui {
 
         IClone *Common::clone() const
         {
-            return new Common(name(), description(), parent());
+            return new Common(name(), description());
         }
     }
 }

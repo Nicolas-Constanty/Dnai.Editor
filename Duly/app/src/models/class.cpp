@@ -124,7 +124,7 @@ namespace duly_gui {
 
         IClone *Class::clone() const
         {
-            return new Class(name(), description(), parent());
+            return new Class(name(), description());
         }
     }
 }
