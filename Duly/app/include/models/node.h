@@ -1,7 +1,7 @@
 #ifndef MODEL_NODE_H
 #define MODEL_NODE_H
 
-#include <QVector>
+#include <QList>
 #include <QVector2D>
 #include "models/common.h"
 #include "models/input.h"
@@ -24,10 +24,10 @@ namespace duly_gui {
 //            Context *m_context;
             Function *m_function;
             QVector2D m_position;
-            QVector<Input*> m_inputs;
-            QVector<Output*> m_outputs;
-            QVector<Flow*> m_flows_in;
-            QVector<Flow*> m_flows_out;
+            QList<Input*> m_inputs;
+            QList<Output*> m_outputs;
+            QList<Flow*> m_flows_in;
+            QList<Flow*> m_flows_out;
 
         public:
             Function *parent() const;
@@ -38,10 +38,22 @@ namespace duly_gui {
             void setFunction(Function *function);
             QVector2D position() const;
             void setPosition(const QVector2D &position);
-            QVector<Input*> inputs() const;
-            QVector<Output*> outputs() const;
-            QVector<Flow *> flows_in() const;
-            QVector<Flow *> flows_out() const;
+            QList<Input*> inputs() const;
+            QList<Output*> outputs() const;
+            QList<Flow *> flows_in() const;
+            QList<Flow *> flows_out() const;
+
+        public:
+            void addInput(Input *);
+            void addOutput(Output *);
+            void addFlowIn(Flow *);
+            void addFlowOut(Flow *);
+
+        public:
+            void removeInput(Input *);
+            void removeOutput(Output *);
+            void removeFlowIn(Flow *);
+            void removeFlowOut(Flow *);
 
             // IModel interface
         public:

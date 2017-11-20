@@ -1,7 +1,7 @@
 #ifndef MODEL_FUNCTION_H
 #define MODEL_FUNCTION_H
 
-#include <QVector>
+#include <QList>
 #include "models/common.h"
 #include "models/variable.h"
 #include "models/input.h"
@@ -20,19 +20,31 @@ namespace duly_gui {
         private:
             Context *m_parent;
 
-            QVector<Variable*> m_variables;
-            QVector<Input*> m_inputs;
-            QVector<Output*> m_outputs;
-            QVector<Node*> m_nodes;
+            QList<Variable*> m_variables;
+            QList<Input*> m_inputs;
+            QList<Output*> m_outputs;
+            QList<Node*> m_nodes;
 
         public:
             Context *parent() const;
             void setParent(Context *parent);
 
-            QVector<Variable*> variables() const;
-            QVector<Input*> inputs() const;
-            QVector<Output*> outputs() const;
-            QVector<Node*> nodes() const;
+            QList<Variable*> variables() const;
+            QList<Input*> inputs() const;
+            QList<Output*> outputs() const;
+            QList<Node*> nodes() const;
+
+        public:
+            void addVariable(Variable *);
+            void addInput(Input *);
+            void addOutput(Output *);
+            void addNode(Node *);
+
+        public:
+            void removeVariable(Variable *);
+            void removeInput(Input *);
+            void removeOutput(Output *);
+            void removeNode(Node *);
 
             // IModel interface
         public:

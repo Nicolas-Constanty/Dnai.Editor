@@ -55,24 +55,64 @@ namespace duly_gui {
             m_position = position;
         }
 
-        QVector<Input*> Node::inputs() const
+        QList<Input*> Node::inputs() const
         {
             return m_inputs;
         }
 
-        QVector<Output*> Node::outputs() const
+        QList<Output*> Node::outputs() const
         {
             return m_outputs;
         }
 
-        QVector<Flow *> Node::flows_out() const
+        QList<Flow *> Node::flows_out() const
         {
             return m_flows_out;
         }
 
-        QVector<Flow *> Node::flows_in() const
+        QList<Flow *> Node::flows_in() const
         {
             return m_flows_in;
+        }
+
+        void Node::addInput(Input *model)
+        {
+            m_inputs.push_back(model);
+        }
+
+        void Node::addOutput(Output *model)
+        {
+            m_outputs.push_back(model);
+        }
+
+        void Node::addFlowIn(Flow *model)
+        {
+            m_flows_in.push_back(model);
+        }
+
+        void Node::addFlowOut(Flow *model)
+        {
+            m_flows_out.push_back(model);
+        }
+
+        void Node::removeInput(Input *model)
+        {
+            m_inputs.removeOne(model);
+        }
+
+        void Node::removeOutput(Output *model)
+        {
+            m_outputs.removeOne(model);
+        }
+
+        void Node::removeFlowIn(Flow *model)
+        {
+            m_flows_in.removeOne(model);
+        }
+
+        void Node::removeFlowOut(Flow *model)
+        {
+            m_flows_out.removeOne(model);
         }
 
         void Node::serialize(QJsonObject &obj) const
