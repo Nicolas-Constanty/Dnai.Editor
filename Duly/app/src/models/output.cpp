@@ -19,5 +19,10 @@ namespace duly_gui {
             Variable::serialize(obj);
             Identity::serialize(obj);
         }
+
+        IClone *Output::clone() const
+        {
+            return new Output(name(), description(), type(), internal(), uid(), linked_uid());
+        }
     }
 }

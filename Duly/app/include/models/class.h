@@ -8,9 +8,6 @@
 #include "models/imodel.h"
 
 namespace duly_gui {
-    namespace views {
-        class Class;
-    }
     namespace models {
         class Class: public Common, virtual public IModel
         {
@@ -38,6 +35,10 @@ namespace duly_gui {
             // IModel interface
         public:
             virtual void serialize(QJsonObject &) const;
+
+            // IClone interface
+        private:
+            IClone *clone() const;
         };
     }
 }

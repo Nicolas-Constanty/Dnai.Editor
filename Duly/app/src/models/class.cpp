@@ -80,6 +80,11 @@ namespace duly_gui {
             obj["methods"] = methods;
             obj["variables"] = variables;
             obj["functions"] = functions;
-        }        
+        }
+
+        IClone *Class::clone() const
+        {
+            return new Class(name(), description(), parent());
+        }
     }
 }

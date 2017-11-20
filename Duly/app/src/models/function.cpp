@@ -81,5 +81,10 @@ namespace duly_gui {
             obj["outputs"] = outputs;
             obj["nodes"] = nodes;
         }
+
+        IClone *Function::clone() const
+        {
+            return new Function(name(), description(), parent());
+        }
     }
 }

@@ -118,5 +118,10 @@ namespace duly_gui {
             obj["flows_in"] = flows_in;
             obj["flows_out"] = flows_out;
         }
+
+        IClone *Node::clone() const
+        {
+            return new Node(name(), description(), position(), parent());
+        }
     }
 }

@@ -39,5 +39,10 @@ namespace duly_gui {
             obj["type"] = m_type;
             obj["internal"] = m_internal;
         }
+
+        IClone *Variable::clone() const
+        {
+            return new Variable(name(), description(), type(), internal());
+        }
     }
 }
