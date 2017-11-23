@@ -10,7 +10,7 @@ void PackageManager::registerEvent(std::function<void(void*, unsigned int)> even
 
 void PackageManager::compute() {
     HeaderCommunication *header = NULL;
-    qDebug() << m_data;
+ //   qDebug() << m_data;
 
    // qDebug() << "enter";
 
