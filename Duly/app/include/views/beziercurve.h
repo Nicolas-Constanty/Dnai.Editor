@@ -12,17 +12,17 @@ namespace duly_gui
 		{
 			Q_OBJECT
 
-				Q_PROPERTY(QPointF p1 READ p1 WRITE setP1 NOTIFY p1Changed)
-				Q_PROPERTY(QPointF p2 READ p2 WRITE setP2 NOTIFY p2Changed)
-				Q_PROPERTY(QPointF p3 READ p3 WRITE setP3 NOTIFY p3Changed)
-				Q_PROPERTY(QPointF p4 READ p4 WRITE setP4 NOTIFY p4Changed)
+			Q_PROPERTY(QPointF p1 READ p1 WRITE setP1 NOTIFY p1Changed)
+			Q_PROPERTY(QPointF p2 READ p2 WRITE setP2 NOTIFY p2Changed)
+			Q_PROPERTY(QPointF p3 READ p3 WRITE setP3 NOTIFY p3Changed)
+			Q_PROPERTY(QPointF p4 READ p4 WRITE setP4 NOTIFY p4Changed)
 
-				Q_PROPERTY(bool dotted READ dotted WRITE setDotted NOTIFY dottedChanged)
-				Q_PROPERTY(uint lineWidth READ lineWidth WRITE setLineWidth NOTIFY lineWidthChanged)
-				Q_PROPERTY(uint segmentCount READ segmentCount WRITE setSegmentCount NOTIFY segmentCountChanged)
+			Q_PROPERTY(bool dotted READ dotted WRITE setDotted NOTIFY dottedChanged)
+			Q_PROPERTY(uint lineWidth READ lineWidth WRITE setLineWidth NOTIFY lineWidthChanged)
+			Q_PROPERTY(uint segmentCount READ segmentCount WRITE setSegmentCount NOTIFY segmentCountChanged)
 
-				Q_PROPERTY(QColor fillColor READ fillColor WRITE setFillColor NOTIFY fillColorChanged)
-				Q_PROPERTY(QColor dottedColor READ dottedColor WRITE setDottedColor NOTIFY dottedColorChanged)
+			Q_PROPERTY(QColor fillColor READ fillColor WRITE setFillColor NOTIFY fillColorChanged)
+			Q_PROPERTY(QColor dottedColor READ dottedColor WRITE setDottedColor NOTIFY dottedColorChanged)
 
 		public:
 			explicit BezierCurve(QQuickItem *parent = nullptr);

@@ -7,6 +7,7 @@ namespace duly_gui {
         {
 
         }
+
         ListModelContext::ListModelContext(QList<Context*> list, QObject *parent)
             : QAbstractListModel(parent), m_list(list) {
 

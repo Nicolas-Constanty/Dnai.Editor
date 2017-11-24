@@ -14,13 +14,12 @@ namespace duly_gui
 		{
 			Q_OBJECT
 
-				Q_PROPERTY(int gridStep READ gridStep WRITE setGridStep NOTIFY gridStepChanged)
-				Q_PROPERTY(int accentGridStep READ accentGridStep WRITE setAccentGridStep NOTIFY accentGridStepChanged)
+			Q_PROPERTY(int gridStep READ gridStep WRITE setGridStep NOTIFY gridStepChanged)
+			Q_PROPERTY(int accentGridStep READ accentGridStep WRITE setAccentGridStep NOTIFY accentGridStepChanged)
 
-				Q_PROPERTY(QColor gridColor READ gridColor WRITE setGridColor NOTIFY gridColorChanged)
-				Q_PROPERTY(QColor accentGridColor READ accentGridColor WRITE setAccentGridColor NOTIFY accentGridColorChanged)
-				Q_PROPERTY(QColor backgroundColor READ backgroundColor WRITE setBackgroundColor NOTIFY backgroundColorChanged)
-
+			Q_PROPERTY(QColor gridColor READ gridColor WRITE setGridColor NOTIFY gridColorChanged)
+			Q_PROPERTY(QColor accentGridColor READ accentGridColor WRITE setAccentGridColor NOTIFY accentGridColorChanged)
+			Q_PROPERTY(QColor backgroundColor READ backgroundColor WRITE setBackgroundColor NOTIFY backgroundColorChanged)
 
 		public:
 			explicit DulyCanvas(QQuickItem *parent = nullptr);

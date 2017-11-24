@@ -1,7 +1,5 @@
 import QtQuick 2.0
 import QtQuick.Controls 2.0
-import QtQuick.Controls.Material 2.0
-
 
 Item {
     id: defaultPanel
@@ -19,8 +17,6 @@ Item {
         anchors.fill: parent
         border.color: "#3f3f46"
         border.width: 1
-        Material.theme: Material.Dark
-        Material.accent: Material.color(Material.DeepOrange, Material.Shade400)
         Grid {
             columns: 0
             anchors.fill: parent

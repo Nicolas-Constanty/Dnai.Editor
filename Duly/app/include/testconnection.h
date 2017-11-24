@@ -61,6 +61,7 @@ public slots:
 
 public:
     void onReceiveEventKoala(void *data, unsigned int size) {
+        (void)(size);
         int *newData = (int *)data;
 
         qDebug() << "receive KOALA event :";
@@ -68,6 +69,7 @@ public:
     }
 
     void onReceiveEventPopole(void *data, unsigned int size) {
+        (void)(size);
         qDebug() << "receive POPOLE event";
         int *intLol = (int *)data;
         qDebug() << *intLol;

@@ -1,4 +1,4 @@
-QT += qml quick
+QT += qml quickcontrols2
 
 CONFIG += c++14
 CONFIG += object_parallel_to_source
@@ -7,11 +7,17 @@ INCLUDEPATH += include/
 
 RC_FILE = duly.rc
 
+settingsfolder.path = $${OUT_PWD}/settings
+settingsfolder.files = settings/*
+
+INSTALLS += settingsfolder
+
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which as been marked deprecated (the exact warnings
 # depend on your compiler). Please consult the documentation of the
 # deprecated API in order to know how to port your code away from it.
 DEFINES += QT_DEPRECATED_WARNINGS QNANO_USE_RENDERNODE
+DEFINES += QPM_INIT
 
 # You can also make your code fail to compile if you use deprecated APIs.
 # In order to do so, uncomment the following line.
@@ -34,7 +40,10 @@ SOURCES += src/baseio.cpp \
     src/manager.cpp \
     src/project.cpp \
     src/views/context.cpp \
-    src/views/class.cpp
+    src/views/class.cpp \
+    src/models/list/listmodelcontext.cpp \
+    src/dulysettings.cpp \
+    src/dulysettingsmodel.cpp
 
 #VIEWS
 SOURCES += src/views/beziercurve.cpp \
@@ -75,8 +84,7 @@ SOURCES +=     src/models/class.cpp \
     src/models/input.cpp \
     src/models/node.cpp \
     src/models/output.cpp \
-    src/models/variable.cpp \
-    src/models/list/listmodelcontext.cpp
+    src/models/variable.cpp
 
 RESOURCES += qml.qrc
 
@@ -113,7 +121,9 @@ HEADERS += include/baseio.h \
     include/project.h \
     include/views/context.h \
     include/views/class.h \
-    include/views.h
+    include/views.h \
+    include/dulysettings.h \
+    include/dulysettingsmodel.h
 
 #VIEWS
 HEADERS += include/views/beziercurve.h \

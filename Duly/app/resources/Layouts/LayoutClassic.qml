@@ -1,24 +1,20 @@
 import QtQuick 2.9
 import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
-import QtQuick.Controls.Material 2.2
 import QtQuick.Dialogs 1.2
 import CustomGeometry 1.0
 import QtGraphicalEffects 1.0
 
-import "Components"
-import "Nodes"
-import "Nodes/Operator"
-import "Nodes/Operator/BinaryOperator"
-import "Nodes/Operator/BinaryOperator/Logical"
-import "Nodes/Operator/UnaryOperator"
+import "../Components"
+import "../Panels"
+import "../Models"
 
-Rectangle {
+BaseLayout {
     id: layout
-    property ToolBarHeader toolBarHeader: toolBar
-    property ConsoleComponent debugConsole: consoleRef
-    property PanelLeft leftPanel: panelLeft
-    property PanelRight rightPanel: panelRight
+    toolBarHeader: toolBar
+    debugConsole: consoleRef
+    leftPanel: panelLeft
+    rightPanel: panelRight
 
     ToolBarHeader {
         id: toolBar
@@ -66,6 +62,10 @@ Rectangle {
         anchors.bottom: layout.bottom
         width: layout.width / 6;
         height: root.height - toolBar.height
+        DeclarationModelDelegate {
+            id: model
+        }
+        dragAndDropPanel.model: model
     }
 
     DropShadow {
@@ -105,7 +105,7 @@ Rectangle {
     }
     ConsoleComponent {
         id: consoleRef
-        anchors.left: panelLeft.left
+        anchors.left: toolBar.left
         anchors.right: panelRight.left
         height: 200
         state: "Invisible"

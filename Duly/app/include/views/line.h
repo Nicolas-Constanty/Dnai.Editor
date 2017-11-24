@@ -13,11 +13,11 @@ namespace duly_gui
 		{
 			Q_OBJECT
 
-				Q_PROPERTY(QPointF p1 READ p1 WRITE setP1 NOTIFY p1Changed)
-				Q_PROPERTY(QPointF p2 READ p2 WRITE setP2 NOTIFY p2Changed)
+			Q_PROPERTY(QPointF p1 READ p1 WRITE setP1 NOTIFY p1Changed)
+			Q_PROPERTY(QPointF p2 READ p2 WRITE setP2 NOTIFY p2Changed)
 
-				Q_PROPERTY(int lineWidth READ lineWidth WRITE setLineWidth NOTIFY lineWidthChanged)
-				Q_PROPERTY(QColor lineColor READ lineColor WRITE setLineColor NOTIFY lineColorChanged)
+			Q_PROPERTY(int lineWidth READ lineWidth WRITE setLineWidth NOTIFY lineWidthChanged)
+			Q_PROPERTY(QColor lineColor READ lineColor WRITE setLineColor NOTIFY lineColorChanged)
 		public:
 			explicit Line(QQuickItem *parent = nullptr);
 			Line(const QPointF &p1, const QPointF &p2, QQuickItem *parent = nullptr);

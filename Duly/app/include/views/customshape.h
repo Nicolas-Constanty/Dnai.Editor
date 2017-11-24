@@ -1,7 +1,6 @@
 #ifndef CUSTOMSHAPE_H
 #define CUSTOMSHAPE_H
 
-#include <QQuickItem>
 #include "views/scalableitem.h"
 
 namespace duly_gui

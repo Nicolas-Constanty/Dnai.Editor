@@ -12,33 +12,33 @@ namespace duly_gui
 		class FlowBackend : public BaseLinkable
 		{
 		public:
-			explicit FlowBackend(DulyResources::FlowType t, QQuickItem *parent);
+            explicit FlowBackend(FlowType t, QQuickItem *parent);
 
 			/**
 			* \brief return the IOType
 			*/
-			DulyResources::FlowType getType() const;
+            FlowType getType() const;
 
 			Link *connect(ALinkable* linkable, BezierCurve* curve) override;
 
 		protected:
-			DulyResources::FlowType m_type;
+            FlowType m_type;
 		};
 
 		class Flow : public LinkableBezierItem
 		{
 			Q_OBJECT
-				Q_PROPERTY(DulyResources::FlowType type READ type WRITE setType NOTIFY typeChanged)
+            Q_PROPERTY(FlowType type READ type WRITE setType NOTIFY typeChanged)
 
 		public:
 			explicit Flow(QQuickItem *parent = nullptr);
 			virtual QSGNode *updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *) override;
 
 		public:
-			DulyResources::FlowType type() const { return m_type; }
+            FlowType type() const { return m_type; }
 
 		public:
-			void setType(DulyResources::FlowType t);
+            void setType(FlowType t);
 			/**
 			* \brief Override componentComplete, and init some values
 			*/
@@ -62,10 +62,10 @@ namespace duly_gui
 			virtual void setLink(Link *) override;
 
 		signals:
-			void typeChanged(DulyResources::FlowType t);
+            void typeChanged(FlowType t);
 
 		private:
-			DulyResources::FlowType m_type;
+            FlowType m_type;
 
 		protected:
 			void mousePressEvent(QMouseEvent* event) override;

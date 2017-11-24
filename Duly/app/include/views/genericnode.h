@@ -13,12 +13,12 @@ namespace duly_gui
         {
             Q_OBJECT
 
-                Q_PROPERTY(bool flowIn READ flowIn WRITE setFlowIn NOTIFY flowInChanged)
-                Q_PROPERTY(bool flowOut READ flowOut WRITE setFlowOut NOTIFY flowOutChanged)
-                Q_PROPERTY(Flow *flowInItem READ flowInItem WRITE setFlowInItem NOTIFY flowInItemChanged)
-                Q_PROPERTY(Flow *flowOutItem READ flowOutItem WRITE setFlowOutItem NOTIFY flowOutItemChanged)
-                Q_PROPERTY(RoundedRectangle *header READ header WRITE setHeader NOTIFY headerChanged)
-                Q_PROPERTY(RoundedRectangle *content READ content WRITE setContent NOTIFY contentChanged)
+            Q_PROPERTY(bool flowIn READ flowIn WRITE setFlowIn NOTIFY flowInChanged)
+            Q_PROPERTY(bool flowOut READ flowOut WRITE setFlowOut NOTIFY flowOutChanged)
+            Q_PROPERTY(Flow *flowInItem READ flowInItem WRITE setFlowInItem NOTIFY flowInItemChanged)
+            Q_PROPERTY(Flow *flowOutItem READ flowOutItem WRITE setFlowOutItem NOTIFY flowOutItemChanged)
+            Q_PROPERTY(RoundedRectangle *header READ header WRITE setHeader NOTIFY headerChanged)
+            Q_PROPERTY(RoundedRectangle *content READ content WRITE setContent NOTIFY contentChanged)
 
         public:
             explicit GenericNode(QQuickItem *parent = nullptr);
