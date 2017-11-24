@@ -2,7 +2,6 @@ import QtQuick 2.4
 import QtQuick.Dialogs 1.2
 import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
-import QtQuick.Controls.Material 2.2
 
 Page {
     property alias fileDialog: fileDialog
@@ -79,7 +78,6 @@ Page {
     }
 
     footer: ToolBar {
-        Material.background: Material.color(Material.Grey, Material.Shade800)
         ToolButton {
             id: cancelButton
             anchors.left: parent.left

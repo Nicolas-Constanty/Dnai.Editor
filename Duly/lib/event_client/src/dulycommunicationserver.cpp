@@ -23,7 +23,7 @@ DulyCommunicationServer::DulyCommunicationServer(QTcpSocket *socket,
 
 }
 
-DulyCommunicationServer::DulyCommunicationServer(DulyCommunicationServer const &other) {
+DulyCommunicationServer::DulyCommunicationServer(DulyCommunicationServer const &other) : QObject(nullptr) {
     *this = other;
 }
 

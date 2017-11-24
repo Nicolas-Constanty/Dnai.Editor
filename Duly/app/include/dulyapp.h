@@ -3,13 +3,21 @@
 
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
+#include <QSettings>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QDir>
 
 namespace duly_gui {
-    class DulyApp : public QGuiApplication
+	class DulyApp : public QGuiApplication
     {
-    public:
+	public:
         DulyApp(int & argc, char **argv);
         bool eventFilter(QObject *object, QEvent *event) override;
+		static void initApp();
+
+	private:
+		QSettings m_settings;
     };
 }
 

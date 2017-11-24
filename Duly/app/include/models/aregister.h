@@ -12,12 +12,12 @@ namespace duly_gui {
             virtual ~ARegister() {}
 
         public:
-            bool addView(T *view) {
+            void addView(T *view) {
                 m_views.push_back(view);
             }
 
             bool removeView(T *view) {
-                m_views.removeOne(view);
+                return m_views.removeOne(view);
             }
         private:
             QList<T*> m_views;

@@ -1,4 +1,3 @@
-#include <QKeyEvent>
 #include "dulyapp.h"
 #include "commands/commandmanager.h"
 
@@ -11,7 +10,7 @@ namespace duly_gui {
     bool DulyApp::eventFilter(QObject *o, QEvent *event)
     {
         if (!event || event->type() != QEvent::KeyPress) return QGuiApplication::eventFilter(o, event);
-		QKeyEvent *e = static_cast<QKeyEvent *>(event);
+	    const auto e = static_cast<QKeyEvent *>(event);
 		if (e->matches(QKeySequence::Undo))
         {
 			commands::CommandManager::Instance()->undo(1);
@@ -24,4 +23,12 @@ namespace duly_gui {
         }
         return QGuiApplication::eventFilter(o, event);
     }
+
+	void DulyApp::initApp()
+	{
+		setOrganizationName("DNAI");
+		setOrganizationDomain("DNAI.com");
+		setApplicationName("DNAI");
+	}
+
 }

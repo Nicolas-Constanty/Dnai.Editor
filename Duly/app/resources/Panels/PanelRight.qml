@@ -1,7 +1,39 @@
 import QtQuick 2.0
+import QtQml.Models 2.1
 
 Panel {
     id: panel
+    property alias dragAndDropPanel: gridView
+
+    Rectangle {
+        id: containerDrag
+        height: panel.height / 2 - anchors.topMargin
+        anchors.left: panel.left
+        anchors.leftMargin: 10
+        anchors.right: panel.right
+        anchors.rightMargin: 10
+        anchors.top: panel.top
+        anchors.topMargin: 30
+        color: "#40000000"
+        radius: 5
+        border.color: "#EEEEEE"
+        border.width: 1
+
+        GridView {
+            id: gridView
+            anchors.left: parent.left
+            anchors.leftMargin: 10
+            anchors.right: parent.right
+            anchors.rightMargin: 10
+            anchors.top: parent.top
+            anchors.topMargin: 10
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: 10
+            cellWidth: 60
+            cellHeight: 60
+        }
+    }
+
     states: [
         State{
             name: "Visible"

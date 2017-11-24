@@ -2,7 +2,7 @@
 
 namespace duly_gui
 {
-    BaseIo::BaseIo(DulyResources::IoType type, QQuickItem *parent) : BaseLinkable(parent), m_type(type)
+    BaseIo::BaseIo(IoType type, QQuickItem *parent) : BaseLinkable(parent), m_type(type)
 	{
 	}
 
@@ -11,14 +11,14 @@ namespace duly_gui
 
 	}
 
-    void BaseIo::setType(DulyResources::IoType t)
+    void BaseIo::setType(IoType t)
 	{
 		if (t == m_type)
 			return;
 		m_type = t;
 	}
 
-    DulyResources::IoType BaseIo::getType() const
+    IoType BaseIo::getType() const
 	{
 		return m_type;
 	}

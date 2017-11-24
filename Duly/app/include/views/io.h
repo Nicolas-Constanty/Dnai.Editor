@@ -18,8 +18,8 @@ namespace duly_gui
 		{
 			Q_OBJECT
 
-				Q_PROPERTY(uint nbSegments READ nbSegments WRITE setNbSegments NOTIFY nbSegmentsChanged)
-				Q_PROPERTY(DulyResources::IoType type READ type WRITE setType NOTIFY typeChanged)
+			Q_PROPERTY(uint nbSegments READ nbSegments WRITE setNbSegments NOTIFY nbSegmentsChanged)
+            Q_PROPERTY(IoType type READ type WRITE setType NOTIFY typeChanged)
 
 		public:
 			static BaseIo *CurrentHover;
@@ -56,20 +56,20 @@ namespace duly_gui
 
 		public:
 			uint nbSegments() const { return m_nbSegments; }
-			DulyResources::IoType type() const { return m_type; }
+            IoType type() const { return m_type; }
 
 		public:
 			void setNbSegments(uint n);
-			void setType(DulyResources::IoType type);
+            void setType(IoType type);
 
 		signals:
 			void nbSegmentsChanged(uint n);
-			void typeChanged(DulyResources::IoType type);
+            void typeChanged(IoType type);
 
 		protected:
 			uint m_nbSegments;
 
-			DulyResources::IoType m_type;
+            IoType m_type;
 
 		protected:
 			bool m_holdClick;

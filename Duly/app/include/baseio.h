@@ -9,23 +9,23 @@ namespace duly_gui {
     class BaseIo : public BaseLinkable
     {
     public:
-        BaseIo(DulyResources::IoType type, QQuickItem *parent);
+        BaseIo(IoType type, QQuickItem *parent);
         ~BaseIo();
 
         /**
          * \brief set the IOType
          * \param t
          */
-        void setType(DulyResources::IoType t);
+        void setType(IoType t);
 
         /**
         * \brief return the IOType
         */
-        DulyResources::IoType getType() const;
+        IoType getType() const;
 
 
     protected:
-        DulyResources::IoType m_type;
+        IoType m_type;
 
     };
 }

@@ -37,7 +37,7 @@ void EventConsumer::receiveData(void *data, unsigned int size) {
     // CALL DU SIGNAL
 
     //int *newData = (int *)data;
-
+    (void)(size);
     QVariantList listVar;
 
     QList<DescriptionParser::TypeParser> const &list = m_parser.getList();

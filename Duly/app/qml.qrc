@@ -53,13 +53,7 @@
         <file>resources/Forms/ConsoleForm.ui.qml</file>
         <file>resources/Panels/DefaultPanel.qml</file>
         <file>resources/Components/ConsoleComponent.qml</file>
-        <file>resources/Components/PanelLeft.qml</file>
-        <file>resources/Components/Panel.qml</file>
-        <file>resources/Components/PanelRight.qml</file>
-        <file>resources/Components/PanelTop.qml</file>
-        <file>resources/LayoutClassic.qml</file>
         <file>resources/Components/FunctionComponent.qml</file>
-        <file>resources/Layout_1.qml</file>
         <file>resources/Components/DeclarationComponent.qml</file>
         <file>resources/Images/WindowHandle.png</file>
         <file>resources/Forms/NewProjectForm.ui.qml</file>
@@ -71,5 +65,33 @@
         <file>resources/Components/ClassContainer.qml</file>
         <file>resources/Components/VariableContainer.qml</file>
         <file>resources/Components/FunctionContainer.qml</file>
+        <file>resources/Components/DragAndDropItem.qml</file>
+        <file>resources/Components/DragDropItem.qml</file>
+        <file>resources/Models/TestModel.qml</file>
+        <file>resources/Models/ContextModel.qml</file>
+        <file>resources/Components/ContextView.qml</file>
+        <file>resources/Components/ClassView.qml</file>
+        <file>resources/Models/DeclarationModel.qml</file>
+        <file>resources/Models/ClassModel.qml</file>
+        <file>resources/Models/DeclarationModelDelegate.qml</file>
+        <file>resources/JavaScript/CreateComponent.js</file>
+        <file>resources/Models/FunctionModel.qml</file>
+        <file>resources/Models/VariableModel.qml</file>
+        <file>resources/Panels/ChooseThemePanel.qml</file>
+        <file>resources/Forms/ChooseThemeForm.ui.qml</file>
+        <file>resources/DulyStyle.qml</file>
+        <file>settings/themes/dark.json</file>
+        <file>settings/themes/light.json</file>
+        <file>resources/Layouts/BaseLayout.qml</file>
+        <file>resources/Panels/Panel.qml</file>
+        <file>resources/Panels/PanelLeft.qml</file>
+        <file>resources/Panels/PanelRight.qml</file>
+        <file>resources/Panels/PanelTop.qml</file>
+        <file>resources/Layouts/Layout_1.qml</file>
+        <file>resources/Layouts/LayoutClassic.qml</file>
+        <file>resources/Controls/DMenuItem.qml</file>
+        <file>resources/fonts/Muli-Regular.ttf</file>
+        <file>resources/Controls/DMenu.qml</file>
+        <file>resources/Controls/DToolButton.qml</file>
     </qresource>
 </RCC>

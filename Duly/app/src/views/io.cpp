@@ -14,7 +14,7 @@ namespace duly_gui
 		Io::Io(QQuickItem *parent) :
 			LinkableBezierItem(parent)
 			, m_nbSegments(32)
-			, m_type(DulyResources::IoType::Int)
+            , m_type(IoType::Int)
 
 		{
 			Io::refreshBackendIo();
@@ -164,7 +164,7 @@ namespace duly_gui
 			update();
 		}
 
-		void Io::setType(DulyResources::IoType type)
+        void Io::setType(IoType type)
 		{
 			if (type == m_type)
 				return;

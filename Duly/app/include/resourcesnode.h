@@ -3,12 +3,12 @@
 
 #include <QObject>
 
-class DulyResources : public QObject
+class IoTypeRessouce : public QObject
 {
     Q_OBJECT
 public:
-    explicit DulyResources(QObject *parent = nullptr) : QObject(parent) {}
-    ~DulyResources() {}
+    explicit IoTypeRessouce(QObject *parent = nullptr) : QObject(parent) {}
+    ~IoTypeRessouce() {}
     /**
     * \brief define all the handle type by the application
     */
@@ -24,13 +24,43 @@ public:
         Count //Get the size of enum, must be at the end all the time!
     };
     Q_ENUM(IoType)
+};
 
-        enum FlowType
+class DeclarationTypeRessouce : public QObject
+{
+    Q_OBJECT
+public:
+    explicit DeclarationTypeRessouce(QObject *parent = nullptr) : QObject(parent) {}
+    ~DeclarationTypeRessouce() {}
+
+    enum DeclarationType
+    {
+        None,
+        Context,
+        Class,
+        Variable,
+        Function
+    };
+    Q_ENUM(DeclarationType)
+};
+
+class FlowTypeRessouce : public QObject
+{
+    Q_OBJECT
+public:
+    explicit FlowTypeRessouce(QObject *parent = nullptr) : QObject(parent) {}
+    ~FlowTypeRessouce() {}
+
+    enum FlowType
     {
         Enter,
         Exit
     };
     Q_ENUM(FlowType)
 };
+
+typedef IoTypeRessouce::IoType IoType;
+typedef FlowTypeRessouce::FlowType FlowType;
+typedef DeclarationTypeRessouce::DeclarationType DeclarationType;
 
 #endif // RESOURCESNODE_H
