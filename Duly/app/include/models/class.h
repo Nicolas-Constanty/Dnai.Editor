@@ -1,19 +1,15 @@
 #ifndef MODEL_CLASS_H
 #define MODEL_CLASS_H
 
-#include <QVector>
+#include <QList>
 #include "models/common.h"
 #include "models/variable.h"
 #include "models/function.h"
 #include "models/imodel.h"
-#include "models/aregister.h"
 
 namespace duly_gui {
-    namespace views {
-        class Class;
-    }
     namespace models {
-        class Class: public Common, public ARegister<views::Class>, virtual public IModel
+        class Class: public Common, virtual public IModel
         {
         public:
             Class(QString const &, QString const &, Context * = nullptr);
@@ -22,23 +18,39 @@ namespace duly_gui {
         private:
             Context *m_parent;
 
-            QVector<Variable*> m_attributes;
-            QVector<Function*> m_methods;
-            QVector<Variable*> m_variables;
-            QVector<Function*> m_functions;
+            QList<Variable*> m_attributes;
+            QList<Function*> m_methods;
+            QList<Variable*> m_variables;
+            QList<Function*> m_functions;
 
         public:
             Context *parent() const;
             void setParent(Context *parent);
 
-            QVector<Variable*> attributes() const;
-            QVector<Function*> methods() const;
-            QVector<Variable*> variables() const;
-            QVector<Function*> functions() const;
+            QList<Variable*> attributes() const;
+            QList<Function*> methods() const;
+            QList<Variable*> variables() const;
+            QList<Function*> functions() const;
+
+        public:
+            void addAttribute(Variable *);
+            void addMethod(Function *);
+            void addVariable(Variable *);
+            void addFunction(Function *);
+
+        public:
+            void removeAttribute(Variable *);
+            void removeMethod(Function *);
+            void removeVariable(Variable *);
+            void removeFunction(Function *);
 
             // IModel interface
         public:
             virtual void serialize(QJsonObject &) const;
+
+            // IClone interface
+        private:
+            IClone *clone() const;
         };
     }
 }

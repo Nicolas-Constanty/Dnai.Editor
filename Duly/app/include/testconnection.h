@@ -37,9 +37,17 @@ public slots:
         memset(toto.c, 0, sizeof(toto.c));
         memcpy(toto.c, "YOLOLOLOLO", sizeof("YOLOLOLOLO"));
         m_com.sendEvent("KOALA", &toto, sizeof(POPO));*/
-        qDebug() << "SEND";
-        int u = 1234;
-         m_com.sendEvent("POPOLE", &u, 4);
+        static int u = 0;
+        if (u % 2 == 0) {
+            qDebug() << "SEND 4";
+            int u = 1234;
+            m_com.sendEvent("POPOLE", &u, 4);
+        } else {
+            qDebug() << "SEND 1";
+            char u = 'A';
+            m_com.sendEvent("POPOLE", &u, 1);
+        }
+        ++u;
     }
 
     void updateTITI() {
@@ -69,10 +77,18 @@ public:
     }
 
     void onReceiveEventPopole(void *data, unsigned int size) {
-        (void)(size);
-        qDebug() << "receive POPOLE event";
-        int *intLol = (int *)data;
-        qDebug() << *intLol;
+        static int u = 0;
+        qDebug() << size;
+        if (u % 2 == 0) {
+            qDebug() << "receive POPOLE event 4";
+            int *intLol = (int *)data;
+            qDebug() << *intLol;
+        } else {
+            qDebug() << "receive POPOLE event 1";
+            char *intLol = (char *)data;
+            qDebug() << *intLol;
+        }
+        ++u;
     }
 
 private:

@@ -24,24 +24,64 @@ namespace duly_gui {
             m_parent = parent;
         }
         
-        QVector<Variable*> Function::variables() const
+        QList<Variable*> Function::variables() const
         {
             return m_variables;
         }
         
-        QVector<Input*> Function::inputs() const
+        QList<Input*> Function::inputs() const
         {
             return m_inputs;
         }
 
-        QVector<Output*> Function::outputs() const
+        QList<Output*> Function::outputs() const
         {
             return m_outputs;
         }
 
-        QVector<Node*> Function::nodes() const
+        QList<Node*> Function::nodes() const
         {
             return m_nodes;
+        }
+
+        void Function::addVariable(Variable *model)
+        {
+            m_variables.push_back(model);
+        }
+
+        void Function::addInput(Input *model)
+        {
+            m_inputs.push_back(model);
+        }
+
+        void Function::addOutput(Output *model)
+        {
+            m_outputs.push_back(model);
+        }
+
+        void Function::addNode(Node *model)
+        {
+            m_nodes.push_back(model);
+        }
+
+        void Function::removeVariable(Variable *model)
+        {
+            m_variables.removeOne(model);
+        }
+
+        void Function::removeInput(Input *model)
+        {
+            m_inputs.removeOne(model);
+        }
+
+        void Function::removeOutput(Output *model)
+        {
+            m_outputs.removeOne(model);
+        }
+
+        void Function::removeNode(Node *model)
+        {
+            m_nodes.removeOne(model);
         }
 
         void Function::serialize(QJsonObject &obj) const
@@ -80,6 +120,11 @@ namespace duly_gui {
             obj["inputs"] = inputs;
             obj["outputs"] = outputs;
             obj["nodes"] = nodes;
+        }
+
+        IClone *Function::clone() const
+        {
+            return new Function(name(), description());
         }
     }
 }

@@ -137,10 +137,10 @@ void DulyCommunicationServer::onReceiveSendEvent(void *data, unsigned int size) 
 
     try {
         EventManager::Event &event = EventManager::shared().getFrom(eventSendPackage->eventName);
-        if (event.getSize() != size - sizeof(EventSendFromClientPackage)) {
-            qDebug() << "[WARNING] receive bad size from " << eventSendPackage->eventName;
-            return;
-        }
+//        if (event.getSize() != size - sizeof(EventSendFromClientPackage)) {
+//            qDebug() << "[WARNING] receive bad size from " << eventSendPackage->eventName;
+//            return;
+//        }
         event.compute((void *)((char *)data - sizeof(HeaderCommunication)), size + sizeof(HeaderCommunication));
 
         static int i = 0;
