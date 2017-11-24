@@ -166,7 +166,7 @@ HEADERS += include/models/common.h \
     include/models/function.h \
     include/models/identity.h \
     include/models/imodel.h \
-    include/models/aregister.h \
+    include/models/iclone.h \
     include/models/list/listmodelcontext.h
 
 #LIB

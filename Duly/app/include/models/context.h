@@ -7,7 +7,6 @@
 #include "models/function.h"
 #include "models/class.h"
 #include "models/imodel.h"
-#include "models/aregister.h"
 
 namespace duly_gui {
     namespace models {
@@ -44,6 +43,10 @@ namespace duly_gui {
             // IModel interface
         public:
             virtual void serialize(QJsonObject &) const;
+
+            // IClone interface
+        private:
+            IClone *clone() const;
         };
     }
 }

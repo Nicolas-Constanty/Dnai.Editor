@@ -111,5 +111,10 @@ namespace duly_gui {
             obj["variables"] = variables;
             obj["functions"] = functions;
         }
+
+        IClone *Context::clone() const
+        {
+            return new Context(name(), description());
+        }
     }
 }

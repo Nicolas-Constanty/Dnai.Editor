@@ -24,24 +24,64 @@ namespace duly_gui {
             m_parent = parent;
         }
         
-        QVector<Variable*> Class::attributes() const
+        QList<Variable*> Class::attributes() const
         {
             return m_attributes;
         }
         
-        QVector<Function*> Class::methods() const
+        QList<Function*> Class::methods() const
         {
             return m_methods;
         }
         
-        QVector<Variable*> Class::variables() const
+        QList<Variable*> Class::variables() const
         {
             return m_variables;
         }
         
-        QVector<Function*> Class::functions() const
+        QList<Function*> Class::functions() const
         {
             return m_functions;
+        }
+
+        void Class::addAttribute(Variable *model)
+        {
+            m_attributes.push_back(model);
+        }
+
+        void Class::addMethod(Function *model)
+        {
+            m_methods.push_back(model);
+        }
+
+        void Class::addVariable(Variable *model)
+        {
+            m_variables.push_back(model);
+        }
+
+        void Class::addFunction(Function *model)
+        {
+            m_functions.push_back(model);
+        }
+
+        void Class::removeAttribute(Variable *model)
+        {
+            m_attributes.removeOne(model);
+        }
+
+        void Class::removeMethod(Function *model)
+        {
+            m_methods.removeOne(model);
+        }
+
+        void Class::removeVariable(Variable *model)
+        {
+            m_variables.removeOne(model);
+        }
+
+        void Class::removeFunction(Function *model)
+        {
+            m_functions.removeOne(model);
         }
 
         void Class::serialize(QJsonObject &obj) const
@@ -80,6 +120,11 @@ namespace duly_gui {
             obj["methods"] = methods;
             obj["variables"] = variables;
             obj["functions"] = functions;
-        }        
+        }
+
+        IClone *Class::clone() const
+        {
+            return new Class(name(), description());
+        }
     }
 }

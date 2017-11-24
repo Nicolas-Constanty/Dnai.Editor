@@ -6,3 +6,13 @@
 .DS_Store
 build-*
 .qmake.stash
+
+Duly/app/debug/
+
+Duly/\.vs/Duly/v15/
+
+Duly/lib/event_client/debug/
+
+Duly/lib/event_client/release/
+
+Duly/app/release/

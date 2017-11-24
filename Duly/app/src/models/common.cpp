@@ -38,5 +38,10 @@ namespace duly_gui {
             obj["name"] = m_name;
             obj["description"] = m_description;
         }
+
+        IClone *Common::clone() const
+        {
+            return new Common(name(), description());
+        }
     }
 }
