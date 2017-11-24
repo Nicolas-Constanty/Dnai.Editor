@@ -1,0 +1,35 @@
+{
+
+   "description": "base context",
+
+   "main": {
+
+       "classes": [
+
+       ],
+
+       "contexts": [
+
+       {"name": "context1", "description": "cc", "variables": [], "classes": [], "functions": []},
+
+       {"name": "context2", "description": "cvgdgs"}
+
+       ],
+
+       "description": "main",
+
+       "functions": [
+
+       ],
+
+       "name": "Duly",
+
+       "variables": [
+
+       ]
+
+   },
+
+   "name": "base"
+
+}
