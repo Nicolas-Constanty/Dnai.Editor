@@ -102,11 +102,14 @@ int main(int argc, char *argv[])
 
     TestConnection test(*com);
 
-    com->registerEvent("POPOLE", 4, std::bind(&TestConnection::onReceiveEventPopole, &test, std::placeholders::_1, std::placeholders::_2));
+    com->registerEvent("DECLARE", 1, std::bind(&TestConnection::onReceiveEventPopole, &test, std::placeholders::_1, std::placeholders::_2));
 
     QTimer *timer = new QTimer();
       QObject::connect(timer, SIGNAL(timeout()), &test, SLOT(update()));
       timer->start(1000);
+
+
+
 
   /*  QTimer *timer = new QTimer();
     QObject::connect(timer, SIGNAL(timeout()), &test, SLOT(update()));
