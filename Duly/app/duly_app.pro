@@ -163,4 +163,13 @@ HEADERS += include/models/common.h \
 DEPENDPATH += $$PWD/../lib/event_client/
 INCLUDEPATH += $$PWD/../lib/event_client/
 
-LIBS += -L "$$PWD/../lib/" -lEventClient
+INCLUDEPATH += $$PWD/../lib/DataComEvent/Shared_include/
+
+#begin library network
+LIBS += $$PWD/../lib/libEventClient.a
+#end library network
+
+#begin library Data Event
+LIBS += $$PWD/../lib/libDataComEvent.a
+LIBS += $$PWD/../lib/DataComEvent/Library/libprotobuf.a
+#end library Data Event
