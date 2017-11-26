@@ -2,28 +2,29 @@
 #define EVENTREGISTERPACKAGE_H
 
 #include <QString>
+#include "dulypack.h"
 #include "headercommunication.h"
 
-typedef struct __attribute__((packed)) {
+PACKED_STRUCT(EventRegisterPackage) {
     char eventName[256];
     unsigned int eventSize;
     char        enable;
-} EventRegisterPackage;
+};
 
-typedef struct __attribute__((packed)) {
+PACKED_STRUCT(EventRegisterPackageAnswerServer) {
     char eventName[256];
     unsigned int id;
-} EventRegisterPackageAnswerServer;
+} ;
 
-typedef struct __attribute__((packed)) {
+PACKED_STRUCT(SendEventRegisterPackageAnswerServer) {
     HeaderCommunication header;
     EventRegisterPackageAnswerServer eventRegister;
-} SendEventRegisterPackageAnswerServer;
+} ;
 
-typedef struct __attribute__((packed)) {
+PACKED_STRUCT(SendEventRegisterPackage) {
     HeaderCommunication header;
     EventRegisterPackage eventRegister;
-} SendEventRegisterPackage;
+} ;
 
 void createEventRegisterPackage(SendEventRegisterPackage &,
                                 QString const &eventName,
