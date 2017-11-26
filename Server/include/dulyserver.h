@@ -10,7 +10,7 @@ class DulyServer : public QTcpServer
     Q_OBJECT
 
 public:
-    DulyServer(quint16 port = 0, const QHostAddress &address = QHostAddress::LocalHost, QObject *parent = Q_NULLPTR);
+    DulyServer(quint16 port = 0, const QHostAddress &address = QHostAddress::AnyIPv4, QObject *parent = Q_NULLPTR);
 
 public:
     void start();

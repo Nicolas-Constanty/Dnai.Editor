@@ -2,27 +2,28 @@
 #define EVENTSENDPACKAGE_H
 
 #include <QString>
+#include "dulypack.h"
 #include "headercommunication.h"
 
-typedef struct __attribute__((packed)) {
+PACKED_STRUCT(EventSendPackage) {
     unsigned int eventId;
     /// + DATA [SIZE]
-} EventSendPackage;
+} ;
 
-typedef struct __attribute__((packed)) {
+PACKED_STRUCT(EventSendFromClientPackage) {
     char    eventName[100];
     /// + DATA [SIZE]
-} EventSendFromClientPackage;
+} ;
 
-typedef struct __attribute__((packed)) {
+PACKED_STRUCT(SendEventSendPackage) {
     HeaderCommunication header;
     EventSendPackage event;
-} SendEventSendPackage;
+} ;
 
-typedef struct __attribute__((packed)) {
+PACKED_STRUCT(SendEventSendFromClientPackage) {
     HeaderCommunication header;
     EventSendFromClientPackage event;
-} SendEventSendFromClientPackage;
+} ;
 
 SendEventSendPackage *createEventSendPackage(unsigned int id,
                             void *data, unsigned int size);

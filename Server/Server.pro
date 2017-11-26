@@ -41,4 +41,5 @@ HEADERS += \
     include/eventregisterpackage.h \
     include/eventsendpackage.h \
     include/eventmanager.h \
-    include/server.h
+    include/server.h \
+    include/dulypack.h

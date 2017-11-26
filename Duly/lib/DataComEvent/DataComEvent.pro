@@ -6,6 +6,7 @@ CONFIG += c++14
 TARGET = DataComEvent
 CONFIG += staticlib
 CONFIG -= app_bundle
+CONFIG += warn_off
 DESTDIR = $$PWD/../
 
 TEMPLATE = lib
