@@ -4,6 +4,7 @@
 #include <QDebug>
 #include <QObject>
 #include "include/clientcommunication.h"
+#include "models/context.h"
 
 #include "datacomeventfactory.h"
 
@@ -41,16 +42,19 @@ public slots:
         m_com.sendEvent("KOALA", &toto, sizeof(POPO));*/
 
         static int i = 0;
+        if (i == 3) {
+            return;
+        }
         DataComEventFactory eventController;
 
         DataComEventFactory::DataComEvent data;
 
-        if (i % 3 == 0) {
-            data = eventController.createDeclare(ENTITY::CONTEXT, 3, "HELLOL", VISIBILITY::PRIVATE);
+       if (i % 3 == 0) {
+            data = eventController.createDeclare(ENTITY::CONTEXT_D, 0, "HELLOL", VISIBILITY::PRIVATE);
         } else if (i % 3 == 1) {
-            data = eventController.createDeclare(ENTITY::VARIABLE, 4, "POLOLOLOLOL", VISIBILITY::PRIVATE);
+            data = eventController.createDeclare(ENTITY::VARIABLE, 0, "POLOLOLOLOL", VISIBILITY::PRIVATE);
         } else {
-            data = eventController.createDeclare(ENTITY::FUNCTION, 5, "1", VISIBILITY::PUBLIC);
+            data = eventController.createDeclare(ENTITY::FUNCTION, 0, "1", VISIBILITY::PUBLIC);
         }
 
         ++i;

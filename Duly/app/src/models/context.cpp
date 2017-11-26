@@ -1,5 +1,6 @@
 #include "models/context.h"
 #include <QJsonArray>
+#include <QDebug>
 
 namespace duly_gui {
     namespace models {
@@ -105,6 +106,8 @@ namespace duly_gui {
                 function->serialize(var);
                 functions.append(var);
             }
+
+            qDebug() << "TOTO";
 
             obj["contexts"] = contexts;
             obj["classes"] = classes;
