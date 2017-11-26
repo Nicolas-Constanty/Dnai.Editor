@@ -8,13 +8,12 @@
 #include "commands/movecanvascommand.h"
 #include "commands/commandmanager.h"
 #include "commands/zoomcanvascommand.h"
+#include "dulyapp.h"
 
 namespace duly_gui
 {
 	namespace views
 	{
-		DulyCanvas *DulyCanvas::Instance = nullptr;
-
 		DulyCanvas::DulyCanvas(QQuickItem *parent)
 			: ScalableItem(parent)
 			, m_gridStep(15)
@@ -25,8 +24,7 @@ namespace duly_gui
 			setAcceptHoverEvents(true);
             setAcceptedMouseButtons(Qt::AllButtons);
             setFlag(ItemAcceptsInputMethod, true);
-			if (Instance == nullptr)
-                Instance = this;
+			static_cast<DulyApp*>(DulyApp::instance())->registerCanvas(this);
 		}
 
 		void DulyCanvas::createGrid()

@@ -1,44 +1,29 @@
 #include "views/context.h"
+#include "dulyapp.h"
 
 namespace duly_gui {
 namespace views {
-Context::Context(const models::Context &model, QQuickItem *parent) :
-    QQuickItem(parent),
+Context::Context(QQuickItem *parent) :
+    DeclarationView(parent),
+    m_model(nullptr)
+{
+	setType(DeclarationType::Context);
+	
+	const auto declView = static_cast<DulyApp *>(DulyApp::instance())->settings()->style()->declarationView();
+	/*auto v = view();
+	v->setRadius(declView->declContext()->radius());
+	v->setFillColor(declView->declContext()->background());
+	v->setBorderColor(declView->declContext()->border()->color());
+	v->setBorderWidth(declView->declContext()->border()->width());
+	v->setWidth(declView->itemSize());
+	v->setHeight(declView->itemSize());
+	v->setAntialiasing(true);*/
+}
+Context::Context(models::Context *model, QQuickItem *parent) :
+	DeclarationView(parent),
     m_model(model)
 {
-}
-
-void Context::setContextContainer(QQuickItem *item)
-{
-    if (item == m_contextContainer)
-        return;
-    m_contextContainer = item;
-    emit contextContainerChanged(item);
-    update();
-}
-void Context::setClassContainer(QQuickItem *item)
-{
-    if (item == m_classContainer)
-        return;
-    m_classContainer = item;
-    emit classContainerChanged(item);
-    update();
-}
-void Context::setFunctionContainer(QQuickItem *item)
-{
-    if (item == m_functionContainer)
-        return;
-    m_functionContainer = item;
-    emit functionContainerChanged(item);
-    update();
-}
-void Context::setVariableContainer(QQuickItem *item)
-{
-    if (item == m_variableContainer)
-        return;
-    m_variableContainer = item;
-    emit variableContainerChanged(item);
-    update();
+	setType(DeclarationType::Context);
 }
 }
 }

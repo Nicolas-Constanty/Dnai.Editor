@@ -8,6 +8,7 @@
 #include "views/genericnode.h"
 #include "commands/movenodecommand.h"
 #include "commands/commandmanager.h"
+#include "dulyapp.h"
 
 namespace duly_gui
 {
@@ -17,7 +18,8 @@ namespace duly_gui
 		GenericNode::GenericNode(QQuickItem *parent) :
             ScalableItem(parent)
 		{
-			DulyCanvas::Instance->focusManager().registerItem(this);
+			m_canvas = static_cast<DulyApp *>(DulyApp::instance())->currentCanvas();
+			m_canvas->focusManager().registerItem(this);
 			setFlag(ItemHasContents, true);
 			setAcceptHoverEvents(true);
 			setAcceptedMouseButtons(Qt::LeftButton);
@@ -114,7 +116,7 @@ namespace duly_gui
 		void GenericNode::mousePressEvent(QMouseEvent* event)
 		{
             qDebug() << "hey";
-			m_offset = QPointF(position() - mapToItem(DulyCanvas::Instance, event->pos()));
+			m_offset = QPointF(position() - mapToItem(m_canvas, event->pos()));
 			if (this != parentItem()->childItems().last())
 				stackAfter(parentItem()->childItems().last());
 			m_header->setBorderColor(QColor(255, 170, 0, 255));
@@ -124,7 +126,7 @@ namespace duly_gui
 
 		void GenericNode::mouseMoveEvent(QMouseEvent* event)
 		{
-            const auto p(mapToItem(DulyCanvas::Instance, event->pos()) + m_offset);
+            const auto p(mapToItem(m_canvas, event->pos()) + m_offset);
             if (!m_holdClik)
             {
                 m_holdClik = true;
@@ -165,7 +167,7 @@ namespace duly_gui
             if (m_realPos == QPointF(-100000, -100000))
             {
                 m_realPos = position();
-                const auto p = DulyCanvas::Instance->origin() + QPointF(width() / 2, height() / 2);
+                const auto p = m_canvas->origin() + QPointF(width() / 2, height() / 2);
                 setTransformOriginPoint(p);
             }
             auto n = static_cast<QSGSimpleRectNode *>(oldNode);

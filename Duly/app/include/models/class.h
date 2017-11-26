@@ -20,8 +20,9 @@ namespace duly_gui {
 
             QList<Variable*> m_attributes;
             QList<Function*> m_methods;
-            QList<Variable*> m_variables;
+            QList<Variable*> m_variables;//TODO remove this line
             QList<Function*> m_functions;
+            //TODO add position
 
         public:
             Context *parent() const;

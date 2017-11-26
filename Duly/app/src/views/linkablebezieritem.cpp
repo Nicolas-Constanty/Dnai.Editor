@@ -3,6 +3,7 @@
 #include "views/genericnode.h"
 #include "eventutilities.h"
 #include "link.h"
+#include "dulyapp.h"
 
 namespace duly_gui
 {
@@ -15,6 +16,7 @@ namespace duly_gui
 			setAcceptedMouseButtons(Qt::LeftButton);
 			setFlag(ItemAcceptsInputMethod, true);
 			m_currentHover = nullptr;
+			m_canvas = static_cast<DulyApp *>(DulyApp::instance())->currentCanvas();
 		}
 
 
@@ -26,9 +28,9 @@ namespace duly_gui
 		void LinkableBezierItem::mouseMoveEvent(QMouseEvent *event)
 		{
 			if (m_currentCurve == nullptr) return;
-			const auto p(mapToItem(DulyCanvas::Instance, event->pos()));
+			const auto p(mapToItem(m_canvas, event->pos()));
 			m_currentCurve->setP4(p);
-			auto qlist = DulyCanvas::Instance->focusManager().findFocused(p);
+			auto qlist = m_canvas->focusManager().findFocused(p);
 			if (qlist.size() == 0)
 			{
 				if (m_currentHover)
@@ -61,7 +63,7 @@ namespace duly_gui
 		{
 			if (EventUtilities::isHoverCircle(m_radius, event))
 			{
-				auto b = new BezierCurve(DulyCanvas::Instance);
+				auto b = new BezierCurve(m_canvas);
 				b->setRealPosition(getCanvasPos());
 				b->setP1(QPoint(0, 0));
 				QColor cb(colorLink());
@@ -81,8 +83,8 @@ namespace duly_gui
 		{
 			if (event->button() != Qt::LeftButton || m_currentCurve == nullptr)
 				return;
-			const auto p(mapToItem(DulyCanvas::Instance, event->pos()));
-			auto qlist = DulyCanvas::Instance->focusManager().findFocused(p);
+			const auto p(mapToItem(m_canvas, event->pos()));
+			auto qlist = m_canvas->focusManager().findFocused(p);
 			if (qlist.size() == 0)
 			{
 				delete(m_currentCurve);

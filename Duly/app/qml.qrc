@@ -93,5 +93,6 @@
         <file>resources/fonts/Muli-Regular.ttf</file>
         <file>resources/Controls/DMenu.qml</file>
         <file>resources/Controls/DToolButton.qml</file>
+        <file>resources/Components/DeclarationView.qml</file>
     </qresource>
 </RCC>
