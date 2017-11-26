@@ -1,13 +1,15 @@
 #ifndef HEADERCOMMUNICATION_H
 #define HEADERCOMMUNICATION_H
 
-#include "dulypack.h"
+#include "pack.h"
 
-PACKED_STRUCT(HeaderCommunication) {
-    int magicNumber;
-    unsigned int packageSize;
-    unsigned int id;
-} ;
+PACKED(
+struct HeaderCommunication {
+int magicNumber;
+unsigned int packageSize;
+unsigned int id;
+}
+);
 
 #define MAGIC_NUMBER 0x44756c79
 

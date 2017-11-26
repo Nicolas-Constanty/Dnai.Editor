@@ -2,17 +2,21 @@
 #define AUTHENTIFICATIONPACKAGE_H
 
 #include <QString>
-#include "dulypack.h"
+#include "pack.h"
 #include "headercommunication.h"
 
-PACKED_STRUCT(AuthentificationPackage) {
+PACKED(
+struct AuthentificationPackage {
     char name[256];
-};
+}
+);
 
-PACKED_STRUCT(SendAuthenticatePackage) {
+PACKED(
+struct SendAuthenticatePackage {
     HeaderCommunication header;
     AuthentificationPackage auth;
-};
+}
+);
 
 void createAuthenticatePackage(SendAuthenticatePackage &, QString const &name);
 
