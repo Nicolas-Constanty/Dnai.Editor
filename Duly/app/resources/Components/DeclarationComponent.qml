@@ -1,6 +1,7 @@
 import QtQuick 2.9
 import QtQuick.Controls 2.2
 import CustomGeometry 1.0
+import CustomViews 1.0
 import Utils 1.0
 
 import "../Nodes"
@@ -13,7 +14,7 @@ DropArea {
     id: dragTarget
     property int margin: 30
     property alias dropProxy: dragTarget
-    DulyCanvas {
+    DeclarationCanvas {
         id: canvas
         anchors.fill: parent
         backgroundColor: DulySettings.style.canvas.background

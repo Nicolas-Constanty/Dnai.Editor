@@ -40,10 +40,13 @@ ApplicationWindow {
         DulySettings.init()
         if (DulySettings.isSettingsLoad())
         {
-            layout = Factory.createObjects("resources/Layouts/LayoutClassic.qml", {
-                                      "anchors.fill": root,
+            Factory.createObjects("resources/Layouts/LayoutClassic.qml", {
+                                      "width": root.width,
+                                      "height": root.height,
                                       "color": "transparent"
                                   }, root)
+            layout = Factory.getObject()
+            layout.anchors.fill = layout.parent
         }
         else
         {

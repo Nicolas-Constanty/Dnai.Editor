@@ -1,35 +1,52 @@
 {
 
-   "description": "base context",
+  "description": "base context",
 
-   "main": {
+  "main": {
 
-       "classes": [
+    "classes": [
+      {
+        "name": "class1",
+        "description": "je suis une classe",
+        "variables": [ ],
+        "functions": [ ]
+      }
+    ],
 
-       ],
+    "contexts": [
 
-       "contexts": [
+      {
+        "name": "context1",
+        "description": "cc",
+        "variables": [ ],
+        "classes": [ ],
+        "functions": [ ]
+      },
 
-       {"name": "context1", "description": "cc", "variables": [], "classes": [], "functions": []},
+      {
+        "name": "context2",
+        "description": "cvgdgs"
+      }
 
-       {"name": "context2", "description": "cvgdgs"}
+    ],
 
-       ],
+    "description": "main",
 
-       "description": "main",
+    "functions": [
 
-       "functions": [
+    ],
 
-       ],
+    "name": "Duly",
 
-       "name": "Duly",
+    "variables": [
+      {
+        "name": "variable1",
+        "description": "je suis une variable"
+      }
+    ]
 
-       "variables": [
+  },
 
-       ]
-
-   },
-
-   "name": "base"
+  "name": "base"
 
 }

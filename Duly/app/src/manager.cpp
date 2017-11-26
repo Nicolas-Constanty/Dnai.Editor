@@ -3,6 +3,8 @@
 #include <QDebug>
 #include <QDir>
 #include <QUrl>
+#include "dulyapp.h"
+#include "views/declarationcanvas.h"
 
 namespace duly_gui {
     const QString Manager::project_extension = ".dulyproject";
@@ -58,6 +60,7 @@ namespace duly_gui {
     void Manager::openProject(const QString &path)
     {
         m_project = this->loadProject(path);
+		views::DeclarationCanvas::CreateContext(m_project->main(), true);
     }
 
     void Manager::openProject(Project *project)

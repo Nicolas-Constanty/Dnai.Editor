@@ -12,5 +12,6 @@
 #include "views/console.h"
 #include "views/class.h"
 #include "views/context.h"
+#include "views/declarationcanvas.h"
 
 #endif // VIEWS_H

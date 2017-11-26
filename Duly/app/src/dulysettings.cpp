@@ -1,18 +1,15 @@
 #include "dulysettings.h"
-#include <QDir>
-#include <QJsonDocument>
-#include <QJsonObject>
-#include <QJsonArray>
 #include <QDebug>
 #include <QQuickItem>
+#include "dulyapp.h"
 
 namespace duly_gui
 {
 	DulySettings::DulySettings(QObject* parent) : QObject(parent)
 	{
-		m_style = new DulySettingsModel(nullptr);
 		m_settings.clear();
-		const auto theme = m_settings.value("themes/current/init").toString();
+		m_style = new DulySettingsModel(nullptr);
+		const auto theme = m_settings.value("themes/current/theme").toString();
 		m_isInit = theme != "";
 	}
 
@@ -47,8 +44,11 @@ namespace duly_gui
 		{
 			const auto key = pair.first[i];
             const auto value = pair.second[i];
-            m_settings.setValue(currentThemeName + key, value);
-			m_settings.setValue(loadThemeName + key, value);
+			if (!m_isInit)
+			{
+				m_settings.setValue(currentThemeName + key, value);
+				m_settings.setValue(loadThemeName + key, value);
+			}
 //			qDebug() << currentThemeName + key;
 //			qDebug() << value;
 			if (m_style)
@@ -56,12 +56,12 @@ namespace duly_gui
                 updateProperty(key.mid(1), value);
 			}
 		}
-		m_settings.setValue("themes/current/init", "0");
+		m_settings.setValue("themes/current/theme", path);
 	}
 
 	void DulySettings::init()
     {
-		const auto theme = m_settings.value("themes/current/init").toString();
+		const auto theme = m_settings.value("themes/current/theme").toString();
 		QDir dir("settings/themes");
 		const auto list = dir.entryList(QDir::Files);
 		for (auto i = list.begin(); i!= list.end(); ++i)
@@ -74,9 +74,13 @@ namespace duly_gui
 		}
 		m_isInit = theme != "";
 		if (!m_isInit && m_themes.count() != 0)
-        {
+		{
+			m_settings.clear();
 			loadTheme(m_themes[0]);
 		}
+		else
+			loadTheme(theme);
+		static_cast<DulyApp *>(DulyApp::instance())->registerSettings(this);
 	}
 
 	QStringList DulySettings::getThemes() const
@@ -130,12 +134,8 @@ namespace duly_gui
         if (list.count() > 1)
         {
             const auto newPath = path.section('/', 1, -1);
-/*            qDebug() << "New path (" + newPath + ")";
-            qDebug() << "attr (" << list[0] << "," << qb->constData() << ")";
-            qDebug() << "<--" << item;*/
             const auto prop = item->property(qb->constData());
             item = qvariant_cast<QQuickItem *>(prop);
-            //qDebug() << "-->" << item;
 			pair = getFinalProperty(item, newPath);
         }
         else

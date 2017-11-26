@@ -42,6 +42,8 @@ static void registerCustomViews()
     qmlRegisterType<duly_gui::views::Input>("CustomViews", 1, 0, "Input");
     qmlRegisterType<duly_gui::views::Output>("CustomViews", 1, 0, "Output");
     qmlRegisterType<duly_gui::views::Flow>("CustomViews", 1, 0, "Flow");
+    qmlRegisterType<duly_gui::views::DeclarationCanvas>("CustomViews", 1, 0, "DeclarationCanvas");
+
 }
 static void registerCustomGeometry()
 {
@@ -69,7 +71,6 @@ static void registerUtils()
     qmlRegisterType<duly_gui::QDeclarationView>("Utils", 1, 0, "QDeclarationView");
     qmlRegisterType<duly_gui::QTextSettings>("Utils", 1, 0, "QTextSettings");
     qmlRegisterType<duly_gui::QFontSettings>("Utils", 1, 0, "QFontSettings");
-
 }
 
 
@@ -94,6 +95,7 @@ int main(int argc, char *argv[])
 //    ClientCommunication *com = ClientManager::shared().newClient(QHostAddress::LocalHost, 7777, "Duly GUI");
 
     QQmlApplicationEngine engine;
+	app.registerEngine(&engine);
     engine.load(QUrl(QLatin1String("qrc:/main.qml")));
     if (engine.rootObjects().isEmpty())
         return -1;

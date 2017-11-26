@@ -7,7 +7,7 @@
   },
   "shadowColor": "#212121",
   "font": {
-    "family": "resources/fonts/Muli-Regular.ttf",
+    "family": ":/resources/fonts/Muli-Regular.ttf",
     "pixelSize": 14
   },
   "text": {

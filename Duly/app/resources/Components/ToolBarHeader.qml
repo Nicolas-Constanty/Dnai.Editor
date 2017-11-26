@@ -30,7 +30,7 @@ Item {
                     onClicked: menuFile.open()
                     DMenu {
                         id: menuFile
-
+                        y: parent.height
                         DMenuItem {
                             id: menuItem
                             font.pixelSize: DulySettings.style.font.pixelSize

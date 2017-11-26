@@ -35,6 +35,5 @@ ChooseThemeForm {
                               }, appWindow)
         layout = Factory.getObject()
         layout.anchors.fill = layout.parent
-//        form.destroy()
     }
 }

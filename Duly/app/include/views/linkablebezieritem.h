@@ -4,6 +4,7 @@
 #include "customshape.h"
 #include "beziercurve.h"
 #include "ilinkable.h"
+#include "dulycanvas.h"
 
 namespace duly_gui
 {
@@ -31,6 +32,7 @@ namespace duly_gui
 
 		protected:
 			BezierCurve *m_currentCurve;
+			DulyCanvas* m_canvas;
 
 		protected:
 			/**

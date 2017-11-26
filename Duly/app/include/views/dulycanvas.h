@@ -14,6 +14,7 @@ namespace duly_gui
 		{
 			Q_OBJECT
 
+        public:
 			Q_PROPERTY(int gridStep READ gridStep WRITE setGridStep NOTIFY gridStepChanged)
 			Q_PROPERTY(int accentGridStep READ accentGridStep WRITE setAccentGridStep NOTIFY accentGridStepChanged)
 
@@ -21,11 +22,8 @@ namespace duly_gui
 			Q_PROPERTY(QColor accentGridColor READ accentGridColor WRITE setAccentGridColor NOTIFY accentGridColorChanged)
 			Q_PROPERTY(QColor backgroundColor READ backgroundColor WRITE setBackgroundColor NOTIFY backgroundColorChanged)
 
-		public:
 			explicit DulyCanvas(QQuickItem *parent = nullptr);
 			~DulyCanvas();
-
-			static DulyCanvas *Instance;
 
 			/**
 			* \brief return the focusManager

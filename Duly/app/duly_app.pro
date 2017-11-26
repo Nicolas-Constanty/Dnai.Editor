@@ -43,7 +43,9 @@ SOURCES += src/baseio.cpp \
     src/views/class.cpp \
     src/models/list/listmodelcontext.cpp \
     src/dulysettings.cpp \
-    src/dulysettingsmodel.cpp
+    src/dulysettingsmodel.cpp \
+    src/views/declarationview.cpp \
+    src/views/declarationcanvas.cpp
 
 #VIEWS
 SOURCES += src/views/beziercurve.cpp \
@@ -123,7 +125,9 @@ HEADERS += include/baseio.h \
     include/views/class.h \
     include/views.h \
     include/dulysettings.h \
-    include/dulysettingsmodel.h
+    include/dulysettingsmodel.h \
+    include/views/declarationview.h \
+    include/views/declarationcanvas.h
 
 #VIEWS
 HEADERS += include/views/beziercurve.h \
@@ -173,4 +177,4 @@ HEADERS += include/models/common.h \
 DEPENDPATH += $$PWD/../lib/event_client/
 INCLUDEPATH += $$PWD/../lib/event_client/
 
-LIBS += -L "$$PWD/../lib/" -lEventClient
+LIBS += -L"$$PWD/../lib/" -lEventClient

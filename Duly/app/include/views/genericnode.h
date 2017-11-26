@@ -5,6 +5,7 @@
 #include "focusmanager.h"
 #include "flow.h"
 #include "scalableitem.h"
+#include "dulycanvas.h"
 
 namespace duly_gui
 {
@@ -75,6 +76,7 @@ namespace duly_gui
             QPointF m_offset;
 			bool m_holdClik;
 	        QPointF m_startPos;
+	        DulyCanvas* m_canvas;
 
         private:
             void updateInputs();
