@@ -2,29 +2,37 @@
 #define EVENTREGISTERPACKAGE_H
 
 #include <QString>
-#include "dulypack.h"
+#include "pack.h"
 #include "headercommunication.h"
 
-PACKED_STRUCT(EventRegisterPackage) {
+PACKED(
+struct EventRegisterPackage {
     char eventName[256];
     unsigned int eventSize;
     char        enable;
-};
+}
+);
 
-PACKED_STRUCT(EventRegisterPackageAnswerServer) {
+PACKED(
+struct EventRegisterPackageAnswerServer {
     char eventName[256];
     unsigned int id;
-} ;
+}
+);
 
-PACKED_STRUCT(SendEventRegisterPackageAnswerServer) {
+PACKED(
+struct SendEventRegisterPackageAnswerServer {
     HeaderCommunication header;
     EventRegisterPackageAnswerServer eventRegister;
-} ;
+}
+);
 
-PACKED_STRUCT(SendEventRegisterPackage) {
+PACKED(
+struct SendEventRegisterPackage {
     HeaderCommunication header;
     EventRegisterPackage eventRegister;
-} ;
+}
+);
 
 void createEventRegisterPackage(SendEventRegisterPackage &,
                                 QString const &eventName,

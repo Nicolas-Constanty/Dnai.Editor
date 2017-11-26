@@ -2,28 +2,36 @@
 #define EVENTSENDPACKAGE_H
 
 #include <QString>
-#include "dulypack.h"
+#include "pack.h"
 #include "headercommunication.h"
 
-PACKED_STRUCT(EventSendPackage) {
+PACKED(
+struct EventSendPackage {
     unsigned int eventId;
     /// + DATA [SIZE]
-} ;
+}
+);
 
-PACKED_STRUCT(EventSendFromClientPackage) {
+PACKED(
+struct EventSendFromClientPackage {
     char    eventName[100];
     /// + DATA [SIZE]
-} ;
+}
+);
 
-PACKED_STRUCT(SendEventSendPackage) {
+PACKED(
+struct SendEventSendPackage{
     HeaderCommunication header;
     EventSendPackage event;
-} ;
+}
+);
 
-PACKED_STRUCT(SendEventSendFromClientPackage) {
+PACKED(
+struct SendEventSendFromClientPackage {
     HeaderCommunication header;
     EventSendFromClientPackage event;
-} ;
+}
+);
 
 SendEventSendPackage *createEventSendPackage(unsigned int id,
                             void *data, unsigned int size);
