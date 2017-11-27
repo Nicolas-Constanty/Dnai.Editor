@@ -7,3 +7,15 @@
 .DS_Store
 build-*
 .qmake.stash
+
+Duly/lib/DataComEvent/Library/protobuf/
+
+Makefile
+
+Makefile\.Debug
+
+Makefile\.Release
+
+Duly/lib/EventClient\.lib
+
+Duly/lib/DataComEvent\.lib
