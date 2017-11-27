@@ -32,3 +32,5 @@ Makefile
 Makefile\.Debug
 
 Makefile\.Release
+
+Duly/app/\.vs/
