@@ -14,8 +14,11 @@ namespace duly_gui {
             Q_PROPERTY(QString description READ description WRITE setDescription NOTIFY descriptionChanged)
 
         public:
-            Common(QString const &, QString const &, QObject * = nullptr);
+            Common(QString const &, QString const &, QString const &, QObject * = nullptr);
             virtual ~Common();
+
+            QString uid() const;
+            void setUid(const QString &uid);
 
             QString name() const;
             void setName(const QString &name);
@@ -24,6 +27,7 @@ namespace duly_gui {
             void setDescription(const QString &description);
 
         private:
+            QString m_uid;
             QString m_name;
             QString m_description;
 
