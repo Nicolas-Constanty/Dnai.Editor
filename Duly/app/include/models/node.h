@@ -8,36 +8,27 @@
 #include "models/output.h"
 #include "models/flow.h"
 #include "models/imodel.h"
+#include "models/position.h"
 
 namespace duly_gui {
     namespace models {
-    class Context;
     class Function;
-        class Node: public Common, virtual public IModel
+        class Node: public Common, public Position, virtual public IModel
         {
         public:
-            Node(QString const &, QString const &, QVector2D const &, Function * = nullptr);
+            Node(QString const &, QString const &, QString const &, QVector2D const &, Function * = nullptr, QObject * = nullptr);
             virtual ~Node();
 
         private:
-            Function *m_parent;
-//            Context *m_context;
             Function *m_function;
-            QVector2D m_position;
             QList<Input*> m_inputs;
             QList<Output*> m_outputs;
             QList<Flow*> m_flows_in;
             QList<Flow*> m_flows_out;
 
         public:
-            Function *parent() const;
-            void setParent(Function *parent);
-//            Context *context() const;
-//            void setContext(Context *context);
             Function *function() const;
             void setFunction(Function *function);
-            QVector2D position() const;
-            void setPosition(const QVector2D &position);
             QList<Input*> inputs() const;
             QList<Output*> outputs() const;
             QList<Flow *> flows_in() const;

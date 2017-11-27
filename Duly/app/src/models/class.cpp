@@ -3,8 +3,8 @@
 
 namespace duly_gui {
     namespace models {
-        Class::Class(QString const &name, QString const &description, Context *parent)
-            : Common(name, description), m_parent(parent)
+        Class::Class(QString const &uid, QString const &name, QString const &description, QVector2D const &position, QObject *parent)
+            : Common(uid, name, description, parent), Position(position)
         {
 
         }
@@ -13,17 +13,7 @@ namespace duly_gui {
         {
 
         }
-        
-        Context *Class::parent() const
-        {
-            return m_parent;
-        }
-        
-        void Class::setParent(Context *parent)
-        {
-            m_parent = parent;
-        }
-        
+
         QList<Variable*> Class::attributes() const
         {
             return m_attributes;
@@ -124,7 +114,7 @@ namespace duly_gui {
 
         IClone *Class::clone() const
         {
-            return new Class(name(), description());
+            return new Class(uid(),name(), description(), position());
         }
     }
 }

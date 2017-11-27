@@ -31,6 +31,7 @@ namespace duly_gui {
     class Project: public models::Common, virtual public models::IModel
     {
     public:
+        Project(const QString &, const QString &, const QString &, QFile &);
         Project(const QString &, const QString &, QFile &);
         virtual ~Project();
 
@@ -56,14 +57,15 @@ namespace duly_gui {
         QJsonObject data() const;
 
     private:
-        models::Variable *unserializeVariable(const QJsonObject &);
-        models::Input *unserializeInput(const QJsonObject &);
-        models::Output *unserializeOutput(const QJsonObject &);
-        models::Flow *unserializeFlow(const QJsonObject &);
-        models::Function *unserializeFunction(const QJsonObject &, models::Context *);
-        models::Class *unserializeClass(const QJsonObject &, models::Context *);
-        models::Context *unserializeContext(const QJsonObject &, models::Context *);
-        models::Node *unserializeNode(const QJsonObject &, models::Function *);
+        models::Variable *unserializeVariable(const QJsonObject &, QObject *);
+        models::Input *unserializeInput(const QJsonObject &, QObject *);
+        models::Output *unserializeOutput(const QJsonObject &, QObject *);
+        models::Flow *unserializeFlow(const QJsonObject &, QObject *);
+        models::Function *unserializeFunction(const QJsonObject &, QObject *);
+        models::Class *unserializeClass(const QJsonObject &, QObject *);
+        models::Context *unserializeContext(const QJsonObject &, QObject *);
+        models::Node *unserializeNode(const QJsonObject &, QObject *);
+        static inline QVector2D unserializePosition(const QJsonObject &);
 
 
         // IModel interface

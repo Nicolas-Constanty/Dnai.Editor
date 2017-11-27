@@ -77,7 +77,7 @@ SOURCES += src/controllers/inputcontroller.cpp \
     src/controllers/consolecontroller.cpp \
 
 #MODELS
-SOURCES +=     src/models/class.cpp \
+SOURCES += src/models/class.cpp \
     src/models/common.cpp \
     src/models/context.cpp \
     src/models/flow.cpp \
@@ -86,7 +86,8 @@ SOURCES +=     src/models/class.cpp \
     src/models/input.cpp \
     src/models/node.cpp \
     src/models/output.cpp \
-    src/models/variable.cpp
+    src/models/variable.cpp \
+    src/models/position.cpp
 
 RESOURCES += qml.qrc
 
@@ -171,6 +172,7 @@ HEADERS += include/models/common.h \
     include/models/identity.h \
     include/models/imodel.h \
     include/models/iclone.h \
+    include/models/position.h \
     include/models/list/listmodelcontext.h
 
 #LIB

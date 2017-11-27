@@ -5,19 +5,18 @@
 #include "models/common.h"
 #include "models/variable.h"
 #include "models/function.h"
+#include "models/position.h"
 #include "models/imodel.h"
 
 namespace duly_gui {
     namespace models {
-        class Class: public Common, virtual public IModel
+        class Class: public Common, public Position, virtual public IModel
         {
         public:
-            Class(QString const &, QString const &, Context * = nullptr);
+            Class(QString const &, QString const &, QString const &, QVector2D const &, QObject * = nullptr);
             virtual ~Class();
 
         private:
-            Context *m_parent;
-
             QList<Variable*> m_attributes;
             QList<Function*> m_methods;
             QList<Function*> m_functions;
@@ -25,9 +24,6 @@ namespace duly_gui {
             //TODO add position
 
         public:
-            Context *parent() const;
-            void setParent(Context *parent);
-
             QList<Variable*> attributes() const;
             QList<Function*> methods() const;
             QList<Function*> functions() const;

@@ -10,7 +10,7 @@ namespace duly_gui {
         class Output: public Variable, Identity, virtual public IModel
         {
         public:
-            Output(QString const &, QString const &, QString const &, bool, QString const &, QString const &);
+            Output(QString const &, QString const &, QString const &, QString const &, bool, QString const &, QObject *parent = nullptr);
             virtual ~Output();
 
             // IModel interface
