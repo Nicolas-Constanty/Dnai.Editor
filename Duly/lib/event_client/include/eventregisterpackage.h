@@ -4,26 +4,34 @@
 #include <QString>
 #include "headercommunication.h"
 
-typedef struct __attribute__((packed)) {
+PACKED(
+struct EventRegisterPackage {
     char eventName[256];
     unsigned int eventSize;
     char        enable;
-} EventRegisterPackage;
+}
+);
 
-typedef struct __attribute__((packed)) {
+PACKED(
+struct EventRegisterPackageAnswerServer {
     char eventName[256];
     unsigned int id;
-} EventRegisterPackageAnswerServer;
+}
+);
 
-typedef struct __attribute__((packed)) {
+PACKED(
+struct SendEventRegisterPackageAnswerServer {
     HeaderCommunication header;
     EventRegisterPackageAnswerServer eventRegister;
-} SendEventRegisterPackageAnswerServer;
+}
+);
 
-typedef struct __attribute__((packed)) {
+PACKED(
+struct SendEventRegisterPackage {
     HeaderCommunication header;
     EventRegisterPackage eventRegister;
-} SendEventRegisterPackage;
+}
+);
 
 void createEventRegisterPackage(SendEventRegisterPackage &,
                                 QString const &eventName,

@@ -15,19 +15,23 @@ public:
     TestConnection(ClientCommunication &com) : m_com(com) {
 
     }
-    typedef struct __attribute__((packed))  {
+    PACKED(
+    struct POPO  {
         long a;
         long b;
         char c[100];
-    } POPO;
+    }
+    );
 
-    typedef struct __attribute__((packed)) {
+    PACKED(
+    struct POPI {
         float a;
         double b;
         short c;
         long d;
         char l;
-    } POPI;
+    }
+    );
 
 
 public slots:

@@ -44,4 +44,5 @@ HEADERS += \
    # testclass.h
     include/eventconsumer.h \
     include/clientmanager.h \
-    include/descriptionparser.h
+    include/descriptionparser.h \
+    include/pack.h

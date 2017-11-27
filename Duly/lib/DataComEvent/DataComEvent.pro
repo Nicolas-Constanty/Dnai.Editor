@@ -31,9 +31,14 @@ HEADERS += \
     Shared_include/core.pb.h \
     Shared_include/datacomeventfactory.h
 
-LIBS += -L $$PWD/Library/ -l protobuf
-
+CONFIG(release, debug|release) {
+unix:LIBS += -L$${PWD}/Library/ -lprotobuf
+win32:LIBS += -L$${PWD}/Library/ -llibprotobuf
+}
+CONFIG(debug, debug|release) {
+unix:LIBS += -L$${PWD}/Library/ -lprotobuf
+win32:LIBS += -L$${PWD}/Library/ -llibprotobufd
+}
 #/usr/local/include/ \
 
 INCLUDEPATH += ./Shared_include/
-
