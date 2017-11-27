@@ -22,3 +22,13 @@ Duly/\.vs/config/
 *.pdb
 
 *.lib
+
+Duly/lib/DataComEvent/Library/protobuf/cmake/build/solution/\.vs/protobuf/v15/
+
+Duly/lib/DataComEvent/Library/protobuf/
+
+Makefile
+
+Makefile\.Debug
+
+Makefile\.Release
