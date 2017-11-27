@@ -66,6 +66,7 @@ namespace duly_gui {
                     obj["uid"].toString(),
                     obj["name"].toString(),
                     obj["description"].toString(),
+                    unserializePosition(obj["position"].toObject()),
                     obj["type"].toString(),
                     obj["internal"].toBool(),
                     parent
@@ -119,7 +120,13 @@ namespace duly_gui {
     models::Function *Project::unserializeFunction(const QJsonObject &obj, QObject *parent)
     {
         ++count.functions;
-        auto model = new models::Function(obj["uid"].toString(), obj["name"].toString(), obj["description"].toString(), parent);
+        auto model = new models::Function(
+                    obj["uid"].toString(),
+                    obj["name"].toString(),
+                    obj["description"].toString(),
+                    unserializePosition(obj["position"].toObject()),
+                    parent
+                );
 
         foreach (auto variable, obj["variables"].toArray()) {
             model->addVariable(this->unserializeVariable(variable.toObject(), model));
@@ -147,10 +154,11 @@ namespace duly_gui {
         ++count.classes;
         auto model = new models::Class(
                     obj["uid"].toString(),
-                obj["name"].toString(),
-                obj["description"].toString(),
-                unserializePosition(obj["position"].toObject()),
-                parent);
+                    obj["name"].toString(),
+                    obj["description"].toString(),
+                    unserializePosition(obj["position"].toObject()),
+                    parent
+                );
 
         foreach (auto attribute, obj["attributes"].toArray()) {
             model->addAttribute(this->unserializeVariable(attribute.toObject(), model));
@@ -177,10 +185,11 @@ namespace duly_gui {
         ++count.contexts;
         auto model = new models::Context(
                     obj["uid"].toString(),
-                obj["name"].toString(),
-                obj["description"].toString(),
-                unserializePosition(obj["position"].toObject()),
-                parent);
+                    obj["name"].toString(),
+                    obj["description"].toString(),
+                    unserializePosition(obj["position"].toObject()),
+                    parent
+                );
 
         foreach (auto context, obj["contexts"].toArray()) {
             model->addContext(this->unserializeContext(context.toObject(), model));
@@ -215,8 +224,9 @@ namespace duly_gui {
                     obj["name"].toString(),
                     obj["description"].toString(),
                     unserializePosition(obj["position"].toObject()),
-                functions_found.first(),
-                parent);
+                    functions_found.first(),
+                    parent
+                );
 
         foreach (auto input, obj["inputs"].toArray()) {
             model->addInput(this->unserializeInput(input.toObject(), model));
