@@ -113,6 +113,7 @@ int main(int argc, char *argv[])
 //      QObject::connect(timer, SIGNAL(timeout()), &test, SLOT(update()));
 //      timer->start(1000);
 
+
   /*  QTimer *timer = new QTimer();
     QObject::connect(timer, SIGNAL(timeout()), &test, SLOT(update()));
     timer->start(1000);

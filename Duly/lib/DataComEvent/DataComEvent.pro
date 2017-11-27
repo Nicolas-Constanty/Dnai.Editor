@@ -1,26 +1,20 @@
 QT += core
 QT -= gui
-QT += network
 
 CONFIG += c++14
 
-TARGET = EventClient
+TARGET = DataComEvent
 CONFIG += staticlib
 CONFIG -= app_bundle
+CONFIG += warn_off
 DESTDIR = $$PWD/../
 
 TEMPLATE = lib
 
+#main.cpp \
 
-INCLUDEPATH += include/
-
-SOURCES += src/packagemanager.cpp \
-    src/dulycommunicationserver.cpp \
-    src/createpackagefunction.cpp \
-    src/clientcommunication.cpp \
-    src/eventconsumer.cpp \
-    src/clientmanager.cpp \
-    src/descriptionparser.cpp
+SOURCES += core.pb.cc \
+    datacomeventfactory.cpp
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which as been marked deprecated (the exact warnings
@@ -34,15 +28,17 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 HEADERS += \
-    include/dulycommunicationserver.h \
-    include/packagemanager.h \
-    include/headercommunication.h \
-    include/eventregisterpackage.h \
-    include/eventsendpackage.h \
-    include/authentificationpackage.h \
-    include/clientcommunication.h \
-   # testclass.h
-    include/eventconsumer.h \
-    include/clientmanager.h \
-    include/descriptionparser.h \
-    include/pack.h
+    Shared_include/core.pb.h \
+    Shared_include/datacomeventfactory.h
+
+CONFIG(release, debug|release) {
+unix:LIBS += -L$${PWD}/Library/ -lprotobuf
+win32:LIBS += -L$${PWD}/Library/ -llibprotobuf
+}
+CONFIG(debug, debug|release) {
+unix:LIBS += -L$${PWD}/Library/ -lprotobuf
+win32:LIBS += -L$${PWD}/Library/ -llibprotobufd
+}
+#/usr/local/include/ \
+
+INCLUDEPATH += ./Shared_include/

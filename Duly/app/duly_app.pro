@@ -176,7 +176,21 @@ HEADERS += include/models/common.h \
     include/models/list/listmodelcontext.h
 
 #LIB
-DEPENDPATH += $$PWD/../lib/event_client/
-INCLUDEPATH += $$PWD/../lib/event_client/
+DEPENDPATH += $${PWD}/../lib/event_client/
+INCLUDEPATH += $${PWD}/../lib/event_client/
 
-LIBS += -L"$$PWD/../lib/" -lEventClient
+INCLUDEPATH += $${PWD}/../lib/DataComEvent/Shared_include/
+
+#begin library network
+LIBS += -L$${PWD}/../lib/ -lEventClient -lDataComEvent
+
+CONFIG(release, debug|release) {
+unix:LIBS += -L$${PWD}/../lib/DataComEvent/Library/ -lprotobuf
+win32:LIBS += -L$${PWD}/../lib/DataComEvent/Library/ -llibprotobuf
+}
+CONFIG(debug, debug|release) {
+unix:LIBS += -L$${PWD}/../lib/DataComEvent/Library/ -lprotobuf
+win32:LIBS += -L$${PWD}/../lib/DataComEvent/Library/ -llibprotobufd
+}
+
+#end library Data Event
