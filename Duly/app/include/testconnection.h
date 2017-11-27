@@ -4,6 +4,9 @@
 #include <QDebug>
 #include <QObject>
 #include "include/clientcommunication.h"
+#include "models/context.h"
+
+#include "datacomeventfactory.h"
 
 class TestConnection : public QObject {
     Q_OBJECT
@@ -12,19 +15,23 @@ public:
     TestConnection(ClientCommunication &com) : m_com(com) {
 
     }
-    typedef struct __attribute__((packed))  {
+    PACKED(
+    struct POPO  {
         long a;
         long b;
         char c[100];
-    } POPO;
+    }
+    );
 
-    typedef struct __attribute__((packed)) {
+    PACKED(
+    struct POPI {
         float a;
         double b;
         short c;
         long d;
         char l;
-    } POPI;
+    }
+    );
 
 
 public slots:
@@ -37,7 +44,29 @@ public slots:
         memset(toto.c, 0, sizeof(toto.c));
         memcpy(toto.c, "YOLOLOLOLO", sizeof("YOLOLOLOLO"));
         m_com.sendEvent("KOALA", &toto, sizeof(POPO));*/
-        static int u = 0;
+
+        static int i = 0;
+        if (i == 3) {
+            return;
+        }
+        DataComEventFactory eventController;
+
+        DataComEventFactory::DataComEvent data;
+
+       if (i % 3 == 0) {
+            data = eventController.createDeclare(ENTITY::CONTEXT_D, 0, "HELLOL", VISIBILITY::PRIVATE);
+        } else if (i % 3 == 1) {
+            data = eventController.createDeclare(ENTITY::VARIABLE, 0, "POLOLOLOLOL", VISIBILITY::PRIVATE);
+        } else {
+            data = eventController.createDeclare(ENTITY::FUNCTION, 0, "1", VISIBILITY::PUBLIC);
+        }
+
+        ++i;
+        m_com.sendEvent("DECLARE", data.data, data.size);
+
+
+
+      /*  static int u = 0;
         if (u % 2 == 0) {
             qDebug() << "SEND 4";
             int u = 1234;
@@ -47,7 +76,7 @@ public slots:
             char u = 'A';
             m_com.sendEvent("POPOLE", &u, 1);
         }
-        ++u;
+        ++u;*/
     }
 
     void updateTITI() {
@@ -77,7 +106,13 @@ public:
     }
 
     void onReceiveEventPopole(void *data, unsigned int size) {
-        static int u = 0;
+        qDebug() << size;
+        Declare secondDeclare;
+        secondDeclare.ParseFromArray(data, size);
+
+        qDebug() << "name: " << QString(secondDeclare.name().c_str());
+
+   /*     static int u = 0;
         qDebug() << size;
         if (u % 2 == 0) {
             qDebug() << "receive POPOLE event 4";
@@ -88,7 +123,7 @@ public:
             char *intLol = (char *)data;
             qDebug() << *intLol;
         }
-        ++u;
+        ++u;*/
     }
 
 private:
