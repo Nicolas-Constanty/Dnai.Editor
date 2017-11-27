@@ -140,8 +140,8 @@ namespace duly_gui {
             model->addMethod(this->unserializeFunction(method.toObject(), nullptr));
         }
 
-        foreach (auto variable, obj["variables"].toArray()) {
-            model->addVariable(this->unserializeVariable(variable.toObject()));
+        foreach (auto classe, obj["classes"].toArray()) {
+            model->addClass(this->unserializeClass(classe.toObject()));
         }
 
         foreach (auto function, obj["functions"].toArray()) {
