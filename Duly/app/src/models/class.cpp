@@ -77,6 +77,7 @@ namespace duly_gui {
         void Class::serialize(QJsonObject &obj) const
         {
             Common::serialize(obj);
+            Position::serialize(obj);
 
             QJsonArray attributes;
             foreach (const Variable *attribute, m_attributes) {

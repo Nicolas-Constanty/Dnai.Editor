@@ -3,8 +3,8 @@
 
 namespace duly_gui {
     namespace models {
-        Function::Function(QString const &uid, QString const &name, QString const &description, QObject *parent)
-            : Common(uid, name, description, parent)
+        Function::Function(QString const &uid, QString const &name, QString const &description, QVector2D const &position, QObject *parent)
+            : Common(uid, name, description, parent), Position(position)
         {
 
         }
@@ -77,6 +77,7 @@ namespace duly_gui {
         void Function::serialize(QJsonObject &obj) const
         {
             Common::serialize(obj);
+            Position::serialize(obj);
 
             QJsonArray variables;
             foreach (const Variable *variable, m_variables) {
@@ -114,7 +115,7 @@ namespace duly_gui {
 
         IClone *Function::clone() const
         {
-            return new Function(uid(), name(), description());
+            return new Function(uid(), name(), description(), position());
         }
     }
 }

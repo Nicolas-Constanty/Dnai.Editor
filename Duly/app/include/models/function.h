@@ -7,14 +7,15 @@
 #include "models/input.h"
 #include "models/output.h"
 #include "models/node.h"
+#include "models/position.h"
 #include "models/imodel.h"
 
 namespace duly_gui {
     namespace models {
-        class Function: public Common, virtual public IModel
+        class Function: public Common, public Position, virtual public IModel
         {
         public:
-            Function(QString const &, QString const &, QString const &, QObject * = nullptr);
+            Function(QString const &, QString const &, QString const &, QVector2D const &, QObject * = nullptr);
             virtual ~Function();
 
         private:
