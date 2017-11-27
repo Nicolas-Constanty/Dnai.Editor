@@ -20,8 +20,8 @@ namespace duly_gui {
 
             QList<Variable*> m_attributes;
             QList<Function*> m_methods;
-            QList<Variable*> m_variables;//TODO remove this line
             QList<Function*> m_functions;
+            QList<Class*> m_classes;
             //TODO add position
 
         public:
@@ -30,20 +30,20 @@ namespace duly_gui {
 
             QList<Variable*> attributes() const;
             QList<Function*> methods() const;
-            QList<Variable*> variables() const;
             QList<Function*> functions() const;
+            QList<Class*> classes() const;
 
         public:
             void addAttribute(Variable *);
             void addMethod(Function *);
-            void addVariable(Variable *);
             void addFunction(Function *);
+            void addClass(Class *);
 
         public:
             void removeAttribute(Variable *);
             void removeMethod(Function *);
-            void removeVariable(Variable *);
             void removeFunction(Function *);
+            void removeClass(Class *);
 
             // IModel interface
         public:
