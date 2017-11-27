@@ -7,6 +7,10 @@
     "classes": [
       {
         "name": "class1",
+        "position": {
+            "x": 10,
+            "y": 10
+        },
         "description": "je suis une classe",
         "variables": [ ],
         "functions": [ ]
@@ -20,12 +24,20 @@
         "description": "cc",
         "variables": [ ],
         "classes": [ ],
+        "position": {
+            "x": 100,
+            "y": 10
+        },
         "functions": [ ]
       },
 
       {
         "name": "context2",
-        "description": "cvgdgs"
+        "description": "cvgdgs",
+        "position": {
+            "x": 200,
+            "y": 10
+        }
       }
 
     ],
@@ -41,7 +53,11 @@
     "variables": [
       {
         "name": "variable1",
-        "description": "je suis une variable"
+        "description": "je suis une variable",
+        "position": {
+            "x": 10,
+            "y": 100
+        }
       }
     ]
 

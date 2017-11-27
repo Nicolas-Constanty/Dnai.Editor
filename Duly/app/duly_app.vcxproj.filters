@@ -35,9 +35,6 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="Header Files\View">
-      <UniqueIdentifier>{8c49ff94-0224-4841-9215-f16149de280c}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\baseio.cpp">
@@ -85,6 +82,12 @@
     <ClCompile Include="src\commands\debugdecorator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\views\declarationcanvas.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\views\declarationview.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="src\dulyapp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -92,6 +95,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\dulyscene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\dulysettings.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\dulysettingsmodel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\eventutilities.cpp">
@@ -166,6 +175,9 @@
     <ClCompile Include="src\controllers\outputcontroller.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\models\position.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="src\project.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -181,6 +193,78 @@
     <ClCompile Include="src\commands\zoomcanvascommand.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Debug\moc_declarationcanvas.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_declarationcanvas.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_customshape.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_customshape.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_context.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_context.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_console.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_console.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_dulysettings.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_dulysettings.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_dulyscene.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_dulyscene.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_dulycanvas.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_dulycanvas.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_declarationview.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_declarationview.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_testconnection.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_testconnection.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_scalableitem.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_scalableitem.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_roundedrectangle.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_roundedrectangle.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_common.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_common.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
     <ClCompile Include="Debug\moc_class.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
@@ -191,6 +275,24 @@
       <Filter>Generated Files</Filter>
     </ClCompile>
     <ClCompile Include="Release\moc_beziercurve.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_resourcesnode.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_resourcesnode.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_manager.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_manager.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_listmodelcontext.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_listmodelcontext.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
     <ClCompile Include="Debug\moc_line.cpp">
@@ -217,131 +319,32 @@
     <ClCompile Include="Release\moc_flow.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_testconnection.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_testconnection.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_scalableitem.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_scalableitem.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_roundedrectangle.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_roundedrectangle.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_resourcesnode.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_resourcesnode.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_manager.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_manager.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_listmodelcontext.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_listmodelcontext.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_customshape.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_customshape.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_context.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_context.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_console.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_console.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_common.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_common.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_dulyscene.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_dulyscene.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_dulycanvas.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_dulycanvas.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\qrc_qml.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_dulysettings.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_dulysettings.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\dulysettings.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Debug\moc_dulysettingsmodel.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
     <ClCompile Include="Release\moc_dulysettingsmodel.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\dulysettingsmodel.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_declarationview.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_declarationview.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\views\declarationview.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\views\declarationcanvas.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_declarationcanvas.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_declarationcanvas.cpp">
+    <ClCompile Include="GeneratedFiles\qrc_qml.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\models\aregister.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="include\baseio.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\baselinkable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <CustomBuild Include="include\views\beziercurve.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
     <ClInclude Include="include\models\class.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <CustomBuild Include="include\views\class.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
     <ClInclude Include="include\commands\command.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -354,19 +357,43 @@
     <CustomBuild Include="include\models\common.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
+    <CustomBuild Include="include\views\console.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
     <ClInclude Include="include\controllers\consolecontroller.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\models\context.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <CustomBuild Include="include\views\context.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="include\views\customshape.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
     <ClInclude Include="include\commands\debugdecorator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <CustomBuild Include="include\views\declarationcanvas.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="include\views\declarationview.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
     <ClInclude Include="include\dulyapp.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <CustomBuild Include="include\views\dulycanvas.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
     <CustomBuild Include="include\dulyscene.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="include\dulysettings.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="include\dulysettingsmodel.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
     <ClInclude Include="include\eventutilities.h">
@@ -375,10 +402,19 @@
     <ClInclude Include="include\models\flow.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <CustomBuild Include="include\views\flow.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
     <ClInclude Include="include\focusmanager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\models\function.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <CustomBuild Include="include\views\genericnode.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <ClInclude Include="include\models\iclone.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\commands\icommand.h">
@@ -396,13 +432,25 @@
     <ClInclude Include="include\models\input.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\views\input.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="include\controllers\inputcontroller.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <CustomBuild Include="include\views\io.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
     <ClInclude Include="include\views\iscalable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <CustomBuild Include="include\views\line.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
     <ClInclude Include="include\link.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\views\linkablebezieritem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\linkabletype.h">
@@ -426,13 +474,25 @@
     <ClInclude Include="include\models\output.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\views\output.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="include\controllers\outputcontroller.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\models\position.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\project.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <CustomBuild Include="include\resourcesnode.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="include\views\roundedrectangle.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="include\views\scalableitem.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
     <CustomBuild Include="include\testconnection.h">
@@ -444,15 +504,6 @@
     <ClInclude Include="include\views.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\views\input.h">
-      <Filter>Header Files\View</Filter>
-    </ClInclude>
-    <ClInclude Include="include\views\linkablebezieritem.h">
-      <Filter>Header Files\View</Filter>
-    </ClInclude>
-    <ClInclude Include="include\views\output.h">
-      <Filter>Header Files\View</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="debug\moc_predefs.h.cbt">
@@ -460,54 +511,6 @@
     </CustomBuild>
     <CustomBuild Include="release\moc_predefs.h.cbt">
       <Filter>Generated Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="include\dulysettings.h">
-      <Filter>Header Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="include\views\class.h">
-      <Filter>Header Files\View</Filter>
-    </CustomBuild>
-    <CustomBuild Include="include\views\beziercurve.h">
-      <Filter>Header Files\View</Filter>
-    </CustomBuild>
-    <CustomBuild Include="include\views\console.h">
-      <Filter>Header Files\View</Filter>
-    </CustomBuild>
-    <CustomBuild Include="include\views\context.h">
-      <Filter>Header Files\View</Filter>
-    </CustomBuild>
-    <CustomBuild Include="include\views\customshape.h">
-      <Filter>Header Files\View</Filter>
-    </CustomBuild>
-    <CustomBuild Include="include\views\dulycanvas.h">
-      <Filter>Header Files\View</Filter>
-    </CustomBuild>
-    <CustomBuild Include="include\views\flow.h">
-      <Filter>Header Files\View</Filter>
-    </CustomBuild>
-    <CustomBuild Include="include\views\genericnode.h">
-      <Filter>Header Files\View</Filter>
-    </CustomBuild>
-    <CustomBuild Include="include\views\io.h">
-      <Filter>Header Files\View</Filter>
-    </CustomBuild>
-    <CustomBuild Include="include\views\line.h">
-      <Filter>Header Files\View</Filter>
-    </CustomBuild>
-    <CustomBuild Include="include\views\roundedrectangle.h">
-      <Filter>Header Files\View</Filter>
-    </CustomBuild>
-    <CustomBuild Include="include\views\scalableitem.h">
-      <Filter>Header Files\View</Filter>
-    </CustomBuild>
-    <CustomBuild Include="include\dulysettingsmodel.h">
-      <Filter>Header Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="include\views\declarationview.h">
-      <Filter>Header Files\View</Filter>
-    </CustomBuild>
-    <CustomBuild Include="include\views\declarationcanvas.h">
-      <Filter>Header Files\View</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
@@ -523,6 +526,9 @@
     <None Include="resources\Nodes\Operator\UnaryOperator\BNotModel.qml">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="resources\Layouts\BaseLayout.qml">
+      <Filter>Resource Files</Filter>
+    </None>
     <None Include="resources\Nodes\Operator\BinaryOperator\BinaryAndModel.qml">
       <Filter>Resource Files</Filter>
     </None>
@@ -530,6 +536,12 @@
       <Filter>Resource Files</Filter>
     </None>
     <None Include="resources\Nodes\Operator\BinaryOperator\BinaryOrModel.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\Forms\ChooseThemeForm.ui.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\Panels\ChooseThemePanel.qml">
       <Filter>Resource Files</Filter>
     </None>
     <None Include="resources\Components\ClassContainer.qml">
@@ -574,6 +586,15 @@
     <None Include="resources\JavaScript\CreateComponent.js">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="resources\Controls\DMenu.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\Controls\DMenuItem.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\Controls\DToolButton.qml">
+      <Filter>Resource Files</Filter>
+    </None>
     <None Include="resources\Components\DeclarationComponent.qml">
       <Filter>Resource Files</Filter>
     </None>
@@ -581,6 +602,9 @@
       <Filter>Resource Files</Filter>
     </None>
     <None Include="resources\Models\DeclarationModelDelegate.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\Components\DeclarationView.qml">
       <Filter>Resource Files</Filter>
     </None>
     <None Include="resources\Nodes\Operator\UnaryOperator\DecrementModel.qml">
@@ -605,6 +629,9 @@
       <Filter>Resource Files</Filter>
     </None>
     <None Include="resources\Forms\DropDownForm.ui.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\DulyStyle.qml">
       <Filter>Resource Files</Filter>
     </None>
     <None Include="resources\Nodes\Operator\BinaryOperator\Logical\EqualModel.qml">
@@ -637,10 +664,10 @@
     <None Include="resources\Forms\LanguagePanelForm.ui.qml">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="resources\LayoutClassic.qml">
+    <None Include="resources\Layouts\LayoutClassic.qml">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="resources\Layout_1.qml">
+    <None Include="resources\Layouts\Layout_1.qml">
       <Filter>Resource Files</Filter>
     </None>
     <None Include="resources\Nodes\Operator\BinaryOperator\LeftShiftModel.qml">
@@ -656,6 +683,9 @@
       <Filter>Resource Files</Filter>
     </None>
     <None Include="resources\Nodes\Operator\BinaryOperator\ModuloModel.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\fonts\Muli-Regular.ttf">
       <Filter>Resource Files</Filter>
     </None>
     <None Include="resources\Nodes\Operator\BinaryOperator\MultiplicateModel.qml">
@@ -694,16 +724,16 @@
     <None Include="resources\Nodes\Operator\BinaryOperator\Logical\OrModel.qml">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="resources\Components\Panel.qml">
+    <None Include="resources\Panels\Panel.qml">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="resources\Components\PanelLeft.qml">
+    <None Include="resources\Panels\PanelLeft.qml">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="resources\Components\PanelRight.qml">
+    <None Include="resources\Panels\PanelRight.qml">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="resources\Components\PanelTop.qml">
+    <None Include="resources\Panels\PanelTop.qml">
       <Filter>Resource Files</Filter>
     </None>
     <None Include="resources\Components\Printer.qml">
@@ -752,6 +782,12 @@
       <Filter>Resource Files</Filter>
     </None>
     <None Include="resources\Nodes\Operator\BinaryOperator\XorModel.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="settings\themes\dark.json">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="settings\themes\light.json">
       <Filter>Resource Files</Filter>
     </None>
     <None Include="main.qml">
