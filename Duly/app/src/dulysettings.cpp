@@ -6,8 +6,7 @@
 namespace duly_gui
 {
 	DulySettings::DulySettings(QObject* parent) : QObject(parent)
-	{
-		m_settings.clear();
+    {
 		m_style = new DulySettingsModel(nullptr);
 		const auto theme = m_settings.value("themes/current/theme").toString();
 		m_isInit = theme != "";
