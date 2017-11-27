@@ -118,6 +118,9 @@ DelegateModel {
                 Label {
                     id: label
                     text: model.name
+                    color: DulySettings.style.text.color
+                    font.family: DulySettings.style.font.family
+                    font.pixelSize: DulySettings.style.font.pixelSize
                     verticalAlignment: Text.AlignVCenter
                     horizontalAlignment: Text.AlignHCenter
                     anchors.centerIn: parent
@@ -130,44 +133,22 @@ DelegateModel {
                 }
             }
             onPressed: {
-                if (model.type == DeclarationType.Context)
-                {
-                    var obj = Factory.createObjects("resources/Components/ContextView.qml" ,
-                                          {
-                                              "width": 50,
-                                              "height": 50,
-                                              "name": model.name,
-                                              "description": model.description,
-                                              "xPos": model.xPos,
-                                              "yPos": model.yPos,
-                                              "radius": model.radius,
-                                              "color": model.color,
-                                              "borderColor": model.borderColor,
-                                              "borderWidth": model.borderWidth
-                                          },
-                                          parent.parent)
-                    obj.x = item.x
-                    obj.y = item.y
-                }
-                else if (model.type == DeclarationType.Class)
-                {
-                    var obj = Factory.createObjects("resources/Components/ClassView.qml",
-                                          {
-                                              "width": 50,
-                                              "height": 50,
-                                              "name": model.name,
-                                              "description": model.description,
-                                              "xPos": model.xPos,
-                                              "yPos": model.yPos,
-                                              "radius": model.radius,
-                                              "color": model.color,
-                                              "borderColor": model.borderColor,
-                                              "borderWidth": model.borderWidth
-                                          },
-                                          parent.parent)
-                    obj.x = item.x
-                    obj.y = item.y
-                }
+                var obj = Factory.createObjects("resources/Components/DeclarationView.qml" ,
+                                      {
+                                          "width": 50,
+                                          "height": 50,
+                                          "name": model.name,
+                                          "description": model.description,
+                                          "xPos": model.xPos,
+                                          "yPos": model.yPos,
+                                          "radius": model.radius,
+                                          "color": model.color,
+                                          "borderColor": model.borderColor,
+                                          "borderWidth": model.borderWidth
+                                      },
+                                      parent.parent)
+                obj.x = item.x
+                obj.y = item.y
             }
         }
     }

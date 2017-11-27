@@ -25,8 +25,8 @@ namespace duly_gui
 			obj->setProperty("height", sets->declarationView()->itemSize());
 			obj->setProperty("name", cl->name());
 			obj->setProperty("description", cl->description());
-			obj->setProperty("xPos", 0);
-			obj->setProperty("yPos", 0);
+            obj->setProperty("xPos", cl->position().x());
+            obj->setProperty("yPos", cl->position().y());
 			obj->setProperty("radius", sets->declarationView()->declClass()->radius());
 			obj->setProperty("color", sets->declarationView()->declClass()->background());
 			obj->setProperty("borderColor", sets->declarationView()->declClass()->border()->color());
@@ -59,8 +59,8 @@ namespace duly_gui
 			obj->setProperty("height", sets->declarationView()->itemSize());
 			obj->setProperty("name", cl->name());
 			obj->setProperty("description", cl->description());
-			obj->setProperty("xPos", 0);
-			obj->setProperty("yPos", 0);
+            obj->setProperty("xPos", cl->position().x());
+            obj->setProperty("yPos", cl->position().y());
 			obj->setProperty("radius", sets->declarationView()->declContext()->radius());
 			obj->setProperty("color", sets->declarationView()->declContext()->background());
 			obj->setProperty("borderColor", sets->declarationView()->declContext()->border()->color());
@@ -104,8 +104,8 @@ namespace duly_gui
 			obj->setProperty("height", sets->declarationView()->itemSize());
 			obj->setProperty("name", cl->name());
 			obj->setProperty("description", cl->description());
-			obj->setProperty("xPos", 0);
-			obj->setProperty("yPos", 0);
+            obj->setProperty("xPos", cl->position().x());
+            obj->setProperty("yPos", cl->position().y());
 			obj->setProperty("radius", sets->declarationView()->declFunction()->radius());
 			obj->setProperty("color", sets->declarationView()->declFunction()->background());
 			obj->setProperty("borderColor", sets->declarationView()->declFunction()->border()->color());
@@ -130,8 +130,8 @@ namespace duly_gui
 			obj->setProperty("height", sets->declarationView()->itemSize());
 			obj->setProperty("name", cl->name());
 			obj->setProperty("description", cl->description());
-			obj->setProperty("xPos", 0);
-			obj->setProperty("yPos", 0);
+            obj->setProperty("xPos", cl->position().x());
+            obj->setProperty("yPos", cl->position().y());
 			obj->setProperty("radius", sets->declarationView()->declVariable()->radius());
 			obj->setProperty("color", sets->declarationView()->declVariable()->background());
 			obj->setProperty("borderColor", sets->declarationView()->declVariable()->border()->color());

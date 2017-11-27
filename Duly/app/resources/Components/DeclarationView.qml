@@ -1,6 +1,7 @@
 import QtQuick 2.9
 import QtQuick.Controls 2.2
 import QtQml.Models 2.3
+import Utils 1.0
 
 Item {
     id: item
@@ -20,6 +21,8 @@ Item {
     property string borderColor: "#81D4FA"
     property int borderWidth: 2
 
+    x: xPos
+    y: yPos
 
     MouseArea {
         id: mouseArea
@@ -58,10 +61,13 @@ Item {
             Drag.hotSpot.y: 25
             Label {
                 id: label
-                text: item.name
+                text: qsTr(item.name)
+                color: DulySettings.style.text.color
                 verticalAlignment: Text.AlignVCenter
                 horizontalAlignment: Text.AlignHCenter
                 anchors.centerIn: parent
+                font.pixelSize: DulySettings.style.font.pixelSize
+                font.family: DulySettings.style.font.family
             }
             states: State {
                 when: mouseArea.drag.active
