@@ -3,8 +3,8 @@
 
 namespace duly_gui {
     namespace models {
-        Class::Class(QString const &name, QString const &description, Context *parent)
-            : Common(name, description), m_parent(parent)
+        Class::Class(QString const &uid, QString const &name, QString const &description, QVector2D const &position, QObject *parent)
+            : Common(uid, name, description, parent), Position(position)
         {
 
         }
@@ -13,17 +13,7 @@ namespace duly_gui {
         {
 
         }
-        
-        Context *Class::parent() const
-        {
-            return m_parent;
-        }
-        
-        void Class::setParent(Context *parent)
-        {
-            m_parent = parent;
-        }
-        
+
         QList<Variable*> Class::attributes() const
         {
             return m_attributes;
@@ -34,14 +24,14 @@ namespace duly_gui {
             return m_methods;
         }
         
-        QList<Variable*> Class::variables() const
-        {
-            return m_variables;
-        }
-        
         QList<Function*> Class::functions() const
         {
             return m_functions;
+        }
+
+        QList<Class*> Class::classes() const
+        {
+            return m_classes;
         }
 
         void Class::addAttribute(Variable *model)
@@ -54,14 +44,14 @@ namespace duly_gui {
             m_methods.push_back(model);
         }
 
-        void Class::addVariable(Variable *model)
-        {
-            m_variables.push_back(model);
-        }
-
         void Class::addFunction(Function *model)
         {
             m_functions.push_back(model);
+        }
+
+        void Class::addClass(Class *model)
+        {
+            m_classes.push_back(model);
         }
 
         void Class::removeAttribute(Variable *model)
@@ -74,19 +64,20 @@ namespace duly_gui {
             m_methods.removeOne(model);
         }
 
-        void Class::removeVariable(Variable *model)
-        {
-            m_variables.removeOne(model);
-        }
-
         void Class::removeFunction(Function *model)
         {
             m_functions.removeOne(model);
         }
 
+        void Class::removeClass(Class *model)
+        {
+            m_classes.removeOne(model);
+        }
+
         void Class::serialize(QJsonObject &obj) const
         {
             Common::serialize(obj);
+            Position::serialize(obj);
 
             QJsonArray attributes;
             foreach (const Variable *attribute, m_attributes) {
@@ -102,13 +93,6 @@ namespace duly_gui {
                 methods.append(var);
             }
 
-            QJsonArray variables;
-            foreach (const Variable *variable, m_variables) {
-                QJsonObject var;
-                variable->serialize(var);
-                variables.append(var);
-            }
-
             QJsonArray functions;
             foreach (const Function *function, m_functions) {
                 QJsonObject var;
@@ -116,15 +100,22 @@ namespace duly_gui {
                 functions.append(var);
             }
 
+            QJsonArray classes;
+            foreach (const Class *classe, m_classes) {
+                QJsonObject var;
+                classe->serialize(var);
+                classes.append(var);
+            }
+
             obj["attributes"] = attributes;
             obj["methods"] = methods;
-            obj["variables"] = variables;
             obj["functions"] = functions;
+            obj["classes"] = functions;
         }
 
         IClone *Class::clone() const
         {
-            return new Class(name(), description());
+            return new Class(uid(),name(), description(), position());
         }
     }
 }

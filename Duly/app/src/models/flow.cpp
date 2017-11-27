@@ -2,8 +2,8 @@
 
 namespace duly_gui {
     namespace models {
-        Flow::Flow(QString const &uid, QString const &linked_uid)
-            :Identity(uid, linked_uid)
+        Flow::Flow(QString const &uid, QString const &name, QString const &description, QString const &linked_uid, QObject *parent)
+            :Common(uid, name, description, parent), Identity(linked_uid)
         {
 
         }
@@ -15,12 +15,13 @@ namespace duly_gui {
 
         void Flow::serialize(QJsonObject &obj) const
         {
+            Common::serialize(obj);
             Identity::serialize(obj);
         }
 
         IClone *Flow::clone() const
         {
-            return new Flow(uid(), linked_uid());
+            return new Flow(uid(), name(), description(), linked_uid());
         }
     }
 }

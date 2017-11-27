@@ -3,13 +3,14 @@
 
 #include "models/identity.h"
 #include "models/imodel.h"
+#include "models/common.h"
 
 namespace duly_gui {
     namespace models {
-        class Flow: public Identity, virtual public IModel
+        class Flow: public Common, public Identity, virtual public IModel
         {
         public:
-            Flow(QString const &, QString const &);
+            Flow(QString const &, QString const &, QString const &, QString const &, QObject *parent = nullptr);
             virtual ~Flow();
 
             // IModel interface

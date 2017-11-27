@@ -5,45 +5,41 @@
 #include "models/common.h"
 #include "models/variable.h"
 #include "models/function.h"
+#include "models/position.h"
 #include "models/imodel.h"
 
 namespace duly_gui {
     namespace models {
-        class Class: public Common, virtual public IModel
+        class Class: public Common, public Position, virtual public IModel
         {
         public:
-            Class(QString const &, QString const &, Context * = nullptr);
+            Class(QString const &, QString const &, QString const &, QVector2D const &, QObject * = nullptr);
             virtual ~Class();
 
         private:
-            Context *m_parent;
-
             QList<Variable*> m_attributes;
             QList<Function*> m_methods;
-            QList<Variable*> m_variables;//TODO remove this line
             QList<Function*> m_functions;
+            QList<Class*> m_classes;
             //TODO add position
 
         public:
-            Context *parent() const;
-            void setParent(Context *parent);
-
             QList<Variable*> attributes() const;
             QList<Function*> methods() const;
-            QList<Variable*> variables() const;
             QList<Function*> functions() const;
+            QList<Class*> classes() const;
 
         public:
             void addAttribute(Variable *);
             void addMethod(Function *);
-            void addVariable(Variable *);
             void addFunction(Function *);
+            void addClass(Class *);
 
         public:
             void removeAttribute(Variable *);
             void removeMethod(Function *);
-            void removeVariable(Variable *);
             void removeFunction(Function *);
+            void removeClass(Class *);
 
             // IModel interface
         public:

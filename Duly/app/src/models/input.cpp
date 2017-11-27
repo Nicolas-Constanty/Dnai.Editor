@@ -1,10 +1,12 @@
+#include <QVector2D>
 #include "models/input.h"
 
 namespace duly_gui {
     namespace models {
-        Input::Input(QString const &name, QString const &description, QString const &type, bool internal,
-                     QString const &uid, QString const &linked_uid)
-            : Variable(name, description, type, internal), Identity(uid, linked_uid)
+        Input::Input(QString const &uid, QString const &name, QString const &description,
+                     QString const &type, bool internal, QString const &linked_uid,
+                     QObject *parent)
+            : Variable(uid, name, description, QVector2D(), type, internal, parent), Identity(linked_uid)
         {
 
         }
@@ -22,7 +24,7 @@ namespace duly_gui {
 
         IClone *Input::clone() const
         {
-            return new Input(name(), description(), type(), internal(), uid(), linked_uid());
+            return new Input(uid(), name(), description(), type(), internal(), linked_uid());
         }
     }
 }

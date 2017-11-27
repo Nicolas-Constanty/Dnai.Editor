@@ -2,8 +2,10 @@
 
 namespace duly_gui {
     namespace models {
-        Variable::Variable(QString const &name, QString const &description, QString const &type, bool internal)
-            : Common(name, description), m_type(type), m_internal(internal)
+        Variable::Variable(QString const &uid, QString const &name, QString const &description, QVector2D const &position,
+                           QString const &type, bool internal,
+                           QObject *parent)
+            : Common(uid, name, description, parent), Position(position), m_type(type), m_internal(internal)
         {
 
         }
@@ -36,13 +38,14 @@ namespace duly_gui {
         void Variable::serialize(QJsonObject &obj) const
         {
             Common::serialize(obj);
+            Position::serialize(obj);
             obj["type"] = m_type;
             obj["internal"] = m_internal;
         }
 
         IClone *Variable::clone() const
         {
-            return new Variable(name(), description(), type(), internal());
+            return new Variable(uid(), name(), description(), position(), type(), internal());
         }
     }
 }

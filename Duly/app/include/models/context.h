@@ -6,14 +6,15 @@
 #include "models/variable.h"
 #include "models/function.h"
 #include "models/class.h"
+#include "models/position.h"
 #include "models/imodel.h"
 
 namespace duly_gui {
     namespace models {
-        class Context: public Common, virtual public IModel
+        class Context: public Common, public Position, virtual public IModel
         {
         public:
-            Context(QString const &, QString const &, QObject * = nullptr);
+            Context(QString const &, QString const &, QString const &, QVector2D const &, QObject * = nullptr);
             virtual ~Context();
 
             //TODO types
