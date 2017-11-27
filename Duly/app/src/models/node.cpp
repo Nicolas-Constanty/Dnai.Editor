@@ -4,8 +4,8 @@
 
 namespace duly_gui {
     namespace models {
-        Node::Node(QString const &name, QString const &description, QVector2D const &position, Function *parent)
-            : Common(name, description), m_parent(parent), m_position(position)
+        Node::Node(QString const &uid, QString const &name, QString const &description, QVector2D const &position, Function *function, QObject *parent)
+            : Common(uid, name, description, parent), Position(position), m_function(function)
         {
 
         }
@@ -14,26 +14,6 @@ namespace duly_gui {
         {
 
         }
-        
-        Function *Node::parent() const
-        {
-            return m_parent;
-        }
-        
-        void Node::setParent(Function *parent)
-        {
-            m_parent = parent;
-        }
-        
-        //        Context *Node::context() const
-        //        {
-        //            return m_context;
-        //        }
-        
-        //        void Node::setContext(Context *context)
-//        {
-//            m_context = context;
-//        }
 
         Function *Node::function() const
         {
@@ -43,16 +23,6 @@ namespace duly_gui {
         void Node::setFunction(Function *function)
         {
             m_function = function;
-        }
-
-        QVector2D Node::position() const
-        {
-            return m_position;
-        }
-
-        void Node::setPosition(const QVector2D &position)
-        {
-            m_position = position;
         }
 
         QList<Input*> Node::inputs() const
@@ -147,10 +117,7 @@ namespace duly_gui {
                 flows_out.append(var);
             }
 
-            obj["position"] = QJsonObject {
-                {"x", static_cast<double>(m_position.x())},
-                {"y", static_cast<double>(m_position.y())}
-            };
+
             obj["function"] = m_function->name();
 
             obj["inputs"] = inputs;
@@ -161,7 +128,7 @@ namespace duly_gui {
 
         IClone *Node::clone() const
         {
-            return new Node(name(), description(), position());
+            return new Node(uid(), name(), description(), position(), function());
         }
     }
 }

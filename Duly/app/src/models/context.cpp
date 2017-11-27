@@ -3,8 +3,8 @@
 
 namespace duly_gui {
     namespace models {
-        Context::Context(QString const &name, QString const &description, QObject *parent)
-            : Common(name, description, parent)
+        Context::Context(QString const &uid, QString const &name, QString const &description, QVector2D const &position, QObject *parent)
+            : Common(uid, name, description, parent), Position(position)
         {
 
         }
@@ -114,7 +114,7 @@ namespace duly_gui {
 
         IClone *Context::clone() const
         {
-            return new Context(name(), description());
+            return new Context(uid(), name(), description(), position());
         }
     }
 }
