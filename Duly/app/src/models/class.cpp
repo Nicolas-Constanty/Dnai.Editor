@@ -1,12 +1,13 @@
 #include "models/class.h"
 #include <QJsonArray>
+#include "include/controllers/clientcontroller.h"
 
 namespace duly_gui {
     namespace models {
         Class::Class(QString const &uid, QString const &name, QString const &description, QVector2D const &position, QObject *parent)
             : Common(uid, name, description, parent), Position(position)
         {
-
+            ClientController::shared().sendDeclareEvent(ENTITY::OBJECT_TYPE, 0, name, VISIBILITY::PRIVATE);
         }
 
         Class::~Class()

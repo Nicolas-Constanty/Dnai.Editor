@@ -8,21 +8,6 @@ namespace duly_gui {
         Context::Context(QString const &uid, QString const &name, QString const &description, QVector2D const &position, QObject *parent)
             : Common(uid, name, description, parent), Position(position)
         {
-            /*
-            DataComEventFactory::DataComEvent data;
-            DataComEventFactory eventFactory;
-
-            qDebug() << "ALLO";
-            qDebug() << uid;
-            qDebug() << name;
-            qDebug() << description;
-            data = eventFactory.createDeclare(ENTITY::CONTEXT_D, 0, name, VISIBILITY::PRIVATE);
-            ClientManager::shared().getFrom("Duly GUI")->sendEvent("DECLARE", data.data, data.size);*/
-            qDebug() << "ALLO";
-            qDebug() << uid;
-            qDebug() << name;
-            qDebug() << description;
-
             ClientController::shared().sendDeclareEvent(ENTITY::CONTEXT_D, 0, name, VISIBILITY::PRIVATE);
         }
 

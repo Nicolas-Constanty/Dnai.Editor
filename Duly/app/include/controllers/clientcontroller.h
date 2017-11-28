@@ -25,6 +25,25 @@ public:
                           QString const &name,
                           VISIBILITY visibility);
 
+#define REMOVE_EVENT_NAME "REMOVE"
+    void sendRemoveEvent(ENTITY entity_type,
+                         uint32_t containerID,
+                         QString const &name);
+
+
+#define MOVE_EVENT_NAME "MOVE"
+    void sendMoveEvent(ENTITY entity_type,
+                       uint32_t fromID,
+                       uint32_t toID,
+                       QString const &name);
+
+#define CHANGE_VISIBILITY_EVENT_NAME "CHANGE_VISIBILITY"
+    void sendChangeVisibilityEvent(ENTITY entity_type,
+                                   uint32_t containerID,
+                                   QString const &name,
+                                   VISIBILITY visibility);
+
+
 private:
     ClientCommunication *m_clientCom;
     DataComEventFactory *m_dataComFactory;
