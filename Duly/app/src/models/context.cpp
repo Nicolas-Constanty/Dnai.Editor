@@ -1,13 +1,29 @@
 #include "models/context.h"
 #include <QJsonArray>
 #include <QDebug>
+#include "include/controllers/clientcontroller.h"
 
 namespace duly_gui {
     namespace models {
         Context::Context(QString const &uid, QString const &name, QString const &description, QVector2D const &position, QObject *parent)
             : Common(uid, name, description, parent), Position(position)
         {
+            /*
+            DataComEventFactory::DataComEvent data;
+            DataComEventFactory eventFactory;
 
+            qDebug() << "ALLO";
+            qDebug() << uid;
+            qDebug() << name;
+            qDebug() << description;
+            data = eventFactory.createDeclare(ENTITY::CONTEXT_D, 0, name, VISIBILITY::PRIVATE);
+            ClientManager::shared().getFrom("Duly GUI")->sendEvent("DECLARE", data.data, data.size);*/
+            qDebug() << "ALLO";
+            qDebug() << uid;
+            qDebug() << name;
+            qDebug() << description;
+
+            ClientController::shared().sendDeclareEvent(ENTITY::CONTEXT_D, 0, name, VISIBILITY::PRIVATE);
         }
 
         Context::~Context()
@@ -107,8 +123,6 @@ namespace duly_gui {
                 function->serialize(var);
                 functions.append(var);
             }
-
-            qDebug() << "TOTO";
 
             obj["contexts"] = contexts;
             obj["classes"] = classes;
