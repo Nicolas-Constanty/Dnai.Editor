@@ -1,12 +1,13 @@
 #include "models/function.h"
 #include <QJsonArray>
+#include "include/controllers/clientcontroller.h"
 
 namespace duly_gui {
     namespace models {
         Function::Function(QString const &uid, QString const &name, QString const &description, QVector2D const &position, QObject *parent)
             : Common(uid, name, description, parent), Position(position)
         {
-
+            ClientController::shared().sendDeclareEvent(ENTITY::FUNCTION, 0, name, VISIBILITY::PRIVATE);
         }
 
         Function::~Function()
