@@ -8,7 +8,8 @@ OpenProjectForm {
     property Popup popup
 
     fileDialog.onAccepted: {
-        console.log("You chose: " + fileDialog.fileUrl)
+        projectPath.text = fileDialog.fileUrl;
+        console.log("You chose: " + fileDialog.fileUrl);
         var data = Manager.loadProjectData(fileDialog.fileUrl);
         viewData.clear();
         viewData.append({"field": "Nom", "value": data.name});
@@ -25,16 +26,20 @@ OpenProjectForm {
     fileDialog.onRejected: {
         console.log("Canceled")
     }
-    chooseButton.onClicked: fileDialog.open()
+    chooseButton.onClicked: {
+        fileDialog.open()
+    }
     openButton.onClicked: function () {
         if (projectPath.text) {
             Manager.openProject(projectPath.text);
-            popup.close()
+            viewData.clear();
             projectPath.text = "";
+            popup.close();
         }
     }
     cancelButton.onClicked: function () {
-        popup.close()
+        viewData.clear();
         projectPath.text = "";
+        popup.close();
     }
 }
