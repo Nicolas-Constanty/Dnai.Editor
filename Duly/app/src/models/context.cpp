@@ -8,7 +8,7 @@ namespace duly_gui {
         Context::Context(QString const &uid, QString const &name, QString const &description, QVector2D const &position, QObject *parent)
             : Common(uid, name, description, parent), Position(position)
         {
-            ClientController::shared().sendDeclareEvent(ENTITY::CONTEXT_D, 0, name, VISIBILITY::PRIVATE);
+
         }
 
         Context::~Context()
@@ -113,6 +113,11 @@ namespace duly_gui {
             obj["classes"] = classes;
             obj["variables"] = variables;
             obj["functions"] = functions;
+        }
+
+        void Context::declare() const
+        {
+            ClientController::shared().sendDeclareEvent(ENTITY::CONTEXT_D, 0, name(), VISIBILITY::PRIVATE);
         }
 
         IClone *Context::clone() const

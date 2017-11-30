@@ -21,6 +21,7 @@ namespace duly_gui {
             // IClone interface
         private:
             IClone *clone() const;
+            virtual void declare() const;
 
             // IModel interface
         public:

@@ -19,6 +19,11 @@ namespace duly_gui {
             Identity::serialize(obj);
         }
 
+        void Flow::declare() const
+        {
+
+        }
+
         IClone *Flow::clone() const
         {
             return new Flow(uid(), name(), description(), linked_uid());

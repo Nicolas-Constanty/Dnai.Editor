@@ -8,7 +8,7 @@ namespace duly_gui {
                            QObject *parent)
             : Common(uid, name, description, parent), Position(position), m_type(type), m_internal(internal)
         {
-            ClientController::shared().sendDeclareEvent(ENTITY::VARIABLE, 0, name, VISIBILITY::PRIVATE);
+
         }
 
         Variable::~Variable()
@@ -42,6 +42,11 @@ namespace duly_gui {
             Position::serialize(obj);
             obj["type"] = m_type;
             obj["internal"] = m_internal;
+        }
+
+        void Variable::declare() const
+        {
+            ClientController::shared().sendDeclareEvent(ENTITY::VARIABLE, 0, name(), VISIBILITY::PRIVATE);
         }
 
         IClone *Variable::clone() const

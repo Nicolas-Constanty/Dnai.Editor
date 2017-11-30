@@ -7,7 +7,7 @@ namespace duly_gui {
         Class::Class(QString const &uid, QString const &name, QString const &description, QVector2D const &position, QObject *parent)
             : Common(uid, name, description, parent), Position(position)
         {
-            ClientController::shared().sendDeclareEvent(ENTITY::OBJECT_TYPE, 0, name, VISIBILITY::PRIVATE);
+
         }
 
         Class::~Class()
@@ -112,6 +112,11 @@ namespace duly_gui {
             obj["methods"] = methods;
             obj["functions"] = functions;
             obj["classes"] = functions;
+        }
+
+        void Class::declare() const
+        {
+            ClientController::shared().sendDeclareEvent(ENTITY::OBJECT_TYPE, 0, name(), VISIBILITY::PRIVATE);
         }
 
         IClone *Class::clone() const
