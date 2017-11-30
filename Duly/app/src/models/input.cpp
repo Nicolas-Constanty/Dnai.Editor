@@ -22,6 +22,11 @@ namespace duly_gui {
             Identity::serialize(obj);
         }
 
+        void Input::declare() const
+        {
+
+        }
+
         IClone *Input::clone() const
         {
             return new Input(uid(), name(), description(), type(), internal(), linked_uid());

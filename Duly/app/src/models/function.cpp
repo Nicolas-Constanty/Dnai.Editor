@@ -7,7 +7,7 @@ namespace duly_gui {
         Function::Function(QString const &uid, QString const &name, QString const &description, QVector2D const &position, QObject *parent)
             : Common(uid, name, description, parent), Position(position)
         {
-            ClientController::shared().sendDeclareEvent(ENTITY::FUNCTION, 0, name, VISIBILITY::PRIVATE);
+
         }
 
         Function::~Function()
@@ -112,6 +112,11 @@ namespace duly_gui {
             obj["inputs"] = inputs;
             obj["outputs"] = outputs;
             obj["nodes"] = nodes;
+        }
+
+        void Function::declare() const
+        {
+            ClientController::shared().sendDeclareEvent(ENTITY::FUNCTION, 0, name(), VISIBILITY::PRIVATE);
         }
 
         IClone *Function::clone() const

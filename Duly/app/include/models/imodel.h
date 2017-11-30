@@ -12,6 +12,7 @@ namespace duly_gui {
             virtual ~IModel(){}
         public:
             virtual void serialize(QJsonObject &) const = 0;
+            virtual void declare() const = 0;
 
             // IClone interface
         private:
