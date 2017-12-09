@@ -85,8 +85,7 @@ namespace duly_gui
 				}
 				const auto context = cl->contexts();
 				for (auto i = 0; i < context.size(); i++)
-				{
-					qDebug() << i;
+                {
 					CreateContext(context[i], false);
 				}
 			}

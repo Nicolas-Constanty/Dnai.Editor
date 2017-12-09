@@ -42,6 +42,7 @@ static void registerCustomViews()
     qmlRegisterType<duly_gui::views::Input>("CustomViews", 1, 0, "Input");
     qmlRegisterType<duly_gui::views::Output>("CustomViews", 1, 0, "Output");
     qmlRegisterType<duly_gui::views::Flow>("CustomViews", 1, 0, "Flow");
+    qmlRegisterType<duly_gui::views::DulyCanvas>("CustomViews", 1, 0, "DulyCanvas");
     qmlRegisterType<duly_gui::views::DeclarationCanvas>("CustomViews", 1, 0, "DeclarationCanvas");
 
 }
@@ -50,7 +51,6 @@ static void registerCustomGeometry()
     qmlRegisterType<duly_gui::views::BezierCurve>("CustomGeometry", 1, 0, "BezierCurve");
     qmlRegisterType<duly_gui::views::Line>("CustomGeometry", 1, 0, "Line");
     qmlRegisterType<duly_gui::views::RoundedRectangle>("CustomGeometry", 1, 0, "RoundedRectangle");
-    qmlRegisterType<duly_gui::views::DulyCanvas>("CustomGeometry", 1, 0, "DulyCanvas");
 }
 
 static void registerUtils()

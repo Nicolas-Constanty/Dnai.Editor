@@ -95,8 +95,7 @@ namespace duly_gui
 		private:
 			bool m_holdClick;
 			QVector2D m_scale;
-			QVector2D m_lastScale;
-			QSettings m_settings;
+            QVector2D m_lastScale;
 			qreal m_saveWidth;
 			qreal m_saveHeight;
 

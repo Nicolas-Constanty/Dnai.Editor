@@ -25,14 +25,16 @@ namespace duly_gui
 
 	QList<QQuickItem *> FocusManager::findFocused(const QPointF &point)
     {
-		QList<QQuickItem *> items;
+        QList<QQuickItem *> items;
 		for (auto i = 0; i < m_items.size(); ++i) {
-            const auto item = static_cast<views::ScalableItem *>(m_items.at(i));
-            auto p = item->mapToItem(item, point);
-            qDebug() << p;
-            if (item->contains(p))
-				items.append(item);
-		}
+            auto item = m_items.at(i);
+            const auto si = dynamic_cast<views::ScalableItem *>(item->parentItem());
+            if (item->contains(point / si->scaleFactor()
+                - item->position() / si->scaleFactor()))
+            {
+                items.append(item);
+            }
+        }
 		return items;
 	}
 

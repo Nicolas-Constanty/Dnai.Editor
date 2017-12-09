@@ -108,8 +108,6 @@ namespace duly_gui {
                 functions.append(var);
             }
 
-            qDebug() << "TOTO";
-
             obj["contexts"] = contexts;
             obj["classes"] = classes;
             obj["variables"] = variables;

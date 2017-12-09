@@ -1,9 +1,11 @@
 import QtQuick 2.4
 import QtQuick.Controls 2.2
-import "../Forms"
-import "../Nodes"
 import CustomGeometry 1.0
 import CustomViews 1.0
+import Utils 1.0
+
+import "../Forms"
+import "../Nodes"
 
 NodeForm {
     property NodeModel model
@@ -51,23 +53,23 @@ NodeForm {
                 borderWidth: 3
                 borderColor: {
                     if (t == IOType.Int)
-                        toolBar.menuEditRef.settingRef.nodeTabRef.intBorderColorRef.colorSetting
+                        DulySettings.style.nodes.intNode.border.color
                     else if (t == IOType.String)
-                        toolBar.menuEditRef.settingRef.nodeTabRef.stringBorderColorRef.colorSetting
+                        DulySettings.style.nodes.stringNode.border.color
                     else if (t == IOType.Bool)
-                        toolBar.menuEditRef.settingRef.nodeTabRef.boolBorderColorRef.colorSetting
+                        DulySettings.style.nodes.boolNode.border.color
                     else if (t == IOType.Generic)
-                        toolBar.menuEditRef.settingRef.nodeTabRef.genericBorderColorRef.colorSetting
+                        DulySettings.style.nodes.genericNode.border.color
                 }
                 fillColor: {
                     if (t == IOType.Int)
-                        toolBar.menuEditRef.settingRef.nodeTabRef.intColorRef.colorSetting
+                        DulySettings.style.nodes.intNode.color
                     else if (t == IOType.String)
-                        toolBar.menuEditRef.settingRef.nodeTabRef.stringColorRef.colorSetting
+                        DulySettings.style.nodes.stringNode.color
                     else if (t == IOType.Bool)
-                        toolBar.menuEditRef.settingRef.nodeTabRef.boolColorRef.colorSetting
+                        DulySettings.style.nodes.boolNode.color
                     else if (t == IOType.Generic)
-                        toolBar.menuEditRef.settingRef.nodeTabRef.genericColorRef.colorSetting
+                        DulySettings.style.nodes.genericNode.color
                 }
                 Label {
                     anchors.topMargin: - i.radius / 2
@@ -77,6 +79,9 @@ NodeForm {
                     anchors.top: parent.top
                     verticalAlignment: Text.AlignVCenter
                     horizontalAlignment: Text.AlignHCenter
+                    color: DulySettings.style.text.color
+                    font.family: DulySettings.style.font.family
+                    font.pixelSize: DulySettings.style.font.pixelSize
                 }
             }
         }
@@ -94,23 +99,23 @@ NodeForm {
                 borderWidth: 3
                 borderColor: {
                     if (t == IOType.Int)
-                        toolBar.menuEditRef.settingRef.nodeTabRef.intBorderColorRef.colorSetting
+                        DulySettings.style.nodes.intNode.border.color
                     else if (t == IOType.String)
-                        toolBar.menuEditRef.settingRef.nodeTabRef.stringBorderColorRef.colorSetting
+                        DulySettings.style.nodes.stringNode.border.color
                     else if (t == IOType.Bool)
-                        toolBar.menuEditRef.settingRef.nodeTabRef.boolBorderColorRef.colorSetting
+                        DulySettings.style.nodes.boolNode.border.color
                     else if (t == IOType.Generic)
-                        toolBar.menuEditRef.settingRef.nodeTabRef.genericBorderColorRef.colorSetting
+                        DulySettings.style.nodes.genericNode.border.color
                 }
                 fillColor: {
                     if (t == IOType.Int)
-                        toolBar.menuEditRef.settingRef.nodeTabRef.intColorRef.colorSetting
+                        DulySettings.style.nodes.intNode.color
                     else if (t == IOType.String)
-                        toolBar.menuEditRef.settingRef.nodeTabRef.stringColorRef.colorSetting
+                        DulySettings.style.nodes.stringNode.color
                     else if (t == IOType.Bool)
-                        toolBar.menuEditRef.settingRef.nodeTabRef.boolColorRef.colorSetting
+                        DulySettings.style.nodes.boolNode.color
                     else if (t == IOType.Generic)
-                        toolBar.menuEditRef.settingRef.nodeTabRef.genericColorRef.colorSetting
+                        DulySettings.style.nodes.genericNode.color
                 }
                 Label {
                     anchors.topMargin: - o.radius / 2
@@ -120,6 +125,9 @@ NodeForm {
                     anchors.top: parent.top
                     verticalAlignment: Text.AlignVCenter
                     horizontalAlignment: Text.AlignHCenter
+                    color: DulySettings.style.text.color
+                    font.family: DulySettings.style.font.family
+                    font.pixelSize: DulySettings.style.font.pixelSize
                 }
             }
         }
