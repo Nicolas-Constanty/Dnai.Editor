@@ -23,7 +23,7 @@ BaseLayout {
         anchors.top: layout.top
     }
 
-    DeclarationComponent {
+    TestNode {
         anchors.top: panelTop.bottom
         anchors.bottom: consoleRef.top
         anchors.left: panelLeft.right

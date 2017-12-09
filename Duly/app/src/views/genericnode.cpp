@@ -1,5 +1,6 @@
 #include <QtQuick/qsgflatcolormaterial.h>
 #include <QSGSimpleRectNode>
+#include <QSizeF>
 
 
 #include "views/input.h"
@@ -114,15 +115,14 @@ namespace duly_gui
 		}
 
 		void GenericNode::mousePressEvent(QMouseEvent* event)
-		{
-            qDebug() << "hey";
+        {
 			m_offset = QPointF(position() - mapToItem(m_canvas, event->pos()));
 			if (this != parentItem()->childItems().last())
 				stackAfter(parentItem()->childItems().last());
 			m_header->setBorderColor(QColor(255, 170, 0, 255));
             m_content->setBorderColor(QColor(255, 170, 0, 255));
             m_holdClik = false;
-		}
+        }
 
 		void GenericNode::mouseMoveEvent(QMouseEvent* event)
 		{
@@ -162,7 +162,7 @@ namespace duly_gui
             m_holdClik = false;
 		}
 
-		QSGNode *GenericNode::updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *)
+        QSGNode *GenericNode::updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *)
         {
             if (m_realPos == QPointF(-100000, -100000))
             {
@@ -188,7 +188,15 @@ namespace duly_gui
 
         bool GenericNode::contains(const QPointF &point) const
         {
-            return QQuickItem::contains(mapToItem(this, point));
+            auto p = mapToItem(m_canvas, point);
+            auto ref = position();
+            qDebug() << p << ref << realPos() << m_canvas->mapToItem(m_canvas, ref) << (p.x() >= ref.x()
+                        && p.y() >= ref.y());
+
+            return p.x() >= ref.x()
+                    && p.y() >= ref.y()
+                    && p.x() <= ref.x() + width() * scaleFactor()
+                    && p.y() <= ref.y() + height() * scaleFactor();
         }
 	}
 }

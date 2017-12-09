@@ -1,6 +1,8 @@
 import QtQuick 2.0
-import "../"
 import CustomGeometry 1.0
+import Utils 1.0
+
+import "../"
 
 NodeModel {
 

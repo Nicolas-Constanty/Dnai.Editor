@@ -27,10 +27,10 @@ namespace duly_gui
 
 		void LinkableBezierItem::mouseMoveEvent(QMouseEvent *event)
 		{
-			if (m_currentCurve == nullptr) return;
-			const auto p(mapToItem(m_canvas, event->pos()));
-			m_currentCurve->setP4(p);
-			auto qlist = m_canvas->focusManager().findFocused(p);
+            if (m_currentCurve == nullptr) return;
+            const auto p(mapToItem(m_canvas, event->pos()));
+            m_currentCurve->setP4(p);
+            auto qlist = m_canvas->focusManager().findFocused(p);
 			if (qlist.size() == 0)
 			{
 				if (m_currentHover)
