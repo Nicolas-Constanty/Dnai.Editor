@@ -184,9 +184,6 @@
     <ClCompile Include="src\views\roundedrectangle.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\views\scalableitem.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\models\variable.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -197,12 +194,6 @@
       <Filter>Generated Files</Filter>
     </ClCompile>
     <ClCompile Include="Release\moc_testconnection.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_scalableitem.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_scalableitem.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
     <ClCompile Include="Debug\moc_roundedrectangle.cpp">
@@ -490,9 +481,6 @@
       <Filter>Header Files</Filter>
     </CustomBuild>
     <CustomBuild Include="include\views\roundedrectangle.h">
-      <Filter>Header Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="include\views\scalableitem.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
     <CustomBuild Include="include\testconnection.h">

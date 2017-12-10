@@ -1,14 +1,16 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2017
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "duly_app", "D:/Users/Nico/Documents/NodeEditor/Duly/app\duly_app.vcxproj", "{ADECB92C-A177-37A0-B323-E4B0CB6E4D54}"
+# Visual Studio 15
+VisualStudioVersion = 15.0.27004.2009
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "duly_app", "app\duly_app.vcxproj", "{ADECB92C-A177-37A0-B323-E4B0CB6E4D54}"
 	ProjectSection(ProjectDependencies) = postProject
 		{FBF938E6-67AC-38D2-8C6F-F4DB0487F607} = {FBF938E6-67AC-38D2-8C6F-F4DB0487F607}
 		{8C74BCFF-6D5B-3A6C-A15A-C2B73B3B59D6} = {8C74BCFF-6D5B-3A6C-A15A-C2B73B3B59D6}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EventClient", "D:/Users/Nico/Documents/NodeEditor/Duly/lib/event_client\EventClient.vcxproj", "{FBF938E6-67AC-38D2-8C6F-F4DB0487F607}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EventClient", "lib\event_client\EventClient.vcxproj", "{FBF938E6-67AC-38D2-8C6F-F4DB0487F607}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DataComEvent", "D:/Users/Nico/Documents/NodeEditor/Duly/lib/DataComEvent\DataComEvent.vcxproj", "{8C74BCFF-6D5B-3A6C-A15A-C2B73B3B59D6}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DataComEvent", "lib\DataComEvent\DataComEvent.vcxproj", "{8C74BCFF-6D5B-3A6C-A15A-C2B73B3B59D6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,8 +31,11 @@ Global
 		{8C74BCFF-6D5B-3A6C-A15A-C2B73B3B59D6}.Release|x64.ActiveCfg = Release|x64
 		{8C74BCFF-6D5B-3A6C-A15A-C2B73B3B59D6}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
-	GlobalSection(ExtensibilityGlobals) = postSolution
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
-	GlobalSection(ExtensibilityAddIns) = postSolution
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		Qt5Version = msvc2017_64
+		SolutionGuid = {31EA459D-F6D8-422C-9053-7BE1C8E30B17}
 	EndGlobalSection
 EndGlobal

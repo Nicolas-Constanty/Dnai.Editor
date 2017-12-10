@@ -26,7 +26,6 @@ Item {
                     id: toolButton
                     text: qsTr("File")
                     font: menuItem.font
-
                     onClicked: menuFile.open()
                     DMenu {
                         id: menuFile
