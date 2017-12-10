@@ -45,7 +45,8 @@ SOURCES += src/baseio.cpp \
     src/dulysettings.cpp \
     src/dulysettingsmodel.cpp \
     src/views/declarationview.cpp \
-    src/views/declarationcanvas.cpp
+    src/views/declarationcanvas.cpp \
+    src/controllers/clientcontroller.cpp
 
 #VIEWS
 SOURCES += src/views/beziercurve.cpp \
@@ -127,7 +128,8 @@ HEADERS += include/baseio.h \
     include/dulysettings.h \
     include/dulysettingsmodel.h \
     include/views/declarationview.h \
-    include/views/declarationcanvas.h
+    include/views/declarationcanvas.h \
+    include/controllers/clientcontroller.h
 
 #VIEWS
 HEADERS += include/views/beziercurve.h \

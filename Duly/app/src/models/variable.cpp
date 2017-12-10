@@ -1,4 +1,5 @@
 #include "models/variable.h"
+#include "include/controllers/clientcontroller.h"
 
 namespace duly_gui {
     namespace models {
@@ -41,6 +42,11 @@ namespace duly_gui {
             Position::serialize(obj);
             obj["type"] = m_type;
             obj["internal"] = m_internal;
+        }
+
+        void Variable::declare() const
+        {
+            ClientController::shared().sendDeclareEvent(ENTITY::VARIABLE, 0, name(), VISIBILITY::PRIVATE);
         }
 
         IClone *Variable::clone() const

@@ -1,5 +1,6 @@
 #include "models/class.h"
 #include <QJsonArray>
+#include "include/controllers/clientcontroller.h"
 
 namespace duly_gui {
     namespace models {
@@ -111,6 +112,11 @@ namespace duly_gui {
             obj["methods"] = methods;
             obj["functions"] = functions;
             obj["classes"] = functions;
+        }
+
+        void Class::declare() const
+        {
+            ClientController::shared().sendDeclareEvent(ENTITY::OBJECT_TYPE, 0, name(), VISIBILITY::PRIVATE);
         }
 
         IClone *Class::clone() const

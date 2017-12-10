@@ -1,5 +1,6 @@
 #include "models/function.h"
 #include <QJsonArray>
+#include "include/controllers/clientcontroller.h"
 
 namespace duly_gui {
     namespace models {
@@ -111,6 +112,11 @@ namespace duly_gui {
             obj["inputs"] = inputs;
             obj["outputs"] = outputs;
             obj["nodes"] = nodes;
+        }
+
+        void Function::declare() const
+        {
+            ClientController::shared().sendDeclareEvent(ENTITY::FUNCTION, 0, name(), VISIBILITY::PRIVATE);
         }
 
         IClone *Function::clone() const
