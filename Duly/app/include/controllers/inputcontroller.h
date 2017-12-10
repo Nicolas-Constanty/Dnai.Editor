@@ -9,7 +9,7 @@ namespace duly_gui
 		class InputController : public BaseIo
 		{
         public:
-            explicit InputController(IoType t, QQuickItem *parent);
+            explicit InputController(IoTypeRessouce::IoType t, QQuickItem *parent);
 
 			/**
 			* \brief Connect linkable together, create a link, and keep a reference on the visual curve

@@ -24,7 +24,7 @@ NodeForm {
         x: radius
         y: headerRef.height / 2 - radius - radius / 3
         visible: model.flowIn
-        type: FlowType.Enter
+        typeFlow: FlowType.Enter
     }
 
     Flow {
@@ -35,7 +35,7 @@ NodeForm {
         x: parent.width - radius * 4
         y: headerRef.height / 2 - radius - radius / 3
         visible: model.flowOut
-        type: FlowType.Exit
+        typeFlow: FlowType.Exit
     }
 
     flowInItem: _flowIn

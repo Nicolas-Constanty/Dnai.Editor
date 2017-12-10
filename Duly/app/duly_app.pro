@@ -115,7 +115,6 @@ HEADERS += include/baseio.h \
     include/ilinkable.h \
     include/link.h \
     include/linkabletype.h \
-    include/resourcesnode.h \
     include/dulyapp.h \
     include/commands/movenodecommand.h \
     include/commands/movecommand.h \
@@ -129,7 +128,10 @@ HEADERS += include/baseio.h \
     include/dulysettingsmodel.h \
     include/views/declarationview.h \
     include/views/declarationcanvas.h \
-    include/controllers/clientcontroller.h
+    include/controllers/clientcontroller.h \
+    include/iotype.h \
+    include/flowtype.h \
+    include/declarationtype.h
 
 #VIEWS
 HEADERS += include/views/beziercurve.h \

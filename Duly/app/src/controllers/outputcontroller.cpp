@@ -5,7 +5,7 @@ namespace duly_gui
 {
 	namespace controllers
 	{
-        OutputController::OutputController(IoType type, QQuickItem* parent)
+        OutputController::OutputController(IoTypeRessouce::IoType type, QQuickItem* parent)
 			: BaseIo(type, parent)
 		{
 		}

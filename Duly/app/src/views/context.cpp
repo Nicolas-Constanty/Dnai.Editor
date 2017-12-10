@@ -7,7 +7,7 @@ Context::Context(QQuickItem *parent) :
     DeclarationView(parent),
     m_model(nullptr)
 {
-	setType(DeclarationType::Context);
+    setType(DeclarationTypeRessouce::DeclarationType::Context);
 	
 	const auto declView = static_cast<DulyApp *>(DulyApp::instance())->settings()->style()->declarationView();
 	/*auto v = view();
@@ -23,7 +23,7 @@ Context::Context(models::Context *model, QQuickItem *parent) :
 	DeclarationView(parent),
     m_model(model)
 {
-	setType(DeclarationType::Context);
+    setType(DeclarationTypeRessouce::DeclarationType::Context);
 }
 }
 }

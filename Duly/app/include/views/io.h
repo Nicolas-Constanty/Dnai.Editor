@@ -4,7 +4,7 @@
 #include <QtQuick/qsgnode.h>
 
 #include "baseio.h"
-#include "resourcesnode.h"
+#include "iotype.h"
 #include "beziercurve.h"
 #include "eventutilities.h"
 #include "genericnode.h"
@@ -20,7 +20,7 @@ namespace duly_gui
 			Q_OBJECT
 
 			Q_PROPERTY(uint nbSegments READ nbSegments WRITE setNbSegments NOTIFY nbSegmentsChanged)
-            Q_PROPERTY(IoType type READ type WRITE setType NOTIFY typeChanged)
+            Q_PROPERTY(IoTypeRessouce::IoType type READ type WRITE setType NOTIFY typeChanged)
 
 		public:
 			static BaseIo *CurrentHover;
@@ -57,20 +57,20 @@ namespace duly_gui
 
 		public:
 			uint nbSegments() const { return m_nbSegments; }
-            IoType type() const { return m_type; }
+            IoTypeRessouce::IoType type() const { return m_type; }
 
 		public:
 			void setNbSegments(uint n);
-            void setType(IoType type);
+            void setType(IoTypeRessouce::IoType type);
 
 		signals:
 			void nbSegmentsChanged(uint n);
-            void typeChanged(IoType type);
+            void typeChanged(IoTypeRessouce::IoType type);
 
 		protected:
 			uint m_nbSegments;
 
-            IoType m_type;
+            IoTypeRessouce::IoType m_type;
 
 		protected:
 			bool m_holdClick;
