@@ -59,7 +59,6 @@ SOURCES += src/views/beziercurve.cpp \
     src/views/linkablebezieritem.cpp \
     src/views/output.cpp \
     src/views/roundedrectangle.cpp \
-    src/views/scalableitem.cpp \
     src/views/console.cpp \
 
 
@@ -143,7 +142,6 @@ HEADERS += include/views/beziercurve.h \
     include/views/linkablebezieritem.h \
     include/views/output.h \
     include/views/roundedrectangle.h \
-    include/views/scalableitem.h \
     include/views/console.h \
 
 #COMMANDS

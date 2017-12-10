@@ -165,11 +165,11 @@ namespace duly_gui
 
 		QPointF Flow::getCanvasPos() const
 		{
-			auto si = dynamic_cast<ScalableItem *>(parentItem());
+//			auto si = dynamic_cast<ScalableItem *>(parentItem());
 			return
-				QPointF(si->realPos() * si->scaleFactor()
-					+ position() * si->scaleFactor()
-					+ QPointF(width() / 2, height() / 2) * si->scaleFactor());
+                QPointF(/*si->realPos()*/ /** si->scaleFactor()*/
+                    + position() /** si->scaleFactor()*/
+                    + QPointF(width() / 2, height() / 2) /** si->scaleFactor()*/);
 		}
 
 		const QColor& Flow::colorLink() const

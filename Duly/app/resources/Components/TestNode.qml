@@ -31,18 +31,39 @@ DropArea {
                 }
             }
         ]
-        Rectangle {
-            x:0
-            y:0
-            width: 100
-            height: 100
-        }
+        Item {
+            id: content_item
+            x: canvas.width/2
+            y: canvas.height/2
+            Node {
+               x: 0
+               y: 0
+               model: SubstractModel {}
+            }
 
-        Node {
-           x: 0
-           y: 0
-           model: SubstractModel {}
+            Node {
+               x: 100
+               y: 100
+               model: SubstractModel {}
+            }
+            onScaleChanged: {
+                zoomText.text = Math.round(content_item.scale * 100) + "%"
+            }
         }
+        content: content_item
+
+//        Rectangle {
+//            x:0
+//            y:0
+//            width: 100
+//            height: 100
+//        }
+
+//        Node {
+//           x: 0
+//           y: 0
+//           model: SubstractModel {}
+//        }
 
 
 //       Node {
@@ -53,15 +74,13 @@ DropArea {
 
         Label {
             id: zoomText
-            text: (canvas.scaleFactor * 100) + "%"
+            text: (content_item.scale * 100) + "%"
             anchors.right: parent.right
             anchors.rightMargin: 20
             anchors.top: parent.top
             anchors.topMargin: 20
         }
-        onScaleFactorChanged: {
-            zoomText.text = Math.round(canvas.scaleFactor * 100) + "%"
-        }
+
 
         //    ContextContainer {
         //        id: contextContainer

@@ -9,6 +9,7 @@
 #include "eventutilities.h"
 #include "genericnode.h"
 #include "linkablebezieritem.h"
+#include "iscalable.h"
 
 namespace duly_gui
 {

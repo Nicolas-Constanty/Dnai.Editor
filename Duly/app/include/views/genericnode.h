@@ -4,13 +4,12 @@
 #include "roundedrectangle.h"
 #include "focusmanager.h"
 #include "flow.h"
-#include "scalableitem.h"
 #include "dulycanvas.h"
 
 namespace duly_gui
 {
     namespace views {
-        class GenericNode : public ScalableItem
+        class GenericNode : public QQuickItem
         {
             Q_OBJECT
 
@@ -31,7 +30,7 @@ namespace duly_gui
             virtual void componentComplete() override;
             void move(const QPointF &vec);
             const QPointF &startPos() const { return m_startPos; }
-            virtual bool contains(const QPointF &point) const override;
+            //virtual bool contains(const QPointF &point) const override;
 
         public:
             FocusManagerIo &inputs() { return m_inputs; }
@@ -52,7 +51,6 @@ namespace duly_gui
             void setFlowOutItem(Flow *f);
             void setHeader(RoundedRectangle *h);
             void setContent(RoundedRectangle *c);
-            void setScaleFactor(qreal s) override;
 
         signals:
             void flowInChanged(bool f);

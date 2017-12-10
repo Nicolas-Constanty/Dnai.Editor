@@ -18,9 +18,11 @@ GenericNode {
 
     content: contentNode
     header: headerNode
-    width: headerNode.width
-    height: headerNode.height + contentNode.height
+    width: headerNode.width + headerNode.borderWidth * 4
+    height: headerNode.height + contentNode.height + headerNode.borderWidth * 6
     RoundedRectangle {
+        x: borderWidth * 2
+        y: borderWidth * 2
         id: headerNode
         width: if (_name.width > _description.width && _name.width * 1.5 > 100)
                    _name.width * 1.5
@@ -65,6 +67,8 @@ GenericNode {
     }
     RoundedRectangle {
         id: contentNode
+        x: borderWidth * 2
+        y: borderWidth * 2
         width: headerNode.width
         height: _inputs.count * 10 + 30
         radius: headerNode.radius

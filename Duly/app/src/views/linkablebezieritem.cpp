@@ -28,7 +28,7 @@ namespace duly_gui
 		void LinkableBezierItem::mouseMoveEvent(QMouseEvent *event)
 		{
             if (m_currentCurve == nullptr) return;
-            const auto p(mapToItem(m_canvas, event->pos()));
+            const auto p(mapToItem(m_canvas->content(), event->pos()));
             m_currentCurve->setP4(p);
             auto qlist = m_canvas->focusManager().findFocused(p);
 			if (qlist.size() == 0)
@@ -63,8 +63,8 @@ namespace duly_gui
 		{
 			if (EventUtilities::isHoverCircle(m_radius, event))
 			{
-				auto b = new BezierCurve(m_canvas);
-				b->setRealPosition(getCanvasPos());
+                auto b = new BezierCurve(m_canvas->content());
+                b->setPosition(getCanvasPos());
 				b->setP1(QPoint(0, 0));
 				QColor cb(colorLink());
 				b->setFillColor(cb);
@@ -83,7 +83,7 @@ namespace duly_gui
 		{
 			if (event->button() != Qt::LeftButton || m_currentCurve == nullptr)
 				return;
-			const auto p(mapToItem(m_canvas, event->pos()));
+            const auto p(mapToItem(m_canvas->content(), event->pos()));
 			auto qlist = m_canvas->focusManager().findFocused(p);
 			if (qlist.size() == 0)
 			{
