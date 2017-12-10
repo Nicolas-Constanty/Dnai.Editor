@@ -52,26 +52,6 @@ DropArea {
         }
         content: content_item
 
-//        Rectangle {
-//            x:0
-//            y:0
-//            width: 100
-//            height: 100
-//        }
-
-//        Node {
-//           x: 0
-//           y: 0
-//           model: SubstractModel {}
-//        }
-
-
-//       Node {
-//          x: 100
-//          y: 100
-//          model: AddNodeModel {}
-//       }
-
         Label {
             id: zoomText
             text: (content_item.scale * 100) + "%"
@@ -80,38 +60,5 @@ DropArea {
             anchors.top: parent.top
             anchors.topMargin: 20
         }
-
-
-        //    ContextContainer {
-        //        id: contextContainer
-        //        anchors.topMargin: 20
-        //        anchors.top: parent.top
-        //        anchors.left: parent.left
-        //        anchors.right: parent.right
-        //    }
-
-        //    ClassContainer {
-        //        id: classContainer
-        //        anchors.topMargin: 20
-        //        anchors.top: contextContainer.bottom
-        //        anchors.left: parent.left
-        //        anchors.right: parent.right
-        //    }
-
-        //    VariableContainer {
-        //        id: variableContainer
-        //        anchors.topMargin: 20
-        //        anchors.top: classContainer.bottom
-        //        anchors.left: parent.left
-        //        anchors.right: parent.right
-        //    }
-
-        //    FunctionContainer {
-        //        id: methodContainer
-        //        anchors.topMargin: 20
-        //        anchors.top: variableContainer.bottom
-        //        anchors.left: parent.left
-        //        anchors.right: parent.right
-        //    }
     }
 }

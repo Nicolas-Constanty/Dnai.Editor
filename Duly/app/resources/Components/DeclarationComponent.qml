@@ -32,24 +32,29 @@ DropArea {
             }
         ]
 
-        Rectangle {
-            x: parent.width / 2
-            y: parent.height / 2
-            width: 5
-            height: 5
+        Item {
+            id: content_item
+            Rectangle {
+                width: 5
+                height: 5
+            }
+
+            onScaleChanged: {
+                zoomText.text = Math.round(canvas.scaleFactor * 100) + "%"
+            }
         }
+
+        content: content_item
 
         Label {
             id: zoomText
-            text: (canvas.scaleFactor * 100) + "%"
+            text: (content_item.scale * 100) + "%"
             anchors.right: parent.right
             anchors.rightMargin: 20
             anchors.top: parent.top
             anchors.topMargin: 20
         }
-        onScaleFactorChanged: {
-            zoomText.text = Math.round(canvas.scaleFactor * 100) + "%"
-        }
+
 
         //    ContextContainer {
         //        id: contextContainer

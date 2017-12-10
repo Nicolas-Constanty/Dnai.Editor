@@ -28,8 +28,10 @@ namespace duly_gui
             */
             virtual QSGNode *updatePaintNode(QSGNode *, UpdatePaintNodeData *) override;
             virtual void componentComplete() override;
+            void resetBorderColor();
             void move(const QPointF &vec);
             const QPointF &startPos() const { return m_startPos; }
+            static void resetSelected();
             //virtual bool contains(const QPointF &point) const override;
 
         public:
@@ -75,6 +77,7 @@ namespace duly_gui
 			bool m_holdClik;
 	        QPointF m_startPos;
 	        DulyCanvas* m_canvas;
+            static GenericNode *m_selected;
 
         private:
             void updateInputs();

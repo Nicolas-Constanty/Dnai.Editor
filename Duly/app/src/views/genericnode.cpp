@@ -15,7 +15,7 @@ namespace duly_gui
 {
 	namespace views
 	{
-	
+        GenericNode *GenericNode::m_selected = nullptr;
 		GenericNode::GenericNode(QQuickItem *parent) :
             QQuickItem(parent)
 		{
@@ -107,9 +107,27 @@ namespace duly_gui
             m_offset = QPointF(position() - mapToItem(m_canvas->content(), event->pos()));
 			if (this != parentItem()->childItems().last())
 				stackAfter(parentItem()->childItems().last());
+            if (m_selected && m_selected != this)
+            {
+                m_selected->resetBorderColor();
+            }
 			m_header->setBorderColor(QColor(255, 170, 0, 255));
             m_content->setBorderColor(QColor(255, 170, 0, 255));
+            m_selected = this;
             m_holdClik = false;
+        }
+
+        void GenericNode::resetSelected()
+        {
+            if (m_selected)
+                m_selected->resetBorderColor();
+            m_selected = nullptr;
+        }
+
+        void GenericNode::resetBorderColor()
+        {
+            m_content->resetBorderColor();
+            m_header->resetBorderColor();
         }
 
 		void GenericNode::mouseMoveEvent(QMouseEvent* event)
@@ -144,8 +162,6 @@ namespace duly_gui
             }
 			m_offset.setX(0);
 			m_offset.setY(0);
-			m_header->resetBorderColor();
-            m_content->resetBorderColor();
             m_holdClik = false;
 		}
 
