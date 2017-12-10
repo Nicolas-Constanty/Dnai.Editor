@@ -19,7 +19,7 @@ BaseLayout {
     ToolBarHeader {
         id: toolBar
         width: layout.width
-        height: toolBar.heightButton
+        height: 40
         anchors.top: layout.top
     }
 
