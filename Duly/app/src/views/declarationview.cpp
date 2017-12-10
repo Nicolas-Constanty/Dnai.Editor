@@ -15,7 +15,7 @@ namespace duly_gui
 			//m_view = new RoundedRectangle(this);
 		}
 
-		void DeclarationView::setType(const DeclarationType type)
+        void DeclarationView::setType(const DeclarationTypeRessouce::DeclarationType type)
 		{
 			if (type == m_type)
 				return;
