@@ -59,12 +59,13 @@ namespace duly_gui {
 
     void Manager::openProject(const QString &path)
     {
-        m_project = this->loadProject(path);
-		views::DeclarationCanvas::CreateContext(m_project->main(), true);
+        this->openProject(this->loadProject(path));
     }
 
     void Manager::openProject(Project *project)
     {
         m_project = project;
+        m_project->declare();
+        views::DeclarationCanvas::CreateContext(m_project->main(), true);
     }
 }

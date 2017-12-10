@@ -26,6 +26,11 @@ namespace duly_gui {
             };
         }
 
+        void Position::declare() const
+        {
+
+        }
+
         IClone *Position::clone() const
         {
             return new Position(m_position);

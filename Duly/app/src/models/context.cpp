@@ -1,6 +1,7 @@
 #include "models/context.h"
 #include <QJsonArray>
 #include <QDebug>
+#include "include/controllers/clientcontroller.h"
 
 namespace duly_gui {
     namespace models {
@@ -112,6 +113,11 @@ namespace duly_gui {
             obj["classes"] = classes;
             obj["variables"] = variables;
             obj["functions"] = functions;
+        }
+
+        void Context::declare() const
+        {
+            ClientController::shared().sendDeclareEvent(ENTITY::CONTEXT_D, 0, name(), VISIBILITY::PRIVATE);
         }
 
         IClone *Context::clone() const
