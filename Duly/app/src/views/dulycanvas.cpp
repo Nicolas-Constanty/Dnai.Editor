@@ -9,6 +9,7 @@
 #include "commands/commandmanager.h"
 #include "commands/zoomcanvascommand.h"
 #include "dulyapp.h"
+#include "views/genericnode.h"
 
 namespace duly_gui
 {
@@ -84,6 +85,7 @@ namespace duly_gui
 		{
             m_offset = event->pos();
 			m_totalOffset = QPointF(0,0);
+            GenericNode::resetSelected();
 		}
 
 		void DulyCanvas::mouseReleaseEvent(QMouseEvent* event)
@@ -146,14 +148,6 @@ namespace duly_gui
 			m_content->setScale(scale);
             const auto w = width();
             const auto h = height();
-            /*for (auto i = 0; i < childItems().size(); i++)
-            {
-                auto child = dynamic_cast<ScalableItem *>(childItems().at(i));
-                if (child)
-                {
-                    child->setScaleFactor(m_scaleFactor);
-                }
-            }
             auto rx = (h != 0) ? w / h : 1;
             auto ry = (w != 0) ? h / w : 1;
             if (rx > ry)
@@ -166,7 +160,7 @@ namespace duly_gui
                 ry = 1;
                 rx = rx / ry;
             }
-            moveCanvas(QPointF(offset.x() * rx, offset.y() * ry) * 100);*/
+            moveCanvas(QPointF(offset.x() * rx, offset.y() * ry) * 100);
 		}
 
 		DulyCanvas::~DulyCanvas()
