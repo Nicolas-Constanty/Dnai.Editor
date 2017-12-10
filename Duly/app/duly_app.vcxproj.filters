@@ -193,6 +193,24 @@
     <ClCompile Include="src\commands\zoomcanvascommand.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Debug\moc_testconnection.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_testconnection.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_scalableitem.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_scalableitem.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_roundedrectangle.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_roundedrectangle.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
     <ClCompile Include="Debug\moc_declarationcanvas.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
@@ -217,64 +235,28 @@
     <ClCompile Include="Release\moc_console.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_dulysettings.cpp">
+    <ClCompile Include="Debug\moc_io.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="Release\moc_dulysettings.cpp">
+    <ClCompile Include="Release\moc_io.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_dulyscene.cpp">
+    <ClCompile Include="Debug\moc_genericnode.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="Release\moc_dulyscene.cpp">
+    <ClCompile Include="Release\moc_genericnode.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_dulycanvas.cpp">
+    <ClCompile Include="Debug\moc_flow.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="Release\moc_dulycanvas.cpp">
+    <ClCompile Include="Release\moc_flow.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_declarationview.cpp">
+    <ClCompile Include="Debug\moc_dulysettingsmodel.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="Release\moc_declarationview.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_testconnection.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_testconnection.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_scalableitem.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_scalableitem.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_roundedrectangle.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_roundedrectangle.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_common.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_common.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_class.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_class.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_beziercurve.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_beziercurve.cpp">
+    <ClCompile Include="Release\moc_dulysettingsmodel.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
     <ClCompile Include="Debug\moc_resourcesnode.cpp">
@@ -301,28 +283,46 @@
     <ClCompile Include="Release\moc_line.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_io.cpp">
+    <ClCompile Include="Debug\moc_dulysettings.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="Release\moc_io.cpp">
+    <ClCompile Include="Release\moc_dulysettings.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_genericnode.cpp">
+    <ClCompile Include="Debug\moc_dulyscene.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="Release\moc_genericnode.cpp">
+    <ClCompile Include="Release\moc_dulyscene.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_flow.cpp">
+    <ClCompile Include="Debug\moc_dulycanvas.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="Release\moc_flow.cpp">
+    <ClCompile Include="Release\moc_dulycanvas.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_dulysettingsmodel.cpp">
+    <ClCompile Include="Debug\moc_declarationview.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="Release\moc_dulysettingsmodel.cpp">
+    <ClCompile Include="Release\moc_declarationview.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_common.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_common.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_class.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_class.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_beziercurve.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_beziercurve.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\qrc_qml.cpp">
@@ -631,9 +631,6 @@
     <None Include="resources\Forms\DropDownForm.ui.qml">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="resources\DulyStyle.qml">
-      <Filter>Resource Files</Filter>
-    </None>
     <None Include="resources\Nodes\Operator\BinaryOperator\Logical\EqualModel.qml">
       <Filter>Resource Files</Filter>
     </None>
@@ -755,6 +752,9 @@
       <Filter>Resource Files</Filter>
     </None>
     <None Include="resources\Models\TestModel.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\Components\TestNode.qml">
       <Filter>Resource Files</Filter>
     </None>
     <None Include="resources\Models\ThemeModel.qml">

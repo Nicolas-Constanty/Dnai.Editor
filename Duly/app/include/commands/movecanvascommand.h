@@ -28,7 +28,7 @@ namespace duly_gui
         private:
             QPointF m_pos;
             QPointF m_lastPos;
-			views::DulyCanvas* m_canvas;
+            views::DulyCanvas* m_canvas;
         };
     }
 }

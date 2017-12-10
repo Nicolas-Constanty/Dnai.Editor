@@ -17,7 +17,7 @@ namespace duly_gui
 	{
 	
 		GenericNode::GenericNode(QQuickItem *parent) :
-            ScalableItem(parent)
+            QQuickItem(parent)
 		{
 			m_canvas = static_cast<DulyApp *>(DulyApp::instance())->currentCanvas();
 			m_canvas->focusManager().registerItem(this);
@@ -76,18 +76,6 @@ namespace duly_gui
 			emit contentChanged(c);
 		}
 
-        void GenericNode::setScaleFactor(qreal s)
-        {
-            if (s == m_scaleFactor)
-                return;
-            if (m_realPos == QPointF(-100000, -100000))
-                m_realPos = position();
-            m_scaleFactor = s;
-            setScale(s);
-            emit scaleFactorChanged(s);
-            update();
-        }
-
 		void GenericNode::updateInputs()
 		{
 			auto list = m_inputs.getList();
@@ -116,7 +104,7 @@ namespace duly_gui
 
 		void GenericNode::mousePressEvent(QMouseEvent* event)
         {
-			m_offset = QPointF(position() - mapToItem(m_canvas, event->pos()));
+            m_offset = QPointF(position() - mapToItem(m_canvas->content(), event->pos()));
 			if (this != parentItem()->childItems().last())
 				stackAfter(parentItem()->childItems().last());
 			m_header->setBorderColor(QColor(255, 170, 0, 255));
@@ -126,7 +114,7 @@ namespace duly_gui
 
 		void GenericNode::mouseMoveEvent(QMouseEvent* event)
 		{
-            const auto p(mapToItem(m_canvas, event->pos()) + m_offset);
+            const auto p(mapToItem(m_canvas->content(), event->pos()) + m_offset);
             if (!m_holdClik)
             {
                 m_holdClik = true;
@@ -145,7 +133,6 @@ namespace duly_gui
                 m_flowInItem->updateLink();
             if (m_flowOutItem && m_flowOutItem->isVisible())
                 m_flowOutItem->updateLink();
-            m_realPos = realPos();
         }
 
 		void GenericNode::mouseReleaseEvent(QMouseEvent *)
@@ -164,17 +151,13 @@ namespace duly_gui
 
         QSGNode *GenericNode::updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *)
         {
-            if (m_realPos == QPointF(-100000, -100000))
-            {
-                m_realPos = position();
-                const auto p = m_canvas->origin() + QPointF(width() / 2, height() / 2);
-                setTransformOriginPoint(p);
-            }
             auto n = static_cast<QSGSimpleRectNode *>(oldNode);
 			if (!n) {
                 n = new QSGSimpleRectNode();
+				const auto p = m_canvas->origin() + QPointF(width() / 2, height() / 2);
+				setTransformOriginPoint(p);
 			}
-            n->setColor(Qt::red);
+            n->setColor(Qt::transparent);
 			n->setRect(boundingRect());
 
 			return n;
@@ -185,7 +168,7 @@ namespace duly_gui
             QQuickItem::componentComplete();
         }
 
-
+/*
         bool GenericNode::contains(const QPointF &point) const
         {
             auto p = mapToItem(m_canvas, point);
@@ -197,6 +180,6 @@ namespace duly_gui
                     && p.y() >= ref.y()
                     && p.x() <= ref.x() + width() * scaleFactor()
                     && p.y() <= ref.y() + height() * scaleFactor();
-        }
+        }*/
 	}
 }
