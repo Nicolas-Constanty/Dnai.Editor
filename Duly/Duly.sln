@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27004.2009
+VisualStudioVersion = 15.0.27130.2003
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "duly_app", "app\duly_app.vcxproj", "{ADECB92C-A177-37A0-B323-E4B0CB6E4D54}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -36,6 +36,6 @@ Global
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		Qt5Version = msvc2017_64
-		SolutionGuid = {31EA459D-F6D8-422C-9053-7BE1C8E30B17}
+		SolutionGuid = {C2210F5E-537B-4F51-AA05-3BF12015268E}
 	EndGlobalSection
 EndGlobal

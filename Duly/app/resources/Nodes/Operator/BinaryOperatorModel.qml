@@ -10,7 +10,7 @@ NodeModel {
     flowOut: false
     inputs: ListModel {
         ListElement { t: IOType.Generic; n: "Value 1" }
-        ListElement { t: IOType.Generic; n: "Value 1" }
+        ListElement { t: IOType.Generic; n: "Value 2" }
     }
 
     outputs: ListModel {

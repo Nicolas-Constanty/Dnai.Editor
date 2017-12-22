@@ -157,6 +157,9 @@
     <ClCompile Include="Debug\moc_declarationcanvas.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="Debug\moc_declarationtype.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="Debug\moc_declarationview.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ClCompile>
@@ -175,10 +178,16 @@
     <ClCompile Include="Debug\moc_flow.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="Debug\moc_flowtype.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="Debug\moc_genericnode.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="Debug\moc_io.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_iotype.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="Debug\moc_line.cpp">
@@ -188,9 +197,6 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="Debug\moc_manager.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_resourcesnode.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="Debug\moc_roundedrectangle.cpp">
@@ -226,6 +232,9 @@
     <ClCompile Include="Release\moc_declarationcanvas.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="Release\moc_declarationtype.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="Release\moc_declarationview.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
@@ -244,10 +253,16 @@
     <ClCompile Include="Release\moc_flow.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="Release\moc_flowtype.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="Release\moc_genericnode.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="Release\moc_io.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Release\moc_iotype.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="Release\moc_line.cpp">
@@ -257,9 +272,6 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="Release\moc_manager.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="Release\moc_resourcesnode.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="Release\moc_roundedrectangle.cpp">
@@ -273,6 +285,7 @@
     <ClCompile Include="src\views\beziercurve.cpp" />
     <ClCompile Include="src\models\class.cpp" />
     <ClCompile Include="src\views\class.cpp" />
+    <ClCompile Include="src\controllers\clientcontroller.cpp" />
     <ClCompile Include="src\commands\command.cpp" />
     <ClCompile Include="src\commands\commanddecorator.cpp" />
     <ClCompile Include="src\commands\commandmanager.cpp" />
@@ -344,6 +357,7 @@
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
     </CustomBuild>
+    <ClInclude Include="include\controllers\clientcontroller.h" />
     <ClInclude Include="include\commands\command.h" />
     <ClInclude Include="include\commands\commanddecorator.h" />
     <ClInclude Include="include\commands\commandmanager.h" />
@@ -395,6 +409,16 @@
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Moc%27ing declarationcanvas.h...</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -D_UNICODE -DWIN32 -DWIN64 -DQT_DEPRECATED_WARNINGS -DQNANO_USE_RENDERNODE -DQPM_INIT -DQT_QUICKCONTROLS2_LIB -DQT_QUICK_LIB -DQT_GUI_LIB -DQT_QML_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB "-I." "-I.\include" "-I.\..\lib\event_client" "-I.\..\lib\DataComEvent\Shared_include" "-I$(QTDIR)\include" "-I$(QTDIR)\include\QtQuickControls2" "-I$(QTDIR)\include\QtQuick" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtANGLE" "-I$(QTDIR)\include\QtQml" "-I$(QTDIR)\include\QtNetwork" "-I$(QTDIR)\include\QtCore" "-I.\debug" "-I\include" "-I$(QTDIR)\mkspecs\win32-msvc"</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Moc%27ing declarationcanvas.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+    </CustomBuild>
+    <CustomBuild Include="include\declarationtype.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -D_UNICODE -DWIN32 -DWIN64 -DQT_DEPRECATED_WARNINGS -DQNANO_USE_RENDERNODE -DQPM_INIT -DQT_NO_DEBUG -DQT_QUICKCONTROLS2_LIB -DQT_QUICK_LIB -DQT_GUI_LIB -DQT_QML_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DNDEBUG "-I." "-I.\include" "-I.\..\lib\event_client" "-I.\..\lib\DataComEvent\Shared_include" "-I$(QTDIR)\include" "-I$(QTDIR)\include\QtQuickControls2" "-I$(QTDIR)\include\QtQuick" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtANGLE" "-I$(QTDIR)\include\QtQml" "-I$(QTDIR)\include\QtNetwork" "-I$(QTDIR)\include\QtCore" "-I.\release" "-I\include" "-I$(QTDIR)\mkspecs\win32-msvc"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Moc%27ing declarationtype.h...</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -D_UNICODE -DWIN32 -DWIN64 -DQT_DEPRECATED_WARNINGS -DQNANO_USE_RENDERNODE -DQPM_INIT -DQT_QUICKCONTROLS2_LIB -DQT_QUICK_LIB -DQT_GUI_LIB -DQT_QML_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB "-I." "-I.\include" "-I.\..\lib\event_client" "-I.\..\lib\DataComEvent\Shared_include" "-I$(QTDIR)\include" "-I$(QTDIR)\include\QtQuickControls2" "-I$(QTDIR)\include\QtQuick" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtANGLE" "-I$(QTDIR)\include\QtQml" "-I$(QTDIR)\include\QtNetwork" "-I$(QTDIR)\include\QtCore" "-I.\debug" "-I\include" "-I$(QTDIR)\mkspecs\win32-msvc"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Moc%27ing declarationtype.h...</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
@@ -463,6 +487,16 @@
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
     </CustomBuild>
+    <CustomBuild Include="include\flowtype.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -D_UNICODE -DWIN32 -DWIN64 -DQT_DEPRECATED_WARNINGS -DQNANO_USE_RENDERNODE -DQPM_INIT -DQT_NO_DEBUG -DQT_QUICKCONTROLS2_LIB -DQT_QUICK_LIB -DQT_GUI_LIB -DQT_QML_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DNDEBUG "-I." "-I.\include" "-I.\..\lib\event_client" "-I.\..\lib\DataComEvent\Shared_include" "-I$(QTDIR)\include" "-I$(QTDIR)\include\QtQuickControls2" "-I$(QTDIR)\include\QtQuick" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtANGLE" "-I$(QTDIR)\include\QtQml" "-I$(QTDIR)\include\QtNetwork" "-I$(QTDIR)\include\QtCore" "-I.\release" "-I\include" "-I$(QTDIR)\mkspecs\win32-msvc"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Moc%27ing flowtype.h...</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -D_UNICODE -DWIN32 -DWIN64 -DQT_DEPRECATED_WARNINGS -DQNANO_USE_RENDERNODE -DQPM_INIT -DQT_QUICKCONTROLS2_LIB -DQT_QUICK_LIB -DQT_GUI_LIB -DQT_QML_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB "-I." "-I.\include" "-I.\..\lib\event_client" "-I.\..\lib\DataComEvent\Shared_include" "-I$(QTDIR)\include" "-I$(QTDIR)\include\QtQuickControls2" "-I$(QTDIR)\include\QtQuick" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtANGLE" "-I$(QTDIR)\include\QtQml" "-I$(QTDIR)\include\QtNetwork" "-I$(QTDIR)\include\QtCore" "-I.\debug" "-I\include" "-I$(QTDIR)\mkspecs\win32-msvc"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Moc%27ing flowtype.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+    </CustomBuild>
     <ClInclude Include="include\focusmanager.h" />
     <ClInclude Include="include\models\function.h" />
     <CustomBuild Include="include\views\genericnode.h">
@@ -488,6 +522,16 @@
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Moc%27ing io.h...</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -D_UNICODE -DWIN32 -DWIN64 -DQT_DEPRECATED_WARNINGS -DQNANO_USE_RENDERNODE -DQPM_INIT -DQT_QUICKCONTROLS2_LIB -DQT_QUICK_LIB -DQT_GUI_LIB -DQT_QML_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB "-I." "-I.\include" "-I.\..\lib\event_client" "-I.\..\lib\DataComEvent\Shared_include" "-I$(QTDIR)\include" "-I$(QTDIR)\include\QtQuickControls2" "-I$(QTDIR)\include\QtQuick" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtANGLE" "-I$(QTDIR)\include\QtQml" "-I$(QTDIR)\include\QtNetwork" "-I$(QTDIR)\include\QtCore" "-I.\debug" "-I\include" "-I$(QTDIR)\mkspecs\win32-msvc"</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Moc%27ing io.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+    </CustomBuild>
+    <CustomBuild Include="include\iotype.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -D_UNICODE -DWIN32 -DWIN64 -DQT_DEPRECATED_WARNINGS -DQNANO_USE_RENDERNODE -DQPM_INIT -DQT_NO_DEBUG -DQT_QUICKCONTROLS2_LIB -DQT_QUICK_LIB -DQT_GUI_LIB -DQT_QML_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DNDEBUG "-I." "-I.\include" "-I.\..\lib\event_client" "-I.\..\lib\DataComEvent\Shared_include" "-I$(QTDIR)\include" "-I$(QTDIR)\include\QtQuickControls2" "-I$(QTDIR)\include\QtQuick" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtANGLE" "-I$(QTDIR)\include\QtQml" "-I$(QTDIR)\include\QtNetwork" "-I$(QTDIR)\include\QtCore" "-I.\release" "-I\include" "-I$(QTDIR)\mkspecs\win32-msvc"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Moc%27ing iotype.h...</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -D_UNICODE -DWIN32 -DWIN64 -DQT_DEPRECATED_WARNINGS -DQNANO_USE_RENDERNODE -DQPM_INIT -DQT_QUICKCONTROLS2_LIB -DQT_QUICK_LIB -DQT_GUI_LIB -DQT_QML_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB "-I." "-I.\include" "-I.\..\lib\event_client" "-I.\..\lib\DataComEvent\Shared_include" "-I$(QTDIR)\include" "-I$(QTDIR)\include\QtQuickControls2" "-I$(QTDIR)\include\QtQuick" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtANGLE" "-I$(QTDIR)\include\QtQml" "-I$(QTDIR)\include\QtNetwork" "-I$(QTDIR)\include\QtCore" "-I.\debug" "-I\include" "-I$(QTDIR)\mkspecs\win32-msvc"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Moc%27ing iotype.h...</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
@@ -535,16 +579,6 @@
     <ClInclude Include="include\controllers\outputcontroller.h" />
     <ClInclude Include="include\models\position.h" />
     <ClInclude Include="include\project.h" />
-    <CustomBuild Include="include\resourcesnode.h">
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -D_UNICODE -DWIN32 -DWIN64 -DQT_DEPRECATED_WARNINGS -DQNANO_USE_RENDERNODE -DQPM_INIT -DQT_NO_DEBUG -DQT_QUICKCONTROLS2_LIB -DQT_QUICK_LIB -DQT_GUI_LIB -DQT_QML_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DNDEBUG "-I." "-I.\include" "-I.\..\lib\event_client" "-I.\..\lib\DataComEvent\Shared_include" "-I$(QTDIR)\include" "-I$(QTDIR)\include\QtQuickControls2" "-I$(QTDIR)\include\QtQuick" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtANGLE" "-I$(QTDIR)\include\QtQml" "-I$(QTDIR)\include\QtNetwork" "-I$(QTDIR)\include\QtCore" "-I.\release" "-I\include" "-I$(QTDIR)\mkspecs\win32-msvc"</Command>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Moc%27ing resourcesnode.h...</Message>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -D_UNICODE -DWIN32 -DWIN64 -DQT_DEPRECATED_WARNINGS -DQNANO_USE_RENDERNODE -DQPM_INIT -DQT_QUICKCONTROLS2_LIB -DQT_QUICK_LIB -DQT_GUI_LIB -DQT_QML_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB "-I." "-I.\include" "-I.\..\lib\event_client" "-I.\..\lib\DataComEvent\Shared_include" "-I$(QTDIR)\include" "-I$(QTDIR)\include\QtQuickControls2" "-I$(QTDIR)\include\QtQuick" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtANGLE" "-I$(QTDIR)\include\QtQml" "-I$(QTDIR)\include\QtNetwork" "-I$(QTDIR)\include\QtCore" "-I.\debug" "-I\include" "-I$(QTDIR)\mkspecs\win32-msvc"</Command>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Moc%27ing resourcesnode.h...</Message>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
-    </CustomBuild>
     <CustomBuild Include="include\views\roundedrectangle.h">
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -D_UNICODE -DWIN32 -DWIN64 -DQT_DEPRECATED_WARNINGS -DQNANO_USE_RENDERNODE -DQPM_INIT -DQT_NO_DEBUG -DQT_QUICKCONTROLS2_LIB -DQT_QUICK_LIB -DQT_GUI_LIB -DQT_QML_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DNDEBUG "-I." "-I.\include" "-I.\..\lib\event_client" "-I.\..\lib\DataComEvent\Shared_include" "-I$(QTDIR)\include" "-I$(QTDIR)\include\QtQuickControls2" "-I$(QTDIR)\include\QtQuick" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtANGLE" "-I$(QTDIR)\include\QtQml" "-I$(QTDIR)\include\QtNetwork" "-I$(QTDIR)\include\QtCore" "-I.\release" "-I\include" "-I$(QTDIR)\mkspecs\win32-msvc"</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Moc%27ing roundedrectangle.h...</Message>

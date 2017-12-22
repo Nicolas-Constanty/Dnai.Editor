@@ -59,6 +59,7 @@ DropArea {
             anchors.rightMargin: 20
             anchors.top: parent.top
             anchors.topMargin: 20
+            color: DulySettings.style.text.color
         }
     }
 }
