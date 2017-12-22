@@ -118,7 +118,7 @@ namespace duly_gui
             m_gridOffset.setY(static_cast<int>(m_gridOffset.y()) % (m_gridStep * 10));
 			for (auto i = 0; i< m_content->childItems().size(); i++)
 			{
-				auto c = childItems().at(i);
+                auto c = m_content->childItems().at(i);
 				c->setPosition(c->position() + offset);
 			}
 			update();

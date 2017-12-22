@@ -65,6 +65,7 @@ namespace duly_gui
 		{
 			const auto f = QFileInfo(*i);
 			const auto basename = f.baseName();
+            qDebug() << dir.absoluteFilePath(*i);
 			m_themes.append(basename);
 			m_themesPath[basename] = dir.absoluteFilePath(*i);
 			
