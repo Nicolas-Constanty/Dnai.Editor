@@ -26,11 +26,13 @@ namespace duly_gui
 
 	void DulySettings::loadTheme(const QString&path)
 	{
+//        if (m_settings.value("themes/current/theme").toString() == path)
+//            return;
 		m_loadedColors.clear();
 		m_loadedNumbers.clear();
 		QFile file(m_themesPath[path]);
 
-		if (!file.open(QIODevice::ReadOnly)) {
+        if (!file.open(QIODevice::ReadOnly)) {
 			return;
 		}
 
@@ -65,7 +67,6 @@ namespace duly_gui
 		{
 			const auto f = QFileInfo(*i);
 			const auto basename = f.baseName();
-            qDebug() << dir.absoluteFilePath(*i);
 			m_themes.append(basename);
 			m_themesPath[basename] = dir.absoluteFilePath(*i);
 			
@@ -82,7 +83,7 @@ namespace duly_gui
 	}
 
 	QStringList DulySettings::getThemes() const
-	{
+    {
 		return  m_themes;
 	}
 
