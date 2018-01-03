@@ -1,4 +1,4 @@
-QT += qml quickcontrols2
+QT += qml quickcontrols2 network
 
 CONFIG += c++14
 CONFIG += object_parallel_to_source
@@ -89,6 +89,16 @@ SOURCES += src/models/class.cpp \
     src/models/variable.cpp \
     src/models/position.cpp
 
+#HTTP
+SOURCES += src/http/url.cpp \
+    src/http/service.cpp \
+    src/http/observable.cpp \
+    src/http/response.cpp
+
+#API
+SOURCES += src/api/api.cpp
+
+
 RESOURCES += qml.qrc
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
@@ -176,6 +186,19 @@ HEADERS += include/models/common.h \
     include/models/iclone.h \
     include/models/position.h \
     include/models/list/listmodelcontext.h
+
+#HTTP
+HEADERS += include/http.h \
+    include/http/url.h \
+    include/http/service.h \
+    include/http/config.h \
+    include/http/observable.h \
+    include/http/response.h \
+    include/http/types.h
+
+#API
+HEADERS += include/api.h \
+    include/api/api.h
 
 #LIB
 DEPENDPATH += $${PWD}/../lib/event_client/
