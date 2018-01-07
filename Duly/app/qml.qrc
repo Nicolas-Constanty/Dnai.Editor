@@ -96,5 +96,7 @@
         <file>resources/Components/TestNode.qml</file>
         <file>resources/Panels/Login.qml</file>
         <file>resources/Forms/LoginForm.ui.qml</file>
+        <file>resources/Panels/Upload.qml</file>
+        <file>resources/Forms/UploadForm.ui.qml</file>
     </qresource>
 </RCC>

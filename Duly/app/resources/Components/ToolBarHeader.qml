@@ -403,6 +403,7 @@ Item {
                         DMenuItem {
                             font: menuItem.font
                             text: qsTr("Upload")
+                            onClicked: uploadPopup.open()
                         }
 
                         DMenuItem {
@@ -496,6 +497,28 @@ Item {
             anchors.fill: parent
             id: loginPanel
             popup: loginPopup
+        }
+    }
+
+    Popup {
+        id: uploadPopup
+        x: parent.width / 2 - width / 2
+        y: appWindow.height / 2 - height / 2
+        background: Rectangle {
+            color: DulySettings.style.background
+            border.color: "#FAFAFA"
+            border.width: 5
+            radius: 10
+        }
+        width: 500
+        height: 100
+        modal: true
+        focus: true
+        closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutside
+        contentItem: Upload {
+            anchors.fill: parent
+            id: uploadPanel
+            popup: uploadPopup
         }
     }
 }
