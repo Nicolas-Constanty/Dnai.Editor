@@ -94,5 +94,7 @@
         <file>resources/Controls/DToolButton.qml</file>
         <file>resources/Components/DeclarationView.qml</file>
         <file>resources/Components/TestNode.qml</file>
+        <file>resources/Panels/Login.qml</file>
+        <file>resources/Forms/LoginForm.ui.qml</file>
     </qresource>
 </RCC>
