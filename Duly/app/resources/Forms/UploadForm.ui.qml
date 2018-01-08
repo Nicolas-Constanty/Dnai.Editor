@@ -18,7 +18,7 @@ RowLayout {
         title: "Please choose a project"
         folder: shortcuts.home
         selectMultiple: true
-        //nameFilters: ["Duly project (*.dulyproject)"]
+        nameFilters: ["Duly project (*.dulyproject)"]
     }
 
     ListModel {
