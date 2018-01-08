@@ -2,30 +2,30 @@
 #define BASEIO_H
 
 #include "baselinkable.h"
-#include "resourcesnode.h"
+#include "iotype.h"
 
 namespace duly_gui {
 
     class BaseIo : public BaseLinkable
     {
     public:
-        BaseIo(IoType type, QQuickItem *parent);
+        BaseIo(IoTypeRessouce::IoType type, QQuickItem *parent);
         ~BaseIo();
 
         /**
          * \brief set the IOType
          * \param t
          */
-        void setType(IoType t);
+        void setType(IoTypeRessouce::IoType t);
 
         /**
         * \brief return the IOType
         */
-        IoType getType() const;
+        IoTypeRessouce::IoType getType() const;
 
 
     protected:
-        IoType m_type;
+        IoTypeRessouce::IoType m_type;
 
     };
 }

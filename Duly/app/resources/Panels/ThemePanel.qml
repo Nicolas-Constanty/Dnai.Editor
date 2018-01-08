@@ -4,6 +4,17 @@ import QtQuick.Controls 2.2
 import Qt.labs.settings 1.0
 import "../Forms"
 
+import Utils 1.0
+
 ThemePanelForm {
     colRef.width: Math.max(implicitWidth, rectRef.availableWidth) - 20
+
+    themes.items.onCurrentTextChanged: {
+        DulySettings.loadTheme(themes.currentText)
+    }
+
+    Component.onCompleted:
+    {
+        themes.listModel = DulySettings.getThemes()
+    }
 }

@@ -2,6 +2,7 @@ import QtQuick 2.4
 import QtQuick.Controls 2.2
 import CustomGeometry 1.0
 import CustomViews 1.0
+import Utils 1.0
 
 GenericNode {
     id: node
@@ -17,9 +18,11 @@ GenericNode {
 
     content: contentNode
     header: headerNode
-    width: headerNode.width
-    height: headerNode.height + contentNode.height
+    width: headerNode.width + headerNode.borderWidth * 4
+    height: headerNode.height + contentNode.height + headerNode.borderWidth * 6
     RoundedRectangle {
+        x: borderWidth * 2
+        y: borderWidth * 2
         id: headerNode
         width: if (_name.width > _description.width && _name.width * 1.5 > 100)
                    _name.width * 1.5
@@ -44,6 +47,9 @@ GenericNode {
             anchors.horizontalCenter: parent.horizontalCenter
             verticalAlignment: Text.AlignVCenter
             horizontalAlignment: Text.AlignHCenter
+            color: DulySettings.style.text.color
+            font.family: DulySettings.style.font.family
+            font.pixelSize: DulySettings.style.font.pixelSize
         }
         Label {
             id: _description
@@ -54,10 +60,15 @@ GenericNode {
             anchors.horizontalCenter: parent.horizontalCenter
             verticalAlignment: Text.AlignVCenter
             horizontalAlignment: Text.AlignHCenter
+            color: DulySettings.style.text.color
+            font.family: DulySettings.style.font.family
+            font.pixelSize: DulySettings.style.font.pixelSize
         }
     }
     RoundedRectangle {
         id: contentNode
+        x: borderWidth * 2
+        y: borderWidth * 2
         width: headerNode.width
         height: _inputs.count * 10 + 30
         radius: headerNode.radius

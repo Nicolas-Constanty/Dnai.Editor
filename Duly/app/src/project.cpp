@@ -262,6 +262,13 @@ namespace duly_gui {
         obj["main"] = main;
     }
 
+    void Project::declare() const
+    {
+        foreach (auto model, m_index) {
+            model->declare();
+        }
+    }
+
     void Project::unserialize(const QJsonObject &obj)
     {
         m_main = this->unserializeContext(obj["main"].toObject(), nullptr);

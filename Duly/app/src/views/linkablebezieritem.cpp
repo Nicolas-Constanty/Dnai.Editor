@@ -27,10 +27,10 @@ namespace duly_gui
 
 		void LinkableBezierItem::mouseMoveEvent(QMouseEvent *event)
 		{
-			if (m_currentCurve == nullptr) return;
-			const auto p(mapToItem(m_canvas, event->pos()));
-			m_currentCurve->setP4(p);
-			auto qlist = m_canvas->focusManager().findFocused(p);
+            if (m_currentCurve == nullptr) return;
+            const auto p(mapToItem(m_canvas->content(), event->pos()));
+            m_currentCurve->setP4(p);
+            auto qlist = m_canvas->focusManager().findFocused(p);
 			if (qlist.size() == 0)
 			{
 				if (m_currentHover)
@@ -63,8 +63,8 @@ namespace duly_gui
 		{
 			if (EventUtilities::isHoverCircle(m_radius, event))
 			{
-				auto b = new BezierCurve(m_canvas);
-				b->setRealPosition(getCanvasPos());
+                auto b = new BezierCurve(m_canvas->content());
+                b->setPosition(getCanvasPos());
 				b->setP1(QPoint(0, 0));
 				QColor cb(colorLink());
 				b->setFillColor(cb);
@@ -83,19 +83,21 @@ namespace duly_gui
 		{
 			if (event->button() != Qt::LeftButton || m_currentCurve == nullptr)
 				return;
-			const auto p(mapToItem(m_canvas, event->pos()));
-			auto qlist = m_canvas->focusManager().findFocused(p);
+            const auto p(mapToItem(m_canvas->content(), event->pos()));
+            auto qlist = m_canvas->focusManager().findFocused(p);
 			if (qlist.size() == 0)
 			{
 				delete(m_currentCurve);
 				m_currentCurve = nullptr;
 				if (!m_linkable->isLink())
-					setNormal();
+                {
+                    setNormal();
+                }
 				afterRealease(nullptr);
 				return;
 			}
-			const auto node = dynamic_cast<GenericNode *>(qlist.at(0));
-			if (node && node != getNode())
+            const auto node = dynamic_cast<GenericNode *>(qlist.at(0));
+            if (node && node != getNode())
 			{
 				const auto p1(mapToItem(node, event->pos()));
 				const auto cs = findLinkableBezierItem(node, p1);
@@ -120,6 +122,17 @@ namespace duly_gui
 					return;
 				}
 			}
+            else if (node)
+            {
+                delete(m_currentCurve);
+                m_currentCurve = nullptr;
+                if (!m_linkable->isLink())
+                {
+                    setNormal();
+                }
+                afterRealease(nullptr);
+                return;
+            }
 			setNormal();
 			afterRealease(nullptr);
 			delete(m_currentCurve);
@@ -127,7 +140,7 @@ namespace duly_gui
 		}
 
 		void LinkableBezierItem::afterRealease(Link *)
-		{}
+        {}
 
 		void LinkableBezierItem::setHover()
 		{
@@ -154,7 +167,8 @@ namespace duly_gui
 			{
 				auto l = list.at(i);
 				auto lb = dynamic_cast<LinkableBezierItem *>(dynamic_cast<BaseLinkable *>(l->L1 == m_linkable ? l->L2 : l->L1)->parent());
-				lb->setNormal();
+                if (lb->getLinkable()->links().size() < 2)
+                    lb->setNormal();
 			}
 			m_linkable->unlinkAll();
 		}

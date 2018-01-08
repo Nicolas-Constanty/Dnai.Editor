@@ -52,6 +52,9 @@
     <ClCompile Include="src\views\class.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\controllers\clientcontroller.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="src\commands\command.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -184,14 +187,47 @@
     <ClCompile Include="src\views\roundedrectangle.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\views\scalableitem.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\models\variable.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\commands\zoomcanvascommand.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_context.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_context.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_console.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_console.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_common.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_common.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_class.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_class.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_declarationview.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_declarationview.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_declarationtype.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_declarationtype.cpp">
+      <Filter>Generated Files</Filter>
     </ClCompile>
     <ClCompile Include="Debug\moc_declarationcanvas.cpp">
       <Filter>Generated Files</Filter>
@@ -205,16 +241,10 @@
     <ClCompile Include="Release\moc_customshape.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_context.cpp">
+    <ClCompile Include="Debug\moc_dulysettingsmodel.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="Release\moc_context.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_console.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_console.cpp">
+    <ClCompile Include="Release\moc_dulysettingsmodel.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
     <ClCompile Include="Debug\moc_dulysettings.cpp">
@@ -235,52 +265,16 @@
     <ClCompile Include="Release\moc_dulycanvas.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_declarationview.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_declarationview.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
     <ClCompile Include="Debug\moc_testconnection.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
     <ClCompile Include="Release\moc_testconnection.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_scalableitem.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_scalableitem.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
     <ClCompile Include="Debug\moc_roundedrectangle.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
     <ClCompile Include="Release\moc_roundedrectangle.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_common.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_common.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_class.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_class.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_beziercurve.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_beziercurve.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_resourcesnode.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_resourcesnode.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
     <ClCompile Include="Debug\moc_manager.cpp">
@@ -301,6 +295,12 @@
     <ClCompile Include="Release\moc_line.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
+    <ClCompile Include="Debug\moc_iotype.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_iotype.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
     <ClCompile Include="Debug\moc_io.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
@@ -313,16 +313,22 @@
     <ClCompile Include="Release\moc_genericnode.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
+    <ClCompile Include="Debug\moc_flowtype.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_flowtype.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
     <ClCompile Include="Debug\moc_flow.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
     <ClCompile Include="Release\moc_flow.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_dulysettingsmodel.cpp">
+    <ClCompile Include="Debug\moc_beziercurve.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="Release\moc_dulysettingsmodel.cpp">
+    <ClCompile Include="Release\moc_beziercurve.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\qrc_qml.cpp">
@@ -345,6 +351,9 @@
     <CustomBuild Include="include\views\class.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
+    <ClInclude Include="include\controllers\clientcontroller.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="include\commands\command.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -378,6 +387,9 @@
     <CustomBuild Include="include\views\declarationcanvas.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
+    <CustomBuild Include="include\declarationtype.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
     <CustomBuild Include="include\views\declarationview.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
@@ -403,6 +415,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <CustomBuild Include="include\views\flow.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="include\flowtype.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
     <ClInclude Include="include\focusmanager.h">
@@ -439,6 +454,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <CustomBuild Include="include\views\io.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="include\iotype.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
     <ClInclude Include="include\views\iscalable.h">
@@ -486,13 +504,7 @@
     <ClInclude Include="include\project.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <CustomBuild Include="include\resourcesnode.h">
-      <Filter>Header Files</Filter>
-    </CustomBuild>
     <CustomBuild Include="include\views\roundedrectangle.h">
-      <Filter>Header Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="include\views\scalableitem.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
     <CustomBuild Include="include\testconnection.h">
@@ -631,9 +643,6 @@
     <None Include="resources\Forms\DropDownForm.ui.qml">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="resources\DulyStyle.qml">
-      <Filter>Resource Files</Filter>
-    </None>
     <None Include="resources\Nodes\Operator\BinaryOperator\Logical\EqualModel.qml">
       <Filter>Resource Files</Filter>
     </None>
@@ -755,6 +764,9 @@
       <Filter>Resource Files</Filter>
     </None>
     <None Include="resources\Models\TestModel.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\Components\TestNode.qml">
       <Filter>Resource Files</Filter>
     </None>
     <None Include="resources\Models\ThemeModel.qml">

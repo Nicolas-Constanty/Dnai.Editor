@@ -14,7 +14,7 @@ DropArea {
     id: dragTarget
     property int margin: 30
     property alias dropProxy: dragTarget
-    DeclarationCanvas {
+    DulyCanvas {
         id: canvas
         anchors.fill: parent
         backgroundColor: DulySettings.style.canvas.background
@@ -31,19 +31,25 @@ DropArea {
                 }
             }
         ]
-
         Item {
             id: content_item
-            Rectangle {
-                width: 5
-                height: 5
+            x: canvas.width/2
+            y: canvas.height/2
+            Node {
+               x: 0
+               y: 0
+               model: SubstractModel {}
             }
 
+            Node {
+               x: 100
+               y: 100
+               model: SubstractModel {}
+            }
             onScaleChanged: {
-                zoomText.text = Math.round(canvas.scaleFactor * 100) + "%"
+                zoomText.text = Math.round(content_item.scale * 100) + "%"
             }
         }
-
         content: content_item
 
         Label {
@@ -53,40 +59,7 @@ DropArea {
             anchors.rightMargin: 20
             anchors.top: parent.top
             anchors.topMargin: 20
+            color: DulySettings.style.text.color
         }
-
-
-        //    ContextContainer {
-        //        id: contextContainer
-        //        anchors.topMargin: 20
-        //        anchors.top: parent.top
-        //        anchors.left: parent.left
-        //        anchors.right: parent.right
-        //    }
-
-        //    ClassContainer {
-        //        id: classContainer
-        //        anchors.topMargin: 20
-        //        anchors.top: contextContainer.bottom
-        //        anchors.left: parent.left
-        //        anchors.right: parent.right
-        //    }
-
-        //    VariableContainer {
-        //        id: variableContainer
-        //        anchors.topMargin: 20
-        //        anchors.top: classContainer.bottom
-        //        anchors.left: parent.left
-        //        anchors.right: parent.right
-        //    }
-
-        //    FunctionContainer {
-        //        id: methodContainer
-        //        anchors.topMargin: 20
-        //        anchors.top: variableContainer.bottom
-        //        anchors.left: parent.left
-        //        anchors.right: parent.right
-        //    }
     }
 }
-

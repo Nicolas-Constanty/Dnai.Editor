@@ -60,7 +60,6 @@ SOURCES += src/views/beziercurve.cpp \
     src/views/linkablebezieritem.cpp \
     src/views/output.cpp \
     src/views/roundedrectangle.cpp \
-    src/views/scalableitem.cpp \
     src/views/console.cpp \
 
 
@@ -116,7 +115,6 @@ HEADERS += include/baseio.h \
     include/ilinkable.h \
     include/link.h \
     include/linkabletype.h \
-    include/resourcesnode.h \
     include/dulyapp.h \
     include/commands/movenodecommand.h \
     include/commands/movecommand.h \
@@ -130,7 +128,10 @@ HEADERS += include/baseio.h \
     include/dulysettingsmodel.h \
     include/views/declarationview.h \
     include/views/declarationcanvas.h \
-    include/controllers/clientcontroller.h
+    include/controllers/clientcontroller.h \
+    include/iotype.h \
+    include/flowtype.h \
+    include/declarationtype.h
 
 #VIEWS
 HEADERS += include/views/beziercurve.h \
@@ -145,7 +146,6 @@ HEADERS += include/views/beziercurve.h \
     include/views/linkablebezieritem.h \
     include/views/output.h \
     include/views/roundedrectangle.h \
-    include/views/scalableitem.h \
     include/views/console.h \
 
 #COMMANDS

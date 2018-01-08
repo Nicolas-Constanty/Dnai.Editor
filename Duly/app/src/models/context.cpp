@@ -116,6 +116,11 @@ namespace duly_gui {
             obj["functions"] = functions;
         }
 
+        void Context::declare() const
+        {
+            ClientController::shared().sendDeclareEvent(ENTITY::CONTEXT_D, 0, name(), VISIBILITY::PRIVATE);
+        }
+
         IClone *Context::clone() const
         {
             return new Context(uid(), name(), description(), position());

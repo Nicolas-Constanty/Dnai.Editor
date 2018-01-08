@@ -1,7 +1,7 @@
 #include "views/declarationcanvas.h"
-#include "resourcesnode.h"
 #include <QQmlApplicationEngine>
 #include "dulyapp.h"
+#include "declarationtype.h"
 
 namespace duly_gui
 {
@@ -20,7 +20,7 @@ namespace duly_gui
 			
 			const auto app = static_cast<DulyApp *>(DulyApp::instance());
 			const auto sets = app->settings()->style();
-			obj->setProperty("type", DeclarationType::Class);
+            obj->setProperty("type", DeclarationTypeRessouce::DeclarationType::Class);
 			obj->setProperty("width", sets->declarationView()->itemSize());
 			obj->setProperty("height", sets->declarationView()->itemSize());
 			obj->setProperty("name", cl->name());
@@ -54,7 +54,7 @@ namespace duly_gui
 
 			const auto app = static_cast<DulyApp *>(DulyApp::instance());
 			const auto sets = app->settings()->style();
-			obj->setProperty("type", DeclarationType::Context);
+            obj->setProperty("type", DeclarationTypeRessouce::DeclarationType::Context);
 			obj->setProperty("width", sets->declarationView()->itemSize());
 			obj->setProperty("height", sets->declarationView()->itemSize());
 			obj->setProperty("name", cl->name());
@@ -85,8 +85,7 @@ namespace duly_gui
 				}
 				const auto context = cl->contexts();
 				for (auto i = 0; i < context.size(); i++)
-				{
-					qDebug() << i;
+                {
 					CreateContext(context[i], false);
 				}
 			}
@@ -99,7 +98,7 @@ namespace duly_gui
 
 			const auto app = static_cast<DulyApp *>(DulyApp::instance());
 			const auto sets = app->settings()->style();
-			obj->setProperty("type", DeclarationType::Function);
+            obj->setProperty("type", DeclarationTypeRessouce::DeclarationType::Function);
 			obj->setProperty("width", sets->declarationView()->itemSize());
 			obj->setProperty("height", sets->declarationView()->itemSize());
 			obj->setProperty("name", cl->name());
@@ -125,7 +124,7 @@ namespace duly_gui
 
 			const auto app = static_cast<DulyApp *>(DulyApp::instance());
 			const auto sets = app->settings()->style();
-			obj->setProperty("type", DeclarationType::Variable);
+            obj->setProperty("type", DeclarationTypeRessouce::DeclarationType::Variable);
 			obj->setProperty("width", sets->declarationView()->itemSize());
 			obj->setProperty("height", sets->declarationView()->itemSize());
 			obj->setProperty("name", cl->name());

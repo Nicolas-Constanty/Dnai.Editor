@@ -1,5 +1,6 @@
 #include <QtQuick/qsgflatcolormaterial.h>
 #include <QSGSimpleRectNode>
+#include <QSizeF>
 
 
 #include "views/input.h"
@@ -14,9 +15,9 @@ namespace duly_gui
 {
 	namespace views
 	{
-	
+        GenericNode *GenericNode::m_selected = nullptr;
 		GenericNode::GenericNode(QQuickItem *parent) :
-            ScalableItem(parent)
+            QQuickItem(parent)
 		{
 			m_canvas = static_cast<DulyApp *>(DulyApp::instance())->currentCanvas();
 			m_canvas->focusManager().registerItem(this);
@@ -75,18 +76,6 @@ namespace duly_gui
 			emit contentChanged(c);
 		}
 
-        void GenericNode::setScaleFactor(qreal s)
-        {
-            if (s == m_scaleFactor)
-                return;
-            if (m_realPos == QPointF(-100000, -100000))
-                m_realPos = position();
-            m_scaleFactor = s;
-            setScale(s);
-            emit scaleFactorChanged(s);
-            update();
-        }
-
 		void GenericNode::updateInputs()
 		{
 			auto list = m_inputs.getList();
@@ -114,19 +103,36 @@ namespace duly_gui
 		}
 
 		void GenericNode::mousePressEvent(QMouseEvent* event)
-		{
-            qDebug() << "hey";
-			m_offset = QPointF(position() - mapToItem(m_canvas, event->pos()));
+        {
+            m_offset = QPointF(position() - mapToItem(m_canvas->content(), event->pos()));
 			if (this != parentItem()->childItems().last())
 				stackAfter(parentItem()->childItems().last());
+            if (m_selected && m_selected != this)
+            {
+                m_selected->resetBorderColor();
+            }
 			m_header->setBorderColor(QColor(255, 170, 0, 255));
             m_content->setBorderColor(QColor(255, 170, 0, 255));
+            m_selected = this;
             m_holdClik = false;
-		}
+        }
+
+        void GenericNode::resetSelected()
+        {
+            if (m_selected)
+                m_selected->resetBorderColor();
+            m_selected = nullptr;
+        }
+
+        void GenericNode::resetBorderColor()
+        {
+            m_content->resetBorderColor();
+            m_header->resetBorderColor();
+        }
 
 		void GenericNode::mouseMoveEvent(QMouseEvent* event)
 		{
-            const auto p(mapToItem(m_canvas, event->pos()) + m_offset);
+            const auto p(mapToItem(m_canvas->content(), event->pos()) + m_offset);
             if (!m_holdClik)
             {
                 m_holdClik = true;
@@ -145,7 +151,6 @@ namespace duly_gui
                 m_flowInItem->updateLink();
             if (m_flowOutItem && m_flowOutItem->isVisible())
                 m_flowOutItem->updateLink();
-            m_realPos = realPos();
         }
 
 		void GenericNode::mouseReleaseEvent(QMouseEvent *)
@@ -157,24 +162,18 @@ namespace duly_gui
             }
 			m_offset.setX(0);
 			m_offset.setY(0);
-			m_header->resetBorderColor();
-            m_content->resetBorderColor();
             m_holdClik = false;
 		}
 
-		QSGNode *GenericNode::updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *)
+        QSGNode *GenericNode::updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *)
         {
-            if (m_realPos == QPointF(-100000, -100000))
-            {
-                m_realPos = position();
-                const auto p = m_canvas->origin() + QPointF(width() / 2, height() / 2);
-                setTransformOriginPoint(p);
-            }
             auto n = static_cast<QSGSimpleRectNode *>(oldNode);
 			if (!n) {
                 n = new QSGSimpleRectNode();
+				const auto p = m_canvas->origin() + QPointF(width() / 2, height() / 2);
+				setTransformOriginPoint(p);
 			}
-            n->setColor(Qt::red);
+            n->setColor(Qt::transparent);
 			n->setRect(boundingRect());
 
 			return n;
@@ -185,10 +184,18 @@ namespace duly_gui
             QQuickItem::componentComplete();
         }
 
-
+/*
         bool GenericNode::contains(const QPointF &point) const
         {
-            return QQuickItem::contains(mapToItem(this, point));
-        }
+            auto p = mapToItem(m_canvas, point);
+            auto ref = position();
+            qDebug() << p << ref << realPos() << m_canvas->mapToItem(m_canvas, ref) << (p.x() >= ref.x()
+                        && p.y() >= ref.y());
+
+            return p.x() >= ref.x()
+                    && p.y() >= ref.y()
+                    && p.x() <= ref.x() + width() * scaleFactor()
+                    && p.y() <= ref.y() + height() * scaleFactor();
+        }*/
 	}
 }

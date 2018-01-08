@@ -14,7 +14,7 @@ namespace duly_gui
 		Io::Io(QQuickItem *parent) :
 			LinkableBezierItem(parent)
 			, m_nbSegments(32)
-            , m_type(IoType::Int)
+            , m_type(IoTypeRessouce::IoType::Int)
 
 		{
 			Io::refreshBackendIo();
@@ -164,7 +164,7 @@ namespace duly_gui
 			update();
 		}
 
-        void Io::setType(IoType type)
+        void Io::setType(IoTypeRessouce::IoType type)
 		{
 			if (type == m_type)
 				return;
@@ -175,14 +175,8 @@ namespace duly_gui
 		}
 
 		QPointF Io::getCanvasPos() const
-		{
-			auto si = dynamic_cast<ScalableItem *>(parentItem()->parentItem()->parentItem()->parentItem()->parentItem());
-            return QPointF(si->position() +
-                parentItem()->parentItem()->parentItem()->parentItem()->position()  +
-                parentItem()->parentItem()->parentItem()->position() +
-                parentItem()->parentItem()->position()  +
-                parentItem()->position() +
-                position() +
+        {
+            return QPointF(mapToItem(m_canvas->content(), position()) +
                 QPointF(width() / 2, height() / 2));
 		}
 

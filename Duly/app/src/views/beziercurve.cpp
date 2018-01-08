@@ -10,7 +10,7 @@ namespace duly_gui
 	namespace views
 	{
 		BezierCurve::BezierCurve(QQuickItem *parent)
-			: ScalableItem(parent)
+			: QQuickItem(parent)
 			, m_p1(0, 0)
 			, m_p2(0.5, 0)
 			, m_p3(0.5, 1)
@@ -59,22 +59,11 @@ namespace duly_gui
 
 		void BezierCurve::setP4(const QPointF &p)
 		{
-			m_scaleFactor = static_cast<ScalableItem *>(parentItem())->scaleFactor();
+            auto point = p - position();
 			if (p == m_p4)
-				return;
-			if (p.x() < 0)
-				m_scale.setX(-1);
-			else
-				m_scale.setX(1);
-			if (p.y() < 0)
-				m_scale.setY(-1);
-			else
-				m_scale.setY(1);
-			setWidth(p.x() - position().x());
-			setHeight(p.y() - position().y());
-			m_saveHeight = height() / scaleFactor();
-			m_saveWidth = width() / scaleFactor();
-			m_realPos = position() / scaleFactor();
+                return;
+            setWidth(point.x());
+            setHeight(point.y());
 			emit p4Changed(p);
 			update();
 		}
@@ -131,7 +120,7 @@ namespace duly_gui
 			QSGGeometryNode *node;
 			QSGGeometry *geometry;
 			const auto aa = antialiasing();
-			const auto radius = float(m_lineWidth * scaleFactor()) / 2.f;
+			const auto radius = float(m_lineWidth * scale()) / 2.f;
 
             const char r = m_dotted ? m_dottedColor.red() * m_dottedColor.alphaF() : m_fillColor.red() * m_fillColor.alphaF();
             const char g = m_dotted ? m_dottedColor.green() * m_dottedColor.alphaF() : m_fillColor.green() * m_fillColor.alphaF();
@@ -168,9 +157,8 @@ namespace duly_gui
 				geometry = node->geometry();
 				geometry->allocate(nbVertices);
 			}
-			auto matrix = data->transformNode->matrix();
-			matrix.scale((m_lastScale.x() != m_scale.x()) ? -1 : 1, (m_lastScale.y() != m_scale.y()) ? -1 : 1);
-			data->transformNode->setMatrix(matrix);
+            auto matrix = data->transformNode->matrix();
+            data->transformNode->setMatrix(matrix);
 			m_lastScale = m_scale;
 
 			const QRectF bounds = boundingRect();
@@ -273,7 +261,7 @@ namespace duly_gui
 				stackBefore(parentItem()->childItems().first());
 		}
 
-		void BezierCurve::setScaleFactor(qreal s)
+		/*void BezierCurve::setScaleFactor(qreal s)
 		{
 			if (s == m_scaleFactor)
 				return;
@@ -285,17 +273,17 @@ namespace duly_gui
 //			setPosition(m_realPos * m_scaleFactor);
 			emit scaleFactorChanged(s);
 			update();
-		}
+		}*/
 
 		void BezierCurve::setRealPosition(const QPointF &pos)
 		{
-			m_realPos = pos / m_scaleFactor;
+			//m_realPos = pos / m_scaleFactor;
 			setPosition(pos);
 		}
 
-		void BezierCurve::translatePos(const QPointF &p)
+		/*void BezierCurve::translatePos(const QPointF &p)
 		{
 			setRealPosition(p + position());
-		}
+		}*/
 	}
 }

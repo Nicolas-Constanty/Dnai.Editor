@@ -451,7 +451,7 @@ namespace duly_gui
 			vertices[++idx].set(-w + center.x(), -h + center.y(), r, g, b, alpha);
 
             Q_ASSERT(idx + 1 == nbVertice);
-
+            node->markDirty(QSGNode::DirtyGeometry);
 			return  node;
 		}
 	}

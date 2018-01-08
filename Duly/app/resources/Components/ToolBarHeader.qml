@@ -13,6 +13,7 @@ Item {
 
     ToolBar {
         width: parent.width
+        height: 60
         spacing: 0
         background: Rectangle {
             color: DulySettings.style.background
@@ -26,7 +27,6 @@ Item {
                     id: toolButton
                     text: qsTr("File")
                     font: menuItem.font
-
                     onClicked: menuFile.open()
                     DMenu {
                         id: menuFile
@@ -115,7 +115,7 @@ Item {
                         DMenuItem {
                             font: menuItem.font
                             text: "Settings"
-                            onClicked: popup.open()
+                            onClicked: settingsPopup.open()
                         }
                     }
                 }
@@ -422,7 +422,11 @@ Item {
 
     //SETTINGS PANEL
     Popup {
-        id: popup
+        id: settingsPopup
+        background: Rectangle {
+            color: DulySettings.style.background
+        }
+
         x: parent.width / 2 - width / 2
         y: appWindow.height / 2 - height / 2
         width: 640
@@ -434,11 +438,15 @@ Item {
             anchors.fill: parent
             id: settingPanel
         }
+
     }
     Popup {
         id: newProjectPopup
         x: parent.width / 2 - width / 2
         y: appWindow.height / 2 - height / 2
+        background: Rectangle {
+            color: DulySettings.style.background
+        }
         width: 640
         height: 480
         modal: true
@@ -454,6 +462,9 @@ Item {
         id: openProjectPopup
         x: parent.width / 2 - width / 2
         y: appWindow.height / 2 - height / 2
+        background: Rectangle {
+            color: DulySettings.style.background
+        }
         width: 640
         height: 480
         modal: true

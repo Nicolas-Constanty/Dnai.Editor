@@ -1,7 +1,7 @@
 #ifndef FLOW_H
 #define FLOW_H
 
-#include "resourcesnode.h"
+#include "flowtype.h"
 #include "baselinkable.h"
 #include "linkablebezieritem.h"
 
@@ -12,33 +12,33 @@ namespace duly_gui
 		class FlowBackend : public BaseLinkable
 		{
 		public:
-            explicit FlowBackend(FlowType t, QQuickItem *parent);
+            explicit FlowBackend(FlowTypeRessouce::FlowType t, QQuickItem *parent);
 
 			/**
 			* \brief return the IOType
 			*/
-            FlowType getType() const;
+            FlowTypeRessouce::FlowType getType() const;
 
 			Link *connect(ALinkable* linkable, BezierCurve* curve) override;
 
 		protected:
-            FlowType m_type;
+            FlowTypeRessouce::FlowType m_typeFlow;
 		};
 
 		class Flow : public LinkableBezierItem
 		{
 			Q_OBJECT
-            Q_PROPERTY(FlowType type READ type WRITE setType NOTIFY typeChanged)
+            Q_PROPERTY(FlowTypeRessouce::FlowType typeFlow READ typeFlow WRITE setTypeFlow NOTIFY typeFlowChanged)
 
 		public:
 			explicit Flow(QQuickItem *parent = nullptr);
 			virtual QSGNode *updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *) override;
 
 		public:
-            FlowType type() const { return m_type; }
+            FlowTypeRessouce::FlowType typeFlow() const { return m_typeFlow; }
 
 		public:
-            void setType(FlowType t);
+            void setTypeFlow(FlowTypeRessouce::FlowType t);
 			/**
 			* \brief Override componentComplete, and init some values
 			*/
@@ -62,10 +62,10 @@ namespace duly_gui
 			virtual void setLink(Link *) override;
 
 		signals:
-            void typeChanged(FlowType t);
+            void typeFlowChanged(FlowTypeRessouce::FlowType t);
 
 		private:
-            FlowType m_type;
+            FlowTypeRessouce::FlowType m_typeFlow;
 
 		protected:
 			void mousePressEvent(QMouseEvent* event) override;

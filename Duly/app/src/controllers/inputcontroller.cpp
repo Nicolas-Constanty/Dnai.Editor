@@ -8,7 +8,7 @@ namespace duly_gui
 {
 	namespace controllers
 	{
-        InputController::InputController(IoType t, QQuickItem *parent)
+        InputController::InputController(IoTypeRessouce::IoType t, QQuickItem *parent)
 			: BaseIo(t, parent)
 		{
 		}

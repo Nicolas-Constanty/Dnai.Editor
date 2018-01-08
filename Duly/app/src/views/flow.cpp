@@ -3,22 +3,21 @@
 
 #include "link.h"
 #include "views/genericnode.h"
-#include "resourcesnode.h"
 #include "views/flow.h"
 
 namespace duly_gui
 {
 	namespace views
 	{
-        FlowBackend::FlowBackend(FlowType t, QQuickItem* parent) :
+        FlowBackend::FlowBackend(FlowTypeRessouce::FlowType t, QQuickItem* parent) :
 			BaseLinkable(parent),
-			m_type(t)
+            m_typeFlow(t)
 		{
 		}
 
-        FlowType FlowBackend::getType() const
+        FlowTypeRessouce::FlowType FlowBackend::getType() const
 		{
-			return m_type;
+            return m_typeFlow;
 		}
 
 		Link* FlowBackend::connect(ALinkable* linkable, BezierCurve* curve)
@@ -37,7 +36,7 @@ namespace duly_gui
 
 		Flow::Flow(QQuickItem* parent) :
 			LinkableBezierItem(parent)
-            , m_type(FlowType::Enter)
+            , m_typeFlow(FlowTypeRessouce::FlowType::Enter)
 		{
 			setFlag(ItemHasContents, true);
 			m_radius = 8;
@@ -146,15 +145,15 @@ namespace duly_gui
 			return node;
 		}
 
-        void Flow::setType(FlowType t)
+        void Flow::setTypeFlow(FlowTypeRessouce::FlowType t)
 		{
-			if (t == m_type && m_linkable != nullptr)
+            if (t == m_typeFlow && m_linkable != nullptr)
 				return;
-			m_type = t;
+            m_typeFlow = t;
 			if (m_linkable)
 				delete m_linkable;
 			m_linkable = new FlowBackend(t, this);
-			emit typeChanged(t);
+            emit typeFlowChanged(t);
 			update();
 		}
 
@@ -164,12 +163,9 @@ namespace duly_gui
 		}
 
 		QPointF Flow::getCanvasPos() const
-		{
-			auto si = dynamic_cast<ScalableItem *>(parentItem());
-			return
-				QPointF(si->realPos() * si->scaleFactor()
-					+ position() * si->scaleFactor()
-					+ QPointF(width() / 2, height() / 2) * si->scaleFactor());
+        {
+            qDebug() << "canvas";
+            return QPointF(parentItem()->position() + position() + QPointF(width() / 2, height() / 2));
 		}
 
 		const QColor& Flow::colorLink() const
@@ -179,9 +175,9 @@ namespace duly_gui
 
 		LinkableBezierItem* Flow::findLinkableBezierItem(GenericNode* n, const QPointF&p)
 		{
-            if (m_type == FlowType::Exit && n->flowInItem()->contains(p - n->flowInItem()->position()))
+            if (m_typeFlow == FlowTypeRessouce::FlowType::Exit && n->flowInItem()->contains(p - n->flowInItem()->position()))
 				return n->flowInItem();
-            else if (m_type == FlowType::Enter && n->flowOutItem()->contains(p - n->flowOutItem()->position()))
+            else if (m_typeFlow == FlowTypeRessouce::FlowType::Enter && n->flowOutItem()->contains(p - n->flowOutItem()->position()))
 				return n->flowOutItem();
 			return nullptr;
 		}

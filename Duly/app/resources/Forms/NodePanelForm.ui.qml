@@ -25,6 +25,8 @@ Item {
         anchors.topMargin: 50
         anchors.fill: parent
 
+        clip: true
+
         ColumnLayout {
             id: column
             spacing: 0
