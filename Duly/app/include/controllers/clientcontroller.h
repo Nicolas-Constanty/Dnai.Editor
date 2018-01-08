@@ -19,6 +19,9 @@ public:
     static ClientController &shared();
 
 public:
+    void onReceiveEntityDeclared(void *, unsigned int);
+
+public:
 #define DECLARE_EVENT_NAME "DECLARE"
     void sendDeclareEvent(ENTITY entity_type,
                           uint32_t containerID,

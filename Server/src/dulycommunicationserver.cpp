@@ -115,9 +115,13 @@ void DulyCommunicationServer::onReceiveRegisterEvent(void *data, unsigned int si
 
      QString name(eventRegister->eventName);
 
-    qDebug() << "[INFO] " << this->m_name << " register " << name << " event !";
-
-     EventManager::shared().addClientToEvent(name, eventRegister->eventSize, this);
+    if (eventRegister->enable == 0) {
+        qDebug() << "[INFO] " << this->m_name << " unregister " << name << " event !";
+        EventManager::shared().removeClientToEvent(name, this);
+    } else {
+        qDebug() << "[INFO] " << this->m_name << " register " << name << " event !";
+        EventManager::shared().addClientToEvent(name, eventRegister->eventSize, this);
+    }
 
 #endif
      (void)data;
