@@ -2,6 +2,7 @@
 #include "include/clientmanager.h"
 #include "include/clientcommunication.h"
 #include "include/controllers/clientcontroller.h"
+#include "core.pb.h"
 
 ClientController::ClientController()
     : m_clientCom(NULL),
@@ -13,12 +14,29 @@ ClientController::ClientController()
     m_clientCom = ClientManager::shared().newClient(m_addr,
                                                     m_port,
                                                     m_name);
+
+    m_clientCom->registerEvent("ENTITY_DECLARED",
+                               4,
+                               std::bind(&ClientController::onReceiveEntityDeclared,
+                                         this, std::placeholders::_1, std::placeholders::_2));
 }
 
 ClientController &ClientController::shared() {
     static ClientController clientController;
 
     return clientController;
+}
+
+void ClientController::onReceiveEntityDeclared(void *data, unsigned int size) {
+    qDebug() << "ENTITY_DECLARED with size=" << size;
+
+    //E secondDeclare;
+    EntityDeclared entityDeclared;
+    if (entityDeclared.ParseFromArray(data, size))
+        qDebug() << QString(entityDeclared.command().name().c_str());
+    else {
+        qDebug() << "FAILED";
+    }
 }
 
 // EVENT TO SEND

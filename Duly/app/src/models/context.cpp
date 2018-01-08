@@ -8,6 +8,7 @@ namespace duly_gui {
         Context::Context(QString const &uid, QString const &name, QString const &description, QVector2D const &position, QObject *parent)
             : Common(uid, name, description, parent), Position(position)
         {
+            qDebug() << "INSTANCE: " << name;
             ClientController::shared().sendDeclareEvent(ENTITY::CONTEXT_D, 0, name, VISIBILITY::PRIVATE);
         }
 

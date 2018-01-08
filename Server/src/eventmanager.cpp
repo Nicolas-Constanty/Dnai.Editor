@@ -32,27 +32,20 @@ int EventManager::addClientToEvent(QString const &eventName,
     }
 
     return (-1);
+}
 
+int EventManager::removeClientToEvent(QString const &eventName,
+                                      DulyCommunicationServer *communication) {
+    static std::hash<std::string> h1;
 
-/*    std::map<QString, int>::const_iterator it = m_indexTab.find(eventName);
-    int idx = 0;
+    size_t str_hash = h1(eventName.toStdString());
+    std::map<size_t, Event>::iterator it = m_indexTab.find(str_hash);
 
-    if (it == m_indexTab.end()) {
-        unsigned int eventsSize = m_events.size();
-        qDebug() << eventsSize;
-        idx = eventsSize;
-        m_indexTab[eventName] = eventsSize;
-
-        Event event(size, eventName);
-        event << communication;
-        m_events.push_back(event);
-        qDebug() << "added from new event" << communication;
-    } else {
-        m_events[it->second] << communication;
-        idx = it->second;
-        qDebug() << "added " << communication;
+    if (it != m_indexTab.end()) {
+        it->second >> communication;
+        return (1);
     }
-    return (idx);*/
+    return (-1);
 }
 
 EventManager::Event &EventManager::getFrom(int id) throw(std::runtime_error) {
