@@ -47,9 +47,7 @@ namespace duly_gui
 			{
 				m_settings.setValue(currentThemeName + key, value);
 				m_settings.setValue(loadThemeName + key, value);
-			}
-//			qDebug() << currentThemeName + key;
-//			qDebug() << value;
+            }
 			if (m_style)
 			{
                 updateProperty(key.mid(1), value);
@@ -67,6 +65,7 @@ namespace duly_gui
 		{
 			const auto f = QFileInfo(*i);
 			const auto basename = f.baseName();
+            qDebug() << dir.absoluteFilePath(*i);
 			m_themes.append(basename);
 			m_themesPath[basename] = dir.absoluteFilePath(*i);
 			
@@ -114,8 +113,7 @@ namespace duly_gui
 			pair.first->setProperty(pair.second.toLatin1().data(), family);
 		}
 		else
-		{
-			//		qDebug() << pair.first << pair.second;
+        {
 			pair.first->setProperty(pair.second.toLatin1().data(), variant);
 		}
 	}

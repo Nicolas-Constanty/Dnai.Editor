@@ -3,8 +3,11 @@ import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.2
 import Qt.labs.settings 1.0
 
+import Utils 1.0
+
 Item {
     property alias name: label.text
+    property alias items: comboBox
     property alias listModel: comboBox.model
 
     Settings {
@@ -38,6 +41,9 @@ Item {
                 anchors.left: parent.left
                 anchors.leftMargin: 0
                 anchors.verticalCenter: parent.verticalCenter
+                color: DulySettings.style.text.color
+                font.family: DulySettings.style.font.family
+                font.pixelSize: DulySettings.style.font.pixelSize
             }
             ComboBox {
                 id: comboBox

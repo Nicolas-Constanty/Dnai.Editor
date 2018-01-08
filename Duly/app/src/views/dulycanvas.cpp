@@ -9,17 +9,19 @@
 #include "commands/commandmanager.h"
 #include "commands/zoomcanvascommand.h"
 #include "dulyapp.h"
+#include "views/genericnode.h"
 
 namespace duly_gui
 {
 	namespace views
 	{
 		DulyCanvas::DulyCanvas(QQuickItem *parent)
-			: ScalableItem(parent)
+			: QQuickItem(parent)
 			, m_gridStep(15)
 			, m_accentGridStep(150)
 			, m_backgroundColor(Qt::transparent)
 		{
+			m_content = new QQuickItem(this);
 			setFlag(ItemHasContents, true);
 			setAcceptHoverEvents(true);
             setAcceptedMouseButtons(Qt::AllButtons);
@@ -32,8 +34,8 @@ namespace duly_gui
 			m_lines.clear();
 			const auto drawGrid = [&](double gridStep, int lineWidth, const QColor &color)
 			{
-				gridStep *= m_scaleFactor;
-                lineWidth *= m_scaleFactor;
+				gridStep *= m_content->scale();
+                lineWidth *= m_content->scale();
 
                 const auto h = height();
                 const auto w = width();
@@ -83,6 +85,7 @@ namespace duly_gui
 		{
             m_offset = event->pos();
 			m_totalOffset = QPointF(0,0);
+            GenericNode::resetSelected();
 		}
 
 		void DulyCanvas::mouseReleaseEvent(QMouseEvent* event)
@@ -113,11 +116,10 @@ namespace duly_gui
 			m_gridOffset = (m_gridOffset + offset);
 			m_gridOffset.setX(static_cast<int>(m_gridOffset.x()) % (m_gridStep * 10));
             m_gridOffset.setY(static_cast<int>(m_gridOffset.y()) % (m_gridStep * 10));
-			for (auto i = 0; i< childItems().size(); i++)
+			for (auto i = 0; i< m_content->childItems().size(); i++)
 			{
-                auto child = dynamic_cast<ScalableItem *>(childItems().at(i));
-				if (child)
-					child->translatePos(offset);
+                auto c = m_content->childItems().at(i);
+				c->setPosition(c->position() + offset);
 			}
 			update();
 		}
@@ -126,13 +128,13 @@ namespace duly_gui
         {
             if (event->modifiers() & Qt::ControlModifier)
             {
-				const auto scale = scaleFactor() + 0.1 * event->angleDelta().y() / 120;
-				if (scale == m_scaleFactor || scale < 0.5f || scale > 2.1f)
+				const auto scale = m_content->scale() + 0.1 * event->angleDelta().y() / 120;
+				if (scale == m_content->scale() || scale < 0.5f || scale > 2.1f)
 					return;
 				
                 const auto w = width() / 2;
                 const auto h = height() / 2;
-                const auto offset = (scale < m_scaleFactor ? 1 : -1) *
+                const auto offset = (scale < m_content->scale() ? 1 : -1) *
                     QPointF((event->pos().x() - w) / w,
                             (event->pos().y() - h) / h);
                 const auto c = new commands::ZoomCanvasCommand(this, scale, offset);
@@ -143,17 +145,9 @@ namespace duly_gui
 
 		void DulyCanvas::zoom(const double &scale, const QPointF &offset)
         {
-            setScaleFactor(scale);
+			m_content->setScale(scale);
             const auto w = width();
             const auto h = height();
-            for (auto i = 0; i < childItems().size(); i++)
-            {
-                auto child = dynamic_cast<ScalableItem *>(childItems().at(i));
-                if (child)
-                {
-                    child->setScaleFactor(m_scaleFactor);
-                }
-            }
             auto rx = (h != 0) ? w / h : 1;
             auto ry = (w != 0) ? h / w : 1;
             if (rx > ry)
@@ -220,12 +214,21 @@ namespace duly_gui
 			update();
 		}
 
-		void DulyCanvas::setScaleFactor(qreal scale)
+		/*void DulyCanvas::setScaleFactor(qreal scale)
 		{
 			if (scale == m_scaleFactor || scale < 0.5f || scale > 2.1f)
 				return;
 			m_scaleFactor = scale;
             emit scaleFactorChanged(scale);
+			update();
+		}*/
+
+		void DulyCanvas::setContent(QQuickItem* ct)
+		{
+			if (ct == m_content)
+				return;
+			m_content = ct;
+			emit contentChanged(ct);
 			update();
 		}
 

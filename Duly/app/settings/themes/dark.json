@@ -32,51 +32,51 @@
   "nodes": {
     "borderWidth": 2,
     "genericNode": {
-      "color": "#29B6F6",
+      "color": "#000000",
       "border": {
-        "color": "#000000",
+        "color": "#29B6F6",
         "width": 2
       }
     },
     "intNode": {
-      "color": "#9CCC65",
+      "color": "#000000",
       "border": {
-        "color": "#000000",
+        "color": "#9CCC65",
         "width": 2
       }
     },
     "stringNode": {
-      "color": "#EC407A",
+      "color": "#000000",
       "border": {
-        "color": "#000000",
+        "color": "#EC407A",
         "width": 2
       }
     },
     "boolNode": {
-      "color": "#FFA726",
+      "color": "#000000",
       "border": {
-        "color": "#000000",
+        "color": "#FFA726",
         "width": 2
       }
     },
     "functionNode": {
-      "color": "#AB47BC",
+      "color": "#000000",
       "border": {
-        "color": "#000000",
+        "color": "#AB47BC",
         "width": 2
       }
     },
     "classNode": {
-      "color": "#3F51B5",
+      "color": "#000000",
       "border": {
-        "color": "#000000",
+        "color": "#3F51B5",
         "width": 2
       }
     },
     "listNode": {
-      "color": "#8D6E63",
+      "color": "#000000",
       "border": {
-        "color": "#000000",
+        "color": "#8D6E63",
         "width": 2
       }
     }

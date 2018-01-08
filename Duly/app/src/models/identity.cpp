@@ -28,6 +28,11 @@ namespace duly_gui {
             obj["linked_uid"] = m_linked_uid;
         }
 
+        void Identity::declare() const
+        {
+
+        }
+
         IClone *Identity::clone() const
         {
             return new Identity(linked_uid());

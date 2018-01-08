@@ -2,6 +2,9 @@ import QtQuick 2.9
 import QtQuick.Dialogs 1.2
 import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.2
+
+import Utils 1.0
+
 import "../Models"
 import "../Components"
 
@@ -11,6 +14,7 @@ Item {
     property alias backgroudColorRef: backgroundColor
     property alias gridColorRef: gridColor
     property alias accentGridColorRef: accentGridColor
+    property alias themes: chooseTheme
 
     ScrollView {
         id: rectangle
@@ -25,9 +29,8 @@ Item {
             spacing: 0
 
             DropDown {
+                id: chooseTheme
                 name: "Theme"
-                listModel: ThemeModel {
-                }
                 height: 40
             }
 

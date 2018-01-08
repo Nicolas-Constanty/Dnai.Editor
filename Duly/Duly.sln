@@ -1,0 +1,41 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2003
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "duly_app", "app\duly_app.vcxproj", "{ADECB92C-A177-37A0-B323-E4B0CB6E4D54}"
+	ProjectSection(ProjectDependencies) = postProject
+		{FBF938E6-67AC-38D2-8C6F-F4DB0487F607} = {FBF938E6-67AC-38D2-8C6F-F4DB0487F607}
+		{8C74BCFF-6D5B-3A6C-A15A-C2B73B3B59D6} = {8C74BCFF-6D5B-3A6C-A15A-C2B73B3B59D6}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EventClient", "lib\event_client\EventClient.vcxproj", "{FBF938E6-67AC-38D2-8C6F-F4DB0487F607}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DataComEvent", "lib\DataComEvent\DataComEvent.vcxproj", "{8C74BCFF-6D5B-3A6C-A15A-C2B73B3B59D6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ADECB92C-A177-37A0-B323-E4B0CB6E4D54}.Debug|x64.ActiveCfg = Debug|x64
+		{ADECB92C-A177-37A0-B323-E4B0CB6E4D54}.Debug|x64.Build.0 = Debug|x64
+		{ADECB92C-A177-37A0-B323-E4B0CB6E4D54}.Release|x64.ActiveCfg = Release|x64
+		{ADECB92C-A177-37A0-B323-E4B0CB6E4D54}.Release|x64.Build.0 = Release|x64
+		{FBF938E6-67AC-38D2-8C6F-F4DB0487F607}.Debug|x64.ActiveCfg = Debug|x64
+		{FBF938E6-67AC-38D2-8C6F-F4DB0487F607}.Debug|x64.Build.0 = Debug|x64
+		{FBF938E6-67AC-38D2-8C6F-F4DB0487F607}.Release|x64.ActiveCfg = Release|x64
+		{FBF938E6-67AC-38D2-8C6F-F4DB0487F607}.Release|x64.Build.0 = Release|x64
+		{8C74BCFF-6D5B-3A6C-A15A-C2B73B3B59D6}.Debug|x64.ActiveCfg = Debug|x64
+		{8C74BCFF-6D5B-3A6C-A15A-C2B73B3B59D6}.Debug|x64.Build.0 = Debug|x64
+		{8C74BCFF-6D5B-3A6C-A15A-C2B73B3B59D6}.Release|x64.ActiveCfg = Release|x64
+		{8C74BCFF-6D5B-3A6C-A15A-C2B73B3B59D6}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		Qt5Version = msvc2017_64
+		SolutionGuid = {C2210F5E-537B-4F51-AA05-3BF12015268E}
+	EndGlobalSection
+EndGlobal

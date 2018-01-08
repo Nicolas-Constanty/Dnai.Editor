@@ -7,11 +7,7 @@ ToolButton {
 
     implicitWidth: Math.max(background ? background.implicitWidth : 0,
                             contentItem.implicitWidth + leftPadding + rightPadding)
-    implicitHeight: Math.max(background ? background.implicitHeight : 0,
-                             contentItem.implicitHeight + topPadding + bottomPadding)
-    baselineOffset: contentItem.y + contentItem.baselineOffset
-
-    padding: 6
+    implicitHeight: 40
 
     contentItem: Text {
         text: control.text

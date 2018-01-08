@@ -19,11 +19,11 @@ BaseLayout {
     ToolBarHeader {
         id: toolBar
         width: layout.width
-        height: toolBar.heightButton
+        height: 40
         anchors.top: layout.top
     }
 
-    DeclarationComponent {
+    TestNode {
         anchors.top: panelTop.bottom
         anchors.bottom: consoleRef.top
         anchors.left: panelLeft.right

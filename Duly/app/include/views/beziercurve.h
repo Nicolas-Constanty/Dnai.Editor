@@ -2,13 +2,13 @@
 #define BEZIERCURVE_H
 
 #include <QSettings>
-#include "scalableitem.h"
+#include <QQuickItem>
 
 namespace duly_gui
 {
 	namespace views
 	{
-		class BezierCurve : public ScalableItem
+		class BezierCurve : public QQuickItem
 		{
 			Q_OBJECT
 
@@ -35,7 +35,6 @@ namespace duly_gui
 			virtual QSGNode *updatePaintNode(QSGNode *, UpdatePaintNodeData *) override;
 
 			void setBack();
-			void setScaleFactor(qreal s) override;
 
 		public:
 			QPointF p1() const { return m_p1; }
@@ -64,7 +63,6 @@ namespace duly_gui
 			void setDottedColor(const QColor &color);
 
 			void setRealPosition(const QPointF &pos);
-			void translatePos(const QPointF &) override;
 
 		signals:
 			void p1Changed(const QPointF &p);
@@ -95,8 +93,7 @@ namespace duly_gui
 		private:
 			bool m_holdClick;
 			QVector2D m_scale;
-			QVector2D m_lastScale;
-			QSettings m_settings;
+            QVector2D m_lastScale;
 			qreal m_saveWidth;
 			qreal m_saveHeight;
 

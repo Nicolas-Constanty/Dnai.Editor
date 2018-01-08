@@ -4,13 +4,12 @@
 #include <list>
 #include "line.h"
 #include "focusmanager.h"
-#include "scalableitem.h"
 
 namespace duly_gui
 {
 	namespace views
 	{
-		class DulyCanvas : public ScalableItem
+		class DulyCanvas : public QQuickItem
 		{
 			Q_OBJECT
 
@@ -21,6 +20,8 @@ namespace duly_gui
 			Q_PROPERTY(QColor gridColor READ gridColor WRITE setGridColor NOTIFY gridColorChanged)
 			Q_PROPERTY(QColor accentGridColor READ accentGridColor WRITE setAccentGridColor NOTIFY accentGridColorChanged)
 			Q_PROPERTY(QColor backgroundColor READ backgroundColor WRITE setBackgroundColor NOTIFY backgroundColorChanged)
+
+			Q_PROPERTY(QQuickItem *content READ content WRITE setContent NOTIFY contentChanged)
 
 			explicit DulyCanvas(QQuickItem *parent = nullptr);
 			~DulyCanvas();
@@ -48,6 +49,7 @@ namespace duly_gui
 			QColor backgroundColor() const { return m_backgroundColor; }
 			const QPointF &totalOffset() const { return m_totalOffset; }
 			const QPointF &origin() const { return m_origin; }
+			QQuickItem *content() const { return m_content; }
 
 
 		public:
@@ -56,7 +58,7 @@ namespace duly_gui
 			void setGridColor(const QColor &color);
 			void setAccentGridColor(const QColor &color);
 			void setBackgroundColor(const QColor & color);
-			void setScaleFactor(qreal scale) override;
+			void setContent(QQuickItem *ct);
 
 
 		signals:
@@ -65,6 +67,7 @@ namespace duly_gui
 			void gridColorChanged(const QColor &color);
 			void accentGridColorChanged(const QColor &color);
 			void backgroundColorChanged(const QColor &color);
+			void contentChanged(QQuickItem *ct);
 
 		private:
 			int m_gridStep;
@@ -83,6 +86,7 @@ namespace duly_gui
 			QPointF	m_offset;
 			QPointF	m_gridOffset;
 			QPointF m_origin;
+			QQuickItem *m_content;
 
 
 		protected:

@@ -25,8 +25,8 @@ namespace duly_gui
 
 		void ScalableItem::translatePos(const QPointF &p)
 		{
-			m_realPos += p / m_scaleFactor;
-			setPosition(scalePos());
+//			m_realPos += p / m_scaleFactor;
+            setPosition(position() + p);
 		}
 	}
 }
