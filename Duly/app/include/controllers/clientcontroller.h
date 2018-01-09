@@ -7,7 +7,7 @@
 class ClientCommunication;
 class DataComEventFactory;
 
-#include "core.pb.h"
+#include "packagecore.h"
 
 #define CLIENT_NAME "DULY_GUI"
 
@@ -20,31 +20,32 @@ public:
 
 public:
     void onReceiveEntityDeclared(void *, unsigned int);
+    void onReceiveDeclare(void *, unsigned int);
 
 public:
 #define DECLARE_EVENT_NAME "DECLARE"
-    void sendDeclareEvent(ENTITY entity_type,
+    void sendDeclareEvent(PackageDataCom::ENTITYCORE entity_type,
                           uint32_t containerID,
                           QString const &name,
-                          VISIBILITY visibility);
+                          PackageDataCom::VISIBILITYCORE visibility);
 
 #define REMOVE_EVENT_NAME "REMOVE"
-    void sendRemoveEvent(ENTITY entity_type,
+    void sendRemoveEvent(PackageDataCom::ENTITYCORE entity_type,
                          uint32_t containerID,
                          QString const &name);
 
 
 #define MOVE_EVENT_NAME "MOVE"
-    void sendMoveEvent(ENTITY entity_type,
+    void sendMoveEvent(PackageDataCom::ENTITYCORE entity_type,
                        uint32_t fromID,
                        uint32_t toID,
                        QString const &name);
 
 #define CHANGE_VISIBILITY_EVENT_NAME "CHANGE_VISIBILITY"
-    void sendChangeVisibilityEvent(ENTITY entity_type,
+    void sendChangeVisibilityEvent(PackageDataCom::ENTITYCORE entity_type,
                                    uint32_t containerID,
                                    QString const &name,
-                                   VISIBILITY visibility);
+                                   PackageDataCom::VISIBILITYCORE visibility);
 
 
 private:
