@@ -33,7 +33,7 @@ ClientController &ClientController::shared() {
 
 void ClientController::onReceiveEntityDeclared(void *data, unsigned int size) {
     qDebug() << "ENTITY_DECLARED with size=" << size;
-    EntityDeclareCorePackage *declare = (EntityDeclareCorePackage *)m_dataComFactory->serializeDeclare(data, size);
+    EntityDeclareCorePackage *declare = (EntityDeclareCorePackage *)m_dataComFactory->serializeEntityDeclare(data, size);
 
     qDebug() << declare->name;
     qDebug() << declare->containerID;
