@@ -66,6 +66,20 @@ namespace duly_gui {
     {
         m_project = project;
         m_project->declare();
+        createTreeModel(m_project);
         views::DeclarationCanvas::CreateContext(m_project->main(), true);
+    }
+
+    void Manager::setProjectModel(models::TreeModel *model)
+    {
+        if (m_projectModel == model || !model)
+            return;
+        m_projectModel = model;
+        emit projectModelChanged(model);
+    }
+
+    void Manager::createTreeModel(Project *project)
+    {
+        setProjectModel(new models::TreeModel(project));
     }
 }

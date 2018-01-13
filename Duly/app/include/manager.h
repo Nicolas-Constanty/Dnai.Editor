@@ -3,11 +3,13 @@
 
 #include <QObject>
 #include "project.h"
+#include "models/treemodel.h"
 
 namespace duly_gui {
     class Manager: public QObject
     {
         Q_OBJECT
+        Q_PROPERTY(models::TreeModel *projectModel READ projectModel WRITE setProjectModel NOTIFY projectModelChanged)
     public:
         Manager(QObject *parent = 0);
         virtual ~Manager();
@@ -15,6 +17,7 @@ namespace duly_gui {
         static const QString project_extension;
 
     private:
+        void createTreeModel(Project *project);
         Project *m_project;
 
     public:
@@ -23,8 +26,15 @@ namespace duly_gui {
         Q_INVOKABLE void openProject(const QString &);
         Q_INVOKABLE void openProject(Project *);
 
+    signals:
+        void projectModelChanged(const models::TreeModel *model);
+
+    public:
+        models::TreeModel *projectModel() const { return m_projectModel; }
+        void setProjectModel(models::TreeModel *model);
     private:
          Project *loadProject(const QString &);
+         models::TreeModel *m_projectModel;
     };
 }
 

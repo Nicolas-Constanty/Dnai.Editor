@@ -1,8 +1,13 @@
 import QtQuick 2.0
+import QtQuick.Controls 1.4
 import "../Panels"
+import Utils 1.0
 
 Panel {
     id: panel
+//    TreeView {
+//        model: Manager.projectModel
+//    }
     states: [
         State{
             name: "Visible"
