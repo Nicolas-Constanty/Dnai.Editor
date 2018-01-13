@@ -116,7 +116,7 @@ namespace duly_gui {
 
         void Class::declare() const
         {
-            ClientController::shared().sendDeclareEvent(ENTITY::OBJECT_TYPE, 0, name(), VISIBILITY::PRIVATE);
+            ClientController::shared().sendDeclareEvent(PackageDataCom::ENTITYCORE::OBJECT_TYPE, 0, name(), PackageDataCom::VISIBILITYCORE::PRIVATE);
         }
 
         IClone *Class::clone() const
