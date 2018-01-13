@@ -191,13 +191,13 @@ INCLUDEPATH += $${PWD}/../lib/DataComEvent/Shared_include/
 #begin library network
 LIBS += -L$${PWD}/../lib/ -lEventClient -lDataComEvent
 
-CONFIG(release, debug|release) {
-unix:LIBS += -L$${PWD}/../lib/DataComEvent/Library/ -lprotobuf
-win32:LIBS += -L$${PWD}/../lib/DataComEvent/Library/ -llibprotobuf
-}
-CONFIG(debug, debug|release) {
-unix:LIBS += -L$${PWD}/../lib/DataComEvent/Library/ -lprotobuf
-win32:LIBS += -L$${PWD}/../lib/DataComEvent/Library/ -llibprotobufd
-}
+#CONFIG(release, debug|release) {
+#unix:LIBS += -L$${PWD}/../lib/DataComEvent/Library/ -lprotobuf
+#win32:LIBS += -L$${PWD}/../lib/DataComEvent/Library/ -llibprotobuf
+#}
+#CONFIG(debug, debug|release) {
+#unix:LIBS += -L$${PWD}/../lib/DataComEvent/Library/ -lprotobuf
+#win32:LIBS += -L$${PWD}/../lib/DataComEvent/Library/ -llibprotobufd
+#}
 
 #end library Data Event

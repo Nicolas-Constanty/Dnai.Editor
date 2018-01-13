@@ -2,6 +2,7 @@
 #include "include/clientmanager.h"
 #include "include/clientcommunication.h"
 #include "include/controllers/clientcontroller.h"
+#include "declarecorepackage.h"
 
 ClientController::ClientController()
     : m_clientCom(NULL),
@@ -13,6 +14,15 @@ ClientController::ClientController()
     m_clientCom = ClientManager::shared().newClient(m_addr,
                                                     m_port,
                                                     m_name);
+
+    m_clientCom->registerEvent("ENTITY_DECLARED",
+                               4,
+                               std::bind(&ClientController::onReceiveEntityDeclared,
+                                         this, std::placeholders::_1, std::placeholders::_2));
+  /*  m_clientCom->registerEvent(DECLARE_EVENT_NAME,
+                               4,
+                               std::bind(&ClientController::onReceiveDeclare,
+                                         this, std::placeholders::_1, std::placeholders::_2));*/
 }
 
 ClientController &ClientController::shared() {
@@ -21,19 +31,48 @@ ClientController &ClientController::shared() {
     return clientController;
 }
 
-// EVENT TO SEND
+void ClientController::onReceiveEntityDeclared(void *data, unsigned int size) {
+    qDebug() << "ENTITY_DECLARED with size=" << size;
+    EntityDeclareCorePackage *declare = (EntityDeclareCorePackage *)m_dataComFactory->serializeEntityDeclare(data, size);
 
-void ClientController::sendDeclareEvent(ENTITY entity_type,
+    qDebug() << declare->name;
+    qDebug() << declare->containerID;
+    qDebug() << (qint32)declare->entityType;
+    qDebug() << (qint32)declare->visibility;
+    qDebug() << (qint32)declare->id;
+
+    //E secondDeclare;
+    //TODO FIX
+    //EntityDeclared entityDeclared;
+    //if (entityDeclared.ParseFromArray(data, size))
+    //    qDebug() << QString(entityDeclared.command().name().c_str());
+    //else {
+    //    qDebug() << "FAILED";
+    //}
+}
+
+void ClientController::onReceiveDeclare(void *data, unsigned int size) {
+    DeclareCorePackage *declare = (DeclareCorePackage *)m_dataComFactory->serializeDeclare(data, size);
+
+    qDebug() << declare->name;
+    qDebug() << declare->containerID;
+    qDebug() << (qint32)declare->entityType;
+    qDebug() << (qint32)declare->visibility;
+
+}
+
+// EVENT TO SEND
+void ClientController::sendDeclareEvent(PackageDataCom::ENTITYCORE entity_type,
                       uint32_t containerID,
                       QString const &name,
-                      VISIBILITY visibility) {
+                      PackageDataCom::VISIBILITYCORE visibility) {
     DataComEventFactory::DataComEvent data;
 
     data = m_dataComFactory->createDeclare(entity_type, containerID, name, visibility);
     m_clientCom->sendEvent(DECLARE_EVENT_NAME, data.data, data.size);
 }
 
-void ClientController::sendRemoveEvent(ENTITY entity_type,
+void ClientController::sendRemoveEvent(PackageDataCom::ENTITYCORE entity_type,
                                        uint32_t containerID,
                                        QString const &name) {
     DataComEventFactory::DataComEvent data;
@@ -43,7 +82,7 @@ void ClientController::sendRemoveEvent(ENTITY entity_type,
 }
 
 
-void ClientController::sendMoveEvent(ENTITY entity_type,
+void ClientController::sendMoveEvent(PackageDataCom::ENTITYCORE entity_type,
                        uint32_t fromID,
                        uint32_t toID,
                        QString const &name) {
@@ -54,10 +93,10 @@ void ClientController::sendMoveEvent(ENTITY entity_type,
 
 }
 
-void ClientController::sendChangeVisibilityEvent(ENTITY entity_type,
+void ClientController::sendChangeVisibilityEvent(PackageDataCom::ENTITYCORE entity_type,
                                     uint32_t containerID,
                                     QString const &name,
-                                    VISIBILITY visibility) {
+                                    PackageDataCom::VISIBILITYCORE visibility) {
     DataComEventFactory::DataComEvent data;
 
     data = m_dataComFactory->createChangeVisibility(entity_type, containerID, name, visibility);

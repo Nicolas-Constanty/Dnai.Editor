@@ -54,11 +54,11 @@ public slots:
         DataComEventFactory::DataComEvent data;
 
        if (i % 3 == 0) {
-            data = eventController.createDeclare(ENTITY::CONTEXT_D, 0, "HELLOL", VISIBILITY::PRIVATE);
+            data = eventController.createDeclare(PackageDataCom::ENTITYCORE::CONTEXT_D, 0, "HELLOL", PackageDataCom::VISIBILITYCORE::PRIVATE);
         } else if (i % 3 == 1) {
-            data = eventController.createDeclare(ENTITY::VARIABLE, 0, "POLOLOLOLOL", VISIBILITY::PRIVATE);
+            data = eventController.createDeclare(PackageDataCom::ENTITYCORE::VARIABLE, 0, "POLOLOLOLOL", PackageDataCom::VISIBILITYCORE::PRIVATE);
         } else {
-            data = eventController.createDeclare(ENTITY::FUNCTION, 0, "1", VISIBILITY::PUBLIC);
+            data = eventController.createDeclare(PackageDataCom::ENTITYCORE::FUNCTION, 0, "1", PackageDataCom::VISIBILITYCORE::PUBLIC);
         }
 
         ++i;
@@ -107,10 +107,10 @@ public:
 
     void onReceiveEventPopole(void *data, unsigned int size) {
         qDebug() << size;
-        Declare secondDeclare;
-        secondDeclare.ParseFromArray(data, size);
+        //Declare secondDeclare;
+        //secondDeclare.ParseFromArray(data, size);
 
-        qDebug() << "name: " << QString(secondDeclare.name().c_str());
+        //qDebug() << "name: " << QString(secondDeclare.name().c_str());
 
    /*     static int u = 0;
         qDebug() << size;
