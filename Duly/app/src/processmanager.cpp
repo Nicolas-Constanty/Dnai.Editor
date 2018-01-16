@@ -63,7 +63,11 @@ void ProcessManager::launch() {
     argumentsServer << "-S";
     argumentsServer << sem.key();
 
-    m_server.startDetached(serverPath, argumentsServer);
+    if (m_server.startDetached(serverPath, argumentsServer) == false) {
+        qDebug() << "[FAILED] LAUNCH Server has failed";
+        qDebug() << "[FAILED]" << serverPath;
+        return;
+    }
 
     sem.acquire();
 
@@ -77,7 +81,11 @@ void ProcessManager::launch() {
     corePath.append(" -p ");
     corePath.append(portStr);
 
-    m_core.startDetached(corePath);
+    if (m_core.startDetached(corePath) == false) {
+        qDebug() << "[FAILED] LAUNCH Core has failed";
+        qDebug() << "[FAILED]" << corePath;
+        return;
+    }
 }
 
 qint16 ProcessManager::getServerPort() {
