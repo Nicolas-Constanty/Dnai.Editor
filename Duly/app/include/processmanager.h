@@ -9,22 +9,22 @@ class ProcessManager : public QObject {
     Q_OBJECT
 
 public:
-    ProcessManager(QString const &path);
+    ProcessManager(QString const &file);
     ~ProcessManager();
 
     void launch();
 
+private:
+    quint16 findUnusedPort() const;
+
 public:
     qint16 getServerPort();
 
-public slots:
-    void readData();
-
 private:
-    QString m_path;
+    QString m_file;
     QProcess m_server;
     QProcess m_core;
-    qint16 m_port;
+    quint16 m_port;
 };
 
 #endif // PROCESSMANAGER_H
