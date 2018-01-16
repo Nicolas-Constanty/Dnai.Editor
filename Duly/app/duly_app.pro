@@ -47,11 +47,11 @@ SOURCES += src/baseio.cpp \
     src/views/declarationview.cpp \
     src/views/declarationcanvas.cpp \
     src/controllers/clientcontroller.cpp \
-    src/processmanager.cpp
+    src/processmanager.cpp \
     src/models/treemodel.cpp \
     src/models/treeitem.cpp \
     src/models/namespacebarmodel.cpp \
-    src/models/namespacebaritem.cpp
+    src/models/namespacebaritem.cpp \
 
 #VIEWS
 SOURCES += src/views/beziercurve.cpp \
@@ -92,7 +92,7 @@ SOURCES += src/models/class.cpp \
     src/models/node.cpp \
     src/models/output.cpp \
     src/models/variable.cpp \
-    src/models/position.cpp
+    src/models/position.cpp \
 
 RESOURCES += qml.qrc
 
@@ -136,13 +136,13 @@ HEADERS += include/baseio.h \
     include/controllers/clientcontroller.h \
     include/iotype.h \
     include/flowtype.h \
-    include/processmanager.h
+    include/processmanager.h \
     include/declarationtype.h \
     include/models/treemodel.h \
-    src/models/treeitem.h \
+    include/models/treeitem.h \
     include/models/treeitem.h \
     include/models/namespacebarmodel.h \
-    include/models/namespacebaritem.h
+    include/models/namespacebaritem.h \
 
 #VIEWS
 HEADERS += include/views/beziercurve.h \
