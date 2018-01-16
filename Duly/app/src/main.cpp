@@ -100,8 +100,11 @@ int main(int argc, char *argv[])
 
 	app.initApp();
 
-
-    ProcessManager processManager("./bin");
+#ifdef Q_OS_MAC
+    ProcessManager processManager("./settings/conf/mac/bin_info.cfg");
+#else
+    ProcessManager processManager("./settings/conf/windows/bin_info.cfg");
+#endif
 
     processManager.launch();
 

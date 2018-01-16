@@ -10,7 +10,11 @@ RC_FILE = duly.rc
 settingsfolder.path = $${OUT_PWD}/settings
 settingsfolder.files = settings/*
 
+settingsfolderconf.path = $${OUT_PWD}/settings/conf
+settingsfolderconf.files = settings/conf/*/*
+
 INSTALLS += settingsfolder
+INSTALLS += settingsfolderbin
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which as been marked deprecated (the exact warnings
