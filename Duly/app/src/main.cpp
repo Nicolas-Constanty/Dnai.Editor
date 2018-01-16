@@ -8,11 +8,7 @@
 #include "dulyapp.h"
 #include "manager.h"
 
-/*
-#include "include/clientcommunication.h"
-#include "include/testconnection.h"
-#include "include/eventconsumer.h"
-#include "include/clientmanager.h"*/
+#include "processmanager.h"
 
 #include "include/controllers/clientcontroller.h"
 #include "include/eventconsumer.h"
@@ -97,6 +93,13 @@ int main(int argc, char *argv[])
 
 	app.initApp();
 
+
+    ProcessManager processManager("./bin");
+
+    processManager.launch();
+
+
+    ClientController::serverPort = processManager.getServerPort();
     ClientController::shared();
 
 

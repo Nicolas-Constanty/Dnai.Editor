@@ -4,11 +4,13 @@
 #include "include/controllers/clientcontroller.h"
 #include "declarecorepackage.h"
 
+qint16 ClientController::serverPort = 7777;
+
 ClientController::ClientController()
     : m_clientCom(NULL),
       m_dataComFactory(new DataComEventFactory()),
       m_name(CLIENT_NAME),
-      m_port(7777),
+      m_port(ClientController::serverPort),
       m_addr(QHostAddress::LocalHost)
 {
     m_clientCom = ClientManager::shared().newClient(m_addr,
@@ -40,15 +42,6 @@ void ClientController::onReceiveEntityDeclared(void *data, unsigned int size) {
     qDebug() << (qint32)declare->entityType;
     qDebug() << (qint32)declare->visibility;
     qDebug() << (qint32)declare->id;
-
-    //E secondDeclare;
-    //TODO FIX
-    //EntityDeclared entityDeclared;
-    //if (entityDeclared.ParseFromArray(data, size))
-    //    qDebug() << QString(entityDeclared.command().name().c_str());
-    //else {
-    //    qDebug() << "FAILED";
-    //}
 }
 
 void ClientController::onReceiveDeclare(void *data, unsigned int size) {

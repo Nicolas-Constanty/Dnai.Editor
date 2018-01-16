@@ -8,7 +8,7 @@
 class Server
 {
 public:
-    Server();
+    Server(bool randomPort, qint16 port, QString const &semKey);
 
 public:
     void start();
@@ -16,6 +16,9 @@ public:
 private:
     DulyServer *m_dulyServer;
     QSettings m_settings;
+    bool    m_randomPort;
+    qint16 m_port;
+    QString m_semKey;
     // SERVER
 };
 

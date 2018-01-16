@@ -16,6 +16,7 @@ private:
     ClientController();
 
 public:
+    static qint16 serverPort;
     static ClientController &shared();
 
 public:
