@@ -12,6 +12,7 @@ TreeModel::TreeModel(const Project *project, QObject *parent)
     QList<QVariant> rootData;
     rootData << "Name";
     rootItem = new TreeItem(rootData);
+    rootItem->setIdx(index(0,0, QModelIndex()));
     setupModelData(project, rootItem);
 }
 
@@ -106,57 +107,62 @@ int TreeModel::rowCount(const QModelIndex &parent) const
     return parentItem->childCount();
 }
 
-void TreeModel::setupContextModel(const models::Context *context, TreeItem *parent)
+void TreeModel::setupContextModel(const models::Context *context, TreeItem *parent, int currentIdx)
 {
     QList<QVariant> columnData;
-    columnData.append(QVariant(context->name()));
+    columnData << context->name();
 
+    auto modelidx = index(currentIdx, 0, parent->idxmodel());
     auto temp = new TreeItem(columnData, parent);
     parent->appendChild(temp);
+    temp->setIdx(modelidx);
 
     const auto contexts = context->contexts();
     for (auto i = 0; i < contexts.size(); i++)
-        setupContextModel(contexts[i], temp);
+        setupContextModel(contexts[i], temp, i);
 
     const auto classes = context->classes();
-    qDebug() << classes.size();
     for (auto i = 0; i < classes.size(); i++)
-        setupClassModel(classes[i], temp);
+        setupClassModel(classes[i], temp, i);
 
     const auto functions = context->functions();
     for (auto i = 0; i < functions.size(); i++)
-        setupFunctionModel(functions[i], temp);
+        setupFunctionModel(functions[i], temp, i);
 }
 
-void TreeModel::setupClassModel(const models::Class *cl, TreeItem *parent)
+void TreeModel::setupClassModel(const models::Class *cl, TreeItem *parent, int currentIdx)
 {
     QList<QVariant> columnData;
-    columnData.append(QVariant(cl->name()));
+    columnData << cl->name();
 
+    auto modelidx = index(currentIdx, 0, parent->idxmodel());
     auto temp = new TreeItem(columnData, parent);
     parent->appendChild(temp);
+    temp->setIdx(modelidx);
 
     const auto classes = cl->classes();
     for (auto i = 0; i < classes.size(); i++)
-        setupClassModel(classes[i], temp);
+        setupClassModel(classes[i], temp, i);
 
     const auto functions = cl->functions();
     for (auto i = 0; i < functions.size(); i++)
-        setupFunctionModel(functions[i], temp);
+        setupFunctionModel(functions[i], temp, i);
 }
 
-void TreeModel::setupFunctionModel(const models::Function *func, TreeItem *parent)
+void TreeModel::setupFunctionModel(const models::Function *func, TreeItem *parent, int currentIdx)
 {
     QList<QVariant> columnData;
-    columnData.append(func->name());
+    columnData << func->name();
 
-    TreeItem *temp = new TreeItem(columnData, parent);
+    auto modelidx = index(currentIdx, 0, parent->idxmodel());
+    auto temp = new TreeItem(columnData, parent);
     parent->appendChild(temp);
+    temp->setIdx(modelidx);
 }
 
 void TreeModel::setupModelData(const Project *project, TreeItem *parent)
 {
-    setupContextModel(project->main(), parent);
+    setupContextModel(project->main(), parent, 0);
 }
 }
 }

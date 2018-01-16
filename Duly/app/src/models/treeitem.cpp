@@ -1,4 +1,5 @@
 #include <QStringList>
+#include <QDebug>
 
 #include "models/treeitem.h"
 
@@ -43,6 +44,12 @@ QVariant TreeItem::data(int column) const
 TreeItem *TreeItem::parentItem()
 {
     return m_parentItem;
+}
+
+void TreeItem::setIdx(const QModelIndex &ref)
+{
+    m_idx = ref;
+    qDebug() << m_idx;
 }
 
 int TreeItem::row() const
