@@ -20,6 +20,8 @@
 #include "dulysettings.h"
 #include "dulysettingsmodel.h"
 
+#include "models/treemodel.h"
+
 static QObject *manager_singleton_provider(QQmlEngine *engine, QJSEngine *scriptEngine)
 {
     Q_UNUSED(engine)
@@ -76,6 +78,11 @@ static void registerUtils()
     qmlRegisterType<duly_gui::QDeclarationView>("Utils", 1, 0, "QDeclarationView");
     qmlRegisterType<duly_gui::QTextSettings>("Utils", 1, 0, "QTextSettings");
     qmlRegisterType<duly_gui::QFontSettings>("Utils", 1, 0, "QFontSettings");
+//    qRegisterMetaType<duly_gui::models::TreeModel*>("TreeModel*");
+    qmlRegisterType<duly_gui::models::TreeModel>("Utils", 1, 0, "TreeModel");
+    qmlRegisterType<NameSpaceBarItem>("Utils", 1, 0, "NameSpaceBarItem");
+    qmlRegisterType<NameSpaceBarModel>("Utils", 1, 0, "NameSpaceBarModel");
+//    qmlRegisterType<duly_gui::models::TreeItem>("Utils", 1, 0, "TreeItem");
 }
 
 

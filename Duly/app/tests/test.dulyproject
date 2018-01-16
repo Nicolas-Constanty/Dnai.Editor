@@ -22,13 +22,56 @@
       {
         "name": "context1",
         "description": "cc",
-        "variables": [ ],
-        "classes": [ ],
+        "variables": [],
+        "classes": [],
         "position": {
-            "x": 100,
-            "y": 10
+          "x": 100,
+          "y": 10
         },
-        "functions": [ ]
+        "functions": [],
+        "contexts": [
+
+          {
+            "name": "context1.1",
+            "description": "cc",
+            "variables": [],
+            "classes": [
+              {
+                "name": "class1.1",
+                "position": {
+                  "x": 10,
+                  "y": 10
+                },
+                "description": "je suis une classe",
+                "variables": [],
+                "functions": [
+                  {
+                    "name": "func1vraimenttreslonguepourtesterlascrollbarautomatique"
+                  },
+                  {
+                    "name": "func2"
+                  }
+                ]
+              }
+            ],
+            "position": {
+              "x": 100,
+              "y": 10
+            },
+
+            "functions": []
+          },
+
+          {
+            "name": "context1.2",
+            "description": "cvgdgs",
+            "position": {
+              "x": 200,
+              "y": 10
+            }
+          }
+
+        ]
       },
 
       {

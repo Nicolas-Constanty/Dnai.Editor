@@ -5,13 +5,14 @@
 #include <QUrl>
 #include "dulyapp.h"
 #include "views/declarationcanvas.h"
+#include "models/treeitem.h"
 
 namespace duly_gui {
     const QString Manager::project_extension = ".dulyproject";
 
     Manager::Manager(QObject *parent): QObject(parent)
     {
-
+        m_projectModel = nullptr;
     }
 
     Manager::~Manager()
@@ -67,19 +68,60 @@ namespace duly_gui {
         m_project = project;
         m_project->declare();
         createTreeModel(m_project);
+        m_currentPath = static_cast<models::TreeItem*>(m_projectModel->index(0,0).internalPointer());
+        createNameSpaceModel(m_currentPath);
         views::DeclarationCanvas::CreateContext(m_project->main(), true);
+    }
+
+    void Manager::updateNamespace(const QModelIndex &index)
+    {
+        m_currentPath = static_cast<models::TreeItem*>(index.internalPointer());
+        createNameSpaceModel(m_currentPath);
+    }
+
+    void Manager::selectTreeItem(const QModelIndex &index)
+    {
+        m_currentPath = static_cast<models::TreeItem*>(index.internalPointer());
+        createNameSpaceModel(m_currentPath);
     }
 
     void Manager::setProjectModel(models::TreeModel *model)
     {
-        if (m_projectModel == model || !model)
+        if (model == nullptr || m_projectModel == model)
             return;
         m_projectModel = model;
         emit projectModelChanged(model);
     }
 
+    void Manager::setNamespacebarModel(const QVariant &ref)
+    {
+        m_namespacebarmodel = ref;
+        emit namespacebarModelChanged(ref);
+    }
+
     void Manager::createTreeModel(Project *project)
     {
         setProjectModel(new models::TreeModel(project));
+    }
+
+    void Manager::createNameSpaceModel(models::TreeItem *item)
+    {
+        QList<QObject *> temp;
+
+        auto ns = new NameSpaceBarItem();
+        ns->setPath(item->data(0).toString());
+        ns->setAsChild(item->childCount());
+        ns->setIdx(item->idxmodel());
+        temp.append(ns);
+        while (item->parentItem()->parentItem())
+        {
+            item = item->parentItem();
+            ns = new NameSpaceBarItem();
+            ns->setPath(item->data(0).toString());
+            ns->setAsChild(item->childCount());
+            temp.append(ns);
+        }
+        std::reverse(temp.begin(), temp.end());
+        setNamespacebarModel(QVariant::fromValue(temp));
     }
 }

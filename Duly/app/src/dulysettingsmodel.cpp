@@ -332,6 +332,14 @@ namespace duly_gui
 		emit backgroundChanged(color);
 	}
 
+    void DulySettingsModel::setAlternateBackground(const QColor& color)
+    {
+        if (m_alternateBackground == color)
+            return;
+        m_alternateBackground = color;
+        emit alternateBackgroundChanged(color);
+    }
+
 	void DulySettingsModel::setShadowColor(const QColor& color)
 	{
 		if (m_shadowColor == color)
@@ -385,7 +393,7 @@ namespace duly_gui
 		
 	}
 
-	void DulySettingsModel::setFont(QFontSettings* f)
+    void DulySettingsModel::setFont(QFontSettings* f)
 	{
 		if (m_font == f)
 			return;

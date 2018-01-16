@@ -48,7 +48,9 @@ SOURCES += src/baseio.cpp \
     src/views/declarationcanvas.cpp \
     src/controllers/clientcontroller.cpp \
     src/models/treemodel.cpp \
-    src/models/treeitem.cpp
+    src/models/treeitem.cpp \
+    src/models/namespacebarmodel.cpp \
+    src/models/namespacebaritem.cpp
 
 #VIEWS
 SOURCES += src/views/beziercurve.cpp \
@@ -136,7 +138,9 @@ HEADERS += include/baseio.h \
     include/declarationtype.h \
     include/models/treemodel.h \
     src/models/treeitem.h \
-    include/models/treeitem.h
+    include/models/treeitem.h \
+    include/models/namespacebarmodel.h \
+    include/models/namespacebaritem.h
 
 #VIEWS
 HEADERS += include/views/beziercurve.h \
