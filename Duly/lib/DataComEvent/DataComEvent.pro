@@ -13,7 +13,7 @@ TEMPLATE = lib
 
 #main.cpp \
 
-SOURCES += core.pb.cc \
+SOURCES += \
     datacomeventfactory.cpp
 
 # The following define makes your compiler emit warnings if you use
@@ -28,17 +28,18 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 HEADERS += \
-    Shared_include/core.pb.h \
-    Shared_include/datacomeventfactory.h
+    Shared_include/datacomeventfactory.h \
+    Shared_include/packagecore.h \
+    Shared_include/declarecorepackage.h
 
-CONFIG(release, debug|release) {
-unix:LIBS += -L$${PWD}/Library/ -lprotobuf
-win32:LIBS += -L$${PWD}/Library/ -llibprotobuf
-}
-CONFIG(debug, debug|release) {
-unix:LIBS += -L$${PWD}/Library/ -lprotobuf
-win32:LIBS += -L$${PWD}/Library/ -llibprotobufd
-}
+#CONFIG(release, debug|release) {
+#unix:LIBS += -L$${PWD}/Library/ -lprotobuf
+#win32:LIBS += -L$${PWD}/Library/ -llibprotobuf
+#}
+#CONFIG(debug, debug|release) {
+#unix:LIBS += -L$${PWD}/Library/ -lprotobuf
+#win32:LIBS += -L$${PWD}/Library/ -llibprotobufd
+#}
 #/usr/local/include/ \
 
 INCLUDEPATH += ./Shared_include/

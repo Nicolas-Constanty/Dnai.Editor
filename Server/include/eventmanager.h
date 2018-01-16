@@ -43,6 +43,8 @@ public:
     int addClientToEvent(QString const &eventName,
                           unsigned int size,
                           DulyCommunicationServer *);
+    int removeClientToEvent(QString const &eventName,
+                            DulyCommunicationServer *communication);
 
     Event &getFrom(int id) throw(std::runtime_error);
     Event &getFrom(QString const &name) throw(std::runtime_error);
