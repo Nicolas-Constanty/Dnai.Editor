@@ -14,7 +14,7 @@ settingsfolderconf.path = $${OUT_PWD}/settings/conf
 settingsfolderconf.files = settings/conf/*/*
 
 INSTALLS += settingsfolder
-INSTALLS += settingsfolderbin
+INSTALLS += settingsfolderconf
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which as been marked deprecated (the exact warnings
