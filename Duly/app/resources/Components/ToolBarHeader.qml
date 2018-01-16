@@ -12,6 +12,7 @@ Item {
     property alias heightButton: toolButton.height
 
     ToolBar {
+        id: toolBar
         width: parent.width
         height: 60
         spacing: 0
@@ -419,6 +420,11 @@ Item {
                     }
                 }
             }
+        }
+        UserMenu {
+            height: 40
+            anchors.right: parent.right
+//            anchors.rightMargin: 299
         }
     }
 
