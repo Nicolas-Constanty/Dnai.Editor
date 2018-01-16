@@ -356,6 +356,7 @@ class DulySettingsModel : public QQuickItem
 {
 Q_OBJECT
 	Q_PROPERTY(QColor background READ background WRITE setBackground NOTIFY backgroundChanged)
+    Q_PROPERTY(QColor alternateBackground READ alternateBackground WRITE setAlternateBackground NOTIFY alternateBackgroundChanged)
 	Q_PROPERTY(QColor shadowColor READ shadowColor WRITE setShadowColor NOTIFY shadowColorChanged)
 	Q_PROPERTY(QColor delegateColor READ delegateColor WRITE setDelegateColor NOTIFY delegateColorChanged)
 	Q_PROPERTY(QBorder *border READ border WRITE setBorder NOTIFY borderChanged)
@@ -370,11 +371,12 @@ Q_OBJECT
 
 signals:
 	void backgroundChanged(const QColor &color);
+    void alternateBackgroundChanged(const QColor &color);
 	void shadowColorChanged(const QColor &color);
 	void canvasChanged(QCanvas *c);
 	void nodesChanged(QNodes *n);
 	void declarationViewChanged(QDeclarationView *d);
-	void fontChanged(QFontSettings *f);
+    void fontChanged(QFontSettings *f);
 	void borderChanged(QBorder *);
 	void delegateColorChanged(const QColor &color);
 	void textChanged(QTextSettings *text);
@@ -385,6 +387,8 @@ public:
 	void setBorder(QBorder *b);
 	const QColor &background() const { return m_background; }
 	void setBackground(const QColor &color);
+    const QColor &alternateBackground() const { return m_alternateBackground; }
+    void setAlternateBackground(const QColor &color);
 	void setShadowColor(const QColor &color);
 	const QColor &shadowColor() const { return m_shadowColor; }
 	const QColor &delegateColor() const { return m_delegateColor; }
@@ -395,8 +399,8 @@ public:
 	void setNodes(QNodes *n);
 	QDeclarationView *declarationView() const { return m_declarationView; }
 	void setDeclarationView(QDeclarationView *d);
-	QFontSettings *font() const { return m_font; }
-	void setFont(QFontSettings *f);
+    QFontSettings *font() const { return m_font; }
+    void setFont(QFontSettings *f);
 	QTextSettings *text() const { return m_text;  }
 	void setText(QTextSettings *t);
 
@@ -407,19 +411,20 @@ public:
 	                                                           , m_canvas(new QCanvas(this))
 	                                                           , m_nodes(new QNodes(this))
 	                                                           , m_declarationView(new QDeclarationView(this))
-	                                                           , m_font(new QFontSettings(this))
+                                                               , m_font(new QFontSettings(this))
 															   , m_text(new QTextSettings(this))
 	{}
 
 private:
 	QColor m_background;
+    QColor m_alternateBackground;
 	QColor m_shadowColor;
 	QColor m_delegateColor;
 	QBorder *m_border;
 	QCanvas *m_canvas;
 	QNodes *m_nodes;
 	QDeclarationView *m_declarationView;
-	QFontSettings *m_font;
+    QFontSettings *m_font;
 	QTextSettings* m_text;
 
 };

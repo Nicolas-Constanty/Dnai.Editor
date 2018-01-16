@@ -8,4 +8,5 @@ Rectangle {
     property ConsoleComponent debugConsole: ConsoleComponent {}
     property PanelLeft leftPanel: PanelLeft {}
     property PanelRight rightPanel: PanelRight {}
+    property PanelTop topPanel: PanelTop {}
 }
