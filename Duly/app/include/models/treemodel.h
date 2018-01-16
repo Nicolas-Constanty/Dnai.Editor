@@ -16,7 +16,8 @@ class TreeModel : public QAbstractItemModel
     Q_OBJECT
 
 public:
-    explicit TreeModel(const Project *project, QObject *parent = 0);
+    explicit TreeModel(QObject *parent = nullptr) : QAbstractItemModel(parent) {}
+    TreeModel(const Project *project, QObject *parent = 0);
     ~TreeModel();
 
     QVariant data(const QModelIndex &index, int role) const override;
@@ -31,14 +32,16 @@ public:
 
 private:
     void setupModelData(const Project *project, TreeItem *parent);
-    void setupContextModel(const models::Context *context, TreeItem *parent);
-    void setupClassModel(const models::Class *cl, TreeItem *parent);
-    void setupFunctionModel(const models::Function *func, TreeItem *parent);
+    void setupContextModel(const models::Context *context, TreeItem *parent, int currentIdx);
+    void setupClassModel(const models::Class *cl, TreeItem *parent, int currentIdx);
+    void setupFunctionModel(const models::Function *func, TreeItem *parent, int currentIdx);
 
     TreeItem *rootItem;
 };
 }
 }
+
+Q_DECLARE_METATYPE(duly_gui::models::TreeModel*)
 
 
 #endif // TREEMODEL_H
