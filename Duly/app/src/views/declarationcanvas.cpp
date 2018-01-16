@@ -10,11 +10,13 @@ namespace duly_gui
         QList<QQmlComponent *> DeclarationCanvas::components;
 		DeclarationCanvas::DeclarationCanvas(QQuickItem* parent) : DulyCanvas(parent)
 		{
-			initComponents();
+
 		}
 
 		void DeclarationCanvas::CreateClass(const models::Class* cl, const bool recursif)
 		{
+            if (components.size() == 0)
+                initComponents();
 			auto obj = static_cast<QQuickItem *>(components[0]->create());
 			obj->setParentItem(DulyApp::currentCanvasInstance());
 			
@@ -49,6 +51,8 @@ namespace duly_gui
 
 		void DeclarationCanvas::CreateContext(const models::Context* cl, const bool recursif = true)
 		{
+            if (components.size() == 0)
+                initComponents();
 			auto obj = static_cast<QQuickItem *>(components[0]->create());
 			obj->setParentItem(DulyApp::currentCanvasInstance());
 
@@ -93,6 +97,8 @@ namespace duly_gui
 
 		void DeclarationCanvas::CreateFunction(const models::Function* cl)
 		{
+            if (components.size() == 0)
+                initComponents();
 			auto obj = static_cast<QQuickItem *>(components[0]->create());
 			obj->setParentItem(DulyApp::currentCanvasInstance());
 
@@ -119,6 +125,8 @@ namespace duly_gui
 
 		void DeclarationCanvas::CreateVariable(const models::Variable* cl)
 		{
+            if (components.size() == 0)
+                initComponents();
 			auto obj = static_cast<QQuickItem *>(components[0]->create());
 			obj->setParentItem(DulyApp::currentCanvasInstance());
 

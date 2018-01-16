@@ -15,6 +15,7 @@ BaseLayout {
     debugConsole: consoleRef
     leftPanel: panelLeft
     rightPanel: panelRight
+    topPanel: panelTop
 
     ToolBarHeader {
         id: toolBar
@@ -90,8 +91,10 @@ BaseLayout {
         id: panelTop
         anchors.top: toolBar.bottom
         anchors.left: panelLeft.right
+        anchors.leftMargin: -1
         anchors.right: panelRight.left
-        height: 40
+        anchors.rightMargin: -1
+        height: 24
     }
 
     DropShadow {
