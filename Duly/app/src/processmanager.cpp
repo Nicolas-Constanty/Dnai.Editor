@@ -22,6 +22,7 @@ ProcessManager::ProcessManager(QString const &file)
 
 ProcessManager::~ProcessManager() {
     m_server.close();
+    m_core.close();
 }
 
  quint16 ProcessManager::findUnusedPort() const {
@@ -63,7 +64,8 @@ void ProcessManager::launch() {
     argumentsServer << "-S";
     argumentsServer << sem.key();
 
-    if (m_server.startDetached(serverPath, argumentsServer) == false) {
+    m_server.start(serverPath, argumentsServer);
+    if (m_server.waitForStarted() == false) {
         qDebug() << "[FAILED] LAUNCH Server has failed";
         qDebug() << "[FAILED]" << serverPath;
         return;
@@ -81,7 +83,8 @@ void ProcessManager::launch() {
     corePath.append(" -p ");
     corePath.append(portStr);
 
-    if (m_core.startDetached(corePath) == false) {
+    m_core.start(corePath);
+    if (m_core.waitForStarted() == false) {
         qDebug() << "[FAILED] LAUNCH Core has failed";
         qDebug() << "[FAILED]" << corePath;
         return;
