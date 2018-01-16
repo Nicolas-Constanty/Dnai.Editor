@@ -3,7 +3,7 @@
 
 #include <QList>
 #include <QVariant>
-
+#include <QModelIndex>
 
 namespace duly_gui {
 namespace models {
@@ -21,11 +21,14 @@ public:
     QVariant data(int column) const;
     int row() const;
     TreeItem *parentItem();
+    const QModelIndex &idxmodel() const { return m_idx; }
+    void setIdx(const QModelIndex &ref);
 
 private:
     QList<TreeItem*> m_childItems;
     QList<QVariant> m_itemData;
     TreeItem *m_parentItem;
+    QModelIndex m_idx;
 };
 }
 }
