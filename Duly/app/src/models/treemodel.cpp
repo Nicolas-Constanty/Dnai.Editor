@@ -63,7 +63,9 @@ QModelIndex TreeModel::index(int row, int column, const QModelIndex &parent)
             const
 {
     if (!hasIndex(row, column, parent))
+    {
         return QModelIndex();
+    }
 
     TreeItem *parentItem;
 
@@ -74,7 +76,10 @@ QModelIndex TreeModel::index(int row, int column, const QModelIndex &parent)
 
     TreeItem *childItem = parentItem->child(row);
     if (childItem)
+    {
+        qDebug() << "Success";
         return createIndex(row, column, childItem);
+    }
     else
         return QModelIndex();
 }
