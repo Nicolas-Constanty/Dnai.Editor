@@ -46,7 +46,7 @@ namespace duly_gui {
 
         void Variable::declare() const
         {
-            ClientController::shared().sendDeclareEvent(PackageDataCom::ENTITYCORE::VARIABLE, 0, name(), PackageDataCom::VISIBILITYCORE::PRIVATE);
+            ClientController::shared().sendDeclareEvent(PackageDataCom::ENTITYCORE::VARIABLE, 0, name(), PackageDataCom::VISIBILITYCORE::PUBLIC);
         }
 
         IClone *Variable::clone() const
