@@ -46,7 +46,8 @@ SOURCES += src/baseio.cpp \
     src/dulysettingsmodel.cpp \
     src/views/declarationview.cpp \
     src/views/declarationcanvas.cpp \
-    src/controllers/clientcontroller.cpp
+    src/controllers/clientcontroller.cpp \
+    src/processmanager.cpp
 
 #VIEWS
 SOURCES += src/views/beziercurve.cpp \
@@ -131,7 +132,8 @@ HEADERS += include/baseio.h \
     include/controllers/clientcontroller.h \
     include/iotype.h \
     include/flowtype.h \
-    include/declarationtype.h
+    include/declarationtype.h \
+    include/processmanager.h
 
 #VIEWS
 HEADERS += include/views/beziercurve.h \

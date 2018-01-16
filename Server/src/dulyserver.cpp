@@ -1,4 +1,6 @@
 #include <QDebug>
+#include <QFile>
+#include <QSystemSemaphore>
 #include "dulyserver.h"
 #include "eventmanager.h"
 
@@ -12,17 +14,35 @@ DulyServer::DulyServer(quint16 port,
 
 }
 
-void DulyServer::start() {
+void DulyServer::createFileInfo(bool failed) {
+    QString filename="currentport.info";
+
+    QFile::remove(filename);
+    QFile file( filename );
+    if ( file.open(QIODevice::ReadWrite) )
+    {
+        QTextStream stream( &file );
+        if (failed == true) {
+            stream << "FAILED" << endl;
+        } else {
+            stream << this->serverPort() << endl;
+        }
+    }
+}
+
+void DulyServer::start(QString const &semKey) {
     connect(this, SIGNAL(newConnection()), this, SLOT(connectionAccepted()));
 
     if (this->listen(m_address, m_port) == false) {
         qDebug() << "[ERROR] Failed to start server !";
-        qDebug() << "[ERROR] port: " << m_port;
-        qDebug() << "[ERROR] ip: " << m_address;
     } else {
         qDebug() << "[SUCCESS] Server start !";
-        qDebug() << "[SUCCESS] port: " << m_port;
+        qDebug() << "[SUCCESS] port: " << this->serverPort();
         qDebug() << "[SUCCESS] ip: " << m_address;
+    }
+    if (semKey.size() > 0) {
+        QSystemSemaphore sem(semKey, 0, QSystemSemaphore::Open);
+        sem.release();
     }
 }
 
