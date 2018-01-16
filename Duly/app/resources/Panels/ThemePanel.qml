@@ -10,11 +10,11 @@ ThemePanelForm {
     colRef.width: Math.max(implicitWidth, rectRef.availableWidth) - 20
 
     themes.items.onCurrentTextChanged: {
-        DulySettings.loadTheme(themes.currentText)
+        DulySettings.loadTheme(themes.items.currentText)
     }
 
     Component.onCompleted:
     {
-        themes.listModel = DulySettings.getThemes()
+        themes.items.model = DulySettings.getThemes()
     }
 }

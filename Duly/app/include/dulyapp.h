@@ -8,7 +8,10 @@
 #include <QJsonObject>
 #include <QDir>
 #include "dulysettings.h"
+#include "project.h"
 #include "views/dulycanvas.h"
+#include "models/treemodel.h"
+
 
 namespace duly_gui {
 	class DulyApp : public QGuiApplication
@@ -30,7 +33,7 @@ namespace duly_gui {
 		DulySettings *m_settings;
 		QList<views::DulyCanvas *> m_canvases;
 		views::DulyCanvas *m_currentCanvas;
-		QQmlApplicationEngine* m_engine;
+        QQmlApplicationEngine* m_engine;
 	};
 }
 
