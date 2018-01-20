@@ -8,6 +8,7 @@
 #include <QSystemSemaphore>
 #include <QSettings>
 #include <QVariant>
+#include <QGuiApplication>
 #include "processmanager.h"
 
 ProcessManager::ProcessManager(QString const &file)
@@ -57,6 +58,8 @@ void ProcessManager::launch() {
         return;
     }
 
+    serverPath.replace("{OUT_DIR}", QGuiApplication::applicationDirPath());
+
     argumentsServer << "-p";
     QString portStr;
     portStr.setNum(m_port);
@@ -79,6 +82,8 @@ void ProcessManager::launch() {
         qDebug() << "DO BINARIES/core=\"[mono] ./PATH/CoreDaemon.exe\" ";
         return;
     }
+
+    corePath.replace("{OUT_DIR}", QGuiApplication::applicationDirPath());
 
     corePath.append(" -p ");
     corePath.append(portStr);
