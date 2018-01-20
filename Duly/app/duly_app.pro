@@ -5,7 +5,14 @@ CONFIG += object_parallel_to_source
 
 INCLUDEPATH += include/
 
-RC_FILE = duly.rc
+
+CONFIG(release, debug|release) {
+win32:RC_FILE = duly.rc
+unix:ICON = DNAI_icon.icns
+}
+#RC_FILE = duly.rc
+
+#ICON = DNAI_icon.icns
 
 settingsfolder.path = $${OUT_PWD}/settings
 settingsfolder.files = settings/*
