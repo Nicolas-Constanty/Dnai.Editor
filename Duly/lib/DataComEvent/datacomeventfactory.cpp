@@ -2,6 +2,7 @@
 #include <QString>
 #include "datacomeventfactory.h"
 #include "declarecorepackage.h"
+#include "commands.h"
 
 DataComEventFactory::DataComEventFactory()
 {
@@ -48,10 +49,33 @@ DataComEventFactory::DataComEvent DataComEventFactory::createDeclare(PackageData
                                                  uint32_t containerID,
                                                  QString const &name,
                                                  PackageDataCom::VISIBILITYCORE visibility) {
-   // DeclareCorePackage declare;
 
-    DataComEventFactory::DataComEvent dataCom = createDataComEvent(SIZE_PACKAGE_DECLARE(name.size()));
-    void *tmp = dataCom.data;
+    qDebug() << "Real: " << name;
+
+    Command::Declare package(entity_type, containerID, name, visibility);
+
+    Scalar<QString> &packed = std::get<2>(package.Data());
+
+    for (Scalar<char> c : packed.Data())
+    {
+        qDebug() << c.Data();
+    }
+
+    size_t size = package.GetPackageSize();
+
+    DataComEventFactory::DataComEvent dataCom = createDataComEvent(size);
+
+    Buffer buff(dataCom.data, size);
+
+    if (package.SerializeTo(buff) != size)
+    {
+        //failed to serialize
+        qDebug() << "Failed to serialize declare package";
+    }
+
+    return dataCom;
+
+    /*void *tmp = dataCom.data;
 
     if (dataCom.size == SIZE_PACKAGE_DECLARE(name.size())) {
         memcpyDataCom(&(dataCom.data), &entity_type, sizeof(entity_type));
@@ -63,7 +87,7 @@ DataComEventFactory::DataComEvent DataComEventFactory::createDeclare(PackageData
         memcpyDataCom(&(dataCom.data), (void *)(name.toStdString().c_str()), name.size());
         memcpyDataCom(&(dataCom.data), &visibility, sizeof(visibility));
     }
-    dataCom.data = tmp;
+    dataCom.data = tmp;*/
 
     return dataCom;
 }
