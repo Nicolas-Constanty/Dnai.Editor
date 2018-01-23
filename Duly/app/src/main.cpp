@@ -103,7 +103,7 @@ int main(int argc, char *argv[])
 	app.initApp();
 
 #ifdef Q_OS_MAC
-    ProcessManager processManager("./settings/conf/mac/bin_info.cfg");
+    ProcessManager processManager(QGuiApplication::applicationDirPath() + "/settings/conf/mac/bin_info.cfg");
 #else
     ProcessManager processManager("./settings/conf/windows/bin_info.cfg");
 #endif

@@ -8,6 +8,7 @@
 #include <QSystemSemaphore>
 #include <QSettings>
 #include <QVariant>
+#include <QGuiApplication>
 #include "processmanager.h"
 
 ProcessManager::ProcessManager(QString const &file)
@@ -22,6 +23,7 @@ ProcessManager::ProcessManager(QString const &file)
 
 ProcessManager::~ProcessManager() {
     m_server.close();
+    m_core.close();
 }
 
  quint16 ProcessManager::findUnusedPort() const {
@@ -56,6 +58,8 @@ void ProcessManager::launch() {
         return;
     }
 
+    serverPath.replace("{OUT_DIR}", QGuiApplication::applicationDirPath());
+
     argumentsServer << "-p";
     QString portStr;
     portStr.setNum(m_port);
@@ -63,7 +67,12 @@ void ProcessManager::launch() {
     argumentsServer << "-S";
     argumentsServer << sem.key();
 
-    m_server.startDetached(serverPath, argumentsServer);
+    m_server.start(serverPath, argumentsServer);
+    if (m_server.waitForStarted() == false) {
+        qDebug() << "[FAILED] LAUNCH Server has failed";
+        qDebug() << "[FAILED]" << serverPath;
+        return;
+    }
 
     sem.acquire();
 
@@ -74,10 +83,17 @@ void ProcessManager::launch() {
         return;
     }
 
+    corePath.replace("{OUT_DIR}", QGuiApplication::applicationDirPath());
+
     corePath.append(" -p ");
     corePath.append(portStr);
 
-    m_core.startDetached(corePath);
+    m_core.start(corePath);
+    if (m_core.waitForStarted() == false) {
+        qDebug() << "[FAILED] LAUNCH Core has failed";
+        qDebug() << "[FAILED]" << corePath;
+        return;
+    }
 }
 
 qint16 ProcessManager::getServerPort() {

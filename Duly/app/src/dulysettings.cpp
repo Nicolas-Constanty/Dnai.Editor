@@ -2,6 +2,7 @@
 #include <QDebug>
 #include <QQuickItem>
 #include "dulyapp.h"
+#include <QGuiApplication>
 
 namespace duly_gui
 {
@@ -31,11 +32,11 @@ namespace duly_gui
 //            return;
 		m_loadedColors.clear();
 		m_loadedNumbers.clear();
-		QFile file(m_themesPath[path]);
+        QFile file(m_themesPath[path]);
 
         if (!file.open(QIODevice::ReadOnly)) {
-			return;
-		}
+            return;
+        }
 
 		const auto data = file.readAll();
 		const auto obj(QJsonDocument::fromJson(data).object());
@@ -62,7 +63,13 @@ namespace duly_gui
 	void DulySettings::init()
     {
 		const auto theme = m_settings.value("themes/current/theme").toString();
-		QDir dir("settings/themes");
+#ifdef Q_OS_MAC
+    QString path = QGuiApplication::applicationDirPath() + "/settings/themes";
+#else
+    QString path = "settings/themes";
+#endif
+        QDir dir(path);
+
 		const auto list = dir.entryList(QDir::Files);
 		for (auto i = list.begin(); i!= list.end(); ++i)
 		{
