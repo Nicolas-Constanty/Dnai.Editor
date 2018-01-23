@@ -1,5 +1,6 @@
 {
   "background": "#424242",
+  "alternateBackground": "#616161",
   "delegateColor": "#212121",
   "border": {
     "color": "#757575",

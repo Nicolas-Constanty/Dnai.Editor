@@ -8,11 +8,7 @@
 #include "dulyapp.h"
 #include "manager.h"
 
-/*
-#include "include/clientcommunication.h"
-#include "include/testconnection.h"
-#include "include/eventconsumer.h"
-#include "include/clientmanager.h"*/
+#include "processmanager.h"
 
 #include "include/controllers/clientcontroller.h"
 #include "include/eventconsumer.h"
@@ -22,6 +18,8 @@
 
 #include "http.h"
 #include "api.h"
+
+#include "models/treemodel.h"
 
 static QObject *manager_singleton_provider(QQmlEngine *engine, QJSEngine *scriptEngine)
 {
@@ -79,6 +77,11 @@ static void registerUtils()
     qmlRegisterType<duly_gui::QDeclarationView>("Utils", 1, 0, "QDeclarationView");
     qmlRegisterType<duly_gui::QTextSettings>("Utils", 1, 0, "QTextSettings");
     qmlRegisterType<duly_gui::QFontSettings>("Utils", 1, 0, "QFontSettings");
+//    qRegisterMetaType<duly_gui::models::TreeModel*>("TreeModel*");
+    qmlRegisterType<duly_gui::models::TreeModel>("Utils", 1, 0, "TreeModel");
+    qmlRegisterType<NameSpaceBarItem>("Utils", 1, 0, "NameSpaceBarItem");
+    qmlRegisterType<NameSpaceBarModel>("Utils", 1, 0, "NameSpaceBarModel");
+//    qmlRegisterType<duly_gui::models::TreeItem>("Utils", 1, 0, "TreeItem");
 }
 
 
@@ -100,6 +103,16 @@ int main(int argc, char *argv[])
 
 	app.initApp();
 
+#ifdef Q_OS_MAC
+    ProcessManager processManager(QGuiApplication::applicationDirPath() + "/settings/conf/mac/bin_info.cfg");
+#else
+    ProcessManager processManager("./settings/conf/windows/bin_info.cfg");
+#endif
+
+    processManager.launch();
+
+
+    ClientController::serverPort = processManager.getServerPort();
     ClientController::shared();
 
     duly_gui::http::Service::Init(duly_gui::api::http_config);

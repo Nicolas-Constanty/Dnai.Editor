@@ -67,4 +67,8 @@ namespace duly_gui {
 		setApplicationName("DNAI");
 	}
 
+//    void DulyApp::setCurrentPath(const QString &path) const
+//    {
+//        m_currentPath = path;
+//    }
 }

@@ -2,6 +2,7 @@
 #include <QDebug>
 #include <QQuickItem>
 #include "dulyapp.h"
+#include <QGuiApplication>
 
 namespace duly_gui
 {
@@ -26,13 +27,15 @@ namespace duly_gui
 
 	void DulySettings::loadTheme(const QString&path)
 	{
+//        if (m_settings.value("themes/current/theme").toString() == path)
+//            return;
 		m_loadedColors.clear();
 		m_loadedNumbers.clear();
-		QFile file(m_themesPath[path]);
+        QFile file(m_themesPath[path]);
 
-		if (!file.open(QIODevice::ReadOnly)) {
-			return;
-		}
+        if (!file.open(QIODevice::ReadOnly)) {
+            return;
+        }
 
 		const auto data = file.readAll();
 		const auto obj(QJsonDocument::fromJson(data).object());
@@ -59,13 +62,18 @@ namespace duly_gui
 	void DulySettings::init()
     {
 		const auto theme = m_settings.value("themes/current/theme").toString();
-		QDir dir("settings/themes");
+#ifdef Q_OS_MAC
+    QString path = QGuiApplication::applicationDirPath() + "/settings/themes";
+#else
+    QString path = "settings/themes";
+#endif
+        QDir dir(path);
+
 		const auto list = dir.entryList(QDir::Files);
 		for (auto i = list.begin(); i!= list.end(); ++i)
 		{
 			const auto f = QFileInfo(*i);
 			const auto basename = f.baseName();
-            qDebug() << dir.absoluteFilePath(*i);
 			m_themes.append(basename);
 			m_themesPath[basename] = dir.absoluteFilePath(*i);
 			
@@ -82,7 +90,7 @@ namespace duly_gui
 	}
 
 	QStringList DulySettings::getThemes() const
-	{
+    {
 		return  m_themes;
 	}
 

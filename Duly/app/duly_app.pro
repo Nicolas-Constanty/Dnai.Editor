@@ -5,12 +5,23 @@ CONFIG += object_parallel_to_source
 
 INCLUDEPATH += include/
 
-RC_FILE = duly.rc
+
+CONFIG(release, debug|release) {
+win32:RC_FILE = duly.rc
+unix:ICON = DNAI_icon.icns
+}
+#RC_FILE = duly.rc
+
+#ICON = DNAI_icon.icns
 
 settingsfolder.path = $${OUT_PWD}/settings
 settingsfolder.files = settings/*
 
+settingsfolderconf.path = $${OUT_PWD}/settings/conf
+settingsfolderconf.files = settings/conf/*/*
+
 INSTALLS += settingsfolder
+INSTALLS += settingsfolderconf
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which as been marked deprecated (the exact warnings
@@ -46,7 +57,12 @@ SOURCES += src/baseio.cpp \
     src/dulysettingsmodel.cpp \
     src/views/declarationview.cpp \
     src/views/declarationcanvas.cpp \
-    src/controllers/clientcontroller.cpp
+    src/controllers/clientcontroller.cpp \
+    src/processmanager.cpp \
+    src/models/treemodel.cpp \
+    src/models/treeitem.cpp \
+    src/models/namespacebarmodel.cpp \
+    src/models/namespacebaritem.cpp \
 
 #VIEWS
 SOURCES += src/views/beziercurve.cpp \
@@ -87,7 +103,7 @@ SOURCES += src/models/class.cpp \
     src/models/node.cpp \
     src/models/output.cpp \
     src/models/variable.cpp \
-    src/models/position.cpp
+    src/models/position.cpp \
 
 #HTTP
 SOURCES += src/http/url.cpp \
@@ -141,7 +157,13 @@ HEADERS += include/baseio.h \
     include/controllers/clientcontroller.h \
     include/iotype.h \
     include/flowtype.h \
-    include/declarationtype.h
+    include/processmanager.h \
+    include/declarationtype.h \
+    include/models/treemodel.h \
+    include/models/treeitem.h \
+    include/models/treeitem.h \
+    include/models/namespacebarmodel.h \
+    include/models/namespacebaritem.h \
 
 #VIEWS
 HEADERS += include/views/beziercurve.h \
