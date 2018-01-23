@@ -58,8 +58,8 @@ namespace duly_gui
 			void setGridColor(const QColor &color);
 			void setAccentGridColor(const QColor &color);
 			void setBackgroundColor(const QColor & color);
-			void setContent(QQuickItem *ct);
-
+            void setContent(QQuickItem *ct);
+            void resetContent();
 
 		signals:
 			void gridStepChanged(int step);
@@ -86,14 +86,13 @@ namespace duly_gui
 			QPointF	m_offset;
 			QPointF	m_gridOffset;
 			QPointF m_origin;
-			QQuickItem *m_content;
-
+            QQuickItem *m_content;
 
 		protected:
 			void mousePressEvent(QMouseEvent* event) override;
 			void mouseReleaseEvent(QMouseEvent* event) override;
 			void mouseMoveEvent(QMouseEvent* event) override;
-			void wheelEvent(QWheelEvent *event) override;
+            void wheelEvent(QWheelEvent *event) override;
 		};
 	}
 }

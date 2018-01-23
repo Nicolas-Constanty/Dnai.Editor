@@ -2,6 +2,8 @@ import QtQuick 2.9
 import CustomGeometry 1.0
 import QtQuick.Controls 2.2
 
+import "../Style"
+
 Item {
     id: item1
     //    property alias borderColor: rect.borderColor
@@ -35,13 +37,12 @@ Item {
             anchors.topMargin: -(label.font.pointSize + 2)
             anchors.horizontalCenter: parent.horizontalCenter
 
-            Label {
+            MLabel {
                 id: label
                 text: qsTr(title)
                 anchors.verticalCenter: parent.verticalCenter
                 font.pointSize: 8
                 anchors.horizontalCenter: parent.horizontalCenter
-                horizontalAlignment: Text.AlignHCenter
             }
         }
     }

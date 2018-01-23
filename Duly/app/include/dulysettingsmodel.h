@@ -7,28 +7,28 @@ namespace duly_gui {
 
 class QFontSettings : public QQuickItem
 {
-	Q_OBJECT
-	Q_PROPERTY(qreal pixelSize READ pixelSize WRITE setPixelSize NOTIFY pixelSizeChanged)
-	Q_PROPERTY(QString family READ family WRITE setFamily NOTIFY familyChanged)
+    Q_OBJECT
+    Q_PROPERTY(qreal pixelSize READ pixelSize WRITE setPixelSize NOTIFY pixelSizeChanged)
+    Q_PROPERTY(QString family READ family WRITE setFamily NOTIFY familyChanged)
 
 public:
-	explicit QFontSettings(QQuickItem *parent = nullptr) : QQuickItem(parent), m_pixelSize(14)
-	{
-	}
+    explicit QFontSettings(QQuickItem *parent = nullptr) : QQuickItem(parent), m_pixelSize(14)
+    {
+    }
 
 signals:
-	void pixelSizeChanged(qreal s);
-	void familyChanged(const QString &f);
+    void pixelSizeChanged(qreal s);
+    void familyChanged(const QString &f);
 
 public:
-	void setPixelSize(qreal s);
-	qreal pixelSize() const { return m_pixelSize; }
-	void setFamily(const QString &s);
-	QString family() const { return m_family;  }
+    void setPixelSize(qreal s);
+    qreal pixelSize() const { return m_pixelSize; }
+    void setFamily(const QString &s);
+    QString family() const { return m_family;  }
 
 private:
-	QString m_family;
-	qreal m_pixelSize;
+    QString m_family;
+    qreal m_pixelSize;
 
 };
 
@@ -351,81 +351,132 @@ private:
 	QDeclaration *m_declVariable;
 };
 
+class QBackground : public QQuickItem
+{
+    Q_OBJECT
+    Q_PROPERTY(QColor color READ color WRITE setColor NOTIFY colorChanged)
+    Q_PROPERTY(QColor darkColor READ darkColor WRITE setDarkColor NOTIFY darkColorChanged)
+    Q_PROPERTY(QColor lightColor READ lightColor WRITE setLightColor NOTIFY lightColorChanged)
+
+public:
+    QBackground(QQuickItem *parent = nullptr) :
+        QQuickItem(parent)
+      , m_color(Qt::magenta)
+      , m_darkColor(Qt::magenta)
+      , m_lightColor(Qt::magenta)
+    {}
+
+signals:
+    void colorChanged(const QColor &color);
+    void darkColorChanged(const QColor &color);
+    void lightColorChanged(const QColor &color);
+
+public:
+    const QColor &color() const { return m_color; }
+    const QColor &darkColor() const { return m_darkColor; }
+    const QColor &lightColor() const { return m_lightColor; }
+
+public:
+    void setColor(const QColor &color);
+    void setDarkColor(const QColor &color);
+    void setLightColor(const QColor &color);
+
+private:
+    QColor m_color;
+    QColor m_darkColor;
+    QColor m_lightColor;
+
+};
+
+class MenuSettings : public QQuickItem
+{
+    Q_OBJECT
+    Q_PROPERTY(QBorder *border READ border WRITE setBorder NOTIFY borderChanged)
+    Q_PROPERTY(QBackground *background READ background WRITE setBackground NOTIFY backgroundChanged)
+public:
+    explicit MenuSettings(QQuickItem *parent = nullptr) : QQuickItem(parent), m_border(new QBorder(this)), m_background(new QBackground(this))
+    {}
+
+signals:
+    void borderChanged(QBorder *);
+    void backgroundChanged(QBackground *b);
+
+public:
+    QBackground *background() const { return m_background; }
+    QBorder *border() const { return m_border; }
+
+public:
+    void setBackground(QBackground *b);
+    void setBorder(QBorder *b);
+
+private:
+    QBackground *m_background;
+    QBorder *m_border;
+};
 
 class DulySettingsModel : public QQuickItem
 {
 Q_OBJECT
-	Q_PROPERTY(QColor background READ background WRITE setBackground NOTIFY backgroundChanged)
-    Q_PROPERTY(QColor alternateBackground READ alternateBackground WRITE setAlternateBackground NOTIFY alternateBackgroundChanged)
-	Q_PROPERTY(QColor shadowColor READ shadowColor WRITE setShadowColor NOTIFY shadowColorChanged)
-	Q_PROPERTY(QColor delegateColor READ delegateColor WRITE setDelegateColor NOTIFY delegateColorChanged)
+    Q_PROPERTY(QBackground *background READ background WRITE setBackground NOTIFY backgroundChanged)
+    Q_PROPERTY(MenuSettings *menu READ menu WRITE setMenu NOTIFY menuChanged)
+    Q_PROPERTY(QColor shadowColor READ shadowColor WRITE setShadowColor NOTIFY shadowColorChanged)
 	Q_PROPERTY(QBorder *border READ border WRITE setBorder NOTIFY borderChanged)
 	Q_PROPERTY(QCanvas *canvas READ canvas WRITE setCanvas NOTIFY canvasChanged)
 	Q_PROPERTY(QNodes *nodes READ nodes WRITE setNodes NOTIFY nodesChanged)
-	Q_PROPERTY(QDeclarationView *declarationView READ declarationView WRITE setDeclarationView NOTIFY
-		declarationViewChanged)
+    Q_PROPERTY(QDeclarationView *declarationView READ declarationView WRITE setDeclarationView NOTIFY declarationViewChanged)
     Q_PROPERTY(QFontSettings *font READ font WRITE setFont NOTIFY fontChanged)
 	Q_PROPERTY(QTextSettings *text READ text WRITE setText NOTIFY textChanged)
 
 
 
 signals:
-	void backgroundChanged(const QColor &color);
-    void alternateBackgroundChanged(const QColor &color);
+    void backgroundChanged(QBackground *b);
+    void menuChanged(MenuSettings *m);
 	void shadowColorChanged(const QColor &color);
 	void canvasChanged(QCanvas *c);
 	void nodesChanged(QNodes *n);
 	void declarationViewChanged(QDeclarationView *d);
     void fontChanged(QFontSettings *f);
 	void borderChanged(QBorder *);
-	void delegateColorChanged(const QColor &color);
 	void textChanged(QTextSettings *text);
 
 
 public:
+    QBackground *background() const { return m_background; }
+    MenuSettings *menu() const { return m_menu; }
 	QBorder *border() const { return m_border; }
-	void setBorder(QBorder *b);
-	const QColor &background() const { return m_background; }
-	void setBackground(const QColor &color);
-    const QColor &alternateBackground() const { return m_alternateBackground; }
-    void setAlternateBackground(const QColor &color);
-	void setShadowColor(const QColor &color);
-	const QColor &shadowColor() const { return m_shadowColor; }
-	const QColor &delegateColor() const { return m_delegateColor; }
-	void setDelegateColor(const QColor &color);
-	QCanvas *canvas() const { return m_canvas; }
-	void setCanvas(QCanvas *c);
-	QNodes *nodes() const { return m_nodes; }
-	void setNodes(QNodes *n);
-	QDeclarationView *declarationView() const { return m_declarationView; }
-	void setDeclarationView(QDeclarationView *d);
+    const QColor &shadowColor() const { return m_shadowColor; }
+    QCanvas *canvas() const { return m_canvas; }
+    QNodes *nodes() const { return m_nodes; }
+    QDeclarationView *declarationView() const { return m_declarationView; }
     QFontSettings *font() const { return m_font; }
+    QTextSettings *text() const { return m_text;  }
+
+public:
+    void setBackground(QBackground *b);
+    void setMenu(MenuSettings *m);
+    void setBorder(QBorder *b);
+    void setShadowColor(const QColor &color);
+	void setCanvas(QCanvas *c);
+	void setNodes(QNodes *n);
+	void setDeclarationView(QDeclarationView *d);
     void setFont(QFontSettings *f);
-	QTextSettings *text() const { return m_text;  }
 	void setText(QTextSettings *t);
 
 
 public:
-	explicit DulySettingsModel(QQuickItem *parent = nullptr) : QQuickItem(parent)
-	                                                           , m_border(new QBorder(this))
-	                                                           , m_canvas(new QCanvas(this))
-	                                                           , m_nodes(new QNodes(this))
-	                                                           , m_declarationView(new QDeclarationView(this))
-                                                               , m_font(new QFontSettings(this))
-															   , m_text(new QTextSettings(this))
-	{}
+    explicit DulySettingsModel(QQuickItem *parent = nullptr);
 
 private:
-	QColor m_background;
-    QColor m_alternateBackground;
-	QColor m_shadowColor;
-	QColor m_delegateColor;
+    QBackground *m_background;
+    MenuSettings *m_menu;
+    QColor m_shadowColor;
 	QBorder *m_border;
 	QCanvas *m_canvas;
 	QNodes *m_nodes;
 	QDeclarationView *m_declarationView;
     QFontSettings *m_font;
-	QTextSettings* m_text;
+    QTextSettings* m_text;
 
 };
 }

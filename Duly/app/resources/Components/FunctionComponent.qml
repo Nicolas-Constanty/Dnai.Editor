@@ -2,6 +2,8 @@ import QtQuick 2.9
 import QtQuick.Controls 2.2
 import CustomGeometry 1.0
 
+import "../Style"
+
 DulyCanvas {
     id: canvas
     gridStep: 15
@@ -9,7 +11,7 @@ DulyCanvas {
     accentGridStep: 150
     accentGridColor: toolBar.menuEditRef.settingRef.themeTabRef.accentGridColorRef.colorSetting
     backgroundColor: toolBar.menuEditRef.settingRef.themeTabRef.backgroudColorRef.colorSetting
-    Label {
+    MLabel {
         id: zoomText
         text: (canvas.scaleFactor * 100) + "%"
         anchors.right: parent.right

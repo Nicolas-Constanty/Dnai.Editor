@@ -49,7 +49,7 @@ TreeItem *TreeItem::parentItem()
 void TreeItem::setIdx(const QModelIndex &ref)
 {
     m_idx = ref;
-    qDebug() << m_idx;
+//    qDebug() << m_idx;
 }
 
 int TreeItem::row() const
@@ -58,6 +58,11 @@ int TreeItem::row() const
         return m_parentItem->m_childItems.indexOf(const_cast<TreeItem*>(this));
 
     return 0;
+}
+
+void TreeItem::setModel(IModel *model)
+{
+    m_model = model;
 }
 
 }

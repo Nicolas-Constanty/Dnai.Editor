@@ -9,7 +9,7 @@ Context::Context(QQuickItem *parent) :
 {
     setType(DeclarationTypeRessouce::DeclarationType::Context);
 	
-	const auto declView = static_cast<DulyApp *>(DulyApp::instance())->settings()->style()->declarationView();
+//	const auto declView = static_cast<DulyApp *>(DulyApp::instance())->settings()->style()->declarationView();
 	/*auto v = view();
 	v->setRadius(declView->declContext()->radius());
 	v->setFillColor(declView->declContext()->background());

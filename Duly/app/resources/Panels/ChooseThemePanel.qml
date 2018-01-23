@@ -9,7 +9,7 @@ import "../Layouts"
 ChooseThemeForm {
     id: form
 
-    panel.color: DulySettings.style.background
+    panel.color: DulySettings.style.background.color
 
     Component.onCompleted:
     {
@@ -19,10 +19,6 @@ ChooseThemeForm {
     themes.onCurrentTextChanged: {
         DulySettings.loadTheme(themes.currentText)
     }
-
-    labelRef.font.pixelSize: DulySettings.style.font.pixelSize
-    labelRef.color: DulySettings.style.text.color
-    labelRef.font.family: DulySettings.style.font.family
 
     validateButton.onClicked: {
         form.visible = false

@@ -4,6 +4,7 @@
 #include <QList>
 #include <QVariant>
 #include <QModelIndex>
+#include "imodel.h"
 
 namespace duly_gui {
 namespace models {
@@ -23,12 +24,15 @@ public:
     TreeItem *parentItem();
     const QModelIndex &idxmodel() const { return m_idx; }
     void setIdx(const QModelIndex &ref);
+    IModel *model() const { return m_model; }
+    void setModel(IModel *);
 
 private:
     QList<TreeItem*> m_childItems;
     QList<QVariant> m_itemData;
     TreeItem *m_parentItem;
     QModelIndex m_idx;
+    IModel *m_model;
 };
 }
 }

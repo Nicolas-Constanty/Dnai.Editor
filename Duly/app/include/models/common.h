@@ -7,7 +7,7 @@
 
 namespace duly_gui {
     namespace models {
-        class Common: public QObject, virtual public IModel
+        class Common: public QObject, public IModel
         {
             Q_OBJECT
             Q_PROPERTY(QString name READ name WRITE setName NOTIFY nameChanged)

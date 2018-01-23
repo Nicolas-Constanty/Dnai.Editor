@@ -37,7 +37,7 @@ Item {
     TabBar {
         id: bar
         background: Rectangle {
-            color: DulySettings.style.background
+            color: DulySettings.style.background.color
         }
         TabButton {
             text: qsTr("Theme")

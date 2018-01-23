@@ -56,6 +56,7 @@ SOURCES += src/baseio.cpp \
     src/models/treeitem.cpp \
     src/models/namespacebarmodel.cpp \
     src/models/namespacebaritem.cpp \
+    layouthandler.cpp
 
 #VIEWS
 SOURCES += src/views/beziercurve.cpp \
@@ -147,6 +148,7 @@ HEADERS += include/baseio.h \
     include/models/treeitem.h \
     include/models/namespacebarmodel.h \
     include/models/namespacebaritem.h \
+    layouthandler.h
 
 #VIEWS
 HEADERS += include/views/beziercurve.h \

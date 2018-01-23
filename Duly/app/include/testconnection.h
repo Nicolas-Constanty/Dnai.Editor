@@ -87,7 +87,7 @@ public slots:
 
     void updateTOTO() {
         POPI toto;
-        toto.a = 3.14000000;
+        toto.a = 3.14000000f;
         toto.b = 5.3212;
         toto.c = 8;
         toto.d = 567890;
@@ -106,6 +106,7 @@ public:
     }
 
     void onReceiveEventPopole(void *data, unsigned int size) {
+        (void)(data);
         qDebug() << size;
         //Declare secondDeclare;
         //secondDeclare.ParseFromArray(data, size);

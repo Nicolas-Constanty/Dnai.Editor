@@ -3,7 +3,10 @@
 
 #include <QObject>
 #include <QModelIndex>
+#include "imodel.h"
 
+namespace duly_gui {
+namespace models {
 class NameSpaceBarItem : public QObject
 {
     Q_OBJECT
@@ -26,11 +29,16 @@ public:
     void setAsChild(bool b);
     QModelIndex idx() const { return m_idx; }
     void setIdx(const QModelIndex &idx);
-
+    void setModel(IModel *model);
+    IModel *model() const { return m_model; }
 private:
     QString m_path;
     bool m_asChild;
     QModelIndex m_idx;
+    IModel *m_model;
 };
+
+}
+}
 
 #endif // NAMESPACEBARITEM_H

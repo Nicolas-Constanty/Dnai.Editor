@@ -2,6 +2,8 @@ import QtQuick 2.9
 import QtQuick.Controls 2.2
 import Utils 1.0
 
+import "../Style"
+
 ToolButton {
     id: control
 
@@ -9,9 +11,8 @@ ToolButton {
                             contentItem.implicitWidth + leftPadding + rightPadding)
     implicitHeight: 40
 
-    contentItem: Text {
+    contentItem: Title3 {
         text: control.text
-        font: control.font
         color: control.enabled ? (control.visualFocus ? DulySettings.style.text.lightColor : DulySettings.style.text.color) : DulySettings.style.text.disableColor
         elide: Text.ElideRight
         horizontalAlignment: Text.AlignHCenter

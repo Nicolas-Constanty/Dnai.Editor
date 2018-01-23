@@ -89,10 +89,24 @@
         <file>resources/Layouts/Layout_1.qml</file>
         <file>resources/Layouts/LayoutClassic.qml</file>
         <file>resources/Controls/DMenuItem.qml</file>
-        <file>resources/fonts/Muli-Regular.ttf</file>
         <file>resources/Controls/DMenu.qml</file>
         <file>resources/Controls/DToolButton.qml</file>
         <file>resources/Components/DeclarationView.qml</file>
         <file>resources/Components/TestNode.qml</file>
+        <file>resources/Style/Title1.qml</file>
+        <file>resources/Style/MText.qml</file>
+        <file>resources/Style/MLabel.qml</file>
+        <file>resources/Style/Title2.qml</file>
+        <file>resources/Style/Title3.qml</file>
+        <file>settings/themes/dark1.json</file>
+        <file>resources/fonts/consola.ttf</file>
+        <file>resources/fonts/consolab.ttf</file>
+        <file>resources/fonts/consolai.ttf</file>
+        <file>resources/fonts/consolaz.ttf</file>
+        <file>resources/Panels/ExpendablePanel.qml</file>
+        <file>resources/Style/TitlePanel.qml</file>
+        <file>resources/Style/MButton.qml</file>
+        <file>resources/Components/TreeViewPanel.qml</file>
+        <file>resources/Panels/DragAndDropPanel.qml</file>
     </qresource>
 </RCC>

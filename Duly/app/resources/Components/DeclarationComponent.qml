@@ -4,6 +4,7 @@ import CustomGeometry 1.0
 import CustomViews 1.0
 import Utils 1.0
 
+import "../Style"
 import "../Nodes"
 import "../Nodes/Operator"
 import "../Nodes/Operator/BinaryOperator"
@@ -46,7 +47,7 @@ DropArea {
 
         content: content_item
 
-        Label {
+        MLabel {
             id: zoomText
             text: (content_item.scale * 100) + "%"
             anchors.right: parent.right

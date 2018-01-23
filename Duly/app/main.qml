@@ -34,7 +34,7 @@ ApplicationWindow {
     minimumHeight: 100
     minimumWidth: 300
     title: qsTr("DNAI")
-    color: DulySettings.style.background
+    color: DulySettings.style.background.color
 
     Component.onCompleted: {
         DulySettings.init()

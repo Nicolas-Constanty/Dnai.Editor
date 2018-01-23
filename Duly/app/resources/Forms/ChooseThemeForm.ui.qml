@@ -2,6 +2,8 @@ import QtQuick 2.9
 import QtQuick.Controls 2.2
 import QtQuick.Controls.Styles 1.4
 
+import "../Style"
+
 Item {
     width: 400
     height: 100
@@ -17,7 +19,7 @@ Item {
         width: 400
         height: 150
 
-        Label {
+        MLabel {
             id: label
             x: 29
             y: 44

@@ -1,10 +1,11 @@
 #include <QDebug>
 #include "models/namespacebarmodel.h"
 
+namespace duly_gui {
+namespace models {
 NameSpaceBarModel::NameSpaceBarModel(QList<NameSpaceBarItem *> list, QObject *parent)
     : QAbstractListModel(parent)
 {
-     qDebug() << "yolo";
     for (auto i = 0; i < list.size(); i++)
     {
         if (list[i] != nullptr)
@@ -17,6 +18,7 @@ NameSpaceBarModel::NameSpaceBarModel(QList<NameSpaceBarItem *> list, QObject *pa
 
 int NameSpaceBarModel::rowCount(const QModelIndex &parent) const
 {
+    (void)(parent);
     return m_list.size();
 }
 
@@ -27,7 +29,6 @@ int NameSpaceBarModel::rowCount(const QModelIndex &parent) const
 
 QVariant NameSpaceBarModel::data(const QModelIndex &index, int role) const
 {
-    qDebug() << "yolo";
     if (!index.isValid())
         return QVariant();
 
@@ -38,4 +39,7 @@ QVariant NameSpaceBarModel::data(const QModelIndex &index, int role) const
         return  m_list.at(index.row());
     }
     return QVariant();
+}
+
+}
 }

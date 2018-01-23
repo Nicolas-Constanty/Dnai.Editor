@@ -32,9 +32,9 @@ public:
 
 private:
     void setupModelData(const Project *project, TreeItem *parent);
-    void setupContextModel(const models::Context *context, TreeItem *parent, int currentIdx);
-    void setupClassModel(const models::Class *cl, TreeItem *parent, int currentIdx);
-    void setupFunctionModel(const models::Function *func, TreeItem *parent, int currentIdx);
+    void setupContextModel(models::Context *context, TreeItem *parent, int currentIdx);
+    void setupClassModel(models::Class *cl, TreeItem *parent, int currentIdx);
+    void setupFunctionModel(models::Function *func, TreeItem *parent, int currentIdx);
 
     TreeItem *rootItem;
 };

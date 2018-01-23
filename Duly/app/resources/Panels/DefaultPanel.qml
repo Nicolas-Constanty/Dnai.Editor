@@ -1,6 +1,8 @@
 import QtQuick 2.0
 import QtQuick.Controls 2.0
 
+import "../Style"
+
 Item {
     id: defaultPanel
 
@@ -20,7 +22,6 @@ Item {
         Grid {
             columns: 0
             anchors.fill: parent
-
             Column {
                 id: column
                 width: parent.width
@@ -50,12 +51,10 @@ Item {
                             height: childrenRect.height
                             color: "transparent"
 
-                            Label {
-                                font.pixelSize: 12
+                            MLabel {
                                 text: defaultPanel.title
                                 rightPadding: 10
                                 textFormat: Text.PlainText
-                                verticalAlignment: Text.AlignVCenter
                                 bottomPadding: 0
                                 topPadding: 0
                                 renderType: Text.QtRendering
@@ -77,9 +76,7 @@ Item {
                                 source: "WindowHandle.png"
                             }
                         }
-
                     }
-
                 }
                 Loader { id: content }
             }

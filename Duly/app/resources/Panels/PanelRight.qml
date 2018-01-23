@@ -1,36 +1,31 @@
 import QtQuick 2.0
+import QtQuick.Controls 2.2
 import QtQml.Models 2.1
 
 Panel {
     id: panel
-    property alias dragAndDropPanel: gridView
+    property alias dragAndDropPanel: dragdrop.gridview
 
-    Rectangle {
-        id: containerDrag
-        height: panel.height / 2 - anchors.topMargin
+    Column {
+        id: _col
+        spacing: 6
         anchors.left: panel.left
-        anchors.leftMargin: 10
+        anchors.leftMargin: 6
         anchors.right: panel.right
-        anchors.rightMargin: 10
+        anchors.rightMargin: 6
         anchors.top: panel.top
-        anchors.topMargin: 30
-        color: "#40000000"
-        radius: 5
-        border.color: "#EEEEEE"
-        border.width: 1
+        anchors.topMargin: 6
+        anchors.bottom: panel.bottom
+        anchors.bottomMargin: 6
 
-        GridView {
-            id: gridView
+        DragAndDropPanel {
+            id: dragdrop
+        }
+        ExpendablePanel {
+            title: "Properties panel"
             anchors.left: parent.left
-            anchors.leftMargin: 10
             anchors.right: parent.right
-            anchors.rightMargin: 10
-            anchors.top: parent.top
-            anchors.topMargin: 10
-            anchors.bottom: parent.bottom
-            anchors.bottomMargin: 10
-            cellWidth: 60
-            cellHeight: 60
+            height: (parent.height - 6 * (parent.children.length -1)) / (parent.children.length)
         }
     }
 

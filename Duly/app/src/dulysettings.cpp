@@ -7,6 +7,7 @@ namespace duly_gui
 {
 	DulySettings::DulySettings(QObject* parent) : QObject(parent)
     {
+//        m_settings.clear();
 		m_style = new DulySettingsModel(nullptr);
 		const auto theme = m_settings.value("themes/current/theme").toString();
 		m_isInit = theme != "";
@@ -100,18 +101,18 @@ namespace duly_gui
 
 		if (pair.second == "family")
 		{
-			for (auto i = 0; i < m_families.count(); i++)
-			{
+            for (auto i = 0; i < m_families.count(); i++)
+            {
                 if (database.hasFamily(m_families[i]))
                     family = m_families[i];
-			}
+            }
             if (family == "")
             {
                 const auto id = QFontDatabase::addApplicationFont(variant.toString());
                 family = QFontDatabase::applicationFontFamilies(id).at(0);
                 m_families.append(family);
             }
-			pair.first->setProperty(pair.second.toLatin1().data(), family);
+            pair.first->setProperty(pair.second.toLatin1().data(), family);
 		}
 		else
         {
@@ -134,7 +135,7 @@ namespace duly_gui
             const auto newPath = path.section('/', 1, -1);
             const auto prop = item->property(qb->constData());
             item = qvariant_cast<QQuickItem *>(prop);
-			pair = getFinalProperty(item, newPath);
+            pair = getFinalProperty(item, newPath);
         }
         else
         {

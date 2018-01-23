@@ -6,6 +6,7 @@ import Utils 1.0
 
 import "../Forms"
 import "../Nodes"
+import "../Style"
 
 NodeForm {
     property NodeModel model
@@ -71,17 +72,12 @@ NodeForm {
                     else if (t == IOType.Generic)
                         DulySettings.style.nodes.genericNode.color
                 }
-                Label {
+                MLabel {
                     anchors.topMargin: - i.radius / 2
                     anchors.leftMargin: i.radius * 4
                     text: n
                     anchors.left: parent.left
                     anchors.top: parent.top
-                    verticalAlignment: Text.AlignVCenter
-                    horizontalAlignment: Text.AlignHCenter
-                    color: DulySettings.style.text.color
-                    font.family: DulySettings.style.font.family
-                    font.pixelSize: DulySettings.style.font.pixelSize
                 }
             }
         }
@@ -117,17 +113,12 @@ NodeForm {
                     else if (t == IOType.Generic)
                         DulySettings.style.nodes.genericNode.color
                 }
-                Label {
+                MLabel {
                     anchors.topMargin: - o.radius / 2
                     anchors.leftMargin: - o.radius - width
                     text: n
                     anchors.left: parent.left
                     anchors.top: parent.top
-                    verticalAlignment: Text.AlignVCenter
-                    horizontalAlignment: Text.AlignHCenter
-                    color: DulySettings.style.text.color
-                    font.family: DulySettings.style.font.family
-                    font.pixelSize: DulySettings.style.font.pixelSize
                 }
             }
         }

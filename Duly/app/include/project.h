@@ -28,7 +28,7 @@ struct Count {
 }
 
 namespace duly_gui {
-    class Project: public models::Common, virtual public models::IModel
+    class Project: public models::Common
     {
     public:
         Project(const QString &, const QString &, const QString &, QFile &);

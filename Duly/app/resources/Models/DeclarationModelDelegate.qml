@@ -3,6 +3,7 @@ import QtQuick.Controls 2.2
 import QtQml.Models 2.3
 import Utils 1.0
 
+import "../Style"
 import "../JavaScript/CreateComponent.js" as Factory
 
 DelegateModel {
@@ -115,16 +116,10 @@ DelegateModel {
                 Drag.active: mouseArea.drag.active
                 Drag.hotSpot.x: height / 2
                 Drag.hotSpot.y: width / 2
-                Label {
+                MLabel {
                     id: label
                     text: model.name
-                    color: DulySettings.style.text.color
-                    font.family: DulySettings.style.font.family
-                    font.pixelSize: DulySettings.style.font.pixelSize
-                    verticalAlignment: Text.AlignVCenter
-                    horizontalAlignment: Text.AlignHCenter
                     anchors.centerIn: parent
-
                 }
                 states: State {
                     when: mouseArea.drag.active

@@ -2,7 +2,9 @@ import QtQuick 2.4
 import QtQuick.Controls 2.2
 import CustomGeometry 1.0
 import CustomViews 1.0
+
 import Utils 1.0
+import "../Style"
 
 GenericNode {
     id: node
@@ -39,30 +41,20 @@ GenericNode {
         borderColor: "#7C7C7C"
         fillColor: "#aa101010"
         antialiasing: true
-        Label {
+        MLabel {
             id: _name
             text: "Node name"
             anchors.top: parent.top
             anchors.topMargin: 5
             anchors.horizontalCenter: parent.horizontalCenter
-            verticalAlignment: Text.AlignVCenter
-            horizontalAlignment: Text.AlignHCenter
-            color: DulySettings.style.text.color
-            font.family: DulySettings.style.font.family
-            font.pixelSize: DulySettings.style.font.pixelSize
         }
-        Label {
+        MLabel {
             id: _description
             text: "This is the node description"
             font.italic: true
             anchors.top: parent.top
             anchors.topMargin: _name.height * 1.3
             anchors.horizontalCenter: parent.horizontalCenter
-            verticalAlignment: Text.AlignVCenter
-            horizontalAlignment: Text.AlignHCenter
-            color: DulySettings.style.text.color
-            font.family: DulySettings.style.font.family
-            font.pixelSize: DulySettings.style.font.pixelSize
         }
     }
     RoundedRectangle {

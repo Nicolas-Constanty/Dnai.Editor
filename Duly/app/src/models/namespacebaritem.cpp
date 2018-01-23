@@ -1,5 +1,9 @@
 #include "models/namespacebaritem.h"
 
+
+namespace duly_gui {
+namespace models {
+
 void NameSpaceBarItem::setPath(const QString &s)
 {
     if (s == m_path)
@@ -23,3 +27,11 @@ void NameSpaceBarItem::setIdx(const QModelIndex &idx)
     m_idx = idx;
     emit idxChanged(idx);
 }
+
+void NameSpaceBarItem::setModel(IModel *model)
+{
+    m_model = model;
+}
+}
+}
+

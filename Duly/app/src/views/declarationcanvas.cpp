@@ -11,40 +11,44 @@ namespace duly_gui
 		DeclarationCanvas::DeclarationCanvas(QQuickItem* parent) : DulyCanvas(parent)
 		{
 
-		}
+        }
 
 		void DeclarationCanvas::CreateClass(const models::Class* cl, const bool recursif)
 		{
             if (components.size() == 0)
                 initComponents();
-			auto obj = static_cast<QQuickItem *>(components[0]->create());
-			obj->setParentItem(DulyApp::currentCanvasInstance());
-			
-			const auto app = static_cast<DulyApp *>(DulyApp::instance());
-			const auto sets = app->settings()->style();
-            obj->setProperty("type", DeclarationTypeRessouce::DeclarationType::Class);
-			obj->setProperty("width", sets->declarationView()->itemSize());
-			obj->setProperty("height", sets->declarationView()->itemSize());
-			obj->setProperty("name", cl->name());
-			obj->setProperty("description", cl->description());
-            obj->setProperty("xPos", cl->position().x());
-            obj->setProperty("yPos", cl->position().y());
-			obj->setProperty("radius", sets->declarationView()->declClass()->radius());
-			obj->setProperty("color", sets->declarationView()->declClass()->background());
-			obj->setProperty("borderColor", sets->declarationView()->declClass()->border()->color());
-			obj->setProperty("borderWidth", sets->declarationView()->declClass()->border()->width());
+            if (!recursif)
+            {
+                auto obj = static_cast<QQuickItem *>(components[0]->create());
+                obj->setParentItem(DulyApp::currentCanvasInstance()->content());
+
+                const auto app = static_cast<DulyApp *>(DulyApp::instance());
+                const auto sets = app->settings()->style();
+                obj->setProperty("type", DeclarationTypeRessouce::DeclarationType::Class);
+                obj->setProperty("width", sets->declarationView()->itemSize());
+                obj->setProperty("height", sets->declarationView()->itemSize());
+                obj->setProperty("name", cl->name());
+                obj->setProperty("description", cl->description());
+                obj->setProperty("xPos", cl->position().x());
+                obj->setProperty("yPos", cl->position().y());
+                obj->setProperty("radius", sets->declarationView()->declClass()->radius());
+                obj->setProperty("color", sets->declarationView()->declClass()->background());
+                obj->setProperty("borderColor", sets->declarationView()->declClass()->border()->color());
+                obj->setProperty("borderWidth", sets->declarationView()->declClass()->border()->width());
+            }
+
 
 			if (recursif)
 			{
+                const auto functions = cl->functions();
+                for (auto i = 0; i < functions.size(); i++)
+                {
+                    CreateFunction(functions[i]);
+                }
 				const auto variables = cl->attributes();
 				for (auto i = 0; i < variables.size(); i++)
 				{
 					CreateVariable(variables[i]);
-				}
-				const auto functions = cl->functions();
-				for (auto i = 0; i < functions.size(); i++)
-				{
-					CreateFunction(functions[i]);
 				}
 			}
 		}
@@ -53,45 +57,49 @@ namespace duly_gui
 		{
             if (components.size() == 0)
                 initComponents();
-			auto obj = static_cast<QQuickItem *>(components[0]->create());
-			obj->setParentItem(DulyApp::currentCanvasInstance());
+            if (!recursif)
+            {
+                auto obj = static_cast<QQuickItem *>(components[0]->create());
+                obj->setParentItem(DulyApp::currentCanvasInstance()->content());
 
-			const auto app = static_cast<DulyApp *>(DulyApp::instance());
-			const auto sets = app->settings()->style();
-            obj->setProperty("type", DeclarationTypeRessouce::DeclarationType::Context);
-			obj->setProperty("width", sets->declarationView()->itemSize());
-			obj->setProperty("height", sets->declarationView()->itemSize());
-			obj->setProperty("name", cl->name());
-			obj->setProperty("description", cl->description());
-            obj->setProperty("xPos", cl->position().x());
-            obj->setProperty("yPos", cl->position().y());
-			obj->setProperty("radius", sets->declarationView()->declContext()->radius());
-			obj->setProperty("color", sets->declarationView()->declContext()->background());
-			obj->setProperty("borderColor", sets->declarationView()->declContext()->border()->color());
-			obj->setProperty("borderWidth", sets->declarationView()->declContext()->border()->width());
+                const auto app = static_cast<DulyApp *>(DulyApp::instance());
+                const auto sets = app->settings()->style();
+                obj->setProperty("type", DeclarationTypeRessouce::DeclarationType::Context);
+                obj->setProperty("width", sets->declarationView()->itemSize());
+                obj->setProperty("height", sets->declarationView()->itemSize());
+                obj->setProperty("name", cl->name());
+                obj->setProperty("description", cl->description());
+                obj->setProperty("xPos", cl->position().x());
+                obj->setProperty("yPos", cl->position().y());
+                obj->setProperty("radius", sets->declarationView()->declContext()->radius());
+                obj->setProperty("color", sets->declarationView()->declContext()->background());
+                obj->setProperty("borderColor", sets->declarationView()->declContext()->border()->color());
+                obj->setProperty("borderWidth", sets->declarationView()->declContext()->border()->width());
+            }
+
 
 			if (recursif)
-			{
-				const auto variables = cl->variables();
-				for (auto i = 0; i < variables.size(); i++)
-				{
-					CreateVariable(variables[i]);
-				}
-				const auto functions = cl->functions();
-				for (auto i = 0; i < functions.size(); i++)
-				{
-					CreateFunction(functions[i]);
-				}
+            {
+                const auto context = cl->contexts();
+                for (auto i = 0; i < context.size(); i++)
+                {
+                    CreateContext(context[i], false);
+                }
 				const auto classes = cl->classes();
 				for (auto i = 0; i < classes.size(); i++)
 				{
 					CreateClass(classes[i], false);
 				}
-				const auto context = cl->contexts();
-				for (auto i = 0; i < context.size(); i++)
+                const auto functions = cl->functions();
+                for (auto i = 0; i < functions.size(); i++)
                 {
-					CreateContext(context[i], false);
-				}
+                    CreateFunction(functions[i]);
+                }
+                const auto variables = cl->variables();
+                for (auto i = 0; i < variables.size(); i++)
+                {
+                    CreateVariable(variables[i]);
+                }
 			}
 		}
 
@@ -100,7 +108,7 @@ namespace duly_gui
             if (components.size() == 0)
                 initComponents();
 			auto obj = static_cast<QQuickItem *>(components[0]->create());
-			obj->setParentItem(DulyApp::currentCanvasInstance());
+            obj->setParentItem(DulyApp::currentCanvasInstance()->content());
 
 			const auto app = static_cast<DulyApp *>(DulyApp::instance());
 			const auto sets = app->settings()->style();
@@ -128,7 +136,7 @@ namespace duly_gui
             if (components.size() == 0)
                 initComponents();
 			auto obj = static_cast<QQuickItem *>(components[0]->create());
-			obj->setParentItem(DulyApp::currentCanvasInstance());
+            obj->setParentItem(DulyApp::currentCanvasInstance()->content());
 
 			const auto app = static_cast<DulyApp *>(DulyApp::instance());
 			const auto sets = app->settings()->style();

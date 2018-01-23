@@ -2,7 +2,9 @@ import QtQuick 2.0
 import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.2
 import QtQuick.Controls.Styles 1.4
+
 import Utils 1.0
+import "../Style"
 
 Panel {
     id: panel
@@ -19,14 +21,12 @@ Panel {
             Button {
                 id: button
                 height: view.height
-                contentItem: Text {
+                contentItem: MText {
                     text: model.modelData.path
-                    color: DulySettings.style.text.color
-                    font.family: DulySettings.style.font.family
                 }
                 background: Rectangle {
                     id: back
-                    color: button.pressed ? DulySettings.style.delegateColor : button.hovered ? DulySettings.style.alternateBackground : "transparent"
+                    color: button.pressed ? DulySettings.style.background.darkColor : button.hovered ? DulySettings.style.background.lightColor : "transparent"
                     border.color: DulySettings.style.border.color
                 }
                 onClicked: {
@@ -38,14 +38,12 @@ Panel {
                 anchors.left: button.right
                 anchors.leftMargin: -1
                 height: view.height
-                contentItem: Text {
+                contentItem: MText {
                     text: ">"
-                    color: DulySettings.style.text.color
-                    font.family: DulySettings.style.font.family
                 }
                 background: Rectangle {
                     id: back1
-                    color: button1.pressed ? DulySettings.style.delegateColor : button1.hovered ? DulySettings.style.alternateBackground : "transparent"
+                    color: button1.pressed ? DulySettings.style.background.darkColor : button1.hovered ? DulySettings.style.background.lightColor : "transparent"
                     border.color: DulySettings.style.border.color
                 }
                 visible: model.modelData.asChild

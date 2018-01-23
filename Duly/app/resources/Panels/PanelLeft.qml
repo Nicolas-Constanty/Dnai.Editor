@@ -1,45 +1,42 @@
 import QtQuick 2.0
-import QtQuick.Controls 1.4
-import QtQuick.Controls.Styles 1.4
 import Utils 1.0
 
+import "../Components"
 import "../Panels"
+import "../Style"
 
 Panel {
     id: panel
-    property alias treeview: tr
-    TreeView {
+    property alias treeview: tr.treeview
 
-        function changeCurrent(cur)
-        {
-            console.log(cur)
-            tr.selection.select(cur)
-            Manager.selectTreeItem(cur)
-        }
-
-        id: tr
-        height: panel.height / 2 - anchors.topMargin
+    Column {
+        id: _col
+        spacing: 6
         anchors.left: panel.left
-        anchors.leftMargin: 10
+        anchors.leftMargin: 6
         anchors.right: panel.right
-        anchors.rightMargin: 10
+        anchors.rightMargin: 6
         anchors.top: panel.top
-        anchors.topMargin: 30
-        model: Manager.projectModel
-        TableViewColumn {
-            title: "Project"
-            role: "display"
+        anchors.topMargin: 6
+        anchors.bottom: panel.bottom
+        anchors.bottomMargin: 6
+
+        TreeViewPanel {
+            id: tr
+            title: qsTr("Solution Explorer")
+            anchors.left: parent.left
+            anchors.right: parent.right
+            height: (parent.height - 6 * (parent.children.length -1)) / (parent.children.length)
         }
-        style: TreeViewStyle {
-            alternateBackgroundColor : DulySettings.style.alternateBackground
-            backgroundColor : DulySettings.style.background
-            highlightedTextColor : DulySettings.style.text.accentColor
-            textColor : DulySettings.style.text.color
-        }
-        onClicked: {
-            Manager.updateNamespace(index)
+
+        ExpendablePanel {
+            title: "Test title"
+            anchors.left: parent.left
+            anchors.right: parent.right
+            height: (parent.height - 6 * (parent.children.length -1)) / (parent.children.length)
         }
     }
+
     states: [
         State{
             name: "Visible"

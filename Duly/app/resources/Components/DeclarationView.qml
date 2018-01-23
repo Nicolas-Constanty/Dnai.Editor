@@ -3,6 +3,8 @@ import QtQuick.Controls 2.2
 import QtQml.Models 2.3
 import Utils 1.0
 
+import "../Style"
+
 Item {
     id: item
 
@@ -59,15 +61,10 @@ Item {
             Drag.active: mouseArea.drag.active
             Drag.hotSpot.x: 25
             Drag.hotSpot.y: 25
-            Label {
+            MLabel {
                 id: label
                 text: qsTr(item.name)
-                color: DulySettings.style.text.color
-                verticalAlignment: Text.AlignVCenter
-                horizontalAlignment: Text.AlignHCenter
                 anchors.centerIn: parent
-                font.pixelSize: DulySettings.style.font.pixelSize
-                font.family: DulySettings.style.font.family
             }
             states: State {
                 when: mouseArea.drag.active

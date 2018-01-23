@@ -229,8 +229,20 @@ namespace duly_gui
 				return;
 			m_content = ct;
 			emit contentChanged(ct);
-			update();
-		}
+            update();
+        }
+
+        void DulyCanvas::resetContent()
+        {
+            if (m_content &&  m_content->childItems().size() > 0)
+            {
+                while (!m_content->childItems().isEmpty()) {
+                    delete m_content->childItems().first();
+                }
+                m_content->childItems().clear();
+                zoom(1, QPoint(0,0));
+            }
+        }
 
 		QSGNode *DulyCanvas::updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *)
 		{

@@ -74,10 +74,12 @@ static void registerUtils()
     qmlRegisterType<duly_gui::QDeclarationView>("Utils", 1, 0, "QDeclarationView");
     qmlRegisterType<duly_gui::QTextSettings>("Utils", 1, 0, "QTextSettings");
     qmlRegisterType<duly_gui::QFontSettings>("Utils", 1, 0, "QFontSettings");
+    qmlRegisterType<duly_gui::MenuSettings>("Utils", 1, 0, "MenuSettings");
+    qmlRegisterType<duly_gui::QBackground>("Utils", 1, 0, "QBackground");
 //    qRegisterMetaType<duly_gui::models::TreeModel*>("TreeModel*");
     qmlRegisterType<duly_gui::models::TreeModel>("Utils", 1, 0, "TreeModel");
-    qmlRegisterType<NameSpaceBarItem>("Utils", 1, 0, "NameSpaceBarItem");
-    qmlRegisterType<NameSpaceBarModel>("Utils", 1, 0, "NameSpaceBarModel");
+    qmlRegisterType<duly_gui::models::NameSpaceBarItem>("Utils", 1, 0, "NameSpaceBarItem");
+    qmlRegisterType<duly_gui::models::NameSpaceBarModel>("Utils", 1, 0, "NameSpaceBarModel");
 //    qmlRegisterType<duly_gui::models::TreeItem>("Utils", 1, 0, "TreeItem");
 }
 
@@ -144,8 +146,6 @@ int main(int argc, char *argv[])
     timer3->start(5000);*/
 
     // FIN CODE COMMUNICATION SERVER
-
-
 
     return app.exec();
 }

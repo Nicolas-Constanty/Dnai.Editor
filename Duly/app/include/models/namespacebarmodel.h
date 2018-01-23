@@ -3,6 +3,8 @@
 #include "namespacebaritem.h"
 #include <QAbstractListModel>
 
+namespace duly_gui {
+namespace models {
 class NameSpaceBarModel : public QAbstractListModel
 {
     Q_OBJECT
@@ -21,5 +23,8 @@ public:
 private:
     QList<QVariant> m_list;
 };
+}
+}
+
 
 #endif // NAMESPACEBARMODEL_H

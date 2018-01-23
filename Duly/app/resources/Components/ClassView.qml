@@ -2,6 +2,8 @@ import QtQuick 2.9
 import QtQuick.Controls 2.2
 import QtQml.Models 2.3
 
+import "../Style"
+
 Item {
     id: item
 
@@ -56,7 +58,7 @@ Item {
             Drag.active: mouseArea.drag.active
             Drag.hotSpot.x: 25
             Drag.hotSpot.y: 25
-            Label {
+            MLabel {
                 id: label
                 text: item.name
                 verticalAlignment: Text.AlignVCenter

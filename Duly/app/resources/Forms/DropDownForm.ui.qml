@@ -4,6 +4,7 @@ import QtQuick.Controls 2.2
 import Qt.labs.settings 1.0
 
 import Utils 1.0
+import "../Style"
 
 Item {
     property alias name: label.text
@@ -36,14 +37,11 @@ Item {
             anchors.leftMargin: 0
             anchors.right: parent.right
             anchors.rightMargin: 0
-            Label {
+            MLabel {
                 id: label
                 anchors.left: parent.left
                 anchors.leftMargin: 0
                 anchors.verticalCenter: parent.verticalCenter
-                color: DulySettings.style.text.color
-                font.family: DulySettings.style.font.family
-                font.pixelSize: DulySettings.style.font.pixelSize
             }
             ComboBox {
                 id: comboBox

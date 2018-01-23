@@ -3,6 +3,8 @@ import QtQuick.Dialogs 1.2
 import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
 
+import "../Style"
+
 Page {
     property alias fileDialog: fileDialog
     property alias chooseButton: pathButton
@@ -33,7 +35,7 @@ Page {
         RowLayout {
             anchors.left: parent.left
             anchors.right: parent.right
-            Label {
+            MLabel {
                 id: pathLabel
                 text: qsTr("Create in : ")
                 anchors.left: parent.left
@@ -57,7 +59,7 @@ Page {
         RowLayout {
             anchors.left: parent.left
             anchors.right: parent.right
-            Label {
+            MLabel {
                 id: nameLabel
                 text: qsTr("Name : ")
                 anchors.left: parent.left
@@ -73,7 +75,7 @@ Page {
         RowLayout {
             anchors.left: parent.left
             anchors.right: parent.right
-            Label {
+            MLabel {
                 id: descriptionLabel
                 text: qsTr("Description : ")
                 anchors.left: parent.left

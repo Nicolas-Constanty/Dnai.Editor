@@ -2,21 +2,21 @@
 
 namespace duly_gui
 {
-	void QFontSettings::setPixelSize(qreal s)
-	{
-		if (m_pixelSize == s)
-			return;
-		m_pixelSize = s;
-		emit pixelSizeChanged(s);
-	}
+    void QFontSettings::setPixelSize(qreal s)
+    {
+        if (m_pixelSize == s)
+            return;
+        m_pixelSize = s;
+        emit pixelSizeChanged(s);
+    }
 
-	void QFontSettings::setFamily(const QString& s)
-	{
-		if (m_family == s)
-			return;
-		m_family = s;
-		emit familyChanged(s);
-	}
+    void QFontSettings::setFamily(const QString& s)
+    {
+        if (m_family == s)
+            return;
+        m_family = s;
+        emit familyChanged(s);
+    }
 
 	void QTextSettings::setColor(const QColor& color)
 	{
@@ -324,22 +324,6 @@ namespace duly_gui
 
 	}
 
-	void DulySettingsModel::setBackground(const QColor& color)
-	{
-		if (m_background == color)
-			return;
-		m_background = color;
-		emit backgroundChanged(color);
-	}
-
-    void DulySettingsModel::setAlternateBackground(const QColor& color)
-    {
-        if (m_alternateBackground == color)
-            return;
-        m_alternateBackground = color;
-        emit alternateBackgroundChanged(color);
-    }
-
 	void DulySettingsModel::setShadowColor(const QColor& color)
 	{
 		if (m_shadowColor == color)
@@ -349,22 +333,30 @@ namespace duly_gui
 		
 	}
 
-	void DulySettingsModel::setBorder(QBorder *b)
+    void DulySettingsModel::setMenu(MenuSettings *m)
+    {
+        if (m_menu == m)
+            return;
+        m_menu = m;
+        emit menuChanged(m);
+    }
+
+    void DulySettingsModel::setBackground(QBackground *b)
+    {
+        if (m_background == b)
+            return;
+        m_background = b;
+        emit backgroundChanged(b);
+    }
+
+    void DulySettingsModel::setBorder(QBorder *b)
 	{
 		if (m_border == b)
 			return;
 		m_border = b;
 		emit borderChanged(b);
 		
-	}
-
-	void DulySettingsModel::setDelegateColor(const QColor& color)
-	{
-		if (m_delegateColor == color)
-			return;
-		m_delegateColor = color;
-		emit delegateColorChanged(color);
-	}
+    }
 
 	void DulySettingsModel::setCanvas(QCanvas *c)
 	{
@@ -393,20 +385,73 @@ namespace duly_gui
 		
 	}
 
-    void DulySettingsModel::setFont(QFontSettings* f)
+    void DulySettingsModel::setFont(QFontSettings *f)
 	{
-		if (m_font == f)
-			return;
+        if (m_font == f)
+            return;
 		m_font = f;
 		emit fontChanged(f);
 		
 	}
 
-	void DulySettingsModel::setText(QTextSettings* t)
+    void DulySettingsModel::setText(QTextSettings* t)
 	{
 		if (m_text == t)
 			return;
 		m_text = t;
-		emit textChanged(t);
-	}
+        emit textChanged(t);
+    }
+
+    DulySettingsModel::DulySettingsModel(QQuickItem *parent) : QQuickItem(parent)
+      , m_background(new QBackground(this))
+      , m_menu(new MenuSettings(this))
+      , m_border(new QBorder(this))
+      , m_canvas(new QCanvas(this))
+      , m_nodes(new QNodes(this))
+      , m_declarationView(new QDeclarationView(this))
+      , m_font(new QFontSettings(this))
+      , m_text(new QTextSettings(this))
+    {
+    }
+
+    void MenuSettings::setBackground(QBackground *b)
+    {
+        if (m_background == b)
+            return;
+        m_background = b;
+        emit backgroundChanged(b);
+    }
+
+    void MenuSettings::setBorder(QBorder *b)
+    {
+        if (m_border == b)
+            return;
+        m_border = b;
+        emit borderChanged(b);
+    }
+
+    void QBackground::setColor(const QColor &c)
+    {
+        if (m_color == c)
+            return;
+        m_color = c;
+        emit colorChanged(c);
+    }
+
+    void QBackground::setDarkColor(const QColor &c)
+    {
+        if (m_darkColor == c)
+            return;
+        m_darkColor = c;
+        emit darkColorChanged(c);
+    }
+
+    void QBackground::setLightColor(const QColor &c)
+    {
+        if (m_lightColor == c)
+            return;
+        m_lightColor = c;
+        emit lightColorChanged(c);
+    }
+
 }

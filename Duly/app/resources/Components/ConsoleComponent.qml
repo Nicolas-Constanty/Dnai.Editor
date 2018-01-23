@@ -3,7 +3,7 @@ import QtQuick.Controls 2.0
 import Utils 1.0
 
 import "../Forms"
-
+import "../Style"
 
 ConsoleForm {
     property int startPos: y
@@ -16,7 +16,7 @@ ConsoleForm {
         height: 25
         color: "transparent"
         width: parent.width
-        Label {
+        MLabel {
             text: if (modelData.substring(0, 2) === "[#")
                   {
                         color = modelData.substring(1, 8)

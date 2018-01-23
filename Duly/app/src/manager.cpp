@@ -6,6 +6,7 @@
 #include "dulyapp.h"
 #include "views/declarationcanvas.h"
 #include "models/treeitem.h"
+#include "models/imodel.h"
 
 namespace duly_gui {
     const QString Manager::project_extension = ".dulyproject";
@@ -65,6 +66,7 @@ namespace duly_gui {
 
     void Manager::openProject(Project *project)
     {
+        DulyApp::currentCanvasInstance()->resetContent();
         m_project = project;
         m_project->declare();
         createTreeModel(m_project);
@@ -77,6 +79,16 @@ namespace duly_gui {
     {
         m_currentPath = static_cast<models::TreeItem*>(index.internalPointer());
         createNameSpaceModel(m_currentPath);
+        DulyApp::currentCanvasInstance()->resetContent();
+        models::IModel *model = m_currentPath->model();
+        if (dynamic_cast<models::Context*>(model))
+        {
+            views::DeclarationCanvas::CreateContext(static_cast<models::Context*>(static_cast<models::Common*>(model)), true);
+        }
+        if (dynamic_cast<models::Class*>(model))
+        {
+            views::DeclarationCanvas::CreateClass(static_cast<models::Class*>(static_cast<models::Common*>(model)), true);
+        }
     }
 
     void Manager::selectTreeItem(const QModelIndex &index)
@@ -108,15 +120,16 @@ namespace duly_gui {
     {
         QList<QObject *> temp;
 
-        auto ns = new NameSpaceBarItem();
+        auto ns = new models::NameSpaceBarItem();
         ns->setPath(item->data(0).toString());
         ns->setAsChild(item->childCount());
         ns->setIdx(item->idxmodel());
+        ns->setModel(item->model());
         temp.append(ns);
         while (item->parentItem()->parentItem())
         {
             item = item->parentItem();
-            ns = new NameSpaceBarItem();
+            ns = new models::NameSpaceBarItem();
             ns->setPath(item->data(0).toString());
             ns->setAsChild(item->childCount());
             temp.append(ns);

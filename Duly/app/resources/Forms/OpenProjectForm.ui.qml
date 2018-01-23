@@ -4,6 +4,7 @@ import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
 
 import Utils 1.0
+import "../Style"
 
 Page {
     property alias fileDialog: fileDialog
@@ -14,7 +15,7 @@ Page {
     property alias viewData: viewData
 
     background: Rectangle {
-        color: DulySettings.style.background
+        color: DulySettings.style.background.color
     }
 
     FileDialog {
@@ -27,16 +28,11 @@ Page {
     TabBar {
         width: parent.width
         TabButton {
-            contentItem: Text {
+            contentItem: MText {
                 text: qsTr("Open a project")
-                color: DulySettings.style.text.color
-                font.family: DulySettings.style.font.family
-                font.pixelSize: DulySettings.style.font.pixelSize
-                horizontalAlignment: Text.AlignHCenter
-                verticalAlignment: Text.AlignVCenter
             }
             background: Rectangle {
-                color: DulySettings.style.background
+                color: DulySettings.style.background.color
             }
         }
     }
@@ -48,13 +44,10 @@ Page {
         RowLayout {
             anchors.left: parent.left
             anchors.right: parent.right
-            Label {
+            MLabel {
                 id: pathLabel
                 text: qsTr("Open : ")
                 anchors.left: parent.left
-                color: DulySettings.style.text.color
-                font.family: DulySettings.style.font.family
-                font.pixelSize: DulySettings.style.font.pixelSize
             }
             TextField {
                 id: projectPath
@@ -99,23 +92,18 @@ Page {
     footer: ToolBar {
         background: Rectangle {
             implicitHeight: 40
-            color: DulySettings.style.background
+            color: DulySettings.style.background.color
         }
         ToolButton {
             id: cancelButton
             anchors.left: parent.left
             leftPadding: 20
             rightPadding: 20
-            contentItem: Text {
+            contentItem: MText {
                 text: qsTr("Cancel")
-                color: DulySettings.style.text.color
-                font.family: DulySettings.style.font.family
-                font.pixelSize: DulySettings.style.font.pixelSize
-                horizontalAlignment: Text.AlignHCenter
-                verticalAlignment: Text.AlignVCenter
             }
             background: Rectangle {
-                color: DulySettings.style.background
+                color: DulySettings.style.background.color
             }
         }
         ToolButton {
@@ -123,16 +111,11 @@ Page {
             anchors.right: parent.right
             leftPadding: 20
             rightPadding: 20
-            contentItem: Text {
+            contentItem: MText {
                 text: qsTr("Open")
-                color: DulySettings.style.text.color
-                font.family: DulySettings.style.font.family
-                font.pixelSize: DulySettings.style.font.pixelSize
-                horizontalAlignment: Text.AlignHCenter
-                verticalAlignment: Text.AlignVCenter
             }
             background: Rectangle {
-                color: DulySettings.style.background
+                color: DulySettings.style.background.color
             }
         }
     }

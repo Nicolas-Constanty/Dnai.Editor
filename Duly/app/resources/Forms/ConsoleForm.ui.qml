@@ -3,6 +3,8 @@ import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.3
 import Utils 1.0
 
+import "../Style"
+
 Item {
     id: defaultPanel
 
@@ -54,13 +56,11 @@ Item {
                             height: parent.height
 
                             color: "transparent"
-                            Label {
+                            MLabel {
                                 id: labelName
-                                font.pixelSize: 12
                                 text: defaultPanel.title
                                 rightPadding: 10
                                 textFormat: Text.PlainText
-                                verticalAlignment: Text.AlignVCenter
                                 bottomPadding: 0
                                 topPadding: 0
                                 renderType: Text.QtRendering
