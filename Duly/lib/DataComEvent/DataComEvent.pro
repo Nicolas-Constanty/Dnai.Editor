@@ -30,7 +30,13 @@ DEFINES += QT_DEPRECATED_WARNINGS
 HEADERS += \
     Shared_include/datacomeventfactory.h \
     Shared_include/packagecore.h \
-    Shared_include/declarecorepackage.h
+    Shared_include/declarecorepackage.h \
+    Shared_include/Buffer.h \
+    Shared_include/ISerializable.h \
+    Shared_include/List.h \
+    Shared_include/Object.h \
+    Shared_include/Scalar.h \
+    Shared_include/commands.h
 
 #CONFIG(release, debug|release) {
 #unix:LIBS += -L$${PWD}/Library/ -lprotobuf
