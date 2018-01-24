@@ -10,7 +10,7 @@
 namespace duly_gui {
     const QString Manager::project_extension = ".dulyproject";
 
-    Manager::Manager(QObject *parent): QObject(parent)
+    Manager::Manager(QObject *parent): QObject(parent), m_user(nullptr)
     {
         m_projectModel = nullptr;
     }
@@ -57,12 +57,22 @@ namespace duly_gui {
         project->unserialize(obj);
         return project;
     }
-
+    
+    models::User *Manager::user() const
+    {
+        return m_user;
+    }
+    
+    void Manager::setUser(models::User *user)
+    {
+        m_user = user;
+    }
+    
     void Manager::openProject(const QString &path)
     {
         this->openProject(this->loadProject(path));
     }
-
+    
     void Manager::openProject(Project *project)
     {
         m_project = project;
@@ -83,6 +93,25 @@ namespace duly_gui {
     {
         m_currentPath = static_cast<models::TreeItem*>(index.internalPointer());
         createNameSpaceModel(m_currentPath);
+    }
+
+    void Manager::signin(const QString &username, const QString &password)
+    {
+        // TODO get user from API
+        api::signin(username, password).map(nullptr, [this](Response response) -> Response {
+            m_user = new models::User();
+            m_user->setName("John Doe");
+            m_user->setProfile_url("../Images/default_user.png");
+            emit userChanged(m_user);
+            return response;
+        });
+    }
+
+    void Manager::logout()
+    {
+        api::logout();
+        delete m_user;
+        m_user = nullptr;
     }
 
     void Manager::setProjectModel(models::TreeModel *model)

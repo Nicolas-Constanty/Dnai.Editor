@@ -29,6 +29,7 @@ namespace duly_gui {
 
     public:
         static Observable &signin(QString const &, QString const &);
+        static void logout();
 
     };
 }

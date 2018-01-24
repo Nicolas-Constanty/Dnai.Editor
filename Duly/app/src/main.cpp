@@ -20,6 +20,7 @@
 #include "api.h"
 
 #include "models/treemodel.h"
+#include "models/user.h"
 
 static QObject *manager_singleton_provider(QQmlEngine *engine, QJSEngine *scriptEngine)
 {
@@ -81,6 +82,7 @@ static void registerUtils()
     qmlRegisterType<duly_gui::models::TreeModel>("Utils", 1, 0, "TreeModel");
     qmlRegisterType<NameSpaceBarItem>("Utils", 1, 0, "NameSpaceBarItem");
     qmlRegisterType<NameSpaceBarModel>("Utils", 1, 0, "NameSpaceBarModel");
+    qmlRegisterType<duly_gui::models::User>("Utils", 1, 0, "User");
 //    qmlRegisterType<duly_gui::models::TreeItem>("Utils", 1, 0, "TreeItem");
 }
 
@@ -116,8 +118,6 @@ int main(int argc, char *argv[])
     ClientController::shared();
 
     duly_gui::http::Service::Init(duly_gui::api::http_config);
-
-    duly_gui::api::signin("root", "Adpa1801").subscribe();
 
     QQmlApplicationEngine engine;
 	app.registerEngine(&engine);

@@ -5,6 +5,8 @@
 #include "project.h"
 #include "models/treemodel.h"
 #include "models/namespacebarmodel.h"
+#include "models/user.h"
+#include "api.h"
 
 namespace duly_gui {
     class Manager: public QObject
@@ -12,6 +14,8 @@ namespace duly_gui {
         Q_OBJECT
         Q_PROPERTY(duly_gui::models::TreeModel *projectModel READ projectModel WRITE setProjectModel NOTIFY projectModelChanged)
         Q_PROPERTY(QVariant namespacebarModel READ namespacebarModel WRITE setNamespacebarModel NOTIFY namespacebarModelChanged)
+        Q_PROPERTY(duly_gui::models::User *user READ user WRITE setUser NOTIFY userChanged)
+
     public:
         Manager(QObject *parent = 0);
         virtual ~Manager();
@@ -31,9 +35,13 @@ namespace duly_gui {
         Q_INVOKABLE void updateNamespace(const QModelIndex &index);
         Q_INVOKABLE void selectTreeItem(const QModelIndex &index);
 
+        Q_INVOKABLE void signin(const QString &, const QString &);
+        Q_INVOKABLE void logout();
+
     signals:
         void projectModelChanged(models::TreeModel *model);
         void namespacebarModelChanged(const QVariant  &ref);
+        void userChanged(models::User *user);
 
     public:
         models::TreeModel *projectModel() const { return m_projectModel; }
@@ -41,11 +49,15 @@ namespace duly_gui {
         QVariant namespacebarModel() const { return m_namespacebarmodel; }
         void setNamespacebarModel(const QVariant &ref);
 
+        models::User *user() const;
+        void setUser(models::User *user);
+
     private:
-         Project *loadProject(const QString &);
-         models::TreeModel *m_projectModel;
+        Project *loadProject(const QString &);
+        models::TreeModel *m_projectModel;
          QVariant m_namespacebarmodel;
          models::TreeItem *m_currentPath;
+         models::User *m_user;
     };
 }
 

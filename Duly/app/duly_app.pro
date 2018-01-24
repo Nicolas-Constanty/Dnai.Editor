@@ -63,6 +63,7 @@ SOURCES += src/baseio.cpp \
     src/models/treeitem.cpp \
     src/models/namespacebarmodel.cpp \
     src/models/namespacebaritem.cpp \
+    src/models/user.cpp
 
 #VIEWS
 SOURCES += src/views/beziercurve.cpp \
@@ -164,6 +165,7 @@ HEADERS += include/baseio.h \
     include/models/treeitem.h \
     include/models/namespacebarmodel.h \
     include/models/namespacebaritem.h \
+    include/models/user.h
 
 #VIEWS
 HEADERS += include/views/beziercurve.h \

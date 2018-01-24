@@ -8,6 +8,8 @@ ColumnLayout {
     property alias createAccount: createAccount
     property alias signin: signin
     property alias forgetPasswordLink: forgetPasswordLink
+    property alias username: login
+    property alias password: password
 
     width: 380
     height: 500
