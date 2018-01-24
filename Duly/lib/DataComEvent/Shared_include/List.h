@@ -63,14 +63,19 @@ public:
 
     size_t SerializeTo(Buffer &buff) const override
     {
-        uint32_t size = 0;
+        uint32_t size = buff.Write(static_cast<uint32_t >(data.size()));
 
-        buff.Write(static_cast<uint32_t >(data.size()));
+        if (size == 0)
+            return size;
 
-        size = sizeof(size);
         for (Stored const &curr : data)
         {
-            size += curr.SerializeTo(buff);
+            size_t s = curr.SerializeTo(buff);
+
+            if (s == 0)
+                return size;
+
+            size += s;
         }
         return size;
     }
@@ -78,13 +83,21 @@ public:
     size_t DeserializeFrom(Buffer &buff) override
     {
         uint32_t cnt;
-        uint32_t size = sizeof(cnt);
+        uint32_t size = buff.Read(cnt);
 
-        buff.Read(cnt);
+        if (size == 0)
+            return size;
+
         for (uint32_t i = 0; i < cnt; i++)
         {
             data.append(Stored());
-            size += data.back().DeserializeFrom(buff);
+
+            size_t s = data.back().DeserializeFrom(buff);
+
+            if (s == 0)
+                return size;
+
+            size += s;
         }
         return size;
     }

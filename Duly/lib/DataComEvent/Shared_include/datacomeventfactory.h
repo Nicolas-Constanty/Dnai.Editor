@@ -3,6 +3,9 @@
 
 //#include "core.pb.h"
 #include <QObject>
+#include <QDebug>
+
+#include "Buffer.h"
 #include "packagecore.h"
 
 
@@ -38,6 +41,25 @@ private:
 
 public:
     DataComEventFactory();
+
+private:
+    template <typename Package, typename ... Params>
+    DataComEvent SerializeCommandToDataComEvent(Params const &... args)
+    {
+        Package pkg(args...);
+        size_t pkgSize = pkg.GetPackageSize();
+        DataComEvent dataCom = createDataComEvent(pkgSize);
+        Buffer buff(dataCom.data, pkgSize);
+
+        if (pkg.SerializeTo(buff) != pkgSize)
+        {
+            qDebug() << QString("DataComEventFactory.SerializePackagedToDataComEvent: Failed to serialize: not enough space into buffer");
+        }
+
+        return dataCom;
+    }
+
+public:
 
     DataComEvent createDeclare(PackageDataCom::ENTITYCORE entity_type,
                        uint32_t containerID,

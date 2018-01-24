@@ -50,46 +50,7 @@ DataComEventFactory::DataComEvent DataComEventFactory::createDeclare(PackageData
                                                  QString const &name,
                                                  PackageDataCom::VISIBILITYCORE visibility) {
 
-    qDebug() << "Real: " << name;
-
-    Command::Declare package(entity_type, containerID, name, visibility);
-
-    Scalar<QString> &packed = std::get<2>(package.Data());
-
-    for (Scalar<char> c : packed.Data())
-    {
-        qDebug() << c.Data();
-    }
-
-    size_t size = package.GetPackageSize();
-
-    DataComEventFactory::DataComEvent dataCom = createDataComEvent(size);
-
-    Buffer buff(dataCom.data, size);
-
-    if (package.SerializeTo(buff) != size)
-    {
-        //failed to serialize
-        qDebug() << "Failed to serialize declare package";
-    }
-
-    return dataCom;
-
-    /*void *tmp = dataCom.data;
-
-    if (dataCom.size == SIZE_PACKAGE_DECLARE(name.size())) {
-        memcpyDataCom(&(dataCom.data), &entity_type, sizeof(entity_type));
-        memcpyDataCom(&(dataCom.data), &containerID, sizeof(containerID));
-
-        qint32 size = name.size();
-        memcpyDataCom(&(dataCom.data), &(size), sizeof(size));
-
-        memcpyDataCom(&(dataCom.data), (void *)(name.toStdString().c_str()), name.size());
-        memcpyDataCom(&(dataCom.data), &visibility, sizeof(visibility));
-    }
-    dataCom.data = tmp;*/
-
-    return dataCom;
+    return SerializeCommandToDataComEvent<Command::Declare>(entity_type, containerID, name, visibility);
 }
 
 void *DataComEventFactory::serializeDeclare(void *data, unsigned int size) {

@@ -44,14 +44,12 @@ public:
 
     size_t SerializeTo(Buffer &buffer) const override
     {
-        buffer.Write(data);
-        return GetPackageSize();
+        return buffer.Write(data);
     }
 
     size_t DeserializeFrom(Buffer &buffer) override
     {
-        buffer.Read(data);
-        return GetPackageSize();
+        return buffer.Read(data);
     }
 
 public:

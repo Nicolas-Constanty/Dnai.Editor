@@ -27,21 +27,23 @@ public:
 
 public:
     template <typename T>
-    void Write(T const &data)
+    size_t Write(T const &data)
     {
         if (index + sizeof(T) > buffSize)
-            throw std::out_of_range("Trying to serialize data out of buffer range : " + std::string(typeid(T).name()));
+            return 0;
         std::memcpy(buffer + index, &data, sizeof(T));
         index += sizeof(T);
+        return sizeof(T);
     }
 
     template <typename T>
-    void Read(T &data)
+    size_t Read(T &data)
     {
         if (index + sizeof(T) > buffSize)
-            throw std::out_of_range("Not enough data in buffer in order to read : " + std::string(typeid(T).name()));
+            return 0;
         std::memcpy(&data, buffer + index, sizeof(T));
         index += sizeof(T);
+        return sizeof(T);
     }
 
     void *getData() const
