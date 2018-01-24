@@ -25,4 +25,15 @@ LoginForm {
         username.text = ""
         password.text = ""
     }
+//    Rectangle {
+//        anchors.fill: parent
+//        opacity: 0.8
+//        z: 99
+//        radius: 10
+//        color: DulySettings.style.background
+//        BusyIndicator {
+//            z: 100
+//            anchors.centerIn: parent
+//        }
+//    }
 }
