@@ -14,10 +14,6 @@ Page {
     property alias projectPath: projectPath
     property alias viewData: viewData
 
-    background: Rectangle {
-        color: DulySettings.style.background
-    }
-
     FileDialog {
         id: fileDialog
         title: "Please choose a project"

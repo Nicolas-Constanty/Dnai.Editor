@@ -429,76 +429,35 @@ Item {
     }
 
     //SETTINGS PANEL
-    Popup {
+    Modal {
         id: settingsPopup
-        background: Rectangle {
-            color: DulySettings.style.background
-        }
-
-        x: parent.width / 2 - width / 2
-        y: appWindow.height / 2 - height / 2
         width: 640
         height: 480
-        modal: true
-        focus: true
-        closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutside
         contentItem: SettingPanel {
             anchors.fill: parent
             id: settingPanel
         }
-
     }
-    Popup {
+
+    Modal {
         id: newProjectPopup
-        x: parent.width / 2 - width / 2
-        y: appWindow.height / 2 - height / 2
-        background: Rectangle {
-            color: DulySettings.style.background
-        }
-        width: 640
-        height: 480
-        modal: true
-        focus: true
-        closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutside
         contentItem: NewProject {
             anchors.fill: parent
             id: newFileProjectPanel
             popup: newProjectPopup
         }
     }
-    Popup {
+
+    Modal {
         id: openProjectPopup
-        x: parent.width / 2 - width / 2
-        y: appWindow.height / 2 - height / 2
-        background: Rectangle {
-            color: DulySettings.style.background
-        }
-        width: 640
-        height: 480
-        modal: true
-        focus: true
-        closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutside
         contentItem: OpenProject {
             anchors.fill: parent
             id: openProjectPanel
             popup: openProjectPopup
         }
     }
-    Popup {
+    Modal {
         id: loginPopup
-        x: parent.width / 2 - width / 2
-        y: appWindow.height / 2 - height / 2
-        background: Rectangle {
-            color: DulySettings.style.background
-            border.color: "#FAFAFA"
-            border.width: 5
-            radius: 10
-        }
-        width: 380
-        height: 500
-        modal: true
-        focus: true
-        closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutside
         contentItem: Login {
             anchors.fill: parent
             id: loginPanel
@@ -506,21 +465,9 @@ Item {
         }
     }
 
-    Popup {
+    Modal {
         id: uploadPopup
-        x: parent.width / 2 - width / 2
-        y: appWindow.height / 2 - height / 2
-        background: Rectangle {
-            color: DulySettings.style.background
-            border.color: "#FAFAFA"
-            border.width: 5
-            radius: 10
-        }
-        width: 500
         height: 100
-        modal: true
-        focus: true
-        closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutside
         contentItem: Upload {
             anchors.fill: parent
             id: uploadPanel
