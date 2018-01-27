@@ -4,11 +4,11 @@
 namespace duly_gui {
     namespace models {
         Variable::Variable(QString const &uid, QString const &name, QString const &description, QVector2D const &position,
-                           QString const &type, bool internal,
+                           QString const &type, bool internal, int index, int listindex,
                            QObject *parent)
-            : Common(uid, name, description, parent), Position(position), m_type(type), m_internal(internal)
+            : Common(uid, name, description, index, listindex, parent), Position(position), m_type(type), m_internal(internal)
         {
-
+            m_type = ModelTypes::Variable;
         }
 
         Variable::~Variable()
@@ -51,7 +51,7 @@ namespace duly_gui {
 
         IClone *Variable::clone() const
         {
-            return new Variable(uid(), name(), description(), position(), type(), internal());
+            return new Variable(uid(), name(), description(), position(), type(), internal(), index(), listIndex());
         }
     }
 }

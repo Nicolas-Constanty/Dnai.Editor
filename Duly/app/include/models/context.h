@@ -14,7 +14,7 @@ namespace duly_gui {
         class Context: public Common, public Position
         {
         public:
-            Context(QString const &, QString const &, QString const &, QVector2D const &, QObject * = nullptr);
+            Context(QString const &, QString const &, QString const &, QVector2D const &, int index, int listindex, QObject * = nullptr);
             virtual ~Context();
 
             //TODO types

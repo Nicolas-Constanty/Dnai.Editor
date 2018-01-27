@@ -14,6 +14,10 @@ namespace duly_gui {
     Manager::Manager(QObject *parent): QObject(parent)
     {
         m_projectModel = nullptr;
+        m_declRef = new DeclarationModel();
+//        auto md = new Declaration();
+//        md->addModel(new duly_gui::models::Context("qsdqsd", "Test", "description", QVector2D(), 0, 0));
+//        m_declRef->addDeclaration(md);
     }
 
     Manager::~Manager()
@@ -66,29 +70,100 @@ namespace duly_gui {
 
     void Manager::openProject(Project *project)
     {
-        DulyApp::currentCanvasInstance()->resetContent();
+//        DulyApp::currentCanvasInstance()->resetContent();
         m_project = project;
         m_project->declare();
         createTreeModel(m_project);
         m_currentPath = static_cast<models::TreeItem*>(m_projectModel->index(0,0).internalPointer());
         createNameSpaceModel(m_currentPath);
-        views::DeclarationCanvas::CreateContext(m_project->main(), true);
+        createDeclarationModel(m_project);
+//        views::DeclarationCanvas::CreateContext(m_project->main(), true);
+    }
+
+    void Manager::setupContextModel(models::Context *context)
+    {
+        if (!m_declRef) return;
+
+        if (context->listIndex() + 1 > m_declRef->rowCount())
+            for (auto i = 0; i < context->listIndex() + 1; i++)
+            {
+                if (i + 1 > m_declRef->rowCount())
+                {
+                    m_declRef->addDeclaration(new Declaration());
+                }
+            }
+        qDebug() << m_declRef->data(m_declRef->index(context->listIndex(), 0));
+//        qDebug() << m_declRef->data(QModelIndex(context->listIndex(), 0, nullptr));
+        qvariant_cast<Declaration *>(m_declRef->data(m_declRef->index(context->listIndex(), 0)))->addModel(context);
+//        qDebug() << "context";
+        const auto contexts = context->contexts();
+        for (auto i = 0; i < contexts.size(); i++)
+            setupContextModel(contexts[i]);
+
+        const auto classes = context->classes();
+        for (auto i = 0; i < classes.size(); i++)
+            setupClassModel(classes[i]);
+
+        const auto functions = context->functions();
+        for (auto i = 0; i < functions.size(); i++)
+            setupFunctionModel(functions[i]);
+    }
+
+    void Manager::setupClassModel(models::Class *cl)
+    {
+        if (!m_declRef) return;
+
+        if (cl->listIndex() + 1 > m_declRef->rowCount())
+            for (auto i = 0; i < cl->listIndex() + 1; i++)
+            {
+                if (i + 1 > m_declRef->rowCount())
+                    m_declRef->addDeclaration(new Declaration());
+            }
+        qvariant_cast<Declaration *>(m_declRef->data(m_declRef->index(cl->listIndex(), 0)))->addModel(cl);
+
+        const auto classes = cl->classes();
+        for (auto i = 0; i < classes.size(); i++)
+            setupClassModel(classes[i]);
+
+        const auto functions = cl->functions();
+        for (auto i = 0; i < functions.size(); i++)
+            setupFunctionModel(functions[i]);
+    }
+
+    void Manager::setupFunctionModel(models::Function *func)
+    {
+        if (!m_declRef) return;
+
+        if (func->listIndex() + 1 > m_declRef->rowCount())
+            for (auto i = 0; i < func->listIndex() + 1; i++)
+            {
+                if (i + 1 > m_declRef->rowCount())
+                    m_declRef->addDeclaration(new Declaration());
+            }
+        qvariant_cast<Declaration *>(m_declRef->data(m_declRef->index(func->listIndex(), 0)))->addModel(func);
+    }
+
+
+    void Manager::createDeclarationModel(Project *project)
+    {
+        setupContextModel(const_cast<duly_gui::models::Context *>(project->main()));
+//        setDeclarationModel(QVariant::fromValue(m_declRef->md()));
     }
 
     void Manager::updateNamespace(const QModelIndex &index)
     {
         m_currentPath = static_cast<models::TreeItem*>(index.internalPointer());
         createNameSpaceModel(m_currentPath);
-        DulyApp::currentCanvasInstance()->resetContent();
+//        DulyApp::currentCanvasInstance()->resetContent();
         models::IModel *model = m_currentPath->model();
-        if (dynamic_cast<models::Context*>(model))
-        {
-            views::DeclarationCanvas::CreateContext(static_cast<models::Context*>(static_cast<models::Common*>(model)), true);
-        }
-        if (dynamic_cast<models::Class*>(model))
-        {
-            views::DeclarationCanvas::CreateClass(static_cast<models::Class*>(static_cast<models::Common*>(model)), true);
-        }
+//        if (dynamic_cast<models::Context*>(model))
+//        {
+//            views::DeclarationCanvas::CreateContext(static_cast<models::Context*>(static_cast<models::Common*>(model)), true);
+//        }
+//        if (dynamic_cast<models::Class*>(model))
+//        {
+//            views::DeclarationCanvas::CreateClass(static_cast<models::Class*>(static_cast<models::Common*>(model)), true);
+//        }
     }
 
     void Manager::selectTreeItem(const QModelIndex &index)
@@ -109,6 +184,12 @@ namespace duly_gui {
     {
         m_namespacebarmodel = ref;
         emit namespacebarModelChanged(ref);
+    }
+
+    void Manager::setDeclarationModel(DeclarationModel *m)
+    {
+        m_declRef = m;
+        emit declarationModelChanged(m);
     }
 
     void Manager::createTreeModel(Project *project)

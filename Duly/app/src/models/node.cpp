@@ -5,7 +5,7 @@
 namespace duly_gui {
     namespace models {
         Node::Node(QString const &uid, QString const &name, QString const &description, QVector2D const &position, Function *function, QObject *parent)
-            : Common(uid, name, description, parent), Position(position), m_function(function)
+            : Common(uid, name, description, 0, 0, parent), Position(position), m_function(function)
         {
 
         }

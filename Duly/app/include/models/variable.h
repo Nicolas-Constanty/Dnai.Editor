@@ -12,7 +12,7 @@ namespace duly_gui {
         class Variable: public Common, public Position, virtual public IModel
         {
         public:
-            Variable(QString const &, QString const &, QString const &, QVector2D const &, QString const &, bool, QObject *parent = nullptr);
+            Variable(const QString &uid, const QString &name, const QString &description, const QVector2D &position, const QString &type, bool internal, int index, int listindex, QObject *parent= nullptr);
             virtual ~Variable();
 
         private:

@@ -4,10 +4,10 @@
 
 namespace duly_gui {
     namespace models {
-        Class::Class(QString const &uid, QString const &name, QString const &description, QVector2D const &position, QObject *parent)
-            : Common(uid, name, description, parent), Position(position)
+        Class::Class(QString const &uid, QString const &name, QString const &description, QVector2D const &position, int index, int listindex, QObject *parent)
+            : Common(uid, name, description, index, listindex, parent), Position(position)
         {
-
+            m_type = ModelTypes::Class;
         }
 
         Class::~Class()
@@ -121,7 +121,7 @@ namespace duly_gui {
 
         IClone *Class::clone() const
         {
-            return new Class(uid(),name(), description(), position());
+            return new Class(uid(),name(), description(), position(), index(), listIndex());
         }
     }
 }

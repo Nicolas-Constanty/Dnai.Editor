@@ -4,10 +4,10 @@
 
 namespace duly_gui {
     namespace models {
-        Function::Function(QString const &uid, QString const &name, QString const &description, QVector2D const &position, QObject *parent)
-            : Common(uid, name, description, parent), Position(position)
+        Function::Function(QString const &uid, QString const &name, QString const &description, QVector2D const &position, int index, int listindex, QObject *parent)
+            : Common(uid, name, description, index, listindex, parent), Position(position)
         {
-
+            m_type = ModelTypes::Function;
         }
 
         Function::~Function()
@@ -121,7 +121,7 @@ namespace duly_gui {
 
         IClone *Function::clone() const
         {
-            return new Function(uid(), name(), description(), position());
+            return new Function(uid(), name(), description(), position(), index(), listIndex());
         }
     }
 }

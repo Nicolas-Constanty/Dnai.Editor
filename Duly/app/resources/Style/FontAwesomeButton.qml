@@ -1,11 +1,11 @@
 import QtQuick 2.0
 import QtQuick.Controls 2.2
 
-import Utils 1.0
-
-Button {
+MButton {
     id: control
-    contentItem: MLabel {
+    property alias label: _label
+    property alias color: _label.color
+    contentItem: FontAwesomeText {
         id: _label
         text: control.text
     }

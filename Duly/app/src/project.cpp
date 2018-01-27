@@ -4,15 +4,15 @@
 
 namespace duly_gui {
     Project::Project(QString const &uid, QString const &name, QString const &description, QFile &file)
-        : models::Common(uid, name, description), m_file(file),
-          m_main(new models::Context("main_uid","Duly", "main", QVector2D()))
+        : models::Common(uid, name, description, 0, 0), m_file(file),
+          m_main(new models::Context("main_uid","Duly", "main", QVector2D(), 0, 0))
     {
 
     }
 
     Project::Project(QString const &name, QString const &description, QFile &file)
-        : models::Common("project_uid", name, description), m_file(file),
-          m_main(new models::Context("main_uid","Duly", "main", QVector2D()))
+        : models::Common("project_uid", name, description, 0, 0), m_file(file),
+          m_main(new models::Context("main_uid","Duly", "main", QVector2D(), 0, 0))
     {
 
     }
@@ -69,6 +69,8 @@ namespace duly_gui {
                     unserializePosition(obj["position"].toObject()),
                     obj["type"].toString(),
                     obj["internal"].toBool(),
+                    obj["index"].toInt(),
+                    obj["listIndex"].toInt(),
                     parent
                 );
 
@@ -125,6 +127,8 @@ namespace duly_gui {
                     obj["name"].toString(),
                     obj["description"].toString(),
                     unserializePosition(obj["position"].toObject()),
+                    obj["index"].toInt(),
+                    obj["listIndex"].toInt(),
                     parent
                 );
 
@@ -157,6 +161,8 @@ namespace duly_gui {
                     obj["name"].toString(),
                     obj["description"].toString(),
                     unserializePosition(obj["position"].toObject()),
+                    obj["index"].toInt(),
+                    obj["listIndex"].toInt(),
                     parent
                 );
 
@@ -188,6 +194,8 @@ namespace duly_gui {
                     obj["name"].toString(),
                     obj["description"].toString(),
                     unserializePosition(obj["position"].toObject()),
+                    obj["index"].toInt(),
+                    obj["listIndex"].toInt(),
                     parent
                 );
 

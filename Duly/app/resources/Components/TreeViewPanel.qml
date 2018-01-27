@@ -13,7 +13,7 @@ ExpendablePanel {
         id: tr
         function changeCurrent(cur)
         {
-            console.log(cur)
+//            console.log(cur)
             tr.selection.select(cur)
             Manager.selectTreeItem(cur)
         }

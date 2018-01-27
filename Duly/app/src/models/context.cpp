@@ -5,9 +5,10 @@
 
 namespace duly_gui {
     namespace models {
-        Context::Context(QString const &uid, QString const &name, QString const &description, QVector2D const &position, QObject *parent)
-            : Common(uid, name, description, parent), Position(position)
+        Context::Context(QString const &uid, QString const &name, QString const &description, QVector2D const &position, int index, int listindex, QObject *parent)
+            : Common(uid, name, description, index, listindex, parent), Position(position)
         {
+            m_type = ModelTypes::Context;
         }
 
         Context::~Context()
@@ -121,7 +122,7 @@ namespace duly_gui {
 
         IClone *Context::clone() const
         {
-            return new Context(uid(), name(), description(), position());
+            return new Context(uid(), name(), description(), position(), index(), listIndex());
         }
     }
 }

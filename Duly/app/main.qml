@@ -21,6 +21,10 @@ ApplicationWindow {
 
 
     id: root
+//    DeclarationView1 {
+
+//    }
+
     property alias appWindow : root
     property double factor : 1.5
     property BaseLayout layout: baseLayout

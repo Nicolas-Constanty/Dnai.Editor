@@ -9,4 +9,5 @@ Text {
     horizontalAlignment: Text.AlignHCenter
     verticalAlignment: Text.AlignVCenter
     renderType: Text.NativeRendering
+    clip: true
 }
