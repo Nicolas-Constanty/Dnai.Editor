@@ -56,6 +56,21 @@ public:
         index = 0;
     }
 
+    template <typename Data>
+    Data *Deserialize()
+    {
+        Data *dat = new Data();
+
+        dat->DeserializeFrom(*this);
+        return dat;
+    }
+
+    template <typename Data>
+    size_t Serialize(Data const &ref)
+    {
+        return ref.SerializeTo(*this);
+    }
+
 private:
     char *buffer;
     size_t index;

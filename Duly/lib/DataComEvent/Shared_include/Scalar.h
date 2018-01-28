@@ -58,26 +58,101 @@ public:
         return data;
     }
 
+    T const &Data() const
+    {
+        return data;
+    }
+
 private:
     T data;
 };
 
 template <>
-class Scalar<QString> : public List<Scalar<char>>
+class Scalar<QString> : public ISerializable
 {
 public:
-    Scalar() : List()
+    Scalar()
     {
 
     }
 
     Scalar(QString const &ref)
     {
-        for (QChar c : ref)
+        refreshSerial(ref);
+    }
+
+    Scalar(Scalar<QString> const &ref)
+    {
+        refreshSerial(ref.data);
+    }
+
+    Scalar<QString> &operator=(Scalar<QString> const &ref)
+    {
+        refreshSerial(ref.data);
+        return *this;
+    }
+
+private:
+    void refreshData() const
+    {
+        data.clear();
+        for (Scalar<char> const &curr : serial.Data())
         {
-            data.append(Scalar<char>(c.toLatin1()));
+            data.append(QChar(curr.Data()));
         }
     }
+
+    void refreshSerial() const
+    {
+        serial.Data().clear();
+        for (QChar const &curr : data)
+        {
+            serial.Data().push_back(curr.toLatin1());
+        }
+    }
+
+    void refreshSerial(QString const &ref) const
+    {
+        data = ref;
+        refreshSerial();
+    }
+
+public:
+    size_t SerializeTo(Buffer &buff) const
+    {
+        refreshSerial();
+        return serial.SerializeTo(buff);
+    }
+
+    size_t DeserializeFrom(Buffer &buff)
+    {
+        size_t size = serial.DeserializeFrom(buff);
+
+        refreshData();
+        return size;
+    }
+
+    size_t GetPackageSize() const
+    {
+        refreshSerial();
+        return serial.GetPackageSize();
+    }
+
+    QString &Data()
+    {
+        refreshData();
+        return data;
+    }
+
+    QString const &Data() const
+    {
+        refreshData();
+        return data;
+    }
+
+private:
+    mutable QString data;
+    mutable List<Scalar<char>> serial;
 };
 
 #endif //SERIALIZER_SCALAR_H

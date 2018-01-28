@@ -7,6 +7,7 @@
 
 #include "Buffer.h"
 #include "packagecore.h"
+#include "replies.h"
 
 
 class Q_DECL_EXPORT DataComEventFactory
@@ -59,6 +60,12 @@ private:
         return dataCom;
     }
 
+    template <typename ReplyPckg>
+    ReplyPckg *DeserializeReplyFrom(void *buff, size_t size)
+    {
+        return Buffer(buff, size).Deserialize<ReplyPckg>();
+    }
+
 public:
 
     DataComEvent createDeclare(PackageDataCom::ENTITYCORE entity_type,
@@ -67,6 +74,8 @@ public:
                        PackageDataCom::VISIBILITYCORE visibility);
     void *serializeDeclare(void *, unsigned int size);
     void *serializeEntityDeclare(void *, unsigned int size);
+
+    Reply::EntityDeclared   *getEntityDeclared(void *buff, size_t size);
 
     DataComEvent createRemove(PackageDataCom::ENTITYCORE entity_type,
                               uint32_t containerID,

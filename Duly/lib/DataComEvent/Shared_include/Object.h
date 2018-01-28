@@ -11,9 +11,13 @@
 template <typename ... AttrTypes>
 class Object : public ISerializable
 {
+public:
+    using DataType = std::tuple<AttrTypes...>;
+
 private:
     template <size_t ... idxs>
     using SeqT = std::integer_sequence<size_t, idxs...>;
+
     std::make_index_sequence<sizeof...(AttrTypes)> _seq;
 
 public:
@@ -35,7 +39,7 @@ public:
     }
 
 public:
-    Object &operator=(std::tuple<AttrTypes...> const &ref)
+    Object &operator=(DataType const &ref)
     {
         data = ref;
         return *this;
@@ -47,9 +51,20 @@ public:
     }
 
 public:
-    std::tuple<AttrTypes...> &Data()
+    DataType &Data()
     {
         return data;
+    }
+
+    DataType const &Data() const
+    {
+        return data;
+    }
+
+    template <size_t fieldIndex>
+    typename std::tuple_element<fieldIndex, DataType>::type &Field()
+    {
+        return std::get<fieldIndex>(data);
     }
 
 private:
@@ -97,7 +112,7 @@ public:
     }
 
 private:
-    std::tuple<AttrTypes...> data;
+    DataType data;
 };
 
 #endif //SERIALIZER_OBJECT_H

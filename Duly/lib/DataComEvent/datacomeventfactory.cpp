@@ -50,7 +50,12 @@ DataComEventFactory::DataComEvent DataComEventFactory::createDeclare(PackageData
                                                  QString const &name,
                                                  PackageDataCom::VISIBILITYCORE visibility) {
 
-    return SerializeCommandToDataComEvent<Command::Declare>(entity_type, containerID, name, visibility);
+    return SerializeCommandToDataComEvent<Command::Declare::Data>(entity_type, containerID, name, visibility);
+}
+
+Reply::EntityDeclared   *DataComEventFactory::getEntityDeclared(void *buff, size_t size)
+{
+    return DeserializeReplyFrom<Reply::EntityDeclared>(buff, size);
 }
 
 void *DataComEventFactory::serializeDeclare(void *data, unsigned int size) {

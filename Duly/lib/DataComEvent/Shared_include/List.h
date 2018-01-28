@@ -49,6 +49,11 @@ public:
         return data;
     }
 
+    QVector<Stored> const &Data() const
+    {
+        return data;
+    }
+
 public:
     size_t GetPackageSize() const override
     {
@@ -102,7 +107,7 @@ public:
         return size;
     }
 
-protected:
+private:
     QVector<Stored> data;
 };
 

@@ -37,7 +37,8 @@ HEADERS += \
     Shared_include/Object.h \
     Shared_include/Scalar.h \
     Shared_include/commands.h \
-    Shared_include/Map.h
+    Shared_include/Map.h \
+    Shared_include/replies.h
 
 #CONFIG(release, debug|release) {
 #unix:LIBS += -L$${PWD}/Library/ -lprotobuf
