@@ -29,17 +29,38 @@ int TreeModel::columnCount(const QModelIndex &parent) const
         return rootItem->columnCount();
 }
 
+Common *TreeModel::matchModel(Common *c)
+{
+    return matchModelRecur(rootItem, c);
+}
+
+Common *TreeModel::matchModelRecur(TreeItem *ti, Common *c)
+{
+    if (ti->model() == c)
+        return ti->model();
+    for (auto i = 0; i < ti->children().count(); i++)
+    {
+        auto model = matchModelRecur(ti->children()[i], c);
+        if (model)
+            return model;
+    }
+    return nullptr;
+}
+
+
 QVariant TreeModel::data(const QModelIndex &index, int role) const
 {
     if (!index.isValid())
         return QVariant();
 
-    if (role != Qt::DisplayRole)
-        return QVariant();
-
-    TreeItem *item = static_cast<TreeItem*>(index.internalPointer());
-
-    return item->data(index.column());
+    if (role == Qt::DisplayRole || role == NameRole)
+    {
+        TreeItem *item = static_cast<TreeItem*>(index.internalPointer());
+        return item->data(index.column());
+    }
+    if (role == ItemRole)
+        return QVariant::fromValue(static_cast<TreeItem*>(index.internalPointer()));
+    return QVariant();
 }
 
 Qt::ItemFlags TreeModel::flags(const QModelIndex &index) const
@@ -60,7 +81,7 @@ QVariant TreeModel::headerData(int section, Qt::Orientation orientation,
 }
 
 QModelIndex TreeModel::index(int row, int column, const QModelIndex &parent)
-            const
+const
 {
     if (!hasIndex(row, column, parent))
     {
@@ -119,8 +140,8 @@ void TreeModel::setupContextModel(models::Context *context, TreeItem *parent, in
     auto modelidx = index(currentIdx, 0, parent->idxmodel());
     auto temp = new TreeItem(columnData, parent);
     parent->appendChild(temp);
+    temp->setModel(static_cast<Common*>(context));
     temp->setIdx(modelidx);
-    temp->setModel(static_cast<IModel*>(static_cast<Common*>(context)));
 
     const auto contexts = context->contexts();
     for (auto i = 0; i < contexts.size(); i++)
@@ -143,8 +164,8 @@ void TreeModel::setupClassModel(models::Class *cl, TreeItem *parent, int current
     auto modelidx = index(currentIdx, 0, parent->idxmodel());
     auto temp = new TreeItem(columnData, parent);
     parent->appendChild(temp);
-    temp->setIdx(modelidx);
     temp->setModel(static_cast<Common*>(cl));
+    temp->setIdx(modelidx);
 
     const auto classes = cl->classes();
     for (auto i = 0; i < classes.size(); i++)
@@ -162,14 +183,63 @@ void TreeModel::setupFunctionModel(models::Function *func, TreeItem *parent, int
 
     auto modelidx = index(currentIdx, 0, parent->idxmodel());
     auto temp = new TreeItem(columnData, parent);
-    temp->setModel(static_cast<Common*>(func));
     parent->appendChild(temp);
+    temp->setModel(static_cast<Common*>(func));
     temp->setIdx(modelidx);
 }
 
 void TreeModel::setupModelData(const Project *project, TreeItem *parent)
 {
     setupContextModel(const_cast<Context *>(project->main()), parent, 0);
+}
+
+QHash<int, QByteArray> TreeModel::roleNames() const {
+    QHash<int, QByteArray> roles;
+    roles[NameRole] = "name";
+    roles[ItemRole] = "item";
+    return roles;
+}
+
+QModelIndexList TreeModel::match(const QModelIndex &start, int role, const QVariant &value, int hits, Qt::MatchFlags flags) const
+{
+    QModelIndexList result;
+    uint matchType = flags & 0x0F;
+    Qt::CaseSensitivity cs = flags & Qt::MatchCaseSensitive ? Qt::CaseSensitive : Qt::CaseInsensitive;
+    bool recurse = flags & Qt::MatchRecursive;
+    bool wrap = flags & Qt::MatchWrap;
+    bool allHits = (hits == -1);
+    QString text; // only convert to a string if it is needed
+    QModelIndex p = parent(start);
+    int from = start.row();
+    int to = rowCount(p);
+
+    // iterates twice if wrapping
+    for (int i = 0; (wrap && i < 2) || (!wrap && i < 1); ++i) {
+        for (int r = from; (r < to) && (allHits || result.count() < hits); ++r) {
+            QModelIndex idx = index(r, start.column(), p);
+            if (!idx.isValid())
+                continue;
+            QVariant v = data(idx, role);
+            // QVariant based matching
+            if (matchType == Qt::MatchExactly) {
+                if (value == v)
+                    result.append(idx);
+            } else {
+                const auto t = qvariant_cast<TreeItem*>(v);
+                if (t != nullptr && QVariant::fromValue(t->model()) == value)
+                    result.append(idx);
+            }
+            if (recurse && hasChildren(idx)) { // search the hierarchy
+                result += match(index(0, idx.column(), idx), role,
+                                (text.isEmpty() ? value : text),
+                                (allHits ? -1 : hits - result.count()), flags);
+            }
+        }
+        // prepare for the next iteration
+        from = 0;
+        to = start.row();
+    }
+    return result;
 }
 }
 }

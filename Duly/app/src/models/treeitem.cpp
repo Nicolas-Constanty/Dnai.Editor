@@ -5,7 +5,7 @@
 
 namespace duly_gui {
 namespace models {
-TreeItem::TreeItem(const QList<QVariant> &data, TreeItem *parent)
+TreeItem::TreeItem(const QList<QVariant> &data, TreeItem *parent) : QObject(nullptr)
 {
     m_parentItem = parent;
     m_itemData = data;
@@ -49,7 +49,6 @@ TreeItem *TreeItem::parentItem()
 void TreeItem::setIdx(const QModelIndex &ref)
 {
     m_idx = ref;
-//    qDebug() << m_idx;
 }
 
 int TreeItem::row() const
@@ -60,7 +59,7 @@ int TreeItem::row() const
     return 0;
 }
 
-void TreeItem::setModel(IModel *model)
+void TreeItem::setModel(duly_gui::models::Common *model)
 {
     m_model = model;
 }

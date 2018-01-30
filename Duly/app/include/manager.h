@@ -5,6 +5,7 @@
 #include "project.h"
 #include "models/treemodel.h"
 #include "models/namespacebarmodel.h"
+#include "models/treeitem.h"
 #include "declarationcolumnmodel.h"
 
 namespace duly_gui {
@@ -30,9 +31,14 @@ namespace duly_gui {
         Q_INVOKABLE QJsonObject loadProjectData(const QString &);
         Q_INVOKABLE void openProject(const QString &);
         Q_INVOKABLE void openProject(Project *);
-        Q_INVOKABLE void updateNamespace(const QModelIndex &index);
+        Q_INVOKABLE QModelIndex getIndexMatch(duly_gui::models::TreeItem *index);
+        Q_INVOKABLE QModelIndex getIndexMatchFromModel(duly_gui::models::Common *md);
         Q_INVOKABLE void selectTreeItem(const QModelIndex &index);
-
+        Q_INVOKABLE void updateNamespace(const QModelIndex &index);
+        Q_INVOKABLE void addContext(int index, int listindex);
+        Q_INVOKABLE void addClass(int index, int listindex);
+        Q_INVOKABLE void addFunction(int index, int listindex);
+        Q_INVOKABLE void addVariable(int index, int listindex);
 
     signals:
         void projectModelChanged(models::TreeModel *model);
@@ -54,10 +60,13 @@ namespace duly_gui {
          models::TreeItem *m_currentPath;
          QVariant m_declarationModel;
          DeclarationModel *m_declRef;
-         void setupClassModel(models::Class *cl);
+         void setupClassModel(models::Class *cl, int level);
          void setupFunctionModel(models::Function *func);
+         void setupContextModel(models::Context *context, int level);
+         void setupVariableModel(models::Variable *variable);
          void createDeclarationModel(Project *project);
-         void setupContextModel(models::Context *context);
+         void clearDeclarationModel();
+         void createDeclarationIfMissing(models::Common *c);
     };
 }
 

@@ -3,9 +3,8 @@
 namespace duly_gui {
     namespace models {
         Common::Common(QString const &uid, QString const &name, QString const &description, int index, int listindex, QObject *parent)
-            : QObject(parent), m_uid(uid), m_name(name), m_description(description), m_index(index), m_listindex(listindex), m_type(ModelTypes::Common)
+            : QObject(parent), m_uid(uid), m_name(name), m_description(description), m_index(index), m_listindex(listindex), m_type(ModelTypes::Common), m_select(false)
         {
-
         }
 
         Common::~Common()
@@ -65,6 +64,11 @@ namespace duly_gui {
                 return;
             m_type = t;
             emit typeChanged(t);
+        }
+
+        void Common::select(bool s)
+        {
+            m_select = s;
         }
 
         void Common::serialize(QJsonObject &obj) const

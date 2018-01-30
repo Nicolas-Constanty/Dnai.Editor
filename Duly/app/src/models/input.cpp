@@ -29,7 +29,7 @@ namespace duly_gui {
 
         IClone *Input::clone() const
         {
-            return new Input(uid(), name(), description(), type(), internal(), linked_uid());
+            return new Input(uid(), name(), description(), varType(), internal(), linked_uid());
         }
     }
 }

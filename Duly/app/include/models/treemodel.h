@@ -16,6 +16,10 @@ class TreeModel : public QAbstractItemModel
     Q_OBJECT
 
 public:
+    enum Roles {
+        NameRole = Qt::UserRole + 1,
+        ItemRole
+    };
     explicit TreeModel(QObject *parent = nullptr) : QAbstractItemModel(parent) {}
     TreeModel(const Project *project, QObject *parent = 0);
     ~TreeModel();
@@ -29,6 +33,8 @@ public:
     QModelIndex parent(const QModelIndex &index) const override;
     int rowCount(const QModelIndex &parent = QModelIndex()) const override;
     int columnCount(const QModelIndex &parent = QModelIndex()) const override;
+    duly_gui::models::Common *matchModel(duly_gui::models::Common *c);
+    QModelIndexList match(const QModelIndex &start, int role, const QVariant &value, int hits, Qt::MatchFlags flags) const override;
 
 private:
     void setupModelData(const Project *project, TreeItem *parent);
@@ -37,6 +43,8 @@ private:
     void setupFunctionModel(models::Function *func, TreeItem *parent, int currentIdx);
 
     TreeItem *rootItem;
+    Common *matchModelRecur(TreeItem *ti, Common *c);
+    QHash<int, QByteArray> roleNames() const;
 };
 }
 }

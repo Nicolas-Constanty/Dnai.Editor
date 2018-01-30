@@ -83,6 +83,7 @@ static void registerUtils()
 //    qmlRegisterType<duly_gui::models::Common>("Utils", 1, 0, "Common");
 
     qmlRegisterType<duly_gui::models::TreeModel>("Utils", 1, 0, "TreeModel");
+    qmlRegisterType<duly_gui::models::TreeItem>("Utils", 1, 0, "TreeItem");
     qmlRegisterType<duly_gui::models::NameSpaceBarItem>("Utils", 1, 0, "NameSpaceBarItem");
     qmlRegisterType<duly_gui::models::NameSpaceBarModel>("Utils", 1, 0, "NameSpaceBarModel");
 

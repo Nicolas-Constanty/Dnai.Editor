@@ -46,12 +46,16 @@ namespace duly_gui {
             int type() const { return m_type; }
             void setType(int t);
 
+            Q_INVOKABLE void select(bool s);
+            Q_INVOKABLE bool isSelect() const { return m_select; }
+
         private:
             QString m_uid;
             QString m_name;
             QString m_description;
             int m_index;
             int m_listindex;
+            bool m_select;
 
         signals:
             void nameChanged();

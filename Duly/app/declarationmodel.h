@@ -11,16 +11,16 @@ public:
     enum Roles {
         ItemRole = Qt::UserRole + 1,
     };
-    Declaration(QObject *parent= nullptr) : QAbstractListModel(parent), m_name("Test"), m_comment("This is a comment") {}
+    Declaration(QObject *parent= nullptr) : QAbstractListModel(parent), m_name("Title section"), m_comment("This is a comment") {}
     void addModel(duly_gui::models::Common *c);
     int rowCount(const QModelIndex & parent = QModelIndex()) const;
     QVariant data(const QModelIndex & index, int role = Qt::DisplayRole) const;
-
+    bool removeRow(int row, const QModelIndex &parent = QModelIndex());
     void setName(const QString &n);
     const QString &name() const { return m_name; }
     void setComment(const QString &n);
     const QString &comment() const { return m_comment; }
-
+    Q_INVOKABLE void removeSelectedItem(int count);
 
 protected:
     QHash<int, QByteArray> roleNames() const;
@@ -39,17 +39,21 @@ public:
     enum Roles {
         NameRole = Qt::UserRole + 1,
         CommentRole,
-        ItemRole
+        ItemRole,
+        IsContextRole
     };
-    DeclarationModel(QObject *parent= nullptr) : QAbstractListModel(parent) {}
+    DeclarationModel(QObject *parent= nullptr) : QAbstractListModel(parent), m_isContext(true) {}
+    void setIsContext(bool value);
     void addDeclaration(Declaration *c);
     int rowCount(const QModelIndex & parent = QModelIndex()) const;
     QVariant data(const QModelIndex & index, int role = Qt::DisplayRole) const;
+    void clear();
 
 protected:
     QHash<int, QByteArray> roleNames() const;
 
 private:
+    bool m_isContext;
     QList<Declaration *> m_model;
 };
 

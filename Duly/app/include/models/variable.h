@@ -16,13 +16,13 @@ namespace duly_gui {
             virtual ~Variable();
 
         private:
-            QString m_type;
+            QString m_vartype;
             bool m_internal;
 //            QVariant value;
 
         public:
-            QString type() const;
-            void setType(const QString &type);
+            QString varType() const;
+            void setVarType(const QString &type);
 
             bool internal() const;
             void setInternal(bool internal);
