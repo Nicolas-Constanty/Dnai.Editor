@@ -18,7 +18,6 @@ public:
 private:
     template <size_t ... idxs>
     using SeqT = std::integer_sequence<size_t, idxs...>;
-
     std::make_index_sequence<sizeof...(AttrTypes)> _seq;
 
 public:
