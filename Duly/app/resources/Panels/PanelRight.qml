@@ -4,7 +4,6 @@ import QtQml.Models 2.1
 
 Panel {
     id: panel
-    property alias dragAndDropPanel: dragdrop.gridview
 
     Column {
         id: _col
@@ -18,9 +17,6 @@ Panel {
         anchors.bottom: panel.bottom
         anchors.bottomMargin: 6
 
-        DragAndDropPanel {
-            id: dragdrop
-        }
         ExpendablePanel {
             title: "Properties panel"
             anchors.left: parent.left

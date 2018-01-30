@@ -6,7 +6,7 @@ namespace duly_gui {
         Input::Input(QString const &uid, QString const &name, QString const &description,
                      QString const &type, bool internal, QString const &linked_uid,
                      QObject *parent)
-            : Variable(uid, name, description, QVector2D(), type, internal, parent), Identity(linked_uid)
+            : Variable(uid, name, description, QVector2D(), type, internal, 0, 0, parent), Identity(linked_uid)
         {
 
         }
@@ -29,7 +29,7 @@ namespace duly_gui {
 
         IClone *Input::clone() const
         {
-            return new Input(uid(), name(), description(), type(), internal(), linked_uid());
+            return new Input(uid(), name(), description(), varType(), internal(), linked_uid());
         }
     }
 }

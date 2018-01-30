@@ -30,7 +30,7 @@ Panel {
                     border.color: DulySettings.style.border.color
                 }
                 onClicked: {
-                    appWindow.layout.leftPanel.treeview.changeCurrent(model.modelData.idx)
+                    appWindow.layout.leftPanel.treeview.changeCurrent(model.modelData.model)
                 }
             }
             Button {

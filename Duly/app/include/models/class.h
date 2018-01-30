@@ -13,7 +13,7 @@ namespace duly_gui {
         class Class: public Common, public Position
         {
         public:
-            Class(QString const &, QString const &, QString const &, QVector2D const &, QObject * = nullptr);
+            Class(QString const &, QString const &, QString const &, QVector2D const &, int index, int listindex, QObject * = nullptr);
             virtual ~Class();
 
         private:

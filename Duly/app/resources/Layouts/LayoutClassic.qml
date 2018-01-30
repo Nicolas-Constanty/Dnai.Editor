@@ -24,7 +24,7 @@ BaseLayout {
         anchors.top: layout.top
     }
 
-    TestNode {
+    DeclarationView1 {
         anchors.top: panelTop.bottom
         anchors.bottom: consoleRef.top
         anchors.left: panelLeft.right
@@ -63,10 +63,6 @@ BaseLayout {
         anchors.bottom: layout.bottom
         width: layout.width / 6;
         height: root.height - toolBar.height
-        DeclarationModelDelegate {
-            id: model
-        }
-        dragAndDropPanel.model: model
     }
 
     DropShadow {

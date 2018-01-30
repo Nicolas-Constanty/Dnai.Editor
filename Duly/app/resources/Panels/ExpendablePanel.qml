@@ -32,6 +32,7 @@ Rectangle {
             horizontalAlignment: Text.AlignLeft
             anchors.left: parent.left
             anchors.leftMargin: 5
+            anchors.right: control.left
         }
         MButton {
             id: control
@@ -43,7 +44,7 @@ Rectangle {
             background: Rectangle {
                 anchors.bottom: parent.bottom
                 anchors.top: parent.top
-                color: control.pressed ? DulySettings.style.background.darkColor : control.hovered ? DulySettings.style.background.lightColor : "transparent"
+                color: control.pressed ? DulySettings.style.background.darkColor : control.hovered ? DulySettings.style.background.lightColor : DulySettings.style.background.color
             }
             onClicked: {
                 if (_panel.state == "Visible")

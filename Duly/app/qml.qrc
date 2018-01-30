@@ -108,5 +108,19 @@
         <file>resources/Style/MButton.qml</file>
         <file>resources/Components/TreeViewPanel.qml</file>
         <file>resources/Panels/DragAndDropPanel.qml</file>
+        <file>resources/Components/DeclarationList.qml</file>
+        <file>resources/Components/DeclarationView1.qml</file>
+        <file>resources/Components/CommonModelView.qml</file>
+        <file>resources/Style/FontAwesomeText.qml</file>
+        <file>resources/fonts/Font Awesome 5 Brands-Regular-400.otf</file>
+        <file>resources/fonts/Font Awesome 5 Free-Regular-400.otf</file>
+        <file>resources/fonts/Font Awesome 5 Free-Solid-900.otf</file>
+        <file>resources/Style/FontAwesomeTextBrand.qml</file>
+        <file>resources/Style/FontAwesomeTextSolid.qml</file>
+        <file>resources/Style/FontAwesomeButton.qml</file>
+        <file>resources/Style/EditableText.qml</file>
+        <file>resources/fonts/Playball.ttf</file>
+        <file>resources/Style/DecorativeText.qml</file>
+        <file>resources/Components/AddButton.qml</file>
     </qresource>
 </RCC>

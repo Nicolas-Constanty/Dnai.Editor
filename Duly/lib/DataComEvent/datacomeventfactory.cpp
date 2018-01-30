@@ -2,6 +2,7 @@
 #include <QString>
 #include "datacomeventfactory.h"
 #include "declarecorepackage.h"
+#include "commands.h"
 
 DataComEventFactory::DataComEventFactory()
 {
@@ -48,24 +49,13 @@ DataComEventFactory::DataComEvent DataComEventFactory::createDeclare(PackageData
                                                  uint32_t containerID,
                                                  QString const &name,
                                                  PackageDataCom::VISIBILITYCORE visibility) {
-   // DeclareCorePackage declare;
 
-    DataComEventFactory::DataComEvent dataCom = createDataComEvent(SIZE_PACKAGE_DECLARE(name.size()));
-    void *tmp = dataCom.data;
+    return SerializeCommandToDataComEvent<Command::Declare::Data>(entity_type, containerID, name, visibility);
+}
 
-    if (dataCom.size == SIZE_PACKAGE_DECLARE(name.size())) {
-        memcpyDataCom(&(dataCom.data), &entity_type, sizeof(entity_type));
-        memcpyDataCom(&(dataCom.data), &containerID, sizeof(containerID));
-
-        qint32 size = name.size();
-        memcpyDataCom(&(dataCom.data), &(size), sizeof(size));
-
-        memcpyDataCom(&(dataCom.data), (void *)(name.toStdString().c_str()), name.size());
-        memcpyDataCom(&(dataCom.data), &visibility, sizeof(visibility));
-    }
-    dataCom.data = tmp;
-
-    return dataCom;
+Reply::EntityDeclared   *DataComEventFactory::getEntityDeclared(void *buff, size_t size)
+{
+    return DeserializeReplyFrom<Reply::EntityDeclared>(buff, size);
 }
 
 void *DataComEventFactory::serializeDeclare(void *data, unsigned int size) {

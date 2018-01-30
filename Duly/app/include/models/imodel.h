@@ -6,10 +6,11 @@
 
 namespace duly_gui {
     namespace models {
+
         class IModel: virtual public IClone
         {
         public:
-            virtual ~IModel(){}
+            virtual ~IModel() {}
         public:
             virtual void serialize(QJsonObject &) const = 0;
             virtual void declare() const = 0;

@@ -18,6 +18,9 @@
 
 #include "models/treemodel.h"
 
+#include "declarationcolumnmodel.h"
+#include "declarationmodel.h"
+
 static QObject *manager_singleton_provider(QQmlEngine *engine, QJSEngine *scriptEngine)
 {
     Q_UNUSED(engine)
@@ -77,9 +80,16 @@ static void registerUtils()
     qmlRegisterType<duly_gui::MenuSettings>("Utils", 1, 0, "MenuSettings");
     qmlRegisterType<duly_gui::QBackground>("Utils", 1, 0, "QBackground");
 //    qRegisterMetaType<duly_gui::models::TreeModel*>("TreeModel*");
+//    qmlRegisterType<duly_gui::models::Common>("Utils", 1, 0, "Common");
+
     qmlRegisterType<duly_gui::models::TreeModel>("Utils", 1, 0, "TreeModel");
+    qmlRegisterType<duly_gui::models::TreeItem>("Utils", 1, 0, "TreeItem");
     qmlRegisterType<duly_gui::models::NameSpaceBarItem>("Utils", 1, 0, "NameSpaceBarItem");
     qmlRegisterType<duly_gui::models::NameSpaceBarModel>("Utils", 1, 0, "NameSpaceBarModel");
+
+    qmlRegisterType<DeclarationModel>("Utils", 1, 0, "DeclarationModel");
+    qmlRegisterType<Declaration>("Utils", 1, 0, "Declaration");
+//    qmlRegisterType<DeclarationColumnModel>("Utils", 1, 0, "DeclarationColumnModel");
 //    qmlRegisterType<duly_gui::models::TreeItem>("Utils", 1, 0, "TreeItem");
 }
 
@@ -98,7 +108,7 @@ int main(int argc, char *argv[])
     registerQml();
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 	
-	duly_gui::DulyApp app(argc, argv);
+    duly_gui::DulyApp app(argc, argv);
 
 	app.initApp();
 

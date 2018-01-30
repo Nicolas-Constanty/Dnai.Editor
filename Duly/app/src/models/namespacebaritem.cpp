@@ -1,4 +1,5 @@
 #include "models/namespacebaritem.h"
+#include "models/treeitem.h"
 
 
 namespace duly_gui {
@@ -28,7 +29,7 @@ void NameSpaceBarItem::setIdx(const QModelIndex &idx)
     emit idxChanged(idx);
 }
 
-void NameSpaceBarItem::setModel(IModel *model)
+void NameSpaceBarItem::setModel(duly_gui::models::TreeItem *model)
 {
     m_model = model;
 }

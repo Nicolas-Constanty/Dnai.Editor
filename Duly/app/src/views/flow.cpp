@@ -164,7 +164,6 @@ namespace duly_gui
 
 		QPointF Flow::getCanvasPos() const
         {
-            qDebug() << "canvas";
             return QPointF(parentItem()->position() + position() + QPointF(width() / 2, height() / 2));
 		}
 

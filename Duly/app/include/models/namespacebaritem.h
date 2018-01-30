@@ -3,7 +3,8 @@
 
 #include <QObject>
 #include <QModelIndex>
-#include "imodel.h"
+#include "models/common.h"
+#include "models/treeitem.h"
 
 namespace duly_gui {
 namespace models {
@@ -13,7 +14,7 @@ class NameSpaceBarItem : public QObject
     Q_PROPERTY(QString path READ path WRITE setPath NOTIFY pathChanged)
     Q_PROPERTY(bool asChild READ asChild WRITE setAsChild NOTIFY asChildChanged)
     Q_PROPERTY(QModelIndex idx READ idx WRITE setIdx NOTIFY idxChanged)
-
+    Q_PROPERTY(duly_gui::models::TreeItem * model READ model WRITE setModel NOTIFY modelChanged)
 public:
     NameSpaceBarItem(QObject *parent = 0) : QObject(parent) {}
 
@@ -21,6 +22,7 @@ signals:
     void pathChanged(const QString &);
     void asChildChanged(bool changed);
     void idxChanged(const QModelIndex &idx);
+    void modelChanged(duly_gui::models::TreeItem *m);
 
 public:
     QString path() const { return m_path; }
@@ -29,13 +31,14 @@ public:
     void setAsChild(bool b);
     QModelIndex idx() const { return m_idx; }
     void setIdx(const QModelIndex &idx);
-    void setModel(IModel *model);
-    IModel *model() const { return m_model; }
+
+    void setModel(duly_gui::models::TreeItem *model);
+    duly_gui::models::TreeItem *model() const { return m_model; }
 private:
     QString m_path;
     bool m_asChild;
     QModelIndex m_idx;
-    IModel *m_model;
+    duly_gui::models::TreeItem *m_model;
 };
 
 }

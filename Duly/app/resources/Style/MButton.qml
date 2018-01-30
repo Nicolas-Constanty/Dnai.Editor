@@ -6,6 +6,7 @@ import Utils 1.0
 Button {
     id: control
     contentItem: MLabel {
+        id: _label
         text: control.text
     }
 }

@@ -15,7 +15,7 @@ namespace duly_gui {
         class Function: public Common, public Position, virtual public IModel
         {
         public:
-            Function(QString const &, QString const &, QString const &, QVector2D const &, QObject * = nullptr);
+            Function(QString const &, QString const &, QString const &, QVector2D const &, int list, int listindex, QObject * = nullptr);
             virtual ~Function();
 
         private:
