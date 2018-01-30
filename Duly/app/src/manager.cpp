@@ -280,21 +280,21 @@ namespace duly_gui {
 
     void Manager::addContext(int index, int listindex)
     {
-        qvariant_cast<Declaration *>(m_declRef->data(m_declRef->index(listindex , 0)))->addModel(new models::Context("undefined", "Name", "", QVector2D(), index, listindex));
+        qvariant_cast<Declaration *>(m_declRef->data(m_declRef->index(listindex , 0)))->addModel(new models::Context("undefined", "Context", "", QVector2D(), index, listindex));
     }
 
     void Manager::addClass(int index, int listindex)
     {
-        qvariant_cast<Declaration *>(m_declRef->data(m_declRef->index(listindex , 0)))->addModel(new models::Class("undefined", "Name", "", QVector2D(), index, listindex));
+        qvariant_cast<Declaration *>(m_declRef->data(m_declRef->index(listindex , 0)))->addModel(new models::Class("undefined", "Class", "", QVector2D(), index, listindex));
     }
 
     void Manager::addFunction(int index, int listindex)
     {
-        qvariant_cast<Declaration *>(m_declRef->data(m_declRef->index(listindex , 0)))->addModel(new models::Function("undefined", "Name", "", QVector2D(), index, listindex));
+        qvariant_cast<Declaration *>(m_declRef->data(m_declRef->index(listindex , 0)))->addModel(new models::Function("undefined", "Function", "", QVector2D(), index, listindex));
     }
 
     void Manager::addVariable(int index, int listindex)
     {
-        qvariant_cast<Declaration *>(m_declRef->data(m_declRef->index(listindex , 0)))->addModel(new models::Variable("undefined", "Name", "", QVector2D(), "generic", false, index, listindex));
+        qvariant_cast<Declaration *>(m_declRef->data(m_declRef->index(listindex , 0)))->addModel(new models::Variable("undefined", "Variable", "", QVector2D(), "generic", false, index, listindex));
     }
 }
