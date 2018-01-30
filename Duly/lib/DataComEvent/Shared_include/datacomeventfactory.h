@@ -3,7 +3,11 @@
 
 //#include "core.pb.h"
 #include <QObject>
+#include <QDebug>
+
+#include "Buffer.h"
 #include "packagecore.h"
+#include "replies.h"
 
 
 class Q_DECL_EXPORT DataComEventFactory
@@ -39,12 +43,39 @@ private:
 public:
     DataComEventFactory();
 
+private:
+    template <typename Package, typename ... Params>
+    DataComEvent SerializeCommandToDataComEvent(Params const &... args)
+    {
+        Package pkg(args...);
+        size_t pkgSize = pkg.GetPackageSize();
+        DataComEvent dataCom = createDataComEvent(pkgSize);
+        Buffer buff(dataCom.data, pkgSize);
+
+        if (pkg.SerializeTo(buff) != pkgSize)
+        {
+            qDebug() << QString("DataComEventFactory.SerializePackagedToDataComEvent: Failed to serialize: not enough space into buffer");
+        }
+
+        return dataCom;
+    }
+
+    template <typename ReplyPckg>
+    ReplyPckg *DeserializeReplyFrom(void *buff, size_t size)
+    {
+        return Buffer(buff, size).Deserialize<ReplyPckg>();
+    }
+
+public:
+
     DataComEvent createDeclare(PackageDataCom::ENTITYCORE entity_type,
                        uint32_t containerID,
                        QString const &name,
                        PackageDataCom::VISIBILITYCORE visibility);
     void *serializeDeclare(void *, unsigned int size);
     void *serializeEntityDeclare(void *, unsigned int size);
+
+    Reply::EntityDeclared   *getEntityDeclared(void *buff, size_t size);
 
     DataComEvent createRemove(PackageDataCom::ENTITYCORE entity_type,
                               uint32_t containerID,

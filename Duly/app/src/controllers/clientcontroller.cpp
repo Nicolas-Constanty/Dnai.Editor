@@ -35,13 +35,14 @@ ClientController &ClientController::shared() {
 
 void ClientController::onReceiveEntityDeclared(void *data, unsigned int size) {
     qDebug() << "ENTITY_DECLARED with size=" << size;
-    EntityDeclareCorePackage *declare = (EntityDeclareCorePackage *)m_dataComFactory->serializeEntityDeclare(data, size);
+    Reply::EntityDeclared *entityDeclared = m_dataComFactory->getEntityDeclared(data, size); //(EntityDeclareCorePackage *)m_dataComFactory->serializeEntityDeclare(data, size);
+    Command::Declare::Data &declare = entityDeclared->Field<Reply::COMMAND>();
 
-    qDebug() << declare->name;
-    qDebug() << declare->containerID;
-    qDebug() << (qint32)declare->entityType;
-    qDebug() << (qint32)declare->visibility;
-    qDebug() << (qint32)declare->id;
+    qDebug() << declare.Field<Command::Declare::NAME>().Data();
+    qDebug() << declare.Field<Command::Declare::CONTAINER_ID>().Data();
+    qDebug() << (qint32)declare.Field<Command::Declare::ENTITY_TYPE>().Data();
+    qDebug() << (qint32)declare.Field<Command::Declare::VISIBILITY>().Data();
+    qDebug() << (qint32)entityDeclared->Field<Reply::RETURN>().Data();
 }
 
 void ClientController::onReceiveDeclare(void *data, unsigned int size) {
