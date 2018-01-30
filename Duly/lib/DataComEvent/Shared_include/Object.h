@@ -6,6 +6,7 @@
 #define SERIALIZER_OBJECT_H
 
 #include <tuple>
+#include <utility>
 #include "ISerializable.h"
 
 template <typename ... AttrTypes>
