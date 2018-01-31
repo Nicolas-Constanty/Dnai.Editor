@@ -1,24 +1,48 @@
-language: c++
+sudo: required
+dist: precise
+language: cpp
 
-dist: trusty
+matrix:
+  include:
+    - compiler: gcc
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - g++-4.9
+      env: COMPILER=g++-4.9
+    - compiler: gcc
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - g++-5
+      env: COMPILER=g++-5
+    - compiler: clang
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+            - llvm-toolchain-precise-3.6
+          packages:
+            - clang-3.6
+      env: COMPILER=clang++-3.6
+    - compiler: clang
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+            - llvm-toolchain-precise-3.7
+          packages:
+            - clang-3.7
+      env: COMPILER=clang++-3.7
 
 cache:
     timeout: 1000
     directories:
         - Qt
-        
-compiler:
-  - gcc
-  - clang
-  
-addons:
-  apt:
-    sources:
-    - ubuntu-toolchain-r-test
-    - llvm-toolchain-precise-3.8
-    packages:
-    - g++-6
-    - clang-3.8
 
 addons:
     apt:
@@ -27,8 +51,6 @@ addons:
             - llvm-toolchain-precise-3.8
         packages:
             - git
-            - g++-6
-            - clang-3.8
             - make
             - autoconf
             - automake
@@ -47,17 +69,13 @@ addons:
             - mesa-common-dev
 
 before_install:
+    - sudo apt-get update -qq
     - if [ ! -e Qt/5.9.1 ] ; then
           rm -rf Qt ;
-          wget http://download.qt.io/official_releases/qt/5.9/5.9.1/qt-opensource-linux-x64-5.9.1.run ;
+          wget http://download.qt.io/official_releases/qt/5.10/5.10.0/qt-opensource-linux-x64-5.9.1.run ;
           chmod +x ./qt-opensource-linux-x64-5.9.1.run ;
           ./qt-opensource-linux-x64-5.9.1.run --platform minimal --script qt-installer-noninteractive.qs --no-force-installations ;
       fi
-
-install:
-    - "[ $CXX = g++ ] && export CXX=g++-6 || true"
-    - "[ $CXX = clang++ ] && export CXX=clang++-3.8 || true"
-
 
 
 script:
