@@ -72,7 +72,7 @@ before_install:
     - sudo apt-get update -qq
     - if [ ! -e Qt/5.9.1 ] ; then
           rm -rf Qt ;
-          wget http://download.qt.io/official_releases/qt/5.10/5.10.0/qt-opensource-linux-x64-5.9.1.run ;
+          wget http://download.qt.io/official_releases/qt/5.10/5.10.0/qt-opensource-linux-x64-5.10.0.run ;
           chmod +x ./qt-opensource-linux-x64-5.9.1.run ;
           ./qt-opensource-linux-x64-5.9.1.run --platform minimal --script qt-installer-noninteractive.qs --no-force-installations ;
       fi
