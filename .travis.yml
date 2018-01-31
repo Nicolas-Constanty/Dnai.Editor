@@ -70,7 +70,7 @@ addons:
 
 before_install:
     - sudo apt-get update -qq
-    - if [ ! -e Qt/5.9.1 ] ; then
+    - if [ ! -e Qt/5.10.0 ] ; then
           rm -rf Qt ;
           wget http://download.qt.io/official_releases/qt/5.10/5.10.0/qt-opensource-linux-x64-5.10.0.run ;
           chmod +x ./qt-opensource-linux-x64-5.10.0.run ;
@@ -79,6 +79,6 @@ before_install:
 
 
 script:
-    - export CMAKE_PREFIX_PATH=$PWD/Qt/5.9.1/gcc_64/lib/cmake ;
+    - export CMAKE_PREFIX_PATH=$PWD/Qt/5.10.0/gcc_64/lib/cmake ;
       cd .. ;
       bash -e ./Duly-GUI/scripts/build.sh -both
