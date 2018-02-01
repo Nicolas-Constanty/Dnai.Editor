@@ -27,7 +27,7 @@ DulyCommunicationServer::DulyCommunicationServer(DulyCommunicationServer const &
     *this = other;
 }
 
-DulyCommunicationServer &DulyCommunicationServer::operator=(DulyCommunicationServer const &other) {
+DulyCommunicationServer &DulyCommunicationServer::operator=(DulyCommunicationServer const &other) : QObject(nullptr) {
     this->m_socket = other.m_socket;
 
     return (*this);
