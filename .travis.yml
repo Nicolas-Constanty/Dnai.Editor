@@ -1,52 +1,33 @@
-language: c++
-
+language: cpp
+os: linux
+compiler: gcc
+sudo: required
 dist: trusty
 
-cache:
-    timeout: 1000
-    directories:
-        - Qt
-
 addons:
-    apt:
-	sources:
-            - llvm-toolchain-precise
-            - ubuntu-toolchain-r-test
-        packages:
-            - git
-            - clang-3.7
-            - g++-5
-            - gcc-5
-            - make
-            - autoconf
-            - automake
-            - libtool
-            - cmake
-            - pkg-config
-            - libxml2-dev
-            - libxslt1-dev
-            - libzip-dev
-            - libsqlite3-dev
-            - libusb-1.0-0-dev
-            - libssl-dev
-            - libssh2-1-dev
-            - libcurl4-openssl-dev
-            # Not a duly-gui dependency, but a Qt dependency
-            - mesa-common-dev
+  apt:
+    packages:
+      - cmake
 
 before_install:
-    - if [ ! -e Qt/5.9.1 ] ; then
-          rm -rf Qt ;
-          wget http://download.qt.io/official_releases/qt/5.9/5.9.1/qt-opensource-linux-x64-5.9.1.run ;
-          chmod +x ./qt-opensource-linux-x64-5.9.1.run ;
-          ./qt-opensource-linux-x64-5.9.1.run --platform minimal --script qt-installer-noninteractive.qs --no-force-installations ;
-      fi
-    - if [ "$CXX" = "g++" ]; then export CXX="g++-5" CC="gcc-5"; fi
-    - if [ "$CXX" = "clang++" ]; then export CXX="clang++-3.7" CC="clang-3.7"; fi
+  # repo for Qt
+  - sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
+  - sudo apt-add-repository --yes ppa:beineri/opt-qt592-trusty
+  - sudo apt-get update -qq
 
+install:
+  - sudo apt-get install -qq g++-6
+  - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-6 90
+  - sudo apt-get --yes install qt59base qt59imageformats qt59svg qt59declarative qt59graphicaleffects qt59quickcontrols2
 
+before_script:
+  # Qt variables
+  - QTDIR="/opt/qt59"
+  - PATH="$QTDIR/bin:$PATH"
+  - source /opt/qt59/bin/qt59-env.sh
 
 script:
-    - export CMAKE_PREFIX_PATH=$PWD/Qt/5.9.1/gcc_64/lib/cmake ;
+    - g++ -v
+    - export CMAKE_PREFIX_PATH=/opt/qt59/lib/cmake  ;
       cd .. ;
       bash -e ./Duly-GUI/scripts/build.sh -both
