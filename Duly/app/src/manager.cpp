@@ -179,7 +179,7 @@ namespace duly_gui {
         m_currentPath = static_cast<models::TreeItem*>(index.internalPointer());
         createNameSpaceModel(m_currentPath);
         clearDeclarationModel();
-        models::IModel *model = m_currentPath->model();
+        const auto model = m_currentPath->model();
         if (dynamic_cast<models::Context*>(model))
         {
             m_declRef->setIsContext(true);

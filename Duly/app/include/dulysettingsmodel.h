@@ -394,7 +394,7 @@ class MenuSettings : public QQuickItem
     Q_PROPERTY(QBorder *border READ border WRITE setBorder NOTIFY borderChanged)
     Q_PROPERTY(QBackground *background READ background WRITE setBackground NOTIFY backgroundChanged)
 public:
-    explicit MenuSettings(QQuickItem *parent = nullptr) : QQuickItem(parent), m_border(new QBorder(this)), m_background(new QBackground(this))
+    explicit MenuSettings(QQuickItem *parent = nullptr) : QQuickItem(parent), m_background(new QBackground(this)), m_border(new QBorder(this))
     {}
 
 signals:

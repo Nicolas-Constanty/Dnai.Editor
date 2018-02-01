@@ -3,7 +3,7 @@
 namespace duly_gui {
     namespace models {
         Common::Common(QString const &uid, QString const &name, QString const &description, int index, int listindex, QObject *parent)
-            : QObject(parent), m_uid(uid), m_name(name), m_description(description), m_index(index), m_listindex(listindex), m_type(ModelTypes::Common), m_select(false)
+            : QObject(parent), m_uid(uid), m_name(name), m_description(description), m_index(index), m_listindex(listindex), m_select(false), m_type(ModelTypes::Common)
         {
         }
 

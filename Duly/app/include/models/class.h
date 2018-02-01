@@ -10,7 +10,7 @@
 
 namespace duly_gui {
     namespace models {
-        class Class: public Common, public Position
+        class Class: public Common, public Position, virtual public IModel
         {
         public:
             Class(QString const &, QString const &, QString const &, QVector2D const &, int index, int listindex, QObject * = nullptr);

@@ -24,6 +24,7 @@ int DeclarationColumnModel::count()
 
 int DeclarationColumnModel::rowCount(const QModelIndex &parent) const
 {
+    Q_UNUSED(parent);
     return m_model.size();
 }
 
