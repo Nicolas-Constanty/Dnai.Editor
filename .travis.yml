@@ -13,6 +13,7 @@ addons:
 
 before_install:
   # repo for Qt
+  - sudo add-apt-repository --yes ppa:ubuntu-toolchain-r/test
   - sudo apt-add-repository --yes ppa:beineri/opt-qt592-trusty
   - sudo apt-get -qq update
 
