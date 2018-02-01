@@ -21,6 +21,7 @@ class DulyCommunicationServer : public QObject
     Q_OBJECT
 
 public:
+    DulyCommunicationServer(QObject *parent = nullptr) : QObject(parent) {}
     DulyCommunicationServer(QTcpSocket *socket = 0, std::list<DulyCommunicationServer *> *clients = 0);
     DulyCommunicationServer(DulyCommunicationServer const &);
 
