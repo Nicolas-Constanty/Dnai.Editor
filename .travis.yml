@@ -8,19 +8,17 @@ addons:
   apt:
     packages:
       - cmake
-      - g++-5
-
 
 before_install:
   # repo for Qt
-  - sudo add-apt-repository --yes ppa:ubuntu-toolchain-r/test
+  - sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
   - sudo apt-add-repository --yes ppa:beineri/opt-qt592-trusty
-  - sudo apt-get -qq update
+  - sudo apt-get update -qq
 
 install:
+  - sudo apt-get install -qq g++-6
+  - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-6 90
   - sudo apt-get --yes install qt59base qt59imageformats qt59svg
-  - export CXX="g++-5"
-  - export CC="gcc-5"
 
 before_script:
   # Qt variables
