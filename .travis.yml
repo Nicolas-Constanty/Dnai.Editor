@@ -18,7 +18,7 @@ before_install:
 install:
   - sudo apt-get install -qq g++-6
   - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-6 90
-  - sudo apt-get --yes install qt59base qt59imageformats qt59svg
+  - sudo apt-get --yes install qt59base qt59imageformats qt59svg qt59declarative qt59graphicaleffects qt59quickcontrols2
 
 before_script:
   # Qt variables
