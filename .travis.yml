@@ -8,7 +8,7 @@ addons:
   apt:
     packages:
       - cmake
-      - g++-4.8
+      - g++-5
 
 
 before_install:
@@ -18,8 +18,8 @@ before_install:
 
 install:
   - sudo apt-get --yes install qt59base qt59imageformats qt59svg
-  - export CXX="g++-4.8"
-  - export CC="gcc-4.8"
+  - export CXX="g++-5"
+  - export CC="gcc-5"
 
 before_script:
   # Qt variables
@@ -28,6 +28,7 @@ before_script:
   - source /opt/qt59/bin/qt59-env.sh
 
 script:
+    - g++ -v
     - export CMAKE_PREFIX_PATH=/opt/qt59/lib/cmake  ;
       cd .. ;
       bash -e ./Duly-GUI/scripts/build.sh -both
