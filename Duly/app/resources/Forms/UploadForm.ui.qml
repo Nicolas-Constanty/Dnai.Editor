@@ -18,7 +18,7 @@ RowLayout {
         title: "Please choose a project"
         folder: shortcuts.home
         selectMultiple: true
-        //nameFilters: ["Duly project (*.dulyproject)"]
+        nameFilters: ["Duly project (*.dulyproject)"]
     }
 
     ListModel {
@@ -52,5 +52,4 @@ RowLayout {
         padding: 6
         Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
     }
-
 }
