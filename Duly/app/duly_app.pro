@@ -1,4 +1,4 @@
-QT += qml quickcontrols2
+QT += qml quickcontrols2 network
 
 CONFIG += c++14
 CONFIG += object_parallel_to_source
@@ -65,7 +65,7 @@ SOURCES += src/baseio.cpp \
     src/models/namespacebaritem.cpp \
     layouthandler.cpp \
     declarationcolumnmodel.cpp \
-    declarationmodel.cpp
+    declarationmodel.cpp \
 
 #VIEWS
 SOURCES += src/views/beziercurve.cpp \
@@ -107,6 +107,17 @@ SOURCES += src/models/class.cpp \
     src/models/output.cpp \
     src/models/variable.cpp \
     src/models/position.cpp \
+    src/models/user.cpp
+
+
+#HTTP
+SOURCES += src/http/url.cpp \
+    src/http/service.cpp \
+    src/http/observable.cpp \
+    src/http/response.cpp
+
+#API
+SOURCES += src/api/api.cpp
 
 RESOURCES += qml.qrc
 
@@ -203,7 +214,21 @@ HEADERS += include/models/common.h \
     include/models/imodel.h \
     include/models/iclone.h \
     include/models/position.h \
-    include/models/list/listmodelcontext.h
+    include/models/list/listmodelcontext.h \
+    include/models/user.h
+
+#HTTP
+HEADERS += include/http.h \
+    include/http/url.h \
+    include/http/service.h \
+    include/http/config.h \
+    include/http/observable.h \
+    include/http/response.h \
+    include/http/types.h
+
+#API
+HEADERS += include/api.h \
+    include/api/api.h
 
 #LIB
 DEPENDPATH += $${PWD}/../lib/event_client/

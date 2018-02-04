@@ -13,6 +13,7 @@ Item {
     property alias heightButton: toolButton.height
 
     ToolBar {
+        id: toolBar
         width: parent.width
         height: 40
         spacing: 0
@@ -32,9 +33,9 @@ Item {
                     DMenu {
                         id: menuFile
                         y: parent.height
-//                        DMenuItem {
-//                            text: qsTr("New window")
-//                        }
+                        //                        DMenuItem {
+                        //                            text: qsTr("New window")
+                        //                        }
                         DMenuItem {
                             text: qsTr("New project")
                             onClicked: newProjectPopup.open()
@@ -43,18 +44,18 @@ Item {
                             text: qsTr("Open project")
                             onClicked: openProjectPopup.open()
                         }
-//                        DMenuItem {
-//                            text: qsTr("Save")
-//                        }
-//                        DMenuItem {
-//                            text: qsTr("Save as")
-//                        }
-//                        DMenuItem {
-//                            text: qsTr("Save all")
-//                        }
-//                        DMenuItem {
-//                            text: qsTr("Close window")
-//                        }
+                        //                        DMenuItem {
+                        //                            text: qsTr("Save")
+                        //                        }
+                        //                        DMenuItem {
+                        //                            text: qsTr("Save as")
+                        //                        }
+                        //                        DMenuItem {
+                        //                            text: qsTr("Save all")
+                        //                        }
+                        //                        DMenuItem {
+                        //                            text: qsTr("Close window")
+                        //                        }
                         DMenuItem {
                             text: qsTr("Exit")
                             onClicked: {
@@ -74,30 +75,30 @@ Item {
                         id: menuEdit
                         y: parent.height
                         property alias settingRef: settingPanel
-//                        DMenuItem {
-//                            text: qsTr("Undo")
-//                        }
-//                        DMenuItem {
-//                            text: qsTr("Redo")
-//                        }
-//                        DMenuItem {
-//                            text: qsTr("Cut")
-//                        }
-//                        DMenuItem {
-//                            text: qsTr("Copy")
-//                        }
-//                        DMenuItem {
-//                            text: qsTr("Past")
-//                        }
-//                        DMenuItem {
-//                            text: qsTr("Delete")
-//                        }
-//                        DMenuItem {
-//                            text: qsTr("Select all")
-//                        }
-//                        DMenuItem {
-//                            text: qsTr("Invert all")
-//                        }
+                        //                        DMenuItem {
+                        //                            text: qsTr("Undo")
+                        //                        }
+                        //                        DMenuItem {
+                        //                            text: qsTr("Redo")
+                        //                        }
+                        //                        DMenuItem {
+                        //                            text: qsTr("Cut")
+                        //                        }
+                        //                        DMenuItem {
+                        //                            text: qsTr("Copy")
+                        //                        }
+                        //                        DMenuItem {
+                        //                            text: qsTr("Past")
+                        //                        }
+                        //                        DMenuItem {
+                        //                            text: qsTr("Delete")
+                        //                        }
+                        //                        DMenuItem {
+                        //                            text: qsTr("Select all")
+                        //                        }
+                        //                        DMenuItem {
+                        //                            text: qsTr("Invert all")
+                        //                        }
                         DMenuItem {
                             text: "Settings"
                             onClicked: settingsPopup.open()
@@ -122,9 +123,9 @@ Item {
                                     appWindow.visibility = Window.Windowed
                             }
                         }
-//                        DMenuItem {
-//                            text: qsTr("Toogle menu bar")
-//                        }
+                        //                        DMenuItem {
+                        //                            text: qsTr("Toogle menu bar")
+                        //                        }
                         DMenuItem {
                             text: qsTr("Toogle left panel")
                             onClicked: {
@@ -143,15 +144,15 @@ Item {
                                     root.layout.rightPanel.state = "Visible"
                             }
                         }
-//                        DMenuItem {
-//                            text: qsTr("Font size up")
-//                        }
-//                        DMenuItem {
-//                            text: qsTr("Font size down")
-//                        }
-//                        DMenuItem {
-//                            text: qsTr("Reset font size")
-//                        }
+                        //                        DMenuItem {
+                        //                            text: qsTr("Font size up")
+                        //                        }
+                        //                        DMenuItem {
+                        //                            text: qsTr("Font size down")
+                        //                        }
+                        //                        DMenuItem {
+                        //                            text: qsTr("Reset font size")
+                        //                        }
                         DMenuItem {
                             text: qsTr("Toogle console")
                             onClicked: {
@@ -161,196 +162,201 @@ Item {
                                     root.layout.debugConsole.state = "Visible"
                             }
                         }
-//                        DMenuItem {
-//                            text: qsTr("Toogle property panel")
-//                        }
+                        //                        DMenuItem {
+                        //                            text: qsTr("Toogle property panel")
+                        //                        }
                     }
                 }
 
-//                DToolButton {
-//                    text: qsTr("Panes")
-//                    onClicked: menuPanes.open()
+                //                DToolButton {
+                //                    text: qsTr("Panes")
+                //                    onClicked: menuPanes.open()
 
-//                    DMenu {
-//                        id: menuPanes
-//                        y: parent.height
+                //                    DMenu {
+                //                        id: menuPanes
+                //                        y: parent.height
 
-//                        DMenuItem {
-//                            text: qsTr("Split left")
-//                        }
-//                        DMenuItem {
-//                            text: qsTr("Split right")
-//                        }
-//                        DMenuItem {
-//                            text: qsTr("Split up")
-//                        }
-//                        DMenuItem {
-//                            text: qsTr("Split down")
-//                        }
-//                        DMenuItem {
-//                            text: qsTr("Next pane")
-//                        }
-//                        DMenuItem {
-//                            text: qsTr("Prev pane")
-//                        }
-//                    }
-//                }
+                //                        DMenuItem {
+                //                            text: qsTr("Split left")
+                //                        }
+                //                        DMenuItem {
+                //                            text: qsTr("Split right")
+                //                        }
+                //                        DMenuItem {
+                //                            text: qsTr("Split up")
+                //                        }
+                //                        DMenuItem {
+                //                            text: qsTr("Split down")
+                //                        }
+                //                        DMenuItem {
+                //                            text: qsTr("Next pane")
+                //                        }
+                //                        DMenuItem {
+                //                            text: qsTr("Prev pane")
+                //                        }
+                //                    }
+                //                }
 
-//                DToolButton {
-//                    text: qsTr("Tab")
-//                    onClicked: menuTab.open()
-
-
-//                    DMenu {
-//                        id: menuTab
-//                        y: parent.height
-
-//                        DMenuItem {
-//                            text: qsTr("Next tab")
-//                        }
-
-//                        DMenuItem {
-//                            text: qsTr("Prev tab")
-//                        }
-
-//                        DMenuItem {
-//                            text: qsTr("Close tab")
-//                        }
-
-//                        DMenuItem {
-//                            text: qsTr("History")
-//                        }
-//                    }
-//                }
-
-//                DToolButton {
-//                    text: qsTr("Viewport")
-//                    onClicked: viewportTab.open()
+                //                DToolButton {
+                //                    text: qsTr("Tab")
+                //                    onClicked: menuTab.open()
 
 
-//                    DMenu {
-//                        id: viewportTab
-//                        y: parent.height
+                //                    DMenu {
+                //                        id: menuTab
+                //                        y: parent.height
 
-//                        DMenuItem {
-//                            text: qsTr("Zoom in")
-//                        }
-//                        DMenuItem {
-//                            text: qsTr("Zoom out")
-//                        }
-//                        DMenuItem {
-//                            text: qsTr("Move")
-//                        }
-//                        DMenuItem {
-//                            text: qsTr("Add node")
-//                        }
-//                        DMenuItem {
-//                            text: qsTr("Resize node")
-//                        }
-//                        DMenuItem {
-//                            text: qsTr("Format node")
-//                        }
-//                        DMenuItem {
-//                            text: qsTr("Collapse node")
-//                        }
-//                        DMenuItem {
-//                            text: qsTr("Expand node")
-//                        }
-//                        DMenuItem {
-//                            text: qsTr("Open node")
-//                        }
-//                        DMenuItem {
-//                            text: qsTr("Open blank node")
-//                        }
-//                        DMenuItem {
-//                            text: qsTr("Link")
-//                        }
-//                        DMenuItem {
-//                            text: qsTr("Unlink")
-//                        }
-//                    }
-//                }
+                //                        DMenuItem {
+                //                            text: qsTr("Next tab")
+                //                        }
 
-//                DToolButton {
-//                    text: qsTr("Node")
-//                    onClicked: nodeTab.open()
+                //                        DMenuItem {
+                //                            text: qsTr("Prev tab")
+                //                        }
+
+                //                        DMenuItem {
+                //                            text: qsTr("Close tab")
+                //                        }
+
+                //                        DMenuItem {
+                //                            text: qsTr("History")
+                //                        }
+                //                    }
+                //                }
+
+                //                DToolButton {
+                //                    text: qsTr("Viewport")
+                //                    onClicked: viewportTab.open()
 
 
-//                    DMenu {
-//                        id: nodeTab
-//                        y: parent.height
+                //                    DMenu {
+                //                        id: viewportTab
+                //                        y: parent.height
 
-//                        DMenuItem {
-//                            text: qsTr("New node")
-//                        }
-//                        DMenuItem {
-//                            text: qsTr("Delete node")
-//                        }
-//                        DMenuItem {
-//                            text: qsTr("Import node")
-//                        }
-//                        DMenuItem {
-//                            text: qsTr("Export node")
-//                        }
-//                    }
-//                }
+                //                        DMenuItem {
+                //                            text: qsTr("Zoom in")
+                //                        }
+                //                        DMenuItem {
+                //                            text: qsTr("Zoom out")
+                //                        }
+                //                        DMenuItem {
+                //                            text: qsTr("Move")
+                //                        }
+                //                        DMenuItem {
+                //                            text: qsTr("Add node")
+                //                        }
+                //                        DMenuItem {
+                //                            text: qsTr("Resize node")
+                //                        }
+                //                        DMenuItem {
+                //                            text: qsTr("Format node")
+                //                        }
+                //                        DMenuItem {
+                //                            text: qsTr("Collapse node")
+                //                        }
+                //                        DMenuItem {
+                //                            text: qsTr("Expand node")
+                //                        }
+                //                        DMenuItem {
+                //                            text: qsTr("Open node")
+                //                        }
+                //                        DMenuItem {
+                //                            text: qsTr("Open blank node")
+                //                        }
+                //                        DMenuItem {
+                //                            text: qsTr("Link")
+                //                        }
+                //                        DMenuItem {
+                //                            text: qsTr("Unlink")
+                //                        }
+                //                    }
+                //                }
 
-//                DToolButton {
-//                    text: qsTr("Run")
-//                    onClicked: runTab.open()
-
-//                    DMenu {
-
-//                        id: runTab
-//                        y: parent.height
-
-//                        DMenuItem {
-//                            text: qsTr("Build")
-//                        }
-
-//                        DMenuItem {
-//                            text: qsTr("Run")
-//                        }
-
-//                        DMenuItem {
-//                            text: qsTr("Run debug")
-//                        }
-
-//                        DMenuItem {
-//                            text: qsTr("Pause")
-//                        }
-
-//                        DMenuItem {
-//                            text: qsTr("Stop")
-//                        }
-//                    }
-//                }
-//                DToolButton {
-//                    text: qsTr("Cloud")
-//                    onClicked: cloudTab.open()
+                //                DToolButton {
+                //                    text: qsTr("Node")
+                //                    onClicked: nodeTab.open()
 
 
+                //                    DMenu {
+                //                        id: nodeTab
+                //                        y: parent.height
 
-//                    DMenu {
-//                        id: cloudTab
-//                        y: parent.height
-//                        DMenuItem {
-//                            text: qsTr("Upload")
-//                        }
-//                        DMenuItem {
-//                            text: qsTr("Download")
-//                        }
-//                        DMenuItem {
-//                            text: qsTr("Store")
-//                        }
-//                    }
-//                }
+                //                        DMenuItem {
+                //                            text: qsTr("New node")
+                //                        }
+                //                        DMenuItem {
+                //                            text: qsTr("Delete node")
+                //                        }
+                //                        DMenuItem {
+                //                            text: qsTr("Import node")
+                //                        }
+                //                        DMenuItem {
+                //                            text: qsTr("Export node")
+                //                        }
+                //                    }
+                //                }
+
+                //                DToolButton {
+                //                    text: qsTr("Run")
+                //                    onClicked: runTab.open()
+
+                //                    DMenu {
+
+                //                        id: runTab
+                //                        y: parent.height
+
+                //                        DMenuItem {
+                //                            text: qsTr("Build")
+                //                        }
+
+                //                        DMenuItem {
+                //                            text: qsTr("Run")
+                //                        }
+
+                //                        DMenuItem {
+                //                            text: qsTr("Run debug")
+                //                        }
+
+                //                        DMenuItem {
+                //                            text: qsTr("Pause")
+                //                        }
+
+                //                        DMenuItem {
+                //                            text: qsTr("Stop")
+                //                        }
+                //                    }
+                //                }
+                //                DToolButton {
+                //                    text: qsTr("Cloud")
+                //                    onClicked: cloudTab.open()
+
+
+
+                //                    DMenu {
+                //                        id: cloudTab
+                //                        y: parent.height
+                //                        DMenuItem {
+                //                            text: qsTr("Upload")
+                //                        }
+                //                        DMenuItem {
+                //                            text: qsTr("Download")
+                //                        }
+                //                        DMenuItem {
+                //                            text: qsTr("Store")
+                //                        }
+                //                    }
+                //                }
             }
+        }
+        UserMenu {
+            height: 40
+            anchors.right: parent.right
+//            anchors.rightMargin: 299
         }
     }
 
     //SETTINGS PANEL
-    Popup {
+    Modal {
         id: settingsPopup
         background: Rectangle {
             color: DulySettings.style.background.color
@@ -369,7 +375,7 @@ Item {
         }
 
     }
-    Popup {
+    Modal {
         id: newProjectPopup
         x: parent.width / 2 - width / 2
         y: appWindow.height / 2 - height / 2
@@ -387,7 +393,7 @@ Item {
             popup: newProjectPopup
         }
     }
-    Popup {
+    Modal {
         id: openProjectPopup
         x: parent.width / 2 - width / 2
         y: appWindow.height / 2 - height / 2
@@ -403,6 +409,48 @@ Item {
             anchors.fill: parent
             id: openProjectPanel
             popup: openProjectPopup
+        }
+    }
+    Modal {
+        id: loginPopup
+        x: parent.width / 2 - width / 2
+        y: appWindow.height / 2 - height / 2
+        background: Rectangle {
+            color: DulySettings.style.background.color
+            border.color: "#FAFAFA"
+            border.width: 5
+            radius: 10
+        }
+        width: 380
+        height: 500
+        modal: true
+        focus: true
+        closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutside
+        contentItem: Login {
+            anchors.fill: parent
+            id: loginPanel
+            popup: loginPopup
+        }
+    }
+    Modal {
+        id: uploadPopup
+        x: parent.width / 2 - width / 2
+        y: appWindow.height / 2 - height / 2
+        background: Rectangle {
+            color: DulySettings.style.background.color
+            border.color: "#FAFAFA"
+            border.width: 5
+            radius: 10
+        }
+        width: 500
+        height: 100
+        modal: true
+        focus: true
+        closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutside
+        contentItem: Upload {
+            anchors.fill: parent
+            id: uploadPanel
+            popup: uploadPopup
         }
     }
 }
