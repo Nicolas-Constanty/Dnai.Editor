@@ -129,5 +129,6 @@
         <file>resources/Components/UserMenu.qml</file>
         <file>resources/Forms/UserMenuForm.ui.qml</file>
         <file>resources/Images/default_user.png</file>
+        <file>resources/Components/Modal.qml</file>
     </qresource>
 </RCC>
