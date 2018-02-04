@@ -21,6 +21,9 @@
 #include "declarationcolumnmodel.h"
 #include "declarationmodel.h"
 
+#include "http.h"
+#include "api.h"
+
 static QObject *manager_singleton_provider(QQmlEngine *engine, QJSEngine *scriptEngine)
 {
     Q_UNUSED(engine)
@@ -124,6 +127,9 @@ int main(int argc, char *argv[])
     ClientController::serverPort = processManager.getServerPort();
     ClientController::shared();
 
+    duly_gui::http::Service::Init(duly_gui::api::http_config);
+
+    duly_gui::api::signin("root", "Adpa1801").subscribe();
 
     QQmlApplicationEngine engine;
 	app.registerEngine(&engine);
