@@ -416,7 +416,7 @@ Item {
         x: parent.width / 2 - width / 2
         y: appWindow.height / 2 - height / 2
         background: Rectangle {
-            color: DulySettings.style.background
+            color: DulySettings.style.background.color
             border.color: "#FAFAFA"
             border.width: 5
             radius: 10
@@ -437,7 +437,7 @@ Item {
         x: parent.width / 2 - width / 2
         y: appWindow.height / 2 - height / 2
         background: Rectangle {
-            color: DulySettings.style.background
+            color: DulySettings.style.background.color
             border.color: "#FAFAFA"
             border.width: 5
             radius: 10

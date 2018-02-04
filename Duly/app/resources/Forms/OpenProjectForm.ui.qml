@@ -70,7 +70,7 @@ Page {
                     verticalAlignment: Text.AlignVCenter
                 }
                 background: Rectangle {
-                    color: DulySettings.style.background
+                    color: DulySettings.style.background.color
                 }
             }
         }
@@ -215,7 +215,7 @@ Page {
     footer: ToolBar {
         background: Rectangle {
             implicitHeight: 40
-            color: DulySettings.style.background
+            color: DulySettings.style.background.color
         }
         ToolButton {
             id: cancelButton
@@ -231,7 +231,7 @@ Page {
                 verticalAlignment: Text.AlignVCenter
             }
             background: Rectangle {
-                color: DulySettings.style.background
+                color: DulySettings.style.background.color
             }
         }
         ToolButton {
@@ -248,7 +248,7 @@ Page {
                 verticalAlignment: Text.AlignVCenter
             }
             background: Rectangle {
-                color: DulySettings.style.background
+                color: DulySettings.style.background.color
             }
         }
     }

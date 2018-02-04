@@ -65,7 +65,7 @@ SOURCES += src/baseio.cpp \
     src/models/namespacebaritem.cpp \
     layouthandler.cpp \
     declarationcolumnmodel.cpp \
-    declarationmodel.cpp
+    declarationmodel.cpp \
 
 #VIEWS
 SOURCES += src/views/beziercurve.cpp \
@@ -214,7 +214,7 @@ HEADERS += include/models/common.h \
     include/models/imodel.h \
     include/models/iclone.h \
     include/models/position.h \
-    include/models/list/listmodelcontext.h
+    include/models/list/listmodelcontext.h \
     include/models/user.h
 
 #HTTP
