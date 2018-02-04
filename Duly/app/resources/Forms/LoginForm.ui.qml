@@ -11,8 +11,6 @@ ColumnLayout {
     property alias username: login
     property alias password: password
 
-    width: 380
-    height: 500
     anchors.fill: parent
     anchors.margins: 3
     spacing: 3

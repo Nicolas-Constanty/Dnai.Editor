@@ -356,7 +356,7 @@ Item {
     }
 
     //SETTINGS PANEL
-    Popup {
+    Modal {
         id: settingsPopup
         background: Rectangle {
             color: DulySettings.style.background.color
@@ -375,7 +375,7 @@ Item {
         }
 
     }
-    Popup {
+    Modal {
         id: newProjectPopup
         x: parent.width / 2 - width / 2
         y: appWindow.height / 2 - height / 2
@@ -393,7 +393,7 @@ Item {
             popup: newProjectPopup
         }
     }
-    Popup {
+    Modal {
         id: openProjectPopup
         x: parent.width / 2 - width / 2
         y: appWindow.height / 2 - height / 2
@@ -411,7 +411,7 @@ Item {
             popup: openProjectPopup
         }
     }
-    Popup {
+    Modal {
         id: loginPopup
         x: parent.width / 2 - width / 2
         y: appWindow.height / 2 - height / 2
@@ -432,7 +432,7 @@ Item {
             popup: loginPopup
         }
     }
-    Popup {
+    Modal {
         id: uploadPopup
         x: parent.width / 2 - width / 2
         y: appWindow.height / 2 - height / 2
