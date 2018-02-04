@@ -126,5 +126,8 @@
         <file>resources/Forms/LoginForm.ui.qml</file>
         <file>resources/Panels/Upload.qml</file>
         <file>resources/Forms/UploadForm.ui.qml</file>
+        <file>resources/Components/UserMenu.qml</file>
+        <file>resources/Forms/UserMenuForm.ui.qml</file>
+        <file>resources/Images/default_user.png</file>
     </qresource>
 </RCC>
