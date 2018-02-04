@@ -122,5 +122,7 @@
         <file>resources/fonts/Playball.ttf</file>
         <file>resources/Style/DecorativeText.qml</file>
         <file>resources/Components/AddButton.qml</file>
+        <file>resources/Panels/Login.qml</file>
+        <file>resources/Forms/LoginForm.ui.qml</file>
     </qresource>
 </RCC>
