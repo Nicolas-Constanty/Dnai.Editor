@@ -18,6 +18,12 @@ MenuItem {
 
     padding: 6
 
+    MouseArea {
+        id: mouseArea
+        anchors.fill: parent
+        cursorShape: Qt.PointingHandCursor
+    }
+
     contentItem: Item {
         Row {
             anchors.verticalCenter: parent.verticalCenter

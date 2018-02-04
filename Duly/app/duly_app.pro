@@ -107,6 +107,8 @@ SOURCES += src/models/class.cpp \
     src/models/output.cpp \
     src/models/variable.cpp \
     src/models/position.cpp \
+    src/models/user.cpp
+
 
 #HTTP
 SOURCES += src/http/url.cpp \
@@ -213,6 +215,7 @@ HEADERS += include/models/common.h \
     include/models/iclone.h \
     include/models/position.h \
     include/models/list/listmodelcontext.h
+    include/models/user.h
 
 #HTTP
 HEADERS += include/http.h \

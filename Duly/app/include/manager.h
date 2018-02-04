@@ -7,6 +7,8 @@
 #include "models/namespacebarmodel.h"
 #include "models/treeitem.h"
 #include "declarationcolumnmodel.h"
+#include "models/user.h"
+#include "api.h"
 
 namespace duly_gui {
     class Manager: public QObject
@@ -15,6 +17,8 @@ namespace duly_gui {
         Q_PROPERTY(duly_gui::models::TreeModel *projectModel READ projectModel WRITE setProjectModel NOTIFY projectModelChanged)
         Q_PROPERTY(QVariant namespacebarModel READ namespacebarModel WRITE setNamespacebarModel NOTIFY namespacebarModelChanged)
         Q_PROPERTY(DeclarationModel *declarationModel READ declarationModel WRITE setDeclarationModel NOTIFY declarationModelChanged)
+        Q_PROPERTY(duly_gui::models::User *user READ user WRITE setUser NOTIFY userChanged)
+
     public:
         Manager(QObject *parent = 0);
         virtual ~Manager();
@@ -40,10 +44,14 @@ namespace duly_gui {
         Q_INVOKABLE void addFunction(int index, int listindex);
         Q_INVOKABLE void addVariable(int index, int listindex);
 
+        Q_INVOKABLE void signin(const QString &, const QString &);
+        Q_INVOKABLE void logout();
+
     signals:
         void projectModelChanged(models::TreeModel *model);
         void namespacebarModelChanged(const QVariant  &ref);
         void declarationModelChanged(DeclarationModel *ref);
+        void userChanged(models::User *user);
 
     public:
         models::TreeModel *projectModel() const { return m_projectModel; }
@@ -52,6 +60,8 @@ namespace duly_gui {
         void setNamespacebarModel(const QVariant &ref);
         void setDeclarationModel(DeclarationModel *ref);
         DeclarationModel * declarationModel() const { return m_declRef; }
+        models::User *user() const;
+        void setUser(models::User *user);
 
     private:
          Project *loadProject(const QString &);
@@ -67,6 +77,7 @@ namespace duly_gui {
          void createDeclarationModel(Project *project);
          void clearDeclarationModel();
          void createDeclarationIfMissing(models::Common *c);
+         models::User *m_user;
     };
 }
 

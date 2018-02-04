@@ -41,6 +41,11 @@ const Config api::http_config = {
         });
     }
 
+    void api::logout()
+    {
+        user = {};
+    }
+
     QString const &api::getToken()
     {
         return user.token;
