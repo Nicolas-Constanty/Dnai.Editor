@@ -66,6 +66,7 @@ SOURCES += src/baseio.cpp \
     layouthandler.cpp \
     declarationcolumnmodel.cpp \
     declarationmodel.cpp \
+    basicnodemodel.cpp
 
 #VIEWS
 SOURCES += src/views/beziercurve.cpp \
@@ -170,7 +171,9 @@ HEADERS += include/baseio.h \
     include/models/namespacebaritem.h \
     layouthandler.h \
     declarationcolumnmodel.h \
-    declarationmodel.h
+    declarationmodel.h \
+    basicnodemodel.h \
+    include/qmlresources/instructionid.h
 
 #VIEWS
 HEADERS += include/views/beziercurve.h \

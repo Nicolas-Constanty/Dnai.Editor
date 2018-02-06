@@ -6,17 +6,21 @@ namespace duly_gui {
     {
         installEventFilter(this);
 		m_currentCanvas = nullptr;
+        loadCustomFont();
+    }
 
+	void DulyApp::registerEngine(QQmlApplicationEngine* engine)
+	{
+        m_engine = engine;
+    }
+
+    void DulyApp::loadCustomFont()
+    {
         QFontDatabase::addApplicationFont(":/resources/fonts/Font Awesome 5 Free-Solid-900.otf");
         QFontDatabase::addApplicationFont(":/resources/fonts/Font Awesome 5 Free-Regular-400.otf");
         QFontDatabase::addApplicationFont(":/resources/fonts/Font Awesome 5 Brands-Regular-400.otf");
         QFontDatabase::addApplicationFont(":/resources/fonts/Playball.ttf");
     }
-
-	void DulyApp::registerEngine(QQmlApplicationEngine* engine)
-	{
-		m_engine = engine;
-	}
 
 	views::DulyCanvas *DulyApp::currentCanvasInstance()
     {
