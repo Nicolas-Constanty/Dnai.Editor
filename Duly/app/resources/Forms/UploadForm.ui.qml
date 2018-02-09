@@ -16,7 +16,6 @@ RowLayout {
     FileDialog {
         id: fileDialog
         title: "Please choose a project"
-        folder: shortcuts.home
         selectMultiple: true
         nameFilters: ["Duly project (*.dulyproject)"]
     }

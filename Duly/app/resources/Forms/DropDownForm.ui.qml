@@ -1,5 +1,4 @@
 import QtQuick 2.9
-import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.2
 import Qt.labs.settings 1.0
 
@@ -17,38 +16,24 @@ Item {
     }
 
     anchors.right: parent.right
-    anchors.rightMargin: 0
     anchors.left: parent.left
-    anchors.leftMargin: 0
+    height: 40
 
-    Rectangle {
+    Item {
         height: 40
-        Layout.preferredHeight: 40
         anchors.right: parent.right
-        anchors.rightMargin: 0
         anchors.left: parent.left
-        anchors.leftMargin: 0
-        color: "transparent"
-        Layout.fillWidth: false
         id: colorPickerForm
-        RowLayout {
-            anchors.verticalCenter: parent.verticalCenter
+        MLabel {
+            id: label
+            height: parent.height
             anchors.left: parent.left
-            anchors.leftMargin: 0
+        }
+        ComboBox {
+            id: comboBox
             anchors.right: parent.right
-            anchors.rightMargin: 0
-            MLabel {
-                id: label
-                anchors.left: parent.left
-                anchors.leftMargin: 0
-                anchors.verticalCenter: parent.verticalCenter
-            }
-            ComboBox {
-                id: comboBox
-                Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
-                textRole: qsTr("")
-                currentIndex: 0
-            }
+            textRole: qsTr("")
+            currentIndex: 0
         }
     }
 }

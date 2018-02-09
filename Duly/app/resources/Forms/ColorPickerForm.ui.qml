@@ -1,7 +1,6 @@
 import QtQuick 2.9
 import QtQuick.Dialogs 1.2
 import QtQuick.Controls 2.2
-import QtQuick.Layouts 1.3
 import Qt.labs.settings 1.0
 
 import Utils 1.0
@@ -20,42 +19,28 @@ Item {
         category: name
         property alias colorSelected: colorSelect.color
     }
-    Rectangle {
+    Item {
         height: mainHeight
         anchors.right: parent.right
-        anchors.rightMargin: 0
         anchors.left: parent.left
-        anchors.leftMargin: 0
-        color: "transparent"
         id: colorPickerForm
-        RowLayout {
-            anchors.verticalCenter: parent.verticalCenter
+        MLabel {
+            id: label
+            text: qsTr("Label")
             anchors.left: parent.left
-            anchors.leftMargin: 0
+            anchors.verticalCenter: parent.verticalCenter
+        }
+        Button {
+            id: selectButton
+            width: 30
+            height: 30
+            anchors.verticalCenter: parent.verticalCenter
             anchors.right: parent.right
-            anchors.rightMargin: 0
-            MLabel {
-                id: label
-                text: qsTr("Label")
-                anchors.left: parent.left
-                anchors.leftMargin: 0
-                anchors.verticalCenter: parent.verticalCenter
-            }
-            Button {
-                id: selectButton
-                width: 30
-                height: 30
-                Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
-                Layout.preferredHeight: 30
-                Layout.preferredWidth: 30
-                Layout.fillWidth: false
-                anchors.verticalCenter: parent.verticalCenter
-                background: Rectangle {
-                    id: colorSelect
-                    color: colorDialogRef.color
-                    border.width: 2
-                    radius: 4
-                }
+            background: Rectangle {
+                id: colorSelect
+                color: colorDialogRef.color
+                border.width: 2
+                radius: 4
             }
         }
     }

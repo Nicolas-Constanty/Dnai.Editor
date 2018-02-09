@@ -10,8 +10,8 @@ UserMenuForm {
     id: root
     fullname: ""
     imgSrc: ""
-    height: parent.height
     opened: false
+
 
     mouseArea.onClicked: {
         if (!Manager.user) {

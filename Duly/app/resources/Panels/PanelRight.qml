@@ -17,6 +17,13 @@ Panel {
         anchors.bottom: panel.bottom
         anchors.bottomMargin: 6
 
+        DragAndDropPanel {
+            title: "Drag & Drop"
+            anchors.left: parent.left
+            anchors.right: parent.right
+            height: (parent.height - 6 * (parent.children.length -1)) / (parent.children.length)
+        }
+
         ExpendablePanel {
             title: "Properties panel"
             anchors.left: parent.left

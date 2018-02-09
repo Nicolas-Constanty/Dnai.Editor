@@ -7,8 +7,6 @@ import "../Forms"
 import Utils 1.0
 
 ThemePanelForm {
-    colRef.width: Math.max(implicitWidth, rectRef.availableWidth) - 20
-
     themes.items.onCurrentTextChanged: {
         DulySettings.loadTheme(themes.items.currentText)
     }

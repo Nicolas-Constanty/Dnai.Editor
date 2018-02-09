@@ -4,4 +4,5 @@ import "../"
 BinaryOperatorModel {
     name: "|"
     description: "Binary Or"
+    icon: "|"
 }

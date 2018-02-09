@@ -349,9 +349,9 @@ Item {
             }
         }
         UserMenu {
-            height: 40
+            anchors.top: parent.top
+            anchors.bottom: parent.bottom
             anchors.right: parent.right
-//            anchors.rightMargin: 299
         }
     }
 

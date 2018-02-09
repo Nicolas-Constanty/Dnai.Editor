@@ -1,83 +1,114 @@
+#include <QQuickWindow>
+#include <QTimer>
+
 #include "dulyapp.h"
 #include "commands/commandmanager.h"
+#include "processmanager.h"
+#include "controllers/consolecontroller.h"
+#include "include/controllers/clientcontroller.h"
 
 namespace duly_gui {
-    DulyApp::DulyApp(int & argc, char **argv) : QGuiApplication(argc, argv)
+DulyApp::DulyApp(int & argc, char **argv) : QGuiApplication(argc, argv)
+{
+    QProcess *process = new QProcess(this);
+    QString file = QDir::homePath() + "/SplashScreen.exe";
+    process->start(file);
+}
+
+void DulyApp::registerEngine(QQmlApplicationEngine* engine)
+{
+    m_engine = engine;
+}
+
+void DulyApp::loadFonts()
+{
+    QFontDatabase::addApplicationFont(":/resources/fonts/Font Awesome 5 Free-Solid-900.otf");
+    QFontDatabase::addApplicationFont(":/resources/fonts/Font Awesome 5 Free-Regular-400.otf");
+    QFontDatabase::addApplicationFont(":/resources/fonts/Font Awesome 5 Brands-Regular-400.otf");
+    QFontDatabase::addApplicationFont(":/resources/fonts/Playball.ttf");
+}
+
+views::DulyCanvas *DulyApp::currentCanvasInstance()
+{
+    return static_cast<DulyApp *>(DulyApp::instance())->currentCanvas();
+}
+
+bool DulyApp::eventFilter(QObject *o, QEvent *event)
+{
+    if (!event || event->type() != QEvent::KeyPress) return QGuiApplication::eventFilter(o, event);
+    const auto e = static_cast<QKeyEvent *>(event);
+    if (e->matches(QKeySequence::Undo))
     {
-        installEventFilter(this);
-		m_currentCanvas = nullptr;
-        loadCustomFont();
+        commands::CommandManager::Instance()->undo(1);
+        return true;
     }
-
-	void DulyApp::registerEngine(QQmlApplicationEngine* engine)
-	{
-        m_engine = engine;
-    }
-
-    void DulyApp::loadCustomFont()
+    else if (e->matches(QKeySequence::Redo))
     {
-        QFontDatabase::addApplicationFont(":/resources/fonts/Font Awesome 5 Free-Solid-900.otf");
-        QFontDatabase::addApplicationFont(":/resources/fonts/Font Awesome 5 Free-Regular-400.otf");
-        QFontDatabase::addApplicationFont(":/resources/fonts/Font Awesome 5 Brands-Regular-400.otf");
-        QFontDatabase::addApplicationFont(":/resources/fonts/Playball.ttf");
+        commands::CommandManager::Instance()->redo(1);
+        return true;
     }
+    return QGuiApplication::eventFilter(o, event);
+}
 
-	views::DulyCanvas *DulyApp::currentCanvasInstance()
+void DulyApp::registerSettings(DulySettings* dulySettings)
+{
+    m_settings = dulySettings;
+}
+
+void DulyApp::registerCanvas(views::DulyCanvas* c)
+{
+    if (!m_canvases.contains(c))
     {
-		return static_cast<DulyApp *>(DulyApp::instance())->currentCanvas();
+        m_canvases.append(c);
+        if (m_currentCanvas == nullptr)
+            m_currentCanvas = c;
     }
+}
 
-    bool DulyApp::eventFilter(QObject *o, QEvent *event)
+void DulyApp::setCurrentCanvas(views::DulyCanvas* c)
+{
+    if (!m_canvases.contains(c))
     {
-        if (!event || event->type() != QEvent::KeyPress) return QGuiApplication::eventFilter(o, event);
-	    const auto e = static_cast<QKeyEvent *>(event);
-		if (e->matches(QKeySequence::Undo))
-        {
-			commands::CommandManager::Instance()->undo(1);
-            return true;
-		}
-        else if (e->matches(QKeySequence::Redo))
-        {
-            commands::CommandManager::Instance()->redo(1);
-            return true;
-        }
-        return QGuiApplication::eventFilter(o, event);
+        qDebug() << c << "Doesn't exist call registerCanvas() before";
+        return;
     }
+    m_currentCanvas = c;
+}
 
-	void DulyApp::registerSettings(DulySettings* dulySettings)
-	{
-		m_settings = dulySettings;
-	}
+void DulyApp::initApp()
+{
+    initProcessManager();
+    installEventFilter(this);
+    m_currentCanvas = nullptr;
+    setupSettings();
+    loadFonts();
+    loadMainWindow();
+//    QTimer::singleShot(10000, this, SLOT(loadMainWindow()));
+}
 
-	void DulyApp::registerCanvas(views::DulyCanvas* c)
-	{
-		if (!m_canvases.contains(c))
-		{
-			m_canvases.append(c);
-			if (m_currentCanvas == nullptr)
-				m_currentCanvas = c;
-		}
-	}
+void DulyApp::loadMainWindow()
+{
+    m_engine->load(QUrl(QLatin1String("qrc:/main.qml")));
+    if (m_engine->rootObjects().isEmpty())
+        throw std::runtime_error("Fail to load main.qml");
+}
 
-	void DulyApp::setCurrentCanvas(views::DulyCanvas* c)
-	{
-		if (!m_canvases.contains(c))
-		{
-			qDebug() << c << "Doesn't exist call registerCanvas() before";
-			return;
-		}
-		m_currentCanvas = c;
-	}
+void DulyApp::initProcessManager()
+{
+#ifdef Q_OS_MAC
+    ProcessManager processManager(QGuiApplication::applicationDirPath() + "/settings/conf/mac/bin_info.cfg");
+#else
+    ProcessManager processManager("./settings/conf/windows/bin_info.cfg");
+#endif
+    processManager.launch();
+    ClientController::serverPort = processManager.getServerPort();
+    ClientController::shared();
+}
 
-	void DulyApp::initApp()
-	{
-		setOrganizationName("DNAI");
-		setOrganizationDomain("DNAI.com");
-		setApplicationName("DNAI");
-	}
-
-//    void DulyApp::setCurrentPath(const QString &path) const
-//    {
-//        m_currentPath = path;
-//    }
+void DulyApp::setupSettings()
+{
+    setOrganizationName("DNAI");
+    setOrganizationDomain("DNAI.com");
+    setApplicationName("DNAI");
+}
 }

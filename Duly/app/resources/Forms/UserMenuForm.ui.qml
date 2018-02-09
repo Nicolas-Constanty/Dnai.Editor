@@ -1,10 +1,9 @@
 import QtQuick 2.4
-import QtQuick.Layouts 1.3
 import Utils 1.0
 
 import "../Controls"
 
-ColumnLayout {
+Item {
     id: root
     property bool opened
     property string imgSrc
@@ -15,32 +14,35 @@ ColumnLayout {
     property alias uploadBtn: uploadBtn
     property alias logoutBtn: logoutBtn
 
-    RowLayout {
-        anchors.fill: parent
-        MouseArea {
-            id: mouseArea
-            anchors.fill: parent
-            cursorShape: Qt.PointingHandCursor
-        }
-        Text {
-            text: (fullname != "") ? fullname : qsTr("Sign In")
-            color: DulySettings.style.text.color
-            font.pixelSize: DulySettings.style.font.pixelSize
-            font.family: DulySettings.style.font.family
-            verticalAlignment: Text.AlignVCenter
-            horizontalAlignment: Text.AlignRight
-            Layout.fillWidth: true
-            Layout.fillHeight: true
-            Layout.rightMargin: 10
-        }
+    width: height + _text.width
 
-        Image {
-            id: avatar
-            source: (imgSrc != "") ? imgSrc : ""
-            fillMode: Image.PreserveAspectFit
-            sourceSize.width: parent.height
-            sourceSize.height: parent.height
-        }
+    MouseArea {
+        id: mouseArea
+        anchors.fill: parent
+        cursorShape: Qt.PointingHandCursor
+    }
+    Text {
+        id: _text
+        text: (fullname != "") ? fullname : qsTr("Sign In")
+        anchors.verticalCenter: parent.verticalCenter
+        anchors.left: parent.left
+        color: DulySettings.style.text.color
+        font.pixelSize: DulySettings.style.font.pixelSize
+        font.family: DulySettings.style.font.family
+        verticalAlignment: Text.AlignVCenter
+        horizontalAlignment: Text.AlignRight
+    }
+
+    Image {
+        id: avatar
+        anchors.right: parent.right
+        anchors.rightMargin: 0
+        source: (imgSrc != "") ? imgSrc : ""
+        fillMode: Image.PreserveAspectFit
+        width: parent.height
+        height: parent.height
+        sourceSize.width: parent.height
+        sourceSize.height: parent.height
     }
 
     DMenu {
@@ -61,7 +63,7 @@ ColumnLayout {
 
         Rectangle {
             border.width: 1
-            Layout.fillWidth: true
+            anchors.fill: parent
             height: 1
         }
 
@@ -73,4 +75,3 @@ ColumnLayout {
         }
     }
 }
-

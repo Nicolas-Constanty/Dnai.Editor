@@ -9,13 +9,13 @@ namespace duly_gui
 {
 	namespace views
 	{
-        FlowBackend::FlowBackend(FlowTypeRessouce::FlowType t, QQuickItem* parent) :
+        FlowBackend::FlowBackend(qmlresources::FlowTypeRessouce::FlowType t, QQuickItem* parent) :
 			BaseLinkable(parent),
             m_typeFlow(t)
 		{
 		}
 
-        FlowTypeRessouce::FlowType FlowBackend::getType() const
+        qmlresources::FlowTypeRessouce::FlowType FlowBackend::getType() const
 		{
             return m_typeFlow;
 		}
@@ -36,7 +36,7 @@ namespace duly_gui
 
 		Flow::Flow(QQuickItem* parent) :
 			LinkableBezierItem(parent)
-            , m_typeFlow(FlowTypeRessouce::FlowType::Enter)
+            , m_typeFlow(qmlresources::FlowTypeRessouce::FlowType::Enter)
 		{
 			setFlag(ItemHasContents, true);
 			m_radius = 8;
@@ -145,7 +145,7 @@ namespace duly_gui
 			return node;
 		}
 
-        void Flow::setTypeFlow(FlowTypeRessouce::FlowType t)
+        void Flow::setTypeFlow(qmlresources::FlowTypeRessouce::FlowType t)
 		{
             if (t == m_typeFlow && m_linkable != nullptr)
 				return;
@@ -174,9 +174,9 @@ namespace duly_gui
 
 		LinkableBezierItem* Flow::findLinkableBezierItem(GenericNode* n, const QPointF&p)
 		{
-            if (m_typeFlow == FlowTypeRessouce::FlowType::Exit && n->flowInItem()->contains(p - n->flowInItem()->position()))
+            if (m_typeFlow == qmlresources::FlowTypeRessouce::FlowType::Exit && n->flowInItem()->contains(p - n->flowInItem()->position()))
 				return n->flowInItem();
-            else if (m_typeFlow == FlowTypeRessouce::FlowType::Enter && n->flowOutItem()->contains(p - n->flowOutItem()->position()))
+            else if (m_typeFlow == qmlresources::FlowTypeRessouce::FlowType::Enter && n->flowOutItem()->contains(p - n->flowOutItem()->position()))
 				return n->flowOutItem();
 			return nullptr;
 		}

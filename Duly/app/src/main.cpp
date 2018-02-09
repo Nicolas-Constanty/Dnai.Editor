@@ -1,30 +1,17 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
-#include <QTimer>
 #include <functional>
+
 #include "views.h"
-
-#include "controllers/consolecontroller.h"
-#include "dulyapp.h"
-#include "manager.h"
-
-#include "processmanager.h"
-
-#include "include/controllers/clientcontroller.h"
-#include "include/eventconsumer.h"
-
-#include "dulysettings.h"
-#include "dulysettingsmodel.h"
-
-#include "models/treemodel.h"
-#include "models/user.h"
-
-#include "declarationcolumnmodel.h"
-#include "declarationmodel.h"
-
+#include "model.h"
 #include "http.h"
 #include "api.h"
+#include "qmlresources.h"
 
+#include "dulyapp.h"
+#include "manager.h"
+#include "include/eventconsumer.h"
+#include "dulysettings.h"
 
 static QObject *manager_singleton_provider(QQmlEngine *engine, QJSEngine *scriptEngine)
 {
@@ -34,12 +21,20 @@ static QObject *manager_singleton_provider(QQmlEngine *engine, QJSEngine *script
     return new duly_gui::Manager();
 }
 
-static QObject *manager_singleton_provider_settings(QQmlEngine *engine, QJSEngine *scriptEngine)
+static QObject *settings_singleton_provider(QQmlEngine *engine, QJSEngine *scriptEngine)
 {
     Q_UNUSED(engine)
     Q_UNUSED(scriptEngine)
 
     return new duly_gui::DulySettings();
+}
+
+static QObject *standardpath_singleton_provider(QQmlEngine *engine, QJSEngine *scriptEngine)
+{
+    Q_UNUSED(engine)
+    Q_UNUSED(scriptEngine)
+
+    return new QCStandardPaths();
 }
 
 static void registerCustomConnection() {
@@ -64,26 +59,33 @@ static void registerCustomGeometry()
     qmlRegisterType<duly_gui::views::RoundedRectangle>("CustomGeometry", 1, 0, "RoundedRectangle");
 }
 
+static void registerEnums()
+{
+    qmlRegisterType<duly_gui::qmlresources::IoTypeRessouce>("Utils", 1, 0, "IOType");
+    qmlRegisterType<duly_gui::qmlresources::FlowTypeRessouce>("Utils", 1, 0, "FlowType");
+    qmlRegisterType<duly_gui::qmlresources::DeclarationTypeRessouce>("Utils", 1, 0, "DeclarationType");
+
+}
+
 static void registerUtils()
 {
     qmlRegisterSingletonType<duly_gui::Manager>("Utils", 1, 0, "Manager", manager_singleton_provider);
-    qmlRegisterSingletonType<duly_gui::DulySettings>("Utils", 1, 0, "DulySettings", manager_singleton_provider_settings);
-    qmlRegisterType<IoTypeRessouce>("Utils", 1, 0, "IOType");
-    qmlRegisterType<FlowTypeRessouce>("Utils", 1, 0, "FlowType");
-    qmlRegisterType<DeclarationTypeRessouce>("Utils", 1, 0, "DeclarationType");
+    qmlRegisterSingletonType<duly_gui::DulySettings>("Utils", 1, 0, "DulySettings", settings_singleton_provider);
+    qmlRegisterSingletonType<QCStandardPaths>("Utils", 1, 0, "StandardPath", standardpath_singleton_provider);
+
     qmlRegisterType<duly_gui::views::Console>("Utils", 1, 0, "Console");
-    qmlRegisterType<duly_gui::DulySettingsModel>("Utils", 1, 0, "DulySettingsModel");
-    qmlRegisterType<duly_gui::QCanvas>("Utils", 1, 0, "QCanvas");
-    qmlRegisterType<duly_gui::QGrid>("Utils", 1, 0, "QGrid");
-    qmlRegisterType<duly_gui::QBorder>("Utils", 1, 0, "QBorder");
-    qmlRegisterType<duly_gui::QNode>("Utils", 1, 0, "QNode");
-    qmlRegisterType<duly_gui::QNodes>("Utils", 1, 0, "QNodes");
-    qmlRegisterType<duly_gui::QDeclaration>("Utils", 1, 0, "QDeclaration");
-    qmlRegisterType<duly_gui::QDeclarationView>("Utils", 1, 0, "QDeclarationView");
-    qmlRegisterType<duly_gui::QTextSettings>("Utils", 1, 0, "QTextSettings");
-    qmlRegisterType<duly_gui::QFontSettings>("Utils", 1, 0, "QFontSettings");
-    qmlRegisterType<duly_gui::MenuSettings>("Utils", 1, 0, "MenuSettings");
-    qmlRegisterType<duly_gui::QBackground>("Utils", 1, 0, "QBackground");
+    qmlRegisterType<duly_gui::models::DulySettingsModel>("Utils", 1, 0, "DulySettingsModel");
+    qmlRegisterType<duly_gui::models::QCanvas>("Utils", 1, 0, "QCanvas");
+    qmlRegisterType<duly_gui::models::QGrid>("Utils", 1, 0, "QGrid");
+    qmlRegisterType<duly_gui::models::QBorder>("Utils", 1, 0, "QBorder");
+    qmlRegisterType<duly_gui::models::QNode>("Utils", 1, 0, "QNode");
+    qmlRegisterType<duly_gui::models::QNodes>("Utils", 1, 0, "QNodes");
+    qmlRegisterType<duly_gui::models::QDeclaration>("Utils", 1, 0, "QDeclaration");
+    qmlRegisterType<duly_gui::models::QDeclarationView>("Utils", 1, 0, "QDeclarationView");
+    qmlRegisterType<duly_gui::models::QTextSettings>("Utils", 1, 0, "QTextSettings");
+    qmlRegisterType<duly_gui::models::QFontSettings>("Utils", 1, 0, "QFontSettings");
+    qmlRegisterType<duly_gui::models::MenuSettings>("Utils", 1, 0, "MenuSettings");
+    qmlRegisterType<duly_gui::models::QBackground>("Utils", 1, 0, "QBackground");
 //    qRegisterMetaType<duly_gui::models::TreeModel*>("TreeModel*");
 //    qmlRegisterType<duly_gui::models::Common>("Utils", 1, 0, "Common");
 
@@ -93,8 +95,8 @@ static void registerUtils()
     qmlRegisterType<duly_gui::models::NameSpaceBarModel>("Utils", 1, 0, "NameSpaceBarModel");
     qmlRegisterType<duly_gui::models::User>("Utils", 1, 0, "User");
 
-    qmlRegisterType<DeclarationModel>("Utils", 1, 0, "DeclarationModel");
-    qmlRegisterType<Declaration>("Utils", 1, 0, "Declaration");
+    qmlRegisterType<duly_gui::models::DeclarationModel>("Utils", 1, 0, "DeclarationModel");
+    qmlRegisterType<duly_gui::models::Declaration>("Utils", 1, 0, "Declaration");
 //    qmlRegisterType<DeclarationColumnModel>("Utils", 1, 0, "DeclarationColumnModel");
 //    qmlRegisterType<duly_gui::models::TreeItem>("Utils", 1, 0, "TreeItem");
 }
@@ -104,6 +106,7 @@ static void registerUtils()
 static void registerQml()
 {
     registerUtils();
+    registerEnums();
     registerCustomViews();
     registerCustomGeometry();
     registerCustomConnection();
@@ -113,30 +116,16 @@ int main(int argc, char *argv[])
 {
     registerQml();
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
-	
+
     duly_gui::DulyApp app(argc, argv);
 
-	app.initApp();
-
-#ifdef Q_OS_MAC
-    ProcessManager processManager(QGuiApplication::applicationDirPath() + "/settings/conf/mac/bin_info.cfg");
-#else
-    ProcessManager processManager("./settings/conf/windows/bin_info.cfg");
-#endif
-
-    processManager.launch();
-
-
-    ClientController::serverPort = processManager.getServerPort();
-    ClientController::shared();
-
-    duly_gui::http::Service::Init(duly_gui::api::http_config);
-
     QQmlApplicationEngine engine;
-	app.registerEngine(&engine);
-    engine.load(QUrl(QLatin1String("qrc:/main.qml")));
-    if (engine.rootObjects().isEmpty())
-        return -1;
+    app.registerEngine(&engine);
+    app.initApp();
+
+//    engine.load(QUrl(QLatin1String("qrc:/main.qml")));
+//    if (engine.rootObjects().isEmpty())
+//        return -1;
 
     // DEBUT CODE POUR LA COMMUNICATION CLIENT SERVER
 

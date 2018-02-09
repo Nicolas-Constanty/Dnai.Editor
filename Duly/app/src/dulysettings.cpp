@@ -9,7 +9,7 @@ namespace duly_gui
 	DulySettings::DulySettings(QObject* parent) : QObject(parent)
     {
 //        m_settings.clear();
-		m_style = new DulySettingsModel(nullptr);
+        m_style = new models::DulySettingsModel(nullptr);
 		const auto theme = m_settings.value("themes/current/theme").toString();
 		m_isInit = theme != "";
 	}
@@ -18,7 +18,7 @@ namespace duly_gui
 	{
 	}
 
-	void DulySettings::setStyle(DulySettingsModel* m)
+    void DulySettings::setStyle(models::DulySettingsModel* m)
 	{
 		if (m == m_style)
 			return;
@@ -127,7 +127,7 @@ namespace duly_gui
 		}
 	}
 
-	void DulySettings::registerStyle(DulySettingsModel *style)
+    void DulySettings::registerStyle(models::DulySettingsModel *style)
 	{
 		m_style = style;
 	}

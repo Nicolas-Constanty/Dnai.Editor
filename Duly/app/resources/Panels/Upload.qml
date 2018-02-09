@@ -1,11 +1,14 @@
 import QtQuick 2.4
 import QtQuick.Controls 2.2
 
+import Utils 1.0
+
 import "../Forms"
 
 UploadForm {
     property Popup popup
 
+    fileDialog.folder: Qt.resolvedUrl(StandardPath.writableLocation(StandardPath.HomeLocation))
     chooseButton.onClicked: fileDialog.open()
     fileDialog.onAccepted: {
         filesModel.clear();

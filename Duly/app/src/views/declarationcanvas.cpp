@@ -1,7 +1,7 @@
 #include "views/declarationcanvas.h"
 #include <QQmlApplicationEngine>
 #include "dulyapp.h"
-#include "declarationtype.h"
+#include "qmlresources/declarationtype.h"
 
 namespace duly_gui
 {
@@ -24,7 +24,7 @@ namespace duly_gui
 
                 const auto app = static_cast<DulyApp *>(DulyApp::instance());
                 const auto sets = app->settings()->style();
-                obj->setProperty("type", DeclarationTypeRessouce::DeclarationType::Class);
+                obj->setProperty("type", qmlresources::DeclarationTypeRessouce::DeclarationType::Class);
                 obj->setProperty("width", sets->declarationView()->itemSize());
                 obj->setProperty("height", sets->declarationView()->itemSize());
                 obj->setProperty("name", cl->name());
@@ -64,7 +64,7 @@ namespace duly_gui
 
                 const auto app = static_cast<DulyApp *>(DulyApp::instance());
                 const auto sets = app->settings()->style();
-                obj->setProperty("type", DeclarationTypeRessouce::DeclarationType::Context);
+                obj->setProperty("type", qmlresources::DeclarationTypeRessouce::DeclarationType::Context);
                 obj->setProperty("width", sets->declarationView()->itemSize());
                 obj->setProperty("height", sets->declarationView()->itemSize());
                 obj->setProperty("name", cl->name());
@@ -112,7 +112,7 @@ namespace duly_gui
 
 			const auto app = static_cast<DulyApp *>(DulyApp::instance());
 			const auto sets = app->settings()->style();
-            obj->setProperty("type", DeclarationTypeRessouce::DeclarationType::Function);
+            obj->setProperty("type", qmlresources::DeclarationTypeRessouce::DeclarationType::Function);
 			obj->setProperty("width", sets->declarationView()->itemSize());
 			obj->setProperty("height", sets->declarationView()->itemSize());
 			obj->setProperty("name", cl->name());
@@ -140,7 +140,7 @@ namespace duly_gui
 
 			const auto app = static_cast<DulyApp *>(DulyApp::instance());
 			const auto sets = app->settings()->style();
-            obj->setProperty("type", DeclarationTypeRessouce::DeclarationType::Variable);
+            obj->setProperty("type", qmlresources::DeclarationTypeRessouce::DeclarationType::Variable);
 			obj->setProperty("width", sets->declarationView()->itemSize());
 			obj->setProperty("height", sets->declarationView()->itemSize());
 			obj->setProperty("name", cl->name());

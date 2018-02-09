@@ -10,7 +10,7 @@ namespace duly_gui
 		class OutputController : public BaseIo
 		{
 		public:
-            explicit OutputController(IoTypeRessouce::IoType type, QQuickItem *parent);
+            explicit OutputController(qmlresources::IoTypeRessouce::IoType type, QQuickItem *parent);
 
 			/**
 			* \brief Connect linkable together, create a link, and keep a reference on the visual curve

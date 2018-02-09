@@ -4,4 +4,5 @@ import "../"
 BinaryOperatorModel {
     name: "\^"
     description: "Binary xor"
+    instruction_id: 11
 }

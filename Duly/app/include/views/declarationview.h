@@ -2,7 +2,7 @@
 #define DECLARATIONVIEW_H
 
 #include <QQuickItem>
-#include "declarationtype.h"
+#include "qmlresources/declarationtype.h"
 #include "roundedrectangle.h"
 
 namespace duly_gui
@@ -12,7 +12,7 @@ namespace duly_gui
 		class DeclarationView : public QQuickItem
 		{
 			Q_OBJECT
-            Q_PROPERTY(DeclarationTypeRessouce::DeclarationType type READ type WRITE setType NOTIFY typeChanged)
+            Q_PROPERTY(qmlresources::DeclarationTypeRessouce::DeclarationType type READ type WRITE setType NOTIFY typeChanged)
             Q_PROPERTY(QString name READ name WRITE setName NOTIFY nameChanged)
             Q_PROPERTY(QString description READ description WRITE setDescription NOTIFY descriptionChanged)
             Q_PROPERTY(qreal xPos READ xPos WRITE setXPos NOTIFY xPosChanged)
@@ -26,7 +26,7 @@ namespace duly_gui
 			explicit DeclarationView(QQuickItem *parent = nullptr);
 
 		signals:
-            void typeChanged(const DeclarationTypeRessouce::DeclarationType type);
+            void typeChanged(const qmlresources::DeclarationTypeRessouce::DeclarationType type);
 			void nameChanged(const QString &name);
 			void descriptionChanged(const QString &name);
 			void xPosChanged(const qreal x);
@@ -37,7 +37,7 @@ namespace duly_gui
 			void borderWidthChanged(const qreal width);
 
 		public:
-            void setType(const DeclarationTypeRessouce::DeclarationType type);
+            void setType(const qmlresources::DeclarationTypeRessouce::DeclarationType type);
 			void setName(const QString &name);
 			void setDescription(const QString &name);
 			void setXPos(const qreal x);
@@ -48,7 +48,7 @@ namespace duly_gui
 			void setBorderWidth(const qreal width);
 
 		public:
-            DeclarationTypeRessouce::DeclarationType type() const { return m_type; }
+            qmlresources::DeclarationTypeRessouce::DeclarationType type() const { return m_type; }
             const QString &name() const { return m_name; }
 			const QString &description() const { return m_description; }
             qreal xPos() const { return m_xPos; }
@@ -60,7 +60,7 @@ namespace duly_gui
 			//RoundedRectangle *view() const { return m_view; }
 
 		private:
-            DeclarationTypeRessouce::DeclarationType m_type;
+            qmlresources::DeclarationTypeRessouce::DeclarationType m_type;
 			QString m_name;
 			QString m_description;
 			qreal m_xPos;

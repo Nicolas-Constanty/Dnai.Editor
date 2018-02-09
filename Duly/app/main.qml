@@ -17,67 +17,95 @@ import "resources/Nodes/Operator/BinaryOperator"
 import "resources/Nodes/Operator/BinaryOperator/Logical"
 import "resources/Nodes/Operator/UnaryOperator"
 
-ApplicationWindow {
-
-
-    id: root
-//    DeclarationView1 {
-
-//    }
-
-    property alias appWindow : root
+Item {
+    id: rootItem
+    property alias appWindow : loader.item
     property double factor : 1.5
-    property BaseLayout layout: baseLayout
+    property BaseLayout layout: appWindow.baseLayout
 
-    BaseLayout {
-        id: baseLayout
-    }
-    visible: true
-    width: DulySettings.isSettingsLoad() ? 1280 : 400
-    height: DulySettings.isSettingsLoad() ? 720 : 150
-    minimumHeight: 100
-    minimumWidth: 300
-    title: qsTr("DNAI")
-    color: DulySettings.style.background.color
-
-    Component.onCompleted: {
-        DulySettings.init()
-        if (DulySettings.isSettingsLoad())
-        {
-            Factory.createObjects("resources/Layouts/LayoutClassic.qml", {
-                                      "width": root.width,
-                                      "height": root.height,
-                                      "color": "transparent"
-                                  }, root)
-            layout = Factory.getObject()
-            layout.anchors.fill = layout.parent
-        }
-        else
-        {
-            Factory.createObjects("resources/Panels/ChooseThemePanel.qml", {
-                                      "width": root.width,
-                                      "height": root.height
-                                  }, root)
-        }
+    function closeSplashScreen()
+    {
+        _splashScreen.close()
     }
 
-/*   EventConsumer {
-        clientName: "Duly GUI"
-        description: "F1D1S1L1C1"
-        eventName: "TOTO"
-
-        onReceiveEvent: {
-            console.log(data[1])
-        }
+    SplashScreen {
+        id: _splashScreen
     }
 
-    EventConsumer {
-        clientName: "Duly GUI"
-        description: "C1"
-        eventName: "TITI"
+    Loader {
+        id: loader
+        asynchronous: true
+        sourceComponent: mainWindow
+        opacity: 0
+    }
 
-        onReceiveEvent: {
-            console.log(data)
+    Component {
+        id: mainWindow
+
+        ApplicationWindow {
+            id: root
+            property alias baseLayout: _baseLayout
+
+            BaseLayout {
+                id: _baseLayout
+            }
+            width: DulySettings.isSettingsLoad() ? 1280 : 400
+            height: DulySettings.isSettingsLoad() ? 720 : 150
+            minimumHeight: 100
+            minimumWidth: 300
+            title: qsTr("DNAI")
+            color: DulySettings.style.background.color
+            visible: false
+
+            Component.onCompleted: {
+                DulySettings.init()
+                if (DulySettings.isSettingsLoad())
+                {
+                    Factory.createObjects("resources/Layouts/LayoutClassic.qml", {
+                                              "width": root.width,
+                                              "height": root.height,
+                                              "color": "transparent"
+                                          }, root)
+                    layout = Factory.getObject()
+                    layout.anchors.fill = layout.parent
+                }
+                else
+                {
+                    Factory.createObjects("resources/Panels/ChooseThemePanel.qml", {
+                                              "width": root.width,
+                                              "height": root.height
+                                          }, root)
+                }
+                visible = true
+            }
+
+            onVisibleChanged: {
+                if (visible == true)
+                    _splashScreen.close();
+            }
+
+            /*   EventConsumer {
+                    clientName: "Duly GUI"
+                    description: "F1D1S1L1C1"
+                    eventName: "TOTO"
+
+                    onReceiveEvent: {
+                        console.log(data[1])
+                    }
+                }
+
+                EventConsumer {
+                    clientName: "Duly GUI"
+                    description: "C1"
+                    eventName: "TITI"
+
+                    onReceiveEvent: {
+                        console.log(data)
+                    }
+                }*/
         }
-    }*/
+    }
 }
+
+
+

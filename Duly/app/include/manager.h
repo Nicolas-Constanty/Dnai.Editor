@@ -6,8 +6,8 @@
 #include "models/treemodel.h"
 #include "models/namespacebarmodel.h"
 #include "models/treeitem.h"
-#include "declarationcolumnmodel.h"
 #include "models/user.h"
+#include "models/declarationmodel.h"
 #include "api.h"
 
 namespace duly_gui {
@@ -16,7 +16,7 @@ namespace duly_gui {
         Q_OBJECT
         Q_PROPERTY(duly_gui::models::TreeModel *projectModel READ projectModel WRITE setProjectModel NOTIFY projectModelChanged)
         Q_PROPERTY(QVariant namespacebarModel READ namespacebarModel WRITE setNamespacebarModel NOTIFY namespacebarModelChanged)
-        Q_PROPERTY(DeclarationModel *declarationModel READ declarationModel WRITE setDeclarationModel NOTIFY declarationModelChanged)
+        Q_PROPERTY(duly_gui::models::DeclarationModel *declarationModel READ declarationModel WRITE setDeclarationModel NOTIFY declarationModelChanged)
         Q_PROPERTY(duly_gui::models::User *user READ user WRITE setUser NOTIFY userChanged)
 
     public:
@@ -50,7 +50,7 @@ namespace duly_gui {
     signals:
         void projectModelChanged(models::TreeModel *model);
         void namespacebarModelChanged(const QVariant  &ref);
-        void declarationModelChanged(DeclarationModel *ref);
+        void declarationModelChanged(models::DeclarationModel *ref);
         void userChanged(models::User *user);
 
     public:
@@ -58,8 +58,8 @@ namespace duly_gui {
         void setProjectModel(models::TreeModel *model);
         QVariant namespacebarModel() const { return m_namespacebarmodel; }
         void setNamespacebarModel(const QVariant &ref);
-        void setDeclarationModel(DeclarationModel *ref);
-        DeclarationModel * declarationModel() const { return m_declRef; }
+        void setDeclarationModel(models::DeclarationModel *ref);
+        models::DeclarationModel * declarationModel() const { return m_declRef; }
         models::User *user() const;
         void setUser(models::User *user);
 
@@ -69,7 +69,7 @@ namespace duly_gui {
          QVariant m_namespacebarmodel;
          models::TreeItem *m_currentPath;
          QVariant m_declarationModel;
-         DeclarationModel *m_declRef;
+         models::DeclarationModel *m_declRef;
          void setupClassModel(models::Class *cl, int level);
          void setupFunctionModel(models::Function *func);
          void setupContextModel(models::Context *context, int level);

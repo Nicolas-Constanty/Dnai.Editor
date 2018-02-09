@@ -31,6 +31,13 @@ BaseLayout {
         anchors.right: panelRight.left
     }
 
+//    NodeCanvas {
+//        anchors.top: panelTop.bottom
+//        anchors.bottom: consoleRef.top
+//        anchors.left: panelLeft.right
+//        anchors.right: panelRight.left
+//    }
+
     DropShadow {
            anchors.fill: source
            horizontalOffset: -3
@@ -62,7 +69,7 @@ BaseLayout {
         anchors.right: layout.right
         anchors.bottom: layout.bottom
         width: layout.width / 6;
-        height: root.height - toolBar.height
+        height: appWindow.height - toolBar.height
     }
 
     DropShadow {

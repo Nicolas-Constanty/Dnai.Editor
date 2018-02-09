@@ -35,3 +35,9 @@ Makefile\.Debug
 Makefile\.Release
 
 Duly/app/\.vs/
+
+*.duly_app
+
+*.Debug
+
+*.Release

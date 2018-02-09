@@ -49,7 +49,6 @@ private:
 }
 }
 
-Q_DECLARE_METATYPE(duly_gui::models::TreeModel*)
-
+Q_DECLARE_METATYPE(duly_gui::models::TreeModel *)
 
 #endif // TREEMODEL_H

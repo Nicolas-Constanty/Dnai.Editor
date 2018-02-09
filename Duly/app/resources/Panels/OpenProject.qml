@@ -7,6 +7,7 @@ import "../Forms"
 OpenProjectForm {
     property Popup popup
 
+    fileDialog.folder: Qt.resolvedUrl(StandardPath.writableLocation((StandardPath.HomeLocation)))
     fileDialog.onAccepted: {
         projectPath.text = fileDialog.fileUrl;
         console.log("You chose: " + fileDialog.fileUrl);

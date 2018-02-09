@@ -4,4 +4,5 @@ import "../"
 BinaryOperatorModel {
     name: "*"
     description: "Multiplicate input 1 by input 2"
+    icon: "x"
 }

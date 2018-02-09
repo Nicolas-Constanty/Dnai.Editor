@@ -2,6 +2,7 @@ QT += qml quickcontrols2 network
 
 CONFIG += c++14
 CONFIG += object_parallel_to_source
+CONFIG += resources_big
 
 INCLUDEPATH += include/
 
@@ -54,7 +55,6 @@ SOURCES += src/baseio.cpp \
     src/views/class.cpp \
     src/models/list/listmodelcontext.cpp \
     src/dulysettings.cpp \
-    src/dulysettingsmodel.cpp \
     src/views/declarationview.cpp \
     src/views/declarationcanvas.cpp \
     src/controllers/clientcontroller.cpp \
@@ -64,9 +64,10 @@ SOURCES += src/baseio.cpp \
     src/models/namespacebarmodel.cpp \
     src/models/namespacebaritem.cpp \
     layouthandler.cpp \
-    declarationcolumnmodel.cpp \
-    declarationmodel.cpp \
-    basicnodemodel.cpp
+    src/models/dulysettingsmodel.cpp \
+    src/models/declarationmodel.cpp \
+    src/models/basicnodemodel.cpp \
+    src/qmlresources/qcstandardpaths.cpp
 
 #VIEWS
 SOURCES += src/views/beziercurve.cpp \
@@ -135,7 +136,8 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 DISTFILES +=
 
-FORMS +=
+FORMS += \
+    resources/Forms/BasePanelForm.ui
 
 #CORE
 HEADERS += include/baseio.h \
@@ -156,24 +158,27 @@ HEADERS += include/baseio.h \
     include/views/class.h \
     include/views.h \
     include/dulysettings.h \
-    include/dulysettingsmodel.h \
     include/views/declarationview.h \
     include/views/declarationcanvas.h \
     include/controllers/clientcontroller.h \
-    include/iotype.h \
-    include/flowtype.h \
     include/processmanager.h \
-    include/declarationtype.h \
     include/models/treemodel.h \
     include/models/treeitem.h \
     include/models/treeitem.h \
     include/models/namespacebarmodel.h \
     include/models/namespacebaritem.h \
     layouthandler.h \
-    declarationcolumnmodel.h \
-    declarationmodel.h \
-    basicnodemodel.h \
-    include/qmlresources/instructionid.h
+    include/qmlresources/instructionid.h \
+    include/qmlresources/declarationtype.h \
+    include/qmlresources/flowtype.h \
+    include/qmlresources/instructionid.h \
+    include/qmlresources/iotype.h \
+    include/qmlresources.h \
+    include/model.h \
+    include/models/dulysettingsmodel.h \
+    include/models/declarationmodel.h \
+    include/models/basicnodemodel.h \
+    include/qmlresources/qcstandardpaths.h
 
 #VIEWS
 HEADERS += include/views/beziercurve.h \

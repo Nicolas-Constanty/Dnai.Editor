@@ -14,7 +14,7 @@ namespace duly_gui {
     Manager::Manager(QObject *parent): QObject(parent), m_user(nullptr)
     {
         m_projectModel = nullptr;
-        m_declRef = new DeclarationModel();
+        m_declRef = new models::DeclarationModel();
     }
 
     Manager::~Manager()
@@ -67,14 +67,12 @@ namespace duly_gui {
 
     void Manager::openProject(Project *project)
     {
-//        DulyApp::currentCanvasInstance()->resetContent();
         m_project = project;
         m_project->declare();
         createTreeModel(m_project);
         m_currentPath = static_cast<models::TreeItem*>(m_projectModel->index(0,0).internalPointer());
         createNameSpaceModel(m_currentPath);
         createDeclarationModel(m_project);
-//        views::DeclarationCanvas::CreateContext(m_project->main(), true);
     }
 
     void Manager::createDeclarationIfMissing(models::Common *c)
@@ -84,7 +82,7 @@ namespace duly_gui {
             {
                 if (i + 1 > m_declRef->rowCount())
                 {
-                    m_declRef->addDeclaration(new Declaration());
+                    m_declRef->addDeclaration(new models::Declaration());
                 }
             }
     }
@@ -98,7 +96,7 @@ namespace duly_gui {
         {
             setupContextModel(contexts[i], lvl);
             createDeclarationIfMissing(contexts[i]);
-            qvariant_cast<Declaration *>(m_declRef->data(m_declRef->index(contexts[i]->listIndex(), 0)))->addModel(contexts[i]);
+            qvariant_cast<models::Declaration *>(m_declRef->data(m_declRef->index(contexts[i]->listIndex(), 0)))->addModel(contexts[i]);
         }
 
         const auto classes = context->classes();
@@ -106,7 +104,7 @@ namespace duly_gui {
         {
             setupClassModel(classes[i], lvl);
             createDeclarationIfMissing(classes[i]);
-            qvariant_cast<Declaration *>(m_declRef->data(m_declRef->index(classes[i]->listIndex(), 0)))->addModel(classes[i]);
+            qvariant_cast<models::Declaration *>(m_declRef->data(m_declRef->index(classes[i]->listIndex(), 0)))->addModel(classes[i]);
         }
 
         const auto functions = context->functions();
@@ -131,7 +129,7 @@ namespace duly_gui {
         {
             setupClassModel(classes[i], lvl);
             createDeclarationIfMissing(classes[i]);
-            qvariant_cast<Declaration *>(m_declRef->data(m_declRef->index(classes[i]->listIndex(), 0)))->addModel(classes[i]);
+            qvariant_cast<models::Declaration *>(m_declRef->data(m_declRef->index(classes[i]->listIndex(), 0)))->addModel(classes[i]);
         }
 
         const auto functions = cl->functions();
@@ -151,14 +149,14 @@ namespace duly_gui {
     {
         if (!m_declRef) return;
         createDeclarationIfMissing(func);
-        qvariant_cast<Declaration *>(m_declRef->data(m_declRef->index(func->listIndex(), 0)))->addModel(func);
+        qvariant_cast<models::Declaration *>(m_declRef->data(m_declRef->index(func->listIndex(), 0)))->addModel(func);
     }
 
     void Manager::setupVariableModel(models::Variable *variable)
     {
         if (!m_declRef) return;
         createDeclarationIfMissing(variable);
-        qvariant_cast<Declaration *>(m_declRef->data(m_declRef->index(variable->listIndex(), 0)))->addModel(variable);
+        qvariant_cast<models::Declaration *>(m_declRef->data(m_declRef->index(variable->listIndex(), 0)))->addModel(variable);
     }
 
     void Manager::createDeclarationModel(Project *project)
@@ -243,7 +241,7 @@ namespace duly_gui {
         emit namespacebarModelChanged(ref);
     }
 
-    void Manager::setDeclarationModel(DeclarationModel *m)
+    void Manager::setDeclarationModel(models::DeclarationModel *m)
     {
         m_declRef = m;
         emit declarationModelChanged(m);
@@ -280,22 +278,22 @@ namespace duly_gui {
 
     void Manager::addContext(int index, int listindex)
     {
-        qvariant_cast<Declaration *>(m_declRef->data(m_declRef->index(listindex , 0)))->addModel(new models::Context("undefined", "Context", "", QVector2D(), index, listindex));
+        qvariant_cast<models::Declaration *>(m_declRef->data(m_declRef->index(listindex , 0)))->addModel(new models::Context("undefined", "Context", "", QVector2D(), index, listindex));
     }
 
     void Manager::addClass(int index, int listindex)
     {
-        qvariant_cast<Declaration *>(m_declRef->data(m_declRef->index(listindex , 0)))->addModel(new models::Class("undefined", "Class", "", QVector2D(), index, listindex));
+        qvariant_cast<models::Declaration *>(m_declRef->data(m_declRef->index(listindex , 0)))->addModel(new models::Class("undefined", "Class", "", QVector2D(), index, listindex));
     }
 
     void Manager::addFunction(int index, int listindex)
     {
-        qvariant_cast<Declaration *>(m_declRef->data(m_declRef->index(listindex , 0)))->addModel(new models::Function("undefined", "Function", "", QVector2D(), index, listindex));
+        qvariant_cast<models::Declaration *>(m_declRef->data(m_declRef->index(listindex , 0)))->addModel(new models::Function("undefined", "Function", "", QVector2D(), index, listindex));
     }
 
     void Manager::addVariable(int index, int listindex)
     {
-        qvariant_cast<Declaration *>(m_declRef->data(m_declRef->index(listindex , 0)))->addModel(new models::Variable("undefined", "Variable", "", QVector2D(), "generic", false, index, listindex));
+        qvariant_cast<models::Declaration *>(m_declRef->data(m_declRef->index(listindex , 0)))->addModel(new models::Variable("undefined", "Variable", "", QVector2D(), "generic", false, index, listindex));
     }
 
     models::User *Manager::user() const

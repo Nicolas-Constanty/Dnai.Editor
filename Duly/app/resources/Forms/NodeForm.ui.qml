@@ -17,6 +17,7 @@ GenericNode {
     property alias flowIn: node.flowIn
     property alias flowOut: node.flowOut
     property alias headerRef: headerNode
+    property alias icon: _icon.text
 
     content: contentNode
     header: headerNode
@@ -26,13 +27,14 @@ GenericNode {
         x: borderWidth * 2
         y: borderWidth * 2
         id: headerNode
-        width: if (_name.width > _description.width && _name.width * 1.5 > 100)
-                   _name.width * 1.5
-               else if (_description.width * 1.5 > 200)
-                   _description.width * 1.5
-               else
-                   200
-        height: _name.height * 1.3 + _description.height * 1.3
+        implicitWidth: if (_name.width > _description.width
+                               && _name.width * 1.5 > 100)
+                           _name.width * 1.5
+                       else if (_description.width * 1.5 > 200)
+                           _description.width * 1.5
+                       else
+                           200
+        implicitHeight: _name.height * 1.3 + _description.height * 1.3
         bottomLeft: false
         bottomRight: false
         topRight: false
@@ -47,6 +49,7 @@ GenericNode {
             anchors.top: parent.top
             anchors.topMargin: 5
             anchors.horizontalCenter: parent.horizontalCenter
+            visible: state == "Open"
         }
         MLabel {
             id: _description
@@ -55,6 +58,12 @@ GenericNode {
             anchors.top: parent.top
             anchors.topMargin: _name.height * 1.3
             anchors.horizontalCenter: parent.horizontalCenter
+            visible: state == "Open"
+        }
+        FontAwesomeTextSolid {
+            id: _icon
+            font.pointSize: 15
+            anchors.fill: parent
         }
     }
     RoundedRectangle {
@@ -73,6 +82,7 @@ GenericNode {
         bottomLeft: false
         anchors.top: headerNode.bottom
         anchors.topMargin: headerNode.borderWidth + 1
+        visible: state == "Open"
         ListView {
             id: _inputs
             anchors.topMargin: 10

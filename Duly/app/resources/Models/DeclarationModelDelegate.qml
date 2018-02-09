@@ -5,6 +5,11 @@ import Utils 1.0
 
 import "../Style"
 import "../JavaScript/CreateComponent.js" as Factory
+import "../Nodes"
+import "../Nodes/Operator"
+import "../Nodes/Operator/BinaryOperator"
+import "../Nodes/Operator/BinaryOperator/Logical"
+import "../Nodes/Operator/UnaryOperator"
 
 DelegateModel {
     id: visualModel
@@ -15,52 +20,53 @@ DelegateModel {
 
     model: ListModel {
             id : listmodel
-            Component.onCompleted: {
-                append({
-                           type: contextModel.type,
-                           name: contextModel.name,
-                           description: contextModel.description,
-                           xPos: contextModel.xPos,
-                           yPos: contextModel.yPos,
-                           radius: contextModel.radius,
-                           color: contextModel.color,
-                           borderColor: contextModel.borderColor,
-                           borderWidth: contextModel.borderWidth
-                       });
-                append({
-                           type: classModel.type,
-                           name: classModel.name,
-                           description: classModel.description,
-                           xPos: classModel.xPos,
-                           yPos: classModel.yPos,
-                           radius: classModel.radius,
-                           color: classModel.color,
-                           borderColor: classModel.borderColor,
-                           borderWidth: classModel.borderWidth
-                       })
-                append({
-                           type: functionModel.type,
-                           name: functionModel.name,
-                           description: functionModel.description,
-                           xPos: functionModel.xPos,
-                           yPos: functionModel.yPos,
-                           radius: functionModel.radius,
-                           color: functionModel.color,
-                           borderColor: functionModel.borderColor,
-                           borderWidth: functionModel.borderWidth
-                       })
-                append({
-                           type: variableModel.type,
-                           name: variableModel.name,
-                           description: variableModel.description,
-                           xPos: variableModel.xPos,
-                           yPos: variableModel.yPos,
-                           radius: variableModel.radius,
-                           color: variableModel.color,
-                           borderColor: variableModel.borderColor,
-                           borderWidth: variableModel.borderWidth
-                       })
-            }
+
+//            Component.onCompleted: {
+//                append({
+//                           type: contextModel.type,
+//                           name: contextModel.name,
+//                           description: contextModel.description,
+//                           xPos: contextModel.xPos,
+//                           yPos: contextModel.yPos,
+//                           radius: contextModel.radius,
+//                           color: contextModel.color,
+//                           borderColor: contextModel.borderColor,
+//                           borderWidth: contextModel.borderWidth
+//                       });
+//                append({
+//                           type: classModel.type,
+//                           name: classModel.name,
+//                           description: classModel.description,
+//                           xPos: classModel.xPos,
+//                           yPos: classModel.yPos,
+//                           radius: classModel.radius,
+//                           color: classModel.color,
+//                           borderColor: classModel.borderColor,
+//                           borderWidth: classModel.borderWidth
+//                       })
+//                append({
+//                           type: functionModel.type,
+//                           name: functionModel.name,
+//                           description: functionModel.description,
+//                           xPos: functionModel.xPos,
+//                           yPos: functionModel.yPos,
+//                           radius: functionModel.radius,
+//                           color: functionModel.color,
+//                           borderColor: functionModel.borderColor,
+//                           borderWidth: functionModel.borderWidth
+//                       })
+//                append({
+//                           type: variableModel.type,
+//                           name: variableModel.name,
+//                           description: variableModel.description,
+//                           xPos: variableModel.xPos,
+//                           yPos: variableModel.yPos,
+//                           radius: variableModel.radius,
+//                           color: variableModel.color,
+//                           borderColor: variableModel.borderColor,
+//                           borderWidth: variableModel.borderWidth
+//                       })
+//            }
     }
 
     delegate: Item {

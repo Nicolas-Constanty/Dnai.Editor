@@ -16,6 +16,67 @@ NodeForm {
     outputs: model.outputs
     name: model.name
     description: model.description
+    icon: model.icon
+
+    state: "Close"
+    states: [
+        State{
+            name: "Open"
+            PropertyChanges{ target: nodeForm.headerRef; width: nodeForm.headerRef.implicitWidth }
+            PropertyChanges{ target: nodeForm.headerRef; height: nodeForm.headerRef.implicitHeight }
+            PropertyChanges{ target: nodeForm.headerRef; radius: 10 }
+            PropertyChanges{ target: nodeForm.headerRef; topRight: false }
+            PropertyChanges{ target: nodeForm.headerRef; bottomLeft: false }
+            PropertyChanges{ target: nodeForm.headerRef; bottomRight: false }
+        },
+        State{
+            name:"Close"
+            PropertyChanges{ target: nodeForm.headerRef; width: 60 }
+            PropertyChanges{ target: nodeForm.headerRef; height: 60 }
+            PropertyChanges{ target: nodeForm.headerRef; radius: 20 }
+            PropertyChanges{ target: nodeForm.headerRef; topRight: true }
+            PropertyChanges{ target: nodeForm.headerRef; bottomLeft: true }
+            PropertyChanges{ target: nodeForm.headerRef; bottomRight: true }
+        }
+    ]
+    transitions: [
+        Transition {
+            from: "Open"
+            to: "Close"
+
+            SequentialAnimation{
+                NumberAnimation {
+                    target: nodeForm.headerRef
+                    property: "width"
+                    duration: 200
+                    easing.type: Easing.InOutQuad
+                }
+                NumberAnimation {
+                    target: nodeForm.headerRef
+                    property: "height"
+                    duration: 200
+                    easing.type: Easing.InOutQuad
+                }
+            }
+        },
+        Transition {
+            from: "Close"
+            to: "Open"
+            SequentialAnimation{
+                NumberAnimation {
+                    target: nodeForm.headerRef
+                    property: "width"
+                    duration: 200
+                }
+                NumberAnimation {
+                    target: nodeForm.headerRef
+                    property: "height"
+                    duration: 200
+                    easing.type: Easing.InOutQuad
+                }
+            }
+        }
+    ]
 
     Flow {
         id: _flowIn

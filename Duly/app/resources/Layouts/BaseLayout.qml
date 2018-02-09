@@ -9,4 +9,8 @@ Rectangle {
     property PanelLeft leftPanel: PanelLeft {}
     property PanelRight rightPanel: PanelRight {}
     property PanelTop topPanel: PanelTop {}
+
+    Component.onCompleted: {
+        rootItem.closeSplashScreen()
+    }
 }

@@ -6,10 +6,10 @@ var parent
 function createObjects(path, sh, p) {
     shape = sh
     parent = p
-    if (parent == null)
+    if (parent === null)
         parent = appWindow
     component = Qt.createComponent("../../" + path);
-    if (component.status == Component.Ready)
+    if (component.status === Component.Ready)
         finishCreation();
     else
         component.statusChanged.connect(finishCreation);
@@ -17,14 +17,14 @@ function createObjects(path, sh, p) {
 }
 
 function finishCreation() {
-    if (component.status == Component.Ready) {
+    if (component.status === Component.Ready) {
         object = component.createObject(parent, shape);
-        if (object == null) {
+        if (object === null) {
             // Error Handling
             console.info("Error creating object");
         }
         return object
-    } else if (component.status == Component.Error) {
+    } else if (component.status === Component.Error) {
         // Error Handling
         console.info("Error loading component:", component.errorString());
     }

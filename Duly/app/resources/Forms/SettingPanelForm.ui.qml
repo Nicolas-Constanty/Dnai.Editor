@@ -12,30 +12,9 @@ Item {
     property alias themeTabRef: themeTab
     property alias nodeTabRef: nodeTab
 
-    StackLayout {
-        id: stack
-        currentIndex: bar.currentIndex
-        anchors.fill: parent
-
-        ThemePanel {
-            id: themeTab
-            Layout.fillHeight: true
-            Layout.fillWidth: true
-        }
-        LanguagePanel {
-            id: languageTab
-            Layout.fillHeight: true
-            Layout.fillWidth: true
-        }
-        NodePanel {
-            id: nodeTab
-            Layout.fillHeight: true
-            Layout.fillWidth: true
-        }
-    }
-
     TabBar {
         id: bar
+        contentWidth: parent.width
         background: Rectangle {
             color: DulySettings.style.background.color
         }
@@ -47,6 +26,24 @@ Item {
         }
         TabButton {
             text: qsTr("Node apparence")
+        }
+    }
+
+    StackLayout {
+        id: stack
+        y: bar.height
+        width: parent.width
+        height: parent.height - bar.height
+        currentIndex: bar.currentIndex
+
+        ThemePanel {
+            id: themeTab
+        }
+        LanguagePanel {
+            id: languageTab
+        }
+        NodePanel {
+            id: nodeTab
         }
     }
 }

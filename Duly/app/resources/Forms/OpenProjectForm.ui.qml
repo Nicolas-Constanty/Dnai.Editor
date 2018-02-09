@@ -1,9 +1,12 @@
 import QtQuick 2.4
 import QtQuick.Dialogs 1.2
 import QtQuick.Controls 2.2
-import QtQuick.Layouts 1.3
 
 import Utils 1.0
+
+import "../Panels"
+import "../Components"
+import "../Style"
 
 Page {
     id: page
@@ -13,11 +16,12 @@ Page {
     property alias openButton: openButton
     property alias projectPath: projectPath
     property alias viewData: viewData
+    width: 1080
+    height: 720
 
     FileDialog {
         id: fileDialog
         title: "Please choose a project"
-        folder: shortcuts.home
         selectMultiple: false
         nameFilters: ["Duly project (*.dulyproject)"]
     }
@@ -56,109 +60,114 @@ Page {
         }
     }
 
-    ColumnLayout {
+    header: TabBar {
+        width: parent.width
+        TabButton {
+            contentItem: Title2 {
+                padding: 10
+                text: qsTr("Open a project")
+            }
+            background: Rectangle {
+                color: DulySettings.style.background.color
+            }
+        }
+        background: Rectangle {
+            color: DulySettings.style.background.color
+        }
+    }
+
+    contentChildren: BasePanel {
+        spacing: 4
         anchors.fill: parent
-        TabBar {
-            Layout.fillWidth: true
-            TabButton {
-                contentItem: Text {
-                    text: qsTr("Open a project")
-                    color: DulySettings.style.text.accentColor
-                    font.family: DulySettings.style.font.family
-                    font.pixelSize: DulySettings.style.font.pixelSize
-                    horizontalAlignment: Text.AlignHCenter
-                    verticalAlignment: Text.AlignVCenter
-                }
-                background: Rectangle {
-                    color: DulySettings.style.background.color
+        Item {
+            anchors.left: parent.left
+            anchors.right: parent.right
+            height: chooseButton.height
+            TextField {
+                id: projectPath
+                anchors.top: parent.top
+                anchors.bottom: parent.bottom
+                anchors.right: chooseButton.left
+                anchors.left: parent.left
+                placeholderText: qsTr("Choose a project")
+                text: fileDialog.fileUrl
+                readOnly: true
+            }
+            Button {
+                id: chooseButton
+                anchors.top: parent.top
+                anchors.bottom: parent.bottom
+                anchors.right: parent.right
+                text: qsTr("Choose")
+            }
+        }
+        Splitter {
+        }
+        Title3 {
+            anchors.left: parent.left
+            anchors.right: parent.right
+            text: qsTr("Online Projects")
+            color: DulySettings.style.text.accentColor
+            horizontalAlignment: Qt.AlignHCenter
+        }
+        ScrollView {
+            padding: 10
+            anchors.left: parent.left
+            anchors.right: parent.right
+            height: 200
+            background: Rectangle {
+                anchors.fill: parent
+                border.color: DulySettings.style.border.color
+                border.width: DulySettings.style.border.width
+                color: DulySettings.style.background.darkColor
+            }
+
+            ListView {
+                anchors.fill: parent
+                anchors.margins: 20
+                spacing: 4
+                model: filesModel
+                clip: true
+                delegate: Item {
+                    width: parent.width
+                    height: _downloadButton.implicitHeight
+                    MLabel {
+                        anchors.left: parent.left
+                        anchors.right: _downloadButton.left
+                        text: filename
+                        horizontalAlignment: Qt.AlignLeft
+                    }
+                    Button {
+                        id: _downloadButton
+                        text: "Download"
+                        anchors.right: parent.right
+                    }
                 }
             }
         }
-        ColumnLayout {
-            RowLayout {
-                Button {
-                    id: chooseButton
-                    text: qsTr("Choose")
+        Splitter {
+        }
+        Title3 {
+            anchors.left: parent.left
+            anchors.right: parent.right
+            text: qsTr("Informations")
+            color: DulySettings.style.text.accentColor
+            horizontalAlignment: Qt.AlignHCenter
+        }
+        ScrollView {
+            anchors.left: parent.left
+            anchors.right: parent.right
+            height: 100
+            ListView {
+                anchors.left: parent.left
+                anchors.right: parent.right
+                clip: true
+                spacing: 4
+                model: ListModel {
+                    id: viewData
                 }
-                TextField {
-                    id: projectPath
-                    placeholderText: qsTr("Choose a project")
-                    text: fileDialog.fileUrl
-                    Layout.fillWidth: true
-                    readOnly: true
-                }
-            }
-            Rectangle {
-                border.width: 2
-                border.color: DulySettings.style.text.accentColor
-                Layout.fillWidth: true
-                height: 2
-            }
-            Label {
-                Layout.fillWidth: true
-                Layout.fillHeight: true
-                text: qsTr("Online Projects")
-                horizontalAlignment: Text.AlignHCenter
-                color: DulySettings.style.text.accentColor
-                font.family: DulySettings.style.font.family
-                font.pixelSize: DulySettings.style.font.pixelSize
-            }
-            ScrollView {
-                padding: 10
-                Layout.fillHeight: true
-                Layout.fillWidth: true
-
-                ListView {
-                    Layout.fillWidth: true
-                    spacing: 4
-                    Layout.fillHeight: true
-                    model: filesModel
-                    clip: true
-                    delegate: RowLayout {
-                        width: parent.width
-                        Text {
-                            Layout.fillWidth: true
-                            text: filename
-                        }
-                        Button {
-                            text: "Download"
-                        }
-                    }
-                }
-            }
-
-            ColumnLayout {
-                Rectangle {
-                    border.width: 2
-                    border.color: DulySettings.style.text.accentColor
-                    Layout.fillWidth: true
-                    height: 2
-                }
-                Label {
-                    Layout.fillWidth: true
-                    Layout.fillHeight: true
-                    text: qsTr("Informations")
-                    horizontalAlignment: Text.AlignHCenter
-                    color: DulySettings.style.text.accentColor
-                    font.family: DulySettings.style.font.family
-                    font.pixelSize: DulySettings.style.font.pixelSize
-                }
-                ScrollView {
-                    Layout.fillWidth: true
-                    Layout.fillHeight: true
-                    height: 100
-                    ListView {
-                        Layout.fillWidth: true
-                        Layout.fillHeight: true
-                        clip: true
-                        spacing: 4
-                        model: ListModel {
-                            id: viewData
-                        }
-                        delegate: Text {
-                            text: field + ": " + value
-                        }
-                    }
+                delegate: Text {
+                    text: field + ": " + value
                 }
             }
         }

@@ -4,4 +4,5 @@ import "../"
 BinaryOperatorModel {
     name: "%"
     description: "Modulo input 1 by input2"
+    icon: "%"
 }

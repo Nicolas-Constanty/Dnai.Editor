@@ -4,4 +4,5 @@ import "../"
 UnaryOperatorModel {
     name: "~"
     description: "Binary no"
+    instruction_id: 19
 }

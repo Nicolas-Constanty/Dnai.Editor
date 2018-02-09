@@ -130,5 +130,16 @@
         <file>resources/Forms/UserMenuForm.ui.qml</file>
         <file>resources/Images/default_user.png</file>
         <file>resources/Components/Modal.qml</file>
+        <file>resources/Images/logo_300dpi_dnai.png</file>
+        <file>resources/Components/NodeCanvas.qml</file>
+        <file>resources/Components/NodeModelViewer.qml</file>
+        <file>resources/Components/SplashScreen.qml</file>
+        <file>resources/Images/BearSheet.png</file>
+        <file>resources/Images/LoadingSprite.png</file>
+        <file>resources/Images/LoadingScreen.png</file>
+        <file>resources/Images/0001.png</file>
+        <file>resources/Forms/BasePanelForm.ui.qml</file>
+        <file>resources/Panels/BasePanel.qml</file>
+        <file>resources/Components/Splitter.qml</file>
     </qresource>
 </RCC>
