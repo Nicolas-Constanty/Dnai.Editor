@@ -9,4 +9,5 @@ LogicalNodeModel {
         ListElement { t: IOType.Bool; n: "Value 1" }
         ListElement { t: IOType.Bool; n: "Value 2" }
     }
+    instruction_id: InstructionID.OR
 }

@@ -64,7 +64,7 @@ static void registerEnums()
     qmlRegisterType<duly_gui::qmlresources::IoTypeRessouce>("Utils", 1, 0, "IOType");
     qmlRegisterType<duly_gui::qmlresources::FlowTypeRessouce>("Utils", 1, 0, "FlowType");
     qmlRegisterType<duly_gui::qmlresources::DeclarationTypeRessouce>("Utils", 1, 0, "DeclarationType");
-
+    qmlRegisterType<duly_gui::qmlresources::QInstructionID>("Utils", 1, 0, "InstructionID");
 }
 
 static void registerUtils()
