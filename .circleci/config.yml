@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  buildLinux:
+  build:
     docker:
       - image: debian:trusty
     steps:
@@ -21,18 +21,10 @@ jobs:
           keys: qtfolder
           paths:
             - /opt/qt59
-
-      - checkout
-
-  builMacOS:
-    macos:
-      xcode: "9.0"
-    steps:
-	  - checkout
+       - checkout
 
 workflows:
   version: 2
   build_and_test:
     jobs:
-      - buildLinux
-      - builMacOS
+      - build
