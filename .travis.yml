@@ -29,10 +29,12 @@ before_install:
   
 
 install:
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get install -qq g++-6 ; fi
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-6 90 ; fi
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]] && [ ! -e /opt/qt59/bin ]; then
-      sudo apt-get --yes install qt59base qt59imageformats qt59svg qt59declarative qt59graphicaleffects qt59quickcontrols2 ;
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
+      sudo apt-get install -qq g++-6 ;
+      sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-6 90 ;
+      - if [ ! -e /opt/qt59/bin ]; then
+          sudo apt-get --yes install qt59base qt59imageformats qt59svg qt59declarative qt59graphicaleffects qt59quickcontrols2 ;
+        fi ;
     fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]] && [ ! -e Qt/5.9.4 ]; then
       rm -rf Qt ;
@@ -49,8 +51,11 @@ before_script:
   - source /opt/qt59/bin/qt59-env.sh
 
 script:
-    - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then g++ -v ; fi
-    - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then export CMAKE_PREFIX_PATH=/opt/qt59/lib/cmake ; fi
-    - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then export CMAKE_PREFIX_PATH=$PWD/Qt/5.9.4/clang/lib/cmake ; fi
+    - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
+        g++ -v ;
+        export CMAKE_PREFIX_PATH=/opt/qt59/lib/cmake ;
+      elif [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
+         export CMAKE_PREFIX_PATH=$PWD/Qt/5.9.4/clang/lib/cmake ;
+      fi
       cd .. ;
       bash -e ./Duly-GUI/scripts/build.sh -both
