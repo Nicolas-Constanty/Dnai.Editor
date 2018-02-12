@@ -62,5 +62,5 @@ script:
       elif [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
          export CMAKE_PREFIX_PATH=$PWD/Qt/5.9.4/clang/lib/cmake ;
       fi
-      cd .. ;
-      bash -e ./Duly-GUI/scripts/build.sh -both
+    - cd .. ;
+    - bash -e ./Duly-GUI/scripts/build.sh -both
