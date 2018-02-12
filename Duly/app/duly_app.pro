@@ -11,18 +11,9 @@ CONFIG(release, debug|release) {
 win32:RC_FILE = duly.rc
 unix:ICON = DNAI_icon.icns
 }
-#RC_FILE = duly.rc
 
-#ICON = DNAI_icon.icns
 
-settingsfolder.path = $${OUT_PWD}/settings
-settingsfolder.files = settings/*
-
-settingsfolderconf.path = $${OUT_PWD}/settings/conf
-settingsfolderconf.files = settings/conf/*/*
-
-INSTALLS += settingsfolder
-INSTALLS += settingsfolderconf
+#INSTALLS += settingsfolderconf
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which as been marked deprecated (the exact warnings
@@ -131,7 +122,7 @@ QML_DESIGNER_IMPORT_PATH =
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
-else: unix:!android: target.path = /opt/$${TARGET}/bin
+else: unix:!android: target.path = /usr/local/bin/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 DISTFILES +=
@@ -257,3 +248,12 @@ LIBS += -L$${PWD}/../lib/ -lEventClient -lDataComEvent
 #}
 
 #end library Data Event
+
+win32:settingsfolder.path = $${OUT_PWD}/settings
+unix:settingsfolder.path = /usr/local/bin/$${TARGET}/bin/$${TARGET}.app/Contents/MacOS/settings
+settingsfolder.files = settings/*
+
+#settingsfolderconf.path = $${OUT_PWD}/settings/conf
+#settingsfolderconf.files = settings/conf/*/*
+
+INSTALLS += settingsfolder
