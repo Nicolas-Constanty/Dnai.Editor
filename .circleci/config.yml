@@ -7,7 +7,9 @@ jobs:
       - checkout
       - run:
           name: compile
-          command: sudo ./scripts/build.sh -both
+          command: |
+            chmod +x ./scripts/build.sh
+            sudo ./scripts/build.sh -both
 
 workflows:
   version: 2
