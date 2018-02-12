@@ -3,14 +3,15 @@
 rm -rf Application
 rm -rf DNAI-Installer.dmg
 
-/Users/victorgouet/Qt/5.9.2/clang_64/bin/qmake ../../Duly/Duly.pro
+/Users/victorgouet/Qt/5.9.4/clang_64/bin/qmake ../../Duly/Duly.pro
 make
+#make install in ./
 cd app/duly_app.app/Contents/MacOS/
 mkdir settings
 cd -
 cp -rf ../../Duly/app/settings/ ./app/duly_app.app/Contents/MacOS/settings
 
-/Users/victorgouet/Qt/5.9.2/clang_64/bin/qmake ../../Server/Server.pro
+/Users/victorgouet/Qt/5.9.4/clang_64/bin/qmake ../../Server/Server.pro
 make
 cp Server app/duly_app.app/Contents/MacOS/
 
@@ -33,7 +34,7 @@ rm Makefile
 
 echo "----- Create depandancy framework -----"
 sleep 1
-/Users/victorgouet/Qt/5.9.2/clang_64/bin/macdeployqt duly_app.app -qmldir=/Users/victorgouet/Documents/DulyGUI/Duly-GUI/Duly/app/resources/ -verbose=2
+/Users/victorgouet/Qt/5.9.4/clang_64/bin/macdeployqt duly_app.app -qmldir=/Users/victorgouet/Documents/DulyGUI/Duly-GUI/Duly/app/resources/ -verbose=2
 sleep 3
 
 rm -rf Application
@@ -53,6 +54,6 @@ sleep 3
 
 echo "----- Generate DMG file -----\n\n"
 sleep 1
-./dmg-generator.sh
+sudo ./dmg-generator.sh
 
 echo "----- SUCCESS -----"
