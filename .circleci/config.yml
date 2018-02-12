@@ -16,7 +16,7 @@ jobs:
               sudo apt-get install -y qt59base qt59imageformats qt59svg qt59declarative qt59graphicaleffects qt59quickcontrols2
             fi
       - save_cache:
-          keys: qtfolder
+          key: qtfolder
           paths:
             - /opt/qt59
       - checkout
