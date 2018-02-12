@@ -1,20 +1,14 @@
 language: cpp
-os: 
-  - linux
-  - osx
-compiler: 
-  - gcc
-  - clang
-  
-sudo: required
 
 matrix:
   include:
     - os: linux
       dist: trusty
       sudo: required
+      compiler: gcc
     - os: osx
       osx_image: xcode9.2
+      compiler: clang
 
 cache:
   directories:
