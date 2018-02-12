@@ -13,6 +13,7 @@ jobs:
       - run:
           name: compile
           command: |
+            export CMAKE_PREFIX_PATH=/opt/qt59/lib/cmake
             chmod +x ./scripts/build.sh
             ./scripts/build.sh
 
