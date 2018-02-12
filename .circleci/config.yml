@@ -9,7 +9,7 @@ jobs:
           name: compile
           command: |
             chmod +x ./scripts/build.sh
-            sudo ./scripts/build.sh -both
+            ./scripts/build.sh -both
 
 workflows:
   version: 2
