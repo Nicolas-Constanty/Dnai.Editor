@@ -6,18 +6,18 @@ jobs:
     steps:
       - restore_cache:
           keys: qtfolder
-	  - run:
-	      command: sudo apt-get update -y; true;
-	  - run:
-	      command: sudo apt-get install software-properties-common;
-	  - run:
-	      command: sudo apt-get install python3-software-properties;
-	  - run:
-	      command: sudo add-apt-repository ppa:beineri/opt-qt594-trusty -y;
-	  - run:
-	      command: sudo apt-get update -y; true;
-	  - run:
-	      command: sudo apt-get install -y qt59base qt59imageformats qt59svg qt59declarative qt59graphicaleffects qt59quickcontrols2;
+      - run:
+          command: sudo apt-get update -y; true;
+      - run:
+          command: sudo apt-get install software-properties-common;
+      - run:
+          command: sudo apt-get install python3-software-properties;
+      - run:
+          command: sudo add-apt-repository ppa:beineri/opt-qt594-trusty -y;
+      - run:
+          command: sudo apt-get update -y; true;
+      - run:
+          command: sudo apt-get install -y qt59base qt59imageformats qt59svg qt59declarative qt59graphicaleffects qt59quickcontrols2;
 
       - save_cache:
           key: qtfolder
