@@ -4,14 +4,16 @@ jobs:
     docker:
       - image: debian:trusty
 
-  dependencies:
-    pre:
-      - sudo apt-get install apt -y
-      - sudo add-apt-repository ppa:beineri/opt-qt594-trusty -y
-      - sudo apt-get update -y; true
-      - sudo apt-get install -y qt59base qt59imageformats qt59svg qt59declarative qt59graphicaleffects qt59quickcontrols2
-
     steps:
+	  - run:
+	      name: install_dep
+          command:
+		    - >
+			  sudo apt-get install apt -y
+			  sudo add-apt-repository ppa:beineri/opt-qt594-trusty -y
+			  sudo apt-get update -y; true
+			  sudo apt-get install -y qt59base qt59imageformats qt59svg qt59declarative qt59graphicaleffects qt59quickcontrols2
+
       - checkout
       - run:
           name: Greeting
