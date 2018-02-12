@@ -6,10 +6,18 @@ jobs:
     steps:
       - checkout
       - run:
+          name: init_qt_variables
+          command: |
+            QTDIR="/opt/qt59";
+            PATH="$QTDIR/bin:$PATH";
+            source /opt/qt59/bin/qt59-env.sh;
+            export CMAKE_PREFIX_PATH=/opt/qt59/lib/cmake ;
+      - run:
           name: compile
           command: |
             chmod +x ./scripts/build.sh
-            ./scripts/build.sh -both
+            ./scripts/build.sh
+
 
 workflows:
   version: 2

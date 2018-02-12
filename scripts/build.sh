@@ -1,6 +1,6 @@
-cd ./Duly-GUI/Duly/;
+cd ./Duly
 $CMAKE_PREFIX_PATH/../../bin/qmake Duly.pro;
 make;
-cd ../Server;
+cd ../Server
 $CMAKE_PREFIX_PATH/../../bin/qmake Server.pro;
 make;
