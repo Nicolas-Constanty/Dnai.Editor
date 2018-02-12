@@ -12,8 +12,11 @@ matrix:
 
 cache:
   directories:
-    - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then /opt/qt59 ; fi
-    - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then Qt/5.9.4 ; fi
+    - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
+        /opt/qt59 ;
+      elif [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
+        Qt/5.9.4 ;
+      fi
 
 addons:
   apt:
@@ -35,9 +38,9 @@ install:
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
       sudo apt-get install -qq g++-6 ;
       sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-6 90 ;
-      - if [ ! -e /opt/qt59/bin ]; then
-          sudo apt-get --yes install qt59base qt59imageformats qt59svg qt59declarative qt59graphicaleffects qt59quickcontrols2 ;
-        fi ;
+      if [ ! -e /opt/qt59/bin ]; then
+        sudo apt-get --yes install qt59base qt59imageformats qt59svg qt59declarative qt59graphicaleffects qt59quickcontrols2 ;
+      fi
     elif [[ "$TRAVIS_OS_NAME" == "osx" ]] && [ ! -e Qt/5.9.4 ]; then
       rm -rf Qt ;
       wget https://download.qt.io/official_releases/qt/5.9/5.9.4/qt-opensource-mac-x64-5.9.4.dmg ;
