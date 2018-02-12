@@ -45,8 +45,8 @@ jobs:
           command: |
             QTDIR="/opt/qt59";
             PATH="$QTDIR/bin:$PATH";
-            sudo source /opt/qt59/bin/qt59-env.sh;
-            sudo export CMAKE_PREFIX_PATH=/opt/qt59/lib/cmake;
+            sudo -s source /opt/qt59/bin/qt59-env.sh;
+            sudo -s export CMAKE_PREFIX_PATH=/opt/qt59/lib/cmake;
       - run:
           name: compile
           command: |
