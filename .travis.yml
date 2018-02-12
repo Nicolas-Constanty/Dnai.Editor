@@ -39,7 +39,7 @@ install:
       wget https://download.qt.io/official_releases/qt/5.9/5.9.4/qt-opensource-mac-x64-5.9.4.dmg ;
       chmod +x ./qt-opensource-mac-x64-5.9.4.dmg ;
       ./qt-opensource-mac-x64-5.9.4.dmg --platform minimal --script qt-installer-noninteractive.qs --no-force-installations ;
-  fi
+    fi
   
 
 before_script:
