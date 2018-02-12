@@ -4,24 +4,23 @@ jobs:
     docker:
       - image: debian:trusty
     steps:
-	  - restore_cache:
-	      keys: qtfolder
+      - restore_cache:
+       keys: qtfolder
       - run:
-	      name: install_dep
+          name: install_dep
           command:
-		    - >
+            - >
               if [! -e /opt/qt59/bin ]; then
                 sudo apt-get install apt -y;
                 sudo add-apt-repository ppa:beineri/opt-qt594-trusty -y;
                 sudo apt-get update -y; true ;
                 sudo apt-get install -y qt59base qt59imageformats qt59svg qt59declarative qt59graphicaleffects qt59quickcontrols2;
               fi
-
-	  - save_cache:
+      - save_cache:
           keys: qtfolder
           paths:
             - /opt/qt59
-       - checkout
+      - checkout
 
 workflows:
   version: 2
