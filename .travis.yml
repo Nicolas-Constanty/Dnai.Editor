@@ -49,7 +49,7 @@ install:
       ls -la /Volumes ;
       ls -la /Volumes/qt-opensource-mac-x64-5.9.4 ;
       sudo chmod +x /Volumes/qt-opensource-mac-x64-5.9.4/qt-opensource-mac-x64-5.9.4.app ;
-      sudo /Volumes/qt-opensource-mac-x64-5.9.4/qt-opensource-mac-x64-5.9.4.app --platform minimal --script qt-installer-noninteractive.qs --no-force-installations ;
+      sudo ./Volumes/qt-opensource-mac-x64-5.9.4/qt-opensource-mac-x64-5.9.4.app --platform minimal --script qt-installer-noninteractive.qs --no-force-installations ;
     fi
   
 
