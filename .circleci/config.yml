@@ -50,7 +50,7 @@ jobs:
       - run:
           name: compile
           command: |
-            sudo ./scripts/build.sh -both;
+            sudo -s ./scripts/build.sh -both;
 
 
 workflows:
