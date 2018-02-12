@@ -45,8 +45,7 @@ jobs:
           command: |
             QTDIR="/opt/qt59";
             PATH="$QTDIR/bin:$PATH";
-            source /opt/qt59/bin/qt59-env.sh;
-            export CMAKE_PREFIX_PATH=/opt/qt59/lib/cmake ;
+
       - run:
           name: compile
           command: |
