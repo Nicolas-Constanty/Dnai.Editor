@@ -43,7 +43,7 @@ install:
         sudo apt-get --yes install qt59base qt59imageformats qt59svg qt59declarative qt59graphicaleffects qt59quickcontrols2 ;
       fi
     elif [[ "$TRAVIS_OS_NAME" == "osx" ]] && [ ! -e Qt/5.9.4 ]; then
-      sudo defaults write com.apple.frameworks.diskimages skip-verify -bool NO ;
+      sudo defaults write com.apple.frameworks.diskimages skip-verify -bool YES ;
       wget https://download.qt.io/official_releases/qt/5.9/5.9.4/qt-opensource-mac-x64-5.9.4.dmg ;
       hdiutil mount ./qt-opensource-mac-x64-5.9.4.dmg ;
       ls -la /Volumes ;
