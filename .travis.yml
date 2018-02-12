@@ -2,13 +2,14 @@ language: cpp
 
 matrix:
   include:
+    - os: osx
+      osx_image: xcode9.2
+      compiler: clang
     - os: linux
       dist: trusty
       sudo: required
       compiler: gcc
-    - os: osx
-      osx_image: xcode9.2
-      compiler: clang
+
 
 cache:
   directories:
@@ -42,10 +43,13 @@ install:
         sudo apt-get --yes install qt59base qt59imageformats qt59svg qt59declarative qt59graphicaleffects qt59quickcontrols2 ;
       fi
     elif [[ "$TRAVIS_OS_NAME" == "osx" ]] && [ ! -e Qt/5.9.4 ]; then
-      rm -rf Qt ;
+      sudo defaults write com.apple.frameworks.diskimages skip-verify -bool YES ;
       wget https://download.qt.io/official_releases/qt/5.9/5.9.4/qt-opensource-mac-x64-5.9.4.dmg ;
-      chmod +x ./qt-opensource-mac-x64-5.9.4.dmg ;
-      ./qt-opensource-mac-x64-5.9.4.dmg --platform minimal --script qt-installer-noninteractive.qs --no-force-installations ;
+      hdiutil mount ./qt-opensource-mac-x64-5.9.4.dmg ;
+      ls -la /Volumes ;
+      ls -la /Volumes/qt-opensource-mac-x64-5.9.4 ;
+      sudo chmod +x /Volumes/qt-opensource-mac-x64-5.9.4/qt-opensource-mac-x64-5.9.4.app ;
+      sudo ./Volumes/qt-opensource-mac-x64-5.9.4/qt-opensource-mac-x64-5.9.4.app --platform minimal --script qt-installer-noninteractive.qs --no-force-installations ;
     fi
   
 
@@ -60,7 +64,7 @@ script:
         g++ -v ;
         export CMAKE_PREFIX_PATH=/opt/qt59/lib/cmake ;
       elif [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
-         export CMAKE_PREFIX_PATH=$PWD/Qt/5.9.4/clang/lib/cmake ;
+        export CMAKE_PREFIX_PATH=$PWD/Qt/5.9.4/clang/lib/cmake ;
       fi
-      cd .. ;
-      bash -e ./Duly-GUI/scripts/build.sh -both
+    - cd .. ;
+    - bash -e ./Duly-GUI/scripts/build.sh -both
