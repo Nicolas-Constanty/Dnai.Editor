@@ -50,6 +50,7 @@ jobs:
       - run:
           name: compile
           command: |
+            ls;
             pwd;
             ./Duly-GUI/scripts/build.sh -both;
 
