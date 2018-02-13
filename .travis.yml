@@ -1,21 +1,14 @@
 language: cpp
 
-matrix:
-  include:
-    - os: osx
-      osx_image: xcode9.2
-      compiler: clang
-    - os: linux
-      dist: trusty
-      sudo: required
-      compiler: gcc
+os: osx
 
+osx_image: xcode9.2
+
+compiler: clang
 
 cache:
   directories:
-    - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
-        /opt/qt59 ;
-      elif [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
+    - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
         Qt/5.9.4 ;
       fi
 
@@ -26,30 +19,18 @@ addons:
 
 before_install:
   # repo for Qt
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
-      sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test ;
-      sudo apt-add-repository --yes ppa:beineri/opt-qt594-trusty ;
-      sudo apt-get update -qq ;
-    elif [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
-      brew update          ;
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
+      brew update ;
     fi
   
 
 install:
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
-      sudo apt-get install -qq g++-6 ;
-      sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-6 90 ;
-      if [ ! -e /opt/qt59/bin ]; then
-        sudo apt-get --yes install qt59base qt59imageformats qt59svg qt59declarative qt59graphicaleffects qt59quickcontrols2 ;
-      fi
-    elif [[ "$TRAVIS_OS_NAME" == "osx" ]] && [ ! -e Qt/5.9.4 ]; then
-      sudo defaults write com.apple.frameworks.diskimages skip-verify -bool YES ;
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]] && [ ! -e Qt/5.9.4 ]; then
+      defaults write com.apple.frameworks.diskimages skip-verify YES;
+      pwd;
       wget https://download.qt.io/official_releases/qt/5.9/5.9.4/qt-opensource-mac-x64-5.9.4.dmg ;
-      hdiutil mount ./qt-opensource-mac-x64-5.9.4.dmg ;
-      ls -la /Volumes ;
-      ls -la /Volumes/qt-opensource-mac-x64-5.9.4 ;
-      sudo chmod +x /Volumes/qt-opensource-mac-x64-5.9.4/qt-opensource-mac-x64-5.9.4.app ;
-      sudo ./Volumes/qt-opensource-mac-x64-5.9.4/qt-opensource-mac-x64-5.9.4.app --platform minimal --script qt-installer-noninteractive.qs --no-force-installations ;
+      hdiutil mount -noverify ./qt-opensource-mac-x64-5.9.4.dmg ;
+      /Volumes/qt-opensource-mac-x64-5.9.4/qt-opensource-mac-x64-5.9.4.app --platform minimal --script qt-installer-noninteractive.qs --no-force-installations ;
     fi
   
 
@@ -60,10 +41,7 @@ before_script:
   - source /opt/qt59/bin/qt59-env.sh
 
 script:
-    - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
-        g++ -v ;
-        export CMAKE_PREFIX_PATH=/opt/qt59/lib/cmake ;
-      elif [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
+    - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
         export CMAKE_PREFIX_PATH=$PWD/Qt/5.9.4/clang/lib/cmake ;
       fi
     - cd .. ;
