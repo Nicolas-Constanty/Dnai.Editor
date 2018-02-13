@@ -1,23 +1,11 @@
 language: cpp
 
+sudo: required
+compiler: clang
 os: osx
 
-osx_image: xcode9.2
-
-compiler: clang
-
-cache:
-  directories:
-    - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
-        ~/Qt5.9.4;
-      fi
-
-before_install:
-  # repo for Qt
-  brew update ;
-  
-
 script:
+  - brew update
   - brew upgrade cmake
   - wget http://download.qt.io/official_releases/qt/5.9/5.9.4/qt-opensource-mac-x64-5.9.4.dmg
   - sudo hdiutil attach -noverify ./qt-opensource-mac-x64-5.9.4.dmg 
