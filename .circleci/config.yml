@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  build:
+  buildLinux:
     docker:
       - image: babiole/xenial_qt5_9_4:v1
     steps:
@@ -16,10 +16,15 @@ jobs:
             export CMAKE_PREFIX_PATH=/opt/qt59/lib/cmake
             chmod +x ./scripts/build.sh
             ./scripts/build.sh
+  buildMacOS:
+    machine:
+      xcode:
+        version: 9.2.0
 
 
 workflows:
   version: 2
   build_and_test:
     jobs:
-      - build
+      - buildLinux
+      - buildMacOS
