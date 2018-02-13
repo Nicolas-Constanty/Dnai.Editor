@@ -10,9 +10,9 @@
 namespace duly_gui {
 DulyApp::DulyApp(int & argc, char **argv) : QGuiApplication(argc, argv)
 {
-    QProcess *process = new QProcess(this);
-    QString file = QDir::homePath() + "/SplashScreen.exe";
-    process->start(file);
+   // QProcess *process = new QProcess(this);
+   // QString file = QDir::homePath() + "/SplashScreen.exe";
+   // process->start(file);
 }
 
 void DulyApp::registerEngine(QQmlApplicationEngine* engine)
@@ -96,12 +96,12 @@ void DulyApp::loadMainWindow()
 void DulyApp::initProcessManager()
 {
 #ifdef Q_OS_MAC
-    ProcessManager processManager(QGuiApplication::applicationDirPath() + "/settings/conf/mac/bin_info.cfg");
+    ProcessManager *processManager = new ProcessManager(QGuiApplication::applicationDirPath() + "/settings/conf/mac/bin_info.cfg");
 #else
-    ProcessManager processManager("./settings/conf/windows/bin_info.cfg");
+    ProcessManager *processManager = new ProcessManager("./settings/conf/windows/bin_info.cfg");
 #endif
-    processManager.launch();
-    ClientController::serverPort = processManager.getServerPort();
+    processManager->launch();
+    ClientController::serverPort = processManager->getServerPort();
     ClientController::shared();
 }
 

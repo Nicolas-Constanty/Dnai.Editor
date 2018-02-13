@@ -94,6 +94,9 @@ void ProcessManager::launch() {
         qDebug() << "[FAILED]" << corePath;
         return;
     }
+
+    qDebug() << "PROCESSES OK !";
+  //  QThread::sleep(10);
 }
 
 qint16 ProcessManager::getServerPort() {
