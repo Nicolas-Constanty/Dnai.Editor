@@ -27,8 +27,8 @@ Controller.prototype.ComponentSelectionPageCallback = function() {
 
     widget.deselectAll();
     widget.selectComponent("qt.59.clang_64");
-    widget.selectComponent("qt.tools.doc");
-    widget.selectComponent("qt.59.qt3d");
+    // widget.selectComponent("qt.tools.doc");
+    // widget.selectComponent("qt.59.qt3d");
     // widget.deselectComponent("qt.tools.qtcreator");
     // widget.deselectComponent("qt.55.qt3d");
     // widget.deselectComponent("qt.55.qtcanvas3d");

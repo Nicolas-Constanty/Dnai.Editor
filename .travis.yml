@@ -9,42 +9,20 @@ compiler: clang
 cache:
   directories:
     - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
-        ./qt-opensource-mac-x64-5.9.4.dmg ;
+        ~/Qt5.9.4;
       fi
-
-addons:
-  apt:
-    packages:
-      - cmake
 
 before_install:
   # repo for Qt
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
-      brew update ;
-    fi
+  brew update ;
   
-
-install:
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]] && [ ! -e ./qt-opensource-mac-x64-5.9.4.dmg ]; then
-      wget https://download.qt.io/official_releases/qt/5.9/5.9.4/qt-opensource-mac-x64-5.9.4.dmg ;
-      sudo hdiutil attach -noverify ./qt-opensource-mac-x64-5.9.4.dmg;
-      /Volumes/qt-opensource-mac-x64-5.9.4/qt-opensource-mac-x64-5.9.4.app/Contents/MacOS/qt-opensource-mac-x64-5.9.4 --platform minimal --script qt_script_osx.qs;
-      mkdir build;
-      cd build;
-      cmake .. -DCMAKE_PREFIX_PATH=~/Qt5.9.4/5.9/clang_64/lib/cmake;
-      make all;
-    fi
-  
-
-before_script:
-  # Qt variables
-  - QTDIR="/opt/qt59"
-  - PATH="$QTDIR/bin:$PATH"
-  - source /opt/qt59/bin/qt59-env.sh
 
 script:
-    - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
-        export CMAKE_PREFIX_PATH=$PWD/Qt/5.9.4/clang/lib/cmake ;
-      fi
-    - cd .. ;
-    - bash -e ./Duly-GUI/scripts/build.sh -both
+  - brew upgrade cmake
+  - wget http://download.qt.io/official_releases/qt/5.9/5.9.4/qt-opensource-mac-x64-5.9.4.dmg
+  - sudo hdiutil attach -noverify ./qt-opensource-mac-x64-5.9.4.dmg 
+  - /Volumes/qt-opensource-mac-x64-5.9.4/qt-opensource-mac-x64-5.9.4.app/Contents/MacOS/qt-opensource-mac-x64-5.9.4 --platform minimal --script qt_script_osx.qs
+  - mkdir build
+  - cd build
+  - cmake .. -DCMAKE_PREFIX_PATH=~/Qt5.9.4/5.9/clang_64/lib/cmake
+  - make all 
