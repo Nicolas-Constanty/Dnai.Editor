@@ -9,7 +9,7 @@ compiler: clang
 cache:
   directories:
     - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
-        Qt/5.9.4 ;
+        ./qt-opensource-mac-x64-5.9.4.dmg ;
       fi
 
 addons:
@@ -25,12 +25,15 @@ before_install:
   
 
 install:
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]] && [ ! -e Qt/5.9.4 ]; then
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]] && [ ! -e ./qt-opensource-mac-x64-5.9.4.dmg ]; then
       defaults write com.apple.frameworks.diskimages skip-verify YES;
-      pwd;
       wget https://download.qt.io/official_releases/qt/5.9/5.9.4/qt-opensource-mac-x64-5.9.4.dmg ;
-      hdiutil mount -noverify ./qt-opensource-mac-x64-5.9.4.dmg ;
-      /Volumes/qt-opensource-mac-x64-5.9.4/qt-opensource-mac-x64-5.9.4.app --platform minimal --script qt-installer-noninteractive.qs --no-force-installations ;
+      sudo hdiutil attach -noverify ./qt-opensource-mac-x64-5.9.4.dmg 
+      /Volumes/qt-opensource-mac-x64-5.9.4/qt-opensource-mac-x64-5.9.4.app/Contents/MacOS/qt-opensource-mac-x64-5.9.4 --platform minimal --script qt_script_osx.qs
+      mkdir build
+      cd build
+      cmake .. -DCMAKE_PREFIX_PATH=~/Qt5.9.4/5.9/clang_64/lib/cmake
+      make all 
     fi
   
 
