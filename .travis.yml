@@ -10,8 +10,8 @@ script:
   - wget http://download.qt.io/official_releases/qt/5.9/5.9.4/qt-opensource-mac-x64-5.9.4.dmg
   - sudo hdiutil attach -noverify ./qt-opensource-mac-x64-5.9.4.dmg
   - /Volumes/qt-opensource-mac-x64-5.9.4/qt-opensource-mac-x64-5.9.4.app/Contents/MacOS/qt-opensource-mac-x64-5.9.4 --platform minimal --script qt_script_osx.qs
-  - ls ~/Qt/5.9.4
+  - ls ~/Qt/5.9.4/clang_64
   - cd Duly
-  - ~/Qt/5.9/clang_64/bin/qmake Duly.pro
+  - ~/Qt/5.9.4/clang_64/bin/qmake Duly.pro
   - cd ../Server
-  - ~/Qt/5.9/clang_64/bin/qmake Server.pro
+  - ~/Qt/5.9.4/clang_64/bin/qmake Server.pro
