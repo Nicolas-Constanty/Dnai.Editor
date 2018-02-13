@@ -1,3 +1,5 @@
+// https://stackoverflow.com/a/34032216/78204
+
 function Controller() {
     installer.autoRejectMessageBoxes();
     installer.installationFinished.connect(function() {
@@ -19,26 +21,20 @@ Controller.prototype.IntroductionPageCallback = function() {
 
 Controller.prototype.TargetDirectoryPageCallback = function()
 {
+    gui.currentPageWidget().TargetDirectoryLineEdit.setText(installer.value("HomeDir") + "/Qt-5.9.3");
     gui.clickButton(buttons.NextButton);
 }
 
 Controller.prototype.ComponentSelectionPageCallback = function() {
     var widget = gui.currentPageWidget();
 
+    // widget.selectAll();
     widget.deselectAll();
-    widget.selectComponent("qt.59.clang_64");
-    // widget.selectComponent("qt.tools.doc");
-    // widget.selectComponent("qt.59.qt3d");
-    // widget.deselectComponent("qt.tools.qtcreator");
-    // widget.deselectComponent("qt.55.qt3d");
-    // widget.deselectComponent("qt.55.qtcanvas3d");
-    // widget.deselectComponent("qt.55.qtlocation");
-    // widget.deselectComponent("qt.55.qtquick1");
-    // widget.deselectComponent("qt.55.qtscript");
-    // widget.deselectComponent("qt.55.qtwebengine");
-    // widget.deselectComponent("qt.extras");
-    // widget.deselectComponent("qt.tools.doc");
-    // widget.deselectComponent("qt.tools.examples");
+
+    widget.selectComponent("qt.594.clang_64")
+    // widget.selectComponent("qt.593.doc")
+    // widget.selectComponent("qt.593.examples")
+    // widget.selectComp.qtscript")
 
     gui.clickButton(buttons.NextButton);
 }
