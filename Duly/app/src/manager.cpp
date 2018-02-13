@@ -309,9 +309,9 @@ namespace duly_gui {
     void Manager::signin(const QString &username, const QString &password)
     {
         // TODO get user from API
-        api::signin(username, password).map(nullptr, [this](Response response) -> Response {
+        api::signin(username, password).map([this](Response response) -> Response {
             m_user = new models::User();
-            m_user->setName("John Doe");
+            m_user->setName(response.body["first_name"].toString() + " " + response.body["last_name"].toString());
             m_user->setProfile_url("../Images/default_user.png");
             emit userChanged(m_user);
             return response;

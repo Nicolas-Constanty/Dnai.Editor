@@ -2,6 +2,7 @@
 #define API_API_H
 
 #include <QString>
+#include <QFile>
 #include "http/observable.h"
 #include "http/config.h"
 #include "http/types.h"
@@ -29,8 +30,10 @@ namespace duly_gui {
 
     public:
         static Observable &signin(QString const &, QString const &);
+        static Observable &get_files();
+        static Observable &get_file(QString const &);
+        static Observable &post_file(QString const &, QFile *);
         static void logout();
-
     };
 }
 

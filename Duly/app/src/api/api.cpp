@@ -41,6 +41,25 @@ const Config api::http_config = {
         });
     }
 
+    Observable &api::get_files()
+    {
+        return Service::url("cloud", "files")->get();
+    }
+
+    Observable &api::get_file(QString const &id)
+    {
+        return Service::url("cloud", "files", id.toLatin1().data())->get();
+    }
+
+    Observable &api::post_file(QString const &title, QFile *file)
+    {
+        return Service::url("cloud", "files")->post(
+                    QJsonObject{
+                        {"title", title}
+                    }
+                    );
+    }
+
     void api::logout()
     {
         user = {};
