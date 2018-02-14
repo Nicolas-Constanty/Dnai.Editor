@@ -2,23 +2,24 @@
 #include <QQmlApplicationEngine>
 #include <functional>
 
-#include "views.h"
-#include "model.h"
-#include "http.h"
 #include "api.h"
+#include "http.h"
+#include "views.h"
+#include "models.h"
 #include "qmlresources.h"
 
-#include "dulyapp.h"
-#include "manager.h"
+#include "dnai/dulyapp.h"
+#include "dnai/manager.h"
+#include "dnai/dulysettings.h"
+
 #include "include/eventconsumer.h"
-#include "dulysettings.h"
 
 static QObject *manager_singleton_provider(QQmlEngine *engine, QJSEngine *scriptEngine)
 {
     Q_UNUSED(engine)
     Q_UNUSED(scriptEngine)
 
-    return new duly_gui::Manager();
+    return new dnai::Manager();
 }
 
 static QObject *settings_singleton_provider(QQmlEngine *engine, QJSEngine *scriptEngine)
@@ -26,7 +27,7 @@ static QObject *settings_singleton_provider(QQmlEngine *engine, QJSEngine *scrip
     Q_UNUSED(engine)
     Q_UNUSED(scriptEngine)
 
-    return new duly_gui::DulySettings();
+    return new dnai::DulySettings();
 }
 
 static QObject *standardpath_singleton_provider(QQmlEngine *engine, QJSEngine *scriptEngine)
@@ -37,79 +38,72 @@ static QObject *standardpath_singleton_provider(QQmlEngine *engine, QJSEngine *s
     return new QCStandardPaths();
 }
 
-static void registerCustomConnection() {
-    qmlRegisterType<EventConsumer>("Communication.EventConsumer", 1, 0, "EventConsumer");
-}
-
-static void registerCustomViews()
+static void registerDNAI()
 {
-    qmlRegisterType<duly_gui::views::DulyCanvas>("CustomViews", 1, 0, "DulyCanvas");
-    qmlRegisterType<duly_gui::views::GenericNode>("CustomViews", 1, 0, "GenericNode");
-    qmlRegisterType<duly_gui::views::Input>("CustomViews", 1, 0, "Input");
-    qmlRegisterType<duly_gui::views::Output>("CustomViews", 1, 0, "Output");
-    qmlRegisterType<duly_gui::views::Flow>("CustomViews", 1, 0, "Flow");
-    qmlRegisterType<duly_gui::views::DulyCanvas>("CustomViews", 1, 0, "DulyCanvas");
-    qmlRegisterType<duly_gui::views::DeclarationCanvas>("CustomViews", 1, 0, "DeclarationCanvas");
-
-}
-static void registerCustomGeometry()
-{
-    qmlRegisterType<duly_gui::views::BezierCurve>("CustomGeometry", 1, 0, "BezierCurve");
-    qmlRegisterType<duly_gui::views::Line>("CustomGeometry", 1, 0, "Line");
-    qmlRegisterType<duly_gui::views::RoundedRectangle>("CustomGeometry", 1, 0, "RoundedRectangle");
+    qmlRegisterSingletonType<dnai::Manager>("DNAI", 1, 0, "Manager", manager_singleton_provider);
+    qmlRegisterSingletonType<dnai::DulySettings>("DNAI", 1, 0, "DulySettings", settings_singleton_provider);
+    qmlRegisterSingletonType<QCStandardPaths>("DNAI", 1, 0, "StandardPath", standardpath_singleton_provider);
 }
 
 static void registerEnums()
 {
-    qmlRegisterType<duly_gui::qmlresources::IoTypeRessouce>("Utils", 1, 0, "IOType");
-    qmlRegisterType<duly_gui::qmlresources::FlowTypeRessouce>("Utils", 1, 0, "FlowType");
-    qmlRegisterType<duly_gui::qmlresources::DeclarationTypeRessouce>("Utils", 1, 0, "DeclarationType");
-    qmlRegisterType<duly_gui::qmlresources::QInstructionID>("Utils", 1, 0, "InstructionID");
+    qmlRegisterType<dnai::qmlresources::IoTypeRessouce>("DNAI.Enums", 1, 0, "IOType");
+    qmlRegisterType<dnai::qmlresources::FlowTypeRessouce>("DNAI.Enums", 1, 0, "FlowType");
+    qmlRegisterType<dnai::qmlresources::DeclarationTypeRessouce>("DNAI.Enums", 1, 0, "DeclarationType");
+    qmlRegisterType<dnai::qmlresources::QInstructionID>("DNAI.Enums", 1, 0, "InstructionID");
 }
 
-static void registerUtils()
+static void registerViews()
 {
-    qmlRegisterSingletonType<duly_gui::Manager>("Utils", 1, 0, "Manager", manager_singleton_provider);
-    qmlRegisterSingletonType<duly_gui::DulySettings>("Utils", 1, 0, "DulySettings", settings_singleton_provider);
-    qmlRegisterSingletonType<QCStandardPaths>("Utils", 1, 0, "StandardPath", standardpath_singleton_provider);
-
-    qmlRegisterType<duly_gui::views::Console>("Utils", 1, 0, "Console");
-    qmlRegisterType<duly_gui::models::DulySettingsModel>("Utils", 1, 0, "DulySettingsModel");
-    qmlRegisterType<duly_gui::models::QCanvas>("Utils", 1, 0, "QCanvas");
-    qmlRegisterType<duly_gui::models::QGrid>("Utils", 1, 0, "QGrid");
-    qmlRegisterType<duly_gui::models::QBorder>("Utils", 1, 0, "QBorder");
-    qmlRegisterType<duly_gui::models::QNode>("Utils", 1, 0, "QNode");
-    qmlRegisterType<duly_gui::models::QNodes>("Utils", 1, 0, "QNodes");
-    qmlRegisterType<duly_gui::models::QDeclaration>("Utils", 1, 0, "QDeclaration");
-    qmlRegisterType<duly_gui::models::QDeclarationView>("Utils", 1, 0, "QDeclarationView");
-    qmlRegisterType<duly_gui::models::QTextSettings>("Utils", 1, 0, "QTextSettings");
-    qmlRegisterType<duly_gui::models::QFontSettings>("Utils", 1, 0, "QFontSettings");
-    qmlRegisterType<duly_gui::models::MenuSettings>("Utils", 1, 0, "MenuSettings");
-    qmlRegisterType<duly_gui::models::QBackground>("Utils", 1, 0, "QBackground");
-//    qRegisterMetaType<duly_gui::models::TreeModel*>("TreeModel*");
-//    qmlRegisterType<duly_gui::models::Common>("Utils", 1, 0, "Common");
-
-    qmlRegisterType<duly_gui::models::TreeModel>("Utils", 1, 0, "TreeModel");
-    qmlRegisterType<duly_gui::models::TreeItem>("Utils", 1, 0, "TreeItem");
-    qmlRegisterType<duly_gui::models::NameSpaceBarItem>("Utils", 1, 0, "NameSpaceBarItem");
-    qmlRegisterType<duly_gui::models::NameSpaceBarModel>("Utils", 1, 0, "NameSpaceBarModel");
-    qmlRegisterType<duly_gui::models::User>("Utils", 1, 0, "User");
-
-    qmlRegisterType<duly_gui::models::DeclarationModel>("Utils", 1, 0, "DeclarationModel");
-    qmlRegisterType<duly_gui::models::Declaration>("Utils", 1, 0, "Declaration");
-//    qmlRegisterType<DeclarationColumnModel>("Utils", 1, 0, "DeclarationColumnModel");
-//    qmlRegisterType<duly_gui::models::TreeItem>("Utils", 1, 0, "TreeItem");
+    // QML Views
+    qmlRegisterType<dnai::views::DulyCanvas>("DNAI.Views", 1, 0, "DulyCanvas");
+    qmlRegisterType<dnai::views::DulyCanvas>("DNAI.Views", 1, 0, "DulyCanvas");
+    qmlRegisterType<dnai::views::DeclarationCanvas>("DNAI.Views", 1, 0, "DeclarationCanvas");
+    qmlRegisterType<dnai::views::Console>("DNAI.Views", 1, 0, "Console");
+    // OpenGL Geometries
+    qmlRegisterType<dnai::views::BezierCurve>("DNAI.Views", 1, 0, "BezierCurve");
+    qmlRegisterType<dnai::views::Line>("DNAI.Views", 1, 0, "Line");
+    qmlRegisterType<dnai::views::RoundedRectangle>("DNAI.Views", 1, 0, "RoundedRectangle");
+    qmlRegisterType<dnai::views::GenericNode>("DNAI.Views", 1, 0, "GenericNode");
+    qmlRegisterType<dnai::views::Input>("DNAI.Views", 1, 0, "Input");
+    qmlRegisterType<dnai::views::Output>("DNAI.Views", 1, 0, "Output");
+    qmlRegisterType<dnai::views::Flow>("DNAI.Views", 1, 0, "Flow");
 }
 
+static void registerModels()
+{
+    qmlRegisterType<dnai::models::DulySettingsModel>("DNAI.Models", 1, 0, "DulySettingsModel");
+    qmlRegisterType<dnai::models::QCanvas>("DNAI.Models", 1, 0, "QCanvas");
+    qmlRegisterType<dnai::models::QGrid>("DNAI.Models", 1, 0, "QGrid");
+    qmlRegisterType<dnai::models::QBorder>("DNAI.Models", 1, 0, "QBorder");
+    qmlRegisterType<dnai::models::QNode>("DNAI.Models", 1, 0, "QNode");
+    qmlRegisterType<dnai::models::QNodes>("DNAI.Models", 1, 0, "QNodes");
+    qmlRegisterType<dnai::models::QDeclaration>("DNAI.Models", 1, 0, "QDeclaration");
+    qmlRegisterType<dnai::models::QDeclarationView>("DNAI.Models", 1, 0, "QDeclarationView");
+    qmlRegisterType<dnai::models::QTextSettings>("DNAI.Models", 1, 0, "QTextSettings");
+    qmlRegisterType<dnai::models::QFontSettings>("DNAI.Models", 1, 0, "QFontSettings");
+    qmlRegisterType<dnai::models::MenuSettings>("DNAI.Models", 1, 0, "MenuSettings");
+    qmlRegisterType<dnai::models::QBackground>("DNAI.Models", 1, 0, "QBackground");
+    qmlRegisterType<dnai::models::TreeModel>("DNAI.Models", 1, 0, "TreeModel");
+    qmlRegisterType<dnai::models::TreeItem>("DNAI.Models", 1, 0, "TreeItem");
+    qmlRegisterType<dnai::models::NameSpaceBarItem>("DNAI.Models", 1, 0, "NameSpaceBarItem");
+    qmlRegisterType<dnai::models::NameSpaceBarModel>("DNAI.Models", 1, 0, "NameSpaceBarModel");
+    qmlRegisterType<dnai::models::User>("DNAI.Models", 1, 0, "User");
+    qmlRegisterType<dnai::models::DeclarationModel>("DNAI.Models", 1, 0, "DeclarationModel");
+    qmlRegisterType<dnai::models::Declaration>("DNAI.Models", 1, 0, "Declaration");
+}
 
+static void registerConnection() {
+    qmlRegisterType<EventConsumer>("DNAI.Communication.EventConsumer", 1, 0, "EventConsumer");
+}
 
 static void registerQml()
 {
-    registerUtils();
+    registerDNAI();
     registerEnums();
-    registerCustomViews();
-    registerCustomGeometry();
-    registerCustomConnection();
+    registerModels();
+    registerViews();
+    registerConnection();
 }
 
 int main(int argc, char *argv[])
@@ -117,11 +111,15 @@ int main(int argc, char *argv[])
     registerQml();
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
-    duly_gui::DulyApp app(argc, argv);
+    dnai::DulyApp app(argc, argv);
 
     QQmlApplicationEngine engine;
     app.registerEngine(&engine);
     app.initApp();
+
+    return app.exec();
+}
+
 
 //    engine.load(QUrl(QLatin1String("qrc:/main.qml")));
 //    if (engine.rootObjects().isEmpty())
@@ -152,6 +150,3 @@ int main(int argc, char *argv[])
     timer3->start(5000);*/
 
     // FIN CODE COMMUNICATION SERVER
-
-    return app.exec();
-}

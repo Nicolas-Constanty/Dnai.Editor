@@ -2,7 +2,7 @@ import QtQuick 2.4
 import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
 
-import Utils 1.0
+import DNAI 1.0
 
 ColumnLayout {
     property alias createAccount: createAccount

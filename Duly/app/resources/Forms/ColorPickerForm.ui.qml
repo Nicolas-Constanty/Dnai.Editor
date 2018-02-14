@@ -3,7 +3,7 @@ import QtQuick.Dialogs 1.2
 import QtQuick.Controls 2.2
 import Qt.labs.settings 1.0
 
-import Utils 1.0
+import DNAI 1.0
 import "../Style"
 
 Item {

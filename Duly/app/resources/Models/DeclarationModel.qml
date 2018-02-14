@@ -1,5 +1,5 @@
 import QtQuick 2.9
-import Utils 1.0
+import DNAI.Enums 1.0
 
 Item {
     property int type: DeclarationType.None

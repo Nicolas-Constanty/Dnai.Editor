@@ -1,10 +1,10 @@
 #ifndef QMLRESOURCES_H
 #define QMLRESOURCES_H
 
-#include "qmlresources/declarationtype.h"
-#include "qmlresources/flowtype.h"
-#include "qmlresources/instructionid.h"
-#include "qmlresources/iotype.h"
-#include "qmlresources/qcstandardpaths.h"
+#include "dnai/qmlresources/declarationtype.h"
+#include "dnai/qmlresources/flowtype.h"
+#include "dnai/qmlresources/instructionid.h"
+#include "dnai/qmlresources/iotype.h"
+#include "dnai/qmlresources/qcstandardpaths.h"
 
 #endif // QMLRESOURCES_H

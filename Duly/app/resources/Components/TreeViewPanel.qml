@@ -2,7 +2,7 @@ import QtQuick 2.0
 import QtQuick.Controls 1.4
 import QtQuick.Controls.Styles 1.4
 import QtQml.Models 2.3
-import Utils 1.0
+import DNAI 1.0
 
 import "../Panels"
 import "../Style"

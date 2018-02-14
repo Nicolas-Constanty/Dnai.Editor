@@ -2,7 +2,6 @@ import QtQuick 2.9
 import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
 import QtQuick.Dialogs 1.2
-import CustomGeometry 1.0
 import QtGraphicalEffects 1.0
 
 import "../Components"
@@ -24,7 +23,7 @@ BaseLayout {
         anchors.top: layout.top
     }
 
-    DeclarationView1 {
+    DeclarationView {
         anchors.top: panelTop.bottom
         anchors.bottom: consoleRef.top
         anchors.left: panelLeft.right

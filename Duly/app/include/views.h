@@ -1,17 +1,17 @@
 #ifndef VIEWS_H
 #define VIEWS_H
 
-#include "views/beziercurve.h"
-#include "views/line.h"
-#include "views/dulycanvas.h"
-#include "views/roundedrectangle.h"
-#include "views/input.h"
-#include "views/output.h"
-#include "views/genericnode.h"
-#include "views/flow.h"
-#include "views/console.h"
-#include "views/class.h"
-#include "views/context.h"
-#include "views/declarationcanvas.h"
+#include "dnai/views/beziercurve.h"
+#include "dnai/views/line.h"
+#include "dnai/views/dulycanvas.h"
+#include "dnai/views/roundedrectangle.h"
+#include "dnai/views/input.h"
+#include "dnai/views/output.h"
+#include "dnai/views/genericnode.h"
+#include "dnai/views/flow.h"
+#include "dnai/views/console.h"
+#include "dnai/views/class.h"
+#include "dnai/views/context.h"
+#include "dnai/views/declarationcanvas.h"
 
 #endif // VIEWS_H

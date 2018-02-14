@@ -1,7 +1,7 @@
 <RCC>
     <qresource prefix="/">
         <file>qtquickcontrols2.conf</file>
-        <file>main.qml</file>
+        <file>resources/main.qml</file>
         <file>resources/Components/ColorPicker.qml</file>
         <file>resources/Components/Container.qml</file>
         <file>resources/Components/DropDown.qml</file>
@@ -91,7 +91,6 @@
         <file>resources/Controls/DMenuItem.qml</file>
         <file>resources/Controls/DMenu.qml</file>
         <file>resources/Controls/DToolButton.qml</file>
-        <file>resources/Components/DeclarationView.qml</file>
         <file>resources/Components/TestNode.qml</file>
         <file>resources/Style/Title1.qml</file>
         <file>resources/Style/MText.qml</file>
@@ -109,7 +108,6 @@
         <file>resources/Components/TreeViewPanel.qml</file>
         <file>resources/Panels/DragAndDropPanel.qml</file>
         <file>resources/Components/DeclarationList.qml</file>
-        <file>resources/Components/DeclarationView1.qml</file>
         <file>resources/Components/CommonModelView.qml</file>
         <file>resources/Style/FontAwesomeText.qml</file>
         <file>resources/fonts/Font Awesome 5 Brands-Regular-400.otf</file>
@@ -141,5 +139,6 @@
         <file>resources/Forms/BasePanelForm.ui.qml</file>
         <file>resources/Panels/BasePanel.qml</file>
         <file>resources/Components/Splitter.qml</file>
+        <file>resources/Components/DeclarationView.qml</file>
     </qresource>
 </RCC>

@@ -1,6 +1,6 @@
 import QtQuick 2.4
 import QtQuick.Controls 1.4
-import Utils 1.0
+import DNAI 1.0
 
 import "../JavaScript/CreateComponent.js" as Factory
 import "../Forms"

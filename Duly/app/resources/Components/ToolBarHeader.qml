@@ -3,7 +3,7 @@ import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
 import QtQuick.Dialogs 1.2
 import QtQuick.Window 2.2
-import Utils 1.0
+import DNAI 1.0
 
 import "../Panels"
 import "../Controls"
@@ -156,10 +156,10 @@ Item {
                         DMenuItem {
                             text: qsTr("Toogle console")
                             onClicked: {
-                                if (root.layout.debugConsole.state == "Visible")
-                                    root.layout.debugConsole.state = "Invisible"
+                                if (appWindow.layout.debugConsole.state === "Visible")
+                                    appWindow.layout.debugConsole.state = "Invisible"
                                 else
-                                    root.layout.debugConsole.state = "Visible"
+                                    appWindow.layout.debugConsole.state = "Visible"
                             }
                         }
                         //                        DMenuItem {

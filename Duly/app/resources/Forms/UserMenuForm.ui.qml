@@ -1,5 +1,5 @@
 import QtQuick 2.4
-import Utils 1.0
+import DNAI 1.0
 
 import "../Controls"
 

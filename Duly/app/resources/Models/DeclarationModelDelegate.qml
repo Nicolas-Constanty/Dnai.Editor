@@ -1,7 +1,7 @@
 import QtQuick 2.9
 import QtQuick.Controls 2.2
 import QtQml.Models 2.3
-import Utils 1.0
+import DNAI 1.0
 
 import "../Style"
 import "../JavaScript/CreateComponent.js" as Factory
@@ -82,7 +82,7 @@ DelegateModel {
                 var isDroppable = tile.Drag.target !== null
 //                console.info(listmodel.count)
                 var obj = Factory.getObject()
-                if (obj != undefined && isDroppable)
+                if (obj !== undefined && isDroppable)
                 {
                     obj.x = mouse.x
                             + obj.x

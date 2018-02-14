@@ -1,6 +1,6 @@
 import QtQuick 2.9
 import QtQuick.Controls 2.2
-import Utils 1.0
+import DNAI 1.0
 
 import "../Style"
 

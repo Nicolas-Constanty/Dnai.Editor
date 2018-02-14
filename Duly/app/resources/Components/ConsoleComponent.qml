@@ -1,6 +1,6 @@
 import QtQuick 2.4
 import QtQuick.Controls 2.0
-import Utils 1.0
+import DNAI 1.0
 
 import "../Forms"
 import "../Style"
@@ -27,9 +27,9 @@ ConsoleForm {
         }
     }
     consoleMode.onCurrentIndexChanged: {
-        if (consoleMode.currentIndex == Console.Normal)
+        if (consoleMode.currentIndex === Console.Normal)
             consoleRefMode.mode = Console.Normal
-        else if (consoleMode.currentIndex == Console.Verbose)
+        else if (consoleMode.currentIndex === Console.Verbose)
             consoleRefMode.mode = Console.Verbose
     }
     states: [

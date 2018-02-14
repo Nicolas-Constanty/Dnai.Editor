@@ -1,6 +1,6 @@
 import QtQuick 2.0
 import "../"
-import Utils 1.0
+import DNAI.Enums 1.0
 
 LogicalNodeModel {
     name: "&&"

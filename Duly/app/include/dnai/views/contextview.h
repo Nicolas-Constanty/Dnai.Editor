@@ -1,0 +1,4 @@
+#ifndef CONTEXTVIEW_H
+#define CONTEXTVIEW_H
+
+#endif // CONTEXTVIEW_H

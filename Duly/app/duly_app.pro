@@ -28,89 +28,95 @@ DEFINES += QPM_INIT
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 #CORE
-SOURCES += src/baseio.cpp \
-    src/link.cpp \
+SOURCES += \
     src/main.cpp \
-    src/eventutilities.cpp \
-    src/focusmanager.cpp \
-    src/baselinkable.cpp \
-    src/dulyscene.cpp \
-    src/dulyapp.cpp \
-    src/commands/movecommand.cpp \
-    src/commands/movenodecommand.cpp \
-    src/commands/movecanvascommand.cpp \
-    src/commands/zoomcanvascommand.cpp \
-    src/manager.cpp \
-    src/project.cpp \
-    src/views/context.cpp \
-    src/views/class.cpp \
-    src/models/list/listmodelcontext.cpp \
-    src/dulysettings.cpp \
-    src/views/declarationview.cpp \
-    src/views/declarationcanvas.cpp \
-    src/controllers/clientcontroller.cpp \
-    src/processmanager.cpp \
-    src/models/treemodel.cpp \
-    src/models/treeitem.cpp \
-    src/models/namespacebarmodel.cpp \
-    src/models/namespacebaritem.cpp \
-    layouthandler.cpp \
-    src/models/dulysettingsmodel.cpp \
-    src/models/declarationmodel.cpp \
-    src/models/basicnodemodel.cpp \
-    src/qmlresources/qcstandardpaths.cpp
-
-#VIEWS
-SOURCES += src/views/beziercurve.cpp \
-    src/views/customshape.cpp \
-    src/views/dulycanvas.cpp \
-    src/views/flow.cpp \
-    src/views/genericnode.cpp \
-    src/views/input.cpp \
-    src/views/io.cpp \
-    src/views/line.cpp \
-    src/views/linkablebezieritem.cpp \
-    src/views/output.cpp \
-    src/views/roundedrectangle.cpp \
-    src/views/console.cpp \
-
+    src/dnai/baseio.cpp \
+    src/dnai/link.cpp \
+    src/dnai/eventutilities.cpp \
+    src/dnai/focusmanager.cpp \
+    src/dnai/baselinkable.cpp \
+    src/dnai/dulyapp.cpp \
+    src/dnai/manager.cpp \
+    src/dnai/project.cpp \
+    src/dnai/dulysettings.cpp
 
 #COMMANDS
 SOURCES += \
-    src/commands/commanddecorator.cpp \
-    src/commands/commandmanager.cpp \
-    src/commands/debugdecorator.cpp \
-    src/commands/command.cpp \
+    src/dnai/commands/movecommand.cpp \
+    src/dnai/commands/movenodecommand.cpp \
+    src/dnai/commands/movecanvascommand.cpp \
+    src/dnai/commands/zoomcanvascommand.cpp
+
+SOURCES += \
+    src/dnai/controllers/clientcontroller.cpp \
+    src/dnai/processmanager.cpp \
+    src/dnai/models/treemodel.cpp \
+    src/dnai/models/treeitem.cpp \
+    src/dnai/models/namespacebarmodel.cpp \
+    src/dnai/models/namespacebaritem.cpp
+
+#VIEWS
+SOURCES += \
+    src/dnai/views/beziercurve.cpp \
+    src/dnai/views/customshape.cpp \
+    src/dnai/views/dulycanvas.cpp \
+    src/dnai/views/flow.cpp \
+    src/dnai/views/genericnode.cpp \
+    src/dnai/views/input.cpp \
+    src/dnai/views/io.cpp \
+    src/dnai/views/line.cpp \
+    src/dnai/views/linkablebezieritem.cpp \
+    src/dnai/views/output.cpp \
+    src/dnai/views/roundedrectangle.cpp \
+    src/dnai/views/console.cpp \
+    src/dnai/views/context.cpp \
+    src/dnai/views/class.cpp \
+    src/dnai/views/declarationview.cpp \
+    src/dnai/views/declarationcanvas.cpp \
+    src/dnai/views/contextview.cpp
+
+#COMMANDS
+SOURCES += \
+    src/dnai/commands/commanddecorator.cpp \
+    src/dnai/commands/commandmanager.cpp \
+    src/dnai/commands/debugdecorator.cpp \
+    src/dnai/commands/command.cpp \
 
 
 #CONTROLLERS
-SOURCES += src/controllers/inputcontroller.cpp \
-    src/controllers/outputcontroller.cpp \
-    src/controllers/consolecontroller.cpp \
+SOURCES += src/dnai/controllers/inputcontroller.cpp \
+    src/dnai/controllers/outputcontroller.cpp \
+    src/dnai/controllers/consolecontroller.cpp \
 
 #MODELS
-SOURCES += src/models/class.cpp \
-    src/models/common.cpp \
-    src/models/context.cpp \
-    src/models/flow.cpp \
-    src/models/function.cpp \
-    src/models/identity.cpp \
-    src/models/input.cpp \
-    src/models/node.cpp \
-    src/models/output.cpp \
-    src/models/variable.cpp \
-    src/models/position.cpp \
-    src/models/user.cpp
-
+SOURCES += src/dnai/models/class.cpp \
+    src/dnai/models/common.cpp \
+    src/dnai/models/context.cpp \
+    src/dnai/models/flow.cpp \
+    src/dnai/models/function.cpp \
+    src/dnai/models/identity.cpp \
+    src/dnai/models/input.cpp \
+    src/dnai/models/node.cpp \
+    src/dnai/models/output.cpp \
+    src/dnai/models/variable.cpp \
+    src/dnai/models/position.cpp \
+    src/dnai/models/user.cpp \
+    src/dnai/models/dulysettingsmodel.cpp \
+    src/dnai/models/declarationmodel.cpp \
+    src/dnai/models/basicnodemodel.cpp \
+    src/dnai/models/list/listmodelcontext.cpp \
 
 #HTTP
-SOURCES += src/http/url.cpp \
-    src/http/service.cpp \
-    src/http/observable.cpp \
-    src/http/response.cpp
+SOURCES += src/dnai/http/url.cpp \
+    src/dnai/http/service.cpp \
+    src/dnai/http/observable.cpp \
+    src/dnai/http/response.cpp
 
 #API
-SOURCES += src/api/api.cpp
+SOURCES += src/dnai/api/api.cpp
+
+#QMLRESOURCES
+SOURCES += src/dnai/qmlresources/qcstandardpaths.cpp
 
 RESOURCES += qml.qrc
 
@@ -130,104 +136,119 @@ DISTFILES +=
 FORMS += \
     resources/Forms/BasePanelForm.ui
 
-#CORE
-HEADERS += include/baseio.h \
-    include/baselinkable.h \
-    include/dulyscene.h \
-    include/eventutilities.h \
-    include/focusmanager.h \
-    include/ilinkable.h \
-    include/link.h \
-    include/linkabletype.h \
-    include/dulyapp.h \
-    include/commands/movenodecommand.h \
-    include/commands/movecommand.h \
-    include/testconnection.h \
-    include/manager.h \
-    include/project.h \
-    include/views/context.h \
-    include/views/class.h \
+#GENERAL HEADER
+HEADERS += \
     include/views.h \
-    include/dulysettings.h \
-    include/views/declarationview.h \
-    include/views/declarationcanvas.h \
-    include/controllers/clientcontroller.h \
-    include/processmanager.h \
-    include/models/treemodel.h \
-    include/models/treeitem.h \
-    include/models/treeitem.h \
-    include/models/namespacebarmodel.h \
-    include/models/namespacebaritem.h \
-    layouthandler.h \
-    include/qmlresources/instructionid.h \
-    include/qmlresources/declarationtype.h \
-    include/qmlresources/flowtype.h \
-    include/qmlresources/instructionid.h \
-    include/qmlresources/iotype.h \
+    include/api.h \
+    include/models.h \
     include/qmlresources.h \
-    include/model.h \
-    include/models/dulysettingsmodel.h \
-    include/models/declarationmodel.h \
-    include/models/basicnodemodel.h \
-    include/qmlresources/qcstandardpaths.h
+
+#DNAI
+HEADERS += \
+    include/dnai/baseio.h \
+    include/dnai/baselinkable.h \
+    include/dnai/eventutilities.h \
+    include/dnai/focusmanager.h \
+    include/dnai/ilinkable.h \
+    include/dnai/link.h \
+    include/dnai/linkabletype.h \
+    include/dnai/dulyapp.h \
+    include/dnai/manager.h \
+    include/dnai/project.h \
+    include/dnai/dulysettings.h \
+    include/dnai/processmanager.h \
 
 #VIEWS
-HEADERS += include/views/beziercurve.h \
-    include/views/customshape.h \
-    include/views/dulycanvas.h \
-    include/views/flow.h \
-    include/views/genericnode.h \
-    include/views/input.h \
-    include/views/io.h \
-    include/views/iscalable.h \
-    include/views/line.h \
-    include/views/linkablebezieritem.h \
-    include/views/output.h \
-    include/views/roundedrectangle.h \
-    include/views/console.h \
+HEADERS += \
+    include/dnai/views/beziercurve.h \
+    include/dnai/views/customshape.h \
+    include/dnai/views/dulycanvas.h \
+    include/dnai/views/flow.h \
+    include/dnai/views/genericnode.h \
+    include/dnai/views/input.h \
+    include/dnai/views/io.h \
+    include/dnai/views/iscalable.h \
+    include/dnai/views/line.h \
+    include/dnai/views/linkablebezieritem.h \
+    include/dnai/views/output.h \
+    include/dnai/views/roundedrectangle.h \
+    include/dnai/views/console.h \
+    include/dnai/views/context.h \
+    include/dnai/views/class.h \
+    include/dnai/views/declarationview.h \
+    include/dnai/views/declarationcanvas.h \
+    include/dnai/views/contextview.h
 
 #COMMANDS
-HEADERS += include/commands/commanddecorator.h \
-    include/commands/commandmanager.h \
-    include/commands/debugdecorator.h \
-    include/commands/icommand.h \
-    include/commands/command.h \
+HEADERS += \
+    include/dnai/commands/commanddecorator.h \
+    include/dnai/commands/commandmanager.h \
+    include/dnai/commands/debugdecorator.h \
+    include/dnai/commands/icommand.h \
+    include/dnai/commands/command.h \
+    include/dnai/commands/movenodecommand.h \
+    include/dnai/commands/movecommand.h \
 
 
 #CONTROLLERS
-HEADERS += include/controllers/inputcontroller.h \
-    include/controllers/outputcontroller.h \
-    include/controllers/consolecontroller.h \
+HEADERS += \
+    include/dnai/controllers/inputcontroller.h \
+    include/dnai/controllers/outputcontroller.h \
+    include/dnai/controllers/consolecontroller.h \
+    include/dnai/controllers/clientcontroller.h \
 
 #MODELS
-HEADERS += include/models/common.h \
-    include/models/context.h \
-    include/models/class.h \
-    include/models/node.h \
-    include/models/variable.h \
-    include/models/input.h \
-    include/models/output.h \
-    include/models/flow.h \
-    include/models/function.h \
-    include/models/identity.h \
-    include/models/imodel.h \
-    include/models/iclone.h \
-    include/models/position.h \
-    include/models/list/listmodelcontext.h \
-    include/models/user.h
+HEADERS += \
+    include/dnai/models/common.h \
+    include/dnai/models/context.h \
+    include/dnai/models/class.h \
+    include/dnai/models/node.h \
+    include/dnai/models/variable.h \
+    include/dnai/models/input.h \
+    include/dnai/models/output.h \
+    include/dnai/models/flow.h \
+    include/dnai/models/function.h \
+    include/dnai/models/identity.h \
+    include/dnai/models/imodel.h \
+    include/dnai/models/iclone.h \
+    include/dnai/models/position.h \
+    include/dnai/models/user.h \
+    include/dnai/models/treemodel.h \
+    include/dnai/models/treeitem.h \
+    include/dnai/models/treeitem.h \
+    include/dnai/models/namespacebarmodel.h \
+    include/dnai/models/namespacebaritem.h \
+    include/dnai/models/dulysettingsmodel.h \
+    include/dnai/models/declarationmodel.h \
+    include/dnai/models/basicnodemodel.h \
+    include/dnai/models/list/listmodelcontext.h \
+
+#QMLRESOURCES
+HEADERS += \
+    include/dnai/qmlresources/instructionid.h \
+    include/dnai/qmlresources/declarationtype.h \
+    include/dnai/qmlresources/flowtype.h \
+    include/dnai/qmlresources/instructionid.h \
+    include/dnai/qmlresources/iotype.h \
+    include/dnai/qmlresources/qcstandardpaths.h \
 
 #HTTP
-HEADERS += include/http.h \
-    include/http/url.h \
-    include/http/service.h \
-    include/http/config.h \
-    include/http/observable.h \
-    include/http/response.h \
-    include/http/types.h
+HEADERS += \
+    include/dnai/http.h \
+    include/dnai/http/url.h \
+    include/dnai/http/service.h \
+    include/dnai/http/config.h \
+    include/dnai/http/observable.h \
+    include/dnai/http/response.h \
+    include/dnai/http/types.h
 
 #API
-HEADERS += include/api.h \
-    include/api/api.h
+HEADERS += \
+    include/dnai/api/api.h
+
+#TEST
+HEADERS += \
+    include/testconnection.h \
 
 #LIB
 DEPENDPATH += $${PWD}/../lib/event_client/

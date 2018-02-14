@@ -4,7 +4,7 @@ import QtQuick.Controls 2.2
 import Qt.labs.settings 1.0
 import "../Forms"
 
-import Utils 1.0
+import DNAI 1.0
 
 ThemePanelForm {
     themes.items.onCurrentTextChanged: {

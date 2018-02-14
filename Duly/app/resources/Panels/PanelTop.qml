@@ -3,7 +3,7 @@ import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.2
 import QtQuick.Controls.Styles 1.4
 
-import Utils 1.0
+import DNAI 1.0
 import "../Style"
 
 Panel {
