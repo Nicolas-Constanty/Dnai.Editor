@@ -41,3 +41,7 @@ Duly/app/\.vs/
 *.Debug
 
 *.Release
+
+Duly/lib/DataComEvent/release/
+
+Duly/lib/DataComEvent/debug/
