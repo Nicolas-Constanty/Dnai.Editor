@@ -116,9 +116,6 @@
     <ClCompile Include="src\dnai\models\context.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\dnai\views\context.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\dnai\views\contextview.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -273,12 +270,6 @@
       <Filter>Generated Files</Filter>
     </ClCompile>
     <ClCompile Include="Release\moc_dulyapp.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_declarationview.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_declarationview.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
     <ClCompile Include="Debug\moc_declarationtype.cpp">
@@ -479,6 +470,27 @@
     <ClCompile Include="Release\moc_appview.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
+    <ClCompile Include="Debug\moc_declarationview.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_declarationview.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_contextview.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_contextview.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\dnai\views\instructionview.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_instructionview.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_instructionview.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\api.h">
@@ -531,9 +543,6 @@
     </ClInclude>
     <ClInclude Include="include\dnai\models\context.h">
       <Filter>Header Files\dnai\models</Filter>
-    </ClInclude>
-    <ClInclude Include="include\dnai\views\contextview.h">
-      <Filter>Header Files\dnai\Views</Filter>
     </ClInclude>
     <ClInclude Include="include\dnai\commands\debugdecorator.h">
       <Filter>Header Files\dnai\commands</Filter>
@@ -771,6 +780,12 @@
       <Filter>Header Files\dnai\models</Filter>
     </CustomBuild>
     <CustomBuild Include="include\dnai\views\appview.h">
+      <Filter>Generated Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="include\dnai\views\contextview.h">
+      <Filter>Header Files\dnai\Views</Filter>
+    </CustomBuild>
+    <CustomBuild Include="include\dnai\views\instructionview.h">
       <Filter>Generated Files</Filter>
     </CustomBuild>
   </ItemGroup>

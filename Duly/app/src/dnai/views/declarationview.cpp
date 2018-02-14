@@ -19,7 +19,10 @@ namespace dnai
 
 		void DeclarationView::setContextModel(dnai::models::DeclarationModel* model)
 		{
+			if (contextModel() == model)
+				return;
 			addModel(static_cast<QObject*>(model), "contextModel");
+			contextModelChanged(model);
 		}
 	}
 }

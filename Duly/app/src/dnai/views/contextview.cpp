@@ -24,7 +24,9 @@ void dnai::views::ContextView::addModel(QObject* model, const QString& name)
 
 QObject* dnai::views::ContextView::getModel(const QString& name) const
 {
-	return m_models[name];
+	if (m_models.contains(name))
+		return m_models[name];
+	return nullptr;
 }
 
 void dnai::views::ContextView::initView(const QString& path)
