@@ -11,8 +11,8 @@
 #include "dnai/views/flow.h"
 #include "dnai/views/console.h"
 #include "dnai/views/class.h"
-#include "dnai/views/context.h"
 #include "dnai/views/declarationcanvas.h"
 #include "dnai/views/appview.h"
+#include "dnai/views/declarationview.h"
 
 #endif // VIEWS_H
