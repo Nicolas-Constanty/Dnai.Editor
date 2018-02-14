@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
+    <Filter Include="Form Files">
+      <UniqueIdentifier>{99349809-55BA-4b9d-BF79-8FDBB0286EB3}</UniqueIdentifier>
+      <Extensions>ui</Extensions>
+      <ParseFiles>false</ParseFiles>
+    </Filter>
+    <Filter Include="Form Files">
+      <UniqueIdentifier>{99349809-55BA-4b9d-BF79-8FDBB0286EB3}</UniqueIdentifier>
+      <Extensions>ui</Extensions>
+      <ParseFiles>false</ParseFiles>
+    </Filter>
     <Filter Include="Generated Files">
       <UniqueIdentifier>{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}</UniqueIdentifier>
       <Extensions>cpp;c;cxx;moc;h;def;odl;idl;res;</Extensions>
@@ -34,187 +44,235 @@
     <Filter Include="Source Files">
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files\dnai">
+      <UniqueIdentifier>{26e60faa-bb7b-43ac-95b4-044774b0b15c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\dnai\api">
+      <UniqueIdentifier>{ded45f5b-bb17-4190-aacf-0bf25bc49104}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\dnai\models">
+      <UniqueIdentifier>{47959740-b216-44a2-8941-4dbabcb962b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\dnai\Views">
+      <UniqueIdentifier>{f4d609b6-adcc-4337-9eb3-0516d20c7357}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\dnai\controllers">
+      <UniqueIdentifier>{230d9345-b15b-43d4-8acf-01075842462f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\dnai\http">
+      <UniqueIdentifier>{feff3295-4905-42e0-8081-a01d76ff27d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\dnai\qmlresources">
+      <UniqueIdentifier>{089332bd-626a-47bb-8ce3-2629af2a0dcb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\dnai\commands">
+      <UniqueIdentifier>{7798d662-a65c-411f-9f64-f4af8ac75f90}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\baseio.cpp">
+    <ClCompile Include="src\dnai\api\api.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\baselinkable.cpp">
+    <ClCompile Include="src\dnai\baseio.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\views\beziercurve.cpp">
+    <ClCompile Include="src\dnai\baselinkable.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\models\class.cpp">
+    <ClCompile Include="src\dnai\models\basicnodemodel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\views\class.cpp">
+    <ClCompile Include="src\dnai\views\beziercurve.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\controllers\clientcontroller.cpp">
+    <ClCompile Include="src\dnai\models\class.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\commands\command.cpp">
+    <ClCompile Include="src\dnai\views\class.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\commands\commanddecorator.cpp">
+    <ClCompile Include="src\dnai\controllers\clientcontroller.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\commands\commandmanager.cpp">
+    <ClCompile Include="src\dnai\commands\command.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\models\common.cpp">
+    <ClCompile Include="src\dnai\commands\commanddecorator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\views\console.cpp">
+    <ClCompile Include="src\dnai\commands\commandmanager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\controllers\consolecontroller.cpp">
+    <ClCompile Include="src\dnai\models\common.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\models\context.cpp">
+    <ClCompile Include="src\dnai\views\console.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\views\context.cpp">
+    <ClCompile Include="src\dnai\controllers\consolecontroller.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\views\customshape.cpp">
+    <ClCompile Include="src\dnai\models\context.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\commands\debugdecorator.cpp">
+    <ClCompile Include="src\dnai\views\context.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\views\declarationcanvas.cpp">
+    <ClCompile Include="src\dnai\views\contextview.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\views\declarationview.cpp">
+    <ClCompile Include="src\dnai\views\customshape.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\dulyapp.cpp">
+    <ClCompile Include="src\dnai\commands\debugdecorator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\views\dulycanvas.cpp">
+    <ClCompile Include="src\dnai\views\declarationcanvas.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\dulyscene.cpp">
+    <ClCompile Include="src\dnai\models\declarationmodel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\dulysettings.cpp">
+    <ClCompile Include="src\dnai\views\declarationview.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\dulysettingsmodel.cpp">
+    <ClCompile Include="src\dnai\dulyapp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\eventutilities.cpp">
+    <ClCompile Include="src\dnai\views\dulycanvas.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\models\flow.cpp">
+    <ClCompile Include="src\dnai\dulysettings.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\views\flow.cpp">
+    <ClCompile Include="src\dnai\models\dulysettingsmodel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\focusmanager.cpp">
+    <ClCompile Include="src\dnai\eventutilities.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\models\function.cpp">
+    <ClCompile Include="src\dnai\models\flow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\views\genericnode.cpp">
+    <ClCompile Include="src\dnai\views\flow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\models\identity.cpp">
+    <ClCompile Include="src\dnai\focusmanager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\models\input.cpp">
+    <ClCompile Include="src\dnai\models\function.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\views\input.cpp">
+    <ClCompile Include="src\dnai\views\genericnode.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\controllers\inputcontroller.cpp">
+    <ClCompile Include="src\dnai\models\identity.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\views\io.cpp">
+    <ClCompile Include="src\dnai\models\input.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\views\line.cpp">
+    <ClCompile Include="src\dnai\views\input.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\link.cpp">
+    <ClCompile Include="src\dnai\controllers\inputcontroller.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\views\linkablebezieritem.cpp">
+    <ClCompile Include="src\dnai\views\io.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\models\list\listmodelcontext.cpp">
+    <ClCompile Include="src\dnai\views\line.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\dnai\link.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\dnai\views\linkablebezieritem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\dnai\models\list\listmodelcontext.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\manager.cpp">
+    <ClCompile Include="src\dnai\manager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\commands\movecanvascommand.cpp">
+    <ClCompile Include="src\dnai\commands\movecanvascommand.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\commands\movecommand.cpp">
+    <ClCompile Include="src\dnai\commands\movecommand.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\commands\movenodecommand.cpp">
+    <ClCompile Include="src\dnai\commands\movenodecommand.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\models\node.cpp">
+    <ClCompile Include="src\dnai\models\namespacebaritem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\models\output.cpp">
+    <ClCompile Include="src\dnai\models\namespacebarmodel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\views\output.cpp">
+    <ClCompile Include="src\dnai\models\node.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\controllers\outputcontroller.cpp">
+    <ClCompile Include="src\dnai\http\observable.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\models\position.cpp">
+    <ClCompile Include="src\dnai\models\output.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\project.cpp">
+    <ClCompile Include="src\dnai\views\output.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\views\roundedrectangle.cpp">
+    <ClCompile Include="src\dnai\controllers\outputcontroller.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\models\variable.cpp">
+    <ClCompile Include="src\dnai\models\position.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\commands\zoomcanvascommand.cpp">
+    <ClCompile Include="src\dnai\processmanager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_context.cpp">
+    <ClCompile Include="src\dnai\project.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\dnai\qmlresources\qcstandardpaths.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\dnai\http\response.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\dnai\views\roundedrectangle.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\dnai\http\service.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\dnai\models\treeitem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\dnai\models\treemodel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\dnai\http\url.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\dnai\models\user.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\dnai\models\variable.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\dnai\commands\zoomcanvascommand.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_dulyapp.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="Release\moc_context.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_console.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_console.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_common.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_common.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_class.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_class.cpp">
+    <ClCompile Include="Release\moc_dulyapp.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
     <ClCompile Include="Debug\moc_declarationview.cpp">
@@ -229,6 +287,12 @@
     <ClCompile Include="Release\moc_declarationtype.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
+    <ClCompile Include="Debug\moc_declarationmodel.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_declarationmodel.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
     <ClCompile Include="Debug\moc_declarationcanvas.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
@@ -241,28 +305,34 @@
     <ClCompile Include="Release\moc_customshape.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_dulysettingsmodel.cpp">
+    <ClCompile Include="Debug\moc_context.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="Release\moc_dulysettingsmodel.cpp">
+    <ClCompile Include="Release\moc_context.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_dulysettings.cpp">
+    <ClCompile Include="Debug\moc_console.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="Release\moc_dulysettings.cpp">
+    <ClCompile Include="Release\moc_console.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_dulyscene.cpp">
+    <ClCompile Include="Debug\moc_user.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="Release\moc_dulyscene.cpp">
+    <ClCompile Include="Release\moc_user.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_dulycanvas.cpp">
+    <ClCompile Include="Debug\moc_url.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="Release\moc_dulycanvas.cpp">
+    <ClCompile Include="Release\moc_url.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_treemodel.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_treemodel.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
     <ClCompile Include="Debug\moc_testconnection.cpp">
@@ -275,6 +345,54 @@
       <Filter>Generated Files</Filter>
     </ClCompile>
     <ClCompile Include="Release\moc_roundedrectangle.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_qcstandardpaths.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_qcstandardpaths.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_class.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_class.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_beziercurve.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_beziercurve.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_basicnodemodel.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_basicnodemodel.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_processmanager.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_processmanager.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_observable.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_observable.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_namespacebarmodel.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_namespacebarmodel.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_namespacebaritem.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_namespacebaritem.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
     <ClCompile Include="Debug\moc_manager.cpp">
@@ -325,10 +443,28 @@
     <ClCompile Include="Release\moc_flow.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_beziercurve.cpp">
+    <ClCompile Include="Debug\moc_dulysettingsmodel.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="Release\moc_beziercurve.cpp">
+    <ClCompile Include="Release\moc_dulysettingsmodel.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_dulysettings.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_dulysettings.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_dulycanvas.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_dulycanvas.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_common.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_common.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\qrc_qml.cpp">
@@ -336,197 +472,289 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\baseio.h">
+    <ClInclude Include="include\api.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\baselinkable.h">
+    <ClInclude Include="include\models.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <CustomBuild Include="include\views\beziercurve.h">
-      <Filter>Header Files</Filter>
-    </CustomBuild>
-    <ClInclude Include="include\models\class.h">
+    <ClInclude Include="include\qmlresources.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <CustomBuild Include="include\views\class.h">
-      <Filter>Header Files</Filter>
-    </CustomBuild>
-    <ClInclude Include="include\controllers\clientcontroller.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\commands\command.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\commands\commanddecorator.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\commands\commandmanager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <CustomBuild Include="include\models\common.h">
-      <Filter>Header Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="include\views\console.h">
-      <Filter>Header Files</Filter>
-    </CustomBuild>
-    <ClInclude Include="include\controllers\consolecontroller.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\models\context.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <CustomBuild Include="include\views\context.h">
-      <Filter>Header Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="include\views\customshape.h">
-      <Filter>Header Files</Filter>
-    </CustomBuild>
-    <ClInclude Include="include\commands\debugdecorator.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <CustomBuild Include="include\views\declarationcanvas.h">
-      <Filter>Header Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="include\declarationtype.h">
-      <Filter>Header Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="include\views\declarationview.h">
-      <Filter>Header Files</Filter>
-    </CustomBuild>
-    <ClInclude Include="include\dulyapp.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <CustomBuild Include="include\views\dulycanvas.h">
-      <Filter>Header Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="include\dulyscene.h">
-      <Filter>Header Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="include\dulysettings.h">
-      <Filter>Header Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="include\dulysettingsmodel.h">
-      <Filter>Header Files</Filter>
-    </CustomBuild>
-    <ClInclude Include="include\eventutilities.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\models\flow.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <CustomBuild Include="include\views\flow.h">
-      <Filter>Header Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="include\flowtype.h">
-      <Filter>Header Files</Filter>
-    </CustomBuild>
-    <ClInclude Include="include\focusmanager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\models\function.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <CustomBuild Include="include\views\genericnode.h">
-      <Filter>Header Files</Filter>
-    </CustomBuild>
-    <ClInclude Include="include\models\iclone.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\commands\icommand.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\models\identity.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\ilinkable.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\models\imodel.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\models\input.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\views\input.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\controllers\inputcontroller.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <CustomBuild Include="include\views\io.h">
-      <Filter>Header Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="include\iotype.h">
-      <Filter>Header Files</Filter>
-    </CustomBuild>
-    <ClInclude Include="include\views\iscalable.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <CustomBuild Include="include\views\line.h">
-      <Filter>Header Files</Filter>
-    </CustomBuild>
-    <ClInclude Include="include\link.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\views\linkablebezieritem.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\linkabletype.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <CustomBuild Include="include\models\list\listmodelcontext.h">
-      <Filter>Header Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="include\manager.h">
-      <Filter>Header Files</Filter>
-    </CustomBuild>
-    <ClInclude Include="include\commands\movecommand.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\commands\movenodecommand.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\models\node.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\models\output.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\views\output.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\controllers\outputcontroller.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\models\position.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\project.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <CustomBuild Include="include\views\roundedrectangle.h">
-      <Filter>Header Files</Filter>
-    </CustomBuild>
     <CustomBuild Include="include\testconnection.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
-    <ClInclude Include="include\models\variable.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="include\views.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="GeneratedFiles\ui_BasePanelForm.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dnai\api\api.h">
+      <Filter>Header Files\dnai\api</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dnai\baseio.h">
+      <Filter>Header Files\dnai</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dnai\baselinkable.h">
+      <Filter>Header Files\dnai</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dnai\models\class.h">
+      <Filter>Header Files\dnai\models</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dnai\controllers\clientcontroller.h">
+      <Filter>Header Files\dnai\controllers</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dnai\commands\command.h">
+      <Filter>Header Files\dnai\commands</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dnai\commands\commanddecorator.h">
+      <Filter>Header Files\dnai\commands</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dnai\commands\commandmanager.h">
+      <Filter>Header Files\dnai\commands</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dnai\http\config.h">
+      <Filter>Header Files\dnai\http</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dnai\controllers\consolecontroller.h">
+      <Filter>Header Files\dnai\controllers</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dnai\models\context.h">
+      <Filter>Header Files\dnai\models</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dnai\views\contextview.h">
+      <Filter>Header Files\dnai\Views</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dnai\commands\debugdecorator.h">
+      <Filter>Header Files\dnai\commands</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dnai\eventutilities.h">
+      <Filter>Header Files\dnai</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dnai\models\flow.h">
+      <Filter>Header Files\dnai\models</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dnai\focusmanager.h">
+      <Filter>Header Files\dnai</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dnai\models\function.h">
+      <Filter>Header Files\dnai\models</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dnai\http.h">
+      <Filter>Header Files\dnai</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dnai\models\iclone.h">
+      <Filter>Header Files\dnai\models</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dnai\commands\icommand.h">
+      <Filter>Header Files\dnai\commands</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dnai\models\identity.h">
+      <Filter>Header Files\dnai\models</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dnai\ilinkable.h">
+      <Filter>Header Files\dnai</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dnai\models\imodel.h">
+      <Filter>Header Files\dnai\models</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dnai\models\input.h">
+      <Filter>Header Files\dnai\models</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dnai\views\input.h">
+      <Filter>Header Files\dnai\Views</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dnai\controllers\inputcontroller.h">
+      <Filter>Header Files\dnai\controllers</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dnai\views\iscalable.h">
+      <Filter>Header Files\dnai\Views</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dnai\link.h">
+      <Filter>Header Files\dnai</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dnai\views\linkablebezieritem.h">
+      <Filter>Header Files\dnai\Views</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dnai\linkabletype.h">
+      <Filter>Header Files\dnai</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dnai\commands\movecommand.h">
+      <Filter>Header Files\dnai\commands</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dnai\models\output.h">
+      <Filter>Header Files\dnai\models</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dnai\models\node.h">
+      <Filter>Header Files\dnai\models</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dnai\commands\movenodecommand.h">
+      <Filter>Header Files\dnai\commands</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dnai\views\output.h">
+      <Filter>Header Files\dnai\Views</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dnai\controllers\outputcontroller.h">
+      <Filter>Header Files\dnai\controllers</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dnai\models\position.h">
+      <Filter>Header Files\dnai\models</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dnai\project.h">
+      <Filter>Header Files\dnai</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dnai\http\response.h">
+      <Filter>Header Files\dnai</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dnai\http\service.h">
+      <Filter>Header Files\dnai\http</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dnai\http\types.h">
+      <Filter>Header Files\dnai\http</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dnai\models\variable.h">
+      <Filter>Header Files\dnai\models</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="debug\moc_instructionid.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="release\moc_instructionid.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
     <CustomBuild Include="debug\moc_predefs.h.cbt">
       <Filter>Generated Files</Filter>
     </CustomBuild>
     <CustomBuild Include="release\moc_predefs.h.cbt">
       <Filter>Generated Files</Filter>
     </CustomBuild>
+    <ClCompile Include="debug\moc_treeitem.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="release\moc_treeitem.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <CustomBuild Include="resources\Forms\BasePanelForm.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="include\dnai\models\common.h">
+      <Filter>Header Files\dnai\models</Filter>
+    </CustomBuild>
+    <CustomBuild Include="include\dnai\views\console.h">
+      <Filter>Header Files\dnai\Views</Filter>
+    </CustomBuild>
+    <CustomBuild Include="include\dnai\views\beziercurve.h">
+      <Filter>Header Files\dnai\Views</Filter>
+    </CustomBuild>
+    <CustomBuild Include="include\dnai\models\basicnodemodel.h">
+      <Filter>Header Files\dnai\models</Filter>
+    </CustomBuild>
+    <CustomBuild Include="include\dnai\views\class.h">
+      <Filter>Header Files\dnai\Views</Filter>
+    </CustomBuild>
+    <CustomBuild Include="include\dnai\views\context.h">
+      <Filter>Header Files\dnai\Views</Filter>
+    </CustomBuild>
+    <CustomBuild Include="include\dnai\views\customshape.h">
+      <Filter>Header Files\dnai\Views</Filter>
+    </CustomBuild>
+    <CustomBuild Include="include\dnai\views\declarationcanvas.h">
+      <Filter>Header Files\dnai\Views</Filter>
+    </CustomBuild>
+    <CustomBuild Include="include\dnai\models\declarationmodel.h">
+      <Filter>Header Files\dnai\models</Filter>
+    </CustomBuild>
+    <CustomBuild Include="include\dnai\qmlresources\declarationtype.h">
+      <Filter>Header Files\dnai\qmlresources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="include\dnai\views\declarationview.h">
+      <Filter>Header Files\dnai\Views</Filter>
+    </CustomBuild>
+    <CustomBuild Include="include\dnai\dulyapp.h">
+      <Filter>Header Files\dnai</Filter>
+    </CustomBuild>
+    <CustomBuild Include="include\dnai\views\dulycanvas.h">
+      <Filter>Header Files\dnai\Views</Filter>
+    </CustomBuild>
+    <CustomBuild Include="include\dnai\dulysettings.h">
+      <Filter>Header Files\dnai</Filter>
+    </CustomBuild>
+    <CustomBuild Include="include\dnai\models\dulysettingsmodel.h">
+      <Filter>Header Files\dnai\models</Filter>
+    </CustomBuild>
+    <CustomBuild Include="include\dnai\views\flow.h">
+      <Filter>Header Files\dnai\Views</Filter>
+    </CustomBuild>
+    <CustomBuild Include="include\dnai\qmlresources\flowtype.h">
+      <Filter>Header Files\dnai\qmlresources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="include\dnai\views\genericnode.h">
+      <Filter>Header Files\dnai\Views</Filter>
+    </CustomBuild>
+    <CustomBuild Include="include\dnai\qmlresources\instructionid.h">
+      <Filter>Header Files\dnai\qmlresources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="include\dnai\views\io.h">
+      <Filter>Header Files\dnai\Views</Filter>
+    </CustomBuild>
+    <CustomBuild Include="include\dnai\qmlresources\iotype.h">
+      <Filter>Header Files\dnai\qmlresources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="include\dnai\views\line.h">
+      <Filter>Header Files\dnai\Views</Filter>
+    </CustomBuild>
+    <CustomBuild Include="include\dnai\models\list\listmodelcontext.h">
+      <Filter>Header Files\dnai\models</Filter>
+    </CustomBuild>
+    <CustomBuild Include="include\dnai\manager.h">
+      <Filter>Header Files\dnai</Filter>
+    </CustomBuild>
+    <CustomBuild Include="include\dnai\models\namespacebaritem.h">
+      <Filter>Header Files\dnai\models</Filter>
+    </CustomBuild>
+    <CustomBuild Include="include\dnai\models\namespacebarmodel.h">
+      <Filter>Header Files\dnai\models</Filter>
+    </CustomBuild>
+    <CustomBuild Include="include\dnai\http\observable.h">
+      <Filter>Header Files\dnai\http</Filter>
+    </CustomBuild>
+    <CustomBuild Include="include\dnai\processmanager.h">
+      <Filter>Header Files\dnai</Filter>
+    </CustomBuild>
+    <CustomBuild Include="include\dnai\qmlresources\qcstandardpaths.h">
+      <Filter>Header Files\dnai\qmlresources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="include\dnai\views\roundedrectangle.h">
+      <Filter>Header Files\dnai\Views</Filter>
+    </CustomBuild>
+    <CustomBuild Include="include\dnai\models\treeitem.h">
+      <Filter>Header Files\dnai\models</Filter>
+    </CustomBuild>
+    <CustomBuild Include="include\dnai\http\url.h">
+      <Filter>Header Files\dnai\http</Filter>
+    </CustomBuild>
+    <CustomBuild Include="include\dnai\models\treemodel.h">
+      <Filter>Header Files\dnai\models</Filter>
+    </CustomBuild>
+    <CustomBuild Include="include\dnai\models\user.h">
+      <Filter>Header Files\dnai\models</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\Images\0001.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="5">
+      <Filter>Resource Files</Filter>
+    </None>
     <None Include="resources\Nodes\Operator\BinaryOperator\AccessModel.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\Components\AddButton.qml">
       <Filter>Resource Files</Filter>
     </None>
     <None Include="resources\Nodes\Operator\BinaryOperator\AddNodeModel.qml">
@@ -535,10 +763,22 @@
     <None Include="resources\Nodes\Operator\BinaryOperator\Logical\AndModel.qml">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="Awesome">
+      <Filter>Resource Files</Filter>
+    </None>
     <None Include="resources\Nodes\Operator\UnaryOperator\BNotModel.qml">
       <Filter>Resource Files</Filter>
     </None>
     <None Include="resources\Layouts\BaseLayout.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\Panels\BasePanel.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\Forms\BasePanelForm.ui.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\Images\BearSheet.png">
       <Filter>Resource Files</Filter>
     </None>
     <None Include="resources\Nodes\Operator\BinaryOperator\BinaryAndModel.qml">
@@ -548,6 +788,9 @@
       <Filter>Resource Files</Filter>
     </None>
     <None Include="resources\Nodes\Operator\BinaryOperator\BinaryOrModel.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Brands-Regular-400.otf">
       <Filter>Resource Files</Filter>
     </None>
     <None Include="resources\Forms\ChooseThemeForm.ui.qml">
@@ -572,6 +815,9 @@
       <Filter>Resource Files</Filter>
     </None>
     <None Include="resources\Models\ColorPickerModel.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\Components\CommonModelView.qml">
       <Filter>Resource Files</Filter>
     </None>
     <None Include="resources\Components\ConsoleComponent.qml">
@@ -610,6 +856,9 @@
     <None Include="resources\Components\DeclarationComponent.qml">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="resources\Components\DeclarationList.qml">
+      <Filter>Resource Files</Filter>
+    </None>
     <None Include="resources\Models\DeclarationModel.qml">
       <Filter>Resource Files</Filter>
     </None>
@@ -617,6 +866,9 @@
       <Filter>Resource Files</Filter>
     </None>
     <None Include="resources\Components\DeclarationView.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\Style\DecorativeText.qml">
       <Filter>Resource Files</Filter>
     </None>
     <None Include="resources\Nodes\Operator\UnaryOperator\DecrementModel.qml">
@@ -634,6 +886,9 @@
     <None Include="resources\Components\DragAndDropItem.qml">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="resources\Panels\DragAndDropPanel.qml">
+      <Filter>Resource Files</Filter>
+    </None>
     <None Include="resources\Components\DragDropItem.qml">
       <Filter>Resource Files</Filter>
     </None>
@@ -643,7 +898,34 @@
     <None Include="resources\Forms\DropDownForm.ui.qml">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="resources\Style\EditableText.qml">
+      <Filter>Resource Files</Filter>
+    </None>
     <None Include="resources\Nodes\Operator\BinaryOperator\Logical\EqualModel.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\Panels\ExpendablePanel.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\Style\FontAwesomeButton.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\Style\FontAwesomeText.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\Style\FontAwesomeTextBrand.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\Style\FontAwesomeTextSolid.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\fonts\Font">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Free-Regular-400.otf">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Free-Solid-900.otf">
       <Filter>Resource Files</Filter>
     </None>
     <None Include="resources\Components\FunctionComponent.qml">
@@ -688,13 +970,34 @@
     <None Include="resources\Nodes\Operator\BinaryOperator\Logical\LessModel.qml">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="resources\Images\LoadingScreen.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\Images\LoadingSprite.png">
+      <Filter>Resource Files</Filter>
+    </None>
     <None Include="resources\Nodes\Operator\BinaryOperator\LogicalNodeModel.qml">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="resources\Nodes\Operator\BinaryOperator\ModuloModel.qml">
+    <None Include="resources\Panels\Login.qml">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="resources\fonts\Muli-Regular.ttf">
+    <None Include="resources\Forms\LoginForm.ui.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\Style\MButton.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\Style\MLabel.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\Style\MText.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\Components\Modal.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\Nodes\Operator\BinaryOperator\ModuloModel.qml">
       <Filter>Resource Files</Filter>
     </None>
     <None Include="resources\Nodes\Operator\BinaryOperator\MultiplicateModel.qml">
@@ -709,10 +1012,16 @@
     <None Include="resources\Components\Node.qml">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="resources\Components\NodeCanvas.qml">
+      <Filter>Resource Files</Filter>
+    </None>
     <None Include="resources\Forms\NodeForm.ui.qml">
       <Filter>Resource Files</Filter>
     </None>
     <None Include="resources\Nodes\NodeModel.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\Components\NodeModelViewer.qml">
       <Filter>Resource Files</Filter>
     </None>
     <None Include="resources\Panels\NodePanel.qml">
@@ -745,6 +1054,9 @@
     <None Include="resources\Panels\PanelTop.qml">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="resources\fonts\Playball.ttf">
+      <Filter>Resource Files</Filter>
+    </None>
     <None Include="resources\Components\Printer.qml">
       <Filter>Resource Files</Filter>
     </None>
@@ -758,6 +1070,12 @@
       <Filter>Resource Files</Filter>
     </None>
     <None Include="resources\Forms\SettingPanelForm.ui.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\Components\SplashScreen.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\Components\Splitter.qml">
       <Filter>Resource Files</Filter>
     </None>
     <None Include="resources\Nodes\Operator\BinaryOperator\SubstractModel.qml">
@@ -778,10 +1096,37 @@
     <None Include="resources\Forms\ThemePanelForm.ui.qml">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="resources\Style\Title1.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\Style\Title2.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\Style\Title3.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\Style\TitlePanel.qml">
+      <Filter>Resource Files</Filter>
+    </None>
     <None Include="resources\Components\ToolBarHeader.qml">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="resources\Components\TreeViewPanel.qml">
+      <Filter>Resource Files</Filter>
+    </None>
     <None Include="resources\Nodes\Operator\UnaryOperatorModel.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\Panels\Upload.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\Forms\UploadForm.ui.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\Components\UserMenu.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\Forms\UserMenuForm.ui.qml">
       <Filter>Resource Files</Filter>
     </None>
     <None Include="resources\Components\VariableContainer.qml">
@@ -796,13 +1141,34 @@
     <None Include="resources\Nodes\Operator\BinaryOperator\XorModel.qml">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="resources\fonts\consola.ttf">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\fonts\consolab.ttf">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\fonts\consolai.ttf">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\fonts\consolaz.ttf">
+      <Filter>Resource Files</Filter>
+    </None>
     <None Include="settings\themes\dark.json">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="settings\themes\dark1.json">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\Images\default_user.png">
       <Filter>Resource Files</Filter>
     </None>
     <None Include="settings\themes\light.json">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="main.qml">
+    <None Include="resources\Images\logo_300dpi_dnai.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\main.qml">
       <Filter>Resource Files</Filter>
     </None>
     <CustomBuild Include="qml.qrc">
@@ -814,5 +1180,16 @@
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="duly.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="resources\fonts\Font Awesome 5 Brands-Regular-400.otf">
+      <Filter>Resource Files</Filter>
+    </Font>
+    <Font Include="resources\fonts\Font Awesome 5 Free-Regular-400.otf">
+      <Filter>Resource Files</Filter>
+    </Font>
+    <Font Include="resources\fonts\Font Awesome 5 Free-Solid-900.otf">
+      <Filter>Resource Files</Filter>
+    </Font>
   </ItemGroup>
 </Project>

@@ -11,7 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{8C74BCFF-6D5B-3A6C-A15A-C2B73B3B59D6}</ProjectGuid>
+    <ProjectGuid>{BE90139B-C3AA-30C1-9486-EFEBFC9BF600}</ProjectGuid>
     <RootNamespace>DataComEvent</RootNamespace>
     <Keyword>Qt4VSv1.0</Keyword>
   </PropertyGroup>
@@ -116,12 +116,20 @@
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="core.pb.cc" />
     <ClCompile Include="datacomeventfactory.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Shared_include\core.pb.h" />
+    <ClInclude Include="Shared_include\Buffer.h" />
+    <ClInclude Include="Shared_include\ISerializable.h" />
+    <ClInclude Include="Shared_include\List.h" />
+    <ClInclude Include="Shared_include\Map.h" />
+    <ClInclude Include="Shared_include\Object.h" />
+    <ClInclude Include="Shared_include\Scalar.h" />
+    <ClInclude Include="Shared_include\commands.h" />
     <ClInclude Include="Shared_include\datacomeventfactory.h" />
+    <ClInclude Include="Shared_include\declarecorepackage.h" />
+    <ClInclude Include="Shared_include\packagecore.h" />
+    <ClInclude Include="Shared_include\replies.h" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="debug\moc_predefs.h.cbt">
