@@ -3,6 +3,7 @@ QT += qml quickcontrols2 network
 CONFIG += c++14
 CONFIG += object_parallel_to_source
 CONFIG += resources_big
+CONFIG += no_batch
 
 INCLUDEPATH += include/
 
@@ -70,7 +71,6 @@ SOURCES += \
     src/dnai/views/output.cpp \
     src/dnai/views/roundedrectangle.cpp \
     src/dnai/views/console.cpp \
-    src/dnai/views/context.cpp \
     src/dnai/views/class.cpp \
     src/dnai/views/declarationview.cpp \
     src/dnai/views/declarationcanvas.cpp \
@@ -105,7 +105,6 @@ SOURCES += src/dnai/models/class.cpp \
     src/dnai/models/dulysettingsmodel.cpp \
     src/dnai/models/declarationmodel.cpp \
     src/dnai/models/basicnodemodel.cpp \
-    src/dnai/models/list/listmodelcontext.cpp \
 
 #HTTP
 SOURCES += \
@@ -146,7 +145,7 @@ HEADERS += \
     include/qmlresources.h \
     include/controllers.h \
     include/commands.h \
-    include/dnai/views/appview.h
+    include/http.h
 
 #DNAI
 HEADERS += \
@@ -178,11 +177,12 @@ HEADERS += \
     include/dnai/views/output.h \
     include/dnai/views/roundedrectangle.h \
     include/dnai/views/console.h \
-    include/dnai/views/context.h \
     include/dnai/views/class.h \
     include/dnai/views/declarationview.h \
     include/dnai/views/declarationcanvas.h \
-    include/dnai/views/contextview.h
+    include/dnai/views/contextview.h \
+    include/dnai/views/appview.h \
+    include/dnai/views/declarationview.h \
 
 #COMMANDS
 HEADERS += \
@@ -226,7 +226,6 @@ HEADERS += \
     include/dnai/models/dulysettingsmodel.h \
     include/dnai/models/declarationmodel.h \
     include/dnai/models/basicnodemodel.h \
-    include/dnai/models/list/listmodelcontext.h \
 
 #QMLRESOURCES
 HEADERS += \
@@ -239,7 +238,6 @@ HEADERS += \
 
 #HTTP
 HEADERS += \
-    include/dnai/http.h \
     include/dnai/http/url.h \
     include/dnai/http/service.h \
     include/dnai/http/config.h \
