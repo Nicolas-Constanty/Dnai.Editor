@@ -136,6 +136,9 @@
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Debug\moc_appview.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="Debug\moc_basicnodemodel.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ClCompile>
@@ -241,6 +244,9 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
       </PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Release\moc_appview.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="Release\moc_basicnodemodel.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
@@ -344,6 +350,7 @@
     <ClCompile Include="src\dnai\baseio.cpp" />
     <ClCompile Include="src\dnai\baselinkable.cpp" />
     <ClCompile Include="src\dnai\models\basicnodemodel.cpp" />
+    <ClCompile Include="src\dnai\views\appview.cpp" />
     <ClCompile Include="src\dnai\views\beziercurve.cpp" />
     <ClCompile Include="src\dnai\models\class.cpp" />
     <ClCompile Include="src\dnai\views\class.cpp" />
@@ -485,6 +492,16 @@
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+    </CustomBuild>
+    <CustomBuild Include="include\dnai\views\appview.h">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Moc%27ing appview.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -D_UNICODE -DWIN32 -DWIN64 -DQT_DEPRECATED_WARNINGS -DQNANO_USE_RENDERNODE -DQPM_INIT -DQT_QUICKCONTROLS2_LIB -DQT_QUICK_LIB -DQT_GUI_LIB -DQT_QML_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB "-I." "-I.\include" "-I.\..\lib\event_client" "-I.\..\lib\DataComEvent\Shared_include" "-I$(QTDIR)\include" "-I$(QTDIR)\include\QtQuickControls2" "-I$(QTDIR)\include\QtQuick" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtANGLE" "-I$(QTDIR)\include\QtQml" "-I$(QTDIR)\include\QtNetwork" "-I$(QTDIR)\include\QtCore" "-I.\debug" "-I\include" "-I$(QTDIR)\mkspecs\win32-msvc" "-I.\GeneratedFiles"</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Moc%27ing appview.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -D_UNICODE -DWIN32 -DWIN64 -DQT_DEPRECATED_WARNINGS -DQNANO_USE_RENDERNODE -DQPM_INIT -DQT_NO_DEBUG -DQT_QUICKCONTROLS2_LIB -DQT_QUICK_LIB -DQT_GUI_LIB -DQT_QML_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DNDEBUG "-I." "-I.\include" "-I.\..\lib\event_client" "-I.\..\lib\DataComEvent\Shared_include" "-I$(QTDIR)\include" "-I$(QTDIR)\include\QtQuickControls2" "-I$(QTDIR)\include\QtQuick" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtANGLE" "-I$(QTDIR)\include\QtQml" "-I$(QTDIR)\include\QtNetwork" "-I$(QTDIR)\include\QtCore" "-I.\release" "-I\include" "-I$(QTDIR)\mkspecs\win32-msvc" "-I.\GeneratedFiles"</Command>
     </CustomBuild>
     <ClInclude Include="include\dnai\views\contextview.h" />
     <CustomBuild Include="include\dnai\views\customshape.h">

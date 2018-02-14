@@ -1,6 +1,8 @@
 #include <QDebug>
 #include <QQuickItem>
 #include <QGuiApplication>
+#include <QJsonDocument>
+#include <QJsonObject>
 
 #include "dnai/dulyapp.h"
 #include "dnai/dulysettings.h"

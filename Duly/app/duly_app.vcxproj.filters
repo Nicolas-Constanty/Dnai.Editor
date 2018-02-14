@@ -470,6 +470,15 @@
     <ClCompile Include="GeneratedFiles\qrc_qml.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\dnai\views\appview.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_appview.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_appview.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\api.h">
@@ -760,6 +769,9 @@
     </CustomBuild>
     <CustomBuild Include="include\dnai\models\user.h">
       <Filter>Header Files\dnai\models</Filter>
+    </CustomBuild>
+    <CustomBuild Include="include\dnai\views\appview.h">
+      <Filter>Generated Files</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>

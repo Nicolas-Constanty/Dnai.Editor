@@ -112,9 +112,6 @@ int main(int argc, char *argv[])
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
     dnai::DulyApp app(argc, argv);
-
-    QQmlApplicationEngine engine;
-    app.registerEngine(&engine);
     app.initApp();
 
     return app.exec();

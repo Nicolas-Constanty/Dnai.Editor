@@ -4,7 +4,6 @@ namespace dnai {
 namespace models {
 BasicNodeModel::BasicNodeModel(QObject *parent) : QObject(parent)
 {
-    m_engine = static_cast<dnai::DulyApp *>(dnai::DulyApp::instance())->engine();
     loadCurrentModel();
 }
 
@@ -22,15 +21,9 @@ void BasicNodeModel::instantiateComponents()
 
 void BasicNodeModel::instantiateComponent(const QString &path)
 {
-    if (m_engine)
-    {
-        const auto component = new QQmlComponent(m_engine, path);
-        qmlresources::QInstructionID::Instruction_ID idx = static_cast<qmlresources::QInstructionID::Instruction_ID>(component->property("instruction_id").toInt());
-        m_components[idx] << component;
-    }
-    else {
-        qWarning() << "Engine must be initialize before calling instantiateComponent(const QString &path)";
-    }
+    const auto component = new QQmlComponent(DulyApp::getEngineInstance(), path);
+    qmlresources::QInstructionID::Instruction_ID idx = static_cast<qmlresources::QInstructionID::Instruction_ID>(component->property("instruction_id").toInt());
+    m_components[idx] << component;
 }
 
 void BasicNodeModel::setQmlPaths(const QString &path)

@@ -45,3 +45,11 @@ Duly/app/\.vs/
 Duly/lib/DataComEvent/release/
 
 Duly/lib/DataComEvent/debug/
+
+Duly/app/x64/Debug/
+
+Duly/lib/DataComEvent/x64/Debug/
+
+Duly/lib/event_client/x64/Debug/
+
+Duly/app/GeneratedFiles/

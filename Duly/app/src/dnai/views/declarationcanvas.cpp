@@ -160,10 +160,8 @@ namespace dnai
 		}
 
 		void DeclarationCanvas::registerComponent(const QString &path)
-		{
-			const auto p = QUrl(path);
-			const auto app = static_cast<DulyApp *>(DulyApp::instance());
-			const auto component = new QQmlComponent(app->engine(), p);
+        {
+            const auto component = new QQmlComponent(DulyApp::getEngineInstance(), path);
 			components.append(component);
 		}
 	}

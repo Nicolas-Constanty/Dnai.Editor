@@ -27,8 +27,6 @@ private:
 private:
     QMap<QString, QStringList> m_qmlpaths;
     QMap<qmlresources::QInstructionID::Instruction_ID, QList<QQmlComponent *>> m_components;
-    QQmlApplicationEngine *m_engine;
-
 };
 }
 }

@@ -38,7 +38,8 @@ SOURCES += \
     src/dnai/dulyapp.cpp \
     src/dnai/manager.cpp \
     src/dnai/project.cpp \
-    src/dnai/dulysettings.cpp
+    src/dnai/dulysettings.cpp \
+    src/dnai/views/appview.cpp
 
 #COMMANDS
 SOURCES += \
@@ -145,6 +146,7 @@ HEADERS += \
     include/qmlresources.h \
     include/controllers.h \
     include/commands.h \
+    include/dnai/views/appview.h
 
 #DNAI
 HEADERS += \

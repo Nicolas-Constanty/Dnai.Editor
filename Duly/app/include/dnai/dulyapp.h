@@ -3,15 +3,10 @@
 
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
-#include <QSettings>
-#include <QJsonDocument>
-#include <QJsonObject>
 #include <QDir>
 #include "dulysettings.h"
-#include "project.h"
 #include "views/dulycanvas.h"
-#include "models/treemodel.h"
-
+#include "processmanager.h"
 
 namespace dnai {
 	class DulyApp : public QGuiApplication
@@ -19,28 +14,32 @@ namespace dnai {
         Q_OBJECT
 	public:
         DulyApp(int & argc, char **argv);
-		void registerEngine(QQmlApplicationEngine *engine);
-        void loadFonts();
-		QQmlApplicationEngine* engine() const { return m_engine; }
-		static views::DulyCanvas* currentCanvasInstance();
-		bool eventFilter(QObject *object, QEvent *event) override;
+		bool eventFilter(QObject * o, QEvent *event) override;
 		void registerSettings(DulySettings* dulySettings);
-		DulySettings *settings() const { return m_settings; }
-		views::DulyCanvas *currentCanvas() const { return m_currentCanvas; }
+		QQmlApplicationEngine const* engine() const;
+		DulySettings *settings() const;
+		views::DulyCanvas *currentCanvas() const;
 		void registerCanvas(views::DulyCanvas *c);
 		void setCurrentCanvas(views::DulyCanvas *c);
-
+		void loadMainWindow();
+		static void loadFonts();
+		static views::DulyCanvas* currentCanvasInstance();
+		static DulyApp *currentInstance();
+		static QObject *createQmlObject(const QString &path);
+		static QQmlEngine *getEngineInstance();
     public slots:
         void initApp();
-        void loadMainWindow();
 
     private:
+		QQmlApplicationEngine m_engine;
 		DulySettings *m_settings;
 		QList<views::DulyCanvas *> m_canvases;
 		views::DulyCanvas *m_currentCanvas;
-        QQmlApplicationEngine* m_engine;
-        void initProcessManager();
-        void setupSettings();
+		ProcessManager* m_processManager{};
+		void initProcessManager();
+		QObject *createQmlComponent(const QString &path);
+		static void setupSettings();
+		static DulyApp *m_instance;
     };
 }
 

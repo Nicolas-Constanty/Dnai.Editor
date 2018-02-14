@@ -13,5 +13,6 @@
 #include "dnai/views/class.h"
 #include "dnai/views/context.h"
 #include "dnai/views/declarationcanvas.h"
+#include "dnai/views/appview.h"
 
 #endif // VIEWS_H
