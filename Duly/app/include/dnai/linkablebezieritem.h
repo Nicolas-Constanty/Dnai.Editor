@@ -4,11 +4,11 @@
 #include "ilinkable.h"
 #include "views/customshape.h"
 
-namespace duly_gui
+namespace dnai
 {
 	class GenericNode;
 
-	class LinkableBezierItem : public CustomShape
+	class LinkableBezierItem : public views::CustomShape
 	{
 	public:
 		virtual ~LinkableBezierItem() = default;

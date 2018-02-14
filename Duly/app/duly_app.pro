@@ -107,7 +107,8 @@ SOURCES += src/dnai/models/class.cpp \
     src/dnai/models/list/listmodelcontext.cpp \
 
 #HTTP
-SOURCES += src/dnai/http/url.cpp \
+SOURCES += \
+    src/dnai/http/url.cpp \
     src/dnai/http/service.cpp \
     src/dnai/http/observable.cpp \
     src/dnai/http/response.cpp
@@ -142,6 +143,8 @@ HEADERS += \
     include/api.h \
     include/models.h \
     include/qmlresources.h \
+    include/controllers.h \
+    include/commands.h \
 
 #DNAI
 HEADERS += \
