@@ -7,8 +7,8 @@
 --window-pos 200 120 \
 --window-size 800 400 \
 --icon-size 100 \
---icon dnai.app 0 0 \
---hide-extension dnai.app \
+--icon DNAI.app 0 0 \
+--hide-extension DNAI.app \
 --app-drop-link 200 100 \
 DNAI-Installer.dmg \
 Application/
