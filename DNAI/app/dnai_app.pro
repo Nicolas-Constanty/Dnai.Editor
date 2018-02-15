@@ -6,7 +6,7 @@ CONFIG += resources_big
 CONFIG += no_batch
 
 INCLUDEPATH += include/
-
+TARGET = dnai
 
 CONFIG(release, debug|release) {
 win32:RC_FILE = dnai.rc
