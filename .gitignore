@@ -8,25 +8,25 @@
 build-*
 .qmake.stash
 
-Duly/app/debug/
+DNAI/app/debug/
 
-Duly/\.vs/Duly/v15/
+DNAI/\.vs/Duly/v15/
 
-Duly/lib/event_client/debug/
+DNAI/lib/event_client/debug/
 
-Duly/lib/event_client/release/
+DNAI/lib/event_client/release/
 
-Duly/app/release/
+DNAI/app/release/
 
-Duly/\.vs/config/
+DNAI/\.vs/config/
 
 *.pdb
 
 *.lib
 
-Duly/lib/DataComEvent/Library/protobuf/cmake/build/solution/\.vs/protobuf/v15/
+DNAI/lib/DataComEvent/Library/protobuf/cmake/build/solution/\.vs/protobuf/v15/
 
-Duly/lib/DataComEvent/Library/protobuf/
+DNAI/lib/DataComEvent/Library/protobuf/
 
 Makefile
 
@@ -34,10 +34,30 @@ Makefile\.Debug
 
 Makefile\.Release
 
-Duly/app/\.vs/
+DNAI/app/\.vs/
 
 *.duly_app
 
 *.Debug
 
 *.Release
+
+*.vs
+
+*debug
+
+*release
+
+DNAI/lib/DataComEvent/release/
+
+DNAI/lib/DataComEvent/debug/
+
+DNAI/app/x64/Debug/
+
+DNAI/lib/DataComEvent/x64/Debug/
+
+DNAI/lib/event_client/x64/Debug/
+
+DNAI/app/GeneratedFiles/
+
+*.bsc
