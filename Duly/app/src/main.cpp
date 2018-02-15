@@ -119,6 +119,8 @@ int main(int argc, char *argv[])
 
     duly_gui::DulyApp app(argc, argv);
 
+    duly_gui::http::Service::Init(duly_gui::api::http_config);
+
     QQmlApplicationEngine engine;
     app.registerEngine(&engine);
     app.initApp();

@@ -6,7 +6,7 @@ const QString api::client_id = "sINQmt18nib3vVlI4B71NKaQjXGWMYxrNJWuuS6e";
 const QString api::client_secret = "pMi9ScKMPv3IgHgCQmKHKX7yxJY5KMd2KXfWKRMa2jk1qyiSz7AJqllnvpFIfstnIDkausSlqgoWJabYIkXnPGiXgaKE9ikPeILVvoWlifaFSngX2QIA3sJFWH0EO9oH";
 api::User api::user = {};
 const Config api::http_config = {
-    "http://localhost:8000",
+    "http://163.5.84.173",
       {},
       {
           [](Url *url) {
