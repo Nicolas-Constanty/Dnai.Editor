@@ -62,7 +62,7 @@ public:
     }
 
     template <size_t fieldIndex>
-    typename std::tuple_element<fieldIndex, DataType>::type &Field()
+    typename std::tuple_element<fieldIndex, DataType>::type const &Field() const
     {
         return std::get<fieldIndex>(data);
     }

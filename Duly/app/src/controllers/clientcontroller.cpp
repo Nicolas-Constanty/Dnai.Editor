@@ -1,8 +1,9 @@
-#include "datacomeventfactory.h"
 #include "include/clientmanager.h"
 #include "include/clientcommunication.h"
 #include "include/controllers/clientcontroller.h"
 #include "declarecorepackage.h"
+#include "commands.h"
+#include "replies.h"
 
 qint16 ClientController::serverPort = 7777;
 
@@ -17,7 +18,20 @@ ClientController::ClientController()
                                                     m_port,
                                                     m_name);
 
-    m_clientCom->registerEvent("ENTITY_DECLARED",
+    registerReplyEvent<Reply::EntityDeclared>("ENTITY_DECLARED", [](Reply::EntityDeclared const &reply) {
+
+        qDebug() << "My amazing registered";
+
+        Command::Declare::Data const &declare = reply.Field<Reply::COMMAND>();
+
+        qDebug() << declare.Field<Command::Declare::NAME>().Data();
+        qDebug() << declare.Field<Command::Declare::CONTAINER_ID>().Data();
+        qDebug() << (qint32)declare.Field<Command::Declare::ENTITY_TYPE>().Data();
+        qDebug() << (qint32)declare.Field<Command::Declare::VISIBILITY>().Data();
+        qDebug() << (qint32)reply.Field<Reply::RETURN>().Data();
+    });
+
+    /*m_clientCom->registerEvent("ENTITY_DECLARED",
                                4,
                                std::bind(&ClientController::onReceiveEntityDeclared,
                                          this, std::placeholders::_1, std::placeholders::_2));
@@ -36,7 +50,7 @@ ClientController &ClientController::shared() {
 void ClientController::onReceiveEntityDeclared(void *data, unsigned int size) {
     qDebug() << "ENTITY_DECLARED with size=" << size;
     Reply::EntityDeclared *entityDeclared = m_dataComFactory->getEntityDeclared(data, size); //(EntityDeclareCorePackage *)m_dataComFactory->serializeEntityDeclare(data, size);
-    Command::Declare::Data &declare = entityDeclared->Field<Reply::COMMAND>();
+    Command::Declare::Data const &declare = entityDeclared->Field<Reply::COMMAND>();
 
     qDebug() << declare.Field<Command::Declare::NAME>().Data();
     qDebug() << declare.Field<Command::Declare::CONTAINER_ID>().Data();
@@ -53,6 +67,11 @@ void ClientController::onReceiveDeclare(void *data, unsigned int size) {
     qDebug() << (qint32)declare->entityType;
     qDebug() << (qint32)declare->visibility;
 
+}
+
+void ClientController::registerEvent(QString const &replyName, std::function<void(void *, unsigned int)> const &callback) const
+{
+    m_clientCom->registerEvent(replyName, 0, callback);
 }
 
 // EVENT TO SEND

@@ -68,7 +68,7 @@ public:
 
     size_t SerializeTo(Buffer &buff) const override
     {
-        uint32_t size = buff.Write(static_cast<uint32_t >(data.size()));
+        size_t size = buff.Write(static_cast<uint32_t >(data.size()));
 
         if (size == 0)
             return size;
@@ -88,7 +88,7 @@ public:
     size_t DeserializeFrom(Buffer &buff) override
     {
         uint32_t cnt;
-        uint32_t size = buff.Read(cnt);
+        size_t size = buff.Read(cnt);
 
         if (size == 0)
             return size;

@@ -60,6 +60,7 @@ private:
         return dataCom;
     }
 
+public:
     template <typename ReplyPckg>
     ReplyPckg *DeserializeReplyFrom(void *buff, size_t size)
     {

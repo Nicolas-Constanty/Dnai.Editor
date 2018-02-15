@@ -1,11 +1,14 @@
 #ifndef CLIENTCONTROLLER_H_
 # define CLIENTCONTROLLER_H_
 
+#include <functional>
+
 #include <QHostAddress>
 #include <QString>
 
 class ClientCommunication;
-class DataComEventFactory;
+
+#include "datacomeventfactory.h"
 
 #include "packagecore.h"
 
@@ -22,6 +25,22 @@ public:
 public:
     void onReceiveEntityDeclared(void *, unsigned int);
     void onReceiveDeclare(void *, unsigned int);
+
+private:
+    void registerEvent(QString const &replyName, std::function<void(void *, unsigned int)> const &callback) const;
+
+public:
+    template <typename Reply, typename Callable>
+    void registerReplyEvent(QString const &replyName, Callable const &callback) const
+    {
+        registerEvent(replyName, [this, &callback](void *data, unsigned int size) {
+            Reply *reply = m_dataComFactory->DeserializeReplyFrom<Reply>(data, size);
+
+            callback(std::cref<Reply>(*reply));
+
+            delete(reply);
+        });
+    }
 
 public:
 #define DECLARE_EVENT_NAME "DECLARE"
