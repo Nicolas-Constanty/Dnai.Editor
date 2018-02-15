@@ -118,6 +118,8 @@ int main(int argc, char *argv[])
     dnai::App app(argc, argv);
     app.initApp();
 
+    dnai::http::Service::Init(dnai::api::http_config);
+
     return app.exec();
 }
 
