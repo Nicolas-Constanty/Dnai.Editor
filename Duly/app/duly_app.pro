@@ -41,7 +41,8 @@ SOURCES += \
     src/dnai/project.cpp \
     src/dnai/dulysettings.cpp \
     src/dnai/views/appview.cpp \
-    src/dnai/views/instructionview.cpp
+    src/dnai/views/instructionview.cpp \
+    src/dnai/views/layout.cpp
 
 #COMMANDS
 SOURCES += \
@@ -147,7 +148,8 @@ HEADERS += \
     include/controllers.h \
     include/commands.h \
     include/http.h \
-    include/dnai/views/instructionview.h
+    include/dnai/views/instructionview.h \
+    include/dnai/views/layout.h
 
 #DNAI
 HEADERS += \

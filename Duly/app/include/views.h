@@ -15,5 +15,6 @@
 #include "dnai/views/appview.h"
 #include "dnai/views/declarationview.h"
 #include "dnai/views/instructionview.h"
+#include "dnai/views/layout.h"
 
 #endif // VIEWS_H
