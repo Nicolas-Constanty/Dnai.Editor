@@ -4,6 +4,7 @@ import QtQml.Models 2.3
 import "../Nodes"
 import "../Nodes/Operator/BinaryOperator"
 import "../Style"
+import "../JavaScript/CreateComponent.js" as Factory
 
 Item {
 
@@ -31,7 +32,7 @@ Item {
                         onReleased: {
                             var isDroppable = tile.Drag.target !== null
                             var obj = Factory.getObject()
-                            if (obj != undefined && isDroppable)
+                            if (obj !== undefined && isDroppable)
                             {
                                 obj.x = mouse.x
                                         + obj.x

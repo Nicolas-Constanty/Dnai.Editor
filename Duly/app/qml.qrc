@@ -140,5 +140,6 @@
         <file>resources/Panels/BasePanel.qml</file>
         <file>resources/Components/Splitter.qml</file>
         <file>resources/Components/DeclarationView.qml</file>
+        <file>resources/Components/TabButtonRounded.qml</file>
     </qresource>
 </RCC>

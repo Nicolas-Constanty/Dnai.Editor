@@ -4,9 +4,14 @@ import QtQuick.Layouts 1.3
 import QtQuick.Dialogs 1.2
 import QtGraphicalEffects 1.0
 
+import DNAI 1.0
+import DNAI.Views 1.0
+
+import "../Style"
 import "../Components"
 import "../Panels"
 import "../Models"
+import "../JavaScript/CreateComponent.js" as Factory
 
 BaseLayout {
     id: layout
@@ -14,7 +19,44 @@ BaseLayout {
     debugConsole: consoleRef
     leftPanel: panelLeft
     rightPanel: panelRight
-    topPanel: panelTop
+//    topPanel: panelTop
+//    PanelTop {
+//        id: panelTop
+//        anchors.left: parent.left
+//        anchors.right: parent.right
+//        height: 24
+//        border.width: 0
+//    }
+    function appendTab(type, name)
+    {
+        if (type === 0)
+        {
+            Factory.createObjects("resources/Panels/PanelTop.qml", {
+                                      "height": 24
+                                  }, _stack)
+            var mobj = Factory.getObject()
+            console.log(mobj)
+            mobj.anchors.left = mobj.parent.left
+            mobj.anchors.right = mobj.parent.right
+            mobj.border.width = 0
+            Factory.createObjects("resources/Components/TabButtonRounded.qml", {
+                                      "text": name,
+                                      "implicitHeight": 20,
+                                      "stack": _stack,
+                                      "refContent": mobj,
+                                      "refTabBar": bar
+                                  }, bar)
+            var tabButton = Factory.getObject();
+            console.log(tabButton)
+            bar.addItem(tabButton)
+            _stack.push(mobj)
+        }
+    }
+
+    Component.onCompleted: {
+        appendTab(0, "hello")
+        appendTab(0, "yoooooooooooo")
+    }
 
     ToolBarHeader {
         id: toolBar
@@ -23,12 +65,57 @@ BaseLayout {
         anchors.top: layout.top
     }
 
-    DeclarationView {
-        anchors.top: panelTop.bottom
+    TabBar {
+        id: bar
+        anchors.top: toolBar.bottom
+        anchors.left: panelLeft.right
+        anchors.leftMargin: -1
+        anchors.right: panelRight.left
+        anchors.rightMargin: -1
+        implicitHeight: 20
+
+//        TabButtonRounded {
+//            text: qsTr("Home")
+//            implicitHeight: 20
+//        }
+
+        background: Rectangle {
+             color: DulySettings.style.background.darkColor
+             Rectangle {
+                 anchors.bottom: parent.bottom
+                 anchors.topMargin: 20
+                 anchors.left: parent.left
+                 anchors.right: parent.right
+                 height: 1
+                 color: DulySettings.style.border.color
+             }
+        }
+    }
+
+    StackView {
+        id: _stack
+        anchors.top: bar.bottom
         anchors.bottom: consoleRef.top
         anchors.left: panelLeft.right
         anchors.right: panelRight.left
     }
+
+    Rectangle {
+        anchors.top: bar.bottom
+        anchors.topMargin: 24
+        anchors.left: panelLeft.right
+        anchors.leftMargin: -1
+        anchors.right: panelRight.left
+        anchors.rightMargin: -1
+        height: 1
+        color: DulySettings.style.border.color
+    }
+//    DeclarationView {
+//        anchors.top: panelTop.bottom
+//        anchors.bottom: consoleRef.top
+//        anchors.left: panelLeft.right
+//        anchors.right: panelRight.left
+//    }
 
 //    NodeCanvas {
 //        anchors.top: panelTop.bottom
@@ -89,25 +176,16 @@ BaseLayout {
            color: "#80000000"
            source: panelRight
     }
-    PanelTop {
-        id: panelTop
-        anchors.top: toolBar.bottom
-        anchors.left: panelLeft.right
-        anchors.leftMargin: -1
-        anchors.right: panelRight.left
-        anchors.rightMargin: -1
-        height: 24
-    }
 
-    DropShadow {
-           anchors.fill: source
-           horizontalOffset: -3
-           verticalOffset: 3
-           radius: 8.0
-           samples: 17
-           color: "#80000000"
-           source: toolBar
-    }
+//    DropShadow {
+//           anchors.fill: source
+//           horizontalOffset: -3
+//           verticalOffset: 3
+//           radius: 8.0
+//           samples: 17
+//           color: "#80000000"
+//           source: toolBar
+//    }
     ConsoleComponent {
         id: consoleRef
         anchors.left: toolBar.left

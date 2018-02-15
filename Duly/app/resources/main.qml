@@ -19,7 +19,7 @@ Item {
     id: rootItem
     property alias appWindow : loader.item
     property double factor : 1.5
-    property alias layout: appWindow.baseLayout
+    property BaseLayout layout: appWindow.baseLayout
 
     function closeSplashScreen()
     {

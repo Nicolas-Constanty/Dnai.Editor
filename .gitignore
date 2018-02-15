@@ -53,3 +53,5 @@ Duly/lib/DataComEvent/x64/Debug/
 Duly/lib/event_client/x64/Debug/
 
 Duly/app/GeneratedFiles/
+
+*.bsc
