@@ -1,5 +1,5 @@
 #include "headercommunication.h"
-#include "dulycommunicationserver.h"
+#include "communicationserver.h"
 #include "authentificationpackage.h"
 #include "eventregisterpackage.h"
 #include "eventsendpackage.h"
@@ -7,8 +7,8 @@
 #include "eventmanager.h"
 #endif
 
-DulyCommunicationServer::DulyCommunicationServer(QTcpSocket *socket,
-                                                 std::list<DulyCommunicationServer *> *clients)
+CommunicationServer::CommunicationServer(QTcpSocket *socket,
+                                                 std::list<CommunicationServer *> *clients)
     : QObject(nullptr),
       m_socket(socket),
       m_packageManager(),
@@ -17,31 +17,31 @@ DulyCommunicationServer::DulyCommunicationServer(QTcpSocket *socket,
       m_clients(clients)
 
 {
-    m_packageManager.registerEvent(ADDFunc(this, &DulyCommunicationServer::onReceiveClientAuthentificationPackage, CLIENT_AUTHENTIFICATION_ID));
-    m_packageManager.registerEvent(ADDFunc(this, &DulyCommunicationServer::onReceiveRegisterEvent, REGISTER_EVENT_ID));
-    m_packageManager.registerEvent(ADDFunc(this, &DulyCommunicationServer::onReceiveSendEvent, SEND_EVENT_ID));
+    m_packageManager.registerEvent(ADDFunc(this, &CommunicationServer::onReceiveClientAuthentificationPackage, CLIENT_AUTHENTIFICATION_ID));
+    m_packageManager.registerEvent(ADDFunc(this, &CommunicationServer::onReceiveRegisterEvent, REGISTER_EVENT_ID));
+    m_packageManager.registerEvent(ADDFunc(this, &CommunicationServer::onReceiveSendEvent, SEND_EVENT_ID));
 
 }
 
-DulyCommunicationServer::DulyCommunicationServer(DulyCommunicationServer const &other) : QObject(nullptr) {
+CommunicationServer::CommunicationServer(CommunicationServer const &other) : QObject(nullptr) {
     *this = other;
 }
 
-DulyCommunicationServer &DulyCommunicationServer::operator=(DulyCommunicationServer const &other) {
+CommunicationServer &CommunicationServer::operator=(CommunicationServer const &other) {
     this->m_socket = other.m_socket;
 
     return (*this);
 }
 
-QTcpSocket *DulyCommunicationServer::socket() {
+QTcpSocket *CommunicationServer::socket() {
     return (m_socket);
 }
 
-void DulyCommunicationServer::setSocket(QTcpSocket *socket) {
+void CommunicationServer::setSocket(QTcpSocket *socket) {
     m_socket = socket;
 }
 
-void DulyCommunicationServer::start() {
+void CommunicationServer::start() {
     qDebug() << "[INFO] connection start !";
     connect(m_socket, SIGNAL(readyRead()), this, SLOT(onRead()));
     connect(this, SIGNAL(sendData(void*,unsigned int)), this, SLOT(send(void*,unsigned int)));
@@ -49,32 +49,32 @@ void DulyCommunicationServer::start() {
   //  useless();
 }
 
-void DulyCommunicationServer::onDisconnected() {
+void CommunicationServer::onDisconnected() {
     emit clientDisconnected(this);
 }
 
-void DulyCommunicationServer::onRead() {
+void CommunicationServer::onRead() {
     m_packageManager << m_socket->readAll();
     m_packageManager.compute();
 }
 
-void DulyCommunicationServer::send(void *data, unsigned int size) {
+void CommunicationServer::send(void *data, unsigned int size) {
     m_socket->write((char *)data, size);
 }
 
-void DulyCommunicationServer::sendAllocatedData(void *data, unsigned int size) {
+void CommunicationServer::sendAllocatedData(void *data, unsigned int size) {
     send(data, size);
     free(data);
 }
 
-void DulyCommunicationServer::sendEventRegisterToAllClient(SendEventRegisterPackageAnswerServer &eventRegisterAnswerServer) {
+void CommunicationServer::sendEventRegisterToAllClient(SendEventRegisterPackageAnswerServer &eventRegisterAnswerServer) {
 
     if (!m_clients) {
         qDebug() << "m_clients is nil";
         return;
     }
 
-    std::list<DulyCommunicationServer *>::iterator it = m_clients->begin();
+    std::list<CommunicationServer *>::iterator it = m_clients->begin();
 
     while (it != m_clients->end()) {
         (*it)->send(&eventRegisterAnswerServer, sizeof(eventRegisterAnswerServer));
@@ -84,7 +84,7 @@ void DulyCommunicationServer::sendEventRegisterToAllClient(SendEventRegisterPack
 
 // EVENTS
 
-void DulyCommunicationServer::onReceiveClientAuthentificationPackage(void *data, unsigned int size) {
+void CommunicationServer::onReceiveClientAuthentificationPackage(void *data, unsigned int size) {
 
 #if SERVER_MODE
     if (size != sizeof(AuthentificationPackage) || m_authenticated == true) {
@@ -107,7 +107,7 @@ void DulyCommunicationServer::onReceiveClientAuthentificationPackage(void *data,
 
 
 
-void DulyCommunicationServer::onReceiveRegisterEvent(void *data, unsigned int size) {
+void CommunicationServer::onReceiveRegisterEvent(void *data, unsigned int size) {
 #if SERVER_MODE
      if (size != sizeof(EventRegisterPackage)) {
          return;
@@ -125,7 +125,7 @@ void DulyCommunicationServer::onReceiveRegisterEvent(void *data, unsigned int si
      (void)size;
 }
 
-void DulyCommunicationServer::onReceiveSendEvent(void *data, unsigned int size) {
+void CommunicationServer::onReceiveSendEvent(void *data, unsigned int size) {
 #if SERVER_MODE
 
      if (size < sizeof(EventSendFromClientPackage)) {

@@ -1,5 +1,5 @@
-#ifndef DULYCOMMUNICATIONSERVER_H
-#define DULYCOMMUNICATIONSERVER_H
+#ifndef COMMUNICATIONSERVER_H
+#define COMMUNICATIONSERVER_H
 
 #include <QObject>
 #include <QTcpSocket>
@@ -16,16 +16,16 @@
 
 Q_DECLARE_METATYPE(unsigned int)
 
-class DulyCommunicationServer : public QObject
+class CommunicationServer : public QObject
 {
     Q_OBJECT
 
 public:
-    DulyCommunicationServer(QObject *parent = nullptr) : QObject(parent) {}
-    DulyCommunicationServer(QTcpSocket *socket = 0, std::list<DulyCommunicationServer *> *clients = 0);
-    DulyCommunicationServer(DulyCommunicationServer const &);
+    CommunicationServer(QObject *parent = nullptr) : QObject(parent) {}
+    CommunicationServer(QTcpSocket *socket = 0, std::list<CommunicationServer *> *clients = 0);
+    CommunicationServer(CommunicationServer const &);
 
-    DulyCommunicationServer &operator=(DulyCommunicationServer const &);
+    CommunicationServer &operator=(CommunicationServer const &);
 
 //#ifndef SERVER_MODE
 signals:
@@ -36,7 +36,7 @@ signals:
 //#endif
 
 signals:
-    void clientDisconnected(DulyCommunicationServer *);
+    void clientDisconnected(CommunicationServer *);
 
 public:
     void setSocket(QTcpSocket *socket);
@@ -62,7 +62,7 @@ private:
     PackageManager m_packageManager;
     bool        m_authenticated;
     QString     m_name;
-    std::list<DulyCommunicationServer *> *m_clients;
+    std::list<CommunicationServer *> *m_clients;
 };
 
-#endif // DULYCOMMUNICATIONSERVER_H
+#endif // COMMUNICATIONSERVER_H

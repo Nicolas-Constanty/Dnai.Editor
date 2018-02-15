@@ -5,7 +5,7 @@
 #include <QThread>
 #include <QHostAddress>
 #include <QList>
-#include "dulycommunicationserver.h"
+#include "communicationserver.h"
 #include "eventregisterpackage.h"
 #include "eventsendpackage.h"
 #include <QSemaphore>
@@ -55,7 +55,7 @@ private:
     } EventCallBack;
 
 private:
-    DulyCommunicationServer *m_com;
+    CommunicationServer *m_com;
     QHostAddress m_addr;
     quint16 m_port;
     QString m_name;

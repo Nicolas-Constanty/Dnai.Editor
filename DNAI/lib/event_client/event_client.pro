@@ -15,12 +15,12 @@ TEMPLATE = lib
 INCLUDEPATH += include/
 
 SOURCES += src/packagemanager.cpp \
-    src/dulycommunicationserver.cpp \
     src/createpackagefunction.cpp \
     src/clientcommunication.cpp \
     src/eventconsumer.cpp \
     src/clientmanager.cpp \
-    src/descriptionparser.cpp
+    src/descriptionparser.cpp \
+    src/communicationserver.cpp
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which as been marked deprecated (the exact warnings
@@ -34,7 +34,6 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 HEADERS += \
-    include/dulycommunicationserver.h \
     include/packagemanager.h \
     include/headercommunication.h \
     include/eventregisterpackage.h \
@@ -45,4 +44,5 @@ HEADERS += \
     include/eventconsumer.h \
     include/clientmanager.h \
     include/descriptionparser.h \
-    include/pack.h
+    include/pack.h \
+    include/communicationserver.h

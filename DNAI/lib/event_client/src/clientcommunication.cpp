@@ -69,7 +69,7 @@ void ClientCommunication::run() {
     QTcpSocket *socket = new QTcpSocket();
     socket->connectToHost(m_addr, m_port);
 
-    m_com = new DulyCommunicationServer(socket);
+    m_com = new CommunicationServer(socket);
 
     socket->moveToThread(this);
     m_com->moveToThread(this);
