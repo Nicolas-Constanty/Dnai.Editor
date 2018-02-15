@@ -16,7 +16,7 @@ Item {
         id: bar
         contentWidth: parent.width
         background: Rectangle {
-            color: DulySettings.style.background.color
+            color: AppSettings.style.background.color
         }
         TabButton {
             text: qsTr("Theme")

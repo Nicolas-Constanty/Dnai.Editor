@@ -17,17 +17,17 @@ DropArea {
     DeclarationCanvas {
         id: canvas
         anchors.fill: parent
-        backgroundColor: DulySettings.style.canvas.background
-        gridStep: DulySettings.style.canvas.grid.step
-        gridColor: DulySettings.style.canvas.grid.color
-        accentGridStep: DulySettings.style.canvas.grid.accentStep
-        accentGridColor: DulySettings.style.canvas.grid.accentColor
+        backgroundColor: AppSettings.style.canvas.background
+        gridStep: AppSettings.style.canvas.grid.step
+        gridColor: AppSettings.style.canvas.grid.color
+        accentGridStep: AppSettings.style.canvas.grid.accentStep
+        accentGridColor: AppSettings.style.canvas.grid.accentColor
         states: [
             State {
                 when: dragTarget.containsDrag
                 PropertyChanges {
                     target: canvas
-                    backgroundColor: DulySettings.style.canvas.grid.selectColor
+                    backgroundColor: AppSettings.style.canvas.grid.selectColor
                 }
             }
         ]

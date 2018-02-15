@@ -4,7 +4,7 @@
 #include <QQuickItem>
 
 #include "command.h"
-#include "dnai/views/dulycanvas.h"
+#include "dnai/views/canvasnode.h"
 
 namespace dnai
 {
@@ -13,7 +13,7 @@ namespace dnai
         class ZoomCanvasCommand : public Command
         {
         public:
-            ZoomCanvasCommand(views::DulyCanvas * c, const double& scale, const QPointF &offset);
+            ZoomCanvasCommand(views::CanvasNode * c, const double& scale, const QPointF &offset);
 
             /**
             * \brief Execute the command
@@ -29,9 +29,9 @@ namespace dnai
             QString infos() const override;
 
         private:
-            views::DulyCanvas * m_canvas;
+            views::CanvasNode * m_canvas;
             double m_scale;
-			QPointF m_offset;
+            QPointF m_offset;
         };
     }
 }

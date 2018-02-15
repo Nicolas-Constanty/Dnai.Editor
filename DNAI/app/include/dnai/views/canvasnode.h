@@ -1,5 +1,5 @@
-#ifndef DULYCANVAS_H
-#define DULYCANVAS_H
+#ifndef CANVASNODE_H
+#define CANVASNODE_H
 
 #include <list>
 
@@ -10,7 +10,7 @@ namespace dnai
 {
 	namespace views
 	{
-		class DulyCanvas : public QQuickItem
+		class CanvasNode : public QQuickItem
 		{
 			Q_OBJECT
 
@@ -24,8 +24,8 @@ namespace dnai
 
 			Q_PROPERTY(QQuickItem *content READ content WRITE setContent NOTIFY contentChanged)
 
-			explicit DulyCanvas(QQuickItem *parent = nullptr);
-			~DulyCanvas();
+			explicit CanvasNode(QQuickItem *parent = nullptr);
+			~CanvasNode();
 
 			/**
 			* \brief return the focusManager
@@ -98,4 +98,4 @@ namespace dnai
 	}
 }
 
-#endif // DULYCANVAS_H
+#endif // CANVASNODE_H

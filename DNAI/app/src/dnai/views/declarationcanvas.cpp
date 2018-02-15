@@ -9,7 +9,7 @@ namespace dnai
 	namespace views
 	{
         QList<QQmlComponent *> DeclarationCanvas::components;
-		DeclarationCanvas::DeclarationCanvas(QQuickItem* parent) : DulyCanvas(parent)
+		DeclarationCanvas::DeclarationCanvas(QQuickItem* parent) : CanvasNode(parent)
 		{
 
         }

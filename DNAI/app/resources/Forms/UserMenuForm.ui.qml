@@ -26,9 +26,9 @@ Item {
         text: (fullname != "") ? fullname : qsTr("Sign In")
         anchors.verticalCenter: parent.verticalCenter
         anchors.left: parent.left
-        color: DulySettings.style.text.color
-        font.pixelSize: DulySettings.style.font.pixelSize
-        font.family: DulySettings.style.font.family
+        color: AppSettings.style.text.color
+        font.pixelSize: AppSettings.style.font.pixelSize
+        font.family: AppSettings.style.font.family
         verticalAlignment: Text.AlignVCenter
         horizontalAlignment: Text.AlignRight
     }
@@ -50,14 +50,14 @@ Item {
         y: parent.height
         DMenuItem {
             id: profileBtn
-            font.pixelSize: DulySettings.style.font.pixelSize
-            font.family: DulySettings.style.font.family
+            font.pixelSize: AppSettings.style.font.pixelSize
+            font.family: AppSettings.style.font.family
             text: qsTr("Profile")
         }
         DMenuItem {
             id: uploadBtn
-            font.pixelSize: DulySettings.style.font.pixelSize
-            font.family: DulySettings.style.font.family
+            font.pixelSize: AppSettings.style.font.pixelSize
+            font.family: AppSettings.style.font.family
             text: qsTr("Upload")
         }
 
@@ -69,8 +69,8 @@ Item {
 
         DMenuItem {
             id: logoutBtn
-            font.pixelSize: DulySettings.style.font.pixelSize
-            font.family: DulySettings.style.font.family
+            font.pixelSize: AppSettings.style.font.pixelSize
+            font.family: AppSettings.style.font.family
             text: qsTr("Logout")
         }
     }

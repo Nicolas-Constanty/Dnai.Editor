@@ -80,14 +80,14 @@ BaseLayout {
 //        }
 
         background: Rectangle {
-             color: DulySettings.style.background.darkColor
+             color: AppSettings.style.background.darkColor
              Rectangle {
                  anchors.bottom: parent.bottom
                  anchors.topMargin: 20
                  anchors.left: parent.left
                  anchors.right: parent.right
                  height: 1
-                 color: DulySettings.style.border.color
+                 color: AppSettings.style.border.color
              }
         }
     }
@@ -108,7 +108,7 @@ BaseLayout {
         anchors.right: panelRight.left
         anchors.rightMargin: -1
         height: 1
-        color: DulySettings.style.border.color
+        color: AppSettings.style.border.color
     }
 //    DeclarationView {
 //        anchors.top: panelTop.bottom

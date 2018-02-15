@@ -8,11 +8,11 @@ import DNAI 1.0
 
 ThemePanelForm {
     themes.items.onCurrentTextChanged: {
-        DulySettings.loadTheme(themes.items.currentText)
+        AppSettings.loadTheme(themes.items.currentText)
     }
 
     Component.onCompleted:
     {
-        themes.items.model = DulySettings.getThemes()
+        themes.items.model = AppSettings.getThemes()
     }
 }

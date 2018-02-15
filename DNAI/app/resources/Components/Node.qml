@@ -114,23 +114,23 @@ NodeForm {
                 borderWidth: 3
                 borderColor: {
                     if (t == IOType.Int)
-                        DulySettings.style.nodes.intNode.border.color
+                        AppSettings.style.nodes.intNode.border.color
                     else if (t == IOType.String)
-                        DulySettings.style.nodes.stringNode.border.color
+                        AppSettings.style.nodes.stringNode.border.color
                     else if (t == IOType.Bool)
-                        DulySettings.style.nodes.boolNode.border.color
+                        AppSettings.style.nodes.boolNode.border.color
                     else if (t == IOType.Generic)
-                        DulySettings.style.nodes.genericNode.border.color
+                        AppSettings.style.nodes.genericNode.border.color
                 }
                 fillColor: {
                     if (t == IOType.Int)
-                        DulySettings.style.nodes.intNode.color
+                        AppSettings.style.nodes.intNode.color
                     else if (t == IOType.String)
-                        DulySettings.style.nodes.stringNode.color
+                        AppSettings.style.nodes.stringNode.color
                     else if (t == IOType.Bool)
-                        DulySettings.style.nodes.boolNode.color
+                        AppSettings.style.nodes.boolNode.color
                     else if (t == IOType.Generic)
-                        DulySettings.style.nodes.genericNode.color
+                        AppSettings.style.nodes.genericNode.color
                 }
                 MLabel {
                     anchors.topMargin: - i.radius / 2
@@ -155,23 +155,23 @@ NodeForm {
                 borderWidth: 3
                 borderColor: {
                     if (t == IOType.Int)
-                        DulySettings.style.nodes.intNode.border.color
+                        AppSettings.style.nodes.intNode.border.color
                     else if (t == IOType.String)
-                        DulySettings.style.nodes.stringNode.border.color
+                        AppSettings.style.nodes.stringNode.border.color
                     else if (t == IOType.Bool)
-                        DulySettings.style.nodes.boolNode.border.color
+                        AppSettings.style.nodes.boolNode.border.color
                     else if (t == IOType.Generic)
-                        DulySettings.style.nodes.genericNode.border.color
+                        AppSettings.style.nodes.genericNode.border.color
                 }
                 fillColor: {
                     if (t == IOType.Int)
-                        DulySettings.style.nodes.intNode.color
+                        AppSettings.style.nodes.intNode.color
                     else if (t == IOType.String)
-                        DulySettings.style.nodes.stringNode.color
+                        AppSettings.style.nodes.stringNode.color
                     else if (t == IOType.Bool)
-                        DulySettings.style.nodes.boolNode.color
+                        AppSettings.style.nodes.boolNode.color
                     else if (t == IOType.Generic)
-                        DulySettings.style.nodes.genericNode.color
+                        AppSettings.style.nodes.genericNode.color
                 }
                 MLabel {
                     anchors.topMargin: - o.radius / 2

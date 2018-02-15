@@ -3,7 +3,7 @@
 
 #include "customshape.h"
 #include "beziercurve.h"
-#include "dulycanvas.h"
+#include "canvasnode.h"
 #include "dnai/ilinkable.h"
 
 namespace dnai
@@ -32,7 +32,7 @@ namespace dnai
 
 		protected:
 			BezierCurve *m_currentCurve;
-			DulyCanvas* m_canvas;
+			CanvasNode* m_canvas;
 
 		protected:
 			/**

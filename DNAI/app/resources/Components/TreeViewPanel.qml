@@ -42,10 +42,10 @@ ExpendablePanel {
             role: "name"
         }
         style: TreeViewStyle {
-            alternateBackgroundColor : DulySettings.style.background.darkColor
-            backgroundColor : DulySettings.style.background.darkColor
-            highlightedTextColor : DulySettings.style.text.lightColor
-            textColor : DulySettings.style.text.color
+            alternateBackgroundColor : AppSettings.style.background.darkColor
+            backgroundColor : AppSettings.style.background.darkColor
+            highlightedTextColor : AppSettings.style.text.lightColor
+            textColor : AppSettings.style.text.color
         }
         onClicked: {
             Manager.updateNamespace(index)

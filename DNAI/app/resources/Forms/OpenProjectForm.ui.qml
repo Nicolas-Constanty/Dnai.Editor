@@ -23,7 +23,7 @@ Page {
         id: fileDialog
         title: "Please choose a project"
         selectMultiple: false
-        nameFilters: ["Duly project (*.dulyproject)"]
+        nameFilters: ["DNAI project (*.dnaiproject)"]
     }
 
     ListModel {
@@ -68,11 +68,11 @@ Page {
                 text: qsTr("Open a project")
             }
             background: Rectangle {
-                color: DulySettings.style.background.color
+                color: AppSettings.style.background.color
             }
         }
         background: Rectangle {
-            color: DulySettings.style.background.color
+            color: AppSettings.style.background.color
         }
     }
 
@@ -107,7 +107,7 @@ Page {
             anchors.left: parent.left
             anchors.right: parent.right
             text: qsTr("Online Projects")
-            color: DulySettings.style.text.accentColor
+            color: AppSettings.style.text.accentColor
             horizontalAlignment: Qt.AlignHCenter
         }
         ScrollView {
@@ -117,9 +117,9 @@ Page {
             height: 200
             background: Rectangle {
                 anchors.fill: parent
-                border.color: DulySettings.style.border.color
-                border.width: DulySettings.style.border.width
-                color: DulySettings.style.background.darkColor
+                border.color: AppSettings.style.border.color
+                border.width: AppSettings.style.border.width
+                color: AppSettings.style.background.darkColor
             }
 
             ListView {
@@ -151,7 +151,7 @@ Page {
             anchors.left: parent.left
             anchors.right: parent.right
             text: qsTr("Informations")
-            color: DulySettings.style.text.accentColor
+            color: AppSettings.style.text.accentColor
             horizontalAlignment: Qt.AlignHCenter
         }
         ScrollView {
@@ -224,7 +224,7 @@ Page {
     footer: ToolBar {
         background: Rectangle {
             implicitHeight: 40
-            color: DulySettings.style.background.color
+            color: AppSettings.style.background.color
         }
         ToolButton {
             id: cancelButton
@@ -233,14 +233,14 @@ Page {
             rightPadding: 20
             contentItem: Text {
                 text: qsTr("Cancel")
-                color: DulySettings.style.text.color
-                font.family: DulySettings.style.font.family
-                font.pixelSize: DulySettings.style.font.pixelSize
+                color: AppSettings.style.text.color
+                font.family: AppSettings.style.font.family
+                font.pixelSize: AppSettings.style.font.pixelSize
                 horizontalAlignment: Text.AlignHCenter
                 verticalAlignment: Text.AlignVCenter
             }
             background: Rectangle {
-                color: DulySettings.style.background.color
+                color: AppSettings.style.background.color
             }
         }
         ToolButton {
@@ -250,14 +250,14 @@ Page {
             rightPadding: 20
             contentItem: Text {
                 text: qsTr("Open")
-                color: DulySettings.style.text.color
-                font.family: DulySettings.style.font.family
-                font.pixelSize: DulySettings.style.font.pixelSize
+                color: AppSettings.style.text.color
+                font.family: AppSettings.style.font.family
+                font.pixelSize: AppSettings.style.font.pixelSize
                 horizontalAlignment: Text.AlignHCenter
                 verticalAlignment: Text.AlignVCenter
             }
             background: Rectangle {
-                color: DulySettings.style.background.color
+                color: AppSettings.style.background.color
             }
         }
     }

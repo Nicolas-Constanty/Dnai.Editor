@@ -16,7 +16,7 @@ namespace dnai
 {
 	namespace controllers
 	{
-#define CLIENT_NAME "DULY_GUI"
+#define CLIENT_NAME "DNAI_GUI"
 
 		class ClientController {
 		private:

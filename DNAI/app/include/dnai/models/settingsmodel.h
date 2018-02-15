@@ -1,5 +1,5 @@
-#ifndef DULYSETTINGSMODEL_H
-#define DULYSETTINGSMODEL_H
+#ifndef SETTINGSMODEL_H
+#define SETTINGSMODEL_H
 
 #include <QQuickItem>
 
@@ -483,4 +483,4 @@ private:
 }
 
 
-#endif // DULYSETTINGSMODEL_H
+#endif // SETTINGSMODEL_H

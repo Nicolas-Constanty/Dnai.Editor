@@ -44,7 +44,7 @@ void ProcessManager::launch() {
     QSettings settingsBin(m_file, QSettings::IniFormat);
 
     QStringList argumentsServer;
-    QSystemSemaphore sem("SERVER_CORE_DULY", 0, QSystemSemaphore::Create);
+    QSystemSemaphore sem("SERVER_CORE_DNAI", 0, QSystemSemaphore::Create);
 
     m_port = findUnusedPort();
     if (m_port <= 0) {

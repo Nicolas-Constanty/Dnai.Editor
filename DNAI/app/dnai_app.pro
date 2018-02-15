@@ -9,7 +9,7 @@ INCLUDEPATH += include/
 
 
 CONFIG(release, debug|release) {
-win32:RC_FILE = duly.rc
+win32:RC_FILE = dnai.rc
 unix:ICON = DNAI_icon.icns
 }
 
@@ -39,7 +39,9 @@ SOURCES += \
     src/dnai/manager.cpp \
     src/dnai/project.cpp \
     src/dnai/app.cpp \
-    src/dnai/settings.cpp
+    src/dnai/settings.cpp \
+    src/dnai/models/settingsmodel.cpp \
+    src/dnai/views/canvasnode.cpp
 
 #COMMANDS
 SOURCES += \
@@ -60,7 +62,6 @@ SOURCES += \
 SOURCES += \
     src/dnai/views/beziercurve.cpp \
     src/dnai/views/customshape.cpp \
-    src/dnai/views/dulycanvas.cpp \
     src/dnai/views/flow.cpp \
     src/dnai/views/genericnode.cpp \
     src/dnai/views/input.cpp \
@@ -104,7 +105,6 @@ SOURCES += src/dnai/models/class.cpp \
     src/dnai/models/variable.cpp \
     src/dnai/models/position.cpp \
     src/dnai/models/user.cpp \
-    src/dnai/models/dulysettingsmodel.cpp \
     src/dnai/models/declarationmodel.cpp \
     src/dnai/models/basicnodemodel.cpp \
 
@@ -149,7 +149,9 @@ HEADERS += \
     include/commands.h \
     include/http.h \
     include/dnai/app.h \
-    include/dnai/settings.h
+    include/dnai/settings.h \
+    include/dnai/models/settingsmodel.h \
+    include/dnai/views/canvasnode.h
 
 #DNAI
 HEADERS += \
@@ -168,7 +170,6 @@ HEADERS += \
 HEADERS += \
     include/dnai/views/beziercurve.h \
     include/dnai/views/customshape.h \
-    include/dnai/views/dulycanvas.h \
     include/dnai/views/flow.h \
     include/dnai/views/genericnode.h \
     include/dnai/views/input.h \
@@ -227,7 +228,6 @@ HEADERS += \
     include/dnai/models/treeitem.h \
     include/dnai/models/namespacebarmodel.h \
     include/dnai/models/namespacebaritem.h \
-    include/dnai/models/dulysettingsmodel.h \
     include/dnai/models/declarationmodel.h \
     include/dnai/models/basicnodemodel.h \
 

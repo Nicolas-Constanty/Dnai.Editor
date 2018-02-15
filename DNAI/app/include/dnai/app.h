@@ -1,5 +1,5 @@
-#ifndef DULYAPP_H
-#define DULYAPP_H
+#ifndef APP_H
+#define APP_H
 
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
@@ -18,9 +18,9 @@ namespace dnai {
 
         void loadMainWindow();
 	    bool eventFilter(QObject* o, QEvent* event) override;
-		void registerSettings(DulySettings* dulySettings);
+        void registerSettings(AppSettings* appSetting);
 		QQmlApplicationEngine const* engine() const;
-	    DulySettings* settings() const;
+        AppSettings* settings() const;
 
 	    views::AppView *appView() const;
 
@@ -36,7 +36,7 @@ namespace dnai {
 
     private:
         QQmlApplicationEngine m_engine;
-        DulySettings *m_settings;
+        AppSettings *m_settings;
         ProcessManager* m_processManager;
 	    views::AppView* m_appView;
 	    static App *m_instance;
@@ -47,4 +47,4 @@ namespace dnai {
     };
 }
 
-#endif // DULYAPP_H
+#endif // APP_H

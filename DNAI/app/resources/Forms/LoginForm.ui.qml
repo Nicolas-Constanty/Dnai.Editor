@@ -28,7 +28,7 @@ ColumnLayout {
             anchors.fill: parent
             verticalAlignment: Text.AlignVCenter
             horizontalAlignment: Text.AlignHCenter
-            color: DulySettings.style.text.color
+            color: AppSettings.style.text.color
         }
     }
 
@@ -62,8 +62,8 @@ ColumnLayout {
             font.weight: Font.Medium
             horizontalAlignment: Text.AlignHCenter
             font.pixelSize: 12
-            color: DulySettings.style.text.color
-            linkColor: DulySettings.style.text.linkColor
+            color: AppSettings.style.text.color
+            linkColor: AppSettings.style.text.linkColor
             MouseArea {
                 id: forgetPasswordLink
                 anchors.fill: parent
@@ -87,7 +87,7 @@ ColumnLayout {
             Layout.fillWidth: true
             font.weight: Font.Medium
             font.pixelSize: 12
-            color: DulySettings.style.text.color
+            color: AppSettings.style.text.color
         }
 
         Text {
@@ -99,8 +99,8 @@ ColumnLayout {
             font.capitalization: Font.Capitalize
             font.weight: Font.Medium
             font.pixelSize: 12
-            color: DulySettings.style.text.color
-            linkColor: DulySettings.style.text.linkColor
+            color: AppSettings.style.text.color
+            linkColor: AppSettings.style.text.linkColor
             MouseArea {
                 id: createAccount
                 anchors.fill: parent

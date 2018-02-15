@@ -6,14 +6,14 @@
 namespace dnai {
     Project::Project(QString const &uid, QString const &name, QString const &description, QFile &file)
         : models::Common(uid, name, description, 0, 0), m_file(file),
-          m_main(new models::Context("main_uid","Duly", "main", QVector2D(), 0, 0))
+          m_main(new models::Context("main_uid","DNAI", "main", QVector2D(), 0, 0))
     {
 
     }
 
     Project::Project(QString const &name, QString const &description, QFile &file)
         : models::Common("project_uid", name, description, 0, 0), m_file(file),
-          m_main(new models::Context("main_uid","Duly", "main", QVector2D(), 0, 0))
+          m_main(new models::Context("main_uid","DNAI", "main", QVector2D(), 0, 0))
     {
 
     }

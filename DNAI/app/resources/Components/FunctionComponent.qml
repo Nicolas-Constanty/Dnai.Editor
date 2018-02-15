@@ -4,7 +4,7 @@ import CustomGeometry 1.0
 
 import "../Style"
 
-DulyCanvas {
+CanvasNode {
     id: canvas
     gridStep: 15
     gridColor: toolBar.menuEditRef.settingRef.themeTabRef.gridColorRef.colorSetting

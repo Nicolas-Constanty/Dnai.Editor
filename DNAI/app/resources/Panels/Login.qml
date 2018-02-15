@@ -30,7 +30,7 @@ LoginForm {
 //        opacity: 0.8
 //        z: 99
 //        radius: 10
-//        color: DulySettings.style.background
+//        color: AppSettings.style.background
 //        BusyIndicator {
 //            z: 100
 //            anchors.centerIn: parent

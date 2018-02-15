@@ -43,17 +43,17 @@ Item {
         ApplicationWindow {
             id: root
             property BaseLayout baseLayout: undefined
-            width: DulySettings.isSettingsLoad() ? 1280 : 400
-            height: DulySettings.isSettingsLoad() ? 720 : 150
+            width: AppSettings.isSettingsLoad() ? 1280 : 400
+            height: AppSettings.isSettingsLoad() ? 720 : 150
             minimumHeight: 100
             minimumWidth: 300
             title: qsTr("DNAI")
-            color: DulySettings.style.background.color
+            color: AppSettings.style.background.color
             visible: false
 
             Component.onCompleted: {
-                DulySettings.init()
-                if (DulySettings.isSettingsLoad())
+                AppSettings.init()
+                if (AppSettings.isSettingsLoad())
                 {
                     Factory.createObjects("resources/Layouts/LayoutClassic.qml", {
                                               "width": root.width,

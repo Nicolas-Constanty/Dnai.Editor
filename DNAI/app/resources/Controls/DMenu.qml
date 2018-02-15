@@ -27,7 +27,7 @@ Menu {
     background: Rectangle {
         implicitWidth: 200
         implicitHeight: 20
-        color: DulySettings.style.menu.background.color
-        border.color: DulySettings.style.border.color
+        color: AppSettings.style.menu.background.color
+        border.color: AppSettings.style.border.color
     }
 }

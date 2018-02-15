@@ -9,7 +9,7 @@
 
 namespace dnai
 {
-	DulySettings::DulySettings(QObject* parent) : QObject(parent)
+	AppSettings::AppSettings(QObject* parent) : QObject(parent)
     {
 //        m_settings.clear();
         m_style = new models::SettingsModel(nullptr);
@@ -17,11 +17,11 @@ namespace dnai
 		m_isInit = theme != "";
 	}
 
-	DulySettings::~DulySettings()
+	AppSettings::~AppSettings()
 	{
 	}
 
-    void DulySettings::setStyle(models::SettingsModel* m)
+    void AppSettings::setStyle(models::SettingsModel* m)
 	{
 		if (m == m_style)
 			return;
@@ -29,7 +29,7 @@ namespace dnai
 		emit styleChanged(m);
 	}
 
-	void DulySettings::loadTheme(const QString&path)
+	void AppSettings::loadTheme(const QString&path)
 	{
 //        if (m_settings.value("themes/current/theme").toString() == path)
 //            return;
@@ -63,7 +63,7 @@ namespace dnai
 		m_settings.setValue("themes/current/theme", path);
 	}
 
-	void DulySettings::init()
+	void AppSettings::init()
     {
 		const auto theme = m_settings.value("themes/current/theme").toString();
 #ifdef Q_OS_MAC
@@ -93,17 +93,17 @@ namespace dnai
 		static_cast<App *>(App::instance())->registerSettings(this);
 	}
 
-	QStringList DulySettings::getThemes() const
+	QStringList AppSettings::getThemes() const
     {
 		return  m_themes;
 	}
 
-	bool DulySettings::isSettingsLoad() const
+	bool AppSettings::isSettingsLoad() const
 	{
 		return m_isInit;
     }
 
-	void DulySettings::updateProperty(const QString &path, const QVariant &variant)
+	void AppSettings::updateProperty(const QString &path, const QVariant &variant)
 	{
 		const auto pair = getFinalProperty(m_style, path);
         QFontDatabase database;
@@ -130,12 +130,12 @@ namespace dnai
 		}
 	}
 
-    void DulySettings::registerStyle(models::SettingsModel *style)
+    void AppSettings::registerStyle(models::SettingsModel *style)
 	{
 		m_style = style;
 	}
 
-	QPair<QQuickItem*, QString> DulySettings::getFinalProperty(QQuickItem *item, const QString &path) const
+	QPair<QQuickItem*, QString> AppSettings::getFinalProperty(QQuickItem *item, const QString &path) const
 	{
 		QPair<QQuickItem*, QString> pair;
         auto list = path.split("/");
@@ -156,7 +156,7 @@ namespace dnai
 		return pair;
 	}
 
-	qreal DulySettings::getSettingNumber(const QString &path)
+	qreal AppSettings::getSettingNumber(const QString &path)
 	{
 		
 		if (m_loadedNumbers.contains(path))
@@ -169,7 +169,7 @@ namespace dnai
 		return m_loadedNumbers[path];
 	}
 
-	QPair<QStringList, QList<QVariant>> DulySettings::findObject(QJsonObject obj, const QString root)
+	QPair<QStringList, QList<QVariant>> AppSettings::findObject(QJsonObject obj, const QString root)
 	{
 		QPair<QStringList, QList<QVariant>> pair;
 		for (auto it = obj.begin(); it != obj.end(); ++it) {

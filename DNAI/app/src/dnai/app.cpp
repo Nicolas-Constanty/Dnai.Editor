@@ -99,9 +99,9 @@ namespace dnai
 
 #pragma region Setter
 
-    void App::registerSettings(DulySettings* dulySettings)
+    void App::registerSettings(AppSettings* appSettings)
 	{
-		m_settings = dulySettings;
+        m_settings = appSettings;
 	}
 
     App* App::currentInstance()
@@ -118,7 +118,7 @@ namespace dnai
 		return &m_engine;
 	}
 
-    DulySettings* App::settings() const
+    AppSettings* App::settings() const
 	{
 		return m_settings;
 	}

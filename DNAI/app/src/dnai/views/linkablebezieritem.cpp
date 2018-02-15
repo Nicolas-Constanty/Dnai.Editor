@@ -2,7 +2,7 @@
 #include "dnai/app.h"
 #include "dnai/eventutilities.h"
 #include "dnai/views/linkablebezieritem.h"
-#include "dnai/views/dulycanvas.h"
+#include "dnai/views/canvasnode.h"
 #include "dnai/views/genericnode.h"
 
 namespace dnai

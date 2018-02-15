@@ -2,7 +2,7 @@
 
 namespace dnai {
 namespace commands {
-	ZoomCanvasCommand::ZoomCanvasCommand(views::DulyCanvas* c, const double& scale, const QPointF& offset):
+    ZoomCanvasCommand::ZoomCanvasCommand(views::CanvasNode* c, const double& scale, const QPointF& offset):
 		Command("ZoomCanvas", false), m_canvas(c), m_scale(scale), m_offset(offset)
 	{
 	}

@@ -1,21 +1,21 @@
-#ifndef DULYSETTINGS_H
-#define DULYSETTINGS_H
+#ifndef APPSETTINGS_H
+#define APPSETTINGS_H
 
 #include <QSettings>
 #include <QFontDatabase>
 #include <QColor>
 #include <qquickitem.h>
-#include "models/dulysettingsmodel.h"
+#include "models/settingsmodel.h"
 
 namespace dnai {
-class DulySettings : public QObject
+class AppSettings : public QObject
 {
     Q_OBJECT
 
 public:
     Q_PROPERTY(dnai::models::SettingsModel *style READ style WRITE setStyle NOTIFY styleChanged)
-    explicit DulySettings(QObject *parent = nullptr);
-    virtual ~DulySettings();
+    explicit AppSettings(QObject *parent = nullptr);
+    virtual ~AppSettings();
 
     static const QString settings_extension;
 
@@ -51,4 +51,4 @@ private:
 };
 }
 
-#endif // DULYSETTINGS_H
+#endif // APPSETTINGS_H

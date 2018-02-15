@@ -26,8 +26,8 @@ Panel {
                 }
                 background: Rectangle {
                     id: back
-                    color: button.pressed ? DulySettings.style.background.darkColor : button.hovered ? DulySettings.style.background.lightColor : "transparent"
-                    border.color: DulySettings.style.border.color
+                    color: button.pressed ? AppSettings.style.background.darkColor : button.hovered ? AppSettings.style.background.lightColor : "transparent"
+                    border.color: AppSettings.style.border.color
                 }
                 onClicked: {
                     appWindow.layout.leftPanel.treeview.changeCurrent(model.modelData.model)
@@ -43,8 +43,8 @@ Panel {
                 }
                 background: Rectangle {
                     id: back1
-                    color: button1.pressed ? DulySettings.style.background.darkColor : button1.hovered ? DulySettings.style.background.lightColor : "transparent"
-                    border.color: DulySettings.style.border.color
+                    color: button1.pressed ? AppSettings.style.background.darkColor : button1.hovered ? AppSettings.style.background.lightColor : "transparent"
+                    border.color: AppSettings.style.border.color
                 }
                 visible: model.modelData.asChild
             }

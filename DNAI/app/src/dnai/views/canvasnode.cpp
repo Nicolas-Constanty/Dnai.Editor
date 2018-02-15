@@ -5,7 +5,7 @@
 #include <algorithm>
 
 #include "dnai/app.h"
-#include "dnai/views/dulycanvas.h"
+#include "dnai/views/canvasnode.h"
 #include "dnai/views/genericnode.h"
 #include "dnai/commands/movecanvascommand.h"
 #include "dnai/commands/commandmanager.h"
@@ -15,7 +15,7 @@ namespace dnai
 {
 	namespace views
 	{
-		DulyCanvas::DulyCanvas(QQuickItem *parent)
+		CanvasNode::CanvasNode(QQuickItem *parent)
 			: QQuickItem(parent)
 			, m_gridStep(15)
 			, m_accentGridStep(150)
@@ -28,7 +28,7 @@ namespace dnai
             setFlag(ItemAcceptsInputMethod, true);
 		}
 
-		void DulyCanvas::createGrid()
+		void CanvasNode::createGrid()
 		{
 			m_lines.clear();
 			const auto drawGrid = [&](double gridStep, int lineWidth, const QColor &color)
@@ -80,14 +80,14 @@ namespace dnai
 
 		}
 
-		void DulyCanvas::mousePressEvent(QMouseEvent* event)
+		void CanvasNode::mousePressEvent(QMouseEvent* event)
 		{
             m_offset = event->pos();
 			m_totalOffset = QPointF(0,0);
             GenericNode::resetSelected();
 		}
 
-		void DulyCanvas::mouseReleaseEvent(QMouseEvent* event)
+		void CanvasNode::mouseReleaseEvent(QMouseEvent* event)
 		{
 			if (m_hasMoved)
             {
@@ -99,7 +99,7 @@ namespace dnai
 			m_hasMoved = false;
 		}
 
-		void DulyCanvas::mouseMoveEvent(QMouseEvent* event)
+		void CanvasNode::mouseMoveEvent(QMouseEvent* event)
         {
 			const auto offset = event->pos() - m_offset;
 			m_totalOffset += offset;
@@ -110,7 +110,7 @@ namespace dnai
 			m_hasMoved = true;
 		}
 
-		void DulyCanvas::moveCanvas(const QPointF &offset)
+		void CanvasNode::moveCanvas(const QPointF &offset)
 		{
 			m_gridOffset = (m_gridOffset + offset);
 			m_gridOffset.setX(static_cast<int>(m_gridOffset.x()) % (m_gridStep * 10));
@@ -123,7 +123,7 @@ namespace dnai
 			update();
 		}
 
-        void DulyCanvas::wheelEvent(QWheelEvent *event)
+        void CanvasNode::wheelEvent(QWheelEvent *event)
         {
             if (event->modifiers() & Qt::ControlModifier)
             {
@@ -142,7 +142,7 @@ namespace dnai
             }
         }
 
-		void DulyCanvas::zoom(const double &scale, const QPointF &offset)
+		void CanvasNode::zoom(const double &scale, const QPointF &offset)
         {
 			m_content->setScale(scale);
             const auto w = width();
@@ -162,11 +162,11 @@ namespace dnai
             moveCanvas(QPointF(offset.x() * rx, offset.y() * ry) * 100);
 		}
 
-		DulyCanvas::~DulyCanvas()
+		CanvasNode::~CanvasNode()
 		{
 		}
 
-		void DulyCanvas::setAccentGridStep(int step)
+		void CanvasNode::setAccentGridStep(int step)
 		{
 			if (step == m_accentGridStep)
 				return;
@@ -176,7 +176,7 @@ namespace dnai
 		}
 
 
-		void DulyCanvas::setGridStep(int step)
+		void CanvasNode::setGridStep(int step)
 		{
 			if (step == m_gridStep)
 				return;
@@ -185,7 +185,7 @@ namespace dnai
 			update();
 		}
 
-		void DulyCanvas::setAccentGridColor(const QColor &color)
+		void CanvasNode::setAccentGridColor(const QColor &color)
 		{
 			if (color == m_accentGridColor)
 				return;
@@ -195,7 +195,7 @@ namespace dnai
 		}
 
 
-		void DulyCanvas::setGridColor(const QColor &color)
+		void CanvasNode::setGridColor(const QColor &color)
 		{
 			if (color == m_gridColor)
 				return;
@@ -204,7 +204,7 @@ namespace dnai
 			update();
 		}
 
-		void DulyCanvas::setBackgroundColor(const QColor &color)
+		void CanvasNode::setBackgroundColor(const QColor &color)
 		{
 			if (color == m_backgroundColor)
 				return;
@@ -213,7 +213,7 @@ namespace dnai
 			update();
 		}
 
-		/*void DulyCanvas::setScaleFactor(qreal scale)
+		/*void CanvasNode::setScaleFactor(qreal scale)
 		{
 			if (scale == m_scaleFactor || scale < 0.5f || scale > 2.1f)
 				return;
@@ -222,7 +222,7 @@ namespace dnai
 			update();
 		}*/
 
-		void DulyCanvas::setContent(QQuickItem* ct)
+		void CanvasNode::setContent(QQuickItem* ct)
 		{
 			if (ct == m_content)
 				return;
@@ -231,7 +231,7 @@ namespace dnai
             update();
         }
 
-        void DulyCanvas::resetContent()
+        void CanvasNode::resetContent()
         {
             if (m_content &&  m_content->childItems().size() > 0)
             {
@@ -243,7 +243,7 @@ namespace dnai
             }
         }
 
-		QSGNode *DulyCanvas::updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *)
+		QSGNode *CanvasNode::updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *)
 		{
 			auto n = static_cast<QSGSimpleRectNode *>(oldNode);
 			m_origin = QPointF(width() / 2, height() / 2);

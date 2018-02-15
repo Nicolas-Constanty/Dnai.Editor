@@ -5,7 +5,7 @@
 #include "dnai/views/output.h"
 #include "dnai/views/input.h"
 #include "dnai/views/genericnode.h"
-#include "dnai/views/dulycanvas.h"
+#include "dnai/views/canvasnode.h"
 #include "dnai/controllers/inputcontroller.h"
 
 namespace dnai

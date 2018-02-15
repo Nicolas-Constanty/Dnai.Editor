@@ -3,7 +3,7 @@
 #include <QSGVertexColorMaterial>
 
 #include "dnai/views/beziercurve.h"
-#include "dnai/views/dulycanvas.h"
+#include "dnai/views/canvasnode.h"
 
 namespace dnai
 {

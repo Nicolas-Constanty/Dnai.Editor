@@ -9,15 +9,15 @@ import "../Layouts"
 ChooseThemeForm {
     id: form
 
-    panel.color: DulySettings.style.background.color
+    panel.color: AppSettings.style.background.color
 
     Component.onCompleted:
     {
-        themes.model = DulySettings.getThemes()
+        themes.model = AppSettings.getThemes()
     }
 
     themes.onCurrentTextChanged: {
-        DulySettings.loadTheme(themes.currentText)
+        AppSettings.loadTheme(themes.currentText)
     }
 
     validateButton.onClicked: {

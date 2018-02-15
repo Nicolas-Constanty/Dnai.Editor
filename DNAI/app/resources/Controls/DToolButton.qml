@@ -13,7 +13,7 @@ ToolButton {
 
     contentItem: Title3 {
         text: control.text
-        color: control.enabled ? (control.visualFocus ? DulySettings.style.text.lightColor : DulySettings.style.text.color) : DulySettings.style.text.disableColor
+        color: control.enabled ? (control.visualFocus ? AppSettings.style.text.lightColor : AppSettings.style.text.color) : AppSettings.style.text.disableColor
         elide: Text.ElideRight
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
@@ -23,7 +23,7 @@ ToolButton {
         implicitWidth: 40
         implicitHeight: 40
 
-        color: Qt.darker( DulySettings.style.text.color, control.enabled && (control.checked || control.highlighted) ? 1.5 : 1.0)
+        color: Qt.darker( AppSettings.style.text.color, control.enabled && (control.checked || control.highlighted) ? 1.5 : 1.0)
         opacity: control.down ? 1.0 : control.enabled && (control.checked || control.highlighted) ? 0.5 : 0
         visible: control.down || (control.enabled && (control.checked || control.highlighted))
     }

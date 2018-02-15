@@ -1,4 +1,4 @@
-#include "dnai/models/dulysettingsmodel.h"
+#include "dnai/models/settingsmodel.h"
 
 namespace dnai {
 namespace models {

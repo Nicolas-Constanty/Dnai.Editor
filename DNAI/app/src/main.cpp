@@ -27,7 +27,7 @@ static QObject *settings_singleton_provider(QQmlEngine *engine, QJSEngine *scrip
     Q_UNUSED(engine)
     Q_UNUSED(scriptEngine)
 
-    return new dnai::DulySettings();
+    return new dnai::AppSettings();
 }
 
 static QObject *standardpath_singleton_provider(QQmlEngine *engine, QJSEngine *scriptEngine)
@@ -41,7 +41,7 @@ static QObject *standardpath_singleton_provider(QQmlEngine *engine, QJSEngine *s
 static void registerDNAI()
 {
     qmlRegisterSingletonType<dnai::Manager>("DNAI", 1, 0, "Manager", manager_singleton_provider);
-    qmlRegisterSingletonType<dnai::DulySettings>("DNAI", 1, 0, "DulySettings", settings_singleton_provider);
+    qmlRegisterSingletonType<dnai::AppSettings>("DNAI", 1, 0, "AppSettings", settings_singleton_provider);
     qmlRegisterSingletonType<QCStandardPaths>("DNAI", 1, 0, "StandardPath", standardpath_singleton_provider);
 }
 
@@ -56,8 +56,8 @@ static void registerEnums()
 static void registerViews()
 {
     // QML Views
-    qmlRegisterType<dnai::views::DulyCanvas>("DNAI.Views", 1, 0, "DulyCanvas");
-    qmlRegisterType<dnai::views::DulyCanvas>("DNAI.Views", 1, 0, "DulyCanvas");
+    qmlRegisterType<dnai::views::CanvasNode>("DNAI.Views", 1, 0, "CanvasNode");
+    qmlRegisterType<dnai::views::CanvasNode>("DNAI.Views", 1, 0, "CanvasNode");
     qmlRegisterType<dnai::views::DeclarationCanvas>("DNAI.Views", 1, 0, "DeclarationCanvas");
     qmlRegisterType<dnai::views::Console>("DNAI.Views", 1, 0, "Console");
     qmlRegisterType<dnai::views::DeclarationView>("DNAI.Views", 1, 0, "DeclarationViewModel");
@@ -128,7 +128,7 @@ int main(int argc, char *argv[])
 
     // DEBUT CODE POUR LA COMMUNICATION CLIENT SERVER
 
-//    ClientCommunication com(QHostAddress::LocalHost, 7777, "Duly GUI");
+//    ClientCommunication com(QHostAddress::LocalHost, 7777, "DNAI GUI");
 //    com.start();
 
 //    TestConnection test(*com);

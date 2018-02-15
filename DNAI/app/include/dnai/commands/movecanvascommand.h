@@ -2,7 +2,7 @@
 #define MOVECANVASCOMMAND_H
 
 #include "command.h"
-#include "dnai/views/dulycanvas.h"
+#include "dnai/views/canvasnode.h"
 
 namespace dnai
 {
@@ -11,7 +11,7 @@ namespace dnai
         class MoveCanvasCommand : public Command
         {
         public:
-	        MoveCanvasCommand(views::DulyCanvas* canvas, const QPointF& pos, bool save);
+                MoveCanvasCommand(views::CanvasNode* canvas, const QPointF& pos, bool save);
             /**
             * \brief Execute the command
             */
@@ -28,7 +28,7 @@ namespace dnai
         private:
             QPointF m_pos;
             QPointF m_lastPos;
-            views::DulyCanvas* m_canvas;
+            views::CanvasNode* m_canvas;
         };
     }
 }

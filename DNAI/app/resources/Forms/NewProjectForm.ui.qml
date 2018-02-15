@@ -20,7 +20,7 @@ Page {
     id: _page
 
     background: Rectangle {
-        color: DulySettings.style.background.color
+        color: AppSettings.style.background.color
     }
 
     header: TabBar {
@@ -31,11 +31,11 @@ Page {
                 text: qsTr("Create a new project")
             }
             background: Rectangle {
-                color: DulySettings.style.background.color
+                color: AppSettings.style.background.color
             }
         }
         background: Rectangle {
-            color: DulySettings.style.background.color
+            color: AppSettings.style.background.color
         }
     }
     FileDialog {
@@ -140,7 +140,7 @@ Page {
         background: Rectangle {
             height: createButton.height
             width: _page.width
-            color: DulySettings.style.background.color
+            color: AppSettings.style.background.color
         }
     }
 }

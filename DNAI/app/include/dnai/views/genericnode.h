@@ -3,7 +3,7 @@
 
 #include "roundedrectangle.h"
 #include "flow.h"
-#include "dulycanvas.h"
+#include "canvasnode.h"
 #include "dnai/focusmanager.h"
 
 namespace dnai
@@ -76,7 +76,7 @@ namespace dnai
             QPointF m_offset;
 			bool m_holdClik;
 	        QPointF m_startPos;
-	        DulyCanvas* m_canvas;
+	        CanvasNode* m_canvas;
             static GenericNode *m_selected;
 
         private:

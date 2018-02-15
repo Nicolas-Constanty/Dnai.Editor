@@ -11,7 +11,7 @@ Rectangle {
     implicitHeight: 40
     width: parent.parent.width
     height: 40
-    color: DulySettings.style.background.color
+    color: AppSettings.style.background.color
     state: "UnSelect"
     states: [
         State{
@@ -201,9 +201,9 @@ Rectangle {
         width: 40
         text: "\uf35d"
         font.pointSize: 15
-        color: _openbutton.hovered ? DulySettings.style.text.color : "#80DEEA"
+        color: _openbutton.hovered ? AppSettings.style.text.color : "#80DEEA"
         background: Rectangle {
-            color: _openbutton.hovered ? "#8080DEEA" : DulySettings.style.background.color
+            color: _openbutton.hovered ? "#8080DEEA" : AppSettings.style.background.color
         }
         Rectangle {
             color: "transparent"
@@ -251,14 +251,14 @@ Rectangle {
             anchors.right: parent.right
             visible: _expandbutton.state === "Expand"
             text: qsTr(model.item.description)
-            color: DulySettings.style.text.color
+            color: AppSettings.style.text.color
             wrapMode: TextEdit.WordWrap
             selectByMouse: true
             font.italic: true
             placeholderText: "comment..."
             background: Rectangle {
-                color: DulySettings.style.menu.background.darkColor
-                border.color: DulySettings.style.background.lightColor
+                color: AppSettings.style.menu.background.darkColor
+                border.color: AppSettings.style.background.lightColor
             }
         }
     }

@@ -35,7 +35,7 @@ MenuItem {
                 rightPadding: control.checkable && control.mirrored ? control.indicator.width + control.spacing : 0
 
                 text: control.text
-                color: control.enabled ? DulySettings.style.text.lightColor : DulySettings.style.text.disableColor
+                color: control.enabled ? AppSettings.style.text.lightColor : AppSettings.style.text.disableColor
                 elide: Text.ElideRight
                 visible: control.text
                 horizontalAlignment: Text.AlignLeft
@@ -61,7 +61,7 @@ MenuItem {
             y: 1
             width: parent.width - 2
             height: parent.height - 2
-            color: control.pressed ? DulySettings.style.background.darkColor : control.hovered ? DulySettings.style.background.lightColor : "transparent"
+            color: control.pressed ? AppSettings.style.background.darkColor : control.hovered ? AppSettings.style.background.lightColor : "transparent"
         }
     }
 }

@@ -12,20 +12,20 @@ Rectangle {
     property alias panel: _panel
     default property alias _contentChildren: _content.data
 
-    border.color: DulySettings.style.border.color
-    border.width: DulySettings.style.border.width
-    color: DulySettings.style.background.darkColor
+    border.color: AppSettings.style.border.color
+    border.width: AppSettings.style.border.width
+    color: AppSettings.style.background.darkColor
     Rectangle {
         id: _header
-        color: DulySettings.style.background.color
+        color: AppSettings.style.background.color
         height: _title.implicitHeight * 1.2
         width: parent.width
         anchors.top: parent.top
         anchors.left: parent.left
         anchors.right: parent.right
-        anchors.leftMargin: DulySettings.style.border.width
-        anchors.rightMargin: DulySettings.style.border.width
-        anchors.topMargin: DulySettings.style.border.width
+        anchors.leftMargin: AppSettings.style.border.width
+        anchors.rightMargin: AppSettings.style.border.width
+        anchors.topMargin: AppSettings.style.border.width
         TitlePanel {
             id: _title
             text: qsTr(_panel.title)
@@ -44,7 +44,7 @@ Rectangle {
             background: Rectangle {
                 anchors.bottom: parent.bottom
                 anchors.top: parent.top
-                color: control.pressed ? DulySettings.style.background.darkColor : control.hovered ? DulySettings.style.background.lightColor : DulySettings.style.background.color
+                color: control.pressed ? AppSettings.style.background.darkColor : control.hovered ? AppSettings.style.background.lightColor : AppSettings.style.background.color
             }
             onClicked: {
                 if (_panel.state == "Visible")
@@ -60,9 +60,9 @@ Rectangle {
         anchors.bottom: parent.bottom
         anchors.left: parent.left
         anchors.right: parent.right
-        anchors.leftMargin: DulySettings.style.border.width
-        anchors.rightMargin: DulySettings.style.border.width
-        anchors.bottomMargin: DulySettings.style.border.width
+        anchors.leftMargin: AppSettings.style.border.width
+        anchors.rightMargin: AppSettings.style.border.width
+        anchors.bottomMargin: AppSettings.style.border.width
     }
 
     states: [

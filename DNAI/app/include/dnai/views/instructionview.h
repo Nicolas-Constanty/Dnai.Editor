@@ -3,7 +3,7 @@
 
 #include "contextview.h"
 #include "dnai/models/function.h"
-#include "dulycanvas.h"
+#include "canvasnode.h"
 
 namespace dnai
 {
@@ -17,7 +17,7 @@ namespace dnai
 			explicit InstructionView(QObject *parent = nullptr);
 			explicit InstructionView(const QString &path, QObject *parent = nullptr);
 
-			DulyCanvas *canvas() const;
+			CanvasNode *canvas() const;
         signals:
             dnai::models::Function *instructionModelChanged(dnai::models::Function *model);
 

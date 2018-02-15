@@ -3,7 +3,7 @@
 
 #include "dnai/views/beziercurve.h"
 #include "dnai/views/line.h"
-#include "dnai/views/dulycanvas.h"
+#include "dnai/views/canvasnode.h"
 #include "dnai/views/roundedrectangle.h"
 #include "dnai/views/input.h"
 #include "dnai/views/output.h"

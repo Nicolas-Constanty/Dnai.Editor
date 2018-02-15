@@ -10,7 +10,7 @@
 #include "dnai/views/declarationcanvas.h"
 
 namespace dnai {
-    const QString Manager::project_extension = ".dulyproject";
+    const QString Manager::project_extension = ".dnaiproject";
 
     Manager::Manager(QObject *parent): QObject(parent), m_user(nullptr)
     {

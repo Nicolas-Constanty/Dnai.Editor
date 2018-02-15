@@ -15,9 +15,9 @@ Item {
         id: _delegate
         Rectangle {
             id: _column
-            color: DulySettings.style.background.lightColor
-            border.color: DulySettings.style.border.color
-            border.width: DulySettings.style.border.width
+            color: AppSettings.style.background.lightColor
+            border.color: AppSettings.style.border.color
+            border.width: AppSettings.style.border.width
             height: _item.height
             width: (_item.width / 3 > 200) ? appWindow.width / 4 : 200
             EditableText {
@@ -37,7 +37,7 @@ Item {
                 anchors.rightMargin: 5
                 anchors.top: _title.top
                 anchors.topMargin: -5
-                color: hovered ? "#E6EE9C" : DulySettings.style.text.color
+                color: hovered ? "#E6EE9C" : AppSettings.style.text.color
                 background: Item {
                 }
                 onPressed: {
@@ -52,21 +52,21 @@ Item {
                 width: _column.width - 35
                 padding: 20
                 background: Rectangle {
-                    border.color: DulySettings.style.border.color
-                    color: DulySettings.style.menu.background.color
+                    border.color: AppSettings.style.border.color
+                    color: AppSettings.style.menu.background.color
                 }
                 TextArea {
                     id: _comment
                     text: qsTr(model.comment)
                     anchors.fill: parent
-                    color: DulySettings.style.text.color
+                    color: AppSettings.style.text.color
                     wrapMode: TextEdit.WordWrap
                     selectByMouse: true
                     font.italic: true
                     placeholderText: "comment..."
                     background: Rectangle {
-                        color: DulySettings.style.menu.background.darkColor
-                        border.color: DulySettings.style.background.lightColor
+                        color: AppSettings.style.menu.background.darkColor
+                        border.color: AppSettings.style.background.lightColor
                     }
                 }
             }
@@ -98,7 +98,7 @@ Item {
                     height: 30
                     label.font.pointSize: 12
                     text: "\uf2ed"
-                    color: _deletebutton.hovered ? _selectInfo.selectCount != 0 ? DulySettings.style.text.color : "99000000" : "99000000"
+                    color: _deletebutton.hovered ? _selectInfo.selectCount != 0 ? AppSettings.style.text.color : "99000000" : "99000000"
                     background: Rectangle {
                         color: _deletebutton.hovered ? _selectInfo.selectCount != 0 ? "#99B71C1C" :  "transparent" : "transparent"
                     }

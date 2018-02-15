@@ -18,7 +18,7 @@ Item {
         height: 40
         spacing: 0
         background: Rectangle {
-            color: DulySettings.style.background.color
+            color: AppSettings.style.background.color
         }
         ScrollView {
             anchors.fill: parent
@@ -359,7 +359,7 @@ Item {
     Modal {
         id: settingsPopup
         background: Rectangle {
-            color: DulySettings.style.background.color
+            color: AppSettings.style.background.color
         }
 
         x: parent.width / 2 - width / 2
@@ -380,7 +380,7 @@ Item {
         x: parent.width / 2 - width / 2
         y: appWindow.height / 2 - height / 2
         background: Rectangle {
-            color: DulySettings.style.background.color
+            color: AppSettings.style.background.color
         }
         width: 640
         height: 480
@@ -398,7 +398,7 @@ Item {
         x: parent.width / 2 - width / 2
         y: appWindow.height / 2 - height / 2
         background: Rectangle {
-            color: DulySettings.style.background.color
+            color: AppSettings.style.background.color
         }
         width: 640
         height: 480
@@ -416,7 +416,7 @@ Item {
         x: parent.width / 2 - width / 2
         y: appWindow.height / 2 - height / 2
         background: Rectangle {
-            color: DulySettings.style.background.color
+            color: AppSettings.style.background.color
             border.color: "#FAFAFA"
             border.width: 5
             radius: 10
@@ -437,7 +437,7 @@ Item {
         x: parent.width / 2 - width / 2
         y: appWindow.height / 2 - height / 2
         background: Rectangle {
-            color: DulySettings.style.background.color
+            color: AppSettings.style.background.color
             border.color: "#FAFAFA"
             border.width: 5
             radius: 10

@@ -8,9 +8,9 @@ dnai::views::InstructionView::InstructionView(const QString& path, QObject* pare
 {
 }
 
-dnai::views::DulyCanvas* dnai::views::InstructionView::canvas() const
+dnai::views::CanvasNode* dnai::views::InstructionView::canvas() const
 {
-	return dynamic_cast<DulyCanvas*>(getView());
+	return dynamic_cast<CanvasNode*>(getView());
 }
 
 dnai::models::Function* dnai::views::InstructionView::instructionModel() const

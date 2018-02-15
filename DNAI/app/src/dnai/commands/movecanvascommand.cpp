@@ -1,11 +1,11 @@
 #include "dnai/commands/movecanvascommand.h"
-#include "dnai/views/dulycanvas.h"
+#include "dnai/views/canvasnode.h"
 
 namespace dnai
 {
 	namespace commands
 	{
-		MoveCanvasCommand::MoveCanvasCommand(views::DulyCanvas *canvas,  const QPointF& pos, bool save) : Command("MoveCanvas", save)
+		MoveCanvasCommand::MoveCanvasCommand(views::CanvasNode *canvas,  const QPointF& pos, bool save) : Command("MoveCanvas", save)
 		{
 			m_canvas = canvas;
 			m_pos = pos;

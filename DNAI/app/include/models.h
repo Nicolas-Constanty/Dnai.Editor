@@ -19,7 +19,7 @@
 #include "dnai/models/user.h"
 #include "dnai/models/variable.h"
 #include "dnai/models/declarationmodel.h"
-#include "dnai/models/dulysettingsmodel.h"
+#include "dnai/models/settingsmodel.h"
 #include "dnai/models/basicnodemodel.h"
 
 #endif // MODELS_H
