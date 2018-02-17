@@ -41,6 +41,11 @@ const Config api::http_config = {
         });
     }
 
+    Observable &api::get_current_user()
+    {
+        return Service::url("users", "me")->get();
+    }
+
     Observable &api::get_files()
     {
         return Service::url("cloud", "files")->get();
@@ -55,7 +60,9 @@ const Config api::http_config = {
     {
         return Service::url("cloud", "files")->post(
                     QJsonObject{
-                        {"title", title}
+                        {"file_type_id", 1},
+                        {"title", title},
+                        {"file", "JSP"}
                     }
                     );
     }
