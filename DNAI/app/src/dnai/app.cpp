@@ -21,6 +21,11 @@ namespace dnai
 			m_instance = this;
 	}
 
+    App::~App() {
+        if (m_processManager)
+        delete (m_processManager);
+    }
+
     void App::initApp()
 	{
 		initProcessManager();
