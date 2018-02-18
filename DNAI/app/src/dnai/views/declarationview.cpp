@@ -1,14 +1,15 @@
 #include "dnai/views/declarationview.h"
+#include "dnai/app.h"
 
 namespace dnai
 {
 	namespace views
 	{
-		DeclarationView::DeclarationView(QObject* parent) : ContextView(parent)
-		{
+        DeclarationView::DeclarationView(QQuickItem* parent) : ContextView(parent)
+        {
 		}
 
-		DeclarationView::DeclarationView(const QString& path, QObject* parent) : ContextView(path, parent)
+        DeclarationView::DeclarationView(const QString& path, QQuickItem* parent) : ContextView(path, parent)
 		{
 		}
 

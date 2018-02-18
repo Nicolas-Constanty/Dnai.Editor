@@ -60,6 +60,7 @@ static void registerViews()
     qmlRegisterType<dnai::views::CanvasNode>("DNAI.Views", 1, 0, "CanvasNode");
     qmlRegisterType<dnai::views::DeclarationCanvas>("DNAI.Views", 1, 0, "DeclarationCanvas");
     qmlRegisterType<dnai::views::Console>("DNAI.Views", 1, 0, "Console");
+    qmlRegisterType<dnai::views::ContextView>("DNAI.Views", 1, 0, "ContextViewModel");
     qmlRegisterType<dnai::views::DeclarationView>("DNAI.Views", 1, 0, "DeclarationViewModel");
     qmlRegisterType<dnai::views::InstructionView>("DNAI.Views", 1, 0, "InstructionViewModel");
     qmlRegisterType<dnai::views::Layout>("DNAI.Views", 1, 0, "LayoutView");

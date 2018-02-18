@@ -1,11 +1,11 @@
 #include "dnai/views/contextview.h"
 #include "dnai/app.h"
 
-dnai::views::ContextView::ContextView(QObject* parent) : QObject(parent), m_view(nullptr), m_progess(1)
+dnai::views::ContextView::ContextView(QQuickItem* parent) : QQuickItem(parent), m_view(nullptr), m_progess(1)
 {
 }
 
-dnai::views::ContextView::ContextView(const QString &qmlview, QObject* parent) : QObject(parent), m_view(nullptr), m_progess(0)
+dnai::views::ContextView::ContextView(const QString &qmlview, QQuickItem* parent) : QQuickItem(parent), m_view(nullptr), m_progess(0)
 {
 	initView(qmlview);
 	updateProgress(1);
@@ -32,6 +32,7 @@ QObject* dnai::views::ContextView::getModel(const QString& name) const
 void dnai::views::ContextView::initView(const QString& path)
 {
     m_view = dynamic_cast<QQuickItem*>(App::createQmlObject(path));
+    m_view->setParentItem(this);
 }
 
 void dnai::views::ContextView::updateProgress(float percent)

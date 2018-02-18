@@ -1,10 +1,10 @@
 #include "dnai/views/instructionview.h"
 
-dnai::views::InstructionView::InstructionView(QObject* parent) : ContextView(parent)
+dnai::views::InstructionView::InstructionView(QQuickItem* parent) : ContextView(parent)
 {
 }
 
-dnai::views::InstructionView::InstructionView(const QString& path, QObject* parent) : ContextView(path, parent)
+dnai::views::InstructionView::InstructionView(const QString& path, QQuickItem* parent) : ContextView(path, parent)
 {
 }
 

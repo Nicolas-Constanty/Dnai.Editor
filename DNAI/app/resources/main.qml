@@ -16,70 +16,93 @@ import "Nodes/Operator/BinaryOperator/Logical"
 import "Nodes/Operator/UnaryOperator"
 
 Item {
-    id: rootItem
-    property alias appWindow : loader.item
-    property double factor : 1.5
-    property BaseLayout layout: appWindow.baseLayout
-
-    function closeSplashScreen()
-    {
-        _splashScreen.close()
-    }
-
-    SplashScreen {
-        id: _splashScreen
-    }
-
-    Loader {
-        id: loader
-        asynchronous: true
-        sourceComponent: mainWindow
-        opacity: 0
-    }
-
-    Component {
-        id: mainWindow
-
-        ApplicationWindow {
-            id: root
-            property BaseLayout baseLayout: undefined
-            width: AppSettings.isSettingsLoad() ? 1280 : 400
-            height: AppSettings.isSettingsLoad() ? 720 : 150
-            minimumHeight: 100
-            minimumWidth: 300
-            title: qsTr("DNAI")
-            color: AppSettings.style.background.color
-            visible: false
-
-            Component.onCompleted: {
-                AppSettings.init()
-                if (AppSettings.isSettingsLoad())
-                {
-                    Factory.createObjects("resources/Layouts/LayoutClassic.qml", {
-                                              "width": root.width,
-                                              "height": root.height,
-                                              "color": "transparent"
-                                          }, root)
-                    baseLayout = Factory.getObject()
-                    baseLayout.anchors.fill = baseLayout.parent
-                }
-                else
-                {
-                    Factory.createObjects("resources/Panels/ChooseThemePanel.qml", {
-                                              "width": root.width,
-                                              "height": root.height
-                                          }, root)
-                }
-                visible = true
-            }
-
-            onVisibleChanged: {
-                if (visible == true)
-                    _splashScreen.close();
-            }
+    id: _main
+    Component.onCompleted: {
+        AppSettings.init()
+        if (AppSettings.isSettingsLoad())
+        {
+            Factory.createObjects("resources/Components/AppWindow.qml", {
+                                  }, _main)
+        }
+        else
+        {
+            Factory.createObjects("resources/Panels/ChooseThemePanel.qml", {
+                                      "width": root.width,
+                                      "height": root.height
+                                  }, _main)
         }
     }
 }
+
+//Item {
+//    id: rootItem
+//    LayoutClassic {
+
+//    }
+
+//    property alias appWindow : loader.item
+//    property double factor : 1.5
+//    property BaseLayout layout: appWindow.baseLayout
+
+//    function closeSplashScreen()
+//    {
+//        _splashScreen.close()
+//    }
+
+//    SplashScreen {
+//        id: _splashScreen
+//    }
+
+//    Loader {
+//        id: loader
+//        asynchronous: true
+//        sourceComponent: mainWindow
+//        opacity: 0
+//    }
+
+//    Component {
+//        id: mainWindow
+
+//        ApplicationWindow {
+//            id: root
+//            property BaseLayout baseLayout: undefined
+//            width: AppSettings.isSettingsLoad() ? 1280 : 400
+//            height: AppSettings.isSettingsLoad() ? 720 : 150
+//            minimumHeight: 100
+//            minimumWidth: 300
+//            title: qsTr("DNAI")
+//            color: AppSettings.style.background.color
+//            visible: false
+
+//            Component.onCompleted: {
+//                AppSettings.init()
+//                if (AppSettings.isSettingsLoad())
+//                {
+//                    Factory.createObjects("resources/Layouts/LayoutClassic.qml", {
+//                                              "width": root.width,
+//                                              "height": root.height,
+//                                              "color": "transparent"
+//                                          }, root)
+//                    baseLayout = Factory.getObject()
+//                    baseLayout.anchors.fill = baseLayout.parent
+//                }
+//                else
+//                {
+//                    Factory.createObjects("resources/Panels/ChooseThemePanel.qml", {
+//                                              "width": root.width,
+//                                              "height": root.height
+//                                          }, root)
+//                }
+//                visible = true
+//            }
+
+//            onVisibleChanged: {
+//                if (visible == true)
+//                    _splashScreen.close();
+//            }
+//        }
+//    }
+//}
 
 
 

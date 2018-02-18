@@ -1,20 +1,19 @@
 #ifndef LAYOUT_H
 #define LAYOUT_H
 
-#include <QObject>
 #include "contextview.h"
 
 namespace dnai
 {
 	namespace views
 	{
-		class Layout : public QObject
+		class Layout : public QQuickItem
 		{
 			Q_OBJECT
             Q_PROPERTY(ContextView * contextView READ contextView WRITE setContextView NOTIFY contextViewChanged)
 
         public:
-			explicit Layout(QObject *parent = nullptr);
+			explicit Layout(QQuickItem *parent = nullptr);
 
 		signals:
             void contextViewChanged(ContextView *ctxView);

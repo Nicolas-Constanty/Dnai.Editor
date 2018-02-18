@@ -1,7 +1,11 @@
 #include "dnai/views/layout.h"
+#include "dnai/app.h"
 
-dnai::views::Layout::Layout(QObject* parent) : QObject(parent), m_context(nullptr)
+dnai::views::Layout::Layout(QQuickItem* parent) : QQuickItem(parent), m_context(nullptr)
 {
+	const auto app = App::currentInstance();
+	if (app->appView() != nullptr && app->appView()->layout() == nullptr)
+		app->appView()->setLayout(this);
 }
 
 void dnai::views::Layout::setContextView(ContextView* ctxView)
@@ -26,7 +30,5 @@ QQuickItem* dnai::views::Layout::getPanel(const QString& name)
 
 void dnai::views::Layout::addPanels(const QString& name, QQuickItem* item)
 {
-	if (m_panels.contains(name))
-		return;
 	m_panels[name] = item;
 }

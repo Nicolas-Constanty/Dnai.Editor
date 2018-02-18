@@ -141,5 +141,6 @@
         <file>resources/Components/Splitter.qml</file>
         <file>resources/Components/DeclarationView.qml</file>
         <file>resources/Components/TabButtonRounded.qml</file>
+        <file>resources/Components/AppWindow.qml</file>
     </qresource>
 </RCC>

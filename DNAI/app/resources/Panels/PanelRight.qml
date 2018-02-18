@@ -2,9 +2,14 @@ import QtQuick 2.0
 import QtQuick.Controls 2.2
 import QtQml.Models 2.1
 
+import DNAI 1.0
+
+import "../Components"
+import "../Panels"
+import "../Style"
+
 Panel {
     id: panel
-
     Column {
         id: _col
         spacing: 6
@@ -31,7 +36,6 @@ Panel {
             height: (parent.height - 6 * (parent.children.length -1)) / (parent.children.length)
         }
     }
-
     states: [
         State{
             name: "Visible"
@@ -46,40 +50,40 @@ Panel {
     ]
     state: "Visible"
     transitions: [
-            Transition {
-                from: "Visible"
-                to: "Invisible"
+        Transition {
+            from: "Visible"
+            to: "Invisible"
 
-                SequentialAnimation{
-                   NumberAnimation {
-                       target: panel
-                       property: "anchors.rightMargin"
-                       duration: 500
-                       easing.type: Easing.InOutQuad
-                   }
-                   NumberAnimation {
-                       target: panel
-                       property: "visible"
-                       duration: 0
-                   }
+            SequentialAnimation{
+                NumberAnimation {
+                    target: panel
+                    property: "anchors.rightMargin"
+                    duration: 500
+                    easing.type: Easing.InOutQuad
                 }
-            },
-            Transition {
-                from: "Invisible"
-                to: "Visible"
-                SequentialAnimation{
-                   NumberAnimation {
-                       target: panel
-                       property: "visible"
-                       duration: 0
-                   }
-                   NumberAnimation {
-                       target: panel
-                       property: "anchors.rightMargin"
-                       duration: 500
-                       easing.type: Easing.InOutQuad
-                   }
+                NumberAnimation {
+                    target: panel
+                    property: "visible"
+                    duration: 0
                 }
             }
-        ]
+        },
+        Transition {
+            from: "Invisible"
+            to: "Visible"
+            SequentialAnimation{
+                NumberAnimation {
+                    target: panel
+                    property: "visible"
+                    duration: 0
+                }
+                NumberAnimation {
+                    target: panel
+                    property: "anchors.rightMargin"
+                    duration: 500
+                    easing.type: Easing.InOutQuad
+                }
+            }
+        }
+    ]
 }

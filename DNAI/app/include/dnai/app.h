@@ -44,6 +44,8 @@ namespace dnai {
         void initProcessManager();
         QObject *createQmlComponent(const QString &path);
 	    static void setupSettings();
+		void initAppView();
+
     };
 }
 

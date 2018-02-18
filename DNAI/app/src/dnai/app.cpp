@@ -19,7 +19,6 @@ namespace dnai
 	{
 		if (m_instance == nullptr)
 			m_instance = this;
-		m_appView = new views::AppView();
 	}
 
     void App::initApp()
@@ -28,6 +27,7 @@ namespace dnai
 		installEventFilter(this);
 		setupSettings();
 		loadFonts();
+        initAppView();
 		loadMainWindow();
 	}
 
@@ -50,7 +50,12 @@ namespace dnai
 		setApplicationName("DNAI");
 	}
 
-    void App::loadFonts()
+	void App::initAppView()
+	{
+		m_appView = new views::AppView();
+	}
+
+	void App::loadFonts()
 	{
 		QFontDatabase::addApplicationFont(":/resources/fonts/Font Awesome 5 Free-Solid-900.otf");
 		QFontDatabase::addApplicationFont(":/resources/fonts/Font Awesome 5 Free-Regular-400.otf");
