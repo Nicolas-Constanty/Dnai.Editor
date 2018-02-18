@@ -3,12 +3,13 @@
 ./yoursway-create-dmg/create-dmg \
 --volname "DNAI Installer" \
 --volicon "Image/DNAI_icon.icns" \
---background "Image/DNAI_logo.png" \
+--background "Image/nbackground720p.png" \
 --window-pos 200 120 \
---window-size 800 400 \
+--window-size 800 450 \
 --icon-size 100 \
---icon DNAI.app 0 0 \
+--icon DNAI.app 260 265 \
 --hide-extension DNAI.app \
---app-drop-link 200 100 \
+--text-size 16 \
+--app-drop-link 540 265 \
 DNAI-Installer.dmg \
 Application/
