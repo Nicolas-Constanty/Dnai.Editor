@@ -14,22 +14,45 @@ import "Nodes/Operator"
 import "Nodes/Operator/BinaryOperator"
 import "Nodes/Operator/BinaryOperator/Logical"
 import "Nodes/Operator/UnaryOperator"
+import "Panels"
 
 Item {
     id: _main
-    Component.onCompleted: {
-        AppSettings.init()
-        if (AppSettings.isSettingsLoad())
-        {
-            Factory.createObjects("resources/Components/AppWindow.qml", {
-                                  }, _main)
+
+    function closeSplashScreen()
+    {
+        _splashScreen.close()
+    }
+    SplashScreen {
+        id: _splashScreen
+    }
+
+    Component.onCompleted: AppSettings.init()
+
+    Loader {
+        id: loader
+        asynchronous: true
+        sourceComponent: AppSettings.isSettingsLoad() ? _mainWindow : _selectTheme
+        opacity: 0
+    }
+
+    Component {
+        id: _mainWindow
+
+        AppWindow {
+            Component.onCompleted: {
+                closeSplashScreen()
+            }
         }
-        else
-        {
-            Factory.createObjects("resources/Panels/ChooseThemePanel.qml", {
-                                      "width": root.width,
-                                      "height": root.height
-                                  }, _main)
+    }
+
+    Component {
+        id: _selectTheme
+
+        ChooseThemePanel {
+            Component.onCompleted: {
+                closeSplashScreen()
+            }
         }
     }
 }
@@ -49,9 +72,7 @@ Item {
 //        _splashScreen.close()
 //    }
 
-//    SplashScreen {
-//        id: _splashScreen
-//    }
+
 
 //    Loader {
 //        id: loader
