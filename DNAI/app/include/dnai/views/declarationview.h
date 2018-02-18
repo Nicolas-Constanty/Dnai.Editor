@@ -14,7 +14,6 @@ namespace dnai
             Q_PROPERTY(dnai::models::DeclarationModel *contextModel READ contextModel WRITE setContextModel NOTIFY contextModelChanged)
 		public:
             explicit DeclarationView(QQuickItem *parent = nullptr);
-            explicit DeclarationView(const QString &path, QQuickItem *parent = nullptr);
 
         signals:
             void contextModelChanged(dnai::models::DeclarationModel *model);

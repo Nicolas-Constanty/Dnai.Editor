@@ -5,12 +5,8 @@ namespace dnai
 {
 	namespace views
 	{
-        DeclarationView::DeclarationView(QQuickItem* parent) : ContextView(parent)
+        DeclarationView::DeclarationView(QQuickItem* parent) : ContextView("qrc:/resources/Components/DeclarationView.qml", parent)
         {
-		}
-
-        DeclarationView::DeclarationView(const QString& path, QQuickItem* parent) : ContextView(path, parent)
-		{
 		}
 
 		dnai::models::DeclarationModel* DeclarationView::contextModel() const

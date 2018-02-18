@@ -77,7 +77,7 @@ namespace dnai {
 	{
 		auto layout = App::currentInstance()->appView()->layout();
 		if (layout->contextView() == nullptr)
-            layout->setContextView(new views::DeclarationView("qrc:/resources/Components/DeclarationView.qml", layout));
+            layout->setContextView(new views::DeclarationView(layout));
 	}
 
 	void Manager::createNameSpaceView() const
@@ -87,6 +87,13 @@ namespace dnai {
 		{
 			QMetaObject::invokeMethod(layout, "appendTab", Q_ARG(QVariant, 0), Q_ARG(QVariant, m_currentPath->data(0)));
 		}
+	}
+
+	void Manager::createInstructionView()
+	{
+		auto layout = App::currentInstance()->appView()->layout();
+		if (layout->contextView() == nullptr)
+			layout->setContextView(new views::InstructionView(layout));
 	}
 
 	void Manager::createDeclarationIfMissing(models::Common *c) const
@@ -197,13 +204,40 @@ namespace dnai {
 		m_declRef->setIsContext(false);
         if (model->type() == ModelTypes::Context)
         {
+	        const auto ctxView = App::currentInstance()->appView()->layout()->contextView();
+			if (ctxView && !dynamic_cast<views::DeclarationView*>(ctxView))
+			{
+				delete ctxView;
+                App::currentInstance()->appView()->layout()->setContextView(nullptr);
+				createDeclarationView();
+			}
             m_declRef->setIsContext(true);
             setupContextModel(dynamic_cast<models::Context*>(static_cast<models::Common*>(model)), 0);
         }
         else if (model->type() == ModelTypes::Class)
         {
+			const auto ctxView = App::currentInstance()->appView()->layout()->contextView();
+			if (ctxView && !dynamic_cast<views::DeclarationView*>(ctxView))
+			{
+				delete ctxView;
+                App::currentInstance()->appView()->layout()->setContextView(nullptr);
+				createDeclarationView();
+			}
             setupClassModel(dynamic_cast<models::Class*>(static_cast<models::Common*>(model)), 0);
         }
+		else if (model->type() == ModelTypes::Function)
+		{
+			qDebug() << "Hello Function";
+			const auto ctxView = App::currentInstance()->appView()->layout()->contextView();
+			if (ctxView && !dynamic_cast<views::InstructionView*>(ctxView))
+			{
+				qDebug() << "delete ctx from function";
+				delete ctxView;
+                App::currentInstance()->appView()->layout()->setContextView(nullptr);
+				createInstructionView();
+			}
+			setupFunctionModel(dynamic_cast<models::Function*>(static_cast<models::Common*>(model)));
+		}
     }
 
     QModelIndex Manager::getIndexMatch(dnai::models::TreeItem *md)

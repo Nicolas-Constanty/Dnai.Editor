@@ -10,7 +10,7 @@ namespace dnai
 		class Layout : public QQuickItem
 		{
 			Q_OBJECT
-            Q_PROPERTY(ContextView * contextView READ contextView WRITE setContextView NOTIFY contextViewChanged)
+            Q_PROPERTY(dnai::views::ContextView * contextView READ contextView WRITE setContextView NOTIFY contextViewChanged)
 
         public:
 			explicit Layout(QQuickItem *parent = nullptr);

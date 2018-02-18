@@ -83,6 +83,7 @@ namespace dnai {
 	    void createDeclarationIfMissing(models::Common *c) const;
 		static void createDeclarationView();
 		void createNameSpaceView() const;
+	    static void createInstructionView();
 	    models::User *m_user;
     };
     }
