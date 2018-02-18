@@ -22,6 +22,11 @@ namespace dnai
 		m_appView = new views::AppView();
 	}
 
+    App::~App() {
+        if (m_processManager)
+        delete (m_processManager);
+    }
+
     void App::initApp()
 	{
 		initProcessManager();
