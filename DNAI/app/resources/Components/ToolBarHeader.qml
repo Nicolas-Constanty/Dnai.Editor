@@ -414,46 +414,4 @@ Item {
             popup: openProjectPopup
         }
     }
-    Modal {
-        id: loginPopup
-        x: parent.width / 2 - width / 2
-        y: appWindow.height / 2 - height / 2
-        background: Rectangle {
-            color: AppSettings.style.background.color
-            border.color: "#FAFAFA"
-            border.width: 5
-            radius: 10
-        }
-        width: 380
-        height: 500
-        modal: true
-        focus: true
-        closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutside
-        contentItem: Login {
-            anchors.fill: parent
-            id: loginPanel
-            popup: loginPopup
-        }
-    }
-    Modal {
-        id: uploadPopup
-        x: parent.width / 2 - width / 2
-        y: appWindow.height / 2 - height / 2
-        background: Rectangle {
-            color: AppSettings.style.background.color
-            border.color: "#FAFAFA"
-            border.width: 5
-            radius: 10
-        }
-        width: 500
-        height: 100
-        modal: true
-        focus: true
-        closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutside
-        contentItem: Upload {
-            anchors.fill: parent
-            id: uploadPanel
-            popup: uploadPopup
-        }
-    }
 }

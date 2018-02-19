@@ -28,6 +28,10 @@ UserMenuForm {
         root.imgSrc = ""
     }
 
+    uploadBtn.onClicked: {
+        uploadPopup.open()
+    }
+
     Connections {
         target: Manager
 
@@ -45,6 +49,18 @@ UserMenuForm {
         contentItem: Login {
             anchors.fill: parent
             popup: loginPopup
+        }
+    }
+
+    Modal {
+        id: uploadPopup
+        rootX: -root.x
+        rootY: -root.y
+        width: 500
+        height: 100
+        contentItem: Upload {
+            anchors.fill: parent
+            popup: uploadPopup
         }
     }
 }

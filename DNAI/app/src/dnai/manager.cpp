@@ -371,6 +371,17 @@ namespace dnai {
         });
     }
 
+    bool Manager::uploadFile(const QString &path)
+    {
+        auto file = new QFile(QUrl(path).toLocalFile());
+        if (!file->open(QIODevice::ReadOnly)) {
+            qWarning("Couldn't open file.");
+            return false;
+        }
+        api::post_file(QFileInfo(file->fileName()).fileName(), file);
+        return true;
+    }
+
     void Manager::updateCurentUserFiles()
     {
         api::get_files().map([this](Response response) -> Response {

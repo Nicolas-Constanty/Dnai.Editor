@@ -1,4 +1,5 @@
 #include <QNetworkAccessManager>
+#include <QFileInfo>
 #include "dnai/http/service.h"
 
 namespace dnai {
@@ -39,7 +40,7 @@ namespace dnai {
             file->open(QIODevice::ReadOnly);
 
             QHttpPart part;
-            part.setHeader(QNetworkRequest::ContentDispositionHeader, QVariant("form-data; name=\"" + key + "\""));
+            part.setHeader(QNetworkRequest::ContentDispositionHeader, QVariant("form-data; name=\"" + key + "\"; filename=\""+ QFileInfo(file->fileName()).fileName() + "\""));
             part.setBodyDevice(file);
             return part;
         }
