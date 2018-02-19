@@ -1,4 +1,5 @@
 #include <QJsonArray>
+#include <QHttpMultiPart>
 
 #include "dnai/api/api.h"
 #include "dnai/http/service.h"
@@ -96,13 +97,14 @@ const Config api::http_config = {
 
     Observable &api::post_file(QString const &title, QFile *file)
     {
-        return Service::url("cloud", "files")->post(
-                    QJsonObject{
-                        {"file_type_id", 1},
-                        {"title", title},
-                        {"file", "JSP"}
-                    }
-                    );
+        QHttpMultiPart *multiPart = new QHttpMultiPart(QHttpMultiPart::FormDataType);
+
+        multiPart->append(http::Service::makeHttpPart("file_type_id", "1"));
+        multiPart->append(http::Service::makeHttpPart("title", title));
+        multiPart->append(http::Service::makeHttpPart("file", file));
+        file->setParent(multiPart);
+
+        return Service::url("cloud", "files")->post(multiPart);
     }
 
     void api::logout()

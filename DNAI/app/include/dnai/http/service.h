@@ -2,6 +2,8 @@
 #define HTTP_SERVICE_H
 
 #include <QNetworkAccessManager>
+#include <QHttpPart>
+#include <QFile>
 #include <sstream>
 #include <iostream>
 #include "url.h"
@@ -15,6 +17,9 @@ namespace dnai {
             static void Init(const Config &);
             static void callInterceptors(Url*);
             static void addInterceptor(InterceptorFunction);
+
+            static QHttpPart makeHttpPart(QString const &, QString const &);
+            static QHttpPart makeHttpPart(QString const &, QFile *);
 
         public:
             template<typename... Args>

@@ -25,5 +25,23 @@ namespace dnai {
         {
             m_config.interceptors.push_back(interceptor);
         }
+
+        QHttpPart Service::makeHttpPart(const QString &key, const QString &value)
+        {
+            QHttpPart part;
+            part.setHeader(QNetworkRequest::ContentDispositionHeader, QVariant("form-data; name=\"" + key + "\""));
+            part.setBody(value.toUtf8());
+            return part;
+        }
+
+        QHttpPart Service::makeHttpPart(const QString &key, QFile *file)
+        {
+            file->open(QIODevice::ReadOnly);
+
+            QHttpPart part;
+            part.setHeader(QNetworkRequest::ContentDispositionHeader, QVariant("form-data; name=\"" + key + "\""));
+            part.setBody(file);
+            return part;
+        }
     }
 }
