@@ -3,7 +3,7 @@
 ./yoursway-create-dmg/create-dmg \
 --volname "DNAI Installer" \
 --volicon "Image/DNAI_icon.icns" \
---background "Image/nbackground720p.png" \
+--background "Image/BackgroundDmg720p.png" \
 --window-pos 200 120 \
 --window-size 800 450 \
 --icon-size 100 \
