@@ -129,19 +129,21 @@ Item {
                         DMenuItem {
                             text: qsTr("Toogle left panel")
                             onClicked: {
-                                if (root.layout.leftPanel.state == "Visible")
-                                    root.layout.leftPanel.state = "Invisible"
+                                var leftPanel = appWindow.layout.getPanel("panelLeft")
+                                if (leftPanel.state === "Visible")
+                                    leftPanel.state = "Invisible"
                                 else
-                                    root.layout.leftPanel.state = "Visible"
+                                    leftPanel.state = "Visible"
                             }
                         }
                         DMenuItem {
                             text: qsTr("Toogle right panel")
                             onClicked: {
-                                if (root.layout.rightPanel.state == "Visible")
-                                    root.layout.rightPanel.state = "Invisible"
+                                var rightPanel = appWindow.layout.getPanel("panelRight")
+                                if (rightPanel.state === "Visible")
+                                    rightPanel.state = "Invisible"
                                 else
-                                    root.layout.rightPanel.state = "Visible"
+                                    rightPanel.state = "Visible"
                             }
                         }
                         //                        DMenuItem {
@@ -156,10 +158,11 @@ Item {
                         DMenuItem {
                             text: qsTr("Toogle console")
                             onClicked: {
-                                if (appWindow.layout.debugConsole.state === "Visible")
-                                    appWindow.layout.debugConsole.state = "Invisible"
+                                var console = appWindow.layout.getPanel("console")
+                                if (console.state === "Visible")
+                                    console.state = "Invisible"
                                 else
-                                    appWindow.layout.debugConsole.state = "Visible"
+                                    console.state = "Visible"
                             }
                         }
                         //                        DMenuItem {

@@ -1,29 +1,24 @@
 #include <QJsonDocument>
-#include <QDebug>
-#include <QDir>
-#include <QUrl>
 
 #include "dnai/app.h"
 #include "dnai/manager.h"
 #include "dnai/models/treeitem.h"
-#include "dnai/models/imodel.h"
+#include "dnai/models/namespacebarmodel.h"
 #include "dnai/views/declarationcanvas.h"
+#include "dnai/views/declarationview.h"
 
 namespace dnai {
     const QString Manager::project_extension = ".dnaiproject";
 
-    Manager::Manager(QObject *parent): QObject(parent), m_user(nullptr)
-    {
-        m_projectModel = nullptr;
-        m_declRef = new models::DeclarationModel();
-    }
+    Manager::Manager(QObject *parent): QObject(parent), m_project(nullptr), m_currentPath(nullptr), m_user(nullptr)
+	{
+		m_projectModel = nullptr;
+		m_declRef = new models::DeclarationModel();
+	}
 
-    Manager::~Manager()
-    {
+    Manager::~Manager() = default;
 
-    }
-
-    void Manager::createProject(const QString &name, const QString &description, const QString &path)
+	void Manager::createProject(const QString &name, const QString &description, const QString &path)
     {
         auto fileUrl = QUrl(QDir(path).filePath(name) + project_extension);
         QFile file(fileUrl.toLocalFile());
@@ -74,9 +69,34 @@ namespace dnai {
         m_currentPath = static_cast<models::TreeItem*>(m_projectModel->index(0,0).internalPointer());
         createNameSpaceModel(m_currentPath);
         createDeclarationModel(m_project);
+        createDeclarationView();
+		createNameSpaceView();
     }
 
-    void Manager::createDeclarationIfMissing(models::Common *c)
+	void Manager::createDeclarationView()
+	{
+		auto layout = App::currentInstance()->appView()->layout();
+		if (layout->contextView() == nullptr)
+            layout->setContextView(new views::DeclarationView(layout));
+	}
+
+	void Manager::createNameSpaceView() const
+	{
+		const auto layout = App::currentInstance()->appView()->layout();
+		if (layout->contextView() != nullptr)
+		{
+			QMetaObject::invokeMethod(layout, "appendTab", Q_ARG(QVariant, 0), Q_ARG(QVariant, m_currentPath->data(0)));
+		}
+	}
+
+	void Manager::createInstructionView()
+	{
+		auto layout = App::currentInstance()->appView()->layout();
+		if (layout->contextView() == nullptr)
+			layout->setContextView(new views::InstructionView(layout));
+	}
+
+	void Manager::createDeclarationIfMissing(models::Common *c) const
     {
         if (c->listIndex() + 1 > m_declRef->rowCount())
             for (auto i = 0; i < c->listIndex() + 1; i++)
@@ -88,107 +108,136 @@ namespace dnai {
             }
     }
 
-    void Manager::setupContextModel(models::Context *context, int lvl)
+    void Manager::setupContextModel(models::Context *context, int lvl) const
     {
         if (!m_declRef || lvl == -1) return;
         lvl -= 1;
         const auto contexts = context->contexts();
-        for (auto i = 0; i < contexts.size(); i++)
+        for (auto ctx : contexts)
         {
-            setupContextModel(contexts[i], lvl);
-            createDeclarationIfMissing(contexts[i]);
-            qvariant_cast<models::Declaration *>(m_declRef->data(m_declRef->index(contexts[i]->listIndex(), 0)))->addModel(contexts[i]);
+            setupContextModel(ctx, lvl);
+            createDeclarationIfMissing(ctx);
+            qvariant_cast<models::Declaration *>(m_declRef->data(m_declRef->index(ctx->listIndex(), 0)))->addModel(
+	            ctx);
         }
 
         const auto classes = context->classes();
-        for (auto i = 0; i < classes.size(); i++)
+        for (auto classe : classes)
         {
-            setupClassModel(classes[i], lvl);
-            createDeclarationIfMissing(classes[i]);
-            qvariant_cast<models::Declaration *>(m_declRef->data(m_declRef->index(classes[i]->listIndex(), 0)))->addModel(classes[i]);
+            setupClassModel(classe, lvl);
+            createDeclarationIfMissing(classe);
+            qvariant_cast<models::Declaration *>(m_declRef->data(m_declRef->index(classe->listIndex(), 0)))->addModel(
+	            classe);
         }
 
         const auto functions = context->functions();
-        for (auto i = 0; i < functions.size(); i++)
+        for (auto function : functions)
         {
-            setupFunctionModel(functions[i]);
+            setupFunctionModel(function);
         }
 
         const auto variables = context->variables();
-        for (auto i = 0; i < variables.size(); i++)
+        for (auto variable : variables)
         {
-            setupVariableModel(variables[i]);
+            setupVariableModel(variable);
         }
     }
 
-    void Manager::setupClassModel(models::Class *cl, int lvl)
+    void Manager::setupClassModel(models::Class *cl, int lvl) const
     {
         if (!m_declRef || lvl == -1) return;
         lvl -= 1;
         const auto classes = cl->classes();
-        for (auto i = 0; i < classes.size(); i++)
+        for (auto classe : classes)
         {
-            setupClassModel(classes[i], lvl);
-            createDeclarationIfMissing(classes[i]);
-            qvariant_cast<models::Declaration *>(m_declRef->data(m_declRef->index(classes[i]->listIndex(), 0)))->addModel(classes[i]);
+            setupClassModel(classe, lvl);
+            createDeclarationIfMissing(classe);
+            qvariant_cast<models::Declaration *>(m_declRef->data(m_declRef->index(classe->listIndex(), 0)))->addModel(
+	            classe);
         }
 
         const auto functions = cl->functions();
-        for (auto i = 0; i < functions.size(); i++)
+        for (auto function : functions)
         {
-            setupFunctionModel(functions[i]);
+            setupFunctionModel(function);
         }
 
         const auto variables = cl->attributes();
-        for (auto i = 0; i < variables.size(); i++)
+        for (auto variable : variables)
         {
-            setupVariableModel(variables[i]);
+            setupVariableModel(variable);
         }
     }
 
-    void Manager::setupFunctionModel(models::Function *func)
+    void Manager::setupFunctionModel(models::Function *func) const
     {
         if (!m_declRef) return;
         createDeclarationIfMissing(func);
         qvariant_cast<models::Declaration *>(m_declRef->data(m_declRef->index(func->listIndex(), 0)))->addModel(func);
     }
 
-    void Manager::setupVariableModel(models::Variable *variable)
+    void Manager::setupVariableModel(models::Variable *variable) const
     {
         if (!m_declRef) return;
         createDeclarationIfMissing(variable);
         qvariant_cast<models::Declaration *>(m_declRef->data(m_declRef->index(variable->listIndex(), 0)))->addModel(variable);
     }
 
-    void Manager::createDeclarationModel(Project *project)
+    void Manager::createDeclarationModel(Project *project) const
     {
         clearDeclarationModel();
         setupContextModel(const_cast<dnai::models::Context *>(project->main()), 0);
     }
 
-    void Manager::clearDeclarationModel()
+    void Manager::clearDeclarationModel() const
     {
         m_declRef->clear();
     }
 
     void Manager::updateNamespace(const QModelIndex &index)
-
     {
         if (!m_declRef || index == QModelIndex()) return;
         m_currentPath = static_cast<models::TreeItem*>(index.internalPointer());
         createNameSpaceModel(m_currentPath);
         clearDeclarationModel();
         const auto model = m_currentPath->model();
-        if (dynamic_cast<models::Context*>(model))
+		m_declRef->setIsContext(false);
+        if (model->type() == ModelTypes::Context)
         {
+	        const auto ctxView = App::currentInstance()->appView()->layout()->contextView();
+			if (ctxView && !dynamic_cast<views::DeclarationView*>(ctxView))
+			{
+				delete ctxView;
+                App::currentInstance()->appView()->layout()->setContextView(nullptr);
+				createDeclarationView();
+			}
             m_declRef->setIsContext(true);
-            setupContextModel(static_cast<models::Context*>(static_cast<models::Common*>(model)), 0);
+            setupContextModel(dynamic_cast<models::Context*>(static_cast<models::Common*>(model)), 0);
         }
-        else if (dynamic_cast<models::Class*>(model))
+        else if (model->type() == ModelTypes::Class)
         {
-            m_declRef->setIsContext(false);
-            setupClassModel(static_cast<models::Class*>(static_cast<models::Common*>(model)), 0);
+			const auto ctxView = App::currentInstance()->appView()->layout()->contextView();
+			if (ctxView && !dynamic_cast<views::DeclarationView*>(ctxView))
+			{
+				delete ctxView;
+                App::currentInstance()->appView()->layout()->setContextView(nullptr);
+				createDeclarationView();
+			}
+            setupClassModel(dynamic_cast<models::Class*>(static_cast<models::Common*>(model)), 0);
         }
+		else if (model->type() == ModelTypes::Function)
+		{
+			qDebug() << "Hello Function";
+			const auto ctxView = App::currentInstance()->appView()->layout()->contextView();
+			if (ctxView && !dynamic_cast<views::InstructionView*>(ctxView))
+			{
+				qDebug() << "delete ctx from function";
+				delete ctxView;
+                App::currentInstance()->appView()->layout()->setContextView(nullptr);
+				createInstructionView();
+			}
+			setupFunctionModel(dynamic_cast<models::Function*>(static_cast<models::Common*>(model)));
+		}
     }
 
     QModelIndex Manager::getIndexMatch(dnai::models::TreeItem *md)
@@ -277,22 +326,22 @@ namespace dnai {
         setNamespacebarModel(QVariant::fromValue(temp));
     }
 
-    void Manager::addContext(int index, int listindex)
+    void Manager::addContext(const int index, const int listindex) const
     {
         qvariant_cast<models::Declaration *>(m_declRef->data(m_declRef->index(listindex , 0)))->addModel(new models::Context("undefined", "Context", "", QVector2D(), index, listindex));
     }
 
-    void Manager::addClass(int index, int listindex)
+    void Manager::addClass(const int index, const int listindex) const
     {
         qvariant_cast<models::Declaration *>(m_declRef->data(m_declRef->index(listindex , 0)))->addModel(new models::Class("undefined", "Class", "", QVector2D(), index, listindex));
     }
 
-    void Manager::addFunction(int index, int listindex)
+    void Manager::addFunction(const int index, const int listindex) const
     {
         qvariant_cast<models::Declaration *>(m_declRef->data(m_declRef->index(listindex , 0)))->addModel(new models::Function("undefined", "Function", "", QVector2D(), index, listindex));
     }
 
-    void Manager::addVariable(int index, int listindex)
+    void Manager::addVariable(const int index, const int listindex) const
     {
         qvariant_cast<models::Declaration *>(m_declRef->data(m_declRef->index(listindex , 0)))->addModel(new models::Variable("undefined", "Variable", "", QVector2D(), "generic", false, index, listindex));
     }
@@ -325,4 +374,19 @@ namespace dnai {
         delete m_user;
         m_user = nullptr;
     }
+
+    void Manager::setAppViewLayout(dnai::views::Layout *l) const
+    {
+		App::currentInstance()->appView()->setLayout(l);
+    }
+
+	void Manager::registerTreeView(QQuickItem *tr)
+	{
+		m_treeView = tr;
+	}
+
+	QQuickItem* Manager::treeView() const
+	{
+		return m_treeView;
+	}
 }

@@ -12,6 +12,7 @@ import "../Nodes/Operator/UnaryOperator"
 
 CanvasNode {
     id: canvas
+    anchors.fill: parent
     backgroundColor: AppSettings.style.canvas.background
     gridStep: AppSettings.style.canvas.grid.step
     gridColor: AppSettings.style.canvas.grid.color
@@ -30,17 +31,7 @@ CanvasNode {
         id: content_item
         x: canvas.width/2
         y: canvas.height/2
-        Node {
-           x: 0
-           y: 0
-           model: SubstractModel {}
-        }
 
-        Node {
-           x: 100
-           y: 100
-           model: AddNodeModel {}
-        }
         onScaleChanged: {
             zoomText.text = Math.round(content_item.scale * 100) + "%"
         }

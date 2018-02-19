@@ -4,12 +4,16 @@ import QtQuick.Controls 2.2
 import QtGraphicalEffects 1.0
 
 import DNAI 1.0
+import DNAI.Models 1.0
 
 import "../Style"
-import "../../"
+import "../"
 
 Item {
     id: _item
+
+    anchors.fill: parent
+    visible: false
 
     Component {
         id: _delegate
@@ -19,21 +23,21 @@ Item {
             border.color: AppSettings.style.border.color
             border.width: AppSettings.style.border.width
             height: _item.height
-            width: (_item.width / 3 > 200) ? appWindow.width / 4 : 200
+            width: (_item.width / 3 > 200) ? _item.width / 4 : 200
             EditableText {
                 id: _title
                 text:  model.name
                 anchors.top: parent.top
                 anchors.topMargin: 10
                 anchors.left: parent.left
-                anchors.right: parent.right
+                anchors.right: _commentbutton.left
                 placeholderText: "Section Title ..."
             }
             FontAwesomeButton {
                 id: _commentbutton
                 text: "\uf27a"
                 label.font.pointSize: 14
-                anchors.right: _title.right
+                anchors.right: _column.right
                 anchors.rightMargin: 5
                 anchors.top: _title.top
                 anchors.topMargin: -5
@@ -41,8 +45,7 @@ Item {
                 background: Item {
                 }
                 onPressed: {
-                    if (!_popup.opened)
-                        _popup.open()
+                    _popup.open()
                 }
             }
             Popup {

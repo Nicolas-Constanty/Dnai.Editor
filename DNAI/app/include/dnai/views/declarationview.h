@@ -13,8 +13,7 @@ namespace dnai
 			Q_OBJECT
             Q_PROPERTY(dnai::models::DeclarationModel *contextModel READ contextModel WRITE setContextModel NOTIFY contextModelChanged)
 		public:
-			explicit DeclarationView(QObject *parent = nullptr);
-			explicit DeclarationView(const QString &path, QObject *parent = nullptr);
+            explicit DeclarationView(QQuickItem *parent = nullptr);
 
         signals:
             void contextModelChanged(dnai::models::DeclarationModel *model);

@@ -30,7 +30,7 @@ Panel {
                     border.color: AppSettings.style.border.color
                 }
                 onClicked: {
-                    appWindow.layout.leftPanel.treeview.changeCurrent(model.modelData.model)
+                    Manager.treeView().changeCurrent(model.modelData.model)
                 }
             }
             Button {

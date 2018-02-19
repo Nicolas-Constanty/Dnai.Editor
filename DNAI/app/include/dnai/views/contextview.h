@@ -7,13 +7,13 @@ namespace dnai
 {
 	namespace views
 	{
-		class ContextView : public QObject
+        class ContextView : public QQuickItem
 		{
 			Q_OBJECT
 		public:
-			explicit ContextView(QObject *parent = nullptr);
-			explicit ContextView(const QString &qmlview, QObject *parent = nullptr);
-			QQuickItem *getView() const;
+            explicit ContextView(QQuickItem *parent = nullptr);
+            explicit ContextView(const QString &qmlview, QQuickItem *parent = nullptr);
+            Q_INVOKABLE QQuickItem *getView() const;
 			void addModel(QObject *model, const QString &name);
 			QObject *getModel(const QString &name) const;
 
