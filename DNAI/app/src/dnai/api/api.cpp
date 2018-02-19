@@ -58,41 +58,12 @@ const Config api::http_config = {
 
     Observable &api::get_files()
     {
-        return Service::url("cloud", "files")->get().map([](Response response) -> Response {
-            response.body = QJsonObject{
-            {"files", QJsonArray{
-                    QJsonObject{
-            {"title", "Mon fichier"},
-            {"description", "mac description"}
-        },
-                    QJsonObject{
-            {"title", "Mon fichier ia"},
-            {"description", "mac description"}
-        },
-                    QJsonObject{
-            {"title", "Mon ia a moi"},
-            {"description", "mac description"}
-        },
-                    QJsonObject{
-            {"title", "My IA"},
-            {"description", "mac dguhiohig"}
-        }
-        }
-        }
-        };
-            return response;
-        });
+        return Service::url("cloud", "files")->get();
     }
 
     Observable &api::get_file(QString const &id)
     {
-        return Service::url("cloud", "files", id.toLatin1().data())->get().map([](Response response) -> Response {
-            response.body = QJsonObject{
-            {"title", "Mon fichier"},
-            {"description", "mac description"}
-        };
-            return response;
-        });
+        return Service::url("cloud", "files", id.toLatin1().data())->get();
     }
 
     Observable &api::post_file(QString const &title, QFile *file)

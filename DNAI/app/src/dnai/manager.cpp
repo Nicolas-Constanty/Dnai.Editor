@@ -386,7 +386,7 @@ namespace dnai {
     {
         api::get_files().map([this](Response response) -> Response {
             if (m_user != nullptr) {
-                m_user->setFiles(response.body["files"].toArray());
+                m_user->setFiles(response.body["results"].toArray());
                 emit userChanged(m_user);
             }
             return response;
