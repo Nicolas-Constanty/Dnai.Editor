@@ -32,5 +32,15 @@ namespace dnai {
        {
            m_profile_url = profile_url;
        }
+
+       QJsonArray User::files() const
+       {
+           return m_files;
+       }
+
+       void User::setFiles(const QJsonArray &files)
+       {
+           m_files = files;
+       }
     }
 }

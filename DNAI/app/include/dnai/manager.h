@@ -44,6 +44,7 @@ namespace dnai {
 	    Q_INVOKABLE void addFunction(int index, int listindex) const;
 	    Q_INVOKABLE void addVariable(int index, int listindex) const;
 	    Q_INVOKABLE void signin(const QString &, const QString &);
+        Q_INVOKABLE void updateCurentUserFiles();
 	    Q_INVOKABLE void logout();
 	    Q_INVOKABLE void setAppViewLayout(dnai::views::Layout* l) const;
 		Q_INVOKABLE void registerTreeView(QQuickItem *tr);

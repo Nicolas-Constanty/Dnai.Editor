@@ -16,6 +16,8 @@ Page {
     property alias openButton: openButton
     property alias projectPath: projectPath
     property alias viewData: viewData
+    property alias filesData: filesData
+    property bool isConnected: false
     width: 1080
     height: 720
 
@@ -24,40 +26,6 @@ Page {
         title: "Please choose a project"
         selectMultiple: false
         nameFilters: ["DNAI project (*.dnaiproject)"]
-    }
-
-    ListModel {
-        id: filesModel
-        ListElement {
-            filename: "fgjdjgdg"
-        }
-        ListElement {
-            filename: "guygyuug"
-        }
-        ListElement {
-            filename: "yugyugytftyf"
-        }
-        ListElement {
-            filename: "dfghjuih"
-        }
-        ListElement {
-            filename: "ijokpkppkp"
-        }
-        ListElement {
-            filename: "plplllllllllll"
-        }
-        ListElement {
-            filename: "deeeeeee"
-        }
-        ListElement {
-            filename: "eeeeeeeeeeeeeeeeeeee"
-        }
-        ListElement {
-            filename: "eeeeeeee"
-        }
-        ListElement {
-            filename: "nnnnnnnn"
-        }
     }
 
     header: TabBar {
@@ -102,8 +70,10 @@ Page {
             }
         }
         Splitter {
+            visible: isConnected
         }
         Title3 {
+            visible: isConnected
             anchors.left: parent.left
             anchors.right: parent.right
             text: qsTr("Online Projects")
@@ -111,6 +81,7 @@ Page {
             horizontalAlignment: Qt.AlignHCenter
         }
         ScrollView {
+            visible: isConnected
             padding: 10
             anchors.left: parent.left
             anchors.right: parent.right
@@ -126,7 +97,9 @@ Page {
                 anchors.fill: parent
                 anchors.margins: 20
                 spacing: 4
-                model: filesModel
+                model: ListModel {
+                    id: filesData
+                }
                 clip: true
                 delegate: Item {
                     width: parent.width
@@ -134,7 +107,7 @@ Page {
                     MLabel {
                         anchors.left: parent.left
                         anchors.right: _downloadButton.left
-                        text: filename
+                        text: title
                         horizontalAlignment: Qt.AlignLeft
                     }
                     Button {

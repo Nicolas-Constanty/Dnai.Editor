@@ -7,6 +7,23 @@ import "../Forms"
 OpenProjectForm {
     property Popup popup
 
+//    popup.onOpened: function() {
+//        Manager.updateCurentUserFiles();
+//    }
+
+    Connections {
+        target: Manager
+
+        onUserChanged: {
+            isConnected = true;
+            filesData.clear();
+            console.log(Manager.user.files, Manager.user.files.length);
+            for (var i = 0; i < Manager.user.files.length; ++i) {
+                filesData.append(Manager.user.files[i]);
+            }
+        }
+    }
+
     fileDialog.folder: Qt.resolvedUrl(StandardPath.writableLocation((StandardPath.HomeLocation)))
     fileDialog.onAccepted: {
         projectPath.text = fileDialog.fileUrl;

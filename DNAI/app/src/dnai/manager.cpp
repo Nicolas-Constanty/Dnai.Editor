@@ -358,15 +358,26 @@ namespace dnai {
 
     void Manager::signin(const QString &username, const QString &password)
     {
-        // TODO get user from API
         api::signin(username, password).map([this](Response response) -> Response {
             api::get_current_user().map([this](Response response) -> Response {
                 m_user = new models::User();
                 m_user->setName(response.body["first_name"].toString() + " " + response.body["last_name"].toString());
                 m_user->setProfile_url("../Images/default_user.png");
+                updateCurentUserFiles();
                 emit userChanged(m_user);
                 return response;
             });
+            return response;
+        });
+    }
+
+    void Manager::updateCurentUserFiles()
+    {
+        api::get_files().map([this](Response response) -> Response {
+            if (m_user != nullptr) {
+                m_user->setFiles(response.body["files"].toArray());
+                emit userChanged(m_user);
+            }
             return response;
         });
     }

@@ -2,8 +2,6 @@
 #include <QQmlApplicationEngine>
 #include <functional>
 
-#include "api.h"
-#include "http.h"
 #include "views.h"
 #include "models.h"
 #include "qmlresources.h"
@@ -118,8 +116,6 @@ int main(int argc, char *argv[])
 
     dnai::App app(argc, argv);
     app.initApp();
-
-    dnai::http::Service::Init(dnai::api::http_config);
 
     return app.exec();
 }
