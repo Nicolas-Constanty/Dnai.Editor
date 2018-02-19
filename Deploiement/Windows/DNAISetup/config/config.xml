@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Installer>
+    <Name>DNAI</Name>
+    <Version>0.0.1</Version>
+    <Title>DNAI</Title>
+    <Publisher>DNAI</Publisher>
+    <StartMenuDir>DNAI</StartMenuDir>
+    <TargetDir>@HomeDir@/DNAI</TargetDir>
+</Installer>

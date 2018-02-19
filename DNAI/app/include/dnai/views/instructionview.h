@@ -14,8 +14,7 @@ namespace dnai
             Q_OBJECT
             Q_PROPERTY(dnai::models::Function *instructionModel READ instructionModel WRITE setInstructionModel NOTIFY instructionModelChanged)
 		public:
-			explicit InstructionView(QObject *parent = nullptr);
-			explicit InstructionView(const QString &path, QObject *parent = nullptr);
+            explicit InstructionView(QQuickItem *parent = nullptr);
 
 			CanvasNode *canvas() const;
         signals:

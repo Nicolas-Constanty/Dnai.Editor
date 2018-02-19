@@ -15,6 +15,7 @@ namespace dnai {
         Q_OBJECT
     public:
         App(int & argc, char **argv);
+        ~App();
 
         void loadMainWindow();
 	    bool eventFilter(QObject* o, QEvent* event) override;
@@ -44,6 +45,8 @@ namespace dnai {
         void initProcessManager();
         QObject *createQmlComponent(const QString &path);
 	    static void setupSettings();
+		void initAppView();
+
     };
 }
 

@@ -3,6 +3,7 @@ import QtQuick.Controls 2.2
 import QtGraphicalEffects 1.0
 
 import DNAI 1.0
+import DNAI.Models 1.0
 import "../Style"
 
 Rectangle {
@@ -223,7 +224,7 @@ Rectangle {
             source: _openbutton.label
         }
         onPressed: {
-            appWindow.layout.leftPanel.treeview.changeCurrentFromModel(model.item)
+            Manager.treeView().changeCurrentFromModel(model.item)
         }
     }
     Item {

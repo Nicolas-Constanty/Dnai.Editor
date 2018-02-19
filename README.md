@@ -4,4 +4,4 @@
 
 
 ## Ubuntu 16.04 ![images/32x32ubuntu.png](https://raw.githubusercontent.com/Nicolas-Constanty/Duly-GUI/develop/images/32x32ubuntu.png?token=AJawSx-fW1Fyeo9LzS7feq-_yNa1l3NZks5ajELUwA%3D%3D)
-![Develop](https://circleci.com/gh/Nicolas-Constanty/Duly-GUI/tree/develop.svg?style=shield&circle-token=8efe136465c22c6ebdc99f33f34bb7e702539ec9) 
+[![Develop](https://circleci.com/gh/Nicolas-Constanty/Duly-GUI/tree/develop.svg?style=shield&circle-token=8efe136465c22c6ebdc99f33f34bb7e702539ec9)](https://circleci.com/gh/Nicolas-Constanty/Duly-GUI/tree/develop)

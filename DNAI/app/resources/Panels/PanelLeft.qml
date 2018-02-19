@@ -7,7 +7,6 @@ import "../Style"
 
 Panel {
     id: panel
-    property alias treeview: tr.treeview
 
     Column {
         id: _col
@@ -27,6 +26,9 @@ Panel {
             anchors.left: parent.left
             anchors.right: parent.right
             height: (parent.height - 6 * (parent.children.length -1)) / (parent.children.length)
+            Component.onCompleted: {
+                Manager.registerTreeView(tr.treeview)
+            }
         }
 
         ExpendablePanel {
