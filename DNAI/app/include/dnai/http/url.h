@@ -8,6 +8,11 @@
 
 namespace dnai {
     namespace  http {
+        enum BodyType {
+            DEFAULT = 0,
+            MULTIPART,
+            DEVICE
+        };
         class Url: public QObject
         {
             Q_OBJECT
@@ -16,24 +21,41 @@ namespace dnai {
 
         private:
             QNetworkAccessManager *m_manager;
+
             QUrl m_url;
             QString m_method;
-            QByteArray m_body;
+
             QMap<QString, QString> m_headers;
             QMap<QString, QString> m_params;
 
+            BodyType m_bodyType;
+            QByteArray m_body;
+            QHttpMultiPart *m_multiPart;
+            QIODevice *m_device;
+
         public:
             Observable &head();
+
             Observable &get();
+
             Observable &post(QByteArray);
             Observable &post(QJsonObject);
             Observable &post(Form);
+            Observable &post(QHttpMultiPart *);
+            Observable &post(QIODevice *);
+
             Observable &put(QByteArray);
             Observable &put(QJsonObject);
             Observable &put(Form);
+            Observable &put(QHttpMultiPart *);
+            Observable &put(QIODevice *);
+
             Observable &patch(QByteArray);
             Observable &patch(QJsonObject);
             Observable &patch(Form);
+            Observable &patch(QHttpMultiPart *);
+            Observable &patch(QIODevice *);
+
             Observable &remove();
             Observable &options();
 

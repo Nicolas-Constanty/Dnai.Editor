@@ -40,7 +40,7 @@ namespace dnai {
 
             QHttpPart part;
             part.setHeader(QNetworkRequest::ContentDispositionHeader, QVariant("form-data; name=\"" + key + "\""));
-            part.setBody(file);
+            part.setBodyDevice(file);
             return part;
         }
     }

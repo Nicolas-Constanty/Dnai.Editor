@@ -43,6 +43,22 @@ namespace dnai {
             return post(query.query(QUrl::FullyEncoded).toUtf8());
         }
 
+        Observable &Url::post(QHttpMultiPart *multiPart)
+        {
+            m_multiPart = multiPart;
+            m_bodyType = MULTIPART;
+            m_method = "POST";
+            return sendRequest();
+        }
+
+        Observable &Url::post(QIODevice *device)
+        {
+            m_device = device;
+            m_bodyType = DEVICE;
+            m_method = "POST";
+            return sendRequest();
+        }
+
         Observable &Url::put(QByteArray body)
         {
             m_body = body;
@@ -65,6 +81,22 @@ namespace dnai {
             return put(query.query(QUrl::FullyEncoded).toUtf8());
         }
 
+        Observable &Url::put(QHttpMultiPart *multiPart)
+        {
+            m_multiPart = multiPart;
+            m_bodyType = MULTIPART;
+            m_method = "PUT";
+            return sendRequest();
+        }
+
+        Observable &Url::put(QIODevice *device)
+        {
+            m_device = device;
+            m_bodyType = DEVICE;
+            m_method = "PUT";
+            return sendRequest();
+        }
+
         Observable &Url::patch(QByteArray body)
         {
             m_body = body;
@@ -85,6 +117,22 @@ namespace dnai {
                 query.addQueryItem(it.key(), it.value());
             }
             return patch(query.query(QUrl::FullyEncoded).toUtf8());
+        }
+
+        Observable &Url::patch(QHttpMultiPart *multiPart)
+        {
+            m_multiPart = multiPart;
+            m_bodyType = MULTIPART;
+            m_method = "PATCH";
+            return sendRequest();
+        }
+
+        Observable &Url::patch(QIODevice *device)
+        {
+            m_device = device;
+            m_bodyType = DEVICE;
+            m_method = "PATCH";
+            return sendRequest();
         }
 
         Observable &Url::remove()
@@ -145,7 +193,17 @@ namespace dnai {
             } else if (m_method == "DELETE") {
                 reply = m_manager->deleteResource(request);
             } */else {
-                reply = m_manager->sendCustomRequest(request, m_method.toLatin1(), m_body);
+                switch (m_bodyType) {
+                case MULTIPART:
+                    reply = m_manager->sendCustomRequest(request, m_method.toLatin1(), m_multiPart);
+                    break;
+                case DEVICE:
+                    reply = m_manager->sendCustomRequest(request, m_method.toLatin1(), m_device);
+                case DEFAULT:
+                default:
+                    reply = m_manager->sendCustomRequest(request, m_method.toLatin1(), m_body);
+                    break;
+                }
             }
             auto observable = new Observable(reply);
             connect(reply, SIGNAL(finished()), observable, SLOT(onResponse()));

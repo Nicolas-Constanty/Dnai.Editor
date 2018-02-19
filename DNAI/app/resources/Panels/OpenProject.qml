@@ -17,7 +17,6 @@ OpenProjectForm {
         onUserChanged: {
             isConnected = true;
             filesData.clear();
-            console.log(Manager.user.files, Manager.user.files.length);
             for (var i = 0; i < Manager.user.files.length; ++i) {
                 filesData.append(Manager.user.files[i]);
             }
