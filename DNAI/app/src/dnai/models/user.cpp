@@ -42,5 +42,15 @@ namespace dnai {
        {
            m_files = files;
        }
+       
+       QJsonObject User::currentFileData() const
+       {
+           return m_currentFileData;
+       }
+       
+       void User::setCurrentFileData(const QJsonObject &currentFileData)
+       {
+           m_currentFileData = currentFileData;
+       }
     }
 }

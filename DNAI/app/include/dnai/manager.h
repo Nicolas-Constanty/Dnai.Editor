@@ -33,6 +33,7 @@ namespace dnai {
     public:
         Q_INVOKABLE void createProject(const QString &, const QString &, const QString &);
         Q_INVOKABLE QJsonObject loadProjectData(const QString &);
+        Q_INVOKABLE void downloadProjectData(uint, const QString &);
         Q_INVOKABLE void openProject(const QString &);
         Q_INVOKABLE void openProject(Project *);
 	    Q_INVOKABLE QModelIndex getIndexMatch(dnai::models::TreeItem * md);
@@ -69,6 +70,7 @@ namespace dnai {
 
     private:
 	    Project *loadProject(const QString &);
+        Project *loadProject(const QJsonObject &, QFile &);
 	    models::TreeModel *m_projectModel;
 	    QVariant m_namespacebarmodel;
 	    models::TreeItem *m_currentPath;

@@ -66,6 +66,11 @@ const Config api::http_config = {
         return Service::url("cloud", "files", id.toLatin1().data())->get();
     }
 
+    Observable &api::get_raw_file(QString const &id)
+    {
+        return Service::url("uploaded_files", id.toLatin1().data())->get();
+    }
+
     Observable &api::post_file(QString const &title, QFile *file)
     {
         QHttpMultiPart *multiPart = new QHttpMultiPart(QHttpMultiPart::FormDataType);

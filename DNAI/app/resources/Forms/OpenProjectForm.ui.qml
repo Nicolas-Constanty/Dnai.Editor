@@ -101,21 +101,7 @@ Page {
                     id: filesData
                 }
                 clip: true
-                delegate: Item {
-                    width: parent.width
-                    height: _downloadButton.implicitHeight
-                    MLabel {
-                        anchors.left: parent.left
-                        anchors.right: _downloadButton.left
-                        text: title
-                        horizontalAlignment: Qt.AlignLeft
-                    }
-                    Button {
-                        id: _downloadButton
-                        text: "Download"
-                        anchors.right: parent.right
-                    }
-                }
+                delegate: onlineFilesDelegate
             }
         }
         Splitter {

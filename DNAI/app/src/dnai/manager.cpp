@@ -38,6 +38,19 @@ namespace dnai {
         return (project != nullptr) ? project->data() : QJsonObject {};
     }
 
+    void Manager::downloadProjectData(uint index, const QString &id)
+    {
+        api::get_raw_file(id).map([this, index](Response response) -> Response {
+            QFile emptyFile("empty");
+            auto project = this->loadProject(response.body, emptyFile);
+            if (project != nullptr) {
+                m_user->setCurrentFileData(project->data());
+                emit userChanged(m_user);
+            }
+            return response;
+        });
+    }
+
     Project * Manager::loadProject(const QString &path)
     {
         QFile file(QUrl(path).toLocalFile());
@@ -49,8 +62,18 @@ namespace dnai {
 
         QByteArray data = file.readAll();
 
-        QJsonObject obj(QJsonDocument::fromJson(data).object());
+        try {
+            QJsonObject obj(QJsonDocument::fromJson(data).object());
+            return this->loadProject(obj, file);
+        } catch (std::exception) {
 
+        }
+        qWarning("Couldn't parse file.");
+        return nullptr;
+    }
+
+    Project *Manager::loadProject(const QJsonObject &obj, QFile &file)
+    {
         Project *project = new Project(obj["name"].toString(), obj["description"].toString(), file);
         project->unserialize(obj);
         return project;
