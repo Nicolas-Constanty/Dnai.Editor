@@ -16,14 +16,21 @@ namespace dnai
 	, m_settings(nullptr)
 	, m_processManager(nullptr)
 	, m_appView(nullptr)
+	, m_nodeModel(nullptr)
 	{
 		if (m_instance == nullptr)
 			m_instance = this;
 	}
 
     App::~App() {
-        if (m_processManager)
-        delete (m_processManager);
+		if (m_settings)
+			delete m_settings;
+		if (m_processManager)
+			delete m_processManager;
+		if (m_appView)
+			delete m_appView;
+		if (m_nodeModel)
+			delete m_nodeModel;
     }
 
     void App::initApp()
@@ -58,6 +65,7 @@ namespace dnai
 	void App::initAppView()
 	{
 		m_appView = new views::AppView();
+		m_nodeModel = new models::BasicNodeModel();
 	}
 
 	void App::loadFonts()
@@ -99,7 +107,12 @@ namespace dnai
 		return QGuiApplication::eventFilter(o, event);
 	}
 
-    QObject* App::createQmlComponent(const QString &path)
+	models::BasicNodeModel* App::basicNodesModel() const
+	{
+		return m_nodeModel;
+	}
+
+	QObject* App::createQmlComponent(const QString &path)
 	{
 		QQmlComponent component(&m_engine, path);
 		return component.create();

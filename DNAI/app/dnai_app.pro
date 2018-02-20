@@ -41,7 +41,8 @@ SOURCES += \
     src/dnai/app.cpp \
     src/dnai/settings.cpp \
     src/dnai/models/settingsmodel.cpp \
-    src/dnai/views/canvasnode.cpp
+    src/dnai/views/canvasnode.cpp \
+    src/dnai/models/listnode.cpp
 
 #COMMANDS
 SOURCES += \
@@ -151,7 +152,8 @@ HEADERS += \
     include/dnai/app.h \
     include/dnai/settings.h \
     include/dnai/models/settingsmodel.h \
-    include/dnai/views/canvasnode.h
+    include/dnai/views/canvasnode.h \
+    include/dnai/models/listnode.h
 
 #DNAI
 HEADERS += \

@@ -7,6 +7,7 @@
 #include "models/treeitem.h"
 #include "models/user.h"
 #include "models/declarationmodel.h"
+#include "models/basicnodemodel.h"
 #include "views/layout.h"
 #include "api.h"
 
@@ -18,6 +19,7 @@ namespace dnai {
         Q_PROPERTY(QVariant namespacebarModel READ namespacebarModel WRITE setNamespacebarModel NOTIFY namespacebarModelChanged)
         Q_PROPERTY(dnai::models::DeclarationModel *declarationModel READ declarationModel WRITE setDeclarationModel NOTIFY declarationModelChanged)
         Q_PROPERTY(dnai::models::User *user READ user WRITE setUser NOTIFY userChanged)
+		Q_PROPERTY(dnai::models::BasicNodeModel *basicNodesModel READ basicNodesModel NOTIFY basicNodesModelChanged)
 
     public:
 	    explicit Manager(QObject *parent = 0);
@@ -48,12 +50,14 @@ namespace dnai {
 	    Q_INVOKABLE void setAppViewLayout(dnai::views::Layout* l) const;
 		Q_INVOKABLE void registerTreeView(QQuickItem *tr);
 		Q_INVOKABLE QQuickItem *treeView() const;
+		Q_INVOKABLE void createNode(QObject *nodeModel);
 
     signals:
 	    void projectModelChanged(models::TreeModel *model);
 	    void namespacebarModelChanged(const QVariant  &ref);
 	    void declarationModelChanged(models::DeclarationModel *ref);
 	    void userChanged(models::User *user);
+		void basicNodesModelChanged(models::BasicNodeModel *);
 
     public:
 	    models::TreeModel *projectModel() const { return m_projectModel; }
@@ -62,6 +66,7 @@ namespace dnai {
 	    void setNamespacebarModel(const QVariant &ref);
 	    void setDeclarationModel(models::DeclarationModel * m);
 	    models::DeclarationModel * declarationModel() const { return m_declRef; }
+		models::BasicNodeModel *basicNodesModel() const;
 	    models::User *user() const;
 	    void setUser(models::User *user);
 

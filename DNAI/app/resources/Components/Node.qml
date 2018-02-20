@@ -2,6 +2,7 @@ import QtQuick 2.4
 import QtQuick.Controls 2.2
 import DNAI.Views 1.0
 import DNAI 1.0
+import DNAI.Enums 1.0
 
 import "../Forms"
 import "../Nodes"
@@ -17,7 +18,7 @@ NodeForm {
     description: model.description
     icon: model.icon
 
-    state: "Close"
+    state: "Open"
     states: [
         State{
             name: "Open"
@@ -141,7 +142,6 @@ NodeForm {
                 }
             }
         }
-
     }
     outputDelegate: Component {
         Item {

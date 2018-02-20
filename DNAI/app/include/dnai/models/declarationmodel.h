@@ -11,9 +11,9 @@ class Declaration : public QAbstractListModel
     Q_OBJECT
 public:
     enum Roles {
-        ItemRole = Qt::UserRole + 1,
+        ItemRole = Qt::UserRole + 1
     };
-    Declaration(QObject *parent= nullptr) : QAbstractListModel(parent), m_name("Title section"), m_comment("This is a comment") {}
+	explicit Declaration(QObject *parent= nullptr) : QAbstractListModel(parent), m_name("Title section"), m_comment("This is a comment") {}
     void addModel(dnai::models::Common *c);
     int rowCount(const QModelIndex & parent = QModelIndex()) const;
     QVariant data(const QModelIndex & index, int role = Qt::DisplayRole) const;
@@ -44,7 +44,8 @@ public:
         ItemRole,
         IsContextRole
     };
-    DeclarationModel(QObject *parent= nullptr) : QAbstractListModel(parent), m_isContext(true) {}
+
+	explicit DeclarationModel(QObject *parent= nullptr) : QAbstractListModel(parent), m_isContext(true) {}
     void setIsContext(bool value);
     void addDeclaration(Declaration *c);
     int rowCount(const QModelIndex & parent = QModelIndex()) const;

@@ -23,6 +23,7 @@ namespace dnai
 			Q_PROPERTY(QColor backgroundColor READ backgroundColor WRITE setBackgroundColor NOTIFY backgroundColorChanged)
 
 			Q_PROPERTY(QQuickItem *content READ content WRITE setContent NOTIFY contentChanged)
+            Q_PROPERTY(bool contextMenu READ contextMenu WRITE setContextMenu NOTIFY contextMenuChanged)
 
 			explicit CanvasNode(QQuickItem *parent = nullptr);
 			~CanvasNode();
@@ -51,7 +52,7 @@ namespace dnai
 			const QPointF &totalOffset() const { return m_totalOffset; }
 			const QPointF &origin() const { return m_origin; }
 			QQuickItem *content() const { return m_content; }
-
+            bool contextMenu() const { return m_contextMenu; }
 
 		public:
 			void setGridStep(int step);
@@ -60,6 +61,7 @@ namespace dnai
 			void setAccentGridColor(const QColor &color);
 			void setBackgroundColor(const QColor & color);
             void setContent(QQuickItem *ct);
+			void setContextMenu(bool b);
             void resetContent();
 
 		signals:
@@ -69,6 +71,8 @@ namespace dnai
 			void accentGridColorChanged(const QColor &color);
 			void backgroundColorChanged(const QColor &color);
 			void contentChanged(QQuickItem *ct);
+			void contextMenuChanged(bool b);
+
 
 		private:
 			int m_gridStep;
@@ -79,6 +83,7 @@ namespace dnai
 			QColor m_backgroundColor;
 			bool m_hasMoved;
 			QPointF m_totalOffset;
+			bool m_contextMenu;
 
 		private:
 			void createGrid();

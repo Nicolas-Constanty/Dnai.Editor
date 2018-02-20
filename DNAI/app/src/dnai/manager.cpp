@@ -1,4 +1,6 @@
 #include <QJsonDocument>
+#include <QQmlIncubator>
+#include <QQmlProperty>
 
 #include "dnai/app.h"
 #include "dnai/manager.h"
@@ -6,6 +8,7 @@
 #include "dnai/models/namespacebarmodel.h"
 #include "dnai/views/declarationcanvas.h"
 #include "dnai/views/declarationview.h"
+#include "dnai/incubator.h"
 
 namespace dnai {
     const QString Manager::project_extension = ".dnaiproject";
@@ -388,5 +391,21 @@ namespace dnai {
 	QQuickItem* Manager::treeView() const
 	{
 		return m_treeView;
+	}
+
+	models::BasicNodeModel* Manager::basicNodesModel() const
+	{
+		return App::currentInstance()->basicNodesModel();
+	}
+
+	void Manager::createNode(QObject *nodeModel)
+	{
+        QString path = "qrc:/resources/Components/Node.qml";
+        QQmlComponent component(App::getEngineInstance(), path);
+        QQuickItem *obj = qobject_cast<QQuickItem*>(component.beginCreate(App::getEngineInstance()->rootContext()));
+        QQmlProperty model(obj, "model", App::getEngineInstance());
+        model.write(QVariant::fromValue(basicNodesModel()->createNode(static_cast<qmlresources::QInstructionID::Instruction_ID>(nodeModel->property("instruction_id").toInt()))));
+        obj->setParentItem(App::instructionView()->canvas()->content());
+        component.completeCreate();
 	}
 }

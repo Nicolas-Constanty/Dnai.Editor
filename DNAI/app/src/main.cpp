@@ -96,6 +96,8 @@ static void registerModels()
     qmlRegisterType<dnai::models::User>("DNAI.Models", 1, 0, "User");
     qmlRegisterType<dnai::models::DeclarationModel>("DNAI.Models", 1, 0, "DeclarationModel");
     qmlRegisterType<dnai::models::Declaration>("DNAI.Models", 1, 0, "Declaration");
+    qmlRegisterType<dnai::models::BasicNodeModel>("DNAI.Models", 1, 0, "BasicNodeModel");
+    qmlRegisterType<dnai::models::ListNode>("DNAI.Models", 1, 0, "ListNode");
 }
 
 static void registerConnection() {

@@ -48,7 +48,7 @@ GenericNode {
             anchors.top: parent.top
             anchors.topMargin: 5
             anchors.horizontalCenter: parent.horizontalCenter
-            visible: state == "Open"
+            visible: node.state === "Open"
         }
         MLabel {
             id: _description
@@ -57,16 +57,18 @@ GenericNode {
             anchors.top: parent.top
             anchors.topMargin: _name.height * 1.3
             anchors.horizontalCenter: parent.horizontalCenter
-            visible: state == "Open"
+            visible: node.state === "Open"
         }
         FontAwesomeTextSolid {
             id: _icon
             font.pointSize: 15
             anchors.fill: parent
+            visible: node.state !== "Open"
         }
     }
     RoundedRectangle {
         id: contentNode
+
         x: borderWidth * 2
         y: borderWidth * 2
         width: headerNode.width
@@ -81,7 +83,7 @@ GenericNode {
         bottomLeft: false
         anchors.top: headerNode.bottom
         anchors.topMargin: headerNode.borderWidth + 1
-        visible: state == "Open"
+        visible: node.state === "Open"
         ListView {
             id: _inputs
             anchors.topMargin: 10
