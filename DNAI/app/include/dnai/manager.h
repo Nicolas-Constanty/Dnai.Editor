@@ -35,6 +35,7 @@ namespace dnai {
     public:
         Q_INVOKABLE void createProject(const QString &, const QString &, const QString &);
         Q_INVOKABLE QJsonObject loadProjectData(const QString &);
+        Q_INVOKABLE void downloadProjectData(uint, const QString &);
         Q_INVOKABLE void openProject(const QString &);
         Q_INVOKABLE void openProject(Project *);
 	    Q_INVOKABLE QModelIndex getIndexMatch(dnai::models::TreeItem * md);
@@ -46,6 +47,8 @@ namespace dnai {
 	    Q_INVOKABLE void addFunction(int index, int listindex) const;
 	    Q_INVOKABLE void addVariable(int index, int listindex) const;
 	    Q_INVOKABLE void signin(const QString &, const QString &);
+        Q_INVOKABLE bool uploadFile(const QString &);
+        Q_INVOKABLE void updateCurentUserFiles();
 	    Q_INVOKABLE void logout();
 	    Q_INVOKABLE void setAppViewLayout(dnai::views::Layout* l) const;
 		Q_INVOKABLE void registerTreeView(QQuickItem *tr);
@@ -72,6 +75,7 @@ namespace dnai {
 
     private:
 	    Project *loadProject(const QString &);
+        Project *loadProject(const QJsonObject &, QFile &);
 	    models::TreeModel *m_projectModel;
 	    QVariant m_namespacebarmodel;
 	    models::TreeItem *m_currentPath;

@@ -5,7 +5,8 @@ import QtQuick.Layouts 1.3
 
 RowLayout {
     property alias fileDialog: fileDialog
-    property alias chooseButton: chooseButton
+    property alias chooseBtn: chooseBtn
+    property alias uploadBtn: uploadBtn
     property alias filesModel: filesModel
 
     width: 500
@@ -25,7 +26,7 @@ RowLayout {
     }
 
     Button {
-        id: chooseButton
+        id: chooseBtn
         text: qsTr("Choose")
     }
 
@@ -46,7 +47,7 @@ RowLayout {
     }
 
     Button {
-        id: upload
+        id: uploadBtn
         text: qsTr("Upload")
         padding: 6
         Layout.alignment: Qt.AlignRight | Qt.AlignVCenter

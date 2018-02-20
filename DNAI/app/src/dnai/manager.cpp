@@ -41,6 +41,19 @@ namespace dnai {
         return (project != nullptr) ? project->data() : QJsonObject {};
     }
 
+    void Manager::downloadProjectData(uint index, const QString &id)
+    {
+        api::get_raw_file(id).map([this, index](Response response) -> Response {
+            QFile emptyFile("empty");
+            auto project = this->loadProject(response.body, emptyFile);
+            if (project != nullptr) {
+                m_user->setCurrentFileData(project->data());
+                emit userChanged(m_user);
+            }
+            return response;
+        });
+    }
+
     Project * Manager::loadProject(const QString &path)
     {
         QFile file(QUrl(path).toLocalFile());
@@ -52,8 +65,18 @@ namespace dnai {
 
         QByteArray data = file.readAll();
 
-        QJsonObject obj(QJsonDocument::fromJson(data).object());
+        try {
+            QJsonObject obj(QJsonDocument::fromJson(data).object());
+            return this->loadProject(obj, file);
+        } catch (std::exception) {
 
+        }
+        qWarning("Couldn't parse file.");
+        return nullptr;
+    }
+
+    Project *Manager::loadProject(const QJsonObject &obj, QFile &file)
+    {
         Project *project = new Project(obj["name"].toString(), obj["description"].toString(), file);
         project->unserialize(obj);
         return project;
@@ -361,12 +384,37 @@ namespace dnai {
 
     void Manager::signin(const QString &username, const QString &password)
     {
-        // TODO get user from API
-        api::signin(username, password).map(nullptr, [this](Response response) -> Response {
-            m_user = new models::User();
-            m_user->setName("John Doe");
-            m_user->setProfile_url("../Images/default_user.png");
-            emit userChanged(m_user);
+        api::signin(username, password).map([this](Response response) -> Response {
+            api::get_current_user().map([this](Response response) -> Response {
+                m_user = new models::User();
+                m_user->setName(response.body["first_name"].toString() + " " + response.body["last_name"].toString());
+                m_user->setProfile_url("../Images/default_user.png");
+                updateCurentUserFiles();
+                emit userChanged(m_user);
+                return response;
+            });
+            return response;
+        });
+    }
+
+    bool Manager::uploadFile(const QString &path)
+    {
+        auto file = new QFile(QUrl(path).toLocalFile());
+        if (!file->open(QIODevice::ReadOnly)) {
+            qWarning("Couldn't open file.");
+            return false;
+        }
+        api::post_file(QFileInfo(file->fileName()).fileName(), file);
+        return true;
+    }
+
+    void Manager::updateCurentUserFiles()
+    {
+        api::get_files().map([this](Response response) -> Response {
+            if (m_user != nullptr) {
+                m_user->setFiles(response.body["results"].toArray());
+                emit userChanged(m_user);
+            }
             return response;
         });
     }

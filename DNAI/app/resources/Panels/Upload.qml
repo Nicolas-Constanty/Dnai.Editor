@@ -9,7 +9,7 @@ UploadForm {
     property Popup popup
 
     fileDialog.folder: Qt.resolvedUrl(StandardPath.writableLocation(StandardPath.HomeLocation))
-    chooseButton.onClicked: fileDialog.open()
+    chooseBtn.onClicked: fileDialog.open()
     fileDialog.onAccepted: {
         filesModel.clear();
         for (var i = 0; i < fileDialog.fileUrls.length; ++i) {
@@ -17,5 +17,11 @@ UploadForm {
             const filename = path.replace(/^.*[\\\/]/, '');
             filesModel.append({"filename": filename, "path": path});
         }
+    }
+    uploadBtn.onClicked: {
+        for (var i = 0; i < fileDialog.fileUrls.length; ++i) {
+            Manager.uploadFile(fileDialog.fileUrls[i]);
+        }
+        popup.close()
     }
 }

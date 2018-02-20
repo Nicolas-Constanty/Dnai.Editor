@@ -2,8 +2,6 @@
 #include <QQmlApplicationEngine>
 #include <functional>
 
-#include "api.h"
-#include "http.h"
 #include "views.h"
 #include "models.h"
 #include "qmlresources.h"

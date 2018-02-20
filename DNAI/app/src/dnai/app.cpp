@@ -6,6 +6,8 @@
 #include "dnai/controllers/consolecontroller.h"
 #include "dnai/controllers/clientcontroller.h"
 #include "dnai/commands/commandmanager.h"
+#include "api.h"
+#include "http.h"
 
 namespace dnai
 {
@@ -40,7 +42,8 @@ namespace dnai
 		setupSettings();
 		loadFonts();
         initAppView();
-		loadMainWindow();
+        loadMainWindow();
+        dnai::http::Service::Init(dnai::api::http_config);
 	}
 
     void App::initProcessManager()

@@ -2,6 +2,7 @@
 #define API_API_H
 
 #include <QString>
+#include <QFile>
 #include "dnai/http/observable.h"
 #include "dnai/http/config.h"
 #include "dnai/http/types.h"
@@ -29,8 +30,12 @@ namespace dnai {
 
     public:
         static Observable &signin(QString const &, QString const &);
+        static Observable &get_current_user();
+        static Observable &get_files();
+        static Observable &get_file(QString const &);
+        static Observable &get_raw_file(QString const &);
+        static Observable &post_file(QString const &, QFile *);
         static void logout();
-
     };
 }
 

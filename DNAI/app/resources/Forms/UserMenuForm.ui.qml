@@ -2,6 +2,7 @@ import QtQuick 2.4
 import DNAI 1.0
 
 import "../Controls"
+import "../Components"
 
 Item {
     id: root
@@ -50,27 +51,19 @@ Item {
         y: parent.height
         DMenuItem {
             id: profileBtn
-            font.pixelSize: AppSettings.style.font.pixelSize
-            font.family: AppSettings.style.font.family
             text: qsTr("Profile")
         }
         DMenuItem {
             id: uploadBtn
-            font.pixelSize: AppSettings.style.font.pixelSize
-            font.family: AppSettings.style.font.family
             text: qsTr("Upload")
         }
 
-        Rectangle {
-            border.width: 1
-            anchors.fill: parent
-            height: 1
+        Splitter {
+
         }
 
         DMenuItem {
             id: logoutBtn
-            font.pixelSize: AppSettings.style.font.pixelSize
-            font.family: AppSettings.style.font.family
             text: qsTr("Logout")
         }
     }
