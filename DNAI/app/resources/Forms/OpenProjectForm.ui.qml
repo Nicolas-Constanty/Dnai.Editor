@@ -18,8 +18,6 @@ Page {
     property alias viewData: viewData
     property alias filesData: filesData
     property bool isConnected: false
-    width: 1080
-    height: 720
 
     background: Rectangle {
         color: AppSettings.style.background.color
