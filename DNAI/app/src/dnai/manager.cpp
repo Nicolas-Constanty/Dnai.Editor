@@ -8,7 +8,6 @@
 #include "dnai/models/namespacebarmodel.h"
 #include "dnai/views/declarationcanvas.h"
 #include "dnai/views/declarationview.h"
-#include "dnai/incubator.h"
 
 namespace dnai {
     const QString Manager::project_extension = ".dnaiproject";
