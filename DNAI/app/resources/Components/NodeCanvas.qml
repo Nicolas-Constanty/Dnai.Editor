@@ -14,6 +14,7 @@ import "../Nodes/Operator/UnaryOperator"
 
 CanvasNode {
     id: canvas
+    clip: true
     anchors.fill: parent
     backgroundColor: AppSettings.style.canvas.background
     gridStep: AppSettings.style.canvas.grid.step
