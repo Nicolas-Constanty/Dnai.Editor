@@ -7,4 +7,5 @@ UnaryOperatorModel {
     name: "-1"
     description: "Multiplicate by -1"
     instruction_id: InstructionID.INVERSE
+    menuName: "Reverse"
 }

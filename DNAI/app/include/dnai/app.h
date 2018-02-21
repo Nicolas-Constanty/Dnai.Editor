@@ -8,6 +8,7 @@
 #include "processmanager.h"
 #include "views/appview.h"
 #include "views/instructionview.h"
+#include "models/basicnodemodel.h"
 
 namespace dnai {
     class App : public QGuiApplication
@@ -19,6 +20,7 @@ namespace dnai {
 
         void loadMainWindow();
 	    bool eventFilter(QObject* o, QEvent* event) override;
+		models::BasicNodeModel *basicNodesModel() const;
         void registerSettings(AppSettings* appSetting);
 		QQmlApplicationEngine const* engine() const;
         AppSettings* settings() const;
@@ -40,6 +42,7 @@ namespace dnai {
         AppSettings *m_settings;
         ProcessManager* m_processManager;
 	    views::AppView* m_appView;
+		models::BasicNodeModel *m_nodeModel;
 	    static App *m_instance;
 
         void initProcessManager();

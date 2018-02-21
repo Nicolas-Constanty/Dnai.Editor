@@ -41,7 +41,8 @@ SOURCES += \
     src/dnai/app.cpp \
     src/dnai/settings.cpp \
     src/dnai/models/settingsmodel.cpp \
-    src/dnai/views/canvasnode.cpp
+    src/dnai/views/canvasnode.cpp \
+    src/dnai/models/listnode.cpp
 
 #COMMANDS
 SOURCES += \
@@ -151,7 +152,8 @@ HEADERS += \
     include/dnai/app.h \
     include/dnai/settings.h \
     include/dnai/models/settingsmodel.h \
-    include/dnai/views/canvasnode.h
+    include/dnai/views/canvasnode.h \
+    include/dnai/models/listnode.h
 
 #DNAI
 HEADERS += \
@@ -185,7 +187,6 @@ HEADERS += \
     include/dnai/views/declarationcanvas.h \
     include/dnai/views/contextview.h \
     include/dnai/views/appview.h \
-    include/dnai/views/declarationview.h \
     include/dnai/views/instructionview.h \
     include/dnai/views/layout.h \
 
@@ -225,7 +226,6 @@ HEADERS += \
     include/dnai/models/user.h \
     include/dnai/models/treemodel.h \
     include/dnai/models/treeitem.h \
-    include/dnai/models/treeitem.h \
     include/dnai/models/namespacebarmodel.h \
     include/dnai/models/namespacebaritem.h \
     include/dnai/models/declarationmodel.h \
@@ -236,7 +236,6 @@ HEADERS += \
     include/dnai/qmlresources/instructionid.h \
     include/dnai/qmlresources/declarationtype.h \
     include/dnai/qmlresources/flowtype.h \
-    include/dnai/qmlresources/instructionid.h \
     include/dnai/qmlresources/iotype.h \
     include/dnai/qmlresources/qcstandardpaths.h \
 

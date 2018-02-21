@@ -1,5 +1,6 @@
 import QtQuick 2.2
 import QtQuick.Controls 2.2
+import QtQuick.Window 2.2
 import QtQuick.Dialogs 1.2
 import QtGraphicalEffects 1.0
 import QtQuick.Layouts 1.3
@@ -16,24 +17,32 @@ import "Nodes/Operator/BinaryOperator/Logical"
 import "Nodes/Operator/UnaryOperator"
 import "Panels"
 
-Item {
+Window {
     id: _main
+    visible: true
+    modality: Qt.ApplicationModal
+    flags: Qt.SplashScreen
+    color: "transparent"
 
     function closeSplashScreen()
     {
         _splashScreen.close()
     }
+
     SplashScreen {
         id: _splashScreen
     }
 
-    Component.onCompleted: AppSettings.init()
+    Component.onCompleted:
+    {
+        AppSettings.init()
+    }
 
     Loader {
         id: loader
-        asynchronous: true
+        asynchronous: true//!Manager.isMac()
+        visible: status == Loader.Ready
         sourceComponent: AppSettings.isSettingsLoad() ? _mainWindow : _selectTheme
-        opacity: 0
     }
 
     Component {
@@ -42,6 +51,7 @@ Item {
         AppWindow {
             Component.onCompleted: {
                 closeSplashScreen()
+                _main.close()
             }
         }
     }

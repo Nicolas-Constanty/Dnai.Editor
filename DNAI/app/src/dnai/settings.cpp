@@ -190,4 +190,13 @@ namespace dnai
 		}
 		return pair;
 	}
+    void AppSettings::setValue(const QString &path, const QVariant &value)
+    {
+        m_settings.setValue(path, value);
+    }
+
+    QVariant AppSettings::getValue(const QString &key)
+    {
+        return m_settings.value(key);
+    }
 }

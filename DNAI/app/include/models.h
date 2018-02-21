@@ -21,5 +21,6 @@
 #include "dnai/models/declarationmodel.h"
 #include "dnai/models/settingsmodel.h"
 #include "dnai/models/basicnodemodel.h"
+#include "dnai/models/listnode.h"
 
 #endif // MODELS_H

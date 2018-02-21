@@ -85,6 +85,10 @@ namespace dnai
             m_offset = event->pos();
 			m_totalOffset = QPointF(0,0);
             GenericNode::resetSelected();
+			if (event->button() == Qt::RightButton)
+			{
+				setContextMenu(!m_contextMenu);
+			}
 		}
 
 		void CanvasNode::mouseReleaseEvent(QMouseEvent* event)
@@ -231,7 +235,15 @@ namespace dnai
             update();
         }
 
-        void CanvasNode::resetContent()
+		void CanvasNode::setContextMenu(bool b)
+		{
+			if (b == m_contextMenu)
+				return;
+			m_contextMenu = b;
+			contextMenuChanged(b);
+		}
+
+		void CanvasNode::resetContent()
         {
             if (m_content &&  m_content->childItems().size() > 0)
             {

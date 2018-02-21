@@ -8,4 +8,5 @@ BinaryOperatorModel {
     description: "Binary Or"
     icon: "|"
     instruction_id: InstructionID.BINARY_OR
+    menuName: "Binary Or"
 }

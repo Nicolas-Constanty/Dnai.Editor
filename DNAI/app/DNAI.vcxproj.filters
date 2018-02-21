@@ -455,6 +455,15 @@
     <ClCompile Include="GeneratedFiles\qrc_qml.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
+    <ClCompile Include="Debug\moc_listnode.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_listnode.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\dnai\models\listnode.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\api.h">
@@ -742,6 +751,9 @@
   <ItemGroup>
     <CustomBuild Include="resources\Forms\BasePanelForm.ui">
       <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="include\dnai\models\listnode.h">
+      <Filter>Generated Files</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>

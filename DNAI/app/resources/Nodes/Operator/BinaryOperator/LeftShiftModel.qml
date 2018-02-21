@@ -8,4 +8,5 @@ BinaryOperatorModel {
     description: "Binary left shift"
     icon: "<<"
     instruction_id: InstructionID.LEFT_SHIFT
+    menuName: "Left shift"
 }

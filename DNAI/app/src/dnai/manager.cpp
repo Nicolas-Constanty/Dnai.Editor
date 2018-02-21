@@ -1,4 +1,6 @@
 #include <QJsonDocument>
+#include <QQmlIncubator>
+#include <QQmlProperty>
 
 #include "dnai/app.h"
 #include "dnai/manager.h"
@@ -442,4 +444,28 @@ namespace dnai {
 	{
 		return m_treeView;
 	}
+
+	models::BasicNodeModel* Manager::basicNodesModel() const
+	{
+		return App::currentInstance()->basicNodesModel();
+	}
+
+	void Manager::createNode(QObject *nodeModel)
+	{
+        QString path = "qrc:/resources/Components/Node.qml";
+        QQmlComponent component(App::getEngineInstance(), path);
+        QQuickItem *obj = qobject_cast<QQuickItem*>(component.beginCreate(App::getEngineInstance()->rootContext()));
+        QQmlProperty model(obj, "model", App::getEngineInstance());
+        model.write(QVariant::fromValue(basicNodesModel()->createNode(static_cast<qmlresources::QInstructionID::Instruction_ID>(nodeModel->property("instruction_id").toInt()))));
+        obj->setParentItem(App::instructionView()->canvas()->content());
+        component.completeCreate();
+    }
+    bool Manager::isMac()
+    {
+#ifdef Q_OS_MAC
+        return true;
+#else
+        return false;
+#endif
+    }
 }

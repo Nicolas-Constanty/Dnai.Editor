@@ -45,7 +45,7 @@ private:
 
     TreeItem *rootItem;
     Common *matchModelRecur(TreeItem *ti, Common *c);
-    QHash<int, QByteArray> roleNames() const;
+    virtual QHash<int, QByteArray> roleNames() const override;
 };
 }
 }

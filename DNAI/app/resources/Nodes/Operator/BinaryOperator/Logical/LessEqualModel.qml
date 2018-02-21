@@ -7,4 +7,5 @@ LogicalNodeModel {
     name: "<="
     description: ""
     instruction_id: InstructionID.LOWER_EQUAL
+    menuName: "Less or equal than"
 }
