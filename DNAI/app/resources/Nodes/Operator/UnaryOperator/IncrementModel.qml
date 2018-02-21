@@ -4,4 +4,5 @@ import "../"
 UnaryOperatorModel {
     name: "++"
     description: "Increment"
+    menuName: "Increment"
 }

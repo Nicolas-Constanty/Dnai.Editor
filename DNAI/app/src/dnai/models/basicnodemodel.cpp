@@ -17,12 +17,10 @@ namespace models {
 
 	QVariant BasicNodeModel::data(const QModelIndex& index, int role) const
 	{
-		if (role == NodeCategories::NODE_MODELS)
-        {
+        if (role == NodeCategories::NODE_MODELS)
             return QVariant::fromValue(m_nodes.values().at(index.row()));
-        }
 		if (role == NodeCategories::NAME)
-			return QVariant::fromValue(m_nodes.keys().at(index.row()));
+            return QVariant::fromValue(m_nodes.keys().at(index.row()));
 		return QVariant();
 	}
 
@@ -35,7 +33,7 @@ namespace models {
 	{
 		QHash<int, QByteArray> roles;
 		roles[NodeCategories::NODE_MODELS] = "nodeModels";
-		roles[NodeCategories::NAME] = "name";
+        roles[NodeCategories::NAME] = "name";
 		return roles;
 	}
 

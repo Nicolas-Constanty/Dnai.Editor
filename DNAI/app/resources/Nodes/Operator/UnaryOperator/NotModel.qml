@@ -7,4 +7,5 @@ UnaryOperatorModel {
     name: "!"
     description: "Logical no"
     instruction_id: InstructionID.NOT
+    menuName: "Logical no"
 }

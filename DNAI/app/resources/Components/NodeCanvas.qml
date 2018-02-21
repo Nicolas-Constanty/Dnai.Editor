@@ -59,7 +59,7 @@ CanvasNode {
                         delegate: Item {
                             Action {
                                 id: _subMenu1
-                                text: name
+                                text: menuName
                                 Component.onCompleted: {
                                     _subMenu.addAction(_subMenu1)
                                 }

@@ -15,7 +15,7 @@ namespace dnai {
 			enum NodeCategories
 			{
 				NODE_MODELS = Qt::UserRole + 1,
-				NAME
+                NAME
 			};
 			explicit BasicNodeModel(QObject *parent = nullptr);
 			int rowCount(const QModelIndex&) const override;

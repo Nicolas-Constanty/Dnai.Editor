@@ -8,4 +8,5 @@ BinaryOperatorModel {
     description: "Divide input 1 by input 2"
     icon: "/"
     instruction_id: InstructionID.DIV
+    menuName: "Divide"
 }

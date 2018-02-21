@@ -115,7 +115,8 @@ namespace dnai
 	QObject* App::createQmlComponent(const QString &path)
 	{
 		QQmlComponent component(&m_engine, path);
-		return component.create();
+        while (!component.isReady());
+        return component.create();
 	}
 
 #pragma endregion 
