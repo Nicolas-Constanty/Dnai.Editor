@@ -187,7 +187,6 @@ HEADERS += \
     include/dnai/views/declarationcanvas.h \
     include/dnai/views/contextview.h \
     include/dnai/views/appview.h \
-    include/dnai/views/declarationview.h \
     include/dnai/views/instructionview.h \
     include/dnai/views/layout.h \
 
@@ -227,7 +226,6 @@ HEADERS += \
     include/dnai/models/user.h \
     include/dnai/models/treemodel.h \
     include/dnai/models/treeitem.h \
-    include/dnai/models/treeitem.h \
     include/dnai/models/namespacebarmodel.h \
     include/dnai/models/namespacebaritem.h \
     include/dnai/models/declarationmodel.h \
@@ -238,7 +236,6 @@ HEADERS += \
     include/dnai/qmlresources/instructionid.h \
     include/dnai/qmlresources/declarationtype.h \
     include/dnai/qmlresources/flowtype.h \
-    include/dnai/qmlresources/instructionid.h \
     include/dnai/qmlresources/iotype.h \
     include/dnai/qmlresources/qcstandardpaths.h \
 

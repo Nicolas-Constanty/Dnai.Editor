@@ -406,5 +406,13 @@ namespace dnai {
         model.write(QVariant::fromValue(basicNodesModel()->createNode(static_cast<qmlresources::QInstructionID::Instruction_ID>(nodeModel->property("instruction_id").toInt()))));
         obj->setParentItem(App::instructionView()->canvas()->content());
         component.completeCreate();
-	}
+    }
+    bool Manager::isMac()
+    {
+#ifdef Q_OS_MAC
+        return true;
+#else
+        return false;
+#endif
+    }
 }

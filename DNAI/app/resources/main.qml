@@ -27,13 +27,16 @@ Item {
         id: _splashScreen
     }
 
-    Component.onCompleted: AppSettings.init()
+    Component.onCompleted:
+    {
+        AppSettings.init()
+    }
 
     Loader {
         id: loader
-        asynchronous: true
+        asynchronous: !Manager.isMac()
+        visible: status == Loader.Ready
         sourceComponent: AppSettings.isSettingsLoad() ? _mainWindow : _selectTheme
-        opacity: 0
     }
 
     Component {
