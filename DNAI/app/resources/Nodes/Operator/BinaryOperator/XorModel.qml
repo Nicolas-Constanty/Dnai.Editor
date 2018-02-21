@@ -7,4 +7,5 @@ BinaryOperatorModel {
     name: "\^"
     description: "Binary xor"
     instruction_id: InstructionID.XOR
+    menuName: "Xor"
 }

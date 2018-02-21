@@ -7,4 +7,5 @@ BinaryOperatorModel {
     name: "Access"
     description: ""
     instruction_id: InstructionID.ACCESS
+    menuName: "Access"
 }

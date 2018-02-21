@@ -54,6 +54,7 @@ namespace dnai {
 		Q_INVOKABLE void registerTreeView(QQuickItem *tr);
 		Q_INVOKABLE QQuickItem *treeView() const;
 		Q_INVOKABLE void createNode(QObject *nodeModel);
+        Q_INVOKABLE bool isMac();
 
     signals:
 	    void projectModelChanged(models::TreeModel *model);

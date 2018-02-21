@@ -25,6 +25,8 @@ QVariant ListNode::data(const QModelIndex& index, int role) const
         return m_nodes[index.row()]->property("name");
     if (role == Roles::INSTRUCTION_ID)
         return m_nodes[index.row()]->property("instruction_id");
+    if (role == Roles::MENU_NAME)
+        return m_nodes[index.row()]->property("menuName");
     return QVariant();
 }
 
@@ -53,6 +55,7 @@ QHash<int, QByteArray> ListNode::roleNames() const
     roles[Roles::ITEM] = "item";
     roles[Roles::NAME] = "name";
     roles[Roles::INSTRUCTION_ID] = "instruction_id";
+    roles[Roles::MENU_NAME] = "menuName";
     return roles;
 }
 }

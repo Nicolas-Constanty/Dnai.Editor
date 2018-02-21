@@ -45,6 +45,8 @@ public:
 
     Q_INVOKABLE qreal getSettingNumber(const QString &path);
 
+    QVariant getValue(const QString &key);
+    void setValue(const QString &path, const QVariant &value);
 private:
     static QPair<QStringList, QList<QVariant>> findObject(QJsonObject obj, const QString root);
     bool m_isInit;

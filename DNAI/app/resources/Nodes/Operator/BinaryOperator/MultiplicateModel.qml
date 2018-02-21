@@ -8,4 +8,5 @@ BinaryOperatorModel {
     description: "Multiplicate input 1 by input 2"
     icon: "x"
     instruction_id: InstructionID.MUL
+    menuName: "Multiplicate"
 }

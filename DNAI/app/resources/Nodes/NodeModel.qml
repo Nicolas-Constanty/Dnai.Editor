@@ -3,6 +3,7 @@ import QtQuick 2.0
 Item {
     property string name: "Node name"
     property string description: "This the node descrition"
+    property string menuName: "default menu name"
     property bool flowIn: true
     property bool flowOut: true
     property string icon: ""

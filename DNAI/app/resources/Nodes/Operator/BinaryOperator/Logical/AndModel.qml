@@ -10,4 +10,5 @@ LogicalNodeModel {
         ListElement { t: IOType.Bool; n: "Value 2" }
     }
     instruction_id: InstructionID.AND
+    menuName: "And"
 }

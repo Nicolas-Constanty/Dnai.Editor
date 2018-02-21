@@ -8,4 +8,5 @@ BinaryOperatorModel {
     description: "Modulo input 1 by input2"
     icon: "%"
     instruction_id: InstructionID.MOD
+    menuName: "Modulo"
 }

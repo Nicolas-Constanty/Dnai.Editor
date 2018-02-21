@@ -13,7 +13,8 @@ namespace dnai
 				enum Roles {
 				ITEM = Qt::UserRole + 1,
 				NAME,
-				INSTRUCTION_ID
+                INSTRUCTION_ID,
+                MENU_NAME
 			};
 		public:
 			explicit ListNode(QObject *parent = nullptr);
