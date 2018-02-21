@@ -27,6 +27,7 @@ namespace dnai {
 
     public:
         static QString const &getToken();
+        static void setUser(User const &);
 
     public:
         static Observable &signin(QString const &, QString const &);

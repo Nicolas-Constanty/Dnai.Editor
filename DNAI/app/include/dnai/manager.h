@@ -45,6 +45,7 @@ namespace dnai {
 	    Q_INVOKABLE void addFunction(int index, int listindex) const;
 	    Q_INVOKABLE void addVariable(int index, int listindex) const;
 	    Q_INVOKABLE void signin(const QString &, const QString &);
+        Q_INVOKABLE void getCurrentUser();
         Q_INVOKABLE bool uploadFile(const QString &);
         Q_INVOKABLE void updateCurentUserFiles();
 	    Q_INVOKABLE void logout();

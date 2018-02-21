@@ -2,6 +2,7 @@
 #include <QHttpMultiPart>
 
 #include "dnai/api/api.h"
+#include "dnai/app.h"
 #include "dnai/http/service.h"
 
 namespace dnai {
@@ -91,5 +92,10 @@ const Config api::http_config = {
     QString const &api::getToken()
     {
         return user.token;
+    }
+
+    void api::setUser(const api::User &user)
+    {
+        api::user = user;
     }
 }
