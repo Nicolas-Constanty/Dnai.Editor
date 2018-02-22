@@ -11,6 +11,7 @@ using namespace dnai::http;
 
 namespace dnai {
     class  api {
+    public:
         struct User {
             QString token;
             QString refresh_token;
@@ -19,6 +20,7 @@ namespace dnai {
 
     public:
         static const Config http_config;
+        static const QString settings_key;
 
     private:
         static const QString client_id;
@@ -31,6 +33,7 @@ namespace dnai {
 
     public:
         static Observable &signin(QString const &, QString const &);
+        static Observable &refresh_token();
         static Observable &get_current_user();
         static Observable &get_files();
         static Observable &get_file(QString const &);
@@ -39,5 +42,11 @@ namespace dnai {
         static void logout();
     };
 }
+
+Q_DECLARE_METATYPE(dnai::api::User)
+
+QDataStream& operator<<(QDataStream& out, const dnai::api::User& v);
+
+QDataStream& operator>>(QDataStream& in, dnai::api::User& v);
 
 #endif // API_API_H

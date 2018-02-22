@@ -9,6 +9,7 @@ namespace dnai {
 const QString api::client_id = "sINQmt18nib3vVlI4B71NKaQjXGWMYxrNJWuuS6e";
 const QString api::client_secret = "pMi9ScKMPv3IgHgCQmKHKX7yxJY5KMd2KXfWKRMa2jk1qyiSz7AJqllnvpFIfstnIDkausSlqgoWJabYIkXnPGiXgaKE9ikPeILVvoWlifaFSngX2QIA3sJFWH0EO9oH";
 api::User api::user = {};
+const QString api::settings_key = "/current/user";
 const Config api::http_config = {
     "http://163.5.84.173",
       {},
@@ -36,11 +37,33 @@ const Config api::http_config = {
                            {"password", password}
                        })
                 .map([](Response response) -> Response {
-            dnai::api::user = {
+            api::setUser({
                 response.body["access_token"].toString(),
                 response.body["refresh_token"].toString(),
                 QDateTime::currentDateTime().addSecs(response.body["expires_in"].toInt())
-            };
+            });
+            return response;
+        });
+    }
+
+    Observable &api::refresh_token()
+    {
+        return Service::url("oauth", "token")
+                ->headers(
+                    Headers{
+                        {"Authorization", "Basic " + QString(client_id + ":" + client_secret).toUtf8().toBase64()},
+                        {"Content-Type", "application/x-www-form-urlencoded"}
+                    })
+                ->post(Form{
+                           {"grant_type", "refresh_token"},
+                           {"refresh_token", api::user.refresh_token}
+                       })
+                .map([](Response response) -> Response {
+            api::setUser({
+                response.body["access_token"].toString(),
+                response.body["refresh_token"].toString(),
+                QDateTime::currentDateTime().addSecs(response.body["expires_in"].toInt())
+            });
             return response;
         });
     }
@@ -97,5 +120,20 @@ const Config api::http_config = {
     void api::setUser(const api::User &user)
     {
         api::user = user;
+        App::currentInstance()->settings()->setValue(api::settings_key, QVariant::fromValue(api::user));
     }
+}
+
+QDataStream &operator<<(QDataStream &out, const dnai::api::User &v)
+{
+    out << v.token << v.refresh_token << v.expire_date;
+    return out;
+}
+
+QDataStream &operator>>(QDataStream &in, dnai::api::User &v)
+{
+    in >> v.token;
+    in >> v.refresh_token;
+    in >> v.expire_date;
+    return in;
 }

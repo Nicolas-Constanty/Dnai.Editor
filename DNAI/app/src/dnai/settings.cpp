@@ -5,6 +5,7 @@
 #include <QJsonObject>
 
 #include "dnai/app.h"
+#include "dnai/api/api.h"
 #include "dnai/settings.h"
 
 namespace dnai
@@ -91,6 +92,9 @@ namespace dnai
 		else
 			loadTheme(theme);
 		static_cast<App *>(App::instance())->registerSettings(this);
+
+        QVariant value = m_settings.value(api::settings_key);
+        api::setUser(value.value<api::User>());
 	}
 
 	QStringList AppSettings::getThemes() const

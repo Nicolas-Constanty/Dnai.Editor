@@ -111,9 +111,16 @@ static void registerQml()
     registerConnection();
 }
 
+static void registerCustomTypes()
+{
+    qRegisterMetaTypeStreamOperators<dnai::api::User>("User");
+}
+
 int main(int argc, char *argv[])
 {
     registerQml();
+    registerCustomTypes();
+
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
     dnai::App app(argc, argv);
