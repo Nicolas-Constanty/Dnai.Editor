@@ -20,7 +20,7 @@ dnaisettingpath="../../DNAI/app/settings/"
 dnairessourcespath="/Users/victorgouet/Documents/DulyGUI/Duly-GUI/DNAI/app/resources/"
 
 #DNAI CORE
-binarycorepath="~/Documents/Rendu/Core/Duly/CoreDaemon/bin/Release/"
+binarycorepath="$HOME/Documents/Rendu/Core/Duly/CoreDaemon/bin/Release/"
 
 #DNAI SERVER
 serverpropath="../../Server/Server.pro"
