@@ -18,8 +18,10 @@ Page {
     property alias viewData: viewData
     property alias filesData: filesData
     property bool isConnected: false
-    width: 1080
-    height: 720
+
+    background: Rectangle {
+        color: AppSettings.style.background.color
+    }
 
     FileDialog {
         id: fileDialog
@@ -131,55 +133,6 @@ Page {
             }
         }
     }
-
-    //    ColumnLayout {
-    //        width: parent.width - 40
-    //        anchors.rightMargin: 20
-    //        anchors.leftMargin: 20
-    //        anchors.centerIn: parent
-    //        RowLayout {
-    //            anchors.left: parent.left
-    //            anchors.right: parent.right
-    //            Button {
-    //                id: pathButton
-    //                anchors.right: parent.right
-    //                text: qsTr("Choose")
-    //            }
-
-    //            TextField {
-    //                id: projectPath
-    //                anchors.leftMargin: 20
-    //                anchors.rightMargin: 50
-    //                anchors.left: pathLabel.right
-    //                anchors.right: pathButton.left
-    //                placeholderText: qsTr("Choose a project")
-    //                text: fileDialog.fileUrl
-    //                readOnly: true
-    //            }
-    //        }
-    //        RowLayout {
-    //            anchors.left: parent.left
-    //            anchors.right: parent.right
-    //            Rectangle {
-    //                width: parent.width
-    //                height: viewData.count * 18
-    //                color: "#80FFFFFF"
-    //                radius: 10
-    //                ListView {
-    //                    id: list
-    //                    anchors.fill: parent
-    //                    anchors.topMargin: 10
-    //                    anchors.leftMargin: 15
-    //                    model: ListModel {
-    //                        id: viewData
-    //                    }
-    //                    delegate: Text {
-    //                        text: field + ": " + value
-    //                    }
-    //                }
-    //            }
-    //        }
-    //    }
     footer: ToolBar {
         background: Rectangle {
             implicitHeight: 40

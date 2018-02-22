@@ -128,14 +128,20 @@ Page {
             anchors.left: parent.left
             leftPadding: 20
             rightPadding: 20
-            text: qsTr("Cancel")
+            contentItem: Text {
+                text: qsTr("Cancel")
+                color: AppSettings.style.text.color
+            }
         }
         ToolButton {
             id: createButton
             anchors.right: parent.right
             leftPadding: 20
             rightPadding: 20
-            text: qsTr("Create")
+            contentItem: Text {
+                text: qsTr("Create")
+                color: AppSettings.style.text.color
+            }
         }
         background: Rectangle {
             height: createButton.height

@@ -400,14 +400,7 @@ Item {
         id: openProjectPopup
         x: parent.width / 2 - width / 2
         y: appWindow.height / 2 - height / 2
-        background: Rectangle {
-            color: AppSettings.style.background.color
-        }
-        width: 640
-        height: 480
-        modal: true
-        focus: true
-        closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutside
+        width: 700
         contentItem: OpenProject {
             anchors.fill: parent
             id: openProjectPanel

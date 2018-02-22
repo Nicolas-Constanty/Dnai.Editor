@@ -12,6 +12,9 @@ UserMenuForm {
     imgSrc: ""
     opened: false
 
+    Component.onCompleted: {
+        Manager.getCurrentUser();
+    }
 
     mouseArea.onClicked: {
         if (!Manager.user) {

@@ -86,6 +86,7 @@ OpenProjectForm {
             MLabel {
                 anchors.left: parent.left
                 anchors.right: _downloadButton.left
+                height: _downloadButton.height
                 text: title
                 horizontalAlignment: Qt.AlignLeft
             }
