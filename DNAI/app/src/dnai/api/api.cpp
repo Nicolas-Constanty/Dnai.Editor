@@ -9,17 +9,24 @@ namespace dnai {
 const QString api::client_id = "sINQmt18nib3vVlI4B71NKaQjXGWMYxrNJWuuS6e";
 const QString api::client_secret = "pMi9ScKMPv3IgHgCQmKHKX7yxJY5KMd2KXfWKRMa2jk1qyiSz7AJqllnvpFIfstnIDkausSlqgoWJabYIkXnPGiXgaKE9ikPeILVvoWlifaFSngX2QIA3sJFWH0EO9oH";
 api::User api::user = {};
+bool api::refreshing_token = false;
+quint64 api::refreshing_delta = 3600;
 const QString api::settings_key = "/current/user";
 const Config api::http_config = {
     "http://163.5.84.173",
       {},
       {
-          [](Url *url) {
+        [](Url *url) {
             auto token = getToken();
             if (!token.isEmpty()) {
-              url->addHeader("Authorization", "Bearer " + token);
-          }
-      }
+                url->addHeader("Authorization", "Bearer " + token);
+            }
+        },
+        [](Url *url) {
+            if (api::refreshing_token == false && QDateTime::currentDateTime().addSecs(api::refreshing_delta) >= api::user.expire_date) {
+                api::refresh_token();
+            }
+        }
     }
   };
 
@@ -48,6 +55,7 @@ const Config api::http_config = {
 
     Observable &api::refresh_token()
     {
+        api::refreshing_token = true;
         return Service::url("oauth", "token")
                 ->headers(
                     Headers{
@@ -64,6 +72,7 @@ const Config api::http_config = {
                 response.body["refresh_token"].toString(),
                 QDateTime::currentDateTime().addSecs(response.body["expires_in"].toInt())
             });
+            api::refreshing_token = false;
             return response;
         });
     }

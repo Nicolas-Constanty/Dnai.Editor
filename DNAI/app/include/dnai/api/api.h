@@ -21,6 +21,9 @@ namespace dnai {
     public:
         static const Config http_config;
         static const QString settings_key;
+    private:
+        static bool refreshing_token;
+        static quint64 refreshing_delta;
 
     private:
         static const QString client_id;
