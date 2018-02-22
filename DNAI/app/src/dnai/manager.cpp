@@ -353,22 +353,22 @@ namespace dnai {
 
     void Manager::addContext(const int index, const int listindex) const
     {
-        qvariant_cast<models::Declaration *>(m_declRef->data(m_declRef->index(listindex , 0)))->addModel(new models::Context("undefined", "Context", "", QVector2D(), index, listindex));
+        qvariant_cast<models::Declaration *>(m_declRef->data(m_declRef->index(listindex , 0)))->addModel(new models::Context(-1, "Context", "", QVector2D(), index, listindex));
     }
 
     void Manager::addClass(const int index, const int listindex) const
     {
-        qvariant_cast<models::Declaration *>(m_declRef->data(m_declRef->index(listindex , 0)))->addModel(new models::Class("undefined", "Class", "", QVector2D(), index, listindex));
+        qvariant_cast<models::Declaration *>(m_declRef->data(m_declRef->index(listindex , 0)))->addModel(new models::Class(-1, "Class", "", QVector2D(), index, listindex));
     }
 
     void Manager::addFunction(const int index, const int listindex) const
     {
-        qvariant_cast<models::Declaration *>(m_declRef->data(m_declRef->index(listindex , 0)))->addModel(new models::Function("undefined", "Function", "", QVector2D(), index, listindex));
+        qvariant_cast<models::Declaration *>(m_declRef->data(m_declRef->index(listindex , 0)))->addModel(new models::Function(-1, "Function", "", QVector2D(), index, listindex));
     }
 
     void Manager::addVariable(const int index, const int listindex) const
     {
-        qvariant_cast<models::Declaration *>(m_declRef->data(m_declRef->index(listindex , 0)))->addModel(new models::Variable("undefined", "Variable", "", QVector2D(), "generic", false, index, listindex));
+        qvariant_cast<models::Declaration *>(m_declRef->data(m_declRef->index(listindex , 0)))->addModel(new models::Variable(-1, "Variable", "", QVector2D(), "generic", false, index, listindex));
     }
 
     models::User *Manager::user() const

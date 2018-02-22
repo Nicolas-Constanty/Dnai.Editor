@@ -28,6 +28,8 @@ namespace dnai
 			*/
 			void execAll();
 
+			void exec(ICommand *command);
+
 			/**
 			* \brief Exectute the next command
 			* \param levels

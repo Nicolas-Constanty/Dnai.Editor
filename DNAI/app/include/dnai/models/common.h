@@ -26,11 +26,11 @@ class Common: public QObject, virtual public IModel
     Q_PROPERTY(int index READ index WRITE setIndex NOTIFY indexChanged)
     Q_PROPERTY(int type READ type WRITE setType NOTIFY typeChanged)
 public:
-    Common(QString const &, QString const &, QString const &, int index, int listindex, QObject * = nullptr);
+    Common(qint32 uid, QString const &name, QString const &description, int index, int listindex, QObject *parent = nullptr);
     virtual ~Common();
 
-    QString uid() const;
-    void setUid(const QString &uid);
+	qint32 uid() const;
+    void setUid(qint32 uid);
 
     QString name() const;
     void setName(const QString &name);
@@ -51,7 +51,7 @@ public:
     Q_INVOKABLE bool isSelect() const { return m_select; }
 
 private:
-    QString m_uid;
+	qint32 m_uid;
     QString m_name;
     QString m_description;
     int m_index;

@@ -10,7 +10,8 @@ namespace models {
 class Output: public Variable, Identity, virtual public IModel
 {
 public:
-    Output(QString const &, QString const &, QString const &, QString const &, bool, QString const &, QObject *parent = nullptr);
+	Output(qint32 uid, QString const& name, QString const& description, QString const& type, bool internal,
+	       QString const& linked_uid, QObject* parent = nullptr);
     virtual ~Output();
 
     // IModel interface

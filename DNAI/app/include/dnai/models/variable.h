@@ -13,7 +13,8 @@ namespace models {
 class Variable: public Common, public Position, virtual public IModel
 {
 public:
-    Variable(const QString &uid, const QString &name, const QString &description, const QVector2D &position, const QString &type, bool internal, int index, int listindex, QObject *parent= nullptr);
+	Variable(qint32 uid, QString const& name, QString const& description, QVector2D const& position, QString const& type,
+	         bool internal, int index, int listindex, QObject* parent = nullptr);
     virtual ~Variable();
 
 private:

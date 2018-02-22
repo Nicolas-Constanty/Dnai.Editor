@@ -10,7 +10,8 @@ namespace models {
 class Input: public Variable, Identity, virtual public IModel
 {
 public:
-    Input(QString const &, QString const &, QString const &, QString const &, bool, QString const &, QObject *parent = nullptr);
+	Input(qint32 uid, QString const& name, QString const& description, QString const& type, bool internal,
+	      QString const& linked_uid, QObject* parent = nullptr);
     virtual ~Input();
 
     // IModel interface

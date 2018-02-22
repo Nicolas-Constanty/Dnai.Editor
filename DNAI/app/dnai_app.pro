@@ -40,9 +40,8 @@ SOURCES += \
     src/dnai/project.cpp \
     src/dnai/app.cpp \
     src/dnai/settings.cpp \
-    src/dnai/models/settingsmodel.cpp \
-    src/dnai/views/canvasnode.cpp \
-    src/dnai/models/listnode.cpp
+    src/dnai/processmanager.cpp \
+
 
 #COMMANDS
 SOURCES += \
@@ -50,14 +49,6 @@ SOURCES += \
     src/dnai/commands/movenodecommand.cpp \
     src/dnai/commands/movecanvascommand.cpp \
     src/dnai/commands/zoomcanvascommand.cpp
-
-SOURCES += \
-    src/dnai/controllers/clientcontroller.cpp \
-    src/dnai/processmanager.cpp \
-    src/dnai/models/treemodel.cpp \
-    src/dnai/models/treeitem.cpp \
-    src/dnai/models/namespacebarmodel.cpp \
-    src/dnai/models/namespacebaritem.cpp
 
 #VIEWS
 SOURCES += \
@@ -78,6 +69,7 @@ SOURCES += \
     src/dnai/views/contextview.cpp \
     src/dnai/views/appview.cpp \
     src/dnai/views/instructionview.cpp \
+    src/dnai/views/canvasnode.cpp \
     src/dnai/views/layout.cpp
 
 #COMMANDS
@@ -89,9 +81,14 @@ SOURCES += \
 
 
 #CONTROLLERS
-SOURCES += src/dnai/controllers/inputcontroller.cpp \
+SOURCES += \
+    src/dnai/controllers/inputcontroller.cpp \
     src/dnai/controllers/outputcontroller.cpp \
     src/dnai/controllers/consolecontroller.cpp \
+    src/dnai/controllers/clientcontroller.cpp \
+    src/dnai/controllers/icontroller.cpp \
+    src/dnai/controllers/contextcontroller.cpp
+
 
 #MODELS
 SOURCES += src/dnai/models/class.cpp \
@@ -108,7 +105,12 @@ SOURCES += src/dnai/models/class.cpp \
     src/dnai/models/user.cpp \
     src/dnai/models/declarationmodel.cpp \
     src/dnai/models/basicnodemodel.cpp \
-
+    src/dnai/models/treemodel.cpp \
+    src/dnai/models/treeitem.cpp \
+    src/dnai/models/namespacebarmodel.cpp \
+    src/dnai/models/namespacebaritem.cpp \
+    src/dnai/models/settingsmodel.cpp \
+    src/dnai/models/listnode.cpp
 #HTTP
 SOURCES += \
     src/dnai/http/url.cpp \
@@ -151,9 +153,7 @@ HEADERS += \
     include/http.h \
     include/dnai/app.h \
     include/dnai/settings.h \
-    include/dnai/models/settingsmodel.h \
-    include/dnai/views/canvasnode.h \
-    include/dnai/models/listnode.h
+
 
 #DNAI
 HEADERS += \
@@ -189,6 +189,7 @@ HEADERS += \
     include/dnai/views/appview.h \
     include/dnai/views/instructionview.h \
     include/dnai/views/layout.h \
+    include/dnai/views/canvasnode.h \
 
 #COMMANDS
 HEADERS += \
@@ -207,6 +208,8 @@ HEADERS += \
     include/dnai/controllers/outputcontroller.h \
     include/dnai/controllers/consolecontroller.h \
     include/dnai/controllers/clientcontroller.h \
+    include/dnai/controllers/icontroller.h \
+    include/dnai/controllers/contextcontroller.h \
 
 #MODELS
 HEADERS += \
@@ -230,6 +233,8 @@ HEADERS += \
     include/dnai/models/namespacebaritem.h \
     include/dnai/models/declarationmodel.h \
     include/dnai/models/basicnodemodel.h \
+    include/dnai/models/settingsmodel.h \
+    include/dnai/models/listnode.h \
 
 #QMLRESOURCES
 HEADERS += \

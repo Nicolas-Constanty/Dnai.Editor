@@ -2,7 +2,7 @@
 
 namespace dnai {
     namespace models {
-        Flow::Flow(QString const &uid, QString const &name, QString const &description, QString const &linked_uid, QObject *parent)
+        Flow::Flow(const qint32 uid, QString const &name, QString const &description, QString const &linked_uid, QObject *parent)
             :Common(uid, name, description, 0, 0, parent), Identity(linked_uid)
         {
 

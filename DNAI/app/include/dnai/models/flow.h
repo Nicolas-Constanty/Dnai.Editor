@@ -10,7 +10,7 @@ namespace models {
 class Flow: public Common, public Identity, virtual public IModel
 {
 public:
-    Flow(QString const &, QString const &, QString const &, QString const &, QObject *parent = nullptr);
+    Flow(const qint32 uid, QString const &name, QString const &description, QString const &linked_uid, QObject *parent = nullptr);
     virtual ~Flow();
 
     // IModel interface

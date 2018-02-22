@@ -31,7 +31,7 @@ namespace dnai {
     class Project: public models::Common
     {
     public:
-        Project(const QString &, const QString &, const QString &, QFile &);
+	    Project(qint32 uid, QString const& name, QString const& description, QFile& file);
         Project(const QString &, const QString &, QFile &);
         virtual ~Project();
 

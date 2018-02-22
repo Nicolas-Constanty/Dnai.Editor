@@ -15,7 +15,8 @@ namespace models {
 class Function: public Common, public Position, virtual public IModel
 {
 public:
-    Function(QString const &, QString const &, QString const &, QVector2D const &, int list, int listindex, QObject * = nullptr);
+	Function(qint32 uid, QString const& name, QString const& description, QVector2D const& position, int index, int listindex,
+	         QObject* parent = nullptr);
     virtual ~Function();
 
 private:

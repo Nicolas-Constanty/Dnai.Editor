@@ -14,7 +14,7 @@ namespace models {
 class Class: public Common, public Position, virtual public IModel
 {
 public:
-    Class(QString const &, QString const &, QString const &, QVector2D const &, int index, int listindex, QObject * = nullptr);
+    Class(qint32 uid, QString const &name, QString const &description, QVector2D const &position, int index, int listindex, QObject *parent = nullptr);
     virtual ~Class();
 
 private:

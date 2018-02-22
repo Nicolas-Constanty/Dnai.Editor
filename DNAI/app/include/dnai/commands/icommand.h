@@ -7,9 +7,10 @@ namespace dnai
 {
 	namespace commands
 	{
+
 		class ICommand
 		{
-		public:
+		protected:
 			virtual ~ICommand() = default;
 
 			/**
@@ -30,6 +31,8 @@ namespace dnai
 			virtual QString infos() const = 0;
 
 			virtual bool isSave() const = 0;
+			friend class CommandManager;
+            friend class DebugDecorator;
 		};
 	}
 }

@@ -2,7 +2,7 @@
 
 namespace dnai {
     namespace models {
-        Common::Common(QString const &uid, QString const &name, QString const &description, int index, int listindex, QObject *parent)
+        Common::Common(const qint32 uid, QString const &name, QString const &description, const int index, const int listindex, QObject *parent)
             : QObject(parent), m_uid(uid), m_name(name), m_description(description), m_index(index), m_listindex(listindex), m_select(false), m_type(ModelTypes::Common)
         {
         }
@@ -12,12 +12,12 @@ namespace dnai {
 
         }
 
-        QString Common::uid() const
+		qint32 Common::uid() const
         {
             return m_uid;
         }
 
-        void Common::setUid(const QString &uid)
+        void Common::setUid(qint32 uid)
         {
             m_uid = uid;
         }

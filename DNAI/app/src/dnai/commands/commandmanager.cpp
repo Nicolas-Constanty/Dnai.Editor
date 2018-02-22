@@ -32,18 +32,24 @@ namespace dnai
             }
 		}
 
+		void CommandManager::exec(ICommand* c)
+		{
+			if (c->isSave())
+			{
+				c->executeSave();
+				m_undoList.push(c);
+			}
+			else
+				c->execute();
+		}
+
+
 		void CommandManager::execAll()
 		{
 			while (!m_doList.empty())
             {
 				ICommand *c = m_doList.front();
-				if (c->isSave())
-                {
-                    c->executeSave();
-					m_undoList.push(c);
-				}
-                else
-                    c->execute();
+				exec(c);
 				m_doList.pop();
             }
 		}

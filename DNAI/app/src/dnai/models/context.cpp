@@ -6,7 +6,7 @@
 
 namespace dnai {
     namespace models {
-        Context::Context(QString const &uid, QString const &name, QString const &description, QVector2D const &position, int index, int listindex, QObject *parent)
+        Context::Context(const qint32 uid, QString const &name, QString const &description, QVector2D const &position, const int index, const int listindex, QObject *parent)
             : Common(uid, name, description, index, listindex, parent), Position(position)
         {
             m_type = ModelTypes::Context;

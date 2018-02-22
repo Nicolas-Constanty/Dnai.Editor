@@ -16,7 +16,8 @@ class Function;
 class Node: public Common, public Position, virtual public IModel
 {
 public:
-    Node(QString const &, QString const &, QString const &, QVector2D const &, Function * = nullptr, QObject * = nullptr);
+	Node(qint32 uid, QString const& name, QString const& description, QVector2D const& position, Function* function,
+	     QObject* parent = nullptr);
     virtual ~Node();
 
 private:

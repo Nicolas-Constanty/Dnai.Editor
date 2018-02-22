@@ -5,7 +5,7 @@
 
 namespace dnai {
     namespace models {
-        Class::Class(QString const &uid, QString const &name, QString const &description, QVector2D const &position, int index, int listindex, QObject *parent)
+        Class::Class(const qint32 uid, QString const &name, QString const &description, QVector2D const &position, const int index, const int listindex, QObject *parent)
             : Common(uid, name, description, index, listindex, parent), Position(position)
         {
             m_type = ModelTypes::Class;

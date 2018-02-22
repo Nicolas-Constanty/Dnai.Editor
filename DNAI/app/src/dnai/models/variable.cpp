@@ -3,7 +3,7 @@
 
 namespace dnai {
     namespace models {
-        Variable::Variable(QString const &uid, QString const &name, QString const &description, QVector2D const &position,
+        Variable::Variable(const qint32 uid, QString const &name, QString const &description, QVector2D const &position,
                            QString const &type, bool internal, int index, int listindex,
                            QObject *parent)
             : Common(uid, name, description, index, listindex, parent), Position(position), m_vartype(type), m_internal(internal)

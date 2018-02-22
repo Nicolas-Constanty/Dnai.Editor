@@ -4,16 +4,16 @@
 #include "dnai/project.h"
 
 namespace dnai {
-    Project::Project(QString const &uid, QString const &name, QString const &description, QFile &file)
+    Project::Project(const qint32 uid, QString const &name, QString const &description, QFile &file)
         : models::Common(uid, name, description, 0, 0), m_file(file),
-          m_main(new models::Context("main_uid","DNAI", "main", QVector2D(), 0, 0))
+          m_main(new models::Context(-1,"DNAI", "main", QVector2D(), 0, 0))
     {
 
     }
 
     Project::Project(QString const &name, QString const &description, QFile &file)
-        : models::Common("project_uid", name, description, 0, 0), m_file(file),
-          m_main(new models::Context("main_uid","DNAI", "main", QVector2D(), 0, 0))
+        : models::Common(-2, name, description, 0, 0), m_file(file),
+          m_main(new models::Context(-1,"DNAI", "main", QVector2D(), 0, 0))
     {
 
     }
@@ -63,8 +63,8 @@ namespace dnai {
     models::Variable *Project::unserializeVariable(const QJsonObject &obj, QObject *parent)
     {
         ++count.variables;
-        auto model = new models::Variable(
-                    obj["uid"].toString(),
+	    const auto model = new models::Variable(
+                    obj["uid"].toInt(),
                     obj["name"].toString(),
                     obj["description"].toString(),
                     unserializePosition(obj["position"].toObject()),
@@ -81,7 +81,7 @@ namespace dnai {
     {
         ++count.inputs;
         auto model = new models::Input(
-                    obj["uid"].toString(),
+                    obj["uid"].toInt(),
                     obj["name"].toString(),
                     obj["description"].toString(),
                     obj["type"].toString(),
@@ -96,7 +96,7 @@ namespace dnai {
     {
         ++count.outputs;
         auto model = new models::Output(
-                    obj["uid"].toString(),
+                    obj["uid"].toInt(),
                     obj["name"].toString(),
                     obj["description"].toString(),
                     obj["type"].toString(),
@@ -111,7 +111,7 @@ namespace dnai {
     {
         ++count.flows;
         auto model = new models::Flow(
-                    obj["uid"].toString(),
+                    obj["uid"].toInt(),
                     obj["name"].toString(),
                     obj["description"].toString(),
                     obj["linked_uid"].toString(),
@@ -124,7 +124,7 @@ namespace dnai {
     {
         ++count.functions;
         auto model = new models::Function(
-                    obj["uid"].toString(),
+                    obj["uid"].toInt(),
                     obj["name"].toString(),
                     obj["description"].toString(),
                     unserializePosition(obj["position"].toObject()),
@@ -158,7 +158,7 @@ namespace dnai {
     {
         ++count.classes;
         auto model = new models::Class(
-                    obj["uid"].toString(),
+                    obj["uid"].toInt(),
                     obj["name"].toString(),
                     obj["description"].toString(),
                     unserializePosition(obj["position"].toObject()),
@@ -191,7 +191,7 @@ namespace dnai {
     {
         ++count.contexts;
         auto model = new models::Context(
-                    obj["uid"].toString(),
+                    obj["uid"].toInt(),
                     obj["name"].toString(),
                     obj["description"].toString(),
                     unserializePosition(obj["position"].toObject()),
@@ -229,7 +229,7 @@ namespace dnai {
         });
 
         auto model = new models::Node(
-                    obj["uid"].toString(),
+                    obj["uid"].toInt(),
                     obj["name"].toString(),
                     obj["description"].toString(),
                     unserializePosition(obj["position"].toObject()),
