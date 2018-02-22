@@ -82,8 +82,8 @@ const Config api::http_config = {
         //TODO when API work `/users/me` and remove John Doe
         return Service::url("users", "1")->get().map([](Response response) -> Response {
             response.body = QJsonObject{
-            {"first_name", "John"},
-            {"last_name", "Doe"},
+            {"first_name", "Adrien"},
+            {"last_name", "WERY"},
         };
             return response;
         });
@@ -91,12 +91,12 @@ const Config api::http_config = {
 
     Observable &api::get_files()
     {
-        return Service::url("cloud", "files")->get();
+        return Service::url("files")->get();
     }
 
     Observable &api::get_file(QString const &id)
     {
-        return Service::url("cloud", "files", id.toLatin1().data())->get();
+        return Service::url("files", id.toLatin1().data())->get();
     }
 
     Observable &api::get_raw_file(QString const &id)
@@ -113,12 +113,12 @@ const Config api::http_config = {
         multiPart->append(http::Service::makeHttpPart("file", file));
         file->setParent(multiPart);
 
-        return Service::url("cloud", "files")->post(multiPart);
+        return Service::url("files")->post(multiPart);
     }
 
     void api::logout()
     {
-        user = {};
+        api::setUser({});
     }
 
     QString const &api::getToken()

@@ -386,6 +386,10 @@ namespace dnai {
         api::signin(username, password).map([this](Response response) -> Response {
             getCurrentUser();
             return response;
+        },
+        [this](Response response) -> Response {
+            emit apiErrors();
+            return response;
         });
     }
 

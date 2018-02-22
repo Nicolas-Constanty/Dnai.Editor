@@ -19,11 +19,21 @@ LoginForm {
     }
 
     signin.onClicked: {
+        error = ""
         if (username.text && password.text) {
             Manager.signin(username.text, password.text);
         }
         username.text = ""
         password.text = ""
+    }
+
+    Connections {
+        target: Manager
+
+        onApiErrors: {
+            error = "Invalid Credentials"
+
+        }
     }
 //    Rectangle {
 //        anchors.fill: parent

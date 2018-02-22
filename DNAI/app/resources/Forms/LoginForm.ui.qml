@@ -10,6 +10,7 @@ ColumnLayout {
     property alias forgetPasswordLink: forgetPasswordLink
     property alias username: login
     property alias password: password
+    property string error: ""
 
     anchors.fill: parent
     anchors.margins: 3
@@ -39,6 +40,13 @@ ColumnLayout {
         Layout.fillWidth: true
         Layout.fillHeight: true
         Layout.margins: 20
+        Text {
+            Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+            horizontalAlignment: Text.AlignHCenter
+            text: error
+            color: "#F44336"
+        }
+
         TextField {
             id: login
             Layout.alignment: Qt.AlignLeft | Qt.AlignTop
