@@ -30,6 +30,9 @@ Page {
                 padding: 10
                 text: qsTr("Create a new project")
             }
+            background: Rectangle {
+                color: AppSettings.style.background.color
+            }
         }
         background: Rectangle {
             color: AppSettings.style.background.color
