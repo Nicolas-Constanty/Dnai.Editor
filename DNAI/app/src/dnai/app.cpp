@@ -37,17 +37,12 @@ namespace dnai
 
     void App::initApp()
 	{
-		initProcessManager();
-		installEventFilter(this);
-		setupSettings();
-		loadFonts();
-        initAppView();
-        loadMainWindow();
-        dnai::http::Service::Init(dnai::api::http_config);
+		
 	}
 
     void App::initProcessManager()
 	{
+        qDebug() << "YOLO";
 #ifdef Q_OS_MAC
 		m_processManager = new ProcessManager(QGuiApplication::applicationDirPath() + "/settings/conf/mac/bin_info.cfg");
 #else
@@ -69,6 +64,19 @@ namespace dnai
 	{
 		m_appView = new views::AppView();
 		m_nodeModel = new models::BasicNodeModel();
+	}
+
+    std::queue<std::function<void()>> App::init()
+	{
+		std::queue<std::function<void()>> initFuncs;
+        initFuncs.push(std::bind(&App::initProcessManager, this));
+        initFuncs.push(std::bind(&App::installEventFilter, this, this));
+        initFuncs.push(&App::setupSettings);
+        initFuncs.push(&App::loadFonts);
+		initFuncs.push(std::bind(&App::initAppView, this));
+		initFuncs.push(std::bind(&App::loadMainWindow, this));
+		initFuncs.push(std::bind(&dnai::http::Service::Init, dnai::api::http_config));
+		return initFuncs;
 	}
 
 	void App::loadFonts()

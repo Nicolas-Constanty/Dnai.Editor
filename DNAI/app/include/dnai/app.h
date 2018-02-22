@@ -9,9 +9,10 @@
 #include "views/appview.h"
 #include "views/instructionview.h"
 #include "models/basicnodemodel.h"
+#include "iloadingclass.h"
 
 namespace dnai {
-    class App : public QGuiApplication
+    class App : public QGuiApplication, public ILoadingClass
     {
         Q_OBJECT
     public:
@@ -26,6 +27,7 @@ namespace dnai {
         AppSettings* settings() const;
 
 	    views::AppView *appView() const;
+        void initProcessManager();
 
     public slots:
         void initApp();
@@ -45,11 +47,12 @@ namespace dnai {
 		models::BasicNodeModel *m_nodeModel;
 	    static App *m_instance;
 
-        void initProcessManager();
         QObject *createQmlComponent(const QString &path);
 	    static void setupSettings();
 		void initAppView();
 
+    protected:
+        std::queue<std::function<void()>> init() override;
     };
 }
 

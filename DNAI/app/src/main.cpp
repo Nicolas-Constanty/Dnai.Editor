@@ -124,8 +124,8 @@ int main(int argc, char *argv[])
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
     dnai::App app(argc, argv);
-    app.initApp();
 
+    app.load();
     return app.exec();
 }
 
