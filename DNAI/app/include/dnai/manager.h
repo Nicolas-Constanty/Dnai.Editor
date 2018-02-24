@@ -20,6 +20,7 @@ namespace dnai {
         Q_PROPERTY(dnai::models::DeclarationModel *declarationModel READ declarationModel WRITE setDeclarationModel NOTIFY declarationModelChanged)
         Q_PROPERTY(dnai::models::User *user READ user WRITE setUser NOTIFY userChanged)
 		Q_PROPERTY(dnai::models::BasicNodeModel *basicNodesModel READ basicNodesModel NOTIFY basicNodesModelChanged)
+        Q_PROPERTY(void errors NOTIFY apiErrors)
 
     public:
 	    explicit Manager(QObject *parent = 0);
@@ -63,6 +64,7 @@ namespace dnai {
 	    void declarationModelChanged(models::DeclarationModel *ref);
 	    void userChanged(models::User *user);
 		void basicNodesModelChanged(models::BasicNodeModel *);
+        void apiErrors();
 
     public:
 	    models::TreeModel *projectModel() const { return m_projectModel; }
