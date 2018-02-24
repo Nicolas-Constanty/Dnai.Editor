@@ -35,7 +35,7 @@ OpenProjectForm {
     fileDialog.onAccepted: {
         projectPath.text = fileDialog.fileUrl;
         console.log("You chose: " + fileDialog.fileUrl);
-        var data = Manager.session.loadProjectData(fileDialog.fileUrl);
+        var data = Manager.loadProjectData(fileDialog.fileUrl);
         fillInformations(data);
     }
 
