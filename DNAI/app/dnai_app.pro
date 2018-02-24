@@ -168,10 +168,11 @@ HEADERS += \
     include/dnai/commands/entitydeclare.h \
     include/dnai/appcontext.h \
     include/dnai/models/property.h \
-    include/dnai/session.h \
-    include/dnai/models/entity.h \
     include/dnai/controllers/propertypanel.h \
     include/dnai/commands/openpropertypanel.h \
+    include/dnai/session.h \
+    include/dnai/models/entity.h \
+    include/dnai/ifactory.h \
     include/dnai/viewshandler.h
 
 
