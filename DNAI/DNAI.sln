@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27130.2027
+VisualStudioVersion = 15.0.27130.2036
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DNAI", "app\DNAI.vcxproj", "{38D27E16-965C-3232-8464-6DA1E7D78EF3}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -36,6 +36,6 @@ Global
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		Qt5Version = msvc2017_64
-		SolutionGuid = {CC7B2398-1965-452F-A23B-9B9669C386C8}
+		SolutionGuid = {C5A9A893-ADD4-42D0-ABD6-5A4315BCF354}
 	EndGlobalSection
 EndGlobal

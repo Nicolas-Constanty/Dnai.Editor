@@ -1,266 +1,1159 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="duly_gui::BaseIo" Collapsed="true">
-    <Position X="1.75" Y="8.75" Width="1.5" />
+  <Class Name="dnai::api" Collapsed="true">
+    <Position X="28" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAEBAgBBAAAAAAgAggAiABAAAgAAAAQAgQA=</HashCode>
+      <FileName>include\dnai\api\api.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="dnai::AppContext" Collapsed="true">
+    <Position X="29.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>include\dnai\appcontext.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="dnai::BaseIo" Collapsed="true">
+    <Position X="9.25" Y="12.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAACIAAAAAAAAAAAAAAAAAAAARAAAAAACAAAAAAAAAA=</HashCode>
-      <FileName>include\baseio.h</FileName>
+      <FileName>include\dnai\baseio.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="duly_gui::BaseLinkable" Collapsed="true">
-    <Position X="3" Y="7.5" Width="1.5" />
+  <Class Name="dnai::BaseLinkable" Collapsed="true">
+    <Position X="10.5" Y="11.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>CAAAAAAAAAAAAABIgAAAAIAAAAAAKAAEAAAAAABAJAA=</HashCode>
-      <FileName>include\baselinkable.h</FileName>
+      <FileName>include\dnai\baselinkable.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="duly_gui::DulyApp" Collapsed="true">
-    <Position X="23" Y="0.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAIAAAA=</HashCode>
-      <FileName>include\dulyapp.h</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="duly_gui::EventUtilities" Collapsed="true">
-    <Position X="21.25" Y="1.5" Width="1.5" />
+  <Class Name="dnai::EventUtilities" Collapsed="true">
+    <Position X="28" Y="2.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAEAAACAAAAEAAAAAAAAAAAA=</HashCode>
-      <FileName>include\eventutilities.h</FileName>
+      <FileName>include\dnai\eventutilities.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="duly_gui::FocusManager" Collapsed="true">
-    <Position X="0.5" Y="4.75" Width="1.5" />
+  <Class Name="dnai::FocusManager" Collapsed="true">
+    <Position X="13" Y="8.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAABQAAABAAAAAAAAAAEAAAAAAAAAQAAIgAAAAA=</HashCode>
-      <FileName>include\focusmanager.h</FileName>
+      <FileName>include\dnai\focusmanager.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="duly_gui::FocusManagerIo" Collapsed="true">
-    <Position X="0.5" Y="6" Width="1.5" />
+  <Class Name="dnai::FocusManagerIo" Collapsed="true">
+    <Position X="13" Y="9.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAABAAAAAAAAAAAAAAAAAAAAAEAgAAAAAAAAAAA=</HashCode>
-      <FileName>include\focusmanager.h</FileName>
+      <FileName>include\dnai\focusmanager.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="duly_gui::Link" Collapsed="true">
-    <Position X="17.75" Y="2.5" Width="1.5" />
+  <Class Name="dnai::Link" Collapsed="true">
+    <Position X="40.25" Y="2.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AiAAAAAAAAAAAAAAAAIAABAAAAGAAAgAAAAAQAAAAAA=</HashCode>
-      <FileName>include\link.h</FileName>
+      <FileName>include\dnai\link.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="duly_gui::ILinkable" Collapsed="true">
-    <Position X="3" Y="4.75" Width="1.5" />
+  <Class Name="dnai::ILinkable" Collapsed="true">
+    <Position X="10.5" Y="8.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>CAAAAAAEAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>include\ilinkable.h</FileName>
+      <FileName>include\dnai\ilinkable.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="duly_gui::ALinkable" Collapsed="true">
-    <Position X="3" Y="6" Width="1.5" />
+  <Class Name="dnai::ALinkable" Collapsed="true">
+    <Position X="10.5" Y="9.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>DAAAAAAEAAAAAAAIgAAAAAAAAAAIAAAEAAAAAABAJAA=</HashCode>
-      <FileName>include\ilinkable.h</FileName>
+      <FileName>include\dnai\ilinkable.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="duly_gui::IScalable" Collapsed="true">
-    <Position X="5.25" Y="0.75" Width="1.5" />
+  <Class Name="dnai::App" Collapsed="true">
+    <Position X="8" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AUAAgAAACgABAgQAABEAEAQAAACEAAIIgwAACBYAIEA=</HashCode>
+      <FileName>include\dnai\app.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="dnai::ILoadingClass" Collapsed="true">
+    <Position X="8" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAQAAgAAAoAAAAAAAAAIAgAgAAAAAQoIAAAAAAgAAAA=</HashCode>
+      <FileName>include\dnai\iloadingclass.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="dnai::IScalable" Collapsed="true">
+    <Position X="0.5" Y="6" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAEAAABAAA=</HashCode>
-      <FileName>include\views\iscalable.h</FileName>
+      <FileName>include\dnai\views\iscalable.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="duly_gui::LinkableType&lt;T&gt;" Collapsed="true">
-    <Position X="19.5" Y="2.5" Width="1.5" />
+  <Class Name="dnai::LinkableType&lt;T&gt;" Collapsed="true">
+    <Position X="28" Y="3.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAACAAAAAACAAAAIAAAAAAAQAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>include\linkabletype.h</FileName>
+      <FileName>include\dnai\linkabletype.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="duly_gui::DulyScene" Collapsed="true">
-    <Position X="19.5" Y="1.5" Width="1.5" />
+  <Class Name="dnai::Project" Collapsed="true">
+    <Position X="16.5" Y="4.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>include\dulyscene.h</FileName>
+      <HashCode>AAAAAEgAGCCAAAAABAEhKQCQQAAAQBhABCAUQCAAIAQ=</HashCode>
+      <FileName>include\dnai\project.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="duly_gui::commands::Command" Collapsed="true">
-    <Position X="8.5" Y="6" Width="1.5" />
+  <Class Name="dnai::Manager" Collapsed="true">
+    <Position X="31.5" Y="3.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>EAAABCAAAAAAAAAICAAMBAAAAAAEAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>include\commands\command.h</FileName>
+      <HashCode>AwBACAAUCKAIGkgAAAETEAVAIgAKIqAEUIkkAACMiQA=</HashCode>
+      <FileName>include\dnai\manager.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="duly_gui::commands::CommandDecorator" Collapsed="true">
-    <Position X="10.75" Y="6" Width="1.5" />
+  <Class Name="dnai::Session" Collapsed="true">
+    <Position X="28" Y="6.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>CIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>include\commands\commanddecorator.h</FileName>
+      <HashCode>AAAAAABAAAAAAAAAACAgAAAAAgACAAAAAAQAAAACAQA=</HashCode>
+      <FileName>include\dnai\session.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="duly_gui::commands::CommandManager" Collapsed="true">
-    <Position X="17.75" Y="0.5" Width="1.5" />
+  <Class Name="dnai::AppSettings" Collapsed="true">
+    <Position X="31.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>BAAACAAkgAAAAAAAAAEAAAEAAIAAAAAJQAgAAACAAAA=</HashCode>
-      <FileName>include\commands\commandmanager.h</FileName>
+      <HashCode>BAIAAAIABYQIEiAQAAIAISAAABCkAAJAAAEAAAAAAAA=</HashCode>
+      <FileName>include\dnai\settings.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="duly_gui::commands::DebugDecorator" Collapsed="true">
-    <Position X="10.75" Y="7.5" Width="1.5" />
+  <Class Name="dnai::models::Class" Collapsed="true">
+    <Position X="11.25" Y="4.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAhCAAAAAAAAAACAAMAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>include\commands\debugdecorator.h</FileName>
+      <HashCode>gJAAAAAACAAAMEABAgIEIQAAACAAECAAAAAAUAAgQAA=</HashCode>
+      <FileName>include\dnai\models\class.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="duly_gui::commands::ICommand" Collapsed="true">
-    <Position X="9.75" Y="4.75" Width="1.5" />
+  <Class Name="dnai::models::Context" Collapsed="true">
+    <Position X="11.25" Y="6.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAABCEAAAAAAAAACAAMAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>include\commands\icommand.h</FileName>
+      <HashCode>AMAAAAAgKgAAMEABAgAAIAQEIAIAACAAAAAAEAAkAAA=</HashCode>
+      <FileName>include\dnai\models\context.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="duly_gui::commands::MoveCommand" Collapsed="true">
-    <Position X="8.5" Y="7.5" Width="1.5" />
+  <Class Name="dnai::models::Flow" Collapsed="true">
+    <Position X="18.75" Y="4.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAABCAAAAAAAAAACAAEAAAAQAAAAAAAAAQAAAAAgAA=</HashCode>
-      <FileName>include\commands\moveCommand.h</FileName>
+      <HashCode>AAAAAAABCAAAAAAAAAAAoAAAAAAAAAAAAAAAEAAAAAA=</HashCode>
+      <FileName>include\dnai\models\flow.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="duly_gui::controllers::OutputController" Collapsed="true">
-    <Position X="0.75" Y="10.25" Width="1.5" />
+  <Class Name="dnai::models::Function" Collapsed="true">
+    <Position X="17.25" Y="6.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAACAAAAAAAA=</HashCode>
-      <FileName>include\controllers\outputcontroller.h</FileName>
+      <HashCode>AAQAAAAACAIAAEAAAQAAoAIEIAABAHIAAAgAEAQEIQA=</HashCode>
+      <FileName>include\dnai\models\function.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="duly_gui::controllers::InputController" Collapsed="true">
-    <Position X="3" Y="10.25" Width="1.5" />
+  <Class Name="dnai::models::IClone" Collapsed="true">
+    <Position X="12" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAgAAAAAAAAAAAAAIAAAAAAAAAAAA=</HashCode>
-      <FileName>include\controllers\inputcontroller.h</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAA=</HashCode>
+      <FileName>include\dnai\models\iclone.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="duly_gui::controllers::ConsoleController" Collapsed="true">
-    <Position X="21.25" Y="0.5" Width="1.5" />
+  <Class Name="dnai::models::Identity" Collapsed="true">
+    <Position X="25.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>oAAAAAAACAgAAAAAAAAAIAAAAAAAAAAAAEAAEABAAAA=</HashCode>
+      <FileName>include\dnai\models\identity.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="dnai::models::IModel" Collapsed="true">
+    <Position X="12" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACAAAAAAAAAAAIAAAAAAAAAAAAAAAEAEAAAA=</HashCode>
+      <FileName>include\dnai\models\imodel.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="dnai::models::Input" Collapsed="true">
+    <Position X="18.75" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAABCAAAAAAAAAAAIAAAEAAAAAAAAAAAEAAAAAA=</HashCode>
+      <FileName>include\dnai\models\input.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="dnai::models::Node" Collapsed="true">
+    <Position X="14.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACAAAAQAAAwAApCAAIAEBA3IAQgAAEAUAAAI=</HashCode>
+      <FileName>include\dnai\models\node.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="dnai::models::Output" Collapsed="true">
+    <Position X="17.75" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACAAAAAAAAAAIIAAAAAAAAAAAAAAAMAAAAAA=</HashCode>
+      <FileName>include\dnai\models\output.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="dnai::models::Position" Collapsed="true">
+    <Position X="12" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACCAAAAAgAAAAIAACAAAAAAAAAAAAEAAAAAA=</HashCode>
+      <FileName>include\dnai\models\position.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="dnai::models::Variable" Collapsed="true">
+    <Position X="14.25" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAABCACAAAAAAAAAIACAAAAAAAAAACUgEAAAgAA=</HashCode>
+      <FileName>include\dnai\models\variable.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="dnai::models::BasicNodeModel" Collapsed="true">
+    <Position X="35" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAgAAAAAIAAACAgAAAAACACAAEAAEQAAAAABA=</HashCode>
+      <FileName>include\dnai\models\basicnodemodel.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="dnai::models::Common" Collapsed="true">
+    <Position X="16.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAIgAAGAAAUAIgIAACIYABARgFAIBAAAAAEQBBAQA=</HashCode>
+      <FileName>include\dnai\models\common.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="dnai::models::Declaration" Collapsed="true">
+    <Position X="33.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EgQAAAAAUAAEAAIAgAAAAAAAAAAEAEBAAAAQAAAAABA=</HashCode>
+      <FileName>include\dnai\models\declarationmodel.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="dnai::models::DeclarationModel" Collapsed="true">
+    <Position X="35" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IkAAAAAAAAAAAEIAAAAEAAAAAAAAAAAAAAAQIAAAABA=</HashCode>
+      <FileName>include\dnai\models\declarationmodel.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="dnai::models::ListNode" Collapsed="true">
+    <Position X="29.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAIAAACAAAAAAAEAAAAAAAAwEAAAABA=</HashCode>
+      <FileName>include\dnai\models\listnode.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="dnai::models::NameSpaceBarItem" Collapsed="true">
+    <Position X="38.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAIDAAAAAAABBAACKACAAAgAAAAAAAAAAAAAAAIIiA=</HashCode>
+      <FileName>include\dnai\models\namespacebaritem.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="dnai::models::NameSpaceBarModel" Collapsed="true">
+    <Position X="40.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAIAAAAAAAAABAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>include\dnai\models\namespacebarmodel.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="dnai::models::QFontSettings" Collapsed="true">
+    <Position X="29.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAAAAAQAAAAAAAIAgAAAAAAAAAAAAAAAw=</HashCode>
+      <FileName>include\dnai\models\settingsmodel.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="dnai::models::QTextSettings" Collapsed="true">
+    <Position X="38.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAABAAAAAQAgAEAjAIgAAABAEAgCAAkQEAElMAAA=</HashCode>
+      <FileName>include\dnai\models\settingsmodel.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="dnai::models::QBorder" Collapsed="true">
+    <Position X="35" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAgIAAA=</HashCode>
+      <FileName>include\dnai\models\settingsmodel.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="dnai::models::QGrid" Collapsed="true">
+    <Position X="31.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAABICAAAgAAAAADAAAAABACgQACIAEIAAIgIAAA=</HashCode>
+      <FileName>include\dnai\models\settingsmodel.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="dnai::models::QCanvas" Collapsed="true">
+    <Position X="36.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAIAAAAAACAAAgAAAAAAAAABgIAAAAAQIAA=</HashCode>
+      <FileName>include\dnai\models\settingsmodel.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="dnai::models::QNode" Collapsed="true">
+    <Position X="35" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAQBAAAAAAAAAAAAREAAAAAACAAAAAAAgIAAA=</HashCode>
+      <FileName>include\dnai\models\settingsmodel.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="dnai::models::QNodes" Collapsed="true">
+    <Position X="36.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>oAATALgQQAAAAAAAgAEBAUAgAQAQQEQUIlAAAAEAACA=</HashCode>
+      <FileName>include\dnai\models\settingsmodel.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="dnai::models::QDeclaration" Collapsed="true">
+    <Position X="40.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACBAIAAAAACAIAAREAAAAAAAAAIAAAAAQIAg=</HashCode>
+      <FileName>include\dnai\models\settingsmodel.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="dnai::models::QDeclarationView" Collapsed="true">
+    <Position X="28" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>UQQAECAgCBEIAEAAASAIQAxEIBAAAAAQAIIEEAIRIBA=</HashCode>
+      <FileName>include\dnai\models\settingsmodel.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="dnai::models::QBackground" Collapsed="true">
+    <Position X="33.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAQAAAEACAAAAAAAAAAACAAEQAAAlIAAA=</HashCode>
+      <FileName>include\dnai\models\settingsmodel.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="dnai::models::MenuSettings" Collapsed="true">
+    <Position X="33.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAQAABAAAAAAACAAAARAAAAAAAAAAAAAAAAQIAA=</HashCode>
+      <FileName>include\dnai\models\settingsmodel.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="dnai::models::SettingsModel" Collapsed="true">
+    <Position X="29.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAYAAAGAJBEAAgABgWAAAAzOAADEwAAIAACCYBAQIAA=</HashCode>
+      <FileName>include\dnai\models\settingsmodel.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="dnai::models::TreeItem" Collapsed="true">
+    <Position X="33.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgBIAAgAQAACBAQAACCQAABCAYAAAAAAAAASAAAIAAA=</HashCode>
+      <FileName>include\dnai\models\treeitem.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="dnai::models::TreeModel" Collapsed="true">
+    <Position X="35" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAwAAAAAQAAACgJAAAAAAAAQAQAJAAAEACAQAAABABY=</HashCode>
+      <FileName>include\dnai\models\treemodel.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="dnai::models::User" Collapsed="true">
+    <Position X="38.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EACAAAAAAQAyAACBIACAAAAAAAAFAQBAAAAAgAAAAAA=</HashCode>
+      <FileName>include\dnai\models\user.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="dnai::controllers::ClientController" Collapsed="true">
+    <Position X="40.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EIAAAAAAAACAAEAAAAIIAAAAEBgAIgAABAAAAAAgEBE=</HashCode>
+      <FileName>include\dnai\controllers\clientcontroller.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="dnai::controllers::ConsoleController" Collapsed="true">
+    <Position X="31.5" Y="1.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>CAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAQABABAAAAA=</HashCode>
-      <FileName>include\controllers\consolecontroller.h</FileName>
+      <FileName>include\dnai\controllers\consolecontroller.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="duly_gui::views::BezierCurve" Collapsed="true">
-    <Position X="7.5" Y="3.5" Width="1.5" />
+  <Class Name="dnai::controllers::ContextController" Collapsed="true">
+    <Position X="9" Y="3.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>CIRgkAAASFBLEigIPQAAAgAAoBEQICghiAERCAAA4AA=</HashCode>
-      <FileName>include\views\beziercurve.h</FileName>
+      <HashCode>AAEAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAABEEAAAAAA=</HashCode>
+      <FileName>include\dnai\controllers\contextcontroller.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="duly_gui::views::Input" Collapsed="true">
-    <Position X="4.25" Y="3.5" Width="1.5" />
+  <Class Name="dnai::controllers::IController" Collapsed="true">
+    <Position X="9" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAIAAAA=</HashCode>
+      <FileName>include\dnai\controllers\icontroller.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="dnai::controllers::AController&lt;T&gt;" Collapsed="true">
+    <Position X="9" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgACAAAEIAAAAAAAEAAAAAAAAAAAAAAAAABIAAoIAAA=</HashCode>
+      <FileName>include\dnai\controllers\icontroller.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="dnai::controllers::InputController" Collapsed="true">
+    <Position X="8.25" Y="14.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAgAAAAAAAAAAAAAIAAAAAAAAAAAA=</HashCode>
+      <FileName>include\dnai\controllers\inputcontroller.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="dnai::controllers::OutputController" Collapsed="true">
+    <Position X="10.5" Y="14.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAACAAAAAAAA=</HashCode>
+      <FileName>include\dnai\controllers\outputcontroller.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="dnai::commands::Command" Collapsed="true">
+    <Position X="1" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAABCAAAAAAAAAICAAMBAAAAAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>include\dnai\commands\command.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="dnai::commands::CommandDecorator" Collapsed="true">
+    <Position X="3.25" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>include\dnai\commands\commanddecorator.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="dnai::commands::CommandManager" Collapsed="true">
+    <Position X="28" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAACAAkgAAAAAAAAAEAAAEAAIAAAAAJQAgQAACAAAA=</HashCode>
+      <FileName>include\dnai\commands\commandmanager.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="dnai::commands::DebugDecorator" Collapsed="true">
+    <Position X="3.25" Y="13.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAhCAAAAAAAAAACAAMAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>include\dnai\commands\debugdecorator.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="dnai::commands::EntityDeclare" Collapsed="true">
+    <Position X="40.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAJABAAAAAAAAACAgEAAAAAAAAAAAAAAAACAAABAA=</HashCode>
+      <FileName>include\dnai\commands\entitydeclare.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="dnai::commands::ICommand" Collapsed="true">
+    <Position X="2.25" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABCEAAAAAAAAACAAMAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>include\dnai\commands\icommand.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="dnai::commands::MoveCommand" Collapsed="true">
+    <Position X="35" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABCAAAAAAAAAACAAEAAAAQAAAAAAAAAQAAAAAgAA=</HashCode>
+      <FileName>include\dnai\commands\movecommand.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="dnai::commands::MoveNodeCommand" Collapsed="true">
+    <Position X="36.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABCAAAAAAgAAACAAEAAAAQAAAAAAAAAQAAAAAgAA=</HashCode>
+      <FileName>include\dnai\commands\movenodecommand.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="dnai::http::Service" Collapsed="true">
+    <Position X="40.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAgAAAAIAAgABAIAABAAAACAAAAAAA=</HashCode>
+      <FileName>include\dnai\http\service.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="dnai::http::Url" Collapsed="true">
+    <Position X="36.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gFAACAAAgAACAAAEAAAIYABIAAAEiQggAQAICAAIAAA=</HashCode>
+      <FileName>include\dnai\http\url.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="dnai::http::Observable" Collapsed="true">
+    <Position X="28" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAEABAAAABAgAAAAAAAAIAQAQAAAAAAAQAAAAAAAA=</HashCode>
+      <FileName>include\dnai\http\observable.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EntitiesFactory" Collapsed="true">
+    <Position X="38.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>include\dnai\entitiesfactory.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IObersvable" Collapsed="true">
+    <Position X="33.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>include\dnai\iobservable.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProcessManager" Collapsed="true">
+    <Position X="29.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AMBAAAAAAAAAAAAAAAAAAACAAAAAAAACAABAAAAAQAA=</HashCode>
+      <FileName>include\dnai\processmanager.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QCStandardPaths" Collapsed="true">
+    <Position X="38.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAABAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>include\dnai\qmlresources\qcstandardpaths.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TestConnection" Collapsed="true">
+    <Position X="31.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAQAAAAAAAAA=</HashCode>
+      <FileName>include\testconnection.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="dnai::views::BezierCurve" Collapsed="true">
+    <Position X="36.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CIRgkAAASFALECgIPQAAAgAAoBEQICghiAERCAAAYAA=</HashCode>
+      <FileName>include\dnai\views\beziercurve.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="dnai::views::Input" Collapsed="true">
+    <Position X="4.75" Y="9" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAgAAIAAAAAAgAAAAAAAAkAAAAABAAAAAAAAAAAA=</HashCode>
-      <FileName>include\views\input.h</FileName>
+      <FileName>include\dnai\views\input.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="duly_gui::views::GenericNode" Collapsed="true">
-    <Position X="9.75" Y="3.5" Width="1.5" />
+  <Class Name="dnai::views::GenericNode" Collapsed="true">
+    <Position X="31.5" Y="2.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AEAiQgQAIABBgAKCAJAAAQFYAA0QIFIQAMARQAQAGEI=</HashCode>
-      <FileName>include\views\genericnode.h</FileName>
+      <HashCode>AEAiQgQAIABBgAKCAJAAIQFYAA0QIFIQANARQAQAGEI=</HashCode>
+      <FileName>include\dnai\views\genericnode.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="duly_gui::views::LinkableBezierItem" Collapsed="true">
-    <Position X="8.25" Y="0.5" Width="1.5" />
+  <Class Name="dnai::views::LinkableBezierItem" Collapsed="true">
+    <Position X="3.5" Y="6" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AEAAAiAAIgBAAAAoICAAEABACAAQQFBAABAAAAQAAAA=</HashCode>
-      <FileName>include\views\linkablebezieritem.h</FileName>
+      <HashCode>AEAAAiAAIgBAAAAoICAAEABICAAQQFBAABAAAAQAAAA=</HashCode>
+      <FileName>include\dnai\views\linkablebezieritem.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="duly_gui::views::Output" Collapsed="true">
-    <Position X="1.5" Y="3.5" Width="1.5" />
+  <Class Name="dnai::views::Output" Collapsed="true">
+    <Position X="2.5" Y="9" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAIAAAAAAgAAAIAAAAgAAAAABAAAAAAAAAAAA=</HashCode>
-      <FileName>include\views\output.h</FileName>
+      <FileName>include\dnai\views\output.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="duly_gui::views::CustomShape" Collapsed="true">
-    <Position X="12.25" Y="1.25" Width="1.5" />
+  <Class Name="dnai::views::AppView" Collapsed="true">
+    <Position X="33.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAACQAIwEAAgAIAIEEI4JEAAEoQCICBAAABAAA=</HashCode>
-      <FileName>include\views\customshape.h</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAACAIAAAAAAAAAAAAAACAAAAAA=</HashCode>
+      <FileName>include\dnai\views\appview.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="duly_gui::views::DulyCanvas" Collapsed="true">
-    <Position X="12" Y="3.5" Width="1.5" />
+  <Class Name="dnai::views::CanvasNode" Collapsed="true">
+    <Position X="6" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAEDAEABBRAAIAAARAAAAgAQCQIAoAQAEhEpAAAlA=</HashCode>
-      <FileName>include\views\dulycanvas.h</FileName>
+      <HashCode>iAICGHAMABBRAIICAAZAABBgAACQKAoQCAEpEpAAAlA=</HashCode>
+      <FileName>include\dnai\views\canvasnode.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="duly_gui::views::FlowBackend" Collapsed="true">
-    <Position X="5.25" Y="8.75" Width="1.5" />
+  <Class Name="dnai::views::Class" Collapsed="true">
+    <Position X="38.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAIAAAAAAAAAAAgCAAAAAAAQAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>include\views\flow.h</FileName>
+      <HashCode>BhAAAAACAIAAAAQAQgAAAIAAAAJAAIAAAAAAAAAAAAA=</HashCode>
+      <FileName>include\dnai\views\class.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="duly_gui::views::Flow" Collapsed="true">
-    <Position X="2.25" Y="2" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AEAAIgAAIAAAAAAgAAAAAAAAABARQBBAABABAAQAAAA=</HashCode>
-      <FileName>include\views\flow.h</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="duly_gui::views::Console" Collapsed="true">
-    <Position X="19.5" Y="0.5" Width="1.5" />
+  <Class Name="dnai::views::Console" Collapsed="true">
+    <Position X="29.75" Y="1.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAgCAAAIAAQCBAAAAAAAoAAAAAAAAAAA=</HashCode>
-      <FileName>include\views\console.h</FileName>
+      <FileName>include\dnai\views\console.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="duly_gui::views::Io" Collapsed="true">
-    <Position X="5.25" Y="2" Width="1.5" />
+  <Class Name="dnai::views::ContextView" Collapsed="true">
+    <Position X="2.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIQAICAAAAAAAAAAAACIAAAAAAAAEEAAAAAABAAAAA=</HashCode>
+      <FileName>include\dnai\views\contextview.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="dnai::views::CustomShape" Collapsed="true">
+    <Position X="4.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACQAIwEAAgAIAIEEI4JEAAEoQCICBAAABAAA=</HashCode>
+      <FileName>include\dnai\views\customshape.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="dnai::views::DeclarationCanvas" Collapsed="true">
+    <Position X="6" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAAAAAAAAgCACAAAAAAAAAAIAAAAAAAADAAAA=</HashCode>
+      <FileName>include\dnai\views\declarationcanvas.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="dnai::views::DeclarationView" Collapsed="true">
+    <Position X="1" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAA=</HashCode>
+      <FileName>include\dnai\views\declarationview.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="dnai::views::FlowBackend" Collapsed="true">
+    <Position X="12.75" Y="12.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAgCAAAAAAAQAAAABAAAAAAAAAAAA=</HashCode>
+      <FileName>include\dnai\views\flow.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="dnai::views::Flow" Collapsed="true">
+    <Position X="8" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAgAAIBAAAAEgAAAAAAAAAAAQQBBAABABAAQAAAA=</HashCode>
+      <FileName>include\dnai\views\flow.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="dnai::views::InstructionView" Collapsed="true">
+    <Position X="3.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAAAAAAAAAAAAAAACBAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>include\dnai\views\instructionview.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="dnai::views::Io" Collapsed="true">
+    <Position X="3.5" Y="7.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAIAYAAAAAAgAAAAAAAAAIAAiFAFQBAAABAFAAQBAAA=</HashCode>
-      <FileName>include\views\io.h</FileName>
+      <FileName>include\dnai\views\io.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="duly_gui::views::Line" Collapsed="true">
-    <Position X="23" Y="1.5" Width="1.5" />
+  <Class Name="dnai::views::Layout" Collapsed="true">
+    <Position X="36.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACAAEEAAAAAAAAAAABAAIAAAAAAAAAAAAACAA=</HashCode>
+      <FileName>include\dnai\views\layout.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="dnai::views::Line" Collapsed="true">
+    <Position X="38.5" Y="2.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AIAAgAAACAABABgAMAAAAgAAAAEAIBAAgAABCEEBIAA=</HashCode>
-      <FileName>include\views\line.h</FileName>
+      <FileName>include\dnai\views\line.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="duly_gui::views::RoundedRectangle" Collapsed="true">
-    <Position X="15.25" Y="2.75" Width="1.5" />
+  <Class Name="dnai::views::RoundedRectangle" Collapsed="true">
+    <Position X="5.75" Y="6" Width="1.5" />
     <TypeIdentifier>
       <HashCode>BAgAEABAEBAAABAEAACAAQAACEAoAAAAAAABAALQEAA=</HashCode>
-      <FileName>include\views\roundedrectangle.h</FileName>
+      <FileName>include\dnai\views\roundedrectangle.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="duly_gui::views::ScalableItem" Collapsed="true">
-    <Position X="9.75" Y="2" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAIBgAAAAAAAAAAAQAAAAAAAAAAAEAAABgAA=</HashCode>
-      <FileName>include\views\scalableitem.h</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="DulyResources" Collapsed="true">
-    <Position X="17.75" Y="1.5" Width="1.5" />
-    <Compartments>
-      <Compartment Name="Nested Types" Collapsed="false" />
-    </Compartments>
+  <Class Name="dnai::qmlresources::DeclarationTypeRessouce" Collapsed="true">
+    <Position X="36.75" Y="1.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>include\resourcesnode.h</FileName>
+      <FileName>include\dnai\qmlresources\declarationtype.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Struct Name="RegisterSettings" Collapsed="true">
-    <Position X="17.75" Y="3.75" Width="1.5" />
+  <Class Name="dnai::qmlresources::FlowTypeRessouce" Collapsed="true">
+    <Position X="29.75" Y="2.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAgACACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAA=</HashCode>
-      <FileName>src\main.cpp</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>include\dnai\qmlresources\flowtype.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="dnai::qmlresources::QInstructionID" Collapsed="true">
+    <Position X="33.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>include\dnai\qmlresources\instructionid.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="dnai::qmlresources::IoTypeRessouce" Collapsed="true">
+    <Position X="35" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>include\dnai\qmlresources\iotype.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="dnai::model::Property" Collapsed="true">
+    <Position X="31.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAA=</HashCode>
+      <FileName>include\dnai\models\property.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="dnai::Count" Collapsed="true">
+    <Position X="29.75" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAAAAAAAABAgAAAAAAAAAAABAAAAAAAAQEIAA=</HashCode>
+      <FileName>include\dnai\project.h</FileName>
     </TypeIdentifier>
   </Struct>
+  <Struct Name="dnai::http::Config" Collapsed="true">
+    <Position X="28" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAIAAgAAAAABAAAAAAAAAAAAAA=</HashCode>
+      <FileName>include\dnai\http\config.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="dnai::http::Status" Collapsed="true">
+    <Position X="40.25" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAACA=</HashCode>
+      <FileName>include\dnai\http\response.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="dnai::http::Response" Collapsed="true">
+    <Position X="38.5" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAACAAAAAAAAAAQAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>include\dnai\http\response.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="qt_meta_stringdata_dnai__views__CanvasNode_t" Collapsed="true">
+    <Position X="36.75" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Debug\moc_canvasnode.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="qt_meta_stringdata_dnai__views__BezierCurve_t" Collapsed="true">
+    <Position X="35" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Debug\moc_beziercurve.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="qt_meta_stringdata_dnai__models__BasicNodeModel_t" Collapsed="true">
+    <Position X="28" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Debug\moc_basicnodemodel.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="qt_meta_stringdata_dnai__views__AppView_t" Collapsed="true">
+    <Position X="33.25" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Debug\moc_appview.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="qt_meta_stringdata_dnai__models__User_t" Collapsed="true">
+    <Position X="36.75" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Debug\moc_user.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="qt_meta_stringdata_dnai__http__Url_t" Collapsed="true">
+    <Position X="36.75" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Debug\moc_url.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="qt_meta_stringdata_dnai__models__TreeModel_t" Collapsed="true">
+    <Position X="35" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Debug\moc_treemodel.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="qt_meta_stringdata_dnai__models__TreeItem_t" Collapsed="true">
+    <Position X="33.25" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Debug\moc_treeitem.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="qt_meta_stringdata_TestConnection_t" Collapsed="true">
+    <Position X="36.75" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Debug\moc_testconnection.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="qt_meta_stringdata_dnai__qmlresources__DeclarationTypeRessouce_t" Collapsed="true">
+    <Position X="38.5" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Debug\moc_declarationtype.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="qt_meta_stringdata_dnai__models__Declaration_t" Collapsed="true">
+    <Position X="31.5" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Debug\moc_declarationmodel.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="qt_meta_stringdata_dnai__models__DeclarationModel_t" Collapsed="true">
+    <Position X="33.25" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Debug\moc_declarationmodel.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="qt_meta_stringdata_dnai__views__DeclarationCanvas_t" Collapsed="true">
+    <Position X="31.5" Y="12.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Debug\moc_declarationcanvas.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="qt_meta_stringdata_dnai__views__CustomShape_t" Collapsed="true">
+    <Position X="29.75" Y="12.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Debug\moc_customshape.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="qt_meta_stringdata_dnai__Session_t" Collapsed="true">
+    <Position X="31.5" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Debug\moc_session.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="qt_meta_stringdata_dnai__views__RoundedRectangle_t" Collapsed="true">
+    <Position X="31.5" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Debug\moc_roundedrectangle.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="qt_meta_stringdata_dnai__model__Property_t" Collapsed="true">
+    <Position X="40.25" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Debug\moc_property.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="qt_meta_stringdata_dnai__models__NameSpaceBarItem_t" Collapsed="true">
+    <Position X="38.5" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Debug\moc_namespacebaritem.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="qt_meta_stringdata_dnai__models__ListNode_t" Collapsed="true">
+    <Position X="35" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Debug\moc_listnode.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="qt_meta_stringdata_dnai__views__Line_t" Collapsed="true">
+    <Position X="29.75" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Debug\moc_line.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="qt_meta_stringdata_dnai__views__Layout_t" Collapsed="true">
+    <Position X="28" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Debug\moc_layout.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="qt_meta_stringdata_dnai__qmlresources__IoTypeRessouce_t" Collapsed="true">
+    <Position X="28" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Debug\moc_iotype.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="qt_meta_stringdata_dnai__views__Io_t" Collapsed="true">
+    <Position X="40.25" Y="12.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Debug\moc_io.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="qt_meta_stringdata_dnai__views__InstructionView_t" Collapsed="true">
+    <Position X="38.5" Y="12.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Debug\moc_instructionview.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="qt_meta_stringdata_dnai__qmlresources__QInstructionID_t" Collapsed="true">
+    <Position X="29.75" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Debug\moc_instructionid.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="qt_meta_stringdata_dnai__views__GenericNode_t" Collapsed="true">
+    <Position X="36.75" Y="12.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Debug\moc_genericnode.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="qt_meta_stringdata_dnai__qmlresources__FlowTypeRessouce_t" Collapsed="true">
+    <Position X="40.25" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Debug\moc_flowtype.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="qt_meta_stringdata_dnai__models__QFontSettings_t" Collapsed="true">
+    <Position X="36.75" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Debug\moc_settingsmodel.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="qt_meta_stringdata_dnai__models__QTextSettings_t" Collapsed="true">
+    <Position X="29.75" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Debug\moc_settingsmodel.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="qt_meta_stringdata_dnai__models__QBorder_t" Collapsed="true">
+    <Position X="29.75" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Debug\moc_settingsmodel.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="qt_meta_stringdata_dnai__models__QGrid_t" Collapsed="true">
+    <Position X="38.5" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Debug\moc_settingsmodel.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="qt_meta_stringdata_dnai__models__QCanvas_t" Collapsed="true">
+    <Position X="31.5" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Debug\moc_settingsmodel.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="qt_meta_stringdata_dnai__models__QNode_t" Collapsed="true">
+    <Position X="40.25" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Debug\moc_settingsmodel.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="qt_meta_stringdata_dnai__models__QNodes_t" Collapsed="true">
+    <Position X="28" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Debug\moc_settingsmodel.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="qt_meta_stringdata_dnai__models__QDeclaration_t" Collapsed="true">
+    <Position X="33.25" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Debug\moc_settingsmodel.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="qt_meta_stringdata_dnai__models__QDeclarationView_t" Collapsed="true">
+    <Position X="35" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Debug\moc_settingsmodel.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="qt_meta_stringdata_dnai__models__QBackground_t" Collapsed="true">
+    <Position X="28" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Debug\moc_settingsmodel.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="qt_meta_stringdata_dnai__models__MenuSettings_t" Collapsed="true">
+    <Position X="36.75" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Debug\moc_settingsmodel.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="qt_meta_stringdata_dnai__models__SettingsModel_t" Collapsed="true">
+    <Position X="31.5" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Debug\moc_settingsmodel.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="qt_meta_stringdata_dnai__AppSettings_t" Collapsed="true">
+    <Position X="33.25" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Debug\moc_settings.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="qt_meta_stringdata_dnai__http__Observable_t" Collapsed="true">
+    <Position X="35" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Debug\moc_observable.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="qt_meta_stringdata_dnai__models__NameSpaceBarModel_t" Collapsed="true">
+    <Position X="40.25" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Debug\moc_namespacebarmodel.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="qt_meta_stringdata_dnai__App_t" Collapsed="true">
+    <Position X="31.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Debug\moc_app.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="qt_meta_stringdata_dnai__views__ContextView_t" Collapsed="true">
+    <Position X="28" Y="12.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Debug\moc_contextview.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="qt_meta_stringdata_dnai__views__Console_t" Collapsed="true">
+    <Position X="40.25" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Debug\moc_console.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="qt_meta_stringdata_dnai__models__Common_t" Collapsed="true">
+    <Position X="29.75" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Debug\moc_common.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="qt_meta_stringdata_dnai__views__Class_t" Collapsed="true">
+    <Position X="38.5" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Debug\moc_class.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="qt_meta_stringdata_ProcessManager_t" Collapsed="true">
+    <Position X="33.25" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Debug\moc_processmanager.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="qt_meta_stringdata_dnai__Manager_t" Collapsed="true">
+    <Position X="38.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Debug\moc_manager.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="qt_meta_stringdata_QCStandardPaths_t" Collapsed="true">
+    <Position X="35" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Debug\moc_qcstandardpaths.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="qt_meta_stringdata_dnai__views__Flow_t" Collapsed="true">
+    <Position X="35" Y="12.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Debug\moc_flow.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="qt_meta_stringdata_dnai__views__DeclarationView_t" Collapsed="true">
+    <Position X="33.25" Y="12.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Debug\moc_declarationview.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Typedef Name="dnai::http::Headers" Collapsed="true">
+    <Position X="33.25" Y="16" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>include\dnai\http\types.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="dnai::http::Params" Collapsed="true">
+    <Position X="36.75" Y="16" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>include\dnai\http\types.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="dnai::http::Form" Collapsed="true">
+    <Position X="31.5" Y="16" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>include\dnai\http\types.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="dnai::http::InterceptorFunction" Collapsed="true">
+    <Position X="35" Y="16" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>include\dnai\http\types.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="dnai::http::ResponseFunction" Collapsed="true">
+    <Position X="38.5" Y="16" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>include\dnai\http\observable.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="dnai::http::ErrorFunction" Collapsed="true">
+    <Position X="28" Y="16" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>include\dnai\http\observable.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="dnai::http::FinalityFunction" Collapsed="true">
+    <Position X="29.75" Y="16" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>include\dnai\http\observable.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Enum Name="dnai::ModelTypes" Collapsed="true">
+    <Position X="29.75" Y="15" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAQAAIIAAIAEAAAAAAAAAQAAAAAAAA=</HashCode>
+      <FileName>include\dnai\models\common.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="dnai::http::BodyType" Collapsed="true">
+    <Position X="28" Y="15" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAIAAAgAAAAAEAAAAAAAAAAAAAA=</HashCode>
+      <FileName>include\dnai\http\url.h</FileName>
+    </TypeIdentifier>
+  </Enum>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>
