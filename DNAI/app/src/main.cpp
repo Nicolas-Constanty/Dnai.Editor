@@ -43,6 +43,7 @@ static void registerDNAI()
     qmlRegisterSingletonType<dnai::Manager>("DNAI", 1, 0, "Manager", manager_singleton_provider);
     qmlRegisterSingletonType<dnai::AppSettings>("DNAI", 1, 0, "AppSettings", settings_singleton_provider);
     qmlRegisterSingletonType<QCStandardPaths>("DNAI", 1, 0, "StandardPath", standardpath_singleton_provider);
+    qmlRegisterType<dnai::Session>("DNAI", 1, 0, "Session");
 }
 
 static void registerEnums()
@@ -106,7 +107,6 @@ static void registerConnection() {
 
 static void registerQml()
 {
-    registerDNAI();
     registerEnums();
     registerModels();
     registerViews();
@@ -126,6 +126,7 @@ int main(int argc, char *argv[])
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
     dnai::App app(argc, argv);
+    registerDNAI();
 
     app.load();
     return app.exec();

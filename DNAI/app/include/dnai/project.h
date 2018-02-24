@@ -55,6 +55,9 @@ namespace dnai {
         QFile &file() const;
         const models::Context *main() const;
         QJsonObject data() const;
+		static QJsonObject loadProjectData(const QString &);
+		static Project *loadProject(const QString &);
+		static Project *loadProject(const QJsonObject &, QFile &);
 
     private:
         models::Variable *unserializeVariable(const QJsonObject &, QObject *);

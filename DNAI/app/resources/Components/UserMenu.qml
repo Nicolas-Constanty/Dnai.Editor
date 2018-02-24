@@ -13,7 +13,7 @@ UserMenuForm {
     opened: false
 
     Component.onCompleted: {
-        Manager.getCurrentUser();
+        Manager.session.getCurrentUser();
     }
 
     mouseArea.onClicked: {
@@ -26,7 +26,7 @@ UserMenuForm {
     }
 
     logoutBtn.onClicked: {
-        Manager.logout()
+        Manager.session.logout()
         root.fullname = ""
         root.imgSrc = ""
     }
@@ -36,12 +36,12 @@ UserMenuForm {
     }
 
     Connections {
-        target: Manager
+        target: Manager.session
 
         onUserChanged: {
             loginPopup.close()
-            root.fullname = Manager.user.name
-            root.imgSrc = Manager.user.profile_url
+            root.fullname = Manager.session.user.name
+            root.imgSrc = Manager.session.user.profile_url
         }
     }
 

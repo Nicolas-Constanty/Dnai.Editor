@@ -1,5 +1,4 @@
 #include <QJsonDocument>
-#include <QQmlIncubator>
 #include <QQmlProperty>
 
 #include "dnai/app.h"
@@ -12,8 +11,9 @@
 namespace dnai {
     const QString Manager::project_extension = ".dnaiproject";
 
-    Manager::Manager(QObject *parent): QObject(parent), m_project(nullptr), m_currentPath(nullptr), m_user(nullptr)
+    Manager::Manager(QObject *parent): QObject(parent), m_project(nullptr), m_currentPath(nullptr)
 	{
+        m_app = App::currentInstance();
 		m_projectModel = nullptr;
 		m_declRef = new models::DeclarationModel();
 	}
@@ -34,56 +34,15 @@ namespace dnai {
         m_project->save();
     }
 
-    QJsonObject Manager::loadProjectData(const QString &path)
+	QJsonObject Manager::loadProjectData(const QString &path)
+	{
+		return Project::loadProjectData(path);
+	}
+
+
+	void Manager::openProject(const QString &path)
     {
-        Project *project = this->loadProject(path);
-        return (project != nullptr) ? project->data() : QJsonObject {};
-    }
-
-    void Manager::downloadProjectData(uint index, const QString &id)
-    {
-        api::get_raw_file(id).map([this, index](Response response) -> Response {
-            QFile emptyFile("empty");
-            auto project = this->loadProject(response.body, emptyFile);
-            if (project != nullptr) {
-                m_user->setCurrentFileData(project->data());
-                emit userChanged(m_user);
-            }
-            return response;
-        });
-    }
-
-    Project * Manager::loadProject(const QString &path)
-    {
-        QFile file(QUrl(path).toLocalFile());
-
-        if (!file.open(QIODevice::ReadWrite)) {
-            qWarning("Couldn't open file.");
-            return nullptr;
-        }
-
-        QByteArray data = file.readAll();
-
-        try {
-            QJsonObject obj(QJsonDocument::fromJson(data).object());
-            return this->loadProject(obj, file);
-        } catch (std::exception) {
-
-        }
-        qWarning("Couldn't parse file.");
-        return nullptr;
-    }
-
-    Project *Manager::loadProject(const QJsonObject &obj, QFile &file)
-    {
-        Project *project = new Project(obj["name"].toString(), obj["description"].toString(), file);
-        project->unserialize(obj);
-        return project;
-    }
-
-    void Manager::openProject(const QString &path)
-    {
-        this->openProject(this->loadProject(path));
+        this->openProject(Project::loadProject(path));
     }
 
     void Manager::openProject(Project *project)
@@ -371,69 +330,6 @@ namespace dnai {
         qvariant_cast<models::Declaration *>(m_declRef->data(m_declRef->index(listindex , 0)))->addModel(new models::Variable(-1, "Variable", "", QVector2D(), "generic", false, index, listindex));
     }
 
-    models::User *Manager::user() const
-    {
-        return m_user;
-    }
-
-    void Manager::setUser(models::User *user)
-    {
-        m_user = user;
-    }
-
-    void Manager::signin(const QString &username, const QString &password)
-    {
-        api::signin(username, password).map([this](Response response) -> Response {
-            getCurrentUser();
-            return response;
-        },
-        [this](Response response) -> Response {
-            emit apiErrors();
-            return response;
-        });
-    }
-
-    void Manager::getCurrentUser()
-    {
-        api::get_current_user().map([this](Response response) -> Response {
-            m_user = new models::User();
-            m_user->setName(response.body["first_name"].toString() + " " + response.body["last_name"].toString());
-            m_user->setProfile_url("../Images/default_user.png");
-            updateCurentUserFiles();
-            emit userChanged(m_user);
-            return response;
-        });
-    }
-
-    bool Manager::uploadFile(const QString &path)
-    {
-        auto file = new QFile(QUrl(path).toLocalFile());
-        if (!file->open(QIODevice::ReadOnly)) {
-            qWarning("Couldn't open file.");
-            return false;
-        }
-        api::post_file(QFileInfo(file->fileName()).fileName(), file);
-        return true;
-    }
-
-    void Manager::updateCurentUserFiles()
-    {
-        api::get_files().map([this](Response response) -> Response {
-            if (m_user != nullptr) {
-                m_user->setFiles(response.body["results"].toArray());
-                emit userChanged(m_user);
-            }
-            return response;
-        });
-    }
-
-    void Manager::logout()
-    {
-        api::logout();
-        delete m_user;
-        m_user = nullptr;
-    }
-
     void Manager::setAppViewLayout(dnai::views::Layout *l) const
     {
 		App::currentInstance()->appView()->setLayout(l);
@@ -452,6 +348,11 @@ namespace dnai {
 	models::BasicNodeModel* Manager::basicNodesModel() const
 	{
 		return App::currentInstance()->basicNodesModel();
+	}
+
+    Session * Manager::session() const
+    {
+        return const_cast<Session *>(m_app->session());
 	}
 
 	void Manager::createNode(QObject *nodeModel)

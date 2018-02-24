@@ -55,7 +55,42 @@ namespace dnai {
         };
     }
 
-    QFile &Project::file() const
+	QJsonObject Project::loadProjectData(const QString &path)
+	{
+		Project *project = Project::loadProject(path);
+		return (project != nullptr) ? project->data() : QJsonObject{};
+	}
+
+	Project * Project::loadProject(const QString &path)
+	{
+		QFile file(QUrl(path).toLocalFile());
+
+		if (!file.open(QIODevice::ReadWrite)) {
+			qWarning("Couldn't open file.");
+			return nullptr;
+		}
+
+		const QByteArray data = file.readAll();
+
+		try {
+			const QJsonObject obj(QJsonDocument::fromJson(data).object());
+			return loadProject(obj, file);
+		}
+		catch (std::exception) {
+
+		}
+		qWarning("Couldn't parse file.");
+		return nullptr;
+	}
+
+	Project *Project::loadProject(const QJsonObject &obj, QFile &file)
+	{
+		auto project = new Project(obj["name"].toString(), obj["description"].toString(), file);
+		project->unserialize(obj);
+		return project;
+	}
+
+	QFile &Project::file() const
     {
         return m_file;
     }

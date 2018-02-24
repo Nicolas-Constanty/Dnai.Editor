@@ -10,6 +10,7 @@
 #include "views/instructionview.h"
 #include "models/basicnodemodel.h"
 #include "iloadingclass.h"
+#include "session.h"
 
 namespace dnai {
     class App : public QGuiApplication, public ILoadingClass
@@ -25,6 +26,7 @@ namespace dnai {
         void registerSettings(AppSettings* appSetting);
 		QQmlApplicationEngine const* engine() const;
         AppSettings* settings() const;
+		Session const * session() const;
 
 	    views::AppView *appView() const;
         void initProcessManager();
@@ -45,6 +47,7 @@ namespace dnai {
         ProcessManager* m_processManager;
 	    views::AppView* m_appView;
 		models::BasicNodeModel *m_nodeModel;
+	    Session m_session;
 	    static App *m_instance;
 
         QObject *createQmlComponent(const QString &path);

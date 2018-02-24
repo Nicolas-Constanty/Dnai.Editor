@@ -43,7 +43,8 @@ SOURCES += \
     src/dnai/processmanager.cpp \
     src/dnai/entitiesfactory.cpp \
     src/dnai/commands/entitydeclare.cpp \
-    src/dnai/appcontext.cpp
+    src/dnai/appcontext.cpp \
+    src/dnai/session.cpp
 
 
 #COMMANDS
@@ -161,7 +162,8 @@ HEADERS += \
     include/dnai/iobservable.h \
     include/dnai/commands/entitydeclare.h \
     include/dnai/appcontext.h \
-    include/dnai/models/property.h
+    include/dnai/models/property.h \
+    include/dnai/session.h
 
 
 #DNAI

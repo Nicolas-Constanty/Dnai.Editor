@@ -158,7 +158,12 @@ namespace dnai
 		return m_settings;
 	}
 
-    QObject* App::createQmlObject(const QString& path)
+	Session const *App::session() const
+	{
+		return &m_session;
+	}
+
+	QObject* App::createQmlObject(const QString& path)
 	{
         return App::currentInstance()->createQmlComponent(path);
 	}

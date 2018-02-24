@@ -10,18 +10,18 @@
 #include "models/basicnodemodel.h"
 #include "views/layout.h"
 #include "api.h"
+#include "session.h"
 
 namespace dnai {
+	class App;
     class Manager: public QObject
     {
         Q_OBJECT
         Q_PROPERTY(dnai::models::TreeModel *projectModel READ projectModel WRITE setProjectModel NOTIFY projectModelChanged)
         Q_PROPERTY(QVariant namespacebarModel READ namespacebarModel WRITE setNamespacebarModel NOTIFY namespacebarModelChanged)
         Q_PROPERTY(dnai::models::DeclarationModel *declarationModel READ declarationModel WRITE setDeclarationModel NOTIFY declarationModelChanged)
-        Q_PROPERTY(dnai::models::User *user READ user WRITE setUser NOTIFY userChanged)
 		Q_PROPERTY(dnai::models::BasicNodeModel *basicNodesModel READ basicNodesModel NOTIFY basicNodesModelChanged)
-        Q_PROPERTY(void errors NOTIFY apiErrors)
-
+        Q_PROPERTY(dnai::Session *session READ session)
     public:
 	    explicit Manager(QObject *parent = 0);
         virtual ~Manager();
@@ -35,8 +35,7 @@ namespace dnai {
 
     public:
         Q_INVOKABLE void createProject(const QString &, const QString &, const QString &);
-        Q_INVOKABLE QJsonObject loadProjectData(const QString &);
-        Q_INVOKABLE void downloadProjectData(uint, const QString &);
+        Q_INVOKABLE static QJsonObject loadProjectData(const QString &);
         Q_INVOKABLE void openProject(const QString &);
         Q_INVOKABLE void openProject(Project *);
 	    Q_INVOKABLE QModelIndex getIndexMatch(dnai::models::TreeItem * md);
@@ -47,11 +46,7 @@ namespace dnai {
 	    Q_INVOKABLE void addClass(int index, int listindex) const;
 	    Q_INVOKABLE void addFunction(int index, int listindex) const;
 	    Q_INVOKABLE void addVariable(int index, int listindex) const;
-	    Q_INVOKABLE void signin(const QString &, const QString &);
-        Q_INVOKABLE void getCurrentUser();
-        Q_INVOKABLE bool uploadFile(const QString &);
-        Q_INVOKABLE void updateCurentUserFiles();
-	    Q_INVOKABLE void logout();
+
 	    Q_INVOKABLE void setAppViewLayout(dnai::views::Layout* l) const;
 		Q_INVOKABLE void registerTreeView(QQuickItem *tr);
 		Q_INVOKABLE QQuickItem *treeView() const;
@@ -62,9 +57,7 @@ namespace dnai {
 	    void projectModelChanged(models::TreeModel *model);
 	    void namespacebarModelChanged(const QVariant  &ref);
 	    void declarationModelChanged(models::DeclarationModel *ref);
-	    void userChanged(models::User *user);
 		void basicNodesModelChanged(models::BasicNodeModel *);
-        void apiErrors();
 
     public:
 	    models::TreeModel *projectModel() const { return m_projectModel; }
@@ -74,12 +67,10 @@ namespace dnai {
 	    void setDeclarationModel(models::DeclarationModel * m);
 	    models::DeclarationModel * declarationModel() const { return m_declRef; }
 		models::BasicNodeModel *basicNodesModel() const;
-	    models::User *user() const;
-	    void setUser(models::User *user);
+        Session *session() const;
 
     private:
-	    Project *loadProject(const QString &);
-        Project *loadProject(const QJsonObject &, QFile &);
+		App * m_app;
 	    models::TreeModel *m_projectModel;
 	    QVariant m_namespacebarmodel;
 	    models::TreeItem *m_currentPath;
@@ -97,7 +88,6 @@ namespace dnai {
 		static void createDeclarationView();
 		void createNameSpaceView() const;
 	    static void createInstructionView();
-	    models::User *m_user;
     };
     }
 
