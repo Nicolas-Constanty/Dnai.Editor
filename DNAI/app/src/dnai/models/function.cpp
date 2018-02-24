@@ -5,15 +5,11 @@
 
 namespace dnai {
     namespace models {
+		QList<QString> Function::m_editableProperties = {};
         Function::Function(const qint32 uid, QString const &name, QString const &description, QVector2D const &position, int index, int listindex, QObject *parent)
             : Common(uid, name, description, index, listindex, parent), Position(position)
         {
             m_type = ModelTypes::Function;
-        }
-
-        Function::~Function()
-        {
-
         }
         
         QList<Variable*> Function::variables() const
@@ -120,7 +116,14 @@ namespace dnai {
             controllers::ClientController::shared().sendDeclareEvent(PackageDataCom::ENTITYCORE::FUNCTION, 0, name(), PackageDataCom::VISIBILITYCORE::PUBLIC);
         }
 
-        IClone *Function::clone() const
+	    const QList<QString>& Function::editableProperties()
+	    {
+			if (m_editableProperties.empty())
+				m_editableProperties += Common::m_editableProperties + Position::m_editableProperties;
+			return m_editableProperties;
+	    }
+
+	    IClone *Function::clone() const
         {
             return new Function(uid(), name(), description(), position(), index(), listIndex());
         }

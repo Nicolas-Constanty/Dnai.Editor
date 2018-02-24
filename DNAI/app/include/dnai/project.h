@@ -2,8 +2,6 @@
 #define PROJECT_H
 
 #include <QString>
-#include <QFile>
-#include <QJsonObject>
 #include "models/class.h"
 #include "models/context.h"
 #include "models/flow.h"
@@ -84,7 +82,6 @@ namespace dnai {
     private:
         static bool defaultSearchFunc(models::Common *, QString const &);
         static bool defaultSearchFunctionsFunc(models::Function *, QString const &);
-
     };
 }
 

@@ -128,6 +128,9 @@
     <ClCompile Include="src\dnai\entitiesfactory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\dnai\models\entity.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="src\dnai\commands\entitydeclare.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -230,6 +233,9 @@
     <ClCompile Include="src\dnai\project.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\dnai\models\property.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="src\dnai\qmlresources\qcstandardpaths.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -269,18 +275,6 @@
     <ClCompile Include="src\dnai\commands\zoomcanvascommand.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_canvasnode.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_canvasnode.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_beziercurve.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_beziercurve.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
     <ClCompile Include="Debug\moc_basicnodemodel.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
@@ -293,70 +287,40 @@
     <ClCompile Include="Release\moc_appview.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
+    <ClCompile Include="Debug\moc_processmanager.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_processmanager.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_observable.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_observable.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_common.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_common.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_class.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_class.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
     <ClCompile Include="Debug\moc_user.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
     <ClCompile Include="Release\moc_user.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_url.cpp">
+    <ClCompile Include="Debug\moc_qcstandardpaths.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="Release\moc_url.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_treemodel.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_treemodel.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_treeitem.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_treeitem.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_testconnection.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_testconnection.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_declarationtype.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_declarationtype.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_declarationmodel.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_declarationmodel.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_declarationcanvas.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_declarationcanvas.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_customshape.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_customshape.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_session.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_session.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_roundedrectangle.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_roundedrectangle.cpp">
+    <ClCompile Include="Release\moc_qcstandardpaths.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
     <ClCompile Include="Debug\moc_property.cpp">
@@ -365,22 +329,16 @@
     <ClCompile Include="Release\moc_property.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_namespacebaritem.cpp">
+    <ClCompile Include="Debug\moc_canvasnode.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="Release\moc_namespacebaritem.cpp">
+    <ClCompile Include="Release\moc_canvasnode.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_listnode.cpp">
+    <ClCompile Include="Debug\moc_beziercurve.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="Release\moc_listnode.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_line.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_line.cpp">
+    <ClCompile Include="Release\moc_beziercurve.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
     <ClCompile Include="Debug\moc_layout.cpp">
@@ -407,12 +365,6 @@
     <ClCompile Include="Release\moc_instructionview.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_instructionid.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_instructionid.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
     <ClCompile Include="Debug\moc_genericnode.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
@@ -425,10 +377,22 @@
     <ClCompile Include="Release\moc_flowtype.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_settingsmodel.cpp">
+    <ClCompile Include="Debug\moc_url.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="Release\moc_settingsmodel.cpp">
+    <ClCompile Include="Release\moc_url.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_roundedrectangle.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_roundedrectangle.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_declarationcanvas.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_declarationcanvas.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
     <ClCompile Include="Debug\moc_settings.cpp">
@@ -437,52 +401,10 @@
     <ClCompile Include="Release\moc_settings.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_observable.cpp">
+    <ClCompile Include="Debug\moc_session.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="Release\moc_observable.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_namespacebarmodel.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_namespacebarmodel.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_app.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_app.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_contextview.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_contextview.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_console.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_console.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_common.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_common.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_class.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_class.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_processmanager.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_processmanager.cpp">
+    <ClCompile Include="Release\moc_session.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
     <ClCompile Include="Debug\moc_manager.cpp">
@@ -491,10 +413,40 @@
     <ClCompile Include="Release\moc_manager.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_qcstandardpaths.cpp">
+    <ClCompile Include="Debug\moc_treemodel.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="Release\moc_qcstandardpaths.cpp">
+    <ClCompile Include="Release\moc_treemodel.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_treeitem.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_treeitem.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_testconnection.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_testconnection.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_settingsmodel.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_settingsmodel.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_namespacebarmodel.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_namespacebarmodel.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_namespacebaritem.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_namespacebaritem.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
     <ClCompile Include="Debug\moc_flow.cpp">
@@ -503,13 +455,88 @@
     <ClCompile Include="Release\moc_flow.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
+    <ClCompile Include="Debug\moc_entity.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_entity.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_app.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_app.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_instructionid.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_instructionid.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_contextview.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_contextview.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_customshape.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_customshape.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_declarationmodel.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_declarationmodel.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_listnode.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_listnode.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_line.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_line.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
     <ClCompile Include="Debug\moc_declarationview.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
     <ClCompile Include="Release\moc_declarationview.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
+    <ClCompile Include="Debug\moc_declarationtype.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_declarationtype.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_console.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_console.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
     <ClCompile Include="GeneratedFiles\qrc_qml.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\dnai\controllers\propertypanel.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\dnai\commands\openpropertypanel.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_viewshandler.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_viewshandler.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\dnai\viewshandler.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -610,6 +637,9 @@
     <ClInclude Include="include\dnai\entitiesfactory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <CustomBuild Include="include\dnai\models\entity.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
     <ClInclude Include="include\dnai\commands\entitydeclare.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -799,12 +829,27 @@
     <ClInclude Include="GeneratedFiles\ui_BasePanelForm.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\dnai\utils\cx_stringlist.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dnai\utils\cx_string.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dnai\controllers\propertypanel.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dnai\commands\openpropertypanel.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="debug\moc_predefs.h.cbt">
       <Filter>Generated Files</Filter>
     </CustomBuild>
     <CustomBuild Include="release\moc_predefs.h.cbt">
+      <Filter>Generated Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="include\dnai\viewshandler.h">
       <Filter>Generated Files</Filter>
     </CustomBuild>
   </ItemGroup>

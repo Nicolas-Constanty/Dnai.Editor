@@ -27,7 +27,7 @@ Panel {
             anchors.right: parent.right
             height: (parent.height - 6 * (parent.children.length -1)) / (parent.children.length)
             Component.onCompleted: {
-                Manager.registerTreeView(tr.treeview)
+                Manager.views.registerTreeView(tr.treeview)
             }
         }
 

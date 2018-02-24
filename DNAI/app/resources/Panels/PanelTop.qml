@@ -14,7 +14,7 @@ Panel {
         orientation: Qt.Horizontal
         spacing: -2
         interactive: false
-        model: Manager.namespacebarModel
+        model: Manager.views.namespacebarModel
         delegate: Item {
             id: rootItem
             width: button.width + (model.modelData.asChild ? button1.width : 1)
@@ -30,7 +30,7 @@ Panel {
                     border.color: AppSettings.style.border.color
                 }
                 onClicked: {
-                    Manager.treeView().changeCurrent(model.modelData.model)
+                    Manager.views.treeView().changeCurrent(model.modelData.model)
                 }
             }
             Button {

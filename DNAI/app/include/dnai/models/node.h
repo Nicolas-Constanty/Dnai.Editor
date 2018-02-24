@@ -1,8 +1,6 @@
 #ifndef MODEL_NODE_H
 #define MODEL_NODE_H
 
-#include <QList>
-#include <QVector2D>
 #include "dnai/models/common.h"
 #include "dnai/models/input.h"
 #include "dnai/models/output.h"
@@ -18,7 +16,7 @@ class Node: public Common, public Position, virtual public IModel
 public:
 	Node(qint32 uid, QString const& name, QString const& description, QVector2D const& position, Function* function,
 	     QObject* parent = nullptr);
-    virtual ~Node();
+	virtual ~Node() = default;
 
 private:
     Function *m_function;
@@ -49,12 +47,15 @@ public:
 
     // IModel interface
 public:
-    virtual void serialize(QJsonObject &) const;
-    virtual void declare() const;
+	void serialize(QJsonObject &) const override;
+	void declare() const override;
+	const QList<QString>& editableProperties() override;
 
     // IClone interface
 private:
-    IClone *clone() const;
+    IClone *clone() const override;
+	static QList<QString> m_editableProperties;
+
 };
 }
 }

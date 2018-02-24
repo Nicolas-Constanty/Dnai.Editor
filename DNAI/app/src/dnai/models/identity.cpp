@@ -2,13 +2,9 @@
 
 namespace dnai {
     namespace models {
+		const QList<QString> Identity::m_editableProperties = {};
         Identity::Identity(QString const &linked_uid)
             : m_linked_uid(linked_uid)
-        {
-
-        }
-
-        Identity::~Identity()
         {
 
         }
@@ -33,7 +29,12 @@ namespace dnai {
 
         }
 
-        IClone *Identity::clone() const
+	    const QList<QString>& Identity::editableProperties()
+	    {
+			return m_editableProperties;
+	    }
+
+	    IClone *Identity::clone() const
         {
             return new Identity(linked_uid());
         }

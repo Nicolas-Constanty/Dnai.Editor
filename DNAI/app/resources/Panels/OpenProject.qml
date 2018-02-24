@@ -10,23 +10,19 @@ OpenProjectForm {
     property Component onlineFilesDelegate: onlineFilesDelegate
     property int currentIndex: -1
 
-//    popup.onOpened: function() {
-//        Manager.session.updateCurentUserFiles();
-//    }
-
     Connections {
-        target: Manager
+        target: Manager.session
 
         onUserChanged: {
             isConnected = true;
             filesData.clear();
-            for (var i = 0; i < Manager.user.files.length; ++i) {
-                filesData.append(Manager.user.files[i]);
+            for (var i = 0; i < Manager.session.user.files.length; ++i) {
+                filesData.append(Manager.session.user.files[i]);
             }
 
             if (currentIndex != -1) {
-                console.log(Manager.user.currentFileData);
-                fillInformations(Manager.user.currentFileData);
+                console.log(Manager.session.user.currentFileData);
+                fillInformations(Manager.session.user.currentFileData);
             }
         }
     }
@@ -97,7 +93,7 @@ OpenProjectForm {
                 onClicked: {
                     currentIndex = index;
                     const filename = file.replace(/^.*[\\\/]/, '');
-                    Manager.downloadProjectData(index, filename);
+                    Manager.session.downloadProjectData(index, filename);
                 }
             }
         }

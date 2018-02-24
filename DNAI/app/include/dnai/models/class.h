@@ -1,8 +1,6 @@
 #ifndef MODEL_CLASS_H
 #define MODEL_CLASS_H
 
-#include <QList>
-
 #include "dnai/models/common.h"
 #include "dnai/models/variable.h"
 #include "dnai/models/function.h"
@@ -44,12 +42,15 @@ public:
 
     // IModel interface
 public:
-    virtual void serialize(QJsonObject &) const;
-    virtual void declare() const;
+	void serialize(QJsonObject &) const override;
+	void declare() const override;
+	const QList<QString> &editableProperties() override;
 
     // IClone interface
 private:
-    IClone *clone() const;
+    IClone *clone() const override;
+	static QList<QString> m_editableProperties;
+
 };
 }
 }

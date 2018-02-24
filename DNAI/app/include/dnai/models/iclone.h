@@ -4,6 +4,7 @@
 namespace dnai {
 namespace models {
 class IClone {
+public:
     virtual IClone* clone() const = 0;
 };
 }

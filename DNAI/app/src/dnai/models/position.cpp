@@ -2,6 +2,9 @@
 
 namespace dnai {
     namespace models {
+		const QList<QString> &Position::m_editableProperties = {
+			"position"
+		};
         Position::Position(QVector2D const &position) : m_position(position)
         {
 
@@ -25,7 +28,12 @@ namespace dnai {
             };
         }
 
-        void Position::declare() const
+	    const QList<QString>& Position::editableProperties()
+	    {
+			return m_editableProperties;
+	    }
+
+	    void Position::declare() const
         {
 
         }

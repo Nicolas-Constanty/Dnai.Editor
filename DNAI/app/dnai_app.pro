@@ -1,6 +1,6 @@
 QT += qml quickcontrols2 network
 
-CONFIG += c++14
+CONFIG += c++17
 CONFIG += object_parallel_to_source
 CONFIG += resources_big
 CONFIG += no_batch
@@ -44,7 +44,12 @@ SOURCES += \
     src/dnai/entitiesfactory.cpp \
     src/dnai/commands/entitydeclare.cpp \
     src/dnai/appcontext.cpp \
-    src/dnai/session.cpp
+    src/dnai/session.cpp \
+    src/dnai/models/property.cpp \
+    src/dnai/models/entity.cpp \
+    src/dnai/controllers/propertypanel.cpp \
+    src/dnai/commands/openpropertypanel.cpp \
+    src/dnai/viewshandler.cpp
 
 
 #COMMANDS
@@ -163,7 +168,11 @@ HEADERS += \
     include/dnai/commands/entitydeclare.h \
     include/dnai/appcontext.h \
     include/dnai/models/property.h \
-    include/dnai/session.h
+    include/dnai/session.h \
+    include/dnai/models/entity.h \
+    include/dnai/controllers/propertypanel.h \
+    include/dnai/commands/openpropertypanel.h \
+    include/dnai/viewshandler.h
 
 
 #DNAI

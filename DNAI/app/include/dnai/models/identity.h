@@ -1,16 +1,15 @@
 #ifndef MODEL_IDENTITY_H
 #define MODEL_IDENTITY_H
 
-#include <QString>
-#include "dnai/models/imodel.h"
+#include "imodel.h"
 
 namespace dnai {
 namespace models {
 class Identity: virtual public IModel
 {
 public:
-    Identity(QString const &);
-    virtual ~Identity();
+	explicit Identity(QString const &);
+    virtual ~Identity() = default;
 
     QString linked_uid() const;
     void setLinked_uid(const QString &linked_uid);
@@ -20,12 +19,16 @@ private:
 
     // IModel interface
 public:
-    virtual void serialize(QJsonObject &) const;
-    virtual void declare() const;
+	void serialize(QJsonObject &) const override;
+	void declare() const override;
+	const QList<QString>& editableProperties() override;
 
     // IClone interface
 private:
-    IClone *clone() const;
+	virtual IClone *clone() const override;
+protected:
+	const static QList<QString> m_editableProperties;
+
 };
 }
 }

@@ -22,5 +22,7 @@
 #include "dnai/models/settingsmodel.h"
 #include "dnai/models/basicnodemodel.h"
 #include "dnai/models/listnode.h"
+#include "dnai/models/property.h"
+#include "dnai/models/entity.h"
 
 #endif // MODELS_H

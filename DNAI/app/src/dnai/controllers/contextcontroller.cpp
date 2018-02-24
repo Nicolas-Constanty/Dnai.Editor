@@ -7,7 +7,7 @@ namespace dnai
 {
 	namespace controllers
 	{
-        ContextController::ContextController() : AController<dnai::models::Class>("")
+        ContextController::ContextController() : AController<dnai::models::Class, Reply::EntityDeclared const&>("")
 		{
 
 		}

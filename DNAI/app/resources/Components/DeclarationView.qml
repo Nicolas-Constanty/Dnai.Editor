@@ -164,7 +164,7 @@ Item {
                             width: 45
                             visible: isContext
                             onPressed: {
-                                Manager.addContext(_sublist.visualModel.items.count, index)
+                                Manager.views.addContext(_sublist.visualModel.items.count, index)
                                 _sublist.positionViewAtEnd()
                             }
                         }
@@ -173,7 +173,7 @@ Item {
                             decoration.color: "#039BE5"
                             width: 45
                             onPressed: {
-                                Manager.addClass(_sublist.visualModel.items.count, index)
+                                Manager.views.addClass(_sublist.visualModel.items.count, index)
                                 _sublist.positionViewAtEnd()
                             }
                         }
@@ -182,7 +182,7 @@ Item {
                             decoration.color: "#8E24AA"
                             width: 45
                             onPressed: {
-                                Manager.addFunction(_sublist.visualModel.items.count, index)
+                                Manager.views.addFunction(_sublist.visualModel.items.count, index)
                                 _sublist.positionViewAtEnd()
                             }
                         }
@@ -191,7 +191,7 @@ Item {
                             decoration.color: "#FB8C00"
                             width: 45
                             onPressed: {
-                                Manager.addVariable(_sublist.visualModel.items.count, index)
+                                Manager.views.addVariable(_sublist.visualModel.items.count, index)
                                 _sublist.positionViewAtEnd()
                             }
                         }
@@ -208,7 +208,7 @@ Item {
             spacing: -1
             orientation: Qt.Horizontal
             layoutDirection: Qt.LeftToRight
-            model: Manager.declarationModel
+            model: Manager.views.declarationModel
             delegate: _delegate
         }
     }

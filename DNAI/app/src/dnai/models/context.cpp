@@ -1,21 +1,18 @@
 #include <QJsonArray>
-#include <QDebug>
 
 #include "dnai/models/context.h"
 #include "dnai/controllers/clientcontroller.h"
 
 namespace dnai {
     namespace models {
+		QList<QString> Context::m_editableProperties = {};
         Context::Context(const qint32 uid, QString const &name, QString const &description, QVector2D const &position, const int index, const int listindex, QObject *parent)
             : Common(uid, name, description, index, listindex, parent), Position(position)
         {
             m_type = ModelTypes::Context;
         }
 
-        Context::~Context()
-        {
-
-        }
+		Context::~Context() = default;
         
         QList<Context*> Context::contexts() const
         {
@@ -125,5 +122,12 @@ namespace dnai {
         {
             return new Context(uid(), name(), description(), position(), index(), listIndex());
         }
+
+	    const QList<QString>& Context::editableProperties()
+	    {
+			if (m_editableProperties.empty())
+				m_editableProperties += Common::m_editableProperties + Position::m_editableProperties;
+			return m_editableProperties;
+	    }
     }
 }

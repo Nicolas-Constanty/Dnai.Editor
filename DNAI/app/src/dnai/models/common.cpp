@@ -2,14 +2,13 @@
 
 namespace dnai {
     namespace models {
+		const QList<QString> Common::m_editableProperties = {
+			"name",
+			"description"
+		};
         Common::Common(const qint32 uid, QString const &name, QString const &description, const int index, const int listindex, QObject *parent)
             : QObject(parent), m_uid(uid), m_name(name), m_description(description), m_index(index), m_listindex(listindex), m_select(false), m_type(ModelTypes::Common)
         {
-        }
-
-        Common::~Common()
-        {
-
         }
 
 		qint32 Common::uid() const
@@ -83,7 +82,12 @@ namespace dnai {
 
         }
 
-        IClone *Common::clone() const
+	    const QList<QString>& Common::editableProperties()
+	    {
+			return m_editableProperties;
+	    }
+
+	    IClone *Common::clone() const
         {
             return new Common(uid(), name(), description(), index(), listIndex());
         }

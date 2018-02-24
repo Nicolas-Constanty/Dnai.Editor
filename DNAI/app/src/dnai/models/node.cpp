@@ -4,13 +4,9 @@
 
 namespace dnai {
     namespace models {
+		QList<QString> Node::m_editableProperties = {};
         Node::Node(const qint32 uid, QString const &name, QString const &description, QVector2D const &position, Function *function, QObject *parent)
             : Common(uid, name, description, 0, 0, parent), Position(position), m_function(function)
-        {
-
-        }
-
-        Node::~Node()
         {
 
         }
@@ -131,7 +127,14 @@ namespace dnai {
 
         }
 
-        IClone *Node::clone() const
+	    const QList<QString>& Node::editableProperties()
+	    {
+			if (m_editableProperties.empty())
+				m_editableProperties += Common::m_editableProperties + Position::m_editableProperties;
+			return m_editableProperties;
+	    }
+
+	    IClone *Node::clone() const
         {
             return new Node(uid(), name(), description(), position(), function());
         }

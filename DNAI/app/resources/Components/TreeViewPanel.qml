@@ -17,24 +17,24 @@ ExpendablePanel {
         function changeCurrent(cur)
         {
 
-            var indexModel = Manager.getIndexMatch(cur)
-            Manager.selectTreeItem(indexModel)
-            Manager.updateNamespace(indexModel)
+            var indexModel = Manager.views.getIndexMatch(cur)
+            Manager.views.selectTreeItem(indexModel)
+            Manager.views.updateNamespace(indexModel)
 //            tr.selection.select(cur, ItemSelectionModel.ClearAndSelect)
             tr.selection.setCurrentIndex(indexModel, ItemSelectionModel.ClearAndSelect)
         }
         function changeCurrentFromModel(cur)
         {
-            var indexModel = Manager.getIndexMatchFromModel(cur)
-            Manager.selectTreeItem(indexModel)
-            Manager.updateNamespace(indexModel)
+            var indexModel = Manager.views.getIndexMatchFromModel(cur)
+            Manager.views.selectTreeItem(indexModel)
+            Manager.views.updateNamespace(indexModel)
             tr.selection.setCurrentIndex(indexModel, ItemSelectionModel.ClearAndSelect)
         }
 
         anchors.fill: parent
-        model: Manager.projectModel
+        model: Manager.views.projectModel
         selection: ItemSelectionModel {
-            model: Manager.projectModel
+            model: Manager.views.projectModel
         }
 
         frameVisible: false
@@ -48,7 +48,7 @@ ExpendablePanel {
             textColor : AppSettings.style.text.color
         }
         onClicked: {
-            Manager.updateNamespace(index)
+            Manager.views.updateNamespace(index)
         }
 
         Component.onCompleted: {

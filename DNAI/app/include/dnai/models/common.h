@@ -27,7 +27,7 @@ class Common: public QObject, virtual public IModel
     Q_PROPERTY(int type READ type WRITE setType NOTIFY typeChanged)
 public:
     Common(qint32 uid, QString const &name, QString const &description, int index, int listindex, QObject *parent = nullptr);
-    virtual ~Common();
+    virtual ~Common() = default;
 
 	qint32 uid() const;
     void setUid(qint32 uid);
@@ -67,15 +67,18 @@ signals:
 
     // IModel interface
 public:
-    virtual void serialize(QJsonObject &) const;
-    virtual void declare() const;
+	void serialize(QJsonObject &) const override;
+	void declare() const override;
+	const QList<QString>& editableProperties() override;
 
     // IClone interface
 private:
-    IClone *clone() const;
+    IClone *clone() const override;
 
 protected:
     int m_type;
+	static const QList<QString> m_editableProperties;
+
 };
 }
 }

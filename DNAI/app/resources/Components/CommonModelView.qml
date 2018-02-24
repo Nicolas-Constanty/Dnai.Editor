@@ -224,7 +224,7 @@ Rectangle {
             source: _openbutton.label
         }
         onPressed: {
-            Manager.treeView().changeCurrentFromModel(model.item)
+            Manager.views.treeView().changeCurrentFromModel(model.item)
         }
     }
     Item {

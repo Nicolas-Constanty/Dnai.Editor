@@ -1,8 +1,6 @@
 #ifndef MODEL_POSITION_H
 #define MODEL_POSITION_H
 
-#include <QVector2D>
-
 #include "dnai/models/imodel.h"
 
 namespace dnai {
@@ -10,7 +8,7 @@ namespace models {
 class Position: virtual public IModel
 {
 public:
-    Position(QVector2D const &);
+	explicit Position(QVector2D const &);
 
 private:
     QVector2D m_position;
@@ -21,12 +19,17 @@ public:
 
     // IClone interface
 private:
-    IClone *clone() const;
-    virtual void declare() const;
+	virtual IClone *clone() const override;
+	void declare() const override;
 
     // IModel interface
 public:
-    void serialize(QJsonObject &) const;
+    void serialize(QJsonObject &) const override;
+	const QList<QString>& editableProperties() override;
+
+protected:
+	static const QList<QString> &m_editableProperties;
+
 };
 }
 }

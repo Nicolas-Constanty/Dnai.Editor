@@ -13,6 +13,7 @@
 
 #include "include/eventconsumer.h"
 #include "dnai/entitiesfactory.h"
+#include "dnai/viewshandler.h"
 
 static QObject *manager_singleton_provider(QQmlEngine *engine, QJSEngine *scriptEngine)
 {
@@ -44,6 +45,7 @@ static void registerDNAI()
     qmlRegisterSingletonType<dnai::AppSettings>("DNAI", 1, 0, "AppSettings", settings_singleton_provider);
     qmlRegisterSingletonType<QCStandardPaths>("DNAI", 1, 0, "StandardPath", standardpath_singleton_provider);
     qmlRegisterType<dnai::Session>("DNAI", 1, 0, "Session");
+    qmlRegisterType<dnai::ViewsHandler>("DNAI", 1, 0, "ViewsHandler");
 }
 
 static void registerEnums()
@@ -99,6 +101,7 @@ static void registerModels()
     qmlRegisterType<dnai::models::Declaration>("DNAI.Models", 1, 0, "Declaration");
     qmlRegisterType<dnai::models::BasicNodeModel>("DNAI.Models", 1, 0, "BasicNodeModel");
     qmlRegisterType<dnai::models::ListNode>("DNAI.Models", 1, 0, "ListNode");
+    qmlRegisterType<dnai::models::Property>("DNAI.Models", 1, 0, "Property");
 }
 
 static void registerConnection() {

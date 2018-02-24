@@ -5,18 +5,16 @@
 
 namespace dnai {
     namespace models {
+		QList<QString> Class::m_editableProperties = {};
         Class::Class(const qint32 uid, QString const &name, QString const &description, QVector2D const &position, const int index, const int listindex, QObject *parent)
             : Common(uid, name, description, index, listindex, parent), Position(position)
         {
             m_type = ModelTypes::Class;
         }
 
-        Class::~Class()
-        {
+        Class::~Class() = default;
 
-        }
-
-        QList<Variable*> Class::attributes() const
+	    QList<Variable*> Class::attributes() const
         {
             return m_attributes;
         }
@@ -120,7 +118,14 @@ namespace dnai {
             controllers::ClientController::shared().sendDeclareEvent(PackageDataCom::ENTITYCORE::OBJECT_TYPE, 0, name(), PackageDataCom::VISIBILITYCORE::PUBLIC);
         }
 
-        IClone *Class::clone() const
+	    const QList<QString> &Class::editableProperties()
+	    {
+			if (m_editableProperties.empty())
+				m_editableProperties += Common::m_editableProperties + Position::m_editableProperties;
+			return m_editableProperties;
+		}
+
+	    IClone *Class::clone() const
         {
             return new Class(uid(),name(), description(), position(), index(), listIndex());
         }

@@ -13,19 +13,37 @@ namespace dnai
 		class IController
 		{
 		public:
+			virtual ~IController() = default;
 			virtual QList<QQuickItem*> views() const = 0;
 			virtual QQuickItem *createView() = 0;
 
 		protected:
 			virtual commands::ICommand *createCommand() = 0;
 		};
-		template <class T>
+        template <class T, class U = void>
 		class AController : public IController, public models::IClone
 		{
 		public:
 			explicit AController(const QString& view): m_createCommand(nullptr)
 			{
                 m_viewPath = view;
+			}
+
+			explicit AController(const AController& controller)
+			{
+				*this = controller;
+			}
+
+			AController& operator=(const AController& other)
+			{
+				// check for self-assignment
+				if (&other == this)
+					return *this;
+				this->m_model = other.model();
+//				this->m_createCommand = other.createCommand();
+				this->m_viewPath = other.path();
+				this->m_views = other.views();
+				return *this;
 			}
 
 			virtual ~AController() = default;
@@ -35,6 +53,14 @@ namespace dnai
 			{
 				return m_model;
 			}
+
+			void setModel(T *m)
+			{
+				if (m == m_model) return;
+				m_model = m;
+			}
+
+			const QString &path() const { return m_viewPath;  }
 
 			QList<QQuickItem*> views() const override
 			{
@@ -48,6 +74,8 @@ namespace dnai
 
             virtual void asyncCreate(T* model)
 			{
+				if (model == nullptr)
+					return;
 				m_createCommand = createCommand();
 				commands::CommandManager::Instance()->exec(m_createCommand);
 				if (m_model)
@@ -55,15 +83,15 @@ namespace dnai
 				m_model = model;
 			}
 
+			virtual bool create(U) {
+                addViewToCurrentContext();
+                return false;
+            }
 		protected:
 			T *m_model;
 			commands::ICommand *m_createCommand;
 			QList<QQuickItem *> m_views;
 			QString m_viewPath;
-
-		protected:
-			virtual bool create(Reply::EntityDeclared const &reply) = 0;
-
 		};
 	}
 }

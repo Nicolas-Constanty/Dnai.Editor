@@ -49,7 +49,7 @@ CanvasNode {
         id: _menu
 
         Repeater {
-            model: Manager.basicNodesModel
+            model: Manager.views.basicNodesModel
             delegate: Item {
                 Menu {
                     id: _subMenu
@@ -79,64 +79,6 @@ CanvasNode {
                 }
             }
         }
-
-//        Menu {
-//            title: qsTr("Unary Operator")
-//            id: _unaryOperator
-
-//            Repeater {
-//                model: Manager.basicNodesModel
-//                delegate: Item {
-//                    width: childrenRect.width
-//                    height: childrenRect.height
-//                    Action {
-//                        text: model.UnaryOperator.name
-//                    }
-//                }
-//            }
-//        }
-
-//        MenuSeparator { }
-
-//        Menu {
-//            title: qsTr("Binary Operator")
-//            id: _binaryOperator
-
-//            Repeater {
-//                model: Manager.basicNodesModel.BinaryOperator
-//                delegate: Item {
-//                    width: childrenRect.width
-//                    height: childrenRect.height
-//                    Action {
-//                        text: model.name
-//                    }
-//                    Component.onCompleted: {
-//                        console.log("Youhouuuuuuuuuuu")
-//                    }
-//                }
-//            }
-//            MenuSeparator { }
-
-//            Menu {
-//                title: qsTr("Logical")
-//                id: _logical
-
-//                Repeater {
-//                    model: Manager.basicNodesModel
-
-//                    delegate: Item {
-//                        width: childrenRect.width
-//                        height: childrenRect.height
-//                        Action {
-//                            text: model.BinaryOperatorLogical.name
-//                        }
-//                    }
-//                }
-////                Component.onCompleted: {
-////                    Manager.basicNodesModel().
-////                }
-//            }
-//        }
     }
 
     MLabel {

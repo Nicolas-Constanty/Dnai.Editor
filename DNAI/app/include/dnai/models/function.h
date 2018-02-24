@@ -1,7 +1,6 @@
 #ifndef MODEL_FUNCTION_H
 #define MODEL_FUNCTION_H
 
-#include <QList>
 #include "dnai/models/common.h"
 #include "dnai/models/variable.h"
 #include "dnai/models/input.h"
@@ -17,7 +16,7 @@ class Function: public Common, public Position, virtual public IModel
 public:
 	Function(qint32 uid, QString const& name, QString const& description, QVector2D const& position, int index, int listindex,
 	         QObject* parent = nullptr);
-    virtual ~Function();
+	~Function() = default;
 
 private:
     QList<Variable*> m_variables;
@@ -45,12 +44,14 @@ public:
 
     // IModel interface
 public:
-    virtual void serialize(QJsonObject &) const;
-    virtual void declare() const;
+	void serialize(QJsonObject &) const override;
+	void declare() const override;
+	const QList<QString>& editableProperties() override;
 
     // IClone interface
 private:
-    IClone *clone() const;
+    IClone *clone() const override;
+	static QList<QString> m_editableProperties;
 };
 }
 }
