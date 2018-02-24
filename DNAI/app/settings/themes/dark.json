@@ -22,7 +22,7 @@
     "shadowColor": "#212121",
     "font": {
         "family": ":/resources/fonts/consola.ttf",
-        "pixelSize": 14
+        "pixelSize": 10
     },
     "text": {
         "color": "#FAFAFA",

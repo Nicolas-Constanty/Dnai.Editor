@@ -10,18 +10,25 @@ namespace dnai
 {
 	namespace controllers
 	{
-		template <class T>
 		class IController
 		{
 		public:
-			explicit IController(const QString& view): m_createCommand(nullptr)
+			virtual QList<QQuickItem*> views() const = 0;
+			virtual QQuickItem *createView() = 0;
+
+		protected:
+			virtual commands::ICommand *createCommand() = 0;
+		};
+		template <class T>
+		class AController : public IController, public models::IClone
+		{
+		public:
+			explicit AController(const QString& view): m_createCommand(nullptr)
 			{
                 m_viewPath = view;
 			}
 
-			virtual ~IController()
-			{
-			}
+			virtual ~AController() = default;
 
 		public:
 			T *model() const
@@ -29,7 +36,7 @@ namespace dnai
 				return m_model;
 			}
 
-			QList<QQuickItem*> views() const
+			QList<QQuickItem*> views() const override
 			{
 				return m_views;
 			}
@@ -41,13 +48,12 @@ namespace dnai
 
             virtual void asyncCreate(T* model)
 			{
+				m_createCommand = createCommand();
 				commands::CommandManager::Instance()->exec(m_createCommand);
 				if (m_model)
 					delete m_model;
 				m_model = model;
 			}
-
-			virtual QQuickItem *createView() = 0;
 
 		protected:
 			T *m_model;

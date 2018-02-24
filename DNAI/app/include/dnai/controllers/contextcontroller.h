@@ -7,7 +7,7 @@ namespace dnai
 {
 	namespace controllers
 	{
-		class ContextController : public IController<models::Class>
+        class ContextController : public AController<models::Class>
 		{
 		public:
 			ContextController();
@@ -16,6 +16,10 @@ namespace dnai
 
 		protected:
 			bool create(Reply::EntityDeclared const& reply) override;
+        private:
+	        IClone* clone() const override;
+        protected:
+	        commands::ICommand* createCommand() override;
 		};
 
 	}

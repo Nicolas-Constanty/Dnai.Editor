@@ -9,8 +9,10 @@
 #include "dnai/app.h"
 #include "dnai/manager.h"
 #include "dnai/settings.h"
+#include "controllers.h"
 
 #include "include/eventconsumer.h"
+#include "dnai/entitiesfactory.h"
 
 static QObject *manager_singleton_provider(QQmlEngine *engine, QJSEngine *scriptEngine)
 {

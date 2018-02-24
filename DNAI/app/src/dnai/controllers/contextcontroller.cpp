@@ -1,17 +1,20 @@
 #include "dnai/controllers/contextcontroller.h"
+#include "dnai/controllers/clientcontroller.h"
+#include "dnai/commands/entitydeclare.h"
+
 
 namespace dnai
 {
 	namespace controllers
 	{
-		ContextController::ContextController() : IController<dnai::models::Class>("qrc:/resources/viewModels/Class.qml")
+        ContextController::ContextController() : AController<dnai::models::Class>("")
 		{
 
 		}
 
 		QQuickItem* ContextController::createView()
 		{
-			return dynamic_cast<QQuickItem*>(App::createQmlObject(m_viewPath));
+			return nullptr;
 		}
 
 		bool ContextController::create(Reply::EntityDeclared const& reply)
@@ -27,6 +30,19 @@ namespace dnai
 			delete model;
 			addViewToCurrentContext();
 			return true;
+		}
+
+		models::IClone* ContextController::clone() const
+		{
+			return new ContextController();
+		}
+
+		commands::ICommand* ContextController::createCommand()
+		{
+			const auto parent = dynamic_cast<dnai::models::Common *>(m_model->parent());
+			if (parent)
+                return new commands::EntityDeclare(PackageDataCom::ENTITYCORE::CONTEXT_D, parent->uid(), m_model->name());
+            return new commands::EntityDeclare(PackageDataCom::ENTITYCORE::CONTEXT_D, -1, m_model->name());
 		}
 	}
 }

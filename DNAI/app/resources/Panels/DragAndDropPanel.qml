@@ -5,8 +5,7 @@ import "../Components"
 
 ExpendablePanel {
     id: tr
-//    property alias gridview: _gridView
-    title: "DragAndDrop"
+    title: "Drag & Drop"
     ScrollView
     {
         anchors.left: parent.left

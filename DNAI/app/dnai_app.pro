@@ -41,7 +41,9 @@ SOURCES += \
     src/dnai/app.cpp \
     src/dnai/settings.cpp \
     src/dnai/processmanager.cpp \
-    src/dnai/entitiesfactory.cpp
+    src/dnai/entitiesfactory.cpp \
+    src/dnai/commands/entitydeclare.cpp \
+    src/dnai/appcontext.cpp
 
 
 #COMMANDS
@@ -156,7 +158,10 @@ HEADERS += \
     include/dnai/settings.h \
     include/dnai/entitiesfactory.h \
     include/dnai/iloadingclass.h \
-    include/dnai/iobservable.h
+    include/dnai/iobservable.h \
+    include/dnai/commands/entitydeclare.h \
+    include/dnai/appcontext.h \
+    include/dnai/models/property.h
 
 
 #DNAI
