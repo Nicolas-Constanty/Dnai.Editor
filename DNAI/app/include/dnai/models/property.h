@@ -10,7 +10,7 @@ class Property : public QObject
     Q_OBJECT
 public:
     Property(QObject *parent = nullptr);
-    virtual ~Property();
+    virtual ~Property() = default;
 };
 }
 }

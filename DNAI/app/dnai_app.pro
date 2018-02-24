@@ -163,7 +163,8 @@ HEADERS += \
     include/dnai/commands/entitydeclare.h \
     include/dnai/appcontext.h \
     include/dnai/models/property.h \
-    include/dnai/session.h
+    include/dnai/session.h \
+    include/dnai/ifactory.h
 
 
 #DNAI
