@@ -54,7 +54,10 @@ bool Session::uploadFile(const QString &path)
         qWarning("Couldn't open file.");
         return false;
     }
-    api::post_file(QFileInfo(file->fileName()).fileName(), file);
+    api::post_file(QFileInfo(file->fileName()).fileName(), file).map([this](Response response) -> Response {
+        updateCurentUserFiles();
+        return response;
+    });
     return true;
 }
 
