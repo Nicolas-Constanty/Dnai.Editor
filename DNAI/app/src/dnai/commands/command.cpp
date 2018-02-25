@@ -4,8 +4,9 @@ namespace dnai
 {
 	namespace commands
 	{
+        const QEvent::Type Command::CommandEvent = static_cast<QEvent::Type>(QEvent::registerEventType());
         Command::Command(const QString &name, bool save) :
-            QEvent(static_cast<QEvent::Type>(QEvent::registerEventType())),
+            QEvent(CommandEvent),
             m_name(name),
             m_save(save)
 		{

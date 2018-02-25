@@ -21,7 +21,7 @@ namespace dnai {
 			int rowCount(const QModelIndex&) const override;
 			QVariant data(const QModelIndex& index, int role) const override;
 			QObject *createNode(qmlresources::QInstructionID::Instruction_ID nodeId) const;
-
+            ~BasicNodeModel();
 		protected:
 			QHash<int, QByteArray> roleNames() const override;
 

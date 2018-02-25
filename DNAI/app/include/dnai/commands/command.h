@@ -10,6 +10,7 @@ namespace dnai
     {
 		class Command : public QEvent, public ICommand
 		{
+            static const QEvent::Type CommandEvent;
 		public:
 			explicit Command(const QString &name, bool save = false);
 

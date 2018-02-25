@@ -4,6 +4,12 @@ dnai::views::AppView::AppView(QObject* parent) : QObject(parent), m_layout(nullp
 {
 }
 
+dnai::views::AppView::~AppView()
+{
+    delete m_layout;
+    qDebug() << "~" << "AppView";
+}
+
 void dnai::views::AppView::setLayout(Layout* l)
 {
 	if (l == m_layout) return;

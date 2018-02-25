@@ -145,6 +145,12 @@ void QCanvas::setGrid(QGrid* g)
     emit gridChanged(g);
 }
 
+QCanvas::~QCanvas()
+{
+    delete m_grid;
+    qDebug() << "~" << "QCanvas";
+}
+
 void QNode::setBorder(QBorder* b)
 {
     if (m_border == b)
@@ -160,6 +166,12 @@ void QNode::setColor(const QColor& color)
     m_color = color;
     emit colorChanged(color);
 
+}
+
+QNode::~QNode()
+{
+    delete m_border;
+    qDebug() << "~" << "QNode";
 }
 
 void QNodes::setGenericNode(QNode* n)
@@ -227,6 +239,18 @@ void QNodes::setBorderWidth(qreal w)
 
 }
 
+QNodes::~QNodes()
+{
+    delete m_genericNode;
+    delete m_intNode;
+    delete m_stringNode;
+    delete m_boolNode;
+    delete m_functionNode;
+    delete m_classNode;
+    delete m_listNode;
+    qDebug() << "~" << "QNodes";
+}
+
 void QDeclaration::setBorder(QBorder* b)
 {
     if (m_border == b)
@@ -251,6 +275,12 @@ void QDeclaration::setBackground(const QColor& color)
     m_background = color;
     emit backgroundChanged(color);
 
+}
+
+QDeclaration::~QDeclaration()
+{
+    delete m_border;
+    qDebug() << "~" << "QDeclaration";
 }
 
 void QDeclarationView::setBorder(QBorder* b)
@@ -324,13 +354,22 @@ void QDeclarationView::setDeclVariable(QDeclaration* d)
 
 }
 
+QDeclarationView::~QDeclarationView()
+{
+    delete m_border;
+    delete m_declContext;
+    delete m_declClass;
+    delete m_declFunction;
+    delete m_declVariable;
+    qDebug() << "~" << "QDeclarationView";
+}
+
 void SettingsModel::setShadowColor(const QColor& color)
 {
     if (m_shadowColor == color)
         return;
     m_shadowColor = color;
     emit shadowColorChanged(color);
-
 }
 
 void SettingsModel::setMenu(MenuSettings *m)
@@ -412,6 +451,26 @@ SettingsModel::SettingsModel(QQuickItem *parent) : QQuickItem(parent)
   , m_font(new QFontSettings(this))
   , m_text(new QTextSettings(this))
 {
+}
+
+SettingsModel::~SettingsModel()
+{
+    delete m_background;
+    delete m_menu;
+    delete m_border;
+    delete m_canvas;
+    delete m_nodes;
+    delete m_declarationView;
+    delete m_font;
+    delete m_text;
+    qDebug() << "~" << "SettingsModel";
+}
+
+MenuSettings::~MenuSettings()
+{
+    delete m_background;
+    delete m_border;
+    qDebug() << "~" << "MenuSettings";
 }
 
 void MenuSettings::setBackground(QBackground *b)

@@ -14,6 +14,7 @@ namespace dnai
             Q_PROPERTY(Layout *layout READ layout WRITE setLayout NOTIFY layoutChanged)
 		public:
 			explicit AppView(QObject* parent = nullptr);
+            ~AppView();
 
         signals:
             void layoutChanged(Layout *l);

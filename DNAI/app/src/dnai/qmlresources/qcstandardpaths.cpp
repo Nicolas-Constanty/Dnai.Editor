@@ -59,7 +59,7 @@ QCStandardPaths::QCStandardPaths(QObject *parent) : QObject(parent)
 
 QCStandardPaths::~QCStandardPaths()
 {
-    qDebug() << "QCStandardPath";
+    qDebug() << "~" << "QCStandardPath";
 }
 
 /*!

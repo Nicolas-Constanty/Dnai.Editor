@@ -14,6 +14,7 @@ namespace dnai
 
         public:
 			explicit Layout(QQuickItem *parent = nullptr);
+            ~Layout();
 
 		signals:
             void contextViewChanged(ContextView *ctxView);

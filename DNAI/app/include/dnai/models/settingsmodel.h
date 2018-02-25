@@ -161,7 +161,7 @@ public:
 
 public:
     explicit QCanvas(QQuickItem *parent = nullptr) : QQuickItem(parent), m_grid(new QGrid(this)) {}
-
+    ~QCanvas();
 private:
     QGrid *m_grid;
     QColor m_background;
@@ -185,7 +185,7 @@ public:
 
 public:
     explicit QNode(QQuickItem *parent = nullptr) : QQuickItem(parent), m_border(new QBorder(this)) {}
-
+    ~QNode();
 private:
     QBorder *m_border;
     QColor m_color;
@@ -243,6 +243,7 @@ public:
       , m_borderWidth(1)
     {
     }
+    ~QNodes();
 
 private:
     QNode *m_genericNode;
@@ -282,7 +283,7 @@ public:
       , m_radius(5), m_border(new QBorder(this))
     {
     }
-
+    ~QDeclaration();
 private:
     QColor m_background;
     qreal m_radius;
@@ -339,6 +340,7 @@ public:
       , m_declVariable(new QDeclaration(this))
     {
     }
+    ~QDeclarationView();
 
 private:
     qreal m_itemSize;
@@ -396,6 +398,7 @@ class MenuSettings : public QQuickItem
 public:
     explicit MenuSettings(QQuickItem *parent = nullptr) : QQuickItem(parent), m_background(new QBackground(this)), m_border(new QBorder(this))
     {}
+    ~MenuSettings();
 
 signals:
     void borderChanged(QBorder *);
@@ -426,8 +429,6 @@ class SettingsModel : public QQuickItem
     Q_PROPERTY(dnai::models::QDeclarationView *declarationView READ declarationView WRITE setDeclarationView NOTIFY declarationViewChanged)
     Q_PROPERTY(dnai::models::QFontSettings *font READ font WRITE setFont NOTIFY fontChanged)
     Q_PROPERTY(dnai::models::QTextSettings *text READ text WRITE setText NOTIFY textChanged)
-
-
 
 signals:
     void backgroundChanged(QBackground *b);
@@ -466,7 +467,7 @@ public:
 
 public:
     explicit SettingsModel(QQuickItem *parent = nullptr);
-
+    ~SettingsModel();
 private:
     QBackground *m_background;
     MenuSettings *m_menu;
@@ -476,7 +477,7 @@ private:
     QNodes *m_nodes;
     QDeclarationView *m_declarationView;
     QFontSettings *m_font;
-    QTextSettings* m_text;
+    QTextSettings *m_text;
 
 };
 }

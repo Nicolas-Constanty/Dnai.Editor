@@ -23,7 +23,7 @@ Item {
             border.color: AppSettings.style.border.color
             border.width: AppSettings.style.border.width
             height: _item.height
-            width: (_item.width / 3 > 200) ? _item.width / 4 : 200
+            width: (_item.width / 3 > 300) ? _item.width / 3 : 300
             EditableText {
                 id: _title
                 text:  model.name

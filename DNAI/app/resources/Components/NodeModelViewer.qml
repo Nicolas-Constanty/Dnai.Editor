@@ -7,19 +7,13 @@ import "../Style"
 import "../JavaScript/CreateComponent.js" as Factory
 
 Item {
-
     Component {
         id: _listDelegate
         GridView {
             cellWidth: 60
             cellHeight: 60
-            Component.onCompleted: {
-                console.log(model)
-                console.log(model.list)
-            }
-
             model: DelegateModel {
-                model: list
+                model: undefined
                 delegate: Item {
                     id: _item
                     height: 60
@@ -81,12 +75,12 @@ Item {
                         }
                         onPressed: {
                             var obj = Factory.createObjects("resources/Components/Node.qml" ,
-                                                  {
-                                                      "width": 50,
-                                                      "height": 50,
-                                                      "model": model.item,
-                                                  },
-                                                  parent.parent)
+                                                            {
+                                                                "width": 50,
+                                                                "height": 50,
+                                                                "model": model.item,
+                                                            },
+                                                            parent.parent)
                             obj.x = item.x
                             obj.y = item.y
                         }

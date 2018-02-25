@@ -25,14 +25,13 @@ namespace dnai
 	}
 
     App::~App() {
-		if (m_settings)
-			delete m_settings;
-		if (m_processManager)
-			delete m_processManager;
-		if (m_appView)
-			delete m_appView;
-		if (m_nodeModel)
-			delete m_nodeModel;
+        if (m_processManager)
+            delete m_processManager;
+        if (m_appView)
+            delete m_appView;
+        if (m_nodeModel)
+            delete m_nodeModel;
+        qDebug() << "~" << "App";
     }
 
     void App::initApp()

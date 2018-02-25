@@ -26,8 +26,15 @@ namespace models {
 
 	QObject* BasicNodeModel::createNode(qmlresources::QInstructionID::Instruction_ID nodeId) const
 	{
-		return m_components[nodeId]->create();
-	}
+        return m_components[nodeId]->create();
+    }
+
+    BasicNodeModel::~BasicNodeModel()
+    {
+        auto map = m_nodes.toStdMap();
+        map.erase(map.begin(), map.end());
+        qDebug() << "~" << "BasicNodeModel";
+    }
 
 	QHash<int, QByteArray> BasicNodeModel::roleNames() const
 	{

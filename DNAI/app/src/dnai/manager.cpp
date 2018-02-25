@@ -19,8 +19,8 @@ namespace dnai {
 
     Manager::~Manager()
     {
-        qDebug() << "Manager";
         delete m_viewsHandler;
+        qDebug() << "~" << "Manager";
     }
 
 	void Manager::createProject(const QString &name, const QString &description, const QString &path)

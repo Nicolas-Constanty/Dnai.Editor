@@ -199,6 +199,7 @@ namespace dnai {
                     break;
                 case DEVICE:
                     reply = m_manager->sendCustomRequest(request, m_method.toLatin1(), m_device);
+                    break;
                 case DEFAULT:
                 default:
                     reply = m_manager->sendCustomRequest(request, m_method.toLatin1(), m_body);

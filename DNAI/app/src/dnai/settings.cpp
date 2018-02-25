@@ -20,7 +20,8 @@ namespace dnai
 
 	AppSettings::~AppSettings()
 	{
-        qDebug() << "AppSetting";
+        delete m_style;
+        qDebug() << "~" << "AppSetting";
 	}
 
     void AppSettings::setStyle(models::SettingsModel* m)
