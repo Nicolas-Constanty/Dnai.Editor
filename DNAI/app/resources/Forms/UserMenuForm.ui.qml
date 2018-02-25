@@ -59,7 +59,6 @@ Item {
         }
 
         Splitter {
-
         }
 
         DMenuItem {

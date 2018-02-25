@@ -18,7 +18,7 @@ namespace dnai
 		Q_PROPERTY(QVariant namespacebarModel READ namespacebarModel WRITE setNamespacebarModel NOTIFY namespacebarModelChanged)
 		Q_PROPERTY(dnai::models::DeclarationModel *declarationModel READ declarationModel WRITE setDeclarationModel NOTIFY declarationModelChanged)
 		Q_PROPERTY(dnai::models::BasicNodeModel *basicNodesModel READ basicNodesModel NOTIFY basicNodesModelChanged)
-		Q_PROPERTY(models::Entity *propertyPanelModel READ propertyPanelModel NOTIFY propertyPanelModelChanged)
+        Q_PROPERTY(dnai::models::Entity *propertyPanelModel READ propertyPanelModel NOTIFY propertyPanelModelChanged)
 
 	signals:
 		void propertyPanelModelChanged(models::Entity *) const;

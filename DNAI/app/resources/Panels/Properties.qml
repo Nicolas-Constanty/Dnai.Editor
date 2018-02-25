@@ -1,6 +1,9 @@
 import QtQuick 2.0
 import QtQuick.Controls 1.4
+import QtQuick.Controls.Styles 1.4
 
+import DNAI 1.0
+import DNAI.Models 1.0
 import "../Style"
 
 ExpendablePanel {
@@ -8,14 +11,7 @@ ExpendablePanel {
 
     TableView {
         id: _tableView
-        anchors.left: parent.left
-        anchors.leftMargin: 10
-        anchors.right: parent.right
-        anchors.rightMargin: 10
-        anchors.top: parent.top
-        anchors.topMargin: 10
-        anchors.bottom: parent.bottom
-        anchors.bottomMargin: 10
+        anchors.fill: parent
 
         TableViewColumn {
             role: "name"
@@ -27,27 +23,58 @@ ExpendablePanel {
             title: "Value"
             width: (2 * _tableView.width) / 3
         }
-        model: test
-        itemDelegate: Item {
+        frameVisible: false
+        headerVisible: false
+        style: TableViewStyle {
+            backgroundColor :  AppSettings.style.background.darkColor
+            alternateBackgroundColor:  AppSettings.style.background.darkColor
+            highlightedTextColor: AppSettings.style.background.color
+            textColor : AppSettings.style.text.color
+        }
+
+        model: Manager.views.propertyPanelModel
+        itemDelegate: Rectangle {
+            color: AppSettings.style.background.darkColor
             // TODO Improve this declaration with javascript creation ?
             EditableText {
                 visible: styleData.column === 1
                 text: styleData.value
                 focus: true
+                color: AppSettings.style.text.color
             }
             MText {
                 visible: styleData.column === 0
                 text: styleData.value
                 focus: true
             }
-        }
-
-        ListModel {
-            id: test
-            ListElement {
-                name : "(Name)"
-                value: "class1"
+            Rectangle {
+                anchors {
+                   right: parent.right
+                   top: parent.top
+                   bottom: parent.bottom
+               }
+               width: 1
+               color: AppSettings.style.border.color
             }
         }
+        rowDelegate: Item {
+            Rectangle {
+                anchors{
+                    right: parent.right
+                    left: parent.left
+                    bottom: parent.bottom
+                }
+                height: 1
+                color: AppSettings.style.border.color
+            }
+       }
+
+//        ListModel {
+//            id: test
+//            ListElement {
+//                name : "(Name)"
+//                value: "class1"
+//            }
+//        }
     }
 }
