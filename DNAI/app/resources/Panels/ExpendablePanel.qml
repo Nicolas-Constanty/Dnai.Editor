@@ -15,8 +15,10 @@ Rectangle {
     border.color: AppSettings.style.border.color
     border.width: AppSettings.style.border.width
     color: AppSettings.style.background.darkColor
+    clip: true
     Rectangle {
         id: _header
+        clip: true
         color: AppSettings.style.background.color
         height: _title.implicitHeight * 1.2
         width: parent.width
@@ -56,6 +58,7 @@ Rectangle {
     }
     Item {
         id: _content
+        clip: true
         anchors.top: _header.bottom
         anchors.bottom: parent.bottom
         anchors.left: parent.left

@@ -12,7 +12,7 @@ ExpendablePanel {
     TableView {
         id: _tableView
         anchors.fill: parent
-
+        anchors.rightMargin: -2
         TableViewColumn {
             role: "name"
             title: "Property name"
@@ -56,9 +56,8 @@ ExpendablePanel {
                width: 1
                color: AppSettings.style.border.color
             }
-        }
-        rowDelegate: Item {
             Rectangle {
+                y: -1
                 anchors{
                     right: parent.right
                     left: parent.left
@@ -67,7 +66,7 @@ ExpendablePanel {
                 height: 1
                 color: AppSettings.style.border.color
             }
-       }
+        }
 
 //        ListModel {
 //            id: test
