@@ -17,7 +17,11 @@ namespace dnai {
         m_viewsHandler->load();
 	}
 
-    Manager::~Manager() = default;
+    Manager::~Manager()
+    {
+        qDebug() << "Manager";
+        delete m_viewsHandler;
+    }
 
 	void Manager::createProject(const QString &name, const QString &description, const QString &path)
     {

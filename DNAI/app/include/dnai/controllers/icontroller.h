@@ -3,7 +3,6 @@
 
 #include "dnai/app.h"
 #include "dnai/commands/icommand.h"
-#include "replies.h"
 #include "dnai/commands/commandmanager.h"
 
 namespace dnai
@@ -23,6 +22,7 @@ namespace dnai
         template <class T, class U = void>
 		class AController : public IController, public models::IClone
 		{
+            using Fun = typename std::conditional<std::is_void<void>::value, void *, U>::type;
 		public:
 			explicit AController(const QString& view): m_createCommand(nullptr)
 			{
@@ -36,7 +36,6 @@ namespace dnai
 
 			AController& operator=(const AController& other)
 			{
-				// check for self-assignment
 				if (&other == this)
 					return *this;
 				this->m_model = other.model();
@@ -74,8 +73,8 @@ namespace dnai
 
             virtual void asyncCreate(T* model)
 			{
-				if (model == nullptr)
-					return;
+                if (model == nullptr)
+                    return;
 				m_createCommand = createCommand();
 				commands::CommandManager::Instance()->exec(m_createCommand);
 				if (m_model)
@@ -83,10 +82,12 @@ namespace dnai
 				m_model = model;
 			}
 
-			virtual bool create(U) {
+            virtual bool create(Fun)
+        	{
                 addViewToCurrentContext();
                 return false;
             }
+
 		protected:
 			T *m_model;
 			commands::ICommand *m_createCommand;

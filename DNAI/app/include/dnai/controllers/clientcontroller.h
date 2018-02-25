@@ -6,11 +6,10 @@
 #include <QHostAddress>
 #include <QString>
 
-class ClientCommunication;
-
 #include "datacomeventfactory.h"
-
 #include "packagecore.h"
+
+class ClientCommunication;
 
 namespace dnai
 {

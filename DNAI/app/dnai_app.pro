@@ -1,6 +1,6 @@
 QT += qml quickcontrols2 network
 
-CONFIG += c++17
+CONFIG += c++14
 CONFIG += object_parallel_to_source
 CONFIG += resources_big
 CONFIG += no_batch

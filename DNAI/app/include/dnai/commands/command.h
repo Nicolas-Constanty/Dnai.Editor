@@ -7,9 +7,7 @@
 namespace dnai
 {
 	namespace commands
-	{
-		const QEvent::Type CommandEvent = static_cast<QEvent::Type>(QEvent::registerEventType());
-
+    {
 		class Command : public QEvent, public ICommand
 		{
 		public:

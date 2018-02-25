@@ -22,7 +22,7 @@ class QCStandardPaths : public QObject
 
 public:
     explicit QCStandardPaths(QObject *parent = 0);
-
+    ~QCStandardPaths();
     enum StandardLocation {
         DesktopLocation,
         DocumentsLocation,

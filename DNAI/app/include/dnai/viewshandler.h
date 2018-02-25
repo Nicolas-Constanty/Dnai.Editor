@@ -1,9 +1,10 @@
 #ifndef VIEWSHANDLER_H
 #define VIEWSHANDLER_H
 #include <QObject>
-#include "dnai/controllers/propertypanel.h"
-#include "dnai/models/property.h"
+
 #include "iloadingclass.h"
+#include "controllers/propertypanel.h"
+#include "models/property.h"
 #include "models/declarationmodel.h"
 #include "models/treeitem.h"
 #include "models/treemodel.h"

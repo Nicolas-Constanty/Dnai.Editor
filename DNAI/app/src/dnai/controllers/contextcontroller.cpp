@@ -2,12 +2,15 @@
 #include "dnai/controllers/clientcontroller.h"
 #include "dnai/commands/entitydeclare.h"
 
-
 namespace dnai
 {
 	namespace controllers
 	{
-        ContextController::ContextController() : AController<dnai::models::Class, Reply::EntityDeclared const&>("")
+        ContextController::ContextController()
+            : AController<
+              dnai::models::Class,
+              Reply::EntityDeclared const&
+              >("")
 		{
 
 		}

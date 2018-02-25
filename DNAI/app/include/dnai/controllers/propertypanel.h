@@ -7,7 +7,7 @@ namespace dnai
 {
 	namespace controllers
 	{
-		class PropertyPanel : public AController<models::Entity>
+        class PropertyPanel : public AController<models::Entity, void>
 		{
 		public:
 			explicit PropertyPanel();

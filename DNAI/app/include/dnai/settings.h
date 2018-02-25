@@ -15,7 +15,7 @@ class AppSettings : public QObject
 public:
     Q_PROPERTY(dnai::models::SettingsModel *style READ style WRITE setStyle NOTIFY styleChanged)
     explicit AppSettings(QObject *parent = nullptr);
-    virtual ~AppSettings();
+    ~AppSettings();
 
     static const QString settings_extension;
 

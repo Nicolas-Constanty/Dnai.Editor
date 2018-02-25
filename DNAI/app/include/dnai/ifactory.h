@@ -20,8 +20,8 @@ public:
 
         template<typename TrueType, typename ... Args>
     void registerObject(Key ci, Args&& ... args)
-        {
-            m_factoryObjects[ci] = [=]() { return static_cast<void *>(new TrueType(std::move(args)...)); };
+    {
+        m_factoryObjects[ci] = [=]() { return static_cast<void *>(new TrueType(std::move(args)...)); };
 	}
 
 private:

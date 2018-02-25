@@ -2,7 +2,7 @@
 #define CONTEXTCONTROLLER_H
 #include "icontroller.h"
 #include "dnai/models/class.h"
-#include "dnai/controllers/clientcontroller.h"
+#include "datacomeventfactory.h"
 
 namespace dnai
 {

@@ -130,7 +130,6 @@ int main(int argc, char *argv[])
 
     dnai::App app(argc, argv);
     registerDNAI();
-
     app.load();
     return app.exec();
 }

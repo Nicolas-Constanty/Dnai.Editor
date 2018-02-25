@@ -57,6 +57,11 @@ QCStandardPaths::QCStandardPaths(QObject *parent) : QObject(parent)
 
 }
 
+QCStandardPaths::~QCStandardPaths()
+{
+    qDebug() << "QCStandardPath";
+}
+
 /*!
     \qmlmethod array StandardPaths::standardLocations(int standardLocation)
     It is equivalent to QStandardPaths::standardLocations()

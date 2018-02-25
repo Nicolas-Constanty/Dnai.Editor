@@ -12,8 +12,10 @@ namespace dnai
 		{
 		}
 
-		Property::Property(const QString& m_name, const QVariant& value, QObject* model, QObject* parent): m_value(value),
-		                                                                                                    m_model(model)
+        Property::Property(const QString& name, const QVariant& value, QObject* model, QObject* parent):
+            m_name(name),
+            m_value(value),
+            m_model(model)
 		{
 		}
 

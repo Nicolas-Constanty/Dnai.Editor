@@ -42,7 +42,6 @@ namespace dnai
 
     void App::initProcessManager()
 	{
-        qDebug() << "YOLO";
 #ifdef Q_OS_MAC
 		m_processManager = new ProcessManager(QGuiApplication::applicationDirPath() + "/settings/conf/mac/bin_info.cfg");
 #else

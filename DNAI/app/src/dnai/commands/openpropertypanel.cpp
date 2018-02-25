@@ -12,7 +12,7 @@ namespace dnai
 
 		void OpenPropertyPanel::execute() const
 		{
-			m_panel->create();
+            m_panel->create(nullptr);
 		}
 
 		void OpenPropertyPanel::unExcute() const
