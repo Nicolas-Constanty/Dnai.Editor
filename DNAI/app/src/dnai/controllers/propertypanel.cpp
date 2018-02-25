@@ -16,12 +16,12 @@ namespace dnai
 
 		QQuickItem* PropertyPanel::createView()
 		{
-			return dynamic_cast<QQuickItem*>(App::createQmlObject(m_viewPath));
+            return nullptr;
 		}
 
-		commands::ICommand* PropertyPanel::createCommand()
+        commands::ICommand* PropertyPanel::createCommand() const
 		{
-			return new commands::OpenPropertyPanel(this, true);
+            return new commands::OpenPropertyPanel(this, true);
         }
 	}
 }

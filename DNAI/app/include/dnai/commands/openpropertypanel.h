@@ -13,7 +13,7 @@ namespace dnai
 		class OpenPropertyPanel : public Command
 		{
 		public:
-			explicit OpenPropertyPanel(controllers::PropertyPanel *panel, bool save);
+            explicit OpenPropertyPanel(const controllers::PropertyPanel *panel, bool save);
 
 			void execute() const override;
 			void unExcute() const override;
@@ -21,7 +21,7 @@ namespace dnai
 
 			~OpenPropertyPanel() override;
 		private:
-			controllers::PropertyPanel *m_panel;
+            const controllers::PropertyPanel *m_panel;
 			controllers::PropertyPanel *m_savedPanel;
 		};
 	}

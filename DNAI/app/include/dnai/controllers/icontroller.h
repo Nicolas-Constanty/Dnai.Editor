@@ -17,14 +17,14 @@ namespace dnai
 			virtual QQuickItem *createView() = 0;
 
 		protected:
-			virtual commands::ICommand *createCommand() = 0;
+            virtual commands::ICommand *createCommand() const = 0;
 		};
         template <class T, class U = void>
 		class AController : public IController, public models::IClone
 		{
             using Fun = typename std::conditional<std::is_void<void>::value, void *, U>::type;
 		public:
-			explicit AController(const QString& view): m_createCommand(nullptr)
+            explicit AController(const QString& view): m_model(nullptr), m_createCommand(nullptr)
 			{
                 m_viewPath = view;
 			}
@@ -39,7 +39,7 @@ namespace dnai
 				if (&other == this)
 					return *this;
 				this->m_model = other.model();
-//				this->m_createCommand = other.createCommand();
+                this->m_createCommand = other.createCommand();
 				this->m_viewPath = other.path();
 				this->m_views = other.views();
 				return *this;

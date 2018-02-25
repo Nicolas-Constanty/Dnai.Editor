@@ -27,12 +27,8 @@ namespace dnai {
 		QQmlApplicationEngine const* engine() const;
         AppSettings* settings() const;
 		Session const * session() const;
-
 	    views::AppView *appView() const;
         void initProcessManager();
-
-    public slots:
-        void initApp();
 
     public:
         static void loadFonts();

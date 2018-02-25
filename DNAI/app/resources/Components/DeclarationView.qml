@@ -126,6 +126,9 @@ Item {
                 anchors.topMargin: 10
                 anchors.bottomMargin: 10
                 clip: true
+//                Component.onCompleted: {
+//                    console.log(width)
+//                }
 
                 ListView {
                     id: _sublist
@@ -157,7 +160,8 @@ Item {
                     }
                     footer: Row {
                         topPadding: 15
-                        anchors.right: parent.right
+                        layoutDirection: Qt.RightToLeft
+                        width: _sublist.width
                         spacing: 5
                         AddButton {
                             id: _addContext

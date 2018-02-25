@@ -20,7 +20,7 @@ namespace dnai
         private:
 	        IClone* clone() const override;
         protected:
-	        commands::ICommand* createCommand() override;
+            commands::ICommand* createCommand() const override;
 		};
 
 	}

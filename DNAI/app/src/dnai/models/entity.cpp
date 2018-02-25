@@ -11,7 +11,7 @@ namespace dnai
 
 		Entity::Entity(IModel* model, QObject* parent) : QAbstractListModel(parent)
 		{
-			qDebug() << "[ENTITY CREATE]" << model->editableProperties();
+            qDebug() << "[ENTITY CREATE]" << model->editableProperties();
 			const auto obj = dynamic_cast<QObject *>(model);
 			for(const auto& prop : model->editableProperties())
 			{
@@ -21,6 +21,7 @@ namespace dnai
 
 		int Entity::rowCount(const QModelIndex& parent) const
 		{
+            Q_UNUSED(parent)
 			return m_properties.count();
 		}
 

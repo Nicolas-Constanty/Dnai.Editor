@@ -40,7 +40,7 @@ namespace dnai
 			return new ContextController();
 		}
 
-		commands::ICommand* ContextController::createCommand()
+        commands::ICommand* ContextController::createCommand() const
 		{
 			const auto parent = dynamic_cast<dnai::models::Common *>(m_model->parent());
 			if (parent)

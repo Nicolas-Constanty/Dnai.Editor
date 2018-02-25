@@ -9,9 +9,9 @@ namespace dnai
 	{
 	}
 
-	void ViewsHandler::updatePropertyPanelModel(models::IModel* model) const
+    void ViewsHandler::updatePropertyPanelModel(dnai::models::Common* model) const
 	{
-		const auto prop = new models::Entity(model);
+        const auto prop = new models::Entity(static_cast<models::IModel*>(model));
 		if (m_propertyPanel->model() == nullptr)
 			m_propertyPanel->asyncCreate(prop);
 		else

@@ -48,8 +48,8 @@ namespace dnai {
 	    const QList<QString>& Variable::editableProperties()
 	    {
 			if (m_editableProperties.empty())
-				m_editableProperties += QList<QString>{ "type", "internal" } + Variable::editableProperties() + Common::editableProperties();
-			return m_editableProperties;
+                m_editableProperties += QList<QString>{ "type", "internal" } + Common::editableProperties() + Position::editableProperties();
+            return m_editableProperties;
 	    }
 
 	    IClone *Variable::clone() const

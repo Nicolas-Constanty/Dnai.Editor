@@ -5,19 +5,19 @@ namespace dnai
 {
 	namespace commands
 	{
-		OpenPropertyPanel::OpenPropertyPanel(controllers::PropertyPanel *panel, const bool save)
+        OpenPropertyPanel::OpenPropertyPanel(const controllers::PropertyPanel *panel, const bool save)
 			: Command("OPEN_PROPERTY_PANEL", save), m_panel(panel), m_savedPanel(nullptr)
 		{
 		}
 
 		void OpenPropertyPanel::execute() const
 		{
-            m_panel->create(nullptr);
+           const_cast<controllers::PropertyPanel *>(m_panel)->create(nullptr);
 		}
 
 		void OpenPropertyPanel::unExcute() const
 		{
-			*m_panel = *m_savedPanel;
+            *const_cast<controllers::PropertyPanel *>(m_panel) = *m_savedPanel;
 			delete m_savedPanel;
 		}
 

@@ -29,7 +29,7 @@ namespace dnai
 
 	public:
 		ViewsHandler();
-		Q_INVOKABLE void updatePropertyPanelModel(models::IModel *model) const;
+        Q_INVOKABLE void updatePropertyPanelModel(dnai::models::Common *model) const;
 		Q_INVOKABLE QModelIndex getIndexMatch(dnai::models::TreeItem * md);
 		Q_INVOKABLE QModelIndex getIndexMatchFromModel(dnai::models::Common *md);
 		Q_INVOKABLE void selectTreeItem(const QModelIndex &index);

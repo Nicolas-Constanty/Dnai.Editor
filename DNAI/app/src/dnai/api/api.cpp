@@ -23,6 +23,7 @@ const Config api::http_config = {
             }
         },
         [](Url *url) {
+            Q_UNUSED(url)
             if (api::refreshing_token == false && QDateTime::currentDateTime().addSecs(api::refreshing_delta) >= api::user.expire_date) {
                 api::refresh_token();
             }

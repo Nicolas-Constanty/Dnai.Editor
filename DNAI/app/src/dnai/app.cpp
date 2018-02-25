@@ -11,8 +11,6 @@
 
 namespace dnai
 {
-#pragma region Initialisation functions
-
     App *App::m_instance = nullptr;
     App::App(int& argc, char** argv) : QGuiApplication(argc, argv)
 	, m_settings(nullptr)
@@ -33,11 +31,6 @@ namespace dnai
             delete m_nodeModel;
         qDebug() << "~" << "App";
     }
-
-    void App::initApp()
-	{
-		
-	}
 
     void App::initProcessManager()
 	{
@@ -92,10 +85,6 @@ namespace dnai
 			throw std::runtime_error("Fail to load main.qml");
 	}
 
-#pragma endregion 
-
-#pragma region Application functions
-
     bool App::eventFilter(QObject* o, QEvent* event)
 	{
 		if (!event || event->type() != QEvent::KeyPress) return QGuiApplication::eventFilter(o, event);
@@ -128,10 +117,6 @@ namespace dnai
         return component.create();
 	}
 
-#pragma endregion 
-
-#pragma region Setter
-
     void App::registerSettings(AppSettings* appSettings)
 	{
         m_settings = appSettings;
@@ -141,10 +126,6 @@ namespace dnai
 	{
 		return m_instance;
 	}
-
-#pragma endregion 
-
-#pragma region Getter
 
     QQmlApplicationEngine const* App::engine() const
 	{
@@ -180,6 +161,4 @@ namespace dnai
 	{
 		return m_appView;
 	}
-
-#pragma endregion 
 }

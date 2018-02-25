@@ -18,7 +18,7 @@ namespace dnai
 		public:
             QQuickItem* createView() override;
 		protected:
-			commands::ICommand* createCommand() override;
+            commands::ICommand* createCommand() const override;
 		};
 	}
 }

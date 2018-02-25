@@ -13,6 +13,13 @@ Rectangle {
     width: parent.parent.width
     height: 40
     color: AppSettings.style.background.color
+    MouseArea {
+        anchors.fill: parent;
+        onClicked: {
+            Manager.views.updatePropertyPanelModel(item)
+        }
+    }
+
     state: "UnSelect"
     states: [
         State{
