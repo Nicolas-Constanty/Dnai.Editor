@@ -1,6 +1,7 @@
 #include "dnai/session.h"
 #include "dnai/http/response.h"
 #include "dnai/api/api.h"
+#include "dnai/project.h"
 #include <QFileInfo>
 
 namespace dnai {
@@ -72,7 +73,20 @@ void Session::logout()
 {
     api::logout();
     delete m_user;
-    m_user = nullptr;
+    setUser(nullptr);
+}
+
+void Session::downloadProjectData(uint index, const QString &id)
+{
+    api::get_raw_file(id).map([this, index](Response response) -> Response {
+         QFile emptyFile("empty");
+         auto project = Project::loadProject(response.body, emptyFile);
+         if (project != nullptr) {
+             m_user->setCurrentFileData(project->data());
+             emit userChanged(m_user);
+         }
+         return response;
+     });
 }
 
 }

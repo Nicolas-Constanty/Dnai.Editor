@@ -17,7 +17,7 @@ UserMenuForm {
     }
 
     mouseArea.onClicked: {
-        if (!Manager.user) {
+        if (!Manager.session.user) {
             loginPopup.open()
         } else {
             opened = !opened
@@ -40,6 +40,10 @@ UserMenuForm {
 
         onUserChanged: {
             loginPopup.close()
+            if (!Manager.session.user) {
+                return;
+            }
+
             root.fullname = Manager.session.user.name
             root.imgSrc = Manager.session.user.profile_url
         }

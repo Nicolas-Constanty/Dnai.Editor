@@ -14,8 +14,12 @@ OpenProjectForm {
         target: Manager.session
 
         onUserChanged: {
-            isConnected = true;
+            isConnected = !!Manager.session.user;
             filesData.clear();
+            if (!Manager.session.user) {
+                return;
+            }
+
             for (var i = 0; i < Manager.session.user.files.length; ++i) {
                 filesData.append(Manager.session.user.files[i]);
             }

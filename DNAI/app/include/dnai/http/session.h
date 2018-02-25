@@ -20,7 +20,6 @@ public:
     Q_INVOKABLE bool uploadFile(const QString &);
     Q_INVOKABLE void updateCurentUserFiles();
     Q_INVOKABLE void logout();
-	Q_INVOKABLE void downloadProjectData(uint, const QString &);
 
 signals:
     void userChanged(models::User *user);
