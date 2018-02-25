@@ -14,6 +14,7 @@ public:
         ItemRole = Qt::UserRole + 1
     };
 	explicit Declaration(QObject *parent= nullptr) : QAbstractListModel(parent), m_name("Title section"), m_comment("This is a comment") {}
+    explicit Declaration(const QString &title, QObject *parent= nullptr) : QAbstractListModel(parent), m_name(title), m_comment("This is a comment") {}
     void addModel(dnai::models::Common *c);
     int rowCount(const QModelIndex & parent = QModelIndex()) const;
     QVariant data(const QModelIndex & index, int role = Qt::DisplayRole) const;

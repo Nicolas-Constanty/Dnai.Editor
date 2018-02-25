@@ -105,8 +105,13 @@ namespace dnai
 
 	QQuickItem* ViewsHandler::treeView() const
 	{
-		return m_treeView;
-	}
+        return m_treeView;
+    }
+
+     void ViewsHandler::createDeclarationList(const QString &title)
+    {
+        m_declRef->addDeclaration(new models::Declaration(title));
+    }
 
 	void ViewsHandler::createNameSpaceModel(models::TreeItem *item)
 	{

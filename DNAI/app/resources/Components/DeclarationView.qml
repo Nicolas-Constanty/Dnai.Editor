@@ -23,7 +23,7 @@ Item {
             border.color: AppSettings.style.border.color
             border.width: AppSettings.style.border.width
             height: _item.height
-            width: (_item.width / 3 > 300) ? _item.width / 3 : 300
+            width: 300
             EditableText {
                 id: _title
                 text:  model.name
@@ -207,13 +207,95 @@ Item {
 
     ScrollView {
         anchors.fill: parent
+        clip: true
         ListView {
+            id: _contextColumns
             anchors.fill: parent
             spacing: -1
             orientation: Qt.Horizontal
             layoutDirection: Qt.LeftToRight
             model: Manager.views.declarationModel
             delegate: _delegate
+        }
+        Rectangle {
+            id: _listCreator
+            x: 300 * _contextColumns.count + 25
+            anchors.top: parent.top
+            anchors.topMargin: 15
+            width: 250
+            height: 30
+            color: "#80000000"
+            radius: 3
+            MText {
+                anchors.fill: parent
+                anchors.margins: 10
+                text: qsTr("Add new column...")
+                font.pointSize: AppSettings.style.font.pixelSize
+                horizontalAlignment: Qt.AlignLeft
+                color: AppSettings.style.text.disableColor
+                font.italic: true
+            }
+            MouseArea {
+                anchors.fill: parent
+                onPressed: {
+                    _popupList.open()
+                }
+            }
+            Popup {
+                id: _popupList
+                width: _listCreator.width + 12
+                height: _listCreator.height * 2 + 10
+                x: -6
+                y: -6
+                onOpened: {
+                    _textInput.forceActiveFocus()
+                }
+                background: Rectangle{
+                    color: AppSettings.style.background.lightColor
+                    radius: 3
+                }
+                enter: Transition {
+                    NumberAnimation { property: "opacity"; from: 0.0; to: 1.0 }
+                }
+                exit: Transition {
+                    NumberAnimation { property: "opacity"; from: 1.0; to: 0.0 }
+                }
+                Rectangle {
+                    x: -6
+                    y: -6
+                    width: 250
+                    height: 30
+                    color: "#80000000"
+                    border.color: AppSettings.style.background.color
+                    radius: 3
+                    TextInput {
+                        id: _textInput
+                        anchors.fill: parent
+                        anchors.margins: 10
+                        color: AppSettings.style.text.color
+                        wrapMode: TextEdit.WordWrap
+                        selectByMouse: true
+                        font.italic: true
+                        verticalAlignment: Qt.AlignVCenter
+                        font.family: AppSettings.style.font.family
+                        MText {
+                            anchors.fill: parent
+                            text: qsTr("Add new column...")
+                            font.pointSize: AppSettings.style.font.pixelSize
+                            horizontalAlignment: Qt.AlignLeft
+                            color: AppSettings.style.text.disableColor
+                            font.italic: true
+                            visible: !parent.text
+                        }
+                        onAccepted: {
+                            _popupList.close()
+                            var t = _textInput.text
+                            _textInput.clear()
+                            Manager.views.createDeclarationList(t)
+                        }
+                    }
+                }
+            }
         }
     }
 }

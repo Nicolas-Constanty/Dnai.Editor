@@ -27,7 +27,7 @@
     "text": {
         "color": "#FAFAFA",
         "darkColor": "#000000",
-        "disableColor": "#000000",
+        "disableColor": "#60FFFFFF",
         "lightColor": "#FFFFFF",
         "linkColor": "#000000",
         "selectionColor": "#000000",
