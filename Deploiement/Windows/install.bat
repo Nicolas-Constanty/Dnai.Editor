@@ -1,4 +1,4 @@
-set QT_DIR=C:\Qt\5.9.4\msvc2017_64
+set QT_DIR=C:\Qt\5.10.1\msvc2017_64
 set PATH=%QT_DIR%\bin;%PATH%
 set PATH=C:\Qt\Tools\QtCreator\bin;%PATH%
 
