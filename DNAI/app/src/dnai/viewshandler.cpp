@@ -117,6 +117,7 @@ namespace dnai
 	{
 		QList<QObject *> temp;
 
+        if (!item || !item->row()) return;
 		auto ns = new models::NameSpaceBarItem();
 		ns->setPath(item->data(0).toString());
 		ns->setAsChild(item->childCount());

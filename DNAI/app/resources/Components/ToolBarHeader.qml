@@ -7,6 +7,7 @@ import DNAI 1.0
 
 import "../Panels"
 import "../Controls"
+import "../Style"
 
 Item {
     property alias menuEditRef: menuEdit
@@ -351,7 +352,42 @@ Item {
                 //                }
             }
         }
+        Timer {
+            id: _timer
+            running: false
+            interval: 3000
+            onTriggered: {
+                _buildButton.status = 1
+            }
+            onRunningChanged: {
+                if (running == true)
+                    _buildButton.status = 3
+            }
+        }
+        Button {
+            property int status: 0
+            id: _buildButton
+            anchors.centerIn: parent
+            background: FontAwesomeTextSolid {
+                text: "\uf013"
+                font.pointSize: 18
+                color: _buildButton.hovered ? "#FFFFFFFF" : _buildButton.status === 0 ? "#FF606060" : _buildButton.status === 1 ? "#FF8BC34A" : _buildButton.status === 2 ? "#F44336" : "#FFC107"
+            }
+            onClicked: {
+                _timer.start()
+                _rotator.start()
+            }
+            RotationAnimator {
+                id: _rotator
+                target: _buildButton;
+                from: 0;
+                to: 360;
+                duration: 3000
+                running: false
+            }
+        }
         UserMenu {
+            id: _usrmenu
             anchors.top: parent.top
             anchors.bottom: parent.bottom
             anchors.right: parent.right
