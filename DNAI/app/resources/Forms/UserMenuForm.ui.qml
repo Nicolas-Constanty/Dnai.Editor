@@ -3,6 +3,7 @@ import DNAI 1.0
 
 import "../Controls"
 import "../Components"
+import "../Style"
 
 Item {
     id: root
@@ -44,6 +45,16 @@ Item {
         height: parent.height
         sourceSize.width: parent.height
         sourceSize.height: parent.height
+        visible: imgSrc != ""
+    }
+
+    FontAwesomeTextSolid {
+        anchors.right: parent.right
+        width: parent.height
+        height: parent.height
+        text: "\uf2bd"
+        font.pointSize: 18
+        visible: imgSrc == ""
     }
 
     DMenu {
