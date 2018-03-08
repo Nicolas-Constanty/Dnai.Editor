@@ -4,7 +4,7 @@
 
 #include "views.h"
 #include "models.h"
-#include "qmlresources.h"
+#include "enums.h"
 
 #include "dnai/app.h"
 #include "dnai/manager.h"
@@ -14,6 +14,11 @@
 #include "include/eventconsumer.h"
 #include "dnai/entitiesfactory.h"
 #include "dnai/viewshandler.h"
+
+#ifdef _WIN32
+#include "../../lib/WinToast/wintoastlib.h"
+using namespace WinToastLib;
+#endif
 
 static QObject *manager_singleton_provider(QQmlEngine *engine, QJSEngine *scriptEngine)
 {
@@ -50,10 +55,10 @@ static void registerDNAI()
 
 static void registerEnums()
 {
-    qmlRegisterType<dnai::qmlresources::IoTypeRessouce>("DNAI.Enums", 1, 0, "IOType");
-    qmlRegisterType<dnai::qmlresources::FlowTypeRessouce>("DNAI.Enums", 1, 0, "FlowType");
-    qmlRegisterType<dnai::qmlresources::DeclarationTypeRessouce>("DNAI.Enums", 1, 0, "DeclarationType");
-    qmlRegisterType<dnai::qmlresources::QInstructionID>("DNAI.Enums", 1, 0, "InstructionID");
+    qmlRegisterType<dnai::enums::IoTypeRessouce>("DNAI.Enums", 1, 0, "IOType");
+    qmlRegisterType<dnai::enums::FlowTypeRessouce>("DNAI.Enums", 1, 0, "FlowType");
+    qmlRegisterType<dnai::enums::DeclarationTypeRessouce>("DNAI.Enums", 1, 0, "DeclarationType");
+    qmlRegisterType<dnai::enums::QInstructionID>("DNAI.Enums", 1, 0, "InstructionID");
 }
 
 static void registerViews()
@@ -61,10 +66,10 @@ static void registerViews()
     // QML Views
     qmlRegisterType<dnai::views::CanvasNode>("DNAI.Views", 1, 0, "CanvasNode");
     qmlRegisterType<dnai::views::CanvasNode>("DNAI.Views", 1, 0, "CanvasNode");
-    qmlRegisterType<dnai::views::DeclarationCanvas>("DNAI.Views", 1, 0, "DeclarationCanvas");
+//    qmlRegisterType<dnai::views::DeclarationCanvas>("DNAI.Views", 1, 0, "DeclarationCanvas");
     qmlRegisterType<dnai::views::Console>("DNAI.Views", 1, 0, "Console");
     qmlRegisterType<dnai::views::ContextView>("DNAI.Views", 1, 0, "ContextView");
-    qmlRegisterType<dnai::views::DeclarationView>("DNAI.Views", 1, 0, "DeclarationViewModel");
+//    qmlRegisterType<dnai::views::DeclarationView>("DNAI.Views", 1, 0, "DeclarationViewModel");
     qmlRegisterType<dnai::views::InstructionView>("DNAI.Views", 1, 0, "InstructionViewModel");
     qmlRegisterType<dnai::views::Layout>("DNAI.Views", 1, 0, "LayoutView");
     qmlRegisterType<dnai::views::AppView>("DNAI.Views", 1, 0, "AppView");
@@ -92,17 +97,17 @@ static void registerModels()
     qmlRegisterType<dnai::models::QFontSettings>("DNAI.Models", 1, 0, "QFontSettings");
     qmlRegisterType<dnai::models::MenuSettings>("DNAI.Models", 1, 0, "MenuSettings");
     qmlRegisterType<dnai::models::QBackground>("DNAI.Models", 1, 0, "QBackground");
-    qmlRegisterType<dnai::models::TreeModel>("DNAI.Models", 1, 0, "TreeModel");
-    qmlRegisterType<dnai::models::TreeItem>("DNAI.Models", 1, 0, "TreeItem");
-    qmlRegisterType<dnai::models::NameSpaceBarItem>("DNAI.Models", 1, 0, "NameSpaceBarItem");
-    qmlRegisterType<dnai::models::NameSpaceBarModel>("DNAI.Models", 1, 0, "NameSpaceBarModel");
+//    qmlRegisterType<dnai::models::TreeModel>("DNAI.Models", 1, 0, "TreeModel");
+//    qmlRegisterType<dnai::models::TreeItem>("DNAI.Models", 1, 0, "TreeItem");
+//    qmlRegisterType<dnai::models::NameSpaceBarItem>("DNAI.Models", 1, 0, "NameSpaceBarItem");
+//    qmlRegisterType<dnai::models::NameSpaceBarModel>("DNAI.Models", 1, 0, "NameSpaceBarModel");
     qmlRegisterType<dnai::models::User>("DNAI.Models", 1, 0, "User");
-    qmlRegisterType<dnai::models::DeclarationModel>("DNAI.Models", 1, 0, "DeclarationModel");
-    qmlRegisterType<dnai::models::Declaration>("DNAI.Models", 1, 0, "Declaration");
+//    qmlRegisterType<dnai::models::DeclarationModel>("DNAI.Models", 1, 0, "DeclarationModel");
+//    qmlRegisterType<dnai::models::Declaration>("DNAI.Models", 1, 0, "Declaration");
     qmlRegisterType<dnai::models::BasicNodeModel>("DNAI.Models", 1, 0, "BasicNodeModel");
     qmlRegisterType<dnai::models::ListNode>("DNAI.Models", 1, 0, "ListNode");
     qmlRegisterType<dnai::models::Property>("DNAI.Models", 1, 0, "Property");
-    qmlRegisterType<dnai::models::Entity>("DNAI.Models", 1, 0, "Entity");
+//    qmlRegisterType<dnai::models::EntityList>("DNAI.Models", 1, 0, "EntityList");
 }
 
 static void registerConnection() {
@@ -130,6 +135,12 @@ int main(int argc, char *argv[])
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
     dnai::App app(argc, argv);
+    WinToast::instance()->setAppName(L"DNAI");
+    WinToast::instance()->setAppUserModelId(
+                WinToast::configureAUMI(L"SaltyStudio", L"DNAI", L"DNAI.app", L"20161006"));
+    if (!WinToast::instance()->initialize()) {
+        qDebug() << "Error, your system in not compatible!";
+    }
     registerDNAI();
     app.load();
     return app.exec();

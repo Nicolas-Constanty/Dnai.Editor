@@ -47,25 +47,25 @@ namespace dnai
 
 		public:
 #define DECLARE_EVENT_NAME "DECLARE"
-			void sendDeclareEvent(PackageDataCom::ENTITYCORE entity_type,
+            void sendDeclareEvent(PackageDataCom::ENTITY_CORE entity_type,
 				uint32_t containerID,
 				QString const &name,
 				PackageDataCom::VISIBILITYCORE visibility);
 
 #define REMOVE_EVENT_NAME "REMOVE"
-			void sendRemoveEvent(PackageDataCom::ENTITYCORE entity_type,
+            void sendRemoveEvent(PackageDataCom::ENTITY_CORE entity_type,
 				uint32_t containerID,
 				QString const &name);
 
 
 #define MOVE_EVENT_NAME "MOVE"
-			void sendMoveEvent(PackageDataCom::ENTITYCORE entity_type,
+            void sendMoveEvent(PackageDataCom::ENTITY_CORE entity_type,
 				uint32_t fromID,
 				uint32_t toID,
 				QString const &name);
 
 #define CHANGE_VISIBILITY_EVENT_NAME "CHANGE_VISIBILITY"
-			void sendChangeVisibilityEvent(PackageDataCom::ENTITYCORE entity_type,
+            void sendChangeVisibilityEvent(PackageDataCom::ENTITY_CORE entity_type,
 				uint32_t containerID,
 				QString const &name,
 				PackageDataCom::VISIBILITYCORE visibility);

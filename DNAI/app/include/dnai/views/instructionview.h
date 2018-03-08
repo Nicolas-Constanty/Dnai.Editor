@@ -3,6 +3,7 @@
 
 #include "contextview.h"
 #include "dnai/models/function.h"
+#include "dnai/models/instruction.h"
 #include "canvasnode.h"
 
 namespace dnai
@@ -12,17 +13,17 @@ namespace dnai
 		class InstructionView : public dnai::views::ContextView
 		{
             Q_OBJECT
-            Q_PROPERTY(dnai::models::Function *instructionModel READ instructionModel WRITE setInstructionModel NOTIFY instructionModelChanged)
+            Q_PROPERTY(dnai::models::Instruction *instructionModel READ instructionModel WRITE setInstructionModel NOTIFY instructionModelChanged)
 		public:
             explicit InstructionView(QQuickItem *parent = nullptr);
 
 			CanvasNode *canvas() const;
         signals:
-            dnai::models::Function *instructionModelChanged(dnai::models::Function *model);
+            dnai::models::Instruction *instructionModelChanged(dnai::models::Instruction *model);
 
         public:
-            dnai::models::Function *instructionModel() const;
-            void setInstructionModel(dnai::models::Function *model);
+            dnai::models::Instruction *instructionModel() const;
+            void setInstructionModel(dnai::models::Instruction *model);
 		};
 	}
 }

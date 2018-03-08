@@ -45,11 +45,24 @@ SOURCES += \
     src/dnai/commands/entitydeclare.cpp \
     src/dnai/appcontext.cpp \
     src/dnai/session.cpp \
-    src/dnai/models/property.cpp \
+    src/dnai/viewshandler.cpp \
+    src/dnai/models/instruction.cpp \
     src/dnai/models/entity.cpp \
-    src/dnai/controllers/propertypanel.cpp \
-    src/dnai/commands/openpropertypanel.cpp \
-    src/dnai/viewshandler.cpp
+    src/dnai/models/entitycore.cpp \
+    src/dnai/models/entitygui.cpp \
+    src/dnai/models/entitytree.cpp \
+    src/dnai/models/variable.cpp \
+    src/dnai/models/basicnodemodel.cpp \
+    src/dnai/models/settingsmodel.cpp \
+    src/dnai/models/user.cpp \
+    src/dnai/models/listnode.cpp
+
+#ENUMS
+SOURCES += \
+    src/dnai/enums/qcstandardpaths.cpp
+
+#MODELS
+SOURCES += \
 
 
 #COMMANDS
@@ -72,9 +85,7 @@ SOURCES += \
     src/dnai/views/output.cpp \
     src/dnai/views/roundedrectangle.cpp \
     src/dnai/views/console.cpp \
-    src/dnai/views/class.cpp \
     src/dnai/views/declarationview.cpp \
-    src/dnai/views/declarationcanvas.cpp \
     src/dnai/views/contextview.cpp \
     src/dnai/views/appview.cpp \
     src/dnai/views/instructionview.cpp \
@@ -88,38 +99,14 @@ SOURCES += \
     src/dnai/commands/debugdecorator.cpp \
     src/dnai/commands/command.cpp \
 
-
 #CONTROLLERS
 SOURCES += \
     src/dnai/controllers/inputcontroller.cpp \
     src/dnai/controllers/outputcontroller.cpp \
     src/dnai/controllers/consolecontroller.cpp \
     src/dnai/controllers/clientcontroller.cpp \
-    src/dnai/controllers/icontroller.cpp \
-    src/dnai/controllers/contextcontroller.cpp
+    src/dnai/controllers/icontroller.cpp
 
-
-#MODELS
-SOURCES += src/dnai/models/class.cpp \
-    src/dnai/models/common.cpp \
-    src/dnai/models/context.cpp \
-    src/dnai/models/flow.cpp \
-    src/dnai/models/function.cpp \
-    src/dnai/models/identity.cpp \
-    src/dnai/models/input.cpp \
-    src/dnai/models/node.cpp \
-    src/dnai/models/output.cpp \
-    src/dnai/models/variable.cpp \
-    src/dnai/models/position.cpp \
-    src/dnai/models/user.cpp \
-    src/dnai/models/declarationmodel.cpp \
-    src/dnai/models/basicnodemodel.cpp \
-    src/dnai/models/treemodel.cpp \
-    src/dnai/models/treeitem.cpp \
-    src/dnai/models/namespacebarmodel.cpp \
-    src/dnai/models/namespacebaritem.cpp \
-    src/dnai/models/settingsmodel.cpp \
-    src/dnai/models/listnode.cpp
 #HTTP
 SOURCES += \
     src/dnai/http/url.cpp \
@@ -129,9 +116,6 @@ SOURCES += \
 
 #API
 SOURCES += src/dnai/api/api.cpp
-
-#QMLRESOURCES
-SOURCES += src/dnai/qmlresources/qcstandardpaths.cpp
 
 RESOURCES += qml.qrc
 
@@ -156,7 +140,7 @@ HEADERS += \
     include/views.h \
     include/api.h \
     include/models.h \
-    include/qmlresources.h \
+    include/enums.h \
     include/controllers.h \
     include/commands.h \
     include/http.h \
@@ -167,13 +151,33 @@ HEADERS += \
     include/dnai/iobservable.h \
     include/dnai/commands/entitydeclare.h \
     include/dnai/appcontext.h \
-    include/dnai/models/property.h \
-    include/dnai/controllers/propertypanel.h \
-    include/dnai/commands/openpropertypanel.h \
     include/dnai/session.h \
-    include/dnai/models/entity.h \
     include/dnai/ifactory.h \
-    include/dnai/viewshandler.h
+    include/dnai/viewshandler.h \
+    include/enums.h \
+    include/dnai/models/instruction.h \
+    include/dnai/models/entity.h \
+    include/dnai/models/entitycore.h \
+    include/dnai/models/entitygui.h \
+    include/dnai/models/entitytree.h \
+    include/dnai/models/variable.h \
+    include/dnai/models/basicnodemodel.h \
+    include/dnai/models/settingsmodel.h \
+    include/dnai/models/user.h \
+    include/dnai/enums/core/core.h \
+    include/dnai/models/listnode.h
+
+#ENUMS
+HEADERS += \
+    include/dnai/enums/core/instructionid.h \
+    include/dnai/enums/declarationtype.h \
+    include/dnai/enums/flowtype.h \
+    include/dnai/enums/iotype.h \
+    include/dnai/enums/qcstandardpaths.h
+
+#MODELS
+HEADERS += \
+
 
 
 #DNAI
@@ -203,9 +207,7 @@ HEADERS += \
     include/dnai/views/output.h \
     include/dnai/views/roundedrectangle.h \
     include/dnai/views/console.h \
-    include/dnai/views/class.h \
     include/dnai/views/declarationview.h \
-    include/dnai/views/declarationcanvas.h \
     include/dnai/views/contextview.h \
     include/dnai/views/appview.h \
     include/dnai/views/instructionview.h \
@@ -230,40 +232,6 @@ HEADERS += \
     include/dnai/controllers/consolecontroller.h \
     include/dnai/controllers/clientcontroller.h \
     include/dnai/controllers/icontroller.h \
-    include/dnai/controllers/contextcontroller.h \
-
-#MODELS
-HEADERS += \
-    include/dnai/models/common.h \
-    include/dnai/models/context.h \
-    include/dnai/models/class.h \
-    include/dnai/models/node.h \
-    include/dnai/models/variable.h \
-    include/dnai/models/input.h \
-    include/dnai/models/output.h \
-    include/dnai/models/flow.h \
-    include/dnai/models/function.h \
-    include/dnai/models/identity.h \
-    include/dnai/models/imodel.h \
-    include/dnai/models/iclone.h \
-    include/dnai/models/position.h \
-    include/dnai/models/user.h \
-    include/dnai/models/treemodel.h \
-    include/dnai/models/treeitem.h \
-    include/dnai/models/namespacebarmodel.h \
-    include/dnai/models/namespacebaritem.h \
-    include/dnai/models/declarationmodel.h \
-    include/dnai/models/basicnodemodel.h \
-    include/dnai/models/settingsmodel.h \
-    include/dnai/models/listnode.h \
-
-#QMLRESOURCES
-HEADERS += \
-    include/dnai/qmlresources/instructionid.h \
-    include/dnai/qmlresources/declarationtype.h \
-    include/dnai/qmlresources/flowtype.h \
-    include/dnai/qmlresources/iotype.h \
-    include/dnai/qmlresources/qcstandardpaths.h \
 
 #HTTP
 HEADERS += \
@@ -284,12 +252,13 @@ HEADERS += \
 
 #LIB
 DEPENDPATH += $${PWD}/../lib/event_client/
+DEPENDPATH += $${PWD}/../lib/WinToast/
 INCLUDEPATH += $${PWD}/../lib/event_client/
 
 INCLUDEPATH += $${PWD}/../lib/DataComEvent/Shared_include/
 
 #begin library network
-LIBS += -L$${PWD}/../lib/ -lEventClient -lDataComEvent
+LIBS += -L$${PWD}/../lib/ -lEventClient -lDataComEvent -lWinToast
 
 #CONFIG(release, debug|release) {
 #unix:LIBS += -L$${PWD}/../lib/DataComEvent/Library/ -lprotobuf

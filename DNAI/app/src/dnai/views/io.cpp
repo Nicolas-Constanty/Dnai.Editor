@@ -14,7 +14,7 @@ namespace dnai
 		Io::Io(QQuickItem *parent) :
 			LinkableBezierItem(parent)
 			, m_nbSegments(32)
-            , m_type(qmlresources::IoTypeRessouce::IoType::Int)
+            , m_type(enums::IoTypeRessouce::IoType::Int)
 
 		{
 			Io::refreshBackendIo();
@@ -164,7 +164,7 @@ namespace dnai
 			update();
 		}
 
-        void Io::setType(qmlresources::IoTypeRessouce::IoType type)
+        void Io::setType(enums::IoTypeRessouce::IoType type)
 		{
 			if (type == m_type)
 				return;

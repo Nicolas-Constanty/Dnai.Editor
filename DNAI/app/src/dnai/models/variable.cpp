@@ -3,7 +3,7 @@
 
 namespace dnai {
     namespace models {
-		QList<QString> Variable::m_editableProperties = {};
+		/*QList<QString> Variable::m_editableProperties = {};
         Variable::Variable(const qint32 uid, QString const &name, QString const &description, QVector2D const &position,
                            QString const &type, bool internal, int index, int listindex,
                            QObject *parent)
@@ -55,6 +55,46 @@ namespace dnai {
 	    IClone *Variable::clone() const
         {
             return new Variable(uid(), name(), description(), position(), varType(), internal(), index(), listIndex());
-        }
+        }*/
+
+	    std::map<qint32, commands::EntityCommand*> VariableCore::initCommands() const
+	    {
+			auto map = EntityCore::initCommands();
+			map[enums::core::COMMANDS::SET_VARIABLE_VALUE] = new commands::EntityCommand();
+			map[enums::core::COMMANDS::GET_VARIABLE_VALUE] = new commands::EntityCommand();
+			map[enums::core::COMMANDS::SET_CONTEXT_PARENT] = new commands::EntityCommand();
+			return map;
+	    }
+
+	    std::map<qint32, commands::EntityCommand*> AttributeCore::initCommands() const
+	    {
+			auto map = EntityCore::initCommands();
+			map[enums::core::ADD_CLASS_ATTRIBUTE] = new commands::EntityCommand();
+			map[enums::core::RENAME_CLASS_ATTRIBUTE] = new commands::EntityCommand();
+			map[enums::core::REMOVE_CLASS_ATTRIBUTE] = new commands::EntityCommand();
+            return map;
+	    }
+
+	    EntityCore* Variable::coreModel() const
+	    {
+			return m_data;
+	    }
+
+	    void Variable::setCoreModel(EntityCore* model)
+	    {
+			if (model->entityType() == enums::core::ENTITY::DATA_TYPE)
+			{
+                if (model->id() == -1)
+				{
+					m_data = &m_dataCore.a;
+				}
+				else
+				{
+					m_data = &m_dataCore.v;
+				}
+			}
+			else
+				qDebug() << "BAD TYPE";
+	    }
     }
 }

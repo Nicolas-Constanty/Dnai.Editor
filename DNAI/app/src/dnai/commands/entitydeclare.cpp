@@ -4,7 +4,7 @@ namespace dnai
 {
 	namespace commands
 	{
-		EntityDeclare::EntityDeclare(const PackageDataCom::ENTITYCORE type, const qint32 containerId, const QString& name,
+        EntityDeclare::EntityDeclare(const PackageDataCom::ENTITY_CORE type, const qint32 containerId, const QString& name,
 		                             const PackageDataCom::VISIBILITYCORE visibility) : Command("ENTITY_DECLARE", true)
 		, m_type(type)
 		, m_containerID(containerId)

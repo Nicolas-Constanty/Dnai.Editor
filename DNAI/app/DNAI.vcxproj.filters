@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="Form Files">
@@ -215,6 +215,9 @@
     <ClCompile Include="src\dnai\http\observable.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\dnai\commands\openpropertypanel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="src\dnai\models\output.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -234,6 +237,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\dnai\models\property.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\dnai\controllers\propertypanel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\dnai\qmlresources\qcstandardpaths.cpp">
@@ -272,271 +278,13 @@
     <ClCompile Include="src\dnai\models\variable.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\dnai\viewshandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="src\dnai\commands\zoomcanvascommand.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Debug\moc_basicnodemodel.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_basicnodemodel.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_appview.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_appview.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_processmanager.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_processmanager.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_observable.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_observable.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_common.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_common.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_class.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_class.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_user.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_user.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_qcstandardpaths.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_qcstandardpaths.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_property.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_property.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_canvasnode.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_canvasnode.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_beziercurve.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_beziercurve.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_layout.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_layout.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_iotype.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_iotype.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_io.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_io.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_instructionview.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_instructionview.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_genericnode.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_genericnode.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_flowtype.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_flowtype.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_url.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_url.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_roundedrectangle.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_roundedrectangle.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_declarationcanvas.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_declarationcanvas.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_settings.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_settings.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_session.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_session.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_manager.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_manager.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_treemodel.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_treemodel.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_treeitem.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_treeitem.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_testconnection.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_testconnection.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_settingsmodel.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_settingsmodel.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_namespacebarmodel.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_namespacebarmodel.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_namespacebaritem.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_namespacebaritem.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_flow.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_flow.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_entity.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_entity.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_app.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_app.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_instructionid.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_instructionid.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_contextview.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_contextview.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_customshape.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_customshape.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_declarationmodel.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_declarationmodel.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_listnode.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_listnode.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_line.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_line.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_declarationview.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_declarationview.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_declarationtype.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_declarationtype.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_console.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_console.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\qrc_qml.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\dnai\controllers\propertypanel.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\dnai\commands\openpropertypanel.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_viewshandler.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_viewshandler.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\dnai\viewshandler.cpp">
+    <ClCompile Include="src\dnai\controllers\classcontroller.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -547,36 +295,36 @@
     <ClInclude Include="include\dnai\api\api.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <CustomBuild Include="include\dnai\app.h">
+    <QtMoc Include="include\dnai\app.h">
       <Filter>Header Files</Filter>
-    </CustomBuild>
+    </QtMoc>
     <ClInclude Include="include\dnai\appcontext.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <CustomBuild Include="include\dnai\views\appview.h">
+    <QtMoc Include="include\dnai\views\appview.h">
       <Filter>Header Files</Filter>
-    </CustomBuild>
+    </QtMoc>
     <ClInclude Include="include\dnai\baseio.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\dnai\baselinkable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <CustomBuild Include="include\dnai\models\basicnodemodel.h">
+    <QtMoc Include="include\dnai\models\basicnodemodel.h">
       <Filter>Header Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="include\dnai\views\beziercurve.h">
+    </QtMoc>
+    <QtMoc Include="include\dnai\views\beziercurve.h">
       <Filter>Header Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="include\dnai\views\canvasnode.h">
+    </QtMoc>
+    <QtMoc Include="include\dnai\views\canvasnode.h">
       <Filter>Header Files</Filter>
-    </CustomBuild>
+    </QtMoc>
     <ClInclude Include="include\dnai\models\class.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <CustomBuild Include="include\dnai\views\class.h">
+    <QtMoc Include="include\dnai\views\class.h">
       <Filter>Header Files</Filter>
-    </CustomBuild>
+    </QtMoc>
     <ClInclude Include="include\dnai\controllers\clientcontroller.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -592,15 +340,15 @@
     <ClInclude Include="include\commands.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <CustomBuild Include="include\dnai\models\common.h">
+    <QtMoc Include="include\dnai\models\common.h">
       <Filter>Header Files</Filter>
-    </CustomBuild>
+    </QtMoc>
     <ClInclude Include="include\dnai\http\config.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <CustomBuild Include="include\dnai\views\console.h">
+    <QtMoc Include="include\dnai\views\console.h">
       <Filter>Header Files</Filter>
-    </CustomBuild>
+    </QtMoc>
     <ClInclude Include="include\dnai\controllers\consolecontroller.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -610,36 +358,36 @@
     <ClInclude Include="include\dnai\controllers\contextcontroller.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <CustomBuild Include="include\dnai\views\contextview.h">
+    <QtMoc Include="include\dnai\views\contextview.h">
       <Filter>Header Files</Filter>
-    </CustomBuild>
+    </QtMoc>
     <ClInclude Include="include\controllers.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <CustomBuild Include="include\dnai\views\customshape.h">
+    <QtMoc Include="include\dnai\views\customshape.h">
       <Filter>Header Files</Filter>
-    </CustomBuild>
+    </QtMoc>
     <ClInclude Include="include\dnai\commands\debugdecorator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <CustomBuild Include="include\dnai\views\declarationcanvas.h">
+    <QtMoc Include="include\dnai\views\declarationcanvas.h">
       <Filter>Header Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="include\dnai\models\declarationmodel.h">
+    </QtMoc>
+    <QtMoc Include="include\dnai\models\declarationmodel.h">
       <Filter>Header Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="include\dnai\qmlresources\declarationtype.h">
+    </QtMoc>
+    <QtMoc Include="include\dnai\qmlresources\declarationtype.h">
       <Filter>Header Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="include\dnai\views\declarationview.h">
+    </QtMoc>
+    <QtMoc Include="include\dnai\views\declarationview.h">
       <Filter>Header Files</Filter>
-    </CustomBuild>
+    </QtMoc>
     <ClInclude Include="include\dnai\entitiesfactory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <CustomBuild Include="include\dnai\models\entity.h">
+    <QtMoc Include="include\dnai\models\entity.h">
       <Filter>Header Files</Filter>
-    </CustomBuild>
+    </QtMoc>
     <ClInclude Include="include\dnai\commands\entitydeclare.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -649,21 +397,21 @@
     <ClInclude Include="include\dnai\models\flow.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <CustomBuild Include="include\dnai\views\flow.h">
+    <QtMoc Include="include\dnai\views\flow.h">
       <Filter>Header Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="include\dnai\qmlresources\flowtype.h">
+    </QtMoc>
+    <QtMoc Include="include\dnai\qmlresources\flowtype.h">
       <Filter>Header Files</Filter>
-    </CustomBuild>
+    </QtMoc>
     <ClInclude Include="include\dnai\focusmanager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\dnai\models\function.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <CustomBuild Include="include\dnai\views\genericnode.h">
+    <QtMoc Include="include\dnai\views\genericnode.h">
       <Filter>Header Files</Filter>
-    </CustomBuild>
+    </QtMoc>
     <ClInclude Include="include\http.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -677,6 +425,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\dnai\models\identity.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dnai\ifactory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\dnai\ilinkable.h">
@@ -697,30 +448,30 @@
     <ClInclude Include="include\dnai\controllers\inputcontroller.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <CustomBuild Include="include\dnai\qmlresources\instructionid.h">
+    <QtMoc Include="include\dnai\qmlresources\instructionid.h">
       <Filter>Header Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="include\dnai\views\instructionview.h">
+    </QtMoc>
+    <QtMoc Include="include\dnai\views\instructionview.h">
       <Filter>Header Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="include\dnai\views\io.h">
+    </QtMoc>
+    <QtMoc Include="include\dnai\views\io.h">
       <Filter>Header Files</Filter>
-    </CustomBuild>
+    </QtMoc>
     <ClInclude Include="include\dnai\iobservable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <CustomBuild Include="include\dnai\qmlresources\iotype.h">
+    <QtMoc Include="include\dnai\qmlresources\iotype.h">
       <Filter>Header Files</Filter>
-    </CustomBuild>
+    </QtMoc>
     <ClInclude Include="include\dnai\views\iscalable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <CustomBuild Include="include\dnai\views\layout.h">
+    <QtMoc Include="include\dnai\views\layout.h">
       <Filter>Header Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="include\dnai\views\line.h">
+    </QtMoc>
+    <QtMoc Include="include\dnai\views\line.h">
       <Filter>Header Files</Filter>
-    </CustomBuild>
+    </QtMoc>
     <ClInclude Include="include\dnai\link.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -730,12 +481,12 @@
     <ClInclude Include="include\dnai\linkabletype.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <CustomBuild Include="include\dnai\models\listnode.h">
+    <QtMoc Include="include\dnai\models\listnode.h">
       <Filter>Header Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="include\dnai\manager.h">
+    </QtMoc>
+    <QtMoc Include="include\dnai\manager.h">
       <Filter>Header Files</Filter>
-    </CustomBuild>
+    </QtMoc>
     <ClInclude Include="include\models.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -745,18 +496,21 @@
     <ClInclude Include="include\dnai\commands\movenodecommand.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <CustomBuild Include="include\dnai\models\namespacebaritem.h">
+    <QtMoc Include="include\dnai\models\namespacebaritem.h">
       <Filter>Header Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="include\dnai\models\namespacebarmodel.h">
+    </QtMoc>
+    <QtMoc Include="include\dnai\models\namespacebarmodel.h">
       <Filter>Header Files</Filter>
-    </CustomBuild>
+    </QtMoc>
     <ClInclude Include="include\dnai\models\node.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <CustomBuild Include="include\dnai\http\observable.h">
+    <QtMoc Include="include\dnai\http\observable.h">
       <Filter>Header Files</Filter>
-    </CustomBuild>
+    </QtMoc>
+    <ClInclude Include="include\dnai\commands\openpropertypanel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="include\dnai\models\output.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -769,76 +523,73 @@
     <ClInclude Include="include\dnai\models\position.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <CustomBuild Include="include\dnai\processmanager.h">
+    <QtMoc Include="include\dnai\processmanager.h">
       <Filter>Header Files</Filter>
-    </CustomBuild>
+    </QtMoc>
     <ClInclude Include="include\dnai\project.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <CustomBuild Include="include\dnai\models\property.h">
+    <QtMoc Include="include\dnai\models\property.h">
       <Filter>Header Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="include\dnai\qmlresources\qcstandardpaths.h">
+    </QtMoc>
+    <ClInclude Include="include\dnai\controllers\propertypanel.h">
       <Filter>Header Files</Filter>
-    </CustomBuild>
+    </ClInclude>
+    <QtMoc Include="include\dnai\qmlresources\qcstandardpaths.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
     <ClInclude Include="include\qmlresources.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\dnai\http\response.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <CustomBuild Include="include\dnai\views\roundedrectangle.h">
+    <QtMoc Include="include\dnai\views\roundedrectangle.h">
       <Filter>Header Files</Filter>
-    </CustomBuild>
+    </QtMoc>
     <ClInclude Include="include\dnai\http\service.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <CustomBuild Include="include\dnai\session.h">
+    <QtMoc Include="include\dnai\session.h">
       <Filter>Header Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="include\dnai\settings.h">
+    </QtMoc>
+    <QtMoc Include="include\dnai\settings.h">
       <Filter>Header Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="include\dnai\models\settingsmodel.h">
+    </QtMoc>
+    <QtMoc Include="include\dnai\models\settingsmodel.h">
       <Filter>Header Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="include\testconnection.h">
+    </QtMoc>
+    <QtMoc Include="include\testconnection.h">
       <Filter>Header Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="include\dnai\models\treeitem.h">
+    </QtMoc>
+    <QtMoc Include="include\dnai\models\treeitem.h">
       <Filter>Header Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="include\dnai\models\treemodel.h">
+    </QtMoc>
+    <QtMoc Include="include\dnai\models\treemodel.h">
       <Filter>Header Files</Filter>
-    </CustomBuild>
+    </QtMoc>
     <ClInclude Include="include\dnai\http\types.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <CustomBuild Include="include\dnai\http\url.h">
+    <QtMoc Include="include\dnai\http\url.h">
       <Filter>Header Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="include\dnai\models\user.h">
+    </QtMoc>
+    <QtMoc Include="include\dnai\models\user.h">
       <Filter>Header Files</Filter>
-    </CustomBuild>
+    </QtMoc>
     <ClInclude Include="include\dnai\models\variable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\views.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="GeneratedFiles\ui_BasePanelForm.h">
+    <QtMoc Include="include\dnai\viewshandler.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <ClInclude Include="include\dnai\controllers\classcontroller.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\dnai\utils\cx_stringlist.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\dnai\utils\cx_string.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\dnai\controllers\propertypanel.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\dnai\commands\openpropertypanel.h">
+    <ClInclude Include="include\dnai\commands\genericcommand.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -847,9 +598,6 @@
       <Filter>Generated Files</Filter>
     </CustomBuild>
     <CustomBuild Include="release\moc_predefs.h.cbt">
-      <Filter>Generated Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="include\dnai\viewshandler.h">
       <Filter>Generated Files</Filter>
     </CustomBuild>
   </ItemGroup>
@@ -1294,25 +1042,14 @@
     <None Include="resources\main.qml">
       <Filter>Resource Files</Filter>
     </None>
-    <CustomBuild Include="qml.qrc">
+    <QtRcc Include="qml.qrc">
       <Filter>Resource Files</Filter>
-    </CustomBuild>
+    </QtRcc>
     <None Include="qtquickcontrols2.conf">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="dnai.rc" />
-  </ItemGroup>
-  <ItemGroup>
-    <Font Include="resources\fonts\Font Awesome 5 Brands-Regular-400.otf">
-      <Filter>Resource Files</Filter>
-    </Font>
-    <Font Include="resources\fonts\Font Awesome 5 Free-Regular-400.otf">
-      <Filter>Resource Files</Filter>
-    </Font>
-    <Font Include="resources\fonts\Font Awesome 5 Free-Solid-900.otf">
-      <Filter>Resource Files</Filter>
-    </Font>
   </ItemGroup>
 </Project>

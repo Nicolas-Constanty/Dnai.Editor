@@ -3,10 +3,10 @@
 
 #include <QObject>
 #include "project.h"
-#include "models/treemodel.h"
-#include "models/treeitem.h"
+//#include "models/treemodel.h"
+//#include "models/treeitem.h"
 #include "models/user.h"
-#include "models/declarationmodel.h"
+//#include "models/declarationmodel.h"
 #include "models/basicnodemodel.h"
 #include "views/layout.h"
 #include "api.h"

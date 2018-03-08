@@ -9,12 +9,12 @@ dnai::views::CanvasNode* dnai::views::InstructionView::canvas() const
 	return dynamic_cast<CanvasNode*>(getView());
 }
 
-dnai::models::Function* dnai::views::InstructionView::instructionModel() const
+dnai::models::Instruction* dnai::views::InstructionView::instructionModel() const
 {
-	return dynamic_cast<dnai::models::Function *>(getModel("instructionModel"));
+    return dynamic_cast<dnai::models::Instruction *>(getModel("instructionModel"));
 }
 
-void dnai::views::InstructionView::setInstructionModel(dnai::models::Function* model)
+void dnai::views::InstructionView::setInstructionModel(dnai::models::Instruction* model)
 {
 	if (instructionModel() == model)
 		return;

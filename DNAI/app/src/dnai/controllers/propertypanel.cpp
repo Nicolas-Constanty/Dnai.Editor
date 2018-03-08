@@ -5,7 +5,7 @@ namespace dnai
 {
 	namespace controllers
 	{
-		PropertyPanel::PropertyPanel() : AController<dnai::models::Entity>("qrc:/resources/Panels/Properties.qml")
+		PropertyPanel::PropertyPanel() : AController<dnai::models::EntityList>("qrc:/resources/Panels/Properties.qml")
 		{
 		}
 

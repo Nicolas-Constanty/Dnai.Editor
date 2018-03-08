@@ -9,49 +9,49 @@
 
 namespace dnai {
 namespace models {
-class Class: public Common, public Position, virtual public IModel
-{
-public:
-    Class(qint32 uid, QString const &name, QString const &description, QVector2D const &position, int index, int listindex, QObject *parent = nullptr);
-    virtual ~Class();
+//class Class: public Common, public Position, virtual public IModel
+//{
+//public:
+//    Class(qint32 uid, QString const &name, QString const &description, QVector2D const &position, int index, int listindex, QObject *parent = nullptr);
+//    virtual ~Class();
 
-private:
-    QList<Variable*> m_attributes;
-    QList<Function*> m_methods;
-    QList<Function*> m_functions;
-    QList<Class*> m_classes;
-    //TODO add position
+//private:
+//    QList<Variable*> m_attributes;
+//    QList<Function*> m_methods;
+//    QList<Function*> m_functions;
+//    QList<Class*> m_classes;
+//    //TODO add position
 
-public:
-    QList<Variable*> attributes() const;
-    QList<Function*> methods() const;
-    QList<Function*> functions() const;
-    QList<Class*> classes() const;
+//public:
+//    QList<Variable*> attributes() const;
+//    QList<Function*> methods() const;
+//    QList<Function*> functions() const;
+//    QList<Class*> classes() const;
 
-public:
-    void addAttribute(Variable *);
-    void addMethod(Function *);
-    void addFunction(Function *);
-    void addClass(Class *);
+//public:
+//    void addAttribute(Variable *);
+//    void addMethod(Function *);
+//    void addFunction(Function *);
+//    void addClass(Class *);
 
-public:
-    void removeAttribute(Variable *);
-    void removeMethod(Function *);
-    void removeFunction(Function *);
-    void removeClass(Class *);
+//public:
+//    void removeAttribute(Variable *);
+//    void removeMethod(Function *);
+//    void removeFunction(Function *);
+//    void removeClass(Class *);
 
-    // IModel interface
-public:
-	void serialize(QJsonObject &) const override;
-	void declare() const override;
-	const QList<QString> &editableProperties() override;
+//    // IModel interface
+//public:
+//	void serialize(QJsonObject &) const override;
+//	void declare() const override;
+//	const QList<QString> &editableProperties() override;
 
-    // IClone interface
-private:
-    IClone *clone() const override;
-	static QList<QString> m_editableProperties;
+//    // IClone interface
+//private:
+//    IClone *clone() const override;
+//	static QList<QString> m_editableProperties;
 
-};
+//};
 }
 }
 

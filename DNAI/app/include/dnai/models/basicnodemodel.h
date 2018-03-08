@@ -4,7 +4,7 @@
 #include <QMap>
 #include <QQmlComponent>
 #include "listnode.h"
-#include "dnai/qmlresources/instructionid.h"
+#include "dnai/enums/core/instructionid.h"
 
 namespace dnai {
 	namespace models {
@@ -20,7 +20,7 @@ namespace dnai {
 			explicit BasicNodeModel(QObject *parent = nullptr);
 			int rowCount(const QModelIndex&) const override;
 			QVariant data(const QModelIndex& index, int role) const override;
-			QObject *createNode(qmlresources::QInstructionID::Instruction_ID nodeId) const;
+            QObject *createNode(enums::QInstructionID::Instruction_ID nodeId) const;
             ~BasicNodeModel();
 		protected:
 			QHash<int, QByteArray> roleNames() const override;
@@ -34,7 +34,7 @@ namespace dnai {
 		private:
 			QMap<QString, QStringList> m_qmlpaths;
 			QMap<QString, ListNode*> m_nodes;
-			QMap<qmlresources::QInstructionID::Instruction_ID, QQmlComponent *> m_components;
+            QMap<enums::QInstructionID::Instruction_ID, QQmlComponent *> m_components;
 		};
 	}
 }

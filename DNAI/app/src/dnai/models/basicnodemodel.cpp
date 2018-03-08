@@ -24,7 +24,7 @@ namespace models {
 		return QVariant();
 	}
 
-	QObject* BasicNodeModel::createNode(qmlresources::QInstructionID::Instruction_ID nodeId) const
+	QObject* BasicNodeModel::createNode(enums::QInstructionID::Instruction_ID nodeId) const
 	{
         return m_components[nodeId]->create();
     }
@@ -70,7 +70,7 @@ void BasicNodeModel::instantiateComponent(const QString &category, const QString
 		m_nodes[category] = new ListNode();
 	const auto obj = component->create();
     *m_nodes[category] << obj;
-	m_components[static_cast<dnai::qmlresources::QInstructionID::Instruction_ID>(obj->property("instruction_id").toInt())] = component;
+	m_components[static_cast<dnai::enums::QInstructionID::Instruction_ID>(obj->property("instruction_id").toInt())] = component;
 }
 
 void BasicNodeModel::setQmlPaths(const QString &path)

@@ -1,35 +1,71 @@
-#ifndef ENTITY_H
-#define ENTITY_H
+#ifndef DNAI_MODELS_ENTITY_H
+#define DNAI_MODELS_ENTITY_H
+#include <QObject>
 
-#include <QAbstractListModel>
-#include "imodel.h"
-#include "property.h"
+#include "generictreeitem.h"
+#include "entitycore.h"
+#include "entitygui.h"
+#include "dnai/enums/core/core.h"
 
-namespace dnai {
-namespace models {
-	class Entity : public QAbstractListModel
+namespace dnai
+{
+	namespace models
 	{
-		Q_OBJECT
-	public:
-		enum Roles {
-			ITEM_ROLE = Qt::UserRole + 1,
-			NAME,
-			VALUE
+		class Entity : public GenericTreeItem<Entity>
+		{
+			Q_OBJECT
+            Q_PROPERTY(qint32 id READ id WRITE setId NOTIFY idChanged)
+            Q_PROPERTY(qint32 containerId READ containerId WRITE setContainerId NOTIFY containerIdChanged)
+			Q_PROPERTY(dnai::enums::core::ENTITY entityType READ entityType WRITE setEntityType NOTIFY entityTypeChanged)
+			Q_PROPERTY(QString name READ name WRITE setName NOTIFY nameChanged)
+			Q_PROPERTY(dnai::enums::core::VISIBILITY visibility READ visibility WRITE setVisibility NOTIFY visibilityChanged)
+			Q_PROPERTY(int index READ id WRITE setIndex NOTIFY indexChanged)
+			Q_PROPERTY(int listIndex READ listIndex WRITE setListIndex NOTIFY listIndexChanged)
+			Q_PROPERTY(QString description READ description WRITE setDescription NOTIFY descriptionChanged)
+			Q_PROPERTY(EntityCore *coreModel READ coreModel WRITE setCoreModel NOTIFY coreModelChanged)
+//			Q_PROPERTY(EntityGUI *guiModel READ guiModel CONSTANT)
+		public:
+			explicit Entity();
+            virtual ~Entity() = default;
+		public:
+            qint32 id() const;
+            qint32 containerId() const;
+			enums::core::ENTITY entityType() const;
+			const QString &name() const;
+			enums::core::VISIBILITY visibility() const;
+			int index() const;
+			int listIndex() const;
+			const QString& description() const;
+			virtual EntityCore *coreModel() const;
+//			virtual const EntityGUI *guiModel() const;
+
+		public:
+            void setId(qint32 id) const;
+            void setContainerId(qint32 containerId) const;
+			void setEntityType(enums::core::ENTITY type) const;
+			void setName(const QString &) const;
+			void setVisibility(enums::core::VISIBILITY) const;
+			void setIndex(int index);
+			void setListIndex(int listIndex);
+			void setDescription(const QString& description);
+			virtual void setCoreModel(EntityCore *model);
+
+		signals:
+            void idChanged(qint32 id) const;
+            void containerIdChanged(qint32 containerId) const;
+			void entityTypeChanged(enums::core::ENTITY type) const;
+			void nameChanged(const QString &) const;
+			void visibilityChanged(enums::core::VISIBILITY) const;
+			void indexChanged(int index) const;
+			void listIndexChanged(int listIndex) const;
+			void descriptionChanged(const QString& description) const;
+			void coreModelChanged(EntityCore *model);
+
+		private:
+			EntityCore *m_dataCore;
+			EntityGUI m_dataGUI;
 		};
-		explicit Entity(QObject *parent = nullptr);
-		explicit Entity(IModel *model, QObject *parent = nullptr);
-		int rowCount(const QModelIndex & parent = QModelIndex()) const override;
-		QVariant data(const QModelIndex & index, int role = Qt::DisplayRole) const override;
-		bool removeRow(int row, const QModelIndex &parent = QModelIndex());
-
-	protected:
-		void addModel(Property *c);
-		QHash<int, QByteArray> roleNames() const override;
-
-	private:
-		QList<Property *> m_properties;
-	};
-}
+	}
 }
 
-#endif // ENTITY_H
+#endif // DNAI_MODELS_ENTITY_H

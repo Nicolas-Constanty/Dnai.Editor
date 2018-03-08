@@ -2,15 +2,16 @@
 #define PROJECT_H
 
 #include <QString>
-#include "models/class.h"
-#include "models/context.h"
-#include "models/flow.h"
-#include "models/function.h"
-#include "models/input.h"
-#include "models/output.h"
-#include "models/node.h"
+//#include "models/class.h"
+//#include "models/context.h"
+//#include "models/flow.h"
+//#include "models/function.h"
+//#include "models/input.h"
+//#include "models/output.h"
+//#include "models/node.h"
 #include "models/variable.h"
 #include "models/imodel.h"
+#include "models/entitytree.h"
 
 namespace dnai {
 struct Count {
@@ -26,63 +27,76 @@ struct Count {
 }
 
 namespace dnai {
-    class Project: public models::Common
-    {
-    public:
-	    Project(qint32 uid, QString const& name, QString const& description, QFile& file);
+  //  class Project: public models::Common
+  //  {
+  //  public:
+	 //   Project(qint32 uid, QString const& name, QString const& description, QFile& file);
+  //      Project(const QString &, const QString &, QFile &);
+  //      virtual ~Project();
+
+  //      typedef bool (* searchFunc)(models::Common *, QString const &);
+  //      typedef bool (* searchFunctionsFunc)(models::Function *, QString const &);
+
+  //  public:
+  //      void save();
+
+  //  private:
+  //      QFile &m_file;
+
+  //      QVector<models::Common*> m_index;
+  //      QVector<models::Function*> m_functions_index;
+
+  //      models::Context const *m_main;
+
+  //      Count count;
+
+  //  public:
+  //      QFile &file() const;
+  //      const models::Context *main() const;
+  //      QJsonObject data() const;
+		//static QJsonObject loadProjectData(const QString &);
+		//static Project *loadProject(const QString &);
+		//static Project *loadProject(const QJsonObject &, QFile &);
+
+  //  private:
+  //      models::Variable *unserializeVariable(const QJsonObject &, QObject *);
+  //      models::Input *unserializeInput(const QJsonObject &, QObject *);
+  //      models::Output *unserializeOutput(const QJsonObject &, QObject *);
+  //      models::Flow *unserializeFlow(const QJsonObject &, QObject *);
+  //      models::Function *unserializeFunction(const QJsonObject &, QObject *);
+  //      models::Class *unserializeClass(const QJsonObject &, QObject *);
+  //      models::Context *unserializeContext(const QJsonObject &, QObject *);
+  //      models::Node *unserializeNode(const QJsonObject &, QObject *);
+  //      static inline QVector2D unserializePosition(const QJsonObject &);
+
+
+  //      // IModel interface
+  //  public:
+  //      virtual void serialize(QJsonObject &) const;
+  //      virtual void declare() const;
+
+  //  public:
+  //      void unserialize(const QJsonObject &);
+  //      QVector<models::Common*> search(QString const &, searchFunc = defaultSearchFunc);
+  //      QVector<models::Function*> searchFunctions(QString const &, searchFunctionsFunc = defaultSearchFunctionsFunc);
+
+  //  private:
+  //      static bool defaultSearchFunc(models::Common *, QString const &);
+  //      static bool defaultSearchFunctionsFunc(models::Function *, QString const &);
+  //  };
+	class Project : public models::EntityTree
+	{
+	public:
+        Project(qint32 uid, QString const& name, QString const& description, QFile& file);
         Project(const QString &, const QString &, QFile &);
-        virtual ~Project();
-
-        typedef bool (* searchFunc)(models::Common *, QString const &);
-        typedef bool (* searchFunctionsFunc)(models::Function *, QString const &);
-
-    public:
-        void save();
-
-    private:
-        QFile &m_file;
-
-        QVector<models::Common*> m_index;
-        QVector<models::Function*> m_functions_index;
-
-        models::Context const *m_main;
-
-        Count count;
-
-    public:
-        QFile &file() const;
-        const models::Context *main() const;
-        QJsonObject data() const;
-		static QJsonObject loadProjectData(const QString &);
-		static Project *loadProject(const QString &);
-		static Project *loadProject(const QJsonObject &, QFile &);
-
-    private:
-        models::Variable *unserializeVariable(const QJsonObject &, QObject *);
-        models::Input *unserializeInput(const QJsonObject &, QObject *);
-        models::Output *unserializeOutput(const QJsonObject &, QObject *);
-        models::Flow *unserializeFlow(const QJsonObject &, QObject *);
-        models::Function *unserializeFunction(const QJsonObject &, QObject *);
-        models::Class *unserializeClass(const QJsonObject &, QObject *);
-        models::Context *unserializeContext(const QJsonObject &, QObject *);
-        models::Node *unserializeNode(const QJsonObject &, QObject *);
-        static inline QVector2D unserializePosition(const QJsonObject &);
-
-
-        // IModel interface
-    public:
-        virtual void serialize(QJsonObject &) const;
-        virtual void declare() const;
-
-    public:
-        void unserialize(const QJsonObject &);
-        QVector<models::Common*> search(QString const &, searchFunc = defaultSearchFunc);
-        QVector<models::Function*> searchFunctions(QString const &, searchFunctionsFunc = defaultSearchFunctionsFunc);
-
-    private:
-        static bool defaultSearchFunc(models::Common *, QString const &);
-        static bool defaultSearchFunctionsFunc(models::Function *, QString const &);
-    };
+		void save();
+		QFile &file() const;
+		const models::Entity *main() const;
+		QJsonObject data() const;
+        static QJsonObject loadProjectData(const QString &);
+        static Project *loadProject(const QString &);
+        static Project *loadProject(const QJsonObject &, QFile &);
+	};
 }
 
 #endif // PROJECT_H

@@ -3,9 +3,9 @@
 
 #include "dnai/controllers/icontroller.h"
 #include "ifactory.h"
-#include "qmlresources/instructionid.h"
+#include "enums/core/instructionid.h"
 
-class EntitiesFactory : public IFactory<dnai::controllers::IController, dnai::qmlresources::QInstructionID::Instruction_ID>
+class EntitiesFactory : public IFactory<dnai::controllers::IController, dnai::enums::QInstructionID::Instruction_ID>
 {
 public:
 	EntitiesFactory() = default;

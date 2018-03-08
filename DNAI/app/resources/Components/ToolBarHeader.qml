@@ -376,6 +376,7 @@ Item {
             onClicked: {
                 _timer.start()
                 _rotator.start()
+                Manager.views.onBuildStart()
             }
             RotationAnimator {
                 id: _rotator

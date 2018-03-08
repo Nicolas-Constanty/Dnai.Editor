@@ -11,7 +11,7 @@
 
 namespace PackageDataCom {
 
-enum class ENTITYCORE : qint32 {
+enum class ENTITY_CORE : qint32 {
     CONTEXT_D = 0,
     VARIABLE = 1,
     FUNCTION = 2,
@@ -23,7 +23,7 @@ enum class ENTITYCORE : qint32 {
     ENTITY_INT_MAX_SENTINEL_DO_NOT_USE_ = 0x7FFFFFFF
 };
 
-enum class VISIBILITYCORE : qint32 {
+enum VISIBILITYCORE {
   PRIVATE = 0,
   PUBLIC = 1,
   VISIBILITY_INT_MIN_SENTINEL_DO_NOT_USE_ = -0x7FFFFFFF - 1,

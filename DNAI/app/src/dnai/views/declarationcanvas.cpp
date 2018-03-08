@@ -25,7 +25,7 @@ namespace dnai
 
                 const auto app = static_cast<App *>(App::instance());
                 const auto sets = app->settings()->style();
-                obj->setProperty("type", qmlresources::DeclarationTypeRessouce::DeclarationType::Class);
+                obj->setProperty("type", enums::DeclarationTypeRessouce::DeclarationType::Class);
                 obj->setProperty("width", sets->declarationView()->itemSize());
                 obj->setProperty("height", sets->declarationView()->itemSize());
                 obj->setProperty("name", cl->name());
@@ -65,7 +65,7 @@ namespace dnai
 
                 const auto app = static_cast<App *>(App::instance());
                 const auto sets = app->settings()->style();
-                obj->setProperty("type", qmlresources::DeclarationTypeRessouce::DeclarationType::Context);
+                obj->setProperty("type", enums::DeclarationTypeRessouce::DeclarationType::Context);
                 obj->setProperty("width", sets->declarationView()->itemSize());
                 obj->setProperty("height", sets->declarationView()->itemSize());
                 obj->setProperty("name", cl->name());
@@ -113,7 +113,7 @@ namespace dnai
 
             const auto app = static_cast<App *>(App::instance());
 			const auto sets = app->settings()->style();
-            obj->setProperty("type", qmlresources::DeclarationTypeRessouce::DeclarationType::Function);
+            obj->setProperty("type", enums::DeclarationTypeRessouce::DeclarationType::Function);
 			obj->setProperty("width", sets->declarationView()->itemSize());
 			obj->setProperty("height", sets->declarationView()->itemSize());
 			obj->setProperty("name", cl->name());
@@ -141,7 +141,7 @@ namespace dnai
 
             const auto app = static_cast<App *>(App::instance());
 			const auto sets = app->settings()->style();
-            obj->setProperty("type", qmlresources::DeclarationTypeRessouce::DeclarationType::Variable);
+            obj->setProperty("type", enums::DeclarationTypeRessouce::DeclarationType::Variable);
 			obj->setProperty("width", sets->declarationView()->itemSize());
 			obj->setProperty("height", sets->declarationView()->itemSize());
 			obj->setProperty("name", cl->name());

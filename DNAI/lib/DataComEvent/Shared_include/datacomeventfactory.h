@@ -69,7 +69,7 @@ public:
 
 public:
 
-	DataComEvent createDeclare(PackageDataCom::ENTITYCORE entity_type,
+    DataComEvent createDeclare(PackageDataCom::ENTITY_CORE entity_type,
 		uint32_t containerID,
 		QString const &name,
 		PackageDataCom::VISIBILITYCORE visibility);
@@ -78,16 +78,16 @@ public:
 
 	Reply::EntityDeclared   *getEntityDeclared(void *buff, size_t size);
 
-	DataComEvent createRemove(PackageDataCom::ENTITYCORE entity_type,
+    DataComEvent createRemove(PackageDataCom::ENTITY_CORE entity_type,
 		uint32_t containerID,
 		QString const &name);
 
-	DataComEvent createMove(PackageDataCom::ENTITYCORE entity_type,
+    DataComEvent createMove(PackageDataCom::ENTITY_CORE entity_type,
 		uint32_t fromID,
 		uint32_t toID,
 		QString const &name);
 
-	DataComEvent createChangeVisibility(PackageDataCom::ENTITYCORE entity_type,
+    DataComEvent createChangeVisibility(PackageDataCom::ENTITY_CORE entity_type,
 		uint32_t containerID,
 		QString const &name,
 		PackageDataCom::VISIBILITYCORE visibility);

@@ -3,9 +3,9 @@
 
 #include "dnai/app.h"
 #include "dnai/manager.h"
-#include "dnai/models/treeitem.h"
-#include "dnai/models/namespacebarmodel.h"
-#include "dnai/views/declarationcanvas.h"
+//#include "dnai/models/treeitem.h"
+//#include "dnai/models/namespacebarmodel.h"
+//#include "dnai/views/declarationcanvas.h"
 #include "dnai/views/declarationview.h"
 
 namespace dnai {
@@ -51,11 +51,11 @@ namespace dnai {
     void Manager::openProject(Project *project)
     {
         m_project = project;
-        m_project->declare();
+//        m_project->declare();
         createTreeModel(m_project);
-        const auto path = static_cast<models::TreeItem*>(m_viewsHandler->projectModel()->index(0,0).internalPointer());
-        m_viewsHandler->setCurrentPath(path);
-        m_viewsHandler->createNameSpaceModel(path);
+//        const auto path = static_cast<models::TreeItem*>(m_viewsHandler->projectModel()->index(0,0).internalPointer());
+//        m_viewsHandler->setCurrentPath(path);
+//        m_viewsHandler->createNameSpaceModel(path);
 		m_viewsHandler->createDeclarationModel(m_project);
 		m_viewsHandler->createDeclarationView();
 		m_viewsHandler->createNameSpaceView();
@@ -287,7 +287,7 @@ namespace dnai {
 
     void Manager::createTreeModel(Project *project)
     {
-        m_viewsHandler->setProjectModel(new models::TreeModel(project));
+//        m_viewsHandler->setProjectModel(new models::TreeModel(project));
     }
 
     //void Manager::createNameSpaceModel(models::TreeItem *item)
@@ -370,7 +370,7 @@ namespace dnai {
         QQmlComponent component(App::getEngineInstance(), path);
         QQuickItem *obj = qobject_cast<QQuickItem*>(component.beginCreate(App::getEngineInstance()->rootContext()));
         QQmlProperty model(obj, "model", App::getEngineInstance());
-        model.write(QVariant::fromValue(m_viewsHandler->basicNodesModel()->createNode(static_cast<qmlresources::QInstructionID::Instruction_ID>(nodeModel->property("instruction_id").toInt()))));
+        model.write(QVariant::fromValue(m_viewsHandler->basicNodesModel()->createNode(static_cast<enums::QInstructionID::Instruction_ID>(nodeModel->property("instruction_id").toInt()))));
         obj->setParentItem(App::instructionView()->canvas()->content());
         component.completeCreate();
     }

@@ -31,12 +31,12 @@ Panel {
             }
         }
 
-        ExpendablePanel {
-            title: "Test title"
-            anchors.left: parent.left
-            anchors.right: parent.right
-            height: (parent.height - 6 * (parent.children.length -1)) / (parent.children.length)
-        }
+//        ExpendablePanel {
+//            title: "Test title"
+//            anchors.left: parent.left
+//            anchors.right: parent.right
+//            height: (parent.height - 6 * (parent.children.length -1)) / (parent.children.length)
+//        }
     }
 
     states: [

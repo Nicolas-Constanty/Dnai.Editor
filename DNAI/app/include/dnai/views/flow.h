@@ -3,7 +3,7 @@
 
 #include "linkablebezieritem.h"
 #include "dnai/baselinkable.h"
-#include "dnai/qmlresources/flowtype.h"
+#include "dnai/enums/flowtype.h"
 
 namespace dnai
 {
@@ -12,33 +12,33 @@ namespace dnai
 		class FlowBackend : public BaseLinkable
 		{
 		public:
-            explicit FlowBackend(qmlresources::FlowTypeRessouce::FlowType t, QQuickItem *parent);
+            explicit FlowBackend(enums::FlowTypeRessouce::FlowType t, QQuickItem *parent);
 
 			/**
 			* \brief return the IOType
 			*/
-            qmlresources::FlowTypeRessouce::FlowType getType() const;
+            enums::FlowTypeRessouce::FlowType getType() const;
 
 			Link *connect(ALinkable* linkable, BezierCurve* curve) override;
 
 		protected:
-            qmlresources::FlowTypeRessouce::FlowType m_typeFlow;
+            enums::FlowTypeRessouce::FlowType m_typeFlow;
 		};
 
 		class Flow : public LinkableBezierItem
 		{
 			Q_OBJECT
-            Q_PROPERTY(dnai::qmlresources::FlowTypeRessouce::FlowType typeFlow READ typeFlow WRITE setTypeFlow NOTIFY typeFlowChanged)
+            Q_PROPERTY(dnai::enums::FlowTypeRessouce::FlowType typeFlow READ typeFlow WRITE setTypeFlow NOTIFY typeFlowChanged)
 
 		public:
 			explicit Flow(QQuickItem *parent = nullptr);
 			virtual QSGNode *updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *) override;
 
 		public:
-            qmlresources::FlowTypeRessouce::FlowType typeFlow() const { return m_typeFlow; }
+            enums::FlowTypeRessouce::FlowType typeFlow() const { return m_typeFlow; }
 
 		public:
-            void setTypeFlow(qmlresources::FlowTypeRessouce::FlowType t);
+            void setTypeFlow(enums::FlowTypeRessouce::FlowType t);
 			/**
 			* \brief Override componentComplete, and init some values
 			*/
@@ -62,10 +62,10 @@ namespace dnai
 			virtual void setLink(Link *) override;
 
 		signals:
-            void typeFlowChanged(qmlresources::FlowTypeRessouce::FlowType t);
+            void typeFlowChanged(enums::FlowTypeRessouce::FlowType t);
 
 		private:
-            qmlresources::FlowTypeRessouce::FlowType m_typeFlow;
+            enums::FlowTypeRessouce::FlowType m_typeFlow;
 
 		protected:
 			void mousePressEvent(QMouseEvent* event) override;

@@ -10,14 +10,14 @@ namespace dnai
 		class EntityDeclare : public Command
 		{
 		public:
-			EntityDeclare(PackageDataCom::ENTITYCORE type, qint32 containerID, const QString &name, PackageDataCom::VISIBILITYCORE visibility = PackageDataCom::VISIBILITYCORE::PUBLIC);
+            EntityDeclare(PackageDataCom::ENTITY_CORE type, qint32 containerID, const QString &name, PackageDataCom::VISIBILITYCORE visibility = PackageDataCom::VISIBILITYCORE::PUBLIC);
 			void execute() const override;
 			void unExcute() const override;
 			void executeSave() override;
 			~EntityDeclare() override;
 
 		private:
-			PackageDataCom::ENTITYCORE m_type;
+            PackageDataCom::ENTITY_CORE m_type;
 			qint32 m_containerID;
 			QString m_name;
 			PackageDataCom::VISIBILITYCORE m_visibility;

@@ -1,69 +1,135 @@
 #include "dnai/models/entity.h"
-#include <QDebug>
 
 namespace dnai
 {
 	namespace models
 	{
-		Entity::Entity(QObject* parent) : QAbstractListModel(parent)
+		Entity::Entity() : m_dataCore(nullptr)
 		{
 		}
 
-		Entity::Entity(IModel* model, QObject* parent) : QAbstractListModel(parent)
+        qint32 Entity::id() const
 		{
-            qDebug() << "[ENTITY CREATE]" << model->editableProperties();
-			const auto obj = dynamic_cast<QObject *>(model);
-			for(const auto& prop : model->editableProperties())
+			return coreModel()->id();
+		}
+
+        qint32 Entity::containerId() const
+		{
+			return coreModel()->containerId();
+		}
+
+		enums::core::ENTITY Entity::entityType() const
+		{
+			return coreModel()->entityType();
+		}
+
+		const QString& Entity::name() const
+		{
+			if (coreModel()->entityType() == enums::core::ENTITY::UNDEFINED)
+				return "default";
+			return coreModel()->name();
+		}
+
+		enums::core::VISIBILITY Entity::visibility() const
+		{
+			return coreModel()->visibility();
+		}
+
+		int Entity::index() const
+		{
+			return m_dataGUI.index();
+		}
+
+		int Entity::listIndex() const
+		{
+			return m_dataGUI.listIndex();
+		}
+
+		const QString& Entity::description() const
+		{
+			return m_dataGUI.description();
+		}
+
+		EntityCore* Entity::coreModel() const
+		{
+			return m_dataCore;
+		}
+
+//		const EntityGUI* Entity::guiModel() const
+//		{
+//			return &m_dataGUI;
+//		}
+
+        void Entity::setId(qint32 id) const
+		{
+			if (coreModel()->setId(id))
 			{
-				addModel(new Property(prop, obj->property(prop.toLatin1().data()), obj));
+				emit idChanged(id);
 			}
 		}
 
-		int Entity::rowCount(const QModelIndex& parent) const
+        void Entity::setContainerId(qint32 containerId) const
 		{
-            Q_UNUSED(parent)
-			return m_properties.count();
+			if (coreModel()->setContainerId(containerId))
+			{
+				emit containerIdChanged(containerId);
+			}
 		}
 
-		QVariant Entity::data(const QModelIndex& index, int role) const
+		void Entity::setEntityType(enums::core::ENTITY type) const
 		{
-			if (index.row() < 0 || index.row() >= m_properties.count())
-				return QVariant();
-
-			const auto item = m_properties[index.row()];
-			if (role == Roles::ITEM_ROLE)
-				return QVariant::fromValue(item);
-			if (role == Roles::NAME)
-				return QVariant::fromValue(item->name());
-			if (role == Roles::VALUE)
-				return item->value();
-			return QVariant();
+			if (coreModel()->setEntityType(type))
+			{
+				emit entityTypeChanged(type);
+			}
 		}
 
-		bool Entity::removeRow(int row, const QModelIndex& parent)
+		void Entity::setName(const QString& name) const
 		{
-			Q_UNUSED(parent);
-			beginRemoveRows(QModelIndex(), row, row);
-			m_properties.removeAt(row);
-			endRemoveRows();
-			return true;
+			if (coreModel()->setName(name))
+			{
+				emit nameChanged(name);
+			}
 		}
 
-		void Entity::addModel(Property* c)
+		void Entity::setVisibility(enums::core::VISIBILITY v) const
 		{
-			beginInsertRows(QModelIndex(), rowCount(), rowCount());
-			m_properties << c;
-			endInsertRows();
-
+			if (coreModel()->setVisibility(v))
+			{
+				emit visibilityChanged(v);
+			}
 		}
 
-		QHash<int, QByteArray> Entity::roleNames() const
+		void Entity::setIndex(int index)
 		{
-			QHash<int, QByteArray> roles;
-			roles[Roles::VALUE] = "item";
-			roles[Roles::NAME] = "name";
-			roles[Roles::ITEM_ROLE] = "item";
-			return roles;
+			if (m_dataGUI.setIndex(index))
+			{
+				emit indexChanged(index);
+			}
+		}
+
+		void Entity::setListIndex(int listIndex)
+		{
+			if (m_dataGUI.setListIndex(listIndex))
+			{
+				emit listIndexChanged(listIndex);
+			}
+		}
+
+		void Entity::setDescription(const QString& description)
+		{
+			if (m_dataGUI.setDescription(description))
+			{
+				emit descriptionChanged(description);
+			}
+		}
+
+		void Entity::setCoreModel(EntityCore* model)
+		{
+			if (m_dataCore == model)
+				return;
+			m_dataCore = model;
+			emit coreModelChanged(model);
 		}
 	}
 }
