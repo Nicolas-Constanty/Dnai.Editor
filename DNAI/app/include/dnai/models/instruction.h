@@ -1,23 +1,23 @@
 #ifndef DNAI_MODELS_INSTRUCTION_H
 #define DNAI_MODELS_INSTRUCTION_H
 
-#include "entitycore.h"
+#include "core/entity.h"
 #include "entity.h"
 
 namespace dnai
 {
 	namespace models
 	{
-		class InstructionCore : public EntityCore
+        class InstructionCore : public core::Entity
 		{
 		public:
-			std::map<qint32, commands::EntityCommand*> initCommands() const override;
+            std::map<qint32, commands::CoreCommand*> initCommands() const override;
 		};
 
-		class MemberInstructionCore : public EntityCore
+        class MemberInstructionCore : public core::Entity
 		{
 		public:
-			std::map<qint32, commands::EntityCommand*> initCommands() const override;
+            std::map<qint32, commands::CoreCommand*> initCommands() const override;
 		};
 
 		union InstructionCoreUnion
@@ -31,11 +31,11 @@ namespace dnai
 		public:
 			~Instruction() = default;
 
-			EntityCore* coreModel() const override;
-			void setCoreModel(EntityCore* model) override;
+            core::Entity* coreModel() const override;
+            void setCoreModel(core::Entity* model) override;
 		private:
 			InstructionCoreUnion m_dataCore;
-			EntityCore * m_data = nullptr;
+            core::Entity * m_data = nullptr;
 		};
 	}
 }

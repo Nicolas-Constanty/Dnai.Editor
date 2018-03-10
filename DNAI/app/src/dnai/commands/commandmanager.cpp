@@ -18,7 +18,7 @@ namespace dnai
 			return  m_instance;
 		}
 
-		void CommandManager::registerCommand(ICommand *cmd)
+        void CommandManager::registerCommand(interfaces::ICommand *cmd)
 		{
 			if (m_console.view() && m_console.view()->isVisible())
                 m_doList.push(new DebugDecorator(cmd));
@@ -32,7 +32,7 @@ namespace dnai
             }
 		}
 
-		void CommandManager::exec(ICommand* c)
+        void CommandManager::exec(interfaces::ICommand* c)
         {
             qDebug() << "yulu";
             if (m_console.view() && m_console.view()->isVisible())
@@ -54,7 +54,7 @@ namespace dnai
 		{
 			while (!m_doList.empty())
             {
-				ICommand *c = m_doList.front();
+                interfaces::ICommand *c = m_doList.front();
                 if (c->isSave())
                 {
                     c->executeSave();
@@ -103,6 +103,11 @@ namespace dnai
 		void CommandManager::setConsoleView(views::Console* consoleView)
 		{
 			m_console.setConsole(consoleView);
+		}
+
+		const controllers::ConsoleController& CommandManager::console() const
+		{
+			return m_console;
 		}
 	}
 }

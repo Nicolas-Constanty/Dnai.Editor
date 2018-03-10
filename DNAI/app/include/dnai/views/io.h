@@ -8,7 +8,7 @@
 #include "beziercurve.h"
 #include "genericnode.h"
 #include "linkablebezieritem.h"
-#include "iscalable.h"
+#include "dnai/interfaces/iscalable.h"
 
 #include "dnai/enums/iotype.h"
 
@@ -16,7 +16,7 @@ namespace dnai
 {
 	namespace views
 	{
-		class Io : public LinkableBezierItem, public IScalable
+        class Io : public LinkableBezierItem, public interfaces::IScalable
 		{
 			Q_OBJECT
 

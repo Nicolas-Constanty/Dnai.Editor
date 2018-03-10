@@ -9,11 +9,11 @@
 #include "views/appview.h"
 #include "views/instructionview.h"
 #include "models/basicnodemodel.h"
-#include "iloadingclass.h"
+#include "dnai/interfaces/iloadingclass.h"
 #include "session.h"
 
 namespace dnai {
-    class App : public QGuiApplication, public ILoadingClass
+    class App : public QGuiApplication, public interfaces::ILoadingClass
     {
         Q_OBJECT
     public:

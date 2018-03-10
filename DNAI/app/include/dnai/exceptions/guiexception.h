@@ -9,6 +9,10 @@ namespace dnai
 		class GuiExeption : public Exception
 		{
 		public:
+			/**
+			* \brief Use this class with exception manager in order to throw a dialog exception. Use this class for gui model exception
+			* \param _Message
+			*/
 			explicit GuiExeption(const std::string& _Message)
 				: Exception(_Message, "Gui")
 			{

@@ -56,9 +56,9 @@ namespace dnai {
 //        const auto path = static_cast<models::TreeItem*>(m_viewsHandler->projectModel()->index(0,0).internalPointer());
 //        m_viewsHandler->setCurrentPath(path);
 //        m_viewsHandler->createNameSpaceModel(path);
-		m_viewsHandler->createDeclarationModel(m_project);
-		m_viewsHandler->createDeclarationView();
-		m_viewsHandler->createNameSpaceView();
+//		m_viewsHandler->createDeclarationModel(m_project);
+//		m_viewsHandler->createDeclarationView();
+//		m_viewsHandler->createNameSpaceView();
     }
 
 	//void Manager::createDeclarationView()

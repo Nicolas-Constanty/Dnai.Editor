@@ -7,20 +7,20 @@ namespace dnai
 	{
         std::map<qint32, commands::EntityCommand*> InstructionCore::initCommands() const
 		{
-			return EntityCore::initCommands();
+            return core::Entity::initCommands();
 		}
 
         std::map<qint32, commands::EntityCommand*> MemberInstructionCore::initCommands() const
 		{
-			return EntityCore::initCommands();
+            return core::Entity::initCommands();
 		}
 
-		EntityCore* Instruction::coreModel() const
+        core::Entity* Instruction::coreModel() const
 		{
 			return m_data;
 		}
 
-		void Instruction::setCoreModel(EntityCore* model)
+        void Instruction::setCoreModel(core::Entity* model)
 		{
 			if (model->entityType() == enums::core::ENTITY::DATA_TYPE)
 			{

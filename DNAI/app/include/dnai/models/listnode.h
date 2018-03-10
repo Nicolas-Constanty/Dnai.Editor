@@ -1,5 +1,5 @@
-#ifndef LISTNODE_H
-#define LISTNODE_H
+#ifndef DNAI_MODELS_LISTNODE_H
+#define DNAI_MODELS_LISTNODE_H
 
 #include <QAbstractListModel>
 
@@ -10,12 +10,6 @@ namespace dnai
 		class ListNode : public QAbstractListModel
 		{
 			Q_OBJECT
-				enum Roles {
-				ITEM = Qt::UserRole + 1,
-				NAME,
-                INSTRUCTION_ID,
-                MENU_NAME
-			};
 		public:
 			explicit ListNode(QObject *parent = nullptr);
 			ListNode(const ListNode &other, QObject *parent = nullptr);
@@ -29,8 +23,14 @@ namespace dnai
 
 		private:
 			QList<QObject *> m_nodes;
+			enum Roles {
+				ITEM = Qt::UserRole + 1,
+				NAME,
+				INSTRU_ID,
+				MENU_NAME
+			};
 		};
 	}
 }
 
-#endif // LISTNODE_H
+#endif // DNAI_MODELS_LISTNODE_H

@@ -5,7 +5,7 @@
 #include "dnai/commands/commanddecorator.h"
 #include "dnai/commands/commandmanager.h"
 #include "dnai/commands/debugdecorator.h"
-#include "dnai/commands/icommand.h"
+#include "dnai/interfaces/icommand.h"
 #include "dnai/commands/movecanvascommand.h"
 #include "dnai/commands/movecommand.h"
 #include "dnai/commands/movenodecommand.h"

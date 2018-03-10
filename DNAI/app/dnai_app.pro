@@ -42,35 +42,41 @@ SOURCES += \
     src/dnai/settings.cpp \
     src/dnai/processmanager.cpp \
     src/dnai/entitiesfactory.cpp \
-    src/dnai/commands/entitydeclare.cpp \
     src/dnai/appcontext.cpp \
     src/dnai/session.cpp \
     src/dnai/viewshandler.cpp \
-    src/dnai/models/instruction.cpp \
-    src/dnai/models/entity.cpp \
-    src/dnai/models/entitycore.cpp \
-    src/dnai/models/entitygui.cpp \
+    src/dnai/models/core/entity.cpp \
     src/dnai/models/entitytree.cpp \
-    src/dnai/models/variable.cpp \
     src/dnai/models/basicnodemodel.cpp \
     src/dnai/models/settingsmodel.cpp \
     src/dnai/models/user.cpp \
-    src/dnai/models/listnode.cpp
+    src/dnai/models/listnode.cpp \
+    src/dnai/models/core/entity.cpp \
+    src/dnai/models/core/entitydata.cpp \
+    src/dnai/models/gui/declarable/entity.cpp \
+    src/dnai/models/gui/declarable/function.cpp \
+    src/dnai/models/gui/nondeclarable/input.cpp \
+    src/dnai/models/gui/nondeclarable/instruction.cpp \
+    src/dnai/models/gui/nondeclarable/output.cpp \
+    src/dnai/models/gui/data/entity.cpp \
+    src/dnai/models/basicnodemodel.cpp \
+    src/dnai/models/entitytree.cpp \
+    src/dnai/models/listnode.cpp \
+    src/dnai/models/settingsmodel.cpp \
+    src/dnai/models/user.cpp \
+    src/dnai/models/entity.cpp \
+    src/dnai/commands/corecommand.cpp
 
 #ENUMS
 SOURCES += \
-    src/dnai/enums/qcstandardpaths.cpp
-
-#MODELS
-SOURCES += \
-
+    src/dnai/enums/qcstandardpaths.cpp \
 
 #COMMANDS
 SOURCES += \
     src/dnai/commands/movecommand.cpp \
     src/dnai/commands/movenodecommand.cpp \
     src/dnai/commands/movecanvascommand.cpp \
-    src/dnai/commands/zoomcanvascommand.cpp
+    src/dnai/commands/zoomcanvascommand.cpp \
 
 #VIEWS
 SOURCES += \
@@ -90,7 +96,7 @@ SOURCES += \
     src/dnai/views/appview.cpp \
     src/dnai/views/instructionview.cpp \
     src/dnai/views/canvasnode.cpp \
-    src/dnai/views/layout.cpp
+    src/dnai/views/layout.cpp \
 
 #COMMANDS
 SOURCES += \
@@ -105,17 +111,18 @@ SOURCES += \
     src/dnai/controllers/outputcontroller.cpp \
     src/dnai/controllers/consolecontroller.cpp \
     src/dnai/controllers/clientcontroller.cpp \
-    src/dnai/controllers/icontroller.cpp
+    src/dnai/controllers/icontroller.cpp \
 
 #HTTP
 SOURCES += \
     src/dnai/http/url.cpp \
     src/dnai/http/service.cpp \
     src/dnai/http/observable.cpp \
-    src/dnai/http/response.cpp
+    src/dnai/http/response.cpp \
 
 #API
-SOURCES += src/dnai/api/api.cpp
+SOURCES += \
+    src/dnai/api/api.cpp \
 
 RESOURCES += qml.qrc
 
@@ -147,25 +154,52 @@ HEADERS += \
     include/dnai/app.h \
     include/dnai/settings.h \
     include/dnai/entitiesfactory.h \
-    include/dnai/iloadingclass.h \
-    include/dnai/iobservable.h \
-    include/dnai/commands/entitydeclare.h \
+    include/dnai/interfaces/iloadingclass.h \
+    include/dnai/interfaces/iobservable.h \
     include/dnai/appcontext.h \
     include/dnai/session.h \
-    include/dnai/ifactory.h \
+    include/dnai/interfaces/ifactory.h \
     include/dnai/viewshandler.h \
     include/enums.h \
     include/dnai/models/instruction.h \
-    include/dnai/models/entity.h \
-    include/dnai/models/entitycore.h \
-    include/dnai/models/entitygui.h \
+    include/dnai/models/declarable/entity.h \
+    include/dnai/models/core/entity.h \
+    include/dnai/models/gui/entity.h \
     include/dnai/models/entitytree.h \
-    include/dnai/models/variable.h \
     include/dnai/models/basicnodemodel.h \
     include/dnai/models/settingsmodel.h \
     include/dnai/models/user.h \
     include/dnai/enums/core/core.h \
-    include/dnai/models/listnode.h
+    include/dnai/models/listnode.h \
+    include/dnai/interfaces/iserializable.h \
+    include/dnai/interfaces/imodel.h \
+    include/dnai/models/core/entity.h \
+    include/dnai/models/core/entitydata.h \
+    include/dnai/models/gui/data/context.h \
+    include/dnai/models/gui/data/entity.h \
+    include/dnai/models/gui/data/function.h \
+    include/dnai/models/gui/data/instruction.h \
+    include/dnai/models/gui/data/linkable.h \
+    include/dnai/models/gui/data/objecttype.h \
+    include/dnai/models/gui/data/variable.h \
+    include/dnai/models/gui/declarable/context.h \
+    include/dnai/models/gui/declarable/entity.h \
+    include/dnai/models/gui/declarable/enumtype.h \
+    include/dnai/models/gui/declarable/function.h \
+    include/dnai/models/gui/declarable/listtype.h \
+    include/dnai/models/gui/declarable/objecttype.h \
+    include/dnai/models/gui/declarable/variable.h \
+    include/dnai/models/gui/flow.h \
+    include/dnai/models/gui/input.h \
+    include/dnai/models/gui/instruction.h \
+    include/dnai/models/gui/output.h \
+    include/dnai/models/basicnodemodel.h \
+    include/dnai/models/entitytree.h \
+    include/dnai/models/generictreeitem.h \
+    include/dnai/models/listnode.h \
+    include/dnai/models/settingsmodel.h \
+    include/dnai/models/user.h \
+    include/dnai/commands/corecommand.h
 
 #ENUMS
 HEADERS += \
@@ -173,12 +207,7 @@ HEADERS += \
     include/dnai/enums/declarationtype.h \
     include/dnai/enums/flowtype.h \
     include/dnai/enums/iotype.h \
-    include/dnai/enums/qcstandardpaths.h
-
-#MODELS
-HEADERS += \
-
-
+    include/dnai/enums/qcstandardpaths.h \
 
 #DNAI
 HEADERS += \
@@ -186,7 +215,7 @@ HEADERS += \
     include/dnai/baselinkable.h \
     include/dnai/eventutilities.h \
     include/dnai/focusmanager.h \
-    include/dnai/ilinkable.h \
+    include/dnai/interfaces/ilinkable.h \
     include/dnai/link.h \
     include/dnai/linkabletype.h \
     include/dnai/manager.h \
@@ -201,7 +230,7 @@ HEADERS += \
     include/dnai/views/genericnode.h \
     include/dnai/views/input.h \
     include/dnai/views/io.h \
-    include/dnai/views/iscalable.h \
+    include/dnai/interfaces/iscalable.h \
     include/dnai/views/line.h \
     include/dnai/views/linkablebezieritem.h \
     include/dnai/views/output.h \
@@ -219,7 +248,7 @@ HEADERS += \
     include/dnai/commands/commanddecorator.h \
     include/dnai/commands/commandmanager.h \
     include/dnai/commands/debugdecorator.h \
-    include/dnai/commands/icommand.h \
+    include/dnai/interfaces/icommand.h \
     include/dnai/commands/command.h \
     include/dnai/commands/movenodecommand.h \
     include/dnai/commands/movecommand.h \
@@ -231,7 +260,7 @@ HEADERS += \
     include/dnai/controllers/outputcontroller.h \
     include/dnai/controllers/consolecontroller.h \
     include/dnai/controllers/clientcontroller.h \
-    include/dnai/controllers/icontroller.h \
+    include/dnai/interfaces/icontroller.h \
 
 #HTTP
 HEADERS += \
@@ -240,11 +269,11 @@ HEADERS += \
     include/dnai/http/config.h \
     include/dnai/http/observable.h \
     include/dnai/http/response.h \
-    include/dnai/http/types.h
+    include/dnai/http/types.h \
 
 #API
 HEADERS += \
-    include/dnai/api/api.h
+    include/dnai/api/api.h \
 
 #TEST
 HEADERS += \

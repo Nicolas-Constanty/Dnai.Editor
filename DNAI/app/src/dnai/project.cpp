@@ -1,59 +1,100 @@
 #include <QJsonDocument>
 #include <QJsonArray>
+#include <QJsonObject>
 
 #include "dnai/project.h"
 
 namespace dnai {
-//    Project::Project(const qint32 uid, QString const &name, QString const &description, QFile &file)
-//        : models::Common(uid, name, description, 0, 0), m_file(file),
-//          m_main(new models::Context(-1,"DNAI", "main", QVector2D(), 0, 0))
-//    {
+Project::Project(): m_main(nullptr)
+{
+}
 
-//    }
-
-//    Project::Project(QString const &name, QString const &description, QFile &file)
-//        : models::Common(-2, name, description, 0, 0), m_file(file),
-//          m_main(new models::Context(-1,"DNAI", "main", QVector2D(), 0, 0))
-//    {
-
-//    }
+Project::Project(QString const &name, QString const &description, QFile &file) : m_file(file)
+{
+    const auto entityCore = new models::core::Entity(name, enums::core::ENTITY::CONTEXT);
+    m_main = new models::Entity(entityCore, description);
+}
 
 //    Project::~Project()
 //    {
 
 //    }
 
-//    void    Project::save()
-//    {
-//        QJsonObject obj;
-//        serialize(obj);
+    void    Project::save()
+    {
+        QJsonObject obj;
+        serialize(obj);
 
-//        m_file.write(QJsonDocument(obj).toJson());
-//    }
+        m_file.write(QJsonDocument(obj).toJson());
+    }
 
-//    const models::Context *Project::main() const
+	void Project::serialize(QJsonObject&) const
+	{
+	}
+
+	void Project::_deserialize(const QJsonObject& obj)
+    {
+         m_main = models::Entity::deserialize(obj["main"].toObject());
+    }
+
+    QJsonObject Project::loadProjectData(const QString &path)
+    {
+        Project *project = Project::loadProject(path);
+        return (project != nullptr) ? project->data() : QJsonObject{};
+    }
+
+    Project *Project::loadProject(const QString &path)
+    {
+        QFile file(QUrl(path).toLocalFile());
+
+        if (!file.open(QIODevice::ReadWrite)) {
+            qWarning("Couldn't open file.");
+            return nullptr;
+        }
+
+        const QByteArray data = file.readAll();
+
+        try {
+            const QJsonObject obj(QJsonDocument::fromJson(data).object());
+            return loadProject(obj, file);
+        }
+        catch (std::exception) {
+
+        }
+        qWarning("Couldn't parse file.");
+        return nullptr;
+    }
+
+    Project *Project::loadProject(const QJsonObject &obj, QFile &file)
+    {
+        auto project = new Project(obj["name"].toString(), obj["description"].toString(), file);
+        project->_deserialize(obj);
+        return project;
+    }
+
+	//    const models::Context *Project::main() const
 //    {
 //        return m_main;
 //    }
 
-//    QJsonObject Project::data() const
-//    {
-//        return QJsonObject {
-//            {"name", name()},
-//            {"description", description()},
-//            {"count", QJsonObject {
-//                    {"contexts", count.contexts},
-//                    {"classes", count.classes},
-//                    {"nodes", count.nodes},
-//                    {"functions", count.functions},
-//                    {"variables", count.variables},
-//                    {"inputs", count.inputs},
-//                    {"outputs", count.outputs},
-//                    {"flows", count.flows}
-//                }
-//            }
-//        };
-//    }
+    QJsonObject Project::data() const
+    {
+        return QJsonObject  {
+            {"name", m_main->coreModel()->name() },
+            {"description", m_main->guiModel()->description()},
+            {"count", QJsonObject {
+                    {"contexts", count.contexts},
+                    {"classes", count.classes},
+                    {"nodes", count.nodes},
+                    {"functions", count.functions},
+                    {"variables", count.variables},
+                    {"inputs", count.inputs},
+                    {"outputs", count.outputs},
+                    {"flows", count.flows}
+                }
+            }
+        };
+    }
 
 //	QJsonObject Project::loadProjectData(const QString &path)
 //	{

@@ -6,6 +6,9 @@ namespace dnai
 {
 	namespace exceptions
 	{
+		/**
+		 * \brief Base class for DNAI Exception
+		 */
 		class Exception : public std::runtime_error
 		{
 		public:

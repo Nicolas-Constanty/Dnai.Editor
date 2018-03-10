@@ -2,10 +2,10 @@
 #define VIEWSHANDLER_H
 #include <QQuickItem>
 
-#include "iloadingclass.h"
+#include "dnai/interfaces/iloadingclass.h"
 #include "dnai/models/basicnodemodel.h"
 //#include "controllers/propertypanel.h"
-#include "models/property.h"
+//#include "models/property.h"
 //#include "models/declarationmodel.h"
 #include "dnai/project.h"
 //#include "models/treeitem.h"
@@ -13,7 +13,7 @@
 
 namespace dnai
 {
-	class ViewsHandler : public QObject, ILoadingClass
+    class ViewsHandler : public QObject, interfaces::ILoadingClass
 	{
 		Q_OBJECT
 //		Q_PROPERTY(dnai::models::TreeModel *projectModel READ projectModel WRITE setProjectModel NOTIFY projectModelChanged)
@@ -63,8 +63,8 @@ namespace dnai
 
 	private:
 		void initApp();
-		void initDeclarationView();
-		void initPropertyPanel();
+//		void initDeclarationView();
+//		void initPropertyPanel();
 
 	private:
 //		controllers::PropertyPanel *m_propertyPanel;
@@ -81,12 +81,12 @@ namespace dnai
 //		void setupClassModel(models::Class *cl, int level) const;
 //		void setupFunctionModel(models::Function *func) const;
 //		void setupContextModel(models::Context *context, int level) const;
-		void setupVariableModel(models::Variable *variable) const;
-		void createDeclarationModel(Project *project) const;
+//		void setupVariableModel(models::Variable *variable) const;
+//		void createDeclarationModel(Project *project) const;
 		void clearDeclarationModel() const;
 //		void createDeclarationIfMissing(models::Common *c) const;
-		void createDeclarationView() const;
-		void createNameSpaceView() const;
+//		void createDeclarationView() const;
+//		void createNameSpaceView() const;
 		void createInstructionView() const;
 
 		friend class Manager;

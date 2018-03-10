@@ -4,7 +4,7 @@
 #include <stack>
 #include <queue>
 
-#include "icommand.h"
+#include "dnai/interfaces/icommand.h"
 #include "dnai/controllers/consolecontroller.h"
 
 namespace dnai
@@ -21,14 +21,18 @@ namespace dnai
 			* \brief Register a command
 			* \param cmd
 			*/
-			void registerCommand(ICommand* cmd);
+            void registerCommand(interfaces::ICommand* cmd);
 
 			/**
 			* \brief Execute all the registers commands
 			*/
 			void execAll();
 
-			void exec(ICommand *command);
+			/**
+             * \brief Execute immediatlty the command
+             * \param command 
+             */
+            void exec(interfaces::ICommand * command);
 
 			/**
 			* \brief Exectute the next command
@@ -42,13 +46,21 @@ namespace dnai
 			*/
 			void undo(int levels);
 
+			/**
+			 * \brief Assign the console view
+			 * \param consoleView 
+			 */
 			void setConsoleView(views::Console *consoleView);
-			const controllers::ConsoleController &console() const { return  m_console;  }
+			/**
+			 * \brief Return the console view
+			 * \return const controllers::ConsoleController&
+			 */
+			const controllers::ConsoleController& console() const;
 
 		private:
-			std::stack<ICommand *> m_undoList;
-			std::stack<ICommand *> m_redoList;
-			std::queue<ICommand *> m_doList;
+            std::stack<interfaces::ICommand *> m_undoList;
+            std::stack<interfaces::ICommand *> m_redoList;
+            std::queue<interfaces::ICommand *> m_doList;
 
 			controllers::ConsoleController m_console;
 			static CommandManager *m_instance;

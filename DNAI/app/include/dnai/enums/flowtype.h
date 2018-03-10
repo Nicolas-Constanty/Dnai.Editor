@@ -12,6 +12,9 @@ public:
     explicit FlowTypeRessouce(QObject *parent = nullptr) : QObject(parent) {}
     ~FlowTypeRessouce() {}
 
+	/**
+     * \brief Enum of available type for a flow
+     */
     enum FlowType
     {
         Enter,

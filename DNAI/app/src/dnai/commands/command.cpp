@@ -31,6 +31,11 @@ namespace dnai
 			return m_save;
 		}
 
+		const QString& Command::name() const
+		{
+			return m_name;
+		}
+
 		QString Command::infos() const
 		{
 			return m_name + "()";

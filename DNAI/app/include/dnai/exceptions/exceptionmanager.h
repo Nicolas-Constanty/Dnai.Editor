@@ -12,6 +12,10 @@ namespace dnai
 		class ExeptionManager
 		{
 		public:
+			/**
+			 * \brief Allow to output error in log and display it in a dialog box
+			 * \param exception 
+			 */
 			static void throwException(const Exception &exception)
 			{
 				try

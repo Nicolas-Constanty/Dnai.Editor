@@ -1,5 +1,5 @@
-#include "dnai/views/declarationview.h"
 #include "dnai/app.h"
+#include "dnai/views/declarationview.h"
 
 namespace dnai
 {
@@ -9,12 +9,12 @@ namespace dnai
         {
 		}
 
-		dnai::models::DeclarationModel* DeclarationView::contextModel() const
+        dnai::models::Entity* DeclarationView::contextModel() const
 		{
-			return dynamic_cast<dnai::models::DeclarationModel*>(getModel("contextModel"));
+            return dynamic_cast<dnai::models::Entity*>(getModel("contextModel"));
 		}
 
-		void DeclarationView::setContextModel(dnai::models::DeclarationModel* model)
+        void DeclarationView::setContextModel(dnai::models::Entity* model)
 		{
 			if (contextModel() == model)
 				return;

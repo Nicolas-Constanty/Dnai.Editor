@@ -10,7 +10,6 @@ namespace dnai
 		template <class T>
 		class GenericTreeItem : public QObject
 		{
-			Q_OBJECT
 		public:
 			GenericTreeItem(QObject *parent = nullptr) : QObject(parent) {}
 			explicit GenericTreeItem(const QList<QVariant> &data, T *parentItem = nullptr) : QObject(nullptr) {}

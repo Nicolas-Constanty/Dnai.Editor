@@ -7,6 +7,9 @@ namespace dnai {
     namespace enums {
         inline namespace core {
             Q_NAMESPACE
+            /**
+             * \brief List of available commands in core.dll
+             */
             enum COMMANDS : qint32
             {
                 //ENTITY
@@ -45,42 +48,58 @@ namespace dnai {
                 UNLINK_INSTRUCTION_INPUT
             };
             // THESE STRUCTS ARE FOR DEBUG PURPOSE, YOU CAN USED THEM TO ITERATE THROW A COMMAND TYPE
+	        /**
+             * \brief Allow to iterate through Entity commands
+             */
             struct EntityCommands
             {
                 static const qint32 begin = COMMANDS::DECLARE;
                 static const qint32 end = COMMANDS::CHANGE_VISIBILITY;
             };
-
+			/**
+			* \brief Allow to iterate through Variable commands
+			*/
             struct VariableCommands
             {
                 static const qint32 begin = COMMANDS::SET_VARIABLE_VALUE;
                 static const qint32 end = COMMANDS::SET_CONTEXT_PARENT;
             };
-
+			/**
+			* \brief Allow to iterate through Enum commands
+			*/
             struct EnumCommands
             {
                 static const qint32 begin = COMMANDS::SET_ENUMERATION_TYPE;
                 static const qint32 end = COMMANDS::REMOVE_ENUMERATION_VALUE;
             };
-
+			/**
+			* \brief Allow to iterate through Class commands
+			*/
             struct ClassCommands
             {
                 static const qint32 begin = COMMANDS::ADD_CLASS_ATTRIBUTE;
                 static const qint32 end = COMMANDS::ADD_CLASS_MEMBER_FUNCTION;
             };
-
+			/**
+			* \brief Allow to iterate through Instruction commands
+			*/
             struct InstructionCommands
             {
                 static const qint32 begin = COMMANDS::CALL_FUNCTION;
                 static const qint32 end = COMMANDS::UNLINK_INSTRUCTION_INPUT;
             };
-
+			/**
+			* \brief Allow to iterate through List commands
+			*/
             struct ListCommands
             {
                 static const qint32 begin = COMMANDS::SET_LIST_TYPE;
                 static const qint32 end = COMMANDS::SET_LIST_TYPE;
             };
 
+	        /**
+             * \brief List of available entity in core.dll
+             */
             enum ENTITY
             {
                 UNDEFINED = -1,
@@ -93,6 +112,9 @@ namespace dnai {
                 LIST_TYPE
             };
 
+	        /**
+             * \brief List of available replies in core.dll
+             */
             enum REPLIES
             {
                 ENTITY_DECLARED,
@@ -106,6 +128,9 @@ namespace dnai {
                 ERROR_OCCURRED
             };
 
+	        /**
+             * \brief List of available visibility in core.dll
+             */
             enum VISIBILITY
             {
                 PUBLIC,

@@ -3,7 +3,6 @@
 
 //#include "dnai/models/common.h"
 //#include "dnai/models/position.h"
-//#include "dnai/models/imodel.h"
 #include "entity.h"
 
 namespace dnai {

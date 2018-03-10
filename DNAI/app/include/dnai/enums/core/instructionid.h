@@ -12,21 +12,25 @@ public:
     QInstructionID(QObject *parent = nullptr) : QObject(parent) {}
     ~QInstructionID() {}
 
-    enum Instruction_ID
+	/**
+     * \brief List of instruction available in core.dll
+     */
+    enum Instruction_ID : qint32
     {
-        AND = (int)(0),
-        OR = (int)(1),
-        DIFFERENT = (int)(2),
-        EQUAL = (int)(3),
-        GREATER = (int)(4),
-        GREATER_EQUAL = (int)(5),
-        LOWER = (int)(6),
-        LOWER_EQUAL = (int)(7),
-        ACCESS = (int)(8),
-        BINARY_AND = (int)(9),
-        BINARY_OR= (int)(10),
-        XOR = (int)(11),
-        ADD = (int)(12),
+		UNDEFINED = -1,
+        AND,
+        OR,
+        DIFFERENT,
+        EQUAL,
+        GREATER,
+        GREATER_EQUAL,
+        LOWER,
+        LOWER_EQUAL,
+        ACCESS,
+        BINARY_AND,
+        BINARY_OR,
+        XOR,
+        ADD,
         SUB,
         DIV,
         MUL,

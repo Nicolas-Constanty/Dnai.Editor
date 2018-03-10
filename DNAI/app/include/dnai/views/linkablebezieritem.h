@@ -4,7 +4,7 @@
 #include "customshape.h"
 #include "beziercurve.h"
 #include "canvasnode.h"
-#include "dnai/ilinkable.h"
+#include "dnai/interfaces/ilinkable.h"
 
 namespace dnai
 {
@@ -16,7 +16,7 @@ namespace dnai
 		{
 		public:
 			LinkableBezierItem(QQuickItem *parent = nullptr);
-			ALinkable *getLinkable() const { return m_linkable; }
+            interfaces::ALinkable *getLinkable() const { return m_linkable; }
 			virtual QPointF getCanvasPos() const = 0;
 			virtual void updateLink() = 0;
 
@@ -72,7 +72,7 @@ namespace dnai
 			};
 
 		protected:
-			ALinkable *m_linkable;
+            interfaces::ALinkable *m_linkable;
 			LinkableBezierItem *m_currentHover;
 			LinkStatus m_status;
 

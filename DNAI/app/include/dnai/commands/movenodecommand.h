@@ -10,23 +10,20 @@ namespace dnai
 {
 	namespace commands
 	{
+		/**
+		* \brief MoveNodeCommand allow to move GenericNode in canvas
+		*/
         class MoveNodeCommand : public Command
 		{
 		public:
             MoveNodeCommand(views::GenericNode * n, const QPointF& vec, bool save = false);
 
-			/**
-			* \brief Execute the command
-			*/
-			void execute() const override;
-			void executeSave() override;
-
-			/**
-			* \brief Reverse the command
-			*/
-			void unExcute() const override;
-
-			QString infos() const override;
+			//Override ICommand functions
+        public:
+	        virtual void execute() const override;
+	        virtual void executeSave() override;
+	        virtual void unExcute() const override;
+	        virtual QString infos() const override;
 
 		private:
             views::GenericNode * m_n;

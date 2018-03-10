@@ -1,7 +1,6 @@
 #include <QDateTime>
 #include "dnai/app.h"
 #include "dnai/viewshandler.h"
-#include "dnai/models/namespacebaritem.h"
 #include "dnai/views/declarationview.h"
 
 #ifdef _WIN32
@@ -44,10 +43,10 @@ namespace dnai
 //		emit declarationModelChanged(m);
 //	}
 
-//	models::BasicNodeModel* ViewsHandler::basicNodesModel() const
-//	{
-//		return m_app->basicNodesModel();
-//	}
+    models::BasicNodeModel* ViewsHandler::basicNodesModel() const
+    {
+        return m_app->basicNodesModel();
+    }
 
 //	void ViewsHandler::setProjectModel(models::TreeModel* model)
 //	{
@@ -66,8 +65,8 @@ namespace dnai
 	{
 		std::queue<std::function<void()>> funcs;
         funcs.push(std::bind(&ViewsHandler::initApp, this));
-        funcs.push(std::bind(&ViewsHandler::initDeclarationView, this));
-        funcs.push(std::bind(&ViewsHandler::initPropertyPanel, this));
+//        funcs.push(std::bind(&ViewsHandler::initDeclarationView, this));
+//        funcs.push(std::bind(&ViewsHandler::initPropertyPanel, this));
 		return funcs;
 	}
 

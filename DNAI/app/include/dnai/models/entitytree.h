@@ -2,12 +2,13 @@
 #define DNAI_MODELS_ENTITY_TREE_H
 
 #include "entity.h"
+#include "dnai/interfaces/iserializable.h"
 
 namespace dnai
 {
 	namespace models
 	{
-		class EntityTree : public QAbstractItemModel
+        class EntityTree : public QAbstractItemModel
 		{
 			Q_OBJECT
 		
