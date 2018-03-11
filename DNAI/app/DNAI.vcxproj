@@ -195,9 +195,10 @@
     <ClCompile Include="src\dnai\commands\corecommand.cpp" />
     <ClCompile Include="src\dnai\models\core\entitydata.cpp" />
     <ClCompile Include="src\dnai\models\gui\declarable\function.cpp" />
-    <ClCompile Include="src\dnai\models\gui\nondeclarable\input.cpp" />
-    <ClCompile Include="src\dnai\models\gui\nondeclarable\instruction.cpp" />
-    <ClCompile Include="src\dnai\models\gui\nondeclarable\output.cpp" />
+    <ClCompile Include="src\dnai\models\gui\declarable\variable.cpp" />
+    <ClCompile Include="src\dnai\models\gui\input.cpp" />
+    <ClCompile Include="src\dnai\models\gui\instruction.cpp" />
+    <ClCompile Include="src\dnai\models\gui\output.cpp" />
     <ClCompile Include="src\dnai\models\old\context.cpp" />
     <ClCompile Include="src\dnai\views\appview.cpp" />
     <ClCompile Include="src\dnai\baseio.cpp" />
@@ -266,9 +267,12 @@
     <ClInclude Include="include\dnai\exceptions\guiexception.h" />
     <ClInclude Include="include\dnai\interfaces\ientity.h" />
     <ClInclude Include="include\dnai\interfaces\iinstruction.h" />
+    <ClInclude Include="include\dnai\interfaces\ivariable.h" />
     <ClInclude Include="include\dnai\models\guicorestruct.h" />
     <ClInclude Include="include\dnai\models\gui\data\context.h" />
+    <ClInclude Include="include\dnai\models\gui\data\input.h" />
     <ClInclude Include="include\dnai\models\gui\data\objecttype.h" />
+    <ClInclude Include="include\dnai\models\gui\data\output.h" />
     <ClInclude Include="include\dnai\models\gui\data\variable.h" />
     <ClInclude Include="include\dnai\models\gui\declarable\variable.h" />
     <ClInclude Include="include\dnai\models\gui\flow.h" />
@@ -287,7 +291,6 @@
     <ClInclude Include="include\dnai\models\gui\declarable\enumtype.h" />
     <ClInclude Include="include\dnai\models\gui\declarable\listtype.h" />
     <ClInclude Include="include\dnai\models\gui\declarable\objecttype.h" />
-    <ClInclude Include="src\dnai\models\gui\entitydata.cpp" />
     <QtMoc Include="include\dnai\app.h">
     </QtMoc>
     <ClInclude Include="include\dnai\appcontext.h" />

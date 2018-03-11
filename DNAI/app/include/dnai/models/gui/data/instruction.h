@@ -17,8 +17,8 @@ namespace dnai
 			{
 				struct Instruction
 				{
-					QList<Input*> inputs;
-					QList<Output*> outputs;
+					QList<gui::Input*> inputs;
+					QList<gui::Output*> outputs;
 					Flow* flowIn = nullptr;
 					Flow* flowOut = nullptr;
 					qint32 instructionId = enums::QInstructionID::Instruction_ID::UNDEFINED;

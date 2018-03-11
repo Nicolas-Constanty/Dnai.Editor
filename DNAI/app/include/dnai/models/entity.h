@@ -24,7 +24,7 @@ namespace dnai
                     Q_PROPERTY(core::Entity *coreModel READ coreModel WRITE setCoreModel NOTIFY coreModelChanged)
                     //			Q_PROPERTY(EntityGUI *guiModel READ guiModel CONSTANT)
 		public:
-                    explicit Entity();
+                    explicit Entity(QObject *parent = nullptr);
             explicit Entity(core::Entity *model, QString const& description);
                     explicit Entity(core::Entity *coremodel, gui::declarable::Entity *guimodel);
             virtual ~Entity() = default;

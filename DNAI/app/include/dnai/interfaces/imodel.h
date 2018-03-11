@@ -13,6 +13,8 @@ namespace dnai {
 		template <class T>
         class IModel: public models::GenericTreeItem<T>, public ASerializable<T>
         {
+		public:
+            explicit IModel(QObject *parent = nullptr) : models::GenericTreeItem<T>(parent) {}
         };
     }
 }

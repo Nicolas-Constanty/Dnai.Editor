@@ -1,6 +1,7 @@
 #ifndef DNAI_MODELS_GUI_DATA_VARIABLE_H
 #define DNAI_MODELS_GUI_DATA_VARIABLE_H
 
+#include <QJsonObject>
 #include "entity.h"
 
 namespace dnai
@@ -13,7 +14,7 @@ namespace dnai
 			{
 				struct Variable : Entity
 				{
-					quint32 varType;
+					qint32 varType = -1;
 					QJsonObject value;
 				};
 			}

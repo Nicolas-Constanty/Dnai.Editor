@@ -1,11 +1,10 @@
-#include <QJsonObject>
 #include "dnai/models/entity.h"
 
 namespace dnai
 {
 	namespace models
 	{
-		Entity::Entity() : m_dataCore(nullptr), m_dataGUI(nullptr)
+		Entity::Entity(QObject* parent) : IModel(parent), m_dataCore(nullptr), m_dataGUI(nullptr)
 		{
 		}
 

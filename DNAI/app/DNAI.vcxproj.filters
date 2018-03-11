@@ -221,28 +221,31 @@
     <ClCompile Include="src\dnai\models\old\context.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\dnai\models\core\entity.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\dnai\models\core\entitydata.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\dnai\models\gui\declarable\function.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\dnai\models\gui\nondeclarable\input.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\dnai\models\gui\nondeclarable\output.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
     <ClCompile Include="src\dnai\models\gui\declarable\entity.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\dnai\models\gui\nondeclarable\instruction.cpp">
+    <ClCompile Include="src\dnai\commands\corecommand.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\dnai\commands\corecommand.cpp">
+    <ClCompile Include="src\dnai\models\gui\declarable\variable.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\dnai\models\gui\input.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\dnai\models\gui\instruction.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\dnai\models\gui\output.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\dnai\models\core\entity.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\dnai\models\core\entitydata.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -499,15 +502,6 @@
     <ClInclude Include="include\dnai\enums\guitype.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\dnai\models\core\entity.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\dnai\models\core\entitydata.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\dnai\models\gui\entitydata.cpp">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
     <ClInclude Include="include\dnai\enums\core\core.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -547,22 +541,7 @@
     <ClInclude Include="include\dnai\models\guicorestruct.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\dnai\models\gui\declarable\entity.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="include\dnai\models\gui\declarable\function.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\dnai\models\gui\data\entity.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\dnai\models\gui\data\function.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\dnai\models\gui\data\instruction.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\dnai\models\gui\data\linkable.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
     <ClInclude Include="include\dnai\models\gui\flow.h">
@@ -580,25 +559,10 @@
     <ClInclude Include="include\dnai\models\gui\declarable\variable.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\dnai\models\gui\data\variable.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
     <ClInclude Include="include\dnai\models\gui\declarable\objecttype.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
     <ClInclude Include="include\dnai\models\gui\declarable\listtype.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\dnai\models\gui\declarable\enumtype.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\dnai\models\gui\declarable\context.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\dnai\models\gui\data\context.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\dnai\models\gui\data\objecttype.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
     <ClInclude Include="include\dnai\interfaces\iinstruction.h">
@@ -608,6 +572,51 @@
       <Filter>Generated Files</Filter>
     </ClInclude>
     <ClInclude Include="include\dnai\commands\corecommand.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dnai\interfaces\ivariable.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dnai\models\gui\declarable\enumtype.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dnai\models\gui\declarable\entity.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dnai\models\gui\declarable\context.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dnai\models\core\entity.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dnai\models\core\entitydata.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dnai\models\gui\data\context.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dnai\models\gui\data\entity.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dnai\models\gui\data\function.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dnai\models\gui\data\input.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dnai\models\gui\data\instruction.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dnai\models\gui\data\linkable.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dnai\models\gui\data\objecttype.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dnai\models\gui\data\output.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dnai\models\gui\data\variable.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
   </ItemGroup>

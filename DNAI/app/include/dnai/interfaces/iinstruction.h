@@ -1,7 +1,6 @@
 #ifndef DNAI_INTERFACES_IINSTRUCTION_H
 #define DNAI_INTERFACES_IINSTRUCTION_H
 
-#include <QString>
 #include "dnai/models/gui/input.h"
 #include "dnai/models/gui/output.h"
 #include "dnai/models/gui/flow.h"

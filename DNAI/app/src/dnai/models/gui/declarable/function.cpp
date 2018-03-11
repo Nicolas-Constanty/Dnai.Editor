@@ -142,12 +142,12 @@ namespace dnai
 					return true;
 				}
 
-				QList<models::gui::Output*> Function::outputs() const
+				QList<gui::Output*> Function::outputs() const
 				{
 					return m_data.outputs;
 				}
 
-				bool Function::setOutputs(const QList<models::gui::Output*>& outputs)
+				bool Function::setOutputs(const QList<gui::Output*>& outputs)
 				{
 					if (m_data.outputs == outputs)
 						return false;
@@ -160,7 +160,7 @@ namespace dnai
 					return m_data.flowIn;
 				}
 
-				bool Function::setFlowIn(models::gui::Flow* flow)
+				bool Function::setFlowIn(gui::Flow* flow)
 				{
 					if (m_data.flowIn == flow)
 						return false;
@@ -168,12 +168,12 @@ namespace dnai
 					return true;
 				}
 
-				models::gui::Flow* Function::flowOut() const
+				gui::Flow* Function::flowOut() const
 				{
 					return m_data.flowOut;
 				}
 
-				bool Function::setFlowOut(models::gui::Flow* flow)
+				bool Function::setFlowOut(gui::Flow* flow)
 				{
 					if (m_data.flowOut == flow)
 						return false;
