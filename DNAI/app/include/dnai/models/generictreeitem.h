@@ -7,16 +7,23 @@ namespace dnai
 {
 	namespace models
 	{
-		template <class T>
 		class GenericTreeItem : public QObject
 		{
+			Q_OBJECT
 		public:
-			GenericTreeItem(QObject *parent = nullptr) : QObject(parent) {}
-			explicit GenericTreeItem(const QList<QVariant> &data, T *parentItem = nullptr) : QObject(nullptr) {}
+			explicit GenericTreeItem(QObject *parent = nullptr) : QObject(parent), m_parentItem(nullptr)
+			{
+			}
+
+			explicit GenericTreeItem(const QList<QVariant> &data, GenericTreeItem *parentItem = nullptr) : QObject(nullptr),
+			                                                                                               m_parentItem(parentItem)
+			{
+			}
+
             virtual ~GenericTreeItem() = default;
-			void appendChild(T *child) { m_childItems.append(child); }
-			T *child(int row) const { return m_childItems.at(row); }
-			const QList<T*> &children() const { return m_childItems; }
+			void appendChild(GenericTreeItem *child) { m_childItems.append(child); }
+			GenericTreeItem *child(int row) const { return m_childItems.at(row); }
+			const QList<GenericTreeItem *> &children() const { return m_childItems; }
 
 			int childCount() const { return m_childItems.count(); }
 			int columnCount() const { return m_itemData.count(); }
@@ -28,7 +35,7 @@ namespace dnai
 //                                    return m_parentItem->m_childItems.indexOf(static_cast<T *const&>(this));
 				return 0;
 			}
-			T *parentItem() { return m_parentItem; }
+			GenericTreeItem *parentItem() const { return m_parentItem; }
 			const QModelIndex &idxmodel() const { return m_idx; }
 			void setIdx(const QModelIndex &ref)
 			{
@@ -38,9 +45,9 @@ namespace dnai
 			}
 
 		private:
-			QList<T*> m_childItems;
+			QList<GenericTreeItem*> m_childItems;
 			QList<QVariant> m_itemData;
-			T *m_parentItem;
+			GenericTreeItem *m_parentItem;
 			QModelIndex m_idx;
 
 		};

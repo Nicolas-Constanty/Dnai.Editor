@@ -248,6 +248,9 @@
     <ClCompile Include="src\dnai\models\core\entitydata.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\dnai\models\gui\flow.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\api.h">
@@ -535,9 +538,6 @@
     <ClInclude Include="include\dnai\models\objecttype.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\dnai\models\variable.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
     <ClInclude Include="include\dnai\models\guicorestruct.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
@@ -617,6 +617,9 @@
       <Filter>Generated Files</Filter>
     </ClInclude>
     <ClInclude Include="include\dnai\models\gui\data\variable.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dnai\models\gui\data\flow.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -1080,14 +1083,14 @@
     <ResourceCompile Include="dnai.rc" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="include\dnai\models\generictreeitem.h">
-      <Filter>Generated Files</Filter>
-    </QtMoc>
     <QtMoc Include="include\dnai\models\basicnodemodel.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="include\dnai\models\entity.h">
       <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="include\dnai\models\generictreeitem.h">
+      <Filter>Generated Files</Filter>
     </QtMoc>
   </ItemGroup>
 </Project>

@@ -196,6 +196,7 @@
     <ClCompile Include="src\dnai\models\core\entitydata.cpp" />
     <ClCompile Include="src\dnai\models\gui\declarable\function.cpp" />
     <ClCompile Include="src\dnai\models\gui\declarable\variable.cpp" />
+    <ClCompile Include="src\dnai\models\gui\flow.cpp" />
     <ClCompile Include="src\dnai\models\gui\input.cpp" />
     <ClCompile Include="src\dnai\models\gui\instruction.cpp" />
     <ClCompile Include="src\dnai\models\gui\output.cpp" />
@@ -270,6 +271,7 @@
     <ClInclude Include="include\dnai\interfaces\ivariable.h" />
     <ClInclude Include="include\dnai\models\guicorestruct.h" />
     <ClInclude Include="include\dnai\models\gui\data\context.h" />
+    <ClInclude Include="include\dnai\models\gui\data\flow.h" />
     <ClInclude Include="include\dnai\models\gui\data\input.h" />
     <ClInclude Include="include\dnai\models\gui\data\objecttype.h" />
     <ClInclude Include="include\dnai\models\gui\data\output.h" />

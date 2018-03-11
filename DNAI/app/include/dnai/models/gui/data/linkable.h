@@ -14,6 +14,16 @@ namespace dnai
 				{
 					QString in;
 					QString out;
+
+					Linkable &operator=(const Linkable &link) = default;
+					bool operator!=(const Linkable &link) const
+					{
+						return !(*this == link);
+					}
+					bool operator==(const Linkable &link) const
+					{
+						return (in == link.in && out == link.out);
+					}
 				};
 			}
 		}

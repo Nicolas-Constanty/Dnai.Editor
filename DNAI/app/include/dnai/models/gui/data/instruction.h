@@ -19,8 +19,8 @@ namespace dnai
 				{
 					QList<gui::Input*> inputs;
 					QList<gui::Output*> outputs;
-					Flow* flowIn = nullptr;
-					Flow* flowOut = nullptr;
+                    gui::Flow* flowIn = nullptr;
+                    gui::Flow* flowOut = nullptr;
 					qint32 instructionId = enums::QInstructionID::Instruction_ID::UNDEFINED;
 
 					Instruction& operator=(const Instruction& other) = default;

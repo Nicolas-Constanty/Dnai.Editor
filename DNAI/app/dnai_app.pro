@@ -51,16 +51,17 @@ SOURCES += \
     src/dnai/models/user.cpp \
     src/dnai/models/listnode.cpp \
     src/dnai/models/core/entitydata.cpp \
-    src/dnai/models/gui/declarable/entity.cpp \
     src/dnai/models/gui/declarable/function.cpp \
-    src/dnai/models/gui/data/entity.cpp \
-    src/dnai/models/entity.cpp \
     src/dnai/commands/corecommand.cpp \
     src/dnai/models/gui/declarable/variable.cpp \
     src/dnai/models/gui/input.cpp \
     src/dnai/models/gui/instruction.cpp \
     src/dnai/models/gui/output.cpp \
-    src/dnai/models/core/entity.cpp
+    src/dnai/models/core/entity.cpp \
+    src/dnai/models/gui/data/entity.cpp \
+    src/dnai/models/gui/declarable/entity.cpp \
+    src/dnai/models/gui/flow.cpp \
+    src/dnai/models/entity.cpp
 
 #ENUMS
 SOURCES += \
@@ -195,7 +196,8 @@ HEADERS += \
     include/dnai/models/settingsmodel.h \
     include/dnai/commands/corecommand.h \
     include/dnai/models/gui/data/input.h \
-    include/dnai/models/gui/data/output.h
+    include/dnai/models/gui/data/output.h \
+    include/dnai/models/entity.h
 
 #ENUMS
 HEADERS += \

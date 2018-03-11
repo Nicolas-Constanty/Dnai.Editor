@@ -69,7 +69,7 @@ namespace dnai
             return m_dataGUI;
         }
 
-        void Entity::setId(qint32 id) const
+        void Entity::setId(qint32 id)
 		{
 			if (coreModel()->setId(id))
 			{
@@ -105,7 +105,8 @@ namespace dnai
 		{
 			if (coreModel()->setVisibility(v))
 			{
-				emit visibilityChanged(v);
+				
+				emit Entity::visibilityChanged(v);
 			}
 		}
 
