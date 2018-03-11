@@ -18,6 +18,7 @@ namespace dnai
 			explicit GenericTreeItem(const QList<QVariant> &data, GenericTreeItem *parentItem = nullptr) : QObject(nullptr),
 			                                                                                               m_parentItem(parentItem)
 			{
+                m_itemData = data;
 			}
 
             virtual ~GenericTreeItem() = default;

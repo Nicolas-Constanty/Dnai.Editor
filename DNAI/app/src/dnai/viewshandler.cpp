@@ -3,7 +3,7 @@
 #include "dnai/viewshandler.h"
 #include "dnai/views/declarationview.h"
 
-#ifdef _WIN32
+#if defined(_WIN32) && defined(_MSC_VER)
 #include "../../lib/WinToast/wintoastlib.h"
 using namespace WinToastLib;
 #endif
@@ -349,7 +349,7 @@ namespace dnai
 //		createNameSpaceModel(m_currentPath);
 //	}
 
-#ifdef _WIN32
+#if defined(_WIN32) && defined(_MSC_VER)
     class CustomHandler : public IWinToastHandler {
     public:
         void toastActivated() const {
@@ -383,7 +383,7 @@ namespace dnai
 #endif
     void ViewsHandler::onBuildStart()
     {
-#ifdef _WIN32
+#if defined(_WIN32) && defined(_MSC_VER)
        WinToastTemplate templ = WinToastTemplate(WinToastTemplate::ImageAndText04);
 //       templ.setImagePath(ui->imagePath->text().toStdWString());
        templ.setTextField(QString("Build Start at :").toStdWString(), WinToastTemplate::FirstLine);

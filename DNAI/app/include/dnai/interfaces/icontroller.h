@@ -20,7 +20,7 @@ namespace dnai
             virtual interfaces::ICommand *createCommand() const = 0;
 		};
         template <class T, class U = void>
-		class AController : public IController, public models::IClone
+        class AController : public IController
 		{
             using Fun = typename std::conditional<std::is_void<void>::value, void *, U>::type;
 		public:
@@ -76,7 +76,7 @@ namespace dnai
                 if (model == nullptr)
                     return;
 				m_createCommand = createCommand();
-				commands::CommandManager::Instance()->exec(m_createCommand);
+                commands::CommandManager::Instance()->exec(m_createCommand);
 				if (m_model)
 					delete m_model;
 				m_model = model;
@@ -90,7 +90,7 @@ namespace dnai
 
 		protected:
 			T *m_model;
-			commands::ICommand *m_createCommand;
+            interfaces::ICommand *m_createCommand;
 			QList<QQuickItem *> m_views;
 			QString m_viewPath;
 		};

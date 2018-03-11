@@ -15,7 +15,7 @@
 #include "dnai/entitiesfactory.h"
 #include "dnai/viewshandler.h"
 
-#ifdef _WIN32
+#if defined(_WIN32) && defined(_MSC_VER)
 #include "../../lib/WinToast/wintoastlib.h"
 using namespace WinToastLib;
 #endif
@@ -136,12 +136,14 @@ int main(int argc, char *argv[])
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
     dnai::App app(argc, argv);
+#if defined(_WIN32) && defined(_MSC_VER)
     WinToast::instance()->setAppName(L"DNAI");
     WinToast::instance()->setAppUserModelId(
                 WinToast::configureAUMI(L"SaltyStudio", L"DNAI", L"DNAI.app", L"20161006"));
     if (!WinToast::instance()->initialize()) {
         qDebug() << "Error, your system in not compatible!";
     }
+#endif
     registerDNAI();
     app.load();
     return app.exec();

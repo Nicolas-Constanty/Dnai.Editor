@@ -161,12 +161,9 @@ HEADERS += \
     include/dnai/models/declarable/entity.h \
     include/dnai/models/core/entity.h \
     include/dnai/models/gui/entity.h \
-    include/dnai/models/entitytree.h \
-    include/dnai/models/basicnodemodel.h \
     include/dnai/models/settingsmodel.h \
     include/dnai/models/user.h \
     include/dnai/enums/core/core.h \
-    include/dnai/models/listnode.h \
     include/dnai/interfaces/iserializable.h \
     include/dnai/interfaces/imodel.h \
     include/dnai/models/core/entity.h \
@@ -193,7 +190,6 @@ HEADERS += \
     include/dnai/models/entitytree.h \
     include/dnai/models/generictreeitem.h \
     include/dnai/models/listnode.h \
-    include/dnai/models/settingsmodel.h \
     include/dnai/commands/corecommand.h \
     include/dnai/models/gui/data/input.h \
     include/dnai/models/gui/data/output.h \
