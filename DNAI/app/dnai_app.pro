@@ -275,13 +275,23 @@ HEADERS += \
 
 #LIB
 DEPENDPATH += $${PWD}/../lib/event_client/
-DEPENDPATH += $${PWD}/../lib/WinToast/
 INCLUDEPATH += $${PWD}/../lib/event_client/
-
 INCLUDEPATH += $${PWD}/../lib/DataComEvent/Shared_include/
 
+win32-msvc*{
+    DEPENDPATH += $${PWD}/../lib/WinToast/
+    LIBS += -lWinToast
+}
+
+win32-g++{
+}
+
+unix{
+}
+
+
 #begin library network
-LIBS += -L$${PWD}/../lib/ -lEventClient -lDataComEvent -lWinToast
+LIBS += -L$${PWD}/../lib/ -lEventClient -lDataComEvent
 
 #CONFIG(release, debug|release) {
 #unix:LIBS += -L$${PWD}/../lib/DataComEvent/Library/ -lprotobuf
