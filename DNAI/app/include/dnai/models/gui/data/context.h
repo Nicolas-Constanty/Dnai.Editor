@@ -5,6 +5,8 @@
 #include "dnai/models/gui/declarable/variable.h"
 #include "dnai/models/gui/declarable/function.h"
 #include "dnai/models/gui/declarable/objecttype.h"
+#include "dnai/models/gui/declarable/enumtype.h"
+#include "dnai/models/gui/declarable/listtype.h"
 
 namespace dnai
 {
@@ -12,14 +14,20 @@ namespace dnai
 	{
 		namespace gui
 		{
+			namespace declarable
+			{
+				class Context;
+			}
 			namespace data
 			{
 				struct Context : Entity
 				{
-					QList<Context*> contexts;
+					QList<declarable::Context*> contexts;
 					QList<declarable::ObjectType*> classes;
 					QList<declarable::Variable*> variables;
 					QList<declarable::Function*> functions;
+					QList<declarable::EnumType*> enums;
+					QList<declarable::ListType*> listobjs;
 				};
 			}
 		}

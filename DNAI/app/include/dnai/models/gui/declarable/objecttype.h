@@ -12,11 +12,11 @@ namespace dnai
 		{
 			namespace declarable
 			{
-				class ObjectType : public IEntity, public interfaces::IModelData<data::ObjectType>, public interfaces::ASerializable<ObjectType>
+				class ObjectType : public interfaces::IEntity, public interfaces::IModelData<data::ObjectType>, public interfaces::ASerializable<ObjectType>
 				{
-					explicit ObjectType(QObject *parent = nullptr);
-					//Implementation of ISerializable
 				public:
+					explicit ObjectType();
+					//Implementation of ISerializable
 					void serialize(QJsonObject& obj) const override;
 				protected:
 					void _deserialize(const QJsonObject& obj) override;

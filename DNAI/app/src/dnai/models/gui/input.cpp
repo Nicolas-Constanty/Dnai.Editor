@@ -1,4 +1,5 @@
 #include "dnai/models/gui/input.h"
+#include "dnai/exceptions/notimplemented.h"
 
 namespace dnai
 {
@@ -18,6 +19,7 @@ namespace dnai
 
 			void Input::_deserialize(const QJsonObject& obj)
 			{
+				throw exceptions::NotImplemented();
 			}
 
 			const data::Input& Input::data() const

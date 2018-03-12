@@ -14,11 +14,11 @@ namespace dnai
 				{ enums::core::RENAME, new commands::CoreCommand([]() {}, []() {}) },
 				{ enums::core::CHANGE_VISIBILITY, new commands::CoreCommand([]() {}, []() {}) }
 			};
-			Entity::Entity()
+            Entity::Entity(enums::core::ENTITY type)
 			{
 				m_data.name = "EmptyEntity";
 				m_data.containerId = -1;
-				m_data.type = enums::core::ENTITY::UNDEFINED;
+                m_data.type = type;
 			}
 
 			Entity::Entity(const Entity& entity)

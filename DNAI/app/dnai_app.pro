@@ -61,7 +61,11 @@ SOURCES += \
     src/dnai/models/gui/data/entity.cpp \
     src/dnai/models/gui/declarable/entity.cpp \
     src/dnai/models/gui/flow.cpp \
-    src/dnai/models/entity.cpp
+    src/dnai/models/entity.cpp \
+    src/dnai/models/gui/declarable/context.cpp \
+    src/dnai/models/gui/declarable/objecttype.cpp \
+    src/dnai/models/gui/declarable/enumtype.cpp \
+    src/dnai/models/gui/declarable/listtype.cpp
 
 #ENUMS
 SOURCES += \

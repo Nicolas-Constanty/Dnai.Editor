@@ -16,47 +16,31 @@ namespace dnai
 				}
 
 				void Function::serialize(QJsonObject& obj) const
-				{
-					QJsonArray variables;
-					foreach(const Variable *variable, m_data.variables) {
-						QJsonObject var;
-						variable->serialize(var);
-						variables.append(var);
-					}
-
-					QJsonArray inputs;
-					foreach(const Input *input, m_data.inputs) {
-						QJsonObject var;
-						input->serialize(var);
-						inputs.append(var);
-					}
-
-					QJsonArray outputs;
-					foreach(const Output *output, m_data.outputs) {
-						QJsonObject var;
-						output->serialize(var);
-						outputs.append(var);
-					}
-
-					QJsonArray instructions;
-					foreach(const interfaces::IInstruction *instruction, m_data.instructions) {
-						QJsonObject var;
-						if (const auto func = dynamic_cast<const Function *>(instruction))
-							func->serialize(var);
-						else if (const auto inst = dynamic_cast<const Instruction *>(instruction))
-							inst->serialize(var);
-						instructions.append(var);
-					}
-
-					obj["variables"] = variables;
-					obj["inputs"] = inputs;
-					obj["outputs"] = outputs;
+				{	
+                    QJsonArray instructions;
+                    foreach(const interfaces::IInstruction *instruction, m_data.instructions) {
+                        QJsonObject var;
+                        if (const auto func = dynamic_cast<const Function *>(instruction))
+                            func->serialize(var);
+                        else if (const auto inst = dynamic_cast<const Instruction *>(instruction))
+                            inst->serialize(var);
+                        instructions.append(var);
+                    }
+					obj["description"] = m_data.description;
+					obj["index"] = m_data.index;
+					obj["listIndex"] = m_data.listIndex;
+					obj["variables"] = serializeList<Variable>(m_data.variables);
+					obj["inputs"] = serializeList<Input>(m_data.inputs);
+					obj["outputs"] = serializeList<Output>(m_data.outputs);
 					obj["instructions"] = instructions;
 				}
 
 				void Function::_deserialize(const QJsonObject& obj)
 				{
 
+					m_data.description = obj["description"].toString();
+					m_data.index = obj["index"].toInt();
+					m_data.listIndex = obj["listIndex"].toInt();
 					foreach(auto variable, obj["variables"].toArray()) {
 						m_data.variables.append(Variable::deserialize(variable.toObject()));
 					}
@@ -69,7 +53,7 @@ namespace dnai
 						m_data.inputs.append(Input::deserialize(output.toObject()));
 					}
 
-					foreach(auto node, obj["nodes"].toArray()) {
+					foreach(auto node, obj["instructions"].toArray()) {
 						if (node.toObject()["instruction_id"].toString().isEmpty())
 							m_data.instructions.append(deserialize(node.toObject()));
 						else

@@ -1,4 +1,5 @@
 #include "dnai/models/gui/declarable/entity.h"
+#include "dnai/exceptions/notimplemented.h"
 
 namespace dnai
 {
@@ -69,10 +70,12 @@ namespace dnai
 
 	            void Entity::serialize(QJsonObject& obj) const
 	            {
+					throw exceptions::NotImplemented();
 	            }
 
 	            void Entity::_deserialize(const QJsonObject& obj)
 	            {
+					throw exceptions::NotImplemented();
 	            }
             }
 		}

@@ -1,4 +1,5 @@
 #include "dnai/models/gui/declarable/variable.h"
+#include "dnai/exceptions/notimplemented.h"
 
 namespace dnai
 {
@@ -23,6 +24,11 @@ namespace dnai
 
 				void Variable::_deserialize(const QJsonObject& obj)
 				{
+					m_data.description = obj["description"].toString();
+					m_data.index = obj["index"].toInt();
+					m_data.listIndex = obj["listIndex"].toInt();
+					m_data.varType = obj["varType"].toInt();
+					m_data.value = obj["value"].toObject();
 				}
 
 				const data::Variable& Variable::data() const

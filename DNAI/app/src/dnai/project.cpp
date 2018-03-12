@@ -1,18 +1,18 @@
 #include <QJsonDocument>
 #include <QJsonArray>
 #include <QJsonObject>
+#include <QDebug>
 
 #include "dnai/project.h"
+#include "dnai/models/gui/declarable/context.h"
 
 namespace dnai {
 Project::Project(): m_main(nullptr)
 {
 }
 
-Project::Project(QString const &name, QString const &description, QFile &file) : m_file(file)
+Project::Project(QFile &file) : m_file(file)
 {
-    const auto entityCore = new models::core::Entity(name, enums::core::ENTITY::CONTEXT);
-    m_main = new models::Entity(entityCore, description);
 }
 
 //    Project::~Project()
@@ -34,7 +34,10 @@ Project::Project(QString const &name, QString const &description, QFile &file) :
 
 	void Project::_deserialize(const QJsonObject& obj)
     {
-         m_main = models::Entity::deserialize(obj["main"].toObject());
+        qDebug() << "coucou";
+        const auto coreModel = new models::core::Entity(obj["name"].toString(), enums::core::ENTITY::CONTEXT);
+        const auto guiModel = models::gui::declarable::Context::deserialize(obj);
+        m_main = models::Entity::deserialize(obj["main"].toObject(), coreModel, guiModel);
     }
 
     QJsonObject Project::loadProjectData(const QString &path)
@@ -67,9 +70,7 @@ Project::Project(QString const &name, QString const &description, QFile &file) :
 
     Project *Project::loadProject(const QJsonObject &obj, QFile &file)
     {
-        auto project = new Project(obj["name"].toString(), obj["description"].toString(), file);
-        project->_deserialize(obj);
-        return project;
+        return Project::deserialize(obj, file);
     }
 
 	//    const models::Context *Project::main() const

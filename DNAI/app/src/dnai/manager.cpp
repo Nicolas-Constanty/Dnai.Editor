@@ -33,7 +33,7 @@ namespace dnai {
             return;
         }
 
-        m_project = new Project(name, description, file);
+        m_project = new Project(file);
         m_project->save();
     }
 

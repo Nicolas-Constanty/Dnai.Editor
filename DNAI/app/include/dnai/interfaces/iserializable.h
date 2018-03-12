@@ -1,6 +1,7 @@
 #ifndef DNAI_INTERFACES_SERIALIZABLE_H
 #define DNAI_INTERFACES_SERIALIZABLE_H
 #include <QJsonObject>
+#include <QJsonArray>
 
 namespace dnai {
     namespace interfaces {
@@ -35,19 +36,41 @@ namespace dnai {
 			virtual ~ASerializable() = default;
 			virtual void serialize(QJsonObject &obj) const override = 0;
 
+			template<class DataType>
+			QJsonArray serializeList(const QList<DataType *> &datalist) const
+			{
+				QJsonArray tmp;
+				foreach(const auto data, datalist) {
+					QJsonObject var;
+					data->serialize(var);
+					tmp.append(var);
+				}
+				return tmp;
+			}
+
 			/**
 			* \brief This function deserialize into a new instance of type T *
 			* \param obj
 			* \return
 			*/
-			static T *deserialize(const QJsonObject &obj)
+			/*static T *deserialize(const QJsonObject &obj)
 			{
 				auto n = dynamic_cast<ASerializable *>(new T);
 				if (n == nullptr)
 					return nullptr;
 				n->_deserialize(obj);
 				return dynamic_cast<T *>(n);
-			}
+			}*/
+
+            template<typename ... Args>
+            static T *deserialize(const QJsonObject &obj, Args& ... args)
+            {
+                auto n = dynamic_cast<ASerializable *>(new T(args...));
+                if (n == nullptr)
+                    return nullptr;
+                n->_deserialize(obj);
+                return dynamic_cast<T *>(n);
+            }
 		protected:
 			virtual void _deserialize(const QJsonObject &obj) override = 0;
 		};

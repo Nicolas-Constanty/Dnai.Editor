@@ -20,7 +20,7 @@ namespace dnai {
     {
 	public:
         Project();
-        Project(const QString &name, const QString &description, QFile &file);
+        Project(QFile &file);
 		void save();
 		QFile &file() const;
 		const models::Entity *main() const;

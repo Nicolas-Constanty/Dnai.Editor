@@ -1,4 +1,7 @@
+#include <QJsonArray>
 #include "dnai/models/entity.h"
+#include "dnai/models/gui/declarable/variable.h"
+#include "dnai/models/gui/declarable/context.h"
 
 namespace dnai
 {
@@ -6,14 +9,9 @@ namespace dnai
 	{
 		Entity::Entity(QObject* parent) : IModel(parent), m_dataCore(nullptr), m_dataGUI(nullptr)
 		{
-		}
+        }
 
-		Entity::Entity(core::Entity *model, const QString &description) : m_dataCore(model), m_dataGUI(nullptr)
-		{
-			m_dataGUI->setDescription(description);
-		}
-
-		Entity::Entity(core::Entity* coremodel, gui::declarable::Entity* guimodel): m_dataCore(coremodel), m_dataGUI(guimodel)
+		Entity::Entity(core::Entity* coremodel, interfaces::IEntity* guimodel): m_dataCore(coremodel), m_dataGUI(guimodel)
 		{
 		}
 
@@ -146,25 +144,105 @@ namespace dnai
 		{
 			if (m_dataCore == nullptr) return;
 			obj["name"] = m_dataCore->name();
-			obj["descrition"] = m_dataGUI->description();
-			obj["uid"] = m_dataCore->id();
-			obj["containerId"] = m_dataCore->containerId();
-			switch (m_dataCore->entityType())
+            switch (m_dataCore->entityType())
+            {
+            case enums::UNDEFINED: break;
+            case enums::CONTEXT:
+            {
+                const auto ctx = dynamic_cast<gui::declarable::Context *>(m_dataGUI);
+                ctx->serialize(obj);
+                break;
+            }
+            case enums::VARIABLE:
+            {
+                const auto var = dynamic_cast<gui::declarable::Variable *>(m_dataGUI);
+                var->serialize(obj);
+                break;
+            }
+            case enums::FUNCTION:
+            {
+                const auto func = dynamic_cast<gui::declarable::Function *>(m_dataGUI);
+                func->serialize(obj);
+                break;
+            }
+            case enums::DATA_TYPE: break;
+            case enums::ENUM_TYPE: break;
+            case enums::OBJECT_TYPE:
+            {
+                const auto classe = dynamic_cast<gui::declarable::ObjectType *>(m_dataGUI);
+                classe->serialize(obj);
+                break;
+            }
+            case enums::LIST_TYPE: break;
+            default: ;
+            }
+			for (auto child : children())
 			{
-			case enums::UNDEFINED: break;
-			case enums::CONTEXT: break;
-			case enums::VARIABLE: break;
-			case enums::FUNCTION: break;
-			case enums::DATA_TYPE: break;
-			case enums::ENUM_TYPE: break;
-			case enums::OBJECT_TYPE: break;
-			case enums::LIST_TYPE: break;
-			default: ;
+				const auto entity = dynamic_cast<Entity *>(child);
+				entity->serialize(obj);
 			}
 		}
 
 		void Entity::_deserialize(const QJsonObject& obj)
 		{
+			m_dataCore->setName(obj["name"].toString());
+            m_dataCore->setVisibility(static_cast<enums::core::VISIBILITY>(obj["visibility"].toInt()));
+            switch (m_dataCore->entityType())
+            {
+            case enums::UNDEFINED: break;
+            case enums::CONTEXT:
+            {
+                m_dataGUI = gui::declarable::Context::deserialize(obj);
+                break;
+            }
+            case enums::VARIABLE:
+            {
+                m_dataGUI = gui::declarable::Variable::deserialize(obj);
+                break;
+            }
+            case enums::FUNCTION:
+            {
+                m_dataGUI = gui::declarable::Function::deserialize(obj);
+                break;
+            }
+            case enums::DATA_TYPE: break;
+            case enums::ENUM_TYPE:
+                m_dataGUI = gui::declarable::EnumType::deserialize(obj);
+                break;
+            case enums::OBJECT_TYPE:
+            {
+                m_dataGUI = gui::declarable::ObjectType::deserialize(obj);
+                break;
+            }
+            case enums::LIST_TYPE:
+                m_dataGUI = gui::declarable::ListType::deserialize(obj);
+                break;
+            default: ;
+            }
+
+            foreach(const auto classe, obj["classes"].toArray()) {
+                const auto coreModel = new models::core::Entity(enums::core::OBJECT_TYPE);
+                const auto entity = Entity::deserialize(classe.toObject(), coreModel);
+				appendChild(entity);
+			}
+
+            foreach(const auto context, obj["contexts"].toArray()) {
+                const auto coreModel = new models::core::Entity(enums::core::CONTEXT);
+                const auto entity = Entity::deserialize(context.toObject(), coreModel);
+				appendChild(entity);
+			}
+
+            foreach(const auto variable, obj["variables"].toArray()) {
+                const auto coreModel = new models::core::Entity(enums::core::VARIABLE);
+                const auto entity = Entity::deserialize(variable.toObject(),coreModel);
+				appendChild(entity);
+			}
+
+            foreach(const auto function, obj["functions"].toArray()) {
+                const auto coreModel = new models::core::Entity(enums::core::FUNCTION);
+                const auto entity = Entity::deserialize(function.toObject(), coreModel);
+				appendChild(entity);
+			}
 		}
 	}
 }

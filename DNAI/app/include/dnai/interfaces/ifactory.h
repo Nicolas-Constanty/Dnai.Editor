@@ -15,7 +15,7 @@ namespace dnai {
         template <typename FactoryType, class ClassIdentifier>
         class IFactory
         {
-            using Callback = std::function<void *()>;
+            using Callback = std::function<FactoryType *()>;
             using Key = typename std::conditional<std::is_enum<ClassIdentifier>::value, int, ClassIdentifier>::type;
         public:
             IFactory() = default;
@@ -26,8 +26,7 @@ namespace dnai {
                  */
                 FactoryType *create(Key ci)
                 {
-                    void *result = m_factoryObjects[ci]();
-                    return reinterpret_cast<FactoryType *>(result);
+                    return m_factoryObjects[ci]();
                 }
 
 	        /**
@@ -40,7 +39,7 @@ namespace dnai {
                 template<typename TrueType, typename ... Args>
             void registerObject(Key ci, Args&& ... args)
             {
-                m_factoryObjects[ci] = [=]() { return static_cast<void *>(new TrueType(std::move(args)...)); };
+                m_factoryObjects[ci] = [=]() { return static_cast<FactoryType *>(new TrueType(std::move(args)...)); };
             }
 
         private:

@@ -23,7 +23,7 @@ namespace dnai
 			class Entity : public IEntityCore, public interfaces::IModelData<EntityData>
 			{
 			public:
-				Entity();
+                Entity(enums::core::ENTITY type = enums::core::ENTITY::UNDEFINED);
 				Entity(const Entity &entity);
 				explicit Entity(const QString& name, enums::core::ENTITY type = enums::core::ENTITY::UNDEFINED, qint32 ctId = -1);
 				explicit Entity(qint32 id, const QString& name, enums::core::ENTITY type = enums::core::ENTITY::UNDEFINED, qint32 ctId = -1);

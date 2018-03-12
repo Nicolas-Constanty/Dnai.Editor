@@ -4,6 +4,8 @@
 #include "entity.h"
 #include "dnai/models/gui/declarable/variable.h"
 #include "dnai/models/gui/declarable/function.h"
+#include "dnai/models/gui/declarable/enumtype.h"
+#include "dnai/models/gui/declarable/listtype.h"
 
 namespace dnai
 {
@@ -18,10 +20,13 @@ namespace dnai
 			{
 				struct ObjectType : Entity
 				{
+					QList<declarable::Variable*> variables;
+					QList<declarable::Function*> functions;
 					QList<declarable::Variable*> attributes;
 					QList<declarable::Function*> methods;
-					QList<declarable::Function*> functions;
 					QList<declarable::ObjectType*> classes;
+					QList<declarable::EnumType*> enums;
+					QList<declarable::ListType*> listobjs;
 				};
 			}
 		}

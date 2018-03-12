@@ -12,11 +12,12 @@ namespace dnai
 		{
 			namespace declarable
 			{
-				class Context : public IEntity, public interfaces::IModelData<data::Context>, public interfaces::ASerializable<Context>
+				class Context : public interfaces::IEntity, public interfaces::IModelData<data::Context>, public interfaces::ASerializable<Context>
 				{
-					explicit Context(QObject *parent = nullptr);
-					//Implementation of ISerializable
+					
 				public:
+					explicit Context();
+					//Implementation of ISerializable
 					void serialize(QJsonObject& obj) const override;
 				protected:
 					void _deserialize(const QJsonObject& obj) override;
