@@ -7,6 +7,9 @@
 #include "../../lib/WinToast/wintoastlib.h"
 using namespace WinToastLib;
 #endif
+#if defined(Q_OS_MAC)
+#include "../../lib/MACToast/toast.h"
+#endif
 
 namespace dnai
 {
@@ -397,6 +400,10 @@ namespace dnai
            qDebug() << "Error", "Could not launch your toast notification!";
 //           QMessageBox::warning(this, "Error", "Could not launch your toast notification!");
        }
+#endif
+#if defined(Q_OS_MAC)
+      Toast macToast;
+      macToast.show("DNAI", "Build has start !");
 #endif
     }
 
