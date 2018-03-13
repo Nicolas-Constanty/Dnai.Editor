@@ -21,7 +21,7 @@ win32-msvc* {
     libReseau.file = lib/event_client/event_client.pro
     libDataEvent.file = lib/DataComEvent/DataComEvent.pro
     app.depends = libReseau libDataEvent
-} unix {
+} unix:!macx {
     SUBDIRS = app libReseau libDataEvent
     app.file = app/dnai_app.pro
     libReseau.file = lib/event_client/event_client.pro

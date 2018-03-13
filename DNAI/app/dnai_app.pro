@@ -197,7 +197,12 @@ HEADERS += \
     include/dnai/commands/corecommand.h \
     include/dnai/models/gui/data/input.h \
     include/dnai/models/gui/data/output.h \
-    include/dnai/models/entity.h
+    include/dnai/models/entity.h \
+    include/dnai/exceptions/coreexception.h \
+    include/dnai/exceptions/exception.h \
+    include/dnai/exceptions/exceptionmanager.h \
+    include/dnai/exceptions/guiexception.h \
+    include/dnai/exceptions/notimplemented.h
 
 #ENUMS
 HEADERS += \
@@ -285,8 +290,7 @@ INCLUDEPATH += $${PWD}/../lib/DataComEvent/Shared_include/
 win32-msvc*{
     DEPENDPATH += $${PWD}/../lib/WinToast/
     LIBS += -lWinToast
-} win32-g++{
-} unix{
+} win32-g++ {
 } macx-clang* {
 #QT += core
 #QT += macextras
