@@ -24,3 +24,12 @@ unix{
     libDataEvent.file = lib/DataComEvent/DataComEvent.pro
     app.depends = libReseau libDataEvent
 }
+
+macx-clang* {
+    SUBDIRS = app notifmac libReseau libDataEvent
+    app.file = app/dnai_app.pro
+    notifmac.file = lib/MACToast/MACToast.pro
+    libReseau.file = lib/event_client/event_client.pro
+    libDataEvent.file = lib/DataComEvent/DataComEvent.pro
+    app.depends = notifmac libReseau libDataEvent
+}

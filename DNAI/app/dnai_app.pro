@@ -293,6 +293,16 @@ win32-g++{
 unix{
 }
 
+macx-clang*{
+#QT += core
+#QT += macextras
+#QT += gui
+    DEPENDPATH += $${PWD}/../lib/MACToast/
+    LIBS +=  -lMACToast
+    LIBS += -framework Foundation
+    INCLUDEPATH += /System/Library/Frameworks/Foundation.framework/Versions/C/Headers
+}
+
 
 #begin library network
 LIBS += -L$${PWD}/../lib/ -lEventClient -lDataComEvent
