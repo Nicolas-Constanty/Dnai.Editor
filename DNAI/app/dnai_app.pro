@@ -285,15 +285,9 @@ INCLUDEPATH += $${PWD}/../lib/DataComEvent/Shared_include/
 win32-msvc*{
     DEPENDPATH += $${PWD}/../lib/WinToast/
     LIBS += -lWinToast
-}
-
-win32-g++{
-}
-
-unix{
-}
-
-macx-clang*{
+} win32-g++{
+} unix{
+} macx-clang* {
 #QT += core
 #QT += macextras
 #QT += gui
