@@ -85,7 +85,7 @@ void Session::downloadProjectData(uint index, const QString &id)
          QFile emptyFile("empty");
          auto project = Project::loadProject(response.body, emptyFile);
          if (project != nullptr) {
-             m_user->setCurrentFileData(project->data());
+             m_user->setCurrentFileData(project->jsonData());
              emit userChanged(m_user);
          }
          return response;

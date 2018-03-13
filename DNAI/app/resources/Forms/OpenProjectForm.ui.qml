@@ -134,8 +134,9 @@ Page {
         }
     }
     footer: ToolBar {
+        height: 40
         background: Rectangle {
-            implicitHeight: 40
+            height: 40
             color: AppSettings.style.background.color
         }
         ToolButton {

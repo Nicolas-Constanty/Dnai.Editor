@@ -53,7 +53,7 @@ namespace dnai {
 	QJsonObject Manager::loadProjectData(const QString &path)
 	{
         setProject(Project::loadProject(path));
-        return m_project->data();
+        return m_project->jsonData();
 	}
 
 

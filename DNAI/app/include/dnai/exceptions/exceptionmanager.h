@@ -9,7 +9,7 @@ namespace dnai
 {
 	namespace exceptions
 	{
-		class ExeptionManager
+		class ExceptionManager
 		{
 		public:
 			/**

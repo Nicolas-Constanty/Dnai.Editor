@@ -11,6 +11,7 @@
 #include "models/basicnodemodel.h"
 #include "dnai/interfaces/iloadingclass.h"
 #include "session.h"
+#include "editor.h"
 
 namespace dnai {
     class App : public QGuiApplication, public interfaces::ILoadingClass
@@ -18,17 +19,20 @@ namespace dnai {
         Q_OBJECT
     public:
         App(int & argc, char **argv);
-        ~App();
+		~App();
 
         void loadMainWindow();
+		void initProcessManager();
 	    bool eventFilter(QObject* o, QEvent* event) override;
-		models::BasicNodeModel *basicNodesModel() const;
-        void registerSettings(AppSettings* appSetting);
-		QQmlApplicationEngine const* engine() const;
-        AppSettings* settings() const;
-		Session const * session() const;
-	    views::AppView *appView() const;
-        void initProcessManager();
+        void registerSettings(AppSettings* appSettings);
+
+    public:
+		const Session &session() const;
+		const AppSettings &settings() const;
+		const views::AppView &appView() const;
+		const QQmlApplicationEngine &engine() const;
+		const models::BasicNodeModel &basicNodesModel() const;
+		Editor *editor() const;
 
     public:
         static void loadFonts();
@@ -45,6 +49,7 @@ namespace dnai {
 		models::BasicNodeModel *m_nodeModel;
 	    Session m_session;
 	    static App *m_instance;
+		Editor *m_editor;
 
         QObject *createQmlComponent(const QString &path);
 	    static void setupSettings();

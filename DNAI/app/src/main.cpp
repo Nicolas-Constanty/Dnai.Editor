@@ -1,6 +1,4 @@
 #include <QGuiApplication>
-#include <QQmlApplicationEngine>
-#include <functional>
 
 #include "views.h"
 #include "models.h"
@@ -29,6 +27,14 @@ static QObject *manager_singleton_provider(QQmlEngine *engine, QJSEngine *script
     return new dnai::Manager();
 }
 
+static QObject *editor_singleton_provider(QQmlEngine *engine, QJSEngine *scriptEngine)
+{
+	Q_UNUSED(engine)
+	Q_UNUSED(scriptEngine)
+	
+	return dnai::App::currentInstance()->editor();
+}
+
 static QObject *settings_singleton_provider(QQmlEngine *engine, QJSEngine *scriptEngine)
 {
     Q_UNUSED(engine)
@@ -48,6 +54,7 @@ static QObject *standardpath_singleton_provider(QQmlEngine *engine, QJSEngine *s
 static void registerDNAI()
 {
     qmlRegisterSingletonType<dnai::Manager>("DNAI", 1, 0, "Manager", manager_singleton_provider);
+	qmlRegisterSingletonType<dnai::Editor>("DNAI", 1, 0, "Editor", editor_singleton_provider);
     qmlRegisterSingletonType<dnai::AppSettings>("DNAI", 1, 0, "AppSettings", settings_singleton_provider);
     qmlRegisterSingletonType<QCStandardPaths>("DNAI", 1, 0, "StandardPath", standardpath_singleton_provider);
     qmlRegisterType<dnai::Session>("DNAI", 1, 0, "Session");

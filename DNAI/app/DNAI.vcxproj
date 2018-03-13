@@ -192,6 +192,8 @@
     <ClCompile Include="src\dnai\api\api.cpp" />
     <ClCompile Include="src\dnai\app.cpp" />
     <ClCompile Include="src\dnai\appcontext.cpp" />
+    <ClCompile Include="src\dnai\editor.cpp" />
+    <ClCompile Include="src\dnai\solution.cpp" />
     <ClCompile Include="src\dnai\views\appview.cpp" />
     <ClCompile Include="src\dnai\baseio.cpp" />
     <ClCompile Include="src\dnai\baselinkable.cpp" />
@@ -278,15 +280,27 @@
     </QtMoc>
     <QtMoc Include="include\dnai\views\canvasnode.h">
     </QtMoc>
+    <ClInclude Include="include\dnai\commands\genericcommand.h" />
+    <ClInclude Include="include\dnai\commands\movenodecommand.h" />
     <ClInclude Include="include\dnai\controllers\clientcontroller.h" />
     <ClInclude Include="include\dnai\commands\command.h" />
     <ClInclude Include="include\dnai\commands\commanddecorator.h" />
     <ClInclude Include="include\dnai\commands\commandmanager.h" />
     <ClInclude Include="include\commands.h" />
+    <ClInclude Include="include\dnai\editor.h" />
     <ClInclude Include="include\dnai\http\config.h" />
     <QtMoc Include="include\dnai\views\console.h">
     </QtMoc>
     <ClInclude Include="include\dnai\controllers\consolecontroller.h" />
+    <ClInclude Include="include\dnai\interfaces\ieditor.h" />
+    <ClInclude Include="include\dnai\interfaces\ieditoraction.h" />
+    <ClInclude Include="include\dnai\interfaces\ieditormodel.h" />
+    <ClInclude Include="include\dnai\interfaces\iproject.h" />
+    <ClInclude Include="include\dnai\interfaces\isavable.h" />
+    <ClInclude Include="include\dnai\interfaces\isingleton.h" />
+    <ClInclude Include="include\dnai\interfaces\isolution.h" />
+    <ClInclude Include="include\dnai\interfaces\iviewelement.h" />
+    <ClInclude Include="include\dnai\interfaces\iviewzone.h" />
     <ClInclude Include="include\dnai\models\gui\data\context.h" />
     <ClInclude Include="include\dnai\models\gui\declarable\context.h" />
     <QtMoc Include="include\dnai\views\contextview.h">
@@ -294,7 +308,6 @@
     <ClInclude Include="include\controllers.h" />
     <QtMoc Include="include\dnai\enums\core\core.h">
     </QtMoc>
-    <ClInclude Include="include\dnai\commands\corecommand.h" />
     <ClInclude Include="include\dnai\exceptions\coreexception.h" />
     <QtMoc Include="include\dnai\views\customshape.h">
     </QtMoc>
@@ -373,8 +386,6 @@
     <QtMoc Include="include\dnai\manager.h">
     </QtMoc>
     <ClInclude Include="include\models.h" />
-    <ClInclude Include="include\dnai\commands\movecommand.h" />
-    <ClInclude Include="include\dnai\commands\movenodecommand.h" />
     <ClInclude Include="include\dnai\exceptions\notimplemented.h" />
     <ClInclude Include="include\dnai\models\gui\data\objecttype.h" />
     <ClInclude Include="include\dnai\models\gui\declarable\objecttype.h" />
@@ -409,6 +420,7 @@
     </QtMoc>
     <ClInclude Include="include\dnai\models\gui\data\variable.h" />
     <ClInclude Include="include\dnai\models\gui\declarable\variable.h" />
+    <ClInclude Include="include\dnai\solution.h" />
     <ClInclude Include="include\views.h" />
     <QtMoc Include="include\dnai\viewshandler.h">
     </QtMoc>

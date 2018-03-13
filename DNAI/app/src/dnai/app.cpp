@@ -17,18 +17,16 @@ namespace dnai
 	, m_processManager(nullptr)
 	, m_appView(nullptr)
 	, m_nodeModel(nullptr)
+	, m_editor(Editor::instance())
 	{
 		if (m_instance == nullptr)
 			m_instance = this;
 	}
 
     App::~App() {
-        if (m_processManager)
-            delete m_processManager;
-        if (m_appView)
-            delete m_appView;
-        if (m_nodeModel)
-            delete m_nodeModel;
+	    delete m_processManager;
+	    delete m_appView;
+	    delete m_nodeModel;
         qDebug() << "~" << "App";
     }
 
@@ -105,9 +103,14 @@ namespace dnai
 		return QGuiApplication::eventFilter(o, event);
 	}
 
-	models::BasicNodeModel* App::basicNodesModel() const
+	const models::BasicNodeModel &App::basicNodesModel() const
 	{
-		return m_nodeModel;
+		return *m_nodeModel;
+	}
+
+	Editor *App::editor() const
+	{
+		return m_editor;
 	}
 
 	QObject* App::createQmlComponent(const QString &path)
@@ -127,19 +130,19 @@ namespace dnai
 		return m_instance;
 	}
 
-    QQmlApplicationEngine const* App::engine() const
+    const QQmlApplicationEngine &App::engine() const
 	{
-		return &m_engine;
+		return m_engine;
 	}
 
-    AppSettings* App::settings() const
+    const AppSettings &App::settings() const
 	{
-		return m_settings;
+		return *m_settings;
 	}
 
-	Session const *App::session() const
+	const Session  &App::session() const
 	{
-		return &m_session;
+		return m_session;
 	}
 
 	QObject* App::createQmlObject(const QString& path)
@@ -147,18 +150,18 @@ namespace dnai
         return App::currentInstance()->createQmlComponent(path);
 	}
 
-    QQmlEngine* App::getEngineInstance()
+    QQmlEngine *App::getEngineInstance()
 	{
-        return const_cast<QQmlEngine *>(dynamic_cast<const QQmlEngine *>(App::currentInstance()->engine()));
+        return const_cast<QQmlEngine *>(dynamic_cast<const QQmlEngine *>(&App::currentInstance()->engine()));
 	}
 
     views::InstructionView* App::instructionView()
 	{
-		return dynamic_cast<views::InstructionView*>(currentInstance()->appView()->layout()->contextView());
+		return dynamic_cast<views::InstructionView*>(currentInstance()->appView().layout()->contextView());
 	}
 
-    views::AppView* App::appView() const
+    const views::AppView &App::appView() const
 	{
-		return m_appView;
+		return *m_appView;
 	}
 }

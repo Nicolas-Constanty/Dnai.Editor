@@ -214,7 +214,7 @@ Item {
             spacing: -1
             orientation: Qt.Horizontal
             layoutDirection: Qt.LeftToRight
-            model: Manager.views.declarationModel
+            model: Manager.project.selectedEntity
             delegate: _delegate
         }
         Rectangle {

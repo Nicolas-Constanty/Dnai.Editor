@@ -1,87 +1,141 @@
 #include <QJsonDocument>
-#include <QJsonArray>
-#include <QJsonObject>
-#include <QDebug>
 
 #include "dnai/project.h"
 #include "dnai/models/gui/declarable/context.h"
+#include "dnai/exceptions/guiexception.h"
+#include "dnai/exceptions/exceptionmanager.h"
+#include "dnai/editor.h"
 
 namespace dnai {
-Project::Project(): EntityTree(nullptr)
-{
-}
-
-Project::Project(QFile &file) : EntityTree(nullptr), m_file(file)
-{
-}
+	Project::Project(): EntityTree(nullptr), m_file(nullptr), m_selectedEntity(nullptr), m_rootEntity(nullptr)
+	{
+	}
 
 //    Project::~Project()
 //    {
 
 //    }
 
-    void    Project::save()
+    void Project::save()
     {
         QJsonObject obj;
         serialize(obj);
 
-        m_file.write(QJsonDocument(obj).toJson());
+        m_file->write(QJsonDocument(obj).toJson());
     }
 
-	void Project::serialize(QJsonObject&) const
+	void Project::serialize(QJsonObject &obj) const
 	{
+		m_rootEntity->serialize(obj);
 	}
 
 	void Project::_deserialize(const QJsonObject& obj)
     {
+		if (obj["version"].toString() != Editor::instance().version())
+			qWarning() << "Warning this project file (" << m_filename << ") wasn't created with the same editor's version (" << obj["version"].toString() << "!= current" << Editor::instance().version() << ")";
         const auto coreModel = new models::core::Entity(obj["name"].toString(), enums::core::ENTITY::CONTEXT);
         const auto guiModel = models::gui::declarable::Context::deserialize(obj);
         m_rootItem = new models::Entity();
         m_rootItem->setIdx(index(0,0, QModelIndex()));
-        m_rootItem->appendChild(models::Entity::deserialize(obj["main"].toObject(), coreModel, guiModel, m_rootItem));
+		m_rootEntity = models::Entity::deserialize(obj["main"].toObject(), coreModel, guiModel, m_rootItem);
+        m_rootItem->appendChild(m_rootEntity);
     }
 
-    QJsonObject Project::loadProjectData(const QString &path)
-    {
-        Project *project = Project::loadProject(path);
-        return (project != nullptr) ? project->data() : QJsonObject{};
-    }
+	models::Entity* Project::selectedEntity() const
+	{
+		return m_selectedEntity;
+	}
 
-    Project *Project::loadProject(const QString &path)
-    {
-        QFile file(QUrl(path).toLocalFile());
+	void Project::setSelectedEntity(models::Entity* entity)
+	{
+		if (m_selectedEntity == entity)
+			return;
+		m_selectedEntity = entity;
+		emit selectedEntityChanged(entity);
+	}
 
-        if (!file.open(QIODevice::ReadWrite)) {
-            qWarning("Couldn't open file.");
-            return nullptr;
-        }
+	void Project::load(const QString& path)
+	{
+		m_filename = path;
+		m_file = new QFile(QUrl(m_filename).toLocalFile());
 
-        const QByteArray data = file.readAll();
+		if (!m_file->open(QIODevice::ReadWrite)) {
+			qWarning("Couldn't open file.");
+			return;
+		}
 
-        try {
-            const QJsonObject obj(QJsonDocument::fromJson(data).object());
-            return loadProject(obj, file);
-        }
-        catch (std::exception) {
+		const QByteArray data = m_file->readAll();
 
-        }
-        qWarning("Couldn't parse file.");
-        return nullptr;
-    }
+		try {
+			const QJsonObject obj(QJsonDocument::fromJson(data).object());
+			_deserialize(obj);
+			m_data = obj;
+		}
+		catch (std::exception &e) {
+			Q_UNUSED(e)
+			exceptions::ExeptionManager::throwException(exceptions::GuiExeption("Error : Corrupted file"));
+		}
+		qWarning("Couldn't parse file.");
+	}
 
-    Project *Project::loadProject(const QJsonObject &obj, QFile &file)
-    {
-        return Project::deserialize(obj, file);
-    }
+	void Project::close()
+	{
+	}
+
+	const QString& Project::version() const
+	{
+		return m_version;
+	}
+
+	void Project::setVersion(const QString& version)
+	{
+		if (version == m_version)
+			return;
+		m_version = version;
+	}
+
+	const QString& Project::name() const
+	{
+		return m_rootEntity->name();
+	}
+
+	void Project::setName(const QString& name)
+	{
+		m_rootEntity->setName(name);
+	}
+
+	const QString& Project::description() const
+	{
+		return m_description;
+	}
+
+	void Project::setDescription(const QString& name)
+	{
+		if (m_description == name)
+			return;
+		m_description = name;
+	}
+
+	const QString& Project::fileName() const
+	{
+		return m_filename;
+	}
+
+	void Project::setFileName(const QString& name)
+	{
+		if (m_filename == name)
+			return;
+		m_filename = name;
+	}
 
 	//    const models::Context *Project::main() const
 //    {
 //        return m_main;
 //    }
 
-    QJsonObject Project::data() const
+    const QJsonObject &Project::jsonData() const
     {
-        const auto rootentity = static_cast<models::Entity *>(m_rootItem->child(0));
+       /* const auto rootentity = static_cast<models::Entity *>(m_rootItem->child(0));
         return QJsonObject  {
             {"name", rootentity->coreModel()->name() },
             {"description", rootentity->guiModel()->description()},
@@ -96,7 +150,8 @@ Project::Project(QFile &file) : EntityTree(nullptr), m_file(file)
                     {"flows", count.flows}
                 }
             }
-        };
+        };*/
+		return m_data;
     }
 
 //	QJsonObject Project::loadProjectData(const QString &path)

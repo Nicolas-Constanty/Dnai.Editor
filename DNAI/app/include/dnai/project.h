@@ -1,6 +1,7 @@
 #ifndef PROJECT_H
 #define PROJECT_H
 #include "models/entitytree.h"
+#include "interfaces/iproject.h"
 
 namespace dnai {
 struct Count {
@@ -16,26 +17,43 @@ struct Count {
 }
 
 namespace dnai {
-	class Project : public models::EntityTree, public interfaces::ASerializable<Project>
+	class Project : public interfaces::IProject, public models::EntityTree, public interfaces::ASerializable<Project>
     {
         Q_OBJECT
+		Q_PROPERTY(dnai::models::Entity *selectedEntity READ selectedEntity WRITE setSelectedEntity NOTIFY selectedEntityChanged)
 	public:
         Project();
-        Project(QFile &file);
-		void save();
-		QFile &file() const;
-		const models::Entity *main() const;
-		QJsonObject data() const;
-        static QJsonObject loadProjectData(const QString &path);
-        static Project *loadProject(const QString &path);
-        static Project *loadProject(const QJsonObject &obj, QFile &file);
+		const QJsonObject &jsonData() const override;
 
     // ISerializable implementation
 		void serialize(QJsonObject& obj) const override;
 		void _deserialize(const QJsonObject& obj) override;
-    private:
-        QFile & m_file = *(new QFile());
+	public:
+		models::Entity *selectedEntity() const;
+		void setSelectedEntity(models::Entity *entity);
+
+	signals:
+		void selectedEntityChanged(models::Entity *entity);
+		void save() override;
+		void load(const QString& path) override;
+		void close() override;
+		const QString& version() const override;
+		void setVersion(const QString& version) override;
+		const QString& name() const override;
+		void setName(const QString& name) override;
+		const QString& description() const override;
+		void setDescription(const QString& name) override;
+		const QString& fileName() const override;
+		void setFileName(const QString& name) override;
+	private:
+		QFile* m_file;
         Count count;
+		models::Entity* m_selectedEntity{};
+		QString m_filename;
+		QString m_description;
+		QJsonObject m_data;
+		QString m_version;
+		models::Entity* m_rootEntity;
 	};
     //  class Project: public models::Common
     //  {

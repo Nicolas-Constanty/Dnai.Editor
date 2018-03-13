@@ -123,6 +123,7 @@ Page {
         }
     }
     footer: ToolBar {
+        height: 40
         ToolButton {
             id: cancelButton
             anchors.left: parent.left
