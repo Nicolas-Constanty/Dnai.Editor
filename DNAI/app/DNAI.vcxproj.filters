@@ -251,6 +251,18 @@
     <ClCompile Include="src\dnai\models\gui\flow.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\dnai\models\gui\declarable\objecttype.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\dnai\models\gui\declarable\context.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\dnai\models\gui\declarable\enumtype.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\dnai\models\gui\declarable\listtype.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\api.h">
@@ -430,9 +442,6 @@
     <QtMoc Include="include\dnai\processmanager.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <ClInclude Include="include\dnai\project.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <QtMoc Include="include\dnai\enums\qcstandardpaths.h">
       <Filter>Header Files</Filter>
     </QtMoc>
@@ -535,9 +544,6 @@
     <ClInclude Include="include\dnai\models\function.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\dnai\models\objecttype.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
     <ClInclude Include="include\dnai\models\guicorestruct.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
@@ -620,6 +626,15 @@
       <Filter>Generated Files</Filter>
     </ClInclude>
     <ClInclude Include="include\dnai\models\gui\data\flow.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dnai\models\gui\data\enumtype.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dnai\exceptions\notimplemented.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dnai\models\gui\data\listtype.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -1091,6 +1106,9 @@
     </QtMoc>
     <QtMoc Include="include\dnai\models\generictreeitem.h">
       <Filter>Generated Files</Filter>
+    </QtMoc>
+    <QtMoc Include="include\dnai\project.h">
+      <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>
 </Project>

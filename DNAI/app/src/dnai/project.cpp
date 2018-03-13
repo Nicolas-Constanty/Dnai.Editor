@@ -7,11 +7,11 @@
 #include "dnai/models/gui/declarable/context.h"
 
 namespace dnai {
-Project::Project(): m_main(nullptr)
+Project::Project(): EntityTree(nullptr)
 {
 }
 
-Project::Project(QFile &file) : m_file(file)
+Project::Project(QFile &file) : EntityTree(nullptr), m_file(file)
 {
 }
 
@@ -34,10 +34,11 @@ Project::Project(QFile &file) : m_file(file)
 
 	void Project::_deserialize(const QJsonObject& obj)
     {
-        qDebug() << "coucou";
         const auto coreModel = new models::core::Entity(obj["name"].toString(), enums::core::ENTITY::CONTEXT);
         const auto guiModel = models::gui::declarable::Context::deserialize(obj);
-        m_main = models::Entity::deserialize(obj["main"].toObject(), coreModel, guiModel);
+        m_rootItem = new models::Entity();
+        m_rootItem->setIdx(index(0,0, QModelIndex()));
+        m_rootItem->appendChild(models::Entity::deserialize(obj["main"].toObject(), coreModel, guiModel, m_rootItem));
     }
 
     QJsonObject Project::loadProjectData(const QString &path)
@@ -80,9 +81,10 @@ Project::Project(QFile &file) : m_file(file)
 
     QJsonObject Project::data() const
     {
+        const auto rootentity = static_cast<models::Entity *>(m_rootItem->child(0));
         return QJsonObject  {
-            {"name", m_main->coreModel()->name() },
-            {"description", m_main->guiModel()->description()},
+            {"name", rootentity->coreModel()->name() },
+            {"description", rootentity->guiModel()->description()},
             {"count", QJsonObject {
                     {"contexts", count.contexts},
                     {"classes", count.classes},

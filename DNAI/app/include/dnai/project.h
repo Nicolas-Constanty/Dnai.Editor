@@ -18,6 +18,7 @@ struct Count {
 namespace dnai {
 	class Project : public models::EntityTree, public interfaces::ASerializable<Project>
     {
+        Q_OBJECT
 	public:
         Project();
         Project(QFile &file);
@@ -34,7 +35,6 @@ namespace dnai {
 		void _deserialize(const QJsonObject& obj) override;
     private:
         QFile & m_file = *(new QFile());
-        models::Entity const *m_main;
         Count count;
 	};
     //  class Project: public models::Common

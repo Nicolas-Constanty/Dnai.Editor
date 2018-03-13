@@ -9,6 +9,7 @@
 #include "dnai/app.h"
 #include "dnai/manager.h"
 #include "dnai/settings.h"
+#include "dnai/project.h"
 #include "controllers.h"
 
 #include "include/eventconsumer.h"
@@ -51,6 +52,7 @@ static void registerDNAI()
     qmlRegisterSingletonType<QCStandardPaths>("DNAI", 1, 0, "StandardPath", standardpath_singleton_provider);
     qmlRegisterType<dnai::Session>("DNAI", 1, 0, "Session");
     qmlRegisterType<dnai::ViewsHandler>("DNAI", 1, 0, "ViewsHandler");
+    qmlRegisterType<dnai::Project>("DNAI", 1, 0, "Project");
 }
 
 static void registerEnums()
@@ -107,6 +109,7 @@ static void registerModels()
     qmlRegisterType<dnai::models::BasicNodeModel>("DNAI.Models", 1, 0, "BasicNodeModel");
     qmlRegisterType<dnai::models::ListNode>("DNAI.Models", 1, 0, "ListNode");
     qmlRegisterType<dnai::models::Entity>("DNAI.Models", 1, 0, "Entity");
+    qmlRegisterType<dnai::models::EntityTree>("DNAI.Models", 1, 0, "EntityTree");
 //    qmlRegisterType<dnai::models::Property>("DNAI.Models", 1, 0, "Property");
 //    qmlRegisterType<dnai::models::EntityList>("DNAI.Models", 1, 0, "EntityList");
 }

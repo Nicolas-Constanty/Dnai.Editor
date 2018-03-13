@@ -105,10 +105,10 @@ namespace dnai
 //		qvariant_cast<models::Declaration *>(m_declRef->data(m_declRef->index(listindex, 0)))->addModel(new models::Variable(-1, "Variable", "", QVector2D(), "generic", false, index, listindex));
 //	}
 
-//	void ViewsHandler::registerTreeView(QQuickItem *tr)
-//	{
-//		m_treeView = tr;
-//	}
+	void ViewsHandler::registerTreeView(QQuickItem *tr)
+	{
+		m_treeView = tr;
+	}
 
 //	QQuickItem* ViewsHandler::treeView() const
 //	{

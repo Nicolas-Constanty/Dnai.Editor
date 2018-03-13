@@ -3,6 +3,7 @@ import QtQuick.Controls 1.4
 import QtQuick.Controls.Styles 1.4
 import QtQml.Models 2.3
 import DNAI 1.0
+import DNAI.Models 1.0
 
 import "../Panels"
 import "../Style"
@@ -32,9 +33,9 @@ ExpendablePanel {
         }
 
         anchors.fill: parent
-        model: Manager.views.projectModel
+        model: Manager.project
         selection: ItemSelectionModel {
-            model: Manager.views.projectModel
+            model: Manager.project
         }
 
         frameVisible: false

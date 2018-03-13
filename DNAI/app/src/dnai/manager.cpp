@@ -23,6 +23,19 @@ namespace dnai {
         qDebug() << "~" << "Manager";
     }
 
+	Project* Manager::project() const
+	{
+		return m_project;
+	}
+
+	void Manager::setProject(Project* p)
+	{
+		if (p == m_project)
+			return;
+		m_project = p;
+		emit projectChanged(p);
+	}
+
 	void Manager::createProject(const QString &name, const QString &description, const QString &path)
     {
         auto fileUrl = QUrl(QDir(path).filePath(name) + project_extension);
@@ -39,20 +52,21 @@ namespace dnai {
 
 	QJsonObject Manager::loadProjectData(const QString &path)
 	{
-		return Project::loadProjectData(path);
+        setProject(Project::loadProject(path));
+        return m_project->data();
 	}
 
 
 	void Manager::openProject(const QString &path)
     {
-        this->openProject(Project::loadProject(path));
+        this->openProject(m_project);
     }
 
     void Manager::openProject(Project *project)
     {
-        m_project = project;
+//        m_project = project;
 //        m_project->declare();
-        createTreeModel(m_project);
+//        createTreeModel(m_project);
 //        const auto path = static_cast<models::TreeItem*>(m_viewsHandler->projectModel()->index(0,0).internalPointer());
 //        m_viewsHandler->setCurrentPath(path);
 //        m_viewsHandler->createNameSpaceModel(path);

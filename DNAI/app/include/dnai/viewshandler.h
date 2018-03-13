@@ -40,7 +40,7 @@ namespace dnai
 //		Q_INVOKABLE void addClass(int index, int listindex) const;
 //		Q_INVOKABLE void addFunction(int index, int listindex) const;
 //		Q_INVOKABLE void addVariable(int index, int listindex) const;
-//		Q_INVOKABLE void registerTreeView(QQuickItem *tr);
+		Q_INVOKABLE void registerTreeView(QQuickItem *tr);
 //        Q_INVOKABLE QQuickItem *treeView() const;
 //        Q_INVOKABLE void createDeclarationList(const QString& title);
         Q_INVOKABLE void onBuildStart();

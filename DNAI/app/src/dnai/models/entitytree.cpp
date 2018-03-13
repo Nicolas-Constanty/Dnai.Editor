@@ -4,24 +4,29 @@
 namespace dnai
 {
 	namespace models
-	{
-		QModelIndex EntityTree::index(const int row, const int column, const QModelIndex& parent) const
-		{
-			if (!hasIndex(row, column, parent))
-				return {};
+    {
+    EntityTree::EntityTree(QObject *parent) : QAbstractItemModel(parent), m_rootItem(nullptr)
+    {
 
+    }
+
+    QModelIndex EntityTree::index(const int row, const int column, const QModelIndex& parent) const
+        {
+			if (!hasIndex(row, column, parent))
+            {
+				return {};
+            }
 			Entity *parentItem;
 
 			if (!parent.isValid())
 				parentItem = m_rootItem;
 			else
-				parentItem = static_cast<Entity*>(parent.internalPointer());
-
+                parentItem = static_cast<Entity*>(parent.internalPointer());
 			const auto childItem = parentItem->child(row);
 			if (childItem)
-			{
+            {
 				return createIndex(row, column, childItem);
-			}
+            }
 			return {};
 		}
 
@@ -49,21 +54,20 @@ namespace dnai
 				parentItem = m_rootItem;
 			else
 				parentItem = static_cast<Entity*>(parent.internalPointer());
-
 			return parentItem->childCount();
 		}
 
 		int EntityTree::columnCount(const QModelIndex& parent) const
 		{
 			if (parent.isValid())
-				return static_cast<Entity*>(parent.internalPointer())->columnCount();
+                return static_cast<Entity*>(parent.internalPointer())->columnCount();
 			return m_rootItem->columnCount();
 		}
 
 		QVariant EntityTree::data(const QModelIndex& index, const int role) const
-		{
+        {
 			if (!index.isValid())
-				return QVariant();
+                return QVariant();
 			const auto entity = static_cast<Entity*>(index.internalPointer());
 			switch (role)
 			{
@@ -75,7 +79,7 @@ namespace dnai
 				return entity->containerId();
 			case NAME:
 			case Qt::DisplayRole:
-				return entity->name();
+				return QVariant::fromValue(entity->name());
 			case VISIBILITY:
 				return entity->visibility();
 			case INDEX:

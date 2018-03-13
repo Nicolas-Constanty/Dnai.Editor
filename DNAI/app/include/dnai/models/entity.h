@@ -8,10 +8,10 @@
 
 namespace dnai
 {
-	namespace models
-	{
+    namespace models
+    {
         class Entity : public interfaces::IModel<Entity>
-		{
+        {
             Q_OBJECT
             Q_PROPERTY(qint32 id READ id WRITE setId NOTIFY idChanged)
             Q_PROPERTY(qint32 containerId READ containerId WRITE setContainerId NOTIFY containerIdChanged)
@@ -23,11 +23,13 @@ namespace dnai
             Q_PROPERTY(QString description READ description WRITE setDescription NOTIFY descriptionChanged)
             Q_PROPERTY(core::Entity *coreModel READ coreModel WRITE setCoreModel NOTIFY coreModelChanged)
                     //			Q_PROPERTY(EntityGUI *guiModel READ guiModel CONSTANT)
-		public:
-            explicit Entity(QObject *parent = nullptr);
-            explicit Entity(core::Entity *coremodel, interfaces::IEntity *guimodel = nullptr);
+        public:
+            explicit Entity();
+            explicit Entity(core::Entity *coremodel, interfaces::IEntity *guimodel = nullptr, GenericTreeItem *parent = nullptr);
+            explicit Entity(core::Entity *coremodel, GenericTreeItem *parent = nullptr, interfaces::IEntity *guimodel = nullptr);
+
             virtual ~Entity() = default;
-		public:
+        public:
             qint32 id() const;
             qint32 containerId() const;
             enums::core::ENTITY entityType() const;
@@ -39,7 +41,7 @@ namespace dnai
             virtual core::Entity *coreModel() const;
             virtual interfaces::IEntity *guiModel() const;
 
-		public:
+        public:
             void setId(qint32 id);
             void setContainerId(qint32 containerId) const;
             void setEntityType(enums::core::ENTITY type) const;
@@ -50,7 +52,7 @@ namespace dnai
             void setDescription(const QString& description);
             virtual void setCoreModel(core::Entity *model);
 
-		signals:
+        signals:
             void idChanged(qint32 id);
             void containerIdChanged(qint32 containerId) const;
             void entityTypeChanged(enums::core::ENTITY type) const;
@@ -65,11 +67,12 @@ namespace dnai
         public:
             void serialize(QJsonObject& obj) const override;
             void _deserialize(const QJsonObject& obj) override;
+            int columnCount() const override;
         private:
             core::Entity *m_dataCore;
             interfaces::IEntity *m_dataGUI;
         };
-	}
+    }
 }
 
 #endif // DNAI_MODELS_ENTITY_H
