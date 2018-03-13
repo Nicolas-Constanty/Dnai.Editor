@@ -89,7 +89,7 @@
       <WarningLevel>Level3</WarningLevel>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>$(QTDIR)\lib\qtmain.lib;shell32.lib;C:\Users\nicol\Documents\Duly-GUI\DNAI\lib\EventClient.lib;C:\Users\nicol\Documents\Duly-GUI\DNAI\lib\DataComEvent.lib;C:\Users\nicol\Documents\Duly-GUI\DNAI\lib\WinToast.lib;$(QTDIR)\lib\Qt5QuickControls2.lib;$(QTDIR)\lib\Qt5Quick.lib;$(QTDIR)\lib\Qt5Gui.lib;$(QTDIR)\lib\Qt5Qml.lib;$(QTDIR)\lib\Qt5Network.lib;$(QTDIR)\lib\Qt5Core.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(QTDIR)\lib\qtmain.lib;shell32.lib;WinToast.lib;C:\Users\nicol\Documents\Duly-GUI\DNAI\lib\EventClient.lib;C:\Users\nicol\Documents\Duly-GUI\DNAI\lib\DataComEvent.lib;$(QTDIR)\lib\Qt5QuickControls2.lib;$(QTDIR)\lib\Qt5Quick.lib;$(QTDIR)\lib\Qt5Gui.lib;$(QTDIR)\lib\Qt5Qml.lib;$(QTDIR)\lib\Qt5Network.lib;$(QTDIR)\lib\Qt5Core.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(QTDIR)\lib;C:\utils\my_sql\my_sql\lib;C:\utils\postgresql\pgsql\lib;$(QTDIR)\lib;C:\Users\nicol\Documents\Duly-GUI\DNAI\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>"/MANIFESTDEPENDENCY:type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' publicKeyToken='6595b64144ccf1df' language='*' processorArchitecture='*'" %(AdditionalOptions)</AdditionalOptions>
       <DataExecutionPrevention>true</DataExecutionPrevention>
@@ -149,7 +149,7 @@
       <ProgramDataBaseFileName>$(IntDir)vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>$(QTDIR)\lib\qtmaind.lib;shell32.lib;C:\Users\nicol\Documents\Duly-GUI\DNAI\lib\EventClient.lib;C:\Users\nicol\Documents\Duly-GUI\DNAI\lib\DataComEvent.lib;C:\Users\nicol\Documents\Duly-GUI\DNAI\lib\WinToast.lib;$(QTDIR)\lib\Qt5QuickControls2d.lib;$(QTDIR)\lib\Qt5Quickd.lib;$(QTDIR)\lib\Qt5Guid.lib;$(QTDIR)\lib\Qt5Qmld.lib;$(QTDIR)\lib\Qt5Networkd.lib;$(QTDIR)\lib\Qt5Cored.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(QTDIR)\lib\qtmaind.lib;shell32.lib;WinToast.lib;C:\Users\nicol\Documents\Duly-GUI\DNAI\lib\EventClient.lib;C:\Users\nicol\Documents\Duly-GUI\DNAI\lib\DataComEvent.lib;$(QTDIR)\lib\Qt5QuickControls2d.lib;$(QTDIR)\lib\Qt5Quickd.lib;$(QTDIR)\lib\Qt5Guid.lib;$(QTDIR)\lib\Qt5Qmld.lib;$(QTDIR)\lib\Qt5Networkd.lib;$(QTDIR)\lib\Qt5Cored.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(QTDIR)\lib;C:\utils\my_sql\my_sql\lib;C:\utils\postgresql\pgsql\lib;$(QTDIR)\lib;C:\Users\nicol\Documents\Duly-GUI\DNAI\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>"/MANIFESTDEPENDENCY:type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' publicKeyToken='6595b64144ccf1df' language='*' processorArchitecture='*'" %(AdditionalOptions)</AdditionalOptions>
       <DataExecutionPrevention>true</DataExecutionPrevention>
@@ -192,19 +192,6 @@
     <ClCompile Include="src\dnai\api\api.cpp" />
     <ClCompile Include="src\dnai\app.cpp" />
     <ClCompile Include="src\dnai\appcontext.cpp" />
-    <ClCompile Include="src\dnai\commands\corecommand.cpp" />
-    <ClCompile Include="src\dnai\models\core\entitydata.cpp" />
-    <ClCompile Include="src\dnai\models\gui\declarable\context.cpp" />
-    <ClCompile Include="src\dnai\models\gui\declarable\enumtype.cpp" />
-    <ClCompile Include="src\dnai\models\gui\declarable\function.cpp" />
-    <ClCompile Include="src\dnai\models\gui\declarable\listtype.cpp" />
-    <ClCompile Include="src\dnai\models\gui\declarable\objecttype.cpp" />
-    <ClCompile Include="src\dnai\models\gui\declarable\variable.cpp" />
-    <ClCompile Include="src\dnai\models\gui\flow.cpp" />
-    <ClCompile Include="src\dnai\models\gui\input.cpp" />
-    <ClCompile Include="src\dnai\models\gui\instruction.cpp" />
-    <ClCompile Include="src\dnai\models\gui\output.cpp" />
-    <ClCompile Include="src\dnai\models\old\context.cpp" />
     <ClCompile Include="src\dnai\views\appview.cpp" />
     <ClCompile Include="src\dnai\baseio.cpp" />
     <ClCompile Include="src\dnai\baselinkable.cpp" />
@@ -217,22 +204,31 @@
     <ClCompile Include="src\dnai\commands\commandmanager.cpp" />
     <ClCompile Include="src\dnai\views\console.cpp" />
     <ClCompile Include="src\dnai\controllers\consolecontroller.cpp" />
+    <ClCompile Include="src\dnai\models\gui\declarable\context.cpp" />
     <ClCompile Include="src\dnai\views\contextview.cpp" />
+    <ClCompile Include="src\dnai\commands\corecommand.cpp" />
     <ClCompile Include="src\dnai\views\customshape.cpp" />
     <ClCompile Include="src\dnai\commands\debugdecorator.cpp" />
     <ClCompile Include="src\dnai\views\declarationview.cpp" />
     <ClCompile Include="src\dnai\entitiesfactory.cpp" />
-    <ClCompile Include="src\dnai\models\entity.cpp" />
     <ClCompile Include="src\dnai\models\core\entity.cpp" />
+    <ClCompile Include="src\dnai\models\entity.cpp" />
+    <ClCompile Include="src\dnai\models\gui\data\entity.cpp" />
     <ClCompile Include="src\dnai\models\gui\declarable\entity.cpp" />
+    <ClCompile Include="src\dnai\models\core\entitydata.cpp" />
     <ClCompile Include="src\dnai\models\entitytree.cpp" />
+    <ClCompile Include="src\dnai\models\gui\declarable\enumtype.cpp" />
     <ClCompile Include="src\dnai\eventutilities.cpp" />
+    <ClCompile Include="src\dnai\models\gui\flow.cpp" />
     <ClCompile Include="src\dnai\views\flow.cpp" />
     <ClCompile Include="src\dnai\focusmanager.cpp" />
+    <ClCompile Include="src\dnai\models\gui\declarable\function.cpp" />
     <ClCompile Include="src\dnai\views\genericnode.cpp" />
     <ClCompile Include="src\dnai\controllers\icontroller.cpp" />
+    <ClCompile Include="src\dnai\models\gui\input.cpp" />
     <ClCompile Include="src\dnai\views\input.cpp" />
     <ClCompile Include="src\dnai\controllers\inputcontroller.cpp" />
+    <ClCompile Include="src\dnai\models\gui\instruction.cpp" />
     <ClCompile Include="src\dnai\views\instructionview.cpp" />
     <ClCompile Include="src\dnai\views\io.cpp" />
     <ClCompile Include="src\dnai\views\layout.cpp" />
@@ -240,12 +236,15 @@
     <ClCompile Include="src\dnai\link.cpp" />
     <ClCompile Include="src\dnai\views\linkablebezieritem.cpp" />
     <ClCompile Include="src\dnai\models\listnode.cpp" />
+    <ClCompile Include="src\dnai\models\gui\declarable\listtype.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\dnai\manager.cpp" />
     <ClCompile Include="src\dnai\commands\movecanvascommand.cpp" />
     <ClCompile Include="src\dnai\commands\movecommand.cpp" />
     <ClCompile Include="src\dnai\commands\movenodecommand.cpp" />
+    <ClCompile Include="src\dnai\models\gui\declarable\objecttype.cpp" />
     <ClCompile Include="src\dnai\http\observable.cpp" />
+    <ClCompile Include="src\dnai\models\gui\output.cpp" />
     <ClCompile Include="src\dnai\views\output.cpp" />
     <ClCompile Include="src\dnai\controllers\outputcontroller.cpp" />
     <ClCompile Include="src\dnai\processmanager.cpp" />
@@ -259,46 +258,13 @@
     <ClCompile Include="src\dnai\models\settingsmodel.cpp" />
     <ClCompile Include="src\dnai\http\url.cpp" />
     <ClCompile Include="src\dnai\models\user.cpp" />
+    <ClCompile Include="src\dnai\models\gui\declarable\variable.cpp" />
     <ClCompile Include="src\dnai\viewshandler.cpp" />
     <ClCompile Include="src\dnai\commands\zoomcanvascommand.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\api.h" />
     <ClInclude Include="include\dnai\api\api.h" />
-    <ClInclude Include="include\dnai\commands\corecommand.h" />
-    <ClInclude Include="include\dnai\exceptions\coreexception.h" />
-    <ClInclude Include="include\dnai\exceptions\exception.h" />
-    <ClInclude Include="include\dnai\exceptions\exceptionmanager.h" />
-    <ClInclude Include="include\dnai\exceptions\guiexception.h" />
-    <ClInclude Include="include\dnai\exceptions\notimplemented.h" />
-    <ClInclude Include="include\dnai\interfaces\ientity.h" />
-    <ClInclude Include="include\dnai\interfaces\iinstruction.h" />
-    <ClInclude Include="include\dnai\interfaces\ivariable.h" />
-    <ClInclude Include="include\dnai\models\guicorestruct.h" />
-    <ClInclude Include="include\dnai\models\gui\data\context.h" />
-    <ClInclude Include="include\dnai\models\gui\data\enumtype.h" />
-    <ClInclude Include="include\dnai\models\gui\data\flow.h" />
-    <ClInclude Include="include\dnai\models\gui\data\input.h" />
-    <ClInclude Include="include\dnai\models\gui\data\listtype.h" />
-    <ClInclude Include="include\dnai\models\gui\data\objecttype.h" />
-    <ClInclude Include="include\dnai\models\gui\data\output.h" />
-    <ClInclude Include="include\dnai\models\gui\data\variable.h" />
-    <ClInclude Include="include\dnai\models\gui\declarable\variable.h" />
-    <ClInclude Include="include\dnai\models\gui\flow.h" />
-    <ClInclude Include="include\dnai\models\gui\declarable\function.h" />
-    <ClInclude Include="include\dnai\models\gui\input.h" />
-    <ClInclude Include="include\dnai\models\gui\instruction.h" />
-    <ClInclude Include="include\dnai\models\gui\data\instruction.h" />
-    <ClInclude Include="include\dnai\models\gui\data\linkable.h" />
-    <ClInclude Include="include\dnai\models\gui\output.h" />
-    <ClInclude Include="include\dnai\models\instruction.h" />
-    <ClInclude Include="include\dnai\models\context.h" />
-    <ClInclude Include="include\dnai\models\datatype.h" />
-    <ClInclude Include="include\dnai\models\function.h" />
-    <ClInclude Include="include\dnai\models\gui\declarable\context.h" />
-    <ClInclude Include="include\dnai\models\gui\declarable\enumtype.h" />
-    <ClInclude Include="include\dnai\models\gui\declarable\listtype.h" />
-    <ClInclude Include="include\dnai\models\gui\declarable\objecttype.h" />
     <QtMoc Include="include\dnai\app.h">
     </QtMoc>
     <ClInclude Include="include\dnai\appcontext.h" />
@@ -317,15 +283,19 @@
     <ClInclude Include="include\dnai\commands\commanddecorator.h" />
     <ClInclude Include="include\dnai\commands\commandmanager.h" />
     <ClInclude Include="include\commands.h" />
-    <ClInclude Include="include\dnai\enums\guitype.h" />
     <ClInclude Include="include\dnai\http\config.h" />
     <QtMoc Include="include\dnai\views\console.h">
     </QtMoc>
     <ClInclude Include="include\dnai\controllers\consolecontroller.h" />
+    <ClInclude Include="include\dnai\models\gui\data\context.h" />
+    <ClInclude Include="include\dnai\models\gui\declarable\context.h" />
     <QtMoc Include="include\dnai\views\contextview.h">
     </QtMoc>
     <ClInclude Include="include\controllers.h" />
-    <ClInclude Include="include\dnai\enums\core\core.h" />
+    <QtMoc Include="include\dnai\enums\core\core.h">
+    </QtMoc>
+    <ClInclude Include="include\dnai\commands\corecommand.h" />
+    <ClInclude Include="include\dnai\exceptions\coreexception.h" />
     <QtMoc Include="include\dnai\views\customshape.h">
     </QtMoc>
     <ClInclude Include="include\dnai\commands\debugdecorator.h" />
@@ -334,95 +304,89 @@
     <QtMoc Include="include\dnai\views\declarationview.h">
     </QtMoc>
     <ClInclude Include="include\dnai\entitiesfactory.h" />
+    <ClInclude Include="include\dnai\models\core\entity.h" />
+    <ClInclude Include="include\dnai\models\declarable\entity.h" />
     <QtMoc Include="include\dnai\models\entity.h">
     </QtMoc>
-    <ClInclude Include="include\dnai\interfaces\iclone.h" />
-    <ClInclude Include="include\dnai\interfaces\icommand.h" />
-    <ClInclude Include="include\dnai\interfaces\icontroller.h" />
-    <ClInclude Include="include\dnai\interfaces\imodeldata.h" />
-    <ClInclude Include="include\dnai\interfaces\ifactory.h" />
-    <ClInclude Include="include\dnai\interfaces\ilinkable.h" />
-    <ClInclude Include="include\dnai\interfaces\iloadingclass.h" />
-    <ClInclude Include="include\dnai\interfaces\imodel.h" />
-    <ClInclude Include="include\dnai\interfaces\iobservable.h" />
-    <ClInclude Include="include\dnai\interfaces\iscalable.h" />
-    <ClInclude Include="include\dnai\interfaces\iserializable.h" />
-    <ClInclude Include="include\dnai\models\core\entity.h" />
-    <ClInclude Include="include\dnai\models\core\entitydata.h" />
     <ClInclude Include="include\dnai\models\gui\data\entity.h" />
-    <ClInclude Include="include\dnai\models\gui\data\function.h" />
     <ClInclude Include="include\dnai\models\gui\declarable\entity.h" />
+    <ClInclude Include="include\dnai\models\gui\entity.h" />
+    <ClInclude Include="include\dnai\models\core\entitydata.h" />
     <QtMoc Include="include\dnai\models\entitytree.h">
     </QtMoc>
-    <QtMoc Include="include\dnai\models\generictreeitem.h">
-      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\GeneratedFiles\$(ConfigurationName)\.;.\GeneratedFiles;.;.\include;.\..\lib\event_client;.\..\lib\DataComEvent\Shared_include;$(QTDIR)\include;$(QTDIR)\include\QtQuickControls2;$(QTDIR)\include\QtQuick;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtQml;$(QTDIR)\include\QtNetwork;$(QTDIR)\include\QtCore;.\debug;\include;$(QTDIR)\mkspecs\win32-msvc</IncludePath>
-      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">_WINDOWS;UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
-      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles\$(ConfigurationName)\.;.\GeneratedFiles;.;.\include;.\..\lib\event_client;.\..\lib\DataComEvent\Shared_include;$(QTDIR)\include;$(QTDIR)\include\QtQuickControls2;$(QTDIR)\include\QtQuick;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtQml;$(QTDIR)\include\QtNetwork;$(QTDIR)\include\QtCore;.\release;\include;$(QTDIR)\mkspecs\win32-msvc</IncludePath>
-      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">_WINDOWS;UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;QT_NO_DEBUG;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB;NDEBUG</Define>
-    </QtMoc>
-    <ClInclude Include="include\dnai\models\treeitem.h" />
-    <QtMoc Include="include\dnai\models\treemodel.h">
-      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\GeneratedFiles\$(ConfigurationName)\.;.\GeneratedFiles;.;.\include;.\..\lib\event_client;.\..\lib\DataComEvent\Shared_include;$(QTDIR)\include;$(QTDIR)\include\QtQuickControls2;$(QTDIR)\include\QtQuick;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtQml;$(QTDIR)\include\QtNetwork;$(QTDIR)\include\QtCore;.\debug;\include;$(QTDIR)\mkspecs\win32-msvc</IncludePath>
-      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">_WINDOWS;UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
-      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles\$(ConfigurationName)\.;.\GeneratedFiles;.;.\include;.\..\lib\event_client;.\..\lib\DataComEvent\Shared_include;$(QTDIR)\include;$(QTDIR)\include\QtQuickControls2;$(QTDIR)\include\QtQuick;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtQml;$(QTDIR)\include\QtNetwork;$(QTDIR)\include\QtCore;.\release;\include;$(QTDIR)\mkspecs\win32-msvc</IncludePath>
-      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">_WINDOWS;UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;QT_NO_DEBUG;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB;NDEBUG</Define>
-    </QtMoc>
     <ClInclude Include="include\enums.h" />
+    <ClInclude Include="include\dnai\models\gui\declarable\enumtype.h" />
     <ClInclude Include="include\dnai\eventutilities.h" />
+    <ClInclude Include="include\dnai\exceptions\exception.h" />
+    <ClInclude Include="include\dnai\exceptions\exceptionmanager.h" />
+    <ClInclude Include="include\dnai\models\gui\flow.h" />
     <QtMoc Include="include\dnai\views\flow.h">
-      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\GeneratedFiles\$(ConfigurationName)\.;.\GeneratedFiles;.;.\include;.\..\lib\event_client;.\..\lib\DataComEvent\Shared_include;$(QTDIR)\include;$(QTDIR)\include\QtQuickControls2;$(QTDIR)\include\QtQuick;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtQml;$(QTDIR)\include\QtNetwork;$(QTDIR)\include\QtCore;.\debug;\include;$(QTDIR)\mkspecs\win32-msvc</IncludePath>
-      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">_WINDOWS;UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
-      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles\$(ConfigurationName)\.;.\GeneratedFiles;.;.\include;.\..\lib\event_client;.\..\lib\DataComEvent\Shared_include;$(QTDIR)\include;$(QTDIR)\include\QtQuickControls2;$(QTDIR)\include\QtQuick;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtQml;$(QTDIR)\include\QtNetwork;$(QTDIR)\include\QtCore;.\release;\include;$(QTDIR)\mkspecs\win32-msvc</IncludePath>
-      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">_WINDOWS;UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;QT_NO_DEBUG;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB;NDEBUG</Define>
     </QtMoc>
     <QtMoc Include="include\dnai\enums\flowtype.h">
     </QtMoc>
     <ClInclude Include="include\dnai\focusmanager.h" />
+    <ClInclude Include="include\dnai\models\gui\data\function.h" />
+    <ClInclude Include="include\dnai\models\gui\declarable\function.h" />
     <QtMoc Include="include\dnai\views\genericnode.h">
     </QtMoc>
+    <QtMoc Include="include\dnai\models\generictreeitem.h">
+    </QtMoc>
+    <ClInclude Include="include\dnai\exceptions\guiexception.h" />
     <ClInclude Include="include\http.h" />
-    <ClInclude Include="include\dnai\commands\icommand.h" />
-    <ClInclude Include="include\dnai\controllers\icontroller.h" />
-    <ClInclude Include="include\dnai\ifactory.h" />
-    <ClInclude Include="include\dnai\ilinkable.h" />
-    <ClInclude Include="include\dnai\iloadingclass.h" />
+    <ClInclude Include="include\dnai\interfaces\iclone.h" />
+    <ClInclude Include="include\dnai\interfaces\icommand.h" />
+    <ClInclude Include="include\dnai\interfaces\icontroller.h" />
+    <ClInclude Include="include\dnai\interfaces\ientity.h" />
+    <ClInclude Include="include\dnai\interfaces\ifactory.h" />
+    <ClInclude Include="include\dnai\interfaces\ilinkable.h" />
+    <ClInclude Include="include\dnai\interfaces\iloadingclass.h" />
+    <ClInclude Include="include\dnai\interfaces\imodel.h" />
+    <ClInclude Include="include\dnai\models\gui\data\input.h" />
+    <ClInclude Include="include\dnai\models\gui\input.h" />
     <ClInclude Include="include\dnai\views\input.h" />
     <ClInclude Include="include\dnai\controllers\inputcontroller.h" />
+    <ClInclude Include="include\dnai\models\gui\data\instruction.h" />
+    <ClInclude Include="include\dnai\models\gui\instruction.h" />
+    <ClInclude Include="include\dnai\models\instruction.h" />
     <QtMoc Include="include\dnai\enums\core\instructionid.h">
     </QtMoc>
     <QtMoc Include="include\dnai\views\instructionview.h">
     </QtMoc>
     <QtMoc Include="include\dnai\views\io.h">
     </QtMoc>
-    <ClInclude Include="include\dnai\iobservable.h" />
+    <ClInclude Include="include\dnai\interfaces\iobservable.h" />
     <QtMoc Include="include\dnai\enums\iotype.h">
     </QtMoc>
-    <ClInclude Include="include\dnai\views\iscalable.h" />
+    <ClInclude Include="include\dnai\interfaces\iscalable.h" />
+    <ClInclude Include="include\dnai\interfaces\iserializable.h" />
     <QtMoc Include="include\dnai\views\layout.h">
     </QtMoc>
     <QtMoc Include="include\dnai\views\line.h">
     </QtMoc>
     <ClInclude Include="include\dnai\link.h" />
+    <ClInclude Include="include\dnai\models\gui\data\linkable.h" />
     <ClInclude Include="include\dnai\views\linkablebezieritem.h" />
     <ClInclude Include="include\dnai\linkabletype.h" />
     <QtMoc Include="include\dnai\models\listnode.h">
     </QtMoc>
+    <ClInclude Include="include\dnai\models\gui\declarable\listtype.h" />
     <QtMoc Include="include\dnai\manager.h">
     </QtMoc>
     <ClInclude Include="include\models.h" />
     <ClInclude Include="include\dnai\commands\movecommand.h" />
     <ClInclude Include="include\dnai\commands\movenodecommand.h" />
+    <ClInclude Include="include\dnai\exceptions\notimplemented.h" />
+    <ClInclude Include="include\dnai\models\gui\data\objecttype.h" />
+    <ClInclude Include="include\dnai\models\gui\declarable\objecttype.h" />
     <QtMoc Include="include\dnai\http\observable.h">
     </QtMoc>
+    <ClInclude Include="include\dnai\models\gui\data\output.h" />
+    <ClInclude Include="include\dnai\models\gui\output.h" />
     <ClInclude Include="include\dnai\views\output.h" />
     <ClInclude Include="include\dnai\controllers\outputcontroller.h" />
     <QtMoc Include="include\dnai\processmanager.h">
     </QtMoc>
     <QtMoc Include="include\dnai\project.h">
-      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\GeneratedFiles\$(ConfigurationName)\.;.\GeneratedFiles;.;.\include;.\..\lib\event_client;.\..\lib\DataComEvent\Shared_include;$(QTDIR)\include;$(QTDIR)\include\QtQuickControls2;$(QTDIR)\include\QtQuick;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtQml;$(QTDIR)\include\QtNetwork;$(QTDIR)\include\QtCore;.\debug;\include;$(QTDIR)\mkspecs\win32-msvc</IncludePath>
-      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">_WINDOWS;UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
-      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles\$(ConfigurationName)\.;.\GeneratedFiles;.;.\include;.\..\lib\event_client;.\..\lib\DataComEvent\Shared_include;$(QTDIR)\include;$(QTDIR)\include\QtQuickControls2;$(QTDIR)\include\QtQuick;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtQml;$(QTDIR)\include\QtNetwork;$(QTDIR)\include\QtCore;.\release;\include;$(QTDIR)\mkspecs\win32-msvc</IncludePath>
-      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">_WINDOWS;UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;QT_NO_DEBUG;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB;NDEBUG</Define>
     </QtMoc>
     <QtMoc Include="include\dnai\enums\qcstandardpaths.h">
     </QtMoc>
@@ -443,6 +407,8 @@
     </QtMoc>
     <QtMoc Include="include\dnai\models\user.h">
     </QtMoc>
+    <ClInclude Include="include\dnai\models\gui\data\variable.h" />
+    <ClInclude Include="include\dnai\models\gui\declarable\variable.h" />
     <ClInclude Include="include\views.h" />
     <QtMoc Include="include\dnai\viewshandler.h">
     </QtMoc>

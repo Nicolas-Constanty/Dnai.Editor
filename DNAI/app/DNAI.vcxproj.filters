@@ -92,7 +92,13 @@
     <ClCompile Include="src\dnai\controllers\consolecontroller.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\dnai\models\gui\declarable\context.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="src\dnai\views\contextview.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\dnai\commands\corecommand.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\dnai\views\customshape.cpp">
@@ -107,13 +113,31 @@
     <ClCompile Include="src\dnai\entitiesfactory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\dnai\models\core\entity.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="src\dnai\models\entity.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\dnai\models\gui\data\entity.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\dnai\models\gui\declarable\entity.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\dnai\models\core\entitydata.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\dnai\models\entitytree.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\dnai\models\gui\declarable\enumtype.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="src\dnai\eventutilities.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\dnai\models\gui\flow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\dnai\views\flow.cpp">
@@ -122,16 +146,25 @@
     <ClCompile Include="src\dnai\focusmanager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\dnai\models\gui\declarable\function.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="src\dnai\views\genericnode.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\dnai\controllers\icontroller.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\dnai\models\gui\input.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="src\dnai\views\input.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\dnai\controllers\inputcontroller.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\dnai\models\gui\instruction.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\dnai\views\instructionview.cpp">
@@ -155,6 +188,9 @@
     <ClCompile Include="src\dnai\models\listnode.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\dnai\models\gui\declarable\listtype.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="src\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -170,7 +206,13 @@
     <ClCompile Include="src\dnai\commands\movenodecommand.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\dnai\models\gui\declarable\objecttype.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="src\dnai\http\observable.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\dnai\models\gui\output.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\dnai\views\output.cpp">
@@ -212,56 +254,14 @@
     <ClCompile Include="src\dnai\models\user.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\dnai\models\gui\declarable\variable.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="src\dnai\viewshandler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\dnai\commands\zoomcanvascommand.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\dnai\models\old\context.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\dnai\models\gui\declarable\function.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\dnai\models\gui\declarable\entity.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\dnai\commands\corecommand.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\dnai\models\gui\declarable\variable.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\dnai\models\gui\input.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\dnai\models\gui\instruction.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\dnai\models\gui\output.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\dnai\models\core\entity.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\dnai\models\core\entitydata.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\dnai\models\gui\flow.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\dnai\models\gui\declarable\objecttype.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\dnai\models\gui\declarable\context.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\dnai\models\gui\declarable\enumtype.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\dnai\models\gui\declarable\listtype.cpp">
-      <Filter>Generated Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -286,6 +286,9 @@
     <ClInclude Include="include\dnai\baselinkable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <QtMoc Include="include\dnai\models\basicnodemodel.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
     <QtMoc Include="include\dnai\views\beziercurve.h">
       <Filter>Header Files</Filter>
     </QtMoc>
@@ -316,10 +319,25 @@
     <ClInclude Include="include\dnai\controllers\consolecontroller.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\dnai\models\gui\data\context.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dnai\models\gui\declarable\context.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <QtMoc Include="include\dnai\views\contextview.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <ClInclude Include="include\controllers.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <QtMoc Include="include\dnai\enums\core\core.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <ClInclude Include="include\dnai\commands\corecommand.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dnai\exceptions\coreexception.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <QtMoc Include="include\dnai\views\customshape.h">
@@ -337,13 +355,46 @@
     <ClInclude Include="include\dnai\entitiesfactory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\dnai\models\core\entity.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dnai\models\declarable\entity.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <QtMoc Include="include\dnai\models\entity.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <ClInclude Include="include\dnai\models\gui\data\entity.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dnai\models\gui\declarable\entity.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dnai\models\gui\entity.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dnai\models\core\entitydata.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <QtMoc Include="include\dnai\models\entitytree.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <ClInclude Include="include\enums.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\dnai\models\gui\declarable\enumtype.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="include\dnai\eventutilities.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dnai\exceptions\exception.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dnai\exceptions\exceptionmanager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dnai\models\gui\flow.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <QtMoc Include="include\dnai\views\flow.h">
@@ -355,31 +406,67 @@
     <ClInclude Include="include\dnai\focusmanager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\dnai\models\gui\data\function.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dnai\models\gui\declarable\function.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <QtMoc Include="include\dnai\views\genericnode.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="include\dnai\models\generictreeitem.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <ClInclude Include="include\dnai\exceptions\guiexception.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="include\http.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\dnai\commands\icommand.h">
+    <ClInclude Include="include\dnai\interfaces\iclone.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\dnai\controllers\icontroller.h">
+    <ClInclude Include="include\dnai\interfaces\icommand.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\dnai\ifactory.h">
+    <ClInclude Include="include\dnai\interfaces\icontroller.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\dnai\ilinkable.h">
+    <ClInclude Include="include\dnai\interfaces\ientity.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\dnai\iloadingclass.h">
+    <ClInclude Include="include\dnai\interfaces\ifactory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dnai\interfaces\ilinkable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dnai\interfaces\iloadingclass.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dnai\interfaces\imodel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dnai\models\gui\data\input.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dnai\models\gui\input.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\dnai\views\input.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\dnai\controllers\inputcontroller.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dnai\models\gui\data\instruction.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dnai\models\gui\instruction.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dnai\models\instruction.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <QtMoc Include="include\dnai\enums\core\instructionid.h">
@@ -391,13 +478,16 @@
     <QtMoc Include="include\dnai\views\io.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <ClInclude Include="include\dnai\iobservable.h">
+    <ClInclude Include="include\dnai\interfaces\iobservable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <QtMoc Include="include\dnai\enums\iotype.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <ClInclude Include="include\dnai\views\iscalable.h">
+    <ClInclude Include="include\dnai\interfaces\iscalable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dnai\interfaces\iserializable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <QtMoc Include="include\dnai\views\layout.h">
@@ -409,6 +499,9 @@
     <ClInclude Include="include\dnai\link.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\dnai\models\gui\data\linkable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="include\dnai\views\linkablebezieritem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -418,6 +511,9 @@
     <QtMoc Include="include\dnai\models\listnode.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <ClInclude Include="include\dnai\models\gui\declarable\listtype.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <QtMoc Include="include\dnai\manager.h">
       <Filter>Header Files</Filter>
     </QtMoc>
@@ -430,9 +526,24 @@
     <ClInclude Include="include\dnai\commands\movenodecommand.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\dnai\exceptions\notimplemented.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dnai\models\gui\data\objecttype.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dnai\models\gui\declarable\objecttype.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <QtMoc Include="include\dnai\http\observable.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <ClInclude Include="include\dnai\models\gui\data\output.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dnai\models\gui\output.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="include\dnai\views\output.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -440,6 +551,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <QtMoc Include="include\dnai\processmanager.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="include\dnai\project.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="include\dnai\enums\qcstandardpaths.h">
@@ -475,176 +589,102 @@
     <QtMoc Include="include\dnai\models\user.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <ClInclude Include="include\dnai\models\gui\data\variable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dnai\models\gui\declarable\variable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="include\views.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <QtMoc Include="include\dnai\viewshandler.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <ClInclude Include="include\dnai\interfaces\iclone.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\dnai\interfaces\icommand.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\dnai\interfaces\icontroller.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\dnai\interfaces\ifactory.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\dnai\interfaces\ilinkable.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\dnai\interfaces\iloadingclass.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\dnai\interfaces\imodel.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\dnai\interfaces\iobservable.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\dnai\interfaces\iscalable.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\dnai\interfaces\iserializable.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\dnai\enums\guitype.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\dnai\enums\core\core.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\dnai\exceptions\coreexception.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\dnai\exceptions\exception.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\dnai\exceptions\exceptionmanager.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\dnai\exceptions\guiexception.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\dnai\interfaces\imodeldata.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\dnai\models\instruction.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\dnai\models\context.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\dnai\models\datatype.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\dnai\models\function.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\dnai\models\guicorestruct.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\dnai\models\gui\declarable\function.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\dnai\models\gui\flow.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\dnai\models\gui\input.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\dnai\models\gui\instruction.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\dnai\models\gui\output.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\dnai\models\gui\declarable\variable.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\dnai\models\gui\declarable\objecttype.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\dnai\models\gui\declarable\listtype.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\dnai\interfaces\iinstruction.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\dnai\interfaces\ientity.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\dnai\commands\corecommand.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\dnai\interfaces\ivariable.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\dnai\models\gui\declarable\enumtype.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\dnai\models\gui\declarable\entity.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\dnai\models\gui\declarable\context.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\dnai\models\core\entity.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\dnai\models\core\entitydata.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\dnai\models\gui\data\context.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\dnai\models\gui\data\entity.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\dnai\models\gui\data\function.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\dnai\models\gui\data\input.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\dnai\models\gui\data\instruction.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\dnai\models\gui\data\linkable.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\dnai\models\gui\data\objecttype.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\dnai\models\gui\data\output.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\dnai\models\gui\data\variable.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\dnai\models\gui\data\flow.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\dnai\models\gui\data\enumtype.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\dnai\exceptions\notimplemented.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\dnai\models\gui\data\listtype.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <CustomBuild Include="debug\moc_predefs.h.cbt">
       <Filter>Generated Files</Filter>
     </CustomBuild>
     <CustomBuild Include="release\moc_predefs.h.cbt">
       <Filter>Generated Files</Filter>
     </CustomBuild>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="resources\Forms\BasePanelForm.ui">
@@ -1096,19 +1136,5 @@
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="dnai.rc" />
-  </ItemGroup>
-  <ItemGroup>
-    <QtMoc Include="include\dnai\models\basicnodemodel.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="include\dnai\models\entity.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="include\dnai\models\generictreeitem.h">
-      <Filter>Generated Files</Filter>
-    </QtMoc>
-    <QtMoc Include="include\dnai\project.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
   </ItemGroup>
 </Project>

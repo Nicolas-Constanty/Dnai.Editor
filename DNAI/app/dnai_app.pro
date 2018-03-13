@@ -202,7 +202,11 @@ HEADERS += \
     include/dnai/exceptions/exception.h \
     include/dnai/exceptions/exceptionmanager.h \
     include/dnai/exceptions/guiexception.h \
-    include/dnai/exceptions/notimplemented.h
+    include/dnai/exceptions/notimplemented.h \
+    include/dnai/interfaces/ifactory.h \
+    include/dnai/interfaces/iclone.h \
+    include/dnai/interfaces/ientity.h \
+    include/dnai/interfaces/ilinkable.h
 
 #ENUMS
 HEADERS += \
