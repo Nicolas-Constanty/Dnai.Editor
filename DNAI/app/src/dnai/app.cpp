@@ -103,12 +103,12 @@ namespace dnai
 		return QGuiApplication::eventFilter(o, event);
 	}
 
-	const models::BasicNodeModel &App::basicNodesModel() const
+    models::BasicNodeModel &App::basicNodesModel() const
 	{
 		return *m_nodeModel;
 	}
 
-	Editor *App::editor() const
+    Editor &App::editor() const
 	{
 		return m_editor;
 	}
@@ -130,17 +130,17 @@ namespace dnai
 		return m_instance;
 	}
 
-    const QQmlApplicationEngine &App::engine() const
+    QQmlApplicationEngine &App::engine()
 	{
 		return m_engine;
 	}
 
-    const AppSettings &App::settings() const
+    AppSettings &App::settings() const
 	{
 		return *m_settings;
 	}
 
-	const Session  &App::session() const
+    Session  &App::session()
 	{
 		return m_session;
 	}
@@ -160,7 +160,7 @@ namespace dnai
 		return dynamic_cast<views::InstructionView*>(currentInstance()->appView().layout()->contextView());
 	}
 
-    const views::AppView &App::appView() const
+    views::AppView &App::appView() const
 	{
 		return *m_appView;
 	}

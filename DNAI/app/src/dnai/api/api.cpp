@@ -130,7 +130,7 @@ const Config api::http_config = {
     void api::setUser(const api::User &user)
     {
         api::user = user;
-        App::currentInstance()->settings()->setValue(api::settings_key, QVariant::fromValue(api::user));
+        App::currentInstance()->settings().setValue(api::settings_key, QVariant::fromValue(api::user));
     }
 }
 

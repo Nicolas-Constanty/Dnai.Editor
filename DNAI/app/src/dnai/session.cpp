@@ -3,6 +3,8 @@
 #include "dnai/api/api.h"
 #include "dnai/project.h"
 #include <QFileInfo>
+#include "dnai/editor.h"
+#include "dnai/solution.h"
 
 namespace dnai {
 
@@ -82,13 +84,19 @@ void Session::logout()
 void Session::downloadProjectData(uint index, const QString &id)
 {
     api::get_raw_file(id).map([this, index](Response response) -> Response {
-         QFile emptyFile("empty");
-         auto project = Project::loadProject(response.body, emptyFile);
-         if (project != nullptr) {
-             m_user->setCurrentFileData(project->jsonData());
-             emit userChanged(m_user);
-         }
-         return response;
+        auto solution = Editor::instance().solution();
+		auto project = new Project();
+		if (!solution)
+		{
+            Editor::instance().openSolution("");
+            solution = Editor::instance().solution();
+			solution->setName("Solution " + project->name());
+		}
+		project->loadFromJson(response.body);
+		solution->addProject(project);
+		m_user->setCurrentFileData(project->jsonData());
+		emit userChanged(m_user);
+        return response;
      });
 }
 

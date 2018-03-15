@@ -27,12 +27,12 @@ namespace dnai {
         void registerSettings(AppSettings* appSettings);
 
     public:
-		const Session &session() const;
-		const AppSettings &settings() const;
-		const views::AppView &appView() const;
-		const QQmlApplicationEngine &engine() const;
-		const models::BasicNodeModel &basicNodesModel() const;
-		Editor *editor() const;
+        Session &session();
+        AppSettings &settings() const;
+        views::AppView &appView() const;
+        QQmlApplicationEngine &engine();
+        models::BasicNodeModel &basicNodesModel() const;
+        Editor &editor() const;
 
     public:
         static void loadFonts();
@@ -49,7 +49,7 @@ namespace dnai {
 		models::BasicNodeModel *m_nodeModel;
 	    Session m_session;
 	    static App *m_instance;
-		Editor *m_editor;
+        Editor &m_editor;
 
         QObject *createQmlComponent(const QString &path);
 	    static void setupSettings();

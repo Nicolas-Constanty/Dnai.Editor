@@ -1,0 +1,129 @@
+{
+
+  "description": "Create min/max IA",
+
+  "main": {
+
+    "classes": [
+      {
+        "name": "class1",
+        "index": 0,
+        "listIndex": 0,
+        "position": {
+          "x": 10,
+          "y": 10
+        },
+        "description": "je suis une classe",
+        "variables": [],
+        "functions": []
+      }
+    ],
+
+    "contexts": [
+
+      {
+        "name": "context1",
+        "description": "cc",
+        "index": 0,
+        "listIndex": 0,
+        "variables": [],
+        "classes": [],
+        "position": {
+          "x": 100,
+          "y": 10
+        },
+        "functions": [],
+        "contexts": [
+
+          {
+            "name": "context1.1",
+            "description": "cc",
+            "index": 0,
+            "listIndex": 1,
+            "variables": [],
+            "contexts":  [],
+            "classes": [
+
+              {
+                "name": "class1.1",
+                "index": 0,
+                "listIndex": 0,
+                "position": {
+                  "x": 10,
+                  "y": 10
+                },
+                "description": "je suis une classe",
+                "variables": [],
+                "functions": [
+                  {
+                    "name": "func1vraimenttreslonguepourtesterlascrollbarautomatique",
+                    "index": 0,
+                    "listIndex": 0
+                  },
+                  {
+                    "name": "func2",
+                    "index": 1,
+                    "listIndex": 0
+                  }
+                ]
+              }
+            ],
+            "position": {
+              "x": 100,
+              "y": 10
+            },
+
+            "functions": []
+          },
+
+          {
+            "name": "context1.2",
+            "description": "cvgdgs",
+            "index": 0,
+            "listIndex": 0,
+            "position": {
+              "x": 200,
+              "y": 10
+            }
+          }
+
+        ]
+      },
+
+      {
+        "name": "context2",
+        "description": "cvgdgs",
+        "index": 0,
+        "listIndex": 0,
+        "position": {
+          "x": 200,
+          "y": 10
+        }
+      }
+
+    ],
+
+    "description": "main",
+
+    "functions": [
+
+    ],
+
+    "name": "Duly",
+
+    "variables": [
+      {
+        "name": "variable1",
+        "description": "je suis une variable",
+        "position": {
+            "x": 10,
+            "y": 100
+        }
+      }
+    ]
+
+  },
+
+  "name": "Plus or Minus"
+
+}

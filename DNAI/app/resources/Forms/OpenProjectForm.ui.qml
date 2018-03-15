@@ -27,7 +27,7 @@ Page {
         id: fileDialog
         title: "Please choose a project"
         selectMultiple: false
-        nameFilters: ["DNAI project (*.dnaiproject)"]
+        nameFilters: ["DNAI project (*.dnai)"]
     }
 
     header: TabBar {

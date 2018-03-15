@@ -33,15 +33,17 @@ namespace dnai
 
 		try {
 			const QJsonObject obj(QJsonDocument::fromJson(data).object());
+			qDebug() << obj;
 			_deserialize(obj);
 			m_data = obj;
-			m_selectedProject = m_projects[0];
+			if (!m_projects.isEmpty())
+				m_selectedProject = m_projects[0];
 		}
 		catch (std::exception &e) {
 			Q_UNUSED(e)
 			throw exceptions::GuiExeption("Error : Corrupted Solution file");
+            qWarning("Couldn't parse file.");
 		}
-		qWarning("Couldn't parse file.");
 	}
 
 	void Solution::close()
@@ -136,11 +138,15 @@ namespace dnai
 	{
 		if (obj["version"].toString() != Editor::instance().version())
 			qWarning() << "Warning this solution file (" << m_filename << ") wasn't created with the same editor's version (" << obj["version"].toString() << "!= current" << Editor::instance().version() << ")";
+
 		for (const auto projfilename : obj["projects"].toArray())
 		{
+			const QStringRef subString(&m_filename, 0, m_filename.lastIndexOf("/"));
 			const auto proj = new Project();
-			proj->load(projfilename.toString());
+			proj->load(subString + "/" + projfilename.toString());
 			m_projects.append(proj);
+			qDebug() << "Successfully load the project :" << subString + "/" + projfilename.toString();
+			qDebug() << proj->jsonData();
 		}
 	}
 }

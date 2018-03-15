@@ -17,7 +17,7 @@ struct Count {
 }
 
 namespace dnai {
-	class Project : public interfaces::IProject, public models::EntityTree, public interfaces::ASerializable<Project>
+    class Project : public models::EntityTree, public interfaces::ASerializable<Project>, public interfaces::IProject
     {
         Q_OBJECT
 		Q_PROPERTY(dnai::models::Entity *selectedEntity READ selectedEntity WRITE setSelectedEntity NOTIFY selectedEntityChanged)
@@ -34,8 +34,11 @@ namespace dnai {
 
 	signals:
 		void selectedEntityChanged(models::Entity *entity);
+
+    public:
 		void save() override;
 		void load(const QString& path) override;
+        void loadFromJson(const QJsonObject& obj);
 		void close() override;
 		const QString& version() const override;
 		void setVersion(const QString& version) override;
