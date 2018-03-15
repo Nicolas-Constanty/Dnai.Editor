@@ -156,7 +156,7 @@ int main(int argc, char *argv[])
 #endif
     registerDNAI();
     app.load();
-    return app.exec();
+    return dnai::App::exec();
 }
 
 
