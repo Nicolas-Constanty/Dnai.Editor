@@ -23,12 +23,13 @@ namespace dnai
 		void save() override;
 		void restoreViewState(const QJsonObject& obj) override;
 		void saveViewState() override;
-		Q_INVOKABLE void openSolution(const QString& filename) override;
+		Q_INVOKABLE void openSolution() override;
+		Q_INVOKABLE void loadSolution(const QString& filename) override;
 		void closeSolution() override;
 		const QList<interfaces::ICommand*>& actions() const override;
 		const QObject& selection() const override;
 		const QList<QObject*>& selections() const override;
-		const QList<interfaces::IViewZone *>& views() const override;
+		Q_INVOKABLE const QList<interfaces::IViewZone *>& views() const override;
 		const interfaces::IViewZone& selectedView() const override;
         interfaces::ISolution *solution() const override;
         dnai::Solution *getSolution() const;

@@ -41,7 +41,14 @@ namespace dnai
 		obj["views"] = arr;
 	}
 
-	void Editor::openSolution(const QString& filename)
+	void Editor::openSolution()
+	{
+        for (auto proj : m_solution->projects())
+            if (auto p = dynamic_cast<Project*>(proj))
+                p->foreachEntity([](models::Entity *e) { e->declare(); });
+	}
+
+	void Editor::loadSolution(const QString& filename)
 	{
 		m_solution = new Solution();
 		if (!filename.isEmpty())

@@ -13,7 +13,7 @@ Item {
     property Handle s: null
     clip: true
 
-    function appendNextV()
+    function appendNextV(percent)
     {
         Factory.createObjects("resources/Components/ViewZone.qml", {}, rootItem.parent)
         var n = Factory.getObject()
@@ -36,7 +36,7 @@ Item {
             s.isVertical = true
             if (n.prev.s === null)
             {
-                s.x = n.prev.x + n.prev.width / 2 - s.width / 2
+                s.x = n.prev.x + n.prev.width * percent - s.width / 2
                 n.prev.s = s
 
                 n.anchors.left = n.prev.s.horizontalCenter
@@ -50,7 +50,7 @@ Item {
                 //   s1        s1  s2
                 n.s = s
                 n.s.x = n.prev.s.x
-                n.prev.s.x = n.prev.x + n.prev.width / 2 - s.width / 2
+                n.prev.s.x = n.prev.x + n.prev.width * percent - s.width / 2
                 //c1
                 n.prev.anchors.right = n.prev.s.horizontalCenter
                 //c2
@@ -75,7 +75,7 @@ Item {
 
 
   */
-    function appendPrevV()
+    function appendPrevV(percent)
     {
         Factory.createObjects("resources/Components/ViewZone.qml", {}, rootItem.parent)
         var n = Factory.getObject()
@@ -98,7 +98,7 @@ Item {
             s.isVertical = true
             if (n.prev && n.prev.s === null)
             {
-                s.x = n.prev.x + n.prev.width / 2 - s.width / 2
+                s.x = n.prev.x + n.prev.width * percent - s.width / 2
                 n.prev.s = s
 
                 n.anchors.left = (n.prev.prev !== null && n.prev.prev.s !== null) ? n.prev.prev.s.horizontalCenter : rootItem.parent.left
@@ -109,7 +109,7 @@ Item {
 
                 // c1  c2 => c3  c1  c2
                 //   s1        s1  s2
-                s.x = s.x = n.next.x + n.next.width / 2 - s.width / 2
+                s.x = s.x = n.next.x + n.next.width * percent - s.width / 2
                 n.s = s
                 //c1
                 n.next.anchors.left = n.s.horizontalCenter
@@ -125,7 +125,7 @@ Item {
         }
     }
 
-    function appendNextH()
+    function appendNextH(percent)
     {
         Factory.createObjects("resources/Components/ViewZone.qml", {}, rootItem.parent)
         var n = Factory.getObject()
@@ -148,7 +148,7 @@ Item {
             s.isVertical = false
             if (n.prev.s === null)
             {
-                s.y = n.prev.y + n.prev.height / 2 - s.height / 2
+                s.y = n.prev.y + n.prev.height * percent - s.height / 2
                 n.prev.s = s
 
                 n.anchors.top = n.prev.s.verticalCenter
@@ -162,7 +162,7 @@ Item {
                 //   s1        s1  s2
                 n.s = s
                 n.s.y = n.prev.s.y
-                n.prev.s.y = n.prev.y + n.prev.height / 2 - s.height / 2
+                n.prev.s.y = n.prev.y + n.prev.height * percent - s.height / 2
                 //c1
                 n.prev.anchors.bottom = n.prev.s.verticalCenter
                 //c2
@@ -179,7 +179,7 @@ Item {
         }
     }
 
-    function appendPrevH()
+    function appendPrevH(percent)
     {
         Factory.createObjects("resources/Components/ViewZone.qml", {}, rootItem.parent)
         var n = Factory.getObject()
@@ -202,7 +202,7 @@ Item {
             s.isVertical = false
             if (n.prev && n.prev.s === null)
             {
-                s.y = n.prev.y + n.prev.height / 2 - s.height / 2
+                s.y = n.prev.y + n.prev.height * percent - s.height / 2
                 n.prev.s = s
 
                 n.anchors.top = (n.prev.prev !== null && n.prev.prev.s !== null) ? n.prev.prev.s.verticalCenter : rootItem.parent.top
@@ -213,7 +213,7 @@ Item {
 
                 // c1  c2 => c3  c1  c2
                 //   s1        s1  s2
-                s.y = s.y = n.next.y + n.next.height / 2 - s.height / 2
+                s.y = s.y = n.next.y + n.next.height * percent - s.height / 2
                 n.s = s
                 //c1
                 n.next.anchors.top = n.s.verticalCenter
@@ -229,19 +229,19 @@ Item {
         }
     }
 
-    function split(direction, w, h)
+    function split(direction, w, h, percent)
     {
         if (direction === 0)
-            splitLeft(w, h)
+            splitLeft(w, h, percent)
         else if (direction === 1)
-            splitRight(w, h)
+            splitRight(w, h, percent)
         else if (direction === 2)
-            splitTop(w, h)
+            splitTop(w, h, percent)
         else if (direction === 3)
-            splitBottom(w, h)
+            splitBottom(w, h, percent)
     }
 
-    function splitVertical(w)
+    function splitVertical(w, percent)
     {
         Factory.createObjects("resources/Components/ViewZone.qml", {}, rootItem)
         var v1 = Factory.getObject()
@@ -253,7 +253,7 @@ Item {
         splitter.width = rootItem.handlesize
         splitter.anchors.top = splitter.parent.top
         splitter.anchors.bottom = splitter.parent.bottom
-        splitter.x = w / 2 - splitter.width / 2
+        splitter.x = w * percent - splitter.width / 2
         splitter.isVertical = true
 
         v1.anchors.top = v1.parent.top
@@ -274,7 +274,7 @@ Item {
         return [v1, v2]
     }
 
-    function splitHorizontal(h)
+    function splitHorizontal(h, percent)
     {
         Factory.createObjects("resources/Components/ViewZone.qml", {}, rootItem)
         var v1 = Factory.getObject()
@@ -286,7 +286,7 @@ Item {
         splitter.height = rootItem.handlesize
         splitter.anchors.right = splitter.parent.right
         splitter.anchors.left = splitter.parent.left
-        splitter.y = h / 2 - splitter.height / 2
+        splitter.y = h  * percent - splitter.height / 2
         splitter.isVertical = false
 
         v1.anchors.right = v1.parent.right
@@ -312,11 +312,11 @@ Item {
 
 //    }
 
-    function splitLeft(w, h)
+    function splitLeft(w, h, percent)
     {
         if (rootItem.parent.splitvalue !== 1)
         {
-            var tab = splitVertical(w)
+            var tab = splitVertical(w, percent)
             for (var i = 0; i < _content.children.length; i++)
             {
                 if (_content.children[i] !== undefined)
@@ -324,14 +324,14 @@ Item {
             }
         }
         else
-            appendPrevV()
+            appendPrevV(percent)
     }
 
-    function splitRight(w, h)
+    function splitRight(w, h, percent)
     {
         if (rootItem.parent.splitvalue !== 1)
         {
-            var tab = splitVertical(w)
+            var tab = splitVertical(w, percent)
             for (var i = 0; i < _content.children.length; i++)
             {
                 if (_content.children[i] !== undefined)
@@ -339,14 +339,14 @@ Item {
             }
         }
         else
-            appendNextV()
+            appendNextV(percent)
     }
 
-    function splitTop(w, h)
+    function splitTop(w, h, percent)
     {
         if (rootItem.parent.splitvalue !== 2)
         {
-            var tab = splitHorizontal(h)
+            var tab = splitHorizontal(h, percent)
             for (var i = 0; i < _content.children.length; i++)
             {
                 if (_content.children[i] !== undefined)
@@ -354,14 +354,14 @@ Item {
             }
         }
         else
-            appendPrevH()
+            appendPrevH(percent)
     }
 
-    function splitBottom(w, h)
+    function splitBottom(w, h, percent)
     {
         if (rootItem.parent.splitvalue !== 2)
         {
-            var tab = splitHorizontal(h)
+            var tab = splitHorizontal(h, percent)
             for (var i = 0; i < _content.children.length; i++)
             {
                 if (_content.children[i] !== undefined)
@@ -369,7 +369,7 @@ Item {
             }
         }
         else
-            appendNextH()
+            appendNextH(percent)
     }
     MouseArea {
         id: ma
@@ -388,25 +388,25 @@ Item {
             text: "SplitLeft"
             onClicked: {
 //                appendNextV()
-                split(0, rootItem.width, rootItem.height)
+                split(0, rootItem.width, rootItem.height, 0.2)
             }
         }
         MenuItem {
             text: "SplitRight"
             onClicked: {
-                split(1, rootItem.width, rootItem.height)
+                split(1, rootItem.width, rootItem.height, 0.5)
             }
         }
         MenuItem {
             text: "SplitTop"
             onClicked: {
-                split(2, rootItem.width, rootItem.height)
+                split(2, rootItem.width, rootItem.height, 0.5)
             }
         }
         MenuItem {
             text: "SplitBottom"
             onClicked: {
-                split(3, rootItem.width, rootItem.height)
+                split(3, rootItem.width, rootItem.height, 0.5)
             }
         }
     }

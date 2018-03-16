@@ -88,7 +88,7 @@ void Session::downloadProjectData(uint index, const QString &id)
 		auto project = new Project();
 		if (!solution)
 		{
-            Editor::instance().openSolution("");
+            Editor::instance().loadSolution("");
             solution = Editor::instance().solution();
 			solution->setName("Solution " + project->name());
 		}

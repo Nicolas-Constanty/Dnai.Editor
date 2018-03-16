@@ -1,6 +1,7 @@
 #ifndef DNAI_MODELS_CORE_ENTITY_H
 #define DNAI_MODELS_CORE_ENTITY_H
 
+#include <QDebug>
 #include "dnai/enums/core/core.h"
 #include "dnai/commands/corecommand.h"
 #include "entitydata.h"
@@ -44,6 +45,11 @@ namespace dnai
 				bool setVisibility(enums::core::VISIBILITY v);
 				enums::core::VISIBILITY visibility() const;
 
+				void declare()
+				{
+					qDebug() << m_data.name;
+				};
+
 				Entity& operator=(const Entity& other);
 
 				//IEntityCore implementation
@@ -55,6 +61,7 @@ namespace dnai
 			public:
 				bool setData(const EntityData &d) override;
 				const EntityData &data() const override;
+
 			private:
 				EntityData m_data;
 				static std::map<qint32, commands::CoreCommand*> m_commands;
