@@ -29,4 +29,4 @@ win32-msvc* {
     app.depends = libReseau libDataEvent
 }
 
-
+SUBDIRS += lib/Cerealization

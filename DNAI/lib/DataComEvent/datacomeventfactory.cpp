@@ -1,8 +1,52 @@
-#include <QDebug>
+#include <cstdlib>
+
+#include "datacomeventfactory.h"
+#include "commands/commands.h"
+#include "replies/replies.h"
+#include "packagecore.h"
+#include "coreserialoperations.h"
+
+template <typename Command>
+DataComEventFactory::DataComEvent DataComEventFactory::createPackageFrom(Command &cmd)
+{
+    Cerealization::Cerealizer::BinaryStream stream;
+
+    stream << cmd;
+
+    return DataComEvent{
+        memcpy(std::malloc(stream.Size()), stream.Data(), stream.Size()),
+        static_cast<unsigned int>(stream.Size())
+    };
+}
+
+template <typename Reply>
+Reply *DataComEventFactory::getPackageFrom(DataComEvent reply, DataComEvent command)
+{
+    std::unique_ptr<Reply> package(new Reply());
+    Cerealization::Cerealizer::BinaryStream replyStream((Cerealization::Cerealizer::BinaryStream::Byte *)reply.data, reply.size);
+    Cerealization::Cerealizer::BinaryStream commandStream((Cerealization::Cerealizer::BinaryStream::Byte *)command.data, command.size);
+
+    replyStream >> *package;
+    commandStream >> package->command;
+
+    return package.release();
+}
+
+#define create_command(CMD) template DataComEventFactory::DataComEvent DataComEventFactory::createPackageFrom<CMD>(CMD &)
+#define get_reply(RPL) template RPL *DataComEventFactory::getPackageFrom<RPL>(DataComEvent, DataComEvent)
+
+/**
+ * Declare
+ */
+create_command(Command::Declarator::Declare);
+get_reply(Reply::Declarator::Declared);
+
+/*#include <QDebug>
 #include <QString>
 #include "datacomeventfactory.h"
 #include "declarecorepackage.h"
 #include "commands.h"
+#include "Cerealizable/Object.hpp"
 
 DataComEventFactory::DataComEventFactory()
 {
@@ -20,7 +64,7 @@ DataComEventFactory::DataComEventFactory()
         dataCom.data = malloc(0);
     }
     return (dataCom);
-}*/
+}
 
 DataComEventFactory::DataComEvent DataComEventFactory::createDataComEvent(qint32 size) {
     DataComEventFactory::DataComEvent dataCom;
@@ -106,7 +150,7 @@ DataComEventFactory::DataComEvent DataComEventFactory::createRemove(PackageDataC
 
     remove.set_entitytype(entity_type);
     remove.set_containerid(containerID);
-    remove.set_name(name.toStdString().c_str());*/
+    remove.set_name(name.toStdString().c_str());
 
     return (createDataComEvent(4));
 }
@@ -121,7 +165,7 @@ DataComEventFactory::DataComEvent DataComEventFactory::createMove(PackageDataCom
     move.set_entitytype(entity_type);
     move.set_fromid(fromID);
     move.set_toid(toID);
-    move.set_name(name.toStdString().c_str());*/
+    move.set_name(name.toStdString().c_str());
 
     return (createDataComEvent(3));
 }
@@ -135,7 +179,8 @@ DataComEventFactory::DataComEvent DataComEventFactory::createChangeVisibility(Pa
     changeVisibility.set_entitytype(entity_type);
     changeVisibility.set_containerid(containerID);
     changeVisibility.set_name(name.toStdString().c_str());
-    changeVisibility.set_newvisi(visibility);*/
+    changeVisibility.set_newvisi(visibility);
 
     return (createDataComEvent(2));
 }
+*/

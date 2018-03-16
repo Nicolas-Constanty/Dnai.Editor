@@ -1,28 +1,26 @@
 #ifndef DATACOMEVENTFACTORY_H
 #define DATACOMEVENTFACTORY_H
 
-//#include "core.pb.h"
 #include <QObject>
 #include <QDebug>
-
-#include "Buffer.h"
-#include "packagecore.h"
-#include "replies.h"
-
 
 class Q_DECL_EXPORT DataComEventFactory
 {
 public:
-	typedef struct DataComEvent {
+    class DataComEvent
+    {
 	public:
 		void *data;
 		unsigned int size;
-		DataComEvent() {
-			data = NULL;
-			size = 0;
+
+        DataComEvent(void *data = nullptr, unsigned int size = 0):
+            data{data},
+            size{size}
+        {
+
 		}
 
-		DataComEvent(DataComEvent const &other) {
+        DataComEvent(DataComEvent const &other) {
 			*this = other;
 		}
 
@@ -31,67 +29,26 @@ public:
 			this->size = other.size;
 			return (*this);
 		}
+    };
 
-	} DataComEvent;
+public:
+    DataComEventFactory() = default;
+    ~DataComEventFactory() = default;
 
 private:
-	//  DataComEvent createDataComEvent(google::protobuf::Message &);
-	DataComEvent createDataComEvent(qint32 size);
-	void memcpyDataCom(void **dest, void *src, size_t);
-	void memcpySerializeDataCom(void *dest, void **src, size_t);
+    template <typename Command>
+    DataComEvent createPackageFrom(Command &cmd);
 
 public:
-	DataComEventFactory();
+    template <typename Package, typename ... Args>
+    DataComEvent createPackage(Args const &... args)
+    {
+        Package pck(args...);
+        return createPackageFrom(pck);
+    }
 
-private:
-	template <typename Package, typename ... Params>
-	DataComEvent SerializeCommandToDataComEvent(Params const &... args)
-	{
-		Package pkg(args...);
-		size_t pkgSize = pkg.GetPackageSize();
-		DataComEvent dataCom = createDataComEvent(pkgSize);
-		Buffer buff(dataCom.data, pkgSize);
-
-		if (pkg.SerializeTo(buff) != pkgSize)
-		{
-			qDebug() << QString("DataComEventFactory.SerializePackagedToDataComEvent: Failed to serialize: not enough space into buffer");
-		}
-
-		return dataCom;
-	}
-
-public:
-	template <typename ReplyPckg>
-	ReplyPckg *DeserializeReplyFrom(void *buff, size_t size)
-	{
-		return Buffer(buff, size).Deserialize<ReplyPckg>();
-	}
-
-public:
-
-    DataComEvent createDeclare(PackageDataCom::ENTITY_CORE entity_type,
-		uint32_t containerID,
-		QString const &name,
-		PackageDataCom::VISIBILITYCORE visibility);
-	void *serializeDeclare(void *, unsigned int size);
-	void *serializeEntityDeclare(void *, unsigned int size);
-
-	Reply::EntityDeclared   *getEntityDeclared(void *buff, size_t size);
-
-    DataComEvent createRemove(PackageDataCom::ENTITY_CORE entity_type,
-		uint32_t containerID,
-		QString const &name);
-
-    DataComEvent createMove(PackageDataCom::ENTITY_CORE entity_type,
-		uint32_t fromID,
-		uint32_t toID,
-		QString const &name);
-
-    DataComEvent createChangeVisibility(PackageDataCom::ENTITY_CORE entity_type,
-		uint32_t containerID,
-		QString const &name,
-		PackageDataCom::VISIBILITYCORE visibility);
-
+    template <typename Reply>
+    Reply *getPackageFrom(DataComEvent reply, DataComEvent command);
 };
 
 #endif // DATACOMEVENTCONTROLLER_H

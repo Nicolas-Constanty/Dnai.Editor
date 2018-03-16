@@ -11,6 +11,8 @@
 
 class ClientCommunication;
 
+using namespace PackageDataCom;
+
 namespace dnai
 {
 	namespace controllers
@@ -25,51 +27,19 @@ namespace dnai
 			static qint16 serverPort;
 			static ClientController &shared();
 
-		public:
-			void onReceiveEntityDeclared(void *, unsigned int);
-			void onReceiveDeclare(void *, unsigned int);
-
 		private:
-			void registerEvent(QString const &replyName, std::function<void(void *, unsigned int)> const &callback) const;
+            template <typename Reply, typename Callable>
+            void registerReplyEvent(Callable const &callback) const;
+
+        private:
+            template <typename Command, typename ... Args>
+            void sendCommand(Args const &... args);
 
 		public:
-			template <typename Reply, typename Callable>
-			void registerReplyEvent(QString const &replyName, Callable const &callback) const
-			{
-				registerEvent(replyName, [this, &callback](void *data, unsigned int size) {
-					Reply *reply = m_dataComFactory->DeserializeReplyFrom<Reply>(data, size);
+            void declaratorDeclare(EntityID declarator, ENTITY_CORE type, std::string const &name, VISIBILITYCORE visibility);
 
-					callback(std::cref<Reply>(*reply));
-
-					delete(reply);
-				});
-			}
-
-		public:
-#define DECLARE_EVENT_NAME "DECLARE"
-            void sendDeclareEvent(PackageDataCom::ENTITY_CORE entity_type,
-				uint32_t containerID,
-				QString const &name,
-				PackageDataCom::VISIBILITYCORE visibility);
-
-#define REMOVE_EVENT_NAME "REMOVE"
-            void sendRemoveEvent(PackageDataCom::ENTITY_CORE entity_type,
-				uint32_t containerID,
-				QString const &name);
-
-
-#define MOVE_EVENT_NAME "MOVE"
-            void sendMoveEvent(PackageDataCom::ENTITY_CORE entity_type,
-				uint32_t fromID,
-				uint32_t toID,
-				QString const &name);
-
-#define CHANGE_VISIBILITY_EVENT_NAME "CHANGE_VISIBILITY"
-            void sendChangeVisibilityEvent(PackageDataCom::ENTITY_CORE entity_type,
-				uint32_t containerID,
-				QString const &name,
-				PackageDataCom::VISIBILITYCORE visibility);
-
+        public:
+            void declaratorDeclared(std::function<void(EntityID, ENTITY_CORE, std::string const &, VISIBILITYCORE, EntityID)> const &callback);
 
 		private:
 			ClientCommunication * m_clientCom;
@@ -77,6 +47,10 @@ namespace dnai
 			QString             m_name;
 			quint16             m_port;
 			QHostAddress        m_addr;
+
+            //commands queue
+        private:
+            std::queue<DataComEventFactory::DataComEvent>  m_commands;
 		};
 	}
 }

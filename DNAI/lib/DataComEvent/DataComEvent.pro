@@ -11,10 +11,16 @@ DESTDIR = $$PWD/../
 
 TEMPLATE = lib
 
+DEPENDPATH += $${PWD}/../
+INCLUDEPATH += $${PWD}/../Cerealization/repository/include
+
+LIBS += Cerealization
+
 #main.cpp \
 
 SOURCES += \
-    datacomeventfactory.cpp
+    datacomeventfactory.cpp \
+    coreserialoperations.cpp
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which as been marked deprecated (the exact warnings
@@ -30,15 +36,11 @@ DEFINES += QT_DEPRECATED_WARNINGS
 HEADERS += \
     Shared_include/datacomeventfactory.h \
     Shared_include/packagecore.h \
-    Shared_include/declarecorepackage.h \
-    Shared_include/Buffer.h \
-    Shared_include/ISerializable.h \
-    Shared_include/List.h \
-    Shared_include/Object.h \
-    Shared_include/Scalar.h \
-    Shared_include/commands.h \
-    Shared_include/Map.h \
-    Shared_include/replies.h
+    Shared_include/coreserialoperations.h \
+    Shared_include/commands/commands.h \
+    Shared_include/commands/declarator/declare.h \
+    Shared_include/replies/replies.h \
+    Shared_include/replies/declared.h
 
 #CONFIG(release, debug|release) {
 #unix:LIBS += -L$${PWD}/Library/ -lprotobuf
