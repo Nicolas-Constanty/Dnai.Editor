@@ -24,8 +24,16 @@ namespace dnai
             registerReplyEvent<Reply::Declarator::Declared>([](EntityID declarator, ENTITY_CORE type, std::string const &name, VISIBILITYCORE visibility, EntityID declared) {
                 qDebug() << "My amazing registered";
 
-                qDebug() << "Declarator.Declare(" << declarator << ", " << type << ", " << name << ", " << visibility << ");";
-                qDebug() << "===> " << declared;
+                qDebug() << QString("Declarator.Declare(")
+                         << declarator
+                         << QString(", ")
+                         << static_cast<qint32>(type)
+                         << QString(", ")
+                         << QString(name.c_str())
+                         << QString(", ")
+                         << static_cast<qint32>(visibility)
+                         << QString(");");
+                qDebug() << QString("===> ") << declared;
             });
 		}
 
@@ -36,12 +44,12 @@ namespace dnai
 		}
 
         template <typename Reply, typename Callable>
-        void ClientController::registerReplyEvent(Callable const &callback) const
+        void ClientController::registerReplyEvent(Callable const &callback)
         {
-            m_clientCom->registerEvent(Reply::EVENT, 0, [this, &callback](void *data, unsigned int size) {
+            m_clientCom->registerEvent(QString(Reply::EVENT().c_str()), 0, [this, &callback](void *data, unsigned int size) {
                 Reply *reply = m_dataComFactory->getPackageFrom<Reply>(DataComEventFactory::DataComEvent{data, size}, m_commands.front());
 
-                command.apply([reply, &callback](auto &... args){
+                reply->command.apply([reply, &callback](auto &... args){
                     callback(args..., reply->get());
                 });
 
@@ -56,13 +64,13 @@ namespace dnai
         {
             DataComEventFactory::DataComEvent package = m_dataComFactory->createPackage<Command>(args...);
 
-            m_clientCom->sendEvent(Command::EVENT, package.data, package.size);
+            m_clientCom->sendEvent(QString(Command::EVENT().c_str()), package.data, package.size);
             m_commands.push(package);
         }
 
         void ClientController::declaratorDeclare(EntityID declarator, ENTITY_CORE type, std::string const &name, VISIBILITYCORE visibility)
         {
-            SendCommand<Command::Declarator::Declare>(declarator, type, name, visibility);
+            sendCommand<Command::Declarator::Declare>(declarator, type, name, visibility);
         }
 
         void ClientController::declaratorDeclared(std::function<void(EntityID, ENTITY_CORE, std::string const &, VISIBILITYCORE, EntityID)> const &callback)

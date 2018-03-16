@@ -11,10 +11,7 @@ DESTDIR = $$PWD/../
 
 TEMPLATE = lib
 
-DEPENDPATH += $${PWD}/../
 INCLUDEPATH += $${PWD}/../Cerealization/repository/include
-
-LIBS += Cerealization
 
 #main.cpp \
 

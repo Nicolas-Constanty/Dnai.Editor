@@ -2,6 +2,7 @@
 # define CLIENTCONTROLLER_H_
 
 #include <functional>
+#include <queue>
 
 #include <QHostAddress>
 #include <QString>
@@ -29,7 +30,7 @@ namespace dnai
 
 		private:
             template <typename Reply, typename Callable>
-            void registerReplyEvent(Callable const &callback) const;
+            void registerReplyEvent(Callable const &callback);
 
         private:
             template <typename Command, typename ... Args>

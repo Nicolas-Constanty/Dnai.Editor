@@ -284,6 +284,7 @@ HEADERS += \
 DEPENDPATH += $${PWD}/../lib/event_client/
 INCLUDEPATH += $${PWD}/../lib/event_client/
 INCLUDEPATH += $${PWD}/../lib/DataComEvent/Shared_include/
+INCLUDEPATH += $${PWD}/../lib/Cerealization/repository/include/
 
 win32-msvc*{
     DEPENDPATH += $${PWD}/../lib/WinToast/
@@ -301,7 +302,7 @@ win32-msvc*{
 
 
 #begin library network
-LIBS += -L$${PWD}/../lib/ -lEventClient -lDataComEvent
+LIBS += -L$${PWD}/../lib/ -lEventClient -lDataComEvent -lCerealization
 
 #CONFIG(release, debug|release) {
 #unix:LIBS += -L$${PWD}/../lib/DataComEvent/Library/ -lprotobuf

@@ -26,7 +26,7 @@ enum class VISIBILITYCORE : qint32 {
   PUBLIC = 1
 };
 
-using EntityID = uint32_t;
+using EntityID = quint32;
 
 }
 
