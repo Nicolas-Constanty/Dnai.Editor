@@ -134,6 +134,32 @@ namespace dnai {
 		m_filename = name;
 	}
 
+	void Project::foreachEntity(const std::function<void(models::Entity *)> &func) const
+	{
+		const auto list = m_rootEntity->children();
+		for (auto item : list)
+		{
+			if (const auto entity = dynamic_cast<models::Entity*>(item))
+			{
+				func(entity);
+				_foreachEntity(item, func);
+			}
+		}
+	}
+	
+	void Project::_foreachEntity(models::GenericTreeItem *root, const std::function<void(models::Entity *)> &func)
+	{
+		const auto& list = root->children();
+		for (auto item : list)
+		{
+			if (const auto entity = dynamic_cast<models::Entity*>(item))
+			{
+				func(entity);
+				_foreachEntity(item, func);
+			}
+		}
+	}
+
 	//    const models::Context *Project::main() const
 //    {
 //        return m_main;

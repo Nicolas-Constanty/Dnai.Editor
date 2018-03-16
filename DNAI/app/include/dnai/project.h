@@ -48,7 +48,12 @@ namespace dnai {
 		void setDescription(const QString& name) override;
 		const QString& fileName() const override;
 		void setFileName(const QString& name) override;
-	private:
+		void foreachEntity(const std::function<void(models::Entity*)> &func) const;
+
+    private:
+	    static void _foreachEntity(models::GenericTreeItem* root, const std::function<void(models::Entity*)> &func);
+   
+    private:
 		QFile* m_file;
         Count count;
 		models::Entity* m_selectedEntity{};
