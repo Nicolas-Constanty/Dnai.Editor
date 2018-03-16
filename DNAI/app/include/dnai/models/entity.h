@@ -41,6 +41,8 @@ namespace dnai
             virtual core::Entity *coreModel() const;
             virtual interfaces::IEntity *guiModel() const;
 
+			void declare();
+
         public:
             void setId(qint32 id);
             void setContainerId(qint32 containerId) const;

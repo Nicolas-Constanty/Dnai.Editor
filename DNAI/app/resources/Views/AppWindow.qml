@@ -44,8 +44,6 @@ ApplicationWindow {
                             "newModal" : newProjectPopup
                         },
                         "Welcome")
-//                addView("resources/Views/DefaultView.qml", {}, "Panel 1")
-//                addView("resources/Views/DefaultView.qml", {}, "Panel 2")
             }
         }
 

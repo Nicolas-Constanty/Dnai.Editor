@@ -26,7 +26,6 @@ namespace dnai
 			virtual void addView(IViewElement *view) = 0;
 			virtual const QList<IViewElement *> &views() const = 0;
 			virtual void removeView() = 0;
-			virtual void views() = 0;
 			virtual void split(SplitDirection dir) = 0;
 
 		};

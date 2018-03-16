@@ -25,7 +25,8 @@ namespace dnai
 			virtual void setVersion(const QString &version) = 0;
 			virtual void restoreViewState(const QJsonObject &obj) = 0;
 			virtual void saveViewState() = 0;
-			virtual void openSolution(const QString &filename) = 0;
+			virtual void openSolution() = 0;
+			virtual void loadSolution(const QString& name) = 0;
 			virtual void closeSolution() = 0;
 			virtual const QList<ICommand *> &actions() const = 0;
 			virtual const QObject &selection() const = 0;

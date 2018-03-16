@@ -72,7 +72,12 @@ namespace dnai
             return m_dataGUI;
         }
 
-        void Entity::setId(qint32 id)
+		void Entity::declare()
+		{
+			m_dataCore->declare();
+		}
+
+		void Entity::setId(qint32 id)
 		{
 			if (coreModel()->setId(id))
 			{
