@@ -1,15 +1,16 @@
 #ifndef DNAI_EDITOR_H
 #define DNAI_EDITOR_H
-#include "interfaces/ieditor.h"
 
+#include "interfaces/ieditor.h"
 
 namespace dnai
 {
-	class Project;
-	class Editor : public QObject, public interfaces::IEditor<Editor>
+    class Project;
+    class Solution;
+	class Editor : public QObject, public interfaces::IEditor
 	{
 		Q_OBJECT
-		Q_PROPERTY(dnai::Project *project READ project WRITE setProject NOTIFY projectChanged)
+        Q_PROPERTY(dnai::Solution *solution READ getSolution WRITE setSolution NOTIFY solutionChanged)
 	protected:
 		Editor() = default;
 	public:
@@ -22,22 +23,26 @@ namespace dnai
 		void save() override;
 		void restoreViewState(const QJsonObject& obj) override;
 		void saveViewState() override;
-		void openSolution(const QString& filename) override;
+		Q_INVOKABLE void openSolution(const QString& filename) override;
 		void closeSolution() override;
-		const QList<interfaces::ICommand*>& getActions() const override;
-		const QObject& getSelection() const override;
-		const QList<QObject*>& getSelections() const override;
-		const QList<interfaces::IViewZone *>& getViews() const override;
-		const interfaces::IViewZone& getSelectedView() const override;
-		const interfaces::ISolution& getSolution() const override;
+		const QList<interfaces::ICommand*>& actions() const override;
+		const QObject& selection() const override;
+		const QList<QObject*>& selections() const override;
+		const QList<interfaces::IViewZone *>& views() const override;
+		const interfaces::IViewZone& selectedView() const override;
+        interfaces::ISolution *solution() const override;
+        dnai::Solution *getSolution() const;
 
 	public:
-		dnai::Project *project() const;
-		void setProject(Project *proj);
+		void selectProject(Project *proj);
+		static Editor &instance();
+
+    public:
+        void setSolution(dnai::Solution *sol);
 
 	signals:
-		void projectChanged(Project *proj);
-		
+        void solutionChanged(dnai::Solution *proj);
+
 	private:
 		interfaces::ISolution *m_solution;
 		interfaces::IViewZone * m_seletedItem = nullptr;
@@ -45,7 +50,8 @@ namespace dnai
 		QList<QObject*> m_selections;
 		QObject *m_selection;
 		QList<interfaces::ICommand*> m_actions;
-		QString m_version;
+		QString m_version = "0.0.1";
+		static Editor &m_instance;
 	};
 }
 

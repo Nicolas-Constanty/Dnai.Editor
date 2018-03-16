@@ -1,8 +1,9 @@
 import QtQuick 2.0
 import QtQuick.Controls 2.3
 
-Rectangle {
+Item {
     id: rootItem
+    property int handlesize: 17
     default property alias _contentChildren: _content.data
     property alias content: _content
     property int splitvalue: -1
@@ -16,7 +17,7 @@ Rectangle {
         var n = createbjects(rootItem.parent, "ViewZone.qml")
         n.anchors.top = n.parent.top
         n.anchors.bottom = n.parent.bottom
-        n.color = "green"
+//        n.color = "green"
         n.next = rootItem.next
         if (rootItem.next != null)
             rootItem.next.prev = n
@@ -26,7 +27,7 @@ Rectangle {
         if (n.prev !== null)
         {
             s = createbjects(rootItem.parent, "Splitter.qml")
-            s.width = 17
+            s.width = rootItem.handlesize
             s.anchors.top = s.parent.top
             s.anchors.bottom = s.parent.bottom
             s.isVertical = true
@@ -38,7 +39,7 @@ Rectangle {
                 n.anchors.left = n.prev.s.horizontalCenter
                 n.anchors.right = (n.next !== null && n.next.s !== null) ? n.next.s.horizontalCenter : rootItem.parent.right
                 n.prev.anchors.right = n.prev.s.horizontalCenter
-                n.prev.color = "green"
+//                n.prev.color = "green"
             }
             else
             {
@@ -76,7 +77,7 @@ Rectangle {
         var n = createbjects(rootItem.parent, "ViewZone.qml")
         n.anchors.top = n.parent.top
         n.anchors.bottom = n.parent.bottom
-        n.color = "green"
+//        n.color = "green"
         n.prev = rootItem.prev
         if (rootItem.prev != null)
             rootItem.prev.next = n
@@ -86,7 +87,7 @@ Rectangle {
         if (n.next !== null)
         {
             s = createbjects(rootItem.parent, "Splitter.qml")
-            s.width = 17
+            s.width = rootItem.handlesize
             s.anchors.top = s.parent.top
             s.anchors.bottom = s.parent.bottom
             s.isVertical = true
@@ -124,7 +125,7 @@ Rectangle {
         var n = createbjects(rootItem.parent, "ViewZone.qml")
         n.anchors.left = n.parent.left
         n.anchors.right = n.parent.right
-        n.color = "green"
+//        n.color = "green"
         n.next = rootItem.next
         if (rootItem.next != null)
             rootItem.next.prev = n
@@ -134,7 +135,7 @@ Rectangle {
         if (n.prev !== null)
         {
             s = createbjects(rootItem.parent, "Splitter.qml")
-            s.height = 17
+            s.height = rootItem.handlesize
             s.anchors.left = s.parent.left
             s.anchors.right = s.parent.right
             s.isVertical = false
@@ -146,7 +147,7 @@ Rectangle {
                 n.anchors.top = n.prev.s.verticalCenter
                 n.anchors.bottom = (n.next !== null && n.next.s !== null) ? n.next.s.verticalCenter : rootItem.parent.bottom
                 n.prev.anchors.bottom = n.prev.s.verticalCenter
-                n.prev.color = "green"
+//                n.prev.color = "green"
             }
             else
             {
@@ -176,7 +177,7 @@ Rectangle {
         var n = createbjects(rootItem.parent, "ViewZone.qml")
         n.anchors.left = n.parent.left
         n.anchors.right = n.parent.right
-        n.color = "green"
+//        n.color = "green"
         n.prev = rootItem.prev
         if (rootItem.prev != null)
             rootItem.prev.next = n
@@ -186,7 +187,7 @@ Rectangle {
         if (n.next !== null)
         {
             s = createbjects(rootItem.parent, "Splitter.qml")
-            s.height = 17
+            s.height = rootItem.handlesize
             s.anchors.right = s.parent.right
             s.anchors.left = s.parent.left
             s.isVertical = false
@@ -247,7 +248,7 @@ Rectangle {
         var v2 = createbjects(rootItem, "ViewZone.qml")
         var splitter = createbjects(rootItem, "Splitter.qml")
 
-        splitter.width = 17
+        splitter.width = rootItem.handlesize
         splitter.anchors.top = splitter.parent.top
         splitter.anchors.bottom = splitter.parent.bottom
         splitter.x = w / 2 - splitter.width / 2
@@ -259,13 +260,13 @@ Rectangle {
         v1.anchors.right = splitter.horizontalCenter
         v1.s = splitter
         v1.next = v2
-        v1.color = "yellow"
+//        v1.color = "yellow"
 
         v2.anchors.top = v2.parent.top
         v2.anchors.bottom = v2.parent.bottom
         v2.anchors.left = splitter.horizontalCenter
         v2.anchors.right = v2.parent.right
-        v2.color = "gray"
+//        v2.color = "gray"
         v2.prev = v1
         rootItem.splitvalue = 1
         return [v1, v2]
@@ -277,7 +278,7 @@ Rectangle {
         var v2 = createbjects(rootItem, "ViewZone.qml")
         var splitter = createbjects(rootItem, "Splitter.qml")
 
-        splitter.height = 17
+        splitter.height = rootItem.handlesize
         splitter.anchors.right = splitter.parent.right
         splitter.anchors.left = splitter.parent.left
         splitter.y = h / 2 - splitter.height / 2
@@ -289,14 +290,14 @@ Rectangle {
         v1.anchors.bottom = splitter.verticalCenter
         v1.s = splitter
         v1.next = v2
-        v1.color = "gray"
+//        v1.color = "gray"
 
         v2.anchors.right = v2.parent.right
         v2.anchors.left = v2.parent.left
         v2.anchors.top = splitter.verticalCenter
         v2.anchors.bottom = v2.parent.bottom
         v2.prev = v1
-        v2.color = "gray"
+//        v2.color = "gray"
         rootItem.splitvalue = 2
         return [v1, v2]
     }
@@ -409,13 +410,19 @@ Rectangle {
         anchors.fill: parent
     }
 
+    Rectangle {
+        color: "#80000000"
+        anchors.fill: parent
+        visible: (rootItem.width <= rootItem.handlesize * 3 || rootItem.height <= rootItem.handlesize * 3)
+    }
+
     onXChanged: {
         if (rootItem.prev !== null && rootItem.prev.s !== null)
         {
             var rp = rootItem.prev;
 
-            rp.s.updateMinX(rp.x)
-            rp.s.updateMaxX((rootItem.next !== null && rootItem.s !== null) ? rootItem.next.x : rootItem.parent.width)
+            rp.s.updateMinX(rp.x + rootItem.handlesize * 2)
+            rp.s.updateMaxX((rootItem.next !== null && rootItem.s !== null) ? rootItem.next.x - rootItem.handlesize * 2: rootItem.parent.width - rootItem.handlesize * 2)
         }
     }
 
@@ -424,8 +431,8 @@ Rectangle {
         {
             var rp = rootItem.prev;
 
-            rp.s.updateMinY(rp.y)
-            rp.s.updateMaxY((rootItem.next !== null && rootItem.s !== null) ? rootItem.next.y : rootItem.parent.height)
+            rp.s.updateMinY(rp.y + rootItem.handlesize * 2)
+            rp.s.updateMaxY((rootItem.next !== null && rootItem.s !== null) ? rootItem.next.y - rootItem.handlesize * 2 : rootItem.parent.height - rootItem.handlesize * 2)
         }
     }
 

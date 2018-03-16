@@ -5,6 +5,7 @@
 
 namespace dnai
 {
+	Editor &Editor::m_instance = *(new Editor());
 	const QString& Editor::version() const
 	{
 		return m_version;
@@ -43,7 +44,8 @@ namespace dnai
 	void Editor::openSolution(const QString& filename)
 	{
 		m_solution = new Solution();
-		m_solution->load(filename);
+		if (!filename.isEmpty())
+			m_solution->load(filename);
 	}
 
 	void Editor::closeSolution()
@@ -51,44 +53,56 @@ namespace dnai
 		m_solution->close();
 	}
 
-	const QList<interfaces::ICommand*>& Editor::getActions() const
+	const QList<interfaces::ICommand*>& Editor::actions() const
 	{
 		return m_actions;
 	}
 
-	const QObject& Editor::getSelection() const
+	const QObject& Editor::selection() const
 	{
 		return *m_selection;
 	}
 
-	const QList<QObject*>& Editor::getSelections() const
+	const QList<QObject*>& Editor::selections() const
 	{
 		return m_selections;
 	}
 
-	const QList<interfaces::IViewZone *>& Editor::getViews() const
+	const QList<interfaces::IViewZone *>& Editor::views() const
 	{
 		return m_viewZones;
 	}
 
-	const interfaces::IViewZone& Editor::getSelectedView() const
+	const interfaces::IViewZone& Editor::selectedView() const
 	{
 		return *m_seletedItem;
 	}
 
-	const interfaces::ISolution& Editor::getSolution() const
+	void Editor::selectProject(Project* proj)
 	{
-		return *m_solution;
+		m_solution->selectProject(proj);
 	}
 
-	Project* Editor::project() const
+	Editor& Editor::instance()
 	{
-		return dynamic_cast<Project *>(m_solution->seletedProject());
+        return m_instance;
+    }
+
+    void Editor::setSolution(dnai::Solution* sol)
+	{
+		if (m_solution == sol)
+			return;
+		m_solution = sol;
+		emit solutionChanged(sol);
 	}
 
-	void Editor::setProject(Project* proj)
-	{
-		if (m_solution->selectProject(proj))
-			emit projectChanged(proj);
-	}
+	interfaces::ISolution *Editor::solution() const
+    {
+        return m_solution;
+    }
+
+    Solution *Editor::getSolution() const
+    {
+        return dynamic_cast<Solution*>(solution());
+    }
 }

@@ -131,7 +131,6 @@
         <file>resources/Images/logo_300dpi_dnai.png</file>
         <file>resources/Components/NodeCanvas.qml</file>
         <file>resources/Components/NodeModelViewer.qml</file>
-        <file>resources/Components/SplashScreen.qml</file>
         <file>resources/Images/BearSheet.png</file>
         <file>resources/Images/LoadingSprite.png</file>
         <file>resources/Images/LoadingScreen.png</file>
@@ -141,7 +140,17 @@
         <file>resources/Components/Splitter.qml</file>
         <file>resources/Components/DeclarationView.qml</file>
         <file>resources/Components/TabButtonRounded.qml</file>
-        <file>resources/Components/AppWindow.qml</file>
         <file>resources/Panels/Properties.qml</file>
+        <file>resources/Controls/Splitter.qml</file>
+        <file>resources/Style/LinkButton.qml</file>
+        <file>resources/Style/MTabBar.qml</file>
+        <file>resources/Style/MTabButton.qml</file>
+        <file>resources/Views/DefaultView.qml</file>
+        <file>resources/Controls/ViewZone.qml</file>
+        <file>resources/Views/AppWindow.qml</file>
+        <file>resources/Views/SplashScreen.qml</file>
+        <file>resources/Views/TabView.qml</file>
+        <file>resources/Components/ViewZone.qml</file>
+        <file>resources/Components/Handle.qml</file>
     </qresource>
 </RCC>

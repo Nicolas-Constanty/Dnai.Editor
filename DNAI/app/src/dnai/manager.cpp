@@ -36,34 +36,34 @@ namespace dnai {
 		emit projectChanged(p);
 	}
 
-	void Manager::createProject(const QString &name, const QString &description, const QString &path)
-    {
-        auto fileUrl = QUrl(QDir(path).filePath(name) + project_extension);
-        QFile file(fileUrl.toLocalFile());
-        if (!file.open(QIODevice::ReadWrite)) {
-            qWarning("Couldn't open file.");
-            qDebug() << file.errorString();
-            return;
-        }
+//	void Manager::createProject(const QString &name, const QString &description, const QString &path)
+//    {
+//        auto fileUrl = QUrl(QDir(path).filePath(name) + project_extension);
+//        QFile file(fileUrl.toLocalFile());
+//        if (!file.open(QIODevice::ReadWrite)) {
+//            qWarning("Couldn't open file.");
+//            qDebug() << file.errorString();
+//            return;
+//        }
 
-        m_project = new Project(file);
-        m_project->save();
-    }
+//        m_project = new Project(file);
+//        m_project->save();
+//    }
 
-	QJsonObject Manager::loadProjectData(const QString &path)
-	{
-        setProject(Project::loadProject(path));
-        return m_project->jsonData();
-	}
+//	QJsonObject Manager::loadProjectData(const QString &path)
+//	{
+////        setProject(Project::loadFromJson(path));
+//        return m_project->jsonData();
+//	}
 
 
-	void Manager::openProject(const QString &path)
-    {
-        this->openProject(m_project);
-    }
+//	void Manager::openProject(const QString &path)
+//    {
+//        this->openProject(m_project);
+//    }
 
-    void Manager::openProject(Project *project)
-    {
+//    void Manager::openProject(Project *project)
+//    {
 //        m_project = project;
 //        m_project->declare();
 //        createTreeModel(m_project);
@@ -73,7 +73,7 @@ namespace dnai {
 //		m_viewsHandler->createDeclarationModel(m_project);
 //		m_viewsHandler->createDeclarationView();
 //		m_viewsHandler->createNameSpaceView();
-    }
+//    }
 
 	//void Manager::createDeclarationView()
 	//{
@@ -350,7 +350,7 @@ namespace dnai {
 
     void Manager::setAppViewLayout(dnai::views::Layout *l) const
     {
-		App::currentInstance()->appView()->setLayout(l);
+        App::currentInstance()->appView().setLayout(l);
     }
 
 	//void Manager::registerTreeView(QQuickItem *tr)
@@ -368,9 +368,9 @@ namespace dnai {
 	//	return App::currentInstance()->basicNodesModel();
 	//}
 
-    Session * Manager::session() const
+    Session *Manager::session() const
     {
-        return const_cast<Session *>(App::currentInstance()->session());
+        return &App::currentInstance()->session();
     }
 
     ViewsHandler *Manager::views() const

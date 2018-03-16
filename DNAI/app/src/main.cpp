@@ -8,6 +8,7 @@
 #include "dnai/manager.h"
 #include "dnai/settings.h"
 #include "dnai/project.h"
+#include "dnai/editor.h"
 #include "controllers.h"
 
 #include "include/eventconsumer.h"
@@ -32,7 +33,7 @@ static QObject *editor_singleton_provider(QQmlEngine *engine, QJSEngine *scriptE
 	Q_UNUSED(engine)
 	Q_UNUSED(scriptEngine)
 	
-	return dnai::App::currentInstance()->editor();
+    return &dnai::Editor::instance();
 }
 
 static QObject *settings_singleton_provider(QQmlEngine *engine, QJSEngine *scriptEngine)

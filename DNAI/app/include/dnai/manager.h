@@ -38,10 +38,10 @@ namespace dnai {
 		void projectChanged(Project *p);
 
     public:
-        Q_INVOKABLE void createProject(const QString &, const QString &, const QString &);
-        Q_INVOKABLE QJsonObject loadProjectData(const QString &);
-        Q_INVOKABLE void openProject(const QString &);
-        Q_INVOKABLE void openProject(Project *);
+//        Q_INVOKABLE void createProject(const QString &, const QString &, const QString &);
+//        Q_INVOKABLE QJsonObject loadProjectData(const QString &);
+//        Q_INVOKABLE void openProject(const QString &);
+//        Q_INVOKABLE void openProject(Project *);
 	    Q_INVOKABLE void setAppViewLayout(dnai::views::Layout* l) const;
 		Q_INVOKABLE void createNode(QObject *nodeModel);
         Q_INVOKABLE bool isMac();

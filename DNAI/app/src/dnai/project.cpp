@@ -31,8 +31,8 @@ namespace dnai {
 
 	void Project::_deserialize(const QJsonObject& obj)
     {
-		if (obj["version"].toString() != Editor::instance().version())
-			qWarning() << "Warning this project file (" << m_filename << ") wasn't created with the same editor's version (" << obj["version"].toString() << "!= current" << Editor::instance().version() << ")";
+        if (obj["version"].toString() != Editor::instance().version())
+            qWarning() << "Warning this project file (" << m_filename << ") wasn't created with the same editor's version (" << obj["version"].toString() << "!= current" << Editor::instance().version() << ")";
         const auto coreModel = new models::core::Entity(obj["name"].toString(), enums::core::ENTITY::CONTEXT);
         const auto guiModel = models::gui::declarable::Context::deserialize(obj);
         m_rootItem = new models::Entity();
@@ -73,10 +73,16 @@ namespace dnai {
 		}
 		catch (std::exception &e) {
 			Q_UNUSED(e)
-			exceptions::ExeptionManager::throwException(exceptions::GuiExeption("Error : Corrupted file"));
+			exceptions::ExceptionManager::throwException(exceptions::GuiExeption("Error : Corrupted file"));
+            qWarning("Couldn't parse file.");
 		}
-		qWarning("Couldn't parse file.");
-	}
+    }
+
+    void Project::loadFromJson(const QJsonObject &obj)
+    {
+        _deserialize(obj);
+        m_data = obj;
+    }
 
 	void Project::close()
 	{

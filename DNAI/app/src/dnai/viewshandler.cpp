@@ -48,7 +48,7 @@ namespace dnai
 
     models::BasicNodeModel* ViewsHandler::basicNodesModel() const
     {
-        return m_app->basicNodesModel();
+        return nullptr; m_app->basicNodesModel();
     }
 
 //	void ViewsHandler::setProjectModel(models::TreeModel* model)
