@@ -38,4 +38,4 @@ namespace dnai
 }
 
 
-#endif DNAI_INTERFACES_IEDITOR_H
+#endif
