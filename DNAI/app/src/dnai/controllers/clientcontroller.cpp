@@ -21,16 +21,28 @@ namespace dnai
             registerReplyEvent<corepackages::declarator::Declared>([](corepackages::declarator::Declared const &reply) {
                 qDebug() << "My amazing registered";
 
-                qDebug() << QString("Declarator.Declare(")
+                qDebug() << "Declarator.Declare("
                          << reply.command.declarator
-                         << QString(", ")
+                         << ", "
                          << static_cast<qint32>(reply.command.type)
-                         << QString(", ")
+                         << ", "
                          << reply.command.name
-                         << QString(", ")
+                         << ", "
                          << static_cast<qint32>(reply.command.visibility)
-                         << QString(");");
-                qDebug() << QString("===> ") << reply.declared;
+                         << ");";
+                qDebug() << "===> " << reply.declared;
+            });
+
+            m_clientCom->registerEvent("ERROR", 0, [this](void *data, int size) {
+                Cerealization::Cerealizer::BinaryStream stream((Cerealization::Cerealizer::BinaryStream::Byte *)data, size);
+
+                QString message;
+                std::string event = m_eventQueue.front();
+
+                stream >> message;
+
+                qDebug() << "Error on event " << event.c_str() << ": " << message;
+                m_eventQueue.pop();
             });
 		}
 

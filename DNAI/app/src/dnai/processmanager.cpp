@@ -75,6 +75,8 @@ void ProcessManager::launch() {
         return;
     }
 
+    qDebug() << "Server started on port: " << portStr;
+
     sem.acquire();
 
     QString corePath = settingsBin.value("BINARIES/core", "").toString();
@@ -89,12 +91,12 @@ void ProcessManager::launch() {
     corePath.append(" -p ");
     corePath.append(portStr);
 
-    m_core.start(corePath);
+    /*m_core.start(corePath);
     if (m_core.waitForStarted() == false) {
         qDebug() << "[FAILED] LAUNCH Core has failed";
         qDebug() << "[FAILED]" << corePath;
         return;
-    }
+    }*/
 
     qDebug() << "PROCESSES OK !";
   //  QThread::sleep(10);

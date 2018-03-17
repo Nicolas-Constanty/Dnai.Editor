@@ -11,7 +11,7 @@ namespace dnai
             Entity::Entity(enums::core::ENTITY type)
 			{
 				m_data.name = "EmptyEntity";
-				m_data.containerId = -1;
+                m_data.containerId = 0;
                 m_data.type = type;
 			}
 
@@ -121,7 +121,7 @@ namespace dnai
             void Entity::declare() const
             {
                 qDebug() << "==================";
-                qDebug() << "====Declaring=====";
+                qDebug() << "=Declare(" << m_data.containerId << ", " << m_data.type << ", " << m_data.name << ", " << m_data.visibility << ")=";
                 qDebug() << "==================";
                 callCoreCommand<dnai::commands::DeclareCoreCommand>(*this);
             }

@@ -65,11 +65,15 @@ namespace dnai
             void sendCommand(Cmd &tosend)
             {
                 Cerealization::Cerealizer::BinaryStream stream;
+                Cerealization::Cerealizer::JSONStream js;
 
-                qDebug() << "Sending data";
+                js << tosend;
+
+                qDebug() << "Sending data for event: " << Cmd::EVENT().c_str() << " => " << js.Data().c_str();
                 stream << tosend;
                 m_clientCom->sendEvent(Cmd::EVENT().c_str(), stream.Data(), stream.Size());
                 m_commands[Cmd::EVENT()].emplace(&tosend);
+                m_eventQueue.push(Cmd::EVENT());
             }
 
 		private:
@@ -81,6 +85,7 @@ namespace dnai
             //commands queue
         private:
             CommandsMap  m_commands;
+            std::queue<std::string> m_eventQueue;
 		};      
 	}
 }
