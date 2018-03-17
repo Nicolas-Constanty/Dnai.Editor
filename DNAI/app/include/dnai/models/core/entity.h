@@ -17,8 +17,7 @@ namespace dnai
 			{
 			public:
 				virtual ~IEntityCore() = default;
-				virtual void callCoreCommand(enums::core::COMMANDS cmd) const = 0;
-                virtual const std::map<qint32, commands::CoreCommand*> &commands() const = 0;
+                virtual void replicate() const = 0;
 			};
 
 			class Entity : public IEntityCore, public interfaces::IModelData<EntityData>
@@ -45,17 +44,25 @@ namespace dnai
 				bool setVisibility(enums::core::VISIBILITY v);
 				enums::core::VISIBILITY visibility() const;
 
-				void declare()
-				{
-					qDebug() << m_data.name;
-				};
+                void declare() const;
+
+                void move(Entity *newParent);
+
+                void remove();
 
 				Entity& operator=(const Entity& other);
 
 				//IEntityCore implementation
 			public:
-				void callCoreCommand(enums::core::COMMANDS cmd) const override;
-				const std::map<qint32, commands::CoreCommand*> &commands() const override;
+                template <typename CommandType, typename ... Args>
+                void callCoreCommand(Args const &... args) const
+                {
+                    commands::CommandManager::Instance()->exec(new CommandType(args...));
+                }
+
+            public:
+                //will replicate the current entity into the CoreDaemon
+                virtual void replicate() const override;
 
 				// IModelData implementation
 			public:
@@ -63,9 +70,7 @@ namespace dnai
 				const EntityData &data() const override;
 
 			private:
-				EntityData m_data;
-				static std::map<qint32, commands::CoreCommand*> m_commands;
-
+                EntityData m_data;
 			};
 		}
 	}

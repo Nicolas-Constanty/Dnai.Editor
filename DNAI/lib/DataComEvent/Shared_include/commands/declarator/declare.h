@@ -11,11 +11,11 @@ namespace Command
 {
     namespace Declarator
     {
-        class Declare : public Tuple<EntityID, ENTITY_CORE, std::string, VISIBILITYCORE>
+        class Declare : public Tuple<EntityID, ENTITY_CORE, QString, VISIBILITYCORE>
         {
         public:
-            Declare(EntityID p_declarator = EntityID(), ENTITY_CORE p_type = ENTITY_CORE(), std::string const &p_name = std::string(), VISIBILITYCORE p_visibility = VISIBILITYCORE()) :
-                Tuple<EntityID, ENTITY_CORE, std::string, VISIBILITYCORE>(declarator, type, name, visibility),
+            Declare(EntityID p_declarator = EntityID(), ENTITY_CORE p_type = ENTITY_CORE(), QString const &p_name = QString(), VISIBILITYCORE p_visibility = VISIBILITYCORE()) :
+                Tuple<EntityID, ENTITY_CORE, QString, VISIBILITYCORE>(declarator, type, name, visibility),
                 declarator(p_declarator),
                 type(p_type),
                 name(p_name),
@@ -35,7 +35,7 @@ namespace Command
         public:
             EntityID declarator;
             ENTITY_CORE type;
-            std::string name;
+            QString name;
             VISIBILITYCORE visibility;
         };
     }

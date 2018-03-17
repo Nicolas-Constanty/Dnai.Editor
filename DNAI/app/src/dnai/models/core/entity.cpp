@@ -1,19 +1,13 @@
 #include "dnai/models/core/entity.h"
 #include "dnai/commands/commandmanager.h"
+#include "dnai/commands/core/declare.h"
 
 namespace dnai
 {
 	namespace models
 	{
 		namespace core
-		{
-			std::map<qint32, commands::CoreCommand*> Entity::m_commands = {
-				{ enums::core::DECLARE, new commands::CoreCommand([]() {}, []() {}) },
-				{ enums::core::REMOVE, new commands::CoreCommand([]() {}, []() {}) },
-				{ enums::core::MOVE, new commands::CoreCommand([]() {}, []() {}) },
-				{ enums::core::RENAME, new commands::CoreCommand([]() {}, []() {}) },
-				{ enums::core::CHANGE_VISIBILITY, new commands::CoreCommand([]() {}, []() {}) }
-			};
+        {
             Entity::Entity(enums::core::ENTITY type)
 			{
 				m_data.name = "EmptyEntity";
@@ -43,6 +37,7 @@ namespace dnai
 
 			Entity::~Entity()
 			{
+
 			}
 
 			bool Entity::setId(qint32 id)
@@ -123,25 +118,34 @@ namespace dnai
 				return m_data.visibility;
 			}
 
+            void Entity::declare() const
+            {
+                qDebug() << "==================";
+                qDebug() << "====Declaring=====";
+                qDebug() << "==================";
+                callCoreCommand<dnai::commands::DeclareCoreCommand>(*this);
+            }
+
+            void Entity::move(Entity *newParent)
+            {
+
+            }
+
+            void Entity::remove()
+            {
+
+            }
+
 			Entity& Entity::operator=(const Entity& other)
 			{
 				m_data = other.data();
 				return *this;
-			}
+            }
 
-			void Entity::callCoreCommand(const enums::core::COMMANDS cmd) const
-			{
-				const auto cmds = commands();
-				if (cmds.find(cmd) != cmds.end())
-				{
-					commands::CommandManager::Instance()->exec(cmds.at(cmd));
-				}
-			}
-
-            const std::map<qint32, commands::CoreCommand*> &Entity::commands() const
-			{
-				return m_commands;
-			}
+            void Entity::replicate() const
+            {
+                declare();
+            }
 		}
 	}
 }

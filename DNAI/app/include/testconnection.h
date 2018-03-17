@@ -5,9 +5,8 @@
 #include <QObject>
 #include "include/clientcommunication.h"
 #include "dnai/models/context.h"
-#include "commands/commands.h"
-
-#include "datacomeventfactory.h"
+#include "Cerealizer/Binary/Binary.hpp"
+#include "dnai/corepackages/commands/declarator/declare.h"
 
 class TestConnection : public QObject {
     Q_OBJECT
@@ -50,20 +49,12 @@ public slots:
         if (i == 3) {
             return;
         }
-        DataComEventFactory eventController;
+        Cerealization::Cerealizer::BinaryStream stream;
+        dnai::corepackages::declarator::Declare package(0, dnai::enums::core::CONTEXT, "toto", dnai::enums::core::PUBLIC);
 
-        DataComEventFactory::DataComEvent data;
-
-       if (i % 3 == 0) {
-            data = eventController.createPackage<Command::Declarator::Declare>(0, PackageDataCom::ENTITY_CORE::CONTEXT_D, "HELLOL", PackageDataCom::VISIBILITYCORE::PRIVATE);
-        } else if (i % 3 == 1) {
-            data = eventController.createPackage<Command::Declarator::Declare>(0, PackageDataCom::ENTITY_CORE::VARIABLE, "POLOLOLOLOL", PackageDataCom::VISIBILITYCORE::PRIVATE);
-        } else {
-            data = eventController.createPackage<Command::Declarator::Declare>(0, PackageDataCom::ENTITY_CORE::FUNCTION, "1", PackageDataCom::VISIBILITYCORE::PUBLIC);
-        }
-
+        stream << package;
         ++i;
-        m_com.sendEvent("DECLARE", data.data, data.size);
+        m_com.sendEvent("DECLARE", stream.Data(), stream.Size());
 
 
 

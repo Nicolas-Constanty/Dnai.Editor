@@ -141,6 +141,11 @@ namespace dnai {
             Q_ENUM_NS(ENTITY)
             Q_ENUM_NS(REPLIES)
             Q_ENUM_NS(VISIBILITY)
+
+            /**
+             * \brief Represents a entity identifier
+             */
+            using EntityID = quint32;
         }
     }
 }
