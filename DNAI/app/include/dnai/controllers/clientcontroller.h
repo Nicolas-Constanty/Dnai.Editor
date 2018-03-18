@@ -9,9 +9,13 @@
 #include <QString>
 
 #include "include/clientcommunication.h"
+
 #include "Cerealizer/Binary/Binary.hpp"
+
 #include "dnai/corepackages/coreserialoperations.h"
 #include "dnai/corepackages/commands/icommanddata.h"
+#include "dnai/corepackages/replies/errorreply.h"
+
 #include "dnai/enums/core/core.h"
 
 namespace dnai
@@ -34,20 +38,34 @@ namespace dnai
 			static qint16 serverPort;
 			static ClientController &shared();
 
-        public:
-            template <typename Reply, typename Callable>
-            void registerReplyEvent(Callable const &callback)
+        private:
+            template <typename Command>
+            const Command *popLastCommand()
+            {
+                typename CommandsMap::iterator it = m_commands.find(Command::EVENT());
+
+                if (it == m_commands.end()) return nullptr;
+
+                const Command *toret = dynamic_cast<const Command *>(it->second.front());
+
+                if (toret != nullptr)
+                    it->second.pop();
+                return toret;
+            }
+
+        private:
+            template <typename Reply, typename Cb>
+            void registerOnReply(Cb const &callback)
             {
                 m_clientCom->registerEvent(Reply::EVENT().c_str(), 0, [this, &callback](void *data, unsigned int size) {
-                    typename CommandsMap::iterator it = m_commands.find(Reply::Command::EVENT());
+                    const Reply::Command *cmd = popLastCommand<Reply::Command>();
 
-                    if (it == m_commands.end())
+                    if (cmd == nullptr)
                     {
-                        qDebug() << "Receiving an event " << Reply::EVENT().c_str() << " but there was no command " << Reply::Command::EVENT().c_str() << " done";
+                        qDebug() << "Receiving " << Reply::EVENT().c_str() << " but there was no command " << Reply::Command::EVENT().c_str() << " done";
                         return;
                     }
 
-                    const Reply::Command *cmd = dynamic_cast<const Reply::Command *>(it->second.front());
                     Reply reply(*cmd);
 
                     if (size > 0)
@@ -57,8 +75,15 @@ namespace dnai
                         reply.fillFrom(stream);
                     }
                     callback(std::cref(reply));
-                    it->second.pop();
                 });
+            }
+
+        public:
+            template <typename Reply, typename Callable, typename Error>
+            void registerReplyEvent(Callable const &callback, Error const &error)
+            {
+                registerOnReply<Reply>(callback);
+                registerOnReply<corepackages::ErrorReply<Reply::Command>>(error);
             }
 
             template <typename Cmd>
@@ -73,7 +98,6 @@ namespace dnai
                 stream << tosend;
                 m_clientCom->sendEvent(Cmd::EVENT().c_str(), stream.Data(), stream.Size());
                 m_commands[Cmd::EVENT()].emplace(&tosend);
-                m_eventQueue.push(Cmd::EVENT());
             }
 
 		private:
@@ -85,7 +109,6 @@ namespace dnai
             //commands queue
         private:
             CommandsMap  m_commands;
-            std::queue<std::string> m_eventQueue;
 		};      
 	}
 }

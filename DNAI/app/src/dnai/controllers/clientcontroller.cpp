@@ -18,32 +18,30 @@ namespace dnai
 		{
             m_clientCom = ClientManager::shared().newClient(m_addr, m_port, m_name);
 
-            registerReplyEvent<corepackages::declarator::Declared>([](corepackages::declarator::Declared const &reply) {
-                qDebug() << "My amazing registered";
+            registerReplyEvent<corepackages::declarator::Declared>(
+                [](corepackages::declarator::Declared const &reply) {
+                    qDebug() << "My amazing registered";
 
-                qDebug() << "Declarator.Declare("
-                         << reply.command.declarator
-                         << ", "
-                         << static_cast<qint32>(reply.command.type)
-                         << ", "
-                         << reply.command.name
-                         << ", "
-                         << static_cast<qint32>(reply.command.visibility)
-                         << ");";
-                qDebug() << "===> " << reply.declared;
-            });
-
-            m_clientCom->registerEvent("ERROR", 0, [this](void *data, int size) {
-                Cerealization::Cerealizer::BinaryStream stream((Cerealization::Cerealizer::BinaryStream::Byte *)data, size);
-
-                QString message;
-                std::string event = m_eventQueue.front();
-
-                stream >> message;
-
-                qDebug() << "Error on event " << event.c_str() << ": " << message;
-                m_eventQueue.pop();
-            });
+                    qDebug() << "Declarator.Declare("
+                             << reply.command.declarator
+                             << ", "
+                             << static_cast<qint32>(reply.command.type)
+                             << ", "
+                             << reply.command.name
+                             << ", "
+                             << static_cast<qint32>(reply.command.visibility)
+                             << ");";
+                    qDebug() << "===> " << reply.declared;
+                },
+                [](corepackages::ErrorReply<corepackages::declarator::Declare> const &error) {
+                    qDebug()
+                            << "Error on event declarator::declare("
+                            << error.command.declarator << ", "
+                            << error.command.type << ", "
+                            << error.command.name << ", "
+                            << error.command.visibility << "): " << error.message;
+                }
+            );
 		}
 
         ClientController &ClientController::shared()

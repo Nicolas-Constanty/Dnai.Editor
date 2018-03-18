@@ -1135,7 +1135,8 @@ HEADERS += \
     include/models.h \
     include/qmlresources.h \
     include/testconnection.h \
-    include/views.h
+    include/views.h \
+    include/dnai/corepackages/replies/errorreply.h
 
 
 #LIB
