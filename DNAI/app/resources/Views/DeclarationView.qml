@@ -105,7 +105,10 @@ Item {
                     onPressed: {
                         if (_selectInfo.selectCount != 0)
                         {
-                            item.removeSelectedItem(_selectInfo.selectCount)
+                            for (var item in _sublist.selectedItems) {
+                                console.log(item)
+                                item.remove()
+                            }
                             _selectInfo.selectCount = 0
                         }
                     }
@@ -126,6 +129,7 @@ Item {
 
                 ListView {
                     id: _sublist
+                    property var selectedItems: []
                     property alias selectInfo: _selectInfo
                     property alias visualModel: _delegateModel
                     anchors.left: parent.left
@@ -135,7 +139,9 @@ Item {
                     model: DelegateModel {
                         id: _delegateModel
                         model: entityChildren
-                        delegate: CommonModelView {}
+                        delegate: CommonModelView {
+                            tparent: _sublist
+                        }
                     }
                     spacing: 15
                     clip: true
@@ -161,7 +167,7 @@ Item {
                             width: 45
                             visible: entityType == 0
                             onPressed: {
-                                Manager.views.addContext(_sublist.visualModel.items.count, index)
+                                modelData.addContext(_sublist.visualModel.items.count, index)
                                 _sublist.positionViewAtEnd()
                             }
                         }
@@ -170,7 +176,7 @@ Item {
                             decoration.color: "#039BE5"
                             width: 45
                             onPressed: {
-                                Manager.views.addClass(_sublist.visualModel.items.count, index)
+                                modelData.addClass(_sublist.visualModel.items.count, index)
                                 _sublist.positionViewAtEnd()
                             }
                         }
@@ -179,7 +185,7 @@ Item {
                             decoration.color: "#8E24AA"
                             width: 45
                             onPressed: {
-                                Manager.views.addFunction(_sublist.visualModel.items.count, index)
+                                modelData.addFunction(_sublist.visualModel.items.count, index)
                                 _sublist.positionViewAtEnd()
                             }
                         }
@@ -188,7 +194,7 @@ Item {
                             decoration.color: "#FB8C00"
                             width: 45
                             onPressed: {
-                                Manager.views.addVariable(_sublist.visualModel.items.count, index)
+                                modelData.addVariable(_sublist.visualModel.items.count, index)
                                 _sublist.positionViewAtEnd()
                             }
                         }

@@ -96,7 +96,7 @@ Rectangle {
                 itemDelegate: Item {
                     Image {
                         id: _icon
-                        source: styleData.value.entityType === 0 ? "../Images/context.png" : styleData.value.entityType === 1 ? "../Images/class.png" : styleData.value.entityType === 2 ? "../Images/function.png" : "../Images/variable.png"
+                        source: styleData.value.entityType === 0 ? "../Images/context.png" : styleData.value.entityType === 1 ? "../Images/variable.png" : styleData.value.entityType === 2 ? "../Images/function.png" : "../Images/class.png"
                         height: 12
                         width: 12
                         anchors.verticalCenter: parent.verticalCenter
@@ -130,12 +130,24 @@ Rectangle {
                     textColor : AppSettings.style.text.color
                 }
                 onClicked: {
-                    var obj = Editor.selectedView()
-                    obj.parent.parent.parent.parent.addView("resources/Views/DeclarationView.qml",
-                                                  {
-                                                      "model" : index.model.data(index, index.model.getRoleKey("modelobj"))
-                                                  },
-                                                  index.model.data(index, index.model.getRoleKey("name")))
+                    var tab = Editor.selectedView()
+                    var model = index.model.data(index, index.model.getRoleKey("modelobj"))
+                    var res = tab.getViewFromModel(model)
+                    console.log(res)
+                    if (res === undefined || res === null)
+                    {
+                        var view = tab.addView("resources/Views/DeclarationView.qml",
+                                    {
+                                        "model" : model
+                                    },
+                                    index.model.data(index, index.model.getRoleKey("name")))
+
+                        tab.appendModel(model, view)
+                    }
+                    else
+                    {
+                        tab.selectIndex(res)
+                    }
                 }
                 headerVisible: false
                 rootIndex: item.index(0, 0)

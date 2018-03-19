@@ -23,13 +23,13 @@ namespace dnai
             Q_PROPERTY(int listIndex READ listIndex WRITE setListIndex NOTIFY listIndexChanged)
             Q_PROPERTY(QString description READ description WRITE setDescription NOTIFY descriptionChanged)
             Q_PROPERTY(core::Entity *coreModel READ coreModel WRITE setCoreModel NOTIFY coreModelChanged)
-			Q_PROPERTY(QVariant entityChildren READ entityChildren CONSTANT)
+			Q_PROPERTY(QVariant entityChildren READ entityChildren NOTIFY entityChildrenChanged)
                     //			Q_PROPERTY(EntityGUI *guiModel READ guiModel CONSTANT)
         public:
             explicit Entity();
             explicit Entity(core::Entity *coremodel, Entity *parent = nullptr, interfaces::IEntity *guimodel = nullptr);
 
-            virtual ~Entity() = default;
+            virtual ~Entity();
         public:
 			bool isRoot() const;
             qint32 id() const;
@@ -56,6 +56,7 @@ namespace dnai
             void setListIndex(int listIndex);
             void setDescription(const QString& description);
             virtual void setCoreModel(core::Entity *model);
+			virtual void appendChild(Entity* child) override;
 
         signals:
 			void isRootChanged(bool isroot);
@@ -68,12 +69,18 @@ namespace dnai
             void listIndexChanged(int listIndex) const;
             void descriptionChanged(const QString& description) const;
             void coreModelChanged(core::Entity *model);
+			void entityChildrenChanged(models::Entity *e);
 
         //Implementation of ISerializable
         public:
             void serialize(QJsonObject& obj) const override;
             void _deserialize(const QJsonObject& obj) override;
-            int columnCount() const override;
+	        Q_INVOKABLE void addContext(int, int);
+			Q_INVOKABLE void addFunction(int, int);
+			Q_INVOKABLE void addVariable(int, int);
+			Q_INVOKABLE void addClass(int, int);
+			Q_INVOKABLE void remove();
+	        int columnCount() const override;
         private:
             core::Entity *m_dataCore;
             interfaces::IEntity *m_dataGUI;

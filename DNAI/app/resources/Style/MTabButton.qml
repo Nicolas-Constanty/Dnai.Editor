@@ -7,6 +7,10 @@ TabButton {
     property int iconsize: 12
     property int margin: 20
 
+    property TabBar tb: null
+    property SwipeView sv: null
+    property Item refContent: null
+
     width: text.length * font.pointSize + iconsize + margin * 2
     anchors.top: parent.top
     anchors.bottom: parent.bottom
@@ -43,6 +47,13 @@ TabButton {
                 cursorShape: Qt.PointingHandCursor
                 height: 14
                 width: 14
+                onPressed: {
+                    if (tb)
+                    {
+                        sv.removeItem(refContent)
+                        tb.removeItem(control)
+                    }
+                }
             }
         }
     }

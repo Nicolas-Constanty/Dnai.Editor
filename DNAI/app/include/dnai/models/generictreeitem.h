@@ -15,8 +15,12 @@ namespace dnai
             {
             }
 
-            virtual ~GenericTreeItem() = default;
-            void appendChild(T *child) {
+            virtual ~GenericTreeItem()
+            {
+				for (auto child : m_childItems)
+					delete child;
+            }
+            virtual void appendChild(T *child) {
                 m_childItems.append(child);
             }
             T *child(int row) const { return m_childItems.at(row); }

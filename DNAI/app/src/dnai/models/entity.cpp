@@ -16,6 +16,12 @@ namespace dnai
 
         }
 
+		Entity::~Entity()
+		{
+			delete m_dataCore;
+			delete m_dataGUI;
+		}
+
 		bool Entity::isRoot() const
 		{
 			return m_isRoot;
@@ -171,6 +177,12 @@ namespace dnai
 			emit coreModelChanged(model);
 		}
 
+		void Entity::appendChild(Entity* child)
+		{
+			GenericTreeItem<Entity>::appendChild(child);
+			emit entityChildrenChanged(child);
+		}
+
 		void Entity::serialize(QJsonObject& obj) const
 		{
 			if (m_dataCore == nullptr) return;
@@ -278,6 +290,55 @@ namespace dnai
                 const auto entity = Entity::deserialize(function.toObject(), coreModel, parent);
 				appendChild(entity);
 			}
+		}
+
+		void Entity::addContext(const int index, const int listindex)
+		{
+			const auto coreModel = new models::core::Entity(enums::core::CONTEXT);
+			const auto guiModel = new models::gui::declarable::Context();
+			guiModel->setIndex(index);
+			guiModel->setListIndex(listindex);
+			Entity *parent = this;
+			const auto entity = new Entity(coreModel, parent, guiModel);
+			appendChild(entity);
+		}
+
+		void Entity::addClass(const int index, const int listindex)
+		{
+			const auto coreModel = new models::core::Entity(enums::core::OBJECT_TYPE);
+			const auto guiModel = new models::gui::declarable::Context();
+			guiModel->setIndex(index);
+			guiModel->setListIndex(listindex);
+			Entity *parent = this;
+			const auto entity = new Entity(coreModel, parent, guiModel);
+			appendChild(entity);
+		}
+
+		void Entity::remove()
+		{
+			delete this;
+		}
+
+		void Entity::addFunction(const int index, const int listindex)
+		{
+			const auto coreModel = new models::core::Entity(enums::core::FUNCTION);
+			const auto guiModel = new models::gui::declarable::Context();
+			guiModel->setIndex(index);
+			guiModel->setListIndex(listindex);
+			Entity *parent = this;
+			const auto entity = new Entity(coreModel, parent, guiModel);
+			appendChild(entity);
+		}
+
+		void Entity::addVariable(const int index, const int listindex)
+		{
+			const auto coreModel = new models::core::Entity(enums::core::VARIABLE);
+			const auto guiModel = new models::gui::declarable::Context();
+			guiModel->setIndex(index);
+			guiModel->setListIndex(listindex);
+			Entity *parent = this;
+			const auto entity = new Entity(coreModel, parent, guiModel);
+			appendChild(entity);
 		}
 
 		int Entity::columnCount() const

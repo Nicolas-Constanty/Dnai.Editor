@@ -9,6 +9,8 @@ import "../Style"
 Rectangle {
     id: _itemview
     property alias isSelected: _selectButton.checked
+    property Item tparent: null
+
     implicitHeight: 40
     width: parent.parent.width
     height: 40
@@ -103,7 +105,7 @@ Rectangle {
         implicitWidth: parent.width * 0.04
         indicator: Rectangle {
             anchors.fill: _selectButton
-            color: (modelData.entityType === 0) ? "#00897B" : (modelData.entityType === 1) ? "#039BE5" : (modelData.entityType === 2) ? "#8E24AA" : "#FB8C00"
+            color: (modelData.entityType === 0) ? "#00897B" : (modelData.entityType === 1) ?  "#FB8C00" : (modelData.entityType === 2) ? "#8E24AA" : "#039BE5"
             FontAwesomeText {
                 anchors.fill: parent
                 text: "\uf00c"
@@ -180,7 +182,14 @@ Rectangle {
         }
 
         onCheckStateChanged: {
-//            model.item.select(_selectButton.checked)
+            if (tparent.selectedItems.indexOf(modelData) === -1)
+            {
+                console.log(parent.parent)
+                console.log("push", modelData, model)
+                tparent.selectedItems.push(modelData)
+            }
+            else
+                tparent.selectedItems.pop(modelData)
             if (_selectButton.checked)
             {
                 _itemview.parent.parent.selectInfo.selectCount += 1
@@ -201,7 +210,7 @@ Rectangle {
     }
     FontAwesomeButton {
         id: _openbutton
-        visible: modelData.entityType < 3
+        visible: modelData.entityType !== 1
 
         anchors.right: _itemview.right
         anchors.top: _itemview.top
