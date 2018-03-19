@@ -133,13 +133,9 @@ Page {
             }
         }
     }
-    footer: ToolBar {
+    footer: Item {
         height: 40
-        background: Rectangle {
-            height: 40
-            color: AppSettings.style.background.color
-        }
-        ToolButton {
+        Button {
             id: cancelButton
             anchors.left: parent.left
             leftPadding: 20
@@ -156,7 +152,7 @@ Page {
                 color: AppSettings.style.background.color
             }
         }
-        ToolButton {
+        Button {
             id: openButton
             anchors.right: parent.right
             leftPadding: 20

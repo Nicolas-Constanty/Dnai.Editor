@@ -8,7 +8,6 @@ import "../Components"
 import "../Panels"
 
 Rectangle {
-    anchors.fill: parent
     color: "#16000000"
     property Modal openModal: null
     property Modal newModal: null

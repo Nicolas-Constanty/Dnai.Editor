@@ -1,10 +1,13 @@
 import QtQuick 2.0
 import QtQuick.Controls 2.3
+
+import DNAI.Views 1.0
 import "../JavaScript/CreateComponent.js" as Factory
 
-Item {
+ViewZoneBack {
     id: rootItem
     property int handlesize: 17
+    property real visualsize: 2
     default property alias _contentChildren: _content.data
     property alias content: _content
     property int splitvalue: -1
@@ -34,6 +37,7 @@ Item {
             s.anchors.top = s.parent.top
             s.anchors.bottom = s.parent.bottom
             s.isVertical = true
+            s.handlesize = rootItem.visualsize
             if (n.prev.s === null)
             {
                 s.x = n.prev.x + n.prev.width * percent - s.width / 2
@@ -96,6 +100,7 @@ Item {
             s.anchors.top = s.parent.top
             s.anchors.bottom = s.parent.bottom
             s.isVertical = true
+            s.handlesize = rootItem.visualsize
             if (n.prev && n.prev.s === null)
             {
                 s.x = n.prev.x + n.prev.width * percent - s.width / 2
@@ -146,6 +151,7 @@ Item {
             s.anchors.left = s.parent.left
             s.anchors.right = s.parent.right
             s.isVertical = false
+            s.handlesize = rootItem.visualsize
             if (n.prev.s === null)
             {
                 s.y = n.prev.y + n.prev.height * percent - s.height / 2
@@ -200,6 +206,7 @@ Item {
             s.anchors.right = s.parent.right
             s.anchors.left = s.parent.left
             s.isVertical = false
+            s.handlesize = rootItem.visualsize
             if (n.prev && n.prev.s === null)
             {
                 s.y = n.prev.y + n.prev.height * percent - s.height / 2
@@ -255,6 +262,7 @@ Item {
         splitter.anchors.bottom = splitter.parent.bottom
         splitter.x = w * percent - splitter.width / 2
         splitter.isVertical = true
+        splitter.handlesize = rootItem.visualsize
 
         v1.anchors.top = v1.parent.top
         v1.anchors.bottom = v1.parent.bottom
@@ -288,6 +296,7 @@ Item {
         splitter.anchors.left = splitter.parent.left
         splitter.y = h  * percent - splitter.height / 2
         splitter.isVertical = false
+        splitter.handlesize = rootItem.visualsize
 
         v1.anchors.right = v1.parent.right
         v1.anchors.left = v1.parent.left
@@ -388,7 +397,7 @@ Item {
             text: "SplitLeft"
             onClicked: {
 //                appendNextV()
-                split(0, rootItem.width, rootItem.height, 0.2)
+                split(0, rootItem.width, rootItem.height, 0.5)
             }
         }
         MenuItem {

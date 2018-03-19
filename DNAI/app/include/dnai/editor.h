@@ -2,11 +2,13 @@
 #define DNAI_EDITOR_H
 
 #include "interfaces/ieditor.h"
+#include "dnai/views/editorview.h"
+#include "dnai/solution.h"
+#include "models/entity.h"
 
 namespace dnai
 {
     class Project;
-    class Solution;
 	class Editor : public QObject, public interfaces::IEditor
 	{
 		Q_OBJECT
@@ -29,10 +31,14 @@ namespace dnai
 		const QList<interfaces::ICommand*>& actions() const override;
 		const QObject& selection() const override;
 		const QList<QObject*>& selections() const override;
-		Q_INVOKABLE const QList<interfaces::IViewZone *>& views() const override;
-		const interfaces::IViewZone& selectedView() const override;
-        interfaces::ISolution *solution() const override;
+		Q_INVOKABLE const QList<QQuickItem *>& views() const override;
+		Q_INVOKABLE QQuickItem *selectedView() const override;
+		Q_INVOKABLE void selectView(QQuickItem *i);
+		interfaces::ISolution *solution() const override;
         dnai::Solution *getSolution() const;
+		void addView(QQuickItem* v) override;
+		views::EditorView *mainView() const;
+		void registerEditorView(views::EditorView *view);
 
 	public:
 		void selectProject(Project *proj);
@@ -46,12 +52,13 @@ namespace dnai
 
 	private:
 		interfaces::ISolution *m_solution;
-		interfaces::IViewZone * m_seletedItem = nullptr;
-		QList<interfaces::IViewZone*> m_viewZones;
+		QQuickItem * m_seletedItem = nullptr;
+		QList<QQuickItem *> m_viewZones;
 		QList<QObject*> m_selections;
 		QObject *m_selection;
 		QList<interfaces::ICommand*> m_actions;
 		QString m_version = "0.0.1";
+		views::EditorView *m_editorView;
 		static Editor &m_instance;
 	};
 }

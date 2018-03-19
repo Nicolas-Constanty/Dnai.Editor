@@ -18,8 +18,8 @@ namespace dnai
 		{
 			if (contextModel() == model)
 				return;
-			addModel(static_cast<QObject*>(model), "contextModel");
-			contextModelChanged(model);
+            addModel(static_cast<QObject*>(model), "contextModel");
+            contextModelChanged(model);
 		}
 	}
 }

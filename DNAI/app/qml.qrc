@@ -86,7 +86,6 @@
         <file>resources/Panels/PanelLeft.qml</file>
         <file>resources/Panels/PanelRight.qml</file>
         <file>resources/Panels/PanelTop.qml</file>
-        <file>resources/Layouts/Layout_1.qml</file>
         <file>resources/Layouts/LayoutClassic.qml</file>
         <file>resources/Controls/DMenuItem.qml</file>
         <file>resources/Controls/DMenu.qml</file>
@@ -98,10 +97,6 @@
         <file>resources/Style/Title2.qml</file>
         <file>resources/Style/Title3.qml</file>
         <file>settings/themes/dark1.json</file>
-        <file>resources/fonts/consola.ttf</file>
-        <file>resources/fonts/consolab.ttf</file>
-        <file>resources/fonts/consolai.ttf</file>
-        <file>resources/fonts/consolaz.ttf</file>
         <file>resources/Panels/ExpendablePanel.qml</file>
         <file>resources/Style/TitlePanel.qml</file>
         <file>resources/Style/MButton.qml</file>
@@ -138,7 +133,6 @@
         <file>resources/Forms/BasePanelForm.ui.qml</file>
         <file>resources/Panels/BasePanel.qml</file>
         <file>resources/Components/Splitter.qml</file>
-        <file>resources/Components/DeclarationView.qml</file>
         <file>resources/Components/TabButtonRounded.qml</file>
         <file>resources/Panels/Properties.qml</file>
         <file>resources/Controls/Splitter.qml</file>
@@ -152,5 +146,26 @@
         <file>resources/Views/TabView.qml</file>
         <file>resources/Components/ViewZone.qml</file>
         <file>resources/Components/Handle.qml</file>
+        <file>resources/Views/SolutionView.qml</file>
+        <file>resources/Views/SolutionExplorer.qml</file>
+        <file>resources/fonts/segoeui.ttf</file>
+        <file>resources/fonts/segoeuib.ttf</file>
+        <file>resources/fonts/segoeuii.ttf</file>
+        <file>resources/fonts/segoeuil.ttf</file>
+        <file>resources/fonts/segoeuisl.ttf</file>
+        <file>resources/fonts/segoeuiz.ttf</file>
+        <file>resources/fonts/seguibl.ttf</file>
+        <file>resources/fonts/seguibli.ttf</file>
+        <file>resources/fonts/seguili.ttf</file>
+        <file>resources/fonts/seguisb.ttf</file>
+        <file>resources/fonts/seguisbi.ttf</file>
+        <file>resources/fonts/seguisli.ttf</file>
+        <file>resources/Components/ModernTreeView.qml</file>
+        <file>resources/Style/CheckableHeader.qml</file>
+        <file>resources/Images/class.png</file>
+        <file>resources/Images/context.png</file>
+        <file>resources/Images/function.png</file>
+        <file>resources/Images/variable.png</file>
+        <file>resources/Views/DeclarationView.qml</file>
     </qresource>
 </RCC>

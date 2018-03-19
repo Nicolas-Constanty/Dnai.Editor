@@ -8,7 +8,7 @@ import "../Style"
 import "../Panels"
 
 Page {
-    property alias fileDialog: fileDialog
+    property alias fileDialog: _fileDialog
     property alias chooseButton: pathButton
     property alias cancelButton: cancelButton
     property alias createButton: createButton
@@ -39,7 +39,7 @@ Page {
         }
     }
     FileDialog {
-        id: fileDialog
+        id: _fileDialog
         title: "Please choose a path"
         selectFolder: true
         selectMultiple: false
@@ -69,7 +69,7 @@ Page {
                 anchors.left: pathLabel.right
                 anchors.right: pathButton.left
                 placeholderText: qsTr("Choose a folder")
-                text: fileDialog.fileUrl
+                text: _fileDialog.fileUrl
                 readOnly: true
             }
             Button {
@@ -122,9 +122,10 @@ Page {
             }
         }
     }
-    footer: ToolBar {
+    footer: Item {
         height: 40
-        ToolButton {
+        width: _page.width
+        Button {
             id: cancelButton
             anchors.left: parent.left
             leftPadding: 20
@@ -132,9 +133,13 @@ Page {
             contentItem: Text {
                 text: qsTr("Cancel")
                 color: AppSettings.style.text.color
+                horizontalAlignment: Text.AlignHCenter
+                verticalAlignment: Text.AlignVCenter
+            }
+            background: Item {
             }
         }
-        ToolButton {
+        Button {
             id: createButton
             anchors.right: parent.right
             leftPadding: 20
@@ -142,12 +147,11 @@ Page {
             contentItem: Text {
                 text: qsTr("Create")
                 color: AppSettings.style.text.color
+                horizontalAlignment: Text.AlignHCenter
+                verticalAlignment: Text.AlignVCenter
             }
-        }
-        background: Rectangle {
-            height: createButton.height
-            width: _page.width
-            color: AppSettings.style.background.color
+            background: Item {
+            }
         }
     }
 }

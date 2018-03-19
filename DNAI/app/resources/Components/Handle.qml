@@ -8,6 +8,7 @@ Item {
     property real xmax: 4000
     property real ymin: 0
     property real ymax: 4000
+    property real handlesize: 2
 
     function updateMinX(val)
     {
@@ -38,8 +39,8 @@ Item {
 
     Rectangle {
         anchors.centerIn: parent
-        height: splitter.isVertical ? parent.height : 2
-        width: !splitter.isVertical ? parent.width : 2
+        height: splitter.isVertical ? parent.height : handlesize
+        width: !splitter.isVertical ? parent.width : handlesize
         color: "#000000"
     }
 

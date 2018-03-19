@@ -1,5 +1,6 @@
 import QtQuick 2.0
 import QtQuick.Controls 2.2
+import DNAI 1.0
 
 import "../JavaScript/CreateComponent.js" as Factory
 import "../Style"
@@ -8,21 +9,39 @@ Item {
     anchors.fill: parent
     function addView(path, data, name)
     {
-        Factory.createObjects("resources/Style/MTabButton.qml", { "text" : name }, bar)
+
+        Factory.createObjects("resources/Style/MTabButton.qml", { "text" : name,}, _bar)
         var obj = Factory.getObject()
-        bar.addItem(obj)
-        Factory.createObjects(path, data, stack)
+        _bar.addItem(obj)
+
+        Factory.createObjects(path, data, _swip)
         obj = Factory.getObject()
-        stack.push(obj)
+        _swip.addItem(obj)
+        Editor.selectView(obj);
+    }
+
+    function selectIndex(index)
+    {
+        _bar.setCurrentIndex(index)
+        _swip.setCurrentIndex(index)
     }
 
     MTabBar {
-        id: bar
+        id: _bar
+        currentIndex: _swip.currentIndex
+        onCurrentIndexChanged: {
+            _swip.currentIndex = currentIndex
+        }
     }
 
-    StackView {
-        id: stack
+    SwipeView {
+        id: _swip
+        currentIndex: _bar.currentIndex
         anchors.fill: parent
-        anchors.topMargin: bar.height
+        anchors.topMargin: _bar.height
+        padding: 0
+        onCurrentIndexChanged: {
+           _bar.currentIndex = currentIndex
+       }
     }
 }

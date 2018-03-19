@@ -14,6 +14,7 @@
 #include "include/eventconsumer.h"
 #include "dnai/entitiesfactory.h"
 #include "dnai/viewshandler.h"
+#include "dnai/enums/core/core.h"
 
 #if defined(_WIN32) && defined(_MSC_VER)
 #include "../../lib/WinToast/wintoastlib.h"
@@ -54,70 +55,120 @@ static QObject *standardpath_singleton_provider(QQmlEngine *engine, QJSEngine *s
 
 static void registerDNAI()
 {
+#define qmlRegisterDnai(type, name) qmlRegisterType<type>("DNAI", 1, 0, name)
     qmlRegisterSingletonType<dnai::Manager>("DNAI", 1, 0, "Manager", manager_singleton_provider);
 	qmlRegisterSingletonType<dnai::Editor>("DNAI", 1, 0, "Editor", editor_singleton_provider);
     qmlRegisterSingletonType<dnai::AppSettings>("DNAI", 1, 0, "AppSettings", settings_singleton_provider);
     qmlRegisterSingletonType<QCStandardPaths>("DNAI", 1, 0, "StandardPath", standardpath_singleton_provider);
-    qmlRegisterType<dnai::Session>("DNAI", 1, 0, "Session");
-    qmlRegisterType<dnai::ViewsHandler>("DNAI", 1, 0, "ViewsHandler");
-    qmlRegisterType<dnai::Project>("DNAI", 1, 0, "Project");
+    qmlRegisterDnai(dnai::Session, "Session");
+    qmlRegisterDnai(dnai::ViewsHandler, "ViewsHandler");
+    qmlRegisterDnai(dnai::Project, "Project");
+	qmlRegisterDnai(dnai::Solution, "Solution");
 }
 
 static void registerEnums()
 {
-    qmlRegisterType<dnai::enums::IoTypeRessouce>("DNAI.Enums", 1, 0, "IOType");
-    qmlRegisterType<dnai::enums::FlowTypeRessouce>("DNAI.Enums", 1, 0, "FlowType");
-    qmlRegisterType<dnai::enums::DeclarationTypeRessouce>("DNAI.Enums", 1, 0, "DeclarationType");
-    qmlRegisterType<dnai::enums::QInstructionID>("DNAI.Enums", 1, 0, "InstructionID");
+#define qmlRegisterEnums(type, name) qmlRegisterType<type>("DNAI.Enums", 1, 0, name)
+    qmlRegisterEnums(dnai::enums::IoTypeRessouce, "IOType");
+    qmlRegisterEnums(dnai::enums::FlowTypeRessouce, "FlowType");
+    qmlRegisterEnums(dnai::enums::DeclarationTypeRessouce, "DeclarationType");
+    qmlRegisterEnums(dnai::enums::QInstructionID, "InstructionID");
+    qmlRegisterUncreatableMetaObject(
+      dnai::enums::core::staticMetaObject, // static meta object
+      "DNAI.Enums",                // import statement (can be any string)
+      1, 0,                          // major and minor version of the import
+      "Core",                 // name in QML (does not have to match C++ name)
+      "Error: only enums"            // error in case someone tries to create a MyNamespace object
+    );
 }
+
+class conststr {
+	const char* p;
+	std::size_t sz;
+public:
+	template<std::size_t N>
+	constexpr conststr(const char(&a)[N]) : p(a), sz(N - 1) {}
+
+	// constexpr functions signal errors by throwing exceptions
+	// in C++11, they must do so from the conditional operator ?:
+	constexpr char operator[](std::size_t n) const
+	{
+		return n < sz ? p[n] : throw std::out_of_range("");
+	}
+
+	constexpr const char *raw() const
+	{
+		return p;
+	}
+};
+
+struct RegisterInfo
+{
+    constexpr RegisterInfo(conststr ns, int version, int subversion)
+		: ns(ns),
+		  version(version),
+		  subversion(subversion)
+	{
+	}
+
+	conststr ns;
+	const int version;
+	const int subversion;
+};
 
 static void registerViews()
 {
+#define qmlRegisterViews(type, name) qmlRegisterType<type>("DNAI.Views", 1, 0, name)
     // QML Views
-    qmlRegisterType<dnai::views::CanvasNode>("DNAI.Views", 1, 0, "CanvasNode");
-    qmlRegisterType<dnai::views::CanvasNode>("DNAI.Views", 1, 0, "CanvasNode");
+    qmlRegisterViews(dnai::views::CanvasNode, "CanvasNode");
 //    qmlRegisterType<dnai::views::DeclarationCanvas>("DNAI.Views", 1, 0, "DeclarationCanvas");
-    qmlRegisterType<dnai::views::Console>("DNAI.Views", 1, 0, "Console");
-    qmlRegisterType<dnai::views::ContextView>("DNAI.Views", 1, 0, "ContextView");
-//    qmlRegisterType<dnai::views::DeclarationView>("DNAI.Views", 1, 0, "DeclarationViewModel");
-    qmlRegisterType<dnai::views::InstructionView>("DNAI.Views", 1, 0, "InstructionViewModel");
-    qmlRegisterType<dnai::views::Layout>("DNAI.Views", 1, 0, "LayoutView");
-    qmlRegisterType<dnai::views::AppView>("DNAI.Views", 1, 0, "AppView");
+    qmlRegisterViews(dnai::views::Console, "Console");
+    qmlRegisterViews(dnai::views::ContextView, "ContextView");
+    qmlRegisterViews(dnai::views::DeclarationView, "DeclarationViewModel");
+    qmlRegisterViews(dnai::views::InstructionView, "InstructionViewModel");
+    qmlRegisterViews(dnai::views::Layout, "LayoutView");
+    qmlRegisterViews(dnai::views::AppView, "AppView");
     // OpenGL Geometries
-    qmlRegisterType<dnai::views::BezierCurve>("DNAI.Views", 1, 0, "BezierCurve");
-    qmlRegisterType<dnai::views::Line>("DNAI.Views", 1, 0, "Line");
-    qmlRegisterType<dnai::views::RoundedRectangle>("DNAI.Views", 1, 0, "RoundedRectangle");
-    qmlRegisterType<dnai::views::GenericNode>("DNAI.Views", 1, 0, "GenericNode");
-    qmlRegisterType<dnai::views::Input>("DNAI.Views", 1, 0, "Input");
-    qmlRegisterType<dnai::views::Output>("DNAI.Views", 1, 0, "Output");
-    qmlRegisterType<dnai::views::Flow>("DNAI.Views", 1, 0, "Flow");
+    qmlRegisterViews(dnai::views::BezierCurve, "BezierCurve");
+    qmlRegisterViews(dnai::views::Line, "Line");
+    qmlRegisterViews(dnai::views::RoundedRectangle, "RoundedRectangle");
+    qmlRegisterViews(dnai::views::GenericNode, "GenericNode");
+    qmlRegisterViews(dnai::views::Input, "Input");
+    qmlRegisterViews(dnai::views::Output, "Output");
+    qmlRegisterViews(dnai::views::Flow, "Flow");
+    qmlRegisterViews(dnai::views::ViewElement, "ViewElement");
+    qmlRegisterViews(dnai::views::ViewZone, "ViewZoneBack");
+    qmlRegisterViews(dnai::views::EditorView, "EditorView");
 }
+
+
 
 static void registerModels()
 {
-    qmlRegisterType<dnai::models::SettingsModel>("DNAI.Models", 1, 0, "SettingsModel");
-    qmlRegisterType<dnai::models::QCanvas>("DNAI.Models", 1, 0, "QCanvas");
-    qmlRegisterType<dnai::models::QGrid>("DNAI.Models", 1, 0, "QGrid");
-    qmlRegisterType<dnai::models::QBorder>("DNAI.Models", 1, 0, "QBorder");
-    qmlRegisterType<dnai::models::QNode>("DNAI.Models", 1, 0, "QNode");
-    qmlRegisterType<dnai::models::QNodes>("DNAI.Models", 1, 0, "QNodes");
-    qmlRegisterType<dnai::models::QDeclaration>("DNAI.Models", 1, 0, "QDeclaration");
-    qmlRegisterType<dnai::models::QDeclarationView>("DNAI.Models", 1, 0, "QDeclarationView");
-    qmlRegisterType<dnai::models::QTextSettings>("DNAI.Models", 1, 0, "QTextSettings");
-    qmlRegisterType<dnai::models::QFontSettings>("DNAI.Models", 1, 0, "QFontSettings");
-    qmlRegisterType<dnai::models::MenuSettings>("DNAI.Models", 1, 0, "MenuSettings");
-    qmlRegisterType<dnai::models::QBackground>("DNAI.Models", 1, 0, "QBackground");
+#define qmlRegisterModels(type, name) qmlRegisterType<type>("DNAI.Models", 1, 0, name)
+    qmlRegisterModels(dnai::models::SettingsModel, "SettingsModel");
+    qmlRegisterModels(dnai::models::QCanvas, "QCanvas");
+    qmlRegisterModels(dnai::models::QGrid, "QGrid");
+    qmlRegisterModels(dnai::models::QBorder, "QBorder");
+    qmlRegisterModels(dnai::models::QNode, "QNode");
+    qmlRegisterModels(dnai::models::QNodes, "QNodes");
+    qmlRegisterModels(dnai::models::QDeclaration, "QDeclaration");
+    qmlRegisterModels(dnai::models::QDeclarationView, "QDeclarationView");
+    qmlRegisterModels(dnai::models::QTextSettings, "QTextSettings");
+    qmlRegisterModels(dnai::models::QFontSettings, "QFontSettings");
+    qmlRegisterModels(dnai::models::MenuSettings, "MenuSettings");
+    qmlRegisterModels(dnai::models::QBackground, "QBackground");
 //    qmlRegisterType<dnai::models::TreeModel>("DNAI.Models", 1, 0, "TreeModel");
 //    qmlRegisterType<dnai::models::TreeItem>("DNAI.Models", 1, 0, "TreeItem");
 //    qmlRegisterType<dnai::models::NameSpaceBarItem>("DNAI.Models", 1, 0, "NameSpaceBarItem");
 //    qmlRegisterType<dnai::models::NameSpaceBarModel>("DNAI.Models", 1, 0, "NameSpaceBarModel");
-    qmlRegisterType<dnai::models::User>("DNAI.Models", 1, 0, "User");
+    qmlRegisterModels(dnai::models::User, "User");
 //    qmlRegisterType<dnai::models::DeclarationModel>("DNAI.Models", 1, 0, "DeclarationModel");
 //    qmlRegisterType<dnai::models::Declaration>("DNAI.Models", 1, 0, "Declaration");
-    qmlRegisterType<dnai::models::BasicNodeModel>("DNAI.Models", 1, 0, "BasicNodeModel");
-    qmlRegisterType<dnai::models::ListNode>("DNAI.Models", 1, 0, "ListNode");
-    qmlRegisterType<dnai::models::Entity>("DNAI.Models", 1, 0, "Entity");
-    qmlRegisterType<dnai::models::EntityTree>("DNAI.Models", 1, 0, "EntityTree");
+    qmlRegisterModels(dnai::models::BasicNodeModel, "BasicNodeModel");
+    qmlRegisterModels(dnai::models::ListNode, "ListNode");
+    qmlRegisterModels(dnai::models::Entity, "Entity");
+    qmlRegisterModels(dnai::models::EntityTree, "EntityTree");
 //    qmlRegisterType<dnai::models::Property>("DNAI.Models", 1, 0, "Property");
 //    qmlRegisterType<dnai::models::EntityList>("DNAI.Models", 1, 0, "EntityList");
 }

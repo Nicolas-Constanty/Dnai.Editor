@@ -88,9 +88,16 @@ namespace dnai
 				return entity->listIndex();
 			case DESCRIPTION:
                 return entity->description();
+            case MODEL:
+				return QVariant::fromValue(entity);
 			default: 
 				return QVariant();
 			}
+		}
+
+		int EntityTree::getRoleKey(QString rolename) const
+		{
+			return roleNames().key(rolename.toLatin1());
 		}
 
 		QHash<int, QByteArray> EntityTree::roleNames() const
@@ -106,6 +113,7 @@ namespace dnai
 			roles[ROLES::DESCRIPTION] = "description";
 			roles[ROLES::CORE_MODEL] = "coreModel";
 			roles[ROLES::GUI_MODEL] = "guiModel";
+			roles[ROLES::MODEL] = "modelobj";
 			return roles;
 		}
 	}

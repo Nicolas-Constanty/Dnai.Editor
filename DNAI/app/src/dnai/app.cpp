@@ -1,5 +1,6 @@
 #include <QQuickWindow>
 #include <QTimer>
+#include <QDir>
 
 #include "dnai/app.h"
 #include "dnai/processmanager.h"
@@ -8,6 +9,7 @@
 #include "dnai/commands/commandmanager.h"
 #include "api.h"
 #include "http.h"
+#include <QDirIterator>
 
 namespace dnai
 {
@@ -70,10 +72,12 @@ namespace dnai
 
 	void App::loadFonts()
 	{
-		QFontDatabase::addApplicationFont(":/resources/fonts/Font Awesome 5 Free-Solid-900.otf");
-		QFontDatabase::addApplicationFont(":/resources/fonts/Font Awesome 5 Free-Regular-400.otf");
-		QFontDatabase::addApplicationFont(":/resources/fonts/Font Awesome 5 Brands-Regular-400.otf");
-		QFontDatabase::addApplicationFont(":/resources/fonts/Playball.ttf");
+		QDirIterator it(":/resources/fonts", QDirIterator::Subdirectories);
+		while (it.hasNext()) {
+			qDebug() << it.filePath();
+			QFontDatabase::addApplicationFont(it.filePath());
+			it.next();
+		}
 	}
 
     void App::loadMainWindow()

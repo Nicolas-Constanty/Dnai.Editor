@@ -263,6 +263,21 @@
     <ClCompile Include="src\dnai\commands\zoomcanvascommand.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\dnai\editor.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\dnai\solution.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\dnai\views\viewelement.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\dnai\views\viewzone.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\dnai\views\editorview.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\api.h">
@@ -334,9 +349,6 @@
     <QtMoc Include="include\dnai\enums\core\core.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <ClInclude Include="include\dnai\commands\corecommand.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="include\dnai\exceptions\coreexception.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -520,9 +532,6 @@
     <ClInclude Include="include\models.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\dnai\commands\movecommand.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="include\dnai\commands\movenodecommand.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -601,90 +610,44 @@
     <QtMoc Include="include\dnai\viewshandler.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <ClInclude Include="include\dnai\commands\genericcommand.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dnai\interfaces\ieditor.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dnai\interfaces\ieditoraction.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dnai\interfaces\ieditormodel.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dnai\interfaces\iproject.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dnai\interfaces\isavable.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dnai\interfaces\isingleton.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dnai\interfaces\isolution.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dnai\interfaces\iviewelement.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dnai\interfaces\iviewzone.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     <CustomBuild Include="debug\moc_predefs.h.cbt">
       <Filter>Generated Files</Filter>
     </CustomBuild>
     <CustomBuild Include="release\moc_predefs.h.cbt">
       <Filter>Generated Files</Filter>
     </CustomBuild>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="resources\Forms\BasePanelForm.ui">
@@ -1136,5 +1099,22 @@
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="dnai.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="include\dnai\editor.h">
+      <Filter>Generated Files</Filter>
+    </QtMoc>
+    <QtMoc Include="include\dnai\views\viewelement.h">
+      <Filter>Generated Files</Filter>
+    </QtMoc>
+    <QtMoc Include="include\dnai\views\viewzone.h">
+      <Filter>Generated Files</Filter>
+    </QtMoc>
+    <QtMoc Include="include\dnai\views\editorview.h">
+      <Filter>Generated Files</Filter>
+    </QtMoc>
+    <QtMoc Include="include\dnai\solution.h">
+      <Filter>Generated Files</Filter>
+    </QtMoc>
   </ItemGroup>
 </Project>

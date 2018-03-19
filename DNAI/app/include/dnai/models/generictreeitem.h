@@ -7,30 +7,30 @@ namespace dnai
 {
     namespace models
     {
+		template<class T>
         class GenericTreeItem : public QObject
         {
-            Q_OBJECT
         public:
-            explicit GenericTreeItem(GenericTreeItem *parent = nullptr) : QObject(nullptr), m_parentItem(parent)
+            explicit GenericTreeItem(T *parent = nullptr) : QObject(nullptr), m_parentItem(parent)
             {
             }
 
             virtual ~GenericTreeItem() = default;
-            void appendChild(GenericTreeItem *child) {
+            void appendChild(T *child) {
                 m_childItems.append(child);
             }
-            GenericTreeItem *child(int row) const { return m_childItems.at(row); }
-            const QList<GenericTreeItem *> &children() const { return m_childItems; }
+            T *child(int row) const { return m_childItems.at(row); }
+            const QList<T *> &children() const { return m_childItems; }
 
             int childCount() const { return m_childItems.count(); }
             virtual int columnCount() const = 0;
             int row() const
             {
                 if (m_parentItem)
-                    m_parentItem->m_childItems.indexOf(const_cast<GenericTreeItem*>(this));
+                    m_parentItem->m_childItems.indexOf(const_cast<T*>(dynamic_cast<const T *>(this)));
                 return 0;
             }
-            GenericTreeItem *parentItem() const { return m_parentItem; }
+            T *parentItem() const { return m_parentItem; }
             const QModelIndex &idxmodel() const { return m_idx; }
             void setIdx(const QModelIndex &ref)
             {
@@ -40,8 +40,8 @@ namespace dnai
             }
 
         private:
-            QList<GenericTreeItem*> m_childItems;
-            GenericTreeItem *m_parentItem;
+            QList<T*> m_childItems;
+            T *m_parentItem;
             QModelIndex m_idx;
 
         };

@@ -11,14 +11,23 @@ namespace dnai
         {
         }
 
-		Entity::Entity(core::Entity* coremodel, interfaces::IEntity* guimodel, GenericTreeItem * parent) : IModel(parent), m_dataCore(coremodel), m_dataGUI(guimodel)
-        {
-        }
-
-        Entity::Entity(core::Entity *coremodel, GenericTreeItem *parent, interfaces::IEntity *guimodel) : IModel(parent), m_dataCore(coremodel), m_dataGUI(guimodel)
+        Entity::Entity(core::Entity *coremodel, Entity *parent, interfaces::IEntity *guimodel) : IModel(parent), m_dataCore(coremodel), m_dataGUI(guimodel)
         {
 
         }
+
+		bool Entity::isRoot() const
+		{
+			return m_isRoot;
+		}
+
+		void Entity::setIsRoot(bool isRoot)
+		{
+			if (m_isRoot == isRoot)
+				return;
+			m_isRoot = isRoot;
+			emit isRootChanged(isRoot);
+		}
 
 		qint32 Entity::id() const
 		{
@@ -30,7 +39,7 @@ namespace dnai
 			return coreModel()->containerId();
 		}
 
-		enums::core::ENTITY Entity::entityType() const
+		qint32 Entity::entityType() const
 		{
 			return coreModel()->entityType();
 		}
@@ -72,6 +81,18 @@ namespace dnai
             return m_dataGUI;
         }
 
+
+
+		const QVariant Entity::entityChildren() const
+		{
+			QList<QObject*> l;
+			for (auto c : children())
+			{
+				l.append(c);
+			}
+            return QVariant::fromValue(l);
+		}
+
 		void Entity::declare()
 		{
 			m_dataCore->declare();
@@ -93,9 +114,9 @@ namespace dnai
 			}
 		}
 
-		void Entity::setEntityType(enums::core::ENTITY type) const
+		void Entity::setEntityType(qint32 type) const
 		{
-			if (coreModel()->setEntityType(type))
+			if (coreModel()->setEntityType(static_cast<enums::ENTITY>(type)))
 			{
 				emit entityTypeChanged(type);
 			}
@@ -232,28 +253,28 @@ namespace dnai
 
             foreach(const auto classe, obj["classes"].toArray()) {
                 const auto coreModel = new models::core::Entity(enums::core::OBJECT_TYPE);
-				GenericTreeItem *parent = this;
+                Entity *parent = this;
                 const auto entity = Entity::deserialize(classe.toObject(), coreModel, parent);
 				appendChild(entity);
 			}
 
             foreach(const auto context, obj["contexts"].toArray()) {
                 const auto coreModel = new models::core::Entity(enums::core::CONTEXT);
-				GenericTreeItem *parent = this;
+                Entity *parent = this;
                 const auto entity = deserialize(context.toObject(), coreModel, parent);
 				appendChild(entity);
 			}
 
             foreach(const auto variable, obj["variables"].toArray()) {
                 const auto coreModel = new models::core::Entity(enums::core::VARIABLE);
-				GenericTreeItem *parent = this;
+                Entity *parent = this;
                 const auto entity = Entity::deserialize(variable.toObject(),coreModel, parent);
 				appendChild(entity);
 			}
 
             foreach(const auto function, obj["functions"].toArray()) {
                 const auto coreModel = new models::core::Entity(enums::core::FUNCTION);
-				GenericTreeItem *parent = this;
+                Entity *parent = this;
                 const auto entity = Entity::deserialize(function.toObject(), coreModel, parent);
 				appendChild(entity);
 			}

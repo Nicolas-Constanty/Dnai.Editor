@@ -1,7 +1,7 @@
 #ifndef DNAI_ENUMS_CORE_H
 #define DNAI_ENUMS_CORE_H
 
-#include <qobjectdefs.h>
+#include <QObject>
 
 namespace dnai {
     namespace enums {
@@ -47,6 +47,7 @@ namespace dnai {
                 UNLINK_INSTRUCTION_FLOW,
                 UNLINK_INSTRUCTION_INPUT
             };
+            Q_ENUM_NS(COMMANDS)
             // THESE STRUCTS ARE FOR DEBUG PURPOSE, YOU CAN USED THEM TO ITERATE THROW A COMMAND TYPE
 	        /**
              * \brief Allow to iterate through Entity commands
@@ -137,7 +138,6 @@ namespace dnai {
                 PRIVATE,
                 PROTECTED
             };
-            Q_ENUM_NS(COMMANDS)
             Q_ENUM_NS(ENTITY)
             Q_ENUM_NS(REPLIES)
             Q_ENUM_NS(VISIBILITY)

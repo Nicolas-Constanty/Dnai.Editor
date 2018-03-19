@@ -1,6 +1,8 @@
 import QtQuick 2.0
 import QtQuick.Window 2.1
 
+import "../Components"
+
 Window {
     id: splash
     color: "transparent"

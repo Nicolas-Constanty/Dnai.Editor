@@ -134,6 +134,12 @@ namespace dnai
 		m_filename = name;
 	}
 
+
+	int Solution::getRoleKey(QString rolename) const
+	{
+		return roleNames().key(rolename.toLatin1());
+	}
+
 	void Solution::_deserialize(const QJsonObject& obj)
 	{
 		if (obj["version"].toString() != Editor::instance().version())
@@ -148,5 +154,42 @@ namespace dnai
 			qDebug() << "Successfully load the project :" << subString + "/" + projfilename.toString();
 			qDebug() << proj->jsonData();
 		}
+	}
+
+	int Solution::rowCount(const QModelIndex& parent) const
+	{
+		return m_projects.count();
+	}
+
+	QVariant Solution::data(const QModelIndex& index, int role) const
+	{
+		if (!index.isValid())
+			return QVariant();
+		const auto proj = dynamic_cast<Project *>(m_projects.at(index.row()));
+		if (proj)
+		{
+			switch (role)
+			{
+			case ITEM:
+				return QVariant::fromValue(proj);
+			case NAME:
+			case Qt::DisplayRole:
+				return QVariant::fromValue(proj->name());
+			case DESCRIPTION:
+				return QVariant::fromValue(proj->description());
+			default:
+				return QVariant();
+			}
+		}
+		return QVariant();
+	}
+
+	QHash<int, QByteArray> Solution::roleNames() const
+	{
+		QHash<int, QByteArray> roles;
+		roles[ROLES::ITEM] = "item";
+		roles[ROLES::NAME] = "name";
+		roles[ROLES::DESCRIPTION] = "description";
+		return roles;
 	}
 }

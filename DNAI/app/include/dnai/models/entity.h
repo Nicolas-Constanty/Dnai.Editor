@@ -15,24 +15,26 @@ namespace dnai
             Q_OBJECT
             Q_PROPERTY(qint32 id READ id WRITE setId NOTIFY idChanged)
             Q_PROPERTY(qint32 containerId READ containerId WRITE setContainerId NOTIFY containerIdChanged)
-            Q_PROPERTY(dnai::enums::core::ENTITY entityType READ entityType WRITE setEntityType NOTIFY entityTypeChanged)
+            Q_PROPERTY(qint32 entityType READ entityType WRITE setEntityType NOTIFY entityTypeChanged)
             Q_PROPERTY(QString name READ name WRITE setName NOTIFY nameChanged)
+			Q_PROPERTY(bool isRoot READ isRoot WRITE setIsRoot NOTIFY isRootChanged)
             Q_PROPERTY(dnai::enums::core::VISIBILITY visibility READ visibility WRITE setVisibility NOTIFY visibilityChanged)
             Q_PROPERTY(int index READ id WRITE setIndex NOTIFY indexChanged)
             Q_PROPERTY(int listIndex READ listIndex WRITE setListIndex NOTIFY listIndexChanged)
             Q_PROPERTY(QString description READ description WRITE setDescription NOTIFY descriptionChanged)
             Q_PROPERTY(core::Entity *coreModel READ coreModel WRITE setCoreModel NOTIFY coreModelChanged)
+			Q_PROPERTY(QVariant entityChildren READ entityChildren CONSTANT)
                     //			Q_PROPERTY(EntityGUI *guiModel READ guiModel CONSTANT)
         public:
             explicit Entity();
-            explicit Entity(core::Entity *coremodel, interfaces::IEntity *guimodel = nullptr, GenericTreeItem *parent = nullptr);
-            explicit Entity(core::Entity *coremodel, GenericTreeItem *parent = nullptr, interfaces::IEntity *guimodel = nullptr);
+            explicit Entity(core::Entity *coremodel, Entity *parent = nullptr, interfaces::IEntity *guimodel = nullptr);
 
             virtual ~Entity() = default;
         public:
+			bool isRoot() const;
             qint32 id() const;
             qint32 containerId() const;
-            enums::core::ENTITY entityType() const;
+            int entityType() const;
             const QString &name() const;
             enums::core::VISIBILITY visibility() const;
             int index() const;
@@ -40,13 +42,14 @@ namespace dnai
             const QString& description() const;
             virtual core::Entity *coreModel() const;
             virtual interfaces::IEntity *guiModel() const;
-
+			const QVariant entityChildren() const;
 			void declare();
 
         public:
+			void setIsRoot(bool isRoot);
             void setId(qint32 id);
             void setContainerId(qint32 containerId) const;
-            void setEntityType(enums::core::ENTITY type) const;
+            void setEntityType(qint32 type) const;
             void setName(const QString &) const;
             void setVisibility(enums::core::VISIBILITY) const;
             void setIndex(int index);
@@ -55,9 +58,10 @@ namespace dnai
             virtual void setCoreModel(core::Entity *model);
 
         signals:
+			void isRootChanged(bool isroot);
             void idChanged(qint32 id);
             void containerIdChanged(qint32 containerId) const;
-            void entityTypeChanged(enums::core::ENTITY type) const;
+            void entityTypeChanged(qint32 type) const;
             void nameChanged(const QString &) const;
             void visibilityChanged(enums::core::VISIBILITY) const;
             void indexChanged(int index) const;
@@ -73,6 +77,7 @@ namespace dnai
         private:
             core::Entity *m_dataCore;
             interfaces::IEntity *m_dataGUI;
+			bool m_isRoot = false;
         };
     }
 }

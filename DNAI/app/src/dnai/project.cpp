@@ -34,10 +34,10 @@ namespace dnai {
         if (obj["version"].toString() != Editor::instance().version())
             qWarning() << "Warning this project file (" << m_filename << ") wasn't created with the same editor's version (" << obj["version"].toString() << "!= current" << Editor::instance().version() << ")";
         const auto coreModel = new models::core::Entity(obj["name"].toString(), enums::core::ENTITY::CONTEXT);
-        const auto guiModel = models::gui::declarable::Context::deserialize(obj);
         m_rootItem = new models::Entity();
         m_rootItem->setIdx(index(0,0, QModelIndex()));
-		m_rootEntity = models::Entity::deserialize(obj["main"].toObject(), coreModel, guiModel, m_rootItem);
+        m_rootEntity = models::Entity::deserialize(obj, coreModel, m_rootItem);
+		m_rootEntity->setIsRoot(true);
         m_rootItem->appendChild(m_rootEntity);
     }
 
@@ -146,8 +146,13 @@ namespace dnai {
 			}
 		}
 	}
-	
-	void Project::_foreachEntity(models::GenericTreeItem *root, const std::function<void(models::Entity *)> &func)
+
+	int Project::childCount() const
+	{
+		return m_rootEntity->childCount();
+	}
+
+	void Project::_foreachEntity(models::Entity *root, const std::function<void(models::Entity *)> &func)
 	{
 		const auto& list = root->children();
 		for (auto item : list)

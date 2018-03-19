@@ -21,6 +21,7 @@ namespace dnai {
     {
         Q_OBJECT
 		Q_PROPERTY(dnai::models::Entity *selectedEntity READ selectedEntity WRITE setSelectedEntity NOTIFY selectedEntityChanged)
+		Q_PROPERTY(int childCount READ childCount CONSTANT)
 	public:
         Project();
 		const QJsonObject &jsonData() const override;
@@ -49,9 +50,10 @@ namespace dnai {
 		const QString& fileName() const override;
 		void setFileName(const QString& name) override;
 		void foreachEntity(const std::function<void(models::Entity*)> &func) const;
+		int childCount() const;
 
     private:
-	    static void _foreachEntity(models::GenericTreeItem* root, const std::function<void(models::Entity*)> &func);
+	    static void _foreachEntity(models::Entity* root, const std::function<void(models::Entity*)> &func);
    
     private:
 		QFile* m_file;

@@ -33,9 +33,9 @@ ExpendablePanel {
         }
 
         anchors.fill: parent
-        model: Manager.project
+        model: Editor.solution
         selection: ItemSelectionModel {
-            model: Manager.project
+            model: Editor.solution
         }
 
         frameVisible: false

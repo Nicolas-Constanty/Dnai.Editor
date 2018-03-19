@@ -103,7 +103,10 @@ SOURCES += \
     src/dnai/settings.cpp \
     src/dnai/solution.cpp \
     src/dnai/viewshandler.cpp \
-    src/main.cpp
+    src/main.cpp \
+    src/dnai/views/viewelement.cpp \
+    src/dnai/views/viewzone.cpp \
+    src/dnai/views/editorview.cpp
 
 
 RESOURCES += qml.qrc
@@ -277,7 +280,10 @@ HEADERS += \
     include/models.h \
     include/qmlresources.h \
     include/testconnection.h \
-    include/views.h
+    include/views.h \
+    include/dnai/views/viewelement.h \
+    include/dnai/views/viewzone.h \
+    include/dnai/views/editorview.h
 
 
 #LIB
