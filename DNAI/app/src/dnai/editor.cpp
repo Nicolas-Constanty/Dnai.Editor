@@ -127,8 +127,7 @@ namespace dnai
 	void Editor::addView(QQuickItem* vz)
 	{
 		if (vz == nullptr || m_viewZones.contains(vz))
-			return;
-		qDebug() << "Add" << vz;
+            return;
 		m_viewZones.append(vz);
 	}
 

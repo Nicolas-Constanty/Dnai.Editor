@@ -152,7 +152,6 @@ Rectangle {
                     var tab = Editor.selectedView()
                     var model = index.model.data(index, index.model.getRoleKey("modelobj"))
                     var res = tab.getViewFromModel(model)
-                    console.log(res)
                     if (res === undefined || res === null)
                     {
                         var view = tab.addView("resources/Views/DeclarationView.qml",
@@ -187,13 +186,10 @@ Rectangle {
                     _expPanel.initialheight = item.childCount * rowheight + _expPanel.header.height + 5
                     item.rowsInserted.connect(tr.rowInserted)
                     item.rowsRemoved.connect(tr.rowRemoved)
-                    console.log(item)
-                    console.log(Editor.solution.selectedProject())
                     if (item === Editor.solution.selectedProject())
                     {
                         _expPanel.control.selected = true
                         last = _expPanel.control
-                        console.log("zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
                     }
 
                 }

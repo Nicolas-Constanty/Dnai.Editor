@@ -47,7 +47,6 @@ namespace dnai
 
 				void declare()
 				{
-					qDebug() << m_data.name;
 				};
 
 				Entity& operator=(const Entity& other);
