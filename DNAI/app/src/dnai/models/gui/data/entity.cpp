@@ -14,7 +14,7 @@ namespace dnai
 
                 bool Entity::operator==(const Entity& other) const
                 {
-                    return (index == other.index && listIndex == other.listIndex && description == other.description);
+                    return (index == other.index && listIndex == other.listIndex && description == other.description && expanded == other.expanded);
                 }
             }
 		}

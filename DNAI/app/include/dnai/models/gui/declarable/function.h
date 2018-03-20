@@ -13,7 +13,7 @@ namespace dnai
 		{
 			namespace declarable
 			{
-				class Function : public interfaces::IInstruction, public interfaces::IEntity, public interfaces::IModelData<data::Function>, public interfaces::ASerializable<Function>
+				class Function : public interfaces::IInstruction, public Entity<data::Function, Function>
                 {
 				public:
                     explicit Function(QObject *parent = nullptr);
@@ -21,17 +21,8 @@ namespace dnai
 					void serialize(QJsonObject& obj) const override;
 				protected:
 					void _deserialize(const QJsonObject& obj) override;
-					//Implementation of IModelData
+
 				public:
-					const data::Function& data() const override;
-					bool setData(const data::Function& data) override;
-				public:
-					int index() const override;
-					bool setIndex(int index) override;
-					int listIndex() const override;
-					bool setListIndex(int listIndex) override;
-					const QString& description() const override;
-					bool setDescription(const QString& description) override;
 					//Implementation of IInstruction
 					QList<models::gui::Input*> inputs() const override;
 					bool setInputs(const QList<models::gui::Input*>& inputs) override;
@@ -41,8 +32,6 @@ namespace dnai
 					bool setFlowIn(models::gui::Flow* flow) override;
 					models::gui::Flow* flowOut() const override;
 					bool setFlowOut(models::gui::Flow* flow) override;
-				protected:
-					data::Function m_data;
 				};
 			}
 		}

@@ -12,6 +12,8 @@ import "../Components"
 Item {
     id: _item
     property alias model: _contextColumns.model
+    property Project proj: null
+    property var idx: null
     Component {
         id: _delegate
         Rectangle {
@@ -167,7 +169,7 @@ Item {
                             width: 45
                             visible: entityType == 0
                             onPressed: {
-                                modelData.addContext(_sublist.visualModel.items.count, index)
+                                proj.addContext(_sublist.visualModel.items.count, index, idx)
                                 _sublist.positionViewAtEnd()
                             }
                         }
@@ -176,7 +178,7 @@ Item {
                             decoration.color: "#039BE5"
                             width: 45
                             onPressed: {
-                                modelData.addClass(_sublist.visualModel.items.count, index)
+                                proj.addClass(_sublist.visualModel.items.count, index, idx)
                                 _sublist.positionViewAtEnd()
                             }
                         }
@@ -185,7 +187,7 @@ Item {
                             decoration.color: "#8E24AA"
                             width: 45
                             onPressed: {
-                                modelData.addFunction(_sublist.visualModel.items.count, index)
+                                proj.addFunction(_sublist.visualModel.items.count, index, idx)
                                 _sublist.positionViewAtEnd()
                             }
                         }
@@ -194,7 +196,7 @@ Item {
                             decoration.color: "#FB8C00"
                             width: 45
                             onPressed: {
-                                modelData.addVariable(_sublist.visualModel.items.count, index)
+                                proj.addVariable(_sublist.visualModel.items.count, index, idx)
                                 _sublist.positionViewAtEnd()
                             }
                         }

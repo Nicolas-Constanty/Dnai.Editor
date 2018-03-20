@@ -7,6 +7,8 @@
 
 namespace dnai
 {
+	class Project;
+
 	class Solution : public QAbstractListModel, public interfaces::ISolution, public interfaces::ASerializable<Solution>
 	{
 		Q_OBJECT
@@ -37,6 +39,8 @@ namespace dnai
 		const QString& fileName() const override;
 		void setFileName(const QString& name) override;
 		Q_INVOKABLE int getRoleKey(QString rolename) const;
+		Q_INVOKABLE bool selectProject(dnai::Project*);
+		Q_INVOKABLE dnai::Project *selectedProject() const;
 
 	protected:
 		void _deserialize(const QJsonObject& obj) override;
@@ -58,5 +62,6 @@ namespace dnai
 
 	};
 }
+
 
 #endif //DNAI_SOLUTION_H

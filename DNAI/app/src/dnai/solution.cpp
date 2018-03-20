@@ -2,8 +2,8 @@
 
 #include "dnai/solution.h"
 #include "dnai/editor.h"
-#include "dnai/project.h"
 #include "dnai/exceptions/guiexception.h"
+#include "dnai/project.h"
 
 namespace dnai
 {
@@ -140,6 +140,16 @@ namespace dnai
 		return roleNames().key(rolename.toLatin1());
 	}
 
+	bool Solution::selectProject(Project* p)
+	{
+		return selectProject(static_cast<IProject*>(p));
+	}
+
+	Project* Solution::selectedProject() const
+	{
+		return dynamic_cast<Project*>(m_selectedProject);
+	}
+
 	void Solution::_deserialize(const QJsonObject& obj)
 	{
 		if (obj["version"].toString() != Editor::instance().version())
@@ -152,7 +162,8 @@ namespace dnai
 			proj->load(subString + "/" + projfilename.toString());
 			m_projects.append(proj);
 			qDebug() << "Successfully load the project :" << subString + "/" + projfilename.toString();
-			qDebug() << proj->jsonData();
+			if (m_selectedProject == nullptr)
+				selectProject(proj);
 		}
 	}
 

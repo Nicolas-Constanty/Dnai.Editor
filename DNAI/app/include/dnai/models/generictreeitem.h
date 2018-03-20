@@ -35,7 +35,7 @@ namespace dnai
                 return 0;
             }
             T *parentItem() const { return m_parentItem; }
-            const QModelIndex &idxmodel() const { return m_idx; }
+            QModelIndex idxmodel() const { return m_idx; }
             void setIdx(const QModelIndex &ref)
             {
                 if (ref == m_idx)

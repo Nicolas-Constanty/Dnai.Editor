@@ -15,6 +15,7 @@ Rectangle {
     color: "#16ffffff"
     property string title: "solution explorer"
     property real rowheight: 16
+    property var last: null
     MLabel {
         id: _title
         height: 35
@@ -56,6 +57,37 @@ Rectangle {
             color: "transparent"
             control.onClicked: {
                 list.currentIndex = index
+                Editor.solution.selectProject(item)
+                if (last !== control)
+                    last.selected = false
+                control.selected = true
+                last = control
+            }
+            Timer {
+                id: _timer
+                interval: 200
+                triggeredOnStart: false
+                running: false
+                repeat: false
+                onTriggered: {
+                    if (_expPanel.state == "Visible")
+                    {
+                        tr.verticalScrollBarPolicy = Qt.ScrollBarAsNeeded
+                        tr.horizontalScrollBarPolicy = Qt.ScrollBarAsNeeded
+                    }
+                }
+            }
+
+            onStateChanged: {
+                if (state == "Invisible")
+                {
+                    tr.verticalScrollBarPolicy = Qt.ScrollBarAlwaysOff
+                    tr.horizontalScrollBarPolicy = Qt.ScrollBarAlwaysOff
+                }
+                else if (state == "Visible" && !_timer.running)
+                {
+                    _timer.start()
+                }
             }
 
             header.height: 25
@@ -68,23 +100,10 @@ Rectangle {
             TreeView {
                 id: tr
                 property bool init: false
-                anchors.left: parent.left
-                anchors.right: parent.right
-
-                function changeCurrent(cur)
-                {
-                    var indexModel = Manager.views.getIndexMatch(cur)
-                    Manager.views.selectTreeItem(indexModel)
-                    Manager.views.updateNamespace(indexModel)
-                    tr.selection.setCurrentIndex(indexModel, ItemSelectionModel.ClearAndSelect)
-                }
-                function changeCurrentFromModel(cur)
-                {
-                    var indexModel = Manager.views.getIndexMatchFromModel(cur)
-                    Manager.views.selectTreeItem(indexModel)
-                    Manager.views.updateNamespace(indexModel)
-                    tr.selection.setCurrentIndex(indexModel, ItemSelectionModel.ClearAndSelect)
-                }
+                signal rowInserted(var index, var start, var end)
+                signal rowRemoved(var index, var start, var end)
+                anchors.fill: parent
+                anchors.bottomMargin: -5
 
                 model: item
                 selection: ItemSelectionModel {
@@ -138,10 +157,11 @@ Rectangle {
                     {
                         var view = tab.addView("resources/Views/DeclarationView.qml",
                                     {
-                                        "model" : model
+                                        "model" : model,
+                                        "idx" : index,
+                                        "proj" : index.model
                                     },
                                     index.model.data(index, index.model.getRoleKey("name")))
-
                         tab.appendModel(model, view)
                     }
                     else
@@ -152,15 +172,46 @@ Rectangle {
                 headerVisible: false
                 rootIndex: item.index(0, 0)
                 onExpanded: {
-                    _expPanel.height += index.model.rowCount(index) * rowheight
+                    index.model.data(index, index.model.getRoleKey("modelobj")).expanded = true
+                    _expPanel.height += item.expandedRows(index) * rowheight
+                    _expPanel.initialheight = _expPanel.height
                 }
 
                 onCollapsed: {
-                    _expPanel.height -= index.model.rowCount(index) * rowheight
+                    _expPanel.height -= item.expandedRows(index) * rowheight
+                    _expPanel.initialheight = _expPanel.height
+                    index.model.data(index, index.model.getRoleKey("modelobj")).expanded = false
                 }
 
                 Component.onCompleted: {
                     _expPanel.initialheight = item.childCount * rowheight + _expPanel.header.height + 5
+                    item.rowsInserted.connect(tr.rowInserted)
+                    item.rowsRemoved.connect(tr.rowRemoved)
+                    console.log(item)
+                    console.log(Editor.solution.selectedProject())
+                    if (item === Editor.solution.selectedProject())
+                    {
+                        _expPanel.control.selected = true
+                        last = _expPanel.control
+                        console.log("zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+                    }
+
+                }
+
+                onRowInserted: {
+                    if (index.model.data(index, index.model.getRoleKey("expended")))
+                    {
+                        _expPanel.height += (end + 1 - start) * rowheight
+                        _expPanel.initialheight = _expPanel.height
+                    }
+                }
+
+                onRowRemoved: {
+                    if (index.model.data(index, index.model.getRoleKey("expended")))
+                    {
+                        _expPanel.height -= (end + 1 - start) * rowheight
+                        _expPanel.initialheight = _expPanel.height
+                    }
                 }
             }
             transitions: Transition {

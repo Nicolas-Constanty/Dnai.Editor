@@ -51,12 +51,16 @@ Rectangle {
 
         MouseArea {
             id: _control
+            property bool selected: false
             anchors.fill: parent
             onClicked: {
-                if (_panel.state == "Visible")
-                    _panel.state = "Invisible"
-                else
-                    _panel.state = "Visible"
+                if (selected)
+                {
+                    if (_panel.state == "Visible")
+                        _panel.state = "Invisible"
+                    else
+                        _panel.state = "Visible"
+                }
             }
         }
     }

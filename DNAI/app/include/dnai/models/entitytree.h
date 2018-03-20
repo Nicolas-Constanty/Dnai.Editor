@@ -25,7 +25,8 @@ namespace dnai
 				DESCRIPTION,
 				CORE_MODEL,
 				GUI_MODEL,
-				MODEL
+				MODEL,
+				EXPANDED
 			};
 
 		// QAbstractItemModel implementation
@@ -39,6 +40,7 @@ namespace dnai
 	        Q_INVOKABLE int getRoleKey(QString rolename) const;
 
         protected:
+			Entity * getItem(const QModelIndex& index) const;
 			virtual QHash<int, QByteArray> roleNames() const override;
 			Entity *m_rootItem;
 		};

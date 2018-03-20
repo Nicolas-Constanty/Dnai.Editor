@@ -54,7 +54,6 @@ SOURCES += \
     src/dnai/models/core/entitydata.cpp \
     src/dnai/models/gui/data/entity.cpp \
     src/dnai/models/gui/declarable/context.cpp \
-    src/dnai/models/gui/declarable/entity.cpp \
     src/dnai/models/gui/declarable/enumtype.cpp \
     src/dnai/models/gui/declarable/function.cpp \
     src/dnai/models/gui/declarable/listtype.cpp \

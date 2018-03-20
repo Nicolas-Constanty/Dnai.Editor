@@ -87,8 +87,6 @@ namespace dnai
             return m_dataGUI;
         }
 
-
-
 		const QVariant Entity::entityChildren() const
 		{
 			QList<QObject*> l;
@@ -97,6 +95,19 @@ namespace dnai
 				l.append(c);
 			}
             return QVariant::fromValue(l);
+		}
+
+		bool Entity::expanded() const
+		{
+			return m_dataGUI->expanded();
+		}
+
+		void Entity::setExpanded(bool exp)
+		{
+			if (guiModel()->setExpanded(exp))
+			{
+				emit expandedChanged(exp);
+			}
 		}
 
 		void Entity::declare()

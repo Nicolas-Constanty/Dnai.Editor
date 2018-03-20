@@ -16,6 +16,7 @@ namespace dnai
 					int index = -1;
 					int listIndex = -1;
 					QString description;
+					bool expanded = false;
 
 					Entity& operator=(const Entity& other) = default;
 					bool operator!=(const Entity& other) const;

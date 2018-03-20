@@ -134,6 +134,36 @@ namespace dnai {
 		m_filename = name;
 	}
 
+	template<>
+	inline void Project::_foreachEntity(models::Entity *root, const std::function<void(models::Entity *)> &func) const
+	{
+		const auto& list = root->children();
+		for (auto item : list)
+		{
+			if (const auto entity = dynamic_cast<models::Entity*>(item))
+			{
+				func(entity);
+				_foreachEntity(item, func);
+			}
+		}
+	}
+
+	template<>
+	int Project::_foreachEntity(models::Entity *root, const std::function<int(models::Entity *)> &func) const
+	{
+		int total = 0;
+		const auto& list = root->children();
+		for (auto item : list)
+		{
+			if (const auto entity = dynamic_cast<models::Entity*>(item))
+			{
+				total += func(entity);
+				total += _foreachEntity(item, func);
+			}
+		}
+		return total;
+	}
+
 	void Project::foreachEntity(const std::function<void(models::Entity *)> &func) const
 	{
 		const auto list = m_rootEntity->children();
@@ -147,22 +177,74 @@ namespace dnai {
 		}
 	}
 
+	int Project::expandedRows(const QModelIndex &parent) const
+	{
+		const auto item = getItem(parent);
+		const auto count = _foreachEntity<int>(item, [](models::Entity *e)
+		{
+			if (e->expanded())
+				return e->childCount();
+			return 0;
+		});
+		return count + (item->expanded() ? item->childCount() : 0);
+	}
+
+	int Project::_expandedRows(models::Entity *e)
+	{
+		int n = 0;
+		if (e->expanded())
+			n += e->childCount();
+		for (auto c : e->children())
+		{
+			if (c->children().count())
+				n += _expandedRows(c);
+		}
+		return n;
+	}
+
+	void Project::addClass(int index, int listindex, const QModelIndex &parent)
+	{
+		models::Entity *parentItem = getItem(parent);
+		bool success;
+
+		beginInsertRows(parent, parentItem->childCount(), parentItem->childCount());
+		parentItem->addClass(index, listindex);
+		endInsertRows();
+	}
+
+	void Project::addContext(int index, int listindex, const QModelIndex &parent)
+	{
+		models::Entity *parentItem = getItem(parent);
+		bool success;
+
+		beginInsertRows(parent, parentItem->childCount(), parentItem->childCount());
+		parentItem->addContext(index, listindex);
+		endInsertRows();
+	}
+
+	void Project::addFunction(int index, int listindex, const QModelIndex &parent)
+	{
+		models::Entity *parentItem = getItem(parent);
+		bool success;
+
+		beginInsertRows(parent, parentItem->childCount(), parentItem->childCount());
+		parentItem->addFunction(index, listindex);
+		endInsertRows();
+	}
+
+	void Project::addVariable(int index, int listindex, const QModelIndex &parent)
+	{
+		models::Entity *parentItem = getItem(parent);
+		bool success;
+
+		beginInsertRows(parent, parentItem->childCount(), parentItem->childCount());
+		parentItem->addVariable(index, listindex);
+		endInsertRows();
+	}
+
 	int Project::childCount() const
 	{
 		return m_rootEntity->childCount();
-	}
-
-	void Project::_foreachEntity(models::Entity *root, const std::function<void(models::Entity *)> &func)
-	{
-		const auto& list = root->children();
-		for (auto item : list)
-		{
-			if (const auto entity = dynamic_cast<models::Entity*>(item))
-			{
-				func(entity);
-				_foreachEntity(item, func);
-			}
-		}
 	}
 
 	//    const models::Context *Project::main() const

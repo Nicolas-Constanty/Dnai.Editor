@@ -17,6 +17,9 @@ namespace dnai
 			virtual int listIndex() const = 0;
 			virtual bool setListIndex(int listIndex) = 0;
 
+			virtual bool expanded() const = 0;
+			virtual bool setExpanded(bool exp) = 0;
+
 			virtual const QString &description() const = 0;
 			virtual bool setDescription(const QString& description) = 0;
 		};

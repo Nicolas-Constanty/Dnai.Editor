@@ -17,6 +17,7 @@ namespace dnai
 
 				void Function::serialize(QJsonObject& obj) const
 				{	
+					Entity::serialize(obj);
                     QJsonArray instructions;
                     foreach(const interfaces::IInstruction *instruction, m_data.instructions) {
                         QJsonObject var;
@@ -26,9 +27,6 @@ namespace dnai
                             inst->serialize(var);
                         instructions.append(var);
                     }
-					obj["description"] = m_data.description;
-					obj["index"] = m_data.index;
-					obj["listIndex"] = m_data.listIndex;
 					obj["variables"] = serializeList<Variable>(m_data.variables);
 					obj["inputs"] = serializeList<Input>(m_data.inputs);
 					obj["outputs"] = serializeList<Output>(m_data.outputs);
@@ -37,10 +35,7 @@ namespace dnai
 
 				void Function::_deserialize(const QJsonObject& obj)
 				{
-
-					m_data.description = obj["description"].toString();
-					m_data.index = obj["index"].toInt();
-					m_data.listIndex = obj["listIndex"].toInt();
+					Entity::_deserialize(obj);
 					foreach(auto variable, obj["variables"].toArray()) {
 						m_data.variables.append(Variable::deserialize(variable.toObject()));
 					}
@@ -59,58 +54,6 @@ namespace dnai
 						else
 							m_data.instructions.append(Instruction::deserialize(node.toObject()));
 					}
-				}
-
-				const data::Function& Function::data() const
-				{
-					return m_data;
-				}
-
-				bool Function::setData(const data::Function& data)
-				{
-                    if (m_data == data)
-                        return false;
-					m_data = data;
-                    return true;
-				}
-
-				int Function::index() const
-				{
-					return m_data.index;
-				}
-
-				bool Function::setIndex(int index)
-				{
-					if (index == m_data.index)
-						return false;
-					m_data.index = index;
-					return true;
-				}
-
-				int Function::listIndex() const
-				{
-					return m_data.listIndex;
-				}
-
-				bool Function::setListIndex(int listIndex)
-				{
-					if (listIndex == m_data.listIndex)
-						return false;
-					m_data.listIndex = listIndex;
-					return true;
-				}
-
-				const QString& Function::description() const
-				{
-					return m_data.description;
-				}
-
-				bool Function::setDescription(const QString& description)
-				{
-					if (description == m_data.description)
-						return false;
-					m_data.description = description;
-					return true;
 				}
 
 				QList<models::gui::Input*> Function::inputs() const
