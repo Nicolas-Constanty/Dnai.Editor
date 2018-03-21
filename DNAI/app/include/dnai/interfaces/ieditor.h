@@ -1,8 +1,9 @@
 #ifndef DNAI_INTERFACES_IEDITOR_H
 #define DNAI_INTERFACES_IEDITOR_H
 
+#include <QQuickItem>
+
 #include "icommand.h"
-#include "iviewzone.h"
 #include "isavable.h"
 #include "isolution.h"
 
@@ -28,11 +29,12 @@ namespace dnai
 			virtual void openSolution() = 0;
 			virtual void loadSolution(const QString& name) = 0;
 			virtual void closeSolution() = 0;
+			virtual void addView(QQuickItem *vz) = 0;
 			virtual const QList<ICommand *> &actions() const = 0;
 			virtual const QObject &selection() const = 0;
 			virtual const QList<QObject *> &selections() const = 0;
-			virtual const QList<IViewZone *> &views() const = 0;
-			virtual const IViewZone &selectedView() const = 0;
+			virtual const QList<QQuickItem *> &views() const = 0;
+			virtual QQuickItem *selectedView() const = 0;
 			virtual ISolution *solution() const = 0;
 		};
 	}

@@ -21,6 +21,7 @@ namespace dnai {
     {
         Q_OBJECT
 		Q_PROPERTY(dnai::models::Entity *selectedEntity READ selectedEntity WRITE setSelectedEntity NOTIFY selectedEntityChanged)
+		Q_PROPERTY(int childCount READ childCount CONSTANT)
 	public:
         Project();
 		const QJsonObject &jsonData() const override;
@@ -49,24 +50,34 @@ namespace dnai {
 		const QString& fileName() const override;
 		void setFileName(const QString& name) override;
 		void foreachEntity(const std::function<void(models::Entity*)> &func) const;
+	    int childCount() const;
+
+    public:
+		Q_INVOKABLE int expandedRows(const QModelIndex& parent) const;
+        Q_INVOKABLE void addClass(int index, const QString &listindex, const QModelIndex& parent);
+        Q_INVOKABLE void addContext(int index, const QString & listindex, const QModelIndex& parent);
+        Q_INVOKABLE void addFunction(int index, const QString & listindex, const QModelIndex& parent);
+        Q_INVOKABLE void addVariable(int index, const QString & listindex, const QModelIndex& parent);
 
     private:
-	    static void _foreachEntity(models::GenericTreeItem* root, const std::function<void(models::Entity*)> &func);
-   
+		template<class T>
+        T _foreachEntity(models::Entity* root, const std::function<T(models::Entity*)> &func) const;
+
     private:
-		QFile* m_file;
-        Count count;
-		models::Entity* m_selectedEntity{};
-		QString m_filename;
-		QString m_description;
-		QJsonObject m_data;
-		QString m_version;
-		models::Entity* m_rootEntity;
-	};
-    //  class Project: public models::Common
+	    QFile* m_file;
+	    Count count;
+	    models::Entity* m_selectedEntity{};
+	    QString m_filename;
+	    QString m_description;
+	    QJsonObject m_data;
+	    QString m_version;
+	    models::Entity* m_rootEntity;
+    };
+
+	//  class Project: public models::Common
     //  {
     //  public:
-       //   Project(qint32 uid, QString const& name, QString const& description, QFile& file);
+    //   Project(qint32 uid, QString const& name, QString const& description, QFile& file);
     //      Project(const QString &, const QString &, QFile &);
     //      virtual ~Project();
 
@@ -89,7 +100,7 @@ namespace dnai {
     //      QFile &file() const;
     //      const models::Context *main() const;
     //      QJsonObject data() const;
-          //static QJsonObject loadProjectData(const QString &);
+    //static QJsonObject loadProjectData(const QString &);
 
 
     //  private:
@@ -118,6 +129,6 @@ namespace dnai {
     //      static bool defaultSearchFunc(models::Common *, QString const &);
     //      static bool defaultSearchFunctionsFunc(models::Function *, QString const &);
     //  };
-}
+    }
 
 #endif // PROJECT_H

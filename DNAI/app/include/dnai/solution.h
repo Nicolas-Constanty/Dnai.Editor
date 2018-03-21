@@ -3,12 +3,23 @@
 
 #include "interfaces/isolution.h"
 #include "interfaces/iserializable.h"
+#include <QAbstractListModel>
 
 namespace dnai
 {
-	class Solution : public interfaces::ISolution, public interfaces::ASerializable<Solution>
+	class Project;
+
+	class Solution : public QAbstractListModel, public interfaces::ISolution, public interfaces::ASerializable<Solution>
 	{
+		Q_OBJECT
 	public:
+		enum ROLES
+		{
+			ITEM = Qt::UserRole + 1,
+			NAME,
+			DESCRIPTION
+		};
+
 		Solution();
 		void save() override;
 		void load(const QString& path) override;
@@ -27,9 +38,17 @@ namespace dnai
 		void serialize(QJsonObject& obj) const override;
 		const QString& fileName() const override;
 		void setFileName(const QString& name) override;
+		Q_INVOKABLE int getRoleKey(QString rolename) const;
+		Q_INVOKABLE bool selectProject(dnai::Project*);
+		Q_INVOKABLE dnai::Project *selectedProject() const;
+
 	protected:
 		void _deserialize(const QJsonObject& obj) override;
-		
+
+	public:
+		int rowCount(const QModelIndex& parent) const override;
+		QVariant data(const QModelIndex& index, int role) const override;
+
 	private:
 		IProject* m_selectedProject;
 		QList<IProject*> m_projects;
@@ -39,7 +58,10 @@ namespace dnai
 		QString m_version;
 		QFile *m_file;
 		QString m_filename;
+		virtual QHash<int, QByteArray> roleNames() const override;
+
 	};
 }
+
 
 #endif //DNAI_SOLUTION_H

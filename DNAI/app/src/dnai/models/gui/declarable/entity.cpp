@@ -55,6 +55,19 @@ namespace dnai
                     return true;
                 }
 
+	            bool Entity::expanded() const
+	            {
+					return m_data.expanded;
+	            }
+
+	            bool Entity::setExpanded(bool exp)
+	            {
+					if (m_data.expanded == exp)
+						return false;
+					m_data.expanded = exp;
+					return true;
+	            }
+
 	            Entity::Entity()
 	            {
 	            }

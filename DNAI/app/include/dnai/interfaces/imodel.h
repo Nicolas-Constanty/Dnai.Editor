@@ -11,10 +11,10 @@ namespace dnai {
 		 * \tparam T 
 		 */
 		template <class T>
-        class IModel: public models::GenericTreeItem, public ASerializable<T>
+        class IModel: public models::GenericTreeItem<T>, public ASerializable<T>
         {
 		public:
-            explicit IModel(GenericTreeItem *parent = nullptr) : models::GenericTreeItem(parent) {}
+            explicit IModel(T *parent = nullptr) : models::GenericTreeItem<T>(parent) {}
         };
     }
 }

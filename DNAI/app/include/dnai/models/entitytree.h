@@ -24,7 +24,10 @@ namespace dnai
 				LISTINDEX,
 				DESCRIPTION,
 				CORE_MODEL,
-				GUI_MODEL
+				GUI_MODEL,
+				MODEL,
+				EXPANDED,
+				LIST_COLUMN
 			};
 
 		// QAbstractItemModel implementation
@@ -35,8 +38,10 @@ namespace dnai
 			int rowCount(const QModelIndex& parent) const override;
 			int columnCount(const QModelIndex& parent) const override;
 			QVariant data(const QModelIndex& index, int role) const override;
+	        Q_INVOKABLE int getRoleKey(QString rolename) const;
 
-		protected:
+        protected:
+			Entity * getItem(const QModelIndex& index) const;
 			virtual QHash<int, QByteArray> roleNames() const override;
 			Entity *m_rootItem;
 		};

@@ -34,10 +34,10 @@ namespace dnai {
         if (obj["version"].toString() != Editor::instance().version())
             qWarning() << "Warning this project file (" << m_filename << ") wasn't created with the same editor's version (" << obj["version"].toString() << "!= current" << Editor::instance().version() << ")";
         const auto coreModel = new models::core::Entity(obj["name"].toString(), enums::core::ENTITY::CONTEXT);
-        const auto guiModel = models::gui::declarable::Context::deserialize(obj);
         m_rootItem = new models::Entity();
         m_rootItem->setIdx(index(0,0, QModelIndex()));
-		m_rootEntity = models::Entity::deserialize(obj["main"].toObject(), coreModel, guiModel, m_rootItem);
+        m_rootEntity = models::Entity::deserialize(obj, coreModel, m_rootItem);
+		m_rootEntity->setIsRoot(true);
         m_rootItem->appendChild(m_rootEntity);
     }
 
@@ -134,22 +134,10 @@ namespace dnai {
 		m_filename = name;
 	}
 
-	void Project::foreachEntity(const std::function<void(models::Entity *)> &func) const
+	template<>
+	inline void Project::_foreachEntity(models::Entity *root, const std::function<void(models::Entity *)> &func) const
 	{
-		const auto list = m_rootEntity->children();
-		for (auto item : list)
-		{
-			if (const auto entity = dynamic_cast<models::Entity*>(item))
-			{
-				func(entity);
-				_foreachEntity(item, func);
-			}
-		}
-	}
-	
-	void Project::_foreachEntity(models::GenericTreeItem *root, const std::function<void(models::Entity *)> &func)
-	{
-		const auto& list = root->children();
+        const auto& list = root->childrenItem();
 		for (auto item : list)
 		{
 			if (const auto entity = dynamic_cast<models::Entity*>(item))
@@ -160,10 +148,83 @@ namespace dnai {
 		}
 	}
 
-	//    const models::Context *Project::main() const
-//    {
-//        return m_main;
-//    }
+	template<>
+	int Project::_foreachEntity(models::Entity *root, const std::function<int(models::Entity *)> &func) const
+	{
+		int total = 0;
+        const auto& list = root->childrenItem();
+		for (auto item : list)
+		{
+			if (const auto entity = dynamic_cast<models::Entity*>(item))
+			{
+				total += func(entity);
+				total += _foreachEntity(item, func);
+			}
+		}
+		return total;
+	}
+
+	void Project::foreachEntity(const std::function<void(models::Entity *)> &func) const
+	{
+        const auto list = m_rootEntity->childrenItem();
+		for (auto item : list)
+		{
+			if (const auto entity = dynamic_cast<models::Entity*>(item))
+			{
+				func(entity);
+				_foreachEntity(item, func);
+			}
+		}
+	}
+
+	int Project::expandedRows(const QModelIndex &parent) const
+	{
+		const auto item = getItem(parent);
+		const auto count = _foreachEntity<int>(item, [](models::Entity *e)
+		{
+			if (e->expanded())
+				return e->childCount();
+			return 0;
+		});
+		return count + (item->expanded() ? item->childCount() : 0);
+    }
+
+    void Project::addClass(int index, const QString & listindex, const QModelIndex &parent)
+	{
+        models::Entity *parentItem = getItem(parent);
+		beginInsertRows(parent, parentItem->childCount(), parentItem->childCount());
+		parentItem->addClass(index, listindex);
+		endInsertRows();
+	}
+
+    void Project::addContext(int index, const QString & listindex, const QModelIndex &parent)
+	{
+        models::Entity *parentItem = getItem(parent);
+		beginInsertRows(parent, parentItem->childCount(), parentItem->childCount());
+		parentItem->addContext(index, listindex);
+		endInsertRows();
+	}
+
+    void Project::addFunction(int index, const QString & listindex, const QModelIndex &parent)
+	{
+        models::Entity *parentItem = getItem(parent);
+		beginInsertRows(parent, parentItem->childCount(), parentItem->childCount());
+		parentItem->addFunction(index, listindex);
+		endInsertRows();
+	}
+
+    void Project::addVariable(int index, const QString & listindex, const QModelIndex &parent)
+	{
+        models::Entity *parentItem = getItem(parent);
+		beginInsertRows(parent, parentItem->childCount(), parentItem->childCount());
+		parentItem->addVariable(index, listindex);
+		endInsertRows();
+	}
+
+	int Project::childCount() const
+	{
+		return m_rootEntity->childCount();
+	}
 
     const QJsonObject &Project::jsonData() const
     {

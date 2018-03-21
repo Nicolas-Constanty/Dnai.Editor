@@ -9,6 +9,8 @@ import "../Style"
 Rectangle {
     id: _itemview
     property alias isSelected: _selectButton.checked
+    property Item tparent: null
+
     implicitHeight: 40
     width: parent.parent.width
     height: 40
@@ -103,7 +105,7 @@ Rectangle {
         implicitWidth: parent.width * 0.04
         indicator: Rectangle {
             anchors.fill: _selectButton
-            color: (model.item.type === 0) ? "#00897B" : (model.item.type === 1) ? "#039BE5" : (model.item.type === 2) ? "#8E24AA" : "#FB8C00"
+            color: (modelData.entityType === 0) ? "#00897B" : (modelData.entityType === 1) ?  "#FB8C00" : (modelData.entityType === 2) ? "#8E24AA" : "#039BE5"
             FontAwesomeText {
                 anchors.fill: parent
                 text: "\uf00c"
@@ -180,7 +182,12 @@ Rectangle {
         }
 
         onCheckStateChanged: {
-            model.item.select(_selectButton.checked)
+            if (tparent.selectedItems.indexOf(modelData) === -1)
+            {
+                tparent.selectedItems.push(modelData)
+            }
+            else
+                tparent.selectedItems.pop(modelData)
             if (_selectButton.checked)
             {
                 _itemview.parent.parent.selectInfo.selectCount += 1
@@ -201,7 +208,7 @@ Rectangle {
     }
     FontAwesomeButton {
         id: _openbutton
-        visible: model.item.type < 3
+        visible: modelData.entityType !== 1
 
         anchors.right: _itemview.right
         anchors.top: _itemview.top
@@ -231,7 +238,7 @@ Rectangle {
             source: _openbutton.label
         }
         onPressed: {
-            Manager.views.treeView().changeCurrentFromModel(model.item)
+            Manager.views.treeView().changeCurrentFromModel(model)
         }
     }
     Item {
@@ -247,7 +254,7 @@ Rectangle {
             anchors.top: parent.top
             anchors.left: parent.left
             anchors.right: parent.right
-            text: model.item.name
+            text: modelData.name
             horizontalAlignment: Qt.AlignLeft
             height: _itemview.implicitHeight
             clip: true
@@ -258,7 +265,7 @@ Rectangle {
             anchors.left: parent.left
             anchors.right: parent.right
             visible: _expandbutton.state === "Expand"
-            text: qsTr(model.item.description)
+            text: qsTr(modelData.description)
             color: AppSettings.style.text.color
             wrapMode: TextEdit.WordWrap
             selectByMouse: true

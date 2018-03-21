@@ -12,29 +12,14 @@ namespace dnai
 		{
 			namespace declarable
 			{
-				class Context : public interfaces::IEntity, public interfaces::IModelData<data::Context>, public interfaces::ASerializable<Context>
+				class Context : public Entity<data::Context, Context>
 				{
-					
 				public:
-					explicit Context();
+					explicit Context() = default;
 					//Implementation of ISerializable
 					void serialize(QJsonObject& obj) const override;
 				protected:
-					void _deserialize(const QJsonObject& obj) override;
-					//Implementation of IModelData
-				public:
-					const data::Context& data() const override;
-					bool setData(const data::Context& data) override;
-				public:
-					int index() const override;
-					bool setIndex(int index) override;
-					int listIndex() const override;
-					bool setListIndex(int listIndex) override;
-					const QString& description() const override;
-					bool setDescription(const QString& description) override;
-
-				protected:
-					data::Context m_data;
+					virtual void _deserialize(const QJsonObject& obj) override;
 				};
 			}
 		}

@@ -2,6 +2,7 @@
 #include "dnai/solution.h"
 #include "dnai/project.h"
 #include "dnai/exceptions/notimplemented.h"
+#include "dnai/interfaces/iviewzone.h"
 
 namespace dnai
 {
@@ -34,9 +35,12 @@ namespace dnai
 		QJsonArray arr;
 		for (const auto view : m_viewZones)
 		{
-			QJsonObject var;
-			view->serialize(var);
-			arr.append(var);
+			if (const auto v = dynamic_cast<interfaces::IViewZone *>(view))
+			{
+				QJsonObject var;
+				v->serialize(var);
+				arr.append(var);
+			}
 		}
 		obj["views"] = arr;
 	}
@@ -44,7 +48,7 @@ namespace dnai
 	void Editor::openSolution()
 	{
         for (auto proj : m_solution->projects())
-            if (auto p = dynamic_cast<Project*>(proj))
+            if (const auto p = dynamic_cast<Project*>(proj))
                 p->foreachEntity([](models::Entity *e) { e->declare(); });
 	}
 
@@ -75,14 +79,21 @@ namespace dnai
 		return m_selections;
 	}
 
-	const QList<interfaces::IViewZone *>& Editor::views() const
+	const QList<QQuickItem *>& Editor::views() const
 	{
 		return m_viewZones;
 	}
 
-	const interfaces::IViewZone& Editor::selectedView() const
+	QQuickItem *Editor::selectedView() const
 	{
-		return *m_seletedItem;
+		return m_seletedItem;
+	}
+
+	void Editor::selectView(QQuickItem* i)
+	{
+		m_seletedItem = i;
+		if (!m_viewZones.contains(m_seletedItem))
+			addView(i);
 	}
 
 	void Editor::selectProject(Project* proj)
@@ -112,4 +123,21 @@ namespace dnai
     {
         return dynamic_cast<Solution*>(solution());
     }
+
+	void Editor::addView(QQuickItem* vz)
+	{
+		if (vz == nullptr || m_viewZones.contains(vz))
+            return;
+		m_viewZones.append(vz);
+	}
+
+	views::EditorView *Editor::mainView() const
+	{
+		return m_editorView;
+	}
+
+	void Editor::registerEditorView(views::EditorView* view)
+	{
+		m_editorView = view;
+	}
 }

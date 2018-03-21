@@ -5,6 +5,9 @@
 #include "dnai/interfaces/iserializable.h"
 #include "dnai/models/gui/data/entity.h"
 #include "dnai/interfaces/ientity.h"
+#include "dnai/exceptions/notimplemented.h"
+
+#include <QDebug>
 
 namespace dnai
 {
@@ -14,30 +17,97 @@ namespace dnai
 		{
 			namespace declarable
 			{
-				
-				class Entity : public interfaces::IEntity, public interfaces::IModelData<data::Entity>, public interfaces::ASerializable<Entity>
+				template<class T, class U>
+				class Entity : public interfaces::IEntity, public interfaces::IModelData<T>, public interfaces::ASerializable<U>
 				{
 					//IModelData implementation
 				public:
-					Entity();
-					const data::Entity &data() const override;
-					bool setData(const data::Entity& data) override;
+					Entity() = default;
+					virtual ~Entity() override = default;
 
-					virtual int index() const override;
-					virtual bool setIndex(int index) override;
+					virtual bool setData(const T& data) override
+					{
+						if (m_data == data)
+							return false;
+						m_data = data;
+						return true;
+					}
 
-					virtual int listIndex() const override;
-					virtual bool setListIndex(int listIndex) override;
+					virtual int index() const override
+					{
+						return m_data.index;
+					}
 
-					virtual const QString &description() const override;
-					virtual bool setDescription(const QString& description) override;
+					virtual bool setIndex(const int index) override
+					{
+						if (m_data.index == index)
+							return false;
+						m_data.index = index;
+						return true;
+					}
 
-					~Entity() override;
-					virtual void serialize(QJsonObject& obj) const override;
+					virtual QUuid listIndex() const override
+					{
+						return m_data.listIndex;
+					}
+
+					virtual bool setListIndex(QUuid listIndex) override
+					{
+						if (m_data.listIndex == listIndex)
+							return false;
+						m_data.listIndex = listIndex;
+						return true;
+					}
+
+					virtual const QString& description() const override
+					{
+						return m_data.description;
+					}
+
+					virtual bool setDescription(const QString& description) override
+					{
+						if (m_data.description == description)
+							return false;
+						m_data.description = description;
+						return true;
+					}
+
+					virtual bool expanded() const override
+					{
+						return m_data.expanded;
+					}
+
+					virtual bool setExpanded(bool exp) override
+					{
+						if (m_data.expanded == exp)
+							return false;
+						m_data.expanded = exp;
+						return true;
+					}
+
+					virtual const T& data() const override
+					{
+						return m_data;
+					}
+
+					virtual void serialize(QJsonObject& obj) const override
+					{
+						obj["expanded"] = m_data.expanded;
+						obj["description"] = m_data.description;
+						obj["index"] = m_data.index;
+						obj["listIndex"] = m_data.listIndex.toString();
+					}
 				protected:
-					virtual void _deserialize(const QJsonObject& obj) override;
-				private:
-					data::Entity m_data;
+					virtual void _deserialize(const QJsonObject& obj) override
+					{
+						m_data.expanded = obj["expanded"].toBool();
+						m_data.description = obj["description"].toString();
+						m_data.index = obj["index"].toInt();
+						m_data.listIndex = QUuid(obj["listIndex"].toString());
+					}
+
+				protected:
+					T m_data;
 				};
 			}
 		}

@@ -64,14 +64,7 @@ OpenProjectForm {
     chooseButton.onClicked: {
         fileDialog.open()
     }
-    openButton.onClicked: function () {
-        if (projectPath.text) {
-            Editor.openSolution()
-            viewData.clear();
-            projectPath.text = "";
-            popup.close();
-        }
-    }
+
     cancelButton.onClicked: function () {
         viewData.clear();
         projectPath.text = "";

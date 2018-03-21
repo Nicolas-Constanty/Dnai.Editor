@@ -41,7 +41,10 @@ namespace dnai
 			if (parentItem == m_rootItem)
 				return {};
 
-			return createIndex(parentItem->row(), 0, parentItem);
+            const auto i = parentItem->row();
+            const auto idx = createIndex(parentItem->row(), 0, parentItem);
+            parentItem->child(i)->setIdx(idx);
+            return idx;
 		}
 
 		int EntityTree::rowCount(const QModelIndex& parent) const
@@ -88,9 +91,30 @@ namespace dnai
 				return entity->listIndex();
 			case DESCRIPTION:
                 return entity->description();
+            case MODEL:
+				return QVariant::fromValue(entity);
+			case EXPANDED:
+                return QVariant::fromValue(entity->expanded());
+			case LIST_COLUMN:
+				return QVariant::fromValue(entity->listColumn());
 			default: 
 				return QVariant();
 			}
+		}
+
+		int EntityTree::getRoleKey(QString rolename) const
+		{
+			return roleNames().key(rolename.toLatin1());
+		}
+
+		Entity *EntityTree::getItem(const QModelIndex &index) const
+		{
+			if (index.isValid()) {
+				Entity *item = static_cast<Entity*>(index.internalPointer());
+				if (item)
+					return item;
+			}
+			return m_rootItem;
 		}
 
 		QHash<int, QByteArray> EntityTree::roleNames() const
@@ -106,6 +130,9 @@ namespace dnai
 			roles[ROLES::DESCRIPTION] = "description";
 			roles[ROLES::CORE_MODEL] = "coreModel";
 			roles[ROLES::GUI_MODEL] = "guiModel";
+			roles[ROLES::MODEL] = "modelobj";
+			roles[ROLES::EXPANDED] = "expended";
+			roles[ROLES::LIST_COLUMN] = "listcolumn";
 			return roles;
 		}
 	}

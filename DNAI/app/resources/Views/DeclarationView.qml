@@ -7,14 +7,13 @@ import DNAI 1.0
 import DNAI.Models 1.0
 
 import "../Style"
-import "../"
+import "../Components"
 
 Item {
     id: _item
-
-    anchors.fill: parent
-    visible: false
-
+    property alias model: _contextColumns.model
+    property Project proj: null
+    property var idx: null
     Component {
         id: _delegate
         Rectangle {
@@ -26,7 +25,7 @@ Item {
             width: 300
             EditableText {
                 id: _title
-                text:  model.name
+                text: modelData.name
                 anchors.top: parent.top
                 anchors.topMargin: 10
                 anchors.left: parent.left
@@ -60,7 +59,7 @@ Item {
                 }
                 TextArea {
                     id: _comment
-                    text: qsTr(model.comment)
+                    text: qsTr(modelData.description)
                     anchors.fill: parent
                     color: AppSettings.style.text.color
                     wrapMode: TextEdit.WordWrap
@@ -108,7 +107,9 @@ Item {
                     onPressed: {
                         if (_selectInfo.selectCount != 0)
                         {
-                            item.removeSelectedItem(_selectInfo.selectCount)
+                            for (var item in _sublist.selectedItems) {
+                                item.remove()
+                            }
                             _selectInfo.selectCount = 0
                         }
                     }
@@ -126,23 +127,23 @@ Item {
                 anchors.topMargin: 10
                 anchors.bottomMargin: 10
                 clip: true
-//                Component.onCompleted: {
-//                    console.log(width)
-//                }
 
                 ListView {
                     id: _sublist
+                    property var selectedItems: []
                     property alias selectInfo: _selectInfo
                     property alias visualModel: _delegateModel
-//                    anchors.fill: parent
                     anchors.left: parent.left
                     anchors.right: parent.right
                     anchors.leftMargin: 15
                     anchors.rightMargin: 25
+
                     model: DelegateModel {
                         id: _delegateModel
-                        model: item
-                        delegate: CommonModelView {}
+                        model: modelData
+                        delegate: CommonModelView {
+                            tparent: _sublist
+                        }
                     }
                     spacing: 15
                     clip: true
@@ -166,9 +167,9 @@ Item {
                         AddButton {
                             id: _addContext
                             width: 45
-                            visible: isContext
+                            visible: modelData.parentRef.entityType === 0
                             onPressed: {
-                                Manager.views.addContext(_sublist.visualModel.items.count, index)
+                                proj.addContext(_sublist.visualModel.items.count, index, idx)
                                 _sublist.positionViewAtEnd()
                             }
                         }
@@ -177,7 +178,7 @@ Item {
                             decoration.color: "#039BE5"
                             width: 45
                             onPressed: {
-                                Manager.views.addClass(_sublist.visualModel.items.count, index)
+                                proj.addClass(_sublist.visualModel.items.count, index, idx)
                                 _sublist.positionViewAtEnd()
                             }
                         }
@@ -186,7 +187,7 @@ Item {
                             decoration.color: "#8E24AA"
                             width: 45
                             onPressed: {
-                                Manager.views.addFunction(_sublist.visualModel.items.count, index)
+                                proj.addFunction(_sublist.visualModel.items.count, index, idx)
                                 _sublist.positionViewAtEnd()
                             }
                         }
@@ -195,7 +196,7 @@ Item {
                             decoration.color: "#FB8C00"
                             width: 45
                             onPressed: {
-                                Manager.views.addVariable(_sublist.visualModel.items.count, index)
+                                proj.addVariable(_sublist.visualModel.items.count, index, idx)
                                 _sublist.positionViewAtEnd()
                             }
                         }
@@ -214,7 +215,6 @@ Item {
             spacing: -1
             orientation: Qt.Horizontal
             layoutDirection: Qt.LeftToRight
-            model: Manager.project.selectedEntity
             delegate: _delegate
         }
         Rectangle {

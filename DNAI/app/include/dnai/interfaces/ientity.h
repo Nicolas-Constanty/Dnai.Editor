@@ -1,6 +1,7 @@
 #ifndef DNAI_INTERFACES_IENTITY_H
 #define DNAI_INTERFACES_IENTITY_H
 
+#include <QUuid>
 #include <QString>
 
 namespace dnai
@@ -14,8 +15,11 @@ namespace dnai
 			virtual int index() const = 0;
 			virtual bool setIndex(int index) = 0;
 
-			virtual int listIndex() const = 0;
-			virtual bool setListIndex(int listIndex) = 0;
+			virtual QUuid listIndex() const = 0;
+			virtual bool setListIndex(QUuid listIndex) = 0;
+
+			virtual bool expanded() const = 0;
+			virtual bool setExpanded(bool exp) = 0;
 
 			virtual const QString &description() const = 0;
 			virtual bool setDescription(const QString& description) = 0;

@@ -17,5 +17,8 @@
 #include "dnai/views/instructionview.h"
 #include "dnai/views/layout.h"
 #include "dnai/views/appview.h"
+#include "dnai/views/viewzone.h"
+#include "dnai/views/viewelement.h"
+#include "dnai/views/editorview.h"
 
 #endif // VIEWS_H

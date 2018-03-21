@@ -40,7 +40,7 @@ Window {
 
     Loader {
         id: loader
-        asynchronous: true//!Manager.isMac()
+        asynchronous: true
         visible: status == Loader.Ready
         sourceComponent: AppSettings.isSettingsLoad() ? _mainWindow : _selectTheme
     }

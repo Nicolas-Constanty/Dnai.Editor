@@ -21,7 +21,7 @@
     },
     "shadowColor": "#212121",
     "font": {
-        "family": ":/resources/fonts/consola.ttf",
+        "family": ":/resources/fonts/segoeui.ttf",
         "pixelSize": 10
     },
     "text": {

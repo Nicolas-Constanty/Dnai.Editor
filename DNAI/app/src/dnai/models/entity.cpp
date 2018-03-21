@@ -11,14 +11,29 @@ namespace dnai
         {
         }
 
-		Entity::Entity(core::Entity* coremodel, interfaces::IEntity* guimodel, GenericTreeItem * parent) : IModel(parent), m_dataCore(coremodel), m_dataGUI(guimodel)
-        {
-        }
-
-        Entity::Entity(core::Entity *coremodel, GenericTreeItem *parent, interfaces::IEntity *guimodel) : IModel(parent), m_dataCore(coremodel), m_dataGUI(guimodel)
+        Entity::Entity(core::Entity *coremodel, Entity *parent, interfaces::IEntity *guimodel) : IModel(parent), m_dataCore(coremodel), m_dataGUI(guimodel)
         {
 
         }
+
+		Entity::~Entity()
+		{
+			delete m_dataCore;
+			delete m_dataGUI;
+		}
+
+		bool Entity::isRoot() const
+		{
+			return m_isRoot;
+		}
+
+		void Entity::setIsRoot(bool isRoot)
+		{
+			if (m_isRoot == isRoot)
+				return;
+			m_isRoot = isRoot;
+			emit isRootChanged(isRoot);
+		}
 
 		qint32 Entity::id() const
 		{
@@ -30,7 +45,7 @@ namespace dnai
 			return coreModel()->containerId();
 		}
 
-		enums::core::ENTITY Entity::entityType() const
+		qint32 Entity::entityType() const
 		{
 			return coreModel()->entityType();
 		}
@@ -52,9 +67,9 @@ namespace dnai
 			return m_dataGUI->index();
 		}
 
-		int Entity::listIndex() const
+		const QString &Entity::listIndex() const
 		{
-			return m_dataGUI->listIndex();
+			return m_dataGUI->listIndex().toString();
 		}
 
 		const QString& Entity::description() const
@@ -72,9 +87,27 @@ namespace dnai
             return m_dataGUI;
         }
 
+		bool Entity::expanded() const
+		{
+			return m_dataGUI->expanded();
+		}
+
+		void Entity::setExpanded(bool exp)
+		{
+			if (guiModel()->setExpanded(exp))
+			{
+				emit expandedChanged(exp);
+			}
+		}
+
 		void Entity::declare()
 		{
 			m_dataCore->declare();
+		}
+
+		Entity* Entity::parentRef() const
+		{
+			return parentItem();
 		}
 
 		void Entity::setId(qint32 id)
@@ -93,9 +126,9 @@ namespace dnai
 			}
 		}
 
-		void Entity::setEntityType(enums::core::ENTITY type) const
+		void Entity::setEntityType(qint32 type) const
 		{
-			if (coreModel()->setEntityType(type))
+			if (coreModel()->setEntityType(static_cast<enums::ENTITY>(type)))
 			{
 				emit entityTypeChanged(type);
 			}
@@ -126,7 +159,7 @@ namespace dnai
 			}
 		}
 
-		void Entity::setListIndex(int listIndex)
+		void Entity::setListIndex(const QString &listIndex)
 		{
 			if (m_dataGUI->setListIndex(listIndex))
 			{
@@ -150,8 +183,30 @@ namespace dnai
 			emit coreModelChanged(model);
 		}
 
+		void Entity::appendChild(Entity* child)
+		{
+			GenericTreeItem<Entity>::appendChild(child);
+			const auto uuid = QUuid(child->guiModel()->listIndex());
+			if (m_columns.find(uuid) == m_columns.end())
+			{
+				const auto c = new Column();
+				m_columslist.append(c);
+				m_columns[uuid] = c;
+			}
+			m_columns[uuid]->append(child);
+			emit entityChildrenChanged(child);
+		}
+
 		void Entity::serialize(QJsonObject& obj) const
 		{
+			QJsonArray arr;
+			for (auto c : m_columns)
+			{
+				QJsonObject tmp;
+				c->serialize(tmp);
+				arr.append(tmp);
+			}
+			obj["columns"] = arr;
 			if (m_dataCore == nullptr) return;
 			obj["name"] = m_dataCore->name();
             switch (m_dataCore->entityType())
@@ -183,10 +238,11 @@ namespace dnai
                 classe->serialize(obj);
                 break;
             }
-            case enums::LIST_TYPE: break;
+            case enums::LIST_TYPE: 
+            	break;
             default: ;
             }
-			for (auto child : children())
+            for (auto child : childrenItem())
 			{
 				const auto entity = dynamic_cast<Entity *>(child);
 				entity->serialize(obj);
@@ -195,6 +251,11 @@ namespace dnai
 
 		void Entity::_deserialize(const QJsonObject& obj)
 		{
+			foreach(const auto column, obj["columns"].toArray()) {
+				const auto col = Column::deserialize(obj);
+                m_columns[col->datas().listIndex] = col;
+				m_columslist.append(col);
+			}
 			m_dataCore->setName(obj["name"].toString());
             m_dataCore->setVisibility(static_cast<enums::core::VISIBILITY>(obj["visibility"].toInt()));
             switch (m_dataCore->entityType())
@@ -232,36 +293,215 @@ namespace dnai
 
             foreach(const auto classe, obj["classes"].toArray()) {
                 const auto coreModel = new models::core::Entity(enums::core::OBJECT_TYPE);
-				GenericTreeItem *parent = this;
+                Entity *parent = this;
                 const auto entity = Entity::deserialize(classe.toObject(), coreModel, parent);
 				appendChild(entity);
 			}
 
             foreach(const auto context, obj["contexts"].toArray()) {
                 const auto coreModel = new models::core::Entity(enums::core::CONTEXT);
-				GenericTreeItem *parent = this;
+                Entity *parent = this;
                 const auto entity = deserialize(context.toObject(), coreModel, parent);
 				appendChild(entity);
 			}
 
             foreach(const auto variable, obj["variables"].toArray()) {
                 const auto coreModel = new models::core::Entity(enums::core::VARIABLE);
-				GenericTreeItem *parent = this;
+                Entity *parent = this;
                 const auto entity = Entity::deserialize(variable.toObject(),coreModel, parent);
 				appendChild(entity);
 			}
 
             foreach(const auto function, obj["functions"].toArray()) {
                 const auto coreModel = new models::core::Entity(enums::core::FUNCTION);
-				GenericTreeItem *parent = this;
+                Entity *parent = this;
                 const auto entity = Entity::deserialize(function.toObject(), coreModel, parent);
 				appendChild(entity);
 			}
 		}
 
+		void Entity::addContext(const int index, const QString &listindex)
+		{
+			const auto coreModel = new models::core::Entity(enums::core::CONTEXT);
+			const auto guiModel = new models::gui::declarable::Context();
+			guiModel->setIndex(index);
+			guiModel->setListIndex(listindex);
+			Entity *parent = this;
+			const auto entity = new Entity(coreModel, parent, guiModel);
+			appendChild(entity);
+		}
+
+		void Entity::addClass(const int index, const QString &listindex)
+		{
+			const auto coreModel = new models::core::Entity(enums::core::OBJECT_TYPE);
+			const auto guiModel = new models::gui::declarable::Context();
+			guiModel->setIndex(index);
+			guiModel->setListIndex(listindex);
+			Entity *parent = this;
+			const auto entity = new Entity(coreModel, parent, guiModel);
+			appendChild(entity);
+		}
+
+		void Entity::remove()
+		{
+			delete this;
+		}
+
+		void Entity::addFunction(const int index, const QString &listindex)
+		{
+			const auto coreModel = new models::core::Entity(enums::core::FUNCTION);
+			const auto guiModel = new models::gui::declarable::Context();
+			guiModel->setIndex(index);
+			guiModel->setListIndex(listindex);
+			Entity *parent = this;
+			const auto entity = new Entity(coreModel, parent, guiModel);
+			appendChild(entity);
+		}
+
+		void Entity::addVariable(const int index, const QString &listindex)
+		{
+			const auto coreModel = new models::core::Entity(enums::core::VARIABLE);
+			const auto guiModel = new models::gui::declarable::Context();
+			guiModel->setIndex(index);
+			guiModel->setListIndex(listindex);
+			Entity *parent = this;
+			const auto entity = new Entity(coreModel, parent, guiModel);
+			appendChild(entity);
+		}
+
 		int Entity::columnCount() const
 		{
 			return 1;
+		}
+
+		QVariant Entity::listColumn() const
+		{
+			return QVariant::fromValue(m_columslist);
+        }
+
+		QHash<int, QByteArray> Column::roleNames() const
+		{
+			QHash<int, QByteArray> roles;
+			roles[ROLES::ENTITIES] = "entities";
+			return roles;
+		}
+
+		void Column::serialize(QJsonObject& obj) const
+		{
+			obj["name"] = m_data.name;
+			obj["description"] = m_data.description;
+            obj["listindex"] = m_data.listIndex.toString();
+		}
+
+		void Column::_deserialize(const QJsonObject& obj)
+		{
+			m_data.name = obj["name"].toString();
+			m_data.description = obj["description"].toString();
+			auto uuid = QUuid(obj["listIndex"].toString());
+			if (uuid.isNull())
+			{
+				const auto getRandomString = [](quint32 size)
+				{
+					const QString possibleCharacters(" !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~");
+
+					QString randomString;
+					for (auto i = 0; i< size; ++i)
+					{
+						auto index = qrand() % possibleCharacters.length();
+						auto nextChar = possibleCharacters.at(index);
+						randomString.append(nextChar);
+					}
+					return randomString;
+				};
+				uuid = QUuid::createUuidV5(QUuid::createUuid(), getRandomString(128));
+				qDebug() << "New Uuid generated" << uuid;
+			}
+            m_data.listIndex = uuid;
+		}
+
+		const gui::data::EntityColumn& Column::datas() const
+		{
+			return m_data;
+		}
+
+		bool Column::setDatas(const gui::data::EntityColumn& data)
+		{
+            if (m_data == data)
+                return false;
+            m_data = data;
+            return true;
+		}
+
+		Column::Column(QObject* parent) : QAbstractListModel(parent)
+		{
+		}
+
+        int Column::rowCount(const QModelIndex& parent) const
+		{
+			return m_entities.count();
+		}
+
+        QVariant Column::data(const QModelIndex& index, int role) const
+		{
+			if (!index.isValid())
+				return QVariant();
+			if (role == ENTITIES)
+				return QVariant::fromValue(m_entities[index.row()]);
+			return QVariant();
+		}
+
+        void Column::append(Entity* e, const QModelIndex &parent)
+		{
+			if (!m_entities.contains(e))
+			{
+				beginInsertRows(parent, rowCount(), rowCount());
+				m_entities.append(e);
+				endInsertRows();
+			}
+		}
+
+        void Column::remove(Entity* e, const QModelIndex &parent)
+		{
+			if (!m_entities.contains(e))
+				return;
+			const auto pos = m_entities.indexOf(e);
+			beginRemoveRows(parent, pos, pos);
+			m_entities.removeOne(e);
+			endRemoveRows();
+		}
+
+		const QString& Column::name() const
+		{
+			return m_data.name;
+		}
+
+		const QString& Column::description() const
+		{
+			return m_data.description;
+		}
+
+		void Column::setName(const QString& name)
+		{
+			if (m_data.name == name)
+				return;
+			m_data.name = name;
+			emit nameChanged(name);
+		}
+
+		void Column::setDescription(const QString& description)
+		{
+			if (m_data.description == description)
+				return;
+			m_data.description = description;
+			emit descriptionChanged(description);
+		}
+
+		Entity* Column::parentRef() const
+		{
+			if (m_entities.empty())
+				return nullptr;
+			return m_entities.first()->parentItem();
+
 		}
 	}
 }

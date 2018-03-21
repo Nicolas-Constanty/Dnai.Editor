@@ -6,10 +6,14 @@ TabButton {
     property bool closable: true
     property int iconsize: 12
     property int margin: 20
+
+    property TabBar tb: null
+    property SwipeView sv: null
+    property Item refContent: null
+
     width: text.length * font.pointSize + iconsize + margin * 2
     anchors.top: parent.top
     anchors.bottom: parent.bottom
-
 
     contentItem: Item {
         anchors.centerIn: parent
@@ -30,14 +34,8 @@ TabButton {
             verticalAlignment: Text.AlignVCenter
             elide: Text.ElideRight
         }
-        MouseArea {
-            id: itemArea
-            anchors.fill: parent
-            cursorShape: Qt.OpenHandCursor
-            hoverEnabled: true
-        }
         FontAwesomeTextSolid {
-            visible: checked || itemArea.containsMouse
+            visible: checked || control.hovered
             anchors.right: parent.right
             anchors.rightMargin: 5
             anchors.verticalCenter: parent.verticalCenter
@@ -49,6 +47,13 @@ TabButton {
                 cursorShape: Qt.PointingHandCursor
                 height: 14
                 width: 14
+                onPressed: {
+                    if (tb)
+                    {
+                        sv.removeItem(refContent)
+                        tb.removeItem(control)
+                    }
+                }
             }
         }
     }

@@ -2,8 +2,6 @@
   "name" : "A Star",
   "description": "Create a A* algorithm",
 
-  "main": {
-
     "classes": [
       {
         "name": "class1",
@@ -103,13 +101,9 @@
 
     ],
 
-    "description": "main",
-
     "functions": [
 
     ],
-
-    "name": "Duly",
 
     "variables": [
       {
@@ -121,6 +115,4 @@
         }
       }
     ]
-
-  }
 }

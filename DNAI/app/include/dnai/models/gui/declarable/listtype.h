@@ -12,28 +12,14 @@ namespace dnai
 		{
 			namespace declarable
 			{
-				class ListType : public interfaces::IEntity, public interfaces::IModelData<data::ListType>, public interfaces::ASerializable<ListType>
+				class ListType : public Entity<data::ListType, ListType>
 				{
 				public:
-					explicit ListType();
+                    explicit ListType() = default;
 					//Implementation of ISerializable
 					void serialize(QJsonObject& obj) const override;
 				protected:
 					void _deserialize(const QJsonObject& obj) override;
-					//Implementation of IModelData
-				public:
-					const data::ListType& data() const override;
-					bool setData(const data::ListType& data) override;
-				public:
-					int index() const override;
-					bool setIndex(int index) override;
-					int listIndex() const override;
-					bool setListIndex(int listIndex) override;
-					const QString& description() const override;
-					bool setDescription(const QString& description) override;
-
-				protected:
-					data::ListType m_data;
 				};
 			}
 		}
