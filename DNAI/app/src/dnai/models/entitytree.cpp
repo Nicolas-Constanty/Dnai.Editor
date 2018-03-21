@@ -95,6 +95,8 @@ namespace dnai
 				return QVariant::fromValue(entity);
 			case EXPANDED:
                 return QVariant::fromValue(entity->expanded());
+			case LIST_COLUMN:
+				return QVariant::fromValue(entity->listColumn());
 			default: 
 				return QVariant();
 			}
@@ -130,6 +132,7 @@ namespace dnai
 			roles[ROLES::GUI_MODEL] = "guiModel";
 			roles[ROLES::MODEL] = "modelobj";
 			roles[ROLES::EXPANDED] = "expended";
+			roles[ROLES::LIST_COLUMN] = "listcolumn";
 			return roles;
 		}
 	}

@@ -7,6 +7,8 @@
 #include "dnai/interfaces/ientity.h"
 #include "dnai/exceptions/notimplemented.h"
 
+#include <QDebug>
+
 namespace dnai
 {
 	namespace models
@@ -44,12 +46,12 @@ namespace dnai
 						return true;
 					}
 
-					virtual int listIndex() const override
+					virtual QUuid listIndex() const override
 					{
 						return m_data.listIndex;
 					}
 
-					virtual bool setListIndex(const int listIndex) override
+					virtual bool setListIndex(QUuid listIndex) override
 					{
 						if (m_data.listIndex == listIndex)
 							return false;
@@ -93,7 +95,7 @@ namespace dnai
 						obj["expanded"] = m_data.expanded;
 						obj["description"] = m_data.description;
 						obj["index"] = m_data.index;
-						obj["listIndex"] = m_data.listIndex;
+						obj["listIndex"] = m_data.listIndex.toString();
 					}
 				protected:
 					virtual void _deserialize(const QJsonObject& obj) override
@@ -101,7 +103,7 @@ namespace dnai
 						m_data.expanded = obj["expanded"].toBool();
 						m_data.description = obj["description"].toString();
 						m_data.index = obj["index"].toInt();
-						m_data.listIndex = obj["listIndex"].toInt();
+						m_data.listIndex = QUuid(obj["listIndex"].toString());
 					}
 
 				protected:

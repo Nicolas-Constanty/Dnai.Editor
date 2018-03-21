@@ -150,7 +150,7 @@ Rectangle {
                 }
                 onClicked: {
                     var tab = Editor.selectedView()
-                    var model = index.model.data(index, index.model.getRoleKey("modelobj"))
+                    var model = index.model.data(index, index.model.getRoleKey("modelobj")).listColumn()
                     var res = tab.getViewFromModel(model)
                     if (res === undefined || res === null)
                     {

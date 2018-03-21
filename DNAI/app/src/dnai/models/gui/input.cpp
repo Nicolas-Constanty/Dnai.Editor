@@ -12,7 +12,7 @@ namespace dnai
 				obj["name"] = m_data.name;
 				obj["description"] = m_data.description;
 				obj["index"] = m_data.index;
-				obj["listIndex"] = m_data.listIndex;
+                obj["listIndex"] = m_data.listIndex.toString();
 				obj["varType"] = m_data.varType;
 				obj["value"] = m_data.value;
 			}

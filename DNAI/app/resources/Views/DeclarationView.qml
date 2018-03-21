@@ -25,7 +25,7 @@ Item {
             width: 300
             EditableText {
                 id: _title
-                text:  model.name
+                text: modelData.name
                 anchors.top: parent.top
                 anchors.topMargin: 10
                 anchors.left: parent.left
@@ -59,7 +59,7 @@ Item {
                 }
                 TextArea {
                     id: _comment
-                    text: qsTr(model.description)
+                    text: qsTr(modelData.description)
                     anchors.fill: parent
                     color: AppSettings.style.text.color
                     wrapMode: TextEdit.WordWrap
@@ -108,7 +108,6 @@ Item {
                         if (_selectInfo.selectCount != 0)
                         {
                             for (var item in _sublist.selectedItems) {
-                                console.log(item)
                                 item.remove()
                             }
                             _selectInfo.selectCount = 0
@@ -138,9 +137,10 @@ Item {
                     anchors.right: parent.right
                     anchors.leftMargin: 15
                     anchors.rightMargin: 25
+
                     model: DelegateModel {
                         id: _delegateModel
-                        model: entityChildren
+                        model: modelData
                         delegate: CommonModelView {
                             tparent: _sublist
                         }
@@ -167,7 +167,7 @@ Item {
                         AddButton {
                             id: _addContext
                             width: 45
-                            visible: entityType == 0
+                            visible: modelData.parentRef.entityType === 0
                             onPressed: {
                                 proj.addContext(_sublist.visualModel.items.count, index, idx)
                                 _sublist.positionViewAtEnd()

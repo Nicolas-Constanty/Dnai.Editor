@@ -278,6 +278,12 @@
     <ClCompile Include="src\dnai\views\editorview.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\dnai\models\treemodel.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\dnai\models\treeitem.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\api.h">
@@ -425,9 +431,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <QtMoc Include="include\dnai\views\genericnode.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="include\dnai\models\generictreeitem.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <ClInclude Include="include\dnai\exceptions\guiexception.h">
@@ -638,6 +641,12 @@
       <Filter>Generated Files</Filter>
     </ClInclude>
     <ClInclude Include="include\dnai\interfaces\iviewzone.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dnai\models\generictreeitem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dnai\models\treeitem.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -1114,6 +1123,9 @@
       <Filter>Generated Files</Filter>
     </QtMoc>
     <QtMoc Include="include\dnai\solution.h">
+      <Filter>Generated Files</Filter>
+    </QtMoc>
+    <QtMoc Include="include\dnai\models\treemodel.h">
       <Filter>Generated Files</Filter>
     </QtMoc>
   </ItemGroup>

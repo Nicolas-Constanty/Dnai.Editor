@@ -184,8 +184,6 @@ Rectangle {
         onCheckStateChanged: {
             if (tparent.selectedItems.indexOf(modelData) === -1)
             {
-                console.log(parent.parent)
-                console.log("push", modelData, model)
                 tparent.selectedItems.push(modelData)
             }
             else

@@ -26,7 +26,8 @@ namespace dnai
 				CORE_MODEL,
 				GUI_MODEL,
 				MODEL,
-				EXPANDED
+				EXPANDED,
+				LIST_COLUMN
 			};
 
 		// QAbstractItemModel implementation

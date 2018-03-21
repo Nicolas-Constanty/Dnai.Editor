@@ -193,6 +193,8 @@
     <ClCompile Include="src\dnai\app.cpp" />
     <ClCompile Include="src\dnai\appcontext.cpp" />
     <ClCompile Include="src\dnai\editor.cpp" />
+    <ClCompile Include="src\dnai\models\treeitem.cpp" />
+    <ClCompile Include="src\dnai\models\treemodel.cpp" />
     <ClCompile Include="src\dnai\solution.cpp" />
     <ClCompile Include="src\dnai\views\appview.cpp" />
     <ClCompile Include="src\dnai\baseio.cpp" />
@@ -353,6 +355,13 @@
       <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles\$(ConfigurationName)\.;.\GeneratedFiles;.;.\include;.\..\lib\event_client;.\..\lib\DataComEvent\Shared_include;$(QTDIR)\include;$(QTDIR)\include\QtQuickControls2;$(QTDIR)\include\QtQuick;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtQml;$(QTDIR)\include\QtNetwork;$(QTDIR)\include\QtCore;.\release;\include;$(QTDIR)\mkspecs\win32-msvc</IncludePath>
       <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">_WINDOWS;UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;QT_NO_DEBUG;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB;NDEBUG</Define>
     </QtMoc>
+    <ClInclude Include="include\dnai\models\treeitem.h" />
+    <QtMoc Include="include\dnai\models\treemodel.h">
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\GeneratedFiles\$(ConfigurationName)\.;.\GeneratedFiles;.;.\include;.\..\lib\event_client;.\..\lib\DataComEvent\Shared_include;$(QTDIR)\include;$(QTDIR)\include\QtQuickControls2;$(QTDIR)\include\QtQuick;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtQml;$(QTDIR)\include\QtNetwork;$(QTDIR)\include\QtCore;.\debug;\include;$(QTDIR)\mkspecs\win32-msvc</IncludePath>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">_WINDOWS;UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles\$(ConfigurationName)\.;.\GeneratedFiles;.;.\include;.\..\lib\event_client;.\..\lib\DataComEvent\Shared_include;$(QTDIR)\include;$(QTDIR)\include\QtQuickControls2;$(QTDIR)\include\QtQuick;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtQml;$(QTDIR)\include\QtNetwork;$(QTDIR)\include\QtCore;.\release;\include;$(QTDIR)\mkspecs\win32-msvc</IncludePath>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">_WINDOWS;UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;QT_NO_DEBUG;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB;NDEBUG</Define>
+    </QtMoc>
     <ClInclude Include="include\enums.h" />
     <ClInclude Include="include\dnai\models\gui\declarable\enumtype.h" />
     <ClInclude Include="include\dnai\eventutilities.h" />
@@ -368,8 +377,7 @@
     <ClInclude Include="include\dnai\models\gui\declarable\function.h" />
     <QtMoc Include="include\dnai\views\genericnode.h">
     </QtMoc>
-    <QtMoc Include="include\dnai\models\generictreeitem.h">
-    </QtMoc>
+    <ClInclude Include="include\dnai\models\generictreeitem.h" />
     <ClInclude Include="include\dnai\exceptions\guiexception.h" />
     <ClInclude Include="include\http.h" />
     <ClInclude Include="include\dnai\interfaces\iclone.h" />

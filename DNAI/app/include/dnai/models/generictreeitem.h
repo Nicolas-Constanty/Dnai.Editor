@@ -24,7 +24,7 @@ namespace dnai
                 m_childItems.append(child);
             }
             T *child(int row) const { return m_childItems.at(row); }
-            const QList<T *> &children() const { return m_childItems; }
+            const QList<T *> &childrenItem() const { return m_childItems; }
 
             int childCount() const { return m_childItems.count(); }
             virtual int columnCount() const = 0;
