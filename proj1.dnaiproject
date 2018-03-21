@@ -3,9 +3,15 @@
   "description": "Create min/max IA",
   "classes": [
     {
+      "columns": [
+        {
+          "name": "null",
+          "listIndex": "{00000000-0000-0000-0000-000000000000}"
+        }
+      ],
       "name": "class1",
       "index": 0,
-      "listIndex": 0,
+      "listIndex": "{00000000-0000-0000-0000-000000000000}",
       "position": {
         "x": 10,
         "y": 10
@@ -22,7 +28,7 @@
       "name": "context1",
       "description": "cc",
       "index": 0,
-      "listIndex": 0,
+      "listIndex": "{00000000-0000-0000-0000-000000000000}",
       "variables": [],
       "classes": [],
       "position": {
@@ -36,7 +42,7 @@
           "name": "context1.1",
           "description": "cc",
           "index": 0,
-          "listIndex": 1,
+          "listIndex": "{00000000-0000-0000-0000-000000000000}",
           "variables": [],
           "contexts": [],
           "classes": [
@@ -44,7 +50,7 @@
             {
               "name": "class1.1",
               "index": 0,
-              "listIndex": 0,
+              "listIndex": "{00000000-0000-0000-0000-000000000000}",
               "position": {
                 "x": 10,
                 "y": 10
@@ -55,12 +61,12 @@
                 {
                   "name": "func1vraimenttreslonguepourtesterlascrollbarautomatique",
                   "index": 0,
-                  "listIndex": 0
+                  "listIndex": "{00000000-0000-0000-0000-000000000000}"
                 },
                 {
                   "name": "func2",
                   "index": 1,
-                  "listIndex": 0
+                  "listIndex": "{00000000-0000-0000-0000-000000000000}"
                 }
               ]
             }
@@ -77,7 +83,7 @@
           "name": "context1.2",
           "description": "cvgdgs",
           "index": 0,
-          "listIndex": 0,
+          "listIndex": "{00000000-0000-0000-0000-000000000000}",
           "position": {
             "x": 200,
             "y": 10
@@ -91,7 +97,7 @@
       "name": "context2",
       "description": "cvgdgs",
       "index": 0,
-      "listIndex": 0,
+      "listIndex": "{00000000-0000-0000-0000-000000000000}",
       "position": {
         "x": 200,
         "y": 10

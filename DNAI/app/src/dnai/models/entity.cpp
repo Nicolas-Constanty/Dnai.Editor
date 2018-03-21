@@ -252,6 +252,7 @@ namespace dnai
 		void Entity::_deserialize(const QJsonObject& obj)
 		{
 			foreach(const auto column, obj["columns"].toArray()) {
+				qDebug() << "Column";
 				const auto col = Column::deserialize(obj);
                 m_columns[col->datas().listIndex] = col;
 				m_columslist.append(col);
@@ -390,14 +391,14 @@ namespace dnai
 		{
 			obj["name"] = m_data.name;
 			obj["description"] = m_data.description;
-            obj["listindex"] = m_data.listIndex.toString();
+            obj["listIndex"] = m_data.listIndex.toString();
 		}
 
 		void Column::_deserialize(const QJsonObject& obj)
 		{
 			m_data.name = obj["name"].toString();
 			m_data.description = obj["description"].toString();
-			auto uuid = QUuid(obj["listIndex"].toString());
+            auto uuid = QUuid(obj["listIndex"].toString());
 			if (uuid.isNull())
 			{
 				const auto getRandomString = [](quint32 size)
