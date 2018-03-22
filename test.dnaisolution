@@ -1,0 +1,8 @@
+{
+  "name": "My ai librairy",
+  "description": "base context",
+  "projects": [
+    "proj1.dnaiproject",
+    "proj2.dnaiproject"
+  ]
+}
