@@ -33,7 +33,6 @@ namespace dnai
 
 		try {
 			const QJsonObject obj(QJsonDocument::fromJson(data).object());
-			qDebug() << obj;
 			_deserialize(obj);
 			m_data = obj;
 			if (!m_projects.isEmpty())

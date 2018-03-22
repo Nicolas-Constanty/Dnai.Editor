@@ -180,7 +180,6 @@ namespace dnai {
 	int Project::expandedRows(const QModelIndex &parent) const
 	{
 		const auto item = getItem(parent);
-        qDebug() << item->childCount();
 		const auto count = _foreachEntity<int>(item, [](models::Entity *e)
 		{
 			if (e->expanded())
@@ -236,14 +235,9 @@ namespace dnai {
 			}
 			++count;
         }
-        qDebug() << "beginRemoveRow" << count << parentItem->childCount();
         beginRemoveRows(index, count, count);
-        qDebug() << "here";
 		e->remove();
-        qDebug() << "yo";
 		endRemoveRows();
-        qDebug() << "endRemoveRow";
-		delete e;
 	}
 
 	int Project::childCount() const

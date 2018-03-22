@@ -111,7 +111,6 @@ Item {
                                 return b.row() - a.row();
                               })
                             for (var i = 0; i < _sublist.selectedItems.length; i++) {
-                                console.log( _sublist.selectedItems[i].row())
                                 proj.removeEntity(idx, _sublist.selectedItems[i])
                             }
                             _sublist.selectedItems = []

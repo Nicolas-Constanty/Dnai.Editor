@@ -256,9 +256,8 @@ namespace dnai
 
 		void Entity::_deserialize(const QJsonObject& obj)
 		{
-			foreach(const auto column, obj["columns"].toArray()) {
-				qDebug() << "Column";
-				const auto col = Column::deserialize(obj);
+            foreach(const auto column, obj["columns"].toArray()) {
+                const auto col = Column::deserialize(column.toObject());
                 m_columns[col->datas().listIndex] = col;
 				m_columslist.append(col);
 			}
@@ -352,15 +351,14 @@ namespace dnai
 
 		void Entity::remove()
 		{
-			qDebug() << "removeFromColumn";
 			auto p = parentItem();
 			for (auto c : p->columns())
 			{
 				c->remove(this);
 			}
-			qDebug() << "RemoveCore";
 			m_dataCore->remove();
 			parentItem()->removeOne(this);
+            delete this;
 		}
 
 		void Entity::addFunction(const int index, const QString &listindex)
