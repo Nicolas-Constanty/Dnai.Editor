@@ -225,8 +225,6 @@ HEADERS += \
     include/dnai/models/instruction.h \
     include/dnai/models/listnode.h \
     include/dnai/models/settingsmodel.h \
-    include/dnai/models/treeitem.h \
-    include/dnai/models/treemodel.h \
     include/dnai/models/user.h \
     include/dnai/utils/cx_string.h \
     include/dnai/utils/cx_stringlist.h \
