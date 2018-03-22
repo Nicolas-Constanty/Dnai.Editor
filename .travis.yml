@@ -4,9 +4,9 @@ sudo: required
 compiler: clang
 os: osx
 
- cache:
-    directories:
-     - ~/Qt/
+cache:
+  directories:
+    - ~/Qt/
 
 script:
   - brew update
