@@ -7,11 +7,8 @@ os: osx
 cache:
   directories:
     - ~/Qt/
-    - $HOME/Library/Caches/Homebrew
 
 script:
-  - brew update
-  - brew upgrade cmake
   - if [ ! -e ~/Qt/5.9.4/ ] ; then
       wget http://download.qt.io/official_releases/qt/5.9/5.9.4/qt-opensource-mac-x64-5.9.4.dmg;
       sudo hdiutil attach -noverify ./qt-opensource-mac-x64-5.9.4.dmg;
