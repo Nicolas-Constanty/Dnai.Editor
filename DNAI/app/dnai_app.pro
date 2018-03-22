@@ -218,21 +218,16 @@ HEADERS += \
     include/dnai/models/gui/instruction.h \
     include/dnai/models/gui/output.h \
     include/dnai/models/basicnodemodel.h \
-    include/dnai/models/context.h \
-    include/dnai/models/datatype.h \
     include/dnai/models/entity.h \
     include/dnai/models/entitytree.h \
-    include/dnai/models/function.h \
     include/dnai/models/generictreeitem.h \
     include/dnai/models/guicorestruct.h \
     include/dnai/models/instruction.h \
     include/dnai/models/listnode.h \
-    include/dnai/models/objecttype.h \
     include/dnai/models/settingsmodel.h \
     include/dnai/models/treeitem.h \
     include/dnai/models/treemodel.h \
     include/dnai/models/user.h \
-    include/dnai/models/variable.h \
     include/dnai/utils/cx_string.h \
     include/dnai/utils/cx_stringlist.h \
     include/dnai/views/appview.h \

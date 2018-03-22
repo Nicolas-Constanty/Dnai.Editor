@@ -28,10 +28,10 @@ namespace dnai
 
             int childCount() const { return m_childItems.count(); }
             virtual int columnCount() const = 0;
-            int row() const
+            virtual int row() const
             {
                 if (m_parentItem)
-                    m_parentItem->m_childItems.indexOf(const_cast<T*>(dynamic_cast<const T *>(this)));
+                    return m_parentItem->m_childItems.indexOf(const_cast<T*>(dynamic_cast<const T *>(this)));
                 return 0;
             }
             T *parentItem() const { return m_parentItem; }
@@ -42,7 +42,11 @@ namespace dnai
                     return;
                 m_idx = ref;
             }
-
+			void removeOne(T *e)
+            {
+				if (m_childItems.contains(e))
+					m_childItems.removeOne(e);
+            }
         private:
             QList<T*> m_childItems;
             T *m_parentItem;

@@ -107,10 +107,16 @@ Item {
                     onPressed: {
                         if (_selectInfo.selectCount != 0)
                         {
-                            for (var item in _sublist.selectedItems) {
-                                item.remove()
+                            _sublist.selectedItems.sort(function compareNombres(a, b) {
+                                return b.row() - a.row();
+                              })
+                            for (var i = 0; i < _sublist.selectedItems.length; i++) {
+                                console.log( _sublist.selectedItems[i].row())
+                                proj.removeEntity(idx, _sublist.selectedItems[i])
                             }
+                            _sublist.selectedItems = []
                             _selectInfo.selectCount = 0
+
                         }
                     }
                 }

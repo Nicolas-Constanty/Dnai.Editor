@@ -6,6 +6,8 @@
 #include "dnai/enums/core/core.h"
 #include "dnai/interfaces/imodel.h"
 #include "gui/data/entitycolum.h"
+#include "gui/declarable/variable.h"
+#include "gui/declarable/context.h"
 
 namespace dnai
 {
@@ -51,6 +53,7 @@ namespace dnai
             QList<Entity *> m_entities;
 	        gui::data::EntityColumn m_data;
         };
+
         class Entity : public interfaces::IModel<Entity>
         {
             Q_OBJECT
@@ -86,9 +89,12 @@ namespace dnai
             const QString &description() const;
             virtual core::Entity *coreModel() const;
             virtual interfaces::IEntity *guiModel() const;
+			template<class T>
+			T *guiModel() const;
 			bool expanded() const;
 			void declare();
 			Entity *parentRef() const;
+			const QMap<QUuid, Column *> &columns();
 
         public:
 			void setIsRoot(bool isRoot);
@@ -130,6 +136,7 @@ namespace dnai
 			void remove();
 	        int columnCount() const override;
 			Q_INVOKABLE QVariant listColumn() const;
+			Q_INVOKABLE int row() const override;
 
         private:
             core::Entity *m_dataCore;
@@ -139,6 +146,19 @@ namespace dnai
 			QMap<QUuid, Column *> m_columns;
 			QList<QObject *> m_columslist;
         };
+
+		using Context = dnai::models::gui::declarable::Context;
+		using EnumType = dnai::models::gui::declarable::EnumType;
+		using Function = dnai::models::gui::declarable::Function;
+		using ListType = dnai::models::gui::declarable::ListType;
+		using ObjectType = dnai::models::gui::declarable::ObjectType;
+		using Variable = dnai::models::gui::declarable::Variable;
+
+	    template <class T>
+	    T* Entity::guiModel() const
+	    {
+			return dynamic_cast<T *>(guiModel());
+	    }
     }
 }
 

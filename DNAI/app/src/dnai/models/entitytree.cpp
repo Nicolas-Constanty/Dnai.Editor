@@ -35,16 +35,13 @@ namespace dnai
 			if (!child.isValid())
 				return {};
 
-			const auto childItem = static_cast<Entity*>(child.internalPointer());
-			const auto parentItem = childItem->parentItem();
+            Entity *childItem = getItem(child);
+            Entity *parentItem = childItem->parentItem();
 
-			if (parentItem == m_rootItem)
-				return {};
+            if (parentItem == m_rootItem)
+                return QModelIndex();
 
-            const auto i = parentItem->row();
-            const auto idx = createIndex(parentItem->row(), 0, parentItem);
-            parentItem->child(i)->setIdx(idx);
-            return idx;
+            return createIndex(parentItem->row(), 0, parentItem);
 		}
 
 		int EntityTree::rowCount(const QModelIndex& parent) const

@@ -4,7 +4,7 @@
 #include <QDebug>
 #include <QObject>
 #include "include/clientcommunication.h"
-#include "dnai/models/context.h"
+//#include "dnai/models/context.h"
 
 #include "datacomeventfactory.h"
 

@@ -150,10 +150,14 @@ Rectangle {
                 }
                 onClicked: {
                     var tab = Editor.selectedView()
+                    console.log("Clic ici")
                     var model = index.model.data(index, index.model.getRoleKey("modelobj")).listColumn()
+                    console.log("Clic ici passed")
                     var res = tab.getViewFromModel(model)
+                    console.log("Get view")
                     if (res === undefined || res === null)
                     {
+                        console.log("Add view")
                         var view = tab.addView("resources/Views/DeclarationView.qml",
                                     {
                                         "model" : model,
@@ -162,10 +166,15 @@ Rectangle {
                                     },
                                     index.model.data(index, index.model.getRoleKey("name")))
                         tab.appendModel(model, view)
+                        console.log("End Add view")
                     }
                     else
                     {
+                        console.log("Open view")
+                        res.idx = index
+                        res.proj = index.model
                         tab.selectIndex(res)
+                        console.log("End Open view")
                     }
                 }
                 headerVisible: false

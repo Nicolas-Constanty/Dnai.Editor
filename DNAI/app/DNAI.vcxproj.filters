@@ -649,6 +649,12 @@
     <ClInclude Include="include\dnai\models\treeitem.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\dnai\models\gui\data\entitycolum.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dnai\models\function.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="debug\moc_predefs.h.cbt">

@@ -311,7 +311,9 @@
     <ClInclude Include="include\dnai\interfaces\isolution.h" />
     <ClInclude Include="include\dnai\interfaces\iviewelement.h" />
     <ClInclude Include="include\dnai\interfaces\iviewzone.h" />
+    <ClInclude Include="include\dnai\models\function.h" />
     <ClInclude Include="include\dnai\models\gui\data\context.h" />
+    <ClInclude Include="include\dnai\models\gui\data\entitycolum.h" />
     <ClInclude Include="include\dnai\models\gui\declarable\context.h" />
     <QtMoc Include="include\dnai\views\contextview.h">
     </QtMoc>

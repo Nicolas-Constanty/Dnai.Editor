@@ -110,6 +110,11 @@ namespace dnai
 			return parentItem();
 		}
 
+		const QMap<QUuid, Column*>& Entity::columns()
+		{
+			return m_columns;
+		}
+
 		void Entity::setId(qint32 id)
 		{
 			if (coreModel()->setId(id))
@@ -330,6 +335,7 @@ namespace dnai
 			Entity *parent = this;
 			const auto entity = new Entity(coreModel, parent, guiModel);
 			appendChild(entity);
+			entity->declare();
 		}
 
 		void Entity::addClass(const int index, const QString &listindex)
@@ -341,11 +347,20 @@ namespace dnai
 			Entity *parent = this;
 			const auto entity = new Entity(coreModel, parent, guiModel);
 			appendChild(entity);
+			entity->declare();
 		}
 
 		void Entity::remove()
 		{
-			delete this;
+			qDebug() << "removeFromColumn";
+			auto p = parentItem();
+			for (auto c : p->columns())
+			{
+				c->remove(this);
+			}
+			qDebug() << "RemoveCore";
+			m_dataCore->remove();
+			parentItem()->removeOne(this);
 		}
 
 		void Entity::addFunction(const int index, const QString &listindex)
@@ -357,6 +372,7 @@ namespace dnai
 			Entity *parent = this;
 			const auto entity = new Entity(coreModel, parent, guiModel);
 			appendChild(entity);
+			entity->declare();
 		}
 
 		void Entity::addVariable(const int index, const QString &listindex)
@@ -368,6 +384,7 @@ namespace dnai
 			Entity *parent = this;
 			const auto entity = new Entity(coreModel, parent, guiModel);
 			appendChild(entity);
+			entity->declare();
 		}
 
 		int Entity::columnCount() const
@@ -379,6 +396,11 @@ namespace dnai
 		{
 			return QVariant::fromValue(m_columslist);
         }
+
+		int Entity::row() const
+		{
+			return IModel<Entity>::row();
+		}
 
 		QHash<int, QByteArray> Column::roleNames() const
 		{
@@ -401,7 +423,7 @@ namespace dnai
             auto uuid = QUuid(obj["listIndex"].toString());
 			if (uuid.isNull())
 			{
-				const auto getRandomString = [](quint32 size)
+                const auto getRandomString = [](int size)
 				{
 					const QString possibleCharacters(" !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~");
 
