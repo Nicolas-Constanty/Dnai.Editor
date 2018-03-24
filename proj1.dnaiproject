@@ -2,7 +2,7 @@
     "columns": [
         {
             "description": "",
-            "listIndex": "{00000000-0000-0000-0000-000000000000}",
+            "listIndex": "{1ba249d4-c165-5e96-aa6b-2da007df6a3a}",
             "name": ""
         }
     ],
@@ -21,7 +21,7 @@
             ],
             "expanded": false,
             "index": 0,
-            "listIndex": "{00000000-0000-0000-0000-000000000000}",
+            "listIndex": "{1ba249d4-c165-5e96-aa6b-2da007df6a3a}",
             "name": "class1",
             "type": 5,
             "visibility": 0
@@ -138,11 +138,53 @@
                     "name": "EmptyEntity",
                     "type": 0,
                     "visibility": 1
+                },
+                {
+                    "columns": [
+                    ],
+                    "description": "",
+                    "entities": [
+                    ],
+                    "expanded": false,
+                    "index": 3,
+                    "listIndex": "{a57fc744-f855-5b4c-97e2-9d6fd1f762c6}",
+                    "name": "EmptyEntity",
+                    "type": 2,
+                    "visibility": 1
+                },
+                {
+                    "columns": [
+                    ],
+                    "description": "",
+                    "entities": [
+                    ],
+                    "expanded": false,
+                    "index": 4,
+                    "listIndex": "{a57fc744-f855-5b4c-97e2-9d6fd1f762c6}",
+                    "name": "EmptyEntity",
+                    "type": 5,
+                    "visibility": 1
+                },
+                {
+                    "columns": [
+                    ],
+                    "description": "",
+                    "entities": [
+                    ],
+                    "expanded": false,
+                    "index": 5,
+                    "listIndex": "{a57fc744-f855-5b4c-97e2-9d6fd1f762c6}",
+                    "name": "EmptyEntity",
+                    "type": 1,
+                    "value": {
+                    },
+                    "varType": -1,
+                    "visibility": 1
                 }
             ],
             "expanded": true,
             "index": 0,
-            "listIndex": "{00000000-0000-0000-0000-000000000000}",
+            "listIndex": "{1ba249d4-c165-5e96-aa6b-2da007df6a3a}",
             "name": "context1",
             "type": 0,
             "visibility": 0
@@ -160,7 +202,7 @@
             ],
             "expanded": false,
             "index": 0,
-            "listIndex": "{00000000-0000-0000-0000-000000000000}",
+            "listIndex": "{1ba249d4-c165-5e96-aa6b-2da007df6a3a}",
             "name": "context2",
             "type": 0,
             "visibility": 0
@@ -178,7 +220,7 @@
             ],
             "expanded": false,
             "index": 0,
-            "listIndex": "{00000000-0000-0000-0000-000000000000}",
+            "listIndex": "{1ba249d4-c165-5e96-aa6b-2da007df6a3a}",
             "name": "variable1",
             "type": 1,
             "value": {
