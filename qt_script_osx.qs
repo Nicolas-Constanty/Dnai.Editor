@@ -31,8 +31,8 @@ Controller.prototype.ComponentSelectionPageCallback = function() {
     // widget.selectAll();
     widget.deselectAll();
 
-    widget.selectComponent("qt.594.clang_64")
-    // widget.selectComponent("qt.593.doc")
+    widget.selectComponent("qt.5101.clang_64")
+    // widget.selectComponent("qt.5101.doc")
     // widget.selectComponent("qt.593.examples")
     // widget.selectComp.qtscript")
 
