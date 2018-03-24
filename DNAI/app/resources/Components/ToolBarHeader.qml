@@ -51,6 +51,7 @@ ToolBar {
                     }
                     DMenuItem {
                         text: qsTr("Save all")
+                        onClicked: Editor.solution.save()
                     }
                     //                        DMenuItem {
                     //                            text: qsTr("Close window")

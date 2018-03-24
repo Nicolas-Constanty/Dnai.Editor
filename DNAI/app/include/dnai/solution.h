@@ -21,7 +21,7 @@ namespace dnai
 		};
 
 		Solution();
-		void save() override;
+		Q_INVOKABLE void save() override;
 		void load(const QString& path) override;
 		void close() override;
 		const QString& version() const override;

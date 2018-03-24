@@ -16,7 +16,11 @@ namespace dnai
 		QJsonObject obj;
 		serialize(obj);
 
+		for (auto p : m_projects)
+			p->save();
+		m_file->open(QIODevice::WriteOnly);
 		m_file->write(QJsonDocument(obj).toJson());
+		m_file->close();
 	}
 
 	void Solution::load(const QString& path)
@@ -24,7 +28,7 @@ namespace dnai
 		m_filename = path;
 		m_file = new QFile(QUrl(m_filename).toLocalFile());
 
-		if (!m_file->open(QIODevice::ReadWrite)) {
+		if (!m_file->open(QIODevice::ReadOnly)) {
 			qWarning("Couldn't open file.");
 			return;
 		}
@@ -43,6 +47,7 @@ namespace dnai
 			throw exceptions::GuiExeption("Error : Corrupted Solution file");
             qWarning("Couldn't parse file.");
 		}
+		m_file->close();
 	}
 
 	void Solution::close()
@@ -118,7 +123,18 @@ namespace dnai
 
 	void Solution::serialize(QJsonObject& obj) const
 	{
-		obj["projects"] = serializeList<IProject>(m_projects);
+		QJsonArray arr;
+		for (auto p : m_projects)
+		{
+			const QStringRef subString(&m_filename, 0, m_filename.lastIndexOf("/") + 1);
+			auto s = p->fileName();
+			const QJsonValue v = s.replace(subString.toString(), "");
+			qDebug() << v.toString();
+			arr.append(v);
+		}
+		obj["name"] = name();
+		obj["description"] = description();
+		obj["projects"] = arr;
 	}
 
 	const QString& Solution::fileName() const
@@ -154,6 +170,8 @@ namespace dnai
 		if (obj["version"].toString() != Editor::instance().version())
 			qWarning() << "Warning this solution file (" << m_filename << ") wasn't created with the same editor's version (" << obj["version"].toString() << "!= current" << Editor::instance().version() << ")";
 
+		m_name = obj["name"].toString();
+		m_description = obj["description"].toString();
 		for (const auto projfilename : obj["projects"].toArray())
 		{
 			const QStringRef subString(&m_filename, 0, m_filename.lastIndexOf("/"));
