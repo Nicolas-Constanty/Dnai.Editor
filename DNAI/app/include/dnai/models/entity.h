@@ -20,6 +20,7 @@ namespace dnai
 			Q_PROPERTY(QString name READ name WRITE setName NOTIFY nameChanged)
 			Q_PROPERTY(QString description READ description WRITE setDescription NOTIFY descriptionChanged)
 			Q_PROPERTY(dnai::models::Entity *parentRef READ parentRef CONSTANT)
+			Q_PROPERTY(QString listIndex READ listIndex WRITE setListIndex NOTIFY listIndexChanged)
 
 			enum ROLES
 			{
@@ -35,11 +36,14 @@ namespace dnai
 			const QString &description() const;
 			void setName(const QString &name);
 			void setDescription(const QString& description);
+			QString listIndex() const;
+			void setListIndex(const QString &s);
 			Entity *parentRef() const;
 
 		signals:
 			void descriptionChanged(const QString &desc);
 			void nameChanged(const QString &desc);
+			void listIndexChanged(const QString list);
         private:
 			virtual QHash<int, QByteArray> roleNames() const override;
         public:
@@ -85,7 +89,7 @@ namespace dnai
             const QString &name() const;
             enums::core::VISIBILITY visibility() const;
             int index() const;
-			const QString &listIndex() const;
+			QString listIndex() const;
             const QString &description() const;
             virtual core::Entity *coreModel() const;
             virtual interfaces::IEntity *guiModel() const;

@@ -16,7 +16,7 @@ namespace dnai
 				class Function : public interfaces::IInstruction, public Entity<data::Function, Function>
                 {
 				public:
-                    explicit Function(QObject *parent = nullptr);
+                    explicit Function() = default;
                     //Implementation of ISerializable
 					void serialize(QJsonObject& obj) const override;
 				protected:

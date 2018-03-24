@@ -37,7 +37,7 @@ namespace dnai {
 		void selectedEntityChanged(models::Entity *entity);
 
     public:
-		void save() override;
+		Q_INVOKABLE void save() override;
 		void load(const QString& path) override;
         void loadFromJson(const QJsonObject& obj);
 		void close() override;

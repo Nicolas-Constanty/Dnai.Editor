@@ -318,8 +318,7 @@
     <QtMoc Include="include\dnai\views\contextview.h">
     </QtMoc>
     <ClInclude Include="include\controllers.h" />
-    <QtMoc Include="include\dnai\enums\core\core.h">
-    </QtMoc>
+    <ClInclude Include="include\dnai\enums\core\core.h" />
     <ClInclude Include="include\dnai\exceptions\coreexception.h" />
     <QtMoc Include="include\dnai\views\customshape.h">
     </QtMoc>

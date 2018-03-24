@@ -6,6 +6,7 @@
 #include "dnai/commands/corecommand.h"
 #include "entitydata.h"
 #include "dnai/interfaces/imodeldata.h"
+#include "dnai/interfaces/iserializable.h"
 
 namespace dnai
 {
@@ -21,7 +22,7 @@ namespace dnai
                 virtual const std::map<qint32, commands::CoreCommand*> &commands() const = 0;
 			};
 
-			class Entity : public IEntityCore, public interfaces::IModelData<EntityData>
+			class Entity : public IEntityCore, public interfaces::IModelData<EntityData>, public interfaces::ASerializable<Entity>
 			{
 			public:
                 Entity(enums::core::ENTITY type = enums::core::ENTITY::UNDEFINED);
@@ -65,6 +66,9 @@ namespace dnai
 				bool setData(const EntityData &d) override;
 				const EntityData &data() const override;
 
+				void serialize(QJsonObject& obj) const override;
+			protected:
+				void _deserialize(const QJsonObject& obj) override;
 			private:
 				EntityData m_data;
 				static std::map<qint32, commands::CoreCommand*> m_commands;

@@ -42,15 +42,16 @@ ToolBar {
                         text: qsTr("Open project")
                         onClicked: openProjectPopup.open()
                     }
-                    //                        DMenuItem {
-                    //                            text: qsTr("Save")
-                    //                        }
-                    //                        DMenuItem {
-                    //                            text: qsTr("Save as")
-                    //                        }
-                    //                        DMenuItem {
-                    //                            text: qsTr("Save all")
-                    //                        }
+                    DMenuItem {
+                        text: qsTr("Save")
+                        onClicked: Editor.solution.selectedProject().save()
+                    }
+                    DMenuItem {
+                        text: qsTr("Save as")
+                    }
+                    DMenuItem {
+                        text: qsTr("Save all")
+                    }
                     //                        DMenuItem {
                     //                            text: qsTr("Close window")
                     //                        }

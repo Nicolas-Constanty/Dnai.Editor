@@ -21,7 +21,9 @@ namespace dnai {
         QJsonObject obj;
         serialize(obj);
 
+		m_file->open(QIODevice::WriteOnly);
         m_file->write(QJsonDocument(obj).toJson());
+		m_file->close();
     }
 
 	void Project::serialize(QJsonObject &obj) const
@@ -59,7 +61,7 @@ namespace dnai {
 		m_filename = path;
 		m_file = new QFile(QUrl(m_filename).toLocalFile());
 
-		if (!m_file->open(QIODevice::ReadWrite)) {
+		if (!m_file->open(QIODevice::ReadOnly)) {
 			qWarning("Couldn't open file.");
 			return;
 		}
@@ -76,6 +78,7 @@ namespace dnai {
 			exceptions::ExceptionManager::throwException(exceptions::GuiExeption("Error : Corrupted file"));
             qWarning("Couldn't parse file.");
 		}
+		m_file->close();
     }
 
     void Project::loadFromJson(const QJsonObject &obj)

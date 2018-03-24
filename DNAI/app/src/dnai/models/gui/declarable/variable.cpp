@@ -9,9 +9,9 @@ namespace dnai
 		{
 			namespace declarable
 			{
-				Variable::Variable(QObject* parent)
-				{
-				}
+//				Variable::Variable(QObject* parent)
+//				{
+//				}
 
 				void Variable::serialize(QJsonObject& obj) const
 				{
