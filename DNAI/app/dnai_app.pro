@@ -64,6 +64,7 @@ SOURCES += \
     src/dnai/models/gui/instruction.cpp \
     src/dnai/models/gui/output.cpp \
     src/dnai/models/basicnodemodel.cpp \
+    src/dnai/models/entity.cpp \
     src/dnai/models/entitytree.cpp \
     src/dnai/models/listnode.cpp \
     src/dnai/models/settingsmodel.cpp \
