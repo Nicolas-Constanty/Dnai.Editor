@@ -31,6 +31,8 @@ DEFINES += QPM_INIT
 #CORE
 SOURCES += \
     src/dnai/api/api.cpp \
+    src/dnai/commands/core/declare.cpp \
+    src/dnai/commands/core/remove.cpp \
     src/dnai/commands/command.cpp \
     src/dnai/commands/commanddecorator.cpp \
     src/dnai/commands/commandmanager.cpp \
@@ -45,6 +47,7 @@ SOURCES += \
     src/dnai/controllers/icontroller.cpp \
     src/dnai/controllers/inputcontroller.cpp \
     src/dnai/controllers/outputcontroller.cpp \
+    src/dnai/corepackages/coreserialoperations.cpp \
     src/dnai/enums/qcstandardpaths.cpp \
     src/dnai/http/observable.cpp \
     src/dnai/http/response.cpp \
@@ -76,6 +79,7 @@ SOURCES += \
     src/dnai/views/contextview.cpp \
     src/dnai/views/customshape.cpp \
     src/dnai/views/declarationview.cpp \
+    src/dnai/views/editorview.cpp \
     src/dnai/views/flow.cpp \
     src/dnai/views/genericnode.cpp \
     src/dnai/views/input.cpp \
@@ -86,6 +90,8 @@ SOURCES += \
     src/dnai/views/linkablebezieritem.cpp \
     src/dnai/views/output.cpp \
     src/dnai/views/roundedrectangle.cpp \
+    src/dnai/views/viewelement.cpp \
+    src/dnai/views/viewzone.cpp \
     src/dnai/app.cpp \
     src/dnai/appcontext.cpp \
     src/dnai/baseio.cpp \
@@ -102,13 +108,7 @@ SOURCES += \
     src/dnai/settings.cpp \
     src/dnai/solution.cpp \
     src/dnai/viewshandler.cpp \
-    src/main.cpp \
-    src/dnai/views/viewelement.cpp \
-    src/dnai/views/viewzone.cpp \
-    src/dnai/views/editorview.cpp
-    src/dnai/commands/core/declare.cpp \
-    src/dnai/commands/core/remove.cpp \
-    src/dnai/corepackages/coreserialoperations.cpp \
+    src/main.cpp
 
 
 RESOURCES += qml.qrc
@@ -132,6 +132,8 @@ FORMS += \
 #GENERAL HEADER
 HEADERS += \
     include/dnai/api/api.h \
+    include/dnai/commands/core/declare.h \
+    include/dnai/commands/core/remove.h \
     include/dnai/commands/command.h \
     include/dnai/commands/commanddecorator.h \
     include/dnai/commands/commandmanager.h \
@@ -151,6 +153,15 @@ HEADERS += \
     include/dnai/controllers/inputcontroller.h \
     include/dnai/controllers/outputcontroller.h \
     include/dnai/controllers/propertypanel.h \
+    include/dnai/corepackages/commands/declarator/declare.h \
+    include/dnai/corepackages/commands/declarator/remove.h \
+    include/dnai/corepackages/commands/icommanddata.h \
+    include/dnai/corepackages/replies/declarator/declared.h \
+    include/dnai/corepackages/replies/declarator/removed.h \
+    include/dnai/corepackages/replies/emptyreply.h \
+    include/dnai/corepackages/replies/errorreply.h \
+    include/dnai/corepackages/replies/reply.h \
+    include/dnai/corepackages/coreserialoperations.h \
     include/dnai/enums/core/commands.h \
     include/dnai/enums/core/core.h \
     include/dnai/enums/core/instructionid.h \
@@ -199,6 +210,7 @@ HEADERS += \
     include/dnai/models/core/entitydata.h \
     include/dnai/models/gui/data/context.h \
     include/dnai/models/gui/data/entity.h \
+    include/dnai/models/gui/data/entitycolum.h \
     include/dnai/models/gui/data/enumtype.h \
     include/dnai/models/gui/data/flow.h \
     include/dnai/models/gui/data/function.h \
@@ -246,6 +258,7 @@ HEADERS += \
     include/dnai/views/contextview.h \
     include/dnai/views/customshape.h \
     include/dnai/views/declarationview.h \
+    include/dnai/views/editorview.h \
     include/dnai/views/flow.h \
     include/dnai/views/genericnode.h \
     include/dnai/views/input.h \
@@ -256,6 +269,8 @@ HEADERS += \
     include/dnai/views/linkablebezieritem.h \
     include/dnai/views/output.h \
     include/dnai/views/roundedrectangle.h \
+    include/dnai/views/viewelement.h \
+    include/dnai/views/viewzone.h \
     include/dnai/app.h \
     include/dnai/appcontext.h \
     include/dnai/baseio.h \
@@ -282,20 +297,7 @@ HEADERS += \
     include/models.h \
     include/qmlresources.h \
     include/testconnection.h \
-    include/views.h \
-    include/dnai/views/viewelement.h \
-    include/dnai/views/viewzone.h \
-    include/dnai/views/editorview.h
-    include/dnai/corepackages/commands/declarator/declare.h \
-    include/dnai/corepackages/commands/declarator/remove.h \
-    include/dnai/corepackages/commands/icommanddata.h \
-    include/dnai/corepackages/replies/declarator/declared.h \
-    include/dnai/corepackages/replies/declarator/removed.h \
-    include/dnai/corepackages/replies/emptyreply.h \
-    include/dnai/corepackages/coreserialoperations.h \
-    include/dnai/corepackages/replies/reply.h \
-    include/dnai/commands/core/remove.h \
-    include/dnai/commands/core/declare.h \
+    include/views.h
 
 
 #LIB
