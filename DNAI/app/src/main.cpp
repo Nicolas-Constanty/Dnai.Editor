@@ -11,7 +11,7 @@
 #include "dnai/editor.h"
 #include "controllers.h"
 
-#include "include/eventconsumer.h"
+//#include "include/eventconsumer.h"
 #include "dnai/entitiesfactory.h"
 #include "dnai/viewshandler.h"
 #include "dnai/enums/core/core.h"
@@ -175,7 +175,7 @@ static void registerModels()
 }
 
 static void registerConnection() {
-    qmlRegisterType<EventConsumer>("DNAI.Communication.EventConsumer", 1, 0, "EventConsumer");
+    //qmlRegisterType<EventConsumer>("DNAI.Communication.EventConsumer", 1, 0, "EventConsumer");
 }
 
 static void registerQml()

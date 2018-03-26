@@ -5,7 +5,7 @@
 #include "dnai/app.h"
 #include "dnai/processmanager.h"
 #include "dnai/controllers/consolecontroller.h"
-#include "dnai/controllers/clientcontroller.h"
+#include "core.h"
 #include "dnai/commands/commandmanager.h"
 #include "api.h"
 #include "http.h"
@@ -40,8 +40,7 @@ namespace dnai
 		m_processManager = new ProcessManager("./settings/conf/windows/bin_info.cfg");
 #endif
 		m_processManager->launch();
-        controllers::ClientController::serverPort = m_processManager->getServerPort();
-        controllers::ClientController::shared();
+        core::connect(m_processManager->getServerPort()); //connect core client
 	}
 
     void App::setupSettings()

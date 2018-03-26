@@ -86,8 +86,7 @@ namespace dnai
             const QString &description() const;
             virtual core::Entity *coreModel() const;
             virtual interfaces::IEntity *guiModel() const;
-			bool expanded() const;
-			void declare();
+            bool expanded() const;
 			Entity *parentRef() const;
 
         public:
@@ -126,10 +125,16 @@ namespace dnai
 	        void addContext(int, const QString &);
 			void addFunction(int, const QString &);
 			void addVariable(int, const QString &);
-			void addClass(int, const QString &);
-			void remove();
+            void addClass(int, const QString &);
 	        int columnCount() const override;
 			Q_INVOKABLE QVariant listColumn() const;
+
+        //core commands
+        public:
+            void declare();
+            void remove();
+            void rename(QString const &name);
+            void move(Entity const &newParent);
 
         private:
             core::Entity *m_dataCore;

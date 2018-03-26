@@ -31,23 +31,18 @@ DEFINES += QPM_INIT
 #CORE
 SOURCES += \
     src/dnai/api/api.cpp \
-    src/dnai/commands/core/declare.cpp \
-    src/dnai/commands/core/remove.cpp \
     src/dnai/commands/command.cpp \
     src/dnai/commands/commanddecorator.cpp \
     src/dnai/commands/commandmanager.cpp \
-    src/dnai/commands/corecommand.cpp \
     src/dnai/commands/debugdecorator.cpp \
     src/dnai/commands/movecanvascommand.cpp \
     src/dnai/commands/movecommand.cpp \
     src/dnai/commands/movenodecommand.cpp \
     src/dnai/commands/zoomcanvascommand.cpp \
-    src/dnai/controllers/clientcontroller.cpp \
     src/dnai/controllers/consolecontroller.cpp \
     src/dnai/controllers/icontroller.cpp \
     src/dnai/controllers/inputcontroller.cpp \
     src/dnai/controllers/outputcontroller.cpp \
-    src/dnai/corepackages/coreserialoperations.cpp \
     src/dnai/enums/qcstandardpaths.cpp \
     src/dnai/http/observable.cpp \
     src/dnai/http/response.cpp \
@@ -132,12 +127,9 @@ FORMS += \
 #GENERAL HEADER
 HEADERS += \
     include/dnai/api/api.h \
-    include/dnai/commands/core/declare.h \
-    include/dnai/commands/core/remove.h \
     include/dnai/commands/command.h \
     include/dnai/commands/commanddecorator.h \
     include/dnai/commands/commandmanager.h \
-    include/dnai/commands/corecommand.h \
     include/dnai/commands/debugdecorator.h \
     include/dnai/commands/entitydeclare.h \
     include/dnai/commands/genericcommand.h \
@@ -147,21 +139,11 @@ HEADERS += \
     include/dnai/commands/openpropertypanel.h \
     include/dnai/commands/zoomcanvascommand.h \
     include/dnai/controllers/classcontroller.h \
-    include/dnai/controllers/clientcontroller.h \
     include/dnai/controllers/consolecontroller.h \
     include/dnai/controllers/contextcontroller.h \
     include/dnai/controllers/inputcontroller.h \
     include/dnai/controllers/outputcontroller.h \
     include/dnai/controllers/propertypanel.h \
-    include/dnai/corepackages/commands/declarator/declare.h \
-    include/dnai/corepackages/commands/declarator/remove.h \
-    include/dnai/corepackages/commands/icommanddata.h \
-    include/dnai/corepackages/replies/declarator/declared.h \
-    include/dnai/corepackages/replies/declarator/removed.h \
-    include/dnai/corepackages/replies/emptyreply.h \
-    include/dnai/corepackages/replies/errorreply.h \
-    include/dnai/corepackages/replies/reply.h \
-    include/dnai/corepackages/coreserialoperations.h \
     include/dnai/enums/core/commands.h \
     include/dnai/enums/core/core.h \
     include/dnai/enums/core/instructionid.h \
@@ -296,15 +278,14 @@ HEADERS += \
     include/http.h \
     include/models.h \
     include/qmlresources.h \
-    include/testconnection.h \
     include/views.h
 
 
 #LIB
-DEPENDPATH += $${PWD}/../lib/event_client/
-INCLUDEPATH += $${PWD}/../lib/event_client/
+DEPENDPATH += $${PWD}/../lib/
+INCLUDEPATH += $${PWD}/../lib/core_client/include/
 #INCLUDEPATH += $${PWD}/../lib/DataComEvent/Shared_include/
-INCLUDEPATH += $${PWD}/../lib/Cerealization/repository/include/
+#INCLUDEPATH += $${PWD}/../lib/Cerealization/repository/include/
 
 win32-msvc*{
     DEPENDPATH += $${PWD}/../lib/WinToast/
@@ -322,7 +303,7 @@ win32-msvc*{
 
 
 #begin library network
-LIBS += -L$${PWD}/../lib/ -lEventClient -lCerealization
+LIBS += -L$${PWD}/../lib/ -lCoreClient -lEventClient -lCerealization
 
 #-lDataComEvent
 

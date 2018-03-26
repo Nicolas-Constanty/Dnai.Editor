@@ -1,6 +1,4 @@
-#include <qdebug.h>
-
-#include "dnai/corepackages/coreserialoperations.h"
+#include "serialoperations.h"
 
 BinaryStream    &operator <<(BinaryStream &stream, QString const &value)
 {
@@ -61,49 +59,49 @@ void enum_deserialize(Stream &stream, EnumType &value)
     value = static_cast<EnumType>(val);
 }
 
-BinaryStream    &operator <<(BinaryStream &stream, dnai::enums::core::ENTITY value)
+BinaryStream    &operator <<(BinaryStream &stream, core::ENTITY value)
 {
     enum_serialize(stream, value);
     return stream;
 }
 
-BinaryStream    &operator >>(BinaryStream &stream, dnai::enums::core::ENTITY &value)
+BinaryStream    &operator >>(BinaryStream &stream, core::ENTITY &value)
 {
     enum_deserialize(stream, value);
     return stream;
 }
 
-JSONStream      &operator <<(JSONStream &stream, dnai::enums::core::ENTITY value)
+JSONStream      &operator <<(JSONStream &stream, core::ENTITY value)
 {
     enum_serialize(stream, value);
     return stream;
 }
 
-JSONStream      &operator >>(JSONStream &stream, dnai::enums::core::ENTITY &value)
+JSONStream      &operator >>(JSONStream &stream, core::ENTITY &value)
 {
     enum_deserialize(stream, value);
     return stream;
 }
 
-BinaryStream    &operator <<(BinaryStream &stream, dnai::enums::core::VISIBILITY value)
+BinaryStream    &operator <<(BinaryStream &stream, core::VISIBILITY value)
 {
     enum_serialize(stream, value);
     return stream;
 }
 
-BinaryStream    &operator >>(BinaryStream &stream, dnai::enums::core::VISIBILITY &value)
+BinaryStream    &operator >>(BinaryStream &stream, core::VISIBILITY &value)
 {
     enum_deserialize(stream, value);
     return stream;
 }
 
-JSONStream      &operator <<(JSONStream &stream, dnai::enums::core::VISIBILITY value)
+JSONStream      &operator <<(JSONStream &stream, core::VISIBILITY value)
 {
     enum_serialize(stream, value);
     return stream;
 }
 
-JSONStream      &operator >>(JSONStream &stream, dnai::enums::core::VISIBILITY &value)
+JSONStream      &operator >>(JSONStream &stream, core::VISIBILITY &value)
 {
     enum_deserialize(stream, value);
     return stream;

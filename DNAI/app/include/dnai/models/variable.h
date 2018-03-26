@@ -65,6 +65,7 @@ namespace dnai {
 
 			EntityCore* coreModel() const override;
 			void setCoreModel(EntityCore* model) override;
+
 		private:
 			VariableCoreUnion m_dataCore;
 			EntityCore * m_data = nullptr;

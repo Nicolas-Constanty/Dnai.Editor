@@ -3,9 +3,9 @@
 
 #include <QDebug>
 #include "dnai/enums/core/core.h"
-#include "dnai/commands/corecommand.h"
 #include "entitydata.h"
 #include "dnai/interfaces/imodeldata.h"
+#include "dnai/commands/commandmanager.h"
 
 namespace dnai
 {
@@ -44,21 +44,7 @@ namespace dnai
 				bool setVisibility(enums::core::VISIBILITY v);
 				enums::core::VISIBILITY visibility() const;
 
-                void declare() const;
-
-                void move(Entity *newParent);
-
-                void remove();
-
 				Entity& operator=(const Entity& other);
-
-				//IEntityCore implementation
-			public:
-                template <typename CommandType, typename ... Args>
-                void callCoreCommand(Args const &... args) const
-                {
-                    commands::CommandManager::Instance()->exec(new CommandType(args...));
-                }
 
             public:
                 //will replicate the current entity into the CoreDaemon

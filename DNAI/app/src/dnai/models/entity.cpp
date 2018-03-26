@@ -3,6 +3,10 @@
 #include "dnai/models/gui/declarable/variable.h"
 #include "dnai/models/gui/declarable/context.h"
 
+/*#include "dnai/commands/commandmanager.h"
+#include "dnai/commands/core/declarator/declare.h"
+#include "dnai/commands/core/declarator/remove.h"*/
+
 namespace dnai
 {
 	namespace models
@@ -102,8 +106,23 @@ namespace dnai
 
 		void Entity::declare()
 		{
-			m_dataCore->declare();
+            //dnai::commands::CommandManager::Instance()->exec(new commands::declarator::DeclareCoreCommand(*this->coreModel()));
 		}
+
+        void Entity::remove()
+        {
+            //dnai::commands::CommandManager::Instance()->exec(new commands::declarator::RemoveCoreCommand(*this->coreModel()));
+        }
+
+        void Entity::rename(const QString &name)
+        {
+
+        }
+
+        void Entity::move(const Entity &newParent)
+        {
+
+        }
 
 		Entity* Entity::parentRef() const
 		{
@@ -340,11 +359,6 @@ namespace dnai
 			Entity *parent = this;
 			const auto entity = new Entity(coreModel, parent, guiModel);
 			appendChild(entity);
-		}
-
-		void Entity::remove()
-		{
-			delete this;
 		}
 
 		void Entity::addFunction(const int index, const QString &listindex)

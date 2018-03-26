@@ -1,6 +1,5 @@
 #include "dnai/models/core/entity.h"
 #include "dnai/commands/commandmanager.h"
-#include "dnai/commands/core/declare.h"
 
 namespace dnai
 {
@@ -118,24 +117,6 @@ namespace dnai
 				return m_data.visibility;
 			}
 
-            void Entity::declare() const
-            {
-                qDebug() << "==================";
-                qDebug() << "=Declare(" << m_data.containerId << ", " << m_data.type << ", " << m_data.name << ", " << m_data.visibility << ")=";
-                qDebug() << "==================";
-                callCoreCommand<dnai::commands::DeclareCoreCommand>(*this);
-            }
-
-            void Entity::move(Entity *newParent)
-            {
-
-            }
-
-            void Entity::remove()
-            {
-
-            }
-
 			Entity& Entity::operator=(const Entity& other)
 			{
 				m_data = other.data();
@@ -144,7 +125,7 @@ namespace dnai
 
             void Entity::replicate() const
             {
-                declare();
+                //declare();
             }
 		}
 	}
