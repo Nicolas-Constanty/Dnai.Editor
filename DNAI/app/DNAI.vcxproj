@@ -311,13 +311,14 @@
     <ClInclude Include="include\dnai\interfaces\isolution.h" />
     <ClInclude Include="include\dnai\interfaces\iviewelement.h" />
     <ClInclude Include="include\dnai\interfaces\iviewzone.h" />
+    <ClInclude Include="include\dnai\models\function.h" />
     <ClInclude Include="include\dnai\models\gui\data\context.h" />
+    <ClInclude Include="include\dnai\models\gui\data\entitycolum.h" />
     <ClInclude Include="include\dnai\models\gui\declarable\context.h" />
     <QtMoc Include="include\dnai\views\contextview.h">
     </QtMoc>
     <ClInclude Include="include\controllers.h" />
-    <QtMoc Include="include\dnai\enums\core\core.h">
-    </QtMoc>
+    <ClInclude Include="include\dnai\enums\core\core.h" />
     <ClInclude Include="include\dnai\exceptions\coreexception.h" />
     <QtMoc Include="include\dnai\views\customshape.h">
     </QtMoc>

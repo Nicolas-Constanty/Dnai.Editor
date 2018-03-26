@@ -16,6 +16,12 @@ namespace dnai
 				{
 				public:
 					explicit Context() = default;
+					const QList<Context*>& contexts() const;
+					const QList<ObjectType*>& classes() const;
+					const QList<Variable*>& variables() const;
+					const QList<EnumType*>& enums() const;
+					const QList<ListType*>& listobjs() const;
+					const QList<Function*>& functions() const;
 					//Implementation of ISerializable
 					void serialize(QJsonObject& obj) const override;
 				protected:

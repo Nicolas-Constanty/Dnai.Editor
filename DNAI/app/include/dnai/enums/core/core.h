@@ -101,7 +101,7 @@ namespace dnai {
 	        /**
              * \brief List of available entity in core.dll
              */
-            enum ENTITY
+            enum ENTITY : qint32
             {
                 UNDEFINED = -1,
                 CONTEXT,

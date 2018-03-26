@@ -3,12 +3,13 @@
 
 #include <QUuid>
 #include <QString>
+#include "iserializable.h"
 
 namespace dnai
 {
 	namespace interfaces
 	{
-		class IEntity
+		class IEntity : public ISerializable
 		{
 		public:
 			virtual ~IEntity() = default;

@@ -352,9 +352,6 @@
     <ClInclude Include="include\controllers.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <QtMoc Include="include\dnai\enums\core\core.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
     <ClInclude Include="include\dnai\exceptions\coreexception.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -648,6 +645,15 @@
     </ClInclude>
     <ClInclude Include="include\dnai\models\treeitem.h">
       <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dnai\models\gui\data\entitycolum.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dnai\models\function.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dnai\enums\core\core.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

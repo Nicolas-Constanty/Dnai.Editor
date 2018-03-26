@@ -165,6 +165,8 @@ Rectangle {
                     }
                     else
                     {
+                        res.idx = index
+                        res.proj = index.model
                         tab.selectIndex(res)
                     }
                 }

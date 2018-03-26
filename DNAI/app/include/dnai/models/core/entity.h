@@ -5,7 +5,7 @@
 #include "dnai/enums/core/core.h"
 #include "entitydata.h"
 #include "dnai/interfaces/imodeldata.h"
-#include "dnai/commands/commandmanager.h"
+#include "dnai/interfaces/iserializable.h"
 
 namespace dnai
 {
@@ -20,7 +20,7 @@ namespace dnai
                 virtual void replicate() const = 0;
 			};
 
-			class Entity : public IEntityCore, public interfaces::IModelData<EntityData>
+			class Entity : public IEntityCore, public interfaces::IModelData<EntityData>, public interfaces::ASerializable<Entity>
 			{
 			public:
                 Entity(enums::core::ENTITY type = enums::core::ENTITY::UNDEFINED);
@@ -44,6 +44,14 @@ namespace dnai
 				bool setVisibility(enums::core::VISIBILITY v);
 				enums::core::VISIBILITY visibility() const;
 
+				void declare() const
+				{
+				};
+
+				void remove() const
+				{	
+				}
+
 				Entity& operator=(const Entity& other);
 
             public:
@@ -55,6 +63,9 @@ namespace dnai
 				bool setData(const EntityData &d) override;
 				const EntityData &data() const override;
 
+				void serialize(QJsonObject& obj) const override;
+			protected:
+				void _deserialize(const QJsonObject& obj) override;
 			private:
                 EntityData m_data;
 			};

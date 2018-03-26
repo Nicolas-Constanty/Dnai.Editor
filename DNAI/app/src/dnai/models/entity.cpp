@@ -71,7 +71,7 @@ namespace dnai
 			return m_dataGUI->index();
 		}
 
-		const QString &Entity::listIndex() const
+		QString Entity::listIndex() const
 		{
 			return m_dataGUI->listIndex().toString();
 		}
@@ -127,6 +127,11 @@ namespace dnai
 		Entity* Entity::parentRef() const
 		{
 			return parentItem();
+		}
+
+		const QMap<QUuid, Column*>& Entity::columns()
+		{
+			return m_columns;
 		}
 
 		void Entity::setId(qint32 id)
@@ -209,6 +214,7 @@ namespace dnai
 			if (m_columns.find(uuid) == m_columns.end())
 			{
 				const auto c = new Column();
+				c->setListIndex(uuid.toString());
 				m_columslist.append(c);
 				m_columns[uuid] = c;
 			}
@@ -218,60 +224,31 @@ namespace dnai
 
 		void Entity::serialize(QJsonObject& obj) const
 		{
-			QJsonArray arr;
+			QJsonArray ca;
 			for (auto c : m_columns)
 			{
 				QJsonObject tmp;
 				c->serialize(tmp);
-				arr.append(tmp);
+				ca.append(tmp);
 			}
-			obj["columns"] = arr;
+			obj["columns"] = ca;
 			if (m_dataCore == nullptr) return;
-			obj["name"] = m_dataCore->name();
-            switch (m_dataCore->entityType())
-            {
-            case enums::UNDEFINED: break;
-            case enums::CONTEXT:
-            {
-                const auto ctx = dynamic_cast<gui::declarable::Context *>(m_dataGUI);
-                ctx->serialize(obj);
-                break;
-            }
-            case enums::VARIABLE:
-            {
-                const auto var = dynamic_cast<gui::declarable::Variable *>(m_dataGUI);
-                var->serialize(obj);
-                break;
-            }
-            case enums::FUNCTION:
-            {
-                const auto func = dynamic_cast<gui::declarable::Function *>(m_dataGUI);
-                func->serialize(obj);
-                break;
-            }
-            case enums::DATA_TYPE: break;
-            case enums::ENUM_TYPE: break;
-            case enums::OBJECT_TYPE:
-            {
-                const auto classe = dynamic_cast<gui::declarable::ObjectType *>(m_dataGUI);
-                classe->serialize(obj);
-                break;
-            }
-            case enums::LIST_TYPE: 
-            	break;
-            default: ;
-            }
+			m_dataCore->serialize(obj);
+			m_dataGUI->serialize(obj);
+			QJsonArray ea;
             for (auto child : childrenItem())
 			{
-				const auto entity = dynamic_cast<Entity *>(child);
-				entity->serialize(obj);
+				QJsonObject o;
+				child->serialize(o);
+				ea.append(o);
 			}
+			obj["entities"] = ea;
 		}
 
 		void Entity::_deserialize(const QJsonObject& obj)
 		{
-			foreach(const auto column, obj["columns"].toArray()) {
-				const auto col = Column::deserialize(obj);
+            foreach(const auto column, obj["columns"].toArray()) {
+                const auto col = Column::deserialize(column.toObject());
                 m_columns[col->datas().listIndex] = col;
 				m_columslist.append(col);
 			}
@@ -297,90 +274,116 @@ namespace dnai
             }
             case enums::DATA_TYPE: break;
             case enums::ENUM_TYPE:
+            {
                 m_dataGUI = gui::declarable::EnumType::deserialize(obj);
                 break;
+            }
             case enums::OBJECT_TYPE:
             {
                 m_dataGUI = gui::declarable::ObjectType::deserialize(obj);
                 break;
             }
             case enums::LIST_TYPE:
+            {
                 m_dataGUI = gui::declarable::ListType::deserialize(obj);
                 break;
+            }
             default: ;
             }
-
-            foreach(const auto classe, obj["classes"].toArray()) {
-                const auto coreModel = new models::core::Entity(enums::core::OBJECT_TYPE);
+			
+            foreach(const auto classe, obj["entities"].toArray()) {
+				QJsonObject o = classe.toObject();
+				qDebug() << o["name"].toString() << o["type"].toInt();
+                const auto coreModel = new models::core::Entity(static_cast<enums::ENTITY>(o["type"].toInt()));
                 Entity *parent = this;
-                const auto entity = Entity::deserialize(classe.toObject(), coreModel, parent);
+                const auto entity = Entity::deserialize(o, coreModel, parent);
+                qDebug() << entity->listIndex();
+				if (QUuid(entity->listIndex()).isNull() && !m_columns.empty())
+					entity->setListIndex(m_columns.keys().first().toString());
 				appendChild(entity);
 			}
 
-            foreach(const auto context, obj["contexts"].toArray()) {
-                const auto coreModel = new models::core::Entity(enums::core::CONTEXT);
-                Entity *parent = this;
-                const auto entity = deserialize(context.toObject(), coreModel, parent);
-				appendChild(entity);
-			}
+   //         foreach(const auto context, obj["contexts"].toArray()) {
+   //             const auto coreModel = new models::core::Entity(enums::core::CONTEXT);
+   //             Entity *parent = this;
+   //             const auto entity = deserialize(context.toObject(), coreModel, parent);
+			//	appendChild(entity);
+			//}
 
-            foreach(const auto variable, obj["variables"].toArray()) {
-                const auto coreModel = new models::core::Entity(enums::core::VARIABLE);
-                Entity *parent = this;
-                const auto entity = Entity::deserialize(variable.toObject(),coreModel, parent);
-				appendChild(entity);
-			}
+   //         foreach(const auto variable, obj["variables"].toArray()) {
+   //             const auto coreModel = new models::core::Entity(enums::core::VARIABLE);
+   //             Entity *parent = this;
+   //             const auto entity = Entity::deserialize(variable.toObject(),coreModel, parent);
+			//	appendChild(entity);
+			//}
 
-            foreach(const auto function, obj["functions"].toArray()) {
-                const auto coreModel = new models::core::Entity(enums::core::FUNCTION);
-                Entity *parent = this;
-                const auto entity = Entity::deserialize(function.toObject(), coreModel, parent);
-				appendChild(entity);
-			}
+   //         foreach(const auto function, obj["functions"].toArray()) {
+   //             const auto coreModel = new models::core::Entity(enums::core::FUNCTION);
+   //             Entity *parent = this;
+   //             const auto entity = Entity::deserialize(function.toObject(), coreModel, parent);
+			//	appendChild(entity);
+			//}
 		}
 
 		void Entity::addContext(const int index, const QString &listindex)
 		{
 			const auto coreModel = new models::core::Entity(enums::core::CONTEXT);
-			const auto guiModel = new models::gui::declarable::Context();
+            const auto guiModel = new models::gui::declarable::Context();
 			guiModel->setIndex(index);
+            qDebug() << listindex;
 			guiModel->setListIndex(listindex);
 			Entity *parent = this;
 			const auto entity = new Entity(coreModel, parent, guiModel);
 			appendChild(entity);
+			entity->declare();
 		}
 
 		void Entity::addClass(const int index, const QString &listindex)
 		{
 			const auto coreModel = new models::core::Entity(enums::core::OBJECT_TYPE);
-			const auto guiModel = new models::gui::declarable::Context();
+            const auto guiModel = new models::gui::declarable::ObjectType();
 			guiModel->setIndex(index);
 			guiModel->setListIndex(listindex);
 			Entity *parent = this;
 			const auto entity = new Entity(coreModel, parent, guiModel);
 			appendChild(entity);
+			entity->declare();
+		}
+
+		void Entity::remove()
+		{
+			auto p = parentItem();
+			for (auto c : p->columns())
+			{
+				c->remove(this);
+			}
+			m_dataCore->remove();
+			parentItem()->removeOne(this);
+            delete this;
 		}
 
 		void Entity::addFunction(const int index, const QString &listindex)
 		{
 			const auto coreModel = new models::core::Entity(enums::core::FUNCTION);
-			const auto guiModel = new models::gui::declarable::Context();
+            const auto guiModel = new models::gui::declarable::Function();
 			guiModel->setIndex(index);
 			guiModel->setListIndex(listindex);
 			Entity *parent = this;
 			const auto entity = new Entity(coreModel, parent, guiModel);
 			appendChild(entity);
+			entity->declare();
 		}
 
 		void Entity::addVariable(const int index, const QString &listindex)
 		{
 			const auto coreModel = new models::core::Entity(enums::core::VARIABLE);
-			const auto guiModel = new models::gui::declarable::Context();
+            const auto guiModel = new models::gui::declarable::Variable();
 			guiModel->setIndex(index);
 			guiModel->setListIndex(listindex);
 			Entity *parent = this;
 			const auto entity = new Entity(coreModel, parent, guiModel);
 			appendChild(entity);
+			entity->declare();
 		}
 
 		int Entity::columnCount() const
@@ -393,6 +396,11 @@ namespace dnai
 			return QVariant::fromValue(m_columslist);
         }
 
+		int Entity::row() const
+		{
+			return IModel<Entity>::row();
+		}
+
 		QHash<int, QByteArray> Column::roleNames() const
 		{
 			QHash<int, QByteArray> roles;
@@ -404,17 +412,17 @@ namespace dnai
 		{
 			obj["name"] = m_data.name;
 			obj["description"] = m_data.description;
-            obj["listindex"] = m_data.listIndex.toString();
+            obj["listIndex"] = m_data.listIndex.toString();
 		}
 
 		void Column::_deserialize(const QJsonObject& obj)
 		{
 			m_data.name = obj["name"].toString();
 			m_data.description = obj["description"].toString();
-			auto uuid = QUuid(obj["listIndex"].toString());
+            auto uuid = QUuid(obj["listIndex"].toString());
 			if (uuid.isNull())
 			{
-				const auto getRandomString = [](quint32 size)
+                const auto getRandomString = [](int size)
 				{
 					const QString possibleCharacters(" !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~");
 
@@ -508,6 +516,19 @@ namespace dnai
 				return;
 			m_data.description = description;
 			emit descriptionChanged(description);
+		}
+
+		QString Column::listIndex() const
+		{
+			return m_data.listIndex.toString();
+		}
+
+		void Column::setListIndex(const QString& s)
+		{
+			if (m_data.listIndex.toString() == s)
+				return;
+			m_data.listIndex = QUuid::fromString(s);
+			emit listIndexChanged(s);
 		}
 
 		Entity* Column::parentRef() const

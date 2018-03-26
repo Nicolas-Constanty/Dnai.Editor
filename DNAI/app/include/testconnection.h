@@ -4,9 +4,7 @@
 #include <QDebug>
 #include <QObject>
 #include "include/clientcommunication.h"
-#include "dnai/models/context.h"
-#include "Cerealizer/Binary/Binary.hpp"
-#include "dnai/corepackages/commands/declarator/declare.h"
+//#include "dnai/models/context.h"
 
 class TestConnection : public QObject {
     Q_OBJECT

@@ -107,10 +107,15 @@ Item {
                     onPressed: {
                         if (_selectInfo.selectCount != 0)
                         {
-                            for (var item in _sublist.selectedItems) {
-                                item.remove()
+                            _sublist.selectedItems.sort(function compareNombres(a, b) {
+                                return b.row() - a.row();
+                              })
+                            for (var i = 0; i < _sublist.selectedItems.length; i++) {
+                                proj.removeEntity(idx, _sublist.selectedItems[i])
                             }
+                            _sublist.selectedItems = []
                             _selectInfo.selectCount = 0
+
                         }
                     }
                 }
@@ -169,7 +174,7 @@ Item {
                             width: 45
                             visible: modelData.parentRef.entityType === 0
                             onPressed: {
-                                proj.addContext(_sublist.visualModel.items.count, index, idx)
+                                proj.addContext(_sublist.visualModel.items.count, modelData.listIndex, idx)
                                 _sublist.positionViewAtEnd()
                             }
                         }
@@ -178,7 +183,7 @@ Item {
                             decoration.color: "#039BE5"
                             width: 45
                             onPressed: {
-                                proj.addClass(_sublist.visualModel.items.count, index, idx)
+                                proj.addClass(_sublist.visualModel.items.count, modelData.listIndex, idx)
                                 _sublist.positionViewAtEnd()
                             }
                         }
@@ -187,7 +192,7 @@ Item {
                             decoration.color: "#8E24AA"
                             width: 45
                             onPressed: {
-                                proj.addFunction(_sublist.visualModel.items.count, index, idx)
+                                proj.addFunction(_sublist.visualModel.items.count, modelData.listIndex, idx)
                                 _sublist.positionViewAtEnd()
                             }
                         }
@@ -196,7 +201,7 @@ Item {
                             decoration.color: "#FB8C00"
                             width: 45
                             onPressed: {
-                                proj.addVariable(_sublist.visualModel.items.count, index, idx)
+                                proj.addVariable(_sublist.visualModel.items.count, modelData.listIndex, idx)
                                 _sublist.positionViewAtEnd()
                             }
                         }

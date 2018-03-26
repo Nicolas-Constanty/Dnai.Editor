@@ -31,7 +31,6 @@ QObject* dnai::views::ContextView::getModel(const QString& name) const
 
 void dnai::views::ContextView::initView(const QString& path)
 {
-    qDebug() << path;
     m_view = dynamic_cast<QQuickItem*>(App::createQmlObject(path));
     m_view->setParentItem(this);
 }

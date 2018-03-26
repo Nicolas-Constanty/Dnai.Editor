@@ -21,7 +21,9 @@ namespace dnai {
         QJsonObject obj;
         serialize(obj);
 
+		m_file->open(QIODevice::WriteOnly);
         m_file->write(QJsonDocument(obj).toJson());
+		m_file->close();
     }
 
 	void Project::serialize(QJsonObject &obj) const
@@ -59,7 +61,7 @@ namespace dnai {
 		m_filename = path;
 		m_file = new QFile(QUrl(m_filename).toLocalFile());
 
-		if (!m_file->open(QIODevice::ReadWrite)) {
+		if (!m_file->open(QIODevice::ReadOnly)) {
 			qWarning("Couldn't open file.");
 			return;
 		}
@@ -76,6 +78,7 @@ namespace dnai {
 			exceptions::ExceptionManager::throwException(exceptions::GuiExeption("Error : Corrupted file"));
             qWarning("Couldn't parse file.");
 		}
+		m_file->close();
     }
 
     void Project::loadFromJson(const QJsonObject &obj)
@@ -219,6 +222,25 @@ namespace dnai {
 		beginInsertRows(parent, parentItem->childCount(), parentItem->childCount());
 		parentItem->addVariable(index, listindex);
 		endInsertRows();
+	}
+
+	void Project::removeEntity(const QModelIndex &index, models::Entity *e)
+	{
+		models::Entity *parentItem = getItem(index);
+		auto count = 0;
+		QModelIndex mi;
+		for (auto i : parentItem->childrenItem())
+		{
+			if (i == e)
+            {
+                mi = index.child(count, 0);
+				break;
+			}
+			++count;
+        }
+        beginRemoveRows(index, count, count);
+		e->remove();
+		endRemoveRows();
 	}
 
 	int Project::childCount() const

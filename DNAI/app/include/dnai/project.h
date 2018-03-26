@@ -37,7 +37,7 @@ namespace dnai {
 		void selectedEntityChanged(models::Entity *entity);
 
     public:
-		void save() override;
+		Q_INVOKABLE void save() override;
 		void load(const QString& path) override;
         void loadFromJson(const QJsonObject& obj);
 		void close() override;
@@ -58,6 +58,7 @@ namespace dnai {
         Q_INVOKABLE void addContext(int index, const QString & listindex, const QModelIndex& parent);
         Q_INVOKABLE void addFunction(int index, const QString & listindex, const QModelIndex& parent);
         Q_INVOKABLE void addVariable(int index, const QString & listindex, const QModelIndex& parent);
+		Q_INVOKABLE void removeEntity(const QModelIndex& index, dnai::models::Entity* e);
 
     private:
 		template<class T>

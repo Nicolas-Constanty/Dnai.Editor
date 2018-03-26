@@ -34,10 +34,8 @@ namespace dnai
 
         void CommandManager::exec(interfaces::ICommand* c)
         {
-            qDebug() << "yulu";
             if (m_console.view() && m_console.view()->isVisible())
             {
-                qDebug() << "yolo";
                 c = new DebugDecorator(c);
             }
 			if (c->isSave())

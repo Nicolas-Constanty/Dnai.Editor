@@ -17,7 +17,7 @@ namespace dnai
                 class Variable : public interfaces::IVariable, public Entity<data::Variable, Variable>
                 {
 				public:
-					explicit Variable(QObject *parent = nullptr);
+					explicit Variable() = default;
                     //Implementation of ISerializable
 					void serialize(QJsonObject& obj) const override;
 				protected:

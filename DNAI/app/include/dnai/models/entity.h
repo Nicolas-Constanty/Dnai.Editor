@@ -6,6 +6,8 @@
 #include "dnai/enums/core/core.h"
 #include "dnai/interfaces/imodel.h"
 #include "gui/data/entitycolum.h"
+#include "gui/declarable/variable.h"
+#include "gui/declarable/context.h"
 
 namespace dnai
 {
@@ -18,6 +20,7 @@ namespace dnai
 			Q_PROPERTY(QString name READ name WRITE setName NOTIFY nameChanged)
 			Q_PROPERTY(QString description READ description WRITE setDescription NOTIFY descriptionChanged)
 			Q_PROPERTY(dnai::models::Entity *parentRef READ parentRef CONSTANT)
+			Q_PROPERTY(QString listIndex READ listIndex WRITE setListIndex NOTIFY listIndexChanged)
 
 			enum ROLES
 			{
@@ -33,11 +36,14 @@ namespace dnai
 			const QString &description() const;
 			void setName(const QString &name);
 			void setDescription(const QString& description);
+			QString listIndex() const;
+			void setListIndex(const QString &s);
 			Entity *parentRef() const;
 
 		signals:
 			void descriptionChanged(const QString &desc);
 			void nameChanged(const QString &desc);
+			void listIndexChanged(const QString list);
         private:
 			virtual QHash<int, QByteArray> roleNames() const override;
         public:
@@ -51,6 +57,7 @@ namespace dnai
             QList<Entity *> m_entities;
 	        gui::data::EntityColumn m_data;
         };
+
         class Entity : public interfaces::IModel<Entity>
         {
             Q_OBJECT
@@ -82,12 +89,16 @@ namespace dnai
             const QString &name() const;
             enums::core::VISIBILITY visibility() const;
             int index() const;
-			const QString &listIndex() const;
+			QString listIndex() const;
             const QString &description() const;
             virtual core::Entity *coreModel() const;
             virtual interfaces::IEntity *guiModel() const;
-            bool expanded() const;
+			template<class T>
+			T *guiModel() const;
+			bool expanded() const;
+			void declare();
 			Entity *parentRef() const;
+			const QMap<QUuid, Column *> &columns();
 
         public:
 			void setIsRoot(bool isRoot);
@@ -128,6 +139,7 @@ namespace dnai
             void addClass(int, const QString &);
 	        int columnCount() const override;
 			Q_INVOKABLE QVariant listColumn() const;
+			Q_INVOKABLE int row() const override;
 
         //core commands
         public:
@@ -144,6 +156,19 @@ namespace dnai
 			QMap<QUuid, Column *> m_columns;
 			QList<QObject *> m_columslist;
         };
+
+		using Context = dnai::models::gui::declarable::Context;
+		using EnumType = dnai::models::gui::declarable::EnumType;
+		using Function = dnai::models::gui::declarable::Function;
+		using ListType = dnai::models::gui::declarable::ListType;
+		using ObjectType = dnai::models::gui::declarable::ObjectType;
+		using Variable = dnai::models::gui::declarable::Variable;
+
+	    template <class T>
+	    T* Entity::guiModel() const
+	    {
+			return dynamic_cast<T *>(guiModel());
+	    }
     }
 }
 
