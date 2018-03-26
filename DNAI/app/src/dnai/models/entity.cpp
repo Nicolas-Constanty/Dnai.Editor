@@ -102,26 +102,6 @@ namespace dnai
 			{
 				emit expandedChanged(exp);
 			}
-		}
-
-		void Entity::declare()
-		{
-            //dnai::commands::CommandManager::Instance()->exec(new commands::declarator::DeclareCoreCommand(*this->coreModel()));
-		}
-
-        void Entity::remove()
-        {
-            //dnai::commands::CommandManager::Instance()->exec(new commands::declarator::RemoveCoreCommand(*this->coreModel()));
-        }
-
-        void Entity::rename(const QString &name)
-        {
-
-        }
-
-        void Entity::move(const Entity &newParent)
-        {
-
         }
 
 		Entity* Entity::parentRef() const
@@ -349,6 +329,11 @@ namespace dnai
 			appendChild(entity);
 			entity->declare();
 		}
+
+        void Entity::declare()
+        {
+
+        }
 
 		void Entity::remove()
 		{

@@ -143,10 +143,7 @@ namespace dnai
 
         //core commands
         public:
-            void declare();
             void remove();
-            void rename(QString const &name);
-            void move(Entity const &newParent);
 
         private:
             core::Entity *m_dataCore;
