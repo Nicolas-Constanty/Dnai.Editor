@@ -81,8 +81,8 @@ namespace dnai
 			void Entity::_deserialize(const QJsonObject& obj)
 			{
                 m_data.name = obj["name"].toString();
-                m_data.type = static_cast<enums::ENTITY>(obj["type"].toInt());
-				m_data.visibility = static_cast<enums::VISIBILITY>(obj["visibility"].toInt());
+                m_data.type = static_cast<enums::core::ENTITY>(obj["type"].toInt());
+                m_data.visibility = static_cast<enums::core::VISIBILITY>(obj["visibility"].toInt());
 			}
 
 			bool Entity::setEntityType(enums::core::ENTITY e)

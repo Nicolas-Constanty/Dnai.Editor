@@ -3,6 +3,7 @@
 #include "dnai/project.h"
 #include "dnai/exceptions/notimplemented.h"
 #include "dnai/interfaces/iviewzone.h"
+#include "dnai/app.h"
 
 namespace dnai
 {
@@ -139,5 +140,10 @@ namespace dnai
 	void Editor::registerEditorView(views::EditorView* view)
 	{
 		m_editorView = view;
+	}
+
+	App *Editor::app()
+	{
+		return App::currentInstance();
 	}
 }

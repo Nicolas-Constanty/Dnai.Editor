@@ -5,11 +5,10 @@
 
 namespace dnai {
     namespace enums {
-        inline namespace core {
-            Q_NAMESPACE
-            /**
-             * \brief List of available commands in core.dll
-             */
+        class core : public QObject {
+            Q_OBJECT
+        public:
+            core(QObject *p = nullptr) : QObject(p) {}
             enum COMMANDS : qint32
             {
                 //ENTITY
@@ -47,7 +46,7 @@ namespace dnai {
                 UNLINK_INSTRUCTION_FLOW,
                 UNLINK_INSTRUCTION_INPUT
             };
-            Q_ENUM_NS(COMMANDS)
+            Q_ENUM(COMMANDS)
             // THESE STRUCTS ARE FOR DEBUG PURPOSE, YOU CAN USED THEM TO ITERATE THROW A COMMAND TYPE
 	        /**
              * \brief Allow to iterate through Entity commands
@@ -138,10 +137,10 @@ namespace dnai {
                 PRIVATE,
                 PROTECTED
             };
-            Q_ENUM_NS(ENTITY)
-            Q_ENUM_NS(REPLIES)
-            Q_ENUM_NS(VISIBILITY)
-        }
+            Q_ENUM(ENTITY)
+            Q_ENUM(REPLIES)
+            Q_ENUM(VISIBILITY)
+        };
     }
 }
 

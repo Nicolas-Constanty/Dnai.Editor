@@ -8,6 +8,7 @@
 
 namespace dnai
 {
+	class App;
     class Project;
 	class Editor : public QObject, public interfaces::IEditor
 	{
@@ -39,6 +40,7 @@ namespace dnai
 		void addView(QQuickItem* v) override;
 		views::EditorView *mainView() const;
 		void registerEditorView(views::EditorView *view);
+		Q_INVOKABLE static dnai::App *app();
 
 	public:
 		void selectProject(Project *proj);

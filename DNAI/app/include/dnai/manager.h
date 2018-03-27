@@ -43,7 +43,7 @@ namespace dnai {
 //        Q_INVOKABLE void openProject(const QString &);
 //        Q_INVOKABLE void openProject(Project *);
 	    Q_INVOKABLE void setAppViewLayout(dnai::views::Layout* l) const;
-		Q_INVOKABLE void createNode(QObject *nodeModel);
+//		Q_INVOKABLE void createNode(QObject *nodeModel);
         Q_INVOKABLE bool isMac();
 
     public:

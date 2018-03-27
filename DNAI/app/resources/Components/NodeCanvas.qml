@@ -49,7 +49,7 @@ CanvasNode {
         id: _menu
 
         Repeater {
-            model: Manager.views.basicNodesModel
+            model: Editor.app().nodes
             delegate: Item {
                 Menu {
                     id: _subMenu

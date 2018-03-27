@@ -10,6 +10,7 @@
 #include "api.h"
 #include "http.h"
 #include <QDirIterator>
+#include <QQmlProperty>
 
 namespace dnai
 {
@@ -107,9 +108,9 @@ namespace dnai
 		return QGuiApplication::eventFilter(o, event);
 	}
 
-    models::BasicNodeModel &App::basicNodesModel() const
+    models::BasicNodeModel *App::nodes() const
 	{
-		return *m_nodeModel;
+		return m_nodeModel;
 	}
 
     Editor &App::editor() const
@@ -167,5 +168,16 @@ namespace dnai
     views::AppView &App::appView() const
 	{
 		return *m_appView;
+	}
+
+	void App::createNode(QObject *nodeModel) const
+	{
+		const QString path = "qrc:/resources/Components/Node.qml";
+		QQmlComponent component(App::getEngineInstance(), path);
+		QQuickItem *obj = qobject_cast<QQuickItem*>(component.beginCreate(App::getEngineInstance()->rootContext()));
+		QQmlProperty model(obj, "model", App::getEngineInstance());
+		model.write(QVariant::fromValue(m_nodeModel->createNode(static_cast<enums::QInstructionID::Instruction_ID>(nodeModel->property("instruction_id").toInt()))));
+		obj->setParentItem(App::instructionView()->canvas()->content());
+		component.completeCreate();
 	}
 }

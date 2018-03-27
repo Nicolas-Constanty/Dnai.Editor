@@ -60,7 +60,8 @@ static void registerDNAI()
 	qmlRegisterSingletonType<dnai::Editor>("DNAI", 1, 0, "Editor", editor_singleton_provider);
     qmlRegisterSingletonType<dnai::AppSettings>("DNAI", 1, 0, "AppSettings", settings_singleton_provider);
     qmlRegisterSingletonType<QCStandardPaths>("DNAI", 1, 0, "StandardPath", standardpath_singleton_provider);
-    qmlRegisterDnai(dnai::Session, "Session");
+	qmlRegisterDnai(dnai::App, "App");
+	qmlRegisterDnai(dnai::Session, "Session");
     qmlRegisterDnai(dnai::ViewsHandler, "ViewsHandler");
     qmlRegisterDnai(dnai::Project, "Project");
 	qmlRegisterDnai(dnai::Solution, "Solution");
@@ -68,18 +69,13 @@ static void registerDNAI()
 
 static void registerEnums()
 {
+
 #define qmlRegisterEnums(type, name) qmlRegisterType<type>("DNAI.Enums", 1, 0, name)
     qmlRegisterEnums(dnai::enums::IoTypeRessouce, "IOType");
     qmlRegisterEnums(dnai::enums::FlowTypeRessouce, "FlowType");
     qmlRegisterEnums(dnai::enums::DeclarationTypeRessouce, "DeclarationType");
     qmlRegisterEnums(dnai::enums::QInstructionID, "InstructionID");
-    qmlRegisterUncreatableMetaObject(
-      dnai::enums::core::staticMetaObject, // static meta object
-      "DNAI.Enums",                // import statement (can be any string)
-      1, 0,                          // major and minor version of the import
-      "Core",                 // name in QML (does not have to match C++ name)
-      "Error: only enums"            // error in case someone tries to create a MyNamespace object
-    );
+    qmlRegisterEnums(dnai::enums::core, "Core");
 }
 
 class conststr {

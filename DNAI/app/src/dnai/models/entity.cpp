@@ -133,7 +133,7 @@ namespace dnai
 
 		void Entity::setEntityType(qint32 type) const
 		{
-			if (coreModel()->setEntityType(static_cast<enums::ENTITY>(type)))
+            if (coreModel()->setEntityType(static_cast<enums::core::ENTITY>(type)))
 			{
 				emit entityTypeChanged(type);
 			}
@@ -237,34 +237,34 @@ namespace dnai
             m_dataCore->setVisibility(static_cast<enums::core::VISIBILITY>(obj["visibility"].toInt()));
             switch (m_dataCore->entityType())
             {
-            case enums::UNDEFINED: break;
-            case enums::CONTEXT:
+            case enums::core::ENTITY::UNDEFINED: break;
+            case enums::core::ENTITY::CONTEXT:
             {
                 m_dataGUI = gui::declarable::Context::deserialize(obj);
                 break;
             }
-            case enums::VARIABLE:
+            case enums::core::ENTITY::VARIABLE:
             {
                 m_dataGUI = gui::declarable::Variable::deserialize(obj);
                 break;
             }
-            case enums::FUNCTION:
+            case enums::core::ENTITY::FUNCTION:
             {
                 m_dataGUI = gui::declarable::Function::deserialize(obj);
                 break;
             }
-            case enums::DATA_TYPE: break;
-            case enums::ENUM_TYPE:
+            case enums::core::ENTITY::DATA_TYPE: break;
+            case enums::core::ENTITY::ENUM_TYPE:
             {
                 m_dataGUI = gui::declarable::EnumType::deserialize(obj);
                 break;
             }
-            case enums::OBJECT_TYPE:
+            case enums::core::ENTITY::OBJECT_TYPE:
             {
                 m_dataGUI = gui::declarable::ObjectType::deserialize(obj);
                 break;
             }
-            case enums::LIST_TYPE:
+            case enums::core::ENTITY::LIST_TYPE:
             {
                 m_dataGUI = gui::declarable::ListType::deserialize(obj);
                 break;
@@ -275,7 +275,7 @@ namespace dnai
             foreach(const auto classe, obj["entities"].toArray()) {
 				QJsonObject o = classe.toObject();
 				qDebug() << o["name"].toString() << o["type"].toInt();
-                const auto coreModel = new models::core::Entity(static_cast<enums::ENTITY>(o["type"].toInt()));
+                const auto coreModel = new models::core::Entity(static_cast<enums::core::ENTITY>(o["type"].toInt()));
                 Entity *parent = this;
                 const auto entity = Entity::deserialize(o, coreModel, parent);
                 qDebug() << entity->listIndex();

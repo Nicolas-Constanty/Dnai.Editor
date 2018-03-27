@@ -46,10 +46,10 @@ namespace dnai
 //		emit declarationModelChanged(m);
 //	}
 
-    models::BasicNodeModel* ViewsHandler::basicNodesModel() const
-    {
-        return nullptr; m_app->basicNodesModel();
-    }
+//    models::BasicNodeModel* ViewsHandler::basicNodesModel() const
+//    {
+//        return nullptr; m_app->basicNodesModel();
+//    }
 
 //	void ViewsHandler::setProjectModel(models::TreeModel* model)
 //	{

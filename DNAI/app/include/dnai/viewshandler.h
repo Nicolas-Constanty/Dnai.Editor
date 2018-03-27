@@ -19,7 +19,7 @@ namespace dnai
 //		Q_PROPERTY(dnai::models::TreeModel *projectModel READ projectModel WRITE setProjectModel NOTIFY projectModelChanged)
 		Q_PROPERTY(QVariant namespacebarModel READ namespacebarModel WRITE setNamespacebarModel NOTIFY namespacebarModelChanged)
 //		Q_PROPERTY(dnai::models::DeclarationModel *declarationModel READ declarationModel WRITE setDeclarationModel NOTIFY declarationModelChanged)
-		Q_PROPERTY(dnai::models::BasicNodeModel *basicNodesModel READ basicNodesModel NOTIFY basicNodesModelChanged)
+//		Q_PROPERTY(dnai::models::BasicNodeModel *basicNodesModel READ basicNodesModel NOTIFY basicNodesModelChanged)
 //        Q_PROPERTY(dnai::models::Entity *propertyPanelModel READ propertyPanelModel NOTIFY propertyPanelModelChanged)
 
 	signals:
@@ -51,7 +51,7 @@ namespace dnai
 		void setNamespacebarModel(const QVariant &ref);
 //		void setDeclarationModel(models::DeclarationModel * m);
 //		models::DeclarationModel * declarationModel() const { return m_declRef; }
-		models::BasicNodeModel *basicNodesModel() const;
+//		models::BasicNodeModel *basicNodesModel() const;
 //		models::TreeModel *projectModel() const { return m_projectModel; }
 //		void setProjectModel(models::TreeModel *model);
 //		void setCurrentPath(models::TreeItem *);
