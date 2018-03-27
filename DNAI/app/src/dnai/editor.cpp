@@ -27,6 +27,7 @@ namespace dnai
 
 	void Editor::restoreViewState(const QJsonObject& obj)
 	{
+        Q_UNUSED(obj)
 		throw exceptions::NotImplemented();
 	}
 

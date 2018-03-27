@@ -375,7 +375,7 @@ ToolBar {
         onClicked: {
             _timer.start()
             _rotator.start()
-            Manager.views.onBuildStart()
+            Editor.app().onBuildStart()
         }
         RotationAnimator {
             id: _rotator

@@ -13,11 +13,11 @@ UserMenuForm {
     opened: false
 
     Component.onCompleted: {
-        Manager.session.getCurrentUser();
+        Editor.app().session.getCurrentUser();
     }
 
     mouseArea.onClicked: {
-        if (!Manager.session.user) {
+        if (!Editor.app().session.user) {
             loginPopup.open()
         } else {
             opened = !opened
@@ -26,7 +26,7 @@ UserMenuForm {
     }
 
     logoutBtn.onClicked: {
-        Manager.session.logout()
+        Editor.app().session.logout()
         root.fullname = ""
         root.imgSrc = ""
     }
@@ -36,16 +36,16 @@ UserMenuForm {
     }
 
     Connections {
-        target: Manager.session
+        target: Editor.app().session
 
         onUserChanged: {
             loginPopup.close()
-            if (!Manager.session.user) {
+            if (!Editor.app().session.user) {
                 return;
             }
 
-            root.fullname = Manager.session.user.name
-            root.imgSrc = Manager.session.user.profile_url
+            root.fullname = Editor.app().session.user.name
+            root.imgSrc = Editor.app().session.user.profile_url
         }
     }
 

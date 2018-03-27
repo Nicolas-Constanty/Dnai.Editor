@@ -1,33 +1,15 @@
 #include <QGuiApplication>
 
-#include "views.h"
-#include "models.h"
-#include "enums.h"
-
-#include "dnai/app.h"
-#include "dnai/manager.h"
-#include "dnai/settings.h"
-#include "dnai/project.h"
+#include "dnai.h"
 #include "dnai/editor.h"
-#include "controllers.h"
+#include "dnai/project.h"
 
 #include "include/eventconsumer.h"
-#include "dnai/entitiesfactory.h"
-#include "dnai/viewshandler.h"
-#include "dnai/enums/core/core.h"
 
 #if defined(_WIN32) && defined(_MSC_VER)
 #include "../../lib/WinToast/wintoastlib.h"
 using namespace WinToastLib;
 #endif
-
-static QObject *manager_singleton_provider(QQmlEngine *engine, QJSEngine *scriptEngine)
-{
-    Q_UNUSED(engine)
-    Q_UNUSED(scriptEngine)
-
-    return new dnai::Manager();
-}
 
 static QObject *editor_singleton_provider(QQmlEngine *engine, QJSEngine *scriptEngine)
 {
@@ -55,14 +37,12 @@ static QObject *standardpath_singleton_provider(QQmlEngine *engine, QJSEngine *s
 
 static void registerDNAI()
 {
-#define qmlRegisterDnai(type, name) qmlRegisterType<type>("DNAI", 1, 0, name)
-    qmlRegisterSingletonType<dnai::Manager>("DNAI", 1, 0, "Manager", manager_singleton_provider);
+#define qmlRegisterDnai(type, name) qmlRegisterType<type>("DNAI", 1, 0, name);
 	qmlRegisterSingletonType<dnai::Editor>("DNAI", 1, 0, "Editor", editor_singleton_provider);
     qmlRegisterSingletonType<dnai::AppSettings>("DNAI", 1, 0, "AppSettings", settings_singleton_provider);
     qmlRegisterSingletonType<QCStandardPaths>("DNAI", 1, 0, "StandardPath", standardpath_singleton_provider);
 	qmlRegisterDnai(dnai::App, "App");
-	qmlRegisterDnai(dnai::Session, "Session");
-    qmlRegisterDnai(dnai::ViewsHandler, "ViewsHandler");
+    qmlRegisterDnai(dnai::Session, "Session");
     qmlRegisterDnai(dnai::Project, "Project");
 	qmlRegisterDnai(dnai::Solution, "Solution");
 }
@@ -117,7 +97,6 @@ static void registerViews()
 #define qmlRegisterViews(type, name) qmlRegisterType<type>("DNAI.Views", 1, 0, name)
     // QML Views
     qmlRegisterViews(dnai::views::CanvasNode, "CanvasNode");
-//    qmlRegisterType<dnai::views::DeclarationCanvas>("DNAI.Views", 1, 0, "DeclarationCanvas");
     qmlRegisterViews(dnai::views::Console, "Console");
     qmlRegisterViews(dnai::views::ContextView, "ContextView");
     qmlRegisterViews(dnai::views::DeclarationView, "DeclarationViewModel");
@@ -154,20 +133,12 @@ static void registerModels()
     qmlRegisterModels(dnai::models::QFontSettings, "QFontSettings");
     qmlRegisterModels(dnai::models::MenuSettings, "MenuSettings");
     qmlRegisterModels(dnai::models::QBackground, "QBackground");
-//    qmlRegisterType<dnai::models::TreeModel>("DNAI.Models", 1, 0, "TreeModel");
-//    qmlRegisterType<dnai::models::TreeItem>("DNAI.Models", 1, 0, "TreeItem");
-//    qmlRegisterType<dnai::models::NameSpaceBarItem>("DNAI.Models", 1, 0, "NameSpaceBarItem");
-//    qmlRegisterType<dnai::models::NameSpaceBarModel>("DNAI.Models", 1, 0, "NameSpaceBarModel");
     qmlRegisterModels(dnai::models::User, "User");
-//    qmlRegisterType<dnai::models::DeclarationModel>("DNAI.Models", 1, 0, "DeclarationModel");
-//    qmlRegisterType<dnai::models::Declaration>("DNAI.Models", 1, 0, "Declaration");
     qmlRegisterModels(dnai::models::BasicNodeModel, "BasicNodeModel");
     qmlRegisterModels(dnai::models::ListNode, "ListNode");
     qmlRegisterModels(dnai::models::Entity, "Entity");
     qmlRegisterModels(dnai::models::Column, "Column");
     qmlRegisterModels(dnai::models::EntityTree, "EntityTree");
-//    qmlRegisterType<dnai::models::Property>("DNAI.Models", 1, 0, "Property");
-//    qmlRegisterType<dnai::models::EntityList>("DNAI.Models", 1, 0, "EntityList");
 }
 
 static void registerConnection() {
@@ -207,34 +178,3 @@ int main(int argc, char *argv[])
     app.load();
     return dnai::App::exec();
 }
-
-
-//    engine.load(QUrl(QLatin1String("qrc:/main.qml")));
-//    if (engine.rootObjects().isEmpty())
-//        return -1;
-
-    // DEBUT CODE POUR LA COMMUNICATION CLIENT SERVER
-
-//    ClientCommunication com(QHostAddress::LocalHost, 7777, "DNAI GUI");
-//    com.start();
-
-//    TestConnection test(*com);
-
-//    com->registerEvent("POPOLE", 4, std::bind(&TestConnection::onReceiveEventPopole, &test, std::placeholders::_1, std::placeholders::_2));
-
-//    QTimer *timer = new QTimer();
-//      QObject::connect(timer, SIGNAL(timeout()), &test, SLOT(update()));
-//      timer->start(1000);
-
-
-  /*  QTimer *timer = new QTimer();
-    QObject::connect(timer, SIGNAL(timeout()), &test, SLOT(update()));
-    timer->start(1000);
-    QTimer *timer2 = new QTimer();
-    QObject::connect(timer2, SIGNAL(timeout()), &test, SLOT(updateTITI()));
-    timer2->start(3000);
-    QTimer *timer3 = new QTimer();
-    QObject::connect(timer3, SIGNAL(timeout()), &test, SLOT(updateTOTO()));
-    timer3->start(5000);*/
-
-    // FIN CODE COMMUNICATION SERVER

@@ -19,6 +19,7 @@ namespace dnai
 
 			void Input::_deserialize(const QJsonObject& obj)
 			{
+                Q_UNUSED(obj)
 				throw exceptions::NotImplemented();
 			}
 

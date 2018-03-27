@@ -64,7 +64,7 @@ CanvasNode {
                                     _subMenu.addAction(_subMenu1)
                                 }
                                 onTriggered: {
-                                    Manager.createNode(item)
+                                    Editor.app().createNode(item)
                                 }
                             }
                         }

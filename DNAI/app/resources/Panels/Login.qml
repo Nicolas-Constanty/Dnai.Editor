@@ -21,14 +21,14 @@ LoginForm {
     signin.onClicked: {
         error = ""
         if (username.text && password.text) {
-            Manager.session.signin(username.text, password.text);
+            Editor.app().session.signin(username.text, password.text);
         }
         username.text = ""
         password.text = ""
     }
 
     Connections {
-        target: Manager.session
+        target: Editor.app().session
 
         onApiErrors: {
             error = "Invalid Credentials"

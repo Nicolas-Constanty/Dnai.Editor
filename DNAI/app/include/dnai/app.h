@@ -18,10 +18,12 @@ namespace dnai {
     {
 		Q_OBJECT
 		Q_PROPERTY(dnai::models::BasicNodeModel *nodes READ nodes CONSTANT)
+        Q_PROPERTY(dnai::Session *session READ session CONSTANT)
 		int nullarg = 0;
     public:
 		App(QObject *parent = nullptr) : QGuiApplication(nullarg, nullptr), m_editor(Editor::instance())
 	    {
+            Q_UNUSED(parent)
 	    }
 
         App(int & argc, char **argv);
@@ -33,7 +35,7 @@ namespace dnai {
         void registerSettings(AppSettings* appSettings);
 
     public:
-        Session &session();
+        Session *session();
         AppSettings &settings() const;
         views::AppView &appView() const;
 		Q_INVOKABLE void createNode(QObject* nodeModel) const;
@@ -47,6 +49,9 @@ namespace dnai {
 	    static QObject *createQmlObject(const QString &path);
         static QQmlEngine *getEngineInstance();
 		static views::InstructionView *instructionView();
+
+        Q_INVOKABLE void onBuildStart();
+        Q_INVOKABLE bool isMac();
 
     private:
         QQmlApplicationEngine m_engine;

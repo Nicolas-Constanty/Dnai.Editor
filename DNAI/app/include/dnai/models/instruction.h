@@ -8,24 +8,6 @@ namespace dnai
 {
 	namespace models
 	{
-        class InstructionCore : public core::Entity
-		{
-		public:
-            std::map<qint32, commands::CoreCommand*> initCommands() const override;
-		};
-
-        class MemberInstructionCore : public core::Entity
-		{
-		public:
-            std::map<qint32, commands::CoreCommand*> initCommands() const override;
-		};
-
-		union InstructionCoreUnion
-		{
-			InstructionCore i;
-			MemberInstructionCore mi;
-			~InstructionCoreUnion() {}
-		};
 		class Instruction : public Entity
 		{
 		public:
@@ -33,8 +15,7 @@ namespace dnai
 
             core::Entity* coreModel() const override;
             void setCoreModel(core::Entity* model) override;
-		private:
-			InstructionCoreUnion m_dataCore;
+        private:
             core::Entity * m_data = nullptr;
 		};
 	}

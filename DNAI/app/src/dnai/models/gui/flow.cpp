@@ -9,11 +9,13 @@ namespace dnai
 		{
 			void Flow::serialize(QJsonObject& obj) const
 			{
+                Q_UNUSED(obj)
 				throw exceptions::NotImplemented();
 			}
 
 			void Flow::_deserialize(const QJsonObject& obj)
 			{
+                Q_UNUSED(obj)
 				throw exceptions::NotImplemented();
 			}
 

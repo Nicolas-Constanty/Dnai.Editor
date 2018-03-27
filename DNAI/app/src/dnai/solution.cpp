@@ -186,6 +186,7 @@ namespace dnai
 
 	int Solution::rowCount(const QModelIndex& parent) const
 	{
+        Q_UNUSED(parent)
 		return m_projects.count();
 	}
 

@@ -95,13 +95,11 @@ SOURCES += \
     src/dnai/eventutilities.cpp \
     src/dnai/focusmanager.cpp \
     src/dnai/link.cpp \
-    src/dnai/manager.cpp \
     src/dnai/processmanager.cpp \
     src/dnai/project.cpp \
     src/dnai/session.cpp \
     src/dnai/settings.cpp \
     src/dnai/solution.cpp \
-    src/dnai/viewshandler.cpp \
     src/main.cpp \
     src/dnai/views/viewelement.cpp \
     src/dnai/views/viewzone.cpp \
@@ -141,14 +139,11 @@ HEADERS += \
     include/dnai/commands/movenodecommand.h \
     include/dnai/commands/openpropertypanel.h \
     include/dnai/commands/zoomcanvascommand.h \
-    include/dnai/controllers/classcontroller.h \
     include/dnai/controllers/clientcontroller.h \
     include/dnai/controllers/consolecontroller.h \
-    include/dnai/controllers/contextcontroller.h \
     include/dnai/controllers/inputcontroller.h \
     include/dnai/controllers/outputcontroller.h \
     include/dnai/controllers/propertypanel.h \
-    include/dnai/enums/core/commands.h \
     include/dnai/enums/core/core.h \
     include/dnai/enums/core/instructionid.h \
     include/dnai/enums/declarationtype.h \
@@ -257,25 +252,25 @@ HEADERS += \
     include/dnai/link.h \
     include/dnai/linkablebezieritem.h \
     include/dnai/linkabletype.h \
-    include/dnai/manager.h \
     include/dnai/processmanager.h \
     include/dnai/project.h \
     include/dnai/session.h \
     include/dnai/settings.h \
     include/dnai/solution.h \
-    include/dnai/viewshandler.h \
     include/api.h \
     include/commands.h \
     include/controllers.h \
     include/enums.h \
     include/http.h \
     include/models.h \
-    include/qmlresources.h \
     include/testconnection.h \
     include/views.h \
     include/dnai/views/viewelement.h \
     include/dnai/views/viewzone.h \
-    include/dnai/views/editorview.h
+    include/dnai/views/editorview.h \
+    include/dnai.h \
+    include/exceptions.h \
+    include/interfaces.h
 
 
 #LIB

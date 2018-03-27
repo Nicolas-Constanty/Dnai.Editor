@@ -11,11 +11,13 @@ namespace dnai
 			{
 				void EnumType::serialize(QJsonObject& obj) const
 				{
+                    Q_UNUSED(obj)
 					throw exceptions::NotImplemented();
 				}
 
 				void EnumType::_deserialize(const QJsonObject& obj)
 				{
+                    Q_UNUSED(obj)
 					throw exceptions::NotImplemented();
 				}
 			}

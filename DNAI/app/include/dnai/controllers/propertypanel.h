@@ -1,6 +1,7 @@
 #ifndef PROPERTYPANEL_H
 #define PROPERTYPANEL_H
-#include "icontroller.h"
+
+#include "dnai/interfaces/icontroller.h"
 #include "dnai/models/entity.h"
 
 namespace dnai

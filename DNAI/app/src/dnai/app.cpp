@@ -12,6 +12,14 @@
 #include <QDirIterator>
 #include <QQmlProperty>
 
+#if defined(_WIN32) && defined(_MSC_VER)
+#include "../../lib/WinToast/wintoastlib.h"
+using namespace WinToastLib;
+#endif
+#if defined(Q_OS_MAC)
+#include "../../lib/MACToast/toast.h"
+#endif
+
 namespace dnai
 {
     App *App::m_instance = nullptr;
@@ -142,12 +150,12 @@ namespace dnai
 
     AppSettings &App::settings() const
 	{
-		return *m_settings;
+        return *m_settings;
 	}
 
-    Session  &App::session()
+    Session  *App::session()
 	{
-		return m_session;
+        return &m_session;
 	}
 
 	QObject* App::createQmlObject(const QString& path)
@@ -180,4 +188,66 @@ namespace dnai
 		obj->setParentItem(App::instructionView()->canvas()->content());
 		component.completeCreate();
 	}
+
+#if defined(_WIN32) && defined(_MSC_VER)
+  class CustomHandler : public IWinToastHandler {
+  public:
+      void toastActivated() const {
+          std::wcout << L"The user clicked in this toast" << std::endl;
+      }
+
+      void toastActivated(int actionIndex) const {
+          std::wcout << L"The user clicked on button #" << actionIndex << L" in this toast" << std::endl;
+      }
+
+      void toastFailed() const {
+          std::wcout << L"Error showing current toast" << std::endl;
+      }
+      void toastDismissed(WinToastDismissalReason state) const {
+          switch (state) {
+          case UserCanceled:
+              std::wcout << L"The user dismissed this toast" << std::endl;
+              break;
+          case ApplicationHidden:
+              std::wcout <<  L"The application hid the toast using ToastNotifier.hide()" << std::endl;
+              break;
+          case TimedOut:
+              std::wcout << L"The toast has timed out" << std::endl;
+              break;
+          default:
+              std::wcout << L"Toast not activated" << std::endl;
+              break;
+          }
+      }
+  };
+#endif
+  void App::onBuildStart()
+  {
+#if defined(_WIN32) && defined(_MSC_VER)
+     WinToastTemplate templ = WinToastTemplate(WinToastTemplate::ImageAndText04);
+     templ.setTextField(QString("Build Start at :").toStdWString(), WinToastTemplate::FirstLine);
+     QDateTime dateTime = dateTime.currentDateTime();
+     QString dateTimeString = dateTime.toString("yyyy-MM-dd hh:mm:ss");
+     templ.setTextField(dateTimeString.toStdWString(), WinToastTemplate::SecondLine);
+     templ.setTextField(QString("by Nicolas C").toStdWString(), WinToastTemplate::ThirdLine);
+     templ.setExpiration(10000);
+
+     if (WinToast::instance()->showToast(templ, new CustomHandler()) < 0) {
+         qDebug() << "Error", "Could not launch your toast notification!";
+     }
+#endif
+#if defined(Q_OS_MAC)
+    Toast macToast;
+    macToast.show("DNAI", "Build has start !");
+#endif
+  }
+
+  bool App::isMac()
+  {
+#if defined(Q_OS_MAC)
+    return true;
+#else
+      return false;
+#endif
+  }
 }
