@@ -23,12 +23,14 @@ HEADERS = \
    $$INCLUDE_ROOT/Cerealizer/Binary/BinaryStream.hpp \
    $$INCLUDE_ROOT/Cerealizer/Binary/BinaryTuple.hpp \
    $$INCLUDE_ROOT/Cerealizer/Binary/DefaultOperations.hpp \
+   $$INCLUDE_ROOT/Cerealizer/Binary/StructOperations.hpp \
    $$INCLUDE_ROOT/Cerealizer/Binary/Operations.hpp \
    $$INCLUDE_ROOT/Cerealizer/JSON/DefaultOperations.hpp \
    $$INCLUDE_ROOT/Cerealizer/JSON/JSON.hpp \
    $$INCLUDE_ROOT/Cerealizer/JSON/JSONObject.hpp \
    $$INCLUDE_ROOT/Cerealizer/JSON/JSONStream.hpp \
    $$INCLUDE_ROOT/Cerealizer/JSON/JSONTuple.hpp \
+   $$INCLUDE_ROOT/Cerealizer/JSON/StructOperations.hpp \
    $$INCLUDE_ROOT/Cerealizer/JSON/Operations.hpp
 
 SOURCES = \

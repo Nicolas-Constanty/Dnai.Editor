@@ -277,8 +277,6 @@ HEADERS += \
 #LIB
 DEPENDPATH += $${PWD}/../lib/
 INCLUDEPATH += $${PWD}/../lib/core_client/include/
-#INCLUDEPATH += $${PWD}/../lib/DataComEvent/Shared_include/
-#INCLUDEPATH += $${PWD}/../lib/Cerealization/repository/include/
 
 win32-msvc*{
     DEPENDPATH += $${PWD}/../lib/WinToast/

@@ -8,7 +8,6 @@
 #include <QHostAddress>
 #include <QString>
 
-#include "Cerealizable/Tuple.hpp"
 #include "Cerealizer/Binary/Binary.hpp"
 #include "serialoperations.h"
 
@@ -32,7 +31,7 @@ namespace core
 
     public:
         template <typename ... Args>
-        void callCommand(QString const &name, Args &... args) const
+        void callCommand(QString const &name, Args const &... args) const
         {
             Cerealization::Cerealizable::Tuple<Args...> toserialize(args...);
             Cerealization::Cerealizer::BinaryStream stream;

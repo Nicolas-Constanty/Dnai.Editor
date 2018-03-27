@@ -106,3 +106,27 @@ JSONStream      &operator >>(JSONStream &stream, core::VISIBILITY &value)
     enum_deserialize(stream, value);
     return stream;
 }
+
+BinaryStream &operator <<(BinaryStream &stream, core::INSTRUCTION value)
+{
+    enum_serialize(stream, value);
+    return stream;
+}
+
+BinaryStream &operator>>(BinaryStream &stream, core::INSTRUCTION &value)
+{
+    enum_deserialize(stream, value);
+    return stream;
+}
+
+JSONStream &operator <<(JSONStream &stream, core::INSTRUCTION value)
+{
+    enum_serialize(stream, value);
+    return stream;
+}
+
+JSONStream &operator>>(JSONStream &stream, core::INSTRUCTION &value)
+{
+    enum_deserialize(stream, value);
+    return stream;
+}

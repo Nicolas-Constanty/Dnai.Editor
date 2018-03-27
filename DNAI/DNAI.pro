@@ -9,21 +9,20 @@ libCerealization.file = lib/Cerealization/Cerealization.pro
 libCoreClient.file = lib/core_client/core_client.pro
 
 libCoreClient.depends = libReseau libCerealization
-app.depends = libCoreClient
 
 win32-msvc* {
     SUBDIRS += notiflib
     notiflib.file = lib/WinToast/wintoast.pro
-    app.depends += notiflib
+    app.depends = notiflib libCoreClient
 }
 macx-clang* {
     SUBDIRS += notifmac
     notifmac.file = lib/MACToast/MACToast.pro
-    app.depends = notifmac
+    app.depends = notifmac libCoreClient
 }
 win32-g++ {
-
+    app.depends = libCoreClient
 }
 unix:!macx {
-
+    app.depends = libCoreClient
 }
