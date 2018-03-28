@@ -20,7 +20,7 @@ namespace dnai
 		for (auto p : m_projects)
 			p->save();
 		m_file->open(QIODevice::WriteOnly);
-		m_file->write(QJsonDocument(obj).toJson());
+        m_file->write(QJsonDocument(obj).toJson(QJsonDocument::Compact));
 		m_file->close();
 	}
 
@@ -136,6 +136,7 @@ namespace dnai
 		obj["name"] = name();
 		obj["description"] = description();
 		obj["projects"] = arr;
+        obj["version"] = Editor::instance().version();
 	}
 
 	const QString& Solution::fileName() const
