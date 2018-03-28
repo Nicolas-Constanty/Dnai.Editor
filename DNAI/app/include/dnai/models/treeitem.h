@@ -1,42 +1,103 @@
-#ifndef TREEITEM_H
-#define TREEITEM_H
+#ifndef DNAI_MODELS_TREEITEM_H
+#define DNAI_MODELS_TREEITEM_H
 
 #include <QList>
 #include <QVariant>
-#include <QModelIndex>
-#include "common.h"
+#include <QVector>
+#include "entity.h"
 
-namespace dnai {
-namespace models {
-class TreeItem : public QObject
+namespace dnai
 {
-    Q_OBJECT
-public:
-    TreeItem(QObject *parent = nullptr) : QObject(parent) {}
-    explicit TreeItem(const QList<QVariant> &data, TreeItem *parentItem = 0);
-    ~TreeItem();
+	namespace models
+	{
+		template<class T>
+		class TreeItem
+		{
+		public:
+			explicit TreeItem(T *parent = 0);
+			~TreeItem();
 
-    void appendChild(TreeItem *child);
+			T *child(int number);
+			int childCount() const;
+			bool insertChild(int position, T *);
+			void appendChild(T *);
+			T *parent();
+			bool removeChildren(int position, int count);
+			int childNumber() const;
+			QList<T*> &children() const;
 
-    TreeItem *child(int row);
-    const QList<TreeItem*> &children() const { return m_childItems; }
-    int childCount() const;
-    int columnCount() const;
-    QVariant data(int column) const;
-    int row() const;
-    TreeItem *parentItem();
-    const QModelIndex &idxmodel() const { return m_idx; }
-    void setIdx(const QModelIndex &ref);
-    dnai::models::Common *model() const { return m_model; }
-    void setModel(dnai::models::Common *);
+		private:
+			QList<T*> m_childItems;
+			T *m_parentItem;
+		};
 
-private:
-    QList<TreeItem*> m_childItems;
-    QList<QVariant> m_itemData;
-    TreeItem *m_parentItem;
-    QModelIndex m_idx;
-    dnai::models::Common *m_model;
-};
+		template <class T>
+		TreeItem<T>::TreeItem(T* parent) : m_parentItem(parent)
+		{
+		}
+
+		template <class T>
+		TreeItem<T>::~TreeItem()
+		{
+		}
+
+		template <class T>
+		T* TreeItem<T>::child(int number)
+		{
+			return m_childItems.at(number);
+		}
+
+		template <class T>
+		int TreeItem<T>::childCount() const
+		{
+			return m_childItems.count();
+		}
+
+		template <class T>
+		bool TreeItem<T>::insertChild(int position, T *e)
+		{
+			if (position < 0 || position > m_childItems.count())
+				return false;
+			m_childItems.insert(position, e);
+		}
+
+		template <class T>
+		void TreeItem<T>::appendChild(T* e)
+		{
+			m_childItems.append(e);
+		}
+
+		template <class T>
+		T* TreeItem<T>::parent()
+		{
+			return m_parentItem;
+		}
+
+		template <class T>
+		bool TreeItem<T>::removeChildren(int position, int count)
+		{
+			if (position < 0 || position > m_childItems.count())
+				return false;
+			auto max = position + count;
+			if (max > m_childItems.count())
+				max = m_childItems.count();
+			for (auto i = position; i < max; i++)
+				delete m_childItems.takeAt(i);
+			return true;
+		}
+
+		template <class T>
+		int TreeItem<T>::childNumber() const
+		{
+			return m_childItems.count();
+		}
+
+		template <class T>
+		QList<T*> &TreeItem<T>::children() const
+		{
+			return m_childItems;
+		}
+	}
 }
-}
-#endif // TREEITEM_H
+
+#endif // DNAI_MODELS_TREEITEM_H

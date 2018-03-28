@@ -27,7 +27,7 @@ Page {
         id: fileDialog
         title: "Please choose a project"
         selectMultiple: false
-        nameFilters: ["DNAI project (*.dnaiproject)"]
+        nameFilters: ["DNAI project (*.dnaisolution)"]
     }
 
     header: TabBar {
@@ -133,12 +133,9 @@ Page {
             }
         }
     }
-    footer: ToolBar {
-        background: Rectangle {
-            implicitHeight: 40
-            color: AppSettings.style.background.color
-        }
-        ToolButton {
+    footer: Item {
+        height: 40
+        Button {
             id: cancelButton
             anchors.left: parent.left
             leftPadding: 20
@@ -155,7 +152,7 @@ Page {
                 color: AppSettings.style.background.color
             }
         }
-        ToolButton {
+        Button {
             id: openButton
             anchors.right: parent.right
             leftPadding: 20

@@ -3,6 +3,7 @@ import QtQuick.Controls 1.4
 import QtQuick.Controls.Styles 1.4
 import QtQml.Models 2.3
 import DNAI 1.0
+import DNAI.Models 1.0
 
 import "../Panels"
 import "../Style"
@@ -14,27 +15,11 @@ ExpendablePanel {
     property variant last: undefined
     TreeView {
         id: tr
-        function changeCurrent(cur)
-        {
-
-            var indexModel = Manager.views.getIndexMatch(cur)
-            Manager.views.selectTreeItem(indexModel)
-            Manager.views.updateNamespace(indexModel)
-//            tr.selection.select(cur, ItemSelectionModel.ClearAndSelect)
-            tr.selection.setCurrentIndex(indexModel, ItemSelectionModel.ClearAndSelect)
-        }
-        function changeCurrentFromModel(cur)
-        {
-            var indexModel = Manager.views.getIndexMatchFromModel(cur)
-            Manager.views.selectTreeItem(indexModel)
-            Manager.views.updateNamespace(indexModel)
-            tr.selection.setCurrentIndex(indexModel, ItemSelectionModel.ClearAndSelect)
-        }
 
         anchors.fill: parent
-        model: Manager.views.projectModel
+        model: Editor.solution
         selection: ItemSelectionModel {
-            model: Manager.views.projectModel
+            model: Editor.solution
         }
 
         frameVisible: false

@@ -1,5 +1,6 @@
 #include <QQuickWindow>
 #include <QTimer>
+#include <QDir>
 
 #include "dnai/app.h"
 #include "dnai/processmanager.h"
@@ -8,6 +9,16 @@
 #include "dnai/commands/commandmanager.h"
 #include "api.h"
 #include "http.h"
+#include <QDirIterator>
+#include <QQmlProperty>
+
+#if defined(_WIN32) && defined(_MSC_VER)
+#include "../../lib/WinToast/wintoastlib.h"
+using namespace WinToastLib;
+#endif
+#if defined(Q_OS_MAC)
+#include "../../lib/MACToast/toast.h"
+#endif
 
 namespace dnai
 {
@@ -17,18 +28,16 @@ namespace dnai
 	, m_processManager(nullptr)
 	, m_appView(nullptr)
 	, m_nodeModel(nullptr)
+	, m_editor(Editor::instance())
 	{
 		if (m_instance == nullptr)
 			m_instance = this;
 	}
 
     App::~App() {
-        if (m_processManager)
-            delete m_processManager;
-        if (m_appView)
-            delete m_appView;
-        if (m_nodeModel)
-            delete m_nodeModel;
+	    delete m_processManager;
+	    delete m_appView;
+	    delete m_nodeModel;
         qDebug() << "~" << "App";
     }
 
@@ -71,11 +80,15 @@ namespace dnai
 	}
 
 	void App::loadFonts()
-	{
-		QFontDatabase::addApplicationFont(":/resources/fonts/Font Awesome 5 Free-Solid-900.otf");
-		QFontDatabase::addApplicationFont(":/resources/fonts/Font Awesome 5 Free-Regular-400.otf");
-		QFontDatabase::addApplicationFont(":/resources/fonts/Font Awesome 5 Brands-Regular-400.otf");
-		QFontDatabase::addApplicationFont(":/resources/fonts/Playball.ttf");
+    {
+        QDirIterator it(":/resources/fonts/", QDirIterator::Subdirectories);
+        while (it.hasNext()) {
+            if (it.fileInfo().isFile())
+            {
+                  QFontDatabase::addApplicationFont(it.filePath());
+            }
+           it.next();
+		}
 	}
 
     void App::loadMainWindow()
@@ -105,9 +118,14 @@ namespace dnai
 		return QGuiApplication::eventFilter(o, event);
 	}
 
-	models::BasicNodeModel* App::basicNodesModel() const
+    models::BasicNodeModel *App::nodes() const
 	{
 		return m_nodeModel;
+	}
+
+    Editor &App::editor() const
+	{
+		return m_editor;
 	}
 
 	QObject* App::createQmlComponent(const QString &path)
@@ -127,19 +145,19 @@ namespace dnai
 		return m_instance;
 	}
 
-    QQmlApplicationEngine const* App::engine() const
+    QQmlApplicationEngine &App::engine()
 	{
-		return &m_engine;
+		return m_engine;
 	}
 
-    AppSettings* App::settings() const
+    AppSettings &App::settings() const
 	{
-		return m_settings;
+        return *m_settings;
 	}
 
-	Session const *App::session() const
+    Session  &App::session()
 	{
-		return &m_session;
+        return m_session;
 	}
 
 	QObject* App::createQmlObject(const QString& path)
@@ -147,18 +165,79 @@ namespace dnai
         return App::currentInstance()->createQmlComponent(path);
 	}
 
-    QQmlEngine* App::getEngineInstance()
+    QQmlEngine *App::getEngineInstance()
 	{
-        return const_cast<QQmlEngine *>(dynamic_cast<const QQmlEngine *>(App::currentInstance()->engine()));
+        return const_cast<QQmlEngine *>(dynamic_cast<const QQmlEngine *>(&App::currentInstance()->engine()));
 	}
 
     views::InstructionView* App::instructionView()
 	{
-		return dynamic_cast<views::InstructionView*>(currentInstance()->appView()->layout()->contextView());
+		return dynamic_cast<views::InstructionView*>(currentInstance()->appView().layout()->contextView());
 	}
 
-    views::AppView* App::appView() const
+    views::AppView &App::appView() const
 	{
-		return m_appView;
+		return *m_appView;
 	}
+#if defined(_WIN32) && defined(_MSC_VER)
+  class CustomHandler : public IWinToastHandler {
+  public:
+      void toastActivated() const {
+          std::wcout << L"The user clicked in this toast" << std::endl;
+      }
+
+      void toastActivated(int actionIndex) const {
+          std::wcout << L"The user clicked on button #" << actionIndex << L" in this toast" << std::endl;
+      }
+
+      void toastFailed() const {
+          std::wcout << L"Error showing current toast" << std::endl;
+      }
+      void toastDismissed(WinToastDismissalReason state) const {
+          switch (state) {
+          case UserCanceled:
+              std::wcout << L"The user dismissed this toast" << std::endl;
+              break;
+          case ApplicationHidden:
+              std::wcout <<  L"The application hid the toast using ToastNotifier.hide()" << std::endl;
+              break;
+          case TimedOut:
+              std::wcout << L"The toast has timed out" << std::endl;
+              break;
+          default:
+              std::wcout << L"Toast not activated" << std::endl;
+              break;
+          }
+      }
+  };
+#endif
+  void App::onBuildStart()
+  {
+#if defined(_WIN32) && defined(_MSC_VER)
+     WinToastTemplate templ = WinToastTemplate(WinToastTemplate::ImageAndText04);
+     templ.setTextField(QString("Build Start at :").toStdWString(), WinToastTemplate::FirstLine);
+     QDateTime dateTime = dateTime.currentDateTime();
+     QString dateTimeString = dateTime.toString("yyyy-MM-dd hh:mm:ss");
+     templ.setTextField(dateTimeString.toStdWString(), WinToastTemplate::SecondLine);
+     templ.setTextField(QString("by Nicolas C").toStdWString(), WinToastTemplate::ThirdLine);
+     templ.setExpiration(10000);
+
+     if (WinToast::instance()->showToast(templ, new CustomHandler()) < 0) {
+         qDebug() << "Error", "Could not launch your toast notification!";
+     }
+#endif
+#if defined(Q_OS_MAC)
+    Toast macToast;
+    macToast.show("DNAI", "Build has start !");
+#endif
+  }
+
+  bool App::isMac()
+  {
+#if defined(Q_OS_MAC)
+    return true;
+#else
+      return false;
+#endif
+  }
 }

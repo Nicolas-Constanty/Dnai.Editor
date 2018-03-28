@@ -2,7 +2,7 @@
 #define DECLARATIONVIEW_H
 
 #include "contextview.h"
-#include "dnai/models/declarationmodel.h"
+#include "dnai/models/entity.h"
 
 namespace dnai
 {
@@ -11,16 +11,16 @@ namespace dnai
 		class DeclarationView : public ContextView
 		{
 			Q_OBJECT
-            Q_PROPERTY(dnai::models::DeclarationModel *contextModel READ contextModel WRITE setContextModel NOTIFY contextModelChanged)
+            Q_PROPERTY(dnai::models::Entity *contextModel READ contextModel WRITE setContextModel NOTIFY contextModelChanged)
 		public:
             explicit DeclarationView(QQuickItem *parent = nullptr);
 
         signals:
-            void contextModelChanged(dnai::models::DeclarationModel *model);
+            void contextModelChanged(dnai::models::Entity *model);
 
         public:
-            dnai::models::DeclarationModel *contextModel() const;
-            void setContextModel(dnai::models::DeclarationModel *model);
+            dnai::models::Entity *contextModel() const;
+            void setContextModel(dnai::models::Entity *model);
 		};
 	}
 }

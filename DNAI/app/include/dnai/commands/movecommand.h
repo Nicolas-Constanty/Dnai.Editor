@@ -13,18 +13,10 @@ namespace dnai
 		public:
             MoveCommand(QQuickItem* w, const QPointF& vec, bool save = false);
 
-			/**
-			* \brief Execute the command
-			*/
-			void execute() const override;
-			void executeSave() override;
-
-			/**
-			* \brief Reverse the command
-			*/
-			void unExcute() const override;
-
-			QString infos() const override;
+			virtual void execute() const override;
+			virtual void executeSave() override;
+			virtual void unExcute() const override;
+			virtual QString infos() const override;
 
 		private:
 			QQuickItem* m_w;

@@ -4,7 +4,7 @@
 #include <QDebug>
 #include <QObject>
 #include "include/clientcommunication.h"
-#include "dnai/models/context.h"
+//#include "dnai/models/context.h"
 
 #include "datacomeventfactory.h"
 
@@ -54,11 +54,11 @@ public slots:
         DataComEventFactory::DataComEvent data;
 
        if (i % 3 == 0) {
-            data = eventController.createDeclare(PackageDataCom::ENTITYCORE::CONTEXT_D, 0, "HELLOL", PackageDataCom::VISIBILITYCORE::PRIVATE);
+            data = eventController.createDeclare(PackageDataCom::ENTITY_CORE::CONTEXT_D, 0, "HELLOL", PackageDataCom::VISIBILITYCORE::PRIVATE);
         } else if (i % 3 == 1) {
-            data = eventController.createDeclare(PackageDataCom::ENTITYCORE::VARIABLE, 0, "POLOLOLOLOL", PackageDataCom::VISIBILITYCORE::PRIVATE);
+            data = eventController.createDeclare(PackageDataCom::ENTITY_CORE::VARIABLE, 0, "POLOLOLOLOL", PackageDataCom::VISIBILITYCORE::PRIVATE);
         } else {
-            data = eventController.createDeclare(PackageDataCom::ENTITYCORE::FUNCTION, 0, "1", PackageDataCom::VISIBILITYCORE::PUBLIC);
+            data = eventController.createDeclare(PackageDataCom::ENTITY_CORE::FUNCTION, 0, "1", PackageDataCom::VISIBILITYCORE::PUBLIC);
         }
 
         ++i;

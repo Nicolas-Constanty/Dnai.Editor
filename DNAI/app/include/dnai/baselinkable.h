@@ -2,10 +2,10 @@
 #define BASELINKABLE_H
 
 #include <QQuickItem>
-#include "ilinkable.h"
+#include "dnai/interfaces/ilinkable.h"
 
 namespace dnai {
-	class BaseLinkable : public ALinkable
+    class BaseLinkable : public interfaces::ALinkable
 	{
 	public:
 		explicit BaseLinkable(QQuickItem *parent);
@@ -17,13 +17,13 @@ namespace dnai {
 		* \param curve
 		* \return Link *
 		*/
-        virtual Link *connect(ALinkable *linkable, views::BezierCurve *curve) override;
+        virtual Link *connect(interfaces::ALinkable *linkable, views::BezierCurve *curve) override;
 
 		/**
 		* \brief Break a link between linkable
 		* \param linkable
 		*/
-		virtual void unlink(ALinkable *linkable) override;
+        virtual void unlink(interfaces::ALinkable *linkable) override;
 
 		/**
 		* \brief Break all the links between linkable
@@ -53,7 +53,7 @@ namespace dnai {
 		* \param linkable
 		* \return Link *
 		*/
-		Link *getLink(ALinkable *linkable) const override;
+        Link *getLink(interfaces::ALinkable *linkable) const override;
 
 		QQuickItem *parent() const { return m_parent; }
 

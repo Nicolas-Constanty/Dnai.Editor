@@ -1,7 +1,7 @@
 #ifndef LINK_H
 #define LINK_H
 
-#include "ilinkable.h"
+#include "dnai/interfaces/ilinkable.h"
 
 namespace dnai
 {
@@ -9,11 +9,11 @@ namespace dnai
 	{
 	public:
 
-		ALinkable *L1;
-		ALinkable *L2;
+        interfaces::ALinkable *L1;
+        interfaces::ALinkable *L2;
 
 	public:
-		Link(ALinkable *l1, ALinkable *l2);
+        Link(interfaces::ALinkable *l1, interfaces::ALinkable *l2);
 		~Link();
 		/**
 		* \brief Assign the visual object to the link

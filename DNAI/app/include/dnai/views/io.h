@@ -8,20 +8,20 @@
 #include "beziercurve.h"
 #include "genericnode.h"
 #include "linkablebezieritem.h"
-#include "iscalable.h"
+#include "dnai/interfaces/iscalable.h"
 
-#include "dnai/qmlresources/iotype.h"
+#include "dnai/enums/iotype.h"
 
 namespace dnai
 {
 	namespace views
 	{
-		class Io : public LinkableBezierItem, public IScalable
+        class Io : public LinkableBezierItem, public interfaces::IScalable
 		{
 			Q_OBJECT
 
 			Q_PROPERTY(uint nbSegments READ nbSegments WRITE setNbSegments NOTIFY nbSegmentsChanged)
-            Q_PROPERTY(dnai::qmlresources::IoTypeRessouce::IoType type READ type WRITE setType NOTIFY typeChanged)
+            Q_PROPERTY(dnai::enums::IoTypeRessouce::IoType type READ type WRITE setType NOTIFY typeChanged)
 
 		public:
 			static BaseIo *CurrentHover;
@@ -58,20 +58,20 @@ namespace dnai
 
 		public:
 			uint nbSegments() const { return m_nbSegments; }
-            qmlresources::IoTypeRessouce::IoType type() const { return m_type; }
+            enums::IoTypeRessouce::IoType type() const { return m_type; }
 
 		public:
 			void setNbSegments(uint n);
-            void setType(qmlresources::IoTypeRessouce::IoType type);
+            void setType(enums::IoTypeRessouce::IoType type);
 
 		signals:
 			void nbSegmentsChanged(uint n);
-            void typeChanged(qmlresources::IoTypeRessouce::IoType type);
+            void typeChanged(enums::IoTypeRessouce::IoType type);
 
 		protected:
 			uint m_nbSegments;
 
-            qmlresources::IoTypeRessouce::IoType m_type;
+            enums::IoTypeRessouce::IoType m_type;
 
 		protected:
 			bool m_holdClick;

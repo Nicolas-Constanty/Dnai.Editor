@@ -18,7 +18,7 @@ RowLayout {
         id: fileDialog
         title: "Please choose a project"
         selectMultiple: true
-        nameFilters: ["DNAI project (*.dnaiproject)"]
+        nameFilters: ["DNAI project (*.dnaisolution)"]
     }
 
     ListModel {

@@ -4,11 +4,15 @@ import QtGraphicalEffects 1.0
 
 import DNAI 1.0
 import DNAI.Models 1.0
+import DNAI.Enums 1.0
 import "../Style"
+import "../JavaScript/CreateComponent.js" as Factory
 
 Rectangle {
     id: _itemview
     property alias isSelected: _selectButton.checked
+    property Item tparent: null
+
     implicitHeight: 40
     width: parent.parent.width
     height: 40
@@ -16,7 +20,7 @@ Rectangle {
     MouseArea {
         anchors.fill: parent;
         onClicked: {
-            Manager.views.updatePropertyPanelModel(item)
+//            Manager.views.updatePropertyPanelModel(item)
         }
     }
 
@@ -103,7 +107,7 @@ Rectangle {
         implicitWidth: parent.width * 0.04
         indicator: Rectangle {
             anchors.fill: _selectButton
-            color: (model.item.type === 0) ? "#00897B" : (model.item.type === 1) ? "#039BE5" : (model.item.type === 2) ? "#8E24AA" : "#FB8C00"
+            color: (modelData.entityType === Core.CONTEXT) ? "#00897B" : (modelData.entityType === Core.OBJECT_TYPE) ?  "#039BE5" : (modelData.entityType === Core.FUNCTION) ? "#8E24AA" : "#FB8C00"
             FontAwesomeText {
                 anchors.fill: parent
                 text: "\uf00c"
@@ -180,7 +184,12 @@ Rectangle {
         }
 
         onCheckStateChanged: {
-            model.item.select(_selectButton.checked)
+            if (tparent.selectedItems.indexOf(modelData) === -1)
+            {
+                tparent.selectedItems.push(modelData)
+            }
+            else
+                tparent.selectedItems.pop(modelData)
             if (_selectButton.checked)
             {
                 _itemview.parent.parent.selectInfo.selectCount += 1
@@ -201,7 +210,7 @@ Rectangle {
     }
     FontAwesomeButton {
         id: _openbutton
-        visible: model.item.type < 3
+        visible: modelData.entityType !== Core.VARIABLE
 
         anchors.right: _itemview.right
         anchors.top: _itemview.top
@@ -231,7 +240,22 @@ Rectangle {
             source: _openbutton.label
         }
         onPressed: {
-            Manager.views.treeView().changeCurrentFromModel(model.item)
+            if (modelData.entityType === Core.FUNCTION)
+            {
+                var tab = Editor.selectedView()
+                var model = modelData
+                var res = tab.getViewFromModel(model)
+                if (res === undefined || res === null)
+                {
+                    var view = tab.addView("resources/Components/NodeCanvas.qml",
+                                {}, modelData.name)
+                    tab.appendModel(modelData, view)
+                }
+                else
+                {
+                    tab.selectIndex(res)
+                }
+            }
         }
     }
     Item {
@@ -247,7 +271,7 @@ Rectangle {
             anchors.top: parent.top
             anchors.left: parent.left
             anchors.right: parent.right
-            text: model.item.name
+            text: modelData.name
             horizontalAlignment: Qt.AlignLeft
             height: _itemview.implicitHeight
             clip: true
@@ -258,7 +282,7 @@ Rectangle {
             anchors.left: parent.left
             anchors.right: parent.right
             visible: _expandbutton.state === "Expand"
-            text: qsTr(model.item.description)
+            text: qsTr(modelData.description)
             color: AppSettings.style.text.color
             wrapMode: TextEdit.WordWrap
             selectByMouse: true

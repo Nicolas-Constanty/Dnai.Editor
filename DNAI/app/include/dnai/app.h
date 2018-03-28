@@ -9,26 +9,30 @@
 #include "views/appview.h"
 #include "views/instructionview.h"
 #include "models/basicnodemodel.h"
-#include "iloadingclass.h"
+#include "dnai/interfaces/iloadingclass.h"
 #include "session.h"
+#include "editor.h"
 
 namespace dnai {
-    class App : public QGuiApplication, public ILoadingClass
+    class App : public QGuiApplication, public interfaces::ILoadingClass
     {
-        Q_OBJECT
+		Q_OBJECT
     public:
         App(int & argc, char **argv);
-        ~App();
+		~App();
 
         void loadMainWindow();
+		void initProcessManager();
 	    bool eventFilter(QObject* o, QEvent* event) override;
-		models::BasicNodeModel *basicNodesModel() const;
-        void registerSettings(AppSettings* appSetting);
-		QQmlApplicationEngine const* engine() const;
-        AppSettings* settings() const;
-		Session const * session() const;
-	    views::AppView *appView() const;
-        void initProcessManager();
+        void registerSettings(AppSettings* appSettings);
+
+    public:
+        Session &session();
+        AppSettings &settings() const;
+        views::AppView &appView() const;
+	    QQmlApplicationEngine &engine();
+        models::BasicNodeModel *nodes() const;
+        Editor &editor() const;
 
     public:
         static void loadFonts();
@@ -37,14 +41,18 @@ namespace dnai {
         static QQmlEngine *getEngineInstance();
 		static views::InstructionView *instructionView();
 
+        Q_INVOKABLE void onBuildStart();
+        Q_INVOKABLE bool isMac();
+
     private:
         QQmlApplicationEngine m_engine;
         AppSettings *m_settings;
         ProcessManager* m_processManager;
 	    views::AppView* m_appView;
-		models::BasicNodeModel *m_nodeModel;
+        models::BasicNodeModel *m_nodeModel;
 	    Session m_session;
 	    static App *m_instance;
+        Editor &m_editor;
 
         QObject *createQmlComponent(const QString &path);
 	    static void setupSettings();

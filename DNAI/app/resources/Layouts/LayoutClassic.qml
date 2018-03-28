@@ -166,7 +166,7 @@ LayoutView {
     }
 
     Component.onCompleted: {
-        Manager.setAppViewLayout(_layout)
+//        Manager.setAppViewLayout(_layout)
     }
 }
 //BaseLayout {

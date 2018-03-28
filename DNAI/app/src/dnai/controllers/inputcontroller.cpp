@@ -8,7 +8,7 @@ namespace dnai
 {
 	namespace controllers
 	{
-        InputController::InputController(qmlresources::IoTypeRessouce::IoType t, QQuickItem *parent)
+        InputController::InputController(enums::IoTypeRessouce::IoType t, QQuickItem *parent)
 			: BaseIo(t, parent)
 		{
 		}

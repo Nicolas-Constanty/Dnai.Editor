@@ -10,7 +10,7 @@ namespace dnai
 		class InputController : public BaseIo
 		{
         public:
-            explicit InputController(qmlresources::IoTypeRessouce::IoType t, QQuickItem *parent);
+            explicit InputController(enums::IoTypeRessouce::IoType t, QQuickItem *parent);
 
 			/**
 			* \brief Connect linkable together, create a link, and keep a reference on the visual curve

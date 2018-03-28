@@ -80,7 +80,7 @@ namespace dnai
 		}
 
 		// EVENT TO SEND
-		void ClientController::sendDeclareEvent(PackageDataCom::ENTITYCORE entity_type,
+        void ClientController::sendDeclareEvent(PackageDataCom::ENTITY_CORE entity_type,
 			uint32_t containerID,
 			QString const &name,
 			PackageDataCom::VISIBILITYCORE visibility) {
@@ -90,7 +90,7 @@ namespace dnai
 			m_clientCom->sendEvent(DECLARE_EVENT_NAME, data.data, data.size);
 		}
 
-		void ClientController::sendRemoveEvent(PackageDataCom::ENTITYCORE entity_type,
+        void ClientController::sendRemoveEvent(PackageDataCom::ENTITY_CORE entity_type,
 			uint32_t containerID,
 			QString const &name) {
 			DataComEventFactory::DataComEvent data;
@@ -100,7 +100,7 @@ namespace dnai
 		}
 
 
-		void ClientController::sendMoveEvent(PackageDataCom::ENTITYCORE entity_type,
+        void ClientController::sendMoveEvent(PackageDataCom::ENTITY_CORE entity_type,
 			uint32_t fromID,
 			uint32_t toID,
 			QString const &name) {
@@ -111,7 +111,7 @@ namespace dnai
 
 		}
 
-		void ClientController::sendChangeVisibilityEvent(PackageDataCom::ENTITYCORE entity_type,
+        void ClientController::sendChangeVisibilityEvent(PackageDataCom::ENTITY_CORE entity_type,
 			uint32_t containerID,
 			QString const &name,
 			PackageDataCom::VISIBILITYCORE visibility) {

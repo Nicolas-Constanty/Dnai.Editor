@@ -9,7 +9,6 @@ class Session : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(dnai::models::User *user READ user WRITE setUser NOTIFY userChanged)
-    Q_PROPERTY(void errors NOTIFY apiErrors CONSTANT)
 
 public:
 	explicit Session(QObject * parent = nullptr);

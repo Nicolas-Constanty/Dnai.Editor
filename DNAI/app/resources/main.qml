@@ -9,7 +9,7 @@ import DNAI 1.0
 
 import "JavaScript/CreateComponent.js" as Factory
 import "Layouts"
-import "Components"
+import "Views"
 import "Nodes"
 import "Nodes/Operator"
 import "Nodes/Operator/BinaryOperator"
@@ -40,7 +40,7 @@ Window {
 
     Loader {
         id: loader
-        asynchronous: true//!Manager.isMac()
+        asynchronous: true
         visible: status == Loader.Ready
         sourceComponent: AppSettings.isSettingsLoad() ? _mainWindow : _selectTheme
     }

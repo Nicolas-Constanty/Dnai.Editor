@@ -9,13 +9,13 @@ namespace dnai
 {
 	namespace views
 	{
-        FlowBackend::FlowBackend(qmlresources::FlowTypeRessouce::FlowType t, QQuickItem* parent) :
+        FlowBackend::FlowBackend(enums::FlowTypeRessouce::FlowType t, QQuickItem* parent) :
 			BaseLinkable(parent),
             m_typeFlow(t)
 		{
 		}
 
-        qmlresources::FlowTypeRessouce::FlowType FlowBackend::getType() const
+        enums::FlowTypeRessouce::FlowType FlowBackend::getType() const
 		{
             return m_typeFlow;
 		}
@@ -36,7 +36,7 @@ namespace dnai
 
 		Flow::Flow(QQuickItem* parent) :
 			LinkableBezierItem(parent)
-            , m_typeFlow(qmlresources::FlowTypeRessouce::FlowType::Enter)
+            , m_typeFlow(enums::FlowTypeRessouce::FlowType::Enter)
 		{
 			setFlag(ItemHasContents, true);
 			m_radius = 8;
@@ -145,7 +145,7 @@ namespace dnai
 			return node;
 		}
 
-        void Flow::setTypeFlow(qmlresources::FlowTypeRessouce::FlowType t)
+        void Flow::setTypeFlow(enums::FlowTypeRessouce::FlowType t)
 		{
             if (t == m_typeFlow && m_linkable != nullptr)
 				return;
@@ -174,9 +174,9 @@ namespace dnai
 
 		LinkableBezierItem* Flow::findLinkableBezierItem(GenericNode* n, const QPointF&p)
 		{
-            if (m_typeFlow == qmlresources::FlowTypeRessouce::FlowType::Exit && n->flowInItem()->contains(p - n->flowInItem()->position()))
+            if (m_typeFlow == enums::FlowTypeRessouce::FlowType::Exit && n->flowInItem()->contains(p - n->flowInItem()->position()))
 				return n->flowInItem();
-            else if (m_typeFlow == qmlresources::FlowTypeRessouce::FlowType::Enter && n->flowOutItem()->contains(p - n->flowOutItem()->position()))
+            else if (m_typeFlow == enums::FlowTypeRessouce::FlowType::Enter && n->flowOutItem()->contains(p - n->flowOutItem()->position()))
 				return n->flowOutItem();
 			return nullptr;
 		}

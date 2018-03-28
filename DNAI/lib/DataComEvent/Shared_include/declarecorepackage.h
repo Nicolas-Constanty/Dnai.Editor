@@ -6,7 +6,7 @@
 
 PACKED(
 struct DeclareCorePackageInterface {
-    PackageDataCom::ENTITYCORE entityType;
+    PackageDataCom::ENTITY_CORE entityType;
     qint32 containerID;
     qint32 p_sizeName;
     PackageDataCom::VISIBILITYCORE visibility;
@@ -14,14 +14,14 @@ struct DeclareCorePackageInterface {
 );
 
 typedef struct DeclareCorePackage {
-    PackageDataCom::ENTITYCORE entityType;
+    PackageDataCom::ENTITY_CORE entityType;
     qint32 containerID;
     QString name;
     PackageDataCom::VISIBILITYCORE visibility;
 } DeclareCorePackage;
 
 typedef struct EntityDeclareCorePackage {
-    PackageDataCom::ENTITYCORE entityType;
+    PackageDataCom::ENTITY_CORE entityType;
     qint32 containerID;
     QString name;
     PackageDataCom::VISIBILITYCORE visibility;

@@ -5,7 +5,7 @@ namespace dnai
 {
 	namespace controllers
 	{
-        OutputController::OutputController(qmlresources::IoTypeRessouce::IoType type, QQuickItem* parent)
+        OutputController::OutputController(enums::IoTypeRessouce::IoType type, QQuickItem* parent)
 			: BaseIo(type, parent)
 		{
 		}

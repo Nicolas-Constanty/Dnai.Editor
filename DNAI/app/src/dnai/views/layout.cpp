@@ -3,9 +3,9 @@
 
 dnai::views::Layout::Layout(QQuickItem* parent) : QQuickItem(parent), m_context(nullptr)
 {
-	const auto app = App::currentInstance();
-	if (app->appView() != nullptr && app->appView()->layout() == nullptr)
-        app->appView()->setLayout(this);
+//	const auto app = App::currentInstance();
+//	if (app->appView() != nullptr && app->appView()->layout() == nullptr)
+//        app->appView()->setLayout(this);
 }
 
 dnai::views::Layout::~Layout()

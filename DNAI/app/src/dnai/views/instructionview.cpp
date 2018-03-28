@@ -1,23 +1,28 @@
 #include "dnai/views/instructionview.h"
 
-dnai::views::InstructionView::InstructionView(QQuickItem* parent) : ContextView("qrc:/resources/Components/NodeCanvas.qml", parent)
-{
+namespace dnai {
+    namespace views {
+        InstructionView::InstructionView(QQuickItem* parent) : ContextView("qrc:/resources/Components/NodeCanvas.qml", parent)
+        {
+        }
+
+        CanvasNode* InstructionView::canvas() const
+        {
+            return dynamic_cast<CanvasNode*>(getView());
+        }
+
+//        models::gui::declarable::Function* InstructionView::instructionModel() const
+//        {
+//            return dynamic_cast<models::gui::declarable::Function *>(getModel("instructionModel"));
+//        }
+
+//        void InstructionView::setInstructionModel(models::gui::declarable::Function* model)
+//        {
+//            if (instructionModel() == model)
+//                return;
+////            addModel(static_cast<QObject*>(model), "instructionModel");
+//            instructionModelChanged(model);
+//        }
+    }
 }
 
-dnai::views::CanvasNode* dnai::views::InstructionView::canvas() const
-{
-	return dynamic_cast<CanvasNode*>(getView());
-}
-
-dnai::models::Function* dnai::views::InstructionView::instructionModel() const
-{
-	return dynamic_cast<dnai::models::Function *>(getModel("instructionModel"));
-}
-
-void dnai::views::InstructionView::setInstructionModel(dnai::models::Function* model)
-{
-	if (instructionModel() == model)
-		return;
-	addModel(static_cast<QObject*>(model), "instructionModel");
-	instructionModelChanged(model);
-}

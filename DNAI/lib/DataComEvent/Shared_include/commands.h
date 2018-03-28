@@ -11,7 +11,7 @@ namespace Command {
 
     namespace Declare {
         using Data = Object<
-            Scalar<PackageDataCom::ENTITYCORE>,
+            Scalar<PackageDataCom::ENTITY_CORE>,
             Scalar<uint32_t>,
             Scalar<QString>,
             Scalar<PackageDataCom::VISIBILITYCORE>

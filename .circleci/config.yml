@@ -2,18 +2,18 @@ version: 2
 jobs:
   build:
     docker:
-      - image: babiole/xenial_qt5_9_4:v1
+      - image: babiole/xenial_qt5_10:v1
     steps:
       - checkout
       - run:
           name: init_qt_variables
           command: |
-            QTDIR="/opt/qt59";
+            QTDIR="/opt/qt510";
             PATH="$QTDIR/bin:$PATH";
       - run:
           name: compile
           command: |
-            export CMAKE_PREFIX_PATH=/opt/qt59/lib/cmake
+            export CMAKE_PREFIX_PATH=/opt/qt510/lib/cmake
             chmod +x ./scripts/build.sh
             ./scripts/build.sh
 

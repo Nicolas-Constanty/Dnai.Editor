@@ -1,16 +1,20 @@
 import QtQuick 2.9
 import QtQuick.Controls 2.2
 import DNAI 1.0
+import QtGraphicalEffects 1.0
 
 import "../Style"
 
 Rectangle {
     id: _panel
     property alias header: _header
+    property alias titleobj: _title
     property bool expended: true
-    property string title: Title
+    property string title: "Title"
     property alias panel: _panel
+    property alias control: _control
     default property alias _contentChildren: _content.data
+    property real initialheight: 40
 
     border.color: AppSettings.style.border.color
     border.width: AppSettings.style.border.width
@@ -33,26 +37,30 @@ Rectangle {
             text: qsTr(_panel.title)
             horizontalAlignment: Text.AlignLeft
             anchors.left: parent.left
-            anchors.leftMargin: 5
-            anchors.right: control.left
+            anchors.leftMargin: 15
+            anchors.verticalCenter: parent.verticalCenter
         }
-        MButton {
-            id: control
-            text: _panel.state == "Visible" ? "\u2BC6" : "\u2BC7"
+        FontAwesomeTextSolid {
+            id: _branch
+            text:  "\u2BC6"
             anchors.right: parent.right
-            anchors.rightMargin: 5
-            anchors.top: _header.top
-            anchors.bottom: _header.bottom
-            background: Rectangle {
-                anchors.bottom: parent.bottom
-                anchors.top: parent.top
-                color: control.pressed ? AppSettings.style.background.darkColor : control.hovered ? AppSettings.style.background.lightColor : AppSettings.style.background.color
-            }
+            anchors.rightMargin: 15
+            anchors.verticalCenterOffset: -2
+            anchors.verticalCenter: parent.verticalCenter
+        }
+
+        MouseArea {
+            id: _control
+            property bool selected: false
+            anchors.fill: parent
             onClicked: {
-                if (_panel.state == "Visible")
-                    _panel.state = "Invisible"
-                else
-                    _panel.state = "Visible"
+                if (selected)
+                {
+                    if (_panel.state == "Visible")
+                        _panel.state = "Invisible"
+                    else
+                        _panel.state = "Visible"
+                }
             }
         }
     }
@@ -63,6 +71,7 @@ Rectangle {
         anchors.bottom: parent.bottom
         anchors.left: parent.left
         anchors.right: parent.right
+        anchors.topMargin: 5
         anchors.leftMargin: AppSettings.style.border.width
         anchors.rightMargin: AppSettings.style.border.width
         anchors.bottomMargin: AppSettings.style.border.width
@@ -71,11 +80,13 @@ Rectangle {
     states: [
         State{
             name: "Visible"
-            PropertyChanges{ target: _panel; height: (parent.height - 6 * (parent.children.length -1)) / (parent.children.length) }
+            PropertyChanges{ target: _panel; height: initialheight }
+            PropertyChanges{ target: _branch; rotation: 0 }
         },
         State{
             name:"Invisible"
             PropertyChanges{ target: _panel; height: _header.height + border.width * 2 }
+            PropertyChanges{ target: _branch; rotation: 90 }
         }
     ]
     state: "Visible"
@@ -84,25 +95,33 @@ Rectangle {
             from: "Visible"
             to: "Invisible"
 
-            SequentialAnimation{
-               NumberAnimation {
-                   target: _panel
-                   property: "height"
-                   duration: 500
-                   easing.type: Easing.InOutQuad
-               }
-            }
+           NumberAnimation {
+               target: _panel
+               property: "height"
+               duration: 200
+               easing.type: Easing.InOutQuad
+           }
+           NumberAnimation {
+               target: _branch
+               property: "rotation"
+               duration: 200
+               easing.type: Easing.InOutQuad
+           }
         },
         Transition {
             from: "Invisible"
             to: "Visible"
-            SequentialAnimation{
-               NumberAnimation {
-                   target: _panel
-                   property: "height"
-                   duration: 500
-                   easing.type: Easing.InOutQuad
-               }
+            NumberAnimation {
+               target: _panel
+               property: "height"
+               duration: 200
+               easing.type: Easing.InOutQuad
+            }
+            NumberAnimation {
+               target: _branch
+               property: "rotation"
+               duration: 200
+               easing.type: Easing.InOutQuad
             }
         }
     ]

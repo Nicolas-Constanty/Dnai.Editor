@@ -5,13 +5,17 @@
 
 namespace dnai {
     namespace commands {
-        class CommandDecorator : public ICommand
+        class CommandDecorator : public interfaces::ICommand
         {
         protected:
-            ICommand *m_decoratedCommand;
+            interfaces::ICommand *m_decoratedCommand;
 
         public:
-            explicit CommandDecorator(ICommand *decoratedCommand);
+	        /**
+             * \brief Allow to add new comportement feature on the decoratedCommand
+             * \param decoratedCommand 
+             */
+            explicit CommandDecorator(interfaces::ICommand *decoratedCommand);
         };
     }
 }

@@ -11,18 +11,13 @@ namespace dnai
 		public:
 			explicit DebugDecorator(ICommand *decoratedCommand);
 
-			/**
-			* \brief Execute the command
-			*/
-			void execute() const override;
-			void executeSave() override;
-			bool isSave() const override;
-			/**
-			* \brief Reverse the command
-			*/
-			void unExcute() const override;
-	
-			QString infos() const override;
+			//Override ICommand functions
+		public:
+			virtual void execute() const override;
+			virtual void executeSave() override;
+			virtual void unExcute() const override;
+			virtual bool isSave() const override;
+			virtual QString infos() const override;
 
 		};
 

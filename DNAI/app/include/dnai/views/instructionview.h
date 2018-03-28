@@ -2,29 +2,29 @@
 #define INSTRUCTIONVIEW_H
 
 #include "contextview.h"
-#include "dnai/models/function.h"
 #include "canvasnode.h"
+
 
 namespace dnai
 {
-	namespace views
-	{
-		class InstructionView : public dnai::views::ContextView
-		{
+    namespace views
+    {
+        class InstructionView : public dnai::views::ContextView
+        {
             Q_OBJECT
-            Q_PROPERTY(dnai::models::Function *instructionModel READ instructionModel WRITE setInstructionModel NOTIFY instructionModelChanged)
-		public:
+//            Q_PROPERTY(dnai::models::gui::declarable::Function *instructionModel READ instructionModel WRITE setInstructionModel NOTIFY instructionModelChanged)
+        public:
             explicit InstructionView(QQuickItem *parent = nullptr);
 
-			CanvasNode *canvas() const;
-        signals:
-            dnai::models::Function *instructionModelChanged(dnai::models::Function *model);
+            CanvasNode *canvas() const;
+//        signals:
+//			models::gui::declarable::Function *instructionModelChanged(models::gui::declarable::Function *model);
 
         public:
-            dnai::models::Function *instructionModel() const;
-            void setInstructionModel(dnai::models::Function *model);
-		};
-	}
+//            models::gui::declarable::Function *instructionModel() const;
+//            void setInstructionModel(models::gui::declarable::Function *model);
+        };
+    }
 }
 
 #endif // INSTRUCTIONVIEW_H

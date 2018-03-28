@@ -22,7 +22,7 @@ namespace dnai
 			delete m_bezierCurve;
 	}
 
-	Link::Link(ALinkable *l1, ALinkable *l2) : m_bezierCurve(nullptr)
+    Link::Link(interfaces::ALinkable *l1, interfaces::ALinkable *l2) : m_bezierCurve(nullptr)
 	{
 		if (l1 == l2)
 			std::runtime_error("L1 and L2 cannot be the same object!");

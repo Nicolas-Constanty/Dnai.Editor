@@ -1,0 +1,154 @@
+{
+  "name": "Plus or Minus",
+  "description": "Create min/max IA",
+  "entities": [
+    {
+      "columns": [
+        {
+          "name": "null",
+          "listIndex": "{00000000-0000-0000-0000-000000000000}"
+        }
+      ],
+      "name": "class1",
+      "type": 5,
+      "index": 0,
+      "listIndex": "{00000000-0000-0000-0000-000000000000}",
+      "position": {
+        "x": 10,
+        "y": 10
+      },
+      "description": "je suis une classe"
+    },
+    {
+      "columns": [
+        {
+          "name": "null",
+          "listIndex": "{00000000-0000-0000-0000-000000000000}"
+        }
+      ],
+      "name": "context1",
+      "type": 0,
+      "description": "cc",
+      "index": 0,
+      "listIndex": "{00000000-0000-0000-0000-000000000000}",
+      "position": {
+        "x": 100,
+        "y": 10
+      },
+      "entities": [
+        {
+          "columns": [
+            {
+              "name": "null",
+              "listIndex": "{00000000-0000-0000-0000-000000000000}"
+            }
+          ],
+          "name": "context1.1",
+          "type": 0,
+          "description": "cc",
+          "index": 0,
+          "listIndex": "{00000000-0000-0000-0000-000000000000}",
+          "entities": [
+            {
+              "columns": [
+                {
+                  "name": "null",
+                  "listIndex": "{00000000-0000-0000-0000-000000000000}"
+                }
+              ],
+              "name": "class1.1",
+              "index": 0,
+              "type": 5,
+              "listIndex": "{00000000-0000-0000-0000-000000000000}",
+              "position": {
+                "x": 10,
+                "y": 10
+              },
+              "description": "je suis une classe",
+              "entities": [
+                {
+                  "columns": [
+                    {
+                      "name": "null",
+                      "listIndex": "{00000000-0000-0000-0000-000000000000}"
+                    }
+                  ],
+                  "name": "func1vraimenttreslonguepourtesterlascrollbarautomatique",
+                  "type": 2,
+                  "index": 0,
+                  "listIndex": "{00000000-0000-0000-0000-000000000000}"
+                },
+                {
+                  "columns": [
+                    {
+                      "name": "null",
+                      "listIndex": "{00000000-0000-0000-0000-000000000000}"
+                    }
+                  ],
+                  "name": "func2",
+                  "type": 2,
+                  "index": 1,
+                  "listIndex": "{00000000-0000-0000-0000-000000000000}"
+                }
+              ]
+            }
+          ],
+          "position": {
+            "x": 100,
+            "y": 10
+          }
+        },
+
+        {
+          "columns": [
+            {
+              "name": "null",
+              "listIndex": "{00000000-0000-0000-0000-000000000000}"
+            }
+          ],
+          "name": "context1.2",
+          "type": 0,
+          "description": "cvgdgs",
+          "index": 0,
+          "listIndex": "{00000000-0000-0000-0000-000000000000}",
+          "position": {
+            "x": 200,
+            "y": 10
+          }
+        }
+      ]
+    },
+    {
+      "columns": [
+        {
+          "name": "null",
+          "listIndex": "{00000000-0000-0000-0000-000000000000}"
+        }
+      ],
+      "name": "context2",
+      "type": 0,
+      "description": "cvgdgs",
+      "index": 0,
+      "listIndex": "{00000000-0000-0000-0000-000000000000}",
+      "position": {
+        "x": 200,
+        "y": 10
+      }
+    },
+    {
+      "columns": [
+        {
+          "name": "null",
+          "listIndex": "{00000000-0000-0000-0000-000000000000}"
+        }
+      ],
+      "name": "variable1",
+      "type": 1,
+      "description": "je suis une variable",
+      "position": {
+        "x": 10,
+        "y": 100
+      }
+    }
+  ]
+}

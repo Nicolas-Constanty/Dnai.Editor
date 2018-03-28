@@ -45,7 +45,7 @@ void DataComEventFactory::memcpySerializeDataCom(void *dest, void **src, size_t 
     (*src) = static_cast<char*>(*src) + size;
 }
 
-DataComEventFactory::DataComEvent DataComEventFactory::createDeclare(PackageDataCom::ENTITYCORE entity_type,
+DataComEventFactory::DataComEvent DataComEventFactory::createDeclare(PackageDataCom::ENTITY_CORE entity_type,
                                                  uint32_t containerID,
                                                  QString const &name,
                                                  PackageDataCom::VISIBILITYCORE visibility) {
@@ -99,7 +99,7 @@ void *DataComEventFactory::serializeEntityDeclare(void *data, unsigned int size)
     return declare;
 }
 
-DataComEventFactory::DataComEvent DataComEventFactory::createRemove(PackageDataCom::ENTITYCORE entity_type,
+DataComEventFactory::DataComEvent DataComEventFactory::createRemove(PackageDataCom::ENTITY_CORE entity_type,
                                                                     uint32_t containerID,
                                                                     QString const &name) {
   /*  Remove remove;
@@ -112,7 +112,7 @@ DataComEventFactory::DataComEvent DataComEventFactory::createRemove(PackageDataC
 }
 
 
-DataComEventFactory::DataComEvent DataComEventFactory::createMove(PackageDataCom::ENTITYCORE entity_type,
+DataComEventFactory::DataComEvent DataComEventFactory::createMove(PackageDataCom::ENTITY_CORE entity_type,
                        uint32_t fromID,
                        uint32_t toID,
                        QString const &name) {
@@ -126,7 +126,7 @@ DataComEventFactory::DataComEvent DataComEventFactory::createMove(PackageDataCom
     return (createDataComEvent(3));
 }
 
-DataComEventFactory::DataComEvent DataComEventFactory::createChangeVisibility(PackageDataCom::ENTITYCORE entity_type,
+DataComEventFactory::DataComEvent DataComEventFactory::createChangeVisibility(PackageDataCom::ENTITY_CORE entity_type,
                                     uint32_t containerID,
                                     QString const &name,
                                     PackageDataCom::VISIBILITYCORE visibility) {

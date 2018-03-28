@@ -1,14 +1,16 @@
-#ifndef ENTITIESFACTORY_H
-#define ENTITIESFACTORY_H
+#ifndef DNAI_ENTITIESFACTORY_H
+#define DNAI_ENTITIESFACTORY_H
 
-#include "dnai/controllers/icontroller.h"
-#include "ifactory.h"
-#include "qmlresources/instructionid.h"
+#include "dnai/interfaces/icontroller.h"
+#include "dnai/interfaces/ifactory.h"
+#include "enums/core/instructionid.h"
 
-class EntitiesFactory : public IFactory<dnai::controllers::IController, dnai::qmlresources::QInstructionID::Instruction_ID>
-{
-public:
-	EntitiesFactory() = default;
-};
+namespace dnai {
+    class EntitiesFactory : public interfaces::IFactory<dnai::interfaces::IController, dnai::enums::QInstructionID::Instruction_ID>
+    {
+    public:
+        EntitiesFactory() = default;
+    };
+}
 
-#endif // ENTITIESFACTORY_H
+#endif // DNAI_ENTITIESFACTORY_H
