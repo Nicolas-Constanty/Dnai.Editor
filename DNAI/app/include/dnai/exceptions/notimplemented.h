@@ -1,15 +1,19 @@
 #ifndef DNAI_EXCEPTION_NOT_IMPLEMENTED_H
 #define DNAI_EXCEPTION_NOT_IMPLEMENTED_H
-#include <stdexcept>
 
+#include "dnai/exceptions/exception.h"
+
+#include <QDebug>
 namespace dnai
 {
 	namespace exceptions
 	{
-		class NotImplemented : public std::logic_error
+        class NotImplemented : public Exception
 		{
 		public:
-			NotImplemented() : std::logic_error("Function not yet implemented") { };
+            NotImplemented() : Exception("Function not yet implemented") {
+                qCritical() << "Function not yet implemented";
+            }
 		};
 	}
 }

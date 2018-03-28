@@ -41,7 +41,6 @@ static void registerDNAI()
 	qmlRegisterSingletonType<dnai::Editor>("DNAI", 1, 0, "Editor", editor_singleton_provider);
     qmlRegisterSingletonType<dnai::AppSettings>("DNAI", 1, 0, "AppSettings", settings_singleton_provider);
     qmlRegisterSingletonType<QCStandardPaths>("DNAI", 1, 0, "StandardPath", standardpath_singleton_provider);
-	qmlRegisterDnai(dnai::App, "App");
     qmlRegisterDnai(dnai::Session, "Session");
     qmlRegisterDnai(dnai::Project, "Project");
 	qmlRegisterDnai(dnai::Solution, "Solution");

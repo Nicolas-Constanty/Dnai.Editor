@@ -18,7 +18,7 @@ NewProjectForm {
     chooseButton.onClicked: fileDialog.open()
     createButton.onClicked: function () {
         if (projectPath.text && projectName.text) {
-            Editor.app().createProject(projectName.text, projectDescription.text, projectPath.text);
+            Editor.createProject(projectName.text, projectDescription.text, projectPath.text);
             popup.close()
             projectName.text = "";
             projectDescription.text = "";

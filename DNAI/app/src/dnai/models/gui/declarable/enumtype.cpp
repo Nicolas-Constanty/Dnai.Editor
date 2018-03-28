@@ -1,5 +1,6 @@
 #include "dnai/models/gui/declarable/enumtype.h"
 #include "dnai/exceptions/notimplemented.h"
+#include "dnai/exceptions/exceptionmanager.h"
 
 namespace dnai
 {
@@ -12,13 +13,13 @@ namespace dnai
 				void EnumType::serialize(QJsonObject& obj) const
 				{
                     Q_UNUSED(obj)
-					throw exceptions::NotImplemented();
+                    exceptions::ExceptionManager::throwException(exceptions::NotImplemented());
 				}
 
 				void EnumType::_deserialize(const QJsonObject& obj)
 				{
                     Q_UNUSED(obj)
-					throw exceptions::NotImplemented();
+                    exceptions::ExceptionManager::throwException(exceptions::NotImplemented());
 				}
 			}
 		}

@@ -32,7 +32,7 @@ ExpendablePanel {
             textColor : AppSettings.style.text.color
         }
 
-        model: Manager.views.propertyPanelModel
+//        model: Manager.views.propertyPanelModel
         itemDelegate: Rectangle {
             color: AppSettings.style.background.darkColor
             // TODO Improve this declaration with javascript creation ?

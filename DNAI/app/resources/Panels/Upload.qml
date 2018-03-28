@@ -20,7 +20,7 @@ UploadForm {
     }
     uploadBtn.onClicked: {
         for (var i = 0; i < fileDialog.fileUrls.length; ++i) {
-            Editor.app().session.uploadFile(fileDialog.fileUrls[i]);
+            Editor.session.uploadFile(fileDialog.fileUrls[i]);
         }
         popup.close()
     }

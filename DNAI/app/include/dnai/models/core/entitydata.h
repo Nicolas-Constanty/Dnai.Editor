@@ -23,7 +23,7 @@ namespace dnai
 				qint32 id = -1;
 				qint32 containerId = -1;
 				enums::core::ENTITY type = enums::core::ENTITY::UNDEFINED;
-				QString name;
+                QString name = "Undefined";
 				enums::core::VISIBILITY visibility = enums::core::VISIBILITY::PRIVATE;
 			};
 		}

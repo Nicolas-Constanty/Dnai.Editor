@@ -5,15 +5,20 @@
 #include "dnai/views/editorview.h"
 #include "dnai/solution.h"
 #include "models/entity.h"
+#include "models/basicnodemodel.h"
 
 namespace dnai
 {
 	class App;
     class Project;
+    class Session;
 	class Editor : public QObject, public interfaces::IEditor
 	{
 		Q_OBJECT
         Q_PROPERTY(dnai::Solution *solution READ getSolution WRITE setSolution NOTIFY solutionChanged)
+        Q_PROPERTY(dnai::models::BasicNodeModel *nodes READ nodes CONSTANT)
+        Q_PROPERTY(dnai::Session *session READ session CONSTANT)
+
 	protected:
 		Editor() = default;
 	public:
@@ -26,21 +31,22 @@ namespace dnai
 		void save() override;
 		void restoreViewState(const QJsonObject& obj) override;
 		void saveViewState() override;
-		Q_INVOKABLE void openSolution() override;
-		Q_INVOKABLE void loadSolution(const QString& filename) override;
 		void closeSolution() override;
 		const QList<interfaces::ICommand*>& actions() const override;
 		const QObject& selection() const override;
 		const QList<QObject*>& selections() const override;
-		Q_INVOKABLE const QList<QQuickItem *>& views() const override;
-		Q_INVOKABLE QQuickItem *selectedView() const override;
-		Q_INVOKABLE void selectView(QQuickItem *i);
-		interfaces::ISolution *solution() const override;
+        interfaces::ISolution *solution() const override;
         dnai::Solution *getSolution() const;
 		void addView(QQuickItem* v) override;
 		views::EditorView *mainView() const;
 		void registerEditorView(views::EditorView *view);
-		Q_INVOKABLE static dnai::App *app();
+
+        Q_INVOKABLE const QList<QQuickItem *>& views() const override;
+        Q_INVOKABLE QQuickItem *selectedView() const override;
+        Q_INVOKABLE void selectView(QQuickItem *i);
+        Q_INVOKABLE void createNode(QObject* nodeModel) const;
+        Q_INVOKABLE void openSolution() override;
+        Q_INVOKABLE void loadSolution(const QString& filename) override;
 
 	public:
 		void selectProject(Project *proj);
@@ -48,8 +54,9 @@ namespace dnai
 
     public:
         void setSolution(dnai::Solution *sol);
-
-	signals:
+        models::BasicNodeModel *nodes() const;
+        Session *session() const;
+    signals:
         void solutionChanged(dnai::Solution *proj);
 
 	private:

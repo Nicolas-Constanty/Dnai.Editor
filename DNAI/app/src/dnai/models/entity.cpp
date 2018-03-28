@@ -52,8 +52,6 @@ namespace dnai
 
 		const QString& Entity::name() const
 		{
-			if (coreModel()->entityType() == enums::core::ENTITY::UNDEFINED)
-				return "default";
 			return coreModel()->name();
 		}
 

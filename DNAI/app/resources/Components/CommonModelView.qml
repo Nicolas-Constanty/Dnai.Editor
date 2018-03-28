@@ -20,7 +20,7 @@ Rectangle {
     MouseArea {
         anchors.fill: parent;
         onClicked: {
-            Manager.views.updatePropertyPanelModel(item)
+//            Manager.views.updatePropertyPanelModel(item)
         }
     }
 

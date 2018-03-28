@@ -80,12 +80,14 @@ namespace dnai
 	}
 
 	void App::loadFonts()
-	{
-		QDirIterator it(":/resources/fonts", QDirIterator::Subdirectories);
-		while (it.hasNext()) {
-			qDebug() << it.filePath();
-			QFontDatabase::addApplicationFont(it.filePath());
-			it.next();
+    {
+        QDirIterator it(":/resources/fonts/", QDirIterator::Subdirectories);
+        while (it.hasNext()) {
+            if (it.fileInfo().isFile())
+            {
+                  QFontDatabase::addApplicationFont(it.filePath());
+            }
+           it.next();
 		}
 	}
 
@@ -153,9 +155,9 @@ namespace dnai
         return *m_settings;
 	}
 
-    Session  *App::session()
+    Session  &App::session()
 	{
-        return &m_session;
+        return m_session;
 	}
 
 	QObject* App::createQmlObject(const QString& path)
@@ -177,18 +179,6 @@ namespace dnai
 	{
 		return *m_appView;
 	}
-
-	void App::createNode(QObject *nodeModel) const
-	{
-		const QString path = "qrc:/resources/Components/Node.qml";
-		QQmlComponent component(App::getEngineInstance(), path);
-		QQuickItem *obj = qobject_cast<QQuickItem*>(component.beginCreate(App::getEngineInstance()->rootContext()));
-		QQmlProperty model(obj, "model", App::getEngineInstance());
-		model.write(QVariant::fromValue(m_nodeModel->createNode(static_cast<enums::QInstructionID::Instruction_ID>(nodeModel->property("instruction_id").toInt()))));
-		obj->setParentItem(App::instructionView()->canvas()->content());
-		component.completeCreate();
-	}
-
 #if defined(_WIN32) && defined(_MSC_VER)
   class CustomHandler : public IWinToastHandler {
   public:

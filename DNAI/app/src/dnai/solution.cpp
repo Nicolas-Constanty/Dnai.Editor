@@ -4,6 +4,7 @@
 #include "dnai/editor.h"
 #include "dnai/exceptions/guiexception.h"
 #include "dnai/project.h"
+#include "dnai/exceptions/exceptionmanager.h"
 
 namespace dnai
 {
@@ -44,7 +45,7 @@ namespace dnai
 		}
 		catch (std::exception &e) {
 			Q_UNUSED(e)
-			throw exceptions::GuiExeption("Error : Corrupted Solution file");
+            exceptions::ExceptionManager::throwException(exceptions::GuiExeption("Error : Corrupted Solution file"));
             qWarning("Couldn't parse file.");
 		}
 		m_file->close();

@@ -297,7 +297,7 @@ Item {
                             _popupList.close()
                             var t = _textInput.text
                             _textInput.clear()
-                            Manager.views.createDeclarationList(t)
+//                            Manager.views.createDeclarationList(t)
                         }
                     }
                 }

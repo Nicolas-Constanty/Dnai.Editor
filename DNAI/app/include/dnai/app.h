@@ -17,15 +17,7 @@ namespace dnai {
     class App : public QGuiApplication, public interfaces::ILoadingClass
     {
 		Q_OBJECT
-		Q_PROPERTY(dnai::models::BasicNodeModel *nodes READ nodes CONSTANT)
-        Q_PROPERTY(dnai::Session *session READ session CONSTANT)
-		int nullarg = 0;
     public:
-		App(QObject *parent = nullptr) : QGuiApplication(nullarg, nullptr), m_editor(Editor::instance())
-	    {
-            Q_UNUSED(parent)
-	    }
-
         App(int & argc, char **argv);
 		~App();
 
@@ -35,10 +27,9 @@ namespace dnai {
         void registerSettings(AppSettings* appSettings);
 
     public:
-        Session *session();
+        Session &session();
         AppSettings &settings() const;
         views::AppView &appView() const;
-		Q_INVOKABLE void createNode(QObject* nodeModel) const;
 	    QQmlApplicationEngine &engine();
         models::BasicNodeModel *nodes() const;
         Editor &editor() const;

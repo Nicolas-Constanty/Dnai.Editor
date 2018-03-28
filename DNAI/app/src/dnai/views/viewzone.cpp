@@ -1,7 +1,7 @@
 #include "dnai/views/viewzone.h"
 #include "dnai/editor.h"
 #include "dnai/exceptions/notimplemented.h"
-
+#include "dnai/exceptions/exceptionmanager.h"
 
 namespace dnai
 {
@@ -15,13 +15,13 @@ namespace dnai
         void ViewZone::serialize(QJsonObject& obj) const
 		{
             Q_UNUSED(obj)
-            throw exceptions::NotImplemented();
+            exceptions::ExceptionManager::throwException(exceptions::NotImplemented());
 		}
 
 		void ViewZone::_deserialize(const QJsonObject& obj)
 		{
             Q_UNUSED(obj)
-            throw exceptions::NotImplemented();
+            exceptions::ExceptionManager::throwException(exceptions::NotImplemented());
 		}
 
 		void ViewZone::open()
@@ -58,7 +58,7 @@ namespace dnai
 		void ViewZone::split(SplitDirection dir)
 		{
             Q_UNUSED(dir)
-            throw exceptions::NotImplemented();
+            exceptions::ExceptionManager::throwException(exceptions::NotImplemented());
 		}
 	}
 }
