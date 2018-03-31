@@ -2,6 +2,7 @@
 #define DNAI_ENUMS_CORE_H
 
 #include <QObject>
+#include "core.h"
 
 namespace dnai {
     namespace enums {
@@ -101,19 +102,20 @@ namespace dnai {
 	        /**
              * \brief List of available entity in core.dll
              */
-            enum ENTITY : qint32
+            using ENTITY = ::core::ENTITY;
+            /*enum ENTITY : qint32
             {
                 UNDEFINED = -1,
-                CONTEXT,
-                VARIABLE,
-                FUNCTION,
-                DATA_TYPE,
-                ENUM_TYPE,
-                OBJECT_TYPE,
-                LIST_TYPE
-            };
+                CONTEXT = ::core::CONTEXT,
+                VARIABLE = ::core::VARIABLE,
+                FUNCTION = ::core::FUNCTION,
+                DATA_TYPE = ::core::DATA_TYPE,
+                ENUM_TYPE = ::core::ENUM_TYPE,
+                OBJECT_TYPE = ::core::OBJECT_TYPE,
+                LIST_TYPE = ::core::LIST_TYPE
+            };*/
 
-	        /**
+            /***
              * \brief List of available replies in core.dll
              */
             enum REPLIES
@@ -132,12 +134,12 @@ namespace dnai {
 	        /**
              * \brief List of available visibility in core.dll
              */
-            enum VISIBILITY
+            using VISIBILITY = ::core::VISIBILITY;
+            /*enum VISIBILITY
             {
-                PUBLIC,
-                PRIVATE,
-                PROTECTED
-            };
+                PRIVATE = ::core::PRIVATE,
+                PUBLIC = ::core::PUBLIC
+            };*/
             Q_ENUM_NS(ENTITY)
             Q_ENUM_NS(REPLIES)
             Q_ENUM_NS(VISIBILITY)
@@ -145,7 +147,7 @@ namespace dnai {
             /**
              * \brief Represents a entity identifier
              */
-            using EntityID = quint32;
+            using EntityID = ::core::EntityID;
         }
     }
 }

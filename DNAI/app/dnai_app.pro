@@ -103,7 +103,11 @@ SOURCES += \
     src/dnai/settings.cpp \
     src/dnai/solution.cpp \
     src/dnai/viewshandler.cpp \
-    src/main.cpp
+    src/main.cpp \
+    src/dnai/commands/corecommand.cpp \
+    src/dnai/commands/core/declarator/declarecommand.cpp \
+    src/dnai/core/entitymanager.cpp \
+    src/dnai/core/declaratorhandler.cpp
 
 
 RESOURCES += qml.qrc
@@ -145,7 +149,6 @@ HEADERS += \
     include/dnai/controllers/outputcontroller.h \
     include/dnai/controllers/propertypanel.h \
     include/dnai/enums/core/commands.h \
-    include/dnai/enums/core/core.h \
     include/dnai/enums/core/instructionid.h \
     include/dnai/enums/declarationtype.h \
     include/dnai/enums/flowtype.h \
@@ -271,7 +274,19 @@ HEADERS += \
     include/http.h \
     include/models.h \
     include/qmlresources.h \
-    include/views.h
+    include/views.h \
+    include/dnai/commands/corecommand.h \
+    include/dnai/commands/core/declarator/declarecommand.h \
+    include/dnai/core/entitymanager.h \
+    include/dnai/core/declaratorhandler.h \
+    include/dnai/core/variablehandler.h \
+    include/dnai/core/functionhandler.h \
+    include/dnai/core/enumhandler.h \
+    include/dnai/core/listhandler.h \
+    include/dnai/core/objecthandler.h \
+    include/dnai/core/projecthandler.h \
+    include/dnai/core/icorehandler.h \
+    include/dnai/enums/core/coreenums.h
 
 
 #LIB

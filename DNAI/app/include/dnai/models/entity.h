@@ -3,7 +3,7 @@
 
 #include "dnai/models/core/entity.h"
 #include "dnai/models/gui/declarable/entity.h"
-#include "dnai/enums/core/core.h"
+#include "dnai/enums/core/coreenums.h"
 #include "dnai/interfaces/imodel.h"
 #include "gui/data/entitycolum.h"
 #include "gui/declarable/variable.h"

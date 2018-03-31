@@ -2,7 +2,7 @@
 #define DNAI_MODELS_CORE_ENTITY_H
 
 #include <QDebug>
-#include "dnai/enums/core/core.h"
+#include "dnai/enums/core/coreenums.h"
 #include "entitydata.h"
 #include "dnai/interfaces/imodeldata.h"
 #include "dnai/interfaces/iserializable.h"

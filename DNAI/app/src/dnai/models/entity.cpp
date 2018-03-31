@@ -236,34 +236,34 @@ namespace dnai
             m_dataCore->setVisibility(static_cast<enums::core::VISIBILITY>(obj["visibility"].toInt()));
             switch (m_dataCore->entityType())
             {
-            case enums::UNDEFINED: break;
-            case enums::CONTEXT:
+            case enums::ENTITY::UNDEFINED: break;
+            case enums::ENTITY::CONTEXT:
             {
                 m_dataGUI = gui::declarable::Context::deserialize(obj);
                 break;
             }
-            case enums::VARIABLE:
+            case enums::ENTITY::VARIABLE:
             {
                 m_dataGUI = gui::declarable::Variable::deserialize(obj);
                 break;
             }
-            case enums::FUNCTION:
+            case enums::ENTITY::FUNCTION:
             {
                 m_dataGUI = gui::declarable::Function::deserialize(obj);
                 break;
             }
-            case enums::DATA_TYPE: break;
-            case enums::ENUM_TYPE:
+            case enums::ENTITY::DATA_TYPE: break;
+            case enums::ENTITY::ENUM_TYPE:
             {
                 m_dataGUI = gui::declarable::EnumType::deserialize(obj);
                 break;
             }
-            case enums::OBJECT_TYPE:
+            case enums::ENTITY::OBJECT_TYPE:
             {
                 m_dataGUI = gui::declarable::ObjectType::deserialize(obj);
                 break;
             }
-            case enums::LIST_TYPE:
+            case enums::ENTITY::LIST_TYPE:
             {
                 m_dataGUI = gui::declarable::ListType::deserialize(obj);
                 break;
@@ -307,7 +307,7 @@ namespace dnai
 
 		void Entity::addContext(const int index, const QString &listindex)
 		{
-			const auto coreModel = new models::core::Entity(enums::core::CONTEXT);
+            const auto coreModel = new models::core::Entity(enums::ENTITY::CONTEXT);
             const auto guiModel = new models::gui::declarable::Context();
 			guiModel->setIndex(index);
             qDebug() << listindex;
@@ -320,7 +320,7 @@ namespace dnai
 
 		void Entity::addClass(const int index, const QString &listindex)
 		{
-			const auto coreModel = new models::core::Entity(enums::core::OBJECT_TYPE);
+            const auto coreModel = new models::core::Entity(enums::ENTITY::OBJECT_TYPE);
             const auto guiModel = new models::gui::declarable::ObjectType();
 			guiModel->setIndex(index);
 			guiModel->setListIndex(listindex);
@@ -349,7 +349,7 @@ namespace dnai
 
 		void Entity::addFunction(const int index, const QString &listindex)
 		{
-			const auto coreModel = new models::core::Entity(enums::core::FUNCTION);
+            const auto coreModel = new models::core::Entity(enums::ENTITY::FUNCTION);
             const auto guiModel = new models::gui::declarable::Function();
 			guiModel->setIndex(index);
 			guiModel->setListIndex(listindex);
@@ -361,7 +361,7 @@ namespace dnai
 
 		void Entity::addVariable(const int index, const QString &listindex)
 		{
-			const auto coreModel = new models::core::Entity(enums::core::VARIABLE);
+            const auto coreModel = new models::core::Entity(enums::ENTITY::VARIABLE);
             const auto guiModel = new models::gui::declarable::Variable();
 			guiModel->setIndex(index);
 			guiModel->setListIndex(listindex);

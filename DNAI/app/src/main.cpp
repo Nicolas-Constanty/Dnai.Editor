@@ -14,7 +14,7 @@
 //#include "include/eventconsumer.h"
 #include "dnai/entitiesfactory.h"
 #include "dnai/viewshandler.h"
-#include "dnai/enums/core/core.h"
+#include "dnai/enums/core/coreenums.h"
 
 #if defined(_WIN32) && defined(_MSC_VER)
 #include "../../lib/WinToast/wintoastlib.h"

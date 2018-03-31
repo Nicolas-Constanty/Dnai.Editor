@@ -2,7 +2,7 @@
 #define DNAI_MODELS_CORE_ENTITYDATA_H
 
 #include <QString>
-#include "dnai/enums/core/core.h"
+#include "dnai/enums/core/coreenums.h"
 
 namespace dnai
 {

@@ -14,8 +14,9 @@ namespace core
     using InstructionID = uint32_t;
     using InstructionPin = uint32_t;
 
-    enum ENTITY
+    enum ENTITY : int32_t
     {
+        UNDEFINED = -1,
         CONTEXT = 0,
         VARIABLE = 1,
         FUNCTION = 2,

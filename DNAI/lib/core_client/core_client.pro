@@ -10,6 +10,7 @@ QT      += network
 TARGET = CoreClient
 TEMPLATE = lib
 CONFIG += staticlib
+CONFIG += c++14
 DESTDIR = $$PWD/../
 
 TEMPLATE = lib
