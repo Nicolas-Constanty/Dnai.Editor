@@ -1,0 +1,4 @@
+#ifndef ICOREHANDLER_H
+#define ICOREHANDLER_H
+
+#endif // ICOREHANDLER_H

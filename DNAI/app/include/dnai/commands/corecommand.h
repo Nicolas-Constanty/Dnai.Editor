@@ -1,0 +1,4 @@
+#ifndef CORECOMMAND_H
+#define CORECOMMAND_H
+
+#endif // CORECOMMAND_H
