@@ -26,7 +26,7 @@ then
 fi
 
 cd $app_path
-find $app_name -type f -follow -print > $current_dir/$mac_files
+find $app_name -type f -follow -print|xargs stat -f "%A %N" > $current_dir/$mac_files
 cd $current_dir
 
 rm -rf $repository_update_path/mac
