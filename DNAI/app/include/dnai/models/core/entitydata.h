@@ -23,7 +23,7 @@ namespace dnai
                 enums::core::EntityID id = 0;
                 enums::core::EntityID containerId = 0;
 				enums::core::ENTITY type = enums::core::ENTITY::UNDEFINED;
-				QString name;
+                QString name = "Undefined";
 				enums::core::VISIBILITY visibility = enums::core::VISIBILITY::PRIVATE;
 			};
 		}

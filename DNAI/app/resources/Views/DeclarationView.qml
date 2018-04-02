@@ -5,6 +5,7 @@ import QtGraphicalEffects 1.0
 
 import DNAI 1.0
 import DNAI.Models 1.0
+import DNAI.Enums 1.0
 
 import "../Style"
 import "../Components"
@@ -172,7 +173,7 @@ Item {
                         AddButton {
                             id: _addContext
                             width: 45
-                            visible: modelData.parentRef.entityType === 0
+                            visible: modelData.parentRef.entityType === Core.CONTEXT
                             onPressed: {
                                 proj.addContext(_sublist.visualModel.items.count, modelData.listIndex, idx)
                                 _sublist.positionViewAtEnd()
@@ -296,7 +297,7 @@ Item {
                             _popupList.close()
                             var t = _textInput.text
                             _textInput.clear()
-                            Manager.views.createDeclarationList(t)
+//                            Manager.views.createDeclarationList(t)
                         }
                     }
                 }

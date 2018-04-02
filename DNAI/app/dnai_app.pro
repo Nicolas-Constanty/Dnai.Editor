@@ -96,13 +96,11 @@ SOURCES += \
     src/dnai/eventutilities.cpp \
     src/dnai/focusmanager.cpp \
     src/dnai/link.cpp \
-    src/dnai/manager.cpp \
     src/dnai/processmanager.cpp \
     src/dnai/project.cpp \
     src/dnai/session.cpp \
     src/dnai/settings.cpp \
     src/dnai/solution.cpp \
-    src/dnai/viewshandler.cpp \
     src/main.cpp \
     src/dnai/commands/corecommand.cpp \
     src/dnai/commands/core/declarator/declarecommand.cpp \
@@ -135,7 +133,6 @@ HEADERS += \
     include/dnai/commands/commanddecorator.h \
     include/dnai/commands/commandmanager.h \
     include/dnai/commands/debugdecorator.h \
-    include/dnai/commands/entitydeclare.h \
     include/dnai/commands/genericcommand.h \
     include/dnai/commands/movecanvascommand.h \
     include/dnai/commands/movecommand.h \
@@ -144,7 +141,6 @@ HEADERS += \
     include/dnai/commands/zoomcanvascommand.h \
     include/dnai/controllers/classcontroller.h \
     include/dnai/controllers/consolecontroller.h \
-    include/dnai/controllers/contextcontroller.h \
     include/dnai/controllers/inputcontroller.h \
     include/dnai/controllers/outputcontroller.h \
     include/dnai/controllers/propertypanel.h \
@@ -260,13 +256,11 @@ HEADERS += \
     include/dnai/link.h \
     include/dnai/linkablebezieritem.h \
     include/dnai/linkabletype.h \
-    include/dnai/manager.h \
     include/dnai/processmanager.h \
     include/dnai/project.h \
     include/dnai/session.h \
     include/dnai/settings.h \
     include/dnai/solution.h \
-    include/dnai/viewshandler.h \
     include/api.h \
     include/commands.h \
     include/controllers.h \
@@ -286,7 +280,13 @@ HEADERS += \
     include/dnai/core/objecthandler.h \
     include/dnai/core/projecthandler.h \
     include/dnai/core/icorehandler.h \
-    include/dnai/enums/core/coreenums.h
+    include/dnai/enums/core/coreenums.h \
+    include/dnai/views/viewelement.h \
+    include/dnai/views/viewzone.h \
+    include/dnai/views/editorview.h \
+    include/dnai.h \
+    include/exceptions.h \
+    include/interfaces.h
 
 
 #LIB

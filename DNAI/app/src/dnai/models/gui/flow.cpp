@@ -1,5 +1,6 @@
 #include "dnai/models/gui/flow.h"
 #include "dnai/exceptions/notimplemented.h"
+#include "dnai/exceptions/exceptionmanager.h"
 
 namespace dnai
 {
@@ -9,12 +10,14 @@ namespace dnai
 		{
 			void Flow::serialize(QJsonObject& obj) const
 			{
-				throw exceptions::NotImplemented();
+                Q_UNUSED(obj)
+                exceptions::ExceptionManager::throwException(exceptions::NotImplemented());
 			}
 
 			void Flow::_deserialize(const QJsonObject& obj)
 			{
-				throw exceptions::NotImplemented();
+                Q_UNUSED(obj)
+                exceptions::ExceptionManager::throwException(exceptions::NotImplemented());
 			}
 
 			const data::Flow& Flow::data() const

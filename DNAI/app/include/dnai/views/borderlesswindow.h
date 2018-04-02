@@ -11,8 +11,8 @@ namespace dnai
 		{
             Q_OBJECT
         public:
-            explicit BorderlessWindow(QWindow *parent = nullptr) {}
-            explicit BorderlessWindow(QQuickRenderControl *renderControl) {}
+            explicit BorderlessWindow(QWindow *parent = nullptr) : QQuickWindow(parent) {}
+            explicit BorderlessWindow(QQuickRenderControl *renderControl) : QQuickWindow(renderControl) {}
             virtual ~BorderlessWindow() {}
 
 		private:

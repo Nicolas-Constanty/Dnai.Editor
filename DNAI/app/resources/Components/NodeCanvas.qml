@@ -49,7 +49,7 @@ CanvasNode {
         id: _menu
 
         Repeater {
-            model: Manager.views.basicNodesModel
+            model: Editor.nodes
             delegate: Item {
                 Menu {
                     id: _subMenu
@@ -64,7 +64,7 @@ CanvasNode {
                                     _subMenu.addAction(_subMenu1)
                                 }
                                 onTriggered: {
-                                    Manager.createNode(item)
+                                    Editor.createNode(item)
                                 }
                             }
                         }

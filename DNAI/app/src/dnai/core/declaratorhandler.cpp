@@ -27,7 +27,7 @@ namespace dnai
             ::core::declarator::onRemoveError(std::bind(&DeclaratorHandler::onRemoveError, this, _1, _2, _3));
         }
 
-        void DeclaratorHandler::onEntityAdded(enums::EntityID id, models::Entity &entity)
+        void DeclaratorHandler::onEntityAdded(enums::core::EntityID id, models::Entity &entity)
         {
             //declare its children
         }

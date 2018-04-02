@@ -15,22 +15,6 @@ ExpendablePanel {
     property variant last: undefined
     TreeView {
         id: tr
-        function changeCurrent(cur)
-        {
-
-            var indexModel = Manager.views.getIndexMatch(cur)
-            Manager.views.selectTreeItem(indexModel)
-            Manager.views.updateNamespace(indexModel)
-//            tr.selection.select(cur, ItemSelectionModel.ClearAndSelect)
-            tr.selection.setCurrentIndex(indexModel, ItemSelectionModel.ClearAndSelect)
-        }
-        function changeCurrentFromModel(cur)
-        {
-            var indexModel = Manager.views.getIndexMatchFromModel(cur)
-            Manager.views.selectTreeItem(indexModel)
-            Manager.views.updateNamespace(indexModel)
-            tr.selection.setCurrentIndex(indexModel, ItemSelectionModel.ClearAndSelect)
-        }
 
         anchors.fill: parent
         model: Editor.solution

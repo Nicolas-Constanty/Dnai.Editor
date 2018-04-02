@@ -4,7 +4,9 @@ import QtGraphicalEffects 1.0
 
 import DNAI 1.0
 import DNAI.Models 1.0
+import DNAI.Enums 1.0
 import "../Style"
+import "../JavaScript/CreateComponent.js" as Factory
 
 Rectangle {
     id: _itemview
@@ -18,7 +20,7 @@ Rectangle {
     MouseArea {
         anchors.fill: parent;
         onClicked: {
-            Manager.views.updatePropertyPanelModel(item)
+//            Manager.views.updatePropertyPanelModel(item)
         }
     }
 
@@ -105,7 +107,7 @@ Rectangle {
         implicitWidth: parent.width * 0.04
         indicator: Rectangle {
             anchors.fill: _selectButton
-            color: (modelData.entityType === 0) ? "#00897B" : (modelData.entityType === 1) ?  "#FB8C00" : (modelData.entityType === 2) ? "#8E24AA" : "#039BE5"
+            color: (modelData.entityType === Core.CONTEXT) ? "#00897B" : (modelData.entityType === Core.OBJECT_TYPE) ?  "#039BE5" : (modelData.entityType === Core.FUNCTION) ? "#8E24AA" : "#FB8C00"
             FontAwesomeText {
                 anchors.fill: parent
                 text: "\uf00c"
@@ -208,7 +210,7 @@ Rectangle {
     }
     FontAwesomeButton {
         id: _openbutton
-        visible: modelData.entityType !== 1
+        visible: modelData.entityType !== Core.VARIABLE
 
         anchors.right: _itemview.right
         anchors.top: _itemview.top
@@ -238,7 +240,22 @@ Rectangle {
             source: _openbutton.label
         }
         onPressed: {
-            Manager.views.treeView().changeCurrentFromModel(model)
+            if (modelData.entityType === Core.FUNCTION)
+            {
+                var tab = Editor.selectedView()
+                var model = modelData
+                var res = tab.getViewFromModel(model)
+                if (res === undefined || res === null)
+                {
+                    var view = tab.addView("resources/Components/NodeCanvas.qml",
+                                {}, modelData.name)
+                    tab.appendModel(modelData, view)
+                }
+                else
+                {
+                    tab.selectIndex(res)
+                }
+            }
         }
     }
     Item {

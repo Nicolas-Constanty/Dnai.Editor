@@ -1,8 +1,14 @@
+#include <QQuickItem>
+#include <QQmlProperty>
+
+
 #include "dnai/editor.h"
 #include "dnai/solution.h"
 #include "dnai/project.h"
 #include "dnai/exceptions/notimplemented.h"
+#include "dnai/exceptions/exceptionmanager.h"
 #include "dnai/interfaces/iviewzone.h"
+#include "dnai/app.h"
 
 namespace dnai
 {
@@ -26,7 +32,8 @@ namespace dnai
 
 	void Editor::restoreViewState(const QJsonObject& obj)
 	{
-		throw exceptions::NotImplemented();
+        Q_UNUSED(obj)
+        exceptions::ExceptionManager::throwException(exceptions::NotImplemented());
 	}
 
 	void Editor::saveViewState()
@@ -111,8 +118,13 @@ namespace dnai
 		if (m_solution == sol)
 			return;
 		m_solution = sol;
-		emit solutionChanged(sol);
-	}
+        emit solutionChanged(sol);
+    }
+
+    models::BasicNodeModel *Editor::nodes() const
+    {
+        return App::currentInstance()->nodes();
+    }
 
 	interfaces::ISolution *Editor::solution() const
     {
@@ -139,5 +151,22 @@ namespace dnai
 	void Editor::registerEditorView(views::EditorView* view)
 	{
 		m_editorView = view;
-	}
+    }
+
+    Session *Editor::session() const
+    {
+        return &App::currentInstance()->session();
+    }
+
+    void Editor::createNode(QObject *nodeModel) const
+    {
+        const QString path = "qrc:/resources/Components/Node.qml";
+        QQmlComponent component(App::getEngineInstance(), path);
+        QQuickItem *obj = qobject_cast<QQuickItem*>(component.beginCreate(App::getEngineInstance()->rootContext()));
+        QQmlProperty model(obj, "model", App::getEngineInstance());
+        model.write(QVariant::fromValue(App::currentInstance()->nodes()->createNode(static_cast<enums::QInstructionID::Instruction_ID>(nodeModel->property("instruction_id").toInt()))));
+        obj->setParentItem(App::instructionView()->canvas()->content());
+        component.completeCreate();
+    }
+
 }

@@ -16,7 +16,7 @@
 namespace dnai {
     class App : public QGuiApplication, public interfaces::ILoadingClass
     {
-        Q_OBJECT
+		Q_OBJECT
     public:
         App(int & argc, char **argv);
 		~App();
@@ -30,8 +30,8 @@ namespace dnai {
         Session &session();
         AppSettings &settings() const;
         views::AppView &appView() const;
-        QQmlApplicationEngine &engine();
-        models::BasicNodeModel &basicNodesModel() const;
+	    QQmlApplicationEngine &engine();
+        models::BasicNodeModel *nodes() const;
         Editor &editor() const;
 
     public:
@@ -41,12 +41,15 @@ namespace dnai {
         static QQmlEngine *getEngineInstance();
 		static views::InstructionView *instructionView();
 
+        Q_INVOKABLE void onBuildStart();
+        Q_INVOKABLE bool isMac();
+
     private:
         QQmlApplicationEngine m_engine;
         AppSettings *m_settings;
         ProcessManager* m_processManager;
 	    views::AppView* m_appView;
-		models::BasicNodeModel *m_nodeModel;
+        models::BasicNodeModel *m_nodeModel;
 	    Session m_session;
 	    static App *m_instance;
         Editor &m_editor;

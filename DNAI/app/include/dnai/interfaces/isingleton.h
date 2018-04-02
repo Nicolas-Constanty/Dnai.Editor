@@ -28,4 +28,4 @@ namespace dnai
         }
 }
 
-#endif DNAI_INTERFACES_ISINGLETON_H
+#endif // DNAI_INTERFACES_ISINGLETON_H

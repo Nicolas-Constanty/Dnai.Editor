@@ -22,12 +22,13 @@ namespace dnai {
         serialize(obj);
 
 		m_file->open(QIODevice::WriteOnly);
-        m_file->write(QJsonDocument(obj).toJson());
+        m_file->write(QJsonDocument(obj).toJson(QJsonDocument::Compact));
 		m_file->close();
     }
 
 	void Project::serialize(QJsonObject &obj) const
 	{
+        obj["version"] = Editor::instance().version();
 		m_rootEntity->serialize(obj);
 	}
 

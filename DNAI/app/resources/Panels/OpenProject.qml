@@ -11,22 +11,22 @@ OpenProjectForm {
     property int currentIndex: -1
 
     Connections {
-        target: Manager.session
+        target: Editor.session
 
         onUserChanged: {
-            isConnected = !!Manager.session.user;
+            isConnected = !!Editor.session.user;
             filesData.clear();
-            if (!Manager.session.user) {
+            if (!Editor.session.user) {
                 return;
             }
 
-            for (var i = 0; i < Manager.session.user.files.length; ++i) {
-                filesData.append(Manager.session.user.files[i]);
+            for (var i = 0; i < Editor.session.user.files.length; ++i) {
+                filesData.append(Editor.session.user.files[i]);
             }
 
             if (currentIndex != -1) {
-                console.log(Manager.session.user.currentFileData);
-                fillInformations(Manager.session.user.currentFileData);
+                console.log(Editor.session.user.currentFileData);
+                fillInformations(Editor.session.user.currentFileData);
             }
         }
     }
@@ -90,7 +90,7 @@ OpenProjectForm {
                 onClicked: {
                     currentIndex = index;
                     const filename = file.replace(/^.*[\\\/]/, '');
-                    Manager.session.downloadProjectData(index, filename);
+                    Editor.session.downloadProjectData(index, filename);
                 }
             }
         }
