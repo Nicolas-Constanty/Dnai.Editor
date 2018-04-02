@@ -2,8 +2,10 @@
 #define DNAI_COMMANDS_CORECOMMAND_H
 
 #include <functional>
+#include <queue>
 
 #include "command.h"
+#include "dnai/enums/core/coreenums.h"
 
 namespace dnai
 {
@@ -26,6 +28,13 @@ namespace dnai
         private:
             Event exec;
             Event undo;
+
+        private:
+            static std::queue<CoreCommand *> commandQueue;
+
+        public:
+            static void Success();
+            static void Error();
         };
     }
 }
