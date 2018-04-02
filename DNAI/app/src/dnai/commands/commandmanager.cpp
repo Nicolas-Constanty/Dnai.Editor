@@ -107,5 +107,14 @@ namespace dnai
 		{
 			return m_console;
 		}
+
+        void CommandManager::removeCommand(interfaces::ICommand *c)
+        {
+            if (!c->isSave())
+                return;
+
+            m_undoList.remove(c);
+            m_redoList.remove(c);
+        }
 	}
 }
