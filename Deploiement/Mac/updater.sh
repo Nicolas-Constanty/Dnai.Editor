@@ -35,9 +35,17 @@ cp -rf $app_path$app_name  $repository_update_path/mac
 mv $current_dir/$mac_files $repository_update_path/
 
 cd $repository_update_path
-git tag $release_version
+
+git branch $release_version-branch $release_version
+git checkout $release_version-branch
+
 git add --all
 git commit -m "new version $release_version on mac"
+
+git tag -d $release_version
+git tag $release_version
+
+git push origin :$release_version
 git push origin $release_version
 
 echo "--- new version available $release_version ---"

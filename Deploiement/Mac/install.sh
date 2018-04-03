@@ -156,6 +156,7 @@ then
     if [ $? -eq 0 ]
     then
 	echo "--- RELEASE ON SERVER ---"
+	./updater.sh --release $version
 	exit 0
     fi
 fi
