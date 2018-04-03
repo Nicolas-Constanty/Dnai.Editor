@@ -1,3 +1,19 @@
+BIEN CHANGER LA VERSION POUR REQUEST.BAT ET UPDATER.BAT
+
+ORDRE:
+launch.bat
+ - install.bat
+cd DNAISetup.bat
+launch.bat
+cd ..
+request.bat
+updater.bat
+
+
+
+
+
+
 lancer launch.bat
 
 Dans le terminal :
@@ -17,3 +33,5 @@ ATTENTION
 Retourner dans le dossier Windows
 CONFIGURER LA VERSION dans request.bat
 Lancer request.bat
+PUIS updater.bat
+

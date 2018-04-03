@@ -1,4 +1,5 @@
-set VERSION="0.0.1"
+set VERSION="0.0.15"
+
 set EXE_NAME="./DNAISetup/DNAISetup.exe"
 
 set CURL_CMD="C:\Users\Victor\Downloads\curl-7.59.0-win64-mingw\bin\curl.exe"
