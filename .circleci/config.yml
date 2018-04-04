@@ -13,6 +13,8 @@ jobs:
       - run:
           name: init_submodule
           command: |
+            apt-get install -qq -y update
+            apt-get install -qq -y git
             git submodule init
             git submodule update
       - run:
