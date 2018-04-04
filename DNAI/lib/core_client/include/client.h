@@ -40,7 +40,6 @@ namespace core
             m_clientCom->sendEvent(name, stream.Data(), static_cast<unsigned int>(stream.Size()));
         }
 
-        #pragma optimize("", off)
         template <typename ... Args>
         void registerReply(QString const &event, std::function<void(Args ...)> const &then) const
         {
@@ -53,7 +52,6 @@ namespace core
                 toInject.apply(then);
             });
         }
-        #pragma optimize("", on)
 
     private:
         ClientCommunication *m_clientCom;
