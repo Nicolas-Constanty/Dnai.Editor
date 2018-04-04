@@ -13,10 +13,10 @@ jobs:
       - run:
           name: init_submodule
           command: |
-            apt-get -q -y update
-            apt-get -q -y install git
-            git submodule init
-            git submodule update
+            apt-get -qq update
+            apt-get -y install git
+            git submodule --quiet init
+            git submodule --quiet update 
       - run:
           name: compile
           command: |
