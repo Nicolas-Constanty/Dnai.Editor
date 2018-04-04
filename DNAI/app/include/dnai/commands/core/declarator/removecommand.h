@@ -1,0 +1,4 @@
+#ifndef REMOVECOMMAND_H
+#define REMOVECOMMAND_H
+
+#endif // REMOVECOMMAND_H

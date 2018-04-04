@@ -1,0 +1,4 @@
+#ifndef HANDLERMANAGER_H
+#define HANDLERMANAGER_H
+
+#endif // HANDLERMANAGER_H
