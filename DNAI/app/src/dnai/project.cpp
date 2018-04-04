@@ -249,6 +249,11 @@ namespace dnai {
 		return m_rootEntity->childCount();
 	}
 
+    models::Entity &Project::getRoot() const
+    {
+        return *m_rootEntity;
+    }
+
     const QJsonObject &Project::jsonData() const
     {
        /* const auto rootentity = static_cast<models::Entity *>(m_rootItem->child(0));

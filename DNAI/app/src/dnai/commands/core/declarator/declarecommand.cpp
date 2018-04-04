@@ -9,7 +9,7 @@ namespace dnai
         {
             DeclareCommand::DeclareCommand(const models::Entity &entity) :
                 CoreCommand(
-                    "CoreDeclare", true,
+                    "Declarator.Declare", true,
                     [&entity]() {
                         core::declarator::declare(
                                 entity.containerId(),

@@ -146,6 +146,8 @@ namespace dnai {
             Q_ENUM(VISIBILITY)
 
             using EntityID = ::core::EntityID;
+
+            static const EntityID UNDEFINED_ID = static_cast<EntityID>(-1);
         };
     }
 }

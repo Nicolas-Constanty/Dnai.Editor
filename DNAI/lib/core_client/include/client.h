@@ -40,11 +40,12 @@ namespace core
             m_clientCom->sendEvent(name, stream.Data(), static_cast<unsigned int>(stream.Size()));
         }
 
+        #pragma optimize("", off)
         template <typename ... Args>
         void registerReply(QString const &event, std::function<void(Args ...)> const &then) const
         {
-            m_clientCom->registerEvent(event, 0, [&then](void *data, unsigned int size) {
-                Cerealization::Cerealizable::Tuple<Args...> toInject;
+            m_clientCom->registerEvent(event, 0, [then](void *data, unsigned int size) {
+                Cerealization::Cerealizable::Tuple<Args ...> toInject;
                 Cerealization::Cerealizer::BinaryStream stream((Cerealization::Cerealizer::BinaryStream::Byte *)data, size);
 
                 stream >> toInject;
@@ -52,6 +53,7 @@ namespace core
                 toInject.apply(then);
             });
         }
+        #pragma optimize("", on)
 
     private:
         ClientCommunication *m_clientCom;

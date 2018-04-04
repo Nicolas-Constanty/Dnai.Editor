@@ -105,7 +105,10 @@ SOURCES += \
     src/dnai/commands/corecommand.cpp \
     src/dnai/commands/core/declarator/declarecommand.cpp \
     src/dnai/core/entitymanager.cpp \
-    src/dnai/core/declaratorhandler.cpp
+    src/dnai/core/declaratorhandler.cpp \
+    src/dnai/commands/core/declarator/removecommand.cpp \
+    src/dnai/core/projecthandler.cpp \
+    src/dnai/core/handlermanager.cpp
 
 
 RESOURCES += qml.qrc
@@ -286,7 +289,9 @@ HEADERS += \
     include/dnai/views/editorview.h \
     include/dnai.h \
     include/exceptions.h \
-    include/interfaces.h
+    include/interfaces.h \
+    include/dnai/commands/core/declarator/removecommand.h \
+    include/dnai/core/handlermanager.h
 
 
 #LIB

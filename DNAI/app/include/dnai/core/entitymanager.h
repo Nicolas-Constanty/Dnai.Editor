@@ -32,6 +32,8 @@ namespace dnai
             void addEntity(enums::core::EntityID id, models::Entity &entity);
             void removeEntity(enums::core::EntityID id);
 
+            bool contains(enums::core::EntityID id) const;
+
             const models::Entity &getEntity(enums::core::EntityID id) const;
             models::Entity &getEntity(enums::core::EntityID id);
 

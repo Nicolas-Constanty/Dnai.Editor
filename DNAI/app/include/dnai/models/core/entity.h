@@ -44,14 +44,6 @@ namespace dnai
 				bool setVisibility(enums::core::VISIBILITY v);
 				enums::core::VISIBILITY visibility() const;
 
-				void declare() const
-				{
-				};
-
-				void remove() const
-				{	
-				}
-
 				Entity& operator=(const Entity& other);
 
             public:

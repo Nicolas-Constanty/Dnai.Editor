@@ -20,8 +20,8 @@ namespace dnai
 				bool operator!=(const EntityData& other) const;
 				bool operator==(const EntityData& other) const;
 
-                enums::core::EntityID id = 0;
-                enums::core::EntityID containerId = 0;
+                enums::core::EntityID id = enums::core::UNDEFINED_ID;
+                enums::core::EntityID containerId = enums::core::UNDEFINED_ID;
 				enums::core::ENTITY type = enums::core::ENTITY::UNDEFINED;
                 QString name = "Undefined";
 				enums::core::VISIBILITY visibility = enums::core::VISIBILITY::PRIVATE;

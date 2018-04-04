@@ -6,6 +6,7 @@ namespace dnai
     {
         void EntityManager::addEntity(enums::core::EntityID id, models::Entity &entity)
         {
+            entity.setId(id);
             entities[id] = &entity;
             emit entityAdded(id, entity);
         }
@@ -17,6 +18,11 @@ namespace dnai
 
             entities.erase(it);
             emit entityRemoved(id, tosend);
+        }
+
+        bool EntityManager::contains(enums::core::EntityID id) const
+        {
+            return entities.find(id) != entities.end();
         }
 
         const models::Entity &EntityManager::getEntity(enums::core::EntityID id) const

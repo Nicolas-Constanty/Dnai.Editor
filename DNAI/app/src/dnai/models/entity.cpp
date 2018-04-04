@@ -3,9 +3,7 @@
 #include "dnai/models/gui/declarable/variable.h"
 #include "dnai/models/gui/declarable/context.h"
 
-/*#include "dnai/commands/commandmanager.h"
-#include "dnai/commands/core/declarator/declare.h"
-#include "dnai/commands/core/declarator/remove.h"*/
+#include "dnai/core/handlermanager.h"
 
 namespace dnai
 {
@@ -330,7 +328,7 @@ namespace dnai
 
         void Entity::declare()
         {
-
+            dnai::core::HandlerManager::Instance().Declarator().declare(*this);
         }
 
 		void Entity::remove()
@@ -339,8 +337,8 @@ namespace dnai
 			for (auto c : p->columns())
 			{
 				c->remove(this);
-			}
-			m_dataCore->remove();
+            }
+            dnai::core::HandlerManager::Instance().Declarator().remove(*this);
 			parentItem()->removeOne(this);
             delete this;
 		}
