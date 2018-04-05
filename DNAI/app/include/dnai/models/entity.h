@@ -96,7 +96,7 @@ namespace dnai
 			template<class T>
 			T *guiModel() const;
 			bool expanded() const;
-			void declare();
+            void declare();
 			Entity *parentRef() const;
 			const QMap<QUuid, Column *> &columns();
 

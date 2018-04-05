@@ -328,6 +328,7 @@ namespace dnai
 
         void Entity::declare()
         {
+            setContainerId(parentItem()->id());
             dnai::core::HandlerManager::Instance().Declarator().declare(*this);
         }
 
