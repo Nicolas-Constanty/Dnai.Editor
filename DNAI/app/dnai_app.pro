@@ -103,15 +103,11 @@ SOURCES += \
     src/dnai/solution.cpp \
     src/main.cpp \
     src/dnai/commands/corecommand.cpp \
-    src/dnai/commands/core/declarator/declarecommand.cpp \
     src/dnai/core/entitymanager.cpp \
     src/dnai/core/declaratorhandler.cpp \
-    src/dnai/commands/core/declarator/removecommand.cpp \
     src/dnai/core/projecthandler.cpp \
     src/dnai/core/handlermanager.cpp \
-    src/dnai/core/variablehandler.cpp \
-    src/dnai/commands/core/variable/settypecommand.cpp \
-    src/dnai/commands/core/variable/setvaluecommand.cpp
+    src/dnai/core/variablehandler.cpp
 
 
 RESOURCES += qml.qrc
@@ -276,7 +272,6 @@ HEADERS += \
     include/qmlresources.h \
     include/views.h \
     include/dnai/commands/corecommand.h \
-    include/dnai/commands/core/declarator/declarecommand.h \
     include/dnai/core/entitymanager.h \
     include/dnai/core/declaratorhandler.h \
     include/dnai/core/variablehandler.h \
@@ -293,10 +288,7 @@ HEADERS += \
     include/dnai.h \
     include/exceptions.h \
     include/interfaces.h \
-    include/dnai/commands/core/declarator/removecommand.h \
-    include/dnai/core/handlermanager.h \
-    include/dnai/commands/core/variable/settypecommand.h \
-    include/dnai/commands/core/variable/setvaluecommand.h
+    include/dnai/core/handlermanager.h
 
 
 #LIB

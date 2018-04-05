@@ -30,7 +30,7 @@ namespace dnai
             void setValue(models::Entity const &variable, QJsonObject const &value);
 
         private:
-            models::gui::declarable::Variable *getVariableData(enums::core::EntityID variable);
+            models::gui::declarable::Variable *getVariableData(enums::core::EntityID variable, bool throws = false);
 
         private:
             void onTypeSet(enums::core::EntityID variable, enums::core::EntityID type);

@@ -2,11 +2,11 @@
 
 #include <qDebug>
 
+#include "core.h"
+
 #include "dnai/core/declaratorhandler.h"
 
 #include "dnai/commands/corecommand.h"
-#include "dnai/commands/core/declarator/declarecommand.h"
-#include "dnai/commands/core/declarator/removecommand.h"
 
 #include "dnai/commands/commandmanager.h"
 
@@ -58,9 +58,27 @@ namespace dnai
                      << todeclare.entityType() << ", "
                      << todeclare.name() << ", "
                      << todeclare.visibility() << ")";
+
             if (todeclare.containerId() != enums::core::UNDEFINED_ID)
             {
-                commands::CommandManager::Instance()->exec(new commands::declarator::DeclareCommand(todeclare));
+                commands::CommandManager::Instance()->exec(
+                    new commands::CoreCommand("Declarator.Declare", true,
+                        /*
+                         * Execute
+                         */
+                        [&todeclare]() {
+                            ::core::declarator::declare(
+                                    todeclare.containerId(),
+                                    static_cast<enums::core::ENTITY>(todeclare.entityType()),
+                                    todeclare.name(),
+                                    todeclare.visibility());
+                        },
+                        /*
+                         * Un-execute
+                         */
+                        [&todeclare]() {
+                            ::core::declarator::remove(todeclare.containerId(), todeclare.name());
+                        }));
                 pendingDeclaration.push(&todeclare);
             }
         }
@@ -70,7 +88,25 @@ namespace dnai
             qDebug() << "Core: DeclaratorHandler: Remove("
                      << toremove.containerId() << ", "
                      << toremove.name() << ")";
-            commands::CommandManager::Instance()->exec(new commands::declarator::RemoveCommand(toremove));
+
+            commands::CommandManager::Instance()->exec(
+                new commands::CoreCommand("Declarator.Remove", true,
+                    /*
+                     * Execute
+                     */
+                    [&toremove](){
+                      ::core::declarator::remove(toremove.containerId(), toremove.name());
+                    },
+                    /*
+                     * Un-execute
+                     */
+                    [&toremove](){
+                      ::core::declarator::declare(
+                              toremove.containerId(),
+                              static_cast<enums::core::ENTITY>(toremove.entityType()),
+                              toremove.name(),
+                              toremove.visibility());
+                    }));
         }
 
         models::Entity *DeclaratorHandler::popDeclared(enums::core::EntityID declarator, enums::core::ENTITY type, const QString &name)

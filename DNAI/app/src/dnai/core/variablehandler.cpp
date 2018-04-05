@@ -11,8 +11,7 @@
 
 #include "dnai/commands/commandmanager.h"
 
-#include "dnai/commands/core/variable/settypecommand.h"
-#include "dnai/commands/core/variable/setvaluecommand.h"
+#include "dnai/commands/corecommand.h"
 
 using namespace std::placeholders;
 
@@ -52,20 +51,51 @@ namespace dnai
 
         void VariableHandler::setType(models::Entity const &variable, models::Entity const &type)
         {
-            commands::CommandManager::Instance()->exec(new commands::variable::SetTypeCommand(variable, type));
+            enums::core::EntityID oldType = getVariableData(variable.id(), true)->varType();
+
+            commands::CommandManager::Instance()->exec(
+                new commands::CoreCommand("Variable.SetType", true,
+                    /*
+                     * Execute
+                     */
+                    [&variable, &type]() {
+                        ::core::variable::setType(variable.id(), type.id());
+                    },
+                    /*
+                     * Un-execute
+                     */
+                    [oldType, &variable]() {
+                        ::core::variable::setType(variable.id(), oldType);
+                    }));
         }
 
         void VariableHandler::setValue(models::Entity const &variable, const QJsonObject &value)
         {
-            QJsonDocument doc(value);
+            QString val = QJsonDocument(value).toJson(QJsonDocument::Compact);
+            QString oldval = QJsonDocument(getVariableData(variable.id(), true)->value()).toJson();
 
-            commands::CommandManager::Instance()->exec(new commands::variable::SetValueCommand(variable, doc.toJson(QJsonDocument::Compact)));
+            commands::CommandManager::Instance()->exec(
+                new commands::CoreCommand("Variable.SetValue", true,
+                    /*
+                     * Execute
+                     */
+                    [&variable, val]() {
+                      ::core::variable::setValue(variable.id(), val);
+                    },
+                    /*
+                     * Un-execute
+                     */
+                    [&variable, oldval]() {
+                      ::core::variable::setValue(variable.id(), oldval);
+                    }));
         }
 
-        models::gui::declarable::Variable   *VariableHandler::getVariableData(enums::core::EntityID variable)
+        models::gui::declarable::Variable   *VariableHandler::getVariableData(enums::core::EntityID variable, bool throws)
         {
             if (manager.contains(variable))
                 return manager.getEntity(variable).guiModel<models::gui::declarable::Variable>();
+            if (throws)
+                throw std::runtime_error("Given entity is not a variable");
             return nullptr;
         }
 
