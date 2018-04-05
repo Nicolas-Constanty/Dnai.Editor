@@ -1,6 +1,8 @@
 #ifndef DNAI_CORE_HANDLERMANAGER_H
 #define DNAI_CORE_HANDLERMANAGER_H
 
+#include <QObject>
+
 #include "entitymanager.h"
 
 #include "projecthandler.h"
@@ -15,8 +17,10 @@ namespace dnai
 {
     namespace core
     {
-        class HandlerManager
+        class HandlerManager : public QObject
         {
+            Q_OBJECT
+
         private:
             HandlerManager();
 
@@ -26,11 +30,15 @@ namespace dnai
         public:
             ProjectHandler &Project();
             DeclaratorHandler &Declarator();
+            VariableHandler &Variable();
 
         private:
             EntityManager m_manager;
+
+        private:
             ProjectHandler m_project;
             DeclaratorHandler m_declarator;
+            VariableHandler m_variable;
         };
     }
 }

@@ -4,14 +4,13 @@
 #include <QObject>
 
 #include "entitymanager.h"
-#include "icorehandler.h"
 #include "dnai/enums/core/coreenums.h"
 
 namespace dnai
 {
     namespace core
     {
-        class VariableHandler : public QObject, public ICoreHandler
+        class VariableHandler : public QObject
         {
             Q_OBJECT
 
@@ -20,14 +19,14 @@ namespace dnai
             virtual ~VariableHandler() = default;
 
         public:
-            void setup() override;
+            void setup();
 
         public slots:
             void onEntityAdded(enums::core::EntityID id, models::Entity &entity);
 
         public:
-            void setType(models::Entity const &variable, models::Entity const &type);
-            void setValue(models::Entity const &variable, QJsonObject const &value);
+            Q_INVOKABLE void setType(models::Entity const &variable, models::Entity const &type);
+            Q_INVOKABLE void setValue(models::Entity const &variable, QJsonObject const &value);
 
         private:
             models::gui::declarable::Variable *getVariableData(enums::core::EntityID variable, bool throws = false);

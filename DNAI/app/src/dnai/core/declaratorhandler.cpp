@@ -100,7 +100,22 @@ namespace dnai
                     /*
                      * Un-execute
                      */
-                    std::bind(&::core::declarator::declare, declarator, type, name, visi)));
+                                          std::bind(&::core::declarator::declare, declarator, type, name, visi)));
+        }
+
+        void DeclaratorHandler::move(const models::Entity &tomove, const models::Entity &newparent)
+        {
+
+        }
+
+        void DeclaratorHandler::rename(const models::Entity &torename, const QString &newname)
+        {
+
+        }
+
+        void DeclaratorHandler::setVisibility(const models::Entity &entity, enums::core::VISIBILITY visibility)
+        {
+
         }
 
         models::Entity *DeclaratorHandler::popDeclared(enums::core::EntityID declarator, enums::core::ENTITY type, const QString &name)

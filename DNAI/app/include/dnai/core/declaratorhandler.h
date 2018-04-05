@@ -5,14 +5,13 @@
 #include <unordered_map>
 
 #include "entitymanager.h"
-#include "icorehandler.h"
 #include "dnai/enums/core/coreenums.h"
 
 namespace dnai
 {
     namespace core
     {
-        class DeclaratorHandler : public QObject, public ICoreHandler
+        class DeclaratorHandler : public QObject
         {
             Q_OBJECT
 
@@ -21,15 +20,18 @@ namespace dnai
             virtual ~DeclaratorHandler() = default;
 
         public:
-            void setup() override;
+            void setup();
 
         public slots:
             void onEntityAdded(enums::core::EntityID id, models::Entity &entity);
             void onEntityRemoved(enums::core::EntityID id, models::Entity &entity);
 
         public:
-            void declare(models::Entity &todeclare);
-            void remove(const models::Entity &toremove);
+            Q_INVOKABLE void declare(models::Entity &todeclare);
+            Q_INVOKABLE void remove(const models::Entity &toremove);
+            Q_INVOKABLE void move(const models::Entity &tomove, const models::Entity &newparent);
+            Q_INVOKABLE void rename(const models::Entity &torename, QString const &newname);
+            Q_INVOKABLE void setVisibility(const models::Entity &entity, enums::core::VISIBILITY visibility);
 
         private:
             models::Entity *popDeclared(enums::core::EntityID declarator, enums::core::ENTITY type, QString const &name);
