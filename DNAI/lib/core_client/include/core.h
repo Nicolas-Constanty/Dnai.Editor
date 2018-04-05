@@ -10,11 +10,11 @@
 
 namespace core
 {
-    using EntityID = uint32_t;
-    using InstructionID = uint32_t;
-    using InstructionPin = uint32_t;
+    using EntityID = quint32;
+    using InstructionID = quint32;
+    using InstructionPin = quint32;
 
-    enum ENTITY : int32_t
+    enum ENTITY : qint32
     {
         UNDEFINED = -1,
         CONTEXT = 0,

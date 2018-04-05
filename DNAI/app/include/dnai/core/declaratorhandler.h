@@ -6,7 +6,7 @@
 
 #include "entitymanager.h"
 #include "icorehandler.h"
-#include "core.h"
+#include "dnai/enums/core/coreenums.h"
 
 namespace dnai
 {

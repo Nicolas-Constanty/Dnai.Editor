@@ -108,7 +108,10 @@ SOURCES += \
     src/dnai/core/declaratorhandler.cpp \
     src/dnai/commands/core/declarator/removecommand.cpp \
     src/dnai/core/projecthandler.cpp \
-    src/dnai/core/handlermanager.cpp
+    src/dnai/core/handlermanager.cpp \
+    src/dnai/core/variablehandler.cpp \
+    src/dnai/commands/core/variable/settypecommand.cpp \
+    src/dnai/commands/core/variable/setvaluecommand.cpp
 
 
 RESOURCES += qml.qrc
@@ -291,7 +294,9 @@ HEADERS += \
     include/exceptions.h \
     include/interfaces.h \
     include/dnai/commands/core/declarator/removecommand.h \
-    include/dnai/core/handlermanager.h
+    include/dnai/core/handlermanager.h \
+    include/dnai/commands/core/variable/settypecommand.h \
+    include/dnai/commands/core/variable/setvaluecommand.h
 
 
 #LIB
