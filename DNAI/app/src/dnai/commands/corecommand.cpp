@@ -17,8 +17,11 @@ namespace dnai
 
         void CoreCommand::execute() const
         {
-            exec();
-            commandQueue.push(const_cast<CoreCommand *>(this));
+            if (exec)
+            {
+                exec();
+                commandQueue.push(const_cast<CoreCommand *>(this));
+            }
         }
 
         void CoreCommand::executeSave()
@@ -28,8 +31,11 @@ namespace dnai
 
         void CoreCommand::unExcute() const
         {
-            undo();
-            commandQueue.push(const_cast<CoreCommand *>(this));
+            if (undo)
+            {
+                undo();
+                commandQueue.push(const_cast<CoreCommand *>(this));
+            }
         }
 
         void CoreCommand::Success()
