@@ -11,13 +11,6 @@ jobs:
             QTDIR="/opt/qt510";
             PATH="$QTDIR/bin:$PATH";
       - run:
-          name: init_submodule
-          command: |
-            apt-get -qq update
-            apt-get -y install git
-            git submodule --quiet init
-            git submodule --quiet update 
-      - run:
           name: compile
           command: |
             export CMAKE_PREFIX_PATH=/opt/qt510/lib/cmake
