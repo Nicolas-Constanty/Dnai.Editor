@@ -1,3 +1,3 @@
 [submodule "DNAI/lib/Cerealization/repository"]
 	path = DNAI/lib/Cerealization/repository
-	url = git@github.com:GasparQ/Cerealization.git
+	url = https://github.com/GasparQ/Cerealization.git
