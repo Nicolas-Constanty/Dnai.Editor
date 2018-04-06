@@ -6,6 +6,13 @@ jobs:
     steps:
       - checkout
       - run:
+          name: init_submodules
+          command: |
+            sudo apt-get -qq update
+            sudo apt-get -q -y install git
+            git submodule sync
+            git submodule update --init
+      - run:
           name: init_qt_variables
           command: |
             QTDIR="/opt/qt510";
