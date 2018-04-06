@@ -1,6 +1,6 @@
 #include <functional>
 
-#include <qDebug>
+#include <QDebug>
 
 #include "core.h"
 

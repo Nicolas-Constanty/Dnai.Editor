@@ -1,5 +1,8 @@
 #include "serialoperations.h"
 
+#include "Cerealizer/Binary/Binary.hpp"
+#include "Cerealizer/JSON/JSON.hpp"
+
 BinaryStream    &operator <<(BinaryStream &stream, QString const &value)
 {
     stream << value.toStdString();
