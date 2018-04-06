@@ -8,8 +8,8 @@ jobs:
       - run:
           name: init_submodules
           command: |
-            sudo apt-get -qq update
-            sudo apt-get -q -y install git
+            apt-get -qq update
+            apt-get -q -y install git
             git submodule sync
             git submodule update --init
       - run:
