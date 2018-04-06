@@ -1,6 +1,6 @@
 #include <functional>
 
-#include <qDebug>
+#include <QDebug>
 
 #include "dnai/core/declaratorhandler.h"
 

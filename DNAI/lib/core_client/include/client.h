@@ -8,8 +8,8 @@
 #include <QHostAddress>
 #include <QString>
 
-#include "Cerealizer/Binary/Binary.hpp"
 #include "serialoperations.h"
+#include "Cerealizer/Binary/Binary.hpp"
 
 #include "clientcommunication.h"
 
