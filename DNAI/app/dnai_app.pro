@@ -108,7 +108,8 @@ SOURCES += \
     src/dnai/core/projecthandler.cpp \
     src/dnai/core/handlermanager.cpp \
     src/dnai/core/variablehandler.cpp \
-    src/dnai/core/functionhandler.cpp
+    src/dnai/core/functionhandler.cpp \
+    src/dnai/core/enumhandler.cpp
 
 
 RESOURCES += qml.qrc

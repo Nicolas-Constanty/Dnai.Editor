@@ -338,4 +338,37 @@ namespace core
             }
         }
     }
+
+    namespace enumeration
+    {
+        void setValue(EntityID enumeration, const QString &name, const QString &value)
+        {
+            Client::shared().callCommand("ENUM.SET_VALUE", enumeration, name, value);
+        }
+
+        void onValueSet(const std::function<void(EntityID, QString, QString)> &then)
+        {
+            Client::shared().registerReply("ENUM.VALUE_SET", then);
+        }
+
+        void onSetValueError(const std::function<void(EntityID, QString, QString, QString)> &error)
+        {
+            Client::shared().registerReply("ENUM.SET_VALUE.ERROR", error);
+        }
+
+        void removeValue(EntityID enumeration, const QString &name)
+        {
+            Client::shared().callCommand("ENUM.REMOVE_VALUE", enumeration, name);
+        }
+
+        void onValueRemoved(const std::function<void(EntityID, QString)> &then)
+        {
+            Client::shared().registerReply("ENUM.VALUE_REMOVED", then);
+        }
+
+        void onRemoveValueError(const std::function<void(EntityID, QString, QString)> &error)
+        {
+            Client::shared().registerReply("ENUM.REMOVE_VALUE.ERROR", error);
+        }
+    }
 }

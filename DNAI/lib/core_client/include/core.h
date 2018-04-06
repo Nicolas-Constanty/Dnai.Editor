@@ -140,8 +140,14 @@ namespace core
 
     namespace enumeration
     {
-        //set value
-        //remove value
+        void setValue(EntityID enumeration, QString const &name, QString const &value);
+        void onValueSet(std::function<void(EntityID, QString, QString)> const &then);
+        void onSetValueError(std::function<void(EntityID, QString, QString, QString)> const &error);
+
+        void removeValue(EntityID enumeration, QString const &name);
+        void onValueRemoved(std::function<void(EntityID, QString)> const &then);
+        void onRemoveValueError(std::function<void(EntityID, QString, QString)> const &error);
+
         //get value
         //set type
         //get type
