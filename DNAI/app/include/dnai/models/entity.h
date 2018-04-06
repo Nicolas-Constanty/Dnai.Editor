@@ -87,6 +87,7 @@ namespace dnai
             qint32 containerId() const;
             int entityType() const;
             const QString &name() const;
+            const QString fullName() const;
             enums::core::VISIBILITY visibility() const;
             int index() const;
 			QString listIndex() const;

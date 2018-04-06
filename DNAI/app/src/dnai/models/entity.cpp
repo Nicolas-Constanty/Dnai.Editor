@@ -54,8 +54,15 @@ namespace dnai
 
 		const QString& Entity::name() const
 		{
-			return coreModel()->name();
-		}
+            return coreModel()->name();
+        }
+
+        const QString Entity::fullName() const
+        {
+            if (parentItem() == nullptr)
+                return name();
+            return parentItem()->fullName() + "." + name();
+        }
 
 		enums::core::VISIBILITY Entity::visibility() const
 		{
