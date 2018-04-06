@@ -51,6 +51,7 @@ namespace dnai {
 		void setFileName(const QString& name) override;
 		void foreachEntity(const std::function<void(models::Entity*)> &func) const;
 	    int childCount() const;
+        models::Entity &getRoot() const;
 
     public:
 		Q_INVOKABLE int expandedRows(const QModelIndex& parent) const;

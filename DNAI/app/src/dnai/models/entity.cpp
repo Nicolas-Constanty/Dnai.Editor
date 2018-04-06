@@ -3,6 +3,8 @@
 #include "dnai/models/gui/declarable/variable.h"
 #include "dnai/models/gui/declarable/context.h"
 
+#include "dnai/core/handlermanager.h"
+
 namespace dnai
 {
 	namespace models
@@ -52,8 +54,15 @@ namespace dnai
 
 		const QString& Entity::name() const
 		{
-			return coreModel()->name();
-		}
+            return coreModel()->name();
+        }
+
+        const QString Entity::fullName() const
+        {
+            if (parentItem() == nullptr)
+                return name();
+            return parentItem()->fullName() + "." + name();
+        }
 
 		enums::core::VISIBILITY Entity::visibility() const
 		{
@@ -96,12 +105,7 @@ namespace dnai
 			{
 				emit expandedChanged(exp);
 			}
-		}
-
-		void Entity::declare()
-		{
-			m_dataCore->declare();
-		}
+        }
 
 		Entity* Entity::parentRef() const
 		{
@@ -306,7 +310,7 @@ namespace dnai
 
 		void Entity::addContext(const int index, const QString &listindex)
 		{
-			const auto coreModel = new models::core::Entity(enums::core::CONTEXT);
+            const auto coreModel = new models::core::Entity(enums::core::ENTITY::CONTEXT);
             const auto guiModel = new models::gui::declarable::Context();
 			guiModel->setIndex(index);
             qDebug() << listindex;
@@ -319,7 +323,7 @@ namespace dnai
 
 		void Entity::addClass(const int index, const QString &listindex)
 		{
-			const auto coreModel = new models::core::Entity(enums::core::OBJECT_TYPE);
+            const auto coreModel = new models::core::Entity(enums::core::ENTITY::OBJECT_TYPE);
             const auto guiModel = new models::gui::declarable::ObjectType();
 			guiModel->setIndex(index);
 			guiModel->setListIndex(listindex);
@@ -329,21 +333,27 @@ namespace dnai
 			entity->declare();
 		}
 
+        void Entity::declare()
+        {
+            setContainerId(parentItem()->id());
+            dnai::core::HandlerManager::Instance().Declarator().declare(*this);
+        }
+
 		void Entity::remove()
 		{
 			auto p = parentItem();
 			for (auto c : p->columns())
 			{
 				c->remove(this);
-			}
-			m_dataCore->remove();
+            }
+            dnai::core::HandlerManager::Instance().Declarator().remove(*this);
 			parentItem()->removeOne(this);
             delete this;
 		}
 
 		void Entity::addFunction(const int index, const QString &listindex)
 		{
-			const auto coreModel = new models::core::Entity(enums::core::FUNCTION);
+            const auto coreModel = new models::core::Entity(enums::core::ENTITY::FUNCTION);
             const auto guiModel = new models::gui::declarable::Function();
 			guiModel->setIndex(index);
 			guiModel->setListIndex(listindex);
@@ -355,7 +365,7 @@ namespace dnai
 
 		void Entity::addVariable(const int index, const QString &listindex)
 		{
-			const auto coreModel = new models::core::Entity(enums::core::VARIABLE);
+            const auto coreModel = new models::core::Entity(enums::core::ENTITY::VARIABLE);
             const auto guiModel = new models::gui::declarable::Variable();
 			guiModel->setIndex(index);
 			guiModel->setListIndex(listindex);

@@ -3,7 +3,7 @@
 
 #include "dnai/models/core/entity.h"
 #include "dnai/models/gui/declarable/entity.h"
-#include "dnai/enums/core/core.h"
+#include "dnai/enums/core/coreenums.h"
 #include "dnai/interfaces/imodel.h"
 #include "gui/data/entitycolum.h"
 #include "gui/declarable/variable.h"
@@ -87,6 +87,7 @@ namespace dnai
             qint32 containerId() const;
             int entityType() const;
             const QString &name() const;
+            const QString fullName() const;
             enums::core::VISIBILITY visibility() const;
             int index() const;
 			QString listIndex() const;
@@ -96,7 +97,7 @@ namespace dnai
 			template<class T>
 			T *guiModel() const;
 			bool expanded() const;
-			void declare();
+            void declare();
 			Entity *parentRef() const;
 			const QMap<QUuid, Column *> &columns();
 
@@ -136,11 +137,14 @@ namespace dnai
 	        void addContext(int, const QString &);
 			void addFunction(int, const QString &);
 			void addVariable(int, const QString &);
-			void addClass(int, const QString &);
-			void remove();
+            void addClass(int, const QString &);
 	        int columnCount() const override;
 			Q_INVOKABLE QVariant listColumn() const;
 			Q_INVOKABLE int row() const override;
+
+        //core commands
+        public:
+            void remove();
 
         private:
             core::Entity *m_dataCore;

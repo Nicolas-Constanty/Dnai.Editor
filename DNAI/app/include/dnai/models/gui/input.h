@@ -21,8 +21,8 @@ namespace dnai
 			public:
 				const data::Input& data() const override;
 				bool setData(const data::Input& data) override;
-				qint32 varType() const override;
-				bool setVarType(qint32 id) override;
+                qint32 varType() const override;
+                bool setVarType(qint32 id) override;
 				const QJsonObject &value() const override;
 				bool setValue(const QJsonObject& value) override;
 			private:

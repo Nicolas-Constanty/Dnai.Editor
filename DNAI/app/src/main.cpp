@@ -4,8 +4,6 @@
 #include "dnai/editor.h"
 #include "dnai/project.h"
 
-#include "include/eventconsumer.h"
-
 #if defined(_WIN32) && defined(_MSC_VER)
 #include "../../lib/WinToast/wintoastlib.h"
 using namespace WinToastLib;
@@ -141,7 +139,7 @@ static void registerModels()
 }
 
 static void registerConnection() {
-    qmlRegisterType<EventConsumer>("DNAI.Communication.EventConsumer", 1, 0, "EventConsumer");
+    //qmlRegisterType<EventConsumer>("DNAI.Communication.EventConsumer", 1, 0, "EventConsumer");
 }
 
 static void registerQml()

@@ -14,7 +14,7 @@ namespace dnai
 				obj["description"] = m_data.description;
 				obj["index"] = m_data.index;
                 obj["listIndex"] = m_data.listIndex.toString();
-				obj["varType"] = m_data.varType;
+                obj["varType"] = varType();
 				obj["value"] = m_data.value;
 			}
 

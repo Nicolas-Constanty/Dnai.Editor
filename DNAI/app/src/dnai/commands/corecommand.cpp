@@ -1,57 +1,52 @@
-#include <utility>
 #include "dnai/commands/corecommand.h"
+#include "dnai/commands/commandmanager.h"
 
 namespace dnai
 {
-	namespace commands
-	{
-//        EntityDeclare::EntityDeclare(const PackageDataCom::ENTITY_CORE type, const qint32 containerId, const QString& name,
-//		                             const PackageDataCom::VISIBILITYCORE visibility) : Command("ENTITY_DECLARE", true)
-//		, m_type(type)
-//		, m_containerID(containerId)
-//		, m_name(name)
-//		, m_visibility(visibility)
-//		{
-//		}
+    namespace commands
+    {
+        std::queue<CoreCommand *> CoreCommand::commandQueue;
 
-//		void EntityDeclare::execute() const
-//		{
-//			controllers::ClientController::shared().sendDeclareEvent(m_type, m_containerID, m_name, m_visibility);
-//		}
+        CoreCommand::CoreCommand(QString const &name, bool save, const Event &exec, const Event &undo) :
+            Command(name, save),
+            exec(exec),
+            undo(undo)
+        {
 
-//		void EntityDeclare::unExcute() const
-//		{
-//			controllers::ClientController::shared().sendRemoveEvent(m_type, m_containerID, m_name);
-//		}
+        }
 
-//		void EntityDeclare::executeSave()
-//		{
-//		}
+        void CoreCommand::execute() const
+        {
+            if (exec)
+            {
+                exec();
+                commandQueue.push(const_cast<CoreCommand *>(this));
+            }
+        }
 
-//		EntityDeclare::~EntityDeclare() = default;
+        void CoreCommand::executeSave()
+        {
+            execute();
+        }
 
-		CoreCommand::CoreCommand(std::function<void()> exec, std::function<void()> reverse):
-			Command("CoreCommand"), m_exec(std::move(exec)), m_reverse(std::move(reverse))
-		{
-		}
+        void CoreCommand::unExcute() const
+        {
+            if (undo)
+            {
+                undo();
+                commandQueue.push(const_cast<CoreCommand *>(this));
+            }
+        }
 
-		void CoreCommand::execute() const
-		{
-			m_exec();
-		}
+        void CoreCommand::Success()
+        {
+            commandQueue.pop();
+        }
 
-		void CoreCommand::unExcute() const
-		{
-			m_reverse();
-		}
-
-		void CoreCommand::executeSave()
-		{
-			execute();
-		}
-
-		CoreCommand::~CoreCommand()
-		{
-		}
-	}
+        void CoreCommand::Error()
+        {
+            CommandManager::Instance()->removeCommand(commandQueue.front());
+            commandQueue.pop();
+        }
+    }
 }

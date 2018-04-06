@@ -13,6 +13,46 @@ namespace dnai
 	{
 		class CommandManager
 		{
+        private:
+            /**
+             * \brief The CommandStack class behaves like a stack of interface::ICommand * but allow to remove any command from it
+             */
+            class CommandStack
+            {
+            public:
+                CommandStack() = default;
+                ~CommandStack() = default;
+
+            public:
+                void push(interfaces::ICommand *c)
+                {
+                    stack.push_back(c);
+                }
+
+                void pop()
+                {
+                    stack.pop_back();
+                }
+
+                interfaces::ICommand *top() const
+                {
+                    return stack.back();
+                }
+
+                bool empty() const
+                {
+                    return stack.empty();
+                }
+
+                void remove(interfaces::ICommand *c)
+                {
+                    stack.remove(c);
+                }
+
+            private:
+                std::list<interfaces::ICommand *> stack;
+            };
+
 		public:
 			CommandManager();
 
@@ -57,9 +97,15 @@ namespace dnai
 			 */
 			const controllers::ConsoleController& console() const;
 
+            /**
+             * \brief Removes a command from undoList or redoList
+             * \param c Command pointer to remove
+             */
+            void removeCommand(interfaces::ICommand *c);
+
 		private:
-            std::stack<interfaces::ICommand *> m_undoList;
-            std::stack<interfaces::ICommand *> m_redoList;
+            CommandStack m_undoList;
+            CommandStack m_redoList;
             std::queue<interfaces::ICommand *> m_doList;
 
 			controllers::ConsoleController m_console;
