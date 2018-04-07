@@ -212,8 +212,8 @@ namespace dnai
 				return QVariant();
 			}
 		}
-		return QVariant();
-	}
+        return QVariant();
+    }
 
 	QHash<int, QByteArray> Solution::roleNames() const
 	{

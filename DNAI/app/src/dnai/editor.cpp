@@ -10,6 +10,8 @@
 #include "dnai/interfaces/iviewzone.h"
 #include "dnai/app.h"
 
+#include "dnai/core/handlermanager.h"
+
 namespace dnai
 {
 	Editor &Editor::m_instance = *(new Editor());
@@ -56,7 +58,7 @@ namespace dnai
 	{
         for (auto proj : m_solution->projects())
             if (const auto p = dynamic_cast<Project*>(proj))
-                p->foreachEntity([](models::Entity *e) { e->declare(); });
+                core::HandlerManager::Instance().Project().create(*p);
 	}
 
 	void Editor::loadSolution(const QString& filename)
@@ -168,5 +170,4 @@ namespace dnai
         obj->setParentItem(App::instructionView()->canvas()->content());
         component.completeCreate();
     }
-
 }

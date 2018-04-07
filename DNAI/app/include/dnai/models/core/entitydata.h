@@ -2,7 +2,7 @@
 #define DNAI_MODELS_CORE_ENTITYDATA_H
 
 #include <QString>
-#include "dnai/enums/core/core.h"
+#include "dnai/enums/core/coreenums.h"
 
 namespace dnai
 {
@@ -20,8 +20,8 @@ namespace dnai
 				bool operator!=(const EntityData& other) const;
 				bool operator==(const EntityData& other) const;
 
-				qint32 id = -1;
-				qint32 containerId = -1;
+                enums::core::EntityID id = enums::core::UNDEFINED_ID;
+                enums::core::EntityID containerId = enums::core::UNDEFINED_ID;
 				enums::core::ENTITY type = enums::core::ENTITY::UNDEFINED;
                 QString name = "Undefined";
 				enums::core::VISIBILITY visibility = enums::core::VISIBILITY::PRIVATE;

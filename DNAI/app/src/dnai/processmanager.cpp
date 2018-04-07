@@ -75,6 +75,8 @@ void ProcessManager::launch() {
         return;
     }
 
+    qDebug() << "Server started on port: " << portStr;
+
     sem.acquire();
 
     QString corePath = settingsBin.value("BINARIES/core", "").toString();

@@ -23,8 +23,8 @@ namespace dnai
 				protected:
 					void _deserialize(const QJsonObject& obj) override;
 				public:
-	                qint32 varType() const override;
-	                bool setVarType(qint32 id) override;
+                    qint32 varType() const override;
+                    bool setVarType(qint32 id) override;
 	                const QJsonObject &value() const override;
 	                bool setValue(const QJsonObject& value) override;
 				};

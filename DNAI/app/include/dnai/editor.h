@@ -67,8 +67,9 @@ namespace dnai
 		QObject *m_selection;
 		QList<interfaces::ICommand*> m_actions;
 		QString m_version = "0.0.1";
-		views::EditorView *m_editorView;
-		static Editor &m_instance;
+        views::EditorView *m_editorView;
+
+        static Editor &m_instance;
 	};
 }
 

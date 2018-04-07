@@ -1,27 +1,42 @@
-#ifndef ENTITYCOMMAND_H
-#define ENTITYCOMMAND_H
+#ifndef DNAI_COMMANDS_CORECOMMAND_H
+#define DNAI_COMMANDS_CORECOMMAND_H
+
+#include <functional>
+#include <queue>
 
 #include "command.h"
+#include "dnai/enums/core/coreenums.h"
 
 namespace dnai
 {
-	namespace commands
-	{
+    namespace commands
+    {
         class CoreCommand : public Command
-		{
-		public:
-            CoreCommand(std::function<void()> exec, std::function<void()> reverse);
+        {
+        public:
+            using Event = std::function<void()>;
 
-			void execute() const override;
-			void unExcute() const override;
-			void executeSave() override;
-			~CoreCommand() override;
+        public:
+            CoreCommand(QString const &name, bool save, Event const &exec, Event const &undo);
+            virtual ~CoreCommand() = default;
+
+        public:
+            void execute() const override;
+            void executeSave() override;
+            void unExcute() const override;
 
         private:
-			const std::function<void()> m_exec;
-			std::function<void()> m_reverse;
-		};
-	}
+            Event exec;
+            Event undo;
+
+        private:
+            static std::queue<CoreCommand *> commandQueue;
+
+        public:
+            static void Success();
+            static void Error();
+        };
+    }
 }
 
-#endif //ENTITYCOMMAND_H
+#endif // DNAI_COMMANDS_CORECOMMAND_H

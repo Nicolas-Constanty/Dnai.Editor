@@ -1,32 +1,28 @@
 TEMPLATE = subdirs
 CONFIG += object_parallel_to_source
 
+SUBDIRS = app libReseau libCerealization libCoreClient
+
+app.file = app/dnai_app.pro
+libReseau.file = lib/event_client/event_client.pro
+libCerealization.file = lib/Cerealization/Cerealization.pro
+libCoreClient.file = lib/core_client/core_client.pro
+
+libCoreClient.depends = libReseau libCerealization
+
 win32-msvc* {
-    SUBDIRS = app notiflib libReseau libDataEvent
-    app.file = app/dnai_app.pro
+    SUBDIRS += notiflib
     notiflib.file = lib/WinToast/wintoast.pro
-    libReseau.file = lib/event_client/event_client.pro
-    libDataEvent.file = lib/DataComEvent/DataComEvent.pro
-    app.depends = notiflib libReseau libDataEvent
-} macx-clang* {
-    SUBDIRS = app notifmac libReseau libDataEvent
-    app.file = app/dnai_app.pro
-    notifmac.file = lib/MACToast/MACToast.pro
-    libReseau.file = lib/event_client/event_client.pro
-    libDataEvent.file = lib/DataComEvent/DataComEvent.pro
-    app.depends = notifmac libReseau libDataEvent
-} win32-g++ {
-    SUBDIRS = app libReseau libDataEvent
-    app.file = app/dnai_app.pro
-    libReseau.file = lib/event_client/event_client.pro
-    libDataEvent.file = lib/DataComEvent/DataComEvent.pro
-    app.depends = libReseau libDataEvent
-} unix:!macx {
-    SUBDIRS = app libReseau libDataEvent
-    app.file = app/dnai_app.pro
-    libReseau.file = lib/event_client/event_client.pro
-    libDataEvent.file = lib/DataComEvent/DataComEvent.pro
-    app.depends = libReseau libDataEvent
+    app.depends = notiflib libCoreClient
 }
-
-
+macx-clang* {
+    SUBDIRS += notifmac
+    notifmac.file = lib/MACToast/MACToast.pro
+    app.depends = notifmac libCoreClient
+}
+win32-g++ {
+    app.depends = libCoreClient
+}
+unix:!macx {
+    app.depends = libCoreClient
+}
