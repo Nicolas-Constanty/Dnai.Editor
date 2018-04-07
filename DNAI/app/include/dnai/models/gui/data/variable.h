@@ -3,6 +3,7 @@
 
 #include <QJsonObject>
 #include "entity.h"
+#include "dnai/enums/core/coreenums.h"
 
 namespace dnai
 {
@@ -14,7 +15,7 @@ namespace dnai
 			{
 				struct Variable : Entity
 				{
-					qint32 varType = -1;
+                    enums::core::EntityID varType = enums::core::UNDEFINED_ID;
 					QJsonObject value;
 				};
 			}

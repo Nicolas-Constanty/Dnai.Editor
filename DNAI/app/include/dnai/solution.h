@@ -11,7 +11,7 @@ namespace dnai
 
 	class Solution : public QAbstractListModel, public interfaces::ISolution, public interfaces::ASerializable<Solution>
 	{
-		Q_OBJECT
+        Q_OBJECT
 	public:
 		enum ROLES
 		{
@@ -58,8 +58,7 @@ namespace dnai
 		QString m_version;
 		QFile *m_file;
 		QString m_filename;
-		virtual QHash<int, QByteArray> roleNames() const override;
-
+        virtual QHash<int, QByteArray> roleNames() const override;
 	};
 }
 

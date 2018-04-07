@@ -2,8 +2,7 @@
 #define DNAI_MODELS_CORE_ENTITY_H
 
 #include <QDebug>
-#include "dnai/enums/core/core.h"
-#include "dnai/commands/corecommand.h"
+#include "dnai/enums/core/coreenums.h"
 #include "entitydata.h"
 #include "dnai/interfaces/imodeldata.h"
 #include "dnai/interfaces/iserializable.h"
@@ -18,8 +17,7 @@ namespace dnai
 			{
 			public:
 				virtual ~IEntityCore() = default;
-				virtual void callCoreCommand(enums::core::COMMANDS cmd) const = 0;
-                virtual const std::map<qint32, commands::CoreCommand*> &commands() const = 0;
+                virtual void replicate() const = 0;
 			};
 
 			class Entity : public IEntityCore, public interfaces::IModelData<EntityData>, public interfaces::ASerializable<Entity>
@@ -46,20 +44,11 @@ namespace dnai
 				bool setVisibility(enums::core::VISIBILITY v);
 				enums::core::VISIBILITY visibility() const;
 
-				void declare() const
-				{
-				};
-
-				void remove() const
-				{	
-				}
-
 				Entity& operator=(const Entity& other);
 
-				//IEntityCore implementation
-			public:
-				void callCoreCommand(enums::core::COMMANDS cmd) const override;
-				const std::map<qint32, commands::CoreCommand*> &commands() const override;
+            public:
+                //will replicate the current entity into the CoreDaemon
+                virtual void replicate() const override;
 
 				// IModelData implementation
 			public:
@@ -70,9 +59,7 @@ namespace dnai
 			protected:
 				void _deserialize(const QJsonObject& obj) override;
 			private:
-				EntityData m_data;
-				static std::map<qint32, commands::CoreCommand*> m_commands;
-
+                EntityData m_data;
 			};
 		}
 	}

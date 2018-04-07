@@ -34,13 +34,11 @@ SOURCES += \
     src/dnai/commands/command.cpp \
     src/dnai/commands/commanddecorator.cpp \
     src/dnai/commands/commandmanager.cpp \
-    src/dnai/commands/corecommand.cpp \
     src/dnai/commands/debugdecorator.cpp \
     src/dnai/commands/movecanvascommand.cpp \
     src/dnai/commands/movecommand.cpp \
     src/dnai/commands/movenodecommand.cpp \
     src/dnai/commands/zoomcanvascommand.cpp \
-    src/dnai/controllers/clientcontroller.cpp \
     src/dnai/controllers/consolecontroller.cpp \
     src/dnai/controllers/icontroller.cpp \
     src/dnai/controllers/inputcontroller.cpp \
@@ -76,6 +74,7 @@ SOURCES += \
     src/dnai/views/contextview.cpp \
     src/dnai/views/customshape.cpp \
     src/dnai/views/declarationview.cpp \
+    src/dnai/views/editorview.cpp \
     src/dnai/views/flow.cpp \
     src/dnai/views/genericnode.cpp \
     src/dnai/views/input.cpp \
@@ -86,6 +85,8 @@ SOURCES += \
     src/dnai/views/linkablebezieritem.cpp \
     src/dnai/views/output.cpp \
     src/dnai/views/roundedrectangle.cpp \
+    src/dnai/views/viewelement.cpp \
+    src/dnai/views/viewzone.cpp \
     src/dnai/app.cpp \
     src/dnai/appcontext.cpp \
     src/dnai/baseio.cpp \
@@ -101,9 +102,14 @@ SOURCES += \
     src/dnai/settings.cpp \
     src/dnai/solution.cpp \
     src/main.cpp \
-    src/dnai/views/viewelement.cpp \
-    src/dnai/views/viewzone.cpp \
-    src/dnai/views/editorview.cpp
+    src/dnai/commands/corecommand.cpp \
+    src/dnai/core/entitymanager.cpp \
+    src/dnai/core/declaratorhandler.cpp \
+    src/dnai/core/projecthandler.cpp \
+    src/dnai/core/handlermanager.cpp \
+    src/dnai/core/variablehandler.cpp \
+    src/dnai/core/functionhandler.cpp \
+    src/dnai/core/enumhandler.cpp
 
 
 RESOURCES += qml.qrc
@@ -130,21 +136,19 @@ HEADERS += \
     include/dnai/commands/command.h \
     include/dnai/commands/commanddecorator.h \
     include/dnai/commands/commandmanager.h \
-    include/dnai/commands/corecommand.h \
     include/dnai/commands/debugdecorator.h \
-    include/dnai/commands/entitydeclare.h \
     include/dnai/commands/genericcommand.h \
     include/dnai/commands/movecanvascommand.h \
     include/dnai/commands/movecommand.h \
     include/dnai/commands/movenodecommand.h \
     include/dnai/commands/openpropertypanel.h \
     include/dnai/commands/zoomcanvascommand.h \
-    include/dnai/controllers/clientcontroller.h \
+    include/dnai/controllers/classcontroller.h \
     include/dnai/controllers/consolecontroller.h \
     include/dnai/controllers/inputcontroller.h \
     include/dnai/controllers/outputcontroller.h \
     include/dnai/controllers/propertypanel.h \
-    include/dnai/enums/core/core.h \
+    include/dnai/enums/core/commands.h \
     include/dnai/enums/core/instructionid.h \
     include/dnai/enums/declarationtype.h \
     include/dnai/enums/flowtype.h \
@@ -191,6 +195,7 @@ HEADERS += \
     include/dnai/models/core/entitydata.h \
     include/dnai/models/gui/data/context.h \
     include/dnai/models/gui/data/entity.h \
+    include/dnai/models/gui/data/entitycolum.h \
     include/dnai/models/gui/data/enumtype.h \
     include/dnai/models/gui/data/flow.h \
     include/dnai/models/gui/data/function.h \
@@ -231,6 +236,7 @@ HEADERS += \
     include/dnai/views/contextview.h \
     include/dnai/views/customshape.h \
     include/dnai/views/declarationview.h \
+    include/dnai/views/editorview.h \
     include/dnai/views/flow.h \
     include/dnai/views/genericnode.h \
     include/dnai/views/input.h \
@@ -241,6 +247,8 @@ HEADERS += \
     include/dnai/views/linkablebezieritem.h \
     include/dnai/views/output.h \
     include/dnai/views/roundedrectangle.h \
+    include/dnai/views/viewelement.h \
+    include/dnai/views/viewzone.h \
     include/dnai/app.h \
     include/dnai/appcontext.h \
     include/dnai/baseio.h \
@@ -263,20 +271,30 @@ HEADERS += \
     include/enums.h \
     include/http.h \
     include/models.h \
-    include/testconnection.h \
+    include/qmlresources.h \
     include/views.h \
+    include/dnai/commands/corecommand.h \
+    include/dnai/core/entitymanager.h \
+    include/dnai/core/declaratorhandler.h \
+    include/dnai/core/variablehandler.h \
+    include/dnai/core/functionhandler.h \
+    include/dnai/core/enumhandler.h \
+    include/dnai/core/listhandler.h \
+    include/dnai/core/objecthandler.h \
+    include/dnai/core/projecthandler.h \
+    include/dnai/enums/core/coreenums.h \
     include/dnai/views/viewelement.h \
     include/dnai/views/viewzone.h \
     include/dnai/views/editorview.h \
     include/dnai.h \
     include/exceptions.h \
-    include/interfaces.h
+    include/interfaces.h \
+    include/dnai/core/handlermanager.h
 
 
 #LIB
-DEPENDPATH += $${PWD}/../lib/event_client/
-INCLUDEPATH += $${PWD}/../lib/event_client/
-INCLUDEPATH += $${PWD}/../lib/DataComEvent/Shared_include/
+DEPENDPATH += $${PWD}/../lib/
+INCLUDEPATH += $${PWD}/../lib/core_client/include/
 
 win32-msvc*{
     DEPENDPATH += $${PWD}/../lib/WinToast/
@@ -294,7 +312,9 @@ win32-msvc*{
 
 
 #begin library network
-LIBS += -L$${PWD}/../lib/ -lEventClient -lDataComEvent
+LIBS += -L$${PWD}/../lib/ -lCoreClient -lEventClient -lCerealization
+
+#-lDataComEvent
 
 #CONFIG(release, debug|release) {
 #unix:LIBS += -L$${PWD}/../lib/DataComEvent/Library/ -lprotobuf

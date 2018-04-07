@@ -4,7 +4,6 @@ import QtQuick.Window 2.2
 import QtQuick.Dialogs 1.2
 import QtGraphicalEffects 1.0
 import QtQuick.Layouts 1.3
-import DNAI.Communication.EventConsumer 1.0
 import DNAI 1.0
 
 import "JavaScript/CreateComponent.js" as Factory

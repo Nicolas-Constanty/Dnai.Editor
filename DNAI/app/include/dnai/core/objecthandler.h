@@ -1,0 +1,4 @@
+#ifndef OBJECTHANDLER_H
+#define OBJECTHANDLER_H
+
+#endif // OBJECTHANDLER_H

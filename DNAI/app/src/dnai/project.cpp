@@ -40,7 +40,7 @@ namespace dnai {
         m_rootItem = new models::Entity();
         m_rootItem->setIdx(index(0,0, QModelIndex()));
         m_rootEntity = models::Entity::deserialize(obj, coreModel, m_rootItem);
-		m_rootEntity->setIsRoot(true);
+        m_rootEntity->setIsRoot(true);
         m_rootItem->appendChild(m_rootEntity);
     }
 
@@ -248,6 +248,11 @@ namespace dnai {
 	{
 		return m_rootEntity->childCount();
 	}
+
+    models::Entity &Project::getRoot() const
+    {
+        return *m_rootEntity;
+    }
 
     const QJsonObject &Project::jsonData() const
     {

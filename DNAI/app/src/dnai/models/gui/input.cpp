@@ -14,7 +14,7 @@ namespace dnai
 				obj["description"] = m_data.description;
 				obj["index"] = m_data.index;
                 obj["listIndex"] = m_data.listIndex.toString();
-				obj["varType"] = m_data.varType;
+                obj["varType"] = static_cast<int>(m_data.varType);
 				obj["value"] = m_data.value;
 			}
 
@@ -37,12 +37,12 @@ namespace dnai
 				return true;
 			}
 
-			qint32 Input::varType() const
+            qint32 Input::varType() const
 			{
 				return m_data.varType;
 			}
 
-			bool Input::setVarType(qint32 id)
+            bool Input::setVarType(qint32 id)
 			{
 				if (m_data.varType == id)
 					return false;
