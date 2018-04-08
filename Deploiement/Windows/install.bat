@@ -14,9 +14,9 @@ MOVE "app/settings" "app/release"
 
 windeployqt.exe "./app/release/DNAI.exe" -qmldir=C:\Users\Victor\Documents\EIP\Duly-GUI\DNAI\app\resources -verbose=2
 
-copy "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\VC\Redist\MSVC\14.12.25810\x64\Microsoft.VC141.CRT\*" "./app/release/"
-copy "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\VC\Redist\MSVC\14.12.25810\x64\Microsoft.VC141.CXXAMP\*" "./app/release/"
-copy "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\VC\Redist\MSVC\14.12.25810\x64\Microsoft.VC141.OpenMP\*" "./app/release/"
+copy "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\VC\Redist\MSVC\14.13.26020\x64\Microsoft.VC141.CRT\*" "./app/release/"
+copy "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\VC\Redist\MSVC\14.13.26020\x64\Microsoft.VC141.CXXAMP\*" "./app/release/"
+copy "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\VC\Redist\MSVC\14.13.26020\x64\Microsoft.VC141.OpenMP\*" "./app/release/"
 
 RENAME "app/release" "DNAI"
 move "app/DNAI" "./"
@@ -51,5 +51,3 @@ copy "C:\Users\Victor\Documents\EIP\Duly\CoreDaemon\bin\Release\*" "./DNAI/Core"
 rmdir /Y /s repos
 
 robocopy "DNAI" "C:\Users\Victor\Documents\EIP\Duly-GUI\Deploiement\Windows\DNAISetup\packages\com.vendor.product\data" /E
-
-DEL "install.bat"
