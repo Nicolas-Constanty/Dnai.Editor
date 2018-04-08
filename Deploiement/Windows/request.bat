@@ -1,4 +1,4 @@
-set VERSION="0.0.20"
+set VERSION="0.0.21"
 
 set EXE_NAME="./DNAISetup/DNAISetup.exe"
 
@@ -39,6 +39,6 @@ DEL tmpTOKEN
 
 echo %id%
 
-%CURL_CMD% -X PUT --data-binary "%EXE_NAME%"  https://api.preprod.dnai.io/download/softwares/windows/%SLUG%/%VERSION% -H "authorization: Bearer %token%" -H "cache-control: no-cache" -H "content-type: text/plain" -H "postman-token: c8638d15-6169-9fb9-2bb3-6314e0d66b45"
+%CURL_CMD% -X PUT --upload-file %EXE_NAME%  https://api.preprod.dnai.io/download/softwares/windows/%SLUG%/%VERSION% -H "authorization: Bearer %token%" -H "cache-control: no-cache" -H "content-type: text/plain" -H "postman-token: c8638d15-6169-9fb9-2bb3-6314e0d66b45"
 
 pause
