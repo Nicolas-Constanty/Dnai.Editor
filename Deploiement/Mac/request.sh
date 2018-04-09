@@ -50,7 +50,8 @@ id=$(curl -X PATCH https://api.preprod.dnai.io/download/softwares/mac/$slug -H "
 
 
 #requete vers PUT MISSING THE FILE
+pwd
 
-curl -X PUT --data-binary "$dmg_path$dmg_name"  https://api.preprod.dnai.io/download/softwares/mac/$slug/$release_version -H "authorization: Bearer $token" -H 'cache-control: no-cache' -H 'content-type: text/plain' -H 'postman-token: c8638d15-6169-9fb9-2bb3-6314e0d66b45'
+curl -X PUT --upload-file "$dmg_path$dmg_name"  https://api.preprod.dnai.io/download/softwares/mac/$slug/$release_version -H "authorization: Bearer $token" -H 'cache-control: no-cache' -H 'content-type: text/plain' -H 'postman-token: c8638d15-6169-9fb9-2bb3-6314e0d66b45'
 
 exit 0
