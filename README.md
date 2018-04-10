@@ -8,6 +8,12 @@
 
 ## Features status
 
+### Settings
+- [x] Language Panel
+- [x] Theme Panel
+- [x] Node Panel
+- [x] Update in realtime
+
 ### Build
 - [x] Build button
 - [ ] Call core
@@ -19,6 +25,7 @@
 - [x] Open
 - [x] Create
 - [ ] Save as
+- [x] Close
 
 ### Project
 - [x] Save
@@ -26,6 +33,7 @@
 - [x] Open
 - [x] Create
 - [ ] Save as
+- [x] Close
 
 ### Node View
 - [x] Grid system
@@ -80,3 +88,10 @@
 - [ ] Edit Boolean
 - [ ] Dropdown
 
+#### Table View
+- [x] Create tab
+- [x] Remove tab
+- [ ] Move tab
+- [x] Split left, right, top, bottom
+- [ ] Unsplit
+- [ ] Duplicate on split
