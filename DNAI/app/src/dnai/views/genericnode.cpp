@@ -18,8 +18,13 @@ namespace dnai
         GenericNode *GenericNode::m_selected = nullptr;
 		GenericNode::GenericNode(QQuickItem *parent) :
             QQuickItem(parent)
-		{
-            m_canvas = App::instructionView()->canvas();
+        {
+	        const auto view = qvariant_cast<QQuickItem *>(Editor::instance().selectedView()->property("currentView"));
+			if (!view)
+			{
+				throw std::runtime_error("No canvas view found!");
+			}
+			m_canvas = dynamic_cast<CanvasNode *>(view);
 			m_canvas->focusManager().registerItem(this);
 			setFlag(ItemHasContents, true);
 			setAcceptHoverEvents(true);

@@ -9,8 +9,16 @@
 namespace dnai
 {
 	Solution::Solution(): m_selectedProject(nullptr), m_file(nullptr)
-	{
-	}
+    {
+    }
+
+    Solution::~Solution()
+    {
+        while (!m_projects.isEmpty()) {
+            delete m_projects.takeFirst();
+        }
+        qDebug() << "~ Solution";
+    }
 
 	void Solution::save()
 	{
