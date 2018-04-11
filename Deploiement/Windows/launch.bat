@@ -1,1 +1,1 @@
-start cmd /k "copy.bat"
+start cmd /k "copy.bat && install.bat"

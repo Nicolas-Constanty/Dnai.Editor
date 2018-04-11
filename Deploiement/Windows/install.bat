@@ -38,6 +38,7 @@ cd ..
 qmake.exe C:\Users\Victor\Documents\EIP\Duly-GUI\Server\Server.pro -spec win32-msvc && C:/Qt/Tools/QtCreator/bin/jom.exe qmake_all
 jom.exe
 move "release\Server.exe" DNAI
+
 rmdir /s debug
 rmdir /s release
 DEL "Makefile*"
@@ -50,4 +51,5 @@ copy "C:\Users\Victor\Documents\EIP\Duly\CoreDaemon\bin\Release\*" "./DNAI/Core"
 
 rmdir /Y /s repos
 
-robocopy "DNAI" "C:\Users\Victor\Documents\EIP\Duly-GUI\Deploiement\Windows\DNAISetup\packages\com.vendor.product\data" /E
+mkdir "C:\Users\Victor\Documents\EIP\Duly-GUI\Deploiement\Windows\DNAISetup\packages\com.vendor.product\data\DNAI"
+robocopy "DNAI" "C:\Users\Victor\Documents\EIP\Duly-GUI\Deploiement\Windows\DNAISetup\packages\com.vendor.product\data\DNAI" /E
