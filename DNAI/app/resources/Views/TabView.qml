@@ -10,6 +10,7 @@ Item {
     anchors.fill: parent
     property var listModel: ({});
     property int localindex: -1
+    property Item currentView: null
     function addView(path, data, name)
     {
         Factory.createObjects("resources/Style/MTabButton.qml", {
@@ -50,6 +51,7 @@ Item {
         currentIndex: _swip.currentIndex
         onCurrentIndexChanged: {
             _swip.currentIndex = currentIndex
+            currentView = _swip.itemAt(currentIndex)
         }
     }
 
@@ -61,6 +63,10 @@ Item {
         padding: 0
         onCurrentIndexChanged: {
            _bar.currentIndex = currentIndex
+           currentView = _swip.itemAt(currentIndex)
        }
+        onWidthChanged: {
+            console.log(width)
+        }
     }
 }

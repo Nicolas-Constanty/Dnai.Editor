@@ -107,7 +107,7 @@ Rectangle {
         implicitWidth: parent.width * 0.04
         indicator: Rectangle {
             anchors.fill: _selectButton
-            color: (modelData.entityType === Core.CONTEXT) ? "#00897B" : (modelData.entityType === Core.OBJECT_TYPE) ?  "#039BE5" : (modelData.entityType === Core.FUNCTION) ? "#8E24AA" : "#FB8C00"
+            color: (modelData.entityType === 0) ? "#00897B" : (modelData.entityType === 5) ?  "#039BE5" : (modelData.entityType === 2) ? "#8E24AA" : "#FB8C00"
             FontAwesomeText {
                 anchors.fill: parent
                 text: "\uf00c"
@@ -210,7 +210,7 @@ Rectangle {
     }
     FontAwesomeButton {
         id: _openbutton
-        visible: modelData.entityType !== Core.VARIABLE
+        visible: modelData.entityType !== 1
 
         anchors.right: _itemview.right
         anchors.top: _itemview.top
@@ -240,7 +240,7 @@ Rectangle {
             source: _openbutton.label
         }
         onPressed: {
-            if (modelData.entityType === Core.FUNCTION)
+            if (modelData.entityType === 2)
             {
                 var tab = Editor.selectedView()
                 var model = modelData

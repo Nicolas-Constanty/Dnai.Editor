@@ -11,10 +11,11 @@ namespace dnai {
 	{
 	}
 
-//    Project::~Project()
-//    {
-
-//    }
+    Project::~Project()
+    {
+        delete m_rootEntity;
+        qDebug() << "~ Project";
+    }
 
     void Project::save()
     {
