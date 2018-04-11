@@ -214,6 +214,9 @@ namespace dnai {
 	{
         models::Entity *parentItem = getItem(parent);
 		beginInsertRows(parent, parentItem->childCount(), parentItem->childCount());
+        qDebug() << "Index: " << index;
+        qDebug() << "Child count: " << parentItem->childCount();
+        qDebug() << "List index: " << listindex;
 		parentItem->addFunction(index, listindex);
 		endInsertRows();
 	}

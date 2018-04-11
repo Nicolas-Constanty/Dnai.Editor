@@ -340,7 +340,7 @@ namespace dnai
         void Entity::declare()
         {
             setContainerId(parentItem()->id());
-            dnai::core::HandlerManager::Instance().Declarator().declare(*this);
+            dnai::core::HandlerManager::Instance().Declarator().declare(this);
         }
 
 		void Entity::remove()
@@ -350,7 +350,7 @@ namespace dnai
 			{
 				c->remove(this);
             }
-            dnai::core::HandlerManager::Instance().Declarator().remove(*this);
+            dnai::core::HandlerManager::Instance().Declarator().remove(this);
 			parentItem()->removeOne(this);
             delete this;
 		}

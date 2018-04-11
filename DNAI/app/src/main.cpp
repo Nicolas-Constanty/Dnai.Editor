@@ -3,6 +3,7 @@
 #include "dnai.h"
 #include "dnai/editor.h"
 #include "dnai/project.h"
+#include "dnai/core/handlermanager.h"
 
 #if defined(_WIN32) && defined(_MSC_VER)
 #include "../../lib/WinToast/wintoastlib.h"
@@ -31,6 +32,14 @@ static QObject *standardpath_singleton_provider(QQmlEngine *engine, QJSEngine *s
     Q_UNUSED(scriptEngine)
 
     return new QCStandardPaths();
+}
+
+static QObject *core_controller_singleton_provider(QQmlEngine *engine, QJSEngine *scriptEngine)
+{
+    Q_UNUSED(engine)
+    Q_UNUSED(scriptEngine)
+
+    return &dnai::core::HandlerManager::Instance();
 }
 
 static void registerDNAI()
@@ -138,8 +147,16 @@ static void registerModels()
     qmlRegisterModels(dnai::models::EntityTree, "EntityTree");
 }
 
-static void registerConnection() {
-    //qmlRegisterType<EventConsumer>("DNAI.Communication.EventConsumer", 1, 0, "EventConsumer");
+static void registerCore() {
+    qmlRegisterUncreatableType<dnai::core::ProjectHandler>("DNAI.Core", 1, 0, "Project", "Use DNAI.Core.Controller.project");
+    qmlRegisterUncreatableType<dnai::core::DeclaratorHandler>("DNAI.Core", 1, 0, "Declarator", "Use DNAI.Core.Controller.declarator");
+    qmlRegisterUncreatableType<dnai::core::VariableHandler>("DNAI.Core", 1, 0, "Variable", "Use DNAI.Core.Controller.variable");
+    qmlRegisterUncreatableType<dnai::core::EnumHandler>("DNAI.Core", 1, 0, "Enumeration", "Use DNAI.Core.Controller.enumeration");
+    qmlRegisterUncreatableType<dnai::core::FunctionHandler>("DNAI.Core", 1, 0, "Function", "Use DNAI.Core.Controller.function");
+    //instruction handler
+    //list handler
+    //object handler
+    qmlRegisterSingletonType<dnai::core::HandlerManager>("DNAI.Core", 1, 0, "Controller", core_controller_singleton_provider);
 }
 
 static void registerQml()
@@ -147,7 +164,7 @@ static void registerQml()
     registerEnums();
     registerModels();
     registerViews();
-    registerConnection();
+    registerCore();
 }
 
 static void registerCustomTypes()

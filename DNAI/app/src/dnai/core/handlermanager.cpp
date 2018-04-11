@@ -22,6 +22,21 @@ namespace dnai
             return inst;
         }
 
+        ProjectHandler *HandlerManager::project()
+        {
+            return &m_project;
+        }
+
+        DeclaratorHandler *HandlerManager::declarator()
+        {
+            return &m_declarator;
+        }
+
+        VariableHandler *HandlerManager::variable()
+        {
+            return &m_variable;
+        }
+
         ProjectHandler &HandlerManager::Project()
         {
             return m_project;

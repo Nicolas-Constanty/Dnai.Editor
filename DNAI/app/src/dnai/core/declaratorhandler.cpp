@@ -42,7 +42,7 @@ namespace dnai
             for (models::Entity *child : entity.childrenItem())
             {
                 child->setContainerId(id);
-                declare(*child);
+                declare(child);
             }
         }
 
@@ -51,20 +51,20 @@ namespace dnai
             removed[entity.containerId()][entity.name().toStdString()] = &entity;
         }
 
-        void DeclaratorHandler::declare(models::Entity &todeclare)
+        void DeclaratorHandler::declare(models::Entity *todeclare)
         {
             qDebug() << "Core: DeclaratorHandler: Declare("
-                     << todeclare.containerId() << ", "
-                     << todeclare.entityType() << ", "
-                     << todeclare.name() << ", "
-                     << todeclare.visibility() << ")";
+                     << todeclare->containerId() << ", "
+                     << todeclare->entityType() << ", "
+                     << todeclare->name() << ", "
+                     << todeclare->visibility() << ")";
 
-            if (todeclare.containerId() != enums::core::UNDEFINED_ID)
+            if (todeclare->containerId() != enums::core::UNDEFINED_ID)
             {
-                enums::core::EntityID declarator = todeclare.containerId();
-                enums::core::ENTITY type = static_cast<enums::core::ENTITY>(todeclare.entityType());
-                QString name = todeclare.name();
-                enums::core::VISIBILITY visi = todeclare.visibility();
+                enums::core::EntityID declarator = todeclare->containerId();
+                enums::core::ENTITY type = static_cast<enums::core::ENTITY>(todeclare->entityType());
+                QString name = todeclare->name();
+                enums::core::VISIBILITY visi = todeclare->visibility();
 
                 commands::CommandManager::Instance()->exec(
                     new commands::CoreCommand("Declarator.Declare", true,
@@ -76,20 +76,20 @@ namespace dnai
                          * Un-execute
                          */
                         std::bind(&::core::declarator::remove, declarator, name)));
-                pendingDeclaration.push(&todeclare);
+                pendingDeclaration.push(todeclare);
             }
         }
 
-        void DeclaratorHandler::remove(const models::Entity &toremove)
+        void DeclaratorHandler::remove(const models::Entity *toremove)
         {
-            enums::core::EntityID declarator = toremove.containerId();
-            enums::core::ENTITY type = static_cast<enums::core::ENTITY>(toremove.entityType());
-            QString name = toremove.name();
-            enums::core::VISIBILITY visi = toremove.visibility();
+            enums::core::EntityID declarator = toremove->containerId();
+            enums::core::ENTITY type = static_cast<enums::core::ENTITY>(toremove->entityType());
+            QString name = toremove->name();
+            enums::core::VISIBILITY visi = toremove->visibility();
 
             qDebug() << "Core: DeclaratorHandler: Remove("
-                     << toremove.containerId() << ", "
-                     << toremove.name() << ")";
+                     << toremove->containerId() << ", "
+                     << toremove->name() << ")";
 
             commands::CommandManager::Instance()->exec(
                 new commands::CoreCommand("Declarator.Remove", true,
@@ -100,7 +100,7 @@ namespace dnai
                     /*
                      * Un-execute
                      */
-                                          std::bind(&::core::declarator::declare, declarator, type, name, visi)));
+                    std::bind(&::core::declarator::declare, declarator, type, name, visi)));
         }
 
         void DeclaratorHandler::move(const models::Entity &tomove, const models::Entity &newparent)

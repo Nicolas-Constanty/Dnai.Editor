@@ -27,11 +27,11 @@ namespace dnai
             void onEntityRemoved(enums::core::EntityID id, models::Entity &entity);
 
         public:
-            Q_INVOKABLE void declare(models::Entity &todeclare);
-            Q_INVOKABLE void remove(const models::Entity &toremove);
-            Q_INVOKABLE void move(const models::Entity &tomove, const models::Entity &newparent);
-            Q_INVOKABLE void rename(const models::Entity &torename, QString const &newname);
-            Q_INVOKABLE void setVisibility(const models::Entity &entity, enums::core::VISIBILITY visibility);
+            Q_INVOKABLE void declare(models::Entity *todeclare);
+            Q_INVOKABLE void remove(const models::Entity *toremove);
+            void move(const models::Entity &tomove, const models::Entity &newparent);
+            void rename(const models::Entity &torename, QString const &newname);
+            void setVisibility(const models::Entity &entity, enums::core::VISIBILITY visibility);
 
         private:
             models::Entity *popDeclared(enums::core::EntityID declarator, enums::core::ENTITY type, QString const &name);
