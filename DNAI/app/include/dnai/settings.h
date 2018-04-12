@@ -34,6 +34,7 @@ private:
 
 public:
     models::SettingsModel *style() const { return m_style; }
+    QString const &currentVersionAPI() const  { return m_currentVersionAPI; }
     void setStyle(models::SettingsModel *m);
     Q_INVOKABLE void loadTheme(const QString &);
     Q_INVOKABLE void init();
