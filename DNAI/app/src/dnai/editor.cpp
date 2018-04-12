@@ -74,6 +74,10 @@ namespace dnai
 		m_solution->close();
 	}
 
+    void Editor::notifyInformation(QString const &text) {
+        m_toasterManagerService.notifyInformation(text);
+    }
+
 	const QList<interfaces::ICommand*>& Editor::actions() const
 	{
 		return m_actions;

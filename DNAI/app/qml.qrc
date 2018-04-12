@@ -167,5 +167,6 @@
         <file>resources/Images/function.png</file>
         <file>resources/Images/variable.png</file>
         <file>resources/Views/DeclarationView.qml</file>
+        <file>resources/Components/Toast.qml</file>
     </qresource>
 </RCC>

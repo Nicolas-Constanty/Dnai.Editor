@@ -6,6 +6,7 @@
 #include "dnai/solution.h"
 #include "models/entity.h"
 #include "models/basicnodemodel.h"
+#include "dnai/toastermanagerservice.h"
 
 namespace dnai
 {
@@ -47,6 +48,7 @@ namespace dnai
         Q_INVOKABLE void createNode(QObject* nodeModel) const;
         Q_INVOKABLE void openSolution() override;
         Q_INVOKABLE void loadSolution(const QString& filename) override;
+        Q_INVOKABLE void notifyInformation(QString const &);
 
 	public:
 		void selectProject(Project *proj);
@@ -68,6 +70,7 @@ namespace dnai
 		QList<interfaces::ICommand*> m_actions;
 		QString m_version = "0.0.1";
         views::EditorView *m_editorView;
+        ToasterManagerService m_toasterManagerService;
 
         static Editor &m_instance;
 	};

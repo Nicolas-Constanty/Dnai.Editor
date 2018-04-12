@@ -172,6 +172,7 @@ int main(int argc, char *argv[])
     }
 #endif
     registerDNAI();
+  //  app.registerReady(std::bind(&dnai::App::onNotifyVersionChanged, &app));
     app.load();
 
     return dnai::App::exec();

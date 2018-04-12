@@ -54,12 +54,18 @@ namespace dnai
             if (response.body.contains("currentVersion")) {
                 m_settings->setAPIVersion(response.body["currentVersion"].toString());
             }
+            onNotifyVersionChanged();
             return response;
         },
         [this](Response response) -> Response {
             qDebug() << "ERROR";
+            onNotifyVersionChanged();
             return response;
         });
+    }
+
+    void App::onNotifyVersionChanged() {
+        m_settings->onNotifyVersionChanged();
     }
 
     void App::initProcessManager()
@@ -97,6 +103,8 @@ namespace dnai
 		initFuncs.push(std::bind(&App::loadMainWindow, this));
 		initFuncs.push(std::bind(&dnai::http::Service::Init, dnai::api::http_config));
         initFuncs.push(std::bind(&App::versionsUpdater, this));
+      //  initFuncs.push(std::bind(&App::onNotifyVersionChanged, this));
+
 		return initFuncs;
 	}
 

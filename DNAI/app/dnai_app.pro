@@ -113,7 +113,8 @@ SOURCES += \
     src/dnai/core/handlermanager.cpp \
     src/dnai/core/variablehandler.cpp \
     src/dnai/core/functionhandler.cpp \
-    src/dnai/core/enumhandler.cpp
+    src/dnai/core/enumhandler.cpp \
+    src/dnai/toastermanagerservice.cpp
 
 
 RESOURCES += qml.qrc
@@ -291,7 +292,8 @@ HEADERS += \
     include/exceptions.h \
     include/interfaces.h \
     include/dnai/core/handlermanager.h \
-    $${PWD}/../lib/core_client/include/core.h
+    $${PWD}/../lib/core_client/include/core.h \
+    include/dnai/toastermanagerservice.h
 
 
 #LIB

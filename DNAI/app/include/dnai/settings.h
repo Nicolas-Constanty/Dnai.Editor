@@ -48,6 +48,7 @@ public:
     Q_INVOKABLE qreal getSettingNumber(const QString &path);
     void setVersion(QString const &);
     void setAPIVersion(QString const &);
+    void onNotifyVersionChanged();
 
     QVariant getValue(const QString &key);
     QVariant getValue(const QString &key, QVariant defaultValue);
@@ -55,7 +56,6 @@ public:
 private:
     static QPair<QStringList, QList<QVariant>> findObject(QJsonObject obj, const QString root);
     bool m_isInit;
-    QString m_currentVersion;
     QString m_currentVersionAPI;
 };
 }
