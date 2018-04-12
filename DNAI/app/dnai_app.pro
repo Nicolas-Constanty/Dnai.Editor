@@ -24,7 +24,7 @@ DEFINES += QT_DEPRECATED_WARNINGS QNANO_USE_RENDERNODE
 DEFINES += QPM_INIT
 
 #Logiciel VERSION RELEASE
-DEFINES += 'DNAI_VERSION_RELEASE=\'\"0.0.22\"\''
+DEFINES += 'DNAI_VERSION_RELEASE=\'\"0.0.21\"\''
 #END
 
 # You can also make your code fail to compile if you use deprecated APIs.

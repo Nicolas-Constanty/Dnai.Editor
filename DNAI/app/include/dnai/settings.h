@@ -41,9 +41,13 @@ public:
     Q_INVOKABLE bool isSettingsLoad() const;
     Q_INVOKABLE void updateProperty(const QString& path, const QVariant &variant);
     Q_INVOKABLE void registerStyle(models::SettingsModel *);
+    Q_INVOKABLE bool isNewVersionAvailable() const;
+
     QPair<QQuickItem*, QString> getFinalProperty(QQuickItem* item, const QString& path) const;
 
     Q_INVOKABLE qreal getSettingNumber(const QString &path);
+    void setVersion(QString const &);
+    void setAPIVersion(QString const &);
 
     QVariant getValue(const QString &key);
     QVariant getValue(const QString &key, QVariant defaultValue);
@@ -51,6 +55,8 @@ public:
 private:
     static QPair<QStringList, QList<QVariant>> findObject(QJsonObject obj, const QString root);
     bool m_isInit;
+    QString m_currentVersion;
+    QString m_currentVersionAPI;
 };
 }
 

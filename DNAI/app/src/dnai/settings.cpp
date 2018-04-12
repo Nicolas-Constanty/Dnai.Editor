@@ -15,7 +15,7 @@ namespace dnai
 //        m_settings.clear();
         m_style = new models::SettingsModel(nullptr);
 		const auto theme = m_settings.value("themes/current/theme").toString();
-		m_isInit = theme != "";
+        m_isInit = theme != "";
 	}
 
 	AppSettings::~AppSettings()
@@ -141,6 +141,21 @@ namespace dnai
 		m_style = style;
 	}
 
+    bool AppSettings::isNewVersionAvailable() const {
+        QStringList currentVersionList = m_currentVersion.split('.');
+        QStringList currentVersionAPIList = m_currentVersionAPI.split('.');
+        int i = 0;
+
+        while (i < currentVersionAPIList.length() && i < currentVersionList.length()) {
+            qDebug() << currentVersionAPIList[i] << " AND " << currentVersionList[i];
+            if (currentVersionAPIList[i].toInt() > currentVersionList[i].toInt()) {
+                return true;
+            }
+            ++i;
+        }
+        return false;
+    }
+
 	QPair<QQuickItem*, QString> AppSettings::getFinalProperty(QQuickItem *item, const QString &path) const
 	{
 		QPair<QQuickItem*, QString> pair;
@@ -174,6 +189,14 @@ namespace dnai
 		m_loadedNumbers[path] = s;
 		return m_loadedNumbers[path];
 	}
+
+    void AppSettings::setVersion(QString const &ver) {
+        m_currentVersion = ver;
+    }
+
+    void AppSettings::setAPIVersion(QString const &ver) {
+        m_currentVersionAPI = ver;
+    }
 
 	QPair<QStringList, QList<QVariant>> AppSettings::findObject(QJsonObject obj, const QString root)
 	{

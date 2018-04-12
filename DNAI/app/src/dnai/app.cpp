@@ -28,9 +28,7 @@ namespace dnai
 	, m_processManager(nullptr)
 	, m_appView(nullptr)
 	, m_nodeModel(nullptr)
-	, m_editor(Editor::instance())
-    , m_currentVersion()
-    , m_currentVersionAPI()
+    , m_editor(Editor::instance())
 	{
 		if (m_instance == nullptr)
 			m_instance = this;
@@ -49,12 +47,12 @@ namespace dnai
 #else
         QString softwares("windows");
 #endif
-        m_currentVersion = DNAI_VERSION_RELEASE;
-        m_currentVersionAPI = m_currentVersion;
+        m_settings->setVersion(DNAI_VERSION_RELEASE);
+        m_settings->setAPIVersion(DNAI_VERSION_RELEASE);
 
         api::get_download_object(softwares, "installer").map([this](Response response) -> Response {
             if (response.body.contains("currentVersion")) {
-                m_currentVersionAPI = response.body["currentVersion"].toString();
+                m_settings->setAPIVersion(response.body["currentVersion"].toString());
             }
             return response;
         },
