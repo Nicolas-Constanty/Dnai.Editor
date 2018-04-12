@@ -29,6 +29,8 @@ namespace dnai
 	, m_appView(nullptr)
 	, m_nodeModel(nullptr)
 	, m_editor(Editor::instance())
+    , m_currentVersion()
+    , m_currentVersionAPI()
 	{
 		if (m_instance == nullptr)
 			m_instance = this;
@@ -41,12 +43,33 @@ namespace dnai
         qDebug() << "~" << "App";
     }
 
+    void App::versionsUpdater() {
+#ifdef Q_OS_MAC
+        QString softwares("mac");
+#else
+        QString softwares("windows");
+#endif
+        m_currentVersion = DNAI_VERSION_RELEASE;
+        m_currentVersionAPI = m_currentVersion;
+
+        api::get_download_object(softwares, "installer").map([this](Response response) -> Response {
+            if (response.body.contains("currentVersion")) {
+                m_currentVersionAPI = response.body["currentVersion"].toString();
+            }
+            return response;
+        },
+        [this](Response response) -> Response {
+            qDebug() << "ERROR";
+            return response;
+        });
+    }
+
     void App::initProcessManager()
 	{
 #ifdef Q_OS_MAC
 		m_processManager = new ProcessManager(QGuiApplication::applicationDirPath() + "/settings/conf/mac/bin_info.cfg");
 #else
-		m_processManager = new ProcessManager("./settings/conf/windows/bin_info.cfg");
+        m_processManager = new ProcessManager(QGuiApplication::applicationDirPath() + "/settings/conf/windows/bin_info.cfg");
 #endif
 		m_processManager->launch();
         core::connect(m_processManager->getServerPort()); //connect core client
@@ -75,6 +98,7 @@ namespace dnai
 		initFuncs.push(std::bind(&App::initAppView, this));
 		initFuncs.push(std::bind(&App::loadMainWindow, this));
 		initFuncs.push(std::bind(&dnai::http::Service::Init, dnai::api::http_config));
+        initFuncs.push(std::bind(&App::versionsUpdater, this));
 		return initFuncs;
 	}
 

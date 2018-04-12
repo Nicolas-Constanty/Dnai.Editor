@@ -25,6 +25,7 @@ namespace dnai {
 		void initProcessManager();
 	    bool eventFilter(QObject* o, QEvent* event) override;
         void registerSettings(AppSettings* appSettings);
+        void versionsUpdater();
 
     public:
         Session &session();
@@ -53,6 +54,8 @@ namespace dnai {
 	    Session m_session;
 	    static App *m_instance;
         Editor &m_editor;
+        QString m_currentVersion;
+        QString m_currentVersionAPI;
 
         QObject *createQmlComponent(const QString &path);
 	    static void setupSettings();

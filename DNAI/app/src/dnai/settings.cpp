@@ -72,7 +72,7 @@ namespace dnai
 #ifdef Q_OS_MAC
     QString path = QGuiApplication::applicationDirPath() + "/settings/themes";
 #else
-    QString path = "settings/themes";
+    QString path = QGuiApplication::applicationDirPath() + "/settings/themes";
 #endif
         QDir dir(path);
 
@@ -204,5 +204,10 @@ namespace dnai
     QVariant AppSettings::getValue(const QString &key)
     {
         return m_settings.value(key);
+    }
+
+    QVariant AppSettings::getValue(const QString &key, QVariant defaultValue)
+    {
+        return m_settings.value(key, defaultValue);
     }
 }

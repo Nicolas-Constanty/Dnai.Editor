@@ -173,5 +173,6 @@ int main(int argc, char *argv[])
 #endif
     registerDNAI();
     app.load();
+
     return dnai::App::exec();
 }

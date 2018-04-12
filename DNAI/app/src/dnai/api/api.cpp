@@ -13,7 +13,7 @@ bool api::refreshing_token = false;
 quint64 api::refreshing_delta = 3600;
 const QString api::settings_key = "/current/user";
 const Config api::http_config = {
-    "http://api.dnai.io",
+    "https://api.preprod.dnai.io/",
       {},
       {
         [](Url *url) {
@@ -93,6 +93,11 @@ const Config api::http_config = {
     Observable &api::get_files()
     {
         return Service::url("files")->get();
+    }
+
+    Observable &api::get_download_object(QString const &platform, QString const &slug)
+    {
+        return Service::url("download/softwares", platform.toLatin1().data(), slug.toLatin1().data())->get();
     }
 
     Observable &api::get_file(QString const &id)
