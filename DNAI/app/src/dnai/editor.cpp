@@ -9,6 +9,7 @@
 #include "dnai/exceptions/exceptionmanager.h"
 #include "dnai/interfaces/iviewzone.h"
 #include "dnai/app.h"
+#include "dnai/views/canvasnode.h"
 
 #include "dnai/core/handlermanager.h"
 
@@ -167,7 +168,13 @@ namespace dnai
         QQuickItem *obj = qobject_cast<QQuickItem*>(component.beginCreate(App::getEngineInstance()->rootContext()));
         QQmlProperty model(obj, "model", App::getEngineInstance());
         model.write(QVariant::fromValue(App::currentInstance()->nodes()->createNode(static_cast<enums::QInstructionID::Instruction_ID>(nodeModel->property("instruction_id").toInt()))));
-        obj->setParentItem(App::instructionView()->canvas()->content());
+        const auto view = qvariant_cast<QQuickItem *>(Editor::instance().selectedView()->property("currentView"));
+        if (!view)
+        {
+            throw std::runtime_error("No canvas view found!");
+        }
+        auto canvas = dynamic_cast<views::CanvasNode *>(view);
+        obj->setParentItem(canvas->content());
         component.completeCreate();
     }
 }

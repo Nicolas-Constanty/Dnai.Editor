@@ -20,8 +20,12 @@ namespace dnai
 
 		Entity::~Entity()
 		{
-			delete m_dataCore;
-			delete m_dataGUI;
+            deleteChildren();
+            if (m_dataCore)
+                delete m_dataCore;
+            if (m_dataGUI)
+                delete m_dataGUI;
+            qDebug() << "~ Entity";
 		}
 
 		bool Entity::isRoot() const

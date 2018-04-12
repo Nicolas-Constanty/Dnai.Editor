@@ -147,12 +147,10 @@ HEADERS += \
     include/dnai/commands/movenodecommand.h \
     include/dnai/commands/openpropertypanel.h \
     include/dnai/commands/zoomcanvascommand.h \
-    include/dnai/controllers/classcontroller.h \
     include/dnai/controllers/consolecontroller.h \
     include/dnai/controllers/inputcontroller.h \
     include/dnai/controllers/outputcontroller.h \
     include/dnai/controllers/propertypanel.h \
-    include/dnai/enums/core/commands.h \
     include/dnai/enums/core/instructionid.h \
     include/dnai/enums/declarationtype.h \
     include/dnai/enums/flowtype.h \
@@ -275,7 +273,6 @@ HEADERS += \
     include/enums.h \
     include/http.h \
     include/models.h \
-    include/qmlresources.h \
     include/views.h \
     include/dnai/commands/corecommand.h \
     include/dnai/core/entitymanager.h \
@@ -293,7 +290,8 @@ HEADERS += \
     include/dnai.h \
     include/exceptions.h \
     include/interfaces.h \
-    include/dnai/core/handlermanager.h
+    include/dnai/core/handlermanager.h \
+    $${PWD}/../lib/core_client/include/core.h
 
 
 #LIB

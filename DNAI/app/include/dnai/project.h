@@ -24,6 +24,7 @@ namespace dnai {
 		Q_PROPERTY(int childCount READ childCount CONSTANT)
 	public:
         Project();
+        ~Project();
 		const QJsonObject &jsonData() const override;
 
     // ISerializable implementation

@@ -17,8 +17,6 @@ namespace dnai
 
             virtual ~GenericTreeItem()
             {
-				for (auto child : m_childItems)
-					delete child;
             }
             virtual void appendChild(T *child) {
                 m_childItems.append(child);
@@ -46,6 +44,12 @@ namespace dnai
             {
 				if (m_childItems.contains(e))
 					m_childItems.removeOne(e);
+            }
+
+            void deleteChildren()
+            {
+                while (!m_childItems.isEmpty())
+                    delete m_childItems.takeFirst();
             }
         private:
             QList<T*> m_childItems;

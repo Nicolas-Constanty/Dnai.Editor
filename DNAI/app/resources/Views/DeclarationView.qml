@@ -173,7 +173,7 @@ Item {
                         AddButton {
                             id: _addContext
                             width: 45
-                            visible: modelData.parentRef.entityType === Core.CONTEXT
+                            visible: modelData.parentRef.entityType === 0
                             onPressed: {
                                 proj.addContext(_sublist.visualModel.items.count, modelData.listIndex, idx)
                                 _sublist.positionViewAtEnd()
