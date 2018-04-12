@@ -33,17 +33,13 @@ namespace dnai
 		if (m_instance == nullptr)
             m_instance = this;
         QTimer::singleShot(300, this, &App::loadSplashScreen);
-        qDebug() << "Ctor";
 	}
 
     void App::loadSplashScreen()
     {
-        qDebug() << "splash";
         m_engine.load(QUrl(QLatin1String("qrc:/resources/main.qml")));
         if (m_engine.rootObjects().isEmpty())
             throw std::runtime_error("Fail to load main.qml");
-        qDebug() << "splashEND";
-        qDebug() << &m_engine;
         QMetaObject::invokeMethod(m_engine.rootObjects().first(), "load");
     }
 

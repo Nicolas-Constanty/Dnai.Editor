@@ -12,7 +12,9 @@ namespace dnai
 {
 	AppSettings::AppSettings(QObject* parent) : QObject(parent)
     {
+#ifdef QT_DEBUG
         m_settings.clear();
+#endif
         m_style = new models::SettingsModel(nullptr);
 		const auto theme = m_settings.value("themes/current/theme").toString();
         m_isInit = theme != "";
