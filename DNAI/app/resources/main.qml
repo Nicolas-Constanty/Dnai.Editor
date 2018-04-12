@@ -46,7 +46,7 @@ Window {
     Loader {
         id: _loadermain
         active: false
-        asynchronous: true
+        asynchronous: false
         visible: status == Loader.Ready
         sourceComponent: _mainWindow
     }
@@ -94,6 +94,7 @@ Window {
                 Component.onCompleted: {
                     pane.wind = _cw
                     closeSplashScreen()
+                    _main.close()
                 }
             }
         }
