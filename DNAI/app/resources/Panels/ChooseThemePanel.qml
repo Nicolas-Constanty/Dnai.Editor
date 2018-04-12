@@ -27,7 +27,7 @@ ChooseThemeForm {
 
     validateButton.onClicked: {
         form.visible = false
-        main.loadMain()
         wind.close()
+        main.loadMain()
     }
 }

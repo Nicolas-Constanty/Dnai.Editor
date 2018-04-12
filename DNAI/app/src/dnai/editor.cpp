@@ -186,4 +186,11 @@ namespace dnai
         obj->setParentItem(canvas->content());
         component.completeCreate();
     }
+
+    void Editor::checkVersion()
+    {
+        auto app = App::currentInstance();
+        app->versionsUpdater();
+        app->onNotifyVersionChanged();
+    }
 }

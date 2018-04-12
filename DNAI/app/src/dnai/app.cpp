@@ -32,7 +32,6 @@ namespace dnai
 	{
 		if (m_instance == nullptr)
             m_instance = this;
-//        registerReady([&](){loadMainWindow();});
         QTimer::singleShot(300, this, &App::loadSplashScreen);
         qDebug() << "Ctor";
 	}
@@ -114,11 +113,7 @@ namespace dnai
         initFuncs.push(&App::setupSettings);
         initFuncs.push(&App::loadFonts);
         initFuncs.push(std::bind(&App::initAppView, this));
-
         initFuncs.push(std::bind(&dnai::http::Service::Init, dnai::api::http_config));
-//        initFuncs.push(std::bind(&App::versionsUpdater, this));
-      //  initFuncs.push(std::bind(&App::onNotifyVersionChanged, this));
-        qDebug() << "EndINIT";
 		return initFuncs;
 	}
 
@@ -139,14 +134,8 @@ namespace dnai
 	}
 
     void App::loadMainWindow()
-	{
-        qDebug() << "yoo";
-        qDebug() << &m_engine;
-        qDebug() << m_engine.rootObjects();
+    {
         QMetaObject::invokeMethod(m_engine.rootObjects().first(), "load");
-//		m_engine.load(QUrl(QLatin1String("qrc:/resources/main.qml")));
-//		if (m_engine.rootObjects().isEmpty())
-//			throw std::runtime_error("Fail to load main.qml");
 	}
 
     bool App::eventFilter(QObject* o, QEvent* event)

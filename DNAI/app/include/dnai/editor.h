@@ -50,6 +50,7 @@ namespace dnai
         Q_INVOKABLE void loadSolution(const QString& filename) override;
         Q_INVOKABLE void notifyInformation(QString const &);
         Q_INVOKABLE void startApp();
+        Q_INVOKABLE void checkVersion();
 
 	public:
 		void selectProject(Project *proj);
