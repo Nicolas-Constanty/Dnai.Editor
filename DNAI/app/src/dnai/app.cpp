@@ -152,6 +152,10 @@ namespace dnai
 		return m_nodeModel;
 	}
 
+    ProcessManager *App::processManager() {
+        return m_processManager;
+    }
+
     Editor &App::editor() const
 	{
 		return m_editor;

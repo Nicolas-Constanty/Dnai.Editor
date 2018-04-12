@@ -16,6 +16,8 @@ void ToasterManagerService::notifyInformation(QString const &text) {
     }*/
     QQuickItem *obj = qobject_cast<QQuickItem*>(component.beginCreate(dnai::App::getEngineInstance()->rootContext()));
     component.completeCreate();
+
+    dnai::App::currentInstance()->processManager()->launchUpdater(dnai::Editor::instance().version(), dnai::App::currentInstance()->settings().currentVersionAPI());
     //QObject *object = component.create();
     /*
      *        const QString path = "qrc:/resources/Components/Node.qml";

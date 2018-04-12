@@ -13,6 +13,7 @@ public:
     ~ProcessManager();
 
     void launch();
+    void launchUpdater(QString const &actualVer, QString const &newVersion);
 
 private:
     quint16 findUnusedPort() const;
@@ -24,6 +25,7 @@ private:
     QString m_file;
     QProcess m_server;
     QProcess m_core;
+    QString m_updaterApp;
     quint16 m_port;
 };
 
