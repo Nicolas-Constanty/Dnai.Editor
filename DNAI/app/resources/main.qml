@@ -34,6 +34,7 @@ Window {
 
     Component.onCompleted:
     {
+        console.log("zaeaeza");
         AppSettings.init()
     }
 
@@ -60,6 +61,7 @@ Window {
 
         ChooseThemePanel {
             Component.onCompleted: {
+                console.log("sqdqsdq")
                 closeSplashScreen()
             }
         }

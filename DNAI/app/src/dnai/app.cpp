@@ -31,7 +31,10 @@ namespace dnai
     , m_editor(Editor::instance())
 	{
 		if (m_instance == nullptr)
-			m_instance = this;
+            m_instance = this;
+        m_engine.load(QUrl(QLatin1String("qrc:/resources/Views/SplashScreen.qml")));
+        if (m_engine.rootObjects().isEmpty())
+            throw std::runtime_error("Fail to load splashscreen.qml");
 	}
 
     App::~App() {
@@ -75,8 +78,8 @@ namespace dnai
 
     void App::setupSettings()
 	{
-		setOrganizationName("DNAI");
-		setOrganizationDomain("DNAI.com");
+        setOrganizationName("SaltyStudio");
+        setOrganizationDomain("dnai.io");
 		setApplicationName("DNAI");
 	}
 
@@ -94,7 +97,7 @@ namespace dnai
         initFuncs.push(&App::setupSettings);
         initFuncs.push(&App::loadFonts);
 		initFuncs.push(std::bind(&App::initAppView, this));
-		initFuncs.push(std::bind(&App::loadMainWindow, this));
+//		initFuncs.push(std::bind(&App::loadMainWindow, this));
 		initFuncs.push(std::bind(&dnai::http::Service::Init, dnai::api::http_config));
         initFuncs.push(std::bind(&App::versionsUpdater, this));
 		return initFuncs;

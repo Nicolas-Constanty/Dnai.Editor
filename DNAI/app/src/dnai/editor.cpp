@@ -66,8 +66,13 @@ namespace dnai
 	{
 		m_solution = new Solution();
 		if (!filename.isEmpty())
-			m_solution->load(filename);
-	}
+            m_solution->load(filename);
+    }
+
+    void Editor::startApp()
+    {
+       App::currentInstance()->load();
+    }
 
 	void Editor::closeSolution()
 	{

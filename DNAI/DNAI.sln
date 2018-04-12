@@ -1,19 +1,26 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27130.2036
+VisualStudioVersion = 15.0.27428.2027
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DNAI", "app\DNAI.vcxproj", "{38D27E16-965C-3232-8464-6DA1E7D78EF3}"
 	ProjectSection(ProjectDependencies) = postProject
 		{E0727402-3A5C-3408-A41E-CC8931722356} = {E0727402-3A5C-3408-A41E-CC8931722356}
+		{E7372959-B806-3AC4-9DD0-1A4C36C0E00E} = {E7372959-B806-3AC4-9DD0-1A4C36C0E00E}
 		{25305FE0-FF39-3E52-95E5-AD96E2988ECC} = {25305FE0-FF39-3E52-95E5-AD96E2988ECC}
-		{32920AAB-ABF0-39CC-B6BC-5EC75048000F} = {32920AAB-ABF0-39CC-B6BC-5EC75048000F}
+		{BC71B132-F545-3CAC-A020-243A11F8C59E} = {BC71B132-F545-3CAC-A020-243A11F8C59E}
 	EndProjectSection
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WinToast", "lib\WinToast\WinToast.vcxproj", "{E0727402-3A5C-3408-A41E-CC8931722356}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EventClient", "lib\event_client\EventClient.vcxproj", "{25305FE0-FF39-3E52-95E5-AD96E2988ECC}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DataComEvent", "lib\DataComEvent\DataComEvent.vcxproj", "{32920AAB-ABF0-39CC-B6BC-5EC75048000F}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Cerealization", "lib\Cerealization\Cerealization.vcxproj", "{BC71B132-F545-3CAC-A020-243A11F8C59E}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CoreClient", "lib\core_client\CoreClient.vcxproj", "{E7372959-B806-3AC4-9DD0-1A4C36C0E00E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{25305FE0-FF39-3E52-95E5-AD96E2988ECC} = {25305FE0-FF39-3E52-95E5-AD96E2988ECC}
+		{BC71B132-F545-3CAC-A020-243A11F8C59E} = {BC71B132-F545-3CAC-A020-243A11F8C59E}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WinToast", "lib\WinToast\WinToast.vcxproj", "{E0727402-3A5C-3408-A41E-CC8931722356}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,24 +32,28 @@ Global
 		{38D27E16-965C-3232-8464-6DA1E7D78EF3}.Debug|x64.Build.0 = Debug|x64
 		{38D27E16-965C-3232-8464-6DA1E7D78EF3}.Release|x64.ActiveCfg = Release|x64
 		{38D27E16-965C-3232-8464-6DA1E7D78EF3}.Release|x64.Build.0 = Release|x64
-		{E0727402-3A5C-3408-A41E-CC8931722356}.Debug|x64.ActiveCfg = Debug|x64
-		{E0727402-3A5C-3408-A41E-CC8931722356}.Debug|x64.Build.0 = Debug|x64
-		{E0727402-3A5C-3408-A41E-CC8931722356}.Release|x64.ActiveCfg = Release|x64
-		{E0727402-3A5C-3408-A41E-CC8931722356}.Release|x64.Build.0 = Release|x64
 		{25305FE0-FF39-3E52-95E5-AD96E2988ECC}.Debug|x64.ActiveCfg = Debug|x64
 		{25305FE0-FF39-3E52-95E5-AD96E2988ECC}.Debug|x64.Build.0 = Debug|x64
 		{25305FE0-FF39-3E52-95E5-AD96E2988ECC}.Release|x64.ActiveCfg = Release|x64
 		{25305FE0-FF39-3E52-95E5-AD96E2988ECC}.Release|x64.Build.0 = Release|x64
-		{32920AAB-ABF0-39CC-B6BC-5EC75048000F}.Debug|x64.ActiveCfg = Debug|x64
-		{32920AAB-ABF0-39CC-B6BC-5EC75048000F}.Debug|x64.Build.0 = Debug|x64
-		{32920AAB-ABF0-39CC-B6BC-5EC75048000F}.Release|x64.ActiveCfg = Release|x64
-		{32920AAB-ABF0-39CC-B6BC-5EC75048000F}.Release|x64.Build.0 = Release|x64
+		{BC71B132-F545-3CAC-A020-243A11F8C59E}.Debug|x64.ActiveCfg = Debug|x64
+		{BC71B132-F545-3CAC-A020-243A11F8C59E}.Debug|x64.Build.0 = Debug|x64
+		{BC71B132-F545-3CAC-A020-243A11F8C59E}.Release|x64.ActiveCfg = Release|x64
+		{BC71B132-F545-3CAC-A020-243A11F8C59E}.Release|x64.Build.0 = Release|x64
+		{E7372959-B806-3AC4-9DD0-1A4C36C0E00E}.Debug|x64.ActiveCfg = Debug|x64
+		{E7372959-B806-3AC4-9DD0-1A4C36C0E00E}.Debug|x64.Build.0 = Debug|x64
+		{E7372959-B806-3AC4-9DD0-1A4C36C0E00E}.Release|x64.ActiveCfg = Release|x64
+		{E7372959-B806-3AC4-9DD0-1A4C36C0E00E}.Release|x64.Build.0 = Release|x64
+		{E0727402-3A5C-3408-A41E-CC8931722356}.Debug|x64.ActiveCfg = Debug|x64
+		{E0727402-3A5C-3408-A41E-CC8931722356}.Debug|x64.Build.0 = Debug|x64
+		{E0727402-3A5C-3408-A41E-CC8931722356}.Release|x64.ActiveCfg = Release|x64
+		{E0727402-3A5C-3408-A41E-CC8931722356}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		Qt5Version = msvc2017_64
-		SolutionGuid = {DB2B8B95-1B3E-4764-9E92-6D34B95B72AF}
+		SolutionGuid = {BC8E2CEB-169E-4347-9CA9-2AB2099A1F60}
 	EndGlobalSection
 EndGlobal

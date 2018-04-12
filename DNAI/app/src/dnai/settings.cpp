@@ -12,7 +12,7 @@ namespace dnai
 {
 	AppSettings::AppSettings(QObject* parent) : QObject(parent)
     {
-//        m_settings.clear();
+        m_settings.clear();
         m_style = new models::SettingsModel(nullptr);
 		const auto theme = m_settings.value("themes/current/theme").toString();
         m_isInit = theme != "";
@@ -68,15 +68,24 @@ namespace dnai
 
 	void AppSettings::init()
     {
+        qDebug() << m_settings.applicationName();
+        qDebug() << m_settings.fileName();
+        qDebug() << m_settings.status();
+        qDebug() << m_settings.childKeys();
+        qDebug() << m_settings.organizationName();
+        qDebug() << m_settings.scope();
+        qDebug() << m_settings.allKeys();
 		const auto theme = m_settings.value("themes/current/theme").toString();
 #ifdef Q_OS_MAC
     QString path = QGuiApplication::applicationDirPath() + "/settings/themes";
 #else
     QString path = QGuiApplication::applicationDirPath() + "/settings/themes";
 #endif
+        qDebug() << QGuiApplication::applicationDirPath();
         QDir dir(path);
 
 		const auto list = dir.entryList(QDir::Files);
+        qDebug() << list.count();
 		for (auto i = list.begin(); i!= list.end(); ++i)
 		{
 			const auto f = QFileInfo(*i);
@@ -86,6 +95,7 @@ namespace dnai
 			
 		}
 		m_isInit = theme != "";
+        qDebug() << m_themes.count();
 		if (!m_isInit && m_themes.count() != 0)
 		{
 			m_settings.clear();

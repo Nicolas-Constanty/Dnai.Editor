@@ -24,7 +24,18 @@ DEFINES += QT_DEPRECATED_WARNINGS QNANO_USE_RENDERNODE
 DEFINES += QPM_INIT
 
 #Logiciel VERSION RELEASE
-DEFINES += 'DNAI_VERSION_RELEASE=\'\"0.0.21\"\''
+VERSION_MAJOR = 0
+VERSION_MINOR = 0
+VERSION_BUILD = 21
+
+DEFINES += "VERSION_MAJOR=$$VERSION_MAJOR"\
+       "VERSION_MINOR=$$VERSION_MINOR"\
+       "VERSION_BUILD=$$VERSION_BUILD"
+
+#Target version
+VERSION = $${VERSION_MAJOR}.$${VERSION_MINOR}.$${VERSION_BUILD}
+
+DEFINES += "DNAI_VERSION_RELEASE=$$VERSION_MAJOR"
 #END
 
 # You can also make your code fail to compile if you use deprecated APIs.
@@ -328,8 +339,13 @@ LIBS += -L$${PWD}/../lib/ -lCoreClient -lEventClient -lCerealization
 #}
 
 #end library Data Event
+CONFIG(release, debug|release) {
+win32:settingsfolder.path = $${OUT_PWD}/release/settings
+}
+CONFIG(debug, debug|release) {
+win32:settingsfolder.path = $${OUT_PWD}/debug/settings
+}
 
-win32:settingsfolder.path = $${OUT_PWD}/settings
 unix:settingsfolder.path = /usr/local/bin/$${TARGET}/bin/$${TARGET}.app/Contents/MacOS/settings
 settingsfolder.files = settings/*
 

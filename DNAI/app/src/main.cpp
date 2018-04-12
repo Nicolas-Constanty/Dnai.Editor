@@ -159,6 +159,7 @@ int main(int argc, char *argv[])
 {
     registerQml();
     registerCustomTypes();
+    registerDNAI();
 
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
@@ -171,8 +172,5 @@ int main(int argc, char *argv[])
         qDebug() << "Error, your system in not compatible!";
     }
 #endif
-    registerDNAI();
-    app.load();
-
     return dnai::App::exec();
 }

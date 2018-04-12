@@ -47,6 +47,7 @@ namespace dnai
         Q_INVOKABLE void createNode(QObject* nodeModel) const;
         Q_INVOKABLE void openSolution() override;
         Q_INVOKABLE void loadSolution(const QString& filename) override;
+        Q_INVOKABLE void startApp();
 
 	public:
 		void selectProject(Project *proj);

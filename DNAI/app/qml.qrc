@@ -167,5 +167,7 @@
         <file>resources/Images/function.png</file>
         <file>resources/Images/variable.png</file>
         <file>resources/Views/DeclarationView.qml</file>
+        <file>resources/Views/PropertyView.qml</file>
+        <file>resources/Components/EntityView.qml</file>
     </qresource>
 </RCC>

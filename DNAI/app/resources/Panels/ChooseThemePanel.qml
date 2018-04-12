@@ -8,6 +8,8 @@ import "../Layouts"
 
 ChooseThemeForm {
     id: form
+    width: 400
+    height: 200
 
     panel.color: AppSettings.style.background.color
 
