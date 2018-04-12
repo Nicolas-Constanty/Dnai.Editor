@@ -32,8 +32,16 @@ ProcessManager::~ProcessManager() {
 void ProcessManager::launchUpdater(QString const &actualVer, QString const &newVersion) {
     if (m_updaterApp.size() != 0) {
     QProcess proc;
-    m_updaterApp = m_updaterApp + " " +  actualVer + " " + newVersion;
-
+#if defined(Q_OS_MAC)
+    QString path = QGuiApplication::applicationDirPath();
+    int len = sizeof("/DNAI.app/Contents/MacOS");
+    int idx = path.length() - (len - 1);
+    path.remove(idx, len);
+    m_updaterApp = m_updaterApp + " " +  actualVer + " " + newVersion + " " + path + " " + "DNAI.app";
+    qDebug() << path;
+#else
+    m_updaterApp = m_updaterApp + " " +  actualVer + " " + newVersion + " " + QGuiApplication::applicationDirPath() + " " + "DNAI";
+#endif
     proc.startDetached(m_updaterApp);
     } else {
         qDebug() << "[WARNING] can't launch DNAI Updater";
