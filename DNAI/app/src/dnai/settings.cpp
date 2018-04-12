@@ -152,9 +152,10 @@ namespace dnai
 	}
 
     bool AppSettings::isNewVersionAvailable() const {
-        QStringList currentVersionList = m_currentVersion.split('.');
+        QStringList currentVersionList = Editor::instance().version().split('.');
         QStringList currentVersionAPIList = m_currentVersionAPI.split('.');
         int i = 0;
+
 
         while (i < currentVersionAPIList.length() && i < currentVersionList.length()) {
             qDebug() << currentVersionAPIList[i] << " AND " << currentVersionList[i];
@@ -201,11 +202,17 @@ namespace dnai
 	}
 
     void AppSettings::setVersion(QString const &ver) {
-        m_currentVersion = ver;
+        Editor::instance().setVersion(ver);
     }
 
     void AppSettings::setAPIVersion(QString const &ver) {
         m_currentVersionAPI = ver;
+    }
+
+    void AppSettings::onNotifyVersionChanged() {
+       // if (isNewVersionAvailable()) {
+            Editor::instance().notifyInformation("LOL");
+      //  }
     }
 
 	QPair<QStringList, QList<QVariant>> AppSettings::findObject(QJsonObject obj, const QString root)

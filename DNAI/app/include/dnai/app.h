@@ -26,6 +26,7 @@ namespace dnai {
 	    bool eventFilter(QObject* o, QEvent* event) override;
         void registerSettings(AppSettings* appSettings);
         void versionsUpdater();
+        void onNotifyVersionChanged();
 
     public:
         Session &session();
