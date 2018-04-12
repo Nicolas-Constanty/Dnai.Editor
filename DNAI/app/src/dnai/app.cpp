@@ -1,6 +1,8 @@
 #include <QQuickWindow>
 #include <QTimer>
 #include <QDir>
+#include <QDirIterator>
+#include <QQmlProperty>
 
 #include "dnai/app.h"
 #include "dnai/processmanager.h"
@@ -9,8 +11,6 @@
 #include "dnai/commands/commandmanager.h"
 #include "api.h"
 #include "http.h"
-#include <QDirIterator>
-#include <QQmlProperty>
 
 #if defined(_WIN32) && defined(_MSC_VER)
 #include "../../lib/WinToast/wintoastlib.h"
@@ -32,10 +32,21 @@ namespace dnai
 	{
 		if (m_instance == nullptr)
             m_instance = this;
-        m_engine.load(QUrl(QLatin1String("qrc:/resources/Views/SplashScreen.qml")));
-        if (m_engine.rootObjects().isEmpty())
-            throw std::runtime_error("Fail to load splashscreen.qml");
+//        registerReady([&](){loadMainWindow();});
+        QTimer::singleShot(300, this, &App::loadSplashScreen);
+        qDebug() << "Ctor";
 	}
+
+    void App::loadSplashScreen()
+    {
+        qDebug() << "splash";
+        m_engine.load(QUrl(QLatin1String("qrc:/resources/main.qml")));
+        if (m_engine.rootObjects().isEmpty())
+            throw std::runtime_error("Fail to load main.qml");
+        qDebug() << "splashEND";
+        qDebug() << &m_engine;
+        QMetaObject::invokeMethod(m_engine.rootObjects().first(), "load");
+    }
 
     App::~App() {
 	    delete m_processManager;
@@ -102,14 +113,18 @@ namespace dnai
         initFuncs.push(std::bind(&App::installEventFilter, this, this));
         initFuncs.push(&App::setupSettings);
         initFuncs.push(&App::loadFonts);
-		initFuncs.push(std::bind(&App::initAppView, this));
-//		initFuncs.push(std::bind(&App::loadMainWindow, this));
-		initFuncs.push(std::bind(&dnai::http::Service::Init, dnai::api::http_config));
-        initFuncs.push(std::bind(&App::versionsUpdater, this));
-      //  initFuncs.push(std::bind(&App::onNotifyVersionChanged, this));
+        initFuncs.push(std::bind(&App::initAppView, this));
 
+        initFuncs.push(std::bind(&dnai::http::Service::Init, dnai::api::http_config));
+//        initFuncs.push(std::bind(&App::versionsUpdater, this));
+      //  initFuncs.push(std::bind(&App::onNotifyVersionChanged, this));
+        qDebug() << "EndINIT";
 		return initFuncs;
 	}
+
+    void App::afterInit()
+    {
+    }
 
 	void App::loadFonts()
     {
@@ -125,9 +140,13 @@ namespace dnai
 
     void App::loadMainWindow()
 	{
-		m_engine.load(QUrl(QLatin1String("qrc:/resources/main.qml")));
-		if (m_engine.rootObjects().isEmpty())
-			throw std::runtime_error("Fail to load main.qml");
+        qDebug() << "yoo";
+        qDebug() << &m_engine;
+        qDebug() << m_engine.rootObjects();
+        QMetaObject::invokeMethod(m_engine.rootObjects().first(), "load");
+//		m_engine.load(QUrl(QLatin1String("qrc:/resources/main.qml")));
+//		if (m_engine.rootObjects().isEmpty())
+//			throw std::runtime_error("Fail to load main.qml");
 	}
 
     bool App::eventFilter(QObject* o, QEvent* event)

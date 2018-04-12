@@ -22,24 +22,43 @@ Window {
     modality: Qt.ApplicationModal
     flags: Qt.SplashScreen
     color: "transparent"
+    property alias main: _main
 
     function closeSplashScreen()
     {
         _splashScreen.close()
     }
 
+    function load()
+    {
+        _loader.active = true;
+    }
+
+    function loadMain()
+    {
+        _loadermain.active = true
+    }
+
     SplashScreen {
         id: _splashScreen
     }
 
+    Loader {
+        id: _loadermain
+        active: false
+        asynchronous: true
+        visible: status == Loader.Ready
+        sourceComponent: _mainWindow
+    }
+
     Component.onCompleted:
     {
-        console.log("zaeaeza");
         AppSettings.init()
     }
 
     Loader {
-        id: loader
+        id: _loader
+        active: false
         asynchronous: true
         visible: status == Loader.Ready
         sourceComponent: AppSettings.isSettingsLoad() ? _mainWindow : _selectTheme
@@ -49,6 +68,8 @@ Window {
         id: _mainWindow
 
         AppWindow {
+            width: 1280
+            height: 720
             Component.onCompleted: {
                 closeSplashScreen()
                 _main.close()
@@ -59,10 +80,15 @@ Window {
     Component {
         id: _selectTheme
 
-        ChooseThemePanel {
-            Component.onCompleted: {
-                console.log("sqdqsdq")
-                closeSplashScreen()
+        AppWindow {
+            id: _cw
+            ChooseThemePanel {
+                id: pane
+                Component.onCompleted: {
+                    console.log("sqdqsdq")
+                    pane.wind = _cw
+                    closeSplashScreen()
+                }
             }
         }
     }

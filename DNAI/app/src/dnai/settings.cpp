@@ -16,6 +16,7 @@ namespace dnai
         m_style = new models::SettingsModel(nullptr);
 		const auto theme = m_settings.value("themes/current/theme").toString();
         m_isInit = theme != "";
+        static_cast<App *>(App::instance())->registerSettings(this);
 	}
 
 	AppSettings::~AppSettings()
@@ -103,7 +104,6 @@ namespace dnai
 		}
 		else
 			loadTheme(theme);
-		static_cast<App *>(App::instance())->registerSettings(this);
 
         QVariant value = m_settings.value(api::settings_key);
         api::setUser(value.value<api::User>());

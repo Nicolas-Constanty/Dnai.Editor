@@ -30,6 +30,6 @@ Window {
         frameHeight: 256
     }
     Component.onCompleted: {
-//        Editor.startApp()
+        Editor.startApp()
     }
 }

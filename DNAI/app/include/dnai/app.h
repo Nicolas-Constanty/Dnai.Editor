@@ -46,6 +46,9 @@ namespace dnai {
         Q_INVOKABLE void onBuildStart();
         Q_INVOKABLE bool isMac();
 
+        void afterInit();
+    public slots:
+        void loadSplashScreen();
     private:
         QQmlApplicationEngine m_engine;
         AppSettings *m_settings;
