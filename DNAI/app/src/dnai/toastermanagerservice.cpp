@@ -42,11 +42,11 @@ Toast *ToasterManagerService::createToast(QString const &text, std::function<voi
     Toast *toast = new Toast(obj, this, func);
 
     QObject::connect(toast->item(), SIGNAL(enterToast()),
-                     toast, SLOT(onEnterToast()));
+                     toast, SLOT(onEnterToast()), Qt::QueuedConnection);
     QObject::connect(toast->item(), SIGNAL(exitToast()),
-                     toast, SLOT(onExitToast()));
+                     toast, SLOT(onExitToast()),Qt::QueuedConnection);
     QObject::connect(toast->item(), SIGNAL(clickToast()),
-                     toast, SLOT(onClickToast()));
+                     toast, SLOT(onClickToast()),Qt::QueuedConnection);
 
     component.completeCreate();
 
