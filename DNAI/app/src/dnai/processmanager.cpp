@@ -37,7 +37,7 @@ void ProcessManager::launchUpdater(QString const &actualVer, QString const &newV
     int len = sizeof("/DNAI.app/Contents/MacOS");
     int idx = path.length() - (len - 1);
     path.remove(idx, len);
-    m_updaterApp = m_updaterApp + " " +  actualVer + " " + newVersion + " " + path + " " + "DNAI.app";
+    m_updaterApp = m_updaterApp + " " +  actualVer + " " + newVersion + " " + path + " " + "DNAI";
     qDebug() << path;
 #else
     m_updaterApp = m_updaterApp + " " +  actualVer + " " + newVersion + " " + QGuiApplication::applicationDirPath() + " " + "DNAI";

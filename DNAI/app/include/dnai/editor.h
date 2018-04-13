@@ -1,6 +1,7 @@
 #ifndef DNAI_EDITOR_H
 #define DNAI_EDITOR_H
 
+#include <QQuickItem>
 #include "interfaces/ieditor.h"
 #include "dnai/views/editorview.h"
 #include "dnai/solution.h"
@@ -48,9 +49,11 @@ namespace dnai
         Q_INVOKABLE void createNode(QObject* nodeModel) const;
         Q_INVOKABLE void openSolution() override;
         Q_INVOKABLE void loadSolution(const QString& filename) override;
-        Q_INVOKABLE void notifyInformation(QString const &);
+        Q_INVOKABLE void notifyInformation(QString const &, std::function<void ()> func);
         Q_INVOKABLE void startApp();
         Q_INVOKABLE void checkVersion();
+        Q_INVOKABLE void registerMainView(QObject *);
+        QQuickItem *mainView();
 
 	public:
 		void selectProject(Project *proj);
@@ -73,6 +76,7 @@ namespace dnai
 		QString m_version = "0.0.1";
         views::EditorView *m_editorView;
         ToasterManagerService m_toasterManagerService;
+        QQuickItem *m_mainView = nullptr;
 
         static Editor &m_instance;
 	};

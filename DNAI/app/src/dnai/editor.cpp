@@ -1,6 +1,6 @@
 #include <QQuickItem>
 #include <QQmlProperty>
-
+#include <QQuickView>
 
 #include "dnai/editor.h"
 #include "dnai/solution.h"
@@ -79,8 +79,11 @@ namespace dnai
 		m_solution->close();
 	}
 
-    void Editor::notifyInformation(QString const &text) {
-        m_toasterManagerService.notifyInformation(text);
+    void Editor::notifyInformation(QString const &text, std::function<void ()> func) {
+        m_toasterManagerService.notifyInformation(text, func);
+        //m_toasterManagerService.notifyWarning(text + "zaoeo ezaezajiezja zeaijejizazij azeijzaeijzeaij ezaijzaeijzejia ezijaizejji zaeijazeijzejai ezajieazijzaeij zeaeazijz eiazjjiaez", func);
+        //m_toasterManagerService.notifyError(text + "2zijjia zaijjizea zeiezaij ", func);
+        //m_toasterManagerService.notifySuccess(text + "3", func);
     }
 
 	const QList<interfaces::ICommand*>& Editor::actions() const
@@ -191,6 +194,13 @@ namespace dnai
     {
         auto app = App::currentInstance();
         app->versionsUpdater();
-        app->onNotifyVersionChanged();
+      //  app->onNotifyVersionChanged();
+    }
+
+    void Editor::registerMainView(QObject *mainView) {
+        m_mainView = static_cast<QQuickWindow*>(mainView)->contentItem();
+    }
+    QQuickItem *Editor::mainView()  {
+        return m_mainView;
     }
 }

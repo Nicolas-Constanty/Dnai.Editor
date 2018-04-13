@@ -210,9 +210,13 @@ namespace dnai
     }
 
     void AppSettings::onNotifyVersionChanged() {
-       // if (isNewVersionAvailable()) {
-            Editor::instance().notifyInformation("LOL");
-      //  }
+        if (isNewVersionAvailable()) {
+            Editor::instance().notifyInformation("Switch to new version " + m_currentVersionAPI, [this]() {
+                qDebug() << "HALO";
+                App::currentInstance()->processManager()->launchUpdater(Editor::instance().version(), m_currentVersionAPI);
+            });
+                                                 //std::bind(&ProcessManager::launchUpdater, App::currentInstance()->processManager()));
+        }
     }
 
 	QPair<QStringList, QList<QVariant>> AppSettings::findObject(QJsonObject obj, const QString root)
