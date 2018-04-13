@@ -27,6 +27,10 @@ void ToasterManagerService::timeout(Toast *toast) {
     }
 }
 
+void ToasterManagerService::removeOne(Toast *toast) {
+    delete toast;
+}
+
 Toast *ToasterManagerService::createToast(QString const &text, std::function<void ()> func) {
     QQmlComponent component(dnai::App::getEngineInstance(), "qrc:/resources/Components/Toast.qml");
 

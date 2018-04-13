@@ -23,6 +23,9 @@ private:
 public:
     void timeout(Toast *toast);
 
+public slots:
+    void removeOne(Toast *toast);
+
 private:
     Toast *createToast(QString const &text, std::function<void ()> func);
 

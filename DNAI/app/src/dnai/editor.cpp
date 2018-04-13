@@ -82,10 +82,20 @@ namespace dnai
 
     void Editor::notifyInformation(QString const &text, std::function<void ()> func) {
         m_toasterManagerService.notifyInformation(text, func);
-        //m_toasterManagerService.notifyWarning(text + "zaoeo ezaezajiezja zeaijejizazij azeijzaeijzeaij ezaijzaeijzejia ezijaizejji zaeijazeijzejai ezajieazijzaeij zeaeazijz eiazjjiaez", func);
-        //m_toasterManagerService.notifyError(text + "2zijjia zaijjizea zeiezaij ", func);
-        //m_toasterManagerService.notifySuccess(text + "3", func);
     }
+
+    void Editor::notifySuccess(QString const &text, std::function<void ()> func) {
+        m_toasterManagerService.notifySuccess(text, func);
+    }
+
+    void Editor::notifyError(QString const &text, std::function<void ()> func) {
+        m_toasterManagerService.notifyError(text, func);
+    }
+
+    void Editor::notifyWarning(QString const &text, std::function<void ()> func) {
+        m_toasterManagerService.notifyWarning(text, func);
+    }
+
 
 	const QList<interfaces::ICommand*>& Editor::actions() const
 	{

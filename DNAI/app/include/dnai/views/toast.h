@@ -16,6 +16,9 @@ public:
     QQuickItem *item();
     QTimer &timer();
 
+signals:
+    void remove(Toast *);
+
 public slots:
     void timeout();
 
