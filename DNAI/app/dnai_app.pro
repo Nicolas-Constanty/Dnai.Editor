@@ -28,14 +28,14 @@ VERSION_MAJOR = 0
 VERSION_MINOR = 0
 VERSION_BUILD = 21
 
-DEFINES += "VERSION_MAJOR=$$VERSION_MAJOR"\
-       "VERSION_MINOR=$$VERSION_MINOR"\
-       "VERSION_BUILD=$$VERSION_BUILD"
+DEFINES += "VERSION_MAJOR=$${VERSION_MAJOR}"\
+       "VERSION_MINOR=$${VERSION_MINOR}"\
+       "VERSION_BUILD=$${VERSION_BUILD}"
 
 #Target version
-VERSION = $${VERSION_MAJOR}.$${VERSION_MINOR}.$${VERSION_BUILD}
+VERSION = "$${VERSION_MAJOR}.$${VERSION_MINOR}.$${VERSION_BUILD}"
 
-DEFINES += "DNAI_VERSION_RELEASE=$$VERSION_MAJOR"
+DEFINES += DNAI_VERSION_RELEASE=\\\"$${VERSION}\\\"
 #END
 
 # You can also make your code fail to compile if you use deprecated APIs.
@@ -125,7 +125,8 @@ SOURCES += \
     src/dnai/core/variablehandler.cpp \
     src/dnai/core/functionhandler.cpp \
     src/dnai/core/enumhandler.cpp \
-    src/dnai/toastermanagerservice.cpp
+    src/dnai/toastermanagerservice.cpp \
+    src/dnai/views/toast.cpp
 
 
 RESOURCES += qml.qrc
@@ -304,7 +305,8 @@ HEADERS += \
     include/interfaces.h \
     include/dnai/core/handlermanager.h \
     $${PWD}/../lib/core_client/include/core.h \
-    include/dnai/toastermanagerservice.h
+    include/dnai/toastermanagerservice.h \
+    include/dnai/views/toast.h
 
 
 #LIB

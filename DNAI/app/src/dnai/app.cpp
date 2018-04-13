@@ -61,14 +61,20 @@ namespace dnai
 
         api::get_download_object(softwares, "installer").map([this](Response response) -> Response {
             if (response.body.contains("currentVersion")) {
+                qDebug() << "enter ?";
                 m_settings->setAPIVersion(response.body["currentVersion"].toString());
             }
+            qDebug() << DNAI_VERSION_RELEASE;
+            qDebug() << Editor::instance().version();
+            qDebug() << m_settings->currentVersionAPI();
+
+
             onNotifyVersionChanged();
             return response;
         },
         [this](Response response) -> Response {
             qDebug() << "ERROR";
-            onNotifyVersionChanged();
+           // onNotifyVersionChanged();
             return response;
         });
     }
@@ -267,8 +273,8 @@ namespace dnai
      }
 #endif
 #if defined(Q_OS_MAC)
-    Toast macToast;
-    macToast.show("DNAI", "Build has start !");
+    //ToastMac macToast;
+    //macToast.show("DNAI", "Build has start !");
 #endif
   }
 

@@ -17,6 +17,7 @@ import "Nodes/Operator/UnaryOperator"
 import "Panels"
 
 Window {
+    objectName: "SALUTmainView"
     id: _main
     visible: true
     modality: Qt.ApplicationModal
@@ -68,9 +69,11 @@ Window {
         id: _mainWindow
 
         AppWindow {
+            id: appViewMain
             width: 1280
             height: 720
             Component.onCompleted: {
+                Editor.registerMainView(appViewMain)
                 closeSplashScreen()
                 _main.close()
             }

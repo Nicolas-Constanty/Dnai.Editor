@@ -4,10 +4,10 @@
 #include <QObject>
 #include <QString>
 
-class Q_DECL_EXPORT Toast
+class Q_DECL_EXPORT ToastMac
 {
 public:
-    Toast();
+    ToastMac();
 
     void show(QString const &title, QString const &info);
 };
