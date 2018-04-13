@@ -19,8 +19,9 @@ Rectangle {
     property string backgroundColor: "#00BFFF"
     property string iconsFont
     property string colorIconsFont
+    property string parentWidthUpdate: parent.width
 
-    x: parent.width - backgroundRect.width + marginsMore + backgroundRect.width
+    x: parentWidthUpdate - backgroundRect.width + marginsMore + backgroundRect.width
     y: 50 + yMargins
     width: 250
     height: ((textField.font.pixelSize + textField.anchors.margins) * textField.lineCount) + 20
@@ -36,6 +37,15 @@ Rectangle {
     Behavior on x {
             NumberAnimation { duration: 300; easing.type: Easing.OutQuad }
         }
+
+    Connections {
+        target: parent
+        onWidthChanged: {
+            backgroundRect.x = backgroundRect.parentWidthUpdate - backgroundRect.width - marginsMore
+            backgroundRect.parentWidthUpdate = parent.width
+        }
+    }
+
 
     FontAwesomeTextSolid {
         id: icons
