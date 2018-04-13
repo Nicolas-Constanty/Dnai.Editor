@@ -21,7 +21,7 @@ namespace dnai
         {
             Q_OBJECT
             //Q_PROPERTY(ProjectHandler *project READ project)
-            Q_PROPERTY(DeclaratorHandler *declarator READ declarator)
+            Q_PROPERTY(DeclaratorHandler *declarator READ declarator NOTIFY declaratorChanged)
             //Q_PROPERTY(VariableHandler *variable READ variable)
 
         private:
@@ -29,6 +29,9 @@ namespace dnai
 
         public:
             static HandlerManager &Instance();
+
+        signals:
+            void declaratorChanged();
 
             /*
              * QML Properties

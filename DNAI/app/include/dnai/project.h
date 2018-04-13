@@ -55,16 +55,15 @@ namespace dnai {
         models::Entity &getRoot() const;
 
     public:
-		Q_INVOKABLE int expandedRows(const QModelIndex& parent) const;
-        Q_INVOKABLE void addClass(int index, const QString &listindex, const QModelIndex& parent);
-        Q_INVOKABLE void addContext(int index, const QString & listindex, const QModelIndex& parent);
-        Q_INVOKABLE void addFunction(int index, const QString & listindex, const QModelIndex& parent);
-        Q_INVOKABLE void addVariable(int index, const QString & listindex, const QModelIndex& parent);
+        Q_INVOKABLE int expandedRows(const QModelIndex& parent) const;
 		Q_INVOKABLE void removeEntity(const QModelIndex& index, dnai::models::Entity* e);
 
     private:
 		template<class T>
         T _foreachEntity(models::Entity* root, const std::function<T(models::Entity*)> &func) const;
+
+    public:
+        Q_INVOKABLE void declareEntityTo(const QModelIndex &parent, dnai::models::Entity *entity, const QString &listIndex);
 
     private:
 	    QFile* m_file;

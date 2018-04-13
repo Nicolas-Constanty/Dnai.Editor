@@ -194,41 +194,6 @@ namespace dnai {
 		return count + (item->expanded() ? item->childCount() : 0);
     }
 
-    void Project::addClass(int index, const QString & listindex, const QModelIndex &parent)
-	{
-        models::Entity *parentItem = getItem(parent);
-		beginInsertRows(parent, parentItem->childCount(), parentItem->childCount());
-		parentItem->addClass(index, listindex);
-		endInsertRows();
-	}
-
-    void Project::addContext(int index, const QString & listindex, const QModelIndex &parent)
-	{
-        models::Entity *parentItem = getItem(parent);
-		beginInsertRows(parent, parentItem->childCount(), parentItem->childCount());
-		parentItem->addContext(index, listindex);
-		endInsertRows();
-	}
-
-    void Project::addFunction(int index, const QString & listindex, const QModelIndex &parent)
-	{
-        models::Entity *parentItem = getItem(parent);
-		beginInsertRows(parent, parentItem->childCount(), parentItem->childCount());
-        qDebug() << "Index: " << index;
-        qDebug() << "Child count: " << parentItem->childCount();
-        qDebug() << "List index: " << listindex;
-		parentItem->addFunction(index, listindex);
-		endInsertRows();
-	}
-
-    void Project::addVariable(int index, const QString & listindex, const QModelIndex &parent)
-	{
-        models::Entity *parentItem = getItem(parent);
-		beginInsertRows(parent, parentItem->childCount(), parentItem->childCount());
-		parentItem->addVariable(index, listindex);
-		endInsertRows();
-	}
-
 	void Project::removeEntity(const QModelIndex &index, models::Entity *e)
 	{
 		models::Entity *parentItem = getItem(index);
@@ -245,8 +210,31 @@ namespace dnai {
         }
         beginRemoveRows(index, count, count);
 		e->remove();
-		endRemoveRows();
-	}
+        endRemoveRows();
+    }
+
+    void Project::declareEntityTo(const QModelIndex &parent, dnai::models::Entity *entity, const QString &listIndex)
+    {
+        models::Entity *parentItem = getItem(parent);
+        int index = parentItem->childCount();
+
+        beginInsertRows(parent, index, index);
+
+        interfaces::IEntity *guiModel = entity->guiModel<interfaces::IEntity>();
+
+        guiModel->setIndex(index);
+
+        qDebug() << "Index: " << listIndex;
+
+        guiModel->setListIndex(listIndex);
+
+        entity->setParent(parentItem);
+        entity->setContainerId(parentItem->containerId());
+
+        parentItem->appendChild(entity);
+
+        endInsertRows();
+    }
 
 	int Project::childCount() const
 	{

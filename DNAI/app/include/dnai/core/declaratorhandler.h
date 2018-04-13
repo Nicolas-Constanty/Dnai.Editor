@@ -6,6 +6,7 @@
 
 #include "entitymanager.h"
 #include "dnai/enums/core/coreenums.h"
+#include "dnai/project.h"
 
 namespace dnai
 {
@@ -26,15 +27,24 @@ namespace dnai
             void onEntityAdded(enums::core::EntityID id, models::Entity &entity);
             void onEntityRemoved(enums::core::EntityID id, models::Entity &entity);
 
+        signals:
+            void declared(dnai::models::Entity *entity);
+            void removed();
+            void moved();
+            void renamed();
+            void visibilitySet();
+
+        private:
+            models::Entity *createEntity(enums::core::ENTITY type, models::Entity *parent);
+
         public:
-            Q_INVOKABLE void declare(models::Entity *todeclare);
+            Q_INVOKABLE void declare(quint32 parentId, qint32 type, QString name = "", qint32 visibility = static_cast<qint32>(enums::core::VISIBILITY::PUBLIC));
             Q_INVOKABLE void remove(const models::Entity *toremove);
             void move(const models::Entity &tomove, const models::Entity &newparent);
             void rename(const models::Entity &torename, QString const &newname);
             void setVisibility(const models::Entity &entity, enums::core::VISIBILITY visibility);
 
         private:
-            models::Entity *popDeclared(enums::core::EntityID declarator, enums::core::ENTITY type, QString const &name);
             models::Entity *findEntity(enums::core::EntityID declarator, QString const &name, bool pop = false);
 
         private:
@@ -51,12 +61,13 @@ namespace dnai
         private:
             EntityManager &manager;
             std::queue<models::Entity *> pendingDeclaration;
+            std::unordered_map<models::Entity *, std::function<void()>> pendingProjectDeclaration;
 
         private:
             using DeclaratorMap = std::unordered_map<std::string, models::Entity *>;
             using RemoveMap = std::unordered_map<enums::core::EntityID, DeclaratorMap>;
 
-            RemoveMap removed;
+            RemoveMap removedMap;
         };
     }
 }

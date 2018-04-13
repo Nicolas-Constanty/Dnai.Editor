@@ -96,8 +96,7 @@ namespace dnai
             virtual interfaces::IEntity *guiModel() const;
 			template<class T>
 			T *guiModel() const;
-			bool expanded() const;
-            void declare();
+            bool expanded() const;
 			Entity *parentRef() const;
 			const QMap<QUuid, Column *> &columns();
 
@@ -134,10 +133,6 @@ namespace dnai
         public:
             void serialize(QJsonObject& obj) const override;
             void _deserialize(const QJsonObject& obj) override;
-	        void addContext(int, const QString &);
-			void addFunction(int, const QString &);
-			void addVariable(int, const QString &);
-            void addClass(int, const QString &);
 	        int columnCount() const override;
 			Q_INVOKABLE QVariant listColumn() const;
 			Q_INVOKABLE int row() const override;

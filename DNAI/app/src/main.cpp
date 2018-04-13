@@ -61,7 +61,7 @@ static void registerEnums()
     qmlRegisterEnums(dnai::enums::FlowTypeRessouce, "FlowType");
     qmlRegisterEnums(dnai::enums::DeclarationTypeRessouce, "DeclarationType");
     qmlRegisterEnums(dnai::enums::QInstructionID, "InstructionID");
-    qmlRegisterEnums(dnai::enums::core, "Core");
+    //qmlRegisterEnums(dnai::enums::core, "Core");
 }
 
 class conststr {
@@ -148,15 +148,16 @@ static void registerModels()
 }
 
 static void registerCore() {
-    qmlRegisterUncreatableType<dnai::core::ProjectHandler>("DNAI.Core", 1, 0, "Project", "Use DNAI.Core.Controller.project");
-    qmlRegisterUncreatableType<dnai::core::DeclaratorHandler>("DNAI.Core", 1, 0, "Declarator", "Use DNAI.Core.Controller.declarator");
-    qmlRegisterUncreatableType<dnai::core::VariableHandler>("DNAI.Core", 1, 0, "Variable", "Use DNAI.Core.Controller.variable");
-    qmlRegisterUncreatableType<dnai::core::EnumHandler>("DNAI.Core", 1, 0, "Enumeration", "Use DNAI.Core.Controller.enumeration");
-    qmlRegisterUncreatableType<dnai::core::FunctionHandler>("DNAI.Core", 1, 0, "Function", "Use DNAI.Core.Controller.function");
-    //instruction handler
-    //list handler
-    //object handler
-    qmlRegisterSingletonType<dnai::core::HandlerManager>("DNAI.Core", 1, 0, "Controller", core_controller_singleton_provider);
+    if (!qmlRegisterUncreatableType<dnai::core::ProjectHandler>("DNAI.Core", 1, 0, "ProjectHandler", "Use DNAI.Core.Controller.project")
+        || !qmlRegisterUncreatableType<dnai::core::DeclaratorHandler>("DNAI.Core", 1, 0, "DeclaratorHandler", "Use DNAI.Core.Controller.declarator")
+        || !qmlRegisterUncreatableType<dnai::core::VariableHandler>("DNAI.Core", 1, 0, "VariableHandler", "Use DNAI.Core.Controller.variable")
+        || !qmlRegisterUncreatableType<dnai::core::EnumHandler>("DNAI.Core", 1, 0, "EnumerationHandler", "Use DNAI.Core.Controller.enumeration")
+        || !qmlRegisterUncreatableType<dnai::core::FunctionHandler>("DNAI.Core", 1, 0, "FunctionHandler", "Use DNAI.Core.Controller.function")
+        //instruction handler
+        //list handler
+        //object handler
+        || !qmlRegisterSingletonType<dnai::core::HandlerManager>("DNAI.Core", 1, 0, "Controller", core_controller_singleton_provider))
+        qDebug() << "Failed to register one core type";
 }
 
 static void registerQml()

@@ -7,6 +7,8 @@ import DNAI 1.0
 import DNAI.Models 1.0
 import DNAI.Enums 1.0
 
+import DNAI.Core 1.0
+
 import "../Style"
 import "../Components"
 
@@ -175,8 +177,9 @@ Item {
                             width: 45
                             visible: modelData.parentRef.entityType === 0
                             onPressed: {
-                                proj.addContext(_sublist.visualModel.items.count, modelData.listIndex, idx)
-                                _sublist.positionViewAtEnd()
+                                console.log(idx)
+                                console.log(modelData.listIndex)
+                                Controller.declarator.declare(modelData.parentRef.id, 0)
                             }
                         }
                         AddButton {
@@ -184,8 +187,7 @@ Item {
                             decoration.color: "#039BE5"
                             width: 45
                             onPressed: {
-                                proj.addClass(_sublist.visualModel.items.count, modelData.listIndex, idx)
-                                _sublist.positionViewAtEnd()
+                                Controller.declarator.declare(modelData.parentRef.id, 5)
                             }
                         }
                         AddButton {
@@ -193,8 +195,7 @@ Item {
                             decoration.color: "#8E24AA"
                             width: 45
                             onPressed: {
-                                proj.addFunction(_sublist.visualModel.items.count, modelData.listIndex, idx)
-                                _sublist.positionViewAtEnd()
+                                Controller.declarator.declare(modelData.parentRef.id, 2)
                             }
                         }
                         AddButton {
@@ -202,9 +203,20 @@ Item {
                             decoration.color: "#FB8C00"
                             width: 45
                             onPressed: {
-                                proj.addVariable(_sublist.visualModel.items.count, modelData.listIndex, idx)
-                                _sublist.positionViewAtEnd()
+                                Controller.declarator.declare(modelData.parentRef, 1)
                             }
+                        }
+                    }
+
+                    Connections {
+                        target: Controller.declarator
+                        onDeclared: {
+                            console.log("==========onDeclared==========")
+                            console.log(idx)
+                            console.log(modelData.listIndex)
+                            proj.declareEntityTo(idx, entity, modelData.listIndex)
+                            _sublist.positionViewAtEnd()
+                            console.log("==============================")
                         }
                     }
                 }

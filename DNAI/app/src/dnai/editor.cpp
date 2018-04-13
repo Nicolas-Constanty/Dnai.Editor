@@ -16,6 +16,7 @@
 namespace dnai
 {
 	Editor &Editor::m_instance = *(new Editor());
+
 	const QString& Editor::version() const
 	{
 		return m_version;
