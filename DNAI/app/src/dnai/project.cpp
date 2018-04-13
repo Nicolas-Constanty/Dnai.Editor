@@ -5,10 +5,20 @@
 #include "dnai/exceptions/guiexception.h"
 #include "dnai/exceptions/exceptionmanager.h"
 #include "dnai/editor.h"
+#include "dnai/core/handlermanager.h"
+#include "dnai/models/entity.h"
 
 namespace dnai {
 	Project::Project(): EntityTree(nullptr), m_file(nullptr), m_selectedEntity(nullptr), m_rootEntity(nullptr)
 	{
+        connect(
+            core::HandlerManager::Instance().declarator(), SIGNAL(removed(dnai::models::Entity*)),
+            this, SLOT(removeEntity(dnai::models::Entity*))
+        );
+        connect(
+            core::HandlerManager::Instance().declarator(), SIGNAL(declared(dnai::models::Entity*)),
+            this, SLOT(addEntity(dnai::models::Entity*))
+        );
 	}
 
     Project::~Project()
@@ -191,49 +201,116 @@ namespace dnai {
 				return e->childCount();
 			return 0;
 		});
-		return count + (item->expanded() ? item->childCount() : 0);
+        return count + (item->expanded() ? item->childCount() : 0);
     }
 
-	void Project::removeEntity(const QModelIndex &index, models::Entity *e)
-	{
-		models::Entity *parentItem = getItem(index);
-		auto count = 0;
-		QModelIndex mi;
-		for (auto i : parentItem->childrenItem())
-		{
-			if (i == e)
-            {
-                mi = index.child(count, 0);
-				break;
-			}
-			++count;
-        }
-        beginRemoveRows(index, count, count);
-		e->remove();
-        endRemoveRows();
-    }
-
-    void Project::declareEntityTo(const QModelIndex &parent, dnai::models::Entity *entity, const QString &listIndex)
+    QModelIndex Project::getIndexOf(models::Entity *e) const
     {
-        models::Entity *parentItem = getItem(parent);
-        int index = parentItem->childCount();
+        QModelIndexList results = match(index(0, 0, QModelIndex()), EntityTree::ROLES::MODEL, QVariant::fromValue(e), 2, Qt::MatchRecursive);
 
-        beginInsertRows(parent, index, index);
+        if (results.length() > 0)
+        {
+            return results.first();
+        }
+        return QModelIndex();
+    }
+
+    dnai::models::Column *dnai::Project::getColumnOf(dnai::models::Entity *entity)
+    {
+        models::Entity *parent = entity->parentItem();
+
+        for (models::Column *currCol : parent->columns().values())
+        {
+            for (models::Entity *child : currCol->getEntities())
+            {
+                if (child == entity)
+                {
+                    return currCol;
+                }
+            }
+        }
+        return nullptr;
+    }
+
+    void Project::removeEntity(models::Entity *entity)
+    {
+        models::Entity *parentItem = entity->parentItem();
+
+        QModelIndex index = getIndexOf(parentItem);
+
+        if (!index.isValid())
+            return;
+
+        int count = 0;
+
+        for (models::Entity *curr : parentItem->childrenItem())
+        {
+            if (curr == entity)
+                break;
+            count++;
+        }
+
+        beginRemoveRows(index, count, count);
+
+        foreach (models::Column *c, parentItem->columns())
+        {
+            c->remove(entity);
+        }
+
+        parentItem->removeOne(entity);
+
+        endRemoveRows();
+
+        addEntityColumnUid(parentItem->id(), entity->name(), entity->listIndex());
+
+        emit entityRemoved(entity);
+    }
+
+    void Project::addEntity(dnai::models::Entity *entity)
+    {
+        if (getIndexOf(entity).isValid())
+            return;
+
+        models::Entity *parentItem = entity->parentItem();
+        QModelIndex index = getIndexOf(parentItem);
+
+        if (!index.isValid())
+            return;
+
+        int idx = parentItem->childCount();
+
+        beginInsertRows(index, idx, idx);
 
         interfaces::IEntity *guiModel = entity->guiModel<interfaces::IEntity>();
 
-        guiModel->setIndex(index);
+        guiModel->setIndex(idx);
 
-        qDebug() << "Index: " << listIndex;
+        QMap<QString, QString>::iterator itIndex = m_entityColumnUid.find(QString::number(parentItem->id()) + entity->name());
 
-        guiModel->setListIndex(listIndex);
-
-        entity->setParent(parentItem);
-        entity->setContainerId(parentItem->containerId());
+        if (itIndex != m_entityColumnUid.end())
+        {
+            qDebug() << itIndex.value();
+            guiModel->setListIndex(itIndex.value());
+            m_entityColumnUid.erase(itIndex);
+        }
 
         parentItem->appendChild(entity);
 
         endInsertRows();
+
+        emit entityAdded(entity);
+    }
+
+    QString Project::generateUniqueChildName(dnai::models::Entity *parent) const
+    {
+        Q_UNUSED(parent)
+        return "Empty(" + QString::number(qrand()) + ")";
+    }
+
+    void Project::addEntityColumnUid(quint32 parentId, const QString &name, const QString &listIndex)
+    {
+        qDebug() << "List Index: " << listIndex;
+        m_entityColumnUid[QString::number(parentId) + name] = listIndex;
     }
 
 	int Project::childCount() const
@@ -564,5 +641,5 @@ namespace dnai {
 //    bool Project::defaultSearchFunctionsFunc(models::Function *model, const QString &search)
 //    {
 //        return model->name().startsWith(search);
-//    }
-}
+    //    }
+    }
