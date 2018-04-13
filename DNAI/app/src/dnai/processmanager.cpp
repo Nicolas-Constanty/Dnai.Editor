@@ -17,6 +17,7 @@ ProcessManager::ProcessManager(QString const &file)
       m_file(file),
       m_server(),
       m_core(),
+      m_updaterApp(),
       m_port(0)
 {
 
@@ -27,7 +28,27 @@ ProcessManager::~ProcessManager() {
     m_core.close();
 }
 
- quint16 ProcessManager::findUnusedPort() const {
+
+void ProcessManager::launchUpdater(QString const &actualVer, QString const &newVersion) {
+    if (m_updaterApp.size() != 0) {
+    QProcess proc;
+#if defined(Q_OS_MAC)
+    QString path = QGuiApplication::applicationDirPath();
+    int len = sizeof("/DNAI.app/Contents/MacOS");
+    int idx = path.length() - (len - 1);
+    path.remove(idx, len);
+    m_updaterApp = m_updaterApp + " " +  actualVer + " " + newVersion + " " + path + " " + "DNAI";
+    qDebug() << path;
+#else
+    m_updaterApp = m_updaterApp + " " +  actualVer + " " + newVersion + " " + QGuiApplication::applicationDirPath() + " " + "DNAI";
+#endif
+    proc.startDetached(m_updaterApp);
+    } else {
+        qDebug() << "[WARNING] can't launch DNAI Updater";
+    }
+}
+
+quint16 ProcessManager::findUnusedPort() const {
      QTcpServer serverTmp;
      quint16 port = 0;
 
@@ -38,10 +59,13 @@ ProcessManager::~ProcessManager() {
      serverTmp.close();
 
      return port;
- }
+}
 
 void ProcessManager::launch() {
     QSettings settingsBin(m_file, QSettings::IniFormat);
+
+    m_updaterApp = settingsBin.value("BINARIES/updater", "").toString();
+    m_updaterApp.replace("{OUT_DIR}", QGuiApplication::applicationDirPath());
 
     QStringList argumentsServer;
     QSystemSemaphore sem("SERVER_CORE_DNAI", 0, QSystemSemaphore::Create);

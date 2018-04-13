@@ -1,6 +1,8 @@
 #include <QQuickWindow>
 #include <QTimer>
 #include <QDir>
+#include <QDirIterator>
+#include <QQmlProperty>
 
 #include "dnai/app.h"
 #include "dnai/processmanager.h"
@@ -9,8 +11,6 @@
 #include "dnai/commands/commandmanager.h"
 #include "api.h"
 #include "http.h"
-#include <QDirIterator>
-#include <QQmlProperty>
 
 #if defined(_WIN32) && defined(_MSC_VER)
 #include "../../lib/WinToast/wintoastlib.h"
@@ -28,11 +28,24 @@ namespace dnai
 	, m_processManager(nullptr)
 	, m_appView(nullptr)
 	, m_nodeModel(nullptr)
-	, m_editor(Editor::instance())
+    , m_editor(Editor::instance())
 	{
 		if (m_instance == nullptr)
-			m_instance = this;
+            m_instance = this;
+        QTimer::singleShot(300, this, &App::loadSplashScreen);
+        qDebug() << "Ctor";
 	}
+
+    void App::loadSplashScreen()
+    {
+        qDebug() << "splash";
+        m_engine.load(QUrl(QLatin1String("qrc:/resources/main.qml")));
+        if (m_engine.rootObjects().isEmpty())
+            throw std::runtime_error("Fail to load main.qml");
+        qDebug() << "splashEND";
+        qDebug() << &m_engine;
+        QMetaObject::invokeMethod(m_engine.rootObjects().first(), "load");
+    }
 
     App::~App() {
 	    delete m_processManager;
@@ -41,12 +54,45 @@ namespace dnai
         qDebug() << "~" << "App";
     }
 
+    void App::versionsUpdater() {
+#ifdef Q_OS_MAC
+        QString softwares("mac");
+#else
+        QString softwares("windows");
+#endif
+        m_settings->setVersion(DNAI_VERSION_RELEASE);
+        m_settings->setAPIVersion(DNAI_VERSION_RELEASE);
+
+        api::get_download_object(softwares, "installer").map([this](Response response) -> Response {
+            if (response.body.contains("currentVersion")) {
+                qDebug() << "enter ?";
+                m_settings->setAPIVersion(response.body["currentVersion"].toString());
+            }
+            qDebug() << DNAI_VERSION_RELEASE;
+            qDebug() << Editor::instance().version();
+            qDebug() << m_settings->currentVersionAPI();
+
+
+            onNotifyVersionChanged();
+            return response;
+        },
+        [this](Response response) -> Response {
+            qDebug() << "ERROR";
+           // onNotifyVersionChanged();
+            return response;
+        });
+    }
+
+    void App::onNotifyVersionChanged() {
+        m_settings->onNotifyVersionChanged();
+    }
+
     void App::initProcessManager()
 	{
 #ifdef Q_OS_MAC
 		m_processManager = new ProcessManager(QGuiApplication::applicationDirPath() + "/settings/conf/mac/bin_info.cfg");
 #else
-		m_processManager = new ProcessManager("./settings/conf/windows/bin_info.cfg");
+        m_processManager = new ProcessManager(QGuiApplication::applicationDirPath() + "/settings/conf/windows/bin_info.cfg");
 #endif
 		m_processManager->launch();
         core::connect(m_processManager->getServerPort()); //connect core client
@@ -54,8 +100,8 @@ namespace dnai
 
     void App::setupSettings()
 	{
-		setOrganizationName("DNAI");
-		setOrganizationDomain("DNAI.com");
+        setOrganizationName("SaltyStudio");
+        setOrganizationDomain("dnai.io");
 		setApplicationName("DNAI");
 	}
 
@@ -72,11 +118,14 @@ namespace dnai
         initFuncs.push(std::bind(&App::installEventFilter, this, this));
         initFuncs.push(&App::setupSettings);
         initFuncs.push(&App::loadFonts);
-		initFuncs.push(std::bind(&App::initAppView, this));
-		initFuncs.push(std::bind(&App::loadMainWindow, this));
-		initFuncs.push(std::bind(&dnai::http::Service::Init, dnai::api::http_config));
+        initFuncs.push(std::bind(&App::initAppView, this));
+        initFuncs.push(std::bind(&dnai::http::Service::Init, dnai::api::http_config));
 		return initFuncs;
 	}
+
+    void App::afterInit()
+    {
+    }
 
 	void App::loadFonts()
     {
@@ -91,10 +140,8 @@ namespace dnai
 	}
 
     void App::loadMainWindow()
-	{
-		m_engine.load(QUrl(QLatin1String("qrc:/resources/main.qml")));
-		if (m_engine.rootObjects().isEmpty())
-			throw std::runtime_error("Fail to load main.qml");
+    {
+        QMetaObject::invokeMethod(m_engine.rootObjects().first(), "load");
 	}
 
     bool App::eventFilter(QObject* o, QEvent* event)
@@ -121,6 +168,10 @@ namespace dnai
 	{
 		return m_nodeModel;
 	}
+
+    ProcessManager *App::processManager() {
+        return m_processManager;
+    }
 
     Editor &App::editor() const
 	{
@@ -226,8 +277,8 @@ namespace dnai
      }
 #endif
 #if defined(Q_OS_MAC)
-    Toast macToast;
-    macToast.show("DNAI", "Build has start !");
+    //ToastMac macToast;
+    //macToast.show("DNAI", "Build has start !");
 #endif
   }
 

@@ -2,12 +2,12 @@
 #include <QtMac>
 #include "MacToast.h"
 
-Toast::Toast()
+ToastMac::ToastMac()
 {
 
 }
 
-void Toast::show(QString const &title, QString const &info) {
+void ToastMac::show(QString const &title, QString const &info) {
     MacToast toast;
  //   QtMac mac;
 

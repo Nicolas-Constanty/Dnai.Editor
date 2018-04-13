@@ -1,6 +1,6 @@
 #include <QQuickItem>
 #include <QQmlProperty>
-
+#include <QQuickView>
 
 #include "dnai/editor.h"
 #include "dnai/solution.h"
@@ -67,13 +67,25 @@ namespace dnai
 	{
 		m_solution = new Solution();
 		if (!filename.isEmpty())
-			m_solution->load(filename);
-	}
+            m_solution->load(filename);
+    }
+
+    void Editor::startApp()
+    {
+       App::currentInstance()->load();
+    }
 
 	void Editor::closeSolution()
 	{
 		m_solution->close();
 	}
+
+    void Editor::notifyInformation(QString const &text, std::function<void ()> func) {
+        m_toasterManagerService.notifyInformation(text, func);
+        //m_toasterManagerService.notifyWarning(text + "zaoeo ezaezajiezja zeaijejizazij azeijzaeijzeaij ezaijzaeijzejia ezijaizejji zaeijazeijzejai ezajieazijzaeij zeaeazijz eiazjjiaez", func);
+        //m_toasterManagerService.notifyError(text + "2zijjia zaijjizea zeiezaij ", func);
+        //m_toasterManagerService.notifySuccess(text + "3", func);
+    }
 
 	const QList<interfaces::ICommand*>& Editor::actions() const
 	{
@@ -177,5 +189,19 @@ namespace dnai
         auto canvas = dynamic_cast<views::CanvasNode *>(view);
         obj->setParentItem(canvas->content());
         component.completeCreate();
+    }
+
+    void Editor::checkVersion()
+    {
+        auto app = App::currentInstance();
+        app->versionsUpdater();
+      //  app->onNotifyVersionChanged();
+    }
+
+    void Editor::registerMainView(QObject *mainView) {
+        m_mainView = static_cast<QQuickWindow*>(mainView)->contentItem();
+    }
+    QQuickItem *Editor::mainView()  {
+        return m_mainView;
     }
 }

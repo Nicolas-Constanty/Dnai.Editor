@@ -42,6 +42,7 @@ namespace dnai {
         static Observable &get_file(QString const &);
         static Observable &get_raw_file(QString const &);
         static Observable &post_file(QString const &, QFile *);
+        static Observable &get_download_object(QString const &platform, QString const &slug);
         static void logout();
     };
 }
