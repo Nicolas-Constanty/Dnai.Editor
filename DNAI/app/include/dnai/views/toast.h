@@ -26,6 +26,7 @@ public slots:
     void onEnterToast();
     void onExitToast();
     void onClickToast();
+    void onRemoveToast();
 
 private:
     int         m_msecDisable;
