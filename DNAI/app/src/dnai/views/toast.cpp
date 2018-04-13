@@ -36,6 +36,13 @@ void Toast::onClickToast() {
     timeout();
 }
 
+void Toast::onRemoveToast() {
+    if (m_timer)
+        delete m_timer;
+    m_timer = NULL;
+    timeout();
+}
+
 void Toast::onEnterToast() {
     delete m_timer;
     m_timer = NULL;

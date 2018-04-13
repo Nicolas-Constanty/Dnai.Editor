@@ -47,6 +47,8 @@ Toast *ToasterManagerService::createToast(QString const &text, std::function<voi
                      toast, SLOT(onExitToast()),Qt::QueuedConnection);
     QObject::connect(toast->item(), SIGNAL(clickToast()),
                      toast, SLOT(onClickToast()),Qt::QueuedConnection);
+    QObject::connect(toast->item(), SIGNAL(removeToast()),
+                     toast, SLOT(onRemoveToast()),Qt::QueuedConnection);
 
     component.completeCreate();
 
@@ -58,19 +60,27 @@ Toast *ToasterManagerService::createToast(QString const &text, std::function<voi
 void ToasterManagerService::notifyInformation(QString const &text, std::function<void ()> func) {
     Toast *toast = createToast(text, func);
     toast->item()->setProperty("backgroundColor", "#00BFFF");
+    toast->item()->setProperty("iconsFont", "\uf05a");
+    toast->item()->setProperty("colorIconsFont", "white");
 }
 
 void ToasterManagerService::notifyError(QString const &text, std::function<void ()> func) {
     Toast *toast = createToast(text, func);
     toast->item()->setProperty("backgroundColor", "#FF3333");
+    toast->item()->setProperty("iconsFont", "\uf057");
+    toast->item()->setProperty("colorIconsFont", "white");
 }
 
 void ToasterManagerService::notifyWarning(QString const &text, std::function<void ()> func) {
     Toast *toast = createToast(text, func);
     toast->item()->setProperty("backgroundColor", "orange");
+    toast->item()->setProperty("iconsFont", "\uf06a");
+    toast->item()->setProperty("colorIconsFont", "white");
 }
 
 void ToasterManagerService::notifySuccess(QString const &text, std::function<void ()> func) {
     Toast *toast = createToast(text, func);
     toast->item()->setProperty("backgroundColor", "#4C9900");
+    toast->item()->setProperty("iconsFont", "\uf058");
+    toast->item()->setProperty("colorIconsFont", "white");
 }

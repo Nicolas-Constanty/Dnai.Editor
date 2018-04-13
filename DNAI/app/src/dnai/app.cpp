@@ -78,7 +78,9 @@ namespace dnai
         },
         [this](Response response) -> Response {
             qDebug() << "ERROR";
-           // onNotifyVersionChanged();
+            Editor::instance().notifyError("Could not check for update.", []() {
+
+            });
             return response;
         });
     }
