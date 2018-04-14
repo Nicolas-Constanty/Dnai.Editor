@@ -23,7 +23,7 @@ namespace dnai {
 
     Project::~Project()
     {
-        delete m_rootEntity;
+        //delete m_rootEntity;
         qDebug() << "~ Project";
     }
 
