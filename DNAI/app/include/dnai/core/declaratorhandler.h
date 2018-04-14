@@ -18,7 +18,7 @@ namespace dnai
 
         public:
             DeclaratorHandler(EntityManager &manager);
-            virtual ~DeclaratorHandler() = default;
+            virtual ~DeclaratorHandler();
 
         public:
             void setup();
@@ -61,13 +61,9 @@ namespace dnai
         private:
             EntityManager &manager;
             std::queue<models::Entity *> pendingDeclaration;
-            std::unordered_map<models::Entity *, std::function<void()>> pendingProjectDeclaration;
 
         private:
-            using DeclaratorMap = std::unordered_map<std::string, models::Entity *>;
-            using RemoveMap = std::unordered_map<enums::core::EntityID, DeclaratorMap>;
-
-            RemoveMap removedMap;
+            std::unordered_map<std::string, models::Entity *> removedEntities;
         };
     }
 }

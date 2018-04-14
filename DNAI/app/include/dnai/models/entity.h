@@ -93,6 +93,7 @@ namespace dnai
             int entityType() const;
             const QString &name() const;
             const QString fullName() const;
+            const QString childFullName(QString const &childName) const;
             enums::core::VISIBILITY visibility() const;
             int index() const;
 			QString listIndex() const;

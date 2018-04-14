@@ -22,6 +22,18 @@ namespace dnai
 
         }
 
+        DeclaratorHandler::~DeclaratorHandler()
+        {
+            for (models::Entity &entity : manager)
+            {
+                delete &entity;
+            }
+            for (std::pair<const std::string, models::Entity *> &curr : removedEntities)
+            {
+                delete curr.second;
+            }
+        }
+
         void DeclaratorHandler::setup()
         {
             QObject::connect(&manager,  SIGNAL(entityAdded(enums::core::EntityID,models::Entity&)),
@@ -45,9 +57,9 @@ namespace dnai
             }
         }
 
-        void DeclaratorHandler::onEntityRemoved(enums::core::EntityID id, models::Entity &entity)
+        void DeclaratorHandler::onEntityRemoved(enums::core::EntityID, models::Entity &entity)
         {
-            removedMap[entity.containerId()][entity.name().toStdString()] = &entity;
+            removedEntities[entity.fullName().toStdString()] = &entity;
         }
 
         models::Entity *DeclaratorHandler::createEntity(enums::core::ENTITY type, models::Entity *parent)
@@ -87,16 +99,25 @@ namespace dnai
                          << name << ", "
                          << enums::core::VISIBILITY::PUBLIC << ")";
 
+                models::Entity *parent = &manager.getEntity(parentId);
+
                 commands::CommandManager::Instance()->exec(
                     new commands::CoreCommand("Declarator.Declare", true,
                         /*
                          * Execute
                          */
-                        std::bind(&::core::declarator::declare, parentId, static_cast<enums::core::ENTITY>(type), name, static_cast<enums::core::VISIBILITY>(visibility)),
+                        [parent, type, name, visibility]() {
+                            qDebug() << "Declare " << name << " into " << parent->name() << "(" << parent->id() << ")";
+                            ::core::declarator::declare(parent->id(), static_cast<enums::core::ENTITY>(type), name, static_cast<enums::core::VISIBILITY>(visibility));
+                        },
                         /*
                          * Un-execute
                          */
-                        std::bind(&::core::declarator::remove, parentId, name)));
+                        [parent, name]() {
+                            qDebug() << "Remove " << name << " from " << parent->name() << "(" << parent->id() << ")";
+                            ::core::declarator::remove(parent->id(), name);
+                        }
+                ));
             }
             else
             {
@@ -114,6 +135,7 @@ namespace dnai
                 return;
             }
 
+            models::Entity *parent = &manager.getEntity(parentId);
             enums::core::ENTITY type = static_cast<enums::core::ENTITY>(torm->entityType());
             enums::core::VISIBILITY visi = torm->visibility();
 
@@ -124,11 +146,15 @@ namespace dnai
                     /*
                      * Execute
                      */
-                    std::bind(&::core::declarator::remove, parentId, name),
+                    [parent, name]() {
+                        ::core::declarator::remove(parent->id(), name);
+                    },
                     /*
                      * Un-execute
                      */
-                    std::bind(&::core::declarator::declare, parentId, type, name, visi)));
+                    [parent, name, type, visi]() {
+                        ::core::declarator::declare(parent->id(), type, name, visi);
+                    }));
         }
 
         void DeclaratorHandler::move(const models::Entity &tomove, const models::Entity &newparent)
@@ -169,6 +195,9 @@ namespace dnai
         {
             models::Entity *todeclare = nullptr;
 
+            if (!manager.contains(declarator))
+                return;
+
             if (!pendingDeclaration.empty()
                 && pendingDeclaration.front()->containerId() == declarator
                 && pendingDeclaration.front()->entityType() == type
@@ -180,11 +209,24 @@ namespace dnai
             }
             else
             {
-                todeclare = createEntity(type, &manager.getEntity(declarator));
-                todeclare->setName(name);
-                todeclare->setVisibility(visibility);
-                todeclare->setEntityType(static_cast<qint32>(type));
-                todeclare->setContainerId(declarator);
+                models::Entity &parent = manager.getEntity(declarator);
+                std::unordered_map<std::string, models::Entity *>::iterator it = removedEntities.find(parent.childFullName(name).toStdString());
+
+                if (it != removedEntities.end())
+                {
+                    todeclare = it->second;
+                    todeclare->setParent(&parent);
+                    todeclare->setContainerId(declarator);
+                    removedEntities.erase(it);
+                }
+                else
+                {
+                    todeclare = createEntity(type, &parent);
+                    todeclare->setName(name);
+                    todeclare->setVisibility(visibility);
+                    todeclare->setEntityType(static_cast<qint32>(type));
+                    todeclare->setContainerId(declarator);
+                }
             }
 
             /*
@@ -238,8 +280,6 @@ namespace dnai
 
                 //this will trigger onEntityRemoved
                 manager.removeEntity(torm->id());
-
-                delete torm;
             }
         }
 

@@ -22,8 +22,7 @@ namespace dnai
         }
 
 		Entity::~Entity()
-		{
-            deleteChildren();
+        {
             if (m_dataCore)
                 delete m_dataCore;
             if (m_dataGUI)
@@ -67,8 +66,13 @@ namespace dnai
         const QString Entity::fullName() const
         {
             if (parentItem() == nullptr)
-                return name();
+                return coreModel() ? name() : "";
             return parentItem()->fullName() + "." + name();
+        }
+
+        const QString Entity::childFullName(const QString &childName) const
+        {
+            return fullName() + "." + childName;
         }
 
 		enums::core::VISIBILITY Entity::visibility() const
