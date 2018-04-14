@@ -81,9 +81,6 @@ namespace dnai
         {
             if (parentId != enums::core::UNDEFINED_ID)
             {
-                if (name.isEmpty())
-                    name = "EmptyEntity(" + QString::number(qrand()) + ")";
-
                 qDebug() << "core::declarator::declare("
                          << parentId << ", "
                          << static_cast<enums::core::ENTITY>(type) << ", "
@@ -107,27 +104,31 @@ namespace dnai
             }
         }
 
-        void DeclaratorHandler::remove(const models::Entity *toremove)
+        void DeclaratorHandler::remove(quint32 parentId, QString const &name)
         {
-            enums::core::EntityID declarator = toremove->containerId();
-            enums::core::ENTITY type = static_cast<enums::core::ENTITY>(toremove->entityType());
-            QString name = toremove->name();
-            enums::core::VISIBILITY visi = toremove->visibility();
+            models::Entity *torm = findEntity(parentId, name);
 
-            qDebug() << "Core: DeclaratorHandler: Remove("
-                     << toremove->containerId() << ", "
-                     << toremove->name() << ")";
+            if (torm == nullptr)
+            {
+                qDebug() << "No such entity " << name << " in EntityManager";
+                return;
+            }
+
+            enums::core::ENTITY type = static_cast<enums::core::ENTITY>(torm->entityType());
+            enums::core::VISIBILITY visi = torm->visibility();
+
+            qDebug() << "Core: DeclaratorHandler: Remove(" << parentId << ", " << name << ")";
 
             commands::CommandManager::Instance()->exec(
                 new commands::CoreCommand("Declarator.Remove", true,
                     /*
                      * Execute
                      */
-                    std::bind(&::core::declarator::remove, declarator, name),
+                    std::bind(&::core::declarator::remove, parentId, name),
                     /*
                      * Un-execute
                      */
-                    std::bind(&::core::declarator::declare, declarator, type, name, visi)));
+                    std::bind(&::core::declarator::declare, parentId, type, name, visi)));
         }
 
         void DeclaratorHandler::move(const models::Entity &tomove, const models::Entity &newparent)
@@ -145,7 +146,7 @@ namespace dnai
 
         }
 
-        models::Entity *DeclaratorHandler::findEntity(enums::core::EntityID declarator, const QString &name, bool pop)
+        models::Entity *DeclaratorHandler::findEntity(enums::core::EntityID declarator, const QString &name)
         {
             if (!manager.contains(declarator))
             {
@@ -158,8 +159,6 @@ namespace dnai
             {
                 if (child->name() == name)
                 {
-                    if (pop)
-                        decl.removeOne(child);
                     return child;
                 }
             }
@@ -225,7 +224,7 @@ namespace dnai
 
         void DeclaratorHandler::onRemoved(enums::core::EntityID declarator, const QString &name)
         {
-            models::Entity *torm = findEntity(declarator, name, true);
+            models::Entity *torm = findEntity(declarator, name);
 
             if (torm != nullptr)
             {
@@ -235,8 +234,12 @@ namespace dnai
                          << declarator << ", "
                          << name << ")";
 
+                emit removed(torm);
+
                 //this will trigger onEntityRemoved
                 manager.removeEntity(torm->id());
+
+                delete torm;
             }
         }
 

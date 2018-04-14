@@ -36,6 +36,8 @@ namespace dnai {
 
 	signals:
 		void selectedEntityChanged(models::Entity *entity);
+        void entityAdded(models::Entity *entity);
+        void entityRemoved(models::Entity *entity);
 
     public:
 		Q_INVOKABLE void save() override;
@@ -56,14 +58,22 @@ namespace dnai {
 
     public:
         Q_INVOKABLE int expandedRows(const QModelIndex& parent) const;
-		Q_INVOKABLE void removeEntity(const QModelIndex& index, dnai::models::Entity* e);
+
+    private:
+        QModelIndex getIndexOf(models::Entity *e) const;
+        models::Column *getColumnOf(models::Entity *e);
+
+    public slots:
+        void removeEntity(dnai::models::Entity *entity);
+        void addEntity(dnai::models::Entity *entity);
+
+    public:
+        Q_INVOKABLE void addEntityColumnUid(quint32 parentId, QString const &name, QString const &listIndex);
+        Q_INVOKABLE QString generateUniqueChildName(dnai::models::Entity *parent) const;
 
     private:
 		template<class T>
         T _foreachEntity(models::Entity* root, const std::function<T(models::Entity*)> &func) const;
-
-    public:
-        Q_INVOKABLE void declareEntityTo(const QModelIndex &parent, dnai::models::Entity *entity, const QString &listIndex);
 
     private:
 	    QFile* m_file;
@@ -74,6 +84,7 @@ namespace dnai {
 	    QJsonObject m_data;
 	    QString m_version;
 	    models::Entity* m_rootEntity;
+        QMap<QString, QString>  m_entityColumnUid;
     };
 
 	//  class Project: public models::Common

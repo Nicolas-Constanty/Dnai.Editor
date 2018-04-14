@@ -315,18 +315,6 @@ namespace dnai
 			//}
         }
 
-		void Entity::remove()
-		{
-			auto p = parentItem();
-			for (auto c : p->columns())
-			{
-				c->remove(this);
-            }
-            dnai::core::HandlerManager::Instance().Declarator().remove(this);
-			parentItem()->removeOne(this);
-            delete this;
-        }
-
 		int Entity::columnCount() const
 		{
 			return 1;
@@ -393,7 +381,12 @@ namespace dnai
                 return false;
             m_data = data;
             return true;
-		}
+        }
+
+        const QList<Entity *> &Column::getEntities() const
+        {
+            return m_entities;
+        }
 
 		Column::Column(QObject* parent) : QAbstractListModel(parent)
 		{

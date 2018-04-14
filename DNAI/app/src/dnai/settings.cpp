@@ -216,6 +216,15 @@ namespace dnai
             Editor::instance().notifyInformation("Switch to new version " + m_currentVersionAPI, [this]() {
                 App::currentInstance()->processManager()->launchUpdater(Editor::instance().version(), m_currentVersionAPI);
             });
+            /*Editor::instance().notifyError("Switch to new version " + m_currentVersionAPI, [this]() {
+                App::currentInstance()->processManager()->launchUpdater(Editor::instance().version(), m_currentVersionAPI);
+            });
+            Editor::instance().notifySuccess("Switch to new version " + m_currentVersionAPI, [this]() {
+                App::currentInstance()->processManager()->launchUpdater(Editor::instance().version(), m_currentVersionAPI);
+            });
+            Editor::instance().notifyWarning("Switch to new version " + m_currentVersionAPI, [this]() {
+                App::currentInstance()->processManager()->launchUpdater(Editor::instance().version(), m_currentVersionAPI);
+            });*/
         }
     }
 

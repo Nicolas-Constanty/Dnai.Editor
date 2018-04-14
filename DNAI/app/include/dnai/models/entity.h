@@ -53,7 +53,12 @@ namespace dnai
         public:
 	        const gui::data::EntityColumn& datas() const;
 	        bool setDatas(const gui::data::EntityColumn& data);
+
+        public:
+            const QList<Entity *> &getEntities() const;
+
         private:
+            Entity *m_target;
             QList<Entity *> m_entities;
 	        gui::data::EntityColumn m_data;
         };
@@ -136,10 +141,6 @@ namespace dnai
 	        int columnCount() const override;
 			Q_INVOKABLE QVariant listColumn() const;
 			Q_INVOKABLE int row() const override;
-
-        //core commands
-        public:
-            void remove();
 
         private:
             core::Entity *m_dataCore;

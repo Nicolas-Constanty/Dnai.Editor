@@ -76,7 +76,6 @@ Item {
                 }
             }
 
-
             Item {
                 id: _header
                 anchors.top: _title.bottom
@@ -114,11 +113,10 @@ Item {
                                 return b.row() - a.row();
                               })
                             for (var i = 0; i < _sublist.selectedItems.length; i++) {
-                                proj.removeEntity(idx, _sublist.selectedItems[i])
+                                Controller.declarator.remove(_sublist.selectedItems[i].containerId, _sublist.selectedItems[i].name)
                             }
                             _sublist.selectedItems = []
                             _selectInfo.selectCount = 0
-
                         }
                     }
                 }
@@ -179,7 +177,11 @@ Item {
                             onPressed: {
                                 console.log(idx)
                                 console.log(modelData.listIndex)
-                                Controller.declarator.declare(modelData.parentRef.id, 0)
+
+                                var name = proj.generateUniqueChildName(modelData.parentRef);
+
+                                proj.addEntityColumnUid(modelData.parentRef.id, name, modelData.listIndex)
+                                Controller.declarator.declare(modelData.parentRef.id, 0, name)
                             }
                         }
                         AddButton {
@@ -187,6 +189,9 @@ Item {
                             decoration.color: "#039BE5"
                             width: 45
                             onPressed: {
+                                var name = proj.generateUniqueChildName(modelData.parentRef);
+
+                                proj.addEntityColumnUid(modelData.parentRef.id, name, modelData.listIndex)
                                 Controller.declarator.declare(modelData.parentRef.id, 5)
                             }
                         }
@@ -195,6 +200,9 @@ Item {
                             decoration.color: "#8E24AA"
                             width: 45
                             onPressed: {
+                                var name = proj.generateUniqueChildName(modelData.parentRef);
+
+                                proj.addEntityColumnUid(modelData.parentRef.id, name, modelData.listIndex)
                                 Controller.declarator.declare(modelData.parentRef.id, 2)
                             }
                         }
@@ -203,20 +211,21 @@ Item {
                             decoration.color: "#FB8C00"
                             width: 45
                             onPressed: {
+                                var name = proj.generateUniqueChildName(modelData.parentRef);
+
+                                proj.addEntityColumnUid(modelData.parentRef.id, name, modelData.listIndex)
                                 Controller.declarator.declare(modelData.parentRef, 1)
                             }
                         }
                     }
 
                     Connections {
-                        target: Controller.declarator
-                        onDeclared: {
-                            console.log("==========onDeclared==========")
-                            console.log(idx)
-                            console.log(modelData.listIndex)
-                            proj.declareEntityTo(idx, entity, modelData.listIndex)
+                        target: proj
+                        onEntityAdded: {
                             _sublist.positionViewAtEnd()
-                            console.log("==============================")
+                        }
+                        onEntityRemoved: {
+                            _sublist.positionViewAtEnd()
                         }
                     }
                 }
