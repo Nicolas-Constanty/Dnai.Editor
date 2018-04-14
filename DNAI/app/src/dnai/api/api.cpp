@@ -45,7 +45,6 @@ const Config api::http_config = {
                            {"password", password}
                        })
                 .map([](Response response) -> Response {
-            qDebug() << "SETUSER";
             api::setUser({
                 response.body["token"].toString(),
                 response.body["refreshToken"].toString(),

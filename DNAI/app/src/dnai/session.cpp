@@ -47,6 +47,7 @@ void Session::getCurrentUser()
         m_user->setName(response.body["username"].toString());
         m_user->setProfile_url("../Images/default_user.png");
         updateCurentUserFiles();
+        Editor::instance().notifyInformation("Welcome back " + m_user->name() + " !", []() {});
         emit userChanged(m_user);
         return response;
     });
