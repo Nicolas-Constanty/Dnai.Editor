@@ -39,9 +39,12 @@ void Session::signin(const QString &username, const QString &password)
 
 void Session::getCurrentUser()
 {
+    if (dnai::api::getId().size() == 0) {
+        return;
+    }
     api::get_current_user().map([this](Response response) -> Response {
         m_user = new models::User();
-        m_user->setName(response.body["first_name"].toString() + " " + response.body["last_name"].toString());
+        m_user->setName(response.body["username"].toString());
         m_user->setProfile_url("../Images/default_user.png");
         updateCurentUserFiles();
         emit userChanged(m_user);
@@ -67,7 +70,7 @@ void Session::updateCurentUserFiles()
 {
     api::get_files().map([this](Response response) -> Response {
         if (m_user != nullptr) {
-            m_user->setFiles(response.body["results"].toArray());
+            m_user->setFiles(response.body["files"].toArray());
             emit userChanged(m_user);
         }
         return response;

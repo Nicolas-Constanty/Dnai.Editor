@@ -24,6 +24,7 @@ signals:
 
 private:
     QSettings m_settings;
+    QSettings m_apiSettings;
     QStringList m_themes;
     QStringList m_families;
     QMap<QString, QString> m_themesPath;
@@ -54,6 +55,8 @@ public:
     QVariant getValue(const QString &key);
     QVariant getValue(const QString &key, QVariant defaultValue);
     void setValue(const QString &path, const QVariant &value);
+    void setAPIValue(const QString &path, const QVariant &value);
+
 private:
     static QPair<QStringList, QList<QVariant>> findObject(QJsonObject obj, const QString root);
     bool m_isInit;

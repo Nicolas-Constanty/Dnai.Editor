@@ -9,12 +9,14 @@
 
 using namespace dnai::http;
 
+
 namespace dnai {
     class  api {
     public:
         struct User {
             QString token;
             QString refresh_token;
+            QString id;
             QDateTime expire_date;
         };
 
@@ -32,6 +34,7 @@ namespace dnai {
 
     public:
         static QString const &getToken();
+        static QString const &getId();
         static void setUser(User const &);
 
     public:
