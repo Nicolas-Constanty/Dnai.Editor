@@ -19,6 +19,7 @@ Rectangle {
     property string backgroundColor: "#00BFFF"
     property string iconsFont
     property string colorIconsFont
+    property bool clickEnable: true
     property string parentWidthUpdate: parent.width
 
     x: parentWidthUpdate - backgroundRect.width + marginsMore + backgroundRect.width
@@ -77,6 +78,7 @@ Rectangle {
          id: mouseArea
         anchors.fill: parent
         hoverEnabled: true
+        enabled: backgroundRect.clickEnable
         onEntered: {
             iconsDelete.visible = true
             backgroundRect.opacity = 1.0

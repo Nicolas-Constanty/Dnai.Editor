@@ -21,6 +21,7 @@ signals:
 
 public slots:
     void timeout();
+    void onDeleteTimeOut();
 
 public slots:
     void onEnterToast();
