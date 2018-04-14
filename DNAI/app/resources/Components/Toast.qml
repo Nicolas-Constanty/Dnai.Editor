@@ -23,7 +23,7 @@ Rectangle {
 
     x: parentWidthUpdate - backgroundRect.width + marginsMore + backgroundRect.width
     y: 50 + yMargins
-    width: 250
+    width: Qt.platform.os === "windows" ? 300 : 250
     height: ((textField.font.pixelSize + textField.anchors.margins) * textField.lineCount) + 20
     id: backgroundRect
     color: backgroundColor
@@ -69,7 +69,7 @@ Rectangle {
         id: textField
         text: textValue
         color: "white"
-        font.pointSize: 14
+        font.pointSize: Qt.platform.os === "windows" ? 10 : 14
         wrapMode: Text.WordWrap
     }
 
