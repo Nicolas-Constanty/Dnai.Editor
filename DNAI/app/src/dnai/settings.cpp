@@ -10,12 +10,14 @@
 
 namespace dnai
 {
-	AppSettings::AppSettings(QObject* parent) : QObject(parent)
+    AppSettings::AppSettings(QObject* parent) : QObject(parent), m_settings(), m_apiSettings("apiSettings", QSettings::IniFormat)
     {
-//        m_settings.clear();
+//        m_apiSettings = QSettings("apiSettings", QSettings::IniFormat);
+        m_settings.clear();
         m_style = new models::SettingsModel(nullptr);
 		const auto theme = m_settings.value("themes/current/theme").toString();
-		m_isInit = theme != "";
+        m_isInit = theme != "";
+        static_cast<App *>(App::instance())->registerSettings(this);
 	}
 
 	AppSettings::~AppSettings()
@@ -68,15 +70,24 @@ namespace dnai
 
 	void AppSettings::init()
     {
+        qDebug() << m_settings.applicationName();
+        qDebug() << m_settings.fileName();
+        qDebug() << m_settings.status();
+        qDebug() << m_settings.childKeys();
+        qDebug() << m_settings.organizationName();
+        qDebug() << m_settings.scope();
+        qDebug() << m_settings.allKeys();
 		const auto theme = m_settings.value("themes/current/theme").toString();
 #ifdef Q_OS_MAC
     QString path = QGuiApplication::applicationDirPath() + "/settings/themes";
 #else
-    QString path = "settings/themes";
+    QString path = QGuiApplication::applicationDirPath() + "/settings/themes";
 #endif
+        qDebug() << QGuiApplication::applicationDirPath();
         QDir dir(path);
 
 		const auto list = dir.entryList(QDir::Files);
+        qDebug() << list.count();
 		for (auto i = list.begin(); i!= list.end(); ++i)
 		{
 			const auto f = QFileInfo(*i);
@@ -86,17 +97,20 @@ namespace dnai
 			
 		}
 		m_isInit = theme != "";
+        qDebug() << m_themes.count();
 		if (!m_isInit && m_themes.count() != 0)
 		{
-			m_settings.clear();
+            qDebug() << "CLEAR";
+            m_settings.clear();
 			loadTheme(m_themes[0]);
 		}
 		else
 			loadTheme(theme);
-		static_cast<App *>(App::instance())->registerSettings(this);
 
-        QVariant value = m_settings.value(api::settings_key);
+        QVariant value = m_apiSettings.value(api::settings_key);
+      //  qDebug() << value.value<api::User>().id;
         api::setUser(value.value<api::User>());
+        qDebug() << "API ID: " << api::getId();
 	}
 
 	QStringList AppSettings::getThemes() const
@@ -141,6 +155,20 @@ namespace dnai
 		m_style = style;
 	}
 
+    bool AppSettings::isNewVersionAvailable() const {
+        QStringList currentVersionList = Editor::instance().version().split('.');
+        QStringList currentVersionAPIList = m_currentVersionAPI.split('.');
+        int i = 0;
+
+        while (i < currentVersionAPIList.length() && i < currentVersionList.length()) {
+            if (currentVersionAPIList[i].toInt() > currentVersionList[i].toInt()) {
+                return true;
+            }
+            ++i;
+        }
+        return false;
+    }
+
 	QPair<QQuickItem*, QString> AppSettings::getFinalProperty(QQuickItem *item, const QString &path) const
 	{
 		QPair<QQuickItem*, QString> pair;
@@ -175,6 +203,31 @@ namespace dnai
 		return m_loadedNumbers[path];
 	}
 
+    void AppSettings::setVersion(QString const &ver) {
+        Editor::instance().setVersion(ver);
+    }
+
+    void AppSettings::setAPIVersion(QString const &ver) {
+        m_currentVersionAPI = ver;
+    }
+
+    void AppSettings::onNotifyVersionChanged() {
+        if (isNewVersionAvailable()) {
+            Editor::instance().notifyInformation("Switch to new version " + m_currentVersionAPI, [this]() {
+                App::currentInstance()->processManager()->launchUpdater(Editor::instance().version(), m_currentVersionAPI);
+            });
+            /*Editor::instance().notifyError("Switch to new version " + m_currentVersionAPI, [this]() {
+                App::currentInstance()->processManager()->launchUpdater(Editor::instance().version(), m_currentVersionAPI);
+            });
+            Editor::instance().notifySuccess("Switch to new version " + m_currentVersionAPI, [this]() {
+                App::currentInstance()->processManager()->launchUpdater(Editor::instance().version(), m_currentVersionAPI);
+            });
+            Editor::instance().notifyWarning("Switch to new version " + m_currentVersionAPI, [this]() {
+                App::currentInstance()->processManager()->launchUpdater(Editor::instance().version(), m_currentVersionAPI);
+            });*/
+        }
+    }
+
 	QPair<QStringList, QList<QVariant>> AppSettings::findObject(QJsonObject obj, const QString root)
 	{
 		QPair<QStringList, QList<QVariant>> pair;
@@ -201,8 +254,17 @@ namespace dnai
         m_settings.setValue(path, value);
     }
 
+    void AppSettings::setAPIValue(const QString &path, const QVariant &value) {
+        m_apiSettings.setValue(path, value);
+    }
+
     QVariant AppSettings::getValue(const QString &key)
     {
         return m_settings.value(key);
+    }
+
+    QVariant AppSettings::getValue(const QString &key, QVariant defaultValue)
+    {
+        return m_settings.value(key, defaultValue);
     }
 }

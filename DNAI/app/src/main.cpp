@@ -3,6 +3,7 @@
 #include "dnai.h"
 #include "dnai/editor.h"
 #include "dnai/project.h"
+#include "dnai/core/handlermanager.h"
 
 #if defined(_WIN32) && defined(_MSC_VER)
 #include "../../lib/WinToast/wintoastlib.h"
@@ -33,6 +34,14 @@ static QObject *standardpath_singleton_provider(QQmlEngine *engine, QJSEngine *s
     return new QCStandardPaths();
 }
 
+static QObject *core_controller_singleton_provider(QQmlEngine *engine, QJSEngine *scriptEngine)
+{
+    Q_UNUSED(engine)
+    Q_UNUSED(scriptEngine)
+
+    return &dnai::core::HandlerManager::Instance();
+}
+
 static void registerDNAI()
 {
 #define qmlRegisterDnai(type, name) qmlRegisterType<type>("DNAI", 1, 0, name);
@@ -52,7 +61,7 @@ static void registerEnums()
     qmlRegisterEnums(dnai::enums::FlowTypeRessouce, "FlowType");
     qmlRegisterEnums(dnai::enums::DeclarationTypeRessouce, "DeclarationType");
     qmlRegisterEnums(dnai::enums::QInstructionID, "InstructionID");
-    qmlRegisterEnums(dnai::enums::core, "Core");
+    //qmlRegisterEnums(dnai::enums::core, "Core");
 }
 
 class conststr {
@@ -138,8 +147,17 @@ static void registerModels()
     qmlRegisterModels(dnai::models::EntityTree, "EntityTree");
 }
 
-static void registerConnection() {
-    //qmlRegisterType<EventConsumer>("DNAI.Communication.EventConsumer", 1, 0, "EventConsumer");
+static void registerCore() {
+    if (!qmlRegisterUncreatableType<dnai::core::ProjectHandler>("DNAI.Core", 1, 0, "ProjectHandler", "Use DNAI.Core.Controller.project")
+        || !qmlRegisterUncreatableType<dnai::core::DeclaratorHandler>("DNAI.Core", 1, 0, "DeclaratorHandler", "Use DNAI.Core.Controller.declarator")
+        || !qmlRegisterUncreatableType<dnai::core::VariableHandler>("DNAI.Core", 1, 0, "VariableHandler", "Use DNAI.Core.Controller.variable")
+        || !qmlRegisterUncreatableType<dnai::core::EnumHandler>("DNAI.Core", 1, 0, "EnumerationHandler", "Use DNAI.Core.Controller.enumeration")
+        || !qmlRegisterUncreatableType<dnai::core::FunctionHandler>("DNAI.Core", 1, 0, "FunctionHandler", "Use DNAI.Core.Controller.function")
+        //instruction handler
+        //list handler
+        //object handler
+        || !qmlRegisterSingletonType<dnai::core::HandlerManager>("DNAI.Core", 1, 0, "Controller", core_controller_singleton_provider))
+        qDebug() << "Failed to register one core type";
 }
 
 static void registerQml()
@@ -147,7 +165,7 @@ static void registerQml()
     registerEnums();
     registerModels();
     registerViews();
-    registerConnection();
+    registerCore();
 }
 
 static void registerCustomTypes()
@@ -159,6 +177,7 @@ int main(int argc, char *argv[])
 {
     registerQml();
     registerCustomTypes();
+    registerDNAI();
 
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
@@ -171,7 +190,5 @@ int main(int argc, char *argv[])
         qDebug() << "Error, your system in not compatible!";
     }
 #endif
-    registerDNAI();
-    app.load();
     return dnai::App::exec();
 }

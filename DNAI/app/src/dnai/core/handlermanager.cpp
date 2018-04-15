@@ -17,9 +17,25 @@ namespace dnai
 
         HandlerManager &HandlerManager::Instance()
         {
-            static HandlerManager inst;
+            //need to instanciate with 'new' because Qt delete the instance
+            static HandlerManager *inst = new HandlerManager();
 
-            return inst;
+            return *inst;
+        }
+
+        ProjectHandler *HandlerManager::project()
+        {
+            return &m_project;
+        }
+
+        DeclaratorHandler *HandlerManager::declarator()
+        {
+            return &m_declarator;
+        }
+
+        VariableHandler *HandlerManager::variable()
+        {
+            return &m_variable;
         }
 
         ProjectHandler &HandlerManager::Project()

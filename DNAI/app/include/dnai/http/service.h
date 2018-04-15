@@ -27,6 +27,7 @@ namespace dnai {
             {
                 std::ostringstream oss;
                 oss << Service::m_config.base_url;
+                qDebug() << QString(Service::m_config.base_url.c_str());
                 int a[] = {0, ((void)(oss << args << "/"), 0) ... };
                 static_cast<void>(a);
                 oss.str().pop_back();

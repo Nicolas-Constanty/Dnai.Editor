@@ -39,6 +39,7 @@ namespace dnai {
 
             for (auto it = body.begin(); it != body.end(); ++it) {
                 query.addQueryItem(it.key(), it.value());
+
             }
             return post(query.query(QUrl::FullyEncoded).toUtf8());
         }
@@ -149,7 +150,7 @@ namespace dnai {
 
         Url *Url::headers(const Headers &headers)
         {
-            for (auto it = headers.begin(); it != headers.end(); ++it) {
+            for (auto it = headers.begin(); it != headers.end(); it++) {
                 m_headers[it.key()] = it.value();
             }
             return this;
@@ -179,6 +180,7 @@ namespace dnai {
 
             for (auto it = m_headers.begin(); it != m_headers.end(); ++it) {
                 request.setRawHeader(it.key().toLatin1(), it.value().toLatin1());
+                qDebug() << it.key() << ": " << it.value();
             }
 
             QNetworkReply *reply;

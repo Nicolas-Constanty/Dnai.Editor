@@ -12,6 +12,10 @@ import "../JavaScript/CreateComponent.js" as Factory
 
 ApplicationWindow {
     id: _root
+    Component.onCompleted: {
+        Editor.checkVersion()
+    }
+
     property alias appWindow: _root
 //    property alias layout: _layout
     width: AppSettings.isSettingsLoad() ? 1280 : 400
@@ -100,15 +104,4 @@ ApplicationWindow {
             }
         }
     }
-
-//    Item {
-//        id: _content
-//        anchors.top: _toolBar.bottom
-//        anchors.left: parent.left
-//        anchors.right: parent.right
-//        anchors.bottom: parent.bottom
-//        LayoutClassic {
-//            id: _layout
-//        }
-//    }
 }

@@ -7,6 +7,8 @@ import DNAI 1.0
 import DNAI.Models 1.0
 import DNAI.Enums 1.0
 
+import DNAI.Core 1.0
+
 import "../Style"
 import "../Components"
 
@@ -74,7 +76,6 @@ Item {
                 }
             }
 
-
             Item {
                 id: _header
                 anchors.top: _title.bottom
@@ -112,11 +113,10 @@ Item {
                                 return b.row() - a.row();
                               })
                             for (var i = 0; i < _sublist.selectedItems.length; i++) {
-                                proj.removeEntity(idx, _sublist.selectedItems[i])
+                                Controller.declarator.remove(_sublist.selectedItems[i].containerId, _sublist.selectedItems[i].name)
                             }
                             _sublist.selectedItems = []
                             _selectInfo.selectCount = 0
-
                         }
                     }
                 }
@@ -175,8 +175,13 @@ Item {
                             width: 45
                             visible: modelData.parentRef.entityType === 0
                             onPressed: {
-                                proj.addContext(_sublist.visualModel.items.count, modelData.listIndex, idx)
-                                _sublist.positionViewAtEnd()
+                                console.log(idx)
+                                console.log(modelData.listIndex)
+
+                                var name = proj.generateUniqueChildName(modelData.parentRef);
+
+                                proj.addEntityColumnUid(modelData.parentRef.id, name, modelData.listIndex)
+                                Controller.declarator.declare(modelData.parentRef.id, 0, name)
                             }
                         }
                         AddButton {
@@ -184,8 +189,10 @@ Item {
                             decoration.color: "#039BE5"
                             width: 45
                             onPressed: {
-                                proj.addClass(_sublist.visualModel.items.count, modelData.listIndex, idx)
-                                _sublist.positionViewAtEnd()
+                                var name = proj.generateUniqueChildName(modelData.parentRef);
+
+                                proj.addEntityColumnUid(modelData.parentRef.id, name, modelData.listIndex)
+                                Controller.declarator.declare(modelData.parentRef.id, 5)
                             }
                         }
                         AddButton {
@@ -193,8 +200,10 @@ Item {
                             decoration.color: "#8E24AA"
                             width: 45
                             onPressed: {
-                                proj.addFunction(_sublist.visualModel.items.count, modelData.listIndex, idx)
-                                _sublist.positionViewAtEnd()
+                                var name = proj.generateUniqueChildName(modelData.parentRef);
+
+                                proj.addEntityColumnUid(modelData.parentRef.id, name, modelData.listIndex)
+                                Controller.declarator.declare(modelData.parentRef.id, 2)
                             }
                         }
                         AddButton {
@@ -202,9 +211,21 @@ Item {
                             decoration.color: "#FB8C00"
                             width: 45
                             onPressed: {
-                                proj.addVariable(_sublist.visualModel.items.count, modelData.listIndex, idx)
-                                _sublist.positionViewAtEnd()
+                                var name = proj.generateUniqueChildName(modelData.parentRef);
+
+                                proj.addEntityColumnUid(modelData.parentRef.id, name, modelData.listIndex)
+                                Controller.declarator.declare(modelData.parentRef, 1)
                             }
+                        }
+                    }
+
+                    Connections {
+                        target: proj
+                        onEntityAdded: {
+                            _sublist.positionViewAtEnd()
+                        }
+                        onEntityRemoved: {
+                            _sublist.positionViewAtEnd()
                         }
                     }
                 }

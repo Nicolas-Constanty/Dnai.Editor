@@ -23,6 +23,21 @@ unix:ICON = DNAI_icon.icns
 DEFINES += QT_DEPRECATED_WARNINGS QNANO_USE_RENDERNODE
 DEFINES += QPM_INIT
 
+#Logiciel VERSION RELEASE
+VERSION_MAJOR = 0
+VERSION_MINOR = 0
+VERSION_BUILD = 21
+
+DEFINES += "VERSION_MAJOR=$${VERSION_MAJOR}"\
+       "VERSION_MINOR=$${VERSION_MINOR}"\
+       "VERSION_BUILD=$${VERSION_BUILD}"
+
+#Target version
+VERSION = "$${VERSION_MAJOR}.$${VERSION_MINOR}.$${VERSION_BUILD}"
+
+DEFINES += DNAI_VERSION_RELEASE=\\\"$${VERSION}\\\"
+#END
+
 # You can also make your code fail to compile if you use deprecated APIs.
 # In order to do so, uncomment the following line.
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
@@ -109,7 +124,9 @@ SOURCES += \
     src/dnai/core/handlermanager.cpp \
     src/dnai/core/variablehandler.cpp \
     src/dnai/core/functionhandler.cpp \
-    src/dnai/core/enumhandler.cpp
+    src/dnai/core/enumhandler.cpp \
+    src/dnai/toastermanagerservice.cpp \
+    src/dnai/views/toast.cpp
 
 
 RESOURCES += qml.qrc
@@ -287,7 +304,9 @@ HEADERS += \
     include/exceptions.h \
     include/interfaces.h \
     include/dnai/core/handlermanager.h \
-    $${PWD}/../lib/core_client/include/core.h
+    $${PWD}/../lib/core_client/include/core.h \
+    include/dnai/toastermanagerservice.h \
+    include/dnai/views/toast.h
 
 
 #LIB
@@ -324,8 +343,13 @@ LIBS += -L$${PWD}/../lib/ -lCoreClient -lEventClient -lCerealization
 #}
 
 #end library Data Event
+CONFIG(release, debug|release) {
+win32:settingsfolder.path = $${OUT_PWD}/release/settings
+}
+CONFIG(debug, debug|release) {
+win32:settingsfolder.path = $${OUT_PWD}/debug/settings
+}
 
-win32:settingsfolder.path = $${OUT_PWD}/settings
 unix:settingsfolder.path = /usr/local/bin/$${TARGET}/bin/$${TARGET}.app/Contents/MacOS/settings
 settingsfolder.files = settings/*
 

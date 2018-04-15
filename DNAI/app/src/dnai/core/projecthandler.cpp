@@ -16,10 +16,10 @@ namespace dnai
             //core callbacks
         }
 
-        void ProjectHandler::create(const Project &tocreate)
+        void ProjectHandler::create(const Project *tocreate)
         {
             //this will trigger entityAdded signal
-            manager.addEntity(0, tocreate.getRoot());
+            manager.addEntity(0, tocreate->getRoot());
             ++nbproject;
         }
 

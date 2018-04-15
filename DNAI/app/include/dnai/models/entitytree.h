@@ -38,10 +38,10 @@ namespace dnai
 			int rowCount(const QModelIndex& parent) const override;
 			int columnCount(const QModelIndex& parent) const override;
 			QVariant data(const QModelIndex& index, int role) const override;
-	        Q_INVOKABLE int getRoleKey(QString rolename) const;
+            Q_INVOKABLE int getRoleKey(QString rolename) const;
 
         protected:
-			Entity * getItem(const QModelIndex& index) const;
+            Entity * getItem(const QModelIndex& index) const;
 			virtual QHash<int, QByteArray> roleNames() const override;
 			Entity *m_rootItem;
 		};

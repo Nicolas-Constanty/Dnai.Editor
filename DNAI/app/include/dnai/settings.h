@@ -24,6 +24,7 @@ signals:
 
 private:
     QSettings m_settings;
+    QSettings m_apiSettings;
     QStringList m_themes;
     QStringList m_families;
     QMap<QString, QString> m_themesPath;
@@ -34,6 +35,7 @@ private:
 
 public:
     models::SettingsModel *style() const { return m_style; }
+    QString const &currentVersionAPI() const  { return m_currentVersionAPI; }
     void setStyle(models::SettingsModel *m);
     Q_INVOKABLE void loadTheme(const QString &);
     Q_INVOKABLE void init();
@@ -41,15 +43,24 @@ public:
     Q_INVOKABLE bool isSettingsLoad() const;
     Q_INVOKABLE void updateProperty(const QString& path, const QVariant &variant);
     Q_INVOKABLE void registerStyle(models::SettingsModel *);
+    Q_INVOKABLE bool isNewVersionAvailable() const;
+
     QPair<QQuickItem*, QString> getFinalProperty(QQuickItem* item, const QString& path) const;
 
     Q_INVOKABLE qreal getSettingNumber(const QString &path);
+    void setVersion(QString const &);
+    void setAPIVersion(QString const &);
+    void onNotifyVersionChanged();
 
     QVariant getValue(const QString &key);
+    QVariant getValue(const QString &key, QVariant defaultValue);
     void setValue(const QString &path, const QVariant &value);
+    void setAPIValue(const QString &path, const QVariant &value);
+
 private:
     static QPair<QStringList, QList<QVariant>> findObject(QJsonObject obj, const QString root);
     bool m_isInit;
+    QString m_currentVersionAPI;
 };
 }
 

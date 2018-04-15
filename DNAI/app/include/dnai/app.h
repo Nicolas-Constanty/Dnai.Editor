@@ -25,6 +25,8 @@ namespace dnai {
 		void initProcessManager();
 	    bool eventFilter(QObject* o, QEvent* event) override;
         void registerSettings(AppSettings* appSettings);
+        void versionsUpdater();
+        void onNotifyVersionChanged();
 
     public:
         Session &session();
@@ -32,6 +34,7 @@ namespace dnai {
         views::AppView &appView() const;
 	    QQmlApplicationEngine &engine();
         models::BasicNodeModel *nodes() const;
+        ProcessManager *processManager();
         Editor &editor() const;
 
     public:
@@ -44,6 +47,9 @@ namespace dnai {
         Q_INVOKABLE void onBuildStart();
         Q_INVOKABLE bool isMac();
 
+        void afterInit();
+    public slots:
+        void loadSplashScreen();
     private:
         QQmlApplicationEngine m_engine;
         AppSettings *m_settings;

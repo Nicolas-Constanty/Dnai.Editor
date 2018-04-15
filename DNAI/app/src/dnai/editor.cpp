@@ -1,6 +1,6 @@
 #include <QQuickItem>
 #include <QQmlProperty>
-
+#include <QQuickView>
 
 #include "dnai/editor.h"
 #include "dnai/solution.h"
@@ -16,6 +16,7 @@
 namespace dnai
 {
 	Editor &Editor::m_instance = *(new Editor());
+
 	const QString& Editor::version() const
 	{
 		return m_version;
@@ -59,20 +60,42 @@ namespace dnai
 	{
         for (auto proj : m_solution->projects())
             if (const auto p = dynamic_cast<Project*>(proj))
-                core::HandlerManager::Instance().Project().create(*p);
+                core::HandlerManager::Instance().Project().create(p);
 	}
 
 	void Editor::loadSolution(const QString& filename)
 	{
 		m_solution = new Solution();
 		if (!filename.isEmpty())
-			m_solution->load(filename);
-	}
+            m_solution->load(filename);
+    }
+
+    void Editor::startApp()
+    {
+       App::currentInstance()->load();
+    }
 
 	void Editor::closeSolution()
 	{
 		m_solution->close();
 	}
+
+    void Editor::notifyInformation(QString const &text, std::function<void ()> func) {
+        m_toasterManagerService.notifyInformation(text, func);
+    }
+
+    void Editor::notifySuccess(QString const &text, std::function<void ()> func) {
+        m_toasterManagerService.notifySuccess(text, func);
+    }
+
+    void Editor::notifyError(QString const &text, std::function<void ()> func) {
+        m_toasterManagerService.notifyError(text, func);
+    }
+
+    void Editor::notifyWarning(QString const &text, std::function<void ()> func) {
+        m_toasterManagerService.notifyWarning(text, func);
+    }
+
 
 	const QList<interfaces::ICommand*>& Editor::actions() const
 	{
@@ -176,5 +199,19 @@ namespace dnai
         auto canvas = dynamic_cast<views::CanvasNode *>(view);
         obj->setParentItem(canvas->content());
         component.completeCreate();
+    }
+
+    void Editor::checkVersion()
+    {
+        auto app = App::currentInstance();
+        app->versionsUpdater();
+      //  app->onNotifyVersionChanged();
+    }
+
+    void Editor::registerMainView(QObject *mainView) {
+        m_mainView = static_cast<QQuickWindow*>(mainView)->contentItem();
+    }
+    QQuickItem *Editor::mainView()  {
+        return m_mainView;
     }
 }

@@ -8,8 +8,8 @@ QT       -= gui
 QT      += network
 
 TARGET = CoreClient
-TEMPLATE = lib
 CONFIG += staticlib
+CONFIG -= app_bundle
 CONFIG += c++14
 DESTDIR = $$PWD/../
 
@@ -43,7 +43,8 @@ HEADERS += \
     include/serialoperations.h \
     include/client.h
 
-unix {
-    target.path = /usr/lib
-    INSTALLS += target
-}
+
+#unix {
+#    target.path = /usr/lib
+#    INSTALLS += target
+#}

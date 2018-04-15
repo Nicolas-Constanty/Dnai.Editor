@@ -22,6 +22,18 @@ namespace dnai
 
         }
 
+        DeclaratorHandler::~DeclaratorHandler()
+        {
+            for (models::Entity &entity : manager)
+            {
+                delete &entity;
+            }
+            for (std::pair<const std::string, models::Entity *> &curr : removedEntities)
+            {
+                delete curr.second;
+            }
+        }
+
         void DeclaratorHandler::setup()
         {
             QObject::connect(&manager,  SIGNAL(entityAdded(enums::core::EntityID,models::Entity&)),
@@ -29,9 +41,7 @@ namespace dnai
             QObject::connect(&manager,  SIGNAL(entityRemoved(enums::core::EntityID,models::Entity&)),
                              this,      SLOT(onEntityRemoved(enums::core::EntityID,models::Entity&)));
 
-            ::core::declarator::onDeclared([this](auto ... args){
-                this->onDeclared(args...);
-            });
+            ::core::declarator::onDeclared(std::bind(&DeclaratorHandler::onDeclared, this, _1, _2, _3, _4, _5));
             ::core::declarator::onDeclareError(std::bind(&DeclaratorHandler::onDeclareError, this, _1, _2, _3, _4, _5));
             ::core::declarator::onRemoved(std::bind(&DeclaratorHandler::onRemoved, this, _1, _2));
             ::core::declarator::onRemoveError(std::bind(&DeclaratorHandler::onRemoveError, this, _1, _2, _3));
@@ -42,65 +52,109 @@ namespace dnai
             for (models::Entity *child : entity.childrenItem())
             {
                 child->setContainerId(id);
-                declare(*child);
+                pendingDeclaration.push(child);
+                declare(id, child->entityType(), child->name(), child->visibility());
             }
         }
 
-        void DeclaratorHandler::onEntityRemoved(enums::core::EntityID id, models::Entity &entity)
+        void DeclaratorHandler::onEntityRemoved(enums::core::EntityID, models::Entity &entity)
         {
-            removed[entity.containerId()][entity.name().toStdString()] = &entity;
+            removedEntities[entity.fullName().toStdString()] = &entity;
         }
 
-        void DeclaratorHandler::declare(models::Entity &todeclare)
+        models::Entity *DeclaratorHandler::createEntity(enums::core::ENTITY type, models::Entity *parent)
         {
-            qDebug() << "Core: DeclaratorHandler: Declare("
-                     << todeclare.containerId() << ", "
-                     << todeclare.entityType() << ", "
-                     << todeclare.name() << ", "
-                     << todeclare.visibility() << ")";
+            interfaces::IEntity *guidata = nullptr;
 
-            if (todeclare.containerId() != enums::core::UNDEFINED_ID)
+            switch (type) {
+            case enums::core::ENTITY::CONTEXT:
+                guidata = new models::gui::declarable::Context();
+                break;
+            case enums::core::ENTITY::VARIABLE:
+                guidata = new models::gui::declarable::Variable();
+                break;
+            case enums::core::ENTITY::LIST_TYPE:
+                guidata = new models::gui::declarable::ListType();
+                break;
+            case enums::core::ENTITY::OBJECT_TYPE:
+                guidata = new models::gui::declarable::ObjectType();
+                break;
+            case enums::core::ENTITY::FUNCTION:
+                guidata = new models::gui::declarable::Function();
+                break;
+            default:
+                return nullptr;
+            }
+
+            return new models::Entity(new models::core::Entity(type), parent, guidata);
+        }
+
+        void DeclaratorHandler::declare(quint32 parentId, qint32 type, QString name, qint32 visibility)
+        {
+            if (parentId != enums::core::UNDEFINED_ID)
             {
-                enums::core::EntityID declarator = todeclare.containerId();
-                enums::core::ENTITY type = static_cast<enums::core::ENTITY>(todeclare.entityType());
-                QString name = todeclare.name();
-                enums::core::VISIBILITY visi = todeclare.visibility();
+                qDebug() << "core::declarator::declare("
+                         << parentId << ", "
+                         << static_cast<enums::core::ENTITY>(type) << ", "
+                         << name << ", "
+                         << enums::core::VISIBILITY::PUBLIC << ")";
+
+                models::Entity *parent = &manager.getEntity(parentId);
 
                 commands::CommandManager::Instance()->exec(
                     new commands::CoreCommand("Declarator.Declare", true,
                         /*
                          * Execute
                          */
-                        std::bind(&::core::declarator::declare, declarator, type, name, visi),
+                        [parent, type, name, visibility]() {
+                            qDebug() << "Declare " << name << " into " << parent->name() << "(" << parent->id() << ")";
+                            ::core::declarator::declare(parent->id(), static_cast<enums::core::ENTITY>(type), name, static_cast<enums::core::VISIBILITY>(visibility));
+                        },
                         /*
                          * Un-execute
                          */
-                        std::bind(&::core::declarator::remove, declarator, name)));
-                pendingDeclaration.push(&todeclare);
+                        [parent, name]() {
+                            qDebug() << "Remove " << name << " from " << parent->name() << "(" << parent->id() << ")";
+                            ::core::declarator::remove(parent->id(), name);
+                        }
+                ));
+            }
+            else
+            {
+                qDebug() << "Cannot declare an entity into parent that have invalid id: " << parentId;
             }
         }
 
-        void DeclaratorHandler::remove(const models::Entity &toremove)
+        void DeclaratorHandler::remove(quint32 parentId, QString const &name)
         {
-            enums::core::EntityID declarator = toremove.containerId();
-            enums::core::ENTITY type = static_cast<enums::core::ENTITY>(toremove.entityType());
-            QString name = toremove.name();
-            enums::core::VISIBILITY visi = toremove.visibility();
+            models::Entity *torm = findEntity(parentId, name);
 
-            qDebug() << "Core: DeclaratorHandler: Remove("
-                     << toremove.containerId() << ", "
-                     << toremove.name() << ")";
+            if (torm == nullptr)
+            {
+                qDebug() << "No such entity " << name << " in EntityManager";
+                return;
+            }
+
+            models::Entity *parent = &manager.getEntity(parentId);
+            enums::core::ENTITY type = static_cast<enums::core::ENTITY>(torm->entityType());
+            enums::core::VISIBILITY visi = torm->visibility();
+
+            qDebug() << "Core: DeclaratorHandler: Remove(" << parentId << ", " << name << ")";
 
             commands::CommandManager::Instance()->exec(
                 new commands::CoreCommand("Declarator.Remove", true,
                     /*
                      * Execute
                      */
-                    std::bind(&::core::declarator::remove, declarator, name),
+                    [parent, name]() {
+                        ::core::declarator::remove(parent->id(), name);
+                    },
                     /*
                      * Un-execute
                      */
-                                          std::bind(&::core::declarator::declare, declarator, type, name, visi)));
+                    [parent, name, type, visi]() {
+                        ::core::declarator::declare(parent->id(), type, name, visi);
+                    }));
         }
 
         void DeclaratorHandler::move(const models::Entity &tomove, const models::Entity &newparent)
@@ -118,52 +172,7 @@ namespace dnai
 
         }
 
-        models::Entity *DeclaratorHandler::popDeclared(enums::core::EntityID declarator, enums::core::ENTITY type, const QString &name)
-        {
-            models::Entity *todeclare = nullptr;
-
-            if (pendingDeclaration.empty())
-            {
-                typename RemoveMap::iterator decl = removed.find(declarator);
-
-                if (decl == removed.end())
-                {
-                    return nullptr;
-                }
-
-                typename DeclaratorMap::iterator it = decl->second.find(name.toStdString());
-
-                if (it == decl->second.end())
-                {
-                    return nullptr;
-                }
-
-                todeclare = it->second;
-
-                if (static_cast<enums::core::ENTITY>(todeclare->entityType()) != type)
-                {
-                    return nullptr;
-                }
-
-                decl->second.erase(it);
-            }
-            else
-            {
-                todeclare = pendingDeclaration.front();
-
-                if (todeclare->containerId() != declarator
-                    || static_cast<enums::core::ENTITY>(todeclare->entityType()) != type
-                    || todeclare->name() != name)
-                {
-                    return nullptr;
-                }
-
-                pendingDeclaration.pop();
-            }
-            return todeclare;
-        }
-
-        models::Entity *DeclaratorHandler::findEntity(enums::core::EntityID declarator, const QString &name, bool pop)
+        models::Entity *DeclaratorHandler::findEntity(enums::core::EntityID declarator, const QString &name)
         {
             if (!manager.contains(declarator))
             {
@@ -176,27 +185,53 @@ namespace dnai
             {
                 if (child->name() == name)
                 {
-                    if (pop)
-                        decl.removeOne(child);
                     return child;
                 }
             }
             return nullptr;
         }
 
-        void DeclaratorHandler::onDeclared(enums::core::EntityID declarator, enums::core::ENTITY type, const QString &name, enums::core::VISIBILITY visibility, enums::core::EntityID declared)
+        void DeclaratorHandler::onDeclared(enums::core::EntityID declarator, enums::core::ENTITY type, const QString &name, enums::core::VISIBILITY visibility, enums::core::EntityID declaredId)
         {
-            models::Entity *todeclare = popDeclared(declarator, type, name);
+            models::Entity *todeclare = nullptr;
 
-            if (todeclare == nullptr)
-            {
-                /*
-                 * If someone else declared an entity
-                 */
-                qDebug() << "Core: DeclaratorHandler: onDeclared: No such entity to declare";
+            if (!manager.contains(declarator))
                 return;
+
+            if (!pendingDeclaration.empty()
+                && pendingDeclaration.front()->containerId() == declarator
+                && pendingDeclaration.front()->entityType() == type
+                && pendingDeclaration.front()->name() == name
+                && pendingDeclaration.front()->visibility() == visibility)
+            {
+                todeclare = pendingDeclaration.front();
+                pendingDeclaration.pop();
+            }
+            else
+            {
+                models::Entity &parent = manager.getEntity(declarator);
+                std::unordered_map<std::string, models::Entity *>::iterator it = removedEntities.find(parent.childFullName(name).toStdString());
+
+                if (it != removedEntities.end())
+                {
+                    todeclare = it->second;
+                    todeclare->setParent(&parent);
+                    todeclare->setContainerId(declarator);
+                    removedEntities.erase(it);
+                }
+                else
+                {
+                    todeclare = createEntity(type, &parent);
+                    todeclare->setName(name);
+                    todeclare->setVisibility(visibility);
+                    todeclare->setEntityType(static_cast<qint32>(type));
+                    todeclare->setContainerId(declarator);
+                }
             }
 
+            /*
+             * todo: Implement a system to check if a the declared entity was declared by the gui
+             */
             commands::CoreCommand::Success();
 
             qDebug() << "Core: DeclaratorHandler: onDeclared("
@@ -204,22 +239,26 @@ namespace dnai
                      << type << ", "
                      << name << ", "
                      << visibility << ", "
-                     << declared << ")";
+                     << declaredId << ")";
+
+            todeclare->setId(declaredId);
 
             //this triggers a entityAdded signal that will call onEntityAdded slot
-            manager.addEntity(declared, *todeclare);
+            manager.addEntity(declaredId, *todeclare);
+
+            emit declared(todeclare);
         }
 
         void DeclaratorHandler::onDeclareError(enums::core::EntityID declarator, enums::core::ENTITY type, const QString &name, enums::core::VISIBILITY visibility, const QString &message)
         {
-            if (popDeclared(declarator, type, name) == nullptr)
+            if (!pendingDeclaration.empty())
             {
-                /*
-                 * If someone else tryied to declare an entity
-                 */
-                return;
+                pendingDeclaration.pop();
             }
 
+            /*
+             * todo: Implement a system to check if the command send corresponds to the event received
+             */
             commands::CoreCommand::Error();
 
             qDebug() << "Core: DeclaratorHandler: onDeclareError: " << message;
@@ -227,7 +266,7 @@ namespace dnai
 
         void DeclaratorHandler::onRemoved(enums::core::EntityID declarator, const QString &name)
         {
-            models::Entity *torm = findEntity(declarator, name, true);
+            models::Entity *torm = findEntity(declarator, name);
 
             if (torm != nullptr)
             {
@@ -236,6 +275,8 @@ namespace dnai
                 qDebug() << "Core: DeclaratorHandler: onRemoved("
                          << declarator << ", "
                          << name << ")";
+
+                emit removed(torm);
 
                 //this will trigger onEntityRemoved
                 manager.removeEntity(torm->id());

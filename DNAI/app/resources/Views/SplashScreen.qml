@@ -1,5 +1,6 @@
 import QtQuick 2.0
 import QtQuick.Window 2.1
+import DNAI 1.0
 
 import "../Components"
 
@@ -27,5 +28,8 @@ Window {
         frameCount: 120
         frameWidth: 164
         frameHeight: 256
+    }
+    Component.onCompleted: {
+        Editor.startApp()
     }
 }

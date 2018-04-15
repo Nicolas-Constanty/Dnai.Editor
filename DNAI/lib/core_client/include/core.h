@@ -26,7 +26,7 @@ namespace core
         LIST_TYPE = 6
     };
 
-    enum VISIBILITY
+    enum VISIBILITY : qint32
     {
         PRIVATE = 0,
         PUBLIC = 1

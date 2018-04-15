@@ -25,8 +25,8 @@ namespace dnai
             void onEntityAdded(enums::core::EntityID id, models::Entity &entity);
 
         public:
-            Q_INVOKABLE void setType(models::Entity const &variable, models::Entity const &type);
-            Q_INVOKABLE void setValue(models::Entity const &variable, QJsonObject const &value);
+            void setType(models::Entity const &variable, models::Entity const &type);
+            void setValue(models::Entity const &variable, QJsonObject const &value);
 
         private:
             models::gui::declarable::Variable *getVariableData(enums::core::EntityID variable, bool throws = false);
