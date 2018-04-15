@@ -1,4 +1,4 @@
-set version= windows0.0.23
+set version= windows0.0.25
 
 set accesschk= "C:\Users\Victor\Downloads\accesschk.exe"
 set actual_user= "Victor"
@@ -12,6 +12,9 @@ set repository_windows= "C:\Users\Victor\Documents\EIP\DNAI_updaters\windows"
 set git= "C:\Program Files\Git\bin\git.exe"
 
 %accesschk% -s %actual_user% %project_path% > %windows_file%
+fart.exe --remove -C --c-style %windows_file% "C:\\Users\\Victor\\Documents\\EIP\\Duly-GUI\\Deploiement\\Windows\\DNAISetup\\packages\\com.vendor.product\\data\\\\"
+
+pause
 
 cd %repository_path%
 
