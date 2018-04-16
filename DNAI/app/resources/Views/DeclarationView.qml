@@ -192,7 +192,7 @@ Item {
                                 var name = proj.generateUniqueChildName(modelData.parentRef);
 
                                 proj.addEntityColumnUid(modelData.parentRef.id, name, modelData.listIndex)
-                                Controller.declarator.declare(modelData.parentRef.id, 5)
+                                Controller.declarator.declare(modelData.parentRef.id, 5, name)
                             }
                         }
                         AddButton {
@@ -203,7 +203,7 @@ Item {
                                 var name = proj.generateUniqueChildName(modelData.parentRef);
 
                                 proj.addEntityColumnUid(modelData.parentRef.id, name, modelData.listIndex)
-                                Controller.declarator.declare(modelData.parentRef.id, 2)
+                                Controller.declarator.declare(modelData.parentRef.id, 2, name)
                             }
                         }
                         AddButton {
@@ -214,7 +214,7 @@ Item {
                                 var name = proj.generateUniqueChildName(modelData.parentRef);
 
                                 proj.addEntityColumnUid(modelData.parentRef.id, name, modelData.listIndex)
-                                Controller.declarator.declare(modelData.parentRef, 1)
+                                Controller.declarator.declare(modelData.parentRef.id, 1, name)
                             }
                         }
                     }
