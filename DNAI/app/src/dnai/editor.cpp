@@ -209,7 +209,7 @@ namespace dnai
     }
 
     void Editor::registerMainView(QObject *mainView) {
-        m_mainView = static_cast<QQuickWindow*>(mainView)->contentItem();
+        m_mainView = static_cast<QQuickWindow*>(mainView);
     }
 
     void Editor::createSolution(const QString &name,
@@ -230,7 +230,7 @@ namespace dnai
         loadSolution(sol_path);
     }
 
-    QQuickItem *Editor::mainView()  {
+    QQuickWindow *Editor::mainView()  {
         return m_mainView;
     }
 }

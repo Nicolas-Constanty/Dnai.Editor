@@ -1,5 +1,6 @@
 #include <QDebug>
 #include <QQmlContext>
+#include <QQuickWindow>
 #include "dnai/app.h"
 #include "include/dnai/toastermanagerservice.h"
 
@@ -35,7 +36,7 @@ Toast *ToasterManagerService::createToast(QString const &text, std::function<voi
     QQmlComponent component(dnai::App::getEngineInstance(), "qrc:/resources/Components/Toast.qml");
 
     QQuickItem *obj = qobject_cast<QQuickItem*>(component.beginCreate(dnai::App::getEngineInstance()->rootContext()));
-    obj->setParentItem(dnai::Editor::instance().mainView());
+    obj->setParentItem(dnai::Editor::instance().mainView()->contentItem());
     obj->setProperty("yMargins", getYposition());
     obj->setProperty("textValue", text);
 

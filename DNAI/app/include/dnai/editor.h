@@ -41,7 +41,7 @@ namespace dnai
         dnai::Solution *getSolution() const;
 		void addView(QQuickItem* v) override;
 		views::EditorView *mainView() const;
-		void registerEditorView(views::EditorView *view);
+        Q_INVOKABLE void registerEditorView(views::EditorView *view);
 
         Q_INVOKABLE const QList<QQuickItem *>& views() const override;
         Q_INVOKABLE QQuickItem *selectedView() const override;
@@ -62,7 +62,7 @@ namespace dnai
                                         const QString &path,
                                         const QString &proj_name,
                                         const QString &proj_desc);
-        QQuickItem *mainView();
+        Q_INVOKABLE QQuickWindow *mainView();
 
 	public:
 		void selectProject(Project *proj);
@@ -85,7 +85,7 @@ namespace dnai
 		QString m_version = "0.0.1";
         views::EditorView *m_editorView;
         ToasterManagerService m_toasterManagerService;
-        QQuickItem *m_mainView = nullptr;
+        QQuickWindow *m_mainView = nullptr;
 
         static Editor &m_instance;
 	};
