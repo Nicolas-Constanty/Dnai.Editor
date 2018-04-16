@@ -24,6 +24,14 @@ namespace dnai {
 
     Project::Project(const QString &filename)
     {
+        connect(
+            core::HandlerManager::Instance().declarator(), SIGNAL(removed(dnai::models::Entity*)),
+            this, SLOT(removeEntity(dnai::models::Entity*))
+        );
+        connect(
+            core::HandlerManager::Instance().declarator(), SIGNAL(declared(dnai::models::Entity*)),
+            this, SLOT(addEntity(dnai::models::Entity*))
+                    );
         m_filename = filename;
         m_file = new QFile(QUrl(m_filename).toLocalFile());
         m_rootItem = new models::Entity();
