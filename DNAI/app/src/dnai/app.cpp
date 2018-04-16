@@ -32,6 +32,7 @@ namespace dnai
 	{
 		if (m_instance == nullptr)
             m_instance = this;
+        setupSettings();
         QTimer::singleShot(300, this, &App::loadSplashScreen);
 	}
 
@@ -114,7 +115,7 @@ namespace dnai
 		std::queue<std::function<void()>> initFuncs;
         initFuncs.push(std::bind(&App::initProcessManager, this));
         initFuncs.push(std::bind(&App::installEventFilter, this, this));
-        initFuncs.push(&App::setupSettings);
+//        initFuncs.push(&App::setupSettings);
         initFuncs.push(&App::loadFonts);
         initFuncs.push(std::bind(&App::initAppView, this));
         initFuncs.push(std::bind(&dnai::http::Service::Init, dnai::api::http_config));

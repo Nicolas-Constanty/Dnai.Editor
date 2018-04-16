@@ -7,12 +7,23 @@ import "../Forms"
 import DNAI 1.0
 
 ThemePanelForm {
+    property bool init: false
     themes.items.onCurrentTextChanged: {
-        AppSettings.loadTheme(themes.items.currentText)
+        if (init)
+            AppSettings.loadTheme(themes.items.currentText)
     }
 
     Component.onCompleted:
     {
         themes.items.model = AppSettings.getThemes()
+        for (var i = 0; i < themes.items.model.length; i++)
+        {
+            if (themes.items.model[i] === AppSettings.currentTheme())
+            {
+                themes.items.currentIndex = i
+                break
+            }
+        }
+        init = true
     }
 }

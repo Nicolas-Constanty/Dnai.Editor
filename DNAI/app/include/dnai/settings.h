@@ -44,6 +44,7 @@ public:
     Q_INVOKABLE void updateProperty(const QString& path, const QVariant &variant);
     Q_INVOKABLE void registerStyle(models::SettingsModel *);
     Q_INVOKABLE bool isNewVersionAvailable() const;
+    Q_INVOKABLE QString currentTheme();
 
     QPair<QQuickItem*, QString> getFinalProperty(QQuickItem* item, const QString& path) const;
 

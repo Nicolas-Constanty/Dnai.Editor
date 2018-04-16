@@ -13,7 +13,6 @@ ChooseThemeForm {
     height: 200
     property var wind: null
 
-
     panel.color: AppSettings.style.background.color
 
     Component.onCompleted:
