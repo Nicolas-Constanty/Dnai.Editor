@@ -7,6 +7,7 @@
 #include "dnai/editor.h"
 #include "dnai/core/handlermanager.h"
 #include "dnai/models/entity.h"
+#include "dnai/models/gui/declarable/context.h"
 
 namespace dnai {
 	Project::Project(): EntityTree(nullptr), m_file(nullptr), m_selectedEntity(nullptr), m_rootEntity(nullptr)
@@ -18,8 +19,18 @@ namespace dnai {
         connect(
             core::HandlerManager::Instance().declarator(), SIGNAL(declared(dnai::models::Entity*)),
             this, SLOT(addEntity(dnai::models::Entity*))
-        );
-	}
+                    );
+    }
+
+    Project::Project(const QString &filename)
+    {
+        m_filename = filename;
+        m_file = new QFile(QUrl(m_filename).toLocalFile());
+        m_rootItem = new models::Entity();
+        m_rootItem->setIdx(index(0,0, QModelIndex()));
+        const auto coreModel = new models::core::Entity("RootEntity", enums::core::ENTITY::CONTEXT);
+        m_rootEntity = new models::Entity(coreModel, m_rootItem, new models::gui::declarable::Context());
+    }
 
     Project::~Project()
     {

@@ -74,6 +74,21 @@ ApplicationWindow {
             anchors.fill: parent
             id: newFileProjectPanel
             popup: newProjectPopup
+
+            createButton.onClicked: function () {
+                if (solutionPath.text) {
+                    Editor.openSolution()
+                    tabV.destroy()
+                    _content.content.destroy()
+                    Factory.createObjects("resources/Views/SolutionView.qml",
+                                          {
+                                              "openModal" : openProjectPopup,
+                                              "newModal" : newProjectPopup
+                                          }, _content)
+                    _content.content = Factory.getObject()
+                    popup.close();
+                }
+            }
         }
     }
     Modal {

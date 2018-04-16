@@ -171,7 +171,7 @@ Rectangle {
                     }
                 }
                 headerVisible: false
-                rootIndex: item.index(0, 0)
+//                rootIndex: item.index(0, 0)
                 onExpanded: {
                     index.model.data(index, index.model.getRoleKey("modelobj")).expanded = true
                     _expPanel.height += item.expandedRows(index) * rowheight

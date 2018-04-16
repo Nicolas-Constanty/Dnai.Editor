@@ -57,6 +57,11 @@ namespace dnai
         Q_INVOKABLE void startApp();
         Q_INVOKABLE void checkVersion();
         Q_INVOKABLE void registerMainView(QObject *);
+        Q_INVOKABLE void createSolution(const QString &name,
+                                        const QString &description,
+                                        const QString &path,
+                                        const QString &proj_name,
+                                        const QString &proj_desc);
         QQuickItem *mainView();
 
 	public:

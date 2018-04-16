@@ -211,6 +211,25 @@ namespace dnai
     void Editor::registerMainView(QObject *mainView) {
         m_mainView = static_cast<QQuickWindow*>(mainView)->contentItem();
     }
+
+    void Editor::createSolution(const QString &name,
+                                const QString &description,
+                                const QString &path,
+                                const QString &proj_name,
+                                const QString &proj_desc)
+    {
+        const auto sol_path = path + "/" + name + ".dnaisolution";
+        auto solution = new Solution(sol_path);
+        solution->setName(name);
+        solution->setDescription(description);
+        auto p = new Project(path + "/" + proj_name + ".dnaiproject");
+        p->setName(proj_name);
+        p->setDescription(proj_desc);
+        solution->addProject(p);
+        solution->save();
+        loadSolution(sol_path);
+    }
+
     QQuickItem *Editor::mainView()  {
         return m_mainView;
     }
