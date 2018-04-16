@@ -27,7 +27,8 @@ namespace dnai
 				ENTITIES = Qt::UserRole + 1,
 			};
         public:
-            explicit Column(QObject *parent = nullptr);
+            explicit Column(QObject *parent = nullptr) : QAbstractListModel(parent) {}
+            explicit Column(Entity *pr, QObject *parent = nullptr);
             virtual int rowCount(const QModelIndex& parent = QModelIndex()) const override;
             QVariant data(const QModelIndex& index, int role) const override;
 	        void append(Entity* e, const QModelIndex& parent = QModelIndex());
@@ -61,6 +62,7 @@ namespace dnai
             Entity *m_target;
             QList<Entity *> m_entities;
 	        gui::data::EntityColumn m_data;
+            Entity *m_parent;
         };
 
         class Entity : public interfaces::IModel<Entity>

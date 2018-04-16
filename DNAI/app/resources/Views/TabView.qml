@@ -30,7 +30,6 @@ Item {
         Editor.selectView(view)
         obj.refContent = v
         _bar.setCurrentIndex(_bar.count - 1)
-        console.log(v)
         return v
     }
 

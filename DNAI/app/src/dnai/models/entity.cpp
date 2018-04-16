@@ -207,7 +207,7 @@ namespace dnai
 			const auto uuid = QUuid(child->guiModel()->listIndex());
 			if (m_columns.find(uuid) == m_columns.end())
 			{
-				const auto c = new Column();
+                const auto c = new Column(this);
 				c->setListIndex(uuid.toString());
 				m_columslist.append(c);
 				m_columns[uuid] = c;
@@ -242,7 +242,8 @@ namespace dnai
 		void Entity::_deserialize(const QJsonObject& obj)
 		{
             foreach(const auto column, obj["columns"].toArray()) {
-                const auto col = Column::deserialize(column.toObject());
+                auto p = this;
+                const auto col = Column::deserialize(column.toObject(), p);
                 m_columns[col->datas().listIndex] = col;
 				m_columslist.append(col);
 			}
@@ -392,8 +393,9 @@ namespace dnai
             return m_entities;
         }
 
-		Column::Column(QObject* parent) : QAbstractListModel(parent)
+        Column::Column(Entity *e, QObject* parent) : QAbstractListModel(parent)
 		{
+            m_parent = e;
 		}
 
         int Column::rowCount(const QModelIndex& parent) const
@@ -471,11 +473,8 @@ namespace dnai
 		}
 
 		Entity* Column::parentRef() const
-		{
-			if (m_entities.empty())
-				return nullptr;
-			return m_entities.first()->parentItem();
-
+        {
+            return m_parent;
 		}
 	}
 }
