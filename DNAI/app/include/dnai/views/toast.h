@@ -21,11 +21,13 @@ signals:
 
 public slots:
     void timeout();
+    void onDeleteTimeOut();
 
 public slots:
     void onEnterToast();
     void onExitToast();
     void onClickToast();
+    void onRemoveToast();
 
 private:
     int         m_msecDisable;

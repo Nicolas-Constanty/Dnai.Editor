@@ -197,6 +197,7 @@ Rectangle {
                 }
 
                 onRowInserted: {
+                    console.log(index)
                     if (index.model.data(index, index.model.getRoleKey("expended")))
                     {
                         _expPanel.height += (end + 1 - start) * rowheight
@@ -205,6 +206,8 @@ Rectangle {
                 }
 
                 onRowRemoved: {
+                    console.log(index)
+                    console.log(index.model)
                     if (index.model.data(index, index.model.getRoleKey("expended")))
                     {
                         _expPanel.height -= (end + 1 - start) * rowheight

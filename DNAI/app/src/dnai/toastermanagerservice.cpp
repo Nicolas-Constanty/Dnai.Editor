@@ -35,18 +35,20 @@ Toast *ToasterManagerService::createToast(QString const &text, std::function<voi
     QQmlComponent component(dnai::App::getEngineInstance(), "qrc:/resources/Components/Toast.qml");
 
     QQuickItem *obj = qobject_cast<QQuickItem*>(component.beginCreate(dnai::App::getEngineInstance()->rootContext()));
+    obj->setParentItem(dnai::Editor::instance().mainView());
     obj->setProperty("yMargins", getYposition());
     obj->setProperty("textValue", text);
-    obj->setParentItem(dnai::Editor::instance().mainView());
 
     Toast *toast = new Toast(obj, this, func);
 
     QObject::connect(toast->item(), SIGNAL(enterToast()),
-                     toast, SLOT(onEnterToast()));
+                     toast, SLOT(onEnterToast()), Qt::QueuedConnection);
     QObject::connect(toast->item(), SIGNAL(exitToast()),
-                     toast, SLOT(onExitToast()));
+                     toast, SLOT(onExitToast()),Qt::QueuedConnection);
     QObject::connect(toast->item(), SIGNAL(clickToast()),
-                     toast, SLOT(onClickToast()));
+                     toast, SLOT(onClickToast()),Qt::QueuedConnection);
+    QObject::connect(toast->item(), SIGNAL(removeToast()),
+                     toast, SLOT(onRemoveToast()),Qt::QueuedConnection);
 
     component.completeCreate();
 
@@ -58,19 +60,27 @@ Toast *ToasterManagerService::createToast(QString const &text, std::function<voi
 void ToasterManagerService::notifyInformation(QString const &text, std::function<void ()> func) {
     Toast *toast = createToast(text, func);
     toast->item()->setProperty("backgroundColor", "#00BFFF");
+    toast->item()->setProperty("iconsFont", u8"\uf05a");
+    toast->item()->setProperty("colorIconsFont", "white");
 }
 
 void ToasterManagerService::notifyError(QString const &text, std::function<void ()> func) {
     Toast *toast = createToast(text, func);
     toast->item()->setProperty("backgroundColor", "#FF3333");
+    toast->item()->setProperty("iconsFont", u8"\uf057");
+    toast->item()->setProperty("colorIconsFont", "white");
 }
 
 void ToasterManagerService::notifyWarning(QString const &text, std::function<void ()> func) {
     Toast *toast = createToast(text, func);
     toast->item()->setProperty("backgroundColor", "orange");
+    toast->item()->setProperty("iconsFont", u8"\uf06a");
+    toast->item()->setProperty("colorIconsFont", "white");
 }
 
 void ToasterManagerService::notifySuccess(QString const &text, std::function<void ()> func) {
     Toast *toast = createToast(text, func);
     toast->item()->setProperty("backgroundColor", "#4C9900");
+    toast->item()->setProperty("iconsFont", u8"\uf058");
+    toast->item()->setProperty("colorIconsFont", "white");
 }

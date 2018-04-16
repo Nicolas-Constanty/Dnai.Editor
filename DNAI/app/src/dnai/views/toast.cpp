@@ -36,6 +36,13 @@ void Toast::onClickToast() {
     timeout();
 }
 
+void Toast::onRemoveToast() {
+    if (m_timer)
+        delete m_timer;
+    m_timer = NULL;
+    timeout();
+}
+
 void Toast::onEnterToast() {
     delete m_timer;
     m_timer = NULL;
@@ -47,7 +54,15 @@ void Toast::onExitToast() {
     connect(m_timer, SIGNAL(timeout()), this, SLOT(timeout()));
 }
 
-void Toast::timeout() {
+void Toast::onDeleteTimeOut() {
     m_toasterManager->timeout(this);
     emit remove(this);
+}
+
+void Toast::timeout() {
+//    m_toasterManager->timeout(this);
+    m_item->setProperty("clickEnable", false);
+    m_item->setProperty("x", m_item->x() + m_item->width());
+ //   m_item->setProperty("x", 1300);
+    QTimer::singleShot(350, this, SLOT(onDeleteTimeOut()));
 }

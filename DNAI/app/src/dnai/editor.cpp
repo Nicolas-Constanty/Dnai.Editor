@@ -16,6 +16,7 @@
 namespace dnai
 {
 	Editor &Editor::m_instance = *(new Editor());
+
 	const QString& Editor::version() const
 	{
 		return m_version;
@@ -59,7 +60,7 @@ namespace dnai
 	{
         for (auto proj : m_solution->projects())
             if (const auto p = dynamic_cast<Project*>(proj))
-                core::HandlerManager::Instance().Project().create(*p);
+                core::HandlerManager::Instance().Project().create(p);
 	}
 
 	void Editor::loadSolution(const QString& filename)

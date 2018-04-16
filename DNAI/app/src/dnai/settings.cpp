@@ -10,7 +10,7 @@
 
 namespace dnai
 {
-	AppSettings::AppSettings(QObject* parent) : QObject(parent)
+    AppSettings::AppSettings(QObject* parent) : QObject(parent), m_settings(), m_apiSettings("apiSettings", QSettings::IniFormat)
     {
 #ifdef QT_DEBUG
         m_settings.clear();
@@ -101,14 +101,17 @@ namespace dnai
         qDebug() << m_themes.count();
 		if (!m_isInit && m_themes.count() != 0)
 		{
-			m_settings.clear();
+            qDebug() << "CLEAR";
+            m_settings.clear();
 			loadTheme(m_themes[0]);
 		}
 		else
 			loadTheme(theme);
 
-        QVariant value = m_settings.value(api::settings_key);
+        QVariant value = m_apiSettings.value(api::settings_key);
+      //  qDebug() << value.value<api::User>().id;
         api::setUser(value.value<api::User>());
+        qDebug() << "API ID: " << api::getId();
 	}
 
 	QStringList AppSettings::getThemes() const
@@ -214,6 +217,15 @@ namespace dnai
             Editor::instance().notifyInformation("Switch to new version " + m_currentVersionAPI, [this]() {
                 App::currentInstance()->processManager()->launchUpdater(Editor::instance().version(), m_currentVersionAPI);
             });
+            /*Editor::instance().notifyError("Switch to new version " + m_currentVersionAPI, [this]() {
+                App::currentInstance()->processManager()->launchUpdater(Editor::instance().version(), m_currentVersionAPI);
+            });
+            Editor::instance().notifySuccess("Switch to new version " + m_currentVersionAPI, [this]() {
+                App::currentInstance()->processManager()->launchUpdater(Editor::instance().version(), m_currentVersionAPI);
+            });
+            Editor::instance().notifyWarning("Switch to new version " + m_currentVersionAPI, [this]() {
+                App::currentInstance()->processManager()->launchUpdater(Editor::instance().version(), m_currentVersionAPI);
+            });*/
         }
     }
 
@@ -241,6 +253,10 @@ namespace dnai
     void AppSettings::setValue(const QString &path, const QVariant &value)
     {
         m_settings.setValue(path, value);
+    }
+
+    void AppSettings::setAPIValue(const QString &path, const QVariant &value) {
+        m_apiSettings.setValue(path, value);
     }
 
     QVariant AppSettings::getValue(const QString &key)

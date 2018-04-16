@@ -20,6 +20,9 @@ namespace dnai
         class HandlerManager : public QObject
         {
             Q_OBJECT
+            //Q_PROPERTY(ProjectHandler *project READ project)
+            Q_PROPERTY(DeclaratorHandler *declarator READ declarator NOTIFY declaratorChanged)
+            //Q_PROPERTY(VariableHandler *variable READ variable)
 
         private:
             HandlerManager();
@@ -27,6 +30,20 @@ namespace dnai
         public:
             static HandlerManager &Instance();
 
+        signals:
+            void declaratorChanged();
+
+            /*
+             * QML Properties
+             */
+        public:
+            ProjectHandler *project();
+            DeclaratorHandler *declarator();
+            VariableHandler *variable();
+
+            /*
+             * Inner c++ properties
+             */
         public:
             ProjectHandler &Project();
             DeclaratorHandler &Declarator();

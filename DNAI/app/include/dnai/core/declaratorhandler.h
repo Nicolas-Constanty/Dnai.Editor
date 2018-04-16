@@ -6,6 +6,7 @@
 
 #include "entitymanager.h"
 #include "dnai/enums/core/coreenums.h"
+#include "dnai/project.h"
 
 namespace dnai
 {
@@ -17,7 +18,7 @@ namespace dnai
 
         public:
             DeclaratorHandler(EntityManager &manager);
-            virtual ~DeclaratorHandler() = default;
+            virtual ~DeclaratorHandler();
 
         public:
             void setup();
@@ -26,16 +27,25 @@ namespace dnai
             void onEntityAdded(enums::core::EntityID id, models::Entity &entity);
             void onEntityRemoved(enums::core::EntityID id, models::Entity &entity);
 
-        public:
-            Q_INVOKABLE void declare(models::Entity &todeclare);
-            Q_INVOKABLE void remove(const models::Entity &toremove);
-            Q_INVOKABLE void move(const models::Entity &tomove, const models::Entity &newparent);
-            Q_INVOKABLE void rename(const models::Entity &torename, QString const &newname);
-            Q_INVOKABLE void setVisibility(const models::Entity &entity, enums::core::VISIBILITY visibility);
+        signals:
+            void declared(dnai::models::Entity *entity);
+            void removed(dnai::models::Entity *entity);
+            void moved();
+            void renamed();
+            void visibilitySet();
 
         private:
-            models::Entity *popDeclared(enums::core::EntityID declarator, enums::core::ENTITY type, QString const &name);
-            models::Entity *findEntity(enums::core::EntityID declarator, QString const &name, bool pop = false);
+            models::Entity *createEntity(enums::core::ENTITY type, models::Entity *parent);
+
+        public:
+            Q_INVOKABLE void declare(quint32 parentId, qint32 type, QString name, qint32 visibility = static_cast<qint32>(enums::core::VISIBILITY::PUBLIC));
+            Q_INVOKABLE void remove(quint32 parentId, QString const &name);
+            void move(const models::Entity &tomove, const models::Entity &newparent);
+            void rename(const models::Entity &torename, QString const &newname);
+            void setVisibility(const models::Entity &entity, enums::core::VISIBILITY visibility);
+
+        private:
+            models::Entity *findEntity(enums::core::EntityID declarator, QString const &name);
 
         private:
             void onDeclared(enums::core::EntityID declarator, enums::core::ENTITY type, QString const &name, enums::core::VISIBILITY visibility, enums::core::EntityID declared);
@@ -53,10 +63,7 @@ namespace dnai
             std::queue<models::Entity *> pendingDeclaration;
 
         private:
-            using DeclaratorMap = std::unordered_map<std::string, models::Entity *>;
-            using RemoveMap = std::unordered_map<enums::core::EntityID, DeclaratorMap>;
-
-            RemoveMap removed;
+            std::unordered_map<std::string, models::Entity *> removedEntities;
         };
     }
 }

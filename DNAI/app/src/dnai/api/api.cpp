@@ -33,22 +33,23 @@ const Config api::http_config = {
 
     Observable &api::signin(const QString &login, const QString &password)
     {
-        return Service::url("oauth", "token")
+        return Service::url("signin")
                 ->headers(
                     Headers{
-                        {"Authorization", "Basic " + QString(client_id + ":" + client_secret).toUtf8().toBase64()},
-                        {"Content-Type", "application/x-www-form-urlencoded"}
+                    //    {"Authorization", "Basic " + QString(client_id + ":" + client_secret).toUtf8().toBase64()},
+                        {"Content-Type", "application/json"}
                     })
-                ->post(Form{
-                           {"grant_type", "password"},
-                           {"username", login},
+                ->post(QJsonObject{
+                          // {"grant_type", "password"},
+                           {"login", login},
                            {"password", password}
                        })
                 .map([](Response response) -> Response {
             api::setUser({
-                response.body["access_token"].toString(),
-                response.body["refresh_token"].toString(),
-                QDateTime::currentDateTime().addSecs(response.body["expires_in"].toInt())
+                response.body["token"].toString(),
+                response.body["refreshToken"].toString(),
+                response.body["user_id"].toString(),
+                QDateTime::currentDateTime().addSecs(6000000)
             });
             return response;
         });
@@ -56,22 +57,24 @@ const Config api::http_config = {
 
     Observable &api::refresh_token()
     {
+        qDebug() << "REFRESHTOKEN: " << api::user.refresh_token;
         api::refreshing_token = true;
-        return Service::url("oauth", "token")
+        return Service::url("refresh")
                 ->headers(
                     Headers{
-                        {"Authorization", "Basic " + QString(client_id + ":" + client_secret).toUtf8().toBase64()},
-                        {"Content-Type", "application/x-www-form-urlencoded"}
+                       // {"Authorization", "Basic " + QString(client_id + ":" + client_secret).toUtf8().toBase64()},
+                        {"Content-Type", "application/json"}
                     })
-                ->post(Form{
-                           {"grant_type", "refresh_token"},
-                           {"refresh_token", api::user.refresh_token}
+                ->post(QJsonObject{
+                          // {"grant_type", "refresh_token"},
+                           {"refreshToken", api::user.refresh_token}
                        })
                 .map([](Response response) -> Response {
             api::setUser({
-                response.body["access_token"].toString(),
-                response.body["refresh_token"].toString(),
-                QDateTime::currentDateTime().addSecs(response.body["expires_in"].toInt())
+                             response.body["token"].toString(),
+                             response.body["refreshToken"].toString(),
+                             response.body["user_id"].toString(),
+                             QDateTime::currentDateTime().addSecs(6000000)
             });
             api::refreshing_token = false;
             return response;
@@ -81,11 +84,8 @@ const Config api::http_config = {
     Observable &api::get_current_user()
     {
         //TODO when API work `/users/me` and remove John Doe
-        return Service::url("users", "1")->get().map([](Response response) -> Response {
-            response.body = QJsonObject{
-            {"first_name", "Adrien"},
-            {"last_name", "WERY"},
-        };
+        return Service::url("users", api::user.id.toLatin1().data())->get().map([](Response response) -> Response {
+
             return response;
         });
     }
@@ -124,6 +124,7 @@ const Config api::http_config = {
 
     void api::logout()
     {
+        qDebug() << "LOGOUT ?";
         api::setUser({});
     }
 
@@ -132,16 +133,22 @@ const Config api::http_config = {
         return user.token;
     }
 
+    QString const &api::getId() {
+        return user.id;
+    }
+
     void api::setUser(const api::User &user)
     {
         api::user = user;
-        App::currentInstance()->settings().setValue(api::settings_key, QVariant::fromValue(api::user));
+        qDebug() << "user: "<<  api::user.id;
+        App::currentInstance()->settings().setAPIValue(api::settings_key, QVariant::fromValue(api::user));
+        qDebug() << "SETTINGS user";
     }
 }
 
 QDataStream &operator<<(QDataStream &out, const dnai::api::User &v)
 {
-    out << v.token << v.refresh_token << v.expire_date;
+    out << v.token << v.refresh_token << v.id << v.expire_date;
     return out;
 }
 
@@ -149,6 +156,7 @@ QDataStream &operator>>(QDataStream &in, dnai::api::User &v)
 {
     in >> v.token;
     in >> v.refresh_token;
+    in >> v.id;
     in >> v.expire_date;
     return in;
 }

@@ -13,14 +13,16 @@ namespace dnai
         {
         }
 
-        Entity::Entity(core::Entity *coremodel, Entity *parent, interfaces::IEntity *guimodel) : IModel(parent), m_dataCore(coremodel), m_dataGUI(guimodel)
+        Entity::Entity(core::Entity *coremodel, Entity *parent, interfaces::IEntity *guimodel) :
+            IModel(parent),
+            m_dataCore(coremodel),
+            m_dataGUI(guimodel)
         {
 
         }
 
 		Entity::~Entity()
-		{
-            deleteChildren();
+        {
             if (m_dataCore)
                 delete m_dataCore;
             if (m_dataGUI)
@@ -64,8 +66,13 @@ namespace dnai
         const QString Entity::fullName() const
         {
             if (parentItem() == nullptr)
-                return name();
+                return coreModel() ? name() : "";
             return parentItem()->fullName() + "." + name();
+        }
+
+        const QString Entity::childFullName(const QString &childName) const
+        {
+            return fullName() + "." + childName;
         }
 
 		enums::core::VISIBILITY Entity::visibility() const
@@ -310,74 +317,7 @@ namespace dnai
    //             const auto entity = Entity::deserialize(function.toObject(), coreModel, parent);
 			//	appendChild(entity);
 			//}
-		}
-
-		void Entity::addContext(const int index, const QString &listindex)
-		{
-            const auto coreModel = new models::core::Entity(enums::core::ENTITY::CONTEXT);
-            const auto guiModel = new models::gui::declarable::Context();
-			guiModel->setIndex(index);
-            qDebug() << listindex;
-			guiModel->setListIndex(listindex);
-			Entity *parent = this;
-			const auto entity = new Entity(coreModel, parent, guiModel);
-			appendChild(entity);
-			entity->declare();
-		}
-
-		void Entity::addClass(const int index, const QString &listindex)
-		{
-            const auto coreModel = new models::core::Entity(enums::core::ENTITY::OBJECT_TYPE);
-            const auto guiModel = new models::gui::declarable::ObjectType();
-			guiModel->setIndex(index);
-			guiModel->setListIndex(listindex);
-			Entity *parent = this;
-			const auto entity = new Entity(coreModel, parent, guiModel);
-			appendChild(entity);
-			entity->declare();
-		}
-
-        void Entity::declare()
-        {
-            setContainerId(parentItem()->id());
-            dnai::core::HandlerManager::Instance().Declarator().declare(*this);
         }
-
-		void Entity::remove()
-		{
-			auto p = parentItem();
-			for (auto c : p->columns())
-			{
-				c->remove(this);
-            }
-            dnai::core::HandlerManager::Instance().Declarator().remove(*this);
-			parentItem()->removeOne(this);
-            delete this;
-		}
-
-		void Entity::addFunction(const int index, const QString &listindex)
-		{
-            const auto coreModel = new models::core::Entity(enums::core::ENTITY::FUNCTION);
-            const auto guiModel = new models::gui::declarable::Function();
-			guiModel->setIndex(index);
-			guiModel->setListIndex(listindex);
-			Entity *parent = this;
-			const auto entity = new Entity(coreModel, parent, guiModel);
-			appendChild(entity);
-			entity->declare();
-		}
-
-		void Entity::addVariable(const int index, const QString &listindex)
-		{
-            const auto coreModel = new models::core::Entity(enums::core::ENTITY::VARIABLE);
-            const auto guiModel = new models::gui::declarable::Variable();
-			guiModel->setIndex(index);
-			guiModel->setListIndex(listindex);
-			Entity *parent = this;
-			const auto entity = new Entity(coreModel, parent, guiModel);
-			appendChild(entity);
-			entity->declare();
-		}
 
 		int Entity::columnCount() const
 		{
@@ -445,7 +385,12 @@ namespace dnai
                 return false;
             m_data = data;
             return true;
-		}
+        }
+
+        const QList<Entity *> &Column::getEntities() const
+        {
+            return m_entities;
+        }
 
 		Column::Column(QObject* parent) : QAbstractListModel(parent)
 		{
