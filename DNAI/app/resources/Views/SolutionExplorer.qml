@@ -185,7 +185,7 @@ Rectangle {
                 }
 
                 Component.onCompleted: {
-                    _expPanel.initialheight = item.childCount * rowheight + _expPanel.header.height + 5
+                    _expPanel.initialheight = rowheight + _expPanel.header.height + 5
                     item.rowsInserted.connect(tr.rowInserted)
                     item.rowsRemoved.connect(tr.rowRemoved)
                     if (item === Editor.solution.selectedProject())
