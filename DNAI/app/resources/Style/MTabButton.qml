@@ -1,5 +1,6 @@
 import QtQuick 2.0
 import QtQuick.Controls 2.2
+import "../Views"
 
 TabButton {
     id: control
@@ -7,13 +8,10 @@ TabButton {
     property int iconsize: 12
     property int margin: 20
 
-    property TabBar tb: null
-    property SwipeView sv: null
+    property TabView tv: null
     property Item refContent: null
 
     width: text.length * font.pointSize + iconsize + margin * 2
-    anchors.top: parent.top
-    anchors.bottom: parent.bottom
 
     contentItem: Item {
         anchors.centerIn: parent
@@ -48,10 +46,12 @@ TabButton {
                 height: 14
                 width: 14
                 onPressed: {
-                    if (tb)
+                    if (tv)
                     {
-                        sv.removeItem(refContent)
-                        tb.removeItem(control)
+                        tv.removeView(refContent)
+                        tv.swip.removeItem(refContent)
+                        tv.bar.removeItem(control)
+                        delete control
                     }
                 }
             }

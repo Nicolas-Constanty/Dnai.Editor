@@ -11,33 +11,59 @@ Item {
     property var listModel: ({});
     property int localindex: -1
     property Item currentView: null
-    function addView(path, data, name)
+    property alias bar: _bar
+    property alias swip: _swip
+
+    function addView(path, data, name, ref)
     {
         Factory.createObjects("resources/Style/MTabButton.qml", {
                                   "text" : name,
-                                  "tb" : _bar,
-                                  "sv" : _swip
+                                  "tv" : view
                               }, _bar)
         var obj = Factory.getObject()
         _bar.addItem(obj)
+        obj.anchors.top = obj.parent.top
+        obj.anchors.bottom = obj.parent.bottom
         Factory.createObjects(path, data, _swip)
-        var obj1 = Factory.getObject()
-        _swip.addItem(obj1)
+        var v = Factory.getObject()
+        _swip.addItem(v)
         Editor.selectView(view)
-        obj.refContent = obj1
+        obj.refContent = v
         _bar.setCurrentIndex(_bar.count - 1)
-        localindex += 1
-        return localindex
+        console.log(v)
+        return v
     }
 
-    function appendModel(model, viewindex)
+    function appendModel(model, viewref)
     {
-        listModel[model] = viewindex
+        listModel[model] = viewref
     }
 
     function getViewFromModel(model)
     {
-        return listModel[model]
+        for (var i = 0; i < _bar.count; i++)
+        {
+            if (_swip.itemAt(i) === listModel[model])
+                return i;
+        }
+        return -1
+    }
+
+    function removeViewFromModel(model)
+    {
+        delete listModel[model]
+    }
+
+    function removeView(v)
+    {
+        for (var keyModel in listModel)
+        {
+            if (listModel[keyModel] === v)
+            {
+                delete listModel[keyModel]
+                break
+            }
+        }
     }
 
     function selectIndex(index)
@@ -65,8 +91,5 @@ Item {
            _bar.currentIndex = currentIndex
            currentView = _swip.itemAt(currentIndex)
        }
-        onWidthChanged: {
-            console.log(width)
-        }
     }
 }

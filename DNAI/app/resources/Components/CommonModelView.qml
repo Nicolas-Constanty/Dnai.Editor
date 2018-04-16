@@ -20,6 +20,7 @@ Rectangle {
     MouseArea {
         anchors.fill: parent;
         onClicked: {
+
 //            Manager.views.updatePropertyPanelModel(item)
         }
     }
@@ -245,7 +246,7 @@ Rectangle {
                 var tab = Editor.selectedView()
                 var model = modelData
                 var res = tab.getViewFromModel(model)
-                if (res === undefined || res === null)
+                if (res === -1)
                 {
                     var view = tab.addView("resources/Components/NodeCanvas.qml",
                                 {}, modelData.name)

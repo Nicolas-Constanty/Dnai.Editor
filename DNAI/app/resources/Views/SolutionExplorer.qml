@@ -122,7 +122,7 @@ Rectangle {
                         antialiasing: true
                     }
                     MLabel {
-                        text: styleData.value.name
+                        text: (styleData.value.name !== undefined) ? styleData.value.name : ""
                         horizontalAlignment: Text.AlignLeft
                         font.family: "segoeui"
                         font.pointSize: 8
@@ -150,13 +150,13 @@ Rectangle {
                 }
                 onClicked: {
                     var tab = Editor.selectedView()
-                    var model = index.model.data(index, index.model.getRoleKey("modelobj")).listColumn()
+                    var model = index.model.data(index, index.model.getRoleKey("modelobj"))
                     var res = tab.getViewFromModel(model)
-                    if (res === undefined || res === null)
+                    if (res === -1)
                     {
                         var view = tab.addView("resources/Views/DeclarationView.qml",
                                     {
-                                        "model" : model,
+                                        "model" : model.listColumn(),
                                         "idx" : index,
                                         "proj" : index.model
                                     },
