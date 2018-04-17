@@ -154,13 +154,22 @@ Rectangle {
                     var res = tab.getViewFromModel(model)
                     if (res === -1)
                     {
-                        var view = tab.addView("resources/Views/DeclarationView.qml",
+                        var view;
+                        if (model.entityType === 2)
+                        {
+                            view = tab.addView("resources/Components/NodeCanvas.qml",
+                                        {}, index.model.data(index, index.model.getRoleKey("name")))
+                        }
+                        else
+                        {
+                            view = tab.addView("resources/Views/DeclarationView.qml",
                                     {
                                         "model" : model.listColumn(),
                                         "idx" : index,
                                         "proj" : index.model
                                     },
                                     index.model.data(index, index.model.getRoleKey("name")))
+                        }
                         tab.appendModel(model, view)
                     }
                     else
@@ -197,7 +206,6 @@ Rectangle {
                 }
 
                 onRowInserted: {
-                    console.log(index)
                     if (index.model.data(index, index.model.getRoleKey("expended")))
                     {
                         _expPanel.height += (end + 1 - start) * rowheight
@@ -206,8 +214,6 @@ Rectangle {
                 }
 
                 onRowRemoved: {
-                    console.log(index)
-                    console.log(index.model)
                     if (index.model.data(index, index.model.getRoleKey("expended")))
                     {
                         _expPanel.height -= (end + 1 - start) * rowheight

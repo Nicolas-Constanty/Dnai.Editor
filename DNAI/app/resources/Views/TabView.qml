@@ -82,6 +82,7 @@ Item {
 
     SwipeView {
         id: _swip
+        interactive: false
         currentIndex: _bar.currentIndex
         anchors.fill: parent
         anchors.topMargin: _bar.height
