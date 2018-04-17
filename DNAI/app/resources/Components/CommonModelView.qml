@@ -211,7 +211,7 @@ Rectangle {
     }
     FontAwesomeButton {
         id: _openbutton
-        visible: modelData.entityType !== 1
+        visible: modelData.entityType === 2
 
         anchors.right: _itemview.right
         anchors.top: _itemview.top
@@ -246,6 +246,7 @@ Rectangle {
                 var tab = Editor.selectedView()
                 var model = modelData
                 var res = tab.getViewFromModel(model)
+
                 if (res === -1)
                 {
                     var view = tab.addView("resources/Components/NodeCanvas.qml",
