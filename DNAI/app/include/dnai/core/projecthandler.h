@@ -1,6 +1,8 @@
 #ifndef DNAI_CORE_PROJECTHANDLER_H
 #define DNAI_CORE_PROJECTHANDLER_H
 
+#include <queue>
+
 #include <QObject>
 
 #include "dnai/project.h"
@@ -22,14 +24,15 @@ namespace dnai
             void setup();
 
         public:
-            Q_INVOKABLE void create(const dnai::Project *tocreate);
+            Q_INVOKABLE void create(dnai::Project *tocreate);
 
-        public:
-            size_t getNbProject() const;
+        private:
+            void onCreated(QString const &name, enums::core::EntityID rootEntity);
+            void onCreateError(QString const &name, QString const &error);
 
         private:
             EntityManager &manager;
-            size_t nbproject;
+            std::queue<Project *> pendingProjects;
         };
     }
 }

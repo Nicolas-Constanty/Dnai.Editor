@@ -30,21 +30,31 @@ namespace core
         static Client &shared();
 
     public:
-        template <typename ... Args>
-        void callCommand(QString const &name, Args const &... args) const
+        void callCommand(QString const &name) const
         {
-            Cerealization::Cerealizable::Tuple<Args...> toserialize(args...);
+            m_clientCom->sendEvent(name, nullptr, 0);
+        }
+
+        template <typename First, typename ... Args>
+        void callCommand(QString const &name, First const &first, Args const &... args) const
+        {
+            Cerealization::Cerealizable::Tuple<First, Args...> toserialize(first, args...);
             Cerealization::Cerealizer::BinaryStream stream;
 
             stream << toserialize;
             m_clientCom->sendEvent(name, stream.Data(), static_cast<unsigned int>(stream.Size()));
         }
 
-        template <typename ... Args>
-        void registerReply(QString const &event, std::function<void(Args ...)> const &then) const
+        void registerReply(QString const &event, std::function<void()> const &then) const
+        {
+            m_clientCom->registerEvent(event, 0, [then](void *, unsigned int) { then(); });
+        }
+
+        template <typename First, typename ... Args>
+        void registerReply(QString const &event, std::function<void(First, Args ...)> const &then) const
         {
             m_clientCom->registerEvent(event, 0, [then](void *data, unsigned int size) {
-                Cerealization::Cerealizable::Tuple<Args ...> toInject;
+                Cerealization::Cerealizable::Tuple<First, Args ...> toInject;
                 Cerealization::Cerealizer::BinaryStream stream((Cerealization::Cerealizer::BinaryStream::Byte *)data, size);
 
                 stream >> toInject;

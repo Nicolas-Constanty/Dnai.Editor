@@ -42,10 +42,12 @@ namespace dnai
 
             if (var != nullptr)
             {
-                if (var->varType() != enums::core::UNDEFINED_ID)
+                //todo: add a system to save action into a map in order to execute it once done
+
+                /*if (var->varType() != enums::core::UNDEFINED_ID)
                     setType(manager.getEntity(id), manager.getEntity(var->varType()));
                 if (!var->value().empty())
-                    setValue(manager.getEntity(id), var->value());
+                    setValue(manager.getEntity(id), var->value());*/
             }
         }
 
