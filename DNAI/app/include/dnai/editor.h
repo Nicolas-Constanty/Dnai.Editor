@@ -63,6 +63,8 @@ namespace dnai
                                         const QString &proj_name,
                                         const QString &proj_desc);
         Q_INVOKABLE QQuickWindow *mainView();
+        Q_INVOKABLE void registerPropertyView(QQuickItem *view);
+		Q_INVOKABLE QQuickItem* propertyView() const;
 
 	public:
 		void selectProject(Project *proj);
@@ -86,8 +88,9 @@ namespace dnai
         views::EditorView *m_editorView;
         ToasterManagerService m_toasterManagerService;
         QQuickWindow *m_mainView = nullptr;
+		QQuickItem* m_propertyView;
 
-        static Editor &m_instance;
+		static Editor &m_instance;
 	};
 }
 

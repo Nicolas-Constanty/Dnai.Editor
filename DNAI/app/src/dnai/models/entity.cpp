@@ -11,6 +11,13 @@ namespace dnai
 	{
         Entity::Entity() : IModel(nullptr), m_dataCore(nullptr), m_dataGUI(nullptr)
         {
+			const QList<QString> props = {
+				"name",
+				"description",
+				"visibility",
+                "entityType"
+			};
+			m_editableProperty = new Property(this, props);
         }
 
         Entity::Entity(core::Entity *coremodel, Entity *parent, interfaces::IEntity *guimodel) :
@@ -18,7 +25,13 @@ namespace dnai
             m_dataCore(coremodel),
             m_dataGUI(guimodel)
         {
-
+			const QList<QString> props = {
+				"name",
+				"description",
+				"visibility",
+                "entityType"
+			};
+			m_editableProperty = new Property(this, props);
         }
 
 		Entity::~Entity()
@@ -27,6 +40,8 @@ namespace dnai
                 delete m_dataCore;
             if (m_dataGUI)
                 delete m_dataGUI;
+			if (m_editableProperty)
+				delete m_editableProperty;
             qDebug() << "~ Entity";
 		}
 
@@ -117,6 +132,19 @@ namespace dnai
 				emit expandedChanged(exp);
 			}
         }
+
+		void Entity::setEditableProperty(Property* p)
+		{
+			if (m_editableProperty == p)
+				return;
+			m_editableProperty = p;
+			emit editablePropertyChanged(p);
+		}
+
+		Property *Entity::editableProperty() const
+		{
+			return m_editableProperty;
+		}
 
 		Entity* Entity::parentRef() const
 		{

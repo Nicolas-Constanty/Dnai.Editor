@@ -1,8 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27428.2027
-MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DNAI", "app\DNAI.vcxproj", "{38D27E16-965C-3232-8464-6DA1E7D78EF3}"
+# Visual Studio 2017
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DNAI", "C:/Users/nicol/Documents/Duly-GUI/DNAI/app\DNAI.vcxproj", "{38D27E16-965C-3232-8464-6DA1E7D78EF3}"
 	ProjectSection(ProjectDependencies) = postProject
 		{E0727402-3A5C-3408-A41E-CC8931722356} = {E0727402-3A5C-3408-A41E-CC8931722356}
 		{E7372959-B806-3AC4-9DD0-1A4C36C0E00E} = {E7372959-B806-3AC4-9DD0-1A4C36C0E00E}
@@ -10,17 +8,17 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DNAI", "app\DNAI.vcxproj", 
 		{BC71B132-F545-3CAC-A020-243A11F8C59E} = {BC71B132-F545-3CAC-A020-243A11F8C59E}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EventClient", "lib\event_client\EventClient.vcxproj", "{25305FE0-FF39-3E52-95E5-AD96E2988ECC}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EventClient", "C:/Users/nicol/Documents/Duly-GUI/DNAI/lib/event_client\EventClient.vcxproj", "{25305FE0-FF39-3E52-95E5-AD96E2988ECC}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Cerealization", "lib\Cerealization\Cerealization.vcxproj", "{BC71B132-F545-3CAC-A020-243A11F8C59E}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Cerealization", "C:/Users/nicol/Documents/Duly-GUI/DNAI/lib/Cerealization\Cerealization.vcxproj", "{BC71B132-F545-3CAC-A020-243A11F8C59E}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CoreClient", "lib\core_client\CoreClient.vcxproj", "{E7372959-B806-3AC4-9DD0-1A4C36C0E00E}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CoreClient", "C:/Users/nicol/Documents/Duly-GUI/DNAI/lib/core_client\CoreClient.vcxproj", "{E7372959-B806-3AC4-9DD0-1A4C36C0E00E}"
 	ProjectSection(ProjectDependencies) = postProject
 		{25305FE0-FF39-3E52-95E5-AD96E2988ECC} = {25305FE0-FF39-3E52-95E5-AD96E2988ECC}
 		{BC71B132-F545-3CAC-A020-243A11F8C59E} = {BC71B132-F545-3CAC-A020-243A11F8C59E}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WinToast", "lib\WinToast\WinToast.vcxproj", "{E0727402-3A5C-3408-A41E-CC8931722356}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WinToast", "C:/Users/nicol/Documents/Duly-GUI/DNAI/lib/WinToast\WinToast.vcxproj", "{E0727402-3A5C-3408-A41E-CC8931722356}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -49,11 +47,8 @@ Global
 		{E0727402-3A5C-3408-A41E-CC8931722356}.Release|x64.ActiveCfg = Release|x64
 		{E0727402-3A5C-3408-A41E-CC8931722356}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
-	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		Qt5Version = msvc2017_64
-		SolutionGuid = {BC8E2CEB-169E-4347-9CA9-2AB2099A1F60}
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
 	EndGlobalSection
 EndGlobal

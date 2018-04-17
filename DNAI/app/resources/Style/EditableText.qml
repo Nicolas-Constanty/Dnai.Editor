@@ -1,7 +1,7 @@
-import QtQuick 2.0
+import QtQuick 2.9
 import DNAI 1.0
 
-TextEdit {
+TextInput {
     id: control
     property string placeholderText: "Enter text here..."
 

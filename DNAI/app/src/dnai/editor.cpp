@@ -1,6 +1,7 @@
 #include <QQuickItem>
 #include <QQmlProperty>
 #include <QQuickView>
+#include <QJsonArray>
 
 #include "dnai/editor.h"
 #include "dnai/solution.h"
@@ -233,4 +234,14 @@ namespace dnai
     QQuickWindow *Editor::mainView()  {
         return m_mainView;
     }
+
+    void Editor::registerPropertyView(QQuickItem *view)
+    {
+		m_propertyView = view;
+    }
+
+	QQuickItem *Editor::propertyView() const
+	{
+		return m_propertyView;
+	}
 }
