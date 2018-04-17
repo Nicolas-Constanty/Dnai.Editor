@@ -147,6 +147,7 @@ namespace dnai
 	        int columnCount() const override;
 			Q_INVOKABLE QVariant listColumn() const;
 			Q_INVOKABLE int row() const override;
+			Q_INVOKABLE void setProp(int row, const QVariant &value);
 
         private:
             core::Entity *m_dataCore;

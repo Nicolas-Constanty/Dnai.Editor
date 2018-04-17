@@ -184,6 +184,7 @@ namespace dnai
 		{
 			if (coreModel()->setName(name))
 			{
+				qDebug() << "NAME" << name;
 				emit nameChanged(name);
 			}
 		}
@@ -361,6 +362,22 @@ namespace dnai
 		int Entity::row() const
 		{
 			return IModel<Entity>::row();
+		}
+
+		void Entity::setProp(int row, const QVariant& value)
+		{
+			if (m_editableProperty)
+			{
+				const auto n = m_editableProperty->getPropName(row);
+				if (n == "name")
+					setName(value.toString());
+				else if (n == "description")
+					setDescription(value.toString());
+				else if (n == "visibility")
+					setVisibility(static_cast<enums::core::VISIBILITY>(value.toInt()));
+				else if (n == "type")
+					setEntityType(static_cast<enums::core::ENTITY>(value.toInt()));
+			}
 		}
 
 		QHash<int, QByteArray> Column::roleNames() const

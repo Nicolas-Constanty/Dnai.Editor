@@ -1,6 +1,7 @@
 #include <QMetaProperty>
 #include <QDebug>
 #include "dnai/models/property.h"
+#include "dnai/models/entity.h"
 
 namespace dnai
 {
@@ -45,6 +46,16 @@ namespace dnai
 				return QVariant::fromValue(m_editableIndex.at(index.row()));
 			}
 			return QVariant();
+		}
+
+		QString Property::getPropName(int row) const
+		{
+			return m_editableIndex.at(row);
+		}
+
+		Entity* Property::model() const
+		{
+			return dynamic_cast<Entity *>(m_obj);
 		}
 
 		QHash<int, QByteArray> Property::roleNames() const

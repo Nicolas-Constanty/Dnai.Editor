@@ -6,6 +6,8 @@
 namespace dnai {
 namespace models {
 
+	class Entity;
+
 class Property : public QAbstractTableModel
 {
 	Q_OBJECT
@@ -19,6 +21,8 @@ public:
 	int rowCount(const QModelIndex& parent) const override;
 	int columnCount(const QModelIndex& parent) const override;
 	QVariant data(const QModelIndex& index, int role) const override;
+	QString getPropName(int row) const;
+	Q_INVOKABLE dnai::models::Entity *model() const;
 
 private:
 	QHash<int, QByteArray> roleNames() const override;
