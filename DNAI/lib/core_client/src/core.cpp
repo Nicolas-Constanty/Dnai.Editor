@@ -12,6 +12,84 @@ namespace core
         Client::shared();
     }
 
+    namespace global
+    {
+        void createProject(const QString &name)
+        {
+            Client::shared().callCommand("GLOBAL.CREATE_PROJECT", name);
+        }
+
+        void onProjectCreated(const std::function<void (QString, EntityID)> &then)
+        {
+            Client::shared().registerReply("GLOBAL.PROJECT_CREATED", then);
+        }
+
+        void onCreateProjectError(const std::function<void (QString, QString)> &error)
+        {
+            Client::shared().registerReply("GLOBAL.CREATE_PROJECT.ERROR", error);
+        }
+
+        void removeProject(const QString &name)
+        {
+            Client::shared().callCommand("GLOBAL.REMOVE_PROJECT", name);
+        }
+
+        void onProjectRemoved(const std::function<void (QString, std::list<EntityID>)> &then)
+        {
+            Client::shared().registerReply("GLOBAL.PROJECT_REMOVED", then);
+        }
+
+        void onRemoveProjectError(const std::function<void (QString, QString)> &error)
+        {
+            Client::shared().registerReply("GLOBAL.REMOVE_PROJECT.ERROR", error);
+        }
+
+        void load(const QString &path)
+        {
+            Client::shared().callCommand("GLOBAL.LOAD", path);
+        }
+
+        void onLoaded(const std::function<void (QString, EntityID)> &then)
+        {
+            Client::shared().registerReply("GLOBAL.LOADED", then);
+        }
+
+        void onLoadError(const std::function<void (QString, QString)> &error)
+        {
+            Client::shared().registerReply("GLOBAL.LOAD.ERROR", error);
+        }
+
+        void save(const QString &path)
+        {
+            Client::shared().callCommand("GLOBAL.SAVE", path);
+        }
+
+        void onSaved(const std::function<void (QString)> &then)
+        {
+            Client::shared().registerReply("GLOBAL.SAVED", then);
+        }
+
+        void onSaveError(const std::function<void (QString, QString)> &error)
+        {
+            Client::shared().registerReply("GLOBAL.SAVE.ERROR", error);
+        }
+
+        void reset()
+        {
+            Client::shared().callCommand("GLOBAL.RESET");
+        }
+
+        void onResetDone(const std::function<void ()> &then)
+        {
+            Client::shared().registerReply("GLOBAL.RESET_DONE", then);
+        }
+
+        void onResetError(const std::function<void (QString)> &error)
+        {
+            Client::shared().registerReply("GLOBAL.RESET.ERROR", error);
+        }
+    }
+
     namespace declarator
     {
         void declare(EntityID declarator, ENTITY type, const QString &name, VISIBILITY visibility)
