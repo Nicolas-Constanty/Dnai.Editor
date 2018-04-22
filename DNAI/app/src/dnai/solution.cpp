@@ -12,6 +12,12 @@ namespace dnai
     {
     }
 
+    Solution::Solution(const QString filename)
+    {
+        m_filename = filename;
+        m_file = new QFile(QUrl(m_filename).toLocalFile());
+    }
+
     Solution::~Solution()
     {
         while (!m_projects.isEmpty()) {

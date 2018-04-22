@@ -1,31 +1,70 @@
+#include <functional>
+
+#include "dnai/commands/commandmanager.h"
+#include "dnai/commands/corecommand.h"
+
 #include "dnai/core/projecthandler.h"
+
+#include "dnai/editor.h"
+
+using namespace std::placeholders;
 
 namespace dnai
 {
     namespace core
     {
         ProjectHandler::ProjectHandler(EntityManager &manager) :
-            manager(manager),
-            nbproject(0)
+            manager(manager)
         {
 
         }
 
         void ProjectHandler::setup()
         {
-            //core callbacks
+            ::core::global::onProjectCreated(std::bind(&ProjectHandler::onCreated, this, _1, _2));
+            ::core::global::onCreateProjectError(std::bind(&ProjectHandler::onCreateError, this, _1, _2));
         }
 
-        void ProjectHandler::create(const Project *tocreate)
+        void ProjectHandler::create(Project *tocreate)
         {
-            //this will trigger entityAdded signal
-            manager.addEntity(0, tocreate->getRoot());
-            ++nbproject;
+            commands::CommandManager::Instance()->exec(new commands::CoreCommand(
+                "Project.Create", true,
+                [this, tocreate](){
+                    pendingProjects.push(tocreate);
+                    ::core::global::createProject(tocreate->name());
+                },
+                [](){} //do remove project
+            ));
         }
 
-        size_t ProjectHandler::getNbProject() const
+        void ProjectHandler::onCreated(const QString &name, enums::core::EntityID rootEntity)
         {
-            return nbproject;
+            if (pendingProjects.empty() || pendingProjects.front()->name() != name)
+            {
+                Editor::instance().notifyWarning("Someone tried to declare a project", [](){});
+                return;
+            }
+
+            commands::CoreCommand::Success();
+
+            Project *curr = pendingProjects.front();
+
+            manager.addEntity(rootEntity, curr->getRoot());
+
+            pendingProjects.pop();
+        }
+
+        void ProjectHandler::onCreateError(const QString &name, const QString &error)
+        {
+            if (pendingProjects.empty() || pendingProjects.front()->name() != name)
+            {
+                Editor::instance().notifyWarning("Someone failed to declare a project", [](){});
+                return;
+            }
+
+            commands::CoreCommand::Error();
+
+            Editor::instance().notifyError("Failed to create project: " + error, [](){});
         }
     }
 }

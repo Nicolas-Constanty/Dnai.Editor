@@ -92,7 +92,7 @@ namespace dnai
 
 					virtual void serialize(QJsonObject& obj) const override
 					{
-						obj["expanded"] = m_data.expanded;
+//						obj["expanded"] = m_data.expanded;
 						obj["description"] = m_data.description;
 						obj["index"] = m_data.index;
 						obj["listIndex"] = m_data.listIndex.toString();
@@ -100,7 +100,7 @@ namespace dnai
 				protected:
 					virtual void _deserialize(const QJsonObject& obj) override
 					{
-						m_data.expanded = obj["expanded"].toBool();
+//						m_data.expanded = obj["expanded"].toBool();
 						m_data.description = obj["description"].toString();
 						m_data.index = obj["index"].toInt();
 						m_data.listIndex = QUuid(obj["listIndex"].toString());

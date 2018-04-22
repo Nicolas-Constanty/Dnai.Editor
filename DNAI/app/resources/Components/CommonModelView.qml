@@ -20,6 +20,7 @@ Rectangle {
     MouseArea {
         anchors.fill: parent;
         onClicked: {
+            Editor.propertyView().model = modelData.editableProperty
 //            Manager.views.updatePropertyPanelModel(item)
         }
     }
@@ -210,7 +211,7 @@ Rectangle {
     }
     FontAwesomeButton {
         id: _openbutton
-        visible: modelData.entityType !== 1
+        visible: modelData.entityType === 2
 
         anchors.right: _itemview.right
         anchors.top: _itemview.top
@@ -245,7 +246,8 @@ Rectangle {
                 var tab = Editor.selectedView()
                 var model = modelData
                 var res = tab.getViewFromModel(model)
-                if (res === undefined || res === null)
+
+                if (res === -1)
                 {
                     var view = tab.addView("resources/Components/NodeCanvas.qml",
                                 {}, modelData.name)

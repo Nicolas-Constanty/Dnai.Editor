@@ -39,6 +39,29 @@ namespace core
 
     void connect(qint16 serverPort);
 
+    namespace global
+    {
+        void createProject(QString const &name);
+        void onProjectCreated(std::function<void(QString, EntityID)> const &then);
+        void onCreateProjectError(std::function<void(QString, QString)> const &error);
+
+        void removeProject(QString const &name);
+        void onProjectRemoved(std::function<void(QString, std::list<EntityID>)> const &then);
+        void onRemoveProjectError(std::function<void(QString, QString)> const &error);
+
+        void load(QString const &path);
+        void onLoaded(std::function<void(QString, EntityID)> const &then);
+        void onLoadError(std::function<void(QString, QString)> const &error);
+
+        void save(QString const &path);
+        void onSaved(std::function<void(QString)> const &then);
+        void onSaveError(std::function<void(QString, QString)> const &error);
+
+        void reset();
+        void onResetDone(std::function<void()> const &then);
+        void onResetError(std::function<void(QString)> const &error);
+    }
+
     namespace declarator
     {
         void declare(EntityID declarator, ENTITY type, QString const &name, VISIBILITY visibility);

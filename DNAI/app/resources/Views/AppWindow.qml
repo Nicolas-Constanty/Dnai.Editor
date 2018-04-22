@@ -12,8 +12,26 @@ import "../JavaScript/CreateComponent.js" as Factory
 
 ApplicationWindow {
     id: _root
+    property alias openProjectPopup: openProjectPopup
+    property alias newProjectPopup: newProjectPopup
     Component.onCompleted: {
         Editor.checkVersion()
+    }
+
+    function openSolution (projectPath, viewData) {
+        if (projectPath.text) {
+            Editor.openSolution()
+            viewData.clear();
+            projectPath.text = "";
+            tabV.destroy()
+            _content.content.destroy()
+            Factory.createObjects("resources/Views/SolutionView.qml",
+                                  {
+                                      "openModal" : openProjectPopup,
+                                      "newModal" : newProjectPopup
+                                  }, _content)
+            _content.content = Factory.getObject()
+        }
     }
 
     property alias appWindow: _root
@@ -74,6 +92,21 @@ ApplicationWindow {
             anchors.fill: parent
             id: newFileProjectPanel
             popup: newProjectPopup
+
+            createButton.onClicked: function () {
+                if (solutionPath.text) {
+                    Editor.openSolution()
+                    tabV.destroy()
+                    _content.content.destroy()
+                    Factory.createObjects("resources/Views/SolutionView.qml",
+                                          {
+                                              "openModal" : openProjectPopup,
+                                              "newModal" : newProjectPopup
+                                          }, _content)
+                    _content.content = Factory.getObject()
+                    popup.close();
+                }
+            }
         }
     }
     Modal {
@@ -86,21 +119,10 @@ ApplicationWindow {
             id: openProjectPanel
             popup: openProjectPopup
 
-            openButton.onClicked: function () {
-                if (projectPath.text) {
-                    Editor.openSolution()
-                    viewData.clear();
-                    projectPath.text = "";
-                    tabV.destroy()
-                    _content.content.destroy()
-                    Factory.createObjects("resources/Views/SolutionView.qml",
-                                          {
-                                              "openModal" : openProjectPopup,
-                                              "newModal" : newProjectPopup
-                                          }, _content)
-                    _content.content = Factory.getObject()
-                    popup.close();
-                }
+            openButton.onClicked:
+            {
+                openSolution(projectPath, viewData)
+                popup.close();
             }
         }
     }

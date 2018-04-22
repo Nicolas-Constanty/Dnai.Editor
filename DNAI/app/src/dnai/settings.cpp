@@ -12,8 +12,9 @@ namespace dnai
 {
     AppSettings::AppSettings(QObject* parent) : QObject(parent), m_settings(), m_apiSettings("apiSettings", QSettings::IniFormat)
     {
-//        m_apiSettings = QSettings("apiSettings", QSettings::IniFormat);
+#ifdef QT_DEBUG
         m_settings.clear();
+#endif
         m_style = new models::SettingsModel(nullptr);
 		const auto theme = m_settings.value("themes/current/theme").toString();
         m_isInit = theme != "";
@@ -34,10 +35,13 @@ namespace dnai
 		emit styleChanged(m);
 	}
 
+    QString AppSettings::currentTheme()
+    {
+        return m_settings.value("themes/current/theme").toString();
+    }
+
 	void AppSettings::loadTheme(const QString&path)
 	{
-//        if (m_settings.value("themes/current/theme").toString() == path)
-//            return;
 		m_loadedColors.clear();
 		m_loadedNumbers.clear();
         QFile file(m_themesPath[path]);
@@ -47,6 +51,7 @@ namespace dnai
         }
 
 		const auto data = file.readAll();
+        file.close();
 		const auto obj(QJsonDocument::fromJson(data).object());
 		const auto pair = findObject(obj, "");
 		const auto loadThemeName = "themes/" + path;
@@ -57,55 +62,45 @@ namespace dnai
             const auto value = pair.second[i];
 			if (!m_isInit)
 			{
-				m_settings.setValue(currentThemeName + key, value);
+                m_settings.setValue(currentThemeName + key, value);
 				m_settings.setValue(loadThemeName + key, value);
             }
 			if (m_style)
 			{
                 updateProperty(key.mid(1), value);
 			}
-		}
-		m_settings.setValue("themes/current/theme", path);
+        }
+        const auto qpath = QVariant::fromValue(path);
+        m_settings.setValue("themes/current/theme", qpath);
 	}
 
 	void AppSettings::init()
     {
-        qDebug() << m_settings.applicationName();
-        qDebug() << m_settings.fileName();
-        qDebug() << m_settings.status();
-        qDebug() << m_settings.childKeys();
-        qDebug() << m_settings.organizationName();
-        qDebug() << m_settings.scope();
-        qDebug() << m_settings.allKeys();
 		const auto theme = m_settings.value("themes/current/theme").toString();
+
 #ifdef Q_OS_MAC
     QString path = QGuiApplication::applicationDirPath() + "/settings/themes";
 #else
     QString path = QGuiApplication::applicationDirPath() + "/settings/themes";
 #endif
-        qDebug() << QGuiApplication::applicationDirPath();
         QDir dir(path);
 
-		const auto list = dir.entryList(QDir::Files);
-        qDebug() << list.count();
+        const auto list = dir.entryList(QDir::Files);
 		for (auto i = list.begin(); i!= list.end(); ++i)
 		{
 			const auto f = QFileInfo(*i);
-			const auto basename = f.baseName();
+            const auto basename = f.baseName();
 			m_themes.append(basename);
-			m_themesPath[basename] = dir.absoluteFilePath(*i);
-			
+            m_themesPath[basename] = dir.absoluteFilePath(*i);
 		}
-		m_isInit = theme != "";
-        qDebug() << m_themes.count();
+        m_isInit = theme != "";
 		if (!m_isInit && m_themes.count() != 0)
-		{
-            qDebug() << "CLEAR";
-            m_settings.clear();
+        {
 			loadTheme(m_themes[0]);
 		}
-		else
-			loadTheme(theme);
+        else {
+            loadTheme(theme);
+        }
 
         QVariant value = m_apiSettings.value(api::settings_key);
       //  qDebug() << value.value<api::User>().id;

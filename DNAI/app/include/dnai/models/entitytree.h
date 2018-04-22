@@ -1,6 +1,7 @@
 #ifndef DNAI_MODELS_ENTITY_TREE_H
 #define DNAI_MODELS_ENTITY_TREE_H
 
+#include <QAbstractListModel>
 #include "entity.h"
 #include "dnai/interfaces/iserializable.h"
 

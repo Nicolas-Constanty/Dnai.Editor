@@ -122,7 +122,7 @@ Rectangle {
                         antialiasing: true
                     }
                     MLabel {
-                        text: styleData.value.name
+                        text: (styleData.value.name !== undefined) ? styleData.value.name : ""
                         horizontalAlignment: Text.AlignLeft
                         font.family: "segoeui"
                         font.pointSize: 8
@@ -150,17 +150,26 @@ Rectangle {
                 }
                 onClicked: {
                     var tab = Editor.selectedView()
-                    var model = index.model.data(index, index.model.getRoleKey("modelobj")).listColumn()
+                    var model = index.model.data(index, index.model.getRoleKey("modelobj"))
                     var res = tab.getViewFromModel(model)
-                    if (res === undefined || res === null)
+                    if (res === -1)
                     {
-                        var view = tab.addView("resources/Views/DeclarationView.qml",
+                        var view;
+                        if (model.entityType === 2)
+                        {
+                            view = tab.addView("resources/Components/NodeCanvas.qml",
+                                        {}, index.model.data(index, index.model.getRoleKey("name")))
+                        }
+                        else
+                        {
+                            view = tab.addView("resources/Views/DeclarationView.qml",
                                     {
-                                        "model" : model,
+                                        "model" : model.listColumn(),
                                         "idx" : index,
                                         "proj" : index.model
                                     },
                                     index.model.data(index, index.model.getRoleKey("name")))
+                        }
                         tab.appendModel(model, view)
                     }
                     else
@@ -171,7 +180,7 @@ Rectangle {
                     }
                 }
                 headerVisible: false
-                rootIndex: item.index(0, 0)
+//                rootIndex: item.index(0, 0)
                 onExpanded: {
                     index.model.data(index, index.model.getRoleKey("modelobj")).expanded = true
                     _expPanel.height += item.expandedRows(index) * rowheight
@@ -185,7 +194,7 @@ Rectangle {
                 }
 
                 Component.onCompleted: {
-                    _expPanel.initialheight = item.childCount * rowheight + _expPanel.header.height + 5
+                    _expPanel.initialheight = rowheight + _expPanel.header.height + 5
                     item.rowsInserted.connect(tr.rowInserted)
                     item.rowsRemoved.connect(tr.rowRemoved)
                     if (item === Editor.solution.selectedProject())
@@ -197,7 +206,6 @@ Rectangle {
                 }
 
                 onRowInserted: {
-                    console.log(index)
                     if (index.model.data(index, index.model.getRoleKey("expended")))
                     {
                         _expPanel.height += (end + 1 - start) * rowheight
@@ -206,8 +214,6 @@ Rectangle {
                 }
 
                 onRowRemoved: {
-                    console.log(index)
-                    console.log(index.model)
                     if (index.model.data(index, index.model.getRoleKey("expended")))
                     {
                         _expPanel.height -= (end + 1 - start) * rowheight

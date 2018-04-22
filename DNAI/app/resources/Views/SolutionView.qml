@@ -30,5 +30,11 @@ ViewZone {
         var obj = Factory.getObject()
 //        obj.title = "Solution Explorer";
         obj.anchors.fill = obj.parent
+
+        tabV.parent.parent.split(0, parent.parent.width, parent.parent.height, 0.70)
+        Factory.createObjects("resources/Views/PropertyView.qml", {}, tabV.parent.parent.next.content)
+        obj = Factory.getObject()
+//        obj.title = "Solution Explorer";
+        obj.anchors.fill = obj.parent
     }
 }

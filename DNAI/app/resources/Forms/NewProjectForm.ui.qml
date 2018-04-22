@@ -9,12 +9,17 @@ import "../Panels"
 
 Page {
     property alias fileDialog: _fileDialog
-    property alias chooseButton: pathButton
+    property alias chooseButton: solutionButton
     property alias cancelButton: cancelButton
     property alias createButton: createButton
-    property alias projectPath: projectPath
+
+    property alias solutionPath: solutionPath
+    property alias solutionName: solutionName
+    property alias solutionDescription: solutionDescription
+
     property alias projectName: projectName
     property alias projectDescription: projectDescription
+
     width: 1080
     height: 720
     id: _page
@@ -28,7 +33,7 @@ Page {
         TabButton {
             contentItem: Title2 {
                 padding: 10
-                text: qsTr("Create a new project")
+                text: qsTr("Create a Solution")
             }
             background: Rectangle {
                 color: AppSettings.style.background.color
@@ -52,10 +57,10 @@ Page {
         Item {
             anchors.left: parent.left
             anchors.right: parent.right
-            height: projectPath.height
+            height: solutionPath.height
             MLabel {
-                id: pathLabel
-                text: qsTr("Create in : ")
+                id: solutionLabel
+                text: qsTr("Solution path : ")
                 anchors.top: parent.top
                 anchors.bottom: parent.bottom
                 anchors.left: parent.left
@@ -63,17 +68,17 @@ Page {
                 width: 100
             }
             TextField {
-                id: projectPath
+                id: solutionPath
                 anchors.top: parent.top
                 anchors.bottom: parent.bottom
-                anchors.left: pathLabel.right
-                anchors.right: pathButton.left
+                anchors.left: solutionLabel.right
+                anchors.right: solutionButton.left
                 placeholderText: qsTr("Choose a folder")
                 text: _fileDialog.fileUrl
                 readOnly: true
             }
             Button {
-                id: pathButton
+                id: solutionButton
                 anchors.top: parent.top
                 anchors.bottom: parent.bottom
                 anchors.right: parent.right
@@ -84,9 +89,50 @@ Page {
         Item {
             anchors.left: parent.left
             anchors.right: parent.right
+            height: solutionName.height
+            MLabel {
+                id: namesolutionLabel
+                text: qsTr("Name : ")
+                anchors.top: parent.top
+                anchors.bottom: parent.bottom
+                anchors.left: parent.left
+                width: 100
+                horizontalAlignment: Qt.AlignLeft
+            }
+            TextField {
+                id: solutionName
+                anchors.left: namesolutionLabel.right
+                anchors.right: parent.right
+                placeholderText: qsTr("Choose a solution name")
+            }
+        }
+        Item {
+            anchors.left: parent.left
+            anchors.right: parent.right
+            height: solutionDescription.height
+            MLabel {
+                id: descriptionsolutionLabel
+                text: qsTr("Description : ")
+                anchors.top: parent.top
+                anchors.bottom: parent.bottom
+                anchors.left: parent.left
+                horizontalAlignment: Qt.AlignLeft
+                width: 100
+            }
+            TextField {
+                id: solutionDescription
+                anchors.left: descriptionsolutionLabel.right
+                anchors.right: parent.right
+                placeholderText: qsTr("Choose a solution description")
+            }
+        }
+
+        Item {
+            anchors.left: parent.left
+            anchors.right: parent.right
             height: projectName.height
             MLabel {
-                id: nameLabel
+                id: nameProjectLabel
                 text: qsTr("Name : ")
                 anchors.top: parent.top
                 anchors.bottom: parent.bottom
@@ -96,9 +142,9 @@ Page {
             }
             TextField {
                 id: projectName
-                anchors.left: nameLabel.right
+                anchors.left: nameProjectLabel.right
                 anchors.right: parent.right
-                placeholderText: qsTr("Choose a project name")
+                placeholderText: qsTr("Choose a solution name")
             }
         }
         Item {
@@ -118,7 +164,7 @@ Page {
                 id: projectDescription
                 anchors.left: descriptionLabel.right
                 anchors.right: parent.right
-                placeholderText: qsTr("Choose a project description")
+                placeholderText: qsTr("Choose a solution description")
             }
         }
     }

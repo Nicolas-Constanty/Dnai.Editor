@@ -17,12 +17,15 @@ NewProjectForm {
     }
     chooseButton.onClicked: fileDialog.open()
     createButton.onClicked: function () {
-        if (projectPath.text && projectName.text) {
-            Editor.createProject(projectName.text, projectDescription.text, projectPath.text);
+        if (solutionPath.text && solutionName.text) {
+            Editor.createSolution(solutionName.text,
+                                 solutionDescription.text,
+                                 solutionPath.text,
+                                 projectName.text,
+                                 projectDescription.text);
             popup.close()
             projectName.text = "";
             projectDescription.text = "";
-            projectPath.text = "";
         }
     }
     cancelButton.onClicked: function () {

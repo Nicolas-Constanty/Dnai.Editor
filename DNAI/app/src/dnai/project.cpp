@@ -7,6 +7,7 @@
 #include "dnai/editor.h"
 #include "dnai/core/handlermanager.h"
 #include "dnai/models/entity.h"
+#include "dnai/models/gui/declarable/context.h"
 
 namespace dnai {
 	Project::Project(): EntityTree(nullptr), m_file(nullptr), m_selectedEntity(nullptr), m_rootEntity(nullptr)
@@ -18,8 +19,26 @@ namespace dnai {
         connect(
             core::HandlerManager::Instance().declarator(), SIGNAL(declared(dnai::models::Entity*)),
             this, SLOT(addEntity(dnai::models::Entity*))
+                    );
+    }
+
+    Project::Project(const QString &filename)
+    {
+        connect(
+            core::HandlerManager::Instance().declarator(), SIGNAL(removed(dnai::models::Entity*)),
+            this, SLOT(removeEntity(dnai::models::Entity*))
         );
-	}
+        connect(
+            core::HandlerManager::Instance().declarator(), SIGNAL(declared(dnai::models::Entity*)),
+            this, SLOT(addEntity(dnai::models::Entity*))
+                    );
+        m_filename = filename;
+        m_file = new QFile(QUrl(m_filename).toLocalFile());
+        m_rootItem = new models::Entity();
+        m_rootItem->setIdx(index(0,0, QModelIndex()));
+        const auto coreModel = new models::core::Entity("RootEntity", enums::core::ENTITY::CONTEXT);
+        m_rootEntity = new models::Entity(coreModel, m_rootItem, new models::gui::declarable::Context());
+    }
 
     Project::~Project()
     {
@@ -208,8 +227,14 @@ namespace dnai {
     {
         QModelIndexList results = match(index(0, 0, QModelIndex()), EntityTree::ROLES::MODEL, QVariant::fromValue(e), 2, Qt::MatchRecursive);
 
+        qDebug() << "Search index of " << e;
+        qDebug() << "Search index of " << e->id();
+        qDebug() << "Search index of " << e->name();
+        qDebug() << "Results: " << results;
+
         if (results.length() > 0)
         {
+            qDebug() << "Res: " << results.first();
             return results.first();
         }
         return QModelIndex();
@@ -285,14 +310,23 @@ namespace dnai {
 
         guiModel->setIndex(idx);
 
-        QMap<QString, QString>::iterator itIndex = m_entityColumnUid.find(QString::number(parentItem->id()) + entity->name());
+        QString key = QString::number(parentItem->id()) + entity->name();
+
+        qDebug() << this;
+
+        qDebug() << "Search for: " << key;
+
+        QMap<QString, QString>::iterator itIndex = m_entityColumnUid.find(key);
 
         if (itIndex != m_entityColumnUid.end())
         {
             qDebug() << itIndex.value();
+            qDebug() << "Setting list index: " << itIndex.value();
             guiModel->setListIndex(itIndex.value());
             m_entityColumnUid.erase(itIndex);
         }
+
+        qDebug() << "Adding entity";
 
         parentItem->appendChild(entity);
 
@@ -309,8 +343,9 @@ namespace dnai {
 
     void Project::addEntityColumnUid(quint32 parentId, const QString &name, const QString &listIndex)
     {
-        qDebug() << "List Index: " << listIndex;
-        m_entityColumnUid[QString::number(parentId) + name] = listIndex;
+        QString key = QString::number(parentId) + name;
+        qDebug() << "IndexMap[" << key << "] = " << listIndex;
+        m_entityColumnUid.insert(key, listIndex);
     }
 
 	int Project::childCount() const

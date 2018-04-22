@@ -36,11 +36,14 @@ ToolBar {
                     //                        }
                     DMenuItem {
                         text: qsTr("New project")
-                        onClicked: newProjectPopup.open()
+                        onClicked: Editor.mainView().newProjectPopup.open()
                     }
                     DMenuItem {
                         text: qsTr("Open project")
-                        onClicked: openProjectPopup.open()
+                        onClicked:
+                        {
+                            Editor.mainView().openProjectPopup.open()
+                        }
                     }
                     DMenuItem {
                         text: qsTr("Save")
@@ -410,36 +413,6 @@ ToolBar {
         contentItem: SettingPanel {
             anchors.fill: parent
             id: settingPanel
-        }
-
-    }
-    Modal {
-        id: newProjectPopup
-        x: parent.width / 2 - width / 2
-        y: appWindow.height / 2 - height / 2
-        background: Rectangle {
-            color: AppSettings.style.background.color
-        }
-        width: 640
-        height: 480
-        modal: true
-        focus: true
-        closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutside
-        contentItem: NewProject {
-            anchors.fill: parent
-            id: newFileProjectPanel
-            popup: newProjectPopup
-        }
-    }
-    Modal {
-        id: openProjectPopup
-        x: parent.width / 2 - width / 2
-        y: appWindow.height / 2 - height / 2
-        width: 700
-        contentItem: OpenProject {
-            anchors.fill: parent
-            id: openProjectPanel
-            popup: openProjectPopup
         }
     }
 }

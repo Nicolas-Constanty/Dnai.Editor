@@ -8,6 +8,7 @@
 #include "gui/data/entitycolum.h"
 #include "gui/declarable/variable.h"
 #include "gui/declarable/context.h"
+#include "dnai/models/property.h"
 
 namespace dnai
 {
@@ -27,7 +28,8 @@ namespace dnai
 				ENTITIES = Qt::UserRole + 1,
 			};
         public:
-            explicit Column(QObject *parent = nullptr);
+            explicit Column(QObject *parent = nullptr) : QAbstractListModel(parent) {}
+            explicit Column(Entity *pr, QObject *parent = nullptr);
             virtual int rowCount(const QModelIndex& parent = QModelIndex()) const override;
             QVariant data(const QModelIndex& index, int role) const override;
 	        void append(Entity* e, const QModelIndex& parent = QModelIndex());
@@ -61,6 +63,7 @@ namespace dnai
             Entity *m_target;
             QList<Entity *> m_entities;
 	        gui::data::EntityColumn m_data;
+            Entity *m_parent;
         };
 
         class Entity : public interfaces::IModel<Entity>
@@ -78,7 +81,7 @@ namespace dnai
             Q_PROPERTY(core::Entity *coreModel READ coreModel WRITE setCoreModel NOTIFY coreModelChanged)
 			Q_PROPERTY(bool expanded READ expanded WRITE setExpanded NOTIFY expandedChanged)
 			Q_PROPERTY(dnai::models::Entity *parentRef READ parentRef CONSTANT)
-
+			Q_PROPERTY(dnai::models::Property *editableProperty READ editableProperty WRITE setEditableProperty NOTIFY editablePropertyChanged)
                     //			Q_PROPERTY(EntityGUI *guiModel READ guiModel CONSTANT)
 
         public:
@@ -105,6 +108,7 @@ namespace dnai
             bool expanded() const;
 			Entity *parentRef() const;
 			const QMap<QUuid, Column *> &columns();
+			Property *editableProperty() const;
 
         public:
 			void setIsRoot(bool isRoot);
@@ -118,6 +122,7 @@ namespace dnai
             void setDescription(const QString& description);
             virtual void setCoreModel(core::Entity *model);
 			void setExpanded(bool exp);
+			void setEditableProperty(Property *p);
 			virtual void appendChild(Entity* child) override;
 
         signals:
@@ -133,7 +138,7 @@ namespace dnai
             void coreModelChanged(core::Entity *model);
 			void entityChildrenChanged(models::Entity *e);
 			void expandedChanged(bool exp);
-
+			void editablePropertyChanged(Property *p);
 
         //Implementation of ISerializable
         public:
@@ -142,6 +147,7 @@ namespace dnai
 	        int columnCount() const override;
 			Q_INVOKABLE QVariant listColumn() const;
 			Q_INVOKABLE int row() const override;
+			Q_INVOKABLE void setProp(int row, const QVariant &value);
 
         private:
             core::Entity *m_dataCore;
@@ -150,6 +156,7 @@ namespace dnai
 			QVariant m_entityChildren;
 			QMap<QUuid, Column *> m_columns;
 			QList<QObject *> m_columslist;
+			Property *m_editableProperty;
         };
 
 		using Context = dnai::models::gui::declarable::Context;

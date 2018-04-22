@@ -11,6 +11,13 @@ namespace dnai
 	{
         Entity::Entity() : IModel(nullptr), m_dataCore(nullptr), m_dataGUI(nullptr)
         {
+			const QList<QString> props = {
+				"name",
+				"description",
+				"visibility",
+                "entityType"
+			};
+			m_editableProperty = new Property(this, props);
         }
 
         Entity::Entity(core::Entity *coremodel, Entity *parent, interfaces::IEntity *guimodel) :
@@ -18,7 +25,13 @@ namespace dnai
             m_dataCore(coremodel),
             m_dataGUI(guimodel)
         {
-
+			const QList<QString> props = {
+				"name",
+				"description",
+				"visibility",
+                "entityType"
+			};
+			m_editableProperty = new Property(this, props);
         }
 
 		Entity::~Entity()
@@ -27,6 +40,8 @@ namespace dnai
                 delete m_dataCore;
             if (m_dataGUI)
                 delete m_dataGUI;
+			if (m_editableProperty)
+				delete m_editableProperty;
             qDebug() << "~ Entity";
 		}
 
@@ -118,6 +133,19 @@ namespace dnai
 			}
         }
 
+		void Entity::setEditableProperty(Property* p)
+		{
+			if (m_editableProperty == p)
+				return;
+			m_editableProperty = p;
+			emit editablePropertyChanged(p);
+		}
+
+		Property *Entity::editableProperty() const
+		{
+			return m_editableProperty;
+		}
+
 		Entity* Entity::parentRef() const
 		{
 			return parentItem();
@@ -156,6 +184,7 @@ namespace dnai
 		{
 			if (coreModel()->setName(name))
 			{
+				qDebug() << "NAME" << name;
 				emit nameChanged(name);
 			}
 		}
@@ -207,7 +236,7 @@ namespace dnai
 			const auto uuid = QUuid(child->guiModel()->listIndex());
 			if (m_columns.find(uuid) == m_columns.end())
 			{
-				const auto c = new Column();
+                const auto c = new Column(this);
 				c->setListIndex(uuid.toString());
 				m_columslist.append(c);
 				m_columns[uuid] = c;
@@ -242,7 +271,8 @@ namespace dnai
 		void Entity::_deserialize(const QJsonObject& obj)
 		{
             foreach(const auto column, obj["columns"].toArray()) {
-                const auto col = Column::deserialize(column.toObject());
+                auto p = this;
+                const auto col = Column::deserialize(column.toObject(), p);
                 m_columns[col->datas().listIndex] = col;
 				m_columslist.append(col);
 			}
@@ -334,6 +364,22 @@ namespace dnai
 			return IModel<Entity>::row();
 		}
 
+		void Entity::setProp(int row, const QVariant& value)
+		{
+			if (m_editableProperty)
+			{
+				const auto n = m_editableProperty->getPropName(row);
+				if (n == "name")
+					setName(value.toString());
+				else if (n == "description")
+					setDescription(value.toString());
+				else if (n == "visibility")
+					setVisibility(static_cast<enums::core::VISIBILITY>(value.toInt()));
+				else if (n == "type")
+					setEntityType(static_cast<enums::core::ENTITY>(value.toInt()));
+			}
+		}
+
 		QHash<int, QByteArray> Column::roleNames() const
 		{
 			QHash<int, QByteArray> roles;
@@ -392,8 +438,9 @@ namespace dnai
             return m_entities;
         }
 
-		Column::Column(QObject* parent) : QAbstractListModel(parent)
+        Column::Column(Entity *e, QObject* parent) : QAbstractListModel(parent)
 		{
+            m_parent = e;
 		}
 
         int Column::rowCount(const QModelIndex& parent) const
@@ -471,11 +518,8 @@ namespace dnai
 		}
 
 		Entity* Column::parentRef() const
-		{
-			if (m_entities.empty())
-				return nullptr;
-			return m_entities.first()->parentItem();
-
+        {
+            return m_parent;
 		}
 	}
 }
