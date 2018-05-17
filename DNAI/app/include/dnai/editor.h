@@ -14,15 +14,32 @@ namespace dnai
 	class App;
     class Project;
     class Session;
+    class PropertyPanelProperties : public QObject {
+        Q_OBJECT
+        Q_PROPERTY(QStringList visibility READ visibility CONSTANT)
+        Q_PROPERTY(QStringList entityType READ entityType CONSTANT)
+    public:
+        explicit PropertyPanelProperties(QObject *parent = nullptr);
+
+        const QStringList &visibility() const;
+        const QStringList &entityType() const;
+
+    private:
+        QStringList m_visibility;
+        QStringList m_entityType;
+    };
+
 	class Editor : public QObject, public interfaces::IEditor
 	{
 		Q_OBJECT
         Q_PROPERTY(dnai::Solution *solution READ getSolution WRITE setSolution NOTIFY solutionChanged)
         Q_PROPERTY(dnai::models::BasicNodeModel *nodes READ nodes CONSTANT)
-        Q_PROPERTY(dnai::Session *session READ session CONSTANT)
+        Q_PROPERTY(dnai::Session *session READ session CONSTANT)  
+		Q_PROPERTY(dnai::PropertyPanelProperties *propertyPanelProperties READ propertyPanelProperties CONSTANT)
 
 	protected:
 		Editor() = default;
+		~Editor();
 	public:
 		Editor(Editor const&) = delete;             // Copy construct
 		Editor(Editor&&) = delete;                  // Move construct
@@ -73,6 +90,7 @@ namespace dnai
     public:
         void setSolution(dnai::Solution *sol);
         models::BasicNodeModel *nodes() const;
+        PropertyPanelProperties *propertyPanelProperties();
         Session *session() const;
     signals:
         void solutionChanged(dnai::Solution *proj);
@@ -89,6 +107,7 @@ namespace dnai
         ToasterManagerService m_toasterManagerService;
         QQuickWindow *m_mainView = nullptr;
 		QQuickItem* m_propertyView;
+		PropertyPanelProperties *m_propertyPanelProperties = nullptr;
 
 		static Editor &m_instance;
 	};

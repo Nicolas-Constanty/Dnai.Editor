@@ -102,7 +102,7 @@ namespace dnai {
             /**
              * \brief List of available entity in core.dll
              */
-            using ENTITY = ::core::ENTITY;
+//            using ENTITY = ::core::ENTITY;
             /*enum ENTITY : qint32
             {
                 UNDEFINED = -1,
@@ -134,16 +134,15 @@ namespace dnai {
             /**
              * \brief List of available visibility in core.dll
              */
-            using VISIBILITY = ::core::VISIBILITY;
-            /*enum VISIBILITY
-            {
-                PUBLIC,
-                PRIVATE,
-                PROTECTED
-            };*/
-            Q_ENUM(ENTITY)
+//            using VISIBILITY = ::core::VISIBILITY;
+//            enum VISIBILITY : qint32
+//            {
+//                PRIVATE = 0,
+//                PUBLIC = 1
+//            };
+//            Q_ENUM(ENTITY)
             Q_ENUM(REPLIES)
-            Q_ENUM(VISIBILITY)
+//            Q_ENUM(VISIBILITY)
 
             using EntityID = ::core::EntityID;
 

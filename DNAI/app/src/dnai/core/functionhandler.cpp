@@ -9,7 +9,7 @@ using namespace std::placeholders;
 
 namespace dnai
 {
-    namespace core
+    namespace gcore
     {
         FunctionHandler::FunctionHandler(EntityManager &manager) :
             manager(manager)
@@ -28,9 +28,10 @@ namespace dnai
             ::core::function::onSetReturnError(std::bind(&FunctionHandler::onSetReturnError, this, _1, _2, _3));
         }
 
-        void FunctionHandler::onEntityAdded(enums::core::EntityID id, models::Entity &added)
+        void FunctionHandler::onEntityAdded(::core::EntityID id, models::Entity &added)
         {
-
+            Q_UNUSED(id)
+            Q_UNUSED(added)
         }
 
         void FunctionHandler::setParameter(const models::Entity &function, const models::Entity &paramVar)
@@ -55,7 +56,7 @@ namespace dnai
                 );
         }
 
-        models::gui::declarable::Function *FunctionHandler::getFunctionData(enums::core::EntityID function, bool throws)
+        models::gui::declarable::Function *FunctionHandler::getFunctionData(::core::EntityID function, bool throws)
         {
             if (manager.contains(function))
             {
@@ -71,24 +72,30 @@ namespace dnai
             return nullptr;
         }
 
-        void FunctionHandler::onParameterSet(enums::core::EntityID function, const QString &paramName)
+        void FunctionHandler::onParameterSet(::core::EntityID function, const QString &paramName)
         {
-
+            Q_UNUSED(function)
+            Q_UNUSED(paramName)
         }
 
-        void FunctionHandler::onSetParameterError(enums::core::EntityID function, const QString &paramName, const QString &message)
+        void FunctionHandler::onSetParameterError(::core::EntityID function, const QString &paramName, const QString &message)
         {
-
+            Q_UNUSED(function)
+            Q_UNUSED(paramName)
+            Q_UNUSED(message)
         }
 
-        void FunctionHandler::onReturnSet(enums::core::EntityID function, const QString &returnName)
+        void FunctionHandler::onReturnSet(::core::EntityID function, const QString &returnName)
         {
-
+            Q_UNUSED(function)
+            Q_UNUSED(returnName)
         }
 
-        void FunctionHandler::onSetReturnError(enums::core::EntityID function, const QString &returnName, const QString &message)
+        void FunctionHandler::onSetReturnError(::core::EntityID function, const QString &returnName, const QString &message)
         {
-
+            Q_UNUSED(function)
+            Q_UNUSED(returnName)
+            Q_UNUSED(message)
         }
 
 

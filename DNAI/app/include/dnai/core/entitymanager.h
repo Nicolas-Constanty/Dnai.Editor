@@ -5,40 +5,39 @@
 
 #include <QObject>
 
-#include "dnai/enums/core/coreenums.h"
-
+#include "core.h"
 #include "dnai/models/entity.h"
 
 namespace dnai
 {
-    namespace core
+    namespace gcore
     {
         class EntityManager : public QObject
         {
             Q_OBJECT
 
         private:
-            using EntityMap = std::unordered_map<enums::core::EntityID, models::Entity *>;
+            using EntityMap = std::unordered_map<::core::EntityID, models::Entity *>;
 
         public:
             EntityManager() = default;
             ~EntityManager() = default;
 
         signals:
-            void entityAdded(enums::core::EntityID id, models::Entity &entity);
-            void entityRemoved(enums::core::EntityID id, models::Entity &entity);
+            void entityAdded(::core::EntityID id, models::Entity &entity);
+            void entityRemoved(::core::EntityID id, models::Entity &entity);
 
         public:
-            void addEntity(enums::core::EntityID id, models::Entity &entity);
-            void removeEntity(enums::core::EntityID id);
+            void addEntity(::core::EntityID id, models::Entity &entity);
+            void removeEntity(::core::EntityID id);
 
-            bool contains(enums::core::EntityID id) const;
+            bool contains(::core::EntityID id) const;
 
-            const models::Entity &getEntity(enums::core::EntityID id) const;
-            models::Entity &getEntity(enums::core::EntityID id);
+            const models::Entity &getEntity(::core::EntityID id) const;
+            models::Entity &getEntity(::core::EntityID id);
 
-            const models::Entity &operator[](enums::core::EntityID id) const;
-            models::Entity &operator[](enums::core::EntityID id);
+            const models::Entity &operator[](::core::EntityID id) const;
+            models::Entity &operator[](::core::EntityID id);
 
         private:
             EntityMap entities;

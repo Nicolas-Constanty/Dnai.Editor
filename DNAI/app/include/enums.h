@@ -1,7 +1,7 @@
 #ifndef DNAI_ENUMS_H
 #define DNAI_ENUMS_H
 
-#include "dnai/enums/core/coreenums.h"
+#include "core.h"
 #include "dnai/enums/core/instructionid.h"
 #include "dnai/enums/declarationtype.h"
 #include "dnai/enums/flowtype.h"

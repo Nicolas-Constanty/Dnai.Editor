@@ -15,13 +15,15 @@ public:
 	enum ROLES
 	{
 		NAME = Qt::UserRole + 1,
-		VALUE
+		VALUE,
+		ITEM
 	};
 	explicit Property(QObject *obj, const QList<QString> &editableprops);
 	int rowCount(const QModelIndex& parent) const override;
 	int columnCount(const QModelIndex& parent) const override;
 	QVariant data(const QModelIndex& index, int role) const override;
-	QString getPropName(int row) const;
+	Q_INVOKABLE void setProp(int row, const QVariant& value);
+	Q_INVOKABLE QString getPropName(int row) const;
 	Q_INVOKABLE dnai::models::Entity *model() const;
 
 private:

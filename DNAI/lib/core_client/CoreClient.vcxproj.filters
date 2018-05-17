@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="Generated Files">
@@ -41,14 +41,16 @@
     <ClInclude Include="include\client.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\core.h">
+    <QtMoc Include="include\core.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
+    </QtMoc>
     <ClInclude Include="include\serialoperations.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    
+    
     <CustomBuild Include="debug\moc_predefs.h.cbt">
       <Filter>Generated Files</Filter>
     </CustomBuild>

@@ -9,7 +9,7 @@ using namespace std::placeholders;
 
 namespace dnai
 {
-    namespace core
+    namespace gcore
     {
         EnumHandler::EnumHandler(EntityManager &manager) :
             manager(manager)
@@ -28,7 +28,7 @@ namespace dnai
             ::core::enumeration::onRemoveValueError(std::bind(&EnumHandler::onRemoveValueError, this, _1, _2, _3));
         }
 
-        void EnumHandler::onEntityAdded(enums::core::EntityID id, models::Entity &entity)
+        void EnumHandler::onEntityAdded(::core::EntityID id, models::Entity &entity)
         {
 
         }
@@ -57,24 +57,30 @@ namespace dnai
             */
         }
 
-        void EnumHandler::onValueSet(enums::core::EntityID enumeration, const QString &name)
+        void EnumHandler::onValueSet(::core::EntityID enumeration, const QString &name)
         {
-
+            Q_UNUSED(enumeration)
+            Q_UNUSED(name)
         }
 
-        void EnumHandler::onSetValueError(enums::core::EntityID enumeration, const QString &name, const QString &message)
+        void EnumHandler::onSetValueError(::core::EntityID enumeration, const QString &name, const QString &message)
         {
-
+            Q_UNUSED(enumeration)
+            Q_UNUSED(name)
+            Q_UNUSED(message)
         }
 
-        void EnumHandler::onValueRemoved(enums::core::EntityID enumeration, const QString &name)
+        void EnumHandler::onValueRemoved(::core::EntityID enumeration, const QString &name)
         {
-
+            Q_UNUSED(enumeration)
+            Q_UNUSED(name)
         }
 
-        void EnumHandler::onRemoveValueError(enums::core::EntityID enumeration, const QString &name, const QString &message)
+        void EnumHandler::onRemoveValueError(::core::EntityID enumeration, const QString &name, const QString &message)
         {
-
+            Q_UNUSED(enumeration)
+            Q_UNUSED(name)
+            Q_UNUSED(message)
         }
     }
 }

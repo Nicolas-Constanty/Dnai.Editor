@@ -170,5 +170,7 @@
         <file>resources/Components/Toast.qml</file>
         <file>resources/Views/PropertyView.qml</file>
         <file>resources/Components/EntityView.qml</file>
+        <file>resources/Components/EnumComponent.qml</file>
+        <file>resources/Components/EditableTextModel.qml</file>
     </qresource>
 </RCC>

@@ -173,10 +173,10 @@ Item {
                         AddButton {
                             id: _addContext
                             width: 45
-                            visible: (modelData.parentRef === null || modelData.parentRef.entityType === 0)
+                            visible: (modelData.parentRef === null || modelData.parentRef.entityType === CoreEnums.CONTEXT)
                             onPressed: {
-                                console.log(idx)
-                                console.log(modelData.listIndex)
+//                                console.log(idx)
+//                                console.log(modelData.listIndex)
 
                                 var name = proj.generateUniqueChildName(modelData.parentRef);
 

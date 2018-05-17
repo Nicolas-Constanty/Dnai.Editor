@@ -11,7 +11,7 @@ using namespace std::placeholders;
 
 namespace dnai
 {
-    namespace core
+    namespace gcore
     {
         ProjectHandler::ProjectHandler(EntityManager &manager) :
             manager(manager)
@@ -37,7 +37,7 @@ namespace dnai
             ));
         }
 
-        void ProjectHandler::onCreated(const QString &name, enums::core::EntityID rootEntity)
+        void ProjectHandler::onCreated(const QString &name, ::core::EntityID rootEntity)
         {
             if (pendingProjects.empty() || pendingProjects.front()->name() != name)
             {

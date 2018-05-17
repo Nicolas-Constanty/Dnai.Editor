@@ -36,11 +36,6 @@
     <PrimaryOutput>DNAI</PrimaryOutput>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ItemDefinitionGroup>
-    <ClCompile>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
-    </ClCompile>
-  </ItemDefinitionGroup>
   <PropertyGroup Condition="'$(QtMsBuild)'=='' or !Exists('$(QtMsBuild)\qt.targets')">
     <QtMsBuild>$(MSBuildProjectDirectory)\QtMsBuild</QtMsBuild>
   </PropertyGroup>
@@ -87,6 +82,7 @@
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
       <WarningLevel>Level3</WarningLevel>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <AdditionalDependencies>$(QTDIR)\lib\qtmain.lib;shell32.lib;WinToast.lib;C:\Users\nicol\Documents\Duly-GUI\DNAI\lib\CoreClient.lib;C:\Users\nicol\Documents\Duly-GUI\DNAI\lib\EventClient.lib;C:\Users\nicol\Documents\Duly-GUI\DNAI\lib\Cerealization.lib;$(QTDIR)\lib\Qt5QuickControls2.lib;$(QTDIR)\lib\Qt5Quick.lib;$(QTDIR)\lib\Qt5Gui.lib;$(QTDIR)\lib\Qt5Qml.lib;$(QTDIR)\lib\Qt5Network.lib;$(QTDIR)\lib\Qt5Core.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -112,18 +108,18 @@
     </ResourceCompile>
     <QtMoc>
       <QTDIR>$(QTDIR)</QTDIR>
-      <InputFile>%(FullPath)</InputFile>
       <OutputFile>.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</OutputFile>
       <ExecutionDescription>Moc'ing %(Identity)...</ExecutionDescription>
+      <InputFile>%(FullPath)</InputFile>
       <DynamicSource>output</DynamicSource>
       <IncludePath>.\GeneratedFiles\$(ConfigurationName);.\GeneratedFiles;$(QTDIR)\mkspecs/win32-msvc;.;./include;C:/Users/nicol/Documents/Duly-GUI/DNAI/lib/core_client/include;$(QTDIR)\include;$(QTDIR)\include/QtQuickControls2;$(QTDIR)\include/QtQuick;$(QTDIR)\include/QtGui;$(QTDIR)\include/QtANGLE;$(QTDIR)\include/QtQml;$(QTDIR)\include/QtNetwork;$(QTDIR)\include/QtCore;C:/Qt/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include;C:/Qt/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed;C:/Qt/Tools/mingw530_32/i686-w64-mingw32/include;C:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++;C:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32;C:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward</IncludePath>
     </QtMoc>
     <QtRcc>
+      <OutputFile>.\GeneratedFiles\qrc_%(Filename).cpp</OutputFile>
       <ExecutionDescription>Rcc'ing %(Identity)...</ExecutionDescription>
       <InitFuncName>qml</InitFuncName>
       <QTDIR>$(QTDIR)</QTDIR>
       <Compression>default</Compression>
-      <OutputFile>.\GeneratedFiles\qrc_%(Filename).cpp</OutputFile>
       <InputFile>%(FullPath)</InputFile>
     </QtRcc>
   </ItemDefinitionGroup>
@@ -144,6 +140,7 @@
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
       <WarningLevel>Level3</WarningLevel>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <ProgramDataBaseFileName>$(IntDir)vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
     </ClCompile>
     <Link>
@@ -167,22 +164,22 @@
     <ResourceCompile>
       <PreprocessorDefinitions>_WINDOWS;UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE=\"0.0.21\";QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ResourceCompile>
+    <QtRcc>
+      <ExecutionDescription>Rcc'ing %(Identity)...</ExecutionDescription>
+      <InitFuncName>qml</InitFuncName>
+      <QTDIR>$(QTDIR)</QTDIR>
+      <Compression>default</Compression>
+      <OutputFile>.\GeneratedFiles\qrc_%(Filename).cpp</OutputFile>
+      <InputFile>%(FullPath)</InputFile>
+    </QtRcc>
     <QtMoc>
       <QTDIR>$(QTDIR)</QTDIR>
-      <InputFile>%(FullPath)</InputFile>
       <OutputFile>.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</OutputFile>
       <ExecutionDescription>Moc'ing %(Identity)...</ExecutionDescription>
+      <InputFile>%(FullPath)</InputFile>
       <DynamicSource>output</DynamicSource>
       <IncludePath>.\GeneratedFiles\$(ConfigurationName);.\GeneratedFiles;$(QTDIR)\mkspecs/win32-msvc;.;./include;C:/Users/nicol/Documents/Duly-GUI/DNAI/lib/core_client/include;$(QTDIR)\include;$(QTDIR)\include/QtQuickControls2;$(QTDIR)\include/QtQuick;$(QTDIR)\include/QtGui;$(QTDIR)\include/QtANGLE;$(QTDIR)\include/QtQml;$(QTDIR)\include/QtNetwork;$(QTDIR)\include/QtCore;C:/Qt/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include;C:/Qt/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed;C:/Qt/Tools/mingw530_32/i686-w64-mingw32/include;C:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++;C:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32;C:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward</IncludePath>
     </QtMoc>
-    <QtRcc>
-      <ExecutionDescription>Rcc'ing %(Identity)...</ExecutionDescription>
-      <Compression>default</Compression>
-      <InitFuncName>qml</InitFuncName>
-      <OutputFile>.\GeneratedFiles\qrc_%(Filename).cpp</OutputFile>
-      <InputFile>%(FullPath)</InputFile>
-      <QTDIR>$(QTDIR)</QTDIR>
-    </QtRcc>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\dnai\api\api.cpp" />
@@ -250,6 +247,7 @@
     <ClCompile Include="src\dnai\processmanager.cpp" />
     <ClCompile Include="src\dnai\project.cpp" />
     <ClCompile Include="src\dnai\core\projecthandler.cpp" />
+    <ClCompile Include="src\dnai\models\property.cpp" />
     <ClCompile Include="src\dnai\enums\qcstandardpaths.cpp" />
     <ClCompile Include="src\dnai\http\response.cpp" />
     <ClCompile Include="src\dnai\views\roundedrectangle.cpp" />
@@ -272,55 +270,55 @@
     <ClInclude Include="include\api.h" />
     <ClInclude Include="include\dnai\api\api.h" />
     <QtMoc Include="include\dnai\app.h">
-      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE=\0.0.21\;QT_NO_DEBUG;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_$(Configuration)="0.0.21";QT_NO_DEBUG;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
       <CompilerFlavor Condition="'$(Configuration)|$(Platform)'=='Release|x64'">msvc</CompilerFlavor>
-      <Include Condition="'$(Configuration)|$(Platform)'=='Release|x64'">release/moc_predefs.h</Include>
-      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE=\0.0.21\;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
+      <Include Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Configuration)/moc_predefs.h</Include>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE="0.0.21";QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
       <CompilerFlavor Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">msvc</CompilerFlavor>
-      <Include Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">debug/moc_predefs.h</Include>
+      <Include Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Configuration)/moc_predefs.h</Include>
     </QtMoc>
     <ClInclude Include="include\dnai\appcontext.h" />
     <QtMoc Include="include\dnai\views\appview.h">
-      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE=\0.0.21\;QT_NO_DEBUG;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_$(Configuration)="0.0.21";QT_NO_DEBUG;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
       <CompilerFlavor Condition="'$(Configuration)|$(Platform)'=='Release|x64'">msvc</CompilerFlavor>
-      <Include Condition="'$(Configuration)|$(Platform)'=='Release|x64'">release/moc_predefs.h</Include>
-      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE=\0.0.21\;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
+      <Include Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Configuration)/moc_predefs.h</Include>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE="0.0.21";QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
       <CompilerFlavor Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">msvc</CompilerFlavor>
-      <Include Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">debug/moc_predefs.h</Include>
+      <Include Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Configuration)/moc_predefs.h</Include>
     </QtMoc>
     <ClInclude Include="include\dnai\baseio.h" />
     <ClInclude Include="include\dnai\baselinkable.h" />
     <QtMoc Include="include\dnai\models\basicnodemodel.h">
-      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE=\0.0.21\;QT_NO_DEBUG;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_$(Configuration)="0.0.21";QT_NO_DEBUG;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
       <CompilerFlavor Condition="'$(Configuration)|$(Platform)'=='Release|x64'">msvc</CompilerFlavor>
-      <Include Condition="'$(Configuration)|$(Platform)'=='Release|x64'">release/moc_predefs.h</Include>
-      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE=\0.0.21\;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
+      <Include Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Configuration)/moc_predefs.h</Include>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE="0.0.21";QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
       <CompilerFlavor Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">msvc</CompilerFlavor>
-      <Include Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">debug/moc_predefs.h</Include>
+      <Include Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Configuration)/moc_predefs.h</Include>
     </QtMoc>
     <QtMoc Include="include\dnai\views\beziercurve.h">
-      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE=\0.0.21\;QT_NO_DEBUG;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_$(Configuration)="0.0.21";QT_NO_DEBUG;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
       <CompilerFlavor Condition="'$(Configuration)|$(Platform)'=='Release|x64'">msvc</CompilerFlavor>
-      <Include Condition="'$(Configuration)|$(Platform)'=='Release|x64'">release/moc_predefs.h</Include>
-      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE=\0.0.21\;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
+      <Include Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Configuration)/moc_predefs.h</Include>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE="0.0.21";QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
       <CompilerFlavor Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">msvc</CompilerFlavor>
-      <Include Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">debug/moc_predefs.h</Include>
+      <Include Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Configuration)/moc_predefs.h</Include>
     </QtMoc>
     <QtMoc Include="include\dnai\views\borderlesswindow.h">
-      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE=\0.0.21\;QT_NO_DEBUG;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_$(Configuration)="0.0.21";QT_NO_DEBUG;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
       <CompilerFlavor Condition="'$(Configuration)|$(Platform)'=='Release|x64'">msvc</CompilerFlavor>
-      <Include Condition="'$(Configuration)|$(Platform)'=='Release|x64'">release/moc_predefs.h</Include>
-      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE=\0.0.21\;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
+      <Include Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Configuration)/moc_predefs.h</Include>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE="0.0.21";QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
       <CompilerFlavor Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">msvc</CompilerFlavor>
-      <Include Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">debug/moc_predefs.h</Include>
+      <Include Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Configuration)/moc_predefs.h</Include>
     </QtMoc>
     <QtMoc Include="include\dnai\views\canvasnode.h">
-      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE=\0.0.21\;QT_NO_DEBUG;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_$(Configuration)="0.0.21";QT_NO_DEBUG;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
       <CompilerFlavor Condition="'$(Configuration)|$(Platform)'=='Release|x64'">msvc</CompilerFlavor>
-      <Include Condition="'$(Configuration)|$(Platform)'=='Release|x64'">release/moc_predefs.h</Include>
-      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE=\0.0.21\;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
+      <Include Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Configuration)/moc_predefs.h</Include>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE="0.0.21";QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
       <CompilerFlavor Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">msvc</CompilerFlavor>
-      <Include Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">debug/moc_predefs.h</Include>
+      <Include Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Configuration)/moc_predefs.h</Include>
     </QtMoc>
     <ClInclude Include="include\dnai\commands\command.h" />
     <ClInclude Include="include\dnai\commands\commanddecorator.h" />
@@ -328,125 +326,132 @@
     <ClInclude Include="include\commands.h" />
     <ClInclude Include="include\dnai\http\config.h" />
     <QtMoc Include="include\dnai\views\console.h">
-      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE=\0.0.21\;QT_NO_DEBUG;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_$(Configuration)="0.0.21";QT_NO_DEBUG;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
       <CompilerFlavor Condition="'$(Configuration)|$(Platform)'=='Release|x64'">msvc</CompilerFlavor>
-      <Include Condition="'$(Configuration)|$(Platform)'=='Release|x64'">release/moc_predefs.h</Include>
-      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE=\0.0.21\;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
+      <Include Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Configuration)/moc_predefs.h</Include>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE="0.0.21";QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
       <CompilerFlavor Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">msvc</CompilerFlavor>
-      <Include Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">debug/moc_predefs.h</Include>
+      <Include Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Configuration)/moc_predefs.h</Include>
     </QtMoc>
     <ClInclude Include="include\dnai\controllers\consolecontroller.h" />
     <ClInclude Include="include\dnai\models\gui\data\context.h" />
     <ClInclude Include="include\dnai\models\gui\declarable\context.h" />
     <QtMoc Include="include\dnai\views\contextview.h">
-      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE=\0.0.21\;QT_NO_DEBUG;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_$(Configuration)="0.0.21";QT_NO_DEBUG;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
       <CompilerFlavor Condition="'$(Configuration)|$(Platform)'=='Release|x64'">msvc</CompilerFlavor>
-      <Include Condition="'$(Configuration)|$(Platform)'=='Release|x64'">release/moc_predefs.h</Include>
-      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE=\0.0.21\;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
+      <Include Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Configuration)/moc_predefs.h</Include>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE="0.0.21";QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
       <CompilerFlavor Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">msvc</CompilerFlavor>
-      <Include Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">debug/moc_predefs.h</Include>
+      <Include Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Configuration)/moc_predefs.h</Include>
     </QtMoc>
     <ClInclude Include="include\controllers.h" />
-    <ClInclude Include="..\lib\core_client\include\core.h" />
+    <QtMoc Include="..\lib\core_client\include\core.h">
+      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_$(Configuration)="0.0.21";QT_NO_DEBUG;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
+      <CompilerFlavor Condition="'$(Configuration)|$(Platform)'=='Release|x64'">msvc</CompilerFlavor>
+      <Include Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Configuration)/moc_predefs.h</Include>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE="0.0.21";QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
+      <CompilerFlavor Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">msvc</CompilerFlavor>
+      <Include Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Configuration)/moc_predefs.h</Include>
+    </QtMoc>
     <ClInclude Include="include\dnai\commands\corecommand.h" />
     <QtMoc Include="include\dnai\enums\core\coreenums.h">
-      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE=\0.0.21\;QT_NO_DEBUG;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_$(Configuration)="0.0.21";QT_NO_DEBUG;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
       <CompilerFlavor Condition="'$(Configuration)|$(Platform)'=='Release|x64'">msvc</CompilerFlavor>
-      <Include Condition="'$(Configuration)|$(Platform)'=='Release|x64'">release/moc_predefs.h</Include>
-      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE=\0.0.21\;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
+      <Include Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Configuration)/moc_predefs.h</Include>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE="0.0.21";QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
       <CompilerFlavor Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">msvc</CompilerFlavor>
-      <Include Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">debug/moc_predefs.h</Include>
+      <Include Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Configuration)/moc_predefs.h</Include>
     </QtMoc>
     <ClInclude Include="include\dnai\exceptions\coreexception.h" />
     <QtMoc Include="include\dnai\views\customshape.h">
-      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE=\0.0.21\;QT_NO_DEBUG;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_$(Configuration)="0.0.21";QT_NO_DEBUG;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
       <CompilerFlavor Condition="'$(Configuration)|$(Platform)'=='Release|x64'">msvc</CompilerFlavor>
-      <Include Condition="'$(Configuration)|$(Platform)'=='Release|x64'">release/moc_predefs.h</Include>
-      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE=\0.0.21\;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
+      <Include Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Configuration)/moc_predefs.h</Include>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE="0.0.21";QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
       <CompilerFlavor Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">msvc</CompilerFlavor>
-      <Include Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">debug/moc_predefs.h</Include>
+      <Include Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Configuration)/moc_predefs.h</Include>
     </QtMoc>
     <ClInclude Include="include\dnai\utils\cx_string.h" />
     <ClInclude Include="include\dnai\utils\cx_stringlist.h" />
     <ClInclude Include="include\dnai\commands\debugdecorator.h" />
     <QtMoc Include="include\dnai\enums\declarationtype.h">
-      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE=\0.0.21\;QT_NO_DEBUG;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_$(Configuration)="0.0.21";QT_NO_DEBUG;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
       <CompilerFlavor Condition="'$(Configuration)|$(Platform)'=='Release|x64'">msvc</CompilerFlavor>
-      <Include Condition="'$(Configuration)|$(Platform)'=='Release|x64'">release/moc_predefs.h</Include>
-      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE=\0.0.21\;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
+      <Include Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Configuration)/moc_predefs.h</Include>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE="0.0.21";QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
       <CompilerFlavor Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">msvc</CompilerFlavor>
-      <Include Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">debug/moc_predefs.h</Include>
+      <Include Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Configuration)/moc_predefs.h</Include>
     </QtMoc>
     <QtMoc Include="include\dnai\views\declarationview.h">
-      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE=\0.0.21\;QT_NO_DEBUG;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_$(Configuration)="0.0.21";QT_NO_DEBUG;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
       <CompilerFlavor Condition="'$(Configuration)|$(Platform)'=='Release|x64'">msvc</CompilerFlavor>
-      <Include Condition="'$(Configuration)|$(Platform)'=='Release|x64'">release/moc_predefs.h</Include>
-      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE=\0.0.21\;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
+      <Include Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Configuration)/moc_predefs.h</Include>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE="0.0.21";QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
       <CompilerFlavor Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">msvc</CompilerFlavor>
-      <Include Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">debug/moc_predefs.h</Include>
+      <Include Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Configuration)/moc_predefs.h</Include>
     </QtMoc>
     <QtMoc Include="include\dnai\core\declaratorhandler.h">
-      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE=\0.0.21\;QT_NO_DEBUG;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_$(Configuration)="0.0.21";QT_NO_DEBUG;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
       <CompilerFlavor Condition="'$(Configuration)|$(Platform)'=='Release|x64'">msvc</CompilerFlavor>
-      <Include Condition="'$(Configuration)|$(Platform)'=='Release|x64'">release/moc_predefs.h</Include>
-      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE=\0.0.21\;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
+      <Include Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Configuration)/moc_predefs.h</Include>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE="0.0.21";QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
       <CompilerFlavor Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">msvc</CompilerFlavor>
-      <Include Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">debug/moc_predefs.h</Include>
+      <Include Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Configuration)/moc_predefs.h</Include>
     </QtMoc>
     <ClInclude Include="include\dnai.h" />
     <QtMoc Include="include\dnai\editor.h">
-      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE=\0.0.21\;QT_NO_DEBUG;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_$(Configuration)="0.0.21";QT_NO_DEBUG;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
       <CompilerFlavor Condition="'$(Configuration)|$(Platform)'=='Release|x64'">msvc</CompilerFlavor>
-      <Include Condition="'$(Configuration)|$(Platform)'=='Release|x64'">release/moc_predefs.h</Include>
-      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE=\0.0.21\;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
+      <Include Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Configuration)/moc_predefs.h</Include>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE="0.0.21";QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
       <CompilerFlavor Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">msvc</CompilerFlavor>
-      <Include Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">debug/moc_predefs.h</Include>
+      <Include Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Configuration)/moc_predefs.h</Include>
     </QtMoc>
     <QtMoc Include="include\dnai\views\editorview.h">
-      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE=\0.0.21\;QT_NO_DEBUG;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB;UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE=\0.0.21\;QT_NO_DEBUG;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_$(Configuration)="0.0.21";QT_NO_DEBUG;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB;UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_$(Configuration)="0.0.21";QT_NO_DEBUG;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
       <CompilerFlavor Condition="'$(Configuration)|$(Platform)'=='Release|x64'">msvc;msvc</CompilerFlavor>
-      <Include Condition="'$(Configuration)|$(Platform)'=='Release|x64'">release/moc_predefs.h;release/moc_predefs.h</Include>
-      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE=\0.0.21\;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB;UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE=\0.0.21\;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
+      <Include Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Configuration)/moc_predefs.h;$(Configuration)/moc_predefs.h</Include>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE="0.0.21";QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB;UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE="0.0.21";QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
       <CompilerFlavor Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">msvc;msvc</CompilerFlavor>
-      <Include Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">debug/moc_predefs.h;debug/moc_predefs.h</Include>
+      <Include Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Configuration)/moc_predefs.h;$(Configuration)/moc_predefs.h</Include>
     </QtMoc>
     <ClInclude Include="include\dnai\entitiesfactory.h" />
     <ClInclude Include="include\dnai\models\core\entity.h" />
     <QtMoc Include="include\dnai\models\entity.h">
-      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE=\0.0.21\;QT_NO_DEBUG;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_$(Configuration)="0.0.21";QT_NO_DEBUG;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
       <CompilerFlavor Condition="'$(Configuration)|$(Platform)'=='Release|x64'">msvc</CompilerFlavor>
-      <Include Condition="'$(Configuration)|$(Platform)'=='Release|x64'">release/moc_predefs.h</Include>
-      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE=\0.0.21\;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
+      <Include Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Configuration)/moc_predefs.h</Include>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE="0.0.21";QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
       <CompilerFlavor Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">msvc</CompilerFlavor>
-      <Include Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">debug/moc_predefs.h</Include>
+      <Include Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Configuration)/moc_predefs.h</Include>
     </QtMoc>
     <ClInclude Include="include\dnai\models\gui\data\entity.h" />
     <ClInclude Include="include\dnai\models\gui\declarable\entity.h" />
     <ClInclude Include="include\dnai\models\gui\data\entitycolum.h" />
     <ClInclude Include="include\dnai\models\core\entitydata.h" />
     <QtMoc Include="include\dnai\core\entitymanager.h">
-      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE=\0.0.21\;QT_NO_DEBUG;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_$(Configuration)="0.0.21";QT_NO_DEBUG;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
       <CompilerFlavor Condition="'$(Configuration)|$(Platform)'=='Release|x64'">msvc</CompilerFlavor>
-      <Include Condition="'$(Configuration)|$(Platform)'=='Release|x64'">release/moc_predefs.h</Include>
-      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE=\0.0.21\;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
+      <Include Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Configuration)/moc_predefs.h</Include>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE="0.0.21";QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
       <CompilerFlavor Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">msvc</CompilerFlavor>
-      <Include Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">debug/moc_predefs.h</Include>
+      <Include Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Configuration)/moc_predefs.h</Include>
     </QtMoc>
     <QtMoc Include="include\dnai\models\entitytree.h">
-      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE=\0.0.21\;QT_NO_DEBUG;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_$(Configuration)="0.0.21";QT_NO_DEBUG;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
       <CompilerFlavor Condition="'$(Configuration)|$(Platform)'=='Release|x64'">msvc</CompilerFlavor>
-      <Include Condition="'$(Configuration)|$(Platform)'=='Release|x64'">release/moc_predefs.h</Include>
-      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE=\0.0.21\;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
+      <Include Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Configuration)/moc_predefs.h</Include>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE="0.0.21";QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
       <CompilerFlavor Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">msvc</CompilerFlavor>
-      <Include Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">debug/moc_predefs.h</Include>
+      <Include Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Configuration)/moc_predefs.h</Include>
     </QtMoc>
     <QtMoc Include="include\dnai\core\enumhandler.h">
-      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE=\0.0.21\;QT_NO_DEBUG;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_$(Configuration)="0.0.21";QT_NO_DEBUG;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
       <CompilerFlavor Condition="'$(Configuration)|$(Platform)'=='Release|x64'">msvc</CompilerFlavor>
-      <Include Condition="'$(Configuration)|$(Platform)'=='Release|x64'">release/moc_predefs.h</Include>
-      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE=\0.0.21\;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
+      <Include Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Configuration)/moc_predefs.h</Include>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE="0.0.21";QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
       <CompilerFlavor Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">msvc</CompilerFlavor>
-      <Include Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">debug/moc_predefs.h</Include>
+      <Include Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Configuration)/moc_predefs.h</Include>
     </QtMoc>
     <ClInclude Include="include\enums.h" />
     <ClInclude Include="include\dnai\models\gui\data\enumtype.h" />
@@ -458,52 +463,52 @@
     <ClInclude Include="include\dnai\models\gui\data\flow.h" />
     <ClInclude Include="include\dnai\models\gui\flow.h" />
     <QtMoc Include="include\dnai\views\flow.h">
-      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE=\0.0.21\;QT_NO_DEBUG;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_$(Configuration)="0.0.21";QT_NO_DEBUG;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
       <CompilerFlavor Condition="'$(Configuration)|$(Platform)'=='Release|x64'">msvc</CompilerFlavor>
-      <Include Condition="'$(Configuration)|$(Platform)'=='Release|x64'">release/moc_predefs.h</Include>
-      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE=\0.0.21\;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
+      <Include Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Configuration)/moc_predefs.h</Include>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE="0.0.21";QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
       <CompilerFlavor Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">msvc</CompilerFlavor>
-      <Include Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">debug/moc_predefs.h</Include>
+      <Include Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Configuration)/moc_predefs.h</Include>
     </QtMoc>
     <QtMoc Include="include\dnai\enums\flowtype.h">
-      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE=\0.0.21\;QT_NO_DEBUG;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_$(Configuration)="0.0.21";QT_NO_DEBUG;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
       <CompilerFlavor Condition="'$(Configuration)|$(Platform)'=='Release|x64'">msvc</CompilerFlavor>
-      <Include Condition="'$(Configuration)|$(Platform)'=='Release|x64'">release/moc_predefs.h</Include>
-      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE=\0.0.21\;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
+      <Include Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Configuration)/moc_predefs.h</Include>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE="0.0.21";QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
       <CompilerFlavor Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">msvc</CompilerFlavor>
-      <Include Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">debug/moc_predefs.h</Include>
+      <Include Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Configuration)/moc_predefs.h</Include>
     </QtMoc>
     <ClInclude Include="include\dnai\focusmanager.h" />
     <ClInclude Include="include\dnai\models\gui\data\function.h" />
     <ClInclude Include="include\dnai\models\gui\declarable\function.h" />
     <QtMoc Include="include\dnai\core\functionhandler.h">
-      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE=\0.0.21\;QT_NO_DEBUG;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_$(Configuration)="0.0.21";QT_NO_DEBUG;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
       <CompilerFlavor Condition="'$(Configuration)|$(Platform)'=='Release|x64'">msvc</CompilerFlavor>
-      <Include Condition="'$(Configuration)|$(Platform)'=='Release|x64'">release/moc_predefs.h</Include>
-      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE=\0.0.21\;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
+      <Include Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Configuration)/moc_predefs.h</Include>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE="0.0.21";QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
       <CompilerFlavor Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">msvc</CompilerFlavor>
-      <Include Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">debug/moc_predefs.h</Include>
+      <Include Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Configuration)/moc_predefs.h</Include>
     </QtMoc>
     <ClInclude Include="include\dnai\commands\genericcommand.h" />
     <QtMoc Include="include\dnai\views\genericnode.h">
-      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE=\0.0.21\;QT_NO_DEBUG;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_$(Configuration)="0.0.21";QT_NO_DEBUG;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
       <CompilerFlavor Condition="'$(Configuration)|$(Platform)'=='Release|x64'">msvc</CompilerFlavor>
-      <Include Condition="'$(Configuration)|$(Platform)'=='Release|x64'">release/moc_predefs.h</Include>
-      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE=\0.0.21\;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
+      <Include Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Configuration)/moc_predefs.h</Include>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE="0.0.21";QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
       <CompilerFlavor Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">msvc</CompilerFlavor>
-      <Include Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">debug/moc_predefs.h</Include>
+      <Include Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Configuration)/moc_predefs.h</Include>
     </QtMoc>
     <ClInclude Include="include\dnai\models\generictreeitem.h" />
     <ClInclude Include="include\dnai\models\guicorestruct.h" />
     <ClInclude Include="include\dnai\exceptions\guiexception.h" />
     <ClInclude Include="include\dnai\enums\guitype.h" />
     <QtMoc Include="include\dnai\core\handlermanager.h">
-      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE=\0.0.21\;QT_NO_DEBUG;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_$(Configuration)="0.0.21";QT_NO_DEBUG;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
       <CompilerFlavor Condition="'$(Configuration)|$(Platform)'=='Release|x64'">msvc</CompilerFlavor>
-      <Include Condition="'$(Configuration)|$(Platform)'=='Release|x64'">release/moc_predefs.h</Include>
-      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE=\0.0.21\;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
+      <Include Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Configuration)/moc_predefs.h</Include>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE="0.0.21";QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
       <CompilerFlavor Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">msvc</CompilerFlavor>
-      <Include Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">debug/moc_predefs.h</Include>
+      <Include Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Configuration)/moc_predefs.h</Include>
     </QtMoc>
     <ClInclude Include="include\http.h" />
     <ClInclude Include="include\dnai\interfaces\iclone.h" />
@@ -527,39 +532,39 @@
     <ClInclude Include="include\dnai\models\gui\instruction.h" />
     <ClInclude Include="include\dnai\models\instruction.h" />
     <QtMoc Include="include\dnai\enums\core\instructionid.h">
-      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE=\0.0.21\;QT_NO_DEBUG;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_$(Configuration)="0.0.21";QT_NO_DEBUG;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
       <CompilerFlavor Condition="'$(Configuration)|$(Platform)'=='Release|x64'">msvc</CompilerFlavor>
-      <Include Condition="'$(Configuration)|$(Platform)'=='Release|x64'">release/moc_predefs.h</Include>
-      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE=\0.0.21\;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
+      <Include Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Configuration)/moc_predefs.h</Include>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE="0.0.21";QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
       <CompilerFlavor Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">msvc</CompilerFlavor>
-      <Include Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">debug/moc_predefs.h</Include>
+      <Include Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Configuration)/moc_predefs.h</Include>
     </QtMoc>
     <QtMoc Include="include\dnai\views\instructionview.h">
-      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE=\0.0.21\;QT_NO_DEBUG;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_$(Configuration)="0.0.21";QT_NO_DEBUG;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
       <CompilerFlavor Condition="'$(Configuration)|$(Platform)'=='Release|x64'">msvc</CompilerFlavor>
-      <Include Condition="'$(Configuration)|$(Platform)'=='Release|x64'">release/moc_predefs.h</Include>
-      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE=\0.0.21\;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
+      <Include Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Configuration)/moc_predefs.h</Include>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE="0.0.21";QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
       <CompilerFlavor Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">msvc</CompilerFlavor>
-      <Include Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">debug/moc_predefs.h</Include>
+      <Include Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Configuration)/moc_predefs.h</Include>
     </QtMoc>
     <ClInclude Include="include\dnai\http\interceptor.h" />
     <ClInclude Include="include\interfaces.h" />
     <QtMoc Include="include\dnai\views\io.h">
-      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE=\0.0.21\;QT_NO_DEBUG;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_$(Configuration)="0.0.21";QT_NO_DEBUG;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
       <CompilerFlavor Condition="'$(Configuration)|$(Platform)'=='Release|x64'">msvc</CompilerFlavor>
-      <Include Condition="'$(Configuration)|$(Platform)'=='Release|x64'">release/moc_predefs.h</Include>
-      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE=\0.0.21\;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
+      <Include Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Configuration)/moc_predefs.h</Include>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE="0.0.21";QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
       <CompilerFlavor Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">msvc</CompilerFlavor>
-      <Include Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">debug/moc_predefs.h</Include>
+      <Include Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Configuration)/moc_predefs.h</Include>
     </QtMoc>
     <ClInclude Include="include\dnai\interfaces\iobservable.h" />
     <QtMoc Include="include\dnai\enums\iotype.h">
-      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE=\0.0.21\;QT_NO_DEBUG;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_$(Configuration)="0.0.21";QT_NO_DEBUG;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
       <CompilerFlavor Condition="'$(Configuration)|$(Platform)'=='Release|x64'">msvc</CompilerFlavor>
-      <Include Condition="'$(Configuration)|$(Platform)'=='Release|x64'">release/moc_predefs.h</Include>
-      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE=\0.0.21\;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
+      <Include Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Configuration)/moc_predefs.h</Include>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE="0.0.21";QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
       <CompilerFlavor Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">msvc</CompilerFlavor>
-      <Include Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">debug/moc_predefs.h</Include>
+      <Include Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Configuration)/moc_predefs.h</Include>
     </QtMoc>
     <ClInclude Include="include\dnai\interfaces\iproject.h" />
     <ClInclude Include="include\dnai\interfaces\isavable.h" />
@@ -571,20 +576,20 @@
     <ClInclude Include="include\dnai\interfaces\iviewelement.h" />
     <ClInclude Include="include\dnai\interfaces\iviewzone.h" />
     <QtMoc Include="include\dnai\views\layout.h">
-      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE=\0.0.21\;QT_NO_DEBUG;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_$(Configuration)="0.0.21";QT_NO_DEBUG;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
       <CompilerFlavor Condition="'$(Configuration)|$(Platform)'=='Release|x64'">msvc</CompilerFlavor>
-      <Include Condition="'$(Configuration)|$(Platform)'=='Release|x64'">release/moc_predefs.h</Include>
-      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE=\0.0.21\;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
+      <Include Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Configuration)/moc_predefs.h</Include>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE="0.0.21";QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
       <CompilerFlavor Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">msvc</CompilerFlavor>
-      <Include Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">debug/moc_predefs.h</Include>
+      <Include Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Configuration)/moc_predefs.h</Include>
     </QtMoc>
     <QtMoc Include="include\dnai\views\line.h">
-      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE=\0.0.21\;QT_NO_DEBUG;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_$(Configuration)="0.0.21";QT_NO_DEBUG;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
       <CompilerFlavor Condition="'$(Configuration)|$(Platform)'=='Release|x64'">msvc</CompilerFlavor>
-      <Include Condition="'$(Configuration)|$(Platform)'=='Release|x64'">release/moc_predefs.h</Include>
-      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE=\0.0.21\;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
+      <Include Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Configuration)/moc_predefs.h</Include>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE="0.0.21";QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
       <CompilerFlavor Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">msvc</CompilerFlavor>
-      <Include Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">debug/moc_predefs.h</Include>
+      <Include Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Configuration)/moc_predefs.h</Include>
     </QtMoc>
     <ClInclude Include="include\dnai\link.h" />
     <ClInclude Include="include\dnai\models\gui\data\linkable.h" />
@@ -593,12 +598,12 @@
     <ClInclude Include="include\dnai\linkabletype.h" />
     <ClInclude Include="include\dnai\core\listhandler.h" />
     <QtMoc Include="include\dnai\models\listnode.h">
-      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE=\0.0.21\;QT_NO_DEBUG;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_$(Configuration)="0.0.21";QT_NO_DEBUG;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
       <CompilerFlavor Condition="'$(Configuration)|$(Platform)'=='Release|x64'">msvc</CompilerFlavor>
-      <Include Condition="'$(Configuration)|$(Platform)'=='Release|x64'">release/moc_predefs.h</Include>
-      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE=\0.0.21\;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
+      <Include Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Configuration)/moc_predefs.h</Include>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE="0.0.21";QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
       <CompilerFlavor Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">msvc</CompilerFlavor>
-      <Include Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">debug/moc_predefs.h</Include>
+      <Include Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Configuration)/moc_predefs.h</Include>
     </QtMoc>
     <ClInclude Include="include\dnai\models\gui\data\listtype.h" />
     <ClInclude Include="include\dnai\models\gui\declarable\listtype.h" />
@@ -611,12 +616,12 @@
     <ClInclude Include="include\dnai\models\gui\data\objecttype.h" />
     <ClInclude Include="include\dnai\models\gui\declarable\objecttype.h" />
     <QtMoc Include="include\dnai\http\observable.h">
-      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE=\0.0.21\;QT_NO_DEBUG;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_$(Configuration)="0.0.21";QT_NO_DEBUG;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
       <CompilerFlavor Condition="'$(Configuration)|$(Platform)'=='Release|x64'">msvc</CompilerFlavor>
-      <Include Condition="'$(Configuration)|$(Platform)'=='Release|x64'">release/moc_predefs.h</Include>
-      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE=\0.0.21\;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
+      <Include Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Configuration)/moc_predefs.h</Include>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE="0.0.21";QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
       <CompilerFlavor Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">msvc</CompilerFlavor>
-      <Include Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">debug/moc_predefs.h</Include>
+      <Include Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Configuration)/moc_predefs.h</Include>
     </QtMoc>
     <ClInclude Include="include\dnai\commands\openpropertypanel.h" />
     <ClInclude Include="include\dnai\models\gui\data\output.h" />
@@ -624,141 +629,148 @@
     <ClInclude Include="include\dnai\views\output.h" />
     <ClInclude Include="include\dnai\controllers\outputcontroller.h" />
     <QtMoc Include="include\dnai\processmanager.h">
-      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE=\0.0.21\;QT_NO_DEBUG;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_$(Configuration)="0.0.21";QT_NO_DEBUG;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
       <CompilerFlavor Condition="'$(Configuration)|$(Platform)'=='Release|x64'">msvc</CompilerFlavor>
-      <Include Condition="'$(Configuration)|$(Platform)'=='Release|x64'">release/moc_predefs.h</Include>
-      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE=\0.0.21\;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
+      <Include Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Configuration)/moc_predefs.h</Include>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE="0.0.21";QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
       <CompilerFlavor Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">msvc</CompilerFlavor>
-      <Include Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">debug/moc_predefs.h</Include>
+      <Include Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Configuration)/moc_predefs.h</Include>
     </QtMoc>
     <QtMoc Include="include\dnai\project.h">
-      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE=\0.0.21\;QT_NO_DEBUG;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_$(Configuration)="0.0.21";QT_NO_DEBUG;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
       <CompilerFlavor Condition="'$(Configuration)|$(Platform)'=='Release|x64'">msvc</CompilerFlavor>
-      <Include Condition="'$(Configuration)|$(Platform)'=='Release|x64'">release/moc_predefs.h</Include>
-      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE=\0.0.21\;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
+      <Include Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Configuration)/moc_predefs.h</Include>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE="0.0.21";QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
       <CompilerFlavor Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">msvc</CompilerFlavor>
-      <Include Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">debug/moc_predefs.h</Include>
+      <Include Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Configuration)/moc_predefs.h</Include>
     </QtMoc>
     <QtMoc Include="include\dnai\core\projecthandler.h">
-      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE=\0.0.21\;QT_NO_DEBUG;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_$(Configuration)="0.0.21";QT_NO_DEBUG;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
       <CompilerFlavor Condition="'$(Configuration)|$(Platform)'=='Release|x64'">msvc</CompilerFlavor>
-      <Include Condition="'$(Configuration)|$(Platform)'=='Release|x64'">release/moc_predefs.h</Include>
-      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE=\0.0.21\;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
+      <Include Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Configuration)/moc_predefs.h</Include>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE="0.0.21";QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
       <CompilerFlavor Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">msvc</CompilerFlavor>
-      <Include Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">debug/moc_predefs.h</Include>
+      <Include Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Configuration)/moc_predefs.h</Include>
     </QtMoc>
-    <ClInclude Include="include\dnai\models\property.h" />
+    <QtMoc Include="include\dnai\models\property.h">
+      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_$(Configuration)="0.0.21";QT_NO_DEBUG;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
+      <CompilerFlavor Condition="'$(Configuration)|$(Platform)'=='Release|x64'">msvc</CompilerFlavor>
+      <Include Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Configuration)/moc_predefs.h</Include>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE="0.0.21";QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
+      <CompilerFlavor Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">msvc</CompilerFlavor>
+      <Include Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Configuration)/moc_predefs.h</Include>
+    </QtMoc>
     <ClInclude Include="include\dnai\controllers\propertypanel.h" />
     <QtMoc Include="include\dnai\enums\qcstandardpaths.h">
-      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE=\0.0.21\;QT_NO_DEBUG;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_$(Configuration)="0.0.21";QT_NO_DEBUG;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
       <CompilerFlavor Condition="'$(Configuration)|$(Platform)'=='Release|x64'">msvc</CompilerFlavor>
-      <Include Condition="'$(Configuration)|$(Platform)'=='Release|x64'">release/moc_predefs.h</Include>
-      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE=\0.0.21\;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
+      <Include Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Configuration)/moc_predefs.h</Include>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE="0.0.21";QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
       <CompilerFlavor Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">msvc</CompilerFlavor>
-      <Include Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">debug/moc_predefs.h</Include>
+      <Include Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Configuration)/moc_predefs.h</Include>
     </QtMoc>
     <ClInclude Include="include\dnai\http\response.h" />
     <QtMoc Include="include\dnai\views\roundedrectangle.h">
-      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE=\0.0.21\;QT_NO_DEBUG;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_$(Configuration)="0.0.21";QT_NO_DEBUG;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
       <CompilerFlavor Condition="'$(Configuration)|$(Platform)'=='Release|x64'">msvc</CompilerFlavor>
-      <Include Condition="'$(Configuration)|$(Platform)'=='Release|x64'">release/moc_predefs.h</Include>
-      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE=\0.0.21\;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
+      <Include Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Configuration)/moc_predefs.h</Include>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE="0.0.21";QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
       <CompilerFlavor Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">msvc</CompilerFlavor>
-      <Include Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">debug/moc_predefs.h</Include>
+      <Include Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Configuration)/moc_predefs.h</Include>
     </QtMoc>
     <ClInclude Include="include\dnai\http\service.h" />
     <ClInclude Include="include\dnai\http\session.h" />
     <QtMoc Include="include\dnai\session.h">
-      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE=\0.0.21\;QT_NO_DEBUG;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_$(Configuration)="0.0.21";QT_NO_DEBUG;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
       <CompilerFlavor Condition="'$(Configuration)|$(Platform)'=='Release|x64'">msvc</CompilerFlavor>
-      <Include Condition="'$(Configuration)|$(Platform)'=='Release|x64'">release/moc_predefs.h</Include>
-      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE=\0.0.21\;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
+      <Include Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Configuration)/moc_predefs.h</Include>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE="0.0.21";QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
       <CompilerFlavor Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">msvc</CompilerFlavor>
-      <Include Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">debug/moc_predefs.h</Include>
+      <Include Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Configuration)/moc_predefs.h</Include>
     </QtMoc>
     <QtMoc Include="include\dnai\settings.h">
-      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE=\0.0.21\;QT_NO_DEBUG;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_$(Configuration)="0.0.21";QT_NO_DEBUG;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
       <CompilerFlavor Condition="'$(Configuration)|$(Platform)'=='Release|x64'">msvc</CompilerFlavor>
-      <Include Condition="'$(Configuration)|$(Platform)'=='Release|x64'">release/moc_predefs.h</Include>
-      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE=\0.0.21\;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
+      <Include Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Configuration)/moc_predefs.h</Include>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE="0.0.21";QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
       <CompilerFlavor Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">msvc</CompilerFlavor>
-      <Include Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">debug/moc_predefs.h</Include>
+      <Include Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Configuration)/moc_predefs.h</Include>
     </QtMoc>
     <QtMoc Include="include\dnai\models\settingsmodel.h">
-      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE=\0.0.21\;QT_NO_DEBUG;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_$(Configuration)="0.0.21";QT_NO_DEBUG;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
       <CompilerFlavor Condition="'$(Configuration)|$(Platform)'=='Release|x64'">msvc</CompilerFlavor>
-      <Include Condition="'$(Configuration)|$(Platform)'=='Release|x64'">release/moc_predefs.h</Include>
-      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE=\0.0.21\;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
+      <Include Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Configuration)/moc_predefs.h</Include>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE="0.0.21";QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
       <CompilerFlavor Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">msvc</CompilerFlavor>
-      <Include Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">debug/moc_predefs.h</Include>
+      <Include Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Configuration)/moc_predefs.h</Include>
     </QtMoc>
     <QtMoc Include="include\dnai\solution.h">
-      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE=\0.0.21\;QT_NO_DEBUG;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_$(Configuration)="0.0.21";QT_NO_DEBUG;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
       <CompilerFlavor Condition="'$(Configuration)|$(Platform)'=='Release|x64'">msvc</CompilerFlavor>
-      <Include Condition="'$(Configuration)|$(Platform)'=='Release|x64'">release/moc_predefs.h</Include>
-      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE=\0.0.21\;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
+      <Include Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Configuration)/moc_predefs.h</Include>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE="0.0.21";QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
       <CompilerFlavor Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">msvc</CompilerFlavor>
-      <Include Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">debug/moc_predefs.h</Include>
+      <Include Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Configuration)/moc_predefs.h</Include>
     </QtMoc>
     <QtMoc Include="include\dnai\views\toast.h">
-      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE=\0.0.21\;QT_NO_DEBUG;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_$(Configuration)="0.0.21";QT_NO_DEBUG;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
       <CompilerFlavor Condition="'$(Configuration)|$(Platform)'=='Release|x64'">msvc</CompilerFlavor>
-      <Include Condition="'$(Configuration)|$(Platform)'=='Release|x64'">release/moc_predefs.h</Include>
-      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE=\0.0.21\;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
+      <Include Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Configuration)/moc_predefs.h</Include>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE="0.0.21";QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
       <CompilerFlavor Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">msvc</CompilerFlavor>
-      <Include Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">debug/moc_predefs.h</Include>
+      <Include Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Configuration)/moc_predefs.h</Include>
     </QtMoc>
     <QtMoc Include="include\dnai\toastermanagerservice.h">
-      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE=\0.0.21\;QT_NO_DEBUG;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_$(Configuration)="0.0.21";QT_NO_DEBUG;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
       <CompilerFlavor Condition="'$(Configuration)|$(Platform)'=='Release|x64'">msvc</CompilerFlavor>
-      <Include Condition="'$(Configuration)|$(Platform)'=='Release|x64'">release/moc_predefs.h</Include>
-      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE=\0.0.21\;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
+      <Include Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Configuration)/moc_predefs.h</Include>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE="0.0.21";QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
       <CompilerFlavor Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">msvc</CompilerFlavor>
-      <Include Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">debug/moc_predefs.h</Include>
+      <Include Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Configuration)/moc_predefs.h</Include>
     </QtMoc>
     <ClInclude Include="include\dnai\http\types.h" />
     <QtMoc Include="include\dnai\http\url.h">
-      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE=\0.0.21\;QT_NO_DEBUG;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_$(Configuration)="0.0.21";QT_NO_DEBUG;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
       <CompilerFlavor Condition="'$(Configuration)|$(Platform)'=='Release|x64'">msvc</CompilerFlavor>
-      <Include Condition="'$(Configuration)|$(Platform)'=='Release|x64'">release/moc_predefs.h</Include>
-      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE=\0.0.21\;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
+      <Include Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Configuration)/moc_predefs.h</Include>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE="0.0.21";QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
       <CompilerFlavor Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">msvc</CompilerFlavor>
-      <Include Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">debug/moc_predefs.h</Include>
+      <Include Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Configuration)/moc_predefs.h</Include>
     </QtMoc>
     <QtMoc Include="include\dnai\models\user.h">
-      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE=\0.0.21\;QT_NO_DEBUG;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_$(Configuration)="0.0.21";QT_NO_DEBUG;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
       <CompilerFlavor Condition="'$(Configuration)|$(Platform)'=='Release|x64'">msvc</CompilerFlavor>
-      <Include Condition="'$(Configuration)|$(Platform)'=='Release|x64'">release/moc_predefs.h</Include>
-      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE=\0.0.21\;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
+      <Include Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Configuration)/moc_predefs.h</Include>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE="0.0.21";QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
       <CompilerFlavor Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">msvc</CompilerFlavor>
-      <Include Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">debug/moc_predefs.h</Include>
+      <Include Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Configuration)/moc_predefs.h</Include>
     </QtMoc>
     <ClInclude Include="include\dnai\models\gui\data\variable.h" />
     <ClInclude Include="include\dnai\models\gui\declarable\variable.h" />
     <QtMoc Include="include\dnai\core\variablehandler.h">
-      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE=\0.0.21\;QT_NO_DEBUG;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_$(Configuration)="0.0.21";QT_NO_DEBUG;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
       <CompilerFlavor Condition="'$(Configuration)|$(Platform)'=='Release|x64'">msvc</CompilerFlavor>
-      <Include Condition="'$(Configuration)|$(Platform)'=='Release|x64'">release/moc_predefs.h</Include>
-      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE=\0.0.21\;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
+      <Include Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Configuration)/moc_predefs.h</Include>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE="0.0.21";QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
       <CompilerFlavor Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">msvc</CompilerFlavor>
-      <Include Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">debug/moc_predefs.h</Include>
+      <Include Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Configuration)/moc_predefs.h</Include>
     </QtMoc>
     <QtMoc Include="include\dnai\views\viewelement.h">
-      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE=\0.0.21\;QT_NO_DEBUG;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB;UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE=\0.0.21\;QT_NO_DEBUG;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_$(Configuration)="0.0.21";QT_NO_DEBUG;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB;UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_$(Configuration)="0.0.21";QT_NO_DEBUG;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
       <CompilerFlavor Condition="'$(Configuration)|$(Platform)'=='Release|x64'">msvc;msvc</CompilerFlavor>
-      <Include Condition="'$(Configuration)|$(Platform)'=='Release|x64'">release/moc_predefs.h;release/moc_predefs.h</Include>
-      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE=\0.0.21\;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB;UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE=\0.0.21\;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
+      <Include Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Configuration)/moc_predefs.h;$(Configuration)/moc_predefs.h</Include>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE="0.0.21";QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB;UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE="0.0.21";QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
       <CompilerFlavor Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">msvc;msvc</CompilerFlavor>
-      <Include Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">debug/moc_predefs.h;debug/moc_predefs.h</Include>
+      <Include Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Configuration)/moc_predefs.h;$(Configuration)/moc_predefs.h</Include>
     </QtMoc>
     <ClInclude Include="include\views.h" />
     <QtMoc Include="include\dnai\views\viewzone.h">
-      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE=\0.0.21\;QT_NO_DEBUG;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB;UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE=\0.0.21\;QT_NO_DEBUG;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_$(Configuration)="0.0.21";QT_NO_DEBUG;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB;UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_$(Configuration)="0.0.21";QT_NO_DEBUG;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
       <CompilerFlavor Condition="'$(Configuration)|$(Platform)'=='Release|x64'">msvc;msvc</CompilerFlavor>
-      <Include Condition="'$(Configuration)|$(Platform)'=='Release|x64'">release/moc_predefs.h;release/moc_predefs.h</Include>
-      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE=\0.0.21\;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB;UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE=\0.0.21\;QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
+      <Include Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Configuration)/moc_predefs.h;$(Configuration)/moc_predefs.h</Include>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE="0.0.21";QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB;UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QNANO_USE_RENDERNODE;QPM_INIT;VERSION_MAJOR=0;VERSION_MINOR=0;VERSION_BUILD=21;DNAI_VERSION_RELEASE="0.0.21";QT_QUICKCONTROLS2_LIB;QT_QUICK_LIB;QT_GUI_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Define>
       <CompilerFlavor Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">msvc;msvc</CompilerFlavor>
-      <Include Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">debug/moc_predefs.h;debug/moc_predefs.h</Include>
+      <Include Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Configuration)/moc_predefs.h;$(Configuration)/moc_predefs.h</Include>
     </QtMoc>
     <ClInclude Include="include\dnai\commands\zoomcanvascommand.h" />
   </ItemGroup>

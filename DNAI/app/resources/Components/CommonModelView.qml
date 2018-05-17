@@ -108,7 +108,7 @@ Rectangle {
         implicitWidth: parent.width * 0.04
         indicator: Rectangle {
             anchors.fill: _selectButton
-            color: (modelData.entityType === 0) ? "#00897B" : (modelData.entityType === 5) ?  "#039BE5" : (modelData.entityType === 2) ? "#8E24AA" : "#FB8C00"
+            color: (modelData.entityType === CoreEnums.CONTEXT) ? "#00897B" : (modelData.entityType === CoreEnums.OBJECT_TYPE) ?  "#039BE5" : (modelData.entityType === CoreEnums.FUNCTION) ? "#8E24AA" : "#FB8C00"
             FontAwesomeText {
                 anchors.fill: parent
                 text: "\uf00c"
@@ -211,7 +211,7 @@ Rectangle {
     }
     FontAwesomeButton {
         id: _openbutton
-        visible: modelData.entityType === 2
+        visible: modelData.entityType === CoreEnums.FUNCTION
 
         anchors.right: _itemview.right
         anchors.top: _itemview.top
@@ -241,7 +241,7 @@ Rectangle {
             source: _openbutton.label
         }
         onPressed: {
-            if (modelData.entityType === 2)
+            if (modelData.entityType === CoreEnums.FUNCTION)
             {
                 var tab = Editor.selectedView()
                 var model = modelData
@@ -251,6 +251,7 @@ Rectangle {
                 {
                     var view = tab.addView("resources/Components/NodeCanvas.qml",
                                 {}, modelData.name)
+                    view.nodeModel = modelData
                     tab.appendModel(modelData, view)
                 }
                 else

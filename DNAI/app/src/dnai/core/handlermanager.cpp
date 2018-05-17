@@ -2,7 +2,7 @@
 
 namespace dnai
 {
-    namespace core
+    namespace gcore
     {
         HandlerManager::HandlerManager() :
             m_manager(),

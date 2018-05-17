@@ -2,13 +2,12 @@
 #define DNAI_MODELS_CORE_ENTITYDATA_H
 
 #include <QString>
-#include "dnai/enums/core/coreenums.h"
-
+#include "core.h"
 namespace dnai
 {
 	namespace models
 	{
-		namespace core
+        namespace gcore
 		{
 			struct EntityData
 			{
@@ -20,11 +19,11 @@ namespace dnai
 				bool operator!=(const EntityData& other) const;
 				bool operator==(const EntityData& other) const;
 
-                enums::core::EntityID id = enums::core::UNDEFINED_ID;
-                enums::core::EntityID containerId = enums::core::UNDEFINED_ID;
-				enums::core::ENTITY type = enums::core::ENTITY::UNDEFINED;
+                ::core::EntityID id = ::core::UNDEFINED_ID;
+                ::core::EntityID containerId = ::core::UNDEFINED_ID;
+                ::core::ENTITY type = ::core::ENTITY::UNDEFINED;
                 QString name = "Undefined";
-				enums::core::VISIBILITY visibility = enums::core::VISIBILITY::PRIVATE;
+                ::core::VISIBILITY visibility = ::core::VISIBILITY::PRIVATE;
 			};
 		}
 	}

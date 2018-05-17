@@ -297,7 +297,6 @@ HEADERS += \
     include/dnai/core/listhandler.h \
     include/dnai/core/objecthandler.h \
     include/dnai/core/projecthandler.h \
-    include/dnai/enums/core/coreenums.h \
     include/dnai/views/viewelement.h \
     include/dnai/views/viewzone.h \
     include/dnai/views/editorview.h \

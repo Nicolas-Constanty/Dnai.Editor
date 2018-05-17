@@ -4,6 +4,7 @@
 #include "dnai/models/gui/declarable/context.h"
 
 #include "dnai/core/handlermanager.h"
+#include "core.h"
 
 namespace dnai
 {
@@ -20,7 +21,7 @@ namespace dnai
 			m_editableProperty = new Property(this, props);
         }
 
-        Entity::Entity(core::Entity *coremodel, Entity *parent, interfaces::IEntity *guimodel) :
+        Entity::Entity(gcore::Entity *coremodel, Entity *parent, interfaces::IEntity *guimodel) :
             IModel(parent),
             m_dataCore(coremodel),
             m_dataGUI(guimodel)
@@ -36,13 +37,10 @@ namespace dnai
 
 		Entity::~Entity()
         {
-            if (m_dataCore)
-                delete m_dataCore;
-            if (m_dataGUI)
-                delete m_dataGUI;
-			if (m_editableProperty)
-				delete m_editableProperty;
-            qDebug() << "~ Entity";
+			delete m_dataCore;
+			delete m_dataGUI;
+			delete m_editableProperty;
+			qDebug() << "~ Entity";
 		}
 
 		bool Entity::isRoot() const
@@ -70,7 +68,7 @@ namespace dnai
 
 		qint32 Entity::entityType() const
 		{
-			return coreModel()->entityType();
+            return static_cast<qint32>(coreModel()->entityType());
 		}
 
 		const QString& Entity::name() const
@@ -90,9 +88,9 @@ namespace dnai
             return fullName() + "." + childName;
         }
 
-		enums::core::VISIBILITY Entity::visibility() const
+        qint32 Entity::visibility() const
 		{
-			return coreModel()->visibility();
+			return static_cast<qint32>(coreModel()->visibility());
 		}
 
 		int Entity::index() const
@@ -110,7 +108,7 @@ namespace dnai
 			return m_dataGUI->description();
 		}
 
-		core::Entity* Entity::coreModel() const
+        gcore::Entity* Entity::coreModel() const
 		{
 			return m_dataCore;
 		}
@@ -174,7 +172,7 @@ namespace dnai
 
 		void Entity::setEntityType(qint32 type) const
 		{
-            if (coreModel()->setEntityType(static_cast<enums::core::ENTITY>(type)))
+            if (coreModel()->setEntityType(static_cast<::core::ENTITY>(type)))
 			{
 				emit entityTypeChanged(type);
 			}
@@ -189,12 +187,12 @@ namespace dnai
 			}
 		}
 
-		void Entity::setVisibility(enums::core::VISIBILITY v) const
-		{
-			if (coreModel()->setVisibility(v))
+        void Entity::setVisibility(qint32 v) const
+        {
+            if (coreModel()->setVisibility(static_cast<core::VISIBILITY>(v)))
 			{
 				
-				emit Entity::visibilityChanged(v);
+                emit Entity::visibilityChanged(v);
 			}
 		}
 
@@ -222,7 +220,7 @@ namespace dnai
 			}
 		}
 
-		void Entity::setCoreModel(core::Entity* model)
+        void Entity::setCoreModel(gcore::Entity* model)
 		{
 			if (m_dataCore == model)
 				return;
@@ -277,37 +275,37 @@ namespace dnai
 				m_columslist.append(col);
 			}
 			m_dataCore->setName(obj["name"].toString());
-            m_dataCore->setVisibility(static_cast<enums::core::VISIBILITY>(obj["visibility"].toInt()));
+            m_dataCore->setVisibility(static_cast<::core::VISIBILITY>(obj["visibility"].toInt()));
             switch (m_dataCore->entityType())
             {
-            case enums::core::ENTITY::UNDEFINED: break;
-            case enums::core::ENTITY::CONTEXT:
+            case ::core::ENTITY::UNDEFINED: break;
+            case ::core::ENTITY::CONTEXT:
             {
                 m_dataGUI = gui::declarable::Context::deserialize(obj);
                 break;
             }
-            case enums::core::ENTITY::VARIABLE:
+            case ::core::ENTITY::VARIABLE:
             {
                 m_dataGUI = gui::declarable::Variable::deserialize(obj);
                 break;
             }
-            case enums::core::ENTITY::FUNCTION:
+            case ::core::ENTITY::FUNCTION:
             {
                 m_dataGUI = gui::declarable::Function::deserialize(obj);
                 break;
             }
-            case enums::core::ENTITY::DATA_TYPE: break;
-            case enums::core::ENTITY::ENUM_TYPE:
+            case ::core::ENTITY::DATA_TYPE: break;
+            case ::core::ENTITY::ENUM_TYPE:
             {
                 m_dataGUI = gui::declarable::EnumType::deserialize(obj);
                 break;
             }
-            case enums::core::ENTITY::OBJECT_TYPE:
+            case ::core::ENTITY::OBJECT_TYPE:
             {
                 m_dataGUI = gui::declarable::ObjectType::deserialize(obj);
                 break;
             }
-            case enums::core::ENTITY::LIST_TYPE:
+            case ::core::ENTITY::LIST_TYPE:
             {
                 m_dataGUI = gui::declarable::ListType::deserialize(obj);
                 break;
@@ -318,7 +316,7 @@ namespace dnai
             foreach(const auto classe, obj["entities"].toArray()) {
 				QJsonObject o = classe.toObject();
 				qDebug() << o["name"].toString() << o["type"].toInt();
-                const auto coreModel = new models::core::Entity(static_cast<enums::core::ENTITY>(o["type"].toInt()));
+                const auto coreModel = new models::gcore::Entity(static_cast<::core::ENTITY>(o["type"].toInt()));
                 Entity *parent = this;
                 const auto entity = Entity::deserialize(o, coreModel, parent);
                 qDebug() << entity->listIndex();
@@ -368,15 +366,7 @@ namespace dnai
 		{
 			if (m_editableProperty)
 			{
-				const auto n = m_editableProperty->getPropName(row);
-				if (n == "name")
-					setName(value.toString());
-				else if (n == "description")
-					setDescription(value.toString());
-				else if (n == "visibility")
-					setVisibility(static_cast<enums::core::VISIBILITY>(value.toInt()));
-				else if (n == "type")
-					setEntityType(static_cast<enums::core::ENTITY>(value.toInt()));
+				m_editableProperty->setProp(row, value);
 			}
 		}
 

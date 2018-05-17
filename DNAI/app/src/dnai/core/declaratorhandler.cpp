@@ -14,7 +14,7 @@ using namespace std::placeholders;
 
 namespace dnai
 {
-    namespace core
+    namespace gcore
     {
         DeclaratorHandler::DeclaratorHandler(EntityManager &manager) :
             manager(manager)
@@ -47,57 +47,57 @@ namespace dnai
             ::core::declarator::onRemoveError(std::bind(&DeclaratorHandler::onRemoveError, this, _1, _2, _3));
         }
 
-        void DeclaratorHandler::onEntityAdded(enums::core::EntityID id, models::Entity &entity)
+        void DeclaratorHandler::onEntityAdded(::core::EntityID id, models::Entity &entity)
         {
             for (models::Entity *child : entity.childrenItem())
             {
                 child->setContainerId(id);
                 pendingDeclaration.push(child);
-                declare(id, child->entityType(), child->name(), child->visibility());
+                declare(id, child->entityType(), child->name(), static_cast<qint32>(child->visibility()));
             }
         }
 
-        void DeclaratorHandler::onEntityRemoved(enums::core::EntityID, models::Entity &entity)
+        void DeclaratorHandler::onEntityRemoved(::core::EntityID, models::Entity &entity)
         {
             removedEntities[entity.fullName().toStdString()] = &entity;
         }
 
-        models::Entity *DeclaratorHandler::createEntity(enums::core::ENTITY type, models::Entity *parent)
+        models::Entity *DeclaratorHandler::createEntity(::core::ENTITY type, models::Entity *parent)
         {
             interfaces::IEntity *guidata = nullptr;
 
             switch (type) {
-            case enums::core::ENTITY::CONTEXT:
+            case ::core::ENTITY::CONTEXT:
                 guidata = new models::gui::declarable::Context();
                 break;
-            case enums::core::ENTITY::VARIABLE:
+            case ::core::ENTITY::VARIABLE:
                 guidata = new models::gui::declarable::Variable();
                 break;
-            case enums::core::ENTITY::LIST_TYPE:
+            case ::core::ENTITY::LIST_TYPE:
                 guidata = new models::gui::declarable::ListType();
                 break;
-            case enums::core::ENTITY::OBJECT_TYPE:
+            case ::core::ENTITY::OBJECT_TYPE:
                 guidata = new models::gui::declarable::ObjectType();
                 break;
-            case enums::core::ENTITY::FUNCTION:
+            case ::core::ENTITY::FUNCTION:
                 guidata = new models::gui::declarable::Function();
                 break;
             default:
                 return nullptr;
             }
 
-            return new models::Entity(new models::core::Entity(type), parent, guidata);
+            return new models::Entity(new models::gcore::Entity(type), parent, guidata);
         }
 
         void DeclaratorHandler::declare(quint32 parentId, qint32 type, QString name, qint32 visibility)
         {
-            if (parentId != enums::core::UNDEFINED_ID)
+            if (parentId != ::core::UNDEFINED_ID)
             {
                 qDebug() << "core::declarator::declare("
                          << parentId << ", "
-                         << static_cast<enums::core::ENTITY>(type) << ", "
+                         << static_cast<::core::ENTITY>(type) << ", "
                          << name << ", "
-                         << enums::core::VISIBILITY::PUBLIC << ")";
+                         << ::core::VISIBILITY::PUBLIC << ")";
 
                 models::Entity *parent = &manager.getEntity(parentId);
 
@@ -108,7 +108,7 @@ namespace dnai
                          */
                         [parent, type, name, visibility]() {
                             qDebug() << "Declare " << name << " into " << parent->name() << "(" << parent->id() << ")";
-                            ::core::declarator::declare(parent->id(), static_cast<enums::core::ENTITY>(type), name, static_cast<enums::core::VISIBILITY>(visibility));
+                            ::core::declarator::declare(parent->id(), static_cast<::core::ENTITY>(type), name, static_cast<::core::VISIBILITY>(visibility));
                         },
                         /*
                          * Un-execute
@@ -136,8 +136,8 @@ namespace dnai
             }
 
             models::Entity *parent = &manager.getEntity(parentId);
-            enums::core::ENTITY type = static_cast<enums::core::ENTITY>(torm->entityType());
-            enums::core::VISIBILITY visi = torm->visibility();
+            ::core::ENTITY type = static_cast<::core::ENTITY>(torm->entityType());
+            ::core::VISIBILITY visi = static_cast<::core::VISIBILITY>(torm->visibility());
 
             qDebug() << "Core: DeclaratorHandler: Remove(" << parentId << ", " << name << ")";
 
@@ -159,20 +159,23 @@ namespace dnai
 
         void DeclaratorHandler::move(const models::Entity &tomove, const models::Entity &newparent)
         {
-
+            Q_UNUSED(tomove)
+            Q_UNUSED(newparent)
         }
 
         void DeclaratorHandler::rename(const models::Entity &torename, const QString &newname)
         {
-
+            Q_UNUSED(torename)
+            Q_UNUSED(newname)
         }
 
-        void DeclaratorHandler::setVisibility(const models::Entity &entity, enums::core::VISIBILITY visibility)
+        void DeclaratorHandler::setVisibility(const models::Entity &entity, ::core::VISIBILITY visibility)
         {
-
+            Q_UNUSED(entity)
+            Q_UNUSED(visibility)
         }
 
-        models::Entity *DeclaratorHandler::findEntity(enums::core::EntityID declarator, const QString &name)
+        models::Entity *DeclaratorHandler::findEntity(::core::EntityID declarator, const QString &name)
         {
             if (!manager.contains(declarator))
             {
@@ -191,7 +194,7 @@ namespace dnai
             return nullptr;
         }
 
-        void DeclaratorHandler::onDeclared(enums::core::EntityID declarator, enums::core::ENTITY type, const QString &name, enums::core::VISIBILITY visibility, enums::core::EntityID declaredId)
+        void DeclaratorHandler::onDeclared(::core::EntityID declarator, ::core::ENTITY type, const QString &name, ::core::VISIBILITY visibility, ::core::EntityID declaredId)
         {
             models::Entity *todeclare = nullptr;
 
@@ -200,9 +203,9 @@ namespace dnai
 
             if (!pendingDeclaration.empty()
                 && pendingDeclaration.front()->containerId() == declarator
-                && pendingDeclaration.front()->entityType() == type
+                && pendingDeclaration.front()->entityType() == static_cast<qint32>(type)
                 && pendingDeclaration.front()->name() == name
-                && pendingDeclaration.front()->visibility() == visibility)
+                && pendingDeclaration.front()->visibility() == static_cast<qint32>(visibility))
             {
                 todeclare = pendingDeclaration.front();
                 pendingDeclaration.pop();
@@ -223,7 +226,7 @@ namespace dnai
                 {
                     todeclare = createEntity(type, &parent);
                     todeclare->setName(name);
-                    todeclare->setVisibility(visibility);
+                    todeclare->setVisibility(static_cast<qint32>(visibility));
                     todeclare->setEntityType(static_cast<qint32>(type));
                     todeclare->setContainerId(declarator);
                 }
@@ -249,7 +252,7 @@ namespace dnai
             emit declared(todeclare);
         }
 
-        void DeclaratorHandler::onDeclareError(enums::core::EntityID declarator, enums::core::ENTITY type, const QString &name, enums::core::VISIBILITY visibility, const QString &message)
+        void DeclaratorHandler::onDeclareError(::core::EntityID declarator, ::core::ENTITY type, const QString &name, ::core::VISIBILITY visibility, const QString &message)
         {
             if (!pendingDeclaration.empty())
             {
@@ -264,7 +267,7 @@ namespace dnai
             qDebug() << "Core: DeclaratorHandler: onDeclareError: " << message;
         }
 
-        void DeclaratorHandler::onRemoved(enums::core::EntityID declarator, const QString &name)
+        void DeclaratorHandler::onRemoved(::core::EntityID declarator, const QString &name)
         {
             models::Entity *torm = findEntity(declarator, name);
 
@@ -283,7 +286,7 @@ namespace dnai
             }
         }
 
-        void DeclaratorHandler::onRemoveError(enums::core::EntityID declarator, const QString &name, const QString &message)
+        void DeclaratorHandler::onRemoveError(::core::EntityID declarator, const QString &name, const QString &message)
         {
             if (findEntity(declarator, name) != nullptr)
             {

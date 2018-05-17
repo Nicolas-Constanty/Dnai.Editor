@@ -1,8 +1,1 @@
-{
-  "name": "My ai librairy",
-  "description": "base context",
-  "projects": [
-    "proj1.dnaiproject",
-    "proj2.dnaiproject"
-  ]
-}
+{"description":"base context","name":"My ai librairy","projects":["proj1.dnaiproject","proj2.dnaiproject"],"version":"0.0.21"}

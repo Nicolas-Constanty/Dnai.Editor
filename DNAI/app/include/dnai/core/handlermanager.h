@@ -15,7 +15,7 @@
 
 namespace dnai
 {
-    namespace core
+    namespace gcore
     {
         class HandlerManager : public QObject
         {

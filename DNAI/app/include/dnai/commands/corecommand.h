@@ -5,7 +5,7 @@
 #include <queue>
 
 #include "command.h"
-#include "dnai/enums/core/coreenums.h"
+#include "core.h"
 
 namespace dnai
 {

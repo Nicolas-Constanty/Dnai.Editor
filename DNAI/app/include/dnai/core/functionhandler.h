@@ -7,7 +7,7 @@
 
 namespace dnai
 {
-    namespace core
+    namespace gcore
     {
         class FunctionHandler : public QObject
         {
@@ -21,21 +21,21 @@ namespace dnai
             void setup();
 
         public slots:
-            void onEntityAdded(enums::core::EntityID id, models::Entity &added);
+            void onEntityAdded(::core::EntityID id, models::Entity &added);
 
         public:
             Q_INVOKABLE void setParameter(models::Entity const &function, models::Entity const &paramVar);
             Q_INVOKABLE void setReturn(models::Entity const &function, models::Entity const &returnVar);
 
         private:
-            models::gui::declarable::Function *getFunctionData(enums::core::EntityID function, bool throws = false);
+            models::gui::declarable::Function *getFunctionData(::core::EntityID function, bool throws = false);
 
         private:
-            void onParameterSet(enums::core::EntityID function, QString const &paramName);
-            void onSetParameterError(enums::core::EntityID function, QString const &paramName, QString const &message);
+            void onParameterSet(::core::EntityID function, QString const &paramName);
+            void onSetParameterError(::core::EntityID function, QString const &paramName, QString const &message);
 
-            void onReturnSet(enums::core::EntityID function, QString const &returnName);
-            void onSetReturnError(enums::core::EntityID function, QString const &returnName, QString const &message);
+            void onReturnSet(::core::EntityID function, QString const &returnName);
+            void onSetReturnError(::core::EntityID function, QString const &returnName, QString const &message);
 
         private:
             EntityManager &manager;

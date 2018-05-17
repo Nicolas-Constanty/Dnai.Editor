@@ -23,7 +23,7 @@ namespace dnai
 				void Variable::_deserialize(const QJsonObject& obj)
 				{
 					Entity::_deserialize(obj);
-                    m_data.varType = static_cast<enums::core::EntityID>(obj["varType"].toInt());
+                    m_data.varType = static_cast<::core::EntityID>(obj["varType"].toInt());
 					m_data.value = obj["value"].toObject();
 				}
 

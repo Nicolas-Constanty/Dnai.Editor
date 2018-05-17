@@ -41,12 +41,34 @@ namespace dnai
 			{
 				return m_obj->property(m_editableIndex.at(index.row()).toLatin1().constData());
 			}
-			else if (role == ROLES::NAME)
+			if (role == ROLES::NAME)
 			{
 				return QVariant::fromValue(m_editableIndex.at(index.row()));
 			}
+			if (role == ROLES::ITEM)
+			{
+				return QVariant::fromValue(m_obj);
+			}
 			return QVariant();
 		}
+
+		void Property::setProp(int row, const QVariant& value)
+		{
+			auto obj = dynamic_cast<Entity*>(m_obj);
+			if (obj)
+			{
+				const auto n = getPropName(row);
+				if (n == "name")
+					obj->setName(value.toString());
+				else if (n == "description")
+					obj->setDescription(value.toString());
+				else if (n == "visibility")
+					obj->setVisibility(value.toInt());
+				else if (n == "type")
+					obj->setEntityType(value.toInt() + 1);
+			}
+		}
+
 
 		QString Property::getPropName(int row) const
 		{
@@ -63,6 +85,7 @@ namespace dnai
 			QHash<int, QByteArray> roles;
 			roles[ROLES::NAME] = "name";
 			roles[ROLES::VALUE] = "value";
+			roles[ROLES::ITEM] = "item";
 			return roles;
 		}
 	}

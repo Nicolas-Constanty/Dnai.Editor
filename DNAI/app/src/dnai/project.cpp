@@ -13,11 +13,11 @@ namespace dnai {
 	Project::Project(): EntityTree(nullptr), m_file(nullptr), m_selectedEntity(nullptr), m_rootEntity(nullptr)
 	{
         connect(
-            core::HandlerManager::Instance().declarator(), SIGNAL(removed(dnai::models::Entity*)),
+            gcore::HandlerManager::Instance().declarator(), SIGNAL(removed(dnai::models::Entity*)),
             this, SLOT(removeEntity(dnai::models::Entity*))
         );
         connect(
-            core::HandlerManager::Instance().declarator(), SIGNAL(declared(dnai::models::Entity*)),
+            gcore::HandlerManager::Instance().declarator(), SIGNAL(declared(dnai::models::Entity*)),
             this, SLOT(addEntity(dnai::models::Entity*))
                     );
     }
@@ -25,18 +25,18 @@ namespace dnai {
     Project::Project(const QString &filename)
     {
         connect(
-            core::HandlerManager::Instance().declarator(), SIGNAL(removed(dnai::models::Entity*)),
+            gcore::HandlerManager::Instance().declarator(), SIGNAL(removed(dnai::models::Entity*)),
             this, SLOT(removeEntity(dnai::models::Entity*))
         );
         connect(
-            core::HandlerManager::Instance().declarator(), SIGNAL(declared(dnai::models::Entity*)),
+            gcore::HandlerManager::Instance().declarator(), SIGNAL(declared(dnai::models::Entity*)),
             this, SLOT(addEntity(dnai::models::Entity*))
                     );
         m_filename = filename;
         m_file = new QFile(QUrl(m_filename).toLocalFile());
         m_rootItem = new models::Entity();
         m_rootItem->setIdx(index(0,0, QModelIndex()));
-        const auto coreModel = new models::core::Entity("RootEntity", enums::core::ENTITY::CONTEXT);
+        const auto coreModel = new models::gcore::Entity("RootEntity", ::core::ENTITY::CONTEXT);
         m_rootEntity = new models::Entity(coreModel, m_rootItem, new models::gui::declarable::Context());
     }
 
@@ -66,7 +66,7 @@ namespace dnai {
     {
         if (obj["version"].toString() != Editor::instance().version())
             qWarning() << "Warning this project file (" << m_filename << ") wasn't created with the same editor's version (" << obj["version"].toString() << "!= current" << Editor::instance().version() << ")";
-        const auto coreModel = new models::core::Entity(obj["name"].toString(), enums::core::ENTITY::CONTEXT);
+        const auto coreModel = new models::gcore::Entity(obj["name"].toString(), ::core::ENTITY::CONTEXT);
         m_rootItem = new models::Entity();
         m_rootItem->setIdx(index(0,0, QModelIndex()));
         m_rootEntity = models::Entity::deserialize(obj, coreModel, m_rootItem);

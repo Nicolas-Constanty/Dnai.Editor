@@ -17,7 +17,7 @@ using namespace std::placeholders;
 
 namespace dnai
 {
-    namespace core
+    namespace gcore
     {
         VariableHandler::VariableHandler(EntityManager &manager) :
             manager(manager)
@@ -36,8 +36,9 @@ namespace dnai
             ::core::variable::onSetValueError(std::bind(&VariableHandler::onSetValueError, this, _1, _2, _3));
         }
 
-        void VariableHandler::onEntityAdded(enums::core::EntityID id, models::Entity &entity)
+        void VariableHandler::onEntityAdded(::core::EntityID id, models::Entity &entity)
         {
+            Q_UNUSED(entity)
             models::gui::declarable::Variable *var = getVariableData(id);
 
             if (var != nullptr)
@@ -53,7 +54,7 @@ namespace dnai
 
         void VariableHandler::setType(models::Entity const &variable, models::Entity const &type)
         {
-            enums::core::EntityID oldType = getVariableData(variable.id(), true)->varType();
+            ::core::EntityID oldType = getVariableData(variable.id(), true)->varType();
 
             commands::CommandManager::Instance()->exec(
                 new commands::CoreCommand("Variable.SetType", true,
@@ -92,7 +93,7 @@ namespace dnai
                     }));
         }
 
-        models::gui::declarable::Variable   *VariableHandler::getVariableData(enums::core::EntityID variable, bool throws)
+        models::gui::declarable::Variable   *VariableHandler::getVariableData(::core::EntityID variable, bool throws)
         {
             if (manager.contains(variable))
                 return manager.getEntity(variable).guiModel<models::gui::declarable::Variable>();
@@ -101,7 +102,7 @@ namespace dnai
             return nullptr;
         }
 
-        void VariableHandler::onTypeSet(enums::core::EntityID variable, enums::core::EntityID type)
+        void VariableHandler::onTypeSet(::core::EntityID variable, ::core::EntityID type)
         {
             if (manager.contains(type))
             {
@@ -116,8 +117,9 @@ namespace dnai
             }
         }
 
-        void VariableHandler::onSetTypeError(enums::core::EntityID variable, enums::core::EntityID type, const QString &message)
+        void VariableHandler::onSetTypeError(::core::EntityID variable, ::core::EntityID type, const QString &message)
         {
+            Q_UNUSED(message)
             if (manager.contains(type))
             {
                 if (getVariableData(variable) != nullptr)
@@ -125,7 +127,7 @@ namespace dnai
             }
         }
 
-        void VariableHandler::onValueSet(enums::core::EntityID variable, const QString &value)
+        void VariableHandler::onValueSet(::core::EntityID variable, const QString &value)
         {
             models::gui::declarable::Variable *var = getVariableData(variable);
 
@@ -142,8 +144,10 @@ namespace dnai
             }
         }
 
-        void VariableHandler::onSetValueError(enums::core::EntityID variable, const QString &value, const QString &message)
+        void VariableHandler::onSetValueError(::core::EntityID variable, const QString &value, const QString &message)
         {
+            Q_UNUSED(value)
+            Q_UNUSED(message)
             if (getVariableData(variable) != nullptr)
             {
                 commands::CoreCommand::Error();

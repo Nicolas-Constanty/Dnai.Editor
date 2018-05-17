@@ -81,7 +81,7 @@ namespace dnai
 			case Qt::DisplayRole:
 				return QVariant::fromValue(entity->name());
 			case VISIBILITY:
-				return entity->visibility();
+                return QVariant::fromValue(entity->visibility());
 			case INDEX:
 				return entity->index();
 			case LISTINDEX:

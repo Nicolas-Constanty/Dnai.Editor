@@ -10,7 +10,7 @@
 
 namespace dnai
 {
-    namespace core
+    namespace gcore
     {
         class ProjectHandler : public QObject
         {
@@ -27,7 +27,7 @@ namespace dnai
             Q_INVOKABLE void create(dnai::Project *tocreate);
 
         private:
-            void onCreated(QString const &name, enums::core::EntityID rootEntity);
+            void onCreated(QString const &name, ::core::EntityID rootEntity);
             void onCreateError(QString const &name, QString const &error);
 
         private:

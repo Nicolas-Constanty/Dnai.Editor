@@ -18,6 +18,11 @@ namespace dnai
 {
 	Editor &Editor::m_instance = *(new Editor());
 
+	Editor::~Editor()
+	{
+		delete m_propertyPanelProperties;
+	}
+
 	const QString& Editor::version() const
 	{
 		return m_version;
@@ -61,7 +66,7 @@ namespace dnai
 	{
         for (auto proj : m_solution->projects())
             if (const auto p = dynamic_cast<Project*>(proj))
-                core::HandlerManager::Instance().Project().create(p);
+                gcore::HandlerManager::Instance().Project().create(p);
 	}
 
 	void Editor::loadSolution(const QString& filename)
@@ -153,6 +158,13 @@ namespace dnai
         return App::currentInstance()->nodes();
     }
 
+    PropertyPanelProperties * Editor::propertyPanelProperties()
+	{
+		if (!m_propertyPanelProperties)
+			m_propertyPanelProperties = new PropertyPanelProperties();
+		return m_propertyPanelProperties;
+	}
+
 	interfaces::ISolution *Editor::solution() const
     {
         return m_solution;
@@ -242,6 +254,30 @@ namespace dnai
 
 	QQuickItem *Editor::propertyView() const
 	{
-		return m_propertyView;
+        return m_propertyView;
+    }
+
+    PropertyPanelProperties::PropertyPanelProperties(QObject *parent) : QObject(parent)
+    {
+        QMetaEnum metaEnum = QMetaEnum::fromType<core::VISIBILITY>();
+		for (auto i = 0; i < metaEnum.keyCount(); i++)
+		{
+			m_visibility.append(metaEnum.key(i));
+		}
+		metaEnum = QMetaEnum::fromType<core::ENTITY>();
+		for (auto i = 1; i < metaEnum.keyCount(); i++)
+		{
+			m_entityType.append(metaEnum.key(i));
+		}
+    }
+
+    const QStringList &PropertyPanelProperties::visibility() const
+    {
+        return m_visibility;
+    }
+
+	const QStringList& PropertyPanelProperties::entityType() const
+	{
+		return m_entityType;
 	}
 }

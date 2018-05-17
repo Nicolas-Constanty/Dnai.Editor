@@ -2,16 +2,16 @@
 
 namespace dnai
 {
-    namespace core
+    namespace gcore
     {
-        void EntityManager::addEntity(enums::core::EntityID id, models::Entity &entity)
+        void EntityManager::addEntity(::core::EntityID id, models::Entity &entity)
         {
             entity.setId(id);
             entities[id] = &entity;
             emit entityAdded(id, entity);
         }
 
-        void EntityManager::removeEntity(enums::core::EntityID id)
+        void EntityManager::removeEntity(::core::EntityID id)
         {
             typename EntityMap::iterator it = entities.find(id);
             models::Entity &tosend = *it->second;
@@ -20,27 +20,27 @@ namespace dnai
             emit entityRemoved(id, tosend);
         }
 
-        bool EntityManager::contains(enums::core::EntityID id) const
+        bool EntityManager::contains(::core::EntityID id) const
         {
             return entities.find(id) != entities.end();
         }
 
-        const models::Entity &EntityManager::getEntity(enums::core::EntityID id) const
+        const models::Entity &EntityManager::getEntity(::core::EntityID id) const
         {
             return *entities.at(id);
         }
 
-        models::Entity &EntityManager::getEntity(enums::core::EntityID id)
+        models::Entity &EntityManager::getEntity(::core::EntityID id)
         {
             return *entities.at(id);
         }
 
-        const models::Entity &EntityManager::operator [](enums::core::EntityID id) const
+        const models::Entity &EntityManager::operator [](::core::EntityID id) const
         {
             return getEntity(id);
         }
 
-        models::Entity &EntityManager::operator [](enums::core::EntityID id)
+        models::Entity &EntityManager::operator [](::core::EntityID id)
         {
             return getEntity(id);
         }

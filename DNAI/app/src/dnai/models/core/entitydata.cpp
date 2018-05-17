@@ -4,7 +4,7 @@ namespace dnai
 {
 	namespace models
 	{
-		namespace core
+        namespace gcore
 		{
 			EntityData::EntityData(const EntityData& other)
 			{

@@ -1,3 +1,5 @@
+#include <QJsonObject>
+
 #include "dnai/models/core/entity.h"
 #include "dnai/commands/commandmanager.h"
 
@@ -5,9 +7,9 @@ namespace dnai
 {
 	namespace models
 	{
-		namespace core
+        namespace gcore
         {
-            Entity::Entity(enums::core::ENTITY type)
+            Entity::Entity(::core::ENTITY type)
 			{
 				m_data.name = "EmptyEntity";
                 m_data.containerId = 0;
@@ -19,14 +21,14 @@ namespace dnai
 				*this = entity;
 			}
 
-			Entity::Entity(const QString& name, enums::core::ENTITY type, qint32 ctId)
+            Entity::Entity(const QString& name, ::core::ENTITY type, qint32 ctId)
 			{
 				m_data.name = name;
 				m_data.type = type;
 				m_data.containerId = ctId;
 			}
 
-			Entity::Entity(qint32 id, const QString& name, enums::core::ENTITY type, qint32 ctId)
+            Entity::Entity(qint32 id, const QString& name, ::core::ENTITY type, qint32 ctId)
 			{
 				m_data.id = id;
 				m_data.name = name;
@@ -68,18 +70,18 @@ namespace dnai
 			void Entity::serialize(QJsonObject& obj) const
 			{
 				obj["name"] = m_data.name;
-				obj["type"] = m_data.type;
-				obj["visibility"] = m_data.visibility;
+                obj["type"] = static_cast<qint32>(m_data.type);
+                obj["visibility"] = static_cast<qint32>(m_data.visibility);
 			}
 
 			void Entity::_deserialize(const QJsonObject& obj)
 			{
                 m_data.name = obj["name"].toString();
-                m_data.type = static_cast<enums::core::ENTITY>(obj["type"].toInt());
-                m_data.visibility = static_cast<enums::core::VISIBILITY>(obj["visibility"].toInt());
+                m_data.type = static_cast<::core::ENTITY>(obj["type"].toInt());
+                m_data.visibility = static_cast<::core::VISIBILITY>(obj["visibility"].toInt());
 			}
 
-			bool Entity::setEntityType(enums::core::ENTITY e)
+            bool Entity::setEntityType(::core::ENTITY e)
 			{
 				if (m_data.type == e)
 					return false;
@@ -87,7 +89,7 @@ namespace dnai
 				return true;
 			}
 
-			enums::core::ENTITY Entity::entityType() const
+            ::core::ENTITY Entity::entityType() const
 			{
 				return m_data.type;
 			}
@@ -118,7 +120,7 @@ namespace dnai
 				return m_data.name;
 			}
 
-			bool Entity::setVisibility(enums::core::VISIBILITY v)
+            bool Entity::setVisibility(::core::VISIBILITY v)
 			{
 				if (m_data.visibility == v)
 					return false;
@@ -126,7 +128,7 @@ namespace dnai
 				return true;
 			}
 
-			enums::core::VISIBILITY Entity::visibility() const
+            ::core::VISIBILITY Entity::visibility() const
 			{
 				return m_data.visibility;
 			}

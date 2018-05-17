@@ -7,7 +7,7 @@
 
 namespace dnai
 {
-    namespace core
+    namespace gcore
     {
         class EnumHandler : public QObject
         {
@@ -21,18 +21,18 @@ namespace dnai
             void setup();
 
         public slots:
-            void onEntityAdded(enums::core::EntityID id, models::Entity &entity);
+            void onEntityAdded(::core::EntityID id, models::Entity &entity);
 
         public:
             Q_INVOKABLE void setValue();
             Q_INVOKABLE void removeValue();
 
         private:
-            void onValueSet(enums::core::EntityID enumeration, QString const &name);
-            void onSetValueError(enums::core::EntityID enumeration, QString const &name, QString const &message);
+            void onValueSet(::core::EntityID enumeration, QString const &name);
+            void onSetValueError(::core::EntityID enumeration, QString const &name, QString const &message);
 
-            void onValueRemoved(enums::core::EntityID enumeration, QString const &name);
-            void onRemoveValueError(enums::core::EntityID enumeration, QString const &name, QString const &message);
+            void onValueRemoved(::core::EntityID enumeration, QString const &name);
+            void onRemoveValueError(::core::EntityID enumeration, QString const &name, QString const &message);
 
         private:
             EntityManager &manager;

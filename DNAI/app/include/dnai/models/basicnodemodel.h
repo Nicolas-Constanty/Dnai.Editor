@@ -5,6 +5,7 @@
 #include <QQmlComponent>
 #include "listnode.h"
 #include "dnai/enums/core/instructionid.h"
+#include <QAbstractListModel>
 
 namespace dnai {
 	namespace models {

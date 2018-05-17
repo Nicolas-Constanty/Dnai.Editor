@@ -1,6 +1,7 @@
 #ifndef CORE_CLIENT_CORE_H
 #define CORE_CLIENT_CORE_H
 
+#include <QMetaObject>
 #include <functional>
 #include <cinttypes>
 #include <map>
@@ -8,13 +9,16 @@
 
 #include <QString>
 
-namespace core
+inline namespace core
 {
+    Q_NAMESPACE
+
     using EntityID = quint32;
     using InstructionID = quint32;
     using InstructionPin = quint32;
+    static const EntityID UNDEFINED_ID = static_cast<EntityID>(-1);
 
-    enum ENTITY : qint32
+    enum class ENTITY : qint32
     {
         UNDEFINED = -1,
         CONTEXT = 0,
@@ -25,12 +29,71 @@ namespace core
         OBJECT_TYPE = 5,
         LIST_TYPE = 6
     };
+    Q_ENUM_NS(ENTITY)
 
-    enum VISIBILITY : qint32
+    enum class VISIBILITY : qint32
     {
         PRIVATE = 0,
         PUBLIC = 1
     };
+    Q_ENUM_NS(VISIBILITY)
+
+    enum class COMMANDS : qint32
+    {
+        //ENTITY
+        DECLARE = 0,
+        REMOVE,
+        RENAME,
+        MOVE,
+        CHANGE_VISIBILITY,
+        //VARIABLE
+        SET_VARIABLE_VALUE,
+        GET_VARIABLE_VALUE,
+        SET_CONTEXT_PARENT,
+        //ENUM
+        SET_ENUMERATION_TYPE,
+        SET_ENUMERATION_VALUE,
+        GET_ENUMERATION_VALUE,
+        REMOVE_ENUMERATION_VALUE,
+        //CLASS
+        ADD_CLASS_ATTRIBUTE,
+        RENAME_CLASS_ATTRIBUTE,
+        REMOVE_CLASS_ATTRIBUTE,
+        ADD_CLASS_MEMBER_FUNCTION,
+        //LIST
+        SET_LIST_TYPE,
+        //INSTRUCTION
+        CALL_FUNCTION,
+        SET_FUNCTION_PARAMETER,
+        SET_FUNCTION_RETURN,
+        SET_FUNCTION_ENTRY_POINT,
+        REMOVE_FUNCTION_INSTRUCTION,
+        ADD_INSTRUCTION,
+        LINK_INSTRUCTION_EXECUTION,
+        LINK_INSTRUCTION_DATA,
+        SET_INSTRUCTION_INPUT_VALUE,
+        UNLINK_INSTRUCTION_FLOW,
+        UNLINK_INSTRUCTION_INPUT
+    };
+    Q_ENUM_NS(COMMANDS)
+
+    /**
+     * \brief List of available replies in core.dll
+     */
+    enum class REPLIES
+    {
+        ENTITY_DECLARED,
+        ENTITY_REMOVED,
+        VARIABLE_VALUE_GET,
+        VARIABLE_TYPE_GET,
+        ENUMERATION_VALUE_GET,
+        CLASS_MEMBER_FUNCTION_ADDED,
+        FUNCTION_CALLED,
+        INSTRUCTION_ADDED,
+        ERROR_OCCURRED
+    };
+    Q_ENUM_NS(REPLIES)
+
 
     enum INSTRUCTION
     {

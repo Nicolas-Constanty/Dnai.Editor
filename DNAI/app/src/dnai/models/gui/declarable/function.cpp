@@ -18,18 +18,18 @@ namespace dnai
 				void Function::serialize(QJsonObject& obj) const
 				{	
 					Entity::serialize(obj);
-     //               QJsonArray instructions;
-     //               foreach(const interfaces::IInstruction *instruction, m_data.instructions) {
-     //                   QJsonObject var;
-     //                   if (const auto func = dynamic_cast<const Function *>(instruction))
-     //                       func->serialize(var);
-     //                   else if (const auto inst = dynamic_cast<const Instruction *>(instruction))
-     //                       inst->serialize(var);
-     //                   instructions.append(var);
-     //               }
-					//obj["inputs"] = serializeList<Input>(m_data.inputs);
-					//obj["outputs"] = serializeList<Output>(m_data.outputs);
-					//obj["instructions"] = instructions;
+                    QJsonArray instructions;
+                    foreach(const interfaces::IInstruction *instruction, m_data.instructions) {
+                        QJsonObject var;
+                        if (const auto func = dynamic_cast<const Function *>(instruction))
+                            func->serialize(var);
+                        else if (const auto inst = dynamic_cast<const Instruction *>(instruction))
+                            inst->serialize(var);
+                        instructions.append(var);
+                    }
+                    obj["inputs"] = serializeList<Input>(m_data.inputs);
+                    obj["outputs"] = serializeList<Output>(m_data.outputs);
+                    obj["instructions"] = instructions;
 				}
 
 				void Function::_deserialize(const QJsonObject& obj)

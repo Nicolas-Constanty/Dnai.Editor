@@ -3,7 +3,7 @@
 
 #include "dnai/models/core/entity.h"
 #include "dnai/models/gui/declarable/entity.h"
-#include "dnai/enums/core/coreenums.h"
+#include "core.h"
 #include "dnai/interfaces/imodel.h"
 #include "gui/data/entitycolum.h"
 #include "gui/declarable/variable.h"
@@ -74,11 +74,11 @@ namespace dnai
             Q_PROPERTY(qint32 entityType READ entityType WRITE setEntityType NOTIFY entityTypeChanged)
             Q_PROPERTY(QString name READ name WRITE setName NOTIFY nameChanged)
 			Q_PROPERTY(bool isRoot READ isRoot WRITE setIsRoot NOTIFY isRootChanged)
-            Q_PROPERTY(dnai::enums::core::VISIBILITY visibility READ visibility WRITE setVisibility NOTIFY visibilityChanged)
+            Q_PROPERTY(qint32 visibility READ visibility WRITE setVisibility NOTIFY visibilityChanged)
             Q_PROPERTY(int index READ id WRITE setIndex NOTIFY indexChanged)
             Q_PROPERTY(QString listIndex READ listIndex WRITE setListIndex NOTIFY listIndexChanged)
             Q_PROPERTY(QString description READ description WRITE setDescription NOTIFY descriptionChanged)
-            Q_PROPERTY(core::Entity *coreModel READ coreModel WRITE setCoreModel NOTIFY coreModelChanged)
+            Q_PROPERTY(gcore::Entity *coreModel READ coreModel WRITE setCoreModel NOTIFY coreModelChanged)
 			Q_PROPERTY(bool expanded READ expanded WRITE setExpanded NOTIFY expandedChanged)
 			Q_PROPERTY(dnai::models::Entity *parentRef READ parentRef CONSTANT)
 			Q_PROPERTY(dnai::models::Property *editableProperty READ editableProperty WRITE setEditableProperty NOTIFY editablePropertyChanged)
@@ -86,7 +86,7 @@ namespace dnai
 
         public:
             explicit Entity();
-            explicit Entity(core::Entity *coremodel, Entity *parent = nullptr, interfaces::IEntity *guimodel = nullptr);
+            explicit Entity(gcore::Entity *coremodel, Entity *parent = nullptr, interfaces::IEntity *guimodel = nullptr);
 
             virtual ~Entity();
         public:
@@ -97,11 +97,11 @@ namespace dnai
             const QString &name() const;
             const QString fullName() const;
             const QString childFullName(QString const &childName) const;
-            enums::core::VISIBILITY visibility() const;
+            qint32 visibility() const;
             int index() const;
 			QString listIndex() const;
             const QString &description() const;
-            virtual core::Entity *coreModel() const;
+            virtual gcore::Entity *coreModel() const;
             virtual interfaces::IEntity *guiModel() const;
 			template<class T>
 			T *guiModel() const;
@@ -116,11 +116,11 @@ namespace dnai
             void setContainerId(qint32 containerId) const;
             void setEntityType(qint32 type) const;
             void setName(const QString &) const;
-            void setVisibility(enums::core::VISIBILITY) const;
+            void setVisibility(qint32 visibility) const;
             void setIndex(int index);
             void setListIndex(const QString &listIndex);
             void setDescription(const QString& description);
-            virtual void setCoreModel(core::Entity *model);
+            virtual void setCoreModel(gcore::Entity *model);
 			void setExpanded(bool exp);
 			void setEditableProperty(Property *p);
 			virtual void appendChild(Entity* child) override;
@@ -131,11 +131,11 @@ namespace dnai
             void containerIdChanged(qint32 containerId) const;
             void entityTypeChanged(qint32 type) const;
             void nameChanged(const QString &) const;
-            void visibilityChanged(enums::core::VISIBILITY) const;
+            void visibilityChanged(qint32 visibility) const;
             void indexChanged(int index) const;
             void listIndexChanged(const QString &listIndex) const;
             void descriptionChanged(const QString& description) const;
-            void coreModelChanged(core::Entity *model);
+            void coreModelChanged(gcore::Entity *model);
 			void entityChildrenChanged(models::Entity *e);
 			void expandedChanged(bool exp);
 			void editablePropertyChanged(Property *p);
@@ -150,7 +150,7 @@ namespace dnai
 			Q_INVOKABLE void setProp(int row, const QVariant &value);
 
         private:
-            core::Entity *m_dataCore;
+            gcore::Entity *m_dataCore;
             interfaces::IEntity *m_dataGUI;
 			bool m_isRoot = false;
 			QVariant m_entityChildren;

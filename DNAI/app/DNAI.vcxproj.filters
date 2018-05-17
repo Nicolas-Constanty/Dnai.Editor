@@ -242,6 +242,9 @@
     <ClCompile Include="src\dnai\core\projecthandler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\dnai\models\property.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="src\dnai\enums\qcstandardpaths.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -361,9 +364,9 @@
     <ClInclude Include="include\controllers.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\lib\core_client\include\core.h">
+    <QtMoc Include="..\lib\core_client\include\core.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
+    </QtMoc>
     <ClInclude Include="include\dnai\commands\corecommand.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -694,9 +697,9 @@
     <QtMoc Include="include\dnai\core\projecthandler.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <ClInclude Include="include\dnai\models\property.h">
+    <QtMoc Include="include\dnai\models\property.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
+    </QtMoc>
     <ClInclude Include="include\dnai\controllers\propertypanel.h">
       <Filter>Header Files</Filter>
     </ClInclude>

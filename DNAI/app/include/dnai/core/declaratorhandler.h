@@ -5,12 +5,12 @@
 #include <unordered_map>
 
 #include "entitymanager.h"
-#include "dnai/enums/core/coreenums.h"
+#include "core.h"
 #include "dnai/project.h"
 
 namespace dnai
 {
-    namespace core
+    namespace gcore
     {
         class DeclaratorHandler : public QObject
         {
@@ -24,8 +24,8 @@ namespace dnai
             void setup();
 
         public slots:
-            void onEntityAdded(enums::core::EntityID id, models::Entity &entity);
-            void onEntityRemoved(enums::core::EntityID id, models::Entity &entity);
+            void onEntityAdded(::core::EntityID id, models::Entity &entity);
+            void onEntityRemoved(::core::EntityID id, models::Entity &entity);
 
         signals:
             void declared(dnai::models::Entity *entity);
@@ -35,24 +35,24 @@ namespace dnai
             void visibilitySet();
 
         private:
-            models::Entity *createEntity(enums::core::ENTITY type, models::Entity *parent);
+            models::Entity *createEntity(::core::ENTITY type, models::Entity *parent);
 
         public:
-            Q_INVOKABLE void declare(quint32 parentId, qint32 type, QString name, qint32 visibility = static_cast<qint32>(enums::core::VISIBILITY::PUBLIC));
+            Q_INVOKABLE void declare(quint32 parentId, qint32 type, QString name, qint32 visibility = static_cast<qint32>(::core::VISIBILITY::PUBLIC));
             Q_INVOKABLE void remove(quint32 parentId, QString const &name);
             void move(const models::Entity &tomove, const models::Entity &newparent);
             void rename(const models::Entity &torename, QString const &newname);
-            void setVisibility(const models::Entity &entity, enums::core::VISIBILITY visibility);
+            void setVisibility(const models::Entity &entity, ::core::VISIBILITY visibility);
 
         private:
-            models::Entity *findEntity(enums::core::EntityID declarator, QString const &name);
+            models::Entity *findEntity(::core::EntityID declarator, QString const &name);
 
         private:
-            void onDeclared(enums::core::EntityID declarator, enums::core::ENTITY type, QString const &name, enums::core::VISIBILITY visibility, enums::core::EntityID declared);
-            void onDeclareError(enums::core::EntityID declarator, enums::core::ENTITY type, QString const &name, enums::core::VISIBILITY visibility, QString const &message);
+            void onDeclared(::core::EntityID declarator, ::core::ENTITY type, QString const &name, ::core::VISIBILITY visibility, ::core::EntityID declared);
+            void onDeclareError(::core::EntityID declarator, ::core::ENTITY type, QString const &name, ::core::VISIBILITY visibility, QString const &message);
 
-            void onRemoved(enums::core::EntityID declarator, QString const &name);
-            void onRemoveError(enums::core::EntityID declarator, QString const &name, QString const &message);
+            void onRemoved(::core::EntityID declarator, QString const &name);
+            void onRemoveError(::core::EntityID declarator, QString const &name, QString const &message);
 
             //renamed / rename_error
             //moved / move_error

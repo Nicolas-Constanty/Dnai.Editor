@@ -115,7 +115,7 @@ Rectangle {
                 itemDelegate: Item {
                     Image {
                         id: _icon
-                        source: styleData.value.entityType === 0 ? "../Images/context.png" : styleData.value.entityType === 1 ? "../Images/variable.png" : styleData.value.entityType === 2 ? "../Images/function.png" : "../Images/class.png"
+                        source: styleData.value.entityType === CoreEnums.CONTEXT ? "../Images/context.png" : styleData.value.entityType === CoreEnums.VARIABLE ? "../Images/variable.png" : styleData.value.entityType === CoreEnums.FUNCTION ? "../Images/function.png" : "../Images/class.png"
                         height: 12
                         width: 12
                         anchors.verticalCenter: parent.verticalCenter

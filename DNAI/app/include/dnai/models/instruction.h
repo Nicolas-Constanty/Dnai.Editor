@@ -13,10 +13,10 @@ namespace dnai
 		public:
 			~Instruction() = default;
 
-            core::Entity* coreModel() const override;
-            void setCoreModel(core::Entity* model) override;
+            gcore::Entity* coreModel() const override;
+            void setCoreModel(gcore::Entity* model) override;
         private:
-            core::Entity * m_data = nullptr;
+            gcore::Entity * m_data = nullptr;
 		};
 	}
 }
