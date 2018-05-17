@@ -1,4 +1,4 @@
-set VERSION="0.0.25"
+set VERSION="0.0.28"
 
 set EXE_NAME="./DNAISetup/DNAISetup.exe"
 

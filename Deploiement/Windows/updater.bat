@@ -1,18 +1,20 @@
-set version= windows0.0.25
+set version= windows0.0.28
 
 set accesschk= "C:\Users\Victor\Downloads\accesschk.exe"
 set actual_user= "Victor"
 set project_path= "C:\Users\Victor\Documents\EIP\Duly-GUI\Deploiement\Windows\DNAISetup\packages\com.vendor.product\data"
-set windows_file= "windows_files.updater"
+set windows_file= "C:\Users\Victor\Documents\EIP\Duly-GUI\Deploiement\Windows\windows_files.updater"
 set current_path="C:\Users\Victor\Documents\EIP\Duly-GUI\Deploiement\Windows"
 
 set repository_path= "C:\Users\Victor\Documents\EIP\DNAI_updaters"
 set repository_windows= "C:\Users\Victor\Documents\EIP\DNAI_updaters\windows"
 
 set git= "C:\Program Files\Git\bin\git.exe"
+set fart= "C:\Users\Victor\Documents\EIP\Duly-GUI\Deploiement\Windows\fart.exe"
 
-%accesschk% -s %actual_user% %project_path% > %windows_file%
-fart.exe --remove -C --c-style %windows_file% "C:\\Users\\Victor\\Documents\\EIP\\Duly-GUI\\Deploiement\\Windows\\DNAISetup\\packages\\com.vendor.product\\data\\\\"
+cd %project_path%
+dir /a-d /b /s > %windows_file%
+%fart% --remove -C --c-style %windows_file% "C:\\Users\\Victor\\Documents\\EIP\\Duly-GUI\\Deploiement\\Windows\\DNAISetup\\packages\\com.vendor.product\\data\\\\"
 
 pause
 
