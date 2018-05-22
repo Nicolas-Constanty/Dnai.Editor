@@ -172,5 +172,6 @@
         <file>resources/Components/EntityView.qml</file>
         <file>resources/Components/EnumComponent.qml</file>
         <file>resources/Components/EditableTextModel.qml</file>
+        <file>resources/Images/enum.png</file>
     </qresource>
 </RCC>

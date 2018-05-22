@@ -80,7 +80,6 @@ SOURCES += \
     src/dnai/models/entity.cpp \
     src/dnai/models/entitytree.cpp \
     src/dnai/models/listnode.cpp \
-    src/dnai/models/settingsmodel.cpp \
     src/dnai/models/user.cpp \
     src/dnai/views/appview.cpp \
     src/dnai/views/beziercurve.cpp \
@@ -240,7 +239,6 @@ HEADERS += \
     include/dnai/models/guicorestruct.h \
     include/dnai/models/instruction.h \
     include/dnai/models/listnode.h \
-    include/dnai/models/settingsmodel.h \
     include/dnai/models/user.h \
     include/dnai/utils/cx_string.h \
     include/dnai/utils/cx_stringlist.h \

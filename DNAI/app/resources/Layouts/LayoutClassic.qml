@@ -60,14 +60,14 @@ LayoutView {
 //        }
 
         background: Rectangle {
-             color: AppSettings.style.background.darkColor
+             color: AppSettings.theme["background"]["darkColor"]
              Rectangle {
                  anchors.bottom: parent.bottom
                  anchors.topMargin: 20
                  anchors.left: parent.left
                  anchors.right: parent.right
                  height: 1
-                 color: AppSettings.style.border.color
+                 color: AppSettings.theme["border"]["color"]
                  visible: _tabBar.count
              }
         }
@@ -99,7 +99,7 @@ LayoutView {
         anchors.right: _panelRight.left
         anchors.rightMargin: -1
         height: 1
-        color: AppSettings.style.border.color
+        color: AppSettings.theme["border"]["color"]
         visible: _tabBar.count
     }
 
@@ -236,14 +236,14 @@ LayoutView {
 ////        }
 
 //        background: Rectangle {
-//             color: AppSettings.style.background.darkColor
+//             color: AppSettings.theme["background"]["darkColor"]
 //             Rectangle {
 //                 anchors.bottom: parent.bottom
 //                 anchors.topMargin: 20
 //                 anchors.left: parent.left
 //                 anchors.right: parent.right
 //                 height: 1
-//                 color: AppSettings.style.border.color
+//                 color: AppSettings.theme["border"]["color"]
 //             }
 //        }
 //    }
@@ -264,7 +264,7 @@ LayoutView {
 //        anchors.right: panelRight.left
 //        anchors.rightMargin: -1
 //        height: 1
-//        color: AppSettings.style.border.color
+//        color: AppSettings.theme["border"]["color"]
 //    }
 ////    DeclarationView {
 ////        anchors.top: panelTop.bottom

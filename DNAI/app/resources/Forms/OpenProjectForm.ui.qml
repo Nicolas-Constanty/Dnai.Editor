@@ -20,7 +20,7 @@ Page {
     property bool isConnected: false
 
     background: Rectangle {
-        color: AppSettings.style.background.color
+        color: AppSettings.theme["background"]["color"]
     }
 
     FileDialog {
@@ -38,11 +38,11 @@ Page {
                 text: qsTr("Open a project")
             }
             background: Rectangle {
-                color: AppSettings.style.background.color
+                color: AppSettings.theme["background"]["color"]
             }
         }
         background: Rectangle {
-            color: AppSettings.style.background.color
+            color: AppSettings.theme["background"]["color"]
         }
     }
 
@@ -79,7 +79,7 @@ Page {
             anchors.left: parent.left
             anchors.right: parent.right
             text: qsTr("Online Projects")
-            color: AppSettings.style.text.accentColor
+            color: AppSettings.theme["text"]["accentColor"]
             horizontalAlignment: Qt.AlignHCenter
         }
         ScrollView {
@@ -90,9 +90,9 @@ Page {
             height: 200
             background: Rectangle {
                 anchors.fill: parent
-                border.color: AppSettings.style.border.color
-                border.width: AppSettings.style.border.width
-                color: AppSettings.style.background.darkColor
+                border.color: AppSettings.theme["border"]["color"]
+                border.width: AppSettings.theme["border"]["width"]
+                color: AppSettings.theme["background"]["darkColor"]
             }
 
             ListView {
@@ -112,7 +112,7 @@ Page {
             anchors.left: parent.left
             anchors.right: parent.right
             text: qsTr("Informations")
-            color: AppSettings.style.text.accentColor
+            color: AppSettings.theme["text"]["accentColor"]
             horizontalAlignment: Qt.AlignHCenter
         }
         ScrollView {
@@ -142,14 +142,14 @@ Page {
             rightPadding: 20
             contentItem: Text {
                 text: qsTr("Cancel")
-                color: AppSettings.style.text.color
-                font.family: AppSettings.style.font.family
-                font.pixelSize: AppSettings.style.font.pixelSize
+                color: AppSettings.theme["text"]["color"]
+                font.family: AppSettings.theme["font"]["family"]
+                font.pixelSize: AppSettings.theme["font"]["pixelSize"]
                 horizontalAlignment: Text.AlignHCenter
                 verticalAlignment: Text.AlignVCenter
             }
             background: Rectangle {
-                color: AppSettings.style.background.color
+                color: AppSettings.theme["background"]["color"]
             }
         }
         Button {
@@ -159,14 +159,14 @@ Page {
             rightPadding: 20
             contentItem: Text {
                 text: qsTr("Open")
-                color: AppSettings.style.text.color
-                font.family: AppSettings.style.font.family
-                font.pixelSize: AppSettings.style.font.pixelSize
+                color: AppSettings.theme["text"]["color"]
+                font.family: AppSettings.theme["font"]["family"]
+                font.pixelSize: AppSettings.theme["font"]["pixelSize"]
                 horizontalAlignment: Text.AlignHCenter
                 verticalAlignment: Text.AlignVCenter
             }
             background: Rectangle {
-                color: AppSettings.style.background.color
+                color: AppSettings.theme["background"]["color"]
             }
         }
     }

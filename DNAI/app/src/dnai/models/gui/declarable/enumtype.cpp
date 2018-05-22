@@ -10,16 +10,40 @@ namespace dnai
 		{
 			namespace declarable
 			{
+				const QMap<QString, QJsonValue>& EnumType::values() const
+				{
+					return m_data.values;
+				}
+
+				const QJsonValue& EnumType::value(QString id) const
+				{
+					return m_data.values[id];
+				}
+
 				void EnumType::serialize(QJsonObject& obj) const
 				{
-                    Q_UNUSED(obj)
-                    exceptions::ExceptionManager::throwException(exceptions::NotImplemented());
+					for (auto &kv : m_data.values.toStdMap())
+					{
+						obj[kv.first] = kv.second;
+					}
 				}
 
 				void EnumType::_deserialize(const QJsonObject& obj)
 				{
-                    Q_UNUSED(obj)
-                    exceptions::ExceptionManager::throwException(exceptions::NotImplemented());
+					for (const auto& key : obj.keys())
+					{
+						setValue(key, obj[key]);
+					}
+				}
+
+				void EnumType::setValue(const QString &key, const QJsonValue &value)
+				{
+					m_data.values[key] = value;
+				}
+
+				void EnumType::setValue(const QPair<QString, QJsonValue> &value)
+				{
+					m_data.values[value.first] = value.second;
 				}
 			}
 		}

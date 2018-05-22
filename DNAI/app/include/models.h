@@ -37,7 +37,6 @@
 #include "dnai/models/guicorestruct.h"
 #include "dnai/models/instruction.h"
 #include "dnai/models/listnode.h"
-#include "dnai/models/settingsmodel.h"
 #include "dnai/models/user.h"
 
 #endif // DNAI_MODELS_H

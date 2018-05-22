@@ -6,6 +6,7 @@ import DNAI 1.0
 import "../JavaScript/CreateComponent.js" as Factory
 import "../Forms"
 import "../Layouts"
+import DNAI 1.0
 
 ChooseThemeForm {
     id: form
@@ -13,7 +14,7 @@ ChooseThemeForm {
     height: 200
     property var wind: null
 
-    panel.color: AppSettings.style.background.color
+    panel.color: AppSettings.theme["background"]["color"]
 
     Component.onCompleted:
     {

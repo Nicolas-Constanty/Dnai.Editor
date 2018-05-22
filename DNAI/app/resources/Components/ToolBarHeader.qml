@@ -16,7 +16,7 @@ ToolBar {
     height: 40
     spacing: 0
     background: Rectangle {
-        color: AppSettings.style.background.color
+        color: AppSettings.theme["background"]["color"]
     }
     ScrollView {
         anchors.fill: parent
@@ -400,7 +400,7 @@ ToolBar {
     Modal {
         id: settingsPopup
         background: Rectangle {
-            color: AppSettings.style.background.color
+            color: AppSettings.theme["background"]["color"]
         }
 
         x: parent.width / 2 - width / 2

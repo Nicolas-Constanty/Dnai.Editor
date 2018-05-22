@@ -21,9 +21,9 @@ Item {
         id: _delegate
         Rectangle {
             id: _column
-            color: AppSettings.style.background.lightColor
-            border.color: AppSettings.style.border.color
-            border.width: AppSettings.style.border.width
+            color: AppSettings.theme["background"]["lightColor"]
+            border.color: AppSettings.theme["border"]["color"]
+            border.width: AppSettings.theme["border"]["width"]
             height: _item.height
             width: 300
             EditableText {
@@ -43,7 +43,7 @@ Item {
                 anchors.rightMargin: 5
                 anchors.top: _title.top
                 anchors.topMargin: -5
-                color: hovered ? "#E6EE9C" : AppSettings.style.text.color
+                color: hovered ? "#E6EE9C" : AppSettings.theme["text"]["color"]
                 background: Item {
                 }
                 onPressed: {
@@ -57,21 +57,21 @@ Item {
                 width: _column.width - 35
                 padding: 20
                 background: Rectangle {
-                    border.color: AppSettings.style.border.color
-                    color: AppSettings.style.menu.background.color
+                    border.color: AppSettings.theme["border"]["color"]
+                    color: AppSettings.theme["menu"]["background"]["color"]
                 }
                 TextArea {
                     id: _comment
                     text: qsTr(modelData.description)
                     anchors.fill: parent
-                    color: AppSettings.style.text.color
+                    color: AppSettings.theme["text"]["color"]
                     wrapMode: TextEdit.WordWrap
                     selectByMouse: true
                     font.italic: true
                     placeholderText: "comment..."
                     background: Rectangle {
-                        color: AppSettings.style.menu.background.darkColor
-                        border.color: AppSettings.style.background.lightColor
+                        color: AppSettings.theme["menu"]["background"]["darkColor"]
+                        border.color: AppSettings.theme["background"]["lightColor"]
                     }
                 }
             }
@@ -102,7 +102,7 @@ Item {
                     height: 30
                     label.font.pointSize: 12
                     text: "\uf2ed"
-                    color: _deletebutton.hovered ? _selectInfo.selectCount != 0 ? AppSettings.style.text.color : "99000000" : "99000000"
+                    color: _deletebutton.hovered ? _selectInfo.selectCount != 0 ? AppSettings.theme["text"]["color"] : "99000000" : "99000000"
                     background: Rectangle {
                         color: _deletebutton.hovered ? _selectInfo.selectCount != 0 ? "#99B71C1C" :  "transparent" : "transparent"
                     }
@@ -181,40 +181,56 @@ Item {
                                 var name = proj.generateUniqueChildName(modelData.parentRef);
 
                                 proj.addEntityColumnUid(modelData.parentRef.id, name, modelData.listIndex)
-                                Controller.declarator.declare(modelData.parentRef.id, 0, name)
+                                Controller.declarator.declare(modelData.parentRef.id, CoreEnums.CONTEXT, name)
                             }
                         }
                         AddButton {
                             id: _addClass
-                            decoration.color: "#039BE5"
+                            property int type: CoreEnums.OBJECT_TYPE
+                            decoration.color: AppSettings.getEntityColor(type)
                             width: 45
                             onPressed: {
                                 var name = proj.generateUniqueChildName(modelData.parentRef);
 
                                 proj.addEntityColumnUid(modelData.parentRef.id, name, modelData.listIndex)
-                                Controller.declarator.declare(modelData.parentRef.id, 5, name)
+                                Controller.declarator.declare(modelData.parentRef.id, type, name)
                             }
                         }
                         AddButton {
                             id: _addFunction
-                            decoration.color: "#8E24AA"
+                            property int type: CoreEnums.FUNCTION
+                            decoration.color: AppSettings.getEntityColor(type)
                             width: 45
                             onPressed: {
                                 var name = proj.generateUniqueChildName(modelData.parentRef);
 
                                 proj.addEntityColumnUid(modelData.parentRef.id, name, modelData.listIndex)
-                                Controller.declarator.declare(modelData.parentRef.id, 2, name)
+                                Controller.declarator.declare(modelData.parentRef.id, type, name)
+                            }
+                        }
+                        AddButton {
+                            id: _addEnum
+                            visible: (modelData.parentRef === null || modelData.parentRef.entityType === CoreEnums.CONTEXT || modelData.parentRef.entityType === CoreEnums.OBJECT_TYPE)
+                            property int type: CoreEnums.ENUM_TYPE
+                            decoration.color: AppSettings.getEntityColor(type)
+                            width: 45
+                            onPressed: {
+                                var name = proj.generateUniqueChildName(modelData.parentRef);
+
+                                proj.addEntityColumnUid(modelData.parentRef.id, name, modelData.listIndex)
+                                Controller.declarator.declare(modelData.parentRef.id, type, name)
                             }
                         }
                         AddButton {
                             id: _addVariable
-                            decoration.color: "#FB8C00"
+                            property int type: CoreEnums.VARIABLE
+                            decoration.color: AppSettings.getEntityColor(type)
                             width: 45
                             onPressed: {
                                 var name = proj.generateUniqueChildName(modelData.parentRef);
 
                                 proj.addEntityColumnUid(modelData.parentRef.id, name, modelData.listIndex)
-                                Controller.declarator.declare(modelData.parentRef.id, 1, name)
+                                Controller.declarator.declare(modelData.parentRef.id, type, name)
                             }
                         }
                     }
@@ -257,9 +273,9 @@ Item {
                 anchors.fill: parent
                 anchors.margins: 10
                 text: qsTr("Add new column...")
-                font.pointSize: AppSettings.style.font.pixelSize
+                font.pointSize: AppSettings.theme["font"]["pixelSize"]
                 horizontalAlignment: Qt.AlignLeft
-                color: AppSettings.style.text.disableColor
+                color: AppSettings.theme["text"]["disableColor"]
                 font.italic: true
             }
             MouseArea {
@@ -278,7 +294,7 @@ Item {
                     _textInput.forceActiveFocus()
                 }
                 background: Rectangle{
-                    color: AppSettings.style.background.lightColor
+                    color: AppSettings.theme["background"]["lightColor"]
                     radius: 3
                 }
                 enter: Transition {
@@ -293,24 +309,24 @@ Item {
                     width: 250
                     height: 30
                     color: "#80000000"
-                    border.color: AppSettings.style.background.color
+                    border.color: AppSettings.theme["background"]["color"]
                     radius: 3
                     TextInput {
                         id: _textInput
                         anchors.fill: parent
                         anchors.margins: 10
-                        color: AppSettings.style.text.color
+                        color: AppSettings.theme["text"]["color"]
                         wrapMode: TextEdit.WordWrap
                         selectByMouse: true
                         font.italic: true
                         verticalAlignment: Qt.AlignVCenter
-                        font.family: AppSettings.style.font.family
+                        font.family: AppSettings.theme["font"]["family"]
                         MText {
                             anchors.fill: parent
                             text: qsTr("Add new column...")
-                            font.pointSize: AppSettings.style.font.pixelSize
+                            font.pointSize: AppSettings.theme["font"]["pixelSize"]
                             horizontalAlignment: Qt.AlignLeft
-                            color: AppSettings.style.text.disableColor
+                            color: AppSettings.theme["text"]["disableColor"]
                             font.italic: true
                             visible: !parent.text
                         }

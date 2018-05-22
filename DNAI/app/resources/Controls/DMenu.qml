@@ -27,7 +27,7 @@ Menu {
     background: Rectangle {
         implicitWidth: 200
         implicitHeight: 20
-        color: AppSettings.style.menu.background.color
-        border.color: AppSettings.style.border.color
+        color: AppSettings.theme["menu"]["background"]["color"]
+        border.color: AppSettings.theme["border"]["color"]
     }
 }

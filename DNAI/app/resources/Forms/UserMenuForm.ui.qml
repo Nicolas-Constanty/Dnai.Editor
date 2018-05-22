@@ -28,9 +28,9 @@ Item {
         text: (fullname != "") ? fullname : qsTr("Sign In")
         anchors.verticalCenter: parent.verticalCenter
         anchors.left: parent.left
-        color: AppSettings.style.text.color
-        font.pixelSize: AppSettings.style.font.pixelSize
-        font.family: AppSettings.style.font.family
+        color: AppSettings.theme["text"]["color"]
+        font.pixelSize: AppSettings.theme["font"]["pixelSize"]
+        font.family: AppSettings.theme["font"]["family"]
         verticalAlignment: Text.AlignVCenter
         horizontalAlignment: Text.AlignRight
     }

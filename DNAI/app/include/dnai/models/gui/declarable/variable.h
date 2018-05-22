@@ -14,10 +14,11 @@ namespace dnai
 		{
 			namespace declarable
 			{
-                class Variable : public interfaces::IVariable, public Entity<data::Variable, Variable>
+                class Variable : public QObject, public interfaces::IVariable, public Entity<data::Variable, Variable>
                 {
+					Q_OBJECT
 				public:
-					explicit Variable() = default;
+					explicit Variable(QObject *parent = nullptr);
                     //Implementation of ISerializable
 					void serialize(QJsonObject& obj) const override;
 				protected:
@@ -27,6 +28,16 @@ namespace dnai
                     bool setVarType(qint32 id) override;
 	                const QJsonObject &value() const override;
 	                bool setValue(const QJsonObject& value) override;
+
+					static const QString &getVariableName(qint32 identifier);
+					static void addVariableType(qint32 identifier, const QString &name);
+	                static const QMap<qint32, QString>& getVariableMap();
+	                static const QStringList &getVariableList();
+					static const int variableListCount();
+
+                private:
+					static QMap<qint32, QString> m_typeMap;
+					static QStringList m_typeList;
 				};
 			}
 		}

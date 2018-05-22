@@ -41,7 +41,7 @@ ApplicationWindow {
     minimumHeight: 150
     minimumWidth: 400
     title: qsTr("DNAI")
-    color: AppSettings.style.background.darkColor
+    color: AppSettings.theme["background"]["darkColor"]
     visible: true
 
     ToolBarHeader {
@@ -81,7 +81,7 @@ ApplicationWindow {
         x: parent.width / 2 - width / 2
         y: appWindow.height / 2 - height / 2
         background: Rectangle {
-            color: AppSettings.style.background.color
+            color: AppSettings.theme["background"]["color"]
         }
         width: 640
         height: 480

@@ -280,4 +280,9 @@ namespace dnai
 	{
 		return m_entityType;
 	}
+
+	const QStringList& PropertyPanelProperties::varType() const
+	{
+		return models::gui::declarable::Variable::getVariableList();
+	}
 }

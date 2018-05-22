@@ -1,18 +1,19 @@
 #ifndef SETTINGSMODEL_H
 #define SETTINGSMODEL_H
 
-#include <QQuickItem>
+#include <QObject>
+#include <QColor>
 
 namespace dnai {
 namespace models {
-class QFontSettings : public QQuickItem
+class QFontSettings : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(qreal pixelSize READ pixelSize WRITE setPixelSize NOTIFY pixelSizeChanged)
     Q_PROPERTY(QString family READ family WRITE setFamily NOTIFY familyChanged)
 
 public:
-    explicit QFontSettings(QQuickItem *parent = nullptr) : QQuickItem(parent), m_pixelSize(14)
+    explicit QFontSettings(QObject *parent = nullptr) : QObject(parent), m_pixelSize(14)
     {
     }
 
@@ -32,7 +33,7 @@ private:
 
 };
 
-class QTextSettings : public QQuickItem
+class QTextSettings : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(QColor color READ color WRITE setColor NOTIFY colorChanged)
@@ -44,7 +45,7 @@ class QTextSettings : public QQuickItem
     Q_PROPERTY(QColor accentColor READ accentColor WRITE setAccentColor NOTIFY accentColorChanged)
 
 public:
-    explicit QTextSettings(QQuickItem *parent = nullptr) : QQuickItem(parent) {}
+    explicit QTextSettings(QObject *parent = nullptr) : QObject(parent) {}
 
 signals:
     void colorChanged(const QColor &);
@@ -82,7 +83,7 @@ private:
     QColor m_accentColor;
 };
 
-class QBorder  : public QQuickItem
+class QBorder  : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(QColor color READ color WRITE setColor NOTIFY colorChanged)
@@ -95,13 +96,13 @@ public:
     const QColor &color() const { return m_color; }
 
 public:
-    explicit QBorder(QQuickItem *parent = nullptr) : QQuickItem(parent) {}
+    explicit QBorder(QObject *parent = nullptr) : QObject(parent) {}
 
 private:
     QColor m_color;
 };
 
-class QGrid  : public QQuickItem
+class QGrid  : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(qreal step READ step WRITE setStep NOTIFY stepChanged)
@@ -131,7 +132,7 @@ public:
     QColor selectColor() const { return m_selectColor; }
 
 public:
-    explicit QGrid(QQuickItem *parent = nullptr) : QQuickItem(parent), m_step(15), m_accentStep(150)
+    explicit QGrid(QObject *parent = nullptr) : QObject(parent), m_step(15), m_accentStep(150)
     {
     }
 
@@ -143,7 +144,7 @@ private:
     QColor m_selectColor;
 };
 
-class QCanvas : public QQuickItem
+class QCanvas : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(QColor background READ background WRITE setBackground NOTIFY backgroundChanged)
@@ -160,14 +161,14 @@ public:
     void setGrid(QGrid *g);
 
 public:
-    explicit QCanvas(QQuickItem *parent = nullptr) : QQuickItem(parent), m_grid(new QGrid(this)) {}
+    explicit QCanvas(QObject *parent = nullptr) : QObject(parent), m_grid(new QGrid(this)) {}
     ~QCanvas();
 private:
     QGrid *m_grid;
     QColor m_background;
 };
 
-class QNode : public QQuickItem
+class QNode : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(dnai::models::QBorder *border READ border WRITE setBorder NOTIFY borderChanged)
@@ -184,14 +185,14 @@ public:
     void setColor(const QColor &color);
 
 public:
-    explicit QNode(QQuickItem *parent = nullptr) : QQuickItem(parent), m_border(new QBorder(this)) {}
+    explicit QNode(QObject *parent = nullptr) : QObject(parent), m_border(new QBorder(this)) {}
     ~QNode();
 private:
     QBorder *m_border;
     QColor m_color;
 };
 
-class QNodes : public QQuickItem
+class QNodes : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(qreal borderWidth READ borderWidth WRITE setBorderWidth NOTIFY borderWidthChanged)
@@ -232,7 +233,7 @@ public:
     void setBorderWidth(qreal width);
 
 public:
-    explicit QNodes(QQuickItem *parent = nullptr) : QQuickItem(parent)
+    explicit QNodes(QObject *parent = nullptr) : QObject(parent)
       , m_genericNode(new QNode(this))
       , m_intNode(new QNode(this))
       , m_stringNode(new QNode(this))
@@ -257,7 +258,7 @@ private:
 
 };
 
-class QDeclaration : public QQuickItem
+class QDeclaration : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(qreal radius READ radius WRITE setRadius NOTIFY radiusChanged)
@@ -279,7 +280,7 @@ public:
     void setBackground(const QColor &color);
 
 public:
-    explicit QDeclaration(QQuickItem *parent = nullptr) : QQuickItem(parent)
+    explicit QDeclaration(QObject *parent = nullptr) : QObject(parent)
       , m_radius(5), m_border(new QBorder(this))
     {
     }
@@ -290,7 +291,7 @@ private:
     QBorder *m_border;
 };
 
-class QDeclarationView : public QQuickItem
+class QDeclarationView : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(qreal itemSize READ itemSize WRITE setItemSize NOTIFY itemSizeChanged)
@@ -332,7 +333,7 @@ public:
 
 
 public:
-    explicit QDeclarationView(QQuickItem *parent = nullptr) : QQuickItem(parent)
+    explicit QDeclarationView(QObject *parent = nullptr) : QObject(parent)
       , m_itemSize(50), m_radius(0), m_border(new QBorder(this))
       , m_declContext(new QDeclaration(this))
       , m_declClass(new QDeclaration(this))
@@ -353,7 +354,7 @@ private:
     QDeclaration *m_declVariable;
 };
 
-class QBackground : public QQuickItem
+class QBackground : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(QColor color READ color WRITE setColor NOTIFY colorChanged)
@@ -361,8 +362,8 @@ class QBackground : public QQuickItem
     Q_PROPERTY(QColor lightColor READ lightColor WRITE setLightColor NOTIFY lightColorChanged)
 
 public:
-    QBackground(QQuickItem *parent = nullptr) :
-        QQuickItem(parent)
+    QBackground(QObject *parent = nullptr) :
+        QObject(parent)
       , m_color(Qt::magenta)
       , m_darkColor(Qt::magenta)
       , m_lightColor(Qt::magenta)
@@ -390,13 +391,13 @@ private:
 
 };
 
-class MenuSettings : public QQuickItem
+class MenuSettings : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(dnai::models::QBorder *border READ border WRITE setBorder NOTIFY borderChanged)
     Q_PROPERTY(dnai::models::QBackground *background READ background WRITE setBackground NOTIFY backgroundChanged)
 public:
-    explicit MenuSettings(QQuickItem *parent = nullptr) : QQuickItem(parent), m_background(new QBackground(this)), m_border(new QBorder(this))
+    explicit MenuSettings(QObject *parent = nullptr) : QObject(parent), m_background(new QBackground(this)), m_border(new QBorder(this))
     {}
     ~MenuSettings();
 
@@ -417,7 +418,16 @@ private:
     QBorder *m_border;
 };
 
-class SettingsModel : public QQuickItem
+class CoreSetting : public QObject
+{
+	Q_OBJECT
+public:
+	CoreSetting(QObject *parent) : QObject(parent) {}
+	Q_INVOKABLE const QString &getEnumColor(int identifier);
+	Q_INVOKABLE const QString &getEnumColum(int identifier);
+};
+
+class SettingsModel : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(dnai::models::QBackground *background READ background WRITE setBackground NOTIFY backgroundChanged)
@@ -429,6 +439,7 @@ class SettingsModel : public QQuickItem
     Q_PROPERTY(dnai::models::QDeclarationView *declarationView READ declarationView WRITE setDeclarationView NOTIFY declarationViewChanged)
     Q_PROPERTY(dnai::models::QFontSettings *font READ font WRITE setFont NOTIFY fontChanged)
     Q_PROPERTY(dnai::models::QTextSettings *text READ text WRITE setText NOTIFY textChanged)
+	Q_PROPERTY(dnai::models::CoreSetting *core READ core WRITE setCore NOTIFY coreChanged)
 
 signals:
     void backgroundChanged(QBackground *b);
@@ -440,6 +451,7 @@ signals:
     void fontChanged(QFontSettings *f);
     void borderChanged(QBorder *);
     void textChanged(QTextSettings *text);
+	void coredChanged(CoreSetting *core);
 
 
 public:
@@ -452,6 +464,7 @@ public:
     QDeclarationView *declarationView() const { return m_declarationView; }
     QFontSettings *font() const { return m_font; }
     QTextSettings *text() const { return m_text;  }
+	CoreSetting *core() const { return m_core; }
 
 public:
     void setBackground(QBackground *b);
@@ -466,7 +479,7 @@ public:
 
 
 public:
-    explicit SettingsModel(QQuickItem *parent = nullptr);
+    explicit SettingsModel(QObject *parent = nullptr);
     ~SettingsModel();
 private:
     QBackground *m_background;
@@ -478,7 +491,7 @@ private:
     QDeclarationView *m_declarationView;
     QFontSettings *m_font;
     QTextSettings *m_text;
-
+	CoreSetting* m_core;
 };
 }
 }

@@ -263,9 +263,6 @@
     <ClCompile Include="src\dnai\settings.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\dnai\models\settingsmodel.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\dnai\solution.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -364,9 +361,6 @@
     <ClInclude Include="include\controllers.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <QtMoc Include="..\lib\core_client\include\core.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
     <ClInclude Include="include\dnai\commands\corecommand.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -724,9 +718,6 @@
     <QtMoc Include="include\dnai\settings.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="include\dnai\models\settingsmodel.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
     <QtMoc Include="include\dnai\solution.h">
       <Filter>Header Files</Filter>
     </QtMoc>
@@ -748,9 +739,6 @@
     <ClInclude Include="include\dnai\models\gui\data\variable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\dnai\models\gui\declarable\variable.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <QtMoc Include="include\dnai\core\variablehandler.h">
       <Filter>Header Files</Filter>
     </QtMoc>
@@ -765,6 +753,9 @@
     </QtMoc>
     <ClInclude Include="include\dnai\commands\zoomcanvascommand.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\core_client\include\core.h">
+      <Filter>Generated Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1307,5 +1298,10 @@
   <ItemGroup>
     <ResourceCompile Include="dnai.rc" />
     <ResourceCompile Include=".\DNAI_resource.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="include\dnai\models\gui\declarable\variable.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
 </Project>

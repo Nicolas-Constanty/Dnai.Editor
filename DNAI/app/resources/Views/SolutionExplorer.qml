@@ -115,7 +115,7 @@ Rectangle {
                 itemDelegate: Item {
                     Image {
                         id: _icon
-                        source: styleData.value.entityType === CoreEnums.CONTEXT ? "../Images/context.png" : styleData.value.entityType === CoreEnums.VARIABLE ? "../Images/variable.png" : styleData.value.entityType === CoreEnums.FUNCTION ? "../Images/function.png" : "../Images/class.png"
+                        source: "../Images/" + AppSettings.getEntityIcon(styleData.value.entityType)
                         height: 12
                         width: 12
                         anchors.verticalCenter: parent.verticalCenter
@@ -145,8 +145,8 @@ Rectangle {
                 style: TreeViewStyle {
                     alternateBackgroundColor : "transparent"
                     backgroundColor : "transparent"
-                    highlightedTextColor : AppSettings.style.text.lightColor
-                    textColor : AppSettings.style.text.color
+                    highlightedTextColor : AppSettings.theme["text"]["lightColor"]
+                    textColor : AppSettings.theme["text"]["color"]
                 }
                 onClicked: {
                     var tab = Editor.selectedView()

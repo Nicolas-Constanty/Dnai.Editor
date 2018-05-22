@@ -17,10 +17,15 @@ namespace dnai
 
 				public:
 					explicit EnumType() = default;
+					const QMap<QString, QJsonValue> &values() const;
+					const QJsonValue &value(QString id) const;
+
 					//Implementation of ISerializable
 					void serialize(QJsonObject& obj) const override;
 				protected:
-					void _deserialize(const QJsonObject& obj) override;
+					virtual void _deserialize(const QJsonObject& obj) override;
+					void setValue(const QString& key, const QJsonValue& value);
+					void setValue(const QPair<QString, QJsonValue> &value);
 				};
 			}
 		}

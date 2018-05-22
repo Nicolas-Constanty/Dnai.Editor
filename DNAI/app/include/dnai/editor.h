@@ -18,11 +18,13 @@ namespace dnai
         Q_OBJECT
         Q_PROPERTY(QStringList visibility READ visibility CONSTANT)
         Q_PROPERTY(QStringList entityType READ entityType CONSTANT)
+		Q_PROPERTY(QStringList varType READ varType CONSTANT)
     public:
         explicit PropertyPanelProperties(QObject *parent = nullptr);
 
         const QStringList &visibility() const;
         const QStringList &entityType() const;
+		const QStringList &varType() const;
 
     private:
         QStringList m_visibility;

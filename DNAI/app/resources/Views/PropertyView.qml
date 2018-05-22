@@ -58,7 +58,7 @@ Rectangle {
                         anchors.right: parent.right
                         anchors.bottom: parent.bottom
                         height: 1
-                        color: AppSettings.style.border.color
+                        color: AppSettings.theme["border"]["color"]
                     }
                     Component.onCompleted: {
                         propertiesName.rectangleHeight = labelText.height
@@ -83,7 +83,7 @@ Rectangle {
                         anchors.right: parent.right
                         anchors.bottom: parent.bottom
                         height: 1
-                        color: AppSettings.style.border.color
+                        color: AppSettings.theme["border"]["color"]
                     }
                     Component.onCompleted: {
                         var obj
@@ -104,6 +104,18 @@ Rectangle {
                             Factory.createObjects("resources/Components/EnumComponent.qml",
                                                   {
                                                       "model" : Editor.propertyPanelProperties.entityType,
+                                                      "modelIndex" : index,
+                                                      "modelItem" : model.item
+                                                  }, value)
+                            obj = Factory.getObject()
+                            obj.currentIndex = model.value
+                            obj.anchors.fill = value
+                        }
+                        else if (model.name === "varType")
+                        {
+                            Factory.createObjects("resources/Components/EnumComponent.qml",
+                                                  {
+                                                      "model" : Editor.propertyPanelProperties.varType,
                                                       "modelIndex" : index,
                                                       "modelItem" : model.item
                                                   }, value)
@@ -151,20 +163,20 @@ Rectangle {
 //        frameVisible: false
 //        headerVisible: false
 //        style: TableViewStyle {
-//            backgroundColor :  AppSettings.style.background.darkColor
-//            alternateBackgroundColor:  AppSettings.style.background.darkColor
-//            highlightedTextColor: AppSettings.style.background.color
-//            textColor : AppSettings.style.text.color
+//            backgroundColor :  AppSettings.theme["background"]["darkColor"]
+//            alternateBackgroundColor:  AppSettings.theme["background"]["darkColor"]
+//            highlightedTextColor: AppSettings.theme["background"]["color"]
+//            textColor : AppSettings.theme["text"]["color"]
 //        }
 //            itemDelegate: Rectangle {
-//                color: AppSettings.style.background.darkColor
+//                color: AppSettings.theme["background"]["darkColor"]
 //                // TODO Improve this declaration with javascript creation ?
 //                EditableText {
 //                    id: editText
 //                    visible: styleData.column === 1 && typeof(styleData.value) === "string"
 //                    text: styleData.value
 //                    focus: true
-//                    color: AppSettings.style.text.color
+//                    color: AppSettings.theme["text"]["color"]
 //                    onAccepted: {
 //                        propertyView.model.model().setProp(styleData.row, editText.text)
 //                    }
@@ -182,7 +194,7 @@ Rectangle {
 //                       bottom: parent.bottom
 //                   }
 //                   width: 1
-//                   color: AppSettings.style.border.color
+//                   color: AppSettings.theme["border"]["color"]
 //                }
 //                Rectangle {
 //                    y: -1
@@ -192,7 +204,7 @@ Rectangle {
 //                        bottom: parent.bottom
 //                    }
 //                    height: 1
-//                    color: AppSettings.style.border.color
+//                    color: AppSettings.theme["border"]["color"]
 //                }
 //            }
 //        Component.onCompleted: {

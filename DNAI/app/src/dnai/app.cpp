@@ -1,8 +1,6 @@
 #include <QQuickWindow>
-#include <QTimer>
-#include <QDir>
 #include <QDirIterator>
-#include <QQmlProperty>
+#include <QFontDatabase>
 
 #include "dnai/app.h"
 #include "dnai/processmanager.h"
@@ -53,9 +51,9 @@ namespace dnai
 
     void App::versionsUpdater() {
 #ifdef Q_OS_MAC
-        QString softwares("mac");
+        const QString softwares("mac");
 #else
-        QString softwares("windows");
+	    const QString softwares("windows");
 #endif
         m_settings->setVersion(DNAI_VERSION_RELEASE);
         m_settings->setAPIVersion(DNAI_VERSION_RELEASE);
@@ -168,7 +166,8 @@ namespace dnai
 		return m_nodeModel;
 	}
 
-    ProcessManager *App::processManager() {
+    ProcessManager *App::processManager() const
+    {
         return m_processManager;
     }
 
@@ -231,18 +230,22 @@ namespace dnai
 #if defined(_WIN32) && defined(_MSC_VER)
   class CustomHandler : public IWinToastHandler {
   public:
-      void toastActivated() const {
+      void toastActivated() const override
+      {
           std::wcout << L"The user clicked in this toast" << std::endl;
       }
 
-      void toastActivated(int actionIndex) const {
+      void toastActivated(int actionIndex) const override
+      {
           std::wcout << L"The user clicked on button #" << actionIndex << L" in this toast" << std::endl;
       }
 
-      void toastFailed() const {
+      void toastFailed() const override
+      {
           std::wcout << L"Error showing current toast" << std::endl;
       }
-      void toastDismissed(WinToastDismissalReason state) const {
+      void toastDismissed(WinToastDismissalReason state) const override
+      {
           switch (state) {
           case UserCanceled:
               std::wcout << L"The user dismissed this toast" << std::endl;

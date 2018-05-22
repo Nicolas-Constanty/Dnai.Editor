@@ -16,22 +16,22 @@ Rectangle {
     default property alias _contentChildren: _content.data
     property real initialheight: 40
 
-    border.color: AppSettings.style.border.color
-    border.width: AppSettings.style.border.width
-    color: AppSettings.style.background.darkColor
+    border.color: AppSettings.theme["border"]["color"]
+    border.width: AppSettings.theme["border"]["width"]
+    color: AppSettings.theme["background"]["darkColor"]
     clip: true
     Rectangle {
         id: _header
         clip: true
-        color: AppSettings.style.background.color
+        color: AppSettings.theme["background"]["color"]
         height: _title.implicitHeight * 1.2
         width: parent.width
         anchors.top: parent.top
         anchors.left: parent.left
         anchors.right: parent.right
-        anchors.leftMargin: AppSettings.style.border.width
-        anchors.rightMargin: AppSettings.style.border.width
-        anchors.topMargin: AppSettings.style.border.width
+        anchors.leftMargin: AppSettings.theme["border"]["width"]
+        anchors.rightMargin: AppSettings.theme["border"]["width"]
+        anchors.topMargin: AppSettings.theme["border"]["width"]
         TitlePanel {
             id: _title
             text: qsTr(_panel.title)
@@ -72,9 +72,9 @@ Rectangle {
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.topMargin: 5
-        anchors.leftMargin: AppSettings.style.border.width
-        anchors.rightMargin: AppSettings.style.border.width
-        anchors.bottomMargin: AppSettings.style.border.width
+        anchors.leftMargin: AppSettings.theme["border"]["width"]
+        anchors.rightMargin: AppSettings.theme["border"]["width"]
+        anchors.bottomMargin: AppSettings.theme["border"]["width"]
     }
 
     states: [

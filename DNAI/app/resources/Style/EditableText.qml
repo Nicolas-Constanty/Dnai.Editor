@@ -5,18 +5,18 @@ TextInput {
     id: control
     property string placeholderText: "Enter text here..."
 
-    font.family: AppSettings.style.font.family
-    font.pointSize: AppSettings.style.font.pixelSize
+    font.family: AppSettings.theme["font"]["family"]
+    font.pointSize: AppSettings.theme["font"]["pixelSize"]
     horizontalAlignment: Qt.AlignHCenter
     verticalAlignment: Qt.AlignVCenter
-    color: AppSettings.style.text.color
+    color: AppSettings.theme["text"]["color"]
     selectByMouse: true
 
     MText {
         anchors.fill: parent
         text: control.placeholderText
-        font.pointSize: AppSettings.style.font.pixelSize
-        color: AppSettings.style.text.disableColor
+        font.pointSize: AppSettings.theme["font"]["pixelSize"]
+        color: AppSettings.theme["text"]["disableColor"]
         font.italic: true
         visible: !control.text
     }

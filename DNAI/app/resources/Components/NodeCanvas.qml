@@ -17,17 +17,17 @@ CanvasNode {
     property var nodeModel: null
     clip: true
 //    anchors.fill: parent
-    backgroundColor: AppSettings.style.canvas.background
-    gridStep: AppSettings.style.canvas.grid.step
-    gridColor: AppSettings.style.canvas.grid.color
-    accentGridStep: AppSettings.style.canvas.grid.accentStep
-    accentGridColor: AppSettings.style.canvas.grid.accentColor
+    backgroundColor: AppSettings.theme["canvas"]["background"]
+    gridStep: AppSettings.theme["canvas"]["grid"]["step"]
+    gridColor: AppSettings.theme["canvas"]["grid"]["color"]
+    accentGridStep: AppSettings.theme["canvas"]["grid"]["accentStep"]
+    accentGridColor: AppSettings.theme["canvas"]["grid"]["accentColor"]
     states: [
         State {
             when: dragTarget.containsDrag
             PropertyChanges {
                 target: canvas
-                backgroundColor: AppSettings.style.canvas.grid.selectColor
+                backgroundColor: AppSettings.theme["canvas"]["grid"]["selectColor"]
             }
         }
     ]

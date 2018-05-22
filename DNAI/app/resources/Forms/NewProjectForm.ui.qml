@@ -25,7 +25,7 @@ Page {
     id: _page
 
     background: Rectangle {
-        color: AppSettings.style.background.color
+        color: AppSettings.theme["background"]["color"]
     }
 
     header: TabBar {
@@ -36,11 +36,11 @@ Page {
                 text: qsTr("Create a Solution")
             }
             background: Rectangle {
-                color: AppSettings.style.background.color
+                color: AppSettings.theme["background"]["color"]
             }
         }
         background: Rectangle {
-            color: AppSettings.style.background.color
+            color: AppSettings.theme["background"]["color"]
         }
     }
     FileDialog {
@@ -178,7 +178,7 @@ Page {
             rightPadding: 20
             contentItem: Text {
                 text: qsTr("Cancel")
-                color: AppSettings.style.text.color
+                color: AppSettings.theme["text"]["color"]
                 horizontalAlignment: Text.AlignHCenter
                 verticalAlignment: Text.AlignVCenter
             }
@@ -192,7 +192,7 @@ Page {
             rightPadding: 20
             contentItem: Text {
                 text: qsTr("Create")
-                color: AppSettings.style.text.color
+                color: AppSettings.theme["text"]["color"]
                 horizontalAlignment: Text.AlignHCenter
                 verticalAlignment: Text.AlignVCenter
             }

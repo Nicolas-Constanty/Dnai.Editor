@@ -12,13 +12,13 @@ namespace dnai
 	{
         Entity::Entity() : IModel(nullptr), m_dataCore(nullptr), m_dataGUI(nullptr)
         {
-			const QList<QString> props = {
-				"name",
-				"description",
-				"visibility",
-                "entityType"
+			const QList<QPair<QObject *, QString>> props = {
+				{ this, "name"},
+				{ this, "description"},
+				{ this, "visibility"},
+				{ this, "entityType"}
 			};
-			m_editableProperty = new Property(this, props);
+			m_editableProperty = new Property(props);
         }
 
         Entity::Entity(gcore::Entity *coremodel, Entity *parent, interfaces::IEntity *guimodel) :
@@ -26,13 +26,13 @@ namespace dnai
             m_dataCore(coremodel),
             m_dataGUI(guimodel)
         {
-			const QList<QString> props = {
-				"name",
-				"description",
-				"visibility",
-                "entityType"
+			const QList<QPair<QObject *, QString>> props = {
+				{ this, "name" },
+				{ this, "description" },
+				{ this, "visibility" },
+				{ this, "entityType" }
 			};
-			m_editableProperty = new Property(this, props);
+			m_editableProperty = new Property(props);
         }
 
 		Entity::~Entity()
@@ -287,6 +287,7 @@ namespace dnai
             case ::core::ENTITY::VARIABLE:
             {
                 m_dataGUI = gui::declarable::Variable::deserialize(obj);
+                m_editableProperty->addProperty(dynamic_cast<gui::declarable::Variable*>(m_dataGUI), "varType");
                 break;
             }
             case ::core::ENTITY::FUNCTION:

@@ -26,8 +26,8 @@ Panel {
                 }
                 background: Rectangle {
                     id: back
-                    color: button.pressed ? AppSettings.style.background.darkColor : button.hovered ? AppSettings.style.background.lightColor : "transparent"
-                    border.color: AppSettings.style.border.color
+                    color: button.pressed ? AppSettings.theme["background"]["darkColor"] : button.hovered ? AppSettings.theme["background"]["lightColor"] : "transparent"
+                    border.color: AppSettings.theme["border"]["color"]
                 }
                 onClicked: {
 //                    Manager.views.treeView().changeCurrent(model.modelData.model)
@@ -43,8 +43,8 @@ Panel {
                 }
                 background: Rectangle {
                     id: back1
-                    color: button1.pressed ? AppSettings.style.background.darkColor : button1.hovered ? AppSettings.style.background.lightColor : "transparent"
-                    border.color: AppSettings.style.border.color
+                    color: button1.pressed ? AppSettings.theme["background"]["darkColor"] : button1.hovered ? AppSettings.theme["background"]["lightColor"] : "transparent"
+                    border.color: AppSettings.theme["border"]["color"]
                 }
                 visible: model.modelData.asChild
             }

@@ -34,7 +34,7 @@ namespace dnai {
         views::AppView &appView() const;
 	    QQmlApplicationEngine &engine();
         models::BasicNodeModel *nodes() const;
-        ProcessManager *processManager();
+        ProcessManager *processManager() const;
         Editor &editor() const;
 
     public:

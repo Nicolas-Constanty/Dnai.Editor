@@ -8,6 +8,28 @@
         "color": "#757575",
         "width": 1
     },
+    "entities" : {
+        "context" : {
+            "color" : "#00897B",
+            "icon" : "context.png"
+        },
+        "object_type" : {
+            "color" : "#039BE5",
+            "icon" : "class.png"
+        },
+        "enum_type" : {
+            "color" : "#00D098",
+            "icon" : "enum.png"
+        },
+        "function" : {
+            "color" : "#8E24AA",
+            "icon" : "function.png"
+        },
+        "variable" : {
+            "color" : "#FB8C00",
+            "icon" : "variable.png"
+        }
+    },
     "menu": {
         "background": {
             "color" : "#424242",

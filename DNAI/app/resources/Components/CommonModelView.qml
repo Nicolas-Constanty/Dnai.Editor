@@ -16,7 +16,7 @@ Rectangle {
     implicitHeight: 40
     width: parent.parent.width
     height: 40
-    color: AppSettings.style.background.color
+    color: AppSettings.theme["background"]["color"]
     MouseArea {
         anchors.fill: parent;
         onClicked: {
@@ -108,7 +108,7 @@ Rectangle {
         implicitWidth: parent.width * 0.04
         indicator: Rectangle {
             anchors.fill: _selectButton
-            color: (modelData.entityType === CoreEnums.CONTEXT) ? "#00897B" : (modelData.entityType === CoreEnums.OBJECT_TYPE) ?  "#039BE5" : (modelData.entityType === CoreEnums.FUNCTION) ? "#8E24AA" : "#FB8C00"
+            color: AppSettings.getEntityColor(modelData.entityType)
             FontAwesomeText {
                 anchors.fill: parent
                 text: "\uf00c"
@@ -212,16 +212,16 @@ Rectangle {
     FontAwesomeButton {
         id: _openbutton
         visible: modelData.entityType === CoreEnums.FUNCTION
-
         anchors.right: _itemview.right
         anchors.top: _itemview.top
         anchors.bottom: _itemview.bottom
         width: 40
         text: "\uf35d"
         font.pointSize: 15
-        color: _openbutton.hovered ? AppSettings.style.text.color : "#80DEEA"
+        color: _openbutton.hovered ? AppSettings.theme["text"]["color"] : "#80DEEA"
         background: Rectangle {
-            color: _openbutton.hovered ? "#8080DEEA" : AppSettings.style.background.color
+            id: _openbuttonBack
+            color: _openbutton.hovered ? "#8080DEEA" : AppSettings.theme["background"]["color"]
         }
         Rectangle {
             color: "transparent"
@@ -286,14 +286,14 @@ Rectangle {
             anchors.right: parent.right
             visible: _expandbutton.state === "Expand"
             text: qsTr(modelData.description)
-            color: AppSettings.style.text.color
+            color: AppSettings.theme["text"]["color"]
             wrapMode: TextEdit.WordWrap
             selectByMouse: true
             font.italic: true
             placeholderText: "comment..."
             background: Rectangle {
-                color: AppSettings.style.menu.background.darkColor
-                border.color: AppSettings.style.background.lightColor
+                color: AppSettings.theme["menu"]["background"]["darkColor"]
+                border.color: AppSettings.theme["background"]["lightColor"]
             }
         }
     }

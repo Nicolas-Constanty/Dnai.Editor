@@ -27,7 +27,7 @@ TabButton {
             anchors.right: parent.right
             contentItem: Text {
                 text: qsTr("\uf057")
-                color: _button.hovered ? "#C62828" : AppSettings.style.background.darkColor
+                color: _button.hovered ? "#C62828" : AppSettings.theme["background"]["darkColor"]
                 font.family: "Font Awesome 5 Free Solid"
             }
             background: Item {}
@@ -49,8 +49,8 @@ TabButton {
         implicitHeight: 40
         height: implicitHeight
         antialiasing: true
-        color: _control.checked ? AppSettings.style.background.color : "transparent"
-        border.color: AppSettings.style.border.color
+        color: _control.checked ? AppSettings.theme["background"]["color"] : "transparent"
+        border.color: AppSettings.theme["border"]["color"]
         border.width: 1
     }
 }

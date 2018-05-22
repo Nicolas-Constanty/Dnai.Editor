@@ -27,10 +27,10 @@ ExpendablePanel {
             role: "name"
         }
         style: TreeViewStyle {
-            alternateBackgroundColor : AppSettings.style.background.darkColor
-            backgroundColor : AppSettings.style.background.darkColor
-            highlightedTextColor : AppSettings.style.text.lightColor
-            textColor : AppSettings.style.text.color
+            alternateBackgroundColor : AppSettings.theme["background"]["darkColor"]
+            backgroundColor : AppSettings.theme["background"]["darkColor"]
+            highlightedTextColor : AppSettings.theme["text"]["lightColor"]
+            textColor : AppSettings.theme["text"]["color"]
         }
         onClicked: {
             Manager.views.updateNamespace(index)

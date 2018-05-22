@@ -134,18 +134,6 @@ static void registerViews()
 static void registerModels()
 {
 #define qmlRegisterModels(type, name) qmlRegisterType<type>("DNAI.Models", 1, 0, name)
-    qmlRegisterModels(dnai::models::SettingsModel, "SettingsModel");
-    qmlRegisterModels(dnai::models::QCanvas, "QCanvas");
-    qmlRegisterModels(dnai::models::QGrid, "QGrid");
-    qmlRegisterModels(dnai::models::QBorder, "QBorder");
-    qmlRegisterModels(dnai::models::QNode, "QNode");
-    qmlRegisterModels(dnai::models::QNodes, "QNodes");
-    qmlRegisterModels(dnai::models::QDeclaration, "QDeclaration");
-    qmlRegisterModels(dnai::models::QDeclarationView, "QDeclarationView");
-    qmlRegisterModels(dnai::models::QTextSettings, "QTextSettings");
-    qmlRegisterModels(dnai::models::QFontSettings, "QFontSettings");
-    qmlRegisterModels(dnai::models::MenuSettings, "MenuSettings");
-    qmlRegisterModels(dnai::models::QBackground, "QBackground");
     qmlRegisterModels(dnai::models::User, "User");
     qmlRegisterModels(dnai::models::BasicNodeModel, "BasicNodeModel");
     qmlRegisterModels(dnai::models::ListNode, "ListNode");

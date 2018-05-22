@@ -29,7 +29,7 @@ ColumnLayout {
             anchors.fill: parent
             verticalAlignment: Text.AlignVCenter
             horizontalAlignment: Text.AlignHCenter
-            color: AppSettings.style.text.color
+            color: AppSettings.theme["text"]["color"]
         }
     }
 
@@ -70,8 +70,8 @@ ColumnLayout {
             font.weight: Font.Medium
             horizontalAlignment: Text.AlignHCenter
             font.pixelSize: 12
-            color: AppSettings.style.text.color
-            linkColor: AppSettings.style.text.linkColor
+            color: AppSettings.theme["text"]["color"]
+            linkColor: AppSettings.theme["text"]["linkColor"]
             MouseArea {
                 id: forgetPasswordLink
                 anchors.fill: parent
@@ -95,7 +95,7 @@ ColumnLayout {
             Layout.fillWidth: true
             font.weight: Font.Medium
             font.pixelSize: 12
-            color: AppSettings.style.text.color
+            color: AppSettings.theme["text"]["color"]
         }
 
         Text {
@@ -107,8 +107,8 @@ ColumnLayout {
             font.capitalization: Font.Capitalize
             font.weight: Font.Medium
             font.pixelSize: 12
-            color: AppSettings.style.text.color
-            linkColor: AppSettings.style.text.linkColor
+            color: AppSettings.theme["text"]["color"]
+            linkColor: AppSettings.theme["text"]["linkColor"]
             MouseArea {
                 id: createAccount
                 anchors.fill: parent

@@ -82,6 +82,9 @@ namespace dnai
             case ::core::ENTITY::FUNCTION:
                 guidata = new models::gui::declarable::Function();
                 break;
+            case ::core::ENTITY::ENUM_TYPE:
+                guidata = new models::gui::declarable::EnumType();
+                break;
             default:
                 return nullptr;
             }

@@ -12,8 +12,9 @@ FontAwesomeButton {
     label.topPadding: _decoration.implicitHeight / 2
     label.color: _control.hovered ? "#80ffffff" : "#8000000"
     background: Rectangle {
+        id: background
         implicitHeight: 30
-        color: _control.hovered ?  AppSettings.style.background.darkColor : AppSettings.style.background.color
+        color: _control.hovered ?  AppSettings.theme["background"]["darkColor"] : AppSettings.theme["background"]["color"]
         Rectangle {
             id: _decoration
             anchors.top: parent.top

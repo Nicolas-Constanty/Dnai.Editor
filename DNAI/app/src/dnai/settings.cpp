@@ -1,111 +1,147 @@
 #include <QDebug>
-#include <QQuickItem>
-#include <QGuiApplication>
-#include <QJsonDocument>
-#include <QJsonObject>
 
 #include "dnai/app.h"
 #include "dnai/api/api.h"
 #include "dnai/settings.h"
+#include "dnai/exceptions/exceptionmanager.h"
+#include "dnai/exceptions/guiexception.h"
 
 namespace dnai
 {
-    AppSettings::AppSettings(QObject* parent) : QObject(parent), m_settings(), m_apiSettings("apiSettings", QSettings::IniFormat)
+    AppSettings::AppSettings(QObject* parent) : QObject(parent),
+	 m_apiSettings("apiSettings", QSettings::IniFormat)
     {
 #ifdef QT_DEBUG
         m_settings.clear();
 #endif
-        m_style = new models::SettingsModel(nullptr);
-		const auto theme = m_settings.value("themes/current/theme").toString();
+		const auto theme = m_settings.value("themes/selected").toString();
         m_isInit = theme != "";
-        static_cast<App *>(App::instance())->registerSettings(this);
+	    dynamic_cast<App *>(App::instance())->registerSettings(this);
 	}
 
 	AppSettings::~AppSettings()
 	{
-        delete m_style;
         qDebug() << "~" << "AppSetting";
 	}
-
-    void AppSettings::setStyle(models::SettingsModel* m)
+	
+	void AppSettings::init()
 	{
-		if (m == m_style)
-			return;
-		m_style = m;
-		emit styleChanged(m);
+		const auto defaultPath = m_settings.value("themes/selected").toString();
+
+		const auto path = QGuiApplication::applicationDirPath() + "/settings/themes";
+		QDir dir(path);
+
+		const auto themePaths = dir.entryList(QDir::Files);
+		for (const auto& themePath : themePaths)
+		{
+			const auto f = QFileInfo(themePath);
+			const auto basename = f.baseName();
+			m_themes.append(basename);
+			m_themesPath[basename] = dir.absoluteFilePath(themePath);
+			const auto settingPath = "themes/" + basename;
+			if (m_settings.value(settingPath).toString().isEmpty())
+			{
+				loadFromJson(m_themesPath[basename]);
+				m_settings.setValue(settingPath, m_theme);
+			}
+		}
+		m_isInit = defaultPath != "";
+		if (!m_isInit && m_themes.count() != 0)
+		{
+			loadFromJson(m_themesPath[m_themes[0]]);
+		}
+		else {
+			loadFromJson(m_themesPath[defaultPath]);
+		}
+
+		QVariant value = m_apiSettings.value(api::settings_key);
+		//  qDebug() << value.value<api::User>().id;
+		api::setUser(value.value<api::User>());
+		qDebug() << "API ID: " << api::getId();
 	}
 
-    QString AppSettings::currentTheme()
+	void AppSettings::loadFromJson(const QString &path)
     {
-        return m_settings.value("themes/current/theme").toString();
+		auto file = new QFile(path);
+
+		if (!file->open(QIODevice::ReadOnly)) {
+			qWarning("Couldn't open file.");
+			return;
+		}
+
+		const QByteArray data = file->readAll();
+
+		try {
+			const QJsonObject obj(QJsonDocument::fromJson(data).object());
+			m_theme = obj.toVariantMap();
+		}
+		catch (std::exception &e) {
+			Q_UNUSED(e)
+			exceptions::ExceptionManager::throwException(exceptions::GuiExeption("Error : Corrupted file"));
+			qWarning("Couldn't parse file.");
+		}
+		file->close();
     }
+
+	const QVariantMap& AppSettings::theme() const
+	{
+		return m_theme;
+	}
+
+	void AppSettings::setTheme(const QVariantMap& map)
+	{
+		m_theme = map;
+		emit themeChanged(map);
+	}
+
+	QString AppSettings::currentTheme() const
+	{
+        return m_settings.value("themes/selected").toString();
+    }
+
+	QString AppSettings::getEntityColor(int identifier) const
+	{
+		const auto id = static_cast<core::ENTITY>(identifier);
+		const auto json = QJsonObject::fromVariantMap(m_theme);
+		switch (id)
+		{
+		case ENTITY::UNDEFINED: return "";
+		case ENTITY::CONTEXT: return json["entities"].toObject()["context"].toObject()["color"].toString();
+		case ENTITY::VARIABLE: return json["entities"].toObject()["variable"].toObject()["color"].toString();
+		case ENTITY::FUNCTION: return json["entities"].toObject()["function"].toObject()["color"].toString();
+		case ENTITY::DATA_TYPE: return json["entities"].toObject()["data_type"].toObject()["color"].toString();
+		case ENTITY::ENUM_TYPE: return json["entities"].toObject()["enum_type"].toObject()["color"].toString();
+		case ENTITY::OBJECT_TYPE: return json["entities"].toObject()["object_type"].toObject()["color"].toString();
+		case ENTITY::LIST_TYPE: return json["entities"].toObject()["list_type"].toObject()["color"].toString();
+		default: ;
+		}
+		return "";
+	}
+
+	QString AppSettings::getEntityIcon(int identifier) const
+	{
+		const auto id = static_cast<core::ENTITY>(identifier);
+		const auto json = QJsonObject::fromVariantMap(m_theme);
+		switch (id)
+		{
+		case ENTITY::UNDEFINED: return "";
+		case ENTITY::CONTEXT: return json["entities"].toObject()["context"].toObject()["icon"].toString();
+		case ENTITY::VARIABLE: return json["entities"].toObject()["variable"].toObject()["icon"].toString();
+		case ENTITY::FUNCTION: return json["entities"].toObject()["function"].toObject()["icon"].toString();
+		case ENTITY::DATA_TYPE: return json["entities"].toObject()["data_type"].toObject()["icon"].toString();
+		case ENTITY::ENUM_TYPE: return json["entities"].toObject()["enum_type"].toObject()["icon"].toString();
+		case ENTITY::OBJECT_TYPE: return json["entities"].toObject()["object_type"].toObject()["icon"].toString();
+		case ENTITY::LIST_TYPE: return json["entities"].toObject()["list_type"].toObject()["icon"].toString();
+		default:;
+		}
+		return "";
+	}
 
 	void AppSettings::loadTheme(const QString&path)
 	{
-		m_loadedColors.clear();
-		m_loadedNumbers.clear();
-        QFile file(m_themesPath[path]);
-
-        if (!file.open(QIODevice::ReadOnly)) {
-            return;
-        }
-
-		const auto data = file.readAll();
-        file.close();
-		const auto obj(QJsonDocument::fromJson(data).object());
-		const auto pair = findObject(obj, "");
-		const auto loadThemeName = "themes/" + path;
-		const auto currentThemeName = "themes/current";
-		for (auto i = 0; i < pair.first.count(); i++)
-		{
-			const auto key = pair.first[i];
-            const auto value = pair.second[i];
-			if (!m_isInit)
-			{
-                m_settings.setValue(currentThemeName + key, value);
-				m_settings.setValue(loadThemeName + key, value);
-            }
-			if (m_style)
-			{
-                updateProperty(key.mid(1), value);
-			}
-        }
-        const auto qpath = QVariant::fromValue(path);
-        m_settings.setValue("themes/current/theme", qpath);
-	}
-
-	void AppSettings::init()
-    {
-		const auto theme = m_settings.value("themes/current/theme").toString();
-
-#ifdef Q_OS_MAC
-    QString path = QGuiApplication::applicationDirPath() + "/settings/themes";
-#else
-    QString path = QGuiApplication::applicationDirPath() + "/settings/themes";
-#endif
-        QDir dir(path);
-
-        const auto list = dir.entryList(QDir::Files);
-		for (auto i = list.begin(); i!= list.end(); ++i)
-		{
-			const auto f = QFileInfo(*i);
-            const auto basename = f.baseName();
-			m_themes.append(basename);
-            m_themesPath[basename] = dir.absoluteFilePath(*i);
-		}
-        m_isInit = theme != "";
-		if (!m_isInit && m_themes.count() != 0)
-        {
-			loadTheme(m_themes[0]);
-		}
-        else {
-            loadTheme(theme);
-        }
-
-        QVariant value = m_apiSettings.value(api::settings_key);
-      //  qDebug() << value.value<api::User>().id;
-        api::setUser(value.value<api::User>());
-        qDebug() << "API ID: " << api::getId();
+		loadFromJson(m_themesPath[path]);
+		m_settings.setValue("themes/selected", path);
+		emit themeChanged(m_theme);
 	}
 
 	QStringList AppSettings::getThemes() const
@@ -117,38 +153,6 @@ namespace dnai
 	{
 		return m_isInit;
     }
-
-	void AppSettings::updateProperty(const QString &path, const QVariant &variant)
-	{
-		const auto pair = getFinalProperty(m_style, path);
-        QFontDatabase database;
-		QString family = "";
-
-		if (pair.second == "family")
-		{
-            for (auto i = 0; i < m_families.count(); i++)
-            {
-                if (database.hasFamily(m_families[i]))
-                    family = m_families[i];
-            }
-            if (family == "")
-            {
-                const auto id = QFontDatabase::addApplicationFont(variant.toString());
-                family = QFontDatabase::applicationFontFamilies(id).at(0);
-                m_families.append(family);
-            }
-            pair.first->setProperty(pair.second.toLatin1().data(), family);
-		}
-		else
-        {
-			pair.first->setProperty(pair.second.toLatin1().data(), variant);
-		}
-	}
-
-    void AppSettings::registerStyle(models::SettingsModel *style)
-	{
-		m_style = style;
-	}
 
     bool AppSettings::isNewVersionAvailable() const {
         QStringList currentVersionList = Editor::instance().version().split('.');
@@ -163,27 +167,6 @@ namespace dnai
         }
         return false;
     }
-
-	QPair<QQuickItem*, QString> AppSettings::getFinalProperty(QQuickItem *item, const QString &path) const
-	{
-		QPair<QQuickItem*, QString> pair;
-        auto list = path.split("/");
-        QByteArray *qb = new QByteArray(list[0].toLatin1());
-        if (list.count() > 1)
-        {
-            const auto newPath = path.section('/', 1, -1);
-            const auto prop = item->property(qb->constData());
-            item = qvariant_cast<QQuickItem *>(prop);
-            pair = getFinalProperty(item, newPath);
-        }
-        else
-        {
-            pair.first = item;
-			pair.second = list[0];
-            return pair;
-        }
-		return pair;
-	}
 
 	qreal AppSettings::getSettingNumber(const QString &path)
 	{
@@ -223,27 +206,6 @@ namespace dnai
         }
     }
 
-	QPair<QStringList, QList<QVariant>> AppSettings::findObject(QJsonObject obj, const QString root)
-	{
-		QPair<QStringList, QList<QVariant>> pair;
-		for (auto it = obj.begin(); it != obj.end(); ++it) {
-			const auto key = it.key();
-			const auto value = it.value();
-
-			if (value.isObject())
-			{
-				const auto p = findObject(value.toObject(), root + "/" + key);
-				pair.first.append(p.first);
-				pair.second.append(p.second);
-			}
-			else
-			{
-				pair.first.append(root + "/" + key);
-				pair.second.append(value.toVariant());
-			}
-		}
-		return pair;
-	}
     void AppSettings::setValue(const QString &path, const QVariant &value)
     {
         m_settings.setValue(path, value);
