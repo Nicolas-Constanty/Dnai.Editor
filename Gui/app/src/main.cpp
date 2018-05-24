@@ -6,7 +6,7 @@
 #include "dnai/core/handlermanager.h"
 
 #if defined(_WIN32) && defined(_MSC_VER)
-#include "../../lib/WinToast/wintoastlib.h"
+#include "../../lib/lwintoast/wintoastlib.h"
 using namespace WinToastLib;
 #endif
 

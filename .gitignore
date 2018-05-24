@@ -61,3 +61,5 @@ DNAI/lib/event_client/x64/Debug/
 DNAI/app/GeneratedFiles/
 
 *.bsc
+
+Gui/app/GeneratedFiles/

@@ -302,7 +302,7 @@ HEADERS += \
     include/exceptions.h \
     include/interfaces.h \
     include/dnai/core/handlermanager.h \
-    $${PWD}/../lib/core_client/include/core.h \
+    $${PWD}/../lib/lcore_client/include/core.h \
     include/dnai/toastermanagerservice.h \
     include/dnai/views/toast.h \
     include/dnai/models/property.h
@@ -310,11 +310,11 @@ HEADERS += \
 
 #LIB
 DEPENDPATH += $${PWD}/../lib/
-INCLUDEPATH += $${PWD}/../lib/core_client/include/
+INCLUDEPATH += $${PWD}/../lib/lcore_client/include/
 
 win32-msvc*{
-    DEPENDPATH += $${PWD}/../lib/WinToast/
-    LIBS += -lWinToast
+    DEPENDPATH += $${PWD}/../lib/lwintoast/
+    LIBS += -lwintoast
 } win32-g++ {
 } macx-clang* {
 #QT += core
@@ -328,7 +328,7 @@ win32-msvc*{
 
 
 #begin library network
-LIBS += -L$${PWD}/../lib/ -lCoreClient -lEventClient -lCerealization
+LIBS += -L$${PWD}/../lib/ -lcore_client -levent_client -lcerealization
 
 #-lDataComEvent
 
