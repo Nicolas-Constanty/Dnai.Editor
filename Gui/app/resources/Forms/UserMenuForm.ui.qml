@@ -1,9 +1,11 @@
 import QtQuick 2.4
+
 import DNAI 1.0
 
 import "../Controls"
 import "../Components"
 import "../Style"
+import Dnai.FontAwesome 1.0
 
 Item {
     id: root
@@ -48,7 +50,7 @@ Item {
         visible: imgSrc != ""
     }
 
-    FontAwesomeTextSolid {
+    TextAwesomeSolid {
         anchors.right: parent.right
         width: parent.height
         height: parent.height

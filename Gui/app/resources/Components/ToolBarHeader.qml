@@ -3,7 +3,9 @@ import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
 import QtQuick.Dialogs 1.2
 import QtQuick.Window 2.2
+
 import DNAI 1.0
+import Dnai.FontAwesome 1.0
 
 import "../Panels"
 import "../Controls"
@@ -370,7 +372,7 @@ ToolBar {
         property int status: 0
         id: _buildButton
         anchors.centerIn: parent
-        background: FontAwesomeTextSolid {
+        background: TextAwesomeSolid {
             text: "\uf013"
             font.pointSize: 18
             color: _buildButton.hovered ? "#FFFFFFFF" : _buildButton.status === 0 ? "#FF606060" : _buildButton.status === 1 ? "#FF8BC34A" : _buildButton.status === 2 ? "#F44336" : "#FFC107"

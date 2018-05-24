@@ -1,28 +1,16 @@
 TEMPLATE = subdirs
 CONFIG += object_parallel_to_source
 
-SUBDIRS = app libReseau libCerealization libCoreClient
+SUBDIRS = app qtplugins lib
 
-app.file = app/dnai_app.pro
-libReseau.file = lib/levent_client/levent_client.pro
-libCerealization.file = lib/lcerealization/lcerealization.pro
-libCoreClient.file = lib/lcore_client/lcore_client.pro
+app.file = app/app.pro
+lib.file = lib/lib.pro
 
-libCoreClient.depends = libReseau libCerealization
+qtplugins.file = plugins/plugins.pro
 
-win32-msvc* {
-    SUBDIRS += notiflib
-    notiflib.file = lib/lwintoast/lwintoast.pro
-    app.depends = notiflib libCoreClient
-}
-macx-clang* {
-    SUBDIRS += notifmac
-    notifmac.file = lib/lmactoast/lmactoast.pro
-    app.depends = notifmac libCoreClient
-}
 win32-g++ {
-    app.depends = libCoreClient
+    app.depends = qtplugins lib
 }
 unix:!macx {
-    app.depends = libCoreClient
+    app.depends = qtplugins lib
 }

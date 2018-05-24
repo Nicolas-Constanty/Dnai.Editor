@@ -8,6 +8,7 @@ import DNAI.Models 1.0
 import DNAI.Enums 1.0
 
 import DNAI.Core 1.0
+import Dnai.FontAwesome 1.0
 
 import "../Style"
 import "../Components"
@@ -35,7 +36,7 @@ Item {
                 anchors.right: _commentbutton.left
                 placeholderText: "Section Title ..."
             }
-            FontAwesomeButton {
+            ButtonAwesome {
                 id: _commentbutton
                 text: "\uf27a"
                 label.font.pointSize: 14
@@ -93,7 +94,7 @@ Item {
                     anchors.bottom: parent.bottom
                     text: (selectCount > 1) ? selectCount + qsTr(" items selected") : selectCount + qsTr(" item selected")
                 }
-                FontAwesomeButton {
+                ButtonAwesome {
                     id: _deletebutton
                     anchors.right: parent.right
                     anchors.top: parent.top

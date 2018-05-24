@@ -5,6 +5,8 @@ import QtGraphicalEffects 1.0
 import DNAI 1.0
 import DNAI.Models 1.0
 import DNAI.Enums 1.0
+import Dnai.FontAwesome 1.0
+
 import "../Style"
 import "../JavaScript/CreateComponent.js" as Factory
 
@@ -109,14 +111,14 @@ Rectangle {
         indicator: Rectangle {
             anchors.fill: _selectButton
             color: AppSettings.getEntityColor(modelData.entityType)
-            FontAwesomeText {
+            TextAwesome {
                 anchors.fill: parent
                 text: "\uf00c"
                 font.pointSize: 15
                 visible: _selectButton.checked
                 color: "#99000000"
             }
-            FontAwesomeButton {
+            LabelAwesome {
                 id: _expandbutton
                 state: "Collapse"
                 states: [
@@ -162,17 +164,20 @@ Rectangle {
                 padding: 0
                 text: state == "Collapse" ? "\uf0dd" : "\uf0d8"
                 color: "#99000000"
-                label.padding: 0
-                label.verticalAlignment: Qt.AlignBottom
-                label.font.pointSize: 10
+                verticalAlignment: Qt.AlignBottom
+                font.pointSize: 10
                 background: Rectangle {
                     color: _expandbutton.hovered ? "#60ffffff" : "transparent"
                 }
-                onClicked: {
-                    if (state === "Collapse")
-                        state = "Expand"
-                    else
-                        state = "Collapse"
+                MouseArea {
+                    id: _expender
+                    anchors.fill: parent
+                    onClicked: {
+                        if (_expandbutton.state === "Collapse")
+                            _expandbutton.state = "Expand"
+                        else
+                            _expandbutton.state = "Collapse"
+                    }
                 }
             }
             Rectangle {
@@ -209,7 +214,7 @@ Rectangle {
                 _itemview.state = "UnSelect"
         }
     }
-    FontAwesomeButton {
+    ButtonAwesome {
         id: _openbutton
         visible: modelData.entityType === CoreEnums.FUNCTION
         anchors.right: _itemview.right

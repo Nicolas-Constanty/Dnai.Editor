@@ -2,6 +2,7 @@ import QtQuick 2.4
 import QtQuick.Controls 2.2
 import DNAI.Views 1.0
 import DNAI 1.0
+import Dnai.FontAwesome 1.0
 
 import "../Style"
 
@@ -59,7 +60,7 @@ GenericNode {
             anchors.horizontalCenter: parent.horizontalCenter
             visible: node.state === "Open"
         }
-        FontAwesomeTextSolid {
+        TextAwesomeSolid {
             id: _icon
             font.pointSize: 15
             anchors.fill: parent

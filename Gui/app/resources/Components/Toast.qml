@@ -4,6 +4,7 @@ import QtQuick.Controls 2.1
 import QtGraphicalEffects 1.0
 
 import DNAI 1.0
+import Dnai.FontAwesome 1.0
 
 import "../Style"
 
@@ -48,7 +49,7 @@ Rectangle {
     }
 
 
-    FontAwesomeTextSolid {
+    TextAwesomeSolid {
         id: icons
         anchors.verticalCenter: backgroundRect.verticalCenter
         anchors.left: backgroundRect.left
@@ -102,7 +103,7 @@ Rectangle {
         }
      }
 
-     FontAwesomeTextSolid {
+     TextAwesomeSolid {
          property string crossIconEnter: "\uf057"
          property string crossIconExit: "\uf00d"
 

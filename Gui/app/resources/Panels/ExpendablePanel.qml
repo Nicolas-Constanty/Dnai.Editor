@@ -1,7 +1,9 @@
 import QtQuick 2.9
 import QtQuick.Controls 2.2
-import DNAI 1.0
 import QtGraphicalEffects 1.0
+
+import DNAI 1.0
+import Dnai.FontAwesome 1.0
 
 import "../Style"
 
@@ -40,7 +42,7 @@ Rectangle {
             anchors.leftMargin: 15
             anchors.verticalCenter: parent.verticalCenter
         }
-        FontAwesomeTextSolid {
+        TextAwesomeSolid {
             id: _branch
             text:  "\u2BC6"
             anchors.right: parent.right

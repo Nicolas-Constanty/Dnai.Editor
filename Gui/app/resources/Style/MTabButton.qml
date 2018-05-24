@@ -1,5 +1,7 @@
 import QtQuick 2.0
 import QtQuick.Controls 2.2
+import Dnai.FontAwesome 1.0
+
 import "../Views"
 
 TabButton {
@@ -32,7 +34,7 @@ TabButton {
             verticalAlignment: Text.AlignVCenter
             elide: Text.ElideRight
         }
-        FontAwesomeTextSolid {
+        TextAwesomeSolid {
             visible: checked || control.hovered
             anchors.right: parent.right
             anchors.rightMargin: 5
