@@ -13,3 +13,9 @@
 [submodule "Gui/lib/lwintoast"]
 	path = Gui/lib/lwintoast
 	url = https://github.com/Nicolas-Constanty/Dnai.SubModules.Libs.Gui.Toasts.lwin.git
+[submodule "Gui/plugins/Controls"]
+	path = Gui/plugins/Controls
+	url = https://github.com/Nicolas-Constanty/Dnai.SubModules.Libs.QtPlugins.Controls.git
+[submodule "Gui/plugins/FontAwesome"]
+	path = Gui/plugins/FontAwesome
+	url = https://github.com/Nicolas-Constanty/Dnai.SubModules.Libs.QtPlugins.FontAwesome.git
