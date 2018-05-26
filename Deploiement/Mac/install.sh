@@ -15,9 +15,9 @@ deployqt="/Users/victorgouet/Qt/$qtv/clang_64/bin/macdeployqt"
 monopath="/Library/Frameworks/Mono.framework/Commands/mono"
 
 #DNAI GUI
-dnaipropath="../../DNAI/DNAI.pro"
-dnaisettingpath="../../DNAI/app/settings/"
-dnairessourcespath="/Users/victorgouet/Documents/DulyGUI/Duly-GUI/DNAI/app/resources/"
+dnaipropath="../../Gui/DNAI.pro"
+dnaisettingpath="../../Gui/app/settings/"
+dnairessourcespath="/Users/victorgouet/Documents/DulyGUI/Duly-GUI/Gui/app/resources/"
 
 #DNAI CORE
 binarycorepath="$HOME/Documents/Rendu/Core/Duly/CoreDaemon/bin/Release/"

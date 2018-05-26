@@ -15,7 +15,7 @@
 using namespace WinToastLib;
 #endif
 #if defined(Q_OS_MAC)
-#include "../../lib/MACToast/toast.h"
+//#include "../../lib/MACToast/toast.h"
 #endif
 
 namespace dnai
