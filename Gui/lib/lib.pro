@@ -15,7 +15,7 @@ win32-msvc* {
     app.depends = notiflib libCoreClient
 }
 macx-clang* {
-    SUBDIRS += notifmac
-    notifmac.file = lmactoast/lmactoast.pro
-    app.depends = notifmac libCoreClient
+    #SUBDIRS += notifmac
+    #notifmac.file = lmactoast/lmactoast.pro
+    app.depends = libCoreClient
 }

@@ -6,13 +6,13 @@ rmdir /s DNAI
 rmdir /s "C:\Users\Victor\Documents\EIP\Duly-GUI\Deploiement\Windows\DNAISetup\packages\com.vendor.product\data"
 md "C:\Users\Victor\Documents\EIP\Duly-GUI\Deploiement\Windows\DNAISetup\packages\com.vendor.product\data"
 
-qmake.exe C:\Users\Victor\Documents\EIP\Duly-GUI\DNAI\DNAI.pro -spec win32-msvc && C:/Qt/Tools/QtCreator/bin/jom.exe qmake_all
+qmake.exe C:\Users\Victor\Documents\EIP\Duly-GUI\Gui\DNAI.pro -spec win32-msvc && C:/Qt/Tools/QtCreator/bin/jom.exe qmake_all
 jom.exe
 jom.exe install
 
-MOVE "app/settings" "app/release"
+# MOVE "app/settings" "app/release"
 
-windeployqt.exe "./app/release/DNAI.exe" -qmldir=C:\Users\Victor\Documents\EIP\Duly-GUI\DNAI\app\resources -verbose=2
+windeployqt.exe "./app/release/DNAI.exe" -qmldir=C:\Users\Victor\Documents\EIP\Duly-GUI\Gui\app\resources -verbose=2
 
 copy "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\VC\Redist\MSVC\14.13.26020\x64\Microsoft.VC141.CRT\*" "./app/release/"
 copy "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\VC\Redist\MSVC\14.13.26020\x64\Microsoft.VC141.CXXAMP\*" "./app/release/"
