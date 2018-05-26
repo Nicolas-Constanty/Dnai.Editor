@@ -22,7 +22,7 @@ Rectangle {
     MouseArea {
         anchors.fill: parent;
         onClicked: {
-            Editor.propertyView().model = modelData.editableProperty
+            Editor.propertyView().model = modelData
 //            Manager.views.updatePropertyPanelModel(item)
         }
     }

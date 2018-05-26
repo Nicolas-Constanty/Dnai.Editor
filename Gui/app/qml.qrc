@@ -169,5 +169,12 @@
         <file>resources/Components/EnumComponent.qml</file>
         <file>resources/Components/EditableTextModel.qml</file>
         <file>resources/Images/enum.png</file>
+        <file>resources/Properties/BoolProperty.qml</file>
+        <file>resources/Properties/EnumValue.qml</file>
+        <file>resources/Properties/IntProperty.qml</file>
+        <file>resources/Properties/StringProperty.qml</file>
+        <file>resources/Properties/DoubleProperty.qml</file>
+        <file>resources/Properties/DropDownProperty.qml</file>
+        <file>resources/Properties/EnumerationProperty.qml</file>
     </qresource>
 </RCC>
