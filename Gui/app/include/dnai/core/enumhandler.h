@@ -20,6 +20,10 @@ namespace dnai
         public:
             void setup();
 
+        signals:
+            void valueSet(dnai::models::Entity *entity, QString const &name, QJsonValue const &value);
+            void valueRemoved(dnai::models::Entity *entity, QString const &name);
+
         public slots:
             void onEntityAdded(::core::EntityID id, models::Entity &entity);
 

@@ -74,12 +74,13 @@ namespace dnai
             );
         }
 
-        void EnumHandler::onValueSet(::core::EntityID enumeration, const QString &name, QString const &)
+        void EnumHandler::onValueSet(::core::EntityID enumeration, const QString &name, QString const &value)
         {
-            //QJsonValue val = QJsonDocument::fromJson(value.toUtf8()).toVariant().toJsonValue();
+            QJsonValue val = QJsonDocument::fromJson(value.toUtf8()).toVariant().toJsonValue();
 
             manager.getEntity(enumeration).guiModel<models::gui::declarable::EnumType>()->addEntry(name);// setValue(name, val);
             commands::CoreCommand::Success();
+            emit valueSet(&manager.getEntity(enumeration), name, val);
         }
 
         void EnumHandler::onSetValueError(::core::EntityID, const QString &name, QString const &value, const QString &message)
@@ -92,6 +93,7 @@ namespace dnai
         {
             manager.getEntity(enumeration).guiModel<models::gui::declarable::EnumType>()->deleteEntry(name);
             commands::CoreCommand::Success();
+            emit valueRemoved(&manager.getEntity(enumeration), name);
         }
 
         void EnumHandler::onRemoveValueError(::core::EntityID, const QString &name, const QString &message)
