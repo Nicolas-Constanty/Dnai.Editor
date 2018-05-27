@@ -10,40 +10,80 @@ namespace dnai
 		{
 			namespace declarable
 			{
-				const QMap<QString, QJsonValue>& EnumType::values() const
+				EnumType::EnumType(QObject* parent) : QObject(parent)
+				{
+				}
+
+				const QStringList& EnumType::values() const
 				{
 					return m_data.values;
 				}
 
-				const QJsonValue& EnumType::value(QString id) const
+				void EnumType::moveUp(int initial)
 				{
-					return m_data.values[id];
+					if (initial < 0)
+						return;
+					const auto start = initial % m_data.values.length();
+					const auto end = (start <= 0) ? m_data.values.length() : start - 1;
+					m_data.values.swap(start, end);
+					emit valuesChanged(m_data.values);
+				}
+
+				void EnumType::addEntry(const QString& entry)
+				{
+					if (entry.isEmpty())
+					{
+						m_data.values.append(QString("Empty ") + m_data.values.length());
+						emit valuesChanged(m_data.values);
+						return;
+					}
+					for (const auto &val : m_data.values)
+						if (val == entry)
+							return;
+					m_data.values.append(entry);
+					emit valuesChanged(m_data.values);
+				}
+
+				void EnumType::deleteEntry(const QString& entry)
+				{
+					m_data.values.removeOne(entry);
+					emit valuesChanged(m_data.values);
+				}
+
+				void EnumType::moveDown(int initial)
+				{
+					if (initial < 0)
+						return;
+					const auto start = initial % m_data.values.length();
+					const auto end = (start + 1) % m_data.values.length();
+					m_data.values.swap(start, end);
+					emit valuesChanged(m_data.values);
 				}
 
 				void EnumType::serialize(QJsonObject& obj) const
 				{
-					for (auto &kv : m_data.values.toStdMap())
+					QJsonArray arr;
+					for (auto &val : m_data.values)
 					{
-						obj[kv.first] = kv.second;
+						arr.append(val);
 					}
+					obj["enumvalues"] = arr;
+				}
+
+				void EnumType::setValues(const QStringList& list)
+				{
+					if (list == m_data.values)
+						return;
+					m_data.values = list;
+					emit valuesChanged(list);
 				}
 
 				void EnumType::_deserialize(const QJsonObject& obj)
 				{
-					for (const auto& key : obj.keys())
+					for (const auto& val : obj["enumvalues"].toArray())
 					{
-						setValue(key, obj[key]);
+						addEntry(val.toString());
 					}
-				}
-
-				void EnumType::setValue(const QString &key, const QJsonValue &value)
-				{
-					m_data.values[key] = value;
-				}
-
-				void EnumType::setValue(const QPair<QString, QJsonValue> &value)
-				{
-					m_data.values[value.first] = value.second;
 				}
 			}
 		}

@@ -245,6 +245,7 @@ namespace dnai
 
 		QObject* Entity::guiProperties() const
 		{
+			qDebug() << dynamic_cast<QObject*>(m_dataGUI);
 			return dynamic_cast<QObject*>(m_dataGUI);
 		}
 
@@ -305,6 +306,7 @@ namespace dnai
             case ::core::ENTITY::ENUM_TYPE:
             {
                 m_dataGUI = gui::declarable::EnumType::deserialize(obj);
+				qDebug() << dynamic_cast<QObject*>(m_dataGUI);
                 break;
             }
             case ::core::ENTITY::OBJECT_TYPE:

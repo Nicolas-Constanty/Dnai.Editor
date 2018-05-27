@@ -61,6 +61,11 @@ Rectangle {
                 }
             }
 
+            function updateEnumerator(model, prop, index, value)
+            {
+                model[prop][index] = value
+            }
+
             property var model: null
             width: _container.width
             onModelChanged: {
@@ -98,6 +103,17 @@ Rectangle {
                             {
                                 propertyPanel.propvalue = createProperty("resources/Properties/StringProperty.qml", { "value": md["guiProperties"]["value"], "name" : "Value", "model": md["guiProperties"], "prop": "value", "method": updateProp })
                             }
+                        }
+                        else if (val === CoreEnums.ENUM_TYPE)
+                        {
+                            createProperty("resources/Properties/EnumerationProperty.qml",
+                                           {
+                                               "listmodel": md["guiProperties"]["values"],
+                                               "name" : "Values",
+                                               "model": md["guiProperties"],
+                                               "prop": "values",
+                                               "method": updateEnumerator
+                                           })
                         }
                     }
 

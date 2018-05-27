@@ -16,17 +16,24 @@ namespace dnai
 				class EnumType : public QObject, public Entity<data::EnumType, EnumType>
 				{
 					Q_OBJECT
+					Q_PROPERTY(QStringList values READ values WRITE setValues NOTIFY valuesChanged)
 				public:
-					explicit EnumType() = default;
-					const QMap<QString, QJsonValue> &values() const;
-					const QJsonValue &value(QString id) const;
+					explicit EnumType(QObject *parent = nullptr);
+					const QStringList &values() const;
+					Q_INVOKABLE void moveUp(int initial);
+					Q_INVOKABLE void moveDown(int initial);
+					Q_INVOKABLE void addEntry(const QString &entry);
+					Q_INVOKABLE void deleteEntry(const QString &entry);
 
 					//Implementation of ISerializable
 					void serialize(QJsonObject& obj) const override;
+					void setValues(const QStringList &list);
+
+				signals:
+					void valuesChanged(const QStringList &val);
+
 				protected:
 					virtual void _deserialize(const QJsonObject& obj) override;
-					void setValue(const QString& key, const QJsonValue& value);
-					void setValue(const QPair<QString, QJsonValue> &value);
 				};
 			}
 		}

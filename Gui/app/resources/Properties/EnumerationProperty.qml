@@ -1,10 +1,11 @@
 import QtQuick 2.0
 import QtQuick.Controls 2.2
 import Dnai.Controls 1.0
+import Dnai.FontAwesome 1.0
 
-PanelView {
+BaseProperty {
     id: _panel
-    property var model: null
+    property var listmodel: null
     property real contentHeight: 24
     property real valueSpacing: 5
     property ButtonAwesomeSolid createButton: _createButton
@@ -25,10 +26,25 @@ PanelView {
             anchors.right: parent.right
             spacing: _panel.valueSpacing
             Repeater {
-                model: _panel.model
+                model: _panel.model[_panel.prop]
                 EnumValue {
+                    model: _panel.model
+                    prop: _panel.prop
                     height: _panel.contentHeight
                     width: _values.width
+                    contentHeight: _panel.contentHeight
+                    moveUpButton.onClicked: {
+                        if (_panel.model !== null)
+                            _panel.model.moveUp(getIndex())
+                    }
+                    moveDownButton.onClicked: {
+                        if (_panel.model !== null)
+                            _panel.model.moveDown(getIndex())
+                    }
+                    deleteButton.onClicked: {
+                        if (_panel.model !== null)
+                            _panel.model.deleteEntry(value)
+                    }
                 }
             }
         }
@@ -43,6 +59,10 @@ PanelView {
         color: "#ffffff"
         background: Rectangle {
             color: "transparent"
+        }
+        onClicked: {
+            if (_panel.model !== null)
+                _panel.model.addEntry("");
         }
     }
 }
