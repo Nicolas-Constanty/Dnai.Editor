@@ -293,7 +293,6 @@ namespace dnai
             {
                 m_dataGUI = gui::declarable::Variable::deserialize(obj);
 				auto d = dynamic_cast<gui::declarable::Variable*>(m_dataGUI);
-				d->setValue("100");
                 m_editableProperty->addProperty(d, "varType");
                 break;
             }

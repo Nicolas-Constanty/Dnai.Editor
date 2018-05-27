@@ -34,6 +34,7 @@ namespace dnai
 				{
 					Entity::serialize(obj);
                     obj["varType"] = varType();
+					qDebug() << value();
                     obj["value"] = value();
 				}
 
