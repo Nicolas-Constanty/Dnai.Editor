@@ -27,8 +27,8 @@ namespace dnai
 
         void VariableHandler::setup()
         {
-            QObject::connect(&manager,  SIGNAL(entityAdded(enums::core::EntityID,models::Entity&)),
-                             this,      SLOT(onEntityAdded(enums::core::EntityID,models::Entity&)));
+            QObject::connect(&manager,  SIGNAL(entityAdded(::core::EntityID,models::Entity&)),
+                             this,      SLOT(onEntityAdded(::core::EntityID,models::Entity&)));
 
             ::core::variable::onTypeSet(std::bind(&VariableHandler::onTypeSet, this, _1, _2));
             ::core::variable::onSetTypeError(std::bind(&VariableHandler::onSetTypeError, this, _1, _2, _3));

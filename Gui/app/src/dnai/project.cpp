@@ -1,4 +1,5 @@
 #include <QJsonDocument>
+#include <QTime>
 
 #include "dnai/project.h"
 #include "dnai/models/gui/declarable/context.h"
@@ -338,6 +339,7 @@ namespace dnai {
     QString Project::generateUniqueChildName(dnai::models::Entity *parent) const
     {
         Q_UNUSED(parent)
+        qsrand(QTime::currentTime().msec());
         return "Empty(" + QString::number(qrand()) + ")";
     }
 

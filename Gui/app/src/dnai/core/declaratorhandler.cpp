@@ -36,10 +36,10 @@ namespace dnai
 
         void DeclaratorHandler::setup()
         {
-            QObject::connect(&manager,  SIGNAL(entityAdded(enums::core::EntityID,models::Entity&)),
-                             this,      SLOT(onEntityAdded(enums::core::EntityID,models::Entity&)));
-            QObject::connect(&manager,  SIGNAL(entityRemoved(enums::core::EntityID,models::Entity&)),
-                             this,      SLOT(onEntityRemoved(enums::core::EntityID,models::Entity&)));
+            QObject::connect(&manager,  SIGNAL(entityAdded(::core::EntityID,models::Entity&)),
+                             this,      SLOT(onEntityAdded(::core::EntityID,models::Entity&)));
+            QObject::connect(&manager,  SIGNAL(entityRemoved(::core::EntityID,models::Entity&)),
+                             this,      SLOT(onEntityRemoved(::core::EntityID,models::Entity&)));
 
             ::core::declarator::onDeclared(std::bind(&DeclaratorHandler::onDeclared, this, _1, _2, _3, _4, _5));
             ::core::declarator::onDeclareError(std::bind(&DeclaratorHandler::onDeclareError, this, _1, _2, _3, _4, _5));
