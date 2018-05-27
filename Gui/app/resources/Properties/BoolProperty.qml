@@ -3,11 +3,11 @@ import QtQuick.Controls 2.2
 
 import Dnai.Controls 1.0
 
-PanelView {
+BaseProperty {
     id: _panel
     property alias value: _value.checked
     property alias label: _value.text
-    property string name: "Bool property"
+    name: "Bool property"
     property real contentHeight: 24
 
     anchors.left: parent.left
@@ -32,6 +32,12 @@ PanelView {
         Switch {
             id: _value
             anchors.horizontalCenter: parent.horizontalCenter
+            onCheckedChanged: {
+                if (_panel.method !== null)
+                {
+                    _panel.method(_panel.model, _panel.prop, _value.checked)
+                }
+            }
         }
         Label {
             id: _labelOn

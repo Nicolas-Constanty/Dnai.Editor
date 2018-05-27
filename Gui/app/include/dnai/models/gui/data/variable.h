@@ -4,6 +4,8 @@
 #include <QJsonObject>
 #include "entity.h"
 #include "core.h"
+#include <QVariantList>
+
 namespace dnai
 {
 	namespace models
@@ -15,7 +17,7 @@ namespace dnai
 				struct Variable : Entity
 				{
                     ::core::EntityID varType = ::core::UNDEFINED_ID;
-					QJsonObject value;
+					QString value = "100";
 				};
 			}
 		}

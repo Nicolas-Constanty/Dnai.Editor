@@ -5,9 +5,6 @@
 #include "dnai/interfaces/iserializable.h"
 #include "dnai/models/gui/data/entity.h"
 #include "dnai/interfaces/ientity.h"
-#include "dnai/exceptions/notimplemented.h"
-
-#include <QDebug>
 
 namespace dnai
 {

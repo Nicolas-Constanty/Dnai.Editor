@@ -3,6 +3,7 @@
 
 #include "dnai/models/gui/data/enumtype.h"
 #include "entity.h"
+#include <QObject>
 
 namespace dnai
 {
@@ -12,9 +13,9 @@ namespace dnai
 		{
 			namespace declarable
 			{
-				class EnumType : public Entity<data::EnumType, EnumType>
+				class EnumType : public QObject, public Entity<data::EnumType, EnumType>
 				{
-
+					Q_OBJECT
 				public:
 					explicit EnumType() = default;
 					const QMap<QString, QJsonValue> &values() const;

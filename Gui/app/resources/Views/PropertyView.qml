@@ -33,6 +33,12 @@ Rectangle {
                 obj.anchors.margins = 10
             }
 
+            function updateProp(model, prop, value)
+            {
+                console.log(model, prop, value)
+                model[prop] = value
+            }
+
             property var model: null
             width: _container.width
             onModelChanged: {
@@ -45,22 +51,28 @@ Rectangle {
                 for (var prop in md) {
                     if (prop === "name")
                     {
-                        createProperty("resources/Properties/StringProperty.qml", { "value":  md[prop], "name" : prop })
+                        createProperty("resources/Properties/StringProperty.qml", { "value":  md[prop], "name" : prop, "model": md, "prop": prop, "method": updateProp })
                     }
                     else if (prop === "visibility")
                     {
-                        createProperty("resources/Properties/DropDownProperty.qml", { "value": md[prop], "model":  Editor.propertyPanelProperties.visibility, "name" : prop })
+                        createProperty("resources/Properties/DropDownProperty.qml", { "value": md[prop], "listmodel":  Editor.propertyPanelProperties.visibility, "name" : prop, "model": md, "prop": prop, "method": updateProp })
                     }
                     else if (prop === "entityType")
                     {
                         var val = md[prop]
                         if (val === CoreEnums.VARIABLE)
                         {
-                            createProperty("resources/Properties/DropDownProperty.qml", { "value": md[prop], "model": Editor.propertyPanelProperties.varType, "name" : "Value" })
+                            var t = md["guiProperties"]["varType"]
+                            createProperty("resources/Properties/DropDownProperty.qml", { "value": t, "listmodel": Editor.propertyPanelProperties.varType, "name" : "Type" })
+                            if (t === 0)
+                            {
+                                createProperty("resources/Properties/IntProperty.qml", { "value": md["guiProperties"]["value"], "name" : "Value", "model": md["guiProperties"], "prop": "value", "method": updateProp })
+                            }
+
                         }
                     }
 
-                    print(prop += " (" + typeof(md[prop]) + ") = " + md[prop]);
+                    //print(prop += " (" + typeof(md[prop]) + ") = " + md[prop]);
                 }
             }
             Component.onCompleted: {

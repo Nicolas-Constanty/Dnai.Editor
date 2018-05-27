@@ -243,6 +243,11 @@ namespace dnai
 			emit entityChildrenChanged(child);
 		}
 
+		QObject* Entity::guiProperties() const
+		{
+			return dynamic_cast<QObject*>(m_dataGUI);
+		}
+
 		void Entity::serialize(QJsonObject& obj) const
 		{
 			QJsonArray ca;
@@ -287,7 +292,9 @@ namespace dnai
             case ::core::ENTITY::VARIABLE:
             {
                 m_dataGUI = gui::declarable::Variable::deserialize(obj);
-                m_editableProperty->addProperty(dynamic_cast<gui::declarable::Variable*>(m_dataGUI), "varType");
+				auto d = dynamic_cast<gui::declarable::Variable*>(m_dataGUI);
+				d->setValue("100");
+                m_editableProperty->addProperty(d, "varType");
                 break;
             }
             case ::core::ENTITY::FUNCTION:

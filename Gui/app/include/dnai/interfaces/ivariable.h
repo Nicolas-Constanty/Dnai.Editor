@@ -15,8 +15,8 @@ namespace dnai
 			virtual qint32 varType() const = 0;
 			virtual bool setVarType(qint32 id) = 0;
 
-			virtual const QJsonObject &value() const = 0;
-			virtual bool setValue(const QJsonObject &value) = 0;
+			virtual const QString &value() const = 0;
+			virtual bool setValue(const QString &value) = 0;
 		};
 	}
 }

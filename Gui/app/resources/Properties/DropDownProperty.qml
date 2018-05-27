@@ -2,10 +2,9 @@ import QtQuick 2.0
 import QtQuick.Controls 2.2
 import Dnai.Controls 1.0
 
-PanelView {
+BaseProperty {
     id: _panel
-    property string name: "Enum Property"
-    property var model: null
+    property var listmodel: null
     property real contentHeight: 35
     property alias label: _label
     property alias value: _value.currentIndex
@@ -15,7 +14,6 @@ PanelView {
     anchors.right: parent.right
     height: _panel.contentHeight + header.height + _panel.content.anchors.topMargin * 2
 
-    header.title.text: name
     Item {
         id: _property
         height: _panel.contentHeight
@@ -33,10 +31,16 @@ PanelView {
         ComboBox {
             id: _value
             height: contentHeight
-            model: _panel.model
+            model: _panel.listmodel
             anchors.right: parent.right
             anchors.left: _label.right
             anchors.leftMargin: 5
+            onCurrentIndexChanged: {
+                if (_panel.method !== null)
+                {
+                    _panel.method(_panel.model, _panel.prop, _value.currentIndex)
+                }
+            }
         }
     }
 

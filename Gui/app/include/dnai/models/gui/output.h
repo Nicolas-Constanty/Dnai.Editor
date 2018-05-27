@@ -23,8 +23,8 @@ namespace dnai
 	            bool setData(const data::Output& data) override;
 	            qint32 varType() const override;
 	            bool setVarType(qint32 id) override;
-	            const QJsonObject &value() const override;
-	            bool setValue(const QJsonObject& value) override;
+                const QString &value() const override;
+                bool setValue(const QString& value) override;
             private:
 				data::Output m_data;
 			};

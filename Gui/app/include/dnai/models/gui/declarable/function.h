@@ -1,6 +1,7 @@
 #ifndef DNAI_MODELS_GUI_DECLARABLE_FUNCTION_H
 #define DNAI_MODELS_GUI_DECLARABLE_FUNCTION_H
 
+#include <QObject>
 #include "dnai/interfaces/ientity.h"
 #include "dnai/interfaces/iinstruction.h"
 #include "dnai/models/gui/data/function.h"
@@ -13,11 +14,12 @@ namespace dnai
 		{
 			namespace declarable
 			{
-				class Function : public interfaces::IInstruction, public Entity<data::Function, Function>
+				class Function : public QObject, public interfaces::IInstruction, public Entity<data::Function, Function>
                 {
+					Q_OBJECT
 				public:
-                    explicit Function() = default;
-                    //Implementation of ISerializable
+					explicit Function(QObject *parent = nullptr);
+					//Implementation of ISerializable
 					void serialize(QJsonObject& obj) const override;
 				protected:
 					void _deserialize(const QJsonObject& obj) override;

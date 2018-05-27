@@ -41,7 +41,7 @@ namespace dnai
 				{
 					Entity::_deserialize(obj);
                     m_data.varType = static_cast<::core::EntityID>(obj["varType"].toInt());
-					m_data.value = obj["value"].toObject();
+                    m_data.value = obj["value"].toString();
 				}
 
                 qint32 Variable::varType() const
@@ -54,19 +54,21 @@ namespace dnai
 					if (m_data.varType == id)
 						return false;
 					m_data.varType = id;
+					emit varTypeChanged(id);
 					return false;
 				}
 
-				const QJsonObject &Variable::value() const
+				const QString &Variable::value() const
 				{
 					return m_data.value;
 				}
 
-				bool Variable::setValue(const QJsonObject& value)
+				bool Variable::setValue(const QString& value)
 				{
 					if (m_data.value == value)
 						return false;
 					m_data.value = value;
+					emit valueChanged(value);
 					return false;
 				}
 

@@ -12,8 +12,9 @@ namespace dnai
 		{
 			namespace declarable
 			{
-				class ObjectType : public Entity<data::ObjectType, ObjectType>
+				class ObjectType : public QObject, public Entity<data::ObjectType, ObjectType>
 				{
+					Q_OBJECT
 				public:
 					explicit ObjectType() = default;
 					const QList<ObjectType*>& classes() const;

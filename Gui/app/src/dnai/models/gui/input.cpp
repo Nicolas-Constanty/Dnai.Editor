@@ -15,7 +15,7 @@ namespace dnai
 				obj["index"] = m_data.index;
                 obj["listIndex"] = m_data.listIndex.toString();
                 obj["varType"] = static_cast<int>(m_data.varType);
-				obj["value"] = m_data.value;
+                obj["value"] = QJsonValue::fromVariant(m_data.value);
 			}
 
 			void Input::_deserialize(const QJsonObject& obj)
@@ -50,12 +50,12 @@ namespace dnai
 				return false;
 			}
 
-			const QJsonObject &Input::value() const
+            const QString &Input::value() const
 			{
 				return m_data.value;
 			}
 
-			bool Input::setValue(const QJsonObject& value)
+            bool Input::setValue(const QString& value)
 			{
 				if (m_data.value == value)
 					return false;

@@ -63,3 +63,7 @@ DNAI/app/GeneratedFiles/
 *.bsc
 
 Gui/app/GeneratedFiles/
+
+*.filters
+
+*.vcxproj

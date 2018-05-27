@@ -3,6 +3,7 @@
 
 #include "dnai/models/gui/data/listtype.h"
 #include "entity.h"
+#include <QObject>
 
 namespace dnai
 {
@@ -12,8 +13,9 @@ namespace dnai
 		{
 			namespace declarable
 			{
-				class ListType : public Entity<data::ListType, ListType>
+				class ListType : public QObject, public Entity<data::ListType, ListType>
 				{
+					Q_OBJECT
 				public:
                     explicit ListType() = default;
 					//Implementation of ISerializable

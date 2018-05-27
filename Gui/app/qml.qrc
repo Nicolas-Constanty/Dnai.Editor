@@ -176,5 +176,6 @@
         <file>resources/Properties/DoubleProperty.qml</file>
         <file>resources/Properties/DropDownProperty.qml</file>
         <file>resources/Properties/EnumerationProperty.qml</file>
+        <file>resources/Properties/BaseProperty.qml</file>
     </qresource>
 </RCC>

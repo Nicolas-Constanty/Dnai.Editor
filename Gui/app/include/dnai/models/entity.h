@@ -71,13 +71,16 @@ namespace dnai
             Q_OBJECT
             Q_PROPERTY(qint32 id READ id WRITE setId NOTIFY idChanged)
             Q_PROPERTY(qint32 containerId READ containerId WRITE setContainerId NOTIFY containerIdChanged)
-            Q_PROPERTY(qint32 entityType READ entityType WRITE setEntityType NOTIFY entityTypeChanged)
-            Q_PROPERTY(QString name READ name WRITE setName NOTIFY nameChanged)
 			Q_PROPERTY(bool isRoot READ isRoot WRITE setIsRoot NOTIFY isRootChanged)
-            Q_PROPERTY(qint32 visibility READ visibility WRITE setVisibility NOTIFY visibilityChanged)
-            Q_PROPERTY(int index READ id WRITE setIndex NOTIFY indexChanged)
-            Q_PROPERTY(QString listIndex READ listIndex WRITE setListIndex NOTIFY listIndexChanged)
-            Q_PROPERTY(QString description READ description WRITE setDescription NOTIFY descriptionChanged)
+			Q_PROPERTY(int index READ id WRITE setIndex NOTIFY indexChanged)
+			Q_PROPERTY(QString listIndex READ listIndex WRITE setListIndex NOTIFY listIndexChanged)
+
+        	Q_PROPERTY(QString name READ name WRITE setName NOTIFY nameChanged)
+			Q_PROPERTY(qint32 visibility READ visibility WRITE setVisibility NOTIFY visibilityChanged)
+			Q_PROPERTY(QString description READ description WRITE setDescription NOTIFY descriptionChanged)
+			Q_PROPERTY(QObject *guiProperties READ guiProperties CONSTANT)
+
+        	Q_PROPERTY(qint32 entityType READ entityType WRITE setEntityType NOTIFY entityTypeChanged)
             Q_PROPERTY(gcore::Entity *coreModel READ coreModel WRITE setCoreModel NOTIFY coreModelChanged)
 			Q_PROPERTY(bool expanded READ expanded WRITE setExpanded NOTIFY expandedChanged)
 			Q_PROPERTY(dnai::models::Entity *parentRef READ parentRef CONSTANT)
@@ -124,6 +127,7 @@ namespace dnai
 			void setExpanded(bool exp);
 			void setEditableProperty(Property *p);
 			virtual void appendChild(Entity* child) override;
+			QObject *guiProperties() const;
 
         signals:
 			void isRootChanged(bool isroot);

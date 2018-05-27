@@ -12,8 +12,9 @@ namespace dnai
 		{
 			namespace declarable
 			{
-				class Context : public Entity<data::Context, Context>
+				class Context : public QObject, public Entity<data::Context, Context>
 				{
+					Q_OBJECT
 				public:
 					explicit Context() = default;
 					const QList<Context*>& contexts() const;

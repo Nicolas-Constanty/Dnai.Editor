@@ -11,9 +11,9 @@ namespace dnai
 		{
 			namespace declarable
 			{
-//				Function::Function(QObject* parent)
-//				{
-//				}
+				Function::Function(QObject* parent) : QObject(parent)
+				{
+				}
 
 				void Function::serialize(QJsonObject& obj) const
 				{	

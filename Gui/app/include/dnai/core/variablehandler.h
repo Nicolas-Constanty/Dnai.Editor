@@ -26,7 +26,7 @@ namespace dnai
 
         public:
             void setType(models::Entity const &variable, models::Entity const &type);
-            void setValue(models::Entity const &variable, QJsonObject const &value);
+            void setValue(models::Entity const &variable, QString const &value);
 
         private:
             models::gui::declarable::Variable *getVariableData(::core::EntityID variable, bool throws = false);

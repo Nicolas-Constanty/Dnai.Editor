@@ -72,10 +72,10 @@ namespace dnai
                     }));
         }
 
-        void VariableHandler::setValue(models::Entity const &variable, const QJsonObject &value)
+        void VariableHandler::setValue(models::Entity const &variable, const QString &value)
         {
-            QString val = QJsonDocument(value).toJson(QJsonDocument::Compact);
-            QString oldval = QJsonDocument(getVariableData(variable.id(), true)->value()).toJson();
+            QString val = value;
+            QString oldval = getVariableData(variable.id(), true)->value();
 
             commands::CommandManager::Instance()->exec(
                 new commands::CoreCommand("Variable.SetValue", true,
@@ -135,12 +135,13 @@ namespace dnai
             {
                 commands::CoreCommand::Success();
 
-                QJsonDocument doc = QJsonDocument::fromJson(value.toUtf8());
+                var->setValue(value);
+//                QJsonDocument doc = QJsonDocument::fromJson(value.toUtf8());
 
-                if (!doc.isNull() && doc.isObject())
-                {
-                    var->setValue(doc.object());
-                }
+//                if (!doc.isNull() && doc.isObject())
+//                {
+//                    var->setValue(doc.object());
+//                }
             }
         }
 

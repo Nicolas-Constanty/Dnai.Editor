@@ -3,18 +3,18 @@ import QtQuick.Controls 2.2
 
 import Dnai.Controls 1.0
 
-PanelView {
+BaseProperty {
     id: _panel
     property alias value: _value.text
     property alias valueRef: _value
     property alias label: _label
-    property string name: "String property"
     property real contentHeight: 24
 
     anchors.left: parent.left
     anchors.right: parent.right
     height: _panel.contentHeight + header.height + _panel.content.anchors.topMargin * 2
 
+    name: "String property"
     header.title.text: name
     Item {
         id: _property
@@ -38,6 +38,13 @@ PanelView {
             anchors.right: parent.right
             anchors.rightMargin: 5
             horizontalAlignment: TextInput.AlignRight
+            onAccepted: {
+                if (_panel.method !== null)
+                {
+                    console.log(_panel.method)
+                    _panel.method(_panel.model, _panel.prop, _value.text)
+                }
+            }
         }
     }
 }
