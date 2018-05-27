@@ -21,30 +21,27 @@ BaseProperty {
         anchors.right: parent.right
         height: (_panel.contentHeight + _panel.valueSpacing) * model.count
 
-        Column {
-            anchors.left: parent.left
-            anchors.right: parent.right
+        ListView {
+            anchors.fill: parent
             spacing: _panel.valueSpacing
-            Repeater {
-                model: _panel.model[_panel.prop]
-                EnumValue {
-                    model: _panel.model
-                    prop: _panel.prop
-                    height: _panel.contentHeight
-                    width: _values.width
-                    contentHeight: _panel.contentHeight
-                    moveUpButton.onClicked: {
-                        if (_panel.model !== null)
-                            _panel.model.moveUp(getIndex())
-                    }
-                    moveDownButton.onClicked: {
-                        if (_panel.model !== null)
-                            _panel.model.moveDown(getIndex())
-                    }
-                    deleteButton.onClicked: {
-                        if (_panel.model !== null)
-                            _panel.model.deleteEntry(value)
-                    }
+            model: _panel.model[_panel.prop]
+            delegate: EnumValue {
+                model: _panel.model
+                prop: _panel.prop
+                height: _panel.contentHeight
+                width: _values.width
+                contentHeight: _panel.contentHeight
+                moveUpButton.onClicked: {
+                    if (_panel.model !== null)
+                        _panel.model.moveUp(getIndex())
+                }
+                moveDownButton.onClicked: {
+                    if (_panel.model !== null)
+                        _panel.model.moveDown(getIndex())
+                }
+                deleteButton.onClicked: {
+                    if (_panel.model !== null)
+                        _panel.model.deleteEntry(value)
                 }
             }
         }

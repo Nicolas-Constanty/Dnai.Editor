@@ -37,7 +37,7 @@ Item {
             height: _enumValue.contentHeight
             horizontalAlignment: TextInput.AlignLeft
             onAccepted: {
-                if (updateValue === null)
+                if (_enumValue.updateValue === null)
                     return
                 _enumValue.upadateValue(_enumValue.model, _enumValue.prop, getIndex(), _value.text)
             }
@@ -49,7 +49,6 @@ Item {
             label.text: "\uf0d7"
             label.font.pointSize: 14
             rotation: 180
-
         }
         ButtonAwesomeSolid {
             id: _moveDownButton
