@@ -24,7 +24,7 @@ namespace dnai
 					if (initial < 0)
 						return;
 					const auto start = initial % m_data.values.length();
-					const auto end = (start <= 0) ? m_data.values.length() : start - 1;
+					const auto end = (start <= 0) ? m_data.values.length() - 1 : start - 1;
 					m_data.values.swap(start, end);
 					emit valuesChanged(m_data.values);
 				}
@@ -33,7 +33,7 @@ namespace dnai
 				{
 					if (entry.isEmpty())
 					{
-						m_data.values.append(QString("Empty ") + m_data.values.length());
+						m_data.values.append(QString("Empty ") + QString::number(m_data.values.length()));
 						emit valuesChanged(m_data.values);
 						return;
 					}

@@ -13,7 +13,6 @@ BaseProperty {
     anchors.left: parent.left
     anchors.right: parent.right
     height: _createButton.height + _values.height + _panel.content.anchors.topMargin * 2 + header.height - _panel.valueSpacing + _panel.spacing * 2
-    header.title.text: qsTr("Enumeration Values")
 
     Item {
         id: _values
@@ -25,17 +24,22 @@ BaseProperty {
             anchors.fill: parent
             spacing: _panel.valueSpacing
             model: _panel.model[prop]
+            onModelChanged: {
+                _panel.height = _panel.height = _createButton.height + (_panel.contentHeight + _panel.valueSpacing) * _panel.model[prop].length + _panel.content.anchors.topMargin * 2 + _panel.header.height - _panel.valueSpacing + _panel.spacing * 2
+            }
+
             delegate: EnumValue {
                 value: modelData
                 prop: _panel.prop
                 height: _panel.contentHeight
-                width: _values.width
+                anchors.left: parent.left
+                anchors.right: parent.right
                 contentHeight: _panel.contentHeight
 
                 function moveUp() {
                     if (_panel.model !== null)
                     {
-                        console.log("on move up")
+//                        console.log("on move up")
                         _panel.model.moveUp(index)
                     }
                 }
@@ -44,7 +48,7 @@ BaseProperty {
                 function moveDown() {
                     if (_panel.model !== null)
                     {
-                        console.log("on move down");
+//                        console.log("on move down");
                         _panel.model.moveDown(index)
                     }
                 }
@@ -76,6 +80,7 @@ BaseProperty {
             if (_panel.model !== null)
             {
                 _panel.model.addEntry("");
+                _panel.height = _createButton.height + (_panel.contentHeight + _panel.valueSpacing) * _panel.model[prop].length + _panel.content.anchors.topMargin * 2 + header.height - _panel.valueSpacing + _panel.spacing * 2
             }
         }
     }
