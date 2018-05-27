@@ -23,6 +23,7 @@ Rectangle {
         anchors.fill: parent
         Column {
             id: propertyPanel
+            property var propvalue: null
             function createProperty(path, ctor)
             {
                 var obj = null
@@ -31,12 +32,33 @@ Rectangle {
                 obj.anchors.left = obj.parent.left
                 obj.anchors.right = obj.parent.right
                 obj.anchors.margins = 10
+                return obj
             }
 
             function updateProp(model, prop, value)
             {
                 console.log(model, prop, value)
                 model[prop] = value
+            }
+
+            function updatePropType(model, prop, value)
+            {
+                model[prop] = value
+                if (propertyPanel.propvalue === null)
+                    return;
+                propertyPanel.propvalue.destroy()
+                if (value === 0)
+                {
+                    propertyPanel.propvalue = createProperty("resources/Properties/IntProperty.qml", { "value": 0, "name" : "Value", "model": model, "prop": prop, "method": updateProp })
+                }
+                else if (value === 1)
+                {
+                    propertyPanel.propvalue = createProperty("resources/Properties/BoolProperty.qml", { "value": false, "name" : "Value", "model": model, "prop": prop, "method": updateProp })
+                }
+                else if (value === 2)
+                {
+                    propertyPanel.propvalue = createProperty("resources/Properties/StringProperty.qml", { "value": "", "name" : "Value", "model": model, "prop": prop, "method": updateProp })
+                }
             }
 
             property var model: null
@@ -63,12 +85,19 @@ Rectangle {
                         if (val === CoreEnums.VARIABLE)
                         {
                             var t = md["guiProperties"]["varType"]
-                            createProperty("resources/Properties/DropDownProperty.qml", { "value": t, "listmodel": Editor.propertyPanelProperties.varType, "name" : "Type" })
+                            createProperty("resources/Properties/DropDownProperty.qml", { "value": t, "listmodel": Editor.propertyPanelProperties.varType, "name" : "Type", "model": md["guiProperties"], "prop": "value", "method": updatePropType})
                             if (t === 0)
                             {
-                                createProperty("resources/Properties/IntProperty.qml", { "value": md["guiProperties"]["value"], "name" : "Value", "model": md["guiProperties"], "prop": "value", "method": updateProp })
+                                propertyPanel.propvalue = createProperty("resources/Properties/IntProperty.qml", { "value": md["guiProperties"]["value"], "name" : "Value", "model": md["guiProperties"], "prop": "value", "method": updateProp })
                             }
-
+                            else if (t === 1)
+                            {
+                                propertyPanel.propvalue = createProperty("resources/Properties/BoolProperty.qml", { "value": md["guiProperties"]["value"], "name" : "Value", "model": md["guiProperties"], "prop": "value", "method": updateProp })
+                            }
+                            else if (t === 2)
+                            {
+                                propertyPanel.propvalue = createProperty("resources/Properties/StringProperty.qml", { "value": md["guiProperties"]["value"], "name" : "Value", "model": md["guiProperties"], "prop": "value", "method": updateProp })
+                            }
                         }
                     }
 

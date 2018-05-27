@@ -9,6 +9,7 @@ BaseProperty {
     property alias label: _label
     property alias value: _value.currentIndex
     property alias valueRef: _value
+    property bool init: false
 
     anchors.left: parent.left
     anchors.right: parent.right
@@ -36,10 +37,11 @@ BaseProperty {
             anchors.left: _label.right
             anchors.leftMargin: 5
             onCurrentIndexChanged: {
-                if (_panel.method !== null)
+                if (_panel.method !== null && init)
                 {
                     _panel.method(_panel.model, _panel.prop, _value.currentIndex)
                 }
+                init = true
             }
         }
     }
