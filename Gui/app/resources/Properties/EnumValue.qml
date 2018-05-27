@@ -6,9 +6,15 @@ import Dnai.FontAwesome 1.0
 
 Item {
     id: _enumValue
-    property ButtonAwesomeSolid moveUpButton: _moveUpButton
-    property ButtonAwesomeSolid moveDownButton: _moveDownButton
-    property ButtonAwesomeSolid deleteButton: _deleteButton
+
+    /**
+     * Action buttons
+     */
+    property var onMoveUp: null
+    property var onMoveDown: null
+    property var onDelete: null
+
+
     property alias value: _value.text
     property real contentHeight: 24
     property var updateValue: null
@@ -39,7 +45,7 @@ Item {
             onAccepted: {
                 if (_enumValue.updateValue === null)
                     return
-                _enumValue.upadateValue(_enumValue.model, _enumValue.prop, getIndex(), _value.text)
+                _enumValue.updateValue(_enumValue.model, _enumValue.prop, getIndex(), _value.text)
             }
         }
         ButtonAwesomeSolid {
@@ -49,6 +55,10 @@ Item {
             label.text: "\uf0d7"
             label.font.pointSize: 14
             rotation: 180
+            onClicked: {
+                console.log("on clicked move up");
+                if (onMoveUp !== null) onMoveUp();
+            }
         }
         ButtonAwesomeSolid {
             id: _moveDownButton
@@ -56,6 +66,9 @@ Item {
             width: _enumValue.contentHeight
             label.text: "\uf0d7"
             label.font.pointSize: 14
+            onClicked: {
+                if (onMoveDown !== null) onMoveDown();
+            }
         }
         ButtonAwesomeSolid {
             id: _deleteButton
@@ -63,6 +76,9 @@ Item {
             width: _enumValue.contentHeight
             label.text: "\uf2ed"
             label.font.pointSize: 14
+            onClicked: {
+                if (onDelete !== null) onDelete();
+            }
         }
     }
 }

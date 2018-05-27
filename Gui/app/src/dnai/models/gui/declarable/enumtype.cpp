@@ -14,7 +14,7 @@ namespace dnai
 				{
 				}
 
-				const QStringList& EnumType::values() const
+                const QStringList& EnumType::values() const
 				{
 					return m_data.values;
 				}

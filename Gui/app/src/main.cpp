@@ -140,6 +140,7 @@ static void registerModels()
     qmlRegisterModels(dnai::models::Entity, "Entity");
     qmlRegisterModels(dnai::models::Column, "Column");
     qmlRegisterModels(dnai::models::EntityTree, "EntityTree");
+    qmlRegisterModels(dnai::models::gui::declarable::EnumType, "EnumType");
 }
 
 static void registerCore() {

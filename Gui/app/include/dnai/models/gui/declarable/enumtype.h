@@ -16,10 +16,10 @@ namespace dnai
 				class EnumType : public QObject, public Entity<data::EnumType, EnumType>
 				{
 					Q_OBJECT
-					Q_PROPERTY(QStringList values READ values WRITE setValues NOTIFY valuesChanged)
+                    Q_PROPERTY(QStringList values READ values WRITE setValues NOTIFY valuesChanged)
 				public:
 					explicit EnumType(QObject *parent = nullptr);
-					const QStringList &values() const;
+                    const QStringList &values() const;
 					Q_INVOKABLE void moveUp(int initial);
 					Q_INVOKABLE void moveDown(int initial);
 					Q_INVOKABLE void addEntry(const QString &entry);

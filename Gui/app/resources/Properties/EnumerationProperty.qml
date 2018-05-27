@@ -19,30 +19,45 @@ BaseProperty {
         id: _values
         anchors.left: parent.left
         anchors.right: parent.right
-        height: (_panel.contentHeight + _panel.valueSpacing) * model.count
+        height: (_panel.contentHeight + _panel.valueSpacing) * _panel.model[prop].length
 
         ListView {
             anchors.fill: parent
             spacing: _panel.valueSpacing
-            model: _panel.model[_panel.prop]
+            model: _panel.model[prop]
             delegate: EnumValue {
-                model: _panel.model
+                value: modelData
                 prop: _panel.prop
                 height: _panel.contentHeight
                 width: _values.width
                 contentHeight: _panel.contentHeight
-                moveUpButton.onClicked: {
+
+                function moveUp() {
                     if (_panel.model !== null)
-                        _panel.model.moveUp(getIndex())
+                    {
+                        console.log("on move up")
+                        _panel.model.moveUp(index)
+                    }
                 }
-                moveDownButton.onClicked: {
+                onMoveUp: moveUp
+
+                function moveDown() {
                     if (_panel.model !== null)
-                        _panel.model.moveDown(getIndex())
+                    {
+                        console.log("on move down");
+                        _panel.model.moveDown(index)
+                    }
                 }
-                deleteButton.onClicked: {
+                onMoveDown: moveDown
+
+                function deleteVal() {
                     if (_panel.model !== null)
+                    {
+                        console.log("on delete");
                         _panel.model.deleteEntry(value)
+                    }
                 }
+                onDelete: deleteVal
             }
         }
     }
@@ -59,7 +74,9 @@ BaseProperty {
         }
         onClicked: {
             if (_panel.model !== null)
+            {
                 _panel.model.addEntry("");
+            }
         }
     }
 }
