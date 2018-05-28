@@ -20,8 +20,12 @@ namespace dnai
 
 			void Input::_deserialize(const QJsonObject& obj)
 			{
-                Q_UNUSED(obj)
-                exceptions::ExceptionManager::throwException(exceptions::NotImplemented());
+				m_data.name = obj["name"].toString();
+				m_data.description = obj["description"].toString();
+				m_data.index = obj["index"].toInt();
+				m_data.listIndex = QUuid::fromString(obj["listIndex"].toString());
+				m_data.varType = obj["varType"].toInt();
+				m_data.value = obj["value"].toString();
 			}
 
 			const data::Input& Input::data() const
