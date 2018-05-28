@@ -20,9 +20,9 @@ namespace dnai
         class HandlerManager : public QObject
         {
             Q_OBJECT
-            //Q_PROPERTY(ProjectHandler *project READ project)
+            Q_PROPERTY(ProjectHandler *project READ project)
             Q_PROPERTY(DeclaratorHandler *declarator READ declarator)
-            //Q_PROPERTY(VariableHandler *variable READ variable)
+            Q_PROPERTY(VariableHandler *variable READ variable)
             Q_PROPERTY(EnumHandler *enumeration READ enumeration)
 
         private:

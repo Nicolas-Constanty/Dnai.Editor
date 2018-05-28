@@ -25,8 +25,8 @@ namespace dnai
             void onEntityAdded(::core::EntityID id, models::Entity &entity);
 
         public:
-            void setType(models::Entity const &variable, models::Entity const &type);
-            void setValue(models::Entity const &variable, QString const &value);
+            Q_INVOKABLE void setType(quint32 variable, quint32 type);
+            Q_INVOKABLE void setValue(quint32 variable, QString const &value);
 
         private:
             models::gui::declarable::Variable *getVariableData(::core::EntityID variable, bool throws = false);

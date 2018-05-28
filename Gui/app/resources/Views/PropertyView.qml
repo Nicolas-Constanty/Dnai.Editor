@@ -7,6 +7,8 @@ import DNAI.Enums 1.0
 import Dnai.Controls 1.0
 import Dnai.FontAwesome 1.0
 
+import DNAI.Core 1.0
+
 import "../Style"
 import "../Properties"
 import "../JavaScript/CreateComponent.js" as Factory
@@ -37,13 +39,21 @@ Rectangle {
 
             function updateProp(model, prop, value)
             {
-                console.log(model, prop, value)
-                model[prop] = value
+                console.log("set value: ", value, " of type ", typeof(value));
+
+                console.log(model.varType);
+                if (model.varType == 5)
+                    value = '"' + value + '"'
+
+                Controller.variable.setValue(propertyPanel.model.id, value);
             }
 
             function updatePropType(model, prop, value)
             {
-                model[prop] = value
+                var typemap = [2, 1, 5]
+
+                Controller.variable.setType(propertyPanel.model.id, typemap[value])
+                //model[prop] = value
                 if (propertyPanel.propvalue === null)
                     return;
                 propertyPanel.propvalue.destroy()
