@@ -39,6 +39,21 @@ qmake.exe C:\Users\Victor\Documents\EIP\Duly-GUI\Server\Server.pro -spec win32-m
 jom.exe
 move "release\Server.exe" DNAI
 
+cd DNAI
+md DNAI_UPDATER
+cd ..
+
+rmdir /s debug
+rmdir /s release
+DEL "Makefile*"
+DEL ".qmake.stash"
+
+qmake.exe C:\Users\Victor\Documents\EIP\Software-updater\SoftwareUpdater\SoftwareUpdater.pro -spec win32-msvc && C:/Qt/Tools/QtCreator/bin/jom.exe qmake_all
+jom.exe
+pause
+move "release\DNAI Updater.exe" "DNAI\DNAI_UPDATER"
+windeployqt.exe "./DNAI/DNAI_UPDATER/DNAI Updater.exe" -qmldir=C:\Users\Victor\Documents\EIP\Software-updater\SoftwareUpdater\qml -verbose=2
+
 rmdir /s debug
 rmdir /s release
 DEL "Makefile*"
