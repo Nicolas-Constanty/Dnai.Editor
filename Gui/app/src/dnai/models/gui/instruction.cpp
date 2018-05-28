@@ -64,7 +64,7 @@ namespace dnai
                 return true;
 			}
 
-			QList<models::gui::Input*> Instruction::inputs() const
+            const QList<models::gui::Input*> &Instruction::inputs() const
 			{
 				return m_data.inputs;
 			}
@@ -77,7 +77,7 @@ namespace dnai
 				return true;
 			}
 
-			QList<models::gui::Output*> Instruction::outputs() const
+            const QList<models::gui::Output*> &Instruction::outputs() const
 			{
 				return m_data.outputs;
 			}

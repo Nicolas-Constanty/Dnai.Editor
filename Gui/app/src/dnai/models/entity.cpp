@@ -245,7 +245,6 @@ namespace dnai
 
 		QObject* Entity::guiProperties() const
 		{
-			qDebug() << dynamic_cast<QObject*>(m_dataGUI);
 			return dynamic_cast<QObject*>(m_dataGUI);
 		}
 

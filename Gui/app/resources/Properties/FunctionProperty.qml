@@ -6,86 +6,59 @@ import Dnai.FontAwesome 1.0
 BaseProperty {
     id: _panel
     property var listmodel: null
+
     property real contentHeight: 24
     property real valueSpacing: 5
     property ButtonAwesomeSolid createButton: _createButton
 
+    property var addValue: null
+
+    property var moveDown: null
+    property var moveUp: null
+    property var deleteValue: null
+    property var nameChanged: null
+    property var typeChanged: null
+
+
     anchors.left: parent.left
     anchors.right: parent.right
-    height: _createButton.height + _values.height + _panel.content.anchors.topMargin * 2 + _panel.header.height - _panel.valueSpacing + _panel.spacing * 2
-
-    ListModel {
-        id: _testModel
-        ListElement {
-            name: "size"
-            type: 2
-        }
-        ListElement {
-            name: "name"
-            type: 2
-        }
-    }
-    Item {
-        id: _values
+    height: (_panel.listmodel.rowCount() * (_panel.contentHeight + _panel.valueSpacing)) + _panel.header.height + _createButton.height + _panel.content.anchors.topMargin * 2 + _panel.spacing * _panel.content.children.length
+    ListView {
+        id: _inputs
         anchors.left: parent.left
         anchors.right: parent.right
-        height: (_panel.contentHeight + _panel.valueSpacing) * _panel.model[prop].length
+        height: (_panel.listmodel.rowCount() * (_panel.contentHeight + _panel.valueSpacing))
+        model: _panel.listmodel
+        spacing: _panel.valueSpacing
 
-        ListView {
-            anchors.fill: parent
-            spacing: _panel.valueSpacing
-            model: _testModel
-            onModelChanged: {
-                _panel.height = _panel.height = _createButton.height + (_panel.contentHeight + _panel.valueSpacing) * _panel.model[prop].length + _panel.content.anchors.topMargin * 2 + _panel.header.height - _panel.valueSpacing + _panel.spacing * 2
+        delegate: ParameterValue {
+            anchors.left: parent.left
+            anchors.right: parent.right
+            height: _panel.contentHeight
+            name: model.name
+            varType: model.varType
+            paramModel: model
+
+            moveDown: function () {
+                _panel.moveDown(index)
             }
-
-            delegate: ParameterValue {
-                name: model.name
-                prop: _panel.prop
-                height: _panel.contentHeight
-                anchors.left: parent.left
-                anchors.right: parent.right
-                contentHeight: _panel.contentHeight
-
-                function moveUp() {
-                    if (_panel.model !== null)
-                    {
-//                        console.log("on move up")
-                        _panel.model.moveUp(index)
-                    }
-                }
-                moveUp: moveUp
-
-                function moveDown() {
-                    if (_panel.model !== null)
-                    {
-//                        console.log("on move down");
-                        _panel.model.moveDown(index)
-                    }
-                }
-                moveDown: moveDown
-
-                function deleteVal() {
-                    if (_panel.model !== null)
-                    {
-                        console.log("on delete");
-                        _panel.model.deleteEntry(value)
-                    }
-                }
-                deleteParameter: deleteVal
-
-                function nameChanged(val) {
-                    console.log(val)
-                }
-                parameterNameChanged: nameChanged
-
-                function typeChanged(val) {
-                    console.log(val)
-                }
-                parameterTypeChanged: typeChanged
+            moveUp: function () {
+                _panel.moveUp(index)
+            }
+            deleteValue: function () {
+                _panel.deleteValue(name)
+                _inputs.height -= _panel.contentHeight + _panel.valueSpacing
+                _panel.height -= _panel.contentHeight + _panel.valueSpacing
+            }
+            nameChanged: function (n) {
+                _panel.nameChanged(index, n)
+            }
+            typeChanged: function (t) {
+                _panel.typeChanged(index, t)
             }
         }
     }
+
     ButtonAwesomeSolid {
         id: _createButton
         label.text: "\uf055"
@@ -98,9 +71,11 @@ BaseProperty {
             color: "transparent"
         }
         onClicked: {
-            if (_panel.model !== null)
+            if (_panel !== null)
             {
-                _panel.model.addEntry("");
+                _panel.addValue()
+                _inputs.height += _panel.contentHeight + _panel.valueSpacing
+                _panel.height += _panel.contentHeight + _panel.valueSpacing
             }
         }
     }

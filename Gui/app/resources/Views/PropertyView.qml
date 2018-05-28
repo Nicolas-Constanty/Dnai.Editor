@@ -19,6 +19,12 @@ Rectangle {
     property real rowheight: 16
     property var last: null
 
+    function debugModel(md)
+    {
+        for (var p in md)
+            console.log(p, md[p])
+    }
+
     ScrollView {
         anchors.fill: parent
         Column {
@@ -123,16 +129,66 @@ Rectangle {
                         {
                             createProperty("resources/Properties/FunctionProperty.qml",
                                            {
-                                               "inputsmodel": md["guiProperties"]["inputs"],
-                                               "outputsmodel": md["guiProperties"]["outputs"],
-                                               "name" : "Parameters / Return",
+                                               "listmodel": md["guiProperties"].inputModels,
+                                               "name" : "Parameters",
                                                "model": md,
                                                "prop": "guiProperties",
-                                               "method": updateFunction
+                                               "addValue": function () {
+                                                   md["guiProperties"].addInput("", 0)
+                                               },
+                                               "moveUp" : function (idx)
+                                               {
+                                                   md["guiProperties"].moveInputUp(idx)
+                                               },
+                                               "moveDown" : function (idx)
+                                               {
+                                                   md["guiProperties"].moveInputDown(idx)
+                                               },
+                                               "deleteValue": function (val)
+                                               {
+                                                   md["guiProperties"].removeInput(val)
+                                               },
+                                               "nameChanged": function (idx, val)
+                                               {
+                                                   md["guiProperties"].updateInputName(idx, val)
+                                               },
+                                               "typeChanged": function (idx, val)
+                                               {
+                                                   md["guiProperties"].updateInputVarType(idx, val)
+                                               }
+                                           })
+                            createProperty("resources/Properties/FunctionProperty.qml",
+                                           {
+                                               "listmodel": md["guiProperties"].outputModels,
+                                               "name" : "Return",
+                                               "model": md,
+                                               "prop": "guiProperties",
+                                               "addValue": function () {
+                                                   md["guiProperties"].addOutput("", 0)
+                                               },
+                                               "moveUp" : function (idx)
+                                               {
+                                                   md["guiProperties"].moveOutputUp(idx)
+                                               },
+                                               "moveDown" : function (idx)
+                                               {
+                                                   md["guiProperties"].moveOutputDown(idx)
+                                               },
+                                               "deleteValue": function (val)
+                                               {
+                                                   md["guiProperties"].removeOutput(val)
+                                               },
+                                               "nameChanged": function (idx, val)
+                                               {
+                                                   md["guiProperties"].updateOutputName(idx, val)
+                                               },
+                                               "typeChanged": function (idx, val)
+                                               {
+                                                   md["guiProperties"].updateOutputVarType(idx, val)
+                                               }
                                            })
                         }
                     }
-
                     //print(prop += " (" + typeof(md[prop]) + ") = " + md[prop]);
                 }
             }
