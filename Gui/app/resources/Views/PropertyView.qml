@@ -71,6 +71,9 @@ Rectangle {
             onModelChanged: {
                 if (propertyPanel.model === null)
                     return
+
+                console.log('======== modèle des propriétés:', propertyPanel.model, "=========");
+
                 for(var i = propertyPanel.children.length; i > 0 ; i--) {
                    propertyPanel.children[i-1].destroy()
                  }
@@ -112,7 +115,8 @@ Rectangle {
                                                "name" : "Values",
                                                "model": md["guiProperties"],
                                                "prop": "values",
-                                               "method": updateEnumerator
+                                               "method": updateEnumerator,
+                                               "entityID": propertyPanel.model.id
                                            })
                         }
                         else if (val === CoreEnums.FUNCTION)

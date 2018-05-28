@@ -21,17 +21,15 @@ namespace dnai
         {
             Q_OBJECT
             //Q_PROPERTY(ProjectHandler *project READ project)
-            Q_PROPERTY(DeclaratorHandler *declarator READ declarator NOTIFY declaratorChanged)
+            Q_PROPERTY(DeclaratorHandler *declarator READ declarator)
             //Q_PROPERTY(VariableHandler *variable READ variable)
+            Q_PROPERTY(EnumHandler *enumeration READ enumeration)
 
         private:
             HandlerManager();
 
         public:
             static HandlerManager &Instance();
-
-        signals:
-            void declaratorChanged();
 
             /*
              * QML Properties
@@ -40,6 +38,7 @@ namespace dnai
             ProjectHandler *project();
             DeclaratorHandler *declarator();
             VariableHandler *variable();
+            EnumHandler *enumeration();
 
             /*
              * Inner c++ properties
@@ -48,6 +47,7 @@ namespace dnai
             ProjectHandler &Project();
             DeclaratorHandler &Declarator();
             VariableHandler &Variable();
+            EnumHandler &Enumeration();
 
         private:
             EntityManager m_manager;
@@ -56,6 +56,7 @@ namespace dnai
             ProjectHandler m_project;
             DeclaratorHandler m_declarator;
             VariableHandler m_variable;
+            EnumHandler m_enumeration;
         };
     }
 }
