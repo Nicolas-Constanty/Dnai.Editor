@@ -62,6 +62,19 @@ namespace dnai
 				m_data.value = value;
 				return false;
 			}
+
+			const QString Input::name() const
+			{
+				return m_data.name;
+			}
+
+			bool Input::setName(const QString name)
+			{
+				if (m_data.name == name)
+					return false;
+				m_data.name = name;
+				return true;
+			}
 		}
 	}
 }

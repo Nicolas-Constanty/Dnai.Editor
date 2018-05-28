@@ -177,5 +177,8 @@
         <file>resources/Properties/DropDownProperty.qml</file>
         <file>resources/Properties/EnumerationProperty.qml</file>
         <file>resources/Properties/BaseProperty.qml</file>
+        <file>resources/Nodes/Getter/Getter.qml</file>
+        <file>resources/Properties/FunctionProperty.qml</file>
+        <file>resources/Properties/ParameterValue.qml</file>
     </qresource>
 </RCC>

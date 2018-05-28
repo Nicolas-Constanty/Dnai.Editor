@@ -25,6 +25,8 @@ namespace dnai
 	            bool setVarType(qint32 id) override;
                 const QString &value() const override;
                 bool setValue(const QString& value) override;
+	            const QString name() const;
+	            bool setName(QString);
             private:
 				data::Output m_data;
 			};

@@ -103,6 +103,100 @@ namespace dnai
 					m_data.flowOut = flow;
 					return true;
 				}
+
+				void Function::addInput(const QString& name, qint32 varType)
+				{
+					for (auto i : m_data.inputs)
+					{
+						if (i->data().name == name)
+							return;
+					}
+					auto input = new gui::Input();
+					input->setVarType(varType);
+					input->setName(name);
+					m_data.inputs.append(input);
+					emit inputsChanged(m_data.inputs);
+				}
+
+				void Function::addOutput(const QString& name, qint32 varType)
+				{
+					for (auto i : m_data.outputs)
+					{
+						if (i->data().name == name)
+							return;
+					}
+					auto output = new gui::Output();
+					output->setVarType(varType);
+					output->setName(name);
+					m_data.outputs.append(output);
+					emit outputsChanged(m_data.outputs);
+				}
+
+				void Function::removeInput(const QString& name)
+				{
+					int index = 0;
+					for (auto i : m_data.inputs)
+					{
+						if (i->data().name == name)
+							break;
+						index++;
+					}
+					m_data.inputs.removeAt(index);
+					emit inputsChanged(m_data.inputs);
+				}
+
+				void Function::removeOutput(const QString& name)
+				{
+					int index = 0;
+					for (auto i : m_data.outputs)
+					{
+						if (i->data().name == name)
+							break;
+						index++;
+					}
+					m_data.outputs.removeAt(index);
+					emit outputsChanged(m_data.outputs);
+				}
+
+				void Function::moveInputUp(int index)
+				{
+					if (index < 0)
+						return;
+					const auto start = index % m_data.inputs.length();
+					const auto end = (start <= 0) ? m_data.inputs.length() - 1 : start - 1;
+					m_data.inputs.swap(start, end);
+					emit inputsChanged(m_data.inputs);
+				}
+
+				void Function::moveOutputUp(int index)
+				{
+					if (index < 0)
+						return;
+					const auto start = index % m_data.outputs.length();
+					const auto end = (start <= 0) ? m_data.outputs.length() - 1 : start - 1;
+					m_data.outputs.swap(start, end);
+					emit outputsChanged(m_data.outputs);
+				}
+
+				void Function::moveInputDown(int index)
+				{
+					if (index < 0)
+						return;
+					const auto start = index % m_data.inputs.length();
+					const auto end = (start + 1) % m_data.inputs.length();
+					m_data.inputs.swap(start, end);
+					emit inputsChanged(m_data.inputs);
+				}
+
+				void Function::moveOutputDown(int index)
+				{
+					if (index < 0)
+						return;
+					const auto start = index % m_data.outputs.length();
+					const auto end = (start + 1) % m_data.outputs.length();
+					m_data.outputs.swap(start, end);
+					emit outputsChanged(m_data.outputs);
+				}
 			}
 		}
 	}

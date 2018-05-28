@@ -115,6 +115,18 @@ Rectangle {
                                                "method": updateEnumerator
                                            })
                         }
+                        else if (val === CoreEnums.FUNCTION)
+                        {
+                            createProperty("resources/Properties/FunctionProperty.qml",
+                                           {
+                                               "inputsmodel": md["guiProperties"]["inputs"],
+                                               "outputsmodel": md["guiProperties"]["outputs"],
+                                               "name" : "Parameters / Return",
+                                               "model": md,
+                                               "prop": "guiProperties",
+                                               "method": updateFunction
+                                           })
+                        }
                     }
 
                     //print(prop += " (" + typeof(md[prop]) + ") = " + md[prop]);
