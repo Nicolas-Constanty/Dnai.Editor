@@ -12,6 +12,7 @@ namespace dnai
 			{
 				EnumType::EnumType(QObject* parent) : QObject(parent)
 				{
+
 				}
 
                 const QStringList& EnumType::values() const
@@ -30,13 +31,7 @@ namespace dnai
 				}
 
 				void EnumType::addEntry(const QString& entry)
-				{
-					if (entry.isEmpty())
-					{
-						m_data.values.append(QString("Empty ") + QString::number(m_data.values.length()));
-						emit valuesChanged(m_data.values);
-						return;
-					}
+                {
 					for (const auto &val : m_data.values)
 						if (val == entry)
 							return;

@@ -21,15 +21,15 @@ namespace dnai
             void setup();
 
         signals:
-            void valueSet(dnai::models::Entity *entity, QString const &name, QJsonValue const &value);
-            void valueRemoved(dnai::models::Entity *entity, QString const &name);
+            void valueSet(dnai::models::gui::declarable::EnumType *enumeration, QString const &name, QJsonValue const &value);
+            void valueRemoved(dnai::models::gui::declarable::EnumType *enumeration, QString const &name);
 
         public slots:
             void onEntityAdded(::core::EntityID id, models::Entity &entity);
 
         public:
-            Q_INVOKABLE void setValue(::core::EntityID entity, QString const &name, QJsonValue const &value);
-            Q_INVOKABLE void removeValue(::core::EntityID entity, QString const &name);
+            Q_INVOKABLE void setValue(quint32 entity, QString name, QJsonValue const &value);
+            Q_INVOKABLE void removeValue(quint32 entity, QString const &name);
 
         private:
             void onValueSet(::core::EntityID enumeration, QString const &name, QString const &value);

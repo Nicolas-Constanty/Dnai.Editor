@@ -2,6 +2,7 @@ import QtQuick 2.0
 import QtQuick.Controls 2.2
 import Dnai.Controls 1.0
 import Dnai.FontAwesome 1.0
+import DNAI.Core 1.0
 
 BaseProperty {
     id: _panel
@@ -9,6 +10,7 @@ BaseProperty {
     property real contentHeight: 24
     property real valueSpacing: 5
     property ButtonAwesomeSolid createButton: _createButton
+    property int entityID: -1
 
     anchors.left: parent.left
     anchors.right: parent.right
@@ -39,7 +41,6 @@ BaseProperty {
                 function moveUp() {
                     if (_panel.model !== null)
                     {
-//                        console.log("on move up")
                         _panel.model.moveUp(index)
                     }
                 }
@@ -48,7 +49,6 @@ BaseProperty {
                 function moveDown() {
                     if (_panel.model !== null)
                     {
-//                        console.log("on move down");
                         _panel.model.moveDown(index)
                     }
                 }
@@ -57,8 +57,7 @@ BaseProperty {
                 function deleteVal() {
                     if (_panel.model !== null)
                     {
-                        console.log("on delete");
-                        _panel.model.deleteEntry(value)
+                        Controller.enumeration.removeValue(entityID, value)
                     }
                 }
                 onDelete: deleteVal
@@ -79,7 +78,8 @@ BaseProperty {
         onClicked: {
             if (_panel.model !== null)
             {
-                _panel.model.addEntry("");
+                Controller.enumeration.setValue(entityID, "", Math.random());
+                //_panel.model.addEntry("");
                 _panel.height = _createButton.height + (_panel.contentHeight + _panel.valueSpacing) * _panel.model[prop].length + _panel.content.anchors.topMargin * 2 + header.height - _panel.valueSpacing + _panel.spacing * 2
             }
         }
