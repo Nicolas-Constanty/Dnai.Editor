@@ -1,6 +1,7 @@
 import QtQuick 2.0
 import QtQuick.Controls 2.2
 
+import DNAI 1.0
 import Dnai.Controls 1.0
 import Dnai.FontAwesome 1.0
 
@@ -12,17 +13,16 @@ Item {
      */
     property var moveUp: null
     property var moveDown: null
-    property var deleteParameter: null
-    property var parameterTypeChanged: null
-    property var parameterNameChanged: null
-
+    property var deleteValue: null
+    property var typeChanged: null
+    property var nameChanged: null
 
     property real contentHeight: 24
     property var updateValue: null
-    property var listmodel: null
     property var prop: null
     property alias name: _name.text
-    property alias type: _type.currentIndex
+    property alias varType: _type.currentIndex
+    property var paramModel: null
 
     property bool init: false
 
@@ -37,16 +37,16 @@ Item {
             height: _parameterValue.contentHeight
             horizontalAlignment: TextInput.AlignLeft
             onAccepted: {
-                if (parameterNameChanged !== null) parameterNameChanged(_name.text)
+                if (nameChanged !== null) nameChanged(_name.text)
             }
         }
         ComboBox {
             id: _type
-            model: listmodel
+            model: Editor.propertyPanelProperties.varType
             height: _parameterValue.contentHeight
             width: _parameterValue.contentHeight * 2
             onCurrentIndexChanged: {
-                if (parameterNameChanged !== null) parameterTypeChanged(_type.currentIndex)
+                if (typeChanged !== null) typeChanged(_type.currentIndex)
             }
         }
         ButtonAwesomeSolid {
@@ -58,7 +58,7 @@ Item {
             rotation: 180
             onClicked: {
 //                console.log("on clicked move up");
-                if (onMoveUp !== null) onMoveUp();
+                if (moveUp !== null) moveUp();
             }
         }
         ButtonAwesomeSolid {
@@ -68,7 +68,7 @@ Item {
             label.text: "\uf0d7"
             label.font.pointSize: 14
             onClicked: {
-                if (onMoveDown !== null) onMoveDown();
+                if (moveDown !== null) moveDown();
             }
         }
         ButtonAwesomeSolid {
@@ -78,7 +78,7 @@ Item {
             label.text: "\uf2ed"
             label.font.pointSize: 14
             onClicked: {
-                if (onDelete !== null) onDelete();
+                if (deleteValue !== null) deleteValue();
             }
         }
     }
