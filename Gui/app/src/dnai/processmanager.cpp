@@ -45,25 +45,37 @@ void ProcessManager::launchUpdater(QString const &actualVer, QString const &newV
 #else
     args.push_back(actualVer);
     args.push_back(newVersion);
+
+ /*   QString appDirPath = QGuiApplication::applicationDirPath();
+    while (appDirPath.size() >= 0 && appDirPath.back() != '/') {
+        appDirPath.remove(appDirPath.size() - 1, 1);
+    }
+    appDirPath.remove(appDirPath.size() - 1, 1);
+    args.push_back(appDirPath);
+    qDebug() << appDirPath;*/
     args.push_back(QGuiApplication::applicationDirPath());
+
     args.push_back("DNAI");
-    qDebug() << QGuiApplication::applicationDirPath();
+    qDebug() << "applicationDirPath: " << QGuiApplication::applicationDirPath();
     QString updaterDir = m_updaterApp;
     m_updaterApp = "\"" + m_updaterApp + "\" ";// +  actualVer + " " + newVersion + " \"" + QGuiApplication::applicationDirPath() + "\" " + "DNAI";
-    qDebug() << m_updaterApp;
+    qDebug() << "M_UPDATERAPP: " << m_updaterApp;
 
     int idx = m_updaterApp.size();
     while (updaterDir.size() >= 0 && updaterDir.back() != '/') {
         updaterDir.remove(updaterDir.size() - 1, 1);
     }
+    updaterDir.remove(updaterDir.size() - 1, 1);
+    qDebug() << "UPDATERDIR: " << updaterDir;
 
-    QDir dirRemove(QDir::tempPath() + "/DNAI_UPDATER");
+    /*QDir dirRemove(QDir::tempPath() + "/DNAI_UPDATER");
 
-    dirRemove.removeRecursively();
+    dirRemove.removeRecursively();*/
 
     QDir dir;
 
-    dir.rename(updaterDir, QDir::tempPath() + "/DNAI_UPDATER");
+    bool returnRename = dir.rename(updaterDir, QDir::tempPath() + "/DNAI_UPDATER");
+    qDebug() << returnRename;
     proc.startDetached(QDir::tempPath() + "/DNAI_UPDATER/DNAI Updater.exe", args);
 
 #endif

@@ -54,6 +54,9 @@ pause
 move "release\DNAI Updater.exe" "DNAI\DNAI_UPDATER"
 windeployqt.exe "./DNAI/DNAI_UPDATER/DNAI Updater.exe" -qmldir=C:\Users\Victor\Documents\EIP\Software-updater\SoftwareUpdater\qml -verbose=2
 
+copy "C:\Users\Victor\Documents\EIP\Software-updater\SoftwareUpdater\lib\libeay32.dll" "./DNAI/DNAI_UPDATER/"
+copy "C:\Users\Victor\Documents\EIP\Software-updater\SoftwareUpdater\lib\ssleay32.dll" "./DNAI/DNAI_UPDATER/"
+
 rmdir /s debug
 rmdir /s release
 DEL "Makefile*"

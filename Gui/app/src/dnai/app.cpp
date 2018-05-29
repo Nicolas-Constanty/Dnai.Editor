@@ -78,8 +78,8 @@ namespace dnai
             Editor::instance().notifyError("Could not check for update.", []() {
 
             });
-//            m_settings->setAPIVersion("0.0.30");
-//            onNotifyVersionChanged();
+            m_settings->setAPIVersion("0.0.30");
+            onNotifyVersionChanged();
 
             return response;
         });
