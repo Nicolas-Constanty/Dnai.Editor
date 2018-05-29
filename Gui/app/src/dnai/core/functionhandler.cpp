@@ -5,6 +5,8 @@
 #include "dnai/commands/commandmanager.h"
 #include "dnai/commands/corecommand.h"
 
+#include "dnai/editor.h"
+
 using namespace std::placeholders;
 
 namespace dnai
@@ -32,10 +34,24 @@ namespace dnai
         {
             Q_UNUSED(id)
             Q_UNUSED(added)
+
+            /*foreach (instruction in entity.instructions)
+            {
+                addInstruction(entity, instruction.id, instruction.construction);
+            }
+
+            foreach (instruction in entity.instructions)
+            {
+                //link data: function [ok], instruction [ok], input [ok], output [ok],
+                //link flow
+            }*/
         }
 
-        void FunctionHandler::setParameter(const models::Entity &function, const models::Entity &paramVar)
+        void FunctionHandler::setParameter(quint32 func, quint32 param)
         {
+            models::Entity &function = manager.getEntity(func);
+            models::Entity &paramVar = manager.getEntity(param);
+
             if (getFunctionData(function.id()) != nullptr && paramVar.parentItem() == &function)
                 commands::CommandManager::Instance()->exec(
                     new commands::CoreCommand("Function.SetParameter", true,
@@ -45,15 +61,32 @@ namespace dnai
                 );
         }
 
-        void FunctionHandler::setReturn(const models::Entity &function, const models::Entity &returnVar)
+        void FunctionHandler::setReturn(quint32 func, quint32 ret)
         {
+            models::Entity &function = manager.getEntity(func);
+            models::Entity &returnVar = manager.getEntity(ret);
+
             if (getFunctionData(function.id()) != nullptr && returnVar.parentItem() == &function)
                 commands::CommandManager::Instance()->exec(
                     new commands::CoreCommand("Function.SetReturn", true,
                         std::bind(&::core::function::setReturn, function.id(), returnVar.name()),
                         nullptr /* not implemented yet */
                     )
-                );
+                            );
+        }
+
+        void FunctionHandler::addInstruction(quint32 func, quint32 instrType, const QList<core::EntityID> &arguments)
+        {
+            models::Entity &function = manager.getEntity(func);
+
+            commands::CommandManager::Instance()->exec(
+                new commands::CoreCommand("Function.AddInstruction", true,
+                    [&function, instrType, arguments](){
+                        ::core::function::addInstruction(function.id(), static_cast<core::INSTRUCTION>(instrType), arguments.toStdList());
+                    },
+                    nullptr // find a system to get the freshly created instruction id in order to remove it
+                )
+            );
         }
 
         models::gui::declarable::Function *FunctionHandler::getFunctionData(::core::EntityID function, bool throws)
@@ -98,6 +131,30 @@ namespace dnai
             Q_UNUSED(message)
         }
 
+        void FunctionHandler::onInstructionAdded(EntityID function, INSTRUCTION type, const std::list<EntityID> &arguments, InstructionID instruction)
+        {
+            commands::CoreCommand::Success();
 
+            Q_UNUSED(function)
+            Q_UNUSED(type)
+            Q_UNUSED(arguments)
+            Q_UNUSED(instruction)
+            /*
+             * Find the models::Entity
+             * Find the models::gui::declarable::function
+             * Create the correct instruction
+             * Add the instruction to function
+             */
+        }
+
+        void FunctionHandler::onAddInstructionError(EntityID function, INSTRUCTION type, const std::list<EntityID> &arguments, const QString &messsage)
+        {
+            Q_UNUSED(function)
+            Q_UNUSED(type)
+            Q_UNUSED(arguments)
+
+            commands::CoreCommand::Error();
+            Editor::instance().notifyError("Unable to create instruction: " + messsage, [](){});
+        }
     }
 }
