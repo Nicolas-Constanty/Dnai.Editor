@@ -7,6 +7,8 @@ import DNAI.Enums 1.0
 import Dnai.Controls 1.0
 import Dnai.FontAwesome 1.0
 
+import DNAI.Core 1.0
+
 import "../Style"
 import "../Properties"
 import "../JavaScript/CreateComponent.js" as Factory
@@ -18,6 +20,12 @@ Rectangle {
     property string title: "Property panel"
     property real rowheight: 16
     property var last: null
+
+    function debugModel(md)
+    {
+        for (var p in md)
+            console.log(p, md[p])
+    }
 
     ScrollView {
         anchors.fill: parent
@@ -37,27 +45,37 @@ Rectangle {
 
             function updateProp(model, prop, value)
             {
-                console.log(model, prop, value)
-                model[prop] = value
+                model[prop] = value;
+            }
+
+            function setVariableValue(model, prop, value)
+            {
+                if (model.varType === 5)
+                    value = '"' + value + '"'
+
+                Controller.variable.setValue(propertyPanel.model.id, value)
             }
 
             function updatePropType(model, prop, value)
             {
-                model[prop] = value
+                var typemap = [2, 1, 5]
+
+                Controller.variable.setType(propertyPanel.model.id, typemap[value])
+
                 if (propertyPanel.propvalue === null)
                     return;
                 propertyPanel.propvalue.destroy()
                 if (value === 0)
                 {
-                    propertyPanel.propvalue = createProperty("resources/Properties/IntProperty.qml", { "value": 0, "name" : "Value", "model": model, "prop": prop, "method": updateProp })
+                    propertyPanel.propvalue = createProperty("resources/Properties/IntProperty.qml", { "value": 0, "name" : "Value", "model": model, "prop": prop, "method": setVariableValue })
                 }
                 else if (value === 1)
                 {
-                    propertyPanel.propvalue = createProperty("resources/Properties/BoolProperty.qml", { "value": false, "name" : "Value", "model": model, "prop": prop, "method": updateProp })
+                    propertyPanel.propvalue = createProperty("resources/Properties/BoolProperty.qml", { "value": false, "name" : "Value", "model": model, "prop": prop, "method": setVariableValue })
                 }
                 else if (value === 2)
                 {
-                    propertyPanel.propvalue = createProperty("resources/Properties/StringProperty.qml", { "value": "", "name" : "Value", "model": model, "prop": prop, "method": updateProp })
+                    propertyPanel.propvalue = createProperty("resources/Properties/StringProperty.qml", { "value": "", "name" : "Value", "model": model, "prop": prop, "method": setVariableValue })
                 }
             }
 
@@ -81,11 +99,16 @@ Rectangle {
                 for (var prop in md) {
                     if (prop === "name")
                     {
-                        createProperty("resources/Properties/StringProperty.qml", { "value":  md[prop], "name" : prop, "model": md, "prop": prop, "method": updateProp })
+                        createProperty("resources/Properties/StringProperty.qml", { "value":  md[prop], "name" : prop, "model": md, "prop": prop, "method": function(model, prop, value){
+                            Controller.declarator.rename(md.containerId, md.name, value);
+                        } })
                     }
                     else if (prop === "visibility")
                     {
-                        createProperty("resources/Properties/DropDownProperty.qml", { "value": md[prop], "listmodel":  Editor.propertyPanelProperties.visibility, "name" : prop, "model": md, "prop": prop, "method": updateProp })
+                        createProperty("resources/Properties/DropDownProperty.qml", { "value": md[prop], "listmodel":  Editor.propertyPanelProperties.visibility, "name" : prop, "model": md, "prop": prop, "method": function(model, prop, value) {
+                            console.log("Visibility:", value);
+                            Controller.declarator.setVisibility(md.containerId, md.name, value);
+                        } })
                     }
                     else if (prop === "entityType")
                     {
@@ -96,15 +119,15 @@ Rectangle {
                             createProperty("resources/Properties/DropDownProperty.qml", { "value": t, "listmodel": Editor.propertyPanelProperties.varType, "name" : "Type", "model": md["guiProperties"], "prop": "value", "method": updatePropType})
                             if (t === 0)
                             {
-                                propertyPanel.propvalue = createProperty("resources/Properties/IntProperty.qml", { "value": md["guiProperties"]["value"], "name" : "Value", "model": md["guiProperties"], "prop": "value", "method": updateProp })
+                                propertyPanel.propvalue = createProperty("resources/Properties/IntProperty.qml", { "value": md["guiProperties"]["value"], "name" : "Value", "model": md["guiProperties"], "prop": "value", "method": setVariableValue })
                             }
                             else if (t === 1)
                             {
-                                propertyPanel.propvalue = createProperty("resources/Properties/BoolProperty.qml", { "value": md["guiProperties"]["value"], "name" : "Value", "model": md["guiProperties"], "prop": "value", "method": updateProp })
+                                propertyPanel.propvalue = createProperty("resources/Properties/BoolProperty.qml", { "value": md["guiProperties"]["value"], "name" : "Value", "model": md["guiProperties"], "prop": "value", "method": setVariableValue })
                             }
                             else if (t === 2)
                             {
-                                propertyPanel.propvalue = createProperty("resources/Properties/StringProperty.qml", { "value": md["guiProperties"]["value"], "name" : "Value", "model": md["guiProperties"], "prop": "value", "method": updateProp })
+                                propertyPanel.propvalue = createProperty("resources/Properties/StringProperty.qml", { "value": md["guiProperties"]["value"], "name" : "Value", "model": md["guiProperties"], "prop": "value", "method": setVariableValue })
                             }
                         }
                         else if (val === CoreEnums.ENUM_TYPE)
@@ -123,16 +146,83 @@ Rectangle {
                         {
                             createProperty("resources/Properties/FunctionProperty.qml",
                                            {
-                                               "inputsmodel": md["guiProperties"]["inputs"],
-                                               "outputsmodel": md["guiProperties"]["outputs"],
-                                               "name" : "Parameters / Return",
+                                               "listmodel": md["guiProperties"].inputModels,
+                                               "name" : "Parameters",
                                                "model": md,
                                                "prop": "guiProperties",
-                                               "method": updateFunction
+                                               "addValue": function () {
+                                                   //md["guiProperties"].addInput("", 0)
+
+                                                   var name = "Empty: " + Math.random();
+
+                                                   Controller.declarator.declare(propertyPanel.model.id, 1, name);
+                                                   Controller.Function.setParameter(propertyPanel.model.id, name);
+                                               },
+                                               "moveUp" : function (idx)
+                                               {
+                                                   md["guiProperties"].moveInputUp(idx)
+                                               },
+                                               "moveDown" : function (idx)
+                                               {
+                                                   md["guiProperties"].moveInputDown(idx)
+                                               },
+                                               "deleteValue": function (val)
+                                               {
+                                                   //md["guiProperties"].removeInput(val)
+
+                                                   Controller.declarator.remove(propertyPanel.model.id, val);
+                                               },
+                                               "nameChanged": function (idx, val)
+                                               {
+                                                   md["guiProperties"].updateInputName(idx, val)
+
+                                                   //Controller.declarator.re
+                                               },
+                                               "typeChanged": function (idx, val)
+                                               {
+                                                   //md["guiProperties"].updateInputVarType(idx, val)
+
+                                                   var ent = md.findByName(val);
+
+                                                   console.log('Set param type entity: ', ent);
+
+                                                   var conv = [2, 1, 5]
+
+                                                   Controller.variable.setType(ent.id, conv[idx]);
+                                               }
+                                           })
+                            createProperty("resources/Properties/FunctionProperty.qml",
+                                           {
+                                               "listmodel": md["guiProperties"].outputModels,
+                                               "name" : "Return",
+                                               "model": md,
+                                               "prop": "guiProperties",
+                                               "addValue": function () {
+                                                   md["guiProperties"].addOutput("", 0)
+                                               },
+                                               "moveUp" : function (idx)
+                                               {
+                                                   md["guiProperties"].moveOutputUp(idx)
+                                               },
+                                               "moveDown" : function (idx)
+                                               {
+                                                   md["guiProperties"].moveOutputDown(idx)
+                                               },
+                                               "deleteValue": function (val)
+                                               {
+                                                   md["guiProperties"].removeOutput(val)
+                                               },
+                                               "nameChanged": function (idx, val)
+                                               {
+                                                   md["guiProperties"].updateOutputName(idx, val)
+                                               },
+                                               "typeChanged": function (idx, val)
+                                               {
+                                                   md["guiProperties"].updateOutputVarType(idx, val)
+                                               }
                                            })
                         }
                     }
-
                     //print(prop += " (" + typeof(md[prop]) + ") = " + md[prop]);
                 }
             }

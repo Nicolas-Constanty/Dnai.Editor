@@ -34,7 +34,8 @@ namespace dnai
 
 					static const QString &getVariableName(qint32 identifier);
 					static void addVariableType(qint32 identifier, const QString &name);
-	                static const QMap<qint32, QString>& getVariableMap();
+                    static const QMap<quint32, QString>& getVariableMap();
+                    static const QMap<QString, quint32>& getVariableMap2();
 	                static const QStringList &getVariableList();
 					static const int variableListCount();
 
@@ -42,9 +43,9 @@ namespace dnai
 					void varTypeChanged(qint32 id);
 					void valueChanged(const QString &variant);
 
-
                 private:
-					static QMap<qint32, QString> m_typeMap;
+                    static QMap<quint32, QString> m_typeMap;
+                    static QMap<QString, quint32> m_typeMap2;
 					static QStringList m_typeList;
 				};
 			}

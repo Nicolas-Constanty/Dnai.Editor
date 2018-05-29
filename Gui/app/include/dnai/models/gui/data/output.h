@@ -14,12 +14,12 @@ namespace dnai
 			{
 				struct Output : Variable, Linkable
 				{
-					QString name;
-					Output &operator=(const Output &link) = default;
+                    QString name;
+                    Output &operator=(const Output &link) = default;
 					bool operator!=(const Output &link) const
 					{
 						return !(*this == link);
-					}
+                    }
 					bool operator==(const Output &link) const
 					{
 						return (name == link.name && Variable::operator==(link) && Linkable::operator==(link));

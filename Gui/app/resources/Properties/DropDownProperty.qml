@@ -7,7 +7,7 @@ BaseProperty {
     property var listmodel: null
     property real contentHeight: 35
     property alias label: _label
-    property alias value: _value.currentIndex
+    property alias value: _value.currentText
     property alias valueRef: _value
     property bool init: false
 

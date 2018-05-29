@@ -245,7 +245,6 @@ namespace dnai
 
 		QObject* Entity::guiProperties() const
 		{
-			qDebug() << dynamic_cast<QObject*>(m_dataGUI);
 			return dynamic_cast<QObject*>(m_dataGUI);
 		}
 
@@ -376,8 +375,21 @@ namespace dnai
 			if (m_editableProperty)
 			{
 				m_editableProperty->setProp(row, value);
-			}
-		}
+            }
+        }
+
+        Entity *Entity::findByName(const QString &name) const
+        {
+            for (Column *curr : m_columns)
+            {
+                for (models::Entity *entity : curr->getEntities())
+                {
+                    if (entity->name() == name)
+                        return entity;
+                }
+            }
+            return nullptr;
+        }
 
 		QHash<int, QByteArray> Column::roleNames() const
 		{

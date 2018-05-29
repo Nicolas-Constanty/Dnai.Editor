@@ -1,6 +1,7 @@
 #include "dnai/models/gui/declarable/function.h"
 
 #include <QJsonArray>
+#include <QDebug>
 #include "dnai/models/gui/instruction.h"
 
 namespace dnai
@@ -11,8 +12,203 @@ namespace dnai
 		{
 			namespace declarable
 			{
+				FunctionInputs::FunctionInputs(QList<models::gui::Input*>*l) : QAbstractListModel(nullptr)
+				{
+					m_list = l;
+				}
+
+				int FunctionInputs::rowCount(const QModelIndex& parent) const
+				{
+					return m_list->count();
+				}
+
+				QVariant FunctionInputs::data(const QModelIndex& index, const int role) const
+				{
+					if (!index.isValid())
+						return QVariant();
+					if (role == Name)
+						return QVariant::fromValue(m_list->at(index.row())->name());
+					else if (role == Type)
+						return QVariant::fromValue(m_list->at(index.row())->varType());
+					return QVariant();
+				}
+
+				void FunctionInputs::add(const QString& name, const qint32 varType)
+				{
+					beginInsertRows(QModelIndex(), m_list->length(), m_list->length());
+					auto input = new gui::Input();
+					input->setVarType(varType);
+					if (name.isEmpty())
+						input->setName(QString("Empty : ") + QString::number(m_list->count()));
+					else
+						input->setName(name);
+					m_list->append(input);
+					endInsertRows();
+				}
+
+				void FunctionInputs::moveUp(const int index)
+				{
+					if (index < 0)
+						return;
+					const auto start = index % m_list->length();
+					const auto end = (start <= 0) ? m_list->length() - 1 : start - 1;
+					beginMoveRows(QModelIndex(), start, start, QModelIndex(), start == 0 ? m_list->length() : end );
+					m_list->swap(start, end);
+					endMoveRows();
+				}
+
+				void FunctionInputs::moveDown(const int index)
+				{
+					if (index < 0)
+						return;
+					const auto start = index % m_list->length();
+					const auto end = (start + 1) % m_list->length();
+					beginMoveRows(QModelIndex(), start, start, QModelIndex(), end == 0 ? 0 : end + 1);
+					m_list->swap(start, end);
+					endMoveRows();
+				}
+
+				void FunctionInputs::remove(const QString& name)
+				{
+					auto index = 0;
+					for (auto i : *m_list)
+					{
+						if (i->name() == name)
+							break;
+						index++;
+					}
+					beginRemoveRows(QModelIndex(), index, index);
+					m_list->removeAt(index);
+					endRemoveRows();
+				}
+
+				bool FunctionInputs::setData(const QModelIndex& index, const QVariant& value, int role)
+				{
+					auto result = false;
+					if (role == Name)
+						result = m_list->at(index.row())->setName(value.toString());
+					else if (role == Type)
+						result = m_list->at(index.row())->setVarType(value.toInt());
+
+					if (result)
+						emit dataChanged(index, index);
+
+					return result;
+				}
+
+				bool FunctionInputs::setData(const int index, const QVariant& value, int role)
+				{
+					return setData(createIndex(index, 0), value, role);
+				}
+
+				QHash<int, QByteArray> FunctionInputs::roleNames() const {
+					QHash<int, QByteArray> roles;
+					roles[Name] = "name";
+					roles[Type] = "varType";
+					return roles;
+				}
+
+				FunctionOutputs::FunctionOutputs(QList<models::gui::Output*> *l) : QAbstractListModel(nullptr)
+				{
+					m_list = l;
+				}
+
+				int FunctionOutputs::rowCount(const QModelIndex& parent) const
+				{
+					return m_list->count();
+				}
+
+				QVariant FunctionOutputs::data(const QModelIndex& index, const int role) const
+				{
+					if (!index.isValid())
+						return QVariant();
+					if (role == Name)
+						return QVariant::fromValue(m_list->at(index.row())->name());
+					else if (role == Type)
+						return QVariant::fromValue(m_list->at(index.row())->varType());
+					return QVariant();
+				}
+
+				void FunctionOutputs::add(const QString& name, const qint32 varType)
+				{
+					beginInsertRows(QModelIndex(), m_list->length(), m_list->length());
+					auto output = new gui::Output();
+					output->setVarType(varType);
+					if (name.isEmpty())
+						output->setName(QString("Empty : ") + QString::number(m_list->count()));
+					else
+						output->setName(name);
+					m_list->append(output);
+					endInsertRows();
+				}
+
+				void FunctionOutputs::moveUp(const int index)
+				{
+					if (index < 0)
+						return;
+					const auto start = index % m_list->length();
+					const auto end = (start <= 0) ? m_list->length() - 1 : start - 1;
+					beginMoveRows(QModelIndex(), start, start, QModelIndex(), start == 0 ? m_list->length() : end);
+					m_list->swap(start, end);
+					endMoveRows();
+				}
+
+				void FunctionOutputs::moveDown(const int index)
+				{
+					if (index < 0)
+						return;
+					const auto start = index % m_list->length();
+					const auto end = (start + 1) % m_list->length();
+					beginMoveRows(QModelIndex(), start, start, QModelIndex(), end == 0 ? 0 : end + 1);
+					m_list->swap(start, end);
+					endMoveRows();
+				}
+
+				void FunctionOutputs::remove(const QString& name)
+				{
+					auto index = 0;
+					for (auto i : *m_list)
+					{
+						if (i->name() == name)
+							break;
+						index++;
+					}
+					beginRemoveRows(QModelIndex(), index, index);
+					m_list->removeAt(index);
+					endRemoveRows();
+				}
+
+				bool FunctionOutputs::setData(const QModelIndex& index, const QVariant& value, int role)
+				{
+					auto result = false;
+					if (role == Name)
+						result = m_list->at(index.row())->setName(value.toString());
+					else if (role == Type)
+						result = m_list->at(index.row())->setVarType(value.toInt());
+
+					if (result)
+						emit dataChanged(index, index);
+
+					return result;
+				}
+
+				bool FunctionOutputs::setData(const int index, const QVariant& value, int role)
+				{
+					return setData(createIndex(index, 0), value, role);
+				}
+
+				QHash<int, QByteArray> FunctionOutputs::roleNames() const
+				{
+					QHash<int, QByteArray> roles;
+					roles[Name] = "name";
+					roles[Type] = "varType";
+					return roles;
+				}
+
 				Function::Function(QObject* parent) : QObject(parent)
 				{
+					m_finputs = new FunctionInputs(&m_data.inputs);
+					m_foutputs = new FunctionOutputs(&m_data.outputs);
 				}
 
 				void Function::serialize(QJsonObject& obj) const
@@ -52,7 +248,7 @@ namespace dnai
 					}
 				}
 
-				QList<models::gui::Input*> Function::inputs() const
+				const QList<models::gui::Input*>& Function::inputs() const
 				{
 					return m_data.inputs;
 				}
@@ -65,7 +261,7 @@ namespace dnai
 					return true;
 				}
 
-				QList<gui::Output*> Function::outputs() const
+				const QList<gui::Output*> &Function::outputs() const
 				{
 					return m_data.outputs;
 				}
@@ -104,98 +300,112 @@ namespace dnai
 					return true;
 				}
 
-				void Function::addInput(const QString& name, qint32 varType)
+				void Function::addInput(const QString& name, const qint32 varType)
 				{
 					for (auto i : m_data.inputs)
 					{
 						if (i->data().name == name)
 							return;
 					}
-					auto input = new gui::Input();
-					input->setVarType(varType);
-					input->setName(name);
-					m_data.inputs.append(input);
-					emit inputsChanged(m_data.inputs);
+					m_finputs->add(name, varType);
+					emit inputModelsChanged(m_finputs);
 				}
 
-				void Function::addOutput(const QString& name, qint32 varType)
+				void Function::addOutput(const QString& name, const qint32 varType)
 				{
 					for (auto i : m_data.outputs)
 					{
 						if (i->data().name == name)
 							return;
 					}
-					auto output = new gui::Output();
-					output->setVarType(varType);
-					output->setName(name);
-					m_data.outputs.append(output);
-					emit outputsChanged(m_data.outputs);
+					m_foutputs->add(name, varType);
+					emit outputModelsChanged(m_foutputs);
 				}
 
 				void Function::removeInput(const QString& name)
 				{
-					int index = 0;
-					for (auto i : m_data.inputs)
-					{
-						if (i->data().name == name)
-							break;
-						index++;
-					}
-					m_data.inputs.removeAt(index);
-					emit inputsChanged(m_data.inputs);
+					m_finputs->remove(name);
+					emit inputModelsChanged(m_finputs);
 				}
 
 				void Function::removeOutput(const QString& name)
 				{
-					int index = 0;
-					for (auto i : m_data.outputs)
-					{
-						if (i->data().name == name)
-							break;
-						index++;
-					}
-					m_data.outputs.removeAt(index);
-					emit outputsChanged(m_data.outputs);
+					m_foutputs->remove(name);
+					emit outputModelsChanged(m_foutputs);
 				}
 
-				void Function::moveInputUp(int index)
+				void Function::moveInputUp(const int index)
 				{
-					if (index < 0)
-						return;
-					const auto start = index % m_data.inputs.length();
-					const auto end = (start <= 0) ? m_data.inputs.length() - 1 : start - 1;
-					m_data.inputs.swap(start, end);
-					emit inputsChanged(m_data.inputs);
+					m_finputs->moveUp(index);
+					emit inputModelsChanged(m_finputs);
 				}
 
-				void Function::moveOutputUp(int index)
+				void Function::moveOutputUp(const int index)
 				{
-					if (index < 0)
-						return;
-					const auto start = index % m_data.outputs.length();
-					const auto end = (start <= 0) ? m_data.outputs.length() - 1 : start - 1;
-					m_data.outputs.swap(start, end);
-					emit outputsChanged(m_data.outputs);
+					m_foutputs->moveUp(index);
+					emit outputModelsChanged(m_foutputs);
 				}
 
-				void Function::moveInputDown(int index)
+				void Function::moveInputDown(const int index)
 				{
-					if (index < 0)
-						return;
-					const auto start = index % m_data.inputs.length();
-					const auto end = (start + 1) % m_data.inputs.length();
-					m_data.inputs.swap(start, end);
-					emit inputsChanged(m_data.inputs);
+					m_finputs->moveDown(index);
+					emit inputModelsChanged(m_finputs);
 				}
 
-				void Function::moveOutputDown(int index)
+				void Function::moveOutputDown(const int index)
 				{
-					if (index < 0)
+					m_foutputs->moveDown(index);
+					emit outputModelsChanged(m_foutputs);
+				}
+
+				void Function::updateInputName(const int index, const QString& name)
+				{
+					m_finputs->setData(index, name, FunctionInputs::Name);
+					emit inputModelsChanged(m_finputs);
+				}
+
+				void Function::updateInputVarType(const int index, const qint32 varType)
+				{
+					m_finputs->setData(index, varType, FunctionInputs::Type);
+					emit inputModelsChanged(m_finputs);
+				}
+
+				void Function::updateOutputName(const int index, const QString& name)
+				{
+					m_foutputs->setData(index, name, FunctionInputs::Name);
+					emit outputModelsChanged(m_foutputs);
+				}
+
+				void Function::updateOutputVarType(const int index, const qint32 varType)
+				{
+					m_foutputs->setData(index, varType, FunctionInputs::Type);
+					emit outputModelsChanged(m_foutputs);
+				}
+
+				FunctionInputs *Function::inputModels() const
+				{
+					return m_finputs;
+				}
+
+				FunctionOutputs *Function::outputModels() const
+				{
+					return m_foutputs;
+				}
+
+				void Function::setInputModels(FunctionInputs* inputs)
+				{
+					if (inputs == m_finputs)
 						return;
-					const auto start = index % m_data.outputs.length();
-					const auto end = (start + 1) % m_data.outputs.length();
-					m_data.outputs.swap(start, end);
-					emit outputsChanged(m_data.outputs);
+					m_finputs = inputs;
+					emit inputModelsChanged(inputs);
+				}
+
+				void Function::setOutputModels(FunctionOutputs* outputs)
+				{
+					if (outputs == m_foutputs)
+						return;
+					m_foutputs = outputs;
+					emit outputModelsChanged(outputs);
 				}
 			}
 		}

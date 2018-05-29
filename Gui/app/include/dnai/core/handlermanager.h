@@ -20,10 +20,11 @@ namespace dnai
         class HandlerManager : public QObject
         {
             Q_OBJECT
-            //Q_PROPERTY(ProjectHandler *project READ project)
+            Q_PROPERTY(ProjectHandler *project READ project)
             Q_PROPERTY(DeclaratorHandler *declarator READ declarator)
-            //Q_PROPERTY(VariableHandler *variable READ variable)
+            Q_PROPERTY(VariableHandler *variable READ variable)
             Q_PROPERTY(EnumHandler *enumeration READ enumeration)
+            Q_PROPERTY(FunctionHandler *Function READ function)
 
         private:
             HandlerManager();
@@ -39,6 +40,7 @@ namespace dnai
             DeclaratorHandler *declarator();
             VariableHandler *variable();
             EnumHandler *enumeration();
+            FunctionHandler *function();
 
             /*
              * Inner c++ properties
@@ -48,6 +50,7 @@ namespace dnai
             DeclaratorHandler &Declarator();
             VariableHandler &Variable();
             EnumHandler &Enumeration();
+            FunctionHandler &Function();
 
         private:
             EntityManager m_manager;
@@ -57,6 +60,7 @@ namespace dnai
             DeclaratorHandler m_declarator;
             VariableHandler m_variable;
             EnumHandler m_enumeration;
+            FunctionHandler m_function;
         };
     }
 }

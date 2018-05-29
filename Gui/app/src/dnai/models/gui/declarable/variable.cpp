@@ -13,18 +13,25 @@ namespace dnai
 //				Variable::Variable(QObject* parent)
 //				{
 //				}
-				QMap<qint32, QString> Variable::m_typeMap =
+                QMap<quint32, QString> Variable::m_typeMap =
 				{
-					{0, "Integer"},
+                    {2, "Integer"},
 					{1, "Boolean"},
-					{2, "String"}
+                    {5, "String"}
 				};
+
+                QMap<QString, quint32> Variable::m_typeMap2 =
+                {
+                    {"Integer", 2},
+                    {"Boolean", 1},
+                    {"String", 5}
+                };
 
 				QStringList Variable::m_typeList = {
 					"Integer",
 					"Boolean",
 					"String"
-				};
+                };
 
 				Variable::Variable(QObject* parent) : QObject(parent)
 				{
@@ -34,7 +41,6 @@ namespace dnai
 				{
 					Entity::serialize(obj);
                     obj["varType"] = varType();
-					qDebug() << value();
                     obj["value"] = value();
 				}
 
@@ -89,10 +95,15 @@ namespace dnai
 					m_typeList.append(name);
 				}
 
-				const QMap<qint32, QString>& Variable::getVariableMap()
+                const QMap<quint32, QString>& Variable::getVariableMap()
 				{
-					return m_typeMap;
-				}
+                    return m_typeMap;
+                }
+
+                const QMap<QString, quint32> &Variable::getVariableMap2()
+                {
+                    return m_typeMap2;
+                }
 
 				const QStringList &Variable::getVariableList()
 				{
@@ -101,8 +112,8 @@ namespace dnai
 
 				const int Variable::variableListCount()
 				{
-					return m_typeMap.count();
-				}
+                    return m_typeMap.count();
+                }
 			}
 		}
 	}

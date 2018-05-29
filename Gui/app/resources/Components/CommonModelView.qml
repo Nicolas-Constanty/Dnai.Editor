@@ -255,8 +255,7 @@ Rectangle {
                 if (res === -1)
                 {
                     var view = tab.addView("resources/Components/NodeCanvas.qml",
-                                {}, modelData.name)
-                    view.nodeModel = modelData
+                                { "nodeModel": modelData, "entityModel": modelData.guiProperties}, modelData.name)
                     tab.appendModel(modelData, view)
                 }
                 else

@@ -153,6 +153,9 @@ namespace dnai
 			Q_INVOKABLE int row() const override;
 			Q_INVOKABLE void setProp(int row, const QVariant &value);
 
+        public:
+            Q_INVOKABLE models::Entity *findByName(QString const &name) const;
+
         private:
             gcore::Entity *m_dataCore;
             interfaces::IEntity *m_dataGUI;

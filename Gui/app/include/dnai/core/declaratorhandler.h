@@ -41,8 +41,8 @@ namespace dnai
             Q_INVOKABLE void declare(quint32 parentId, qint32 type, QString name, qint32 visibility = static_cast<qint32>(::core::VISIBILITY::PUBLIC));
             Q_INVOKABLE void remove(quint32 parentId, QString const &name);
             void move(const models::Entity &tomove, const models::Entity &newparent);
-            void rename(const models::Entity &torename, QString const &newname);
-            void setVisibility(const models::Entity &entity, ::core::VISIBILITY visibility);
+            Q_INVOKABLE void rename(quint32 parentId, QString const &name, QString const &newname);
+            Q_INVOKABLE void setVisibility(quint32 parentId, QString const &name, qint32 visibility);
 
         private:
             models::Entity *findEntity(::core::EntityID declarator, QString const &name);
@@ -54,9 +54,13 @@ namespace dnai
             void onRemoved(::core::EntityID declarator, QString const &name);
             void onRemoveError(::core::EntityID declarator, QString const &name, QString const &message);
 
-            //renamed / rename_error
+            void onRenamed(::core::EntityID declarator, QString const &name, QString const &newname);
+            void onRenameError(::core::EntityID declarator, QString const &name, QString const &newname, QString const &message);
+
+            void onVisibilitySet(::core::EntityID declarator, QString const &name, core::VISIBILITY visibility);
+            void onSetVisibilityError(core::EntityID declarator, QString const &name, core::VISIBILITY visibility, QString const &message);
+
             //moved / move_error
-            //visibility_set / set_visibility_error
 
         private:
             EntityManager &manager;

@@ -77,12 +77,13 @@ void BasicNodeModel::setQmlPaths(const QString &path)
 {
     QDirIterator it(path, QDirIterator::Subdirectories);
     while (it.hasNext()) {
-	    const auto filename = it.fileName();
+        const auto filename = it.fileName();
         if (it.fileInfo().isFile()
                 && filename != "NodeModel.qml"
                 && filename != "UnaryOperatorModel.qml"
                 && filename != "BinaryOperatorModel.qml"
-                && filename != "LogicalNodeModel.qml")
+                && filename != "LogicalNodeModel.qml"
+                && it.fileInfo().dir().dirName() != "Getter")
         {
 			if (it.fileInfo().dir().dirName() == "Logical")
 				m_qmlpaths["BinaryOperator" + it.fileInfo().dir().dirName()] << it.filePath();
