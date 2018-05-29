@@ -99,11 +99,16 @@ Rectangle {
                 for (var prop in md) {
                     if (prop === "name")
                     {
-                        createProperty("resources/Properties/StringProperty.qml", { "value":  md[prop], "name" : prop, "model": md, "prop": prop, "method": updateProp })
+                        createProperty("resources/Properties/StringProperty.qml", { "value":  md[prop], "name" : prop, "model": md, "prop": prop, "method": function(model, prop, value){
+                            Controller.declarator.rename(md.containerId, md.name, value);
+                        } })
                     }
                     else if (prop === "visibility")
                     {
-                        createProperty("resources/Properties/DropDownProperty.qml", { "value": md[prop], "listmodel":  Editor.propertyPanelProperties.visibility, "name" : prop, "model": md, "prop": prop, "method": updateProp })
+                        createProperty("resources/Properties/DropDownProperty.qml", { "value": md[prop], "listmodel":  Editor.propertyPanelProperties.visibility, "name" : prop, "model": md, "prop": prop, "method": function(model, prop, value) {
+                            console.log("Visibility:", value);
+                            Controller.declarator.setVisibility(md.containerId, md.name, value);
+                        } })
                     }
                     else if (prop === "entityType")
                     {
