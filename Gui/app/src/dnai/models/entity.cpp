@@ -532,5 +532,10 @@ namespace dnai
         {
             return m_parent;
 		}
+
+		void Entity::setGuiModel(interfaces::IEntity* model)
+		{
+			m_dataGUI = model;
+		}
 	}
 }

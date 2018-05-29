@@ -5,6 +5,7 @@
 #include "dnai/interfaces/iserializable.h"
 #include "dnai/interfaces/ivariable.h"
 #include "data/input.h"
+#include "dnai/interfaces/ilinkable.h"
 
 namespace dnai
 {
@@ -12,8 +13,9 @@ namespace dnai
 	{
 		namespace gui
 		{
-			class Input : public interfaces::IVariable, public interfaces::IModelData<data::Input>, public interfaces::ASerializable<Input>
+			class Input : public QObject, public interfaces::IVariable, public interfaces::IModelData<data::Input>, public interfaces::ASerializable<Input>
 			{
+				Q_OBJECT
 			public:
 				void serialize(QJsonObject& obj) const override;
 			protected:
@@ -27,6 +29,7 @@ namespace dnai
                 bool setValue(const QString& value) override;
 				const QString name() const;
 				bool setName(const QString name);
+
 			private:
 				data::Input m_data;
 			};

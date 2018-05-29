@@ -2,6 +2,7 @@
 
 #include <QJsonArray>
 #include <QDebug>
+#include "dnai/models/entity.h"
 #include "dnai/models/gui/instruction.h"
 
 namespace dnai
@@ -12,7 +13,7 @@ namespace dnai
 		{
 			namespace declarable
 			{
-				FunctionInputs::FunctionInputs(QList<models::gui::Input*>*l) : QAbstractListModel(nullptr)
+				FunctionInputs::FunctionInputs(QList<models::Entity*>*l) : QAbstractListModel(nullptr)
 				{
 					m_list = l;
 				}
@@ -29,20 +30,22 @@ namespace dnai
 					if (role == Name)
 						return QVariant::fromValue(m_list->at(index.row())->name());
 					else if (role == Type)
-						return QVariant::fromValue(m_list->at(index.row())->varType());
+						return QVariant::fromValue(dynamic_cast<gui::declarable::Variable*>(m_list->at(index.row())->guiModel())->varType());
 					return QVariant();
 				}
 
 				void FunctionInputs::add(const QString& name, const qint32 varType)
 				{
 					beginInsertRows(QModelIndex(), m_list->length(), m_list->length());
-					auto input = new gui::Input();
+					auto input = new gui::declarable::Variable();
+					auto entity = new models::Entity(new gcore::Entity(::core::ENTITY::VARIABLE));
+					entity->setGuiModel(input);
 					input->setVarType(varType);
 					if (name.isEmpty())
-						input->setName(QString("Empty : ") + QString::number(m_list->count()));
+                        entity->setName(QString("Empty : ") + QString::number(m_list->count()));
 					else
-						input->setName(name);
-					m_list->append(input);
+                        entity->setName(name);
+					m_list->append(entity);
 					endInsertRows();
 				}
 
@@ -86,10 +89,12 @@ namespace dnai
 				{
 					auto result = false;
 					if (role == Name)
-						result = m_list->at(index.row())->setName(value.toString());
+					{
+						m_list->at(index.row())->setName(value.toString());
+						result = true;
+					}
 					else if (role == Type)
-						result = m_list->at(index.row())->setVarType(value.toInt());
-
+						result = dynamic_cast<models::gui::declarable::Variable*>(m_list->at(index.row())->guiModel())->setVarType(value.toInt());
 					if (result)
 						emit dataChanged(index, index);
 
@@ -108,7 +113,7 @@ namespace dnai
 					return roles;
 				}
 
-				FunctionOutputs::FunctionOutputs(QList<models::gui::Output*> *l) : QAbstractListModel(nullptr)
+				FunctionOutputs::FunctionOutputs(QList<models::Entity*> *l) : QAbstractListModel(nullptr)
 				{
 					m_list = l;
 				}
@@ -125,20 +130,22 @@ namespace dnai
 					if (role == Name)
 						return QVariant::fromValue(m_list->at(index.row())->name());
 					else if (role == Type)
-						return QVariant::fromValue(m_list->at(index.row())->varType());
+						return QVariant::fromValue(dynamic_cast<gui::declarable::Variable*>(m_list->at(index.row())->guiModel())->varType());
 					return QVariant();
 				}
 
 				void FunctionOutputs::add(const QString& name, const qint32 varType)
 				{
 					beginInsertRows(QModelIndex(), m_list->length(), m_list->length());
-					auto output = new gui::Output();
+					auto output = new gui::declarable::Variable();
+					auto entity = new models::Entity(new gcore::Entity(::core::ENTITY::VARIABLE));
+					entity->setGuiModel(output);
 					output->setVarType(varType);
 					if (name.isEmpty())
-						output->setName(QString("Empty : ") + QString::number(m_list->count()));
+                        entity->setName(QString("Empty : ") + QString::number(m_list->count()));
 					else
-						output->setName(name);
-					m_list->append(output);
+                        entity->setName(name);
+					m_list->append(entity);
 					endInsertRows();
 				}
 
@@ -182,10 +189,12 @@ namespace dnai
 				{
 					auto result = false;
 					if (role == Name)
-						result = m_list->at(index.row())->setName(value.toString());
+					{
+						m_list->at(index.row())->setName(value.toString());
+						result = true;
+					}
 					else if (role == Type)
-						result = m_list->at(index.row())->setVarType(value.toInt());
-
+						result = dynamic_cast<models::gui::declarable::Variable*>(m_list->at(index.row())->guiModel())->setVarType(value.toInt());
 					if (result)
 						emit dataChanged(index, index);
 
@@ -215,16 +224,13 @@ namespace dnai
 				{	
 					Entity::serialize(obj);
                     QJsonArray instructions;
-                    foreach(const interfaces::IInstruction *instruction, m_data.instructions) {
+                    foreach(const auto instruction, m_data.instructions) {
                         QJsonObject var;
-                        if (const auto func = dynamic_cast<const Function *>(instruction))
-                            func->serialize(var);
-                        else if (const auto inst = dynamic_cast<const Instruction *>(instruction))
-                            inst->serialize(var);
+                        instruction->serialize(var);
                         instructions.append(var);
                     }
-                    obj["inputs"] = serializeList<Input>(m_data.inputs);
-                    obj["outputs"] = serializeList<Output>(m_data.outputs);
+                    obj["inputs"] = serializeList<models::Entity>(m_data.inputs);
+                    obj["outputs"] = serializeList<models::Entity>(m_data.outputs);
                     obj["instructions"] = instructions;
 				}
 
@@ -233,27 +239,29 @@ namespace dnai
 					Entity::_deserialize(obj);
 
 					foreach(auto input, obj["inputs"].toArray()) {
-                        m_data.inputs.append(Input::deserialize(input.toObject()));
+						const auto core = new gcore::Entity(::core::ENTITY::VARIABLE);
+						auto ent = models::Entity::deserialize(input.toObject(), core);
+                        m_data.inputs.append(ent);
 					}
 
 					foreach(auto output, obj["outputs"].toArray()) {
-                        m_data.inputs.append(Input::deserialize(output.toObject()));
+						const auto core = new gcore::Entity(::core::ENTITY::VARIABLE);
+						auto ent = models::Entity::deserialize(output.toObject(), core);
+						m_data.outputs.append(ent);
 					}
 
 					foreach(auto node, obj["instructions"].toArray()) {
 						if (node.toObject()["instruction_id"].toString().isEmpty())
-                            m_data.instructions.append(deserialize(node.toObject()));
-						else
                             m_data.instructions.append(Instruction::deserialize(node.toObject()));
 					}
 				}
 
-				const QList<models::gui::Input*>& Function::inputs() const
+				const QList<models::Entity*>& Function::inputs() const
 				{
 					return m_data.inputs;
 				}
 
-				bool Function::setInputs(const QList<models::gui::Input*>& inputs)
+				bool Function::setInputs(const QList<models::Entity*>& inputs)
 				{
 					if (m_data.inputs == inputs)
 						return false;
@@ -261,12 +269,12 @@ namespace dnai
 					return true;
 				}
 
-				const QList<gui::Output*> &Function::outputs() const
+				const QList<models::Entity*> &Function::outputs() const
 				{
 					return m_data.outputs;
 				}
 
-				bool Function::setOutputs(const QList<gui::Output*>& outputs)
+				bool Function::setOutputs(const QList<models::Entity*>& outputs)
 				{
 					if (m_data.outputs == outputs)
 						return false;
@@ -304,7 +312,7 @@ namespace dnai
 				{
 					for (auto i : m_data.inputs)
 					{
-						if (i->data().name == name)
+                        if (i->name() == name)
 							return;
 					}
 					m_finputs->add(name, varType);
@@ -315,7 +323,7 @@ namespace dnai
 				{
 					for (auto i : m_data.outputs)
 					{
-						if (i->data().name == name)
+                        if (i->name() == name)
 							return;
 					}
 					m_foutputs->add(name, varType);

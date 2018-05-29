@@ -41,6 +41,7 @@ namespace dnai
 
 	void BaseLinkable::unlinkAll()
 	{
+        //TODO CORE UNLINK_ALL
 		while (!m_links.empty()) {
 			auto l = m_links.back();
 			l->ClearLink();

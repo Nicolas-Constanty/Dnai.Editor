@@ -25,10 +25,10 @@ namespace dnai
 				const data::Instruction& data() const override;
 				bool setData(const data::Instruction& data) override;
 				//Implementation of IInstruction
-                const QList<models::gui::Input*> &inputs() const override;
-				bool setInputs(const QList<models::gui::Input*>& inputs) override;
-                const QList<models::gui::Output*> &outputs() const override;
-				bool setOutputs(const QList<models::gui::Output*>& outputs) override;
+                const QList<models::Entity*> &inputs() const override;
+                bool setInputs(const QList<models::Entity*>& inputs) override;
+                const QList<models::Entity*> &outputs() const override;
+                bool setOutputs(const QList<models::Entity*>& outputs) override;
 				models::gui::Flow* flowIn() const override;
 				bool setFlowIn(models::gui::Flow* flow) override;
 				models::gui::Flow* flowOut() const override;

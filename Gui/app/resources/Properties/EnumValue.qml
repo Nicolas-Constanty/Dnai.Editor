@@ -14,7 +14,6 @@ Item {
     property var onMoveDown: null
     property var onDelete: null
 
-
     property alias value: _value.text
     property real contentHeight: 24
     property var updateValue: null
@@ -45,6 +44,7 @@ Item {
             onAccepted: {
                 if (_enumValue.updateValue === null)
                     return
+                console.log("yoooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo")
                 _enumValue.updateValue(_enumValue.model, _enumValue.prop, getIndex(), _value.text)
             }
         }

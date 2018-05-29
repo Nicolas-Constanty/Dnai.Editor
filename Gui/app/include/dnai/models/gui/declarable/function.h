@@ -29,7 +29,7 @@ namespace dnai
 						Name = Qt::UserRole + 1,
 						Type
 					};
-					explicit FunctionInputs(QList<models::gui::Input*> *);
+					explicit FunctionInputs(QList<models::Entity*> *);
 					int rowCount(const QModelIndex& parent) const override;
 					QVariant data(const QModelIndex& index, int role) const override;
 					void add(const QString &name, qint32 varType);
@@ -40,7 +40,7 @@ namespace dnai
 					bool setData(int index, const QVariant& value, int role);
 
 				private:
-					QList<models::gui::Input*> *m_list;
+					QList<models::Entity*> *m_list;
 					QHash<int, QByteArray> roleNames() const override;
 
 				};
@@ -57,7 +57,7 @@ namespace dnai
 						Name = Qt::UserRole + 1,
 						Type
 					};
-					explicit FunctionOutputs(QList<models::gui::Output*> *);
+					explicit FunctionOutputs(QList<models::Entity*> *);
 					int rowCount(const QModelIndex& parent) const override;
 					QVariant data(const QModelIndex& index, int role) const override;
 					void add(const QString &name, qint32 varType);
@@ -69,7 +69,7 @@ namespace dnai
 					bool setData(int index, const QVariant& value, int role);
 
 				private:
-					QList<models::gui::Output*> *m_list;
+					QList<models::Entity*> *m_list;
 					QHash<int, QByteArray> roleNames() const override;
 
 				};
@@ -87,10 +87,10 @@ namespace dnai
 
 				public:
 					//Implementation of IInstruction
-					const QList<models::gui::Input*> &inputs() const override;
-					bool setInputs(const QList<models::gui::Input*>& inputs) override;
-					const QList<models::gui::Output*> &outputs() const override;
-					bool setOutputs(const QList<models::gui::Output*>& outputs) override;
+					const QList<models::Entity*> &inputs() const override;
+					bool setInputs(const QList<models::Entity*>& inputs) override;
+					const QList<models::Entity*> &outputs() const override;
+					bool setOutputs(const QList<models::Entity*>& outputs) override;
 					models::gui::Flow* flowIn() const override;
 					bool setFlowIn(models::gui::Flow* flow) override;
 					models::gui::Flow* flowOut() const override;
