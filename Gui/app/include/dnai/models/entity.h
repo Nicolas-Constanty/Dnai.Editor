@@ -108,6 +108,7 @@ namespace dnai
             virtual interfaces::IEntity *guiModel() const;
 			template<class T>
 			T *guiModel() const;
+			//void setGuiModel(interfaces::IEntity *);
             bool expanded() const;
 			Entity *parentRef() const;
 			const QMap<QUuid, Column *> &columns();
@@ -174,6 +175,11 @@ namespace dnai
 	    T* Entity::guiModel() const
 	    {
 			return dynamic_cast<T *>(guiModel());
+	    }
+
+	    void Entity::setGuiModel(interfaces::IEntity* model)
+	    {
+			m_dataGUI = model;
 	    }
     }
 }

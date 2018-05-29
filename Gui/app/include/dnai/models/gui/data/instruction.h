@@ -3,22 +3,21 @@
 
 #include <QList>
 #include "dnai/enums/core/instructionid.h"
-#include "dnai/models/gui/input.h"
-#include "dnai/models/gui/output.h"
 #include "dnai/models/gui/flow.h"
 
 namespace dnai
 {
 	namespace models
 	{
+		class Entity;
 		namespace gui
 		{
 			namespace data
 			{
 				struct Instruction
 				{
-					QList<gui::Input*> inputs;
-					QList<gui::Output*> outputs;
+                    QList<models::Entity*> inputs;
+					QList<models::Entity*> outputs;
                     gui::Flow* flowIn = nullptr;
                     gui::Flow* flowOut = nullptr;
 					qint32 instructionId = enums::QInstructionID::Instruction_ID::UNDEFINED;

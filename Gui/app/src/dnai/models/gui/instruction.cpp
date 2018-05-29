@@ -1,6 +1,8 @@
 #include <QJsonObject>
 #include <QJsonArray>
 #include "dnai/models/gui/instruction.h"
+#include "dnai/models/gui/declarable/variable.h"
+#include "dnai/models/entity.h"
 
 namespace dnai
 {
@@ -15,14 +17,14 @@ namespace dnai
 			void Instruction::serialize(QJsonObject& obj) const
 			{
 				QJsonArray inputs;
-				foreach(const Input *input, m_data.inputs) {
+				foreach(const auto input, m_data.inputs) {
 					QJsonObject var;
 					input->serialize(var);
 					inputs.append(var);
 				}
 
 				QJsonArray outputs;
-				foreach(const Output *output, m_data.outputs) {
+				foreach(const auto output, m_data.outputs) {
 					QJsonObject var;
 					output->serialize(var);
 					outputs.append(var);
@@ -41,10 +43,12 @@ namespace dnai
 			void Instruction::_deserialize(const QJsonObject& obj)
 			{
 				foreach(auto input, obj["inputs"].toArray()) {
-					m_data.inputs.append(Input::deserialize(input.toObject()));
+					auto ent = models::Entity::deserialize(input.toObject());
+					m_data.inputs.append(ent);
 		        }
-				foreach(auto input, obj["m_outputs"].toArray()) {
-					m_data.inputs.append(Input::deserialize(input.toObject()));
+				foreach(auto output, obj["m_outputs"].toArray()) {
+					auto ent = models::Entity::deserialize(output.toObject());
+					m_data.inputs.append(ent);
 				}
 				m_data.flowIn = Flow::deserialize(obj["flow_in"].toObject());
 				m_data.flowOut = Flow::deserialize(obj["flow_out"].toObject());
@@ -64,12 +68,12 @@ namespace dnai
                 return true;
 			}
 
-            const QList<models::gui::Input*> &Instruction::inputs() const
+            const QList<models::Entity*> &Instruction::inputs() const
 			{
 				return m_data.inputs;
 			}
 
-			bool Instruction::setInputs(const QList<models::gui::Input*>& inputs)
+            bool Instruction::setInputs(const QList<models::Entity*>& inputs)
 			{
 				if (m_data.inputs == inputs)
 					return false;
@@ -77,12 +81,12 @@ namespace dnai
 				return true;
 			}
 
-            const QList<models::gui::Output*> &Instruction::outputs() const
+            const QList<models::Entity*> &Instruction::outputs() const
 			{
 				return m_data.outputs;
 			}
 
-			bool Instruction::setOutputs(const QList<models::gui::Output*>& outputs)
+            bool Instruction::setOutputs(const QList<models::Entity*>& outputs)
 			{
 				if (m_data.outputs == outputs)
 					return false;

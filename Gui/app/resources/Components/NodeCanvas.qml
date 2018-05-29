@@ -39,6 +39,11 @@ CanvasNode {
         x: canvas.width/2
         y: canvas.height/2
 
+        Repeater {
+            model: entityModel.instructions
+
+        }
+
         onScaleChanged: {
             zoomText.text = Math.round(content_item.scale * 100) + "%"
         }

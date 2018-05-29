@@ -4,7 +4,7 @@
 #include "entity.h"
 #include "instruction.h"
 #include "dnai/models/gui/declarable/variable.h"
-#include "dnai/interfaces/iinstruction.h"
+#include "dnai/models/gui/instruction.h"
 
 namespace dnai
 {
@@ -16,7 +16,7 @@ namespace dnai
 			{
 				struct Function : Entity, Instruction
 				{
-					QList<interfaces::IInstruction*> instructions;
+					QList<models::gui::Instruction*> instructions;
 					QList<declarable::Variable*> variables;
 
                     Function& operator=(const Function& other) = default;
