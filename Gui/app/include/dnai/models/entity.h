@@ -179,11 +179,6 @@ namespace dnai
 	    {
 			return dynamic_cast<T *>(guiModel());
 	    }
-
-	    void Entity::setGuiModel(interfaces::IEntity* model)
-	    {
-			m_dataGUI = model;
-	    }
     }
 }
 
