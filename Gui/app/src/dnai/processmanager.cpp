@@ -9,6 +9,7 @@
 #include <QSettings>
 #include <QVariant>
 #include <QGuiApplication>
+#include <QDir>
 
 #include "dnai/processmanager.h"
 
@@ -32,6 +33,8 @@ ProcessManager::~ProcessManager() {
 void ProcessManager::launchUpdater(QString const &actualVer, QString const &newVersion) {
     if (m_updaterApp.size() != 0) {
     QProcess proc;
+    QStringList args;
+
 #if defined(Q_OS_MAC)
     QString path = QGuiApplication::applicationDirPath();
     int len = sizeof("/DNAI.app/Contents/MacOS");
@@ -40,9 +43,42 @@ void ProcessManager::launchUpdater(QString const &actualVer, QString const &newV
     m_updaterApp = m_updaterApp + " " +  actualVer + " " + newVersion + " " + path + " " + "DNAI";
     qDebug() << path;
 #else
-    m_updaterApp = m_updaterApp + " " +  actualVer + " " + newVersion + " " + QGuiApplication::applicationDirPath() + " " + "DNAI";
+    args.push_back(actualVer);
+    args.push_back(newVersion);
+
+ /*   QString appDirPath = QGuiApplication::applicationDirPath();
+    while (appDirPath.size() >= 0 && appDirPath.back() != '/') {
+        appDirPath.remove(appDirPath.size() - 1, 1);
+    }
+    appDirPath.remove(appDirPath.size() - 1, 1);
+    args.push_back(appDirPath);
+    qDebug() << appDirPath;*/
+    args.push_back(QGuiApplication::applicationDirPath());
+
+    args.push_back("DNAI");
+    qDebug() << "applicationDirPath: " << QGuiApplication::applicationDirPath();
+    QString updaterDir = m_updaterApp;
+    m_updaterApp = "\"" + m_updaterApp + "\" ";// +  actualVer + " " + newVersion + " \"" + QGuiApplication::applicationDirPath() + "\" " + "DNAI";
+    qDebug() << "M_UPDATERAPP: " << m_updaterApp;
+
+    int idx = m_updaterApp.size();
+    while (updaterDir.size() >= 0 && updaterDir.back() != '/') {
+        updaterDir.remove(updaterDir.size() - 1, 1);
+    }
+    updaterDir.remove(updaterDir.size() - 1, 1);
+    qDebug() << "UPDATERDIR: " << updaterDir;
+
+    /*QDir dirRemove(QDir::tempPath() + "/DNAI_UPDATER");
+
+    dirRemove.removeRecursively();*/
+
+    QDir dir;
+
+    bool returnRename = dir.rename(updaterDir, QDir::tempPath() + "/DNAI_UPDATER");
+    qDebug() << returnRename;
+    proc.startDetached(QDir::tempPath() + "/DNAI_UPDATER/DNAI Updater.exe", args);
+
 #endif
-    proc.startDetached(m_updaterApp);
     } else {
         qDebug() << "[WARNING] can't launch DNAI Updater";
     }

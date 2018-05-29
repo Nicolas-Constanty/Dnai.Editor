@@ -67,3 +67,4 @@ Component.prototype.dynamicPageEntered = function ()
         pageWidget.m_pageLabel.text = "This is a dynamically created page.";
     }
 }
+
