@@ -5,6 +5,8 @@
 
 #include "entitymanager.h"
 
+#include "instructionhandler.h"
+
 namespace dnai
 {
     namespace gcore
@@ -12,6 +14,7 @@ namespace dnai
         class FunctionHandler : public QObject
         {
             Q_OBJECT
+            Q_PROPERTY(InstructionHandler *instruction READ instruction)
 
         public:
             FunctionHandler(EntityManager &manager);
@@ -24,9 +27,8 @@ namespace dnai
             void onEntityAdded(::core::EntityID id, models::Entity &added);
 
         public:
-            Q_INVOKABLE void setParameter(quint32 func, quint32 param);
-            Q_INVOKABLE void setReturn(quint32 func, quint32 ret);
-
+            Q_INVOKABLE void setParameter(quint32 func, QString const &paramName);
+            Q_INVOKABLE void setReturn(quint32 func, QString const &retName);
             Q_INVOKABLE void addInstruction(quint32 func, quint32 instrType, QList<core::EntityID> const &arguments);
 
         private:
@@ -44,6 +46,12 @@ namespace dnai
 
         private:
             EntityManager &manager;
+
+        public:
+            InstructionHandler *instruction();
+
+        private:
+            InstructionHandler m_instruction;
         };
     }
 }

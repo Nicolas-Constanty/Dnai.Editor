@@ -43,13 +43,6 @@ namespace dnai
             ::core::function::instruction::onUnlinkExecutionError(std::bind(&InstructionHandler::onUnlinkExecutionError, this, _1, _2, _3, _4));
         }
 
-        void InstructionHandler::onEntityAdded(EntityID id, models::Entity &added)
-        {
-            /*
-             *
-             */
-        }
-
         void InstructionHandler::remove(quint32 func, quint32 instruction)
         {
             Q_UNUSED(func)

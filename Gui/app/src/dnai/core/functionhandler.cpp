@@ -14,7 +14,8 @@ namespace dnai
     namespace gcore
     {
         FunctionHandler::FunctionHandler(EntityManager &manager) :
-            manager(manager)
+            manager(manager),
+            m_instruction(manager)
         {
 
         }
@@ -28,6 +29,8 @@ namespace dnai
             ::core::function::onSetParameterError(std::bind(&FunctionHandler::onSetParameterError, this, _1, _2, _3));
             ::core::function::onReturnSet(std::bind(&FunctionHandler::onReturnSet, this, _1, _2));
             ::core::function::onSetReturnError(std::bind(&FunctionHandler::onSetReturnError, this, _1, _2, _3));
+
+            m_instruction.setup();
         }
 
         void FunctionHandler::onEntityAdded(::core::EntityID id, models::Entity &added)
@@ -47,29 +50,27 @@ namespace dnai
             }*/
         }
 
-        void FunctionHandler::setParameter(quint32 func, quint32 param)
+        void FunctionHandler::setParameter(quint32 func, QString const &paramName)
         {
             models::Entity &function = manager.getEntity(func);
-            models::Entity &paramVar = manager.getEntity(param);
 
-            if (getFunctionData(function.id()) != nullptr && paramVar.parentItem() == &function)
+            if (getFunctionData(function.id()) != nullptr)
                 commands::CommandManager::Instance()->exec(
                     new commands::CoreCommand("Function.SetParameter", true,
-                        std::bind(&::core::function::setParameter, function.id(), paramVar.name()),
+                        std::bind(&::core::function::setParameter, function.id(), paramName),
                         nullptr /* not implemented yet */
                     )
                 );
         }
 
-        void FunctionHandler::setReturn(quint32 func, quint32 ret)
+        void FunctionHandler::setReturn(quint32 func, QString const &retName)
         {
             models::Entity &function = manager.getEntity(func);
-            models::Entity &returnVar = manager.getEntity(ret);
 
-            if (getFunctionData(function.id()) != nullptr && returnVar.parentItem() == &function)
+            if (getFunctionData(function.id()) != nullptr)
                 commands::CommandManager::Instance()->exec(
                     new commands::CoreCommand("Function.SetReturn", true,
-                        std::bind(&::core::function::setReturn, function.id(), returnVar.name()),
+                        std::bind(&::core::function::setReturn, function.id(), retName),
                         nullptr /* not implemented yet */
                     )
                             );
@@ -155,6 +156,11 @@ namespace dnai
 
             commands::CoreCommand::Error();
             Editor::instance().notifyError("Unable to create instruction: " + messsage, [](){});
+        }
+
+        InstructionHandler *FunctionHandler::instruction()
+        {
+            return &m_instruction;
         }
     }
 }

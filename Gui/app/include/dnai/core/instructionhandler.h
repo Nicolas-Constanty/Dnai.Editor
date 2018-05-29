@@ -20,9 +20,6 @@ namespace dnai
         public:
             void setup();
 
-        public slots:
-            void onEntityAdded(::core::EntityID id, models::Entity &added);
-
         public:
             Q_INVOKABLE void remove(quint32 function, quint32 instruction);
             Q_INVOKABLE void setEntryPoint(quint32 function, quint32 instruction);
