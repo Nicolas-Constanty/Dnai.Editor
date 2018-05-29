@@ -25,6 +25,10 @@ binarycorepath="$HOME/Documents/Rendu/Core/Duly/CoreDaemon/bin/Release/"
 #DNAI SERVER
 serverpropath="../../Server/Server.pro"
 
+#DNAI UPDATER
+updaterpropath="$HOME/Documents/Rendu/EIP/Software-updater/SoftwareUpdater/SoftwareUpdater.pro"
+updateressourcespath="$HOME/Documents/Rendu/EIP/Software-updater/SoftwareUpdater/qml/"
+
 #---------------------------------------------------------------------------------------
 
 compile=true
@@ -122,6 +126,8 @@ then
     $deployqt DNAI.app -qmldir=$dnairessourcespath -verbose=2
     sleep 3
 
+
+
     rm -rf Application
     mkdir Application
     mv -f DNAI.app Application
@@ -134,6 +140,20 @@ then
     install_name_tool -change @rpath/QtCore.framework/Versions/5/QtCore @executable_path/../Frameworks/QtCore.framework/Versions/5/QtCore ./Server
     otool -L Server
     cd -
+
+#DEPLOY UPDATER DNAI
+    rm -rf "DNAI Updater.app"
+
+    $qmakebinary $updaterpropath
+    make
+    $deployqt "DNAI Updater.app" -qmldir=$updateressourcespath -verbose=2
+
+    rm *.o
+    rm *.cpp
+    rm *.h
+    rm Makefile
+
+    mv "DNAI Updater.app" ./Application/DNAI.app/Contents/Frameworks
 
     sleep 3
 fi

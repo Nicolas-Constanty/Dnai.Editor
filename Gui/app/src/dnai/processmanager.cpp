@@ -40,8 +40,9 @@ void ProcessManager::launchUpdater(QString const &actualVer, QString const &newV
     int len = sizeof("/DNAI.app/Contents/MacOS");
     int idx = path.length() - (len - 1);
     path.remove(idx, len);
-    m_updaterApp = m_updaterApp + " " +  actualVer + " " + newVersion + " " + path + " " + "DNAI";
-    qDebug() << path;
+    QString app = "\"" + m_updaterApp + "\" " +  actualVer + " " + newVersion + " \"" + path + "\" " + "DNAI";
+    qDebug() << app;
+    proc.startDetached(app);
 #else
     args.push_back(actualVer);
     args.push_back(newVersion);
