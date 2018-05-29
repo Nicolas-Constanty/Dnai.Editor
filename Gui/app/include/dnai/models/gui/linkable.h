@@ -15,15 +15,15 @@ namespace dnai
 			class Linkable : public QObject, public interfaces::IModelData<data::Linkable>, public interfaces::ASerializable<data::Linkable>
 			{
 				Q_OBJECT
-				Q_PROPERTY(QString id READ id WRITE setId NOTIFY instructionChanged)
-				Q_PROPERTY(QString linkedId READ linkedId WRITE se NOTIFY outputChanged)
+				Q_PROPERTY(QString id READ id WRITE setId NOTIFY idChanged)
+				Q_PROPERTY(QString linkedId READ linkedId WRITE setLinkedId NOTIFY idLinkedChanged)
 
 			public:
-				const QString id() const;
+				QString id() const;
 				void setId(const QString &id);
 
-				const QString linkedId() const;
-				void setLinkedID(const QString &id);
+				QString linkedId() const;
+				void setLinkedId(const QString &id);
 
 			signals:
 				void idChanged(const QString &id);

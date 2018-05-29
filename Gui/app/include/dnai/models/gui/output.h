@@ -12,8 +12,23 @@ namespace dnai
 	{
 		namespace gui
 		{
-            class Output : public interfaces::IVariable, public interfaces::IModelData<data::Output>, public interfaces::ASerializable<Output>
+            class Output : public QObject, public interfaces::IVariable, public interfaces::IModelData<data::Output>, public interfaces::ASerializable<Output>
 			{
+				Q_OBJECT
+				Q_PROPERTY(QString id READ id WRITE setId NOTIFY idChanged)
+				Q_PROPERTY(QString linkedId READ linkedId WRITE setLinkedId NOTIFY idLinkedChanged)
+
+			public:
+				explicit Output(QObject * parent = nullptr);
+				QString id() const;
+				void setId(const QString &id);
+
+				QString linkedId() const;
+				void setLinkedId(const QString &id);
+
+			signals:
+				void idChanged(const QString &id);
+				void idLinkedChanged(const QString &linkedID);
 			public:
 				void serialize(QJsonObject& obj) const override;
 			protected:
