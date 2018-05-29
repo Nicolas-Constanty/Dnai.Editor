@@ -239,12 +239,14 @@ namespace dnai
 					Entity::_deserialize(obj);
 
 					foreach(auto input, obj["inputs"].toArray()) {
-						auto ent = models::Entity::deserialize(input.toObject());
+						const auto core = new gcore::Entity(::core::ENTITY::VARIABLE);
+						auto ent = models::Entity::deserialize(input.toObject(), core);
                         m_data.inputs.append(ent);
 					}
 
 					foreach(auto output, obj["outputs"].toArray()) {
-						auto ent = models::Entity::deserialize(output.toObject());
+						const auto core = new gcore::Entity(::core::ENTITY::VARIABLE);
+						auto ent = models::Entity::deserialize(output.toObject(), core);
 						m_data.outputs.append(ent);
 					}
 
