@@ -177,5 +177,9 @@
         <file>resources/Nodes/Getter/Getter.qml</file>
         <file>resources/Properties/FunctionProperty.qml</file>
         <file>resources/Properties/ParameterValue.qml</file>
+        <file>resources/Nodes/Getter/IntGetter.qml</file>
+        <file>resources/Nodes/Getter/FloatGetter.qml</file>
+        <file>resources/Nodes/Getter/StringGetter.qml</file>
+        <file>resources/Nodes/Getter/BoolGetter.qml</file>
     </qresource>
 </RCC>

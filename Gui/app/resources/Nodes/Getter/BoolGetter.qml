@@ -6,7 +6,7 @@ NodeModel {
     property var model: null
     property int type: 0
     flowIn: false
-    onModelChanged: {
-        console.log(model)
+    outputs: ListModel {
+        ListElement { t: IOType.Bool; n: "output" }
     }
 }

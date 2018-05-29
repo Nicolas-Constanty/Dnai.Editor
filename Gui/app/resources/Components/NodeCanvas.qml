@@ -7,14 +7,17 @@ import DNAI.Models 1.0
 
 import "../Style"
 import "../Nodes"
+import "../Nodes/Getter"
 import "../Nodes/Operator"
 import "../Nodes/Operator/BinaryOperator"
 import "../Nodes/Operator/BinaryOperator/Logical"
 import "../Nodes/Operator/UnaryOperator"
+import "../JavaScript/CreateComponent.js" as Factory
 
 CanvasNode {
     id: canvas
     property var nodeModel: null
+    property var entityModel: null
     clip: true
 //    anchors.fill: parent
     backgroundColor: AppSettings.theme["canvas"]["background"]
@@ -73,12 +76,68 @@ CanvasNode {
                 }
                 MenuSeparator {
                     id: _sepMenu
+                    visible: Editor.nodes.rowCount() !== index + 1
                 }
                 Component.onCompleted: {
                     _menu.addMenu(_subMenu)
                     _menu.addItem(_sepMenu)
                 }
             }
+        }
+        Menu {
+            id: _getters
+            title: "Inputs"
+            Repeater {
+                model: canvas.entityModel.inputModels
+                delegate: Item {
+                    id: _getterAction
+                    Action {
+                        id: _subMenu2
+                        text: model.name
+                        Component.onCompleted: {
+                            _getters.addAction(_subMenu2)
+                        }
+                        onTriggered: {
+                            var obj;
+                            if (model.varType === 0)
+                            {
+                                Factory.createObjects(
+                                    "resources/Nodes/Getter/IntGetter.qml",
+                                    { "model" : model, "name" : model.name, "description" : "" })
+                                obj = Factory.getObject()
+                                Factory.createObjects(
+                                            "resources/Components/Node.qml",
+                                            { "model": obj },
+                                            content_item)
+                            }
+                            else if (model.varType === 1)
+                            {
+                                Factory.createObjects(
+                                    "resources/Nodes/Getter/BoolGetter.qml",
+                                    { "model" : model, "name" : model.name, "description" : "" })
+                                obj = Factory.getObject()
+                                Factory.createObjects(
+                                            "resources/Components/Node.qml",
+                                            { "model": obj },
+                                            content_item)
+                            }
+                            else if (model.varType === 2)
+                            {
+                                Factory.createObjects(
+                                    "resources/Nodes/Getter/StringGetter.qml",
+                                    { "model" : model, "name" : model.name, "description" : "" })
+                                obj = Factory.getObject()
+                                Factory.createObjects(
+                                            "resources/Components/Node.qml",
+                                            { "model": obj },
+                                            content_item)
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        MenuSeparator {
         }
     }
 

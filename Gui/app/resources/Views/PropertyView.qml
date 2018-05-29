@@ -48,7 +48,7 @@ Rectangle {
                 console.log("set value: ", value, " of type ", typeof(value));
 
                 console.log(model.varType);
-                if (model.varType == 5)
+                if (model.varType === 5)
                     value = '"' + value + '"'
 
                 Controller.variable.setValue(propertyPanel.model.id, value);
