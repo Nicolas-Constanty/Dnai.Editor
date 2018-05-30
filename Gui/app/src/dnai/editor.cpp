@@ -197,19 +197,26 @@ namespace dnai
         return &App::currentInstance()->session();
     }
 
-    void Editor::createNode(QObject *nodeModel) const
+    void Editor::createNode(models::Entity *entity, QObject *nodeModel, qint32 x, qint32 y) const
     {
+		auto function = dynamic_cast<models::gui::declarable::Function *>(entity->guiModel());
+		if (function == nullptr) return;
+		auto instruction = new models::gui::Instruction();
+		instruction->setX(x);
+		instruction->setY(y);
+		instruction->setInstructionId(nodeModel->property("instruction_id").toInt());
+		function->addInstruction(instruction);
         const QString path = "qrc:/resources/Components/Node.qml";
         QQmlComponent component(App::getEngineInstance(), path);
         QQuickItem *obj = qobject_cast<QQuickItem*>(component.beginCreate(App::getEngineInstance()->rootContext()));
         QQmlProperty model(obj, "model", App::getEngineInstance());
-        model.write(QVariant::fromValue(App::currentInstance()->nodes()->createNode(static_cast<enums::QInstructionID::Instruction_ID>(nodeModel->property("instruction_id").toInt()))));
+        model.write(QVariant::fromValue(App::currentInstance()->nodes()->createNode(static_cast<enums::QInstructionID::Instruction_ID>(instruction->instruction_id()))));
         const auto view = qvariant_cast<QQuickItem *>(Editor::instance().selectedView()->property("currentView"));
         if (!view)
         {
             throw std::runtime_error("No canvas view found!");
         }
-        auto canvas = dynamic_cast<views::CanvasNode *>(view);
+	    const auto canvas = dynamic_cast<views::CanvasNode *>(view);
         obj->setParentItem(canvas->content());
         component.completeCreate();
     }
@@ -257,7 +264,32 @@ namespace dnai
         return m_propertyView;
     }
 
-    PropertyPanelProperties::PropertyPanelProperties(QObject *parent) : QObject(parent)
+	void Editor::loadFunction(dnai::models::Entity* entity) const
+	{
+		const auto function = dynamic_cast<models::gui::declarable::Function *>(entity->guiModel());
+		if (function == nullptr) return;
+		const auto view = qvariant_cast<QQuickItem *>(Editor::instance().selectedView()->property("currentView"));
+		if (!view)
+		{
+			throw std::runtime_error("No canvas view found!");
+		}
+		const QString path = "qrc:/resources/Components/Node.qml";
+		QQmlComponent component(App::getEngineInstance(), path);
+		const auto canvas = dynamic_cast<views::CanvasNode *>(view);
+
+		for (const auto instruction : function->instructions())
+		{
+			QQuickItem *obj = qobject_cast<QQuickItem*>(component.beginCreate(App::getEngineInstance()->rootContext()));
+			QQmlProperty model(obj, "model", App::getEngineInstance());
+			model.write(QVariant::fromValue(App::currentInstance()->nodes()->createNode(static_cast<enums::QInstructionID::Instruction_ID>(instruction->instruction_id()))));
+			obj->setParentItem(canvas->content());
+			obj->setX(instruction->x());
+			obj->setY(instruction->y());
+			component.completeCreate();
+		}
+	}
+
+	PropertyPanelProperties::PropertyPanelProperties(QObject *parent) : QObject(parent)
     {
         QMetaEnum metaEnum = QMetaEnum::fromType<core::VISIBILITY>();
 		for (auto i = 0; i < metaEnum.keyCount(); i++)

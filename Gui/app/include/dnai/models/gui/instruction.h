@@ -14,6 +14,7 @@ namespace dnai
 		{
 			class Instruction : public QObject, public interfaces::IModelData<data::Instruction>, public interfaces::ASerializable<Instruction>
             {
+				Q_OBJECT
 			public:
                 explicit Instruction(QObject *parent = nullptr);
                 //Implementation of ISerializable
@@ -36,6 +37,16 @@ namespace dnai
 
 				const QList<models::gui::Flow*> &flowOut() const;
                 bool setFlowOut(const QList<models::gui::Flow*> &flow);
+
+				qint32 x() const;
+				bool setX(qint32 x);
+
+				qint32 y() const;
+				bool setY(qint32 y);
+
+				qint32 instruction_id() const;
+				bool setInstructionId(qint32 id);
+
 			private:
 				data::Instruction m_data;
 			};

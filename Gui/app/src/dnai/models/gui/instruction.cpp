@@ -33,8 +33,11 @@ namespace dnai
 				obj["inputs"] = inputs;
 				obj["outputs"] = outputs;
 				QJsonObject temp;
-				m_data.flowIn->serialize(temp);
-				obj["flow_in"] = temp;
+                if (m_data.flowIn != nullptr)
+                {
+                    m_data.flowIn->serialize(temp);
+                    obj["flow_in"] = temp;
+                }
 				obj["flow_out"] = serializeList<Flow>(m_data.flowOut);
 				obj["instruction_id"] = m_data.instructionId;
 			}
@@ -117,6 +120,45 @@ namespace dnai
 				if (m_data.flowOut == flow)
 					return false;
 				m_data.flowOut = flow;
+				return true;
+			}
+
+			qint32 Instruction::x() const
+			{
+				return m_data.x;
+			}
+
+			bool Instruction::setX(qint32 x)
+			{
+				if (m_data.x == x)
+					return false;
+				m_data.x = x;
+				return true;
+			}
+
+			qint32 Instruction::y() const
+			{
+				return m_data.y;
+			}
+
+			bool Instruction::setY(qint32 y)
+			{
+				if (m_data.y == y)
+					return false;
+				m_data.y = y;
+				return true;
+			}
+
+			qint32 Instruction::instruction_id() const
+			{
+				return m_data.instructionId;
+			}
+
+			bool Instruction::setInstructionId(qint32 id)
+			{
+				if (m_data.instructionId == id)
+					return false;
+				m_data.instructionId = id;
 				return true;
 			}
 		}

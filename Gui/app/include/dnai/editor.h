@@ -65,7 +65,8 @@ namespace dnai
         Q_INVOKABLE const QList<QQuickItem *>& views() const override;
         Q_INVOKABLE QQuickItem *selectedView() const override;
         Q_INVOKABLE void selectView(QQuickItem *i);
-        Q_INVOKABLE void createNode(QObject* nodeModel) const;
+		Q_INVOKABLE void createNode(dnai::models::Entity* entity, QObject* nodeModel, qint32 x, qint32 y) const;
+
         Q_INVOKABLE void openSolution() override;
         Q_INVOKABLE void loadSolution(const QString& filename) override;
         Q_INVOKABLE void notifyInformation(QString const &, std::function<void ()> func);
@@ -74,7 +75,7 @@ namespace dnai
         Q_INVOKABLE void notifyWarning(QString const &text, std::function<void ()> func);
 
         Q_INVOKABLE void startApp();
-        Q_INVOKABLE void checkVersion();
+        Q_INVOKABLE static void checkVersion();
         Q_INVOKABLE void registerMainView(QObject *);
         Q_INVOKABLE void createSolution(const QString &name,
                                         const QString &description,
@@ -84,6 +85,7 @@ namespace dnai
         Q_INVOKABLE QQuickWindow *mainView();
         Q_INVOKABLE void registerPropertyView(QQuickItem *view);
 		Q_INVOKABLE QQuickItem* propertyView() const;
+		Q_INVOKABLE void loadFunction(dnai::models::Entity *entity) const;
 
 	public:
 		void selectProject(Project *proj);
@@ -94,8 +96,8 @@ namespace dnai
         models::BasicNodeModel *nodes() const;
         PropertyPanelProperties *propertyPanelProperties();
         Session *session() const;
-    signals:
-        void solutionChanged(dnai::Solution *proj);
+	signals:
+		void solutionChanged(dnai::Solution *proj);
 
 	private:
 		interfaces::ISolution *m_solution;
@@ -105,14 +107,14 @@ namespace dnai
 		QObject *m_selection;
 		QList<interfaces::ICommand*> m_actions;
 		QString m_version = "0.0.1";
-        views::EditorView *m_editorView;
-        ToasterManagerService m_toasterManagerService;
-        QQuickWindow *m_mainView = nullptr;
+		views::EditorView *m_editorView;
+		ToasterManagerService m_toasterManagerService;
+		QQuickWindow *m_mainView = nullptr;
 		QQuickItem* m_propertyView;
 		PropertyPanelProperties *m_propertyPanelProperties = nullptr;
 
 		static Editor &m_instance;
 	};
-}
+	}
 
 #endif //DNAI_EDITOR_H

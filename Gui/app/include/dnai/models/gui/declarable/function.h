@@ -91,6 +91,7 @@ namespace dnai
 					bool setInputs(const QList<models::Entity*>& inputs);
 					const QList<models::Entity*> &outputs() const;
 					bool setOutputs(const QList<models::Entity*>& outputs);
+					const QList<models::gui::Instruction *> &instructions() const;
 
 					Q_INVOKABLE void addInput(const QString &name, qint32 varType);
 					Q_INVOKABLE void addOutput(const QString &name, qint32 varType);
@@ -113,6 +114,8 @@ namespace dnai
 					FunctionOutputs *outputModels() const;
 					void setInputModels(FunctionInputs* inputs);
 					void setOutputModels(FunctionOutputs* outputs);
+
+					void addInstruction(Instruction *instruction);
 
 				signals:
 					void inputModelsChanged(FunctionInputs* inputs);

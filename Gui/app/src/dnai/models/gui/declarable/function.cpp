@@ -282,6 +282,11 @@ namespace dnai
 					return true;
 				}
 
+				const QList<models::gui::Instruction*>& Function::instructions() const
+				{
+					return m_data.instructions;
+				}
+
 				void Function::addInput(const QString& name, const qint32 varType)
 				{
 					for (auto i : m_data.inputs)
@@ -388,6 +393,11 @@ namespace dnai
 						return;
 					m_foutputs = outputs;
 					emit outputModelsChanged(outputs);
+				}
+
+				void Function::addInstruction(Instruction* instruction)
+				{
+					m_data.instructions.append(instruction);
 				}
 			}
 		}

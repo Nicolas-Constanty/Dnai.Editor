@@ -1,6 +1,7 @@
 #include "dnai/models/gui/flow.h"
 #include "dnai/exceptions/notimplemented.h"
 #include "dnai/exceptions/exceptionmanager.h"
+#include "dnai/editor.h"
 
 namespace dnai
 {
@@ -11,13 +12,13 @@ namespace dnai
 			void Flow::serialize(QJsonObject& obj) const
 			{
                 Q_UNUSED(obj)
-                exceptions::ExceptionManager::throwException(exceptions::NotImplemented());
+				Editor::instance().notifyError("Flow serialize not implemented", []() {});
 			}
 
 			void Flow::_deserialize(const QJsonObject& obj)
 			{
-                Q_UNUSED(obj)
-                exceptions::ExceptionManager::throwException(exceptions::NotImplemented());
+				Q_UNUSED(obj)
+				Editor::instance().notifyError("Flow not _deserialize implemented", [](){});
 			}
 
 			const data::Flow& Flow::data() const
