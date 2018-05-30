@@ -106,9 +106,9 @@ namespace dnai
         this->notifySuccess("Build succeeded !", [](){
         });
         //TODO REPLACE
-        QFile file("/Users/victorgouet/Downloads/MoreOrLess.duly");
+        QFile file("D:\\EIP\\Core\\TestCommand\\bin\\Debug\\moreOrLess.dnai");
 
-        file.copy("/Users/victorgouet/Documents/MoreOrLess.duly");
+        file.copy("C:\\Users\\GasparQ\\Desktop\\Test\\moreOrLess.dnai");
     }
 
 
