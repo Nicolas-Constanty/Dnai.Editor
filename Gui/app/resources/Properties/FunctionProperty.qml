@@ -51,10 +51,12 @@ BaseProperty {
                 _panel.height -= _panel.contentHeight + _panel.valueSpacing
             }
             nameChanged: function (n) {
-                _panel.nameChanged(index, n)
+                _panel.nameChanged(index, model.name, n)
             }
             typeChanged: function (t) {
-                _panel.typeChanged(index, t)
+                console.log("model: ", paramModel.id);
+                console.log("_inputs[index]: ", _inputs[index]);
+                _panel.typeChanged(index, name, t)
             }
         }
     }
