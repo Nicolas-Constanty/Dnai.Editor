@@ -296,7 +296,6 @@ namespace dnai {
 
         if (!index.isValid())
         {
-            parentItem->appendChild(entity);
             return;
         }
 
