@@ -301,7 +301,7 @@ namespace dnai
              */
             commands::CoreCommand::Error();
             qDebug() << "Failed to declare entity " << name << ": " << message;
-            //Editor::instance().notifyError("Unable to declare entity " + name + ": " + message, [](){});
+            Editor::instance().notifyError("Unable to declare entity " + name + ": " + message, [](){});
         }
 
         void DeclaratorHandler::onRemoved(::core::EntityID declarator, const QString &name)

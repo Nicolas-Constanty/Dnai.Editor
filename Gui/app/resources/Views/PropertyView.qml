@@ -151,12 +151,11 @@ Rectangle {
                                                "model": md,
                                                "prop": "guiProperties",
                                                "addValue": function () {
-                                                   //md["guiProperties"].addInput("", 0)
 
-                                                   var name = "Empty: " + Math.random();
+                                                   var name = "Empty: " + Math.floor(Math.random() * 100);
 
-                                                   Controller.declarator.declare(propertyPanel.model.id, 1, name);
-                                                   Controller.Function.setParameter(propertyPanel.model.id, name);
+                                                   Controller.Function.pendingParameter(md.id, name);
+                                                   Controller.declarator.declare(md.id, 1, name);
                                                },
                                                "moveUp" : function (idx)
                                                {
@@ -168,27 +167,20 @@ Rectangle {
                                                },
                                                "deleteValue": function (val)
                                                {
-                                                   //md["guiProperties"].removeInput(val)
-
-                                                   Controller.declarator.remove(propertyPanel.model.id, val);
+                                                   Controller.Function.pendindRemoveParam(md.id, val);
+                                                   Controller.declarator.remove(md.id, val);
                                                },
-                                               "nameChanged": function (idx, val)
+                                               "nameChanged": function (idx, name, val)
                                                {
-                                                   md["guiProperties"].updateInputName(idx, val)
-
-                                                   //Controller.declarator.re
+                                                   Controller.declarator.rename(md.id, name, val);
                                                },
-                                               "typeChanged": function (idx, val)
+                                               "typeChanged": function (idx, name, val)
                                                {
-                                                   //md["guiProperties"].updateInputVarType(idx, val)
-
-                                                   var ent = md.findByName(val);
-
-                                                   console.log('Set param type entity: ', ent);
+                                                   var ent = md["guiProperties"].getInputId(name);
 
                                                    var conv = [2, 1, 5]
 
-                                                   Controller.variable.setType(ent.id, conv[idx]);
+                                                   Controller.variable.setType(ent, conv[val]);
                                                }
                                            })
                             createProperty("resources/Properties/FunctionProperty.qml",
@@ -198,7 +190,10 @@ Rectangle {
                                                "model": md,
                                                "prop": "guiProperties",
                                                "addValue": function () {
-                                                   md["guiProperties"].addOutput("", 0)
+                                                   var name = "Empty: " + Math.floor(Math.random() * 100);
+
+                                                   Controller.Function.pendingReturn(md.id, name);
+                                                   Controller.declarator.declare(md.id, 1, name);
                                                },
                                                "moveUp" : function (idx)
                                                {
@@ -210,15 +205,20 @@ Rectangle {
                                                },
                                                "deleteValue": function (val)
                                                {
-                                                   md["guiProperties"].removeOutput(val)
+                                                   Controller.Function.pendingRmReturn(md.id, val);
+                                                   Controller.declarator.remove(md.id, val);
                                                },
-                                               "nameChanged": function (idx, val)
+                                               "nameChanged": function (idx, name, val)
                                                {
-                                                   md["guiProperties"].updateOutputName(idx, val)
+                                                   Controller.declarator.rename(md.id, name, val);
                                                },
-                                               "typeChanged": function (idx, val)
+                                               "typeChanged": function (idx, name, val)
                                                {
-                                                   md["guiProperties"].updateOutputVarType(idx, val)
+                                                   var ent = md["guiProperties"].getOutputId(name);
+
+                                                   var conv = [2, 1, 5]
+
+                                                   Controller.variable.setType(ent, conv[val]);
                                                }
                                            })
                         }

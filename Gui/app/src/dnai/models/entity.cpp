@@ -391,6 +391,15 @@ namespace dnai
             return nullptr;
         }
 
+        quint32 Entity::findIdByName(const QString &name) const
+        {
+            models::Entity *ent = findByName(name);
+
+            if (ent == nullptr)
+                return static_cast<quint32>(-1);
+            return ent->id();
+        }
+
 		QHash<int, QByteArray> Column::roleNames() const
 		{
 			QHash<int, QByteArray> roles;

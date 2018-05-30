@@ -13,6 +13,8 @@ namespace dnai
 {
 	namespace models
 	{
+        class Entity;
+
 		namespace gui
 		{
 			namespace declarable
@@ -32,7 +34,7 @@ namespace dnai
 					explicit FunctionInputs(QList<models::Entity*> *);
 					int rowCount(const QModelIndex& parent) const override;
 					QVariant data(const QModelIndex& index, int role) const override;
-					void add(const QString &name, qint32 varType);
+                    void add(models::Entity *var);
 					void moveUp(int index);
 					void moveDown(int index);
 					void remove(const QString &name);
@@ -60,7 +62,7 @@ namespace dnai
 					explicit FunctionOutputs(QList<models::Entity*> *);
 					int rowCount(const QModelIndex& parent) const override;
 					QVariant data(const QModelIndex& index, int role) const override;
-					void add(const QString &name, qint32 varType);
+                    void add(models::Entity *var);
 					void moveUp(int index);
 					void moveDown(int index);
 					void remove(const QString &name);
@@ -92,8 +94,8 @@ namespace dnai
 					const QList<models::Entity*> &outputs() const;
 					bool setOutputs(const QList<models::Entity*>& outputs);
 
-					Q_INVOKABLE void addInput(const QString &name, qint32 varType);
-					Q_INVOKABLE void addOutput(const QString &name, qint32 varType);
+                    Q_INVOKABLE void addInput(models::Entity *var);
+                    Q_INVOKABLE void addOutput(models::Entity *var);
 					Q_INVOKABLE void removeInput(const QString &name);
 					Q_INVOKABLE void removeOutput(const QString &name);
 
@@ -103,16 +105,20 @@ namespace dnai
 					Q_INVOKABLE void moveInputDown(int index);
 					Q_INVOKABLE void moveOutputDown(int index);
 
-					Q_INVOKABLE void updateInputName(int index, const QString &name);
+                    /*Q_INVOKABLE void updateInputName(int index, const QString &name);
 					Q_INVOKABLE void updateInputVarType(int index, qint32 varType);
 
 					Q_INVOKABLE void updateOutputName(int index, const QString &name);
-					Q_INVOKABLE void updateOutputVarType(int index, qint32 varType);
+                    Q_INVOKABLE void updateOutputVarType(int index, qint32 varType);*/
 
 					FunctionInputs *inputModels() const;
 					FunctionOutputs *outputModels() const;
 					void setInputModels(FunctionInputs* inputs);
 					void setOutputModels(FunctionOutputs* outputs);
+
+                public:
+                    Q_INVOKABLE quint32 getInputId(QString const &name) const;
+                    Q_INVOKABLE quint32 getOutputId(QString const &name) const;
 
 				signals:
 					void inputModelsChanged(FunctionInputs* inputs);
