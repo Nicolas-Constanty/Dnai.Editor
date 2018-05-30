@@ -282,32 +282,6 @@ namespace dnai
 					return true;
 				}
 
-				models::gui::Flow* Function::flowIn() const
-				{
-					return m_data.flowIn;
-				}
-
-				bool Function::setFlowIn(gui::Flow* flow)
-				{
-					if (m_data.flowIn == flow)
-						return false;
-					m_data.flowIn = flow;
-					return true;
-				}
-
-				gui::Flow* Function::flowOut() const
-				{
-					return m_data.flowOut;
-				}
-
-				bool Function::setFlowOut(gui::Flow* flow)
-				{
-					if (m_data.flowOut == flow)
-						return false;
-					m_data.flowOut = flow;
-					return true;
-				}
-
                 void Function::addInput(models::Entity *var)
 				{
 					for (auto i : m_data.inputs)

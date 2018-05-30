@@ -35,25 +35,23 @@ namespace dnai
 				QJsonObject temp;
 				m_data.flowIn->serialize(temp);
 				obj["flow_in"] = temp;
-				m_data.flowOut->serialize(temp);
-				obj["flow_out"] = temp;
+				obj["flow_out"] = serializeList<Flow>(m_data.flowOut);
 				obj["instruction_id"] = m_data.instructionId;
 			}
 
 			void Instruction::_deserialize(const QJsonObject& obj)
 			{
 				foreach(auto input, obj["inputs"].toArray()) {
-					const auto core = new gcore::Entity(::core::ENTITY::VARIABLE);
-					auto ent = models::Entity::deserialize(input.toObject(), core);
+					auto ent = gui::Input::deserialize(input.toObject());
 					m_data.inputs.append(ent);
 		        }
 				foreach(auto output, obj["m_outputs"].toArray()) {
-					const auto core = new gcore::Entity(::core::ENTITY::VARIABLE);
-					auto ent = models::Entity::deserialize(output.toObject(), core);
-					m_data.inputs.append(ent);
+					auto ent = gui::Output::deserialize(output.toObject());
+					m_data.outputs.append(ent);
 				}
 				m_data.flowIn = Flow::deserialize(obj["flow_in"].toObject());
-				m_data.flowOut = Flow::deserialize(obj["flow_out"].toObject());
+				for (auto elem : obj["flow_out"].toArray())
+					m_data.flowOut.append(Flow::deserialize(elem.toObject()));
 				m_data.instructionId = obj["instruction_id"].toInt();
 			}
 
@@ -70,12 +68,12 @@ namespace dnai
                 return true;
 			}
 
-            const QList<models::Entity*> &Instruction::inputs() const
+            const QList<models::gui::Input*> &Instruction::inputs() const
 			{
 				return m_data.inputs;
 			}
 
-            bool Instruction::setInputs(const QList<models::Entity*>& inputs)
+			bool Instruction::setInputs(const QList<models::gui::Input*>& inputs)
 			{
 				if (m_data.inputs == inputs)
 					return false;
@@ -83,12 +81,12 @@ namespace dnai
 				return true;
 			}
 
-            const QList<models::Entity*> &Instruction::outputs() const
+            const QList<models::gui::Output*> &Instruction::outputs() const
 			{
 				return m_data.outputs;
 			}
 
-            bool Instruction::setOutputs(const QList<models::Entity*>& outputs)
+            bool Instruction::setOutputs(const QList<models::gui::Output*>& outputs)
 			{
 				if (m_data.outputs == outputs)
 					return false;
@@ -109,12 +107,12 @@ namespace dnai
 				return true;
 			}
 
-			models::gui::Flow* Instruction::flowOut() const
+			const QList<models::gui::Flow*> &Instruction::flowOut() const
 			{
 				return m_data.flowOut;
 			}
 
-			bool Instruction::setFlowOut(models::gui::Flow* flow)
+			bool Instruction::setFlowOut(const QList<models::gui::Flow*> &flow)
 			{
 				if (m_data.flowOut == flow)
 					return false;

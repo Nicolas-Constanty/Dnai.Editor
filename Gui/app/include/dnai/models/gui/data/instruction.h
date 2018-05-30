@@ -4,6 +4,8 @@
 #include <QList>
 #include "dnai/enums/core/instructionid.h"
 #include "dnai/models/gui/flow.h"
+#include "dnai/models/gui/input.h"
+#include "dnai/models/gui/output.h"
 
 namespace dnai
 {
@@ -16,12 +18,13 @@ namespace dnai
 			{
 				struct Instruction
 				{
-                    QList<models::Entity*> inputs;
-					QList<models::Entity*> outputs;
+					quint32 uid;
+                    QList<models::gui::Input*> inputs;
+					QList<models::gui::Output*> outputs;
                     gui::Flow* flowIn = nullptr;
-                    gui::Flow* flowOut = nullptr;
+                    QList<gui::Flow*> flowOut;
 					qint32 instructionId = enums::QInstructionID::Instruction_ID::UNDEFINED;
-
+					QList<quint32> construction;
 					Instruction& operator=(const Instruction& other) = default;
 
 					bool operator!=(const Instruction& other) const

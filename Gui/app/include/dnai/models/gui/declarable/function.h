@@ -75,7 +75,7 @@ namespace dnai
 					QHash<int, QByteArray> roleNames() const override;
 
 				};
-				class Function : public QObject, public interfaces::IInstruction, public Entity<data::Function, Function>
+				class Function : public QObject, public Entity<data::Function, Function>
                 {
 					Q_OBJECT
 					Q_PROPERTY(FunctionInputs *inputModels READ inputModels WRITE setInputModels NOTIFY inputModelsChanged)
@@ -89,14 +89,10 @@ namespace dnai
 
 				public:
 					//Implementation of IInstruction
-					const QList<models::Entity*> &inputs() const override;
-					bool setInputs(const QList<models::Entity*>& inputs) override;
-					const QList<models::Entity*> &outputs() const override;
-					bool setOutputs(const QList<models::Entity*>& outputs) override;
-					models::gui::Flow* flowIn() const override;
-					bool setFlowIn(models::gui::Flow* flow) override;
-					models::gui::Flow* flowOut() const override;
-					bool setFlowOut(models::gui::Flow* flow) override;
+					const QList<models::Entity*> &inputs() const;
+					bool setInputs(const QList<models::Entity*>& inputs);
+					const QList<models::Entity*> &outputs() const;
+					bool setOutputs(const QList<models::Entity*>& outputs);
 
                     Q_INVOKABLE void addInput(models::Entity *var);
                     Q_INVOKABLE void addOutput(models::Entity *var);
