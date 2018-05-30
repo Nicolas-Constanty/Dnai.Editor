@@ -14,6 +14,7 @@ public:
 
     void launch();
     void launchUpdater(QString const &actualVer, QString const &newVersion);
+    void closeAll();
 
 private:
     quint16 findUnusedPort() const;

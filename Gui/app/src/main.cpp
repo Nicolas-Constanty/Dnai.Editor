@@ -173,6 +173,13 @@ static void registerCustomTypes()
     qRegisterMetaTypeStreamOperators<dnai::api::User>("User");
 }
 
+void error_callBack(int signal) {
+    dnai::App::currentInstance()->processManager()->closeAll();
+
+    qDebug() << "The program will crash with signal " << signal;
+    abort();
+}
+
 int main(int argc, char *argv[])
 {
 #if defined(Q_OS_WIN)
@@ -180,6 +187,8 @@ int main(int argc, char *argv[])
    // I don't know why. Don't ask me.
    QSslSocket();
 #endif
+    signal(SIGSEGV, error_callBack);
+
     registerQml();
     registerCustomTypes();
     registerDNAI();
