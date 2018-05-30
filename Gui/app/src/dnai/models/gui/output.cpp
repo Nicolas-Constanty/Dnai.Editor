@@ -8,18 +8,52 @@ namespace dnai
 	{
 		namespace gui
 		{
+			Output::Output(QObject* parent) : QObject(parent)
+			{
+			}
+
+			QString Output::id() const
+			{
+				return m_data.id.toString();
+			}
+
+			void Output::setId(const QString &id)
+			{
+				if (m_data.id.toString() == id)
+					return;
+				m_data.id = id;
+				emit idChanged(id);
+			}
+
+			QString Output::linkedId() const
+			{
+				return m_data.linkedId.toString();
+			}
+
+			void Output::setLinkedId(const QString& id)
+			{
+				if (m_data.linkedId.toString() == id)
+					return;
+				m_data.linkedId = id;
+				emit idChanged(id);
+			}
+
 			void Output::serialize(QJsonObject& obj) const
 			{
+				obj["id"] = m_data.id.toString();
+				obj["linkedId"] = m_data.linkedId.toString();
 				obj["name"] = m_data.name;
 				obj["description"] = m_data.description;
 				obj["index"] = m_data.index;
-                obj["listIndex"] = m_data.listIndex.toString();
-                obj["varType"] = varType();
-                obj["value"] = QJsonValue::fromVariant(m_data.value);
+				obj["listIndex"] = m_data.listIndex.toString();
+				obj["varType"] = static_cast<int>(m_data.varType);
+				obj["value"] = QJsonValue::fromVariant(m_data.value);
 			}
 
 			void Output::_deserialize(const QJsonObject& obj)
 			{
+				m_data.id = QUuid::fromString(obj["id"].toString());
+				m_data.linkedId = QUuid::fromString(obj["linkedId"].toString());
 				m_data.name = obj["name"].toString();
 				m_data.description = obj["description"].toString();
 				m_data.index = obj["index"].toInt();

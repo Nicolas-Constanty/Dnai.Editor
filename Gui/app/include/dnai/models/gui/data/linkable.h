@@ -1,6 +1,7 @@
 #ifndef DNAI_MODELS_GUI_LINKABLEDATA_H
 #define DNAI_MODELS_GUI_LINKABLEDATA_H
-#include <QString>
+
+#include <QUuid>
 
 namespace dnai
 {
@@ -12,8 +13,10 @@ namespace dnai
 			{
 				struct Linkable
 				{
-					QString in;
-					QString out;
+					/*QString id;
+					QString linkedId;*/
+					QUuid id;
+					QUuid linkedId;
 
 					Linkable &operator=(const Linkable &link) = default;
 					bool operator!=(const Linkable &link) const
@@ -22,7 +25,7 @@ namespace dnai
 					}
 					bool operator==(const Linkable &link) const
 					{
-						return (in == link.in && out == link.out);
+						return (id == link.id && linkedId == link.linkedId);
 					}
 				};
 			}
