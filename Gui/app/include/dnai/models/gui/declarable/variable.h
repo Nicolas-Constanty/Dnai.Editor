@@ -47,6 +47,8 @@ namespace dnai
                     static QMap<quint32, QString> m_typeMap;
                     static QMap<QString, quint32> m_typeMap2;
 					static QStringList m_typeList;
+
+					static QList<Variable *> m_variables;
 				};
 			}
 		}

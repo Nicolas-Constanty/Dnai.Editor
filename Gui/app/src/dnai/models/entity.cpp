@@ -10,6 +10,8 @@ namespace dnai
 {
 	namespace models
 	{
+		EntityList *Entity::m_entities = new EntityList(new QList<models::Entity *>());
+
         Entity::Entity() : IModel(nullptr), m_dataCore(nullptr), m_dataGUI(nullptr)
         {
 			const QList<QPair<QObject *, QString>> props = {
@@ -332,7 +334,7 @@ namespace dnai
 					entity->setListIndex(m_columns.keys().first().toString());
 				appendChild(entity);
 			}
-
+			m_entities->add(this);
    //         foreach(const auto context, obj["contexts"].toArray()) {
    //             const auto coreModel = new models::core::Entity(enums::core::CONTEXT);
    //             Entity *parent = this;
@@ -458,7 +460,108 @@ namespace dnai
             return m_entities;
         }
 
-        Column::Column(Entity *e, QObject* parent) : QAbstractListModel(parent)
+		EntityList::EntityList(QList<models::Entity*>*l) : QAbstractListModel(nullptr)
+		{
+			m_list = l;
+		}
+
+		int EntityList::rowCount(const QModelIndex& parent) const
+		{
+			return m_list->count();
+		}
+
+		QVariant EntityList::data(const QModelIndex& index, const int role) const
+		{
+			if (!index.isValid())
+				return QVariant();
+			if (role == Name)
+				return QVariant::fromValue(m_list->at(index.row())->name());
+			else if (role == Type)
+				return QVariant::fromValue(dynamic_cast<gui::declarable::Variable*>(m_list->at(index.row())->guiModel())->varType());
+			return QVariant();
+		}
+
+		void EntityList::add(models::Entity *var)
+		{
+			beginInsertRows(QModelIndex(), m_list->length(), m_list->length());
+			/*auto input = new gui::declarable::Variable();
+			auto entity = new models::Entity(new gcore::Entity(::core::ENTITY::VARIABLE));
+			entity->setGuiModel(input);
+			input->setVarType(varType);
+			if (name.isEmpty())
+			entity->setName(QString("Empty : ") + QString::number(m_list->count()));
+			else
+			entity->setName(name);*/
+			m_list->append(var);
+			endInsertRows();
+		}
+
+		void EntityList::moveUp(const int index)
+		{
+			if (index < 0)
+				return;
+			const auto start = index % m_list->length();
+			const auto end = (start <= 0) ? m_list->length() - 1 : start - 1;
+			beginMoveRows(QModelIndex(), start, start, QModelIndex(), start == 0 ? m_list->length() : end);
+			m_list->swap(start, end);
+			endMoveRows();
+		}
+
+		void EntityList::moveDown(const int index)
+		{
+			if (index < 0)
+				return;
+			const auto start = index % m_list->length();
+			const auto end = (start + 1) % m_list->length();
+			beginMoveRows(QModelIndex(), start, start, QModelIndex(), end == 0 ? 0 : end + 1);
+			m_list->swap(start, end);
+			endMoveRows();
+		}
+
+		void EntityList::remove(const QString& name)
+		{
+			auto index = 0;
+			for (auto i : *m_list)
+			{
+				if (i->name() == name)
+					break;
+				index++;
+			}
+			beginRemoveRows(QModelIndex(), index, index);
+			m_list->removeAt(index);
+			endRemoveRows();
+		}
+
+		bool EntityList::setData(const QModelIndex& index, const QVariant& value, int role)
+		{
+			auto result = false;
+			if (role == Name)
+			{
+				m_list->at(index.row())->setName(value.toString());
+				result = true;
+			}
+			else if (role == Type)
+				result = dynamic_cast<models::gui::declarable::Variable*>(m_list->at(index.row())->guiModel())->setVarType(value.toInt());
+			if (result)
+				emit dataChanged(index, index);
+
+			return result;
+		}
+
+		bool EntityList::setData(const int index, const QVariant& value, int role)
+		{
+			return setData(createIndex(index, 0), value, role);
+		}
+
+		QHash<int, QByteArray> EntityList::roleNames() const {
+			QHash<int, QByteArray> roles;
+			roles[Name] = "name";
+			roles[Type] = "varType";
+			return roles;
+		}
+
+
+		Column::Column(Entity *e, QObject* parent) : QAbstractListModel(parent)
 		{
             m_parent = e;
 		}

@@ -65,7 +65,34 @@ namespace dnai
 	        gui::data::EntityColumn m_data;
             Entity *m_parent;
         };
+		class EntityList : public QAbstractListModel
+		{
+			Q_OBJECT
 
+		public:
+			EntityList(QObject *parent = nullptr) : QAbstractListModel(parent), m_list(nullptr)
+			{
+			}
+			enum Roles {
+				Name = Qt::UserRole + 1,
+				Type
+			};
+			explicit EntityList(QList<models::Entity*> *);
+			int rowCount(const QModelIndex& parent) const override;
+			QVariant data(const QModelIndex& index, int role) const override;
+			void add(models::Entity *var);
+			void moveUp(int index);
+			void moveDown(int index);
+			void remove(const QString &name);
+
+			bool setData(const QModelIndex& index, const QVariant& value, int role) override;
+			bool setData(int index, const QVariant& value, int role);
+
+		private:
+			QList<models::Entity*> *m_list;
+			QHash<int, QByteArray> roleNames() const override;
+
+		};
         class Entity : public interfaces::IModel<Entity>
         {
             Q_OBJECT
@@ -157,7 +184,8 @@ namespace dnai
         public:
             models::Entity *findByName(QString const &name) const;
             Q_INVOKABLE quint32 findIdByName(QString const &name) const;
-
+			static EntityList *m_entities;
+			
         private:
             gcore::Entity *m_dataCore;
             interfaces::IEntity *m_dataGUI;
@@ -166,6 +194,7 @@ namespace dnai
 			QMap<QUuid, Column *> m_columns;
 			QList<QObject *> m_columslist;
 			Property *m_editableProperty;
+
         };
 
 		using Context = dnai::models::gui::declarable::Context;

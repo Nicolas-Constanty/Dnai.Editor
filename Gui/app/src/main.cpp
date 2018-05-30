@@ -8,6 +8,7 @@
 #if defined(_WIN32) && defined(_MSC_VER)
 #include "../../lib/lwintoast/wintoastlib.h"
 using namespace WinToastLib;
+#include <QSslSocket>
 #endif
 
 static QObject *editor_singleton_provider(QQmlEngine *engine, QJSEngine *scriptEngine)
@@ -54,6 +55,7 @@ static void registerDNAI()
     qmlRegisterDnai(dnai::PropertyPanelProperties, "PropertyPanelProperties");
     qmlRegisterDnai(dnai::models::gui::declarable::FunctionInputs, "FunctionIn");
     qmlRegisterDnai(dnai::models::gui::declarable::FunctionOutputs, "FunctionOut");
+    qmlRegisterDnai(dnai::models::EntityList, "EntityList");
 }
 
 static void registerEnums()
@@ -173,12 +175,16 @@ static void registerCustomTypes()
 
 int main(int argc, char *argv[])
 {
+#if defined(Q_OS_WIN)
+   // Just to load ssl library.
+   // I don't know why. Don't ask me.
+   QSslSocket();
+#endif
     registerQml();
     registerCustomTypes();
     registerDNAI();
 
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
-
     dnai::App app(argc, argv);
 #if defined(_WIN32) && defined(_MSC_VER)
     WinToast::instance()->setAppName(L"DNAI");
