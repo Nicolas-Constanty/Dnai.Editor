@@ -93,7 +93,8 @@ CanvasNode {
             id: _getters
             title: "Inputs"
             Repeater {
-                model: canvas.entityModel.inputModels
+                //model: canvas.entityModel.inputModels
+                model: Editor.entities()
                 delegate: Item {
                     id: _getterAction
                     Action {

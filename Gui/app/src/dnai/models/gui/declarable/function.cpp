@@ -251,8 +251,7 @@ namespace dnai
 					}
 
 					foreach(auto node, obj["instructions"].toArray()) {
-						if (node.toObject()["instruction_id"].toString().isEmpty())
-                            m_data.instructions.append(Instruction::deserialize(node.toObject()));
+                        m_data.instructions.append(Instruction::deserialize(node.toObject()));
 					}
 				}
 

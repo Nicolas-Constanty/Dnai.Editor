@@ -228,6 +228,11 @@ namespace dnai
       //  app->onNotifyVersionChanged();
     }
 
+	models::EntityList *Editor::entities()
+	{
+		return models::Entity::m_entities;
+	}
+
     void Editor::registerMainView(QObject *mainView) {
         m_mainView = static_cast<QQuickWindow*>(mainView);
     }

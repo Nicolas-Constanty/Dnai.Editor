@@ -76,14 +76,15 @@ namespace dnai
 
         Q_INVOKABLE void startApp();
         Q_INVOKABLE static void checkVersion();
-        Q_INVOKABLE void registerMainView(QObject *);
-        Q_INVOKABLE void createSolution(const QString &name,
-                                        const QString &description,
-                                        const QString &path,
-                                        const QString &proj_name,
-                                        const QString &proj_desc);
-        Q_INVOKABLE QQuickWindow *mainView();
-        Q_INVOKABLE void registerPropertyView(QQuickItem *view);
+		Q_INVOKABLE static dnai::models::EntityList *entities();
+		Q_INVOKABLE void registerMainView(QObject *);
+		Q_INVOKABLE void createSolution(const QString &name,
+		                                const QString &description,
+		                                const QString &path,
+		                                const QString &proj_name,
+		                                const QString &proj_desc);
+		Q_INVOKABLE QQuickWindow *mainView();
+		Q_INVOKABLE void registerPropertyView(QQuickItem *view);
 		Q_INVOKABLE QQuickItem* propertyView() const;
 		Q_INVOKABLE void loadFunction(dnai::models::Entity *entity) const;
 
@@ -91,11 +92,11 @@ namespace dnai
 		void selectProject(Project *proj);
 		static Editor &instance();
 
-    public:
-        void setSolution(dnai::Solution *sol);
-        models::BasicNodeModel *nodes() const;
-        PropertyPanelProperties *propertyPanelProperties();
-        Session *session() const;
+	public:
+		void setSolution(dnai::Solution *sol);
+		models::BasicNodeModel *nodes() const;
+		PropertyPanelProperties *propertyPanelProperties();
+		Session *session() const;
 	signals:
 		void solutionChanged(dnai::Solution *proj);
 
