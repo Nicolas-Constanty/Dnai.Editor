@@ -362,6 +362,7 @@ ToolBar {
         interval: 3000
         onTriggered: {
             _buildButton.status = 1
+            Editor.onBuildSuccess()
         }
         onRunningChanged: {
             if (running == true)
@@ -380,7 +381,7 @@ ToolBar {
         onClicked: {
             _timer.start()
             _rotator.start()
-            Editor.onBuildStart()
+          //  Editor.onBuildStart()
         }
         RotationAnimator {
             id: _rotator

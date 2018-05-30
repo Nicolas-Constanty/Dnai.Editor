@@ -102,6 +102,15 @@ namespace dnai
         m_toasterManagerService.notifyWarning(text, func);
     }
 
+    void Editor::onBuildSuccess() {
+        this->notifySuccess("Build succeeded !", [](){
+        });
+        //TODO REPLACE
+        QFile file("/Users/victorgouet/Downloads/MoreOrLess.duly");
+
+        file.copy("/Users/victorgouet/Documents/MoreOrLess.duly");
+    }
+
 
 	const QList<interfaces::ICommand*>& Editor::actions() const
 	{
