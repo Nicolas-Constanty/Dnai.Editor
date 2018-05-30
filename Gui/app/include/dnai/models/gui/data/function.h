@@ -14,8 +14,10 @@ namespace dnai
 		{
 			namespace data
 			{
-				struct Function : Entity, Instruction
+				struct Function : Entity
 				{
+					QList<models::Entity*> inputs;
+					QList<models::Entity*> outputs;
 					QList<models::gui::Instruction*> instructions;
 					QList<declarable::Variable*> variables;
 
@@ -28,7 +30,7 @@ namespace dnai
 
 					bool operator==(const Function& other) const
 					{
-						return (Instruction::operator==(other) && instructions == other.instructions && variables == other.variables);
+						return (instructions == other.instructions && variables == other.variables);
 					}
 				};
 			}
