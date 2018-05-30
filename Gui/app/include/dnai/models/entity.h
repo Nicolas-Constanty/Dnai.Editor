@@ -155,7 +155,8 @@ namespace dnai
 			Q_INVOKABLE void setProp(int row, const QVariant &value);
 
         public:
-            Q_INVOKABLE models::Entity *findByName(QString const &name) const;
+            models::Entity *findByName(QString const &name) const;
+            Q_INVOKABLE quint32 findIdByName(QString const &name) const;
 
         private:
             gcore::Entity *m_dataCore;

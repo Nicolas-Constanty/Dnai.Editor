@@ -21,9 +21,6 @@ namespace dnai
 
         void InstructionHandler::setup()
         {
-            QObject::connect(&manager,  SIGNAL(entityAdded(::core::EntityID,models::Entity&)),
-                             this,      SLOT(onEntityAdded(::core::EntityID,models::Entity&)));
-
             ::core::function::instruction::onRemoved(std::bind(&InstructionHandler::onRemoved, this, _1, _2));
             ::core::function::instruction::onRemoveError(std::bind(&InstructionHandler::onRemoveError, this, _1, _2, _3));
 

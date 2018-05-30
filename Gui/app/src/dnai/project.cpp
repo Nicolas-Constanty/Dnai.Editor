@@ -228,14 +228,8 @@ namespace dnai {
     {
         QModelIndexList results = match(index(0, 0, QModelIndex()), EntityTree::ROLES::MODEL, QVariant::fromValue(e), 2, Qt::MatchRecursive);
 
-        qDebug() << "Search index of " << e;
-        qDebug() << "Search index of " << e->id();
-        qDebug() << "Search index of " << e->name();
-        qDebug() << "Results: " << results;
-
         if (results.length() > 0)
         {
-            qDebug() << "Res: " << results.first();
             return results.first();
         }
         return QModelIndex();
@@ -301,7 +295,9 @@ namespace dnai {
         QModelIndex index = getIndexOf(parentItem);
 
         if (!index.isValid())
+        {
             return;
+        }
 
         int idx = parentItem->childCount();
 

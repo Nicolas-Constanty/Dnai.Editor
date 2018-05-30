@@ -27,8 +27,8 @@ namespace dnai
 
         void EnumHandler::setup()
         {
-            QObject::connect(&manager,  SIGNAL(entityAdded(enums::core::EntityID,models::Entity&)),
-                             this,      SLOT(onEntityAdded(enums::core::EntityID,models::Entity&)));
+            QObject::connect(&manager,  SIGNAL(entityAdded(::core::EntityID,models::Entity&)),
+                             this,      SLOT(onEntityAdded(::core::EntityID,models::Entity&)));
 
             ::core::enumeration::onValueSet(std::bind(&EnumHandler::onValueSet, this, _1, _2, _3));
             ::core::enumeration::onSetValueError(std::bind(&EnumHandler::onSetValueError, this, _1, _2, _3, _4));

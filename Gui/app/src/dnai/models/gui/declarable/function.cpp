@@ -34,18 +34,18 @@ namespace dnai
 					return QVariant();
 				}
 
-				void FunctionInputs::add(const QString& name, const qint32 varType)
+                void FunctionInputs::add(models::Entity *var)
 				{
 					beginInsertRows(QModelIndex(), m_list->length(), m_list->length());
-					auto input = new gui::declarable::Variable();
-					auto entity = new models::Entity(new gcore::Entity(::core::ENTITY::VARIABLE));
-					entity->setGuiModel(input);
-					input->setVarType(varType);
-					if (name.isEmpty())
+                    /*auto input = new gui::declarable::Variable();
+                    auto entity = new models::Entity(new gcore::Entity(::core::ENTITY::VARIABLE));
+                    entity->setGuiModel(input);
+                    input->setVarType(varType);
+                    if (name.isEmpty())
                         entity->setName(QString("Empty : ") + QString::number(m_list->count()));
 					else
-                        entity->setName(name);
-					m_list->append(entity);
+                        entity->setName(name);*/
+                    m_list->append(var);
 					endInsertRows();
 				}
 
@@ -134,18 +134,18 @@ namespace dnai
 					return QVariant();
 				}
 
-				void FunctionOutputs::add(const QString& name, const qint32 varType)
+                void FunctionOutputs::add(models::Entity *var)
 				{
 					beginInsertRows(QModelIndex(), m_list->length(), m_list->length());
-					auto output = new gui::declarable::Variable();
+                    /*auto output = new gui::declarable::Variable();
 					auto entity = new models::Entity(new gcore::Entity(::core::ENTITY::VARIABLE));
 					entity->setGuiModel(output);
 					output->setVarType(varType);
 					if (name.isEmpty())
                         entity->setName(QString("Empty : ") + QString::number(m_list->count()));
 					else
-                        entity->setName(name);
-					m_list->append(entity);
+                        entity->setName(name);*/
+                    m_list->append(var);
 					endInsertRows();
 				}
 
@@ -287,25 +287,25 @@ namespace dnai
 					return m_data.instructions;
 				}
 
-				void Function::addInput(const QString& name, const qint32 varType)
+                void Function::addInput(models::Entity *var)
 				{
 					for (auto i : m_data.inputs)
 					{
-                        if (i->name() == name)
+                        if (i->name() == var->name())
 							return;
 					}
-					m_finputs->add(name, varType);
+                    m_finputs->add(var);
 					emit inputModelsChanged(m_finputs);
 				}
 
-				void Function::addOutput(const QString& name, const qint32 varType)
+                void Function::addOutput(models::Entity *var)
 				{
 					for (auto i : m_data.outputs)
 					{
-                        if (i->name() == name)
+                        if (i->name() == var->name())
 							return;
 					}
-					m_foutputs->add(name, varType);
+                    m_foutputs->add(var);
 					emit outputModelsChanged(m_foutputs);
 				}
 
@@ -345,7 +345,7 @@ namespace dnai
 					emit outputModelsChanged(m_foutputs);
 				}
 
-				void Function::updateInputName(const int index, const QString& name)
+                /*void Function::updateInputName(const int index, const QString& name)
 				{
 					m_finputs->setData(index, name, FunctionInputs::Name);
 					emit inputModelsChanged(m_finputs);
@@ -367,7 +367,7 @@ namespace dnai
 				{
 					m_foutputs->setData(index, varType, FunctionInputs::Type);
 					emit outputModelsChanged(m_foutputs);
-				}
+                }*/
 
 				FunctionInputs *Function::inputModels() const
 				{
@@ -399,6 +399,25 @@ namespace dnai
 				{
 					m_data.instructions.append(instruction);
 				}
+                quint32 Function::getInputId(const QString &name) const
+                {
+                    for (models::Entity *curr : inputs())
+                    {
+                        if (curr->name() == name)
+                            return curr->id();
+                    }
+                    return core::UNDEFINED_ID;
+                }
+
+                quint32 Function::getOutputId(const QString &name) const
+                {
+                    for (models::Entity *curr : outputs())
+                    {
+                        if (curr->name() == name)
+                            return curr->id();
+                    }
+                    return core::UNDEFINED_ID;
+                }
 			}
 		}
 	}

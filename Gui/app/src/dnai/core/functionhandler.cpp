@@ -22,8 +22,10 @@ namespace dnai
 
         void FunctionHandler::setup()
         {
-            QObject::connect(&manager,  SIGNAL(entityAdded(enums::core::EntityID,models::Entity&)),
-                             this,      SLOT(onEntityAdded(enums::core::EntityID,models::Entity&)));
+            QObject::connect(&manager,  SIGNAL(entityAdded(::core::EntityID,models::Entity&)),
+                             this,      SLOT(onEntityAdded(::core::EntityID,models::Entity&)));
+            QObject::connect(&manager,  SIGNAL(entityRemoved(::core::EntityID,models::Entity&)),
+                             this,      SLOT(onEntityRemoved(::core::EntityID,models::Entity&)));
 
             ::core::function::onParameterSet(std::bind(&FunctionHandler::onParameterSet, this, _1, _2));
             ::core::function::onSetParameterError(std::bind(&FunctionHandler::onSetParameterError, this, _1, _2, _3));
@@ -38,6 +40,23 @@ namespace dnai
             Q_UNUSED(id)
             Q_UNUSED(added)
 
+            if (!pendingParams.empty()
+                && added.containerId() == pendingParams.front().first
+                && added.name() == pendingParams.front().second)
+            {
+                params.push(&added);
+                setParameter(added.containerId(), added.name());
+                pendingParams.pop();
+            }
+            else if (!pendingRet.empty()
+                && added.containerId() == pendingRet.front().first
+                && added.name() == pendingRet.front().second)
+            {
+                returns.push(&added);
+                setReturn(added.containerId(), added.name());
+                pendingRet.pop();
+            }
+
             /*foreach (instruction in entity.instructions)
             {
                 addInstruction(entity, instruction.id, instruction.construction);
@@ -50,17 +69,64 @@ namespace dnai
             }*/
         }
 
+        void FunctionHandler::onEntityRemoved(EntityID id, models::Entity &removed)
+        {
+            if (!pendingRmParam.empty()
+                && pendingRmParam.front().first == removed.containerId()
+                && pendingRmParam.front().second == removed.name())
+            {
+                models::Entity &func = manager.getEntity(removed.containerId());
+
+                func.guiModel<models::gui::declarable::Function>()->removeInput(removed.name());
+                pendingRmParam.pop();
+            }
+            else if (!pendingRmRet.empty()
+                     && pendingRmRet.front().first == removed.containerId()
+                     && pendingRmRet.front().second == removed.name())
+            {
+                models::Entity &func = manager.getEntity(removed.containerId());
+
+                func.guiModel<models::gui::declarable::Function>()->removeOutput(removed.name());
+                pendingRmRet.pop();
+            }
+        }
+
+        void FunctionHandler::pendingParameter(quint32 func, const QString &paramName)
+        {
+            pendingParams.push(std::make_pair(func, paramName));
+        }
+
+        void FunctionHandler::pendindRemoveParam(quint32 func, const QString &paramName)
+        {
+            pendingRmParam.push(std::make_pair(func, paramName));
+        }
+
+        void FunctionHandler::pendingReturn(quint32 func, const QString &returnName)
+        {
+            pendingRet.push(std::make_pair(func, returnName));
+        }
+
+        void FunctionHandler::pendingRmReturn(quint32 func, const QString &returnName)
+        {
+            pendingRmRet.push(std::make_pair(func, returnName));
+        }
+
         void FunctionHandler::setParameter(quint32 func, QString const &paramName)
         {
             models::Entity &function = manager.getEntity(func);
 
+            qDebug() << "Set as parameter";
+
             if (getFunctionData(function.id()) != nullptr)
+            {
+                qDebug() << "Really set as parameter";
                 commands::CommandManager::Instance()->exec(
                     new commands::CoreCommand("Function.SetParameter", true,
                         std::bind(&::core::function::setParameter, function.id(), paramName),
                         nullptr /* not implemented yet */
                     )
                 );
+            }
         }
 
         void FunctionHandler::setReturn(quint32 func, QString const &retName)
@@ -106,10 +172,27 @@ namespace dnai
             return nullptr;
         }
 
-        void FunctionHandler::onParameterSet(::core::EntityID function, const QString &paramName)
+        void FunctionHandler::onParameterSet(::core::EntityID func, const QString &paramName)
         {
-            Q_UNUSED(function)
+            Q_UNUSED(func)
             Q_UNUSED(paramName)
+
+            models::Entity &function = manager.getEntity(func);
+
+            if (params.empty())
+                return;
+
+            models::Entity *param = params.front();
+
+            models::gui::declarable::Function *gui = function.guiModel<models::gui::declarable::Function>();
+
+            if (gui != nullptr && param->name() == paramName)
+            {
+                qDebug() << "Variable " << param->name() << "(" << param->id() << ") set as parameter";
+                gui->addInput(param);
+                commands::CoreCommand::Success();
+                params.pop();
+            }
         }
 
         void FunctionHandler::onSetParameterError(::core::EntityID function, const QString &paramName, const QString &message)
@@ -117,12 +200,31 @@ namespace dnai
             Q_UNUSED(function)
             Q_UNUSED(paramName)
             Q_UNUSED(message)
+
+            commands::CoreCommand::Error();
+            Editor::instance().notifyError("Unable to set variable " + paramName + " as parameter: " + message, [](){});
         }
 
         void FunctionHandler::onReturnSet(::core::EntityID function, const QString &returnName)
         {
             Q_UNUSED(function)
             Q_UNUSED(returnName)
+
+            models::Entity &func = manager.getEntity(function);
+
+            if (returns.empty())
+                return;
+
+            models::Entity *var = returns.front();
+
+            models::gui::declarable::Function *gui = func.guiModel<models::gui::declarable::Function>();
+
+            if (gui != nullptr && var->name() == returnName)
+            {
+                gui->addOutput(var);
+                returns.pop();
+                commands::CoreCommand::Success();
+            }
         }
 
         void FunctionHandler::onSetReturnError(::core::EntityID function, const QString &returnName, const QString &message)
@@ -130,6 +232,9 @@ namespace dnai
             Q_UNUSED(function)
             Q_UNUSED(returnName)
             Q_UNUSED(message)
+
+            commands::CoreCommand::Error();
+            Editor::instance().notifyError("Unable to set return: " + message, [](){});
         }
 
         void FunctionHandler::onInstructionAdded(EntityID function, INSTRUCTION type, const std::list<EntityID> &arguments, InstructionID instruction)
