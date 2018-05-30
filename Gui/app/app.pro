@@ -7,6 +7,7 @@ CONFIG += no_batch
 
 INCLUDEPATH += include/
 TARGET = DNAI
+TEMPLATE = app
 
 CONFIG(release, debug|release) {
 win32:RC_FILE = dnai.rc
@@ -143,7 +144,8 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /usr/local/bin/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-DISTFILES +=
+DISTFILES += \
+    dnai.ico
 
 FORMS += \
     resources/Forms/BasePanelForm.ui

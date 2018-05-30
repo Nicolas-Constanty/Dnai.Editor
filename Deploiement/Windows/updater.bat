@@ -1,4 +1,4 @@
-set version= windows0.0.28
+set version= windows0.0.52
 
 set accesschk= "C:\Users\Victor\Downloads\accesschk.exe"
 set actual_user= "Victor"
