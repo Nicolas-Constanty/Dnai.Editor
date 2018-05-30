@@ -64,7 +64,7 @@ namespace dnai
                 qDebug() << "enter ?";
                 m_settings->setAPIVersion(response.body["currentVersion"].toString());
             }
-            m_settings->setAPIVersion("0.0.30");
+           // m_settings->setAPIVersion("0.0.30");
             qDebug() << DNAI_VERSION_RELEASE;
             qDebug() << Editor::instance().version();
             qDebug() << m_settings->currentVersionAPI();
@@ -78,8 +78,8 @@ namespace dnai
             Editor::instance().notifyError("Could not check for update.", []() {
 
             });
-            m_settings->setAPIVersion("0.0.30");
-            onNotifyVersionChanged();
+       //     m_settings->setAPIVersion("0.0.30");
+       //     onNotifyVersionChanged();
 
             return response;
         });

@@ -55,7 +55,6 @@ namespace dnai
 		}
 
 		QVariant value = m_apiSettings.value(api::settings_key);
-		//  qDebug() << value.value<api::User>().id;
 		api::setUser(value.value<api::User>());
 		qDebug() << "API ID: " << api::getId();
 	}
