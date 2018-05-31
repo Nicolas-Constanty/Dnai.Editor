@@ -211,8 +211,6 @@ namespace dnai
 		auto function = dynamic_cast<models::gui::declarable::Function *>(entity->guiModel());
 		if (function == nullptr) return;
 		auto instruction = new models::gui::Instruction();
-		instruction->setX(x);
-		instruction->setY(y);
 		instruction->setInstructionId(nodeModel->property("instruction_id").toInt());
 		function->addInstruction(instruction);
         const QString path = "qrc:/resources/Components/Node.qml";
@@ -227,6 +225,10 @@ namespace dnai
         }
 	    const auto canvas = dynamic_cast<views::CanvasNode *>(view);
         obj->setParentItem(canvas->content());
+		instruction->setX(x - canvas->content()->x());
+		instruction->setY(y - canvas->content()->y());
+		obj->setX(instruction->x());
+		obj->setY(instruction->y());
         component.completeCreate();
     }
 

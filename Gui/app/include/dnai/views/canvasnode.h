@@ -24,6 +24,7 @@ namespace dnai
 
 			Q_PROPERTY(QQuickItem *content READ content WRITE setContent NOTIFY contentChanged)
             Q_PROPERTY(bool contextMenu READ contextMenu WRITE setContextMenu NOTIFY contextMenuChanged)
+			Q_PROPERTY(QPoint mousePosition READ mousePosition CONSTANT)
 
 			explicit CanvasNode(QQuickItem *parent = nullptr);
 			~CanvasNode();
@@ -53,6 +54,7 @@ namespace dnai
 			const QPointF &origin() const { return m_origin; }
 			QQuickItem *content() const { return m_content; }
             bool contextMenu() const { return m_contextMenu; }
+			const QPoint &mousePosition() const { return m_mousePosition; }
 
 		public:
 			void setGridStep(int step);
@@ -84,6 +86,7 @@ namespace dnai
 			bool m_hasMoved;
 			QPointF m_totalOffset;
 			bool m_contextMenu;
+			QPoint m_mousePosition;
 
 		private:
 			void createGrid();
