@@ -51,7 +51,7 @@ namespace dnai
 
 				void FunctionInputs::moveUp(const int index)
 				{
-					if (index < 0)
+					if (index < 0 || m_list->length() <= 1)
 						return;
 					const auto start = index % m_list->length();
 					const auto end = (start <= 0) ? m_list->length() - 1 : start - 1;
@@ -62,7 +62,7 @@ namespace dnai
 
 				void FunctionInputs::moveDown(const int index)
 				{
-					if (index < 0)
+					if (index < 0 || m_list->length() <= 1)
 						return;
 					const auto start = index % m_list->length();
 					const auto end = (start + 1) % m_list->length();
@@ -151,7 +151,7 @@ namespace dnai
 
 				void FunctionOutputs::moveUp(const int index)
 				{
-					if (index < 0)
+					if (index < 0 || m_list->length() <= 1)
 						return;
 					const auto start = index % m_list->length();
 					const auto end = (start <= 0) ? m_list->length() - 1 : start - 1;
@@ -162,7 +162,7 @@ namespace dnai
 
 				void FunctionOutputs::moveDown(const int index)
 				{
-					if (index < 0)
+					if (index < 0 || m_list->length() <= 1)
 						return;
 					const auto start = index % m_list->length();
 					const auto end = (start + 1) % m_list->length();
