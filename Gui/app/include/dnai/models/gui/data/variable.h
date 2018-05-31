@@ -17,7 +17,7 @@ namespace dnai
 				struct Variable : Entity
 				{
                     ::core::EntityID varType = 2;
-					QString value = "100";
+                    QString value = "";
 				};
 			}
 		}

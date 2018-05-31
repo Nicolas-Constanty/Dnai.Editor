@@ -1,4 +1,6 @@
 #include <functional>
+#include <algorithm>
+#include <unordered_set>
 
 #include "dnai/core/functionhandler.h"
 
@@ -55,6 +57,27 @@ namespace dnai
                 returns.push(&added);
                 setReturn(added.containerId(), added.name());
                 pendingRet.pop();
+            }
+            else
+            {
+                models::gui::declarable::Function *func = getFunctionData(id);
+
+                if (func != nullptr)
+                {
+                    for (models::Entity *child : added.childrenItem())
+                    {
+                        if (std::find_if(func->inputs().begin(), func->inputs().end(), [child](models::Entity *curr){ return curr->name() == child->name(); }) != func->inputs().end())
+                        {
+                            pendingParameter(id, child->name());
+                        }
+                        else if (std::find_if(func->outputs().begin(), func->outputs().end(), [child](models::Entity *curr){ return curr->name() == child->name(); }) != func->outputs().end())
+                        {
+                            pendingReturn(id, child->name());
+                        }
+                    }
+                    func->setInputs(QList<models::Entity*>());
+                    func->setOutputs(QList<models::Entity*>());
+                }
             }
 
             /*foreach (instruction in entity.instructions)
@@ -189,7 +212,10 @@ namespace dnai
             if (gui != nullptr && param->name() == paramName)
             {
                 qDebug() << "Variable " << param->name() << "(" << param->id() << ") set as parameter";
-                gui->addInput(param);
+                if (!gui->inputs().contains(param))
+                    gui->addInput(param);
+                if (!function.childrenItem().contains(param))
+                    function.appendChild(param);
                 commands::CoreCommand::Success();
                 params.pop();
             }
@@ -221,7 +247,10 @@ namespace dnai
 
             if (gui != nullptr && var->name() == returnName)
             {
-                gui->addOutput(var);
+                if (!gui->outputs().contains(var))
+                    gui->addOutput(var);
+                if (!func.childrenItem().contains(var))
+                    func.appendChild(var);
                 returns.pop();
                 commands::CoreCommand::Success();
             }
