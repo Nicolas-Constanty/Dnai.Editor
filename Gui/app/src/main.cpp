@@ -9,6 +9,8 @@
 #include "../../lib/lwintoast/wintoastlib.h"
 using namespace WinToastLib;
 #include <QSslSocket>
+#include <signal.h>
+#include <tchar.h>
 #endif
 
 static QObject *editor_singleton_provider(QQmlEngine *engine, QJSEngine *scriptEngine)
@@ -186,8 +188,14 @@ int main(int argc, char *argv[])
    // Just to load ssl library.
    // I don't know why. Don't ask me.
    QSslSocket();
+   typedef void (*SignalHandlerPointer)(int);
+
+    SignalHandlerPointer previousHandler;
+    previousHandler = signal(SIGSEGV, error_callBack);
+    previousHandler = signal(SIGABRT, error_callBack);
 #else
-    signal(SIGSEGV, error_callBack);
+    signal(SIGSEGV, error_callBack);    
+    signal(SIGABRT, error_callBack);
 #endif
 
     registerQml();
@@ -196,6 +204,7 @@ int main(int argc, char *argv[])
 
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     dnai::App app(argc, argv);
+
 #if defined(_WIN32) && defined(_MSC_VER)
     WinToast::instance()->setAppName(L"DNAI");
     WinToast::instance()->setAppUserModelId(
