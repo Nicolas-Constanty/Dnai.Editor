@@ -173,13 +173,23 @@ static void registerCustomTypes()
     qRegisterMetaTypeStreamOperators<dnai::api::User>("User");
 }
 
+void error_callBack(int signal) {
+    dnai::App::currentInstance()->processManager()->closeAll();
+
+    qDebug() << "The program will crash with signal " << signal;
+    abort();
+}
+
 int main(int argc, char *argv[])
 {
 #if defined(Q_OS_WIN)
    // Just to load ssl library.
    // I don't know why. Don't ask me.
    QSslSocket();
+#else
+    signal(SIGSEGV, error_callBack);
 #endif
+
     registerQml();
     registerCustomTypes();
     registerDNAI();

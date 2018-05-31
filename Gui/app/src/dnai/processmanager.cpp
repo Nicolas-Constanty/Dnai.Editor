@@ -10,6 +10,8 @@
 #include <QVariant>
 #include <QGuiApplication>
 #include <QDir>
+#include <cstdlib>
+#include <iostream>
 
 #include "dnai/processmanager.h"
 
@@ -21,10 +23,14 @@ ProcessManager::ProcessManager(QString const &file)
       m_updaterApp(),
       m_port(0)
 {
-
 }
 
 ProcessManager::~ProcessManager() {
+    closeAll();
+}
+
+void ProcessManager::closeAll() {
+    qDebug() << "close server process and core process !";
     m_server.close();
     m_core.close();
 }
