@@ -69,5 +69,7 @@ copy "C:\Users\Victor\Documents\EIP\Duly\CoreDaemon\bin\Release\*" "./DNAI/Core"
 
 rmdir /Y /s repos
 
+robocopy "libs" "DNAI" /E
+
 mkdir "C:\Users\Victor\Documents\EIP\Duly-GUI\Deploiement\Windows\DNAISetup\packages\com.vendor.product\data\DNAI"
 robocopy "DNAI" "C:\Users\Victor\Documents\EIP\Duly-GUI\Deploiement\Windows\DNAISetup\packages\com.vendor.product\data\DNAI" /E

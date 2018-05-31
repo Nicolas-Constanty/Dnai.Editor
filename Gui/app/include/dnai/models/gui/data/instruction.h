@@ -26,8 +26,8 @@ namespace dnai
 					qint32 instructionId = enums::QInstructionID::Instruction_ID::UNDEFINED;
 					QList<quint32> construction;
 					Instruction& operator=(const Instruction& other) = default;
-					qint32 x;
-					qint32 y;
+					qint32 x = 0;
+					qint32 y = 0;
 
 					bool operator!=(const Instruction& other) const
 					{

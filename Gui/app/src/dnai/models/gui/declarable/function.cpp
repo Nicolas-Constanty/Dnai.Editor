@@ -251,7 +251,7 @@ namespace dnai
 					}
 
 					foreach(auto node, obj["instructions"].toArray()) {
-                        m_data.instructions.append(Instruction::deserialize(node.toObject()));
+						addInstruction(Instruction::deserialize(node.toObject()));
 					}
 				}
 

@@ -40,6 +40,8 @@ namespace dnai
                 }
 				obj["flow_out"] = serializeList<Flow>(m_data.flowOut);
 				obj["instruction_id"] = m_data.instructionId;
+				obj["x"] = m_data.x;
+				obj["y"] = m_data.y;
 			}
 
 			void Instruction::_deserialize(const QJsonObject& obj)
@@ -56,6 +58,8 @@ namespace dnai
 				for (auto elem : obj["flow_out"].toArray())
 					m_data.flowOut.append(Flow::deserialize(elem.toObject()));
 				m_data.instructionId = obj["instruction_id"].toInt();
+				m_data.x = obj["x"].toInt();
+				m_data.y = obj["y"].toInt();
 			}
 
 			const data::Instruction& Instruction::data() const
