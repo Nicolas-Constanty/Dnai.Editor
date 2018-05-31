@@ -186,8 +186,9 @@ int main(int argc, char *argv[])
    // Just to load ssl library.
    // I don't know why. Don't ask me.
    QSslSocket();
-#endif
+#else
     signal(SIGSEGV, error_callBack);
+#endif
 
     registerQml();
     registerCustomTypes();
