@@ -134,7 +134,8 @@ namespace dnai
 						return false;
 					m_data.varType = id;
 					emit varTypeChanged(id);
-					return false;
+                    setValue("");
+                    return true;
 				}
 
 				const QString &Variable::value() const
