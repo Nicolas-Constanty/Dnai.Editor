@@ -6,6 +6,7 @@
 
 #include "dnai/commands/commandmanager.h"
 #include "dnai/commands/corecommand.h"
+#include "dnai/models/instruction.h"
 
 #include "dnai/editor.h"
 
@@ -77,19 +78,13 @@ namespace dnai
                     }
                     func->setInputs(QList<models::Entity*>());
                     func->setOutputs(QList<models::Entity*>());
+
+                    for (models::gui::Instruction *curr : func->data().instructions)
+                    {
+                        addInstruction(id, curr->instruction_id(), curr->data().construction);
+                    }
                 }
             }
-
-            /*foreach (instruction in entity.instructions)
-            {
-                addInstruction(entity, instruction.id, instruction.construction);
-            }
-
-            foreach (instruction in entity.instructions)
-            {
-                //link data: function [ok], instruction [ok], input [ok], output [ok],
-                //link flow
-            }*/
         }
 
         void FunctionHandler::onEntityRemoved(EntityID id, models::Entity &removed)
@@ -165,7 +160,7 @@ namespace dnai
                             );
         }
 
-        void FunctionHandler::addInstruction(quint32 func, quint32 instrType, const QList<core::EntityID> &arguments)
+        void FunctionHandler::addInstruction(quint32 func, quint32 instrType, const QList<quint32> &arguments)
         {
             models::Entity &function = manager.getEntity(func);
 
@@ -274,6 +269,19 @@ namespace dnai
             Q_UNUSED(type)
             Q_UNUSED(arguments)
             Q_UNUSED(instruction)
+
+            models::gui::declarable::Function *func = getFunctionData(function);
+
+            if (func != nullptr)
+            {
+                models::gui::Instruction *instr = new models::gui::Instruction();
+                instr->setInstructionId(type);
+                instr->setUid(instruction);
+                //instr->data().construction = QList<quint32>(arguments);
+                func->addInstruction(instr);
+                emit instructionAdded(&manager.getEntity(function), instr);
+            }
+
             /*
              * Find the models::Entity
              * Find the models::gui::declarable::function
@@ -290,6 +298,7 @@ namespace dnai
 
             commands::CoreCommand::Error();
             Editor::instance().notifyError("Unable to create instruction: " + messsage);
+            emit addInstructionError(function, type, QList<quint32>::fromStdList(arguments), messsage);
         }
 
         InstructionHandler *FunctionHandler::instruction()

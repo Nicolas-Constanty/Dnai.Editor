@@ -163,8 +163,21 @@ namespace dnai
 				if (m_data.instructionId == id)
 					return false;
 				m_data.instructionId = id;
-				return true;
-			}
+                return true;
+            }
+
+            quint32 Instruction::Uid() const
+            {
+                return m_data.uid;
+            }
+
+            bool Instruction::setUid(quint32 id)
+            {
+                if (m_data.uid == id)
+                    return false;
+                m_data.uid = id;
+                return true;
+            }
 		}
 	}
 }

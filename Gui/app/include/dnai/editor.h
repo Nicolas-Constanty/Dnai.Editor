@@ -1,6 +1,9 @@
 #ifndef DNAI_EDITOR_H
 #define DNAI_EDITOR_H
 
+#include <queue>
+#include <map>
+
 #include <QQuickItem>
 #include "interfaces/ieditor.h"
 #include "dnai/views/editorview.h"
@@ -51,7 +54,7 @@ namespace dnai
         Q_INVOKABLE const QList<QQuickItem *>& views() const override;
         Q_INVOKABLE QQuickItem *selectedView() const override;
         Q_INVOKABLE void selectView(QQuickItem *i);
-		Q_INVOKABLE void createNode(dnai::models::Entity* entity, QObject* nodeModel, qint32 x, qint32 y) const;
+        Q_INVOKABLE void createNode(dnai::models::Entity* entity, quint32 type, QList<quint32> const &args, qint32 x, qint32 y);
 
         Q_INVOKABLE void openSolution() override;
         Q_INVOKABLE void loadSolution(const QString& filename) override;
@@ -84,8 +87,13 @@ namespace dnai
 		void setSolution(dnai::Solution *sol);
 		models::BasicNodeModel *nodes() const;
 		Session *session() const;
+
 	signals:
 		void solutionChanged(dnai::Solution *proj);
+
+    public slots:
+        void onInstructionAdded(models::Entity *func, models::gui::Instruction *instr);
+        void onAddInstructionError(quint32 func, quint32 type, QList<quint32> const &args, QString const &msg);
 
 	private:
 		interfaces::ISolution *m_solution;
@@ -101,6 +109,10 @@ namespace dnai
 		QQuickItem* m_propertyView;
 		models::ContextMenu* m_contextMenu;
 
+    private:
+        std::queue<std::pair<quint32, quint32>> m_pendingInstruction;
+
+    private:
 		static Editor &m_instance;
 	};
 	}

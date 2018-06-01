@@ -314,6 +314,7 @@ HEADERS += \
     include/dnai/core/instructionhandler.h \
     include/dnai/models/gui/entitylist.h \
     include/dnai/models/contextmenu.h
+    include/dnai/core/instructionmanager.h
 
 
 #LIB
