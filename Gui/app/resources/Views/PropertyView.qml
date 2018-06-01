@@ -58,10 +58,7 @@ Rectangle {
 
             function updatePropType(model, prop, value)
             {
-                var typemap = [2, 1, 5]
-
                 var enumvalue = Editor.propertyPanelProperties.varTypes.getValueFromIndex(value)
-                console.log("cccccccccccc", enumvalue)
                 Controller.variable.setType(propertyPanel.model.id, enumvalue)
 
                 if (propertyPanel.propvalue === null)
@@ -142,7 +139,6 @@ Rectangle {
                                            })
 
                             var valname = Editor.propertyPanelProperties.varTypes.getNameFromValue(t);
-                            console.log("ValName", valname)
                             if (valname === "Integer")
                             {
                                 propertyPanel.propvalue = createProperty("resources/Properties/IntProperty.qml", { "value": md["guiProperties"]["value"], "name" : "Value", "model": md["guiProperties"], "prop": "value", "method": setVariableValue })
@@ -203,10 +199,7 @@ Rectangle {
                                                "typeChanged": function (idx, name, val)
                                                {
                                                    var ent = md["guiProperties"].getInputId(name);
-
-                                                   var conv = [2, 1, 5]
-
-                                                   Controller.variable.setType(ent, conv[val]);
+                                                   Controller.variable.setType(ent,Editor.propertyPanelProperties.varTypes.getValueFromIndex(val));
                                                }
                                            })
                             createProperty("resources/Properties/FunctionProperty.qml",
