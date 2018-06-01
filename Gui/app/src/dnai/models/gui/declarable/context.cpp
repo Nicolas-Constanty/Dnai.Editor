@@ -1,4 +1,3 @@
-#include <QJsonArray>
 #include "dnai/models/gui/declarable/context.h"
 #include "dnai/models/gui/instruction.h"
 
@@ -10,6 +9,11 @@ namespace dnai
 		{
 			namespace declarable
 			{
+				Context::Context(QObject* parent) : QObject(parent)
+				{
+					
+				}
+
 				const QList<declarable::Context*> &Context::contexts() const
 				{
 					return m_data.contexts;

@@ -8,28 +8,13 @@
 #include "models/entity.h"
 #include "models/basicnodemodel.h"
 #include "dnai/toastermanagerservice.h"
+#include "dnai/models/contextmenu.h"
 
 namespace dnai
 {
 	class App;
     class Project;
     class Session;
-    class PropertyPanelProperties : public QObject {
-        Q_OBJECT
-        Q_PROPERTY(QStringList visibility READ visibility CONSTANT)
-        Q_PROPERTY(QStringList entityType READ entityType CONSTANT)
-        Q_PROPERTY(QStringList varType READ varType CONSTANT)
-    public:
-        explicit PropertyPanelProperties(QObject *parent = nullptr);
-
-        const QStringList &visibility() const;
-        const QStringList &entityType() const;
-        const QStringList &varType() const;
-
-    private:
-        QStringList m_visibility;
-        QStringList m_entityType;
-    };
 
 	class Editor : public QObject, public interfaces::IEditor
 	{
@@ -37,10 +22,10 @@ namespace dnai
         Q_PROPERTY(dnai::Solution *solution READ getSolution WRITE setSolution NOTIFY solutionChanged)
         Q_PROPERTY(dnai::models::BasicNodeModel *nodes READ nodes CONSTANT)
         Q_PROPERTY(dnai::Session *session READ session CONSTANT)  
-		Q_PROPERTY(dnai::PropertyPanelProperties *propertyPanelProperties READ propertyPanelProperties CONSTANT)
+		Q_PROPERTY(dnai::models::ContextMenu *contextMenu READ contextMenu CONSTANT)
 
 	protected:
-		Editor() = default;
+		Editor();
 		~Editor();
 	public:
 		Editor(Editor const&) = delete;             // Copy construct
@@ -60,6 +45,7 @@ namespace dnai
         dnai::Solution *getSolution() const;
 		void addView(QQuickItem* v) override;
 		views::EditorView *mainView() const;
+		dnai::models::ContextMenu *contextMenu() const;
         Q_INVOKABLE void registerEditorView(views::EditorView *view);
 
         Q_INVOKABLE const QList<QQuickItem *>& views() const override;
@@ -69,16 +55,16 @@ namespace dnai
 
         Q_INVOKABLE void openSolution() override;
         Q_INVOKABLE void loadSolution(const QString& filename) override;
-        Q_INVOKABLE void notifyInformation(QString const &, std::function<void ()> func);
-        Q_INVOKABLE void notifySuccess(QString const &text, std::function<void ()> func);
-        Q_INVOKABLE void notifyError(QString const &text, std::function<void ()> func);
-        Q_INVOKABLE void notifyWarning(QString const &text, std::function<void ()> func);
+        Q_INVOKABLE void notifyInformation(QString const &, std::function<void ()> func = [](){});
+        Q_INVOKABLE void notifySuccess(QString const &text, std::function<void ()> func = []() {});
+        Q_INVOKABLE void notifyError(QString const &text, std::function<void ()> func = []() {});
+        Q_INVOKABLE void notifyWarning(QString const &text, std::function<void ()> func = []() {});
 
         Q_INVOKABLE void onBuildSuccess();
 
         Q_INVOKABLE void startApp();
         Q_INVOKABLE static void checkVersion();
-		Q_INVOKABLE static dnai::models::EntityList *entities();
+		//Q_INVOKABLE static dnai::models::EntityList *entities();
 		Q_INVOKABLE void registerMainView(QObject *);
 		Q_INVOKABLE void createSolution(const QString &name,
 		                                const QString &description,
@@ -89,7 +75,7 @@ namespace dnai
 		Q_INVOKABLE void registerPropertyView(QQuickItem *view);
 		Q_INVOKABLE QQuickItem* propertyView() const;
 		Q_INVOKABLE void loadFunction(dnai::models::Entity *entity) const;
-
+		Q_INVOKABLE void updateContextMenu(dnai::models::Entity *entity) const;
 	public:
 		void selectProject(Project *proj);
 		static Editor &instance();
@@ -97,7 +83,6 @@ namespace dnai
 	public:
 		void setSolution(dnai::Solution *sol);
 		models::BasicNodeModel *nodes() const;
-		PropertyPanelProperties *propertyPanelProperties();
 		Session *session() const;
 	signals:
 		void solutionChanged(dnai::Solution *proj);
@@ -114,7 +99,7 @@ namespace dnai
 		ToasterManagerService m_toasterManagerService;
 		QQuickWindow *m_mainView = nullptr;
 		QQuickItem* m_propertyView;
-		PropertyPanelProperties *m_propertyPanelProperties = nullptr;
+		models::ContextMenu* m_contextMenu;
 
 		static Editor &m_instance;
 	};

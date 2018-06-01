@@ -1,5 +1,6 @@
 #include "dnai/models/gui/declarable/variable.h"
 #include "dnai/exceptions/notimplemented.h"
+#include "dnai/models/gui/entitylist.h"
 #include "core.h"
 
 namespace dnai
@@ -10,28 +11,62 @@ namespace dnai
 		{
 			namespace declarable
 			{
-//				Variable::Variable(QObject* parent)
-//				{
-//				}
-                QMap<quint32, QString> Variable::m_typeMap =
+				EntityList *Variable::m_variables = new EntityList(new QList<models::Entity*>());
+				VarTypeList *Variable::m_varTypes = nullptr;
+
+				int VarTypeList::rowCount(const QModelIndex& parent) const
 				{
-                    {2, "Integer"},
-					{1, "Boolean"},
-                    {5, "String"}
-				};
+					return m_values.count();
+				}
 
-                QMap<QString, quint32> Variable::m_typeMap2 =
-                {
-                    {"Integer", 2},
-                    {"Boolean", 1},
-                    {"String", 5}
-                };
+				void VarTypeList::append(const QString &name, const quint32 value)
+				{
+					if (m_values.find(name) != m_values.end()) return;
+					beginInsertRows(QModelIndex(), m_values.count(), m_values.count());
+					m_values.insert(name, value);
+					endInsertRows();
+				}
 
-				QStringList Variable::m_typeList = {
-					"Integer",
-					"Boolean",
-					"String"
-                };
+				void VarTypeList::append(const QPair<QString, quint32> &value)
+				{
+					if (m_values.find(value.first) != m_values.end()) return;
+					beginInsertRows(QModelIndex(), m_values.count(), m_values.count());
+					m_values.insert(value.first, value.second);
+					endInsertRows();
+				}
+
+				void VarTypeList::remove(const QString& name)
+				{
+					auto index = 0;
+					for (const auto& i : m_values.keys())
+					{
+						if (i == name)
+							break;
+						index++;
+					}
+					beginRemoveRows(QModelIndex(), index, index);
+					m_values.remove(name);
+					endRemoveRows();
+				}
+
+				QVariant VarTypeList::data(const QModelIndex& index, int role) const
+				{
+					if (!index.isValid())
+						return QVariant();
+					if (role == Name)
+						return QVariant::fromValue(m_values.keys().at(index.row()));
+					else if (role == Type)
+						return QVariant::fromValue(m_values.values().at(index.row()));
+					return QVariant();
+				}
+
+				QHash<int, QByteArray> VarTypeList::roleNames() const
+				{
+					QHash<int, QByteArray> roles;
+					roles[Name] = "name";
+					roles[Type] = "varType";
+					return roles;
+				}
 
 				Variable::Variable(QObject* parent) : QObject(parent)
 				{
@@ -56,7 +91,7 @@ namespace dnai
                     return m_data.varType;
 				}
 
-                bool Variable::setVarType(qint32 id)
+                bool Variable::setVarType(const qint32 id)
 				{
 					if (m_data.varType == id)
 						return false;
@@ -79,41 +114,21 @@ namespace dnai
 					return false;
 				}
 
-				const QString& Variable::getVariableName(qint32 identifier)
+				EntityList* Variable::variables()
 				{
-					return m_typeMap[identifier];
+					return m_variables;
 				}
 
-				void Variable::addVariableType(qint32 identifier, const QString& name)
+				VarTypeList* Variable::varTypes()
 				{
-					if (m_typeMap.find(identifier) != m_typeMap.end())
+					if (!m_varTypes)
 					{
-						auto msg = "Type " + name + " already exist";
-						throw std::runtime_error(msg.toLatin1().constData());
+						m_varTypes->append({ "Integer", 2 });
+						m_varTypes->append({ "Boolean", 1 });
+						m_varTypes->append({ "String", 5 });
 					}
-					m_typeMap[identifier] = name;
-					m_typeList.append(name);
+					return m_varTypes;
 				}
-
-                const QMap<quint32, QString>& Variable::getVariableMap()
-				{
-                    return m_typeMap;
-                }
-
-                const QMap<QString, quint32> &Variable::getVariableMap2()
-                {
-                    return m_typeMap2;
-                }
-
-				const QStringList &Variable::getVariableList()
-				{
-					return m_typeList;
-				}
-
-				const int Variable::variableListCount()
-				{
-                    return m_typeMap.count();
-                }
 			}
 		}
 	}

@@ -228,7 +228,7 @@ namespace dnai
             Q_UNUSED(message)
 
             commands::CoreCommand::Error();
-            Editor::instance().notifyError("Unable to set variable " + paramName + " as parameter: " + message, [](){});
+            Editor::instance().notifyError("Unable to set variable " + paramName + " as parameter: " + message);
         }
 
         void FunctionHandler::onReturnSet(::core::EntityID function, const QString &returnName)
@@ -263,7 +263,7 @@ namespace dnai
             Q_UNUSED(message)
 
             commands::CoreCommand::Error();
-            Editor::instance().notifyError("Unable to set return: " + message, [](){});
+            Editor::instance().notifyError("Unable to set return: " + message);
         }
 
         void FunctionHandler::onInstructionAdded(EntityID function, INSTRUCTION type, const std::list<EntityID> &arguments, InstructionID instruction)
@@ -289,7 +289,7 @@ namespace dnai
             Q_UNUSED(arguments)
 
             commands::CoreCommand::Error();
-            Editor::instance().notifyError("Unable to create instruction: " + messsage, [](){});
+            Editor::instance().notifyError("Unable to create instruction: " + messsage);
         }
 
         InstructionHandler *FunctionHandler::instruction()

@@ -1,6 +1,7 @@
 #ifndef DNAI_MODELS_GUI_FLOW_H
 #define DNAI_MODELS_GUI_FLOW_H
 
+#include <QObject>
 #include "dnai/interfaces/imodeldata.h"
 #include "dnai/interfaces/iserializable.h"
 #include "data/flow.h"
@@ -11,7 +12,7 @@ namespace dnai
 	{
 		namespace gui
 		{
-			class Flow : public interfaces::IModelData<data::Flow>, public interfaces::ASerializable<Flow>
+			class Flow : public QObject, public interfaces::IModelData<data::Flow>, public interfaces::ASerializable<Flow>
 			{
 			public:
 				void serialize(QJsonObject& obj) const override;

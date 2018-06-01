@@ -41,7 +41,7 @@ namespace dnai
         {
             if (pendingProjects.empty() || pendingProjects.front()->name() != name)
             {
-                Editor::instance().notifyWarning("Someone tried to declare a project", [](){});
+                Editor::instance().notifyWarning("Someone tried to declare a project");
                 return;
             }
 
@@ -58,13 +58,13 @@ namespace dnai
         {
             if (pendingProjects.empty() || pendingProjects.front()->name() != name)
             {
-                Editor::instance().notifyWarning("Someone failed to declare a project", [](){});
+                Editor::instance().notifyWarning("Someone failed to declare a project");
                 return;
             }
 
             commands::CoreCommand::Error();
 
-            Editor::instance().notifyError("Failed to create project: " + error, [](){});
+            Editor::instance().notifyError("Failed to create project: " + error);
         }
     }
 }

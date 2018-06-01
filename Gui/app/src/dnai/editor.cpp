@@ -1,7 +1,5 @@
-#include <QQuickItem>
 #include <QQmlProperty>
 #include <QQuickView>
-#include <QJsonArray>
 
 #include "dnai/editor.h"
 #include "dnai/solution.h"
@@ -11,16 +9,23 @@
 #include "dnai/interfaces/iviewzone.h"
 #include "dnai/app.h"
 #include "dnai/views/canvasnode.h"
-
+#include "dnai/models/gui/declarable/function.h"
 #include "dnai/core/handlermanager.h"
 
 namespace dnai
 {
 	Editor &Editor::m_instance = *(new Editor());
 
+	Editor::Editor(): m_solution(nullptr)
+		, m_selection(nullptr)
+		, m_editorView(nullptr)
+		, m_propertyView(nullptr)
+		, m_contextMenu(new models::ContextMenu())
+	{
+	}
+
 	Editor::~Editor()
 	{
-		delete m_propertyPanelProperties;
 	}
 
 	const QString& Editor::version() const
@@ -167,13 +172,6 @@ namespace dnai
         return App::currentInstance()->nodes();
     }
 
-    PropertyPanelProperties * Editor::propertyPanelProperties()
-	{
-		if (!m_propertyPanelProperties)
-			m_propertyPanelProperties = new PropertyPanelProperties();
-		return m_propertyPanelProperties;
-	}
-
 	interfaces::ISolution *Editor::solution() const
     {
         return m_solution;
@@ -194,6 +192,11 @@ namespace dnai
 	views::EditorView *Editor::mainView() const
 	{
 		return m_editorView;
+	}
+
+	dnai::models::ContextMenu* Editor::contextMenu() const
+	{
+		return m_contextMenu;
 	}
 
 	void Editor::registerEditorView(views::EditorView* view)
@@ -239,10 +242,10 @@ namespace dnai
       //  app->onNotifyVersionChanged();
     }
 
-	models::EntityList *Editor::entities()
-	{
-		return models::Entity::m_entities;
-	}
+	//models::EntityList *Editor::entities()
+	//{
+	//	return models::Entity::m_entities;
+	//}
 
     void Editor::registerMainView(QObject *mainView) {
         m_mainView = static_cast<QQuickWindow*>(mainView);
@@ -305,32 +308,14 @@ namespace dnai
 		}
 	}
 
-	PropertyPanelProperties::PropertyPanelProperties(QObject *parent) : QObject(parent)
-    {
-        QMetaEnum metaEnum = QMetaEnum::fromType<core::VISIBILITY>();
-		for (auto i = 0; i < metaEnum.keyCount(); i++)
-		{
-			m_visibility.append(metaEnum.key(i));
-		}
-		metaEnum = QMetaEnum::fromType<core::ENTITY>();
-		for (auto i = 1; i < metaEnum.keyCount(); i++)
-		{
-			m_entityType.append(metaEnum.key(i));
-		}
-    }
-
-    const QStringList &PropertyPanelProperties::visibility() const
-    {
-        return m_visibility;
-    }
-
-	const QStringList& PropertyPanelProperties::entityType() const
+	void Editor::updateContextMenu(dnai::models::Entity* entity) const
 	{
-		return m_entityType;
-	}
-
-    const QStringList &PropertyPanelProperties::varType() const
-	{
-        return models::gui::declarable::Variable::getVariableList();
+		if (entity == nullptr)
+            return;
+		const auto func = entity->guiModel<models::gui::declarable::Function>();
+		if (func)
+        {
+            m_contextMenu->createFromEntity(entity);
+		}
 	}
 }

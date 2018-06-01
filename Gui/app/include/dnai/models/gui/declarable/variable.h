@@ -4,7 +4,8 @@
 #include <QObject>
 #include "dnai/interfaces/ivariable.h"
 #include "dnai/models/gui/data/variable.h"
-#include "entity.h"
+#include "dnai/models/gui/declarable/entity.h"
+#include <QAbstractListModel>
 
 namespace dnai
 {
@@ -12,8 +13,25 @@ namespace dnai
 	{
 		namespace gui
 		{
+            class EntityList;
 			namespace declarable
 			{
+				class VarTypeList : public QAbstractListModel
+				{
+				public:
+					enum Roles {
+						Name = Qt::UserRole + 1,
+						Type
+					};
+					int rowCount(const QModelIndex& parent) const override;
+					void append(const QString& name, quint32);
+					void append(const QPair<QString, quint32>& value);
+					void remove(const QString &name);
+					QVariant data(const QModelIndex& index, int role) const override;
+				private:
+					QMap<QString, quint32> m_values;
+					QHash<int, QByteArray> roleNames() const override;
+				};
                 class Variable : public QObject, public interfaces::IVariable, public Entity<data::Variable, Variable>
                 {
 					Q_OBJECT
@@ -37,18 +55,17 @@ namespace dnai
                     static const QMap<quint32, QString>& getVariableMap();
                     static const QMap<QString, quint32>& getVariableMap2();
 	                static const QStringList &getVariableList();
-					static const int variableListCount();
+					static int variableListCount();
+					static EntityList *variables();
+					static VarTypeList *varTypes();
 
 				signals:
 					void varTypeChanged(qint32 id);
 					void valueChanged(const QString &variant);
 
                 private:
-                    static QMap<quint32, QString> m_typeMap;
-                    static QMap<QString, quint32> m_typeMap2;
-					static QStringList m_typeList;
-
-					static QList<Variable *> m_variables;
+					static VarTypeList *m_varTypes;
+					static EntityList *m_variables;
 				};
 			}
 		}

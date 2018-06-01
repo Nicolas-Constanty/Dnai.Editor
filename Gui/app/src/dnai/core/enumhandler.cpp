@@ -92,7 +92,7 @@ namespace dnai
         void EnumHandler::onSetValueError(::core::EntityID, const QString &name, QString const &value, const QString &message)
         {
             commands::CoreCommand::Error();
-            dnai::Editor::instance().notifyError("Cannot set \"" + name + "\" to value \"" + value + "\" to enumeration: " + message, [](){});
+            dnai::Editor::instance().notifyError("Cannot set \"" + name + "\" to value \"" + value + "\" to enumeration: " + message);
         }
 
         void EnumHandler::onValueRemoved(::core::EntityID enumeration, const QString &name)
@@ -107,7 +107,7 @@ namespace dnai
         void EnumHandler::onRemoveValueError(::core::EntityID, const QString &name, const QString &message)
         {
             commands::CoreCommand::Error();
-            dnai::Editor::instance().notifyError("Cannot remove value \"" + name + "\" from enumeration: " + message, [](){});
+            dnai::Editor::instance().notifyError("Cannot remove value \"" + name + "\" from enumeration: " + message);
         }
     }
 }

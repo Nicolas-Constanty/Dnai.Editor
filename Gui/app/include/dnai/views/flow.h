@@ -63,6 +63,8 @@ namespace dnai
 
 		signals:
             void typeFlowChanged(enums::FlowTypeRessouce::FlowType t);
+			void linked(dnai::Link *link);
+			void unlinked(dnai::Link *link);
 
 		private:
             enums::FlowTypeRessouce::FlowType m_typeFlow;

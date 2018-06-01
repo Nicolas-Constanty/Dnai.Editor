@@ -8,6 +8,7 @@
 #include "dnai/interfaces/ientity.h"
 #include "dnai/interfaces/iinstruction.h"
 #include "dnai/models/gui/data/function.h"
+#include "dnai/models/gui/flow.h"
 
 namespace dnai
 {
@@ -17,69 +18,15 @@ namespace dnai
 
 		namespace gui
 		{
+			class EntityList;
 			namespace declarable
 			{
-				class FunctionInputs : public QAbstractListModel
-				{
-					Q_OBJECT
-					
-				public:
-					FunctionInputs(QObject *parent = nullptr) : QAbstractListModel(parent), m_list(nullptr)
-					{
-					}
-					enum Roles {
-						Name = Qt::UserRole + 1,
-						Type
-					};
-					explicit FunctionInputs(QList<models::Entity*> *);
-					int rowCount(const QModelIndex& parent) const override;
-					QVariant data(const QModelIndex& index, int role) const override;
-                    void add(models::Entity *var);
-					void moveUp(int index);
-					void moveDown(int index);
-					void remove(const QString &name);
-					bool setData(const QModelIndex& index, const QVariant& value, int role) override;
-					bool setData(int index, const QVariant& value, int role);
-
-				private:
-					QList<models::Entity*> *m_list;
-					QHash<int, QByteArray> roleNames() const override;
-
-				};
-
-				class FunctionOutputs : public QAbstractListModel
-				{
-					Q_OBJECT
-					
-				public:
-					FunctionOutputs(QObject *parent = nullptr) : QAbstractListModel(parent), m_list(nullptr)
-					{
-					}
-					enum Roles {
-						Name = Qt::UserRole + 1,
-						Type
-					};
-					explicit FunctionOutputs(QList<models::Entity*> *);
-					int rowCount(const QModelIndex& parent) const override;
-					QVariant data(const QModelIndex& index, int role) const override;
-                    void add(models::Entity *var);
-					void moveUp(int index);
-					void moveDown(int index);
-					void remove(const QString &name);
-
-					bool setData(const QModelIndex& index, const QVariant& value, int role) override;
-					bool setData(int index, const QVariant& value, int role);
-
-				private:
-					QList<models::Entity*> *m_list;
-					QHash<int, QByteArray> roleNames() const override;
-
-				};
 				class Function : public QObject, public Entity<data::Function, Function>
                 {
 					Q_OBJECT
-					Q_PROPERTY(FunctionInputs *inputModels READ inputModels WRITE setInputModels NOTIFY inputModelsChanged)
-					Q_PROPERTY(FunctionOutputs *outputModels READ outputModels WRITE setOutputModels NOTIFY outputModelsChanged)
+					Q_PROPERTY(dnai::models::gui::EntityList *inputModels READ inputModels WRITE setInputModels NOTIFY inputModelsChanged)
+					Q_PROPERTY(dnai::models::gui::EntityList *outputModels READ outputModels WRITE setOutputModels NOTIFY outputModelsChanged)
+
 				public:
 					explicit Function(QObject *parent = nullptr);
 					//Implementation of ISerializable
@@ -112,10 +59,10 @@ namespace dnai
 					Q_INVOKABLE void updateOutputName(int index, const QString &name);
                     Q_INVOKABLE void updateOutputVarType(int index, qint32 varType);*/
 
-					FunctionInputs *inputModels() const;
-					FunctionOutputs *outputModels() const;
-					void setInputModels(FunctionInputs* inputs);
-					void setOutputModels(FunctionOutputs* outputs);
+					EntityList *inputModels() const;
+					EntityList *outputModels() const;
+					void setInputModels(EntityList* inputs);
+					void setOutputModels(EntityList* outputs);
 
 					void addInstruction(Instruction *instruction);
 
@@ -123,12 +70,13 @@ namespace dnai
                     Q_INVOKABLE quint32 getOutputId(QString const &name) const;
 
 				signals:
-					void inputModelsChanged(FunctionInputs* inputs);
-					void outputModelsChanged(FunctionOutputs* outputs);
+					void inputModelsChanged(dnai::models::gui::EntityList* inputs);
+					void outputModelsChanged(dnai::models::gui::EntityList* outputs);
+
 
 				private:
-					FunctionInputs *m_finputs;
-					FunctionOutputs *m_foutputs;
+					EntityList *m_finputs;
+					EntityList *m_foutputs;
 				};
 			}
 		}

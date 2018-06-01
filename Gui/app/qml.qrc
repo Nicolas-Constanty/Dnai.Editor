@@ -181,5 +181,6 @@
         <file>resources/Nodes/Getter/FloatGetter.qml</file>
         <file>resources/Nodes/Getter/StringGetter.qml</file>
         <file>resources/Nodes/Getter/BoolGetter.qml</file>
+        <file>resources/Components/GetterMenu.qml</file>
     </qresource>
 </RCC>

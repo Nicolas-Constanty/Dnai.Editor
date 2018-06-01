@@ -54,10 +54,8 @@ static void registerDNAI()
     qmlRegisterDnai(dnai::Session, "Session");
     qmlRegisterDnai(dnai::Project, "Project");
 	qmlRegisterDnai(dnai::Solution, "Solution");
-    qmlRegisterDnai(dnai::PropertyPanelProperties, "PropertyPanelProperties");
-    qmlRegisterDnai(dnai::models::gui::declarable::FunctionInputs, "FunctionIn");
-    qmlRegisterDnai(dnai::models::gui::declarable::FunctionOutputs, "FunctionOut");
-    qmlRegisterDnai(dnai::models::EntityList, "EntityList");
+    qmlRegisterDnai(dnai::models::gui::EntityList, "EntityList");
+    qmlRegisterDnai(dnai::models::ContextMenu, "ContextMenu");
 }
 
 static void registerEnums()

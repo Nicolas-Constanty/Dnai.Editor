@@ -25,11 +25,15 @@ namespace dnai
 			const auto li = dynamic_cast<FlowBackend *>(linkable);
 			if (li != nullptr && li->getType() != getType())
 			{
-				if (li->links().size())
+				if (!li->links().empty())
 				{
-					dynamic_cast<LinkableBezierItem *>(li->parent())->unlinkAll();
+					if (const auto lb = dynamic_cast<LinkableBezierItem *>(li->parent()))
+						lb->unlinkAll();
 				}
-				return BaseLinkable::connect(linkable, curve);
+				const auto l = BaseLinkable::connect(linkable, curve);
+				if (const auto fl = dynamic_cast<Flow *>(parent()))
+					emit fl->linked(l);
+				return l;
 			}
 			return nullptr;
 		}
