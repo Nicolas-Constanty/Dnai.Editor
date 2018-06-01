@@ -20,7 +20,8 @@ namespace dnai
 				}
 				enum Roles {
 					Name = Qt::UserRole + 1,
-					Type
+					Type,
+					Entity
 				};
 				explicit EntityList(QList<models::Entity*> *);
 				explicit EntityList(const QList<models::Entity*> &);
