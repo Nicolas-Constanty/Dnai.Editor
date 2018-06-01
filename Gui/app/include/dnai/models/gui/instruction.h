@@ -47,6 +47,9 @@ namespace dnai
 				qint32 instruction_id() const;
 				bool setInstructionId(qint32 id);
 
+                quint32 Uid() const;
+                bool setUid(quint32 id);
+
 			private:
 				data::Instruction m_data;
 			};

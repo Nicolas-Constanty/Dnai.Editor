@@ -1,3 +1,7 @@
+#include <tuple>
+
+#include <QObject>
+#include <QQuickItem>
 #include <QQmlProperty>
 #include <QQuickView>
 
@@ -17,10 +21,11 @@ namespace dnai
 	Editor &Editor::m_instance = *(new Editor());
 
 	Editor::Editor(): m_solution(nullptr)
-		, m_selection(nullptr)
-		, m_editorView(nullptr)
-		, m_propertyView(nullptr)
-		, m_contextMenu(new models::ContextMenu())
+	                  , m_selection(nullptr)
+	                  , m_editorView(nullptr)
+	                  , m_propertyView(nullptr)
+	                  , m_contextMenu(new models::ContextMenu())
+					  , m_propertyPanelProperties(nullptr)
 	{
 	}
 
@@ -85,6 +90,10 @@ namespace dnai
     void Editor::startApp()
     {
        App::currentInstance()->load();
+       QObject::connect(&dnai::gcore::HandlerManager::Instance().Function(), SIGNAL(instructionAdded(models::Entity*,models::gui::Instruction*)),
+                        this, SLOT(onInstructionAdded(models::Entity*,models::gui::Instruction*)));
+       QObject::connect(&dnai::gcore::HandlerManager::Instance().Function(), SIGNAL(addInstructionError(quint32,quint32,QList<quint32>,QString)),
+                        this, SLOT(onAddInstructionError(quint32,quint32,QList<quint32>,QString)));
     }
 
 	void Editor::closeSolution()
@@ -217,13 +226,18 @@ namespace dnai
         return &App::currentInstance()->session();
     }
 
-    void Editor::createNode(models::Entity *entity, QObject *nodeModel, qint32 x, qint32 y) const
+    void Editor::onInstructionAdded(models::Entity *, models::gui::Instruction *instruction)
     {
-		auto function = dynamic_cast<models::gui::declarable::Function *>(entity->guiModel());
-		if (function == nullptr) return;
-		auto instruction = new models::gui::Instruction();
-		instruction->setInstructionId(nodeModel->property("instruction_id").toInt());
-		function->addInstruction(instruction);
+        if (m_pendingInstruction.empty())
+            return;
+
+        quint32 x, y;
+
+        std::tie(x, y) = m_pendingInstruction.front();
+
+        qDebug() << "Editor instruction added: " << x << ", " << y;
+
+        //at reception, the editor must do this code
         const QString path = "qrc:/resources/Components/Node.qml";
         QQmlComponent component(App::getEngineInstance(), path);
         QQuickItem *obj = qobject_cast<QQuickItem*>(component.beginCreate(App::getEngineInstance()->rootContext()));
@@ -234,13 +248,41 @@ namespace dnai
         {
             throw std::runtime_error("No canvas view found!");
         }
-	    const auto canvas = dynamic_cast<views::CanvasNode *>(view);
+        const auto canvas = dynamic_cast<views::CanvasNode *>(view);
         obj->setParentItem(canvas->content());
-		instruction->setX(x - canvas->content()->x());
-		instruction->setY(y - canvas->content()->y());
-		obj->setX(instruction->x());
-		obj->setY(instruction->y());
+        instruction->setX(x - canvas->content()->x());
+        instruction->setY(y - canvas->content()->y());
+        obj->setX(instruction->x());
+        obj->setY(instruction->y());
         component.completeCreate();
+        m_pendingInstruction.pop();
+    }
+
+    void Editor::onAddInstructionError(quint32 func, quint32 type, const QList<quint32> &args, const QString &msg)
+    {
+        qDebug() << "Editor Instruction error";
+        if (!m_pendingInstruction.empty())
+            m_pendingInstruction.pop();
+    }
+
+    void Editor::createNode(models::Entity *entity, quint32 type, QList<qint32> const &args, qint32 x, qint32 y)
+    {
+        auto function = dynamic_cast<models::gui::declarable::Function *>(entity->guiModel());
+        if (function == nullptr) return;
+
+        QList<quint32> topass;
+
+        for (qint32 curr : args) {
+            topass.append(static_cast<quint32>(curr));
+        }
+
+        qDebug() << "Arguments: " << args;
+
+        //call the core function to add instruction
+        dnai::gcore::HandlerManager::Instance().Function().addInstruction(entity->id(), type, topass);
+
+        //save the positions when the instruction will be added
+        m_pendingInstruction.emplace(std::make_pair(x, y));
     }
 
     void Editor::checkVersion()

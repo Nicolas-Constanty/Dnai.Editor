@@ -41,7 +41,7 @@ namespace dnai
         public:
             Q_INVOKABLE void setParameter(quint32 func, QString const &paramName);
             Q_INVOKABLE void setReturn(quint32 func, QString const &retName);
-            Q_INVOKABLE void addInstruction(quint32 func, quint32 instrType, QList<core::EntityID> const &arguments);
+            Q_INVOKABLE void addInstruction(quint32 func, quint32 instrType, QList<quint32> const &arguments);
 
         private:
             models::gui::declarable::Function *getFunctionData(::core::EntityID function, bool throws = false);
@@ -55,6 +55,10 @@ namespace dnai
 
             void onInstructionAdded(::core::EntityID function, ::core::INSTRUCTION type, std::list<::core::EntityID> const &arguments, ::core::InstructionID instruction);
             void onAddInstructionError(::core::EntityID function, ::core::INSTRUCTION type, std::list<::core::EntityID> const &arguments, QString const &messsage);
+
+        signals:
+            void instructionAdded(models::Entity *function, models::gui::Instruction *instruction);
+            void addInstructionError(quint32 func, quint32 instrType, QList<quint32> const &args, QString const &msg);
 
         private:
             EntityManager &manager;

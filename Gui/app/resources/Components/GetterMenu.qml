@@ -22,7 +22,17 @@ Menu {
                 }
                 onTriggered: {
                     var obj;
-                    if (Editor.varTypes.getNameFromValue(model.varType) === "Integer")
+
+                    console.log('model: ', model)
+                    console.log('model entity: ', model.entity)
+                    console.log('model entity name: ', model.entity.name)
+                    console.log('model entity id: ', model.entity.id)
+
+                    console.log('node model: ', nodeModel);
+
+                    Editor.createNode(nodeModel, 23, [model.entity.id], canvas.mousePosition.x, canvas.mousePosition.y);
+
+                    /*if (model.varType === 0)
                     {
                         console.log("create Node getter")
                         Factory.createObjects(
@@ -55,7 +65,7 @@ Menu {
                                     "resources/Components/Node.qml",
                                     { "model": obj, "x": canvas.mousePosition.x, "y": canvas.mousePosition.y },
                                     _inputs.ctItem)
-                    }
+                    }*/
                 }
             }
         }
