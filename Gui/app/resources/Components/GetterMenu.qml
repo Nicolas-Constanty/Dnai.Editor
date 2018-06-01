@@ -22,7 +22,7 @@ Menu {
                 }
                 onTriggered: {
                     var obj;
-                    if (model.varType === 0)
+                    if (Editor.varTypes.getNameFromValue(model.varType) === "Integer")
                     {
                         console.log("create Node getter")
                         Factory.createObjects(
@@ -34,7 +34,7 @@ Menu {
                                     { "model": obj, "x": canvas.mousePosition.x, "y": canvas.mousePosition.y },
                                     _inputs.ctItem)
                     }
-                    else if (model.varType === 1)
+                    else if (Editor.varTypes.getNameFromValue(model.varType) === "Boolean")
                     {
                         Factory.createObjects(
                             "resources/Nodes/Getter/BoolGetter.qml",
@@ -45,7 +45,7 @@ Menu {
                                     { "model": obj, "x": canvas.mousePosition.x, "y": canvas.mousePosition.y },
                                     _inputs.ctItem)
                     }
-                    else if (model.varType === 2)
+                    else if (Editor.varTypes.getNameFromValue(model.varType) === "String")
                     {
                         Factory.createObjects(
                             "resources/Nodes/Getter/StringGetter.qml",

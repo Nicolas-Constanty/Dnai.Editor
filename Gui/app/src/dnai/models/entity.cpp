@@ -184,7 +184,8 @@ namespace dnai
 		void Entity::setName(const QString& name) const
 		{
 			if (coreModel()->setName(name))
-            {
+			{
+				qDebug() << "NAME" << name;
 				emit nameChanged(name);
 			}
 		}
@@ -305,6 +306,7 @@ namespace dnai
             case ::core::ENTITY::ENUM_TYPE:
             {
                 m_dataGUI = gui::declarable::EnumType::deserialize(obj);
+				qDebug() << dynamic_cast<QObject*>(m_dataGUI);
                 break;
             }
             case ::core::ENTITY::OBJECT_TYPE:
@@ -321,10 +323,12 @@ namespace dnai
             }
 			
             foreach(const auto classe, obj["entities"].toArray()) {
-                QJsonObject o = classe.toObject();
+				QJsonObject o = classe.toObject();
+				qDebug() << o["name"].toString() << o["type"].toInt();
                 const auto coreModel = new models::gcore::Entity(static_cast<::core::ENTITY>(o["type"].toInt()));
                 Entity *parent = this;
                 const auto entity = Entity::deserialize(o, coreModel, parent);
+                qDebug() << entity->listIndex();
 				if (QUuid(entity->listIndex()).isNull() && !m_columns.empty())
 					entity->setListIndex(m_columns.keys().first().toString());
 				appendChild(entity);

@@ -1,5 +1,5 @@
 import QtQuick 2.0
-import QtQuick.Controls 1.4
+import QtQuick.Controls 2.2
 
 import DNAI 1.0
 import DNAI.Enums 1.0
@@ -60,20 +60,23 @@ Rectangle {
             {
                 var typemap = [2, 1, 5]
 
-                Controller.variable.setType(propertyPanel.model.id, typemap[value])
+                var enumvalue = Editor.propertyPanelProperties.varTypes.getValueFromIndex(value)
+                console.log("cccccccccccc", enumvalue)
+                Controller.variable.setType(propertyPanel.model.id, enumvalue)
 
                 if (propertyPanel.propvalue === null)
                     return;
                 propertyPanel.propvalue.destroy()
-                if (value === 0)
+                var valname = Editor.propertyPanelProperties.varTypes.getNameFromValue(enumvalue);
+                if (valname === "Integer")
                 {
                     propertyPanel.propvalue = createProperty("resources/Properties/IntProperty.qml", { "value": 0, "name" : "Value", "model": model, "prop": prop, "method": setVariableValue })
                 }
-                else if (value === 1)
+                else if (valname === "Boolean")
                 {
                     propertyPanel.propvalue = createProperty("resources/Properties/BoolProperty.qml", { "value": false, "name" : "Value", "model": model, "prop": prop, "method": setVariableValue })
                 }
-                else if (value === 2)
+                else if (valname === "String")
                 {
                     propertyPanel.propvalue = createProperty("resources/Properties/StringProperty.qml", { "value": "", "name" : "Value", "model": model, "prop": prop, "method": setVariableValue })
                 }
@@ -86,6 +89,17 @@ Rectangle {
 
             property var model: null
             width: _container.width
+            ItemDelegate {
+                id: _varTypeDelegate
+                width: _value.width
+                text: model.name
+                contentItem: Text {
+                   text: model.name
+                   elide: Text.ElideRight
+                   verticalAlignment: Text.AlignVCenter
+                }
+                highlighted: control.highlightedIndex === index
+            }
             onModelChanged: {
                 if (propertyPanel.model === null)
                     return
@@ -116,16 +130,28 @@ Rectangle {
                         if (val === CoreEnums.VARIABLE)
                         {
                             var t = md["guiProperties"]["varType"]
-                            createProperty("resources/Properties/DropDownProperty.qml", { "value": t, "listmodel": Editor.propertyPanelProperties.varType, "name" : "Type", "model": md["guiProperties"], "prop": "value", "method": updatePropType})
-                            if (t === 0)
+                            createProperty("resources/Properties/DropDownProperty.qml", {
+                                               "value": Editor.propertyPanelProperties.varTypes.getIndexFromValue(t),
+                                               "listmodel": Editor.propertyPanelProperties.varTypes,
+                                               "name" : "Type",
+                                               "model": md["guiProperties"],
+                                               "prop": "value",
+                                               "method": updatePropType,
+                                               "itemDelegate": _varTypeDelegate,
+                                               "textRole": "name"
+                                           })
+
+                            var valname = Editor.propertyPanelProperties.varTypes.getNameFromValue(t);
+                            console.log("ValName", valname)
+                            if (valname === "Integer")
                             {
                                 propertyPanel.propvalue = createProperty("resources/Properties/IntProperty.qml", { "value": md["guiProperties"]["value"], "name" : "Value", "model": md["guiProperties"], "prop": "value", "method": setVariableValue })
                             }
-                            else if (t === 1)
+                            else if (valname === "Boolean")
                             {
                                 propertyPanel.propvalue = createProperty("resources/Properties/BoolProperty.qml", { "value": md["guiProperties"]["value"], "name" : "Value", "model": md["guiProperties"], "prop": "value", "method": setVariableValue })
                             }
-                            else if (t === 2)
+                            else if (valname === "String")
                             {
                                 propertyPanel.propvalue = createProperty("resources/Properties/StringProperty.qml", { "value": md["guiProperties"]["value"], "name" : "Value", "model": md["guiProperties"], "prop": "value", "method": setVariableValue })
                             }

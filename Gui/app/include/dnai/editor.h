@@ -16,13 +16,32 @@ namespace dnai
     class Project;
     class Session;
 
+	class PropertyPanelProperties : public QObject {
+		Q_OBJECT
+			Q_PROPERTY(QStringList visibility READ visibility CONSTANT)
+			Q_PROPERTY(QStringList entityType READ entityType CONSTANT)
+			Q_PROPERTY(dnai::models::gui::declarable::VarTypeList *varTypes READ varTypes CONSTANT)
+	public:
+		explicit PropertyPanelProperties(QObject *parent = nullptr);
+
+		const QStringList &visibility() const;
+		const QStringList &entityType() const;
+		models::gui::declarable::VarTypeList *varTypes() const;
+
+	private:
+		QStringList m_visibility;
+		QStringList m_entityType;
+	};
+
 	class Editor : public QObject, public interfaces::IEditor
 	{
 		Q_OBJECT
         Q_PROPERTY(dnai::Solution *solution READ getSolution WRITE setSolution NOTIFY solutionChanged)
         Q_PROPERTY(dnai::models::BasicNodeModel *nodes READ nodes CONSTANT)
         Q_PROPERTY(dnai::Session *session READ session CONSTANT)  
+		Q_PROPERTY(dnai::PropertyPanelProperties *propertyPanelProperties READ propertyPanelProperties CONSTANT)
 		Q_PROPERTY(dnai::models::ContextMenu *contextMenu READ contextMenu CONSTANT)
+
 
 	protected:
 		Editor();
@@ -76,9 +95,11 @@ namespace dnai
 		Q_INVOKABLE QQuickItem* propertyView() const;
 		Q_INVOKABLE void loadFunction(dnai::models::Entity *entity) const;
 		Q_INVOKABLE void updateContextMenu(dnai::models::Entity *entity) const;
+
 	public:
 		void selectProject(Project *proj);
 		static Editor &instance();
+		PropertyPanelProperties *propertyPanelProperties();
 
 	public:
 		void setSolution(dnai::Solution *sol);
@@ -100,6 +121,8 @@ namespace dnai
 		QQuickWindow *m_mainView = nullptr;
 		QQuickItem* m_propertyView;
 		models::ContextMenu* m_contextMenu;
+		PropertyPanelProperties *m_propertyPanelProperties = nullptr;
+
 
 		static Editor &m_instance;
 	};

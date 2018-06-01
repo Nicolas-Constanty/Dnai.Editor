@@ -1,6 +1,7 @@
 #ifndef DNAI_MODELS_GUI_OUTPUT_H
 #define DNAI_MODELS_GUI_OUTPUT_H
 
+#include <QObject>
 #include "dnai/interfaces/iserializable.h"
 #include "data/output.h"
 #include "dnai/interfaces/imodeldata.h"
@@ -36,8 +37,8 @@ namespace dnai
             public:
 	            const data::Output& data() const override;
 	            bool setData(const data::Output& data) override;
-	            qint32 varType() const override;
-	            bool setVarType(qint32 id) override;
+                quint32 varType() const override;
+                bool setVarType(quint32 id) override;
                 const QString &value() const override;
                 bool setValue(const QString& value) override;
 	            const QString name() const;

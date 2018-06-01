@@ -1,10 +1,8 @@
 #ifndef DNAI_MODELS_GUI_DATA_VARIABLE_H
 #define DNAI_MODELS_GUI_DATA_VARIABLE_H
 
-#include <QJsonObject>
 #include "entity.h"
 #include "core.h"
-#include <QVariantList>
 
 namespace dnai
 {

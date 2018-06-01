@@ -53,11 +53,48 @@ namespace dnai
 				{
 					if (!index.isValid())
 						return QVariant();
-					if (role == Name)
+					if (role == Qt::DisplayRole || role == Name)
 						return QVariant::fromValue(m_values.keys().at(index.row()));
 					else if (role == Type)
 						return QVariant::fromValue(m_values.values().at(index.row()));
 					return QVariant();
+				}
+
+				QString VarTypeList::getNameFromValue(quint32 value)
+				{
+					for (const auto& val : m_values.keys())
+					{
+						if (value == m_values[val])
+							return val;
+					}
+					return "";
+				}
+
+				int VarTypeList::getIndexFromValue(quint32 value)
+				{
+					auto i = 0;
+					for (const auto& val : m_values.keys())
+					{
+						if (value == m_values[val])
+						{
+							qDebug() << val;
+							return i;
+
+						}
+						++i;
+					}
+					return 0;
+				}
+
+				int VarTypeList::getValueFromIndex(int value) const
+				{
+                    return m_values.values()[value];
+				}
+
+				const QVariant &VarTypeList::names()
+				{
+					m_keys = QVariant::fromValue(m_values.keys());
+					return m_keys;
 				}
 
 				QHash<int, QByteArray> VarTypeList::roleNames() const
@@ -75,7 +112,7 @@ namespace dnai
 				void Variable::serialize(QJsonObject& obj) const
 				{
 					Entity::serialize(obj);
-                    obj["varType"] = varType();
+                    obj["varType"] = qint32(varType());
                     obj["value"] = value();
 				}
 
@@ -86,12 +123,12 @@ namespace dnai
                     m_data.value = obj["value"].toString();
 				}
 
-                qint32 Variable::varType() const
+                quint32 Variable::varType() const
 				{
                     return m_data.varType;
 				}
 
-                bool Variable::setVarType(const qint32 id)
+                bool Variable::setVarType(const quint32 id)
 				{
 					if (m_data.varType == id)
 						return false;
@@ -123,8 +160,9 @@ namespace dnai
 				{
 					if (!m_varTypes)
 					{
-						m_varTypes->append({ "Integer", 2 });
+                        m_varTypes = new VarTypeList();
 						m_varTypes->append({ "Boolean", 1 });
+						m_varTypes->append({ "Integer", 2 });
 						m_varTypes->append({ "String", 5 });
 					}
 					return m_varTypes;
