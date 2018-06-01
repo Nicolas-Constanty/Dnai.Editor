@@ -82,8 +82,7 @@ void BasicNodeModel::setQmlPaths(const QString &path)
                 && filename != "NodeModel.qml"
                 && filename != "UnaryOperatorModel.qml"
                 && filename != "BinaryOperatorModel.qml"
-                && filename != "LogicalNodeModel.qml"
-                && it.fileInfo().dir().dirName() != "Getter")
+                && filename != "LogicalNodeModel.qml")
         {
 			if (it.fileInfo().dir().dirName() == "Logical")
 				m_qmlpaths["BinaryOperator" + it.fileInfo().dir().dirName()] << it.filePath();
