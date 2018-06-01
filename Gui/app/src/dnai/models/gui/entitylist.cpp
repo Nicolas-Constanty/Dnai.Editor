@@ -32,6 +32,8 @@ namespace dnai
 					return QVariant::fromValue(m_list->at(index.row())->name());
 				else if (role == Type)
 					return QVariant::fromValue(dynamic_cast<gui::declarable::Variable*>(m_list->at(index.row())->guiModel())->varType());
+				else if (role == Entity)
+					return QVariant::fromValue(m_list->at(index.row()));
 				return QVariant();
 			}
 
@@ -106,6 +108,7 @@ namespace dnai
 				QHash<int, QByteArray> roles;
 				roles[Name] = "name";
 				roles[Type] = "varType";
+				roles[Entity] = "entity";
 				return roles;
 			}
 		}
