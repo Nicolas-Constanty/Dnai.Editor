@@ -226,6 +226,8 @@ namespace dnai
 
         std::tie(x, y) = m_pendingInstruction.front();
 
+        qDebug() << "Editor instruction added: " << x << ", " << y;
+
         //at reception, the editor must do this code
         const QString path = "qrc:/resources/Components/Node.qml";
         QQmlComponent component(App::getEngineInstance(), path);
@@ -249,17 +251,26 @@ namespace dnai
 
     void Editor::onAddInstructionError(quint32 func, quint32 type, const QList<quint32> &args, const QString &msg)
     {
+        qDebug() << "Editor Instruction error";
         if (!m_pendingInstruction.empty())
             m_pendingInstruction.pop();
     }
 
-    void Editor::createNode(models::Entity *entity, quint32 type, QList<quint32> const &args, qint32 x, qint32 y)
+    void Editor::createNode(models::Entity *entity, quint32 type, QList<qint32> const &args, qint32 x, qint32 y)
     {
         auto function = dynamic_cast<models::gui::declarable::Function *>(entity->guiModel());
         if (function == nullptr) return;
 
+        QList<quint32> topass;
+
+        for (qint32 curr : args) {
+            topass.append(static_cast<quint32>(curr));
+        }
+
+        qDebug() << "Arguments: " << args;
+
         //call the core function to add instruction
-        dnai::gcore::HandlerManager::Instance().Function().addInstruction(entity->id(), type, args);
+        dnai::gcore::HandlerManager::Instance().Function().addInstruction(entity->id(), type, topass);
 
         //save the positions when the instruction will be added
         m_pendingInstruction.emplace(std::make_pair(x, y));

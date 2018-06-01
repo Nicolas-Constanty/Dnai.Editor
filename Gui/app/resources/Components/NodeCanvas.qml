@@ -147,7 +147,7 @@ CanvasNode {
                                     _subMenu.addAction(_subMenu1)
                                 }
                                 onTriggered: {
-                                    Editor.createNode(canvas.nodeModel, item, canvas.mousePosition.x, canvas.mousePosition.y)
+                                    Editor.createNode(canvas.nodeModel, item.instruction_id, [2, 2, 2], canvas.mousePosition.x, canvas.mousePosition.y)
                                 }
                             }
                         }

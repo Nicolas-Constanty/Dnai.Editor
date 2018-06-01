@@ -34,6 +34,8 @@ namespace dnai
             ::core::function::onSetParameterError(std::bind(&FunctionHandler::onSetParameterError, this, _1, _2, _3));
             ::core::function::onReturnSet(std::bind(&FunctionHandler::onReturnSet, this, _1, _2));
             ::core::function::onSetReturnError(std::bind(&FunctionHandler::onSetReturnError, this, _1, _2, _3));
+            ::core::function::onInstructionAdded(std::bind(&FunctionHandler::onInstructionAdded, this, _1, _2, _3, _4));
+            ::core::function::onAddInstructionError(std::bind(&FunctionHandler::onAddInstructionError, this, _1, _2, _3, _4));
 
             m_instruction.setup();
         }
@@ -164,6 +166,7 @@ namespace dnai
         {
             models::Entity &function = manager.getEntity(func);
 
+            qDebug() << "Add instruction(" << func << ", " << instrType << ", " << arguments << ")";
             commands::CommandManager::Instance()->exec(
                 new commands::CoreCommand("Function.AddInstruction", true,
                     [&function, instrType, arguments](){
@@ -272,8 +275,10 @@ namespace dnai
 
             models::gui::declarable::Function *func = getFunctionData(function);
 
+            qDebug() << "Instruction added";
             if (func != nullptr)
             {
+                qDebug() << "===== Created ok =====";
                 models::gui::Instruction *instr = new models::gui::Instruction();
                 instr->setInstructionId(type);
                 instr->setUid(instruction);
