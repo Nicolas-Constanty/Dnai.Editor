@@ -243,6 +243,8 @@ namespace dnai
         QQuickItem *obj = qobject_cast<QQuickItem*>(component.beginCreate(App::getEngineInstance()->rootContext()));
         QQmlProperty model(obj, "model", App::getEngineInstance());
         model.write(QVariant::fromValue(App::currentInstance()->nodes()->createNode(static_cast<enums::QInstructionID::Instruction_ID>(instruction->instruction_id()))));
+        QQmlProperty instr(obj, "instruction_model", App::getEngineInstance());
+        instr.write(QVariant::fromValue(instruction));
         const auto view = qvariant_cast<QQuickItem *>(Editor::instance().selectedView()->property("currentView"));
         if (!view)
         {
@@ -351,6 +353,8 @@ namespace dnai
 			QQuickItem *obj = qobject_cast<QQuickItem*>(component.beginCreate(App::getEngineInstance()->rootContext()));
 			QQmlProperty model(obj, "model", App::getEngineInstance());
 			model.write(QVariant::fromValue(App::currentInstance()->nodes()->createNode(static_cast<enums::QInstructionID::Instruction_ID>(instruction->instruction_id()))));
+            QQmlProperty instr(obj, "instruction_model", App::getEngineInstance());
+            instr.write(QVariant::fromValue(instruction));
 			obj->setParentItem(canvas->content());
 			obj->setX(instruction->x());
 			obj->setY(instruction->y());

@@ -10,6 +10,11 @@ import "../Style"
 
 NodeForm {
     property NodeModel model
+    property var instruction_model: null
+
+    onInstruction_modelChanged: {
+        model.model = instruction_model
+    }
 
     id: nodeForm
     inputs: model.inputs
