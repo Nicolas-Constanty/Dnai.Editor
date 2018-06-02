@@ -4,10 +4,10 @@ import DNAI 1.0
 TextInput {
     id: control
     property string placeholderText: "Enter text here..."
-    property string selectColor: "#847AFF"
-    property string deselectColor: "#4E4E5E"
-    property string selectColorBackground: "#333232"
-    property string deselectColorBackground: "#252526"
+    property string selectColor: AppSettings.theme["editableText"]["color"]["border"]["select"]
+    property string deselectColor: AppSettings.theme["editableText"]["color"]["border"]["deselect"]
+    property string selectColorBackground: AppSettings.theme["editableText"]["color"]["background"]["select"]
+    property string deselectColorBackground: AppSettings.theme["editableText"]["color"]["background"]["deselect"]
 
     font.family: AppSettings.theme["font"]["family"]
     font.pointSize: AppSettings.theme["font"]["pixelSize"]

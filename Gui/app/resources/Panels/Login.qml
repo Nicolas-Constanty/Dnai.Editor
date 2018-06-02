@@ -53,7 +53,7 @@ Item {
         anchors.right: parent.right
         anchors.topMargin: 10
         anchors.rightMargin: 10
-        color: "white"
+        color: AppSettings.theme["text"]["color"]
 
         MouseArea {
             id: crossMouseId
@@ -65,7 +65,6 @@ Item {
             }
 
             onReleased: {
-                console.log('CLIC ?')
                 loginViewId.popup.close()
             }
 
@@ -90,7 +89,7 @@ Item {
             anchors.topMargin: 20
             anchors.horizontalCenter: parent.horizontalCenter
             text: "Login"
-            color: "white"
+            color: AppSettings.theme["text"]["color"]
             font.pointSize: 14
         }
 
@@ -102,10 +101,10 @@ Item {
         anchors.top: loginLabelId.top
         anchors.left: inputField.left
         anchors.leftMargin: 20
-        anchors.topMargin: 40
+        anchors.topMargin: 60
         font.pointSize: 12
         text: "Username or Email :"
-        color: "white"
+        color: AppSettings.theme["text"]["color"]
     }
 
     EditableText {
@@ -128,7 +127,7 @@ Item {
         anchors.topMargin: 60
         font.pointSize: 12
         text: "Password :"
-        color: "white"
+        color: AppSettings.theme["text"]["color"]
     }
 
     EditableText {
@@ -156,7 +155,7 @@ Item {
         style: CheckBoxStyle {
 
         label: Text {
-            color: "White"
+            color: AppSettings.theme["text"]["color"]
             text: "Remember me"
         }
 
@@ -170,7 +169,7 @@ Item {
     MLabel {
         id: errorId
         text: ""
-        color: "red"
+        color: AppSettings.theme["text"]["errorColor"]
         font.pointSize: 8
         anchors.top: checkboxRememberId.bottom
         anchors.left: inputField.left

@@ -11,9 +11,9 @@ Popup {
     x: rootX + appWindow.width / 2 - width / 2
     y: rootY + appWindow.height / 2 - height / 2
     background: Rectangle {
-        color: "#252526"
-        border.width: 1
-        border.color: "#BCBCBC"
+        color: AppSettings.theme["modal"]["color"]
+        border.width: AppSettings.theme["modal"]["border"]["width"]
+        border.color: AppSettings.theme["modal"]["border"]["color"]
     }
     width: 400
     height: 500

@@ -53,7 +53,8 @@
         "lightColor": "#FFFFFF",
         "linkColor": "#000000",
         "selectionColor": "#000000",
-        "accentColor": "#FF7043"
+        "accentColor": "#FF7043",
+        "errorColor": "#FE1B00"
     },
     "canvas": {
         "background": "#4F4F4F",
@@ -159,10 +160,30 @@
         }
     },
      "button": {
-        "color": "#D8C9FF",
+        "color": "#847AFF",
+        "hovercolor": "#8E84FF",
         "text": {
-            "color": "#35334A",
+            "color": "#FFFFFF",
             "hovercolor": "#FFFFFF"
+        }
+    },
+    "modal": {
+        "color": "#252526",
+        "border": {
+            "color": "#BCBCBC",
+            "width": 1
+        }
+    },
+    "editableText": {
+        "color": {
+            "border": {
+            "select": "#847AFF",
+            "deselect": "#4E4E5E"
+            },
+            "background": {
+                "select": "#333232",
+                "deselect": "#252526"
+            }
         }
     }
 }
