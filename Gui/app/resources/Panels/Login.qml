@@ -14,7 +14,7 @@ Item {
     id: loginViewId
     property Modal popup
     property int popupWidth: 350
-    property int popupHeight: 475
+    property int popupHeight: inputField.childrenRect.height + 40
     property string urlForgotPassword: "https://preprod.dnai.io/users/forgot-your-password/"
     property string urlCreateAccount: "https://preprod.dnai.io/users/register/"
     height: popupHeight
@@ -46,6 +46,44 @@ Item {
         }
     }
 
+    TextAwesomeSolid {
+        id: crossId
+        text: "\uf00d"
+        anchors.top: parent.top
+        anchors.right: parent.right
+        anchors.topMargin: 10
+        anchors.rightMargin: 10
+        color: "white"
+
+        MouseArea {
+            id: crossMouseId
+            anchors.fill: crossId
+            hoverEnabled: true
+            //focus: true
+            onEntered: {
+                crossMouseId.cursorShape = Qt.PointingHandCursor
+            }
+
+            onReleased: {
+                console.log('CLIC ?')
+                loginViewId.popup.close()
+            }
+
+            onExited: {
+                crossMouseId.cursorShape = Qt.PointingHandCursor
+            }
+        }
+    }
+
+    Item {
+        id: inputField
+        anchors.top: parent.top
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
+        anchors.leftMargin: 40
+        anchors.rightMargin: 40
+
         MLabel {
             id: loginLabelId
             anchors.top: parent.top
@@ -56,47 +94,12 @@ Item {
             font.pointSize: 14
         }
 
-        TextAwesomeSolid {
-            id: crossId
-            text: "\uf00d"
-            anchors.top: parent.top
-            anchors.right: parent.right
-            anchors.topMargin: 10
-            anchors.rightMargin: 10
-            color: "white"
 
-            MouseArea {
-                id: crossMouseId
-                anchors.fill: crossId
-                hoverEnabled: true
-                //focus: true
-                onEntered: {
-                    crossMouseId.cursorShape = Qt.PointingHandCursor
-                }
 
-                onReleased: {
-                    console.log('CLIC ?')
-                    loginViewId.popup.close()
-                }
-
-                onExited: {
-                    crossMouseId.cursorShape = Qt.PointingHandCursor
-                }
-            }
-        }
-
-    Item {
-        id: inputField
-        anchors.top: loginLabelId.bottom
-        anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.bottom: parent.bottom
-        anchors.leftMargin: 40
-        anchors.rightMargin: 40
 
     MLabel {
         id: usernameId
-        anchors.top: inputField.top
+        anchors.top: loginLabelId.top
         anchors.left: inputField.left
         anchors.leftMargin: 20
         anchors.topMargin: 40
@@ -213,6 +216,7 @@ Item {
         anchors.top: createAccountId.bottom
         anchors.horizontalCenter: createAccountId.horizontalCenter
         anchors.topMargin: 20
+      //  anchors.bottom: inputField.bottom
         text: "Forgot password ?"
 
         onPressed: {
@@ -234,6 +238,7 @@ Item {
             reset()
         }
     }
+
 
 
 
