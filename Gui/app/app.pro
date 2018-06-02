@@ -312,7 +312,7 @@ HEADERS += \
     include/dnai/models/property.h \
     include/dnai/core/instructionhandler.h \
     include/dnai/models/gui/entitylist.h \
-    include/dnai/models/contextmenu.h
+    include/dnai/models/contextmenu.h \
     include/dnai/core/instructionmanager.h
 
 

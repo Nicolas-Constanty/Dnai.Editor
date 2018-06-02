@@ -177,10 +177,6 @@
         <file>resources/Properties/FunctionProperty.qml</file>
         <file>resources/Properties/ParameterValue.qml</file>
         <file>resources/Components/GetterMenu.qml</file>
-        <file>resources/Nodes/Getter/IntGetter.qml</file>
-        <file>resources/Nodes/Getter/FloatGetter.qml</file>
-        <file>resources/Nodes/Getter/StringGetter.qml</file>
-        <file>resources/Nodes/Getter/BoolGetter.qml</file>
         <file>resources/Components/CustomMenuButton.qml</file>
         <file>resources/Forms/LoginForm.qml</file>
         <file>resources/Style/MTextClickable.qml</file>
