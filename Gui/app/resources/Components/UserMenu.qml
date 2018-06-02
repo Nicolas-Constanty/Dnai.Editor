@@ -88,7 +88,7 @@ Item {
         }
         MTextClickable {
             id: logoutId
-            text: "logout"
+            text: "Sign out"
             anchors.right: parent.right
             onPressed: {
                 Editor.session.logout()
