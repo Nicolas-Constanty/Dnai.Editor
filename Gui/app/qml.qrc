@@ -109,7 +109,6 @@
         <file>resources/Style/DecorativeText.qml</file>
         <file>resources/Components/AddButton.qml</file>
         <file>resources/Panels/Login.qml</file>
-        <file>resources/Forms/LoginForm.ui.qml</file>
         <file>resources/Panels/Upload.qml</file>
         <file>resources/Forms/UploadForm.ui.qml</file>
         <file>resources/Components/UserMenu.qml</file>
@@ -181,5 +180,9 @@
         <file>resources/Nodes/Getter/FloatGetter.qml</file>
         <file>resources/Nodes/Getter/StringGetter.qml</file>
         <file>resources/Nodes/Getter/BoolGetter.qml</file>
+        <file>resources/Components/CustomMenuButton.qml</file>
+        <file>resources/Forms/LoginForm.qml</file>
+        <file>resources/Style/MTextClickable.qml</file>
+        <file>resources/Style/MPopup.qml</file>
     </qresource>
 </RCC>

@@ -59,7 +59,7 @@ namespace dnai
         m_settings->setAPIVersion(DNAI_VERSION_RELEASE);
 
 
-        api::get_download_object(softwares, "installer").map([this](Response response) -> Response {
+        api::get_download_object(softwares, "installer").map([this](http::Response response) -> http::Response {
             if (response.body.contains("currentVersion")) {
                 qDebug() << "enter ?";
                 m_settings->setAPIVersion(response.body["currentVersion"].toString());
@@ -73,7 +73,7 @@ namespace dnai
             onNotifyVersionChanged();
             return response;
         },
-        [this](Response response) -> Response {
+        [this](http::Response response) -> http::Response {
             qDebug() << "ERROR";
             Editor::instance().notifyError("Could not check for update.", []() {
 

@@ -183,7 +183,6 @@ HEADERS += \
     include/dnai/http/observable.h \
     include/dnai/http/response.h \
     include/dnai/http/service.h \
-    include/dnai/http/session.h \
     include/dnai/http/types.h \
     include/dnai/http/url.h \
     include/dnai/interfaces/iclone.h \

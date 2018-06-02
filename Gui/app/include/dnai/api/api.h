@@ -7,7 +7,7 @@
 #include "dnai/http/config.h"
 #include "dnai/http/types.h"
 
-using namespace dnai::http;
+//using namespace dnai::http;
 
 
 namespace dnai {
@@ -21,8 +21,9 @@ namespace dnai {
         };
 
     public:
-        static const Config http_config;
+        static const http::Config http_config;
         static const QString settings_key;
+        static bool rememberUser;
     private:
         static bool refreshing_token;
         static quint64 refreshing_delta;
@@ -38,14 +39,14 @@ namespace dnai {
         static void setUser(User const &);
 
     public:
-        static Observable &signin(QString const &, QString const &);
-        static Observable &refresh_token();
-        static Observable &get_current_user();
-        static Observable &get_files();
-        static Observable &get_file(QString const &);
-        static Observable &get_raw_file(QString const &);
-        static Observable &post_file(QString const &, QFile *);
-        static Observable &get_download_object(QString const &platform, QString const &slug);
+        static http::Observable &signin(QString const &, QString const &);
+        static http::Observable &refresh_token();
+        static http::Observable &get_current_user();
+        static http::Observable &get_files();
+        static http::Observable &get_file(QString const &);
+        static http::Observable &get_raw_file(QString const &);
+        static http::Observable &post_file(QString const &, QFile *);
+        static http::Observable &get_download_object(QString const &platform, QString const &slug);
         static void logout();
     };
 }

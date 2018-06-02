@@ -9,6 +9,7 @@ class Session : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(dnai::models::User *user READ user WRITE setUser NOTIFY userChanged)
+    Q_PROPERTY(bool rememberUser READ rememberUser WRITE setRememberUser NOTIFY rememberUserChanged)
 
 public:
 	explicit Session(QObject * parent = nullptr);
@@ -24,15 +25,20 @@ public:
 signals:
     void userChanged(models::User *user);
 	void apiErrors();
+    void rememberUserChanged(bool);
 
 public:
     models::User *user() const;
+    bool rememberUser() const;
     void setUser(models::User *user);
+    void setRememberUser(bool);
 
 private:
     models::User *m_user;
+    bool m_rememberUser;
 
 };
 }
 
 #endif // SESSION_H
+

@@ -5,6 +5,7 @@ import DNAI 1.0
 import "../Forms"
 import "../Panels"
 import "../Components"
+import "../Style"
 
 UserMenuForm {
     id: root
@@ -54,10 +55,14 @@ UserMenuForm {
         rootX: -root.x
         rootY: -root.y
         contentItem: Login {
+            id: loginPopupItem
             anchors.fill: parent
             popup: loginPopup
         }
+        width: loginPopupItem.popupWidth
+        height: loginPopupItem.popupHeight
     }
+
 
     Modal {
         id: uploadPopup

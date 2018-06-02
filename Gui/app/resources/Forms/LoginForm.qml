@@ -4,6 +4,8 @@ import QtQuick.Layouts 1.3
 
 import DNAI 1.0
 
+import "../Components"
+
 ColumnLayout {
     property alias createAccount: createAccount
     property alias signin: signin
@@ -15,6 +17,18 @@ ColumnLayout {
     anchors.fill: parent
     anchors.margins: 3
     spacing: 3
+
+    CustomMenuButton {
+        anchors.top: parent.top
+        anchors.left: parent.left
+        width: 50
+        height: 50
+        textValue: "Login"
+
+        onPressed: {
+            console.log("YOLO")
+        }
+    }
 
     Rectangle {
         id: header

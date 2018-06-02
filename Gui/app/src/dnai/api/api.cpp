@@ -6,23 +6,24 @@
 #include "dnai/http/service.h"
 
 namespace dnai {
-const QString api::client_id = "sINQmt18nib3vVlI4B71NKaQjXGWMYxrNJWuuS6e";
-const QString api::client_secret = "pMi9ScKMPv3IgHgCQmKHKX7yxJY5KMd2KXfWKRMa2jk1qyiSz7AJqllnvpFIfstnIDkausSlqgoWJabYIkXnPGiXgaKE9ikPeILVvoWlifaFSngX2QIA3sJFWH0EO9oH";
+const QString api::client_id = "";
+const QString api::client_secret = "";
 api::User api::user = {};
+bool api::rememberUser = false;
 bool api::refreshing_token = false;
 quint64 api::refreshing_delta = 3600;
 const QString api::settings_key = "/current/user";
-const Config api::http_config = {
+const http::Config api::http_config = {
     "https://api.preprod.dnai.io/",
       {},
       {
-        [](Url *url) {
+        [](http::Url *url) {
             auto token = getToken();
             if (!token.isEmpty()) {
                 url->addHeader("Authorization", "Bearer " + token);
             }
         },
-        [](Url *url) {
+        [](http::Url *url) {
             Q_UNUSED(url)
             if (api::refreshing_token == false && QDateTime::currentDateTime().addSecs(api::refreshing_delta) >= api::user.expire_date) {
                 api::refresh_token();
@@ -31,11 +32,11 @@ const Config api::http_config = {
     }
   };
 
-    Observable &api::signin(const QString &login, const QString &password)
+    http::Observable &api::signin(const QString &login, const QString &password)
     {
-        return Service::url("signin")
+        return http::Service::url("signin")
                 ->headers(
-                    Headers{
+                    http::Headers{
                     //    {"Authorization", "Basic " + QString(client_id + ":" + client_secret).toUtf8().toBase64()},
                         {"Content-Type", "application/json"}
                     })
@@ -44,7 +45,7 @@ const Config api::http_config = {
                            {"login", login},
                            {"password", password}
                        })
-                .map([](Response response) -> Response {
+                .map([](http::Response response) -> http::Response {
             api::setUser({
                 response.body["token"].toString(),
                 response.body["refreshToken"].toString(),
@@ -55,13 +56,13 @@ const Config api::http_config = {
         });
     }
 
-    Observable &api::refresh_token()
+    http::Observable &api::refresh_token()
     {
         qDebug() << "REFRESHTOKEN: " << api::user.refresh_token;
         api::refreshing_token = true;
-        return Service::url("refresh")
+        return http::Service::url("refresh")
                 ->headers(
-                    Headers{
+                    http::Headers{
                        // {"Authorization", "Basic " + QString(client_id + ":" + client_secret).toUtf8().toBase64()},
                         {"Content-Type", "application/json"}
                     })
@@ -69,7 +70,7 @@ const Config api::http_config = {
                           // {"grant_type", "refresh_token"},
                            {"refreshToken", api::user.refresh_token}
                        })
-                .map([](Response response) -> Response {
+                .map([](http::Response response) -> http::Response {
             api::setUser({
                              response.body["token"].toString(),
                              response.body["refreshToken"].toString(),
@@ -81,36 +82,36 @@ const Config api::http_config = {
         });
     }
 
-    Observable &api::get_current_user()
+    http::Observable &api::get_current_user()
     {
         //TODO when API work `/users/me` and remove John Doe
-        return Service::url("users", api::user.id.toLatin1().data())->get().map([](Response response) -> Response {
+        return http::Service::url("users", api::user.id.toLatin1().data())->get().map([](http::Response response) -> http::Response {
 
             return response;
         });
     }
 
-    Observable &api::get_files()
+    http::Observable &api::get_files()
     {
-        return Service::url("files")->get();
+        return http::Service::url("files")->get();
     }
 
-    Observable &api::get_download_object(QString const &platform, QString const &slug)
+    http::Observable &api::get_download_object(QString const &platform, QString const &slug)
     {
-        return Service::url("download/softwares", platform.toLatin1().data(), slug.toLatin1().data())->get();
+        return http::Service::url("download/softwares", platform.toLatin1().data(), slug.toLatin1().data())->get();
     }
 
-    Observable &api::get_file(QString const &id)
+    http::Observable &api::get_file(QString const &id)
     {
-        return Service::url("files", id.toLatin1().data())->get();
+        return http::Service::url("files", id.toLatin1().data())->get();
     }
 
-    Observable &api::get_raw_file(QString const &id)
+    http::Observable &api::get_raw_file(QString const &id)
     {
-        return Service::url("uploaded_files", id.toLatin1().data())->get();
+        return http::Service::url("uploaded_files", id.toLatin1().data())->get();
     }
 
-    Observable &api::post_file(QString const &title, QFile *file)
+    http::Observable &api::post_file(QString const &title, QFile *file)
     {
         QHttpMultiPart *multiPart = new QHttpMultiPart(QHttpMultiPart::FormDataType);
 
@@ -119,13 +120,13 @@ const Config api::http_config = {
         multiPart->append(http::Service::makeHttpPart("file", file));
         file->setParent(multiPart);
 
-        return Service::url("files")->post(multiPart);
+        return http::Service::url("files")->post(multiPart);
     }
 
     void api::logout()
     {
-        qDebug() << "LOGOUT ?";
-        api::setUser({});
+        api::user = {};
+        App::currentInstance()->settings().setAPIValue(api::settings_key, QVariant::fromValue(api::user));
     }
 
     QString const &api::getToken()
@@ -140,9 +141,8 @@ const Config api::http_config = {
     void api::setUser(const api::User &user)
     {
         api::user = user;
-        qDebug() << "user: "<<  api::user.id;
-        App::currentInstance()->settings().setAPIValue(api::settings_key, QVariant::fromValue(api::user));
-        qDebug() << "SETTINGS user";
+        if (api::rememberUser)
+            App::currentInstance()->settings().setAPIValue(api::settings_key, QVariant::fromValue(api::user));
     }
 }
 

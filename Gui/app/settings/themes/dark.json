@@ -157,5 +157,12 @@
                 "width": 2
             }
         }
+    },
+     "button": {
+        "color": "#D8C9FF",
+        "text": {
+            "color": "#35334A",
+            "hovercolor": "#FFFFFF"
+        }
     }
 }

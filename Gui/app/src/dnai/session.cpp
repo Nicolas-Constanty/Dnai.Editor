@@ -1,20 +1,28 @@
-#include "dnai/session.h"
+#include <QFileInfo>
 #include "dnai/http/response.h"
 #include "dnai/api/api.h"
 #include "dnai/project.h"
-#include <QFileInfo>
 #include "dnai/editor.h"
 #include "dnai/solution.h"
+#include "dnai/session.h"
 
 namespace dnai {
-
-Session::Session(QObject *parent) : QObject(parent), m_user(nullptr)
+//namespace http {
+Session::Session(QObject *parent)
+    : QObject(parent),
+    m_user(nullptr),
+    m_rememberUser(false)
 {
 }
 
 models::User *Session::user() const
 {
     return m_user;
+}
+
+bool Session::rememberUser() const
+{
+    return m_rememberUser;
 }
 
 void Session::setUser(models::User *user)
@@ -27,11 +35,11 @@ void Session::setUser(models::User *user)
 
 void Session::signin(const QString &username, const QString &password)
 {
-    api::signin(username, password).map([this](Response response) -> Response {
+    api::signin(username, password).map([this](http::Response response) -> http::Response {
         getCurrentUser();
         return response;
     },
-    [this](Response response) -> Response {
+    [this](http::Response response) -> http::Response {
         emit apiErrors();
         return response;
     });
@@ -42,7 +50,7 @@ void Session::getCurrentUser()
     if (dnai::api::getId().size() == 0) {
         return;
     }
-    api::get_current_user().map([this](Response response) -> Response {
+    api::get_current_user().map([this](http::Response response) -> http::Response {
         m_user = new models::User();
         m_user->setName(response.body["username"].toString());
         m_user->setProfile_url("../Images/default_user.png");
@@ -60,7 +68,7 @@ bool Session::uploadFile(const QString &path)
         qWarning("Couldn't open file.");
         return false;
     }
-    api::post_file(QFileInfo(file->fileName()).fileName(), file).map([this](Response response) -> Response {
+    api::post_file(QFileInfo(file->fileName()).fileName(), file).map([this](http::Response response) -> http::Response {
         updateCurentUserFiles();
         return response;
     });
@@ -69,7 +77,7 @@ bool Session::uploadFile(const QString &path)
 
 void Session::updateCurentUserFiles()
 {
-    api::get_files().map([this](Response response) -> Response {
+    api::get_files().map([this](http::Response response) -> http::Response {
         if (m_user != nullptr) {
             m_user->setFiles(response.body["files"].toArray());
             emit userChanged(m_user);
@@ -87,7 +95,7 @@ void Session::logout()
 
 void Session::downloadProjectData(uint index, const QString &id)
 {
-    api::get_raw_file(id).map([this, index](Response response) -> Response {
+    api::get_raw_file(id).map([this, index](http::Response response) -> http::Response {
         auto solution = Editor::instance().solution();
 		auto project = new Project();
 		if (!solution)
@@ -102,6 +110,13 @@ void Session::downloadProjectData(uint index, const QString &id)
 		emit userChanged(m_user);
         return response;
      });
+}
+
+void Session::setRememberUser(bool user)
+{
+    m_rememberUser = user;
+    api::rememberUser = user;
+    emit rememberUserChanged(m_rememberUser);
 }
 
 }

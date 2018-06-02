@@ -56,7 +56,7 @@ namespace dnai {
         ProcessManager* m_processManager;
 	    views::AppView* m_appView;
         models::BasicNodeModel *m_nodeModel;
-	    Session m_session;
+        Session m_session;
 	    static App *m_instance;
         Editor &m_editor;
 
