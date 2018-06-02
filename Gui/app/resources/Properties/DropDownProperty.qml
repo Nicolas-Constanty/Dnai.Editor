@@ -7,9 +7,11 @@ BaseProperty {
     property var listmodel: null
     property real contentHeight: 35
     property alias label: _label
-    property alias value: _value.currentText
+    property alias value: _value.currentIndex
     property alias valueRef: _value
     property bool init: false
+    property ItemDelegate itemDelegate: null
+    property string textRole: ""
 
     anchors.left: parent.left
     anchors.right: parent.right
@@ -36,6 +38,8 @@ BaseProperty {
             anchors.right: parent.right
             anchors.left: _label.right
             anchors.leftMargin: 5
+            textRole: _panel.textRole
+
             onCurrentIndexChanged: {
                 if (_panel.method !== null && init)
                 {

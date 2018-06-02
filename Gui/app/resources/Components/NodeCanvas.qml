@@ -51,12 +51,86 @@ CanvasNode {
     content: content_item
 
     onContextMenuChanged: {
+        Editor.updateContextMenu(nodeModel)
         _menu.popup()
+    }
+
+    property var inputs: entityModel.inputModels
+    property var outputs: entityModel.outputModels
+    property var variables: entityModel.inputModels
+
+
+    property var inputsMenu: null
+    property var outputsMenu: null
+    property var variablesMenu: null
+
+    onInputsChanged: {
+        if (inputsMenu != null)
+            _menu.removeMenu(inputsMenu)
+        if (entityModel.inputModels && entityModel.inputModels.rowCount() > 0)
+        {
+            Factory.createObjects("resources/Components/GetterMenu.qml",
+                                  {
+                                      "getterModel": entityModel.inputModels,
+                                      "title" : "Inputs",
+                                      "ctItem": content_item,
+                                      "canvas": canvas
+                                  }, _menu)
+            inputsMenu = Factory.getObject()
+            _menu.addMenu(inputsMenu)
+        }
+    }
+
+    onOutputsChanged: {
+        if (outputsMenu != null)
+            _menu.removeMenu(outputsMenu)
+        if (entityModel.outputModels && entityModel.outputModels.rowCount() > 0)
+        {
+            Factory.createObjects("resources/Components/GetterMenu.qml",
+                                  {
+                                      "getterModel": entityModel.outputModels,
+                                      "title" : "Outputs",
+                                      "ctItem": content_item,
+                                      "canvas": canvas
+                                  }, _menu)
+            outputsMenu = Factory.getObject()
+            _menu.addMenu(outputsMenu)
+        }
+    }
+
+    onVariablesChanged: {
+        if (variablesMenu != null)
+            _menu.removeMenu(variablesMenu)
+        if (Editor.contextMenu.variables && Editor.contextMenu.variables.rowCount() > 0)
+        {
+            Factory.createObjects("resources/Components/GetterMenu.qml",
+                                  {
+                                      "getterModel": Editor.contextMenu.variables,
+                                      "title" : "Variables",
+                                      "ctItem": content_item,
+                                      "canvas": canvas
+                                  }, _menu)
+            variablesMenu = Factory.getObject()
+            _menu.addMenu(variablesMenu)
+        }
     }
 
     Menu {
         id: _menu
 
+
+
+
+
+//        onOpenedChanged: {
+//            if (_menu.opened)
+//            {
+//                Editor.updateContextMenu(nodeModel)
+//
+
+
+//            }
+//        }
         Repeater {
             model: Editor.nodes
             delegate: Item {
@@ -73,77 +147,16 @@ CanvasNode {
                                     _subMenu.addAction(_subMenu1)
                                 }
                                 onTriggered: {
-                                    Editor.createNode(canvas.nodeModel, item, canvas.mousePosition.x, canvas.mousePosition.y)
+                                    Editor.createNode(canvas.nodeModel, item.instruction_id, [2, 2, 2], canvas.mousePosition.x, canvas.mousePosition.y)
                                 }
                             }
                         }
                     }
                 }
-                MenuSeparator {
-                    id: _sepMenu
-                    visible: Editor.nodes.rowCount() !== index + 1
-                }
                 Component.onCompleted: {
                     _menu.addMenu(_subMenu)
-                    _menu.addItem(_sepMenu)
                 }
             }
-        }
-        Menu {
-            id: _getters
-            title: "Inputs"
-            Repeater {
-                //model: canvas.entityModel.inputModels
-                model: Editor.entities()
-                delegate: Item {
-                    id: _getterAction
-                    Action {
-                        id: _subMenu2
-                        text: model.name
-                        Component.onCompleted: {
-                            _getters.addAction(_subMenu2)
-                        }
-                        onTriggered: {
-                            var obj;
-                            if (model.varType === 0)
-                            {
-                                Factory.createObjects(
-                                    "resources/Nodes/Getter/IntGetter.qml",
-                                    { "model" : model, "name" : model.name, "description" : "" })
-                                obj = Factory.getObject()
-                                Factory.createObjects(
-                                            "resources/Components/Node.qml",
-                                            { "model": obj },
-                                            content_item)
-                            }
-                            else if (model.varType === 1)
-                            {
-                                Factory.createObjects(
-                                    "resources/Nodes/Getter/BoolGetter.qml",
-                                    { "model" : model, "name" : model.name, "description" : "" })
-                                obj = Factory.getObject()
-                                Factory.createObjects(
-                                            "resources/Components/Node.qml",
-                                            { "model": obj },
-                                            content_item)
-                            }
-                            else if (model.varType === 2)
-                            {
-                                Factory.createObjects(
-                                    "resources/Nodes/Getter/StringGetter.qml",
-                                    { "model" : model, "name" : model.name, "description" : "" })
-                                obj = Factory.getObject()
-                                Factory.createObjects(
-                                            "resources/Components/Node.qml",
-                                            { "model": obj },
-                                            content_item)
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        MenuSeparator {
         }
     }
 

@@ -35,6 +35,26 @@ namespace dnai
             return *entities.at(id);
         }
 
+        const models::Entity *EntityManager::findByFullname(const QString &fullName) const
+        {
+            for (const models::Entity &curr : *this) {
+                if (curr.fullName() == fullName) {
+                    return &curr;
+                }
+            }
+            return nullptr;
+        }
+
+        models::Entity *EntityManager::findByFullname(const QString &fullName)
+        {
+            for (models::Entity &curr : *this) {
+                if (curr.fullName() == fullName) {
+                    return &curr;
+                }
+            }
+            return nullptr;
+        }
+
         const models::Entity &EntityManager::operator [](::core::EntityID id) const
         {
             return getEntity(id);

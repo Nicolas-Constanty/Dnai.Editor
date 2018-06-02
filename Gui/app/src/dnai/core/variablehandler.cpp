@@ -146,7 +146,7 @@ namespace dnai
                 if (getVariableData(variable) != nullptr)
                 {
                     commands::CoreCommand::Error();
-                    Editor::instance().notifyError(message.toUtf8(), [](){});
+                    Editor::instance().notifyError(message.toUtf8());
                 }
             }
         }
@@ -178,7 +178,7 @@ namespace dnai
             if (getVariableData(variable) != nullptr)
             {
                 commands::CoreCommand::Error();
-                Editor::instance().notifyError(message.toUtf8(), [](){});
+                Editor::instance().notifyError(message.toUtf8());
             }
         }
     }

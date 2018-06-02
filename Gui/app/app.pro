@@ -128,7 +128,9 @@ SOURCES += \
     src/dnai/toastermanagerservice.cpp \
     src/dnai/views/toast.cpp \
     src/dnai/models/property.cpp \
-    src/dnai/core/instructionhandler.cpp
+    src/dnai/core/instructionhandler.cpp \
+    src/dnai/models/contextmenu.cpp \
+    src/dnai/models/gui/entitylist.cpp
 
 
 RESOURCES += qml.qrc
@@ -308,7 +310,10 @@ HEADERS += \
     include/dnai/toastermanagerservice.h \
     include/dnai/views/toast.h \
     include/dnai/models/property.h \
-    include/dnai/core/instructionhandler.h
+    include/dnai/core/instructionhandler.h \
+    include/dnai/models/gui/entitylist.h \
+    include/dnai/models/contextmenu.h
+    include/dnai/core/instructionmanager.h
 
 
 #LIB

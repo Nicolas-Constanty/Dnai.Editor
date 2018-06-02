@@ -3,6 +3,8 @@ import QtQuick.Controls 2.2
 import Dnai.Controls 1.0
 import Dnai.FontAwesome 1.0
 
+import DNAI 1.0
+
 BaseProperty {
     id: _panel
     property var listmodel: null
@@ -36,7 +38,7 @@ BaseProperty {
             anchors.right: parent.right
             height: _panel.contentHeight
             name: model.name
-            varType: model.varType
+            varType: Editor.propertyPanelProperties.varTypes.getIndexFromValue(model.varType)
             paramModel: model
 
             moveDown: function () {

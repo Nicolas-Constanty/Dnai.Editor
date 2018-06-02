@@ -75,12 +75,12 @@ namespace dnai
 				return true;
 			}
 
-            qint32 Input::varType() const
+            quint32 Input::varType() const
 			{
 				return m_data.varType;
 			}
 
-            bool Input::setVarType(qint32 id)
+            bool Input::setVarType(quint32 id)
 			{
 				if (m_data.varType == id)
 					return false;

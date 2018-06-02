@@ -97,8 +97,13 @@ namespace dnai
             default:
                 return nullptr;
             }
-
-            return new models::Entity(new models::gcore::Entity(type), parent, guidata);
+			const auto entity = new models::Entity(new models::gcore::Entity(type), parent, guidata);
+			if (static_cast<ENTITY>(parent->entityType()) != ENTITY::FUNCTION
+				&& type == ENTITY::VARIABLE)
+			{
+				models::gui::declarable::Variable::variables()->append(entity);
+			}
+        	return entity;
         }
 
         void DeclaratorHandler::declare(quint32 parentId, qint32 type, QString name, qint32 visibility)
@@ -280,7 +285,12 @@ namespace dnai
 
             //this triggers a entityAdded signal that will call onEntityAdded slot
             manager.addEntity(declaredId, *todeclare);
-
+			if (todeclare->parentItem()
+				&& todeclare->parentItem()->coreModel()->entityType() != ENTITY::FUNCTION
+				&& todeclare->coreModel()->entityType() == ENTITY::VARIABLE)
+			{
+				models::gui::declarable::Variable::variables()->append(todeclare);
+			}
             emit declared(todeclare);
         }
 
@@ -301,7 +311,7 @@ namespace dnai
              */
             commands::CoreCommand::Error();
             qDebug() << "Failed to declare entity " << name << ": " << message;
-            Editor::instance().notifyError("Unable to declare entity " + name + ": " + message, [](){});
+            Editor::instance().notifyError("Unable to declare entity " + name + ": " + message);
         }
 
         void DeclaratorHandler::onRemoved(::core::EntityID declarator, const QString &name)
@@ -328,7 +338,7 @@ namespace dnai
             if (findEntity(declarator, name) != nullptr)
             {
                 commands::CoreCommand::Error();
-                Editor::instance().notifyError("Unable to remove entity " + name + ": " + message, [](){});
+                Editor::instance().notifyError("Unable to remove entity " + name + ": " + message);
             }
         }
 
@@ -351,7 +361,7 @@ namespace dnai
             Q_UNUSED(newname)
 
             commands::CoreCommand::Error();
-            Editor::instance().notifyError("Unable to rename entity " + name + ": " + message, [](){});
+            Editor::instance().notifyError("Unable to rename entity " + name + ": " + message);
         }
 
         void DeclaratorHandler::onVisibilitySet(EntityID declarator, const QString &name, VISIBILITY visibility)
@@ -373,7 +383,7 @@ namespace dnai
             Q_UNUSED(visibility)
 
             commands::CoreCommand::Error();
-            Editor::instance().notifyError("Unable to set visibility of entity " + name + ": " + message, [](){});
+            Editor::instance().notifyError("Unable to set visibility of entity " + name + ": " + message);
         }
     }
 }

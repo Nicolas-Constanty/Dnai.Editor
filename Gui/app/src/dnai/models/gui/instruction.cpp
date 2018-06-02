@@ -41,7 +41,15 @@ namespace dnai
 				obj["flow_out"] = serializeList<Flow>(m_data.flowOut);
 				obj["instruction_id"] = m_data.instructionId;
 				obj["x"] = m_data.x;
-				obj["y"] = m_data.y;
+                obj["y"] = m_data.y;
+
+                QJsonArray linkEntities;
+
+                for (QString const &curr : m_data.linked) {
+                    linkEntities.append(curr);
+                }
+
+                obj["linked"] = linkEntities;
 			}
 
 			void Instruction::_deserialize(const QJsonObject& obj)
@@ -60,6 +68,9 @@ namespace dnai
 				m_data.instructionId = obj["instruction_id"].toInt();
 				m_data.x = obj["x"].toInt();
 				m_data.y = obj["y"].toInt();
+                foreach (auto link, obj["linked"].toArray()) {
+                    m_data.linked.append(link.toString());
+                }
 			}
 
 			const data::Instruction& Instruction::data() const
@@ -163,8 +174,34 @@ namespace dnai
 				if (m_data.instructionId == id)
 					return false;
 				m_data.instructionId = id;
-				return true;
-			}
+                return true;
+            }
+
+            quint32 Instruction::Uid() const
+            {
+                return m_data.uid;
+            }
+
+            bool Instruction::setUid(quint32 id)
+            {
+                if (m_data.uid == id)
+                    return false;
+                m_data.uid = id;
+                return true;
+            }
+
+            const QList<QString> &Instruction::linked() const
+            {
+                return m_data.linked;
+            }
+
+            bool Instruction::setLinkedEntities(const QList<QString> &value)
+            {
+                if (value == m_data.linked)
+                    return false;
+                m_data.linked = value;
+                return true;
+            }
 		}
 	}
 }

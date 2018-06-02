@@ -16,7 +16,7 @@ namespace dnai
 				{
 					Q_OBJECT
 				public:
-					explicit Context() = default;
+					explicit Context(QObject *parent = nullptr);
 					const QList<Context*>& contexts() const;
 					const QList<ObjectType*>& classes() const;
 					const QList<Variable*>& variables() const;

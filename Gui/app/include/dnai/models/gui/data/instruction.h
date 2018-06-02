@@ -12,6 +12,7 @@ namespace dnai
 	namespace models
 	{
 		class Entity;
+
 		namespace gui
 		{
 			namespace data
@@ -24,7 +25,7 @@ namespace dnai
                     gui::Flow* flowIn = nullptr;
                     QList<gui::Flow*> flowOut;
 					qint32 instructionId = enums::QInstructionID::Instruction_ID::UNDEFINED;
-					QList<quint32> construction;
+                    QList<QString> linked;
 					Instruction& operator=(const Instruction& other) = default;
 					qint32 x = 0;
 					qint32 y = 0;
@@ -41,7 +42,7 @@ namespace dnai
 							&& outputs == other.outputs
 							&& flowIn == other.flowIn
 							&& instructionId == other.instructionId);
-					}
+                    }
 				};
 			}
 		}

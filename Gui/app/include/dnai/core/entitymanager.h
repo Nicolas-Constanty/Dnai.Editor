@@ -36,6 +36,9 @@ namespace dnai
             const models::Entity &getEntity(::core::EntityID id) const;
             models::Entity &getEntity(::core::EntityID id);
 
+            const models::Entity *findByFullname(QString const &fullName) const;
+            models::Entity *findByFullname(QString const &fullName);
+
             const models::Entity &operator[](::core::EntityID id) const;
             models::Entity &operator[](::core::EntityID id);
 

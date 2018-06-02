@@ -15,6 +15,8 @@ namespace dnai
 			class Instruction : public QObject, public interfaces::IModelData<data::Instruction>, public interfaces::ASerializable<Instruction>
             {
 				Q_OBJECT
+
+                Q_PROPERTY(QList<QString> linked READ linked WRITE setLinkedEntities)
 			public:
                 explicit Instruction(QObject *parent = nullptr);
                 //Implementation of ISerializable
@@ -46,6 +48,12 @@ namespace dnai
 
 				qint32 instruction_id() const;
 				bool setInstructionId(qint32 id);
+
+                quint32 Uid() const;
+                bool setUid(quint32 id);
+
+                QList<QString> const &linked() const;
+                bool setLinkedEntities(QList<QString> const &value);
 
 			private:
 				data::Instruction m_data;

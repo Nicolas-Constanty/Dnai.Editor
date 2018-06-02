@@ -12,13 +12,13 @@ namespace dnai
 			void Flow::serialize(QJsonObject& obj) const
 			{
                 Q_UNUSED(obj)
-				Editor::instance().notifyError("Flow serialize not implemented", []() {});
+				Editor::instance().notifyError("Flow serialize not implemented");
 			}
 
 			void Flow::_deserialize(const QJsonObject& obj)
 			{
 				Q_UNUSED(obj)
-				Editor::instance().notifyError("Flow not _deserialize implemented", [](){});
+				Editor::instance().notifyError("Flow _deserialize not implemented");
 			}
 
 			const data::Flow& Flow::data() const

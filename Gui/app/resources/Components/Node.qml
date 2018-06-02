@@ -10,6 +10,11 @@ import "../Style"
 
 NodeForm {
     property NodeModel model
+    property var instruction_model: null
+
+    onInstruction_modelChanged: {
+        model.model = instruction_model
+    }
 
     id: nodeForm
     inputs: model.inputs
@@ -87,6 +92,14 @@ NodeForm {
         y: headerRef.height / 2 - radius - radius / 3
         visible: model.flowIn
         typeFlow: FlowType.Enter
+        onLinked: {
+            console.log("yooooooooooooooo")
+        }
+
+//        Component.onCompleted: {
+//            for (var i in _flowIn)
+//                console.log(i, _flowIn[i])
+//        }
     }
 
     Flow {

@@ -28,8 +28,11 @@ namespace dnai
 				ENTITIES = Qt::UserRole + 1,
 			};
         public:
-            explicit Column(QObject *parent = nullptr) : QAbstractListModel(parent) {}
-            explicit Column(Entity *pr, QObject *parent = nullptr);
+            explicit Column(QObject *parent = nullptr) : QAbstractListModel(parent), m_target(nullptr),
+                                                         m_parent(nullptr)
+	        {
+	        }
+            explicit Column(Entity * e, QObject *parent = nullptr);
             virtual int rowCount(const QModelIndex& parent = QModelIndex()) const override;
             QVariant data(const QModelIndex& index, int role) const override;
 	        void append(Entity* e, const QModelIndex& parent = QModelIndex());
@@ -65,7 +68,7 @@ namespace dnai
 	        gui::data::EntityColumn m_data;
             Entity *m_parent;
         };
-		class EntityList : public QAbstractListModel
+		/*class EntityList : public QAbstractListModel
 		{
 			Q_OBJECT
 
@@ -80,7 +83,7 @@ namespace dnai
 			explicit EntityList(QList<models::Entity*> *);
 			int rowCount(const QModelIndex& parent) const override;
 			QVariant data(const QModelIndex& index, int role) const override;
-			void add(models::Entity *var);
+			void append(models::Entity *var);
 			void moveUp(int index);
 			void moveDown(int index);
 			void remove(const QString &name);
@@ -92,7 +95,7 @@ namespace dnai
 			QList<models::Entity*> *m_list;
 			QHash<int, QByteArray> roleNames() const override;
 
-		};
+		};*/
         class Entity : public interfaces::IModel<Entity>
         {
             Q_OBJECT
@@ -158,58 +161,58 @@ namespace dnai
 			QObject *guiProperties() const;
 
         signals:
-			void isRootChanged(bool isroot);
-            void idChanged(qint32 id);
-            void containerIdChanged(qint32 containerId) const;
-            void entityTypeChanged(qint32 type) const;
-            void nameChanged(const QString &) const;
-            void visibilityChanged(qint32 visibility) const;
-            void indexChanged(int index) const;
-            void listIndexChanged(const QString &listIndex) const;
-            void descriptionChanged(const QString& description) const;
-            void coreModelChanged(gcore::Entity *model);
-			void entityChildrenChanged(models::Entity *e);
-			void expandedChanged(bool exp);
-			void editablePropertyChanged(Property *p);
+	        void isRootChanged(bool isroot);
+	        void idChanged(qint32 id);
+	        void containerIdChanged(qint32 containerId) const;
+	        void entityTypeChanged(qint32 type) const;
+	        void nameChanged(const QString &) const;
+	        void visibilityChanged(qint32 visibility) const;
+	        void indexChanged(int index) const;
+	        void listIndexChanged(const QString &listIndex) const;
+	        void descriptionChanged(const QString& description) const;
+	        void coreModelChanged(gcore::Entity *model);
+	        void entityChildrenChanged(models::Entity *e);
+	        void expandedChanged(bool exp);
+	        void editablePropertyChanged(Property *p);
 
-        //Implementation of ISerializable
+	        //Implementation of ISerializable
         public:
-            void serialize(QJsonObject& obj) const override;
-            void _deserialize(const QJsonObject& obj) override;
+	        void serialize(QJsonObject& obj) const override;
+	        void _deserialize(const QJsonObject& obj) override;
 	        int columnCount() const override;
-			Q_INVOKABLE QVariant listColumn() const;
-			Q_INVOKABLE int row() const override;
-			Q_INVOKABLE void setProp(int row, const QVariant &value);
+	        Q_INVOKABLE QVariant listColumn() const;
+	        Q_INVOKABLE int row() const override;
+	        Q_INVOKABLE void setProp(int row, const QVariant &value);
 
         public:
-            models::Entity *findByName(QString const &name) const;
-            Q_INVOKABLE quint32 findIdByName(QString const &name) const;
-			static EntityList *m_entities;
+	        models::Entity *findByName(QString const &name) const;
+	        Q_INVOKABLE quint32 findIdByName(QString const &name) const;
+	        //static EntityList *m_entities;
 			
         private:
-            gcore::Entity *m_dataCore;
-            interfaces::IEntity *m_dataGUI;
-			bool m_isRoot = false;
-			QVariant m_entityChildren;
-			QMap<QUuid, Column *> m_columns;
-			QList<QObject *> m_columslist;
-			Property *m_editableProperty;
+	        gcore::Entity *m_dataCore;
+	        interfaces::IEntity *m_dataGUI;
+	        bool m_isRoot = false;
+	        QVariant m_entityChildren;
+	        QMap<QUuid, Column *> m_columns;
+	        QList<QObject *> m_columslist;
+	        Property *m_editableProperty;
 
         };
 
-		using Context = dnai::models::gui::declarable::Context;
-		using EnumType = dnai::models::gui::declarable::EnumType;
-		using Function = dnai::models::gui::declarable::Function;
-		using ListType = dnai::models::gui::declarable::ListType;
-		using ObjectType = dnai::models::gui::declarable::ObjectType;
-		using Variable = dnai::models::gui::declarable::Variable;
+        using Context = dnai::models::gui::declarable::Context;
+        using EnumType = dnai::models::gui::declarable::EnumType;
+        using Function = dnai::models::gui::declarable::Function;
+        using ListType = dnai::models::gui::declarable::ListType;
+        using ObjectType = dnai::models::gui::declarable::ObjectType;
+        using Variable = dnai::models::gui::declarable::Variable;
 
-	    template <class T>
-	    T* Entity::guiModel() const
-	    {
-			return dynamic_cast<T *>(guiModel());
-	    }
-    }
-}
+        template <class T>
+        T* Entity::guiModel() const
+        {
+	        return dynamic_cast<T *>(guiModel());
+        }
+        }
+        }
 
 #endif // DNAI_MODELS_ENTITY_H

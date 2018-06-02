@@ -5,7 +5,7 @@ import "../"
 
 NodeModel {
 
-    flowIn: false
+    flowIn: true
     flowOut: false
     inputs: ListModel {
         ListElement { t: IOType.Generic; n: "Value 1" }

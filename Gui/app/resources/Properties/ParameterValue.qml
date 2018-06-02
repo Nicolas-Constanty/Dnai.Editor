@@ -42,9 +42,10 @@ Item {
         }
         ComboBox {
             id: _type
-            model: Editor.propertyPanelProperties.varType
+            model: Editor.propertyPanelProperties.varTypes
             height: _parameterValue.contentHeight
             width: _parameterValue.contentHeight * 2
+            textRole: "name"
             onCurrentIndexChanged: {
                 if (typeChanged !== null) typeChanged(_type.currentIndex)
             }
