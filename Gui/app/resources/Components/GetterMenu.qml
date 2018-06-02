@@ -2,6 +2,7 @@ import QtQuick 2.9
 import QtQuick.Controls 2.3
 
 import DNAI 1.0
+import DNAI.Enums 1.0
 
 import "../JavaScript/CreateComponent.js" as Factory
 
@@ -30,7 +31,7 @@ Menu {
 
                     console.log('node model: ', nodeModel);
 
-                    Editor.createNode(nodeModel, 23, [model.entity.id], canvas.mousePosition.x, canvas.mousePosition.y);
+                    Editor.createNode(nodeModel, InstructionID.GETTER, [model.entity.id], canvas.mousePosition.x, canvas.mousePosition.y);
 
                     /*if (model.varType === 0)
                     {

@@ -47,6 +47,9 @@ namespace dnai
             models::gui::declarable::Function *getFunctionData(::core::EntityID function, bool throws = false);
 
         private:
+            void refreshPendingFunctionInstructions();
+
+        private:
             void onParameterSet(::core::EntityID function, QString const &paramName);
             void onSetParameterError(::core::EntityID function, QString const &paramName, QString const &message);
 
@@ -70,16 +73,27 @@ namespace dnai
             InstructionHandler m_instruction;
 
         private:
+            //this queue is used to set a variable as parameter when its added
             std::queue<std::pair<quint32, QString>> pendingParams;
+            //this queue is when a variable is identified to be set as a parameter
             std::queue<models::Entity *> params;
-
+            //this queue is when a parameter is removed
             std::queue<std::pair<quint32, QString>> pendingRmParam;
 
         private:
+            //this queue is used to set a variable as return when its added
             std::queue<std::pair<quint32, QString>> pendingRet;
+            //this queue is when a variable is identified to be set as return
             std::queue<models::Entity *> returns;
-
+            //this queue is when a return is removed
             std::queue<std::pair<quint32, QString>> pendingRmRet;
+
+        private:
+            //this queue is used to save an instruction that has to be set
+            std::queue<models::gui::Instruction *> pendingInstruction;
+
+            //this queue is used to try to declare instructions once an entity is added
+            std::list<models::Entity *> pendingFunctionInstructions;
         };
     }
 }

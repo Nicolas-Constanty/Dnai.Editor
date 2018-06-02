@@ -81,12 +81,11 @@ namespace dnai
                     func->setInputs(QList<models::Entity*>());
                     func->setOutputs(QList<models::Entity*>());
 
-                    for (models::gui::Instruction *curr : func->data().instructions)
-                    {
-                        addInstruction(id, curr->instruction_id(), curr->data().construction);
-                    }
+                    pendingFunctionInstructions.push_back(&added);
                 }
             }
+
+            refreshPendingFunctionInstructions();
         }
 
         void FunctionHandler::onEntityRemoved(EntityID id, models::Entity &removed)
@@ -193,6 +192,96 @@ namespace dnai
             return nullptr;
         }
 
+        /**
+         * @brief FunctionHandler::refreshPendingFunctionInstructions
+         *
+         * This function tries to declared function instructions for thoses who needed entity that wasn't created yet
+         *
+         * Ex:
+         *     - A function has a list of instructions
+         *     - A getter is an instruction that need the id of a variable
+         *     - If the variable is not created yet, we can't declare the getter
+         *     - Then we need to wait until the variable is created
+         *     - So we push the function in a list
+         *     - Each time an entity is added, we try to redeclare the instructions
+         *     - If the redeclaration went fine, we erase the function from the list
+         *     - Either, we left the function in place
+         */
+        void FunctionHandler::refreshPendingFunctionInstructions()
+        {
+            //we visit all the functions from the list
+            for (std::list<models::Entity *>::iterator it = pendingFunctionInstructions.begin(); it != pendingFunctionInstructions.end();)
+            {
+                //we get the function model
+                models::Function *func = getFunctionData((*it)->id());
+
+                //this queue is the instructions of the function
+                std::queue<models::gui::Instruction *> instructions;
+                //this queue is the list of entities to send
+                std::queue<QList<quint32>> linked;
+
+                //this is to check that we can declare all the instructions
+                bool isfull = true;
+
+                //we visit all the instructions of the function
+                for (models::gui::Instruction *curr : func->instructions())
+                {
+                    //this is the list of entities to send
+                    QList<quint32> construction;
+                    //this is to check that all the entities exist
+                    bool add = true;
+
+                    //we visit all the entities to send for the instruction
+                    for (QString const &cname : curr->linked())
+                    {
+                        models::Entity *associated = manager.findByFullname(cname);
+
+                        //if the entity doesn't exists, we break the loop
+                        if (associated == nullptr)
+                        {
+                            add = false;
+                            break;
+                        }
+                        construction.append(associated->id());
+                    }
+
+                    //if the construction list is ok
+                    if (add)
+                    {
+                        //we add it to the queue
+                        instructions.push(curr);
+                        linked.push(construction);
+                    }
+                    else
+                    {
+                        //in case of an error, we break the loop
+                        isfull = false;
+                        break;
+                    }
+                }
+
+                //if we can declare all the instructions
+                if (isfull)
+                {
+                    //declare everything
+                    while (!instructions.empty())
+                    {
+                        pendingInstruction.push(instructions.front());
+                        addInstruction((*it)->id(), instructions.front()->instruction_id(), linked.front());
+                        instructions.pop();
+                        linked.pop();
+                    }
+                    //and remove the function from the list
+                    it = pendingFunctionInstructions.erase(it);
+                }
+                else
+                {
+                    //or just increment to the next function
+                    ++it;
+                }
+            }
+        }
+
         void FunctionHandler::onParameterSet(::core::EntityID func, const QString &paramName)
         {
             Q_UNUSED(func)
@@ -279,11 +368,28 @@ namespace dnai
             if (func != nullptr)
             {
                 qDebug() << "===== Created ok =====";
-                models::gui::Instruction *instr = new models::gui::Instruction();
-                instr->setInstructionId(type);
-                instr->setUid(instruction);
-                //instr->data().construction = QList<quint32>(arguments);
-                func->addInstruction(instr);
+                models::gui::Instruction *instr;
+
+                if (pendingInstruction.empty())
+                {
+                    instr = new models::gui::Instruction();
+                    instr->setInstructionId(type);
+                    instr->setUid(instruction);
+
+                    QList<QString> linked;
+
+                    for (quint32 curr : arguments) {
+                        linked.append(manager.getEntity(curr).fullName());
+                    }
+
+                    instr->setLinkedEntities(linked);
+                    func->addInstruction(instr);
+                }
+                else
+                {
+                    instr = pendingInstruction.front();
+                    pendingInstruction.pop();
+                }
                 emit instructionAdded(&manager.getEntity(function), instr);
             }
 

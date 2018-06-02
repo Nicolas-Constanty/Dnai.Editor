@@ -50,6 +50,9 @@ namespace dnai
                 quint32 Uid() const;
                 bool setUid(quint32 id);
 
+                QList<QString> const &linked() const;
+                bool setLinkedEntities(QList<QString> const &value);
+
 			private:
 				data::Instruction m_data;
 			};

@@ -6,8 +6,15 @@ NodeModel {
     property var model: null
     property int type: 0
     flowIn: false
+    flowOut: false
     outputs: ListModel {
         ListElement { t: IOType.Int; n: "output" }
     }
     instruction_id: InstructionID.GETTER
+    Component.onCompleted: {
+        console.log('Getter model: ', model)
+    }
+    onModelChanged: {
+        console.log('Getter model: ', model);
+    }
 }
