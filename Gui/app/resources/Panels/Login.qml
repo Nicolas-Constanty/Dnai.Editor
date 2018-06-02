@@ -118,6 +118,7 @@ Item {
         anchors.topMargin: 5
         horizontalAlignment: TextInput.AlignLeft
         placeholderText: ""
+        KeyNavigation.tab: passwordEditableId
     }
 
     MLabel {
@@ -143,6 +144,7 @@ Item {
         anchors.topMargin: 5
         horizontalAlignment: TextInput.AlignLeft
         placeholderText: ""
+        KeyNavigation.tab: usernameEditableId
     }
 
     C.CheckBox {
@@ -193,7 +195,10 @@ Item {
             if (usernameEditableId.text && passwordEditableId.text) {
                 errorId.text = ""
                 Editor.session.signin(usernameEditableId.text, passwordEditableId.text);
+            } else {
+                errorId.text = "Fields empty."
             }
+
             console.log("YOLO")
         }
     }
