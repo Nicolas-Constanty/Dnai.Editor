@@ -59,16 +59,16 @@ Item {
 
     function onConnectionSuccess() {
         containerId.visible = true
+        backgroundSelectionId.visible = false
         borderId.visible = false
         signInId.visible = false
-        backgroundSelectionId.visible = false
     }
 
     function onLogoutSuccess() {
         containerId.visible = false
+        backgroundSelectionId.visible = true
         borderId.visible = true
         signInId.visible = true
-        backgroundSelectionId.visible = true
     }
 
     ColumnLayout {
