@@ -85,10 +85,12 @@ Item {
         MText {
             id: usernameId
             text: ""
+            font.pointSize: 9
         }
         MTextClickable {
             id: logoutId
             text: "Sign out"
+            font.pointSize: 8
             anchors.right: parent.right
             onPressed: {
                 Editor.session.logout()
