@@ -29,10 +29,11 @@ ToolBar {
                 id: toolButton
                 text: qsTr("File")
 
-                onClicked: menuFile.open()
+                onButtonPressed: menuFile.open()
                 DMenu {
                     id: menuFile
                     y: parent.height
+
                     //                        DMenuItem {
                     //                            text: qsTr("New window")
                     //                        }
@@ -73,7 +74,7 @@ ToolBar {
             DToolButton {
 
                 text: qsTr("Edit")
-                onClicked: menuEdit.open()
+                onButtonPressed: menuEdit.open()
 
 
                 DMenu {
@@ -113,7 +114,7 @@ ToolBar {
 
             DToolButton {
                 text: qsTr("View")
-                onClicked: menuView.open()
+                onButtonPressed:  menuView.open()
 
 
                 DMenu {

@@ -7,6 +7,8 @@ import "../Style"
 ToolButton {
     id: control
 
+    signal buttonPressed()
+
     implicitWidth: Math.max(background ? background.implicitWidth : 0,
                             contentItem.implicitWidth + leftPadding + rightPadding)
     implicitHeight: 40
@@ -18,13 +20,35 @@ ToolButton {
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
     }
+    MouseArea {
+        anchors.fill: parent
+        hoverEnabled: true
+        cursorShape: Qt.PointingHandCursor
+
+        onEntered: {
+            backgroundId.color = Qt.darker( AppSettings.theme["text"]["color"], 1.5)
+            backgroundId.visible = true
+
+        }
+
+        onPressed: {
+            buttonPressed()
+        }
+
+        onExited: {
+            backgroundId.visible = false
+        }
+    }
 
     background: Rectangle {
+        id: backgroundId
         implicitWidth: 40
         implicitHeight: 40
 
         color: Qt.darker( AppSettings.theme["text"]["color"], control.enabled && (control.checked || control.highlighted) ? 1.5 : 1.0)
-        opacity: control.down ? 1.0 : control.enabled && (control.checked || control.highlighted) ? 0.5 : 0
+        opacity: 0.3//control.down ? 1.0 : control.enabled && (control.checked || control.highlighted) ? 0.5 : 0
         visible: control.down || (control.enabled && (control.checked || control.highlighted))
+
+
     }
 }
