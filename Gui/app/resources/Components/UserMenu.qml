@@ -74,7 +74,7 @@ Item {
     ColumnLayout {
         id: containerId
         visible: false
-        spacing: 1
+        spacing: 0
         anchors.top: parent.top
         anchors.topMargin: 3
         anchors.bottomMargin: 3
