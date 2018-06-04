@@ -78,8 +78,8 @@ TextInput {
         text: errorText
         font.pointSize: 8
         anchors.top: control.bottom
-        anchors.topMargin: 5
-        anchors.rightMargin: 10
+        anchors.topMargin: 2
+        anchors.rightMargin: 5
         anchors.right: control.right
         color: AppSettings.theme["text"]["errorColor"]
         z: parent.z + 1
