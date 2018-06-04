@@ -82,6 +82,7 @@ namespace dnai
 
 	void Editor::loadSolution(const QString& filename)
 	{
+        setLoaded(true);
 		m_solution = new Solution();
 		if (!filename.isEmpty())
             m_solution->load(filename);
@@ -98,6 +99,7 @@ namespace dnai
 
 	void Editor::closeSolution()
 	{
+        setLoaded(false);
 		m_solution->close();
 	}
 
@@ -147,10 +149,26 @@ namespace dnai
 		return m_viewZones;
 	}
 
+    bool Editor::loaded() const {
+        return (m_loaded);
+    }
+
+    void Editor::setLoaded(bool newLoaded) {
+        this->m_loaded = newLoaded;
+        emit loadedChanged(this->m_loaded);
+    }
+
+
 	QQuickItem *Editor::selectedView() const
 	{
 		return m_seletedItem;
 	}
+
+    bool Editor::isSolutionLoad() const {
+        return (m_solution != nullptr);
+    }
+
+
 
 	void Editor::selectView(QQuickItem* i)
 	{
