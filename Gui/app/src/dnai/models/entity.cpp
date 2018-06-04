@@ -21,7 +21,7 @@ namespace dnai
 				{ this, "visibility"},
 				{ this, "entityType"}
 			};
-			m_editableProperty = new Property(props);
+            m_editableProperty = new Property(props);
         }
 
         Entity::Entity(gcore::Entity *coremodel, Entity *parent, interfaces::IEntity *guimodel) :

@@ -93,8 +93,8 @@ ApplicationWindow {
             id: newFileProjectPanel
             popup: newProjectPopup
 
-           /* createButton.onClicked: function () {
-                if (solutionPath.text) {
+            onProjectCreated: function (projectName, path, solutionName) {
+                if (path) {
                     Editor.openSolution()
                     tabV.destroy()
                     _content.content.destroy()
@@ -106,7 +106,7 @@ ApplicationWindow {
                     _content.content = Factory.getObject()
                     popup.close();
                 }
-            }*/
+            }
         }
     }
     Modal {

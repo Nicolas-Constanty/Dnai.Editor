@@ -14,7 +14,7 @@ namespace dnai
 			{
 				struct Entity
 				{
-					int index = -1;
+                    int index = 0;
 					QUuid listIndex;
 					QString description;
 					bool expanded = false;

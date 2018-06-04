@@ -39,6 +39,7 @@ namespace dnai {
         m_rootItem->setIdx(index(0,0, QModelIndex()));
         const auto coreModel = new models::gcore::Entity("RootEntity", ::core::ENTITY::CONTEXT);
         m_rootEntity = new models::Entity(coreModel, m_rootItem, new models::gui::declarable::Context());
+        m_rootEntity->setId(0);
     }
 
     Project::~Project()

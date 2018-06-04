@@ -9,9 +9,13 @@ import "../Style"
 import "../Components"
 
 Item {
+    id: _newProj
+
     property Popup popup
     property int widthValue: 650
     property int heightValue: container.childrenRect.height + 40
+
+    signal projectCreated(string project, string path, string solution)
 
     Connections {
         target: popup
@@ -217,7 +221,7 @@ Item {
                                          locationEditable.text,
                                          solutionNameEditable.text,
                                          "");
-                    Editor.openSolution()
+                    _newProj.projectCreated(nameEditable.text, locationEditable.text, solutionNameEditable.text);
                     popup.close()
                     resetData()
                 } else {
