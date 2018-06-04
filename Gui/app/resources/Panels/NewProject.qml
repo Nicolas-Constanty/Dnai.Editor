@@ -217,6 +217,7 @@ Item {
                                          locationEditable.text,
                                          solutionNameEditable.text,
                                          "");
+                    Editor.openSolution()
                     popup.close()
                     resetData()
                 } else {
