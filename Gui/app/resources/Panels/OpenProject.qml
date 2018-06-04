@@ -4,11 +4,52 @@ import DNAI 1.0
 
 import "../Forms"
 import "../Style"
+import "../Components"
 
-OpenProjectForm {
+Item {
     property Popup popup
-    property Component onlineFilesDelegate: onlineFilesDelegate
-    property int currentIndex: -1
+    property int widthValue: 700
+    property int heightValue: container.childrenRect.height + 40
+
+      Item {
+          id: container
+          anchors.fill: parent
+          anchors.margins: 40
+
+          MLabel {
+              id: title
+              text: "Open a project"
+              anchors.top: parent.top
+              anchors.horizontalCenter: parent.horizontalCenter
+              font.pointSize: 14
+          }
+
+          EditableText {
+              id: locationText
+              anchors.top: title.bottom
+              anchors.topMargin: 20
+              anchors.left: parent.left
+              anchors.right: buttonBrowse.left
+              anchors.bottom: buttonBrowse.bottom
+              anchors.rightMargin: 20
+              canEdit: false
+              placeholderText: ""
+          }
+
+          CustomMenuButton {
+              id: buttonBrowse
+              anchors.top: title.bottom
+              anchors.topMargin: 20
+              anchors.right: parent.right
+          //    anchors.left:locationText.left
+              textValue: "Choose project ..."
+              width: textWidth + 20
+              height: textHeight + 20
+          }
+      }
+/*
+ property Component onlineFilesDelegate: onlineFilesDelegate
+ property int currentIndex: -1
 
     Connections {
         target: Editor.session
@@ -94,5 +135,5 @@ OpenProjectForm {
                 }
             }
         }
-    }
+    }*/
 }

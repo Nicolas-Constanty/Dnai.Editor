@@ -44,7 +44,7 @@ ToolBar {
                         text: qsTr("Open project")
                         onClicked:
                         {
-                            Editor.mainView().openProjectPopup.open()
+                            Editor.mainView().openProjectId.open()
                         }
                     }
                     DMenuItem {

@@ -1,5 +1,6 @@
 import QtQuick 2.0
 import QtQuick.Controls 2.2
+import QtQuick.Dialogs 1.3
 
 import DNAI 1.0
 import DNAI.Views 1.0
@@ -12,26 +13,26 @@ import "../JavaScript/CreateComponent.js" as Factory
 
 ApplicationWindow {
     id: _root
-    property alias openProjectPopup: openProjectPopup
+    property alias openProjectId: openProjectId
     property alias newProjectPopup: newProjectPopup
     Component.onCompleted: {
         Editor.checkVersion()
     }
 
-    function openSolution (projectPath, viewData) {
-        if (projectPath.text) {
+    function openSolution (projectPath) {
+     //   if (projectPath) {
             Editor.openSolution()
-            viewData.clear();
-            projectPath.text = "";
+         //   viewData.clear();
+          //  projectPath = "";
             tabV.destroy()
             _content.content.destroy()
             Factory.createObjects("resources/Views/SolutionView.qml",
                                   {
-                                      "openModal" : openProjectPopup,
+                                      "openModal" : openProjectId,
                                       "newModal" : newProjectPopup
                                   }, _content)
             _content.content = Factory.getObject()
-        }
+     //   }
     }
 
     property alias appWindow: _root
@@ -67,7 +68,7 @@ ApplicationWindow {
                 Component.onCompleted: {
                     addView("resources/Views/DefaultView.qml",
                             {
-                                "openModal" : openProjectPopup,
+                                "openModal" : openProjectId,
                                 "newModal" : newProjectPopup
                             },
                             "Welcome")
@@ -100,7 +101,7 @@ ApplicationWindow {
                     _content.content.destroy()
                     Factory.createObjects("resources/Views/SolutionView.qml",
                                           {
-                                              "openModal" : openProjectPopup,
+                                              "openModal" : openProjectId,
                                               "newModal" : newProjectPopup
                                           }, _content)
                     _content.content = Factory.getObject()
@@ -109,11 +110,30 @@ ApplicationWindow {
             }
         }
     }
-    Modal {
+
+    FileDialog {
+        id: openProjectId
+        title: "Choose a Project name"
+        folder: Qt.resolvedUrl(StandardPath.writableLocation((StandardPath.HomeLocation)))
+  //      selectFolder: true
+  //      selectExisting: true
+        onAccepted: {
+            console.log('allo ?')
+            Editor.loadSolution(openProjectId.fileUrl)
+            openSolution(openProjectId.fileUrl)
+        }
+        onRejected: {
+            //console.log("Canceled")
+        }
+
+    }
+
+   /* Modal {
         id: openProjectPopup
         x: parent.width / 2 - width / 2
         y: _root.height / 2 - height / 2
-        width: 700
+        width: openProjectPanel.widthValue
+        height: openProjectPanel.heightValue
         contentItem: OpenProject {
             anchors.fill: parent
             id: openProjectPanel
@@ -125,5 +145,5 @@ ApplicationWindow {
                 popup.close();
             }
         }
-    }
+    }*/
 }

@@ -1,5 +1,6 @@
 import QtQuick 2.0
 import QtQuick.Controls 2.2
+import QtQuick.Dialogs 1.3
 
 import DNAI 1.0
 
@@ -9,7 +10,7 @@ import "../Panels"
 
 Rectangle {
     color: "#16000000"
-    property Modal openModal: null
+    property FileDialog openModal: null
     property Modal newModal: null
 
     Column {
@@ -18,7 +19,7 @@ Rectangle {
         LinkButton {
             text: qsTr("Create new project")
             mousearea.onPressed: {
-                if (openModal !== null)
+                if (newModal !== null)
                     newProjectPopup.open()
             }
             anchors.horizontalCenter: parent.horizontalCenter
@@ -32,7 +33,7 @@ Rectangle {
             text: qsTr("Open a project")
             mousearea.onPressed: {
                 if (openModal !== null)
-                    openProjectPopup.open()
+                    openProjectId.open()
             }
             anchors.horizontalCenter: parent.horizontalCenter
         }

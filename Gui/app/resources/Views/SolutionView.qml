@@ -1,4 +1,5 @@
 import QtQuick 2.0
+import QtQuick.Dialogs 1.3
 
 import DNAI.Views 1.0
 import "../Components"
@@ -6,7 +7,7 @@ import "../JavaScript/CreateComponent.js" as Factory
 
 ViewZone {
     id: _parent
-    property Modal openModal: null
+    property FileDialog openModal: null
     property Modal newModal: null
     visualsize: 0
 

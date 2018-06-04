@@ -11,6 +11,7 @@ TextInput {
     property string deselectColorBackground: AppSettings.theme["editableText"]["color"]["background"]["deselect"]
     property string errorText: ""
     property alias grparent: control.parent
+    property bool canEdit: true
 
     font.family: AppSettings.theme["font"]["family"]
     font.pointSize: AppSettings.theme["font"]["pixelSize"]
@@ -38,11 +39,13 @@ TextInput {
     MouseArea {
         id: controlMouseId
         anchors.fill: control
-        cursorShape: Qt.IBeamCursor
+        cursorShape: canEdit ? Qt.IBeamCursor : Qt.ArrowCursor
 
         onPressed: {
-            control.focus = true
-            control.cursorPosition = control.positionAt(controlMouseId.mouseX, controlMouseId.mouseY)
+            if (canEdit) {
+                control.focus = true
+                control.cursorPosition = control.positionAt(controlMouseId.mouseX, controlMouseId.mouseY)
+            }
         }
 
     }

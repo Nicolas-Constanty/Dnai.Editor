@@ -140,7 +140,8 @@ Item {
             anchors.right: parent.right
             height: 30
             horizontalAlignment: TextInput.AlignLeft
-            KeyNavigation.tab: locationEditable
+            KeyNavigation.tab: solutionNameEditable
+            placeholderText: "Project's name ..."
             onTextChanged: {
                 solutionNameEditable.text = nameEditable.text
             }
@@ -166,7 +167,8 @@ Item {
             height: 30
             horizontalAlignment: TextInput.AlignLeft
             KeyNavigation.tab: solutionNameEditable
-
+            canEdit: false
+            placeholderText: ""
         }
 
         CustomMenuButton {
@@ -203,6 +205,7 @@ Item {
             height: 30
             horizontalAlignment: TextInput.AlignLeft
             KeyNavigation.tab: nameEditable
+            placeholderText: "Project's solution name ..."
         }
 
         CustomMenuButton {
