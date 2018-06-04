@@ -146,7 +146,8 @@ Item {
             anchors.right: parent.right
             anchors.top: locationEditable.top
             anchors.bottom: locationEditable.bottom
-            width: 80
+            width: browseLocation.textWidth + 20
+            height: browseLocation.textHeight + 20
             textValue: "Browse..."
             textPointSize: 12
 
@@ -181,8 +182,8 @@ Item {
             anchors.top: solutionNameEditable.bottom
             anchors.topMargin: 20
             anchors.horizontalCenter: parent.horizontalCenter
-            width: 120
-            height: 40
+            width: validateButton.textWidth + 20
+            height: validateButton.textHeight + 20
             textValue: "Create Project"
 
             onPressed: {

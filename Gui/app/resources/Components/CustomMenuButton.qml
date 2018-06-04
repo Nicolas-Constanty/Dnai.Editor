@@ -12,6 +12,8 @@ Item {
     signal hoverExit()
     property string textValue: ""
     property int textPointSize: 15
+    property alias textWidth: buttonLaunchText.width
+    property alias textHeight: buttonLaunchText.height
 
 
     Rectangle {
