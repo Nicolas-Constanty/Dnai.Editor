@@ -1,13 +1,206 @@
 import QtQuick 2.4
 import QtQuick.Controls 2.2
 import DNAI 1.0
+import Dnai.FontAwesome 1.0
+import QtQuick.Dialogs 1.3
 
 import "../Forms"
+import "../Style"
+import "../Components"
 
-NewProjectForm {
+Item {
     property Popup popup
+    property int widthValue: 650
+    property int heightValue: container.childrenRect.height + 40
 
-    fileDialog.folder: Qt.resolvedUrl(StandardPath.writableLocation((StandardPath.HomeLocation)))
+    FileDialog {
+        id: fileDialog
+        title: "Choose a directory"
+        folder: Qt.resolvedUrl(StandardPath.writableLocation((StandardPath.HomeLocation)))
+        selectFolder: true
+        selectExisting: true
+        onAccepted: {
+            locationEditable.text = fileDialog.fileUrl
+        }
+        onRejected: {
+            //console.log("Canceled")
+        }
+    }
+
+    MouseArea {
+        anchors.fill: parent
+
+        onPressed: {
+            nameEditable.focus = false
+            solutionNameEditable.focus = false
+            locationEditable.focus = false
+        }
+    }
+
+    function resetData() {
+        nameEditable.focus = false
+        solutionNameEditable.focus = false
+        locationEditable.focus = false
+        nameEditable.text = ""
+        solutionNameEditable.text = ""
+        locationEditable.text = ""
+    }
+
+
+    TextAwesomeSolid {
+        id: crossId
+        text: "\uf00d"
+        anchors.top: parent.top
+        anchors.right: parent.right
+        anchors.topMargin: 10
+        anchors.rightMargin: 10
+        color: AppSettings.theme["text"]["color"]
+
+        MouseArea {
+            id: crossMouseId
+            anchors.fill: crossId
+            hoverEnabled: true
+            //focus: true
+            onEntered: {
+                crossMouseId.cursorShape = Qt.PointingHandCursor
+            }
+
+            onReleased: {
+                popup.close()
+            }
+
+            onExited: {
+                crossMouseId.cursorShape = Qt.PointingHandCursor
+            }
+        }
+    }
+
+
+
+
+    Item {
+        id: container
+        anchors.fill: parent
+        anchors.margins: 40
+        anchors.topMargin: 20
+
+
+
+        MLabel {
+            id: title
+            text: "Create new project"
+            anchors.top: parent.top
+            anchors.horizontalCenter: parent.horizontalCenter
+            font.pointSize: 14
+        }
+
+        MLabel {
+            id: name
+            text: "Name:"
+            anchors.top: title.bottom
+            anchors.topMargin: 20
+            anchors.verticalCenter: nameEditable.verticalCenter
+            font.pointSize: 12
+        }
+
+        EditableText {
+            id: nameEditable
+            anchors.top: title.bottom
+            anchors.topMargin: 20
+            anchors.left: solutioName.right
+            anchors.leftMargin: 10
+            anchors.right: parent.right
+            height: 30
+            horizontalAlignment: TextInput.AlignLeft
+            KeyNavigation.tab: locationEditable
+            onTextChanged: {
+                solutionNameEditable.text = nameEditable.text
+            }
+        }
+
+        MLabel {
+            id: location
+            text: "Location:"
+            anchors.top: nameEditable.bottom
+            anchors.topMargin: 20
+            anchors.verticalCenter: locationEditable.verticalCenter
+            font.pointSize: 12
+        }
+
+        EditableText {
+            id: locationEditable
+            anchors.top: nameEditable.bottom
+            anchors.topMargin: 20
+            anchors.left: solutioName.right
+            anchors.leftMargin: 10
+            anchors.right: browseLocation.left
+            anchors.rightMargin: 20
+            height: 30
+            horizontalAlignment: TextInput.AlignLeft
+            KeyNavigation.tab: solutionNameEditable
+
+        }
+
+        CustomMenuButton {
+            id: browseLocation
+            anchors.right: parent.right
+            anchors.top: locationEditable.top
+            anchors.bottom: locationEditable.bottom
+            width: 80
+            textValue: "Browse..."
+            textPointSize: 12
+
+            onPressed: {
+                fileDialog.open()
+            }
+        }
+
+        MLabel {
+            id: solutioName
+            text: "Solution name:"
+            anchors.top: locationEditable.bottom
+            anchors.topMargin: 20
+            anchors.verticalCenter: solutionNameEditable.verticalCenter
+            font.pointSize: 12
+        }
+
+        EditableText {
+            id: solutionNameEditable
+            anchors.top: locationEditable.bottom
+            anchors.topMargin: 20
+            anchors.left: solutioName.right
+            anchors.leftMargin: 10
+            anchors.right: parent.right
+            height: 30
+            horizontalAlignment: TextInput.AlignLeft
+            KeyNavigation.tab: nameEditable
+        }
+
+        CustomMenuButton {
+            id: validateButton
+            anchors.top: solutionNameEditable.bottom
+            anchors.topMargin: 20
+            anchors.horizontalCenter: parent.horizontalCenter
+            width: 120
+            height: 40
+            textValue: "Create Project"
+
+            onPressed: {
+                if (locationEditable.text && solutionNameEditable.text && nameEditable.text) {
+                    Editor.createSolution(nameEditable.text,
+                                         "",
+                                         locationEditable.text,
+                                         solutionNameEditable.text,
+                                         "");
+                    popup.close()
+                    resetData()
+                }
+            }
+        }
+
+    }
+
+    /*fileDialog.folder: Qt.resolvedUrl(StandardPath.writableLocation((StandardPath.HomeLocation)))
 
     fileDialog.onAccepted: {
         console.log("You chose: " + fileDialog.fileUrl)
@@ -33,5 +226,5 @@ NewProjectForm {
         projectName.text = "";
         projectDescription.text = "";
         projectPath.text = "";
-    }
+    }*/
 }

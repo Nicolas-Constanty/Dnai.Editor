@@ -1,6 +1,9 @@
 import QtQuick 2.9
 import DNAI 1.0
+import Dnai.FontAwesome 1.0
 
+//f106
+//TODO ajouter error
 TextInput {
     id: control
     property string placeholderText: "Enter text here..."
@@ -42,12 +45,18 @@ TextInput {
     }
 
     MText {
-        anchors.fill: parent
+        anchors.right: parent.right
+        anchors.rightMargin: parent.rightPadding
+        anchors.leftMargin: parent.leftPadding
+        anchors.left: parent.left
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
         text: control.placeholderText
         font.pointSize: AppSettings.theme["font"]["pixelSize"]
         color: AppSettings.theme["text"]["disableColor"]
         font.italic: true
         visible: !control.text
+        horizontalAlignment: parent.horizontalAlignment
     }
 
     Rectangle {
@@ -59,4 +68,14 @@ TextInput {
         height: 3
         color: control.focus == true ? selectColor : deselectColor
     }
+
+    /*TextAwesomeSolid {
+        id: crossId
+        text: "\uf106"
+        anchors.top: control.bottom
+        anchors.topMargin: 3
+        anchors.left: control.left
+     //   anchors.leftMargin: 10
+        color: AppSettings.theme["text"]["color"]
+    }*/
 }

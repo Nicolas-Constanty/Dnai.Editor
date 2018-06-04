@@ -80,11 +80,11 @@ ApplicationWindow {
         id: newProjectPopup
         x: parent.width / 2 - width / 2
         y: appWindow.height / 2 - height / 2
-        background: Rectangle {
-            color: AppSettings.theme["background"]["color"]
-        }
-        width: 640
-        height: 480
+    //    background: Rectangle {
+    //        color: AppSettings.theme["background"]["color"]
+    //    }
+        width: newFileProjectPanel.widthValue
+        height: newFileProjectPanel.heightValue
         modal: true
         focus: true
         closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutside
@@ -93,7 +93,7 @@ ApplicationWindow {
             id: newFileProjectPanel
             popup: newProjectPopup
 
-            createButton.onClicked: function () {
+           /* createButton.onClicked: function () {
                 if (solutionPath.text) {
                     Editor.openSolution()
                     tabV.destroy()
@@ -106,7 +106,7 @@ ApplicationWindow {
                     _content.content = Factory.getObject()
                     popup.close();
                 }
-            }
+            }*/
         }
     }
     Modal {
