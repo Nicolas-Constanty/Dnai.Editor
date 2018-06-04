@@ -222,10 +222,21 @@ Item {
                 } else {
                     if (!locationEditable.text)
                         locationEditable.errorText = "Field is empty"
+                    else {
+                        locationEditable.errorText = ""
+                    }
+
                     if (!nameEditable.text)
                         nameEditable.errorText = "Field is empty"
+                    else {
+                        nameEditable.errorText = ""
+                    }
+
                     if (!solutionNameEditable.text)
                         solutionNameEditable.errorText = "Field is empty"
+                    else {
+                        solutionNameEditable.errorText = ""
+                    }
                 }
             }
         }
