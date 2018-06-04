@@ -15,13 +15,14 @@ ToolBar {
     property alias menuEditRef: menuEdit
     id: toolBar
     width: parent.width
-    height: 40
+    height: 50
     spacing: 0
     background: Rectangle {
         color: AppSettings.theme["background"]["color"]
     }
     ScrollView {
         anchors.fill: parent
+        padding: 5
         RowLayout {
             spacing: 0
             anchors.fill: parent
