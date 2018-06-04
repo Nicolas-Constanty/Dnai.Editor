@@ -2,8 +2,6 @@ import QtQuick 2.9
 import DNAI 1.0
 import Dnai.FontAwesome 1.0
 
-//f106
-//TODO ajouter error
 TextInput {
     id: control
     property string placeholderText: "Enter text here..."
@@ -11,6 +9,8 @@ TextInput {
     property string deselectColor: AppSettings.theme["editableText"]["color"]["border"]["deselect"]
     property string selectColorBackground: AppSettings.theme["editableText"]["color"]["background"]["select"]
     property string deselectColorBackground: AppSettings.theme["editableText"]["color"]["background"]["deselect"]
+    property string errorText: ""
+    property alias grparent: control.parent
 
     font.family: AppSettings.theme["font"]["family"]
     font.pointSize: AppSettings.theme["font"]["pixelSize"]
@@ -22,6 +22,12 @@ TextInput {
     leftPadding: 5
     rightPadding: 5
 
+    onFocusChanged: {
+        if (!focus && errorId.text) {
+            errorText = ""
+        }
+    }
+
 
     Rectangle {
         anchors.fill: parent
@@ -29,12 +35,9 @@ TextInput {
         z: parent.z - 1
     }
 
-  //  mouseSelectionMode: TextInput.SelectCharacters
-
     MouseArea {
         id: controlMouseId
         anchors.fill: control
-       // hoverEnabled: true
         cursorShape: Qt.IBeamCursor
 
         onPressed: {
@@ -66,16 +69,30 @@ TextInput {
         anchors.left: control.left
         anchors.right: control.right
         height: 3
-        color: control.focus == true ? selectColor : deselectColor
+        color:  (errorId.text) ? AppSettings.theme["text"]["errorColor"] : control.focus == true ? selectColor : deselectColor
+    }
+
+    MText {
+        id: errorId
+        parent: grparent
+        text: errorText
+        font.pointSize: 8
+        anchors.top: control.bottom
+        anchors.topMargin: 5
+        anchors.rightMargin: 10
+        anchors.right: control.right
+        color: AppSettings.theme["text"]["errorColor"]
+        z: parent.z + 1
     }
 
     /*TextAwesomeSolid {
-        id: crossId
+        id: arrowId
         text: "\uf106"
+        parent: grparent
         anchors.top: control.bottom
-        anchors.topMargin: 3
-        anchors.left: control.left
-     //   anchors.leftMargin: 10
-        color: AppSettings.theme["text"]["color"]
+//        anchors.topMargin: 3
+        anchors.right: control.right
+        anchors.rightMargin: 5
+        color: AppSettings.theme["text"]["errorColor"]
     }*/
 }

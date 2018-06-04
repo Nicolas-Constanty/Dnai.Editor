@@ -13,6 +13,30 @@ Item {
     property int widthValue: 650
     property int heightValue: container.childrenRect.height + 40
 
+    Connections {
+        target: popup
+        onClosed: {
+            reset()
+        }
+
+        onOpened: {
+
+        }
+    }
+
+    function reset() {
+        locationEditable.errorText = ""
+        nameEditable.errorText = ""
+        solutionNameEditable.errorText = ""
+        locationEditable.focus = false
+        nameEditable.focus = false
+        solutionNameEditable.focus = false
+        locationEditable.text = ""
+        nameEditable.text = ""
+        solutionNameEditable.text = ""
+
+    }
+
     FileDialog {
         id: fileDialog
         title: "Choose a directory"
@@ -195,6 +219,13 @@ Item {
                                          "");
                     popup.close()
                     resetData()
+                } else {
+                    if (!locationEditable.text)
+                        locationEditable.errorText = "Field is empty"
+                    if (!nameEditable.text)
+                        nameEditable.errorText = "Field is empty"
+                    if (!solutionNameEditable.text)
+                        solutionNameEditable.errorText = "Field is empty"
                 }
             }
         }
