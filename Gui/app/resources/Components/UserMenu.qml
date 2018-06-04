@@ -120,7 +120,7 @@ Item {
 
     Rectangle {
         id: backgroundProfileId
-        color: containerId.visible == false ? "#639DBE" : "#5EBB89"
+        color: containerId.visible == false ? AppSettings.theme["background"]["bluecolor"] : AppSettings.theme["background"]["greencolor"]
         anchors.top: parent.top
         anchors.right: parent.right
         anchors.bottom: parent.bottom
