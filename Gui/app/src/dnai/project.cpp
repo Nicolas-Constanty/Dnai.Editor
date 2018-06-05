@@ -103,10 +103,14 @@ namespace dnai {
 	void Project::load(const QString& path)
 	{
 		m_filename = path;
+
+        qDebug() << "File url: " << path;
+        qDebug() << "File path: " << QUrl(m_filename).toLocalFile();
+
 		m_file = new QFile(QUrl(m_filename).toLocalFile());
 
 		if (!m_file->open(QIODevice::ReadOnly)) {
-			qWarning("Couldn't open file.");
+            qWarning() << "Couldn't open file: " << m_file->errorString();
 			return;
 		}
 

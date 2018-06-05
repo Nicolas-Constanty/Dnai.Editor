@@ -46,6 +46,7 @@ namespace dnai
 		Q_PROPERTY(dnai::PropertyPanelProperties *propertyPanelProperties READ propertyPanelProperties CONSTANT)
 		Q_PROPERTY(dnai::models::ContextMenu *contextMenu READ contextMenu CONSTANT)
         Q_PROPERTY(bool loaded READ loaded WRITE setLoaded NOTIFY loadedChanged)
+        Q_PROPERTY(QString solutionName READ solutionName)
 
     protected:
         Editor();
@@ -71,6 +72,7 @@ namespace dnai
         views::EditorView *mainView() const;
         bool loaded() const;
         dnai::models::ContextMenu *contextMenu() const;
+        QString const &solutionName() const;
 
         void setLoaded(bool);
         Q_INVOKABLE void registerEditorView(views::EditorView *view);
@@ -115,6 +117,10 @@ namespace dnai
         models::BasicNodeModel *nodes() const;
         Session *session() const;
 
+    public:
+        void setAppName(QString const &name);
+        void setSolutionName(QString const &name);
+
     signals:
         void solutionChanged(dnai::Solution *proj);
         void loadedChanged(bool);
@@ -137,6 +143,8 @@ namespace dnai
         QQuickItem* m_propertyView;
         models::ContextMenu* m_contextMenu;
 		dnai::PropertyPanelProperties *m_propertyPanelProperties;
+        QString m_appname;
+        QString m_solutionName;
 
     private:
         std::queue<std::pair<quint32, quint32>> m_pendingInstruction;

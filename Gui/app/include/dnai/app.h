@@ -16,7 +16,7 @@
 namespace dnai {
     class App : public QGuiApplication, public interfaces::ILoadingClass
     {
-		Q_OBJECT
+        Q_OBJECT
     public:
         App(int & argc, char **argv);
 		~App();
