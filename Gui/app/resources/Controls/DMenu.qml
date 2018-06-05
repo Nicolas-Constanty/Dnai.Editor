@@ -12,6 +12,7 @@ Menu {
 
     margins: 0
 
+
     contentItem: ListView {
         implicitHeight: contentHeight
         model: control.contentModel

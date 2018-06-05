@@ -24,6 +24,7 @@ namespace dnai
 			Q_PROPERTY(QStringList visibility READ visibility CONSTANT)
 			Q_PROPERTY(QStringList entityType READ entityType CONSTANT)
 			Q_PROPERTY(dnai::models::gui::declarable::VarTypeList *varTypes READ varTypes CONSTANT)
+
 	public:
 		explicit PropertyPanelProperties(QObject *parent = nullptr);
 
@@ -44,6 +45,7 @@ namespace dnai
         Q_PROPERTY(dnai::Session *session READ session CONSTANT)  
 		Q_PROPERTY(dnai::PropertyPanelProperties *propertyPanelProperties READ propertyPanelProperties CONSTANT)
 		Q_PROPERTY(dnai::models::ContextMenu *contextMenu READ contextMenu CONSTANT)
+        Q_PROPERTY(bool loaded READ loaded WRITE setLoaded NOTIFY loadedChanged)
 
     protected:
         Editor();
@@ -59,6 +61,7 @@ namespace dnai
         void restoreViewState(const QJsonObject& obj) override;
         void saveViewState() override;
         void closeSolution() override;
+
         const QList<interfaces::ICommand*>& actions() const override;
         const QObject& selection() const override;
         const QList<QObject*>& selections() const override;
@@ -66,11 +69,15 @@ namespace dnai
         dnai::Solution *getSolution() const;
         void addView(QQuickItem* v) override;
         views::EditorView *mainView() const;
+        bool loaded() const;
         dnai::models::ContextMenu *contextMenu() const;
+
+        void setLoaded(bool);
         Q_INVOKABLE void registerEditorView(views::EditorView *view);
 
         Q_INVOKABLE const QList<QQuickItem *>& views() const override;
         Q_INVOKABLE QQuickItem *selectedView() const override;
+        Q_INVOKABLE bool isSolutionLoad() const;
         Q_INVOKABLE void selectView(QQuickItem *i);
         Q_INVOKABLE void createNode(dnai::models::Entity* entity, quint32 type, QList<qint32> const &args, qint32 x, qint32 y);
 
@@ -110,6 +117,7 @@ namespace dnai
 
     signals:
         void solutionChanged(dnai::Solution *proj);
+        void loadedChanged(bool);
 
     public slots:
         void onInstructionAdded(models::Entity *func, models::gui::Instruction *instr);
@@ -132,6 +140,7 @@ namespace dnai
 
     private:
         std::queue<std::pair<quint32, quint32>> m_pendingInstruction;
+        bool m_loaded = false;
 
     private:
         static Editor &m_instance;

@@ -20,6 +20,16 @@ ToolBar {
     background: Rectangle {
         color: AppSettings.theme["background"]["color"]
     }
+
+    /*Connections {
+        target: Editor
+
+        onLoadedChanged: {
+            enableLoaded = Editor.loaded
+            console.log('ALOORS ????' + enableLoaded)
+        }
+    }*/
+
     ScrollView {
         anchors.fill: parent
         RowLayout {
@@ -29,51 +39,55 @@ ToolBar {
                 id: toolButton
                 text: qsTr("File")
 
-                onClicked: menuFile.open()
+                onButtonPressed: menuFile.open()
                 DMenu {
                     id: menuFile
                     y: parent.height
+
                     //                        DMenuItem {
                     //                            text: qsTr("New window")
                     //                        }
                     DMenuItem {
                         text: qsTr("New project")
-                        onClicked: Editor.mainView().newProjectPopup.open()
+                        onButtonPressed: Editor.mainView().newProjectPopup.open()
                     }
                     DMenuItem {
                         text: qsTr("Open project")
-                        onClicked:
+                        onButtonPressed:
                         {
                             Editor.mainView().openProjectId.open()
                         }
                     }
                     DMenuItem {
                         text: qsTr("Save")
-                        onClicked: Editor.solution.selectedProject().save()
+                        onButtonPressed: Editor.solution.selectedProject().save()
+                        enabled: Editor.loaded
                     }
                     DMenuItem {
                         text: qsTr("Save as")
+                        enabled: Editor.loaded
                     }
                     DMenuItem {
                         text: qsTr("Save all")
-                        onClicked: Editor.solution.save()
+                        onButtonPressed: Editor.solution.save()
+                        enabled: Editor.loaded
                     }
                     //                        DMenuItem {
                     //                            text: qsTr("Close window")
                     //                        }
-                    DMenuItem {
+                    /*DMenuItem {
                         text: qsTr("Exit")
-                        onClicked: {
+                        onButtonPressed: {
                             Qt.quit()
                         }
-                    }
+                    }*/
                 }
             }
 
             DToolButton {
 
                 text: qsTr("Edit")
-                onClicked: menuEdit.open()
+                onButtonPressed: menuEdit.open()
 
 
                 DMenu {
@@ -106,14 +120,14 @@ ToolBar {
                     //                        }
                     DMenuItem {
                         text: "Settings"
-                        onClicked: settingsPopup.open()
+                        onButtonPressed: settingsPopup.open()
                     }
                 }
             }
 
             DToolButton {
                 text: qsTr("View")
-                onClicked: menuView.open()
+                onButtonPressed:  menuView.open()
 
 
                 DMenu {
@@ -121,7 +135,7 @@ ToolBar {
                     y: parent.height
                     DMenuItem {
                         text: qsTr("Toogle full screen")
-                        onClicked: {
+                        onButtonPressed: {
                             if (appWindow.visibility != Window.FullScreen)
                                 appWindow.visibility = Window.FullScreen
                             else
@@ -133,7 +147,7 @@ ToolBar {
                     //                        }
                     DMenuItem {
                         text: qsTr("Toogle left panel")
-                        onClicked: {
+                        onButtonPressed: {
                             var leftPanel = appWindow.layout.getPanel("panelLeft")
                             if (leftPanel.state === "Visible")
                                 leftPanel.state = "Invisible"
@@ -143,7 +157,7 @@ ToolBar {
                     }
                     DMenuItem {
                         text: qsTr("Toogle right panel")
-                        onClicked: {
+                        onButtonPressed: {
                             var rightPanel = appWindow.layout.getPanel("panelRight")
                             if (rightPanel.state === "Visible")
                                 rightPanel.state = "Invisible"
@@ -162,7 +176,7 @@ ToolBar {
                     //                        }
                     DMenuItem {
                         text: qsTr("Toogle console")
-                        onClicked: {
+                        onButtonPressed: {
                             var console = appWindow.layout.getPanel("console")
                             if (console.state === "Visible")
                                 console.state = "Invisible"

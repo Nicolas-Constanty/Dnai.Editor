@@ -22,6 +22,7 @@ namespace dnai {
         Q_OBJECT
 		Q_PROPERTY(dnai::models::Entity *selectedEntity READ selectedEntity WRITE setSelectedEntity NOTIFY selectedEntityChanged)
 		Q_PROPERTY(int childCount READ childCount CONSTANT)
+        Q_PROPERTY(bool saved READ saved WRITE setSaved NOTIFY savedChanged)
 	public:
         Project();
         Project(const QString &filename);
@@ -34,14 +35,17 @@ namespace dnai {
 	public:
 		models::Entity *selectedEntity() const;
 		void setSelectedEntity(models::Entity *entity);
+        void setSaved(bool);
 
 	signals:
 		void selectedEntityChanged(models::Entity *entity);
         void entityAdded(models::Entity *entity);
         void entityRemoved(models::Entity *entity);
+        void savedChanged(bool saveState);
 
     public:
 		Q_INVOKABLE void save() override;
+        bool saved() const;
 		void load(const QString& path) override;
         void loadFromJson(const QJsonObject& obj);
 		void close() override;
@@ -86,6 +90,7 @@ namespace dnai {
 	    QString m_version;
 	    models::Entity* m_rootEntity;
         QMap<QString, QString>  m_entityColumnUid;
+        bool m_save = true;
     };
 
 	//  class Project: public models::Common

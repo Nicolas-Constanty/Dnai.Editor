@@ -2,7 +2,9 @@
     "background": {
         "color" : "#2d2d30",
         "darkColor" : "#1e1e1e",
-        "lightColor": "#333337"
+        "lightColor": "#333337",
+        "bluecolor": "#639DBD",
+        "greencolor": "#63BB8C"
     },
     "border": {
         "color": "#3f3f46",

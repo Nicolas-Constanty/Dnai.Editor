@@ -7,7 +7,11 @@ import "../Style"
 MenuItem {
     id: control
 
+    signal buttonPressed()
+
     property string iconpath: ""
+
+  //  property bool disable: false
 
     implicitWidth: Math.max(background ? background.implicitWidth : 0,
                             contentItem.implicitWidth + leftPadding + rightPadding)
@@ -18,7 +22,39 @@ MenuItem {
 
     padding: 6
 
+    onEnabledChanged: {
+        console.log('CHANGED' + enabled)
+    }
+
+    MouseArea {
+        anchors.fill: parent
+        hoverEnabled: true
+        cursorShape: Qt.PointingHandCursor
+
+        onPressed: {
+            if (control.enabled)
+                control.buttonPressed()
+        }
+
+       /* onEntered: {
+            console.log('HIII')
+            backgroundId.color = AppSettings.theme["background"]["lightColor"]
+        }
+
+        onPressed: {
+            //buttonPressed()
+        }
+
+        onExited: {
+            //backgroundId.visible = false
+            backgroundId.color =
+        }*/
+    }
+
     contentItem: Item {
+
+
+
         Row {
             anchors.verticalCenter: parent.verticalCenter
             spacing: 4
@@ -57,11 +93,13 @@ MenuItem {
         implicitWidth: 200
         implicitHeight: txt.implicitHeight * 1.4
         Rectangle {
+            id: backgroundId
             x: 1
             y: 1
             width: parent.width - 2
             height: parent.height - 2
             color: control.pressed ? AppSettings.theme["background"]["darkColor"] : control.hovered ? AppSettings.theme["background"]["lightColor"] : "transparent"
+
         }
     }
 }
