@@ -41,8 +41,7 @@ namespace dnai
                 c = new DebugDecorator(c);
             }
 			if (c->isSave())
-			{
-                qDebug() << "Execute save";
+            {
 				c->executeSave();
 				m_undoList.push(c);
                 Project *dnaiProject = dynamic_cast<Project *>(Editor::instance().solution()->seletedProject());

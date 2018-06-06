@@ -21,6 +21,7 @@ namespace dnai {
             gcore::HandlerManager::Instance().declarator(), SIGNAL(declared(dnai::models::Entity*)),
             this, SLOT(addEntity(dnai::models::Entity*))
                     );
+        QQmlEngine::setObjectOwnership(this, QQmlEngine::CppOwnership);
     }
 
     Project::Project(const QString &filename)
@@ -40,6 +41,7 @@ namespace dnai {
         const auto coreModel = new models::gcore::Entity("RootEntity", ::core::ENTITY::CONTEXT);
         m_rootEntity = new models::Entity(coreModel, m_rootItem, new models::gui::declarable::Context());
         m_rootEntity->setId(0);
+        QQmlEngine::setObjectOwnership(this, QQmlEngine::CppOwnership);
     }
 
     Project::~Project()
@@ -200,7 +202,7 @@ namespace dnai {
 	}
 
 	template<>
-	int Project::_foreachEntity(models::Entity *root, const std::function<int(models::Entity *)> &func) const
+    int Project::_foreachEntity<int>(models::Entity *root, const std::function<int(models::Entity *)> &func) const
 	{
 		int total = 0;
         const auto& list = root->childrenItem();
@@ -213,7 +215,7 @@ namespace dnai {
 			}
 		}
 		return total;
-	}
+    }
 
 	void Project::foreachEntity(const std::function<void(models::Entity *)> &func) const
 	{
@@ -228,16 +230,30 @@ namespace dnai {
 		}
 	}
 
+    /**
+     * @brief Project::expandedRows Count the number of children to display in treeview
+     * @details It do a breadth-first order traversal from the given node in each expanded children but stops depth research at first children collapsed
+     * @param parent The item that is expanded/collapse
+     * @return Number of child to display
+     */
 	int Project::expandedRows(const QModelIndex &parent) const
 	{
 		const auto item = getItem(parent);
-		const auto count = _foreachEntity<int>(item, [](models::Entity *e)
-		{
-			if (e->expanded())
-				return e->childCount();
-			return 0;
-		});
-        return count + (item->expanded() ? item->childCount() : 0);
+        auto count = 0;
+        std::queue<models::Entity *> entities;
+
+        entities.push(item);
+        while (!entities.empty())
+        {
+            if (entities.front()->expanded()) {
+                count += entities.front()->childCount();
+                for (models::Entity *child : entities.front()->childrenItem()) {
+                    entities.push(child);
+                }
+            }
+            entities.pop();
+        }
+        return count;
     }
 
     QModelIndex Project::getIndexOf(models::Entity *e) const
