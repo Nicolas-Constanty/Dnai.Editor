@@ -1,5 +1,5 @@
 import QtQuick 2.9
-import QtQuick.Controls 2.2
+import QtQuick.Controls 2.3
 import QtQuick.Layouts 1.3
 import QtQuick.Dialogs 1.2
 import QtQuick.Window 2.2
@@ -21,13 +21,84 @@ ToolBar {
         color: AppSettings.theme["background"]["color"]
     }
 
-    /*Connections {
-        target: Editor
+    Action {
+        id: newProjectAction
+        text: qsTr("New project")
+        onTriggered: Editor.mainView().newProjectPopup.open()
+        shortcut: StandardKey.New
+    }
+    Action {
+        id: openAction
+        text: qsTr("Open project")
+        onTriggered: Editor.mainView().openProjectId.open()
+        shortcut: StandardKey.Open
+    }
+    Action {
+        id: saveAction
+        text: qsTr("Save")
+        onTriggered: Editor.solution.selectedProject().save()
+        enabled: Editor.loaded
+        shortcut: StandardKey.Save
+    }
+    Action {
+        id: saveAsAction
+        text: qsTr("Save as")
+        enabled: Editor.loaded
+        shortcut: StandardKey.SaveAs
+    }
+    Action {
+        id: saveAllAction
+        text: qsTr("Save all")
+        onTriggered: Editor.solution.save()
+        enabled: Editor.loaded
+    //    shortcut: StandardKey.SaveAll
+    }
 
-        onLoadedChanged: {
-            enableLoaded = Editor.loaded
-            console.log('ALOORS ????' + enableLoaded)
+    Action {
+        id: settingsAction
+        text: qsTr("Settings")
+        onTriggered: settingsPopup.open()
+        shortcut: StandardKey.Preferences
+    }
+
+    Action {
+        id: fullscreenAction
+        text: qsTr("Toogle full screen")
+        onTriggered: {
+            if (appWindow.visibility != Window.FullScreen)
+                appWindow.visibility = Window.FullScreen
+            else
+                appWindow.visibility = Window.Windowed
         }
+        shortcut: StandardKey.FullScreen
+    }
+
+  /*  Action {
+        id: leftPanelAction
+        text: qsTr("Toogle left panel")
+        enabled: Editor.loaded
+        onTriggered: {
+            var leftPanel = appWindow.layout.getPanel("panelLeft")
+            if (leftPanel.state === "Visible")
+                leftPanel.state = "Invisible"
+            else
+                leftPanel.state = "Visible"
+        }
+        //shortcut: StandardKey.
+    }
+
+    Action {
+        id: rightPanelAction
+        text: qsTr("Toogle right panel")
+        enabled: Editor.loaded
+        onTriggered: {
+            var rightPanel = appWindow.layout.getPanel("panelRight")
+            if (rightPanel.state === "Visible")
+                rightPanel.state = "Invisible"
+            else
+                rightPanel.state = "Visible"
+        }
+        //shortcut: StandardKey.FullScreen
     }*/
 
     ScrollView {
@@ -44,43 +115,11 @@ ToolBar {
                     id: menuFile
                     y: parent.height
 
-                    //                        DMenuItem {
-                    //                            text: qsTr("New window")
-                    //                        }
-                    DMenuItem {
-                        text: qsTr("New project")
-                        onButtonPressed: Editor.mainView().newProjectPopup.open()
-                    }
-                    DMenuItem {
-                        text: qsTr("Open project")
-                        onButtonPressed:
-                        {
-                            Editor.mainView().openProjectId.open()
-                        }
-                    }
-                    DMenuItem {
-                        text: qsTr("Save")
-                        onButtonPressed: Editor.solution.selectedProject().save()
-                        enabled: Editor.loaded
-                    }
-                    DMenuItem {
-                        text: qsTr("Save as")
-                        enabled: Editor.loaded
-                    }
-                    DMenuItem {
-                        text: qsTr("Save all")
-                        onButtonPressed: Editor.solution.save()
-                        enabled: Editor.loaded
-                    }
-                    //                        DMenuItem {
-                    //                            text: qsTr("Close window")
-                    //                        }
-                    /*DMenuItem {
-                        text: qsTr("Exit")
-                        onButtonPressed: {
-                            Qt.quit()
-                        }
-                    }*/
+                    DMenuItem { action: newProjectAction }
+                    DMenuItem { action: openAction }
+                    DMenuItem { action: saveAction }
+                    DMenuItem { action: saveAsAction }
+                    DMenuItem { action: saveAllAction }
                 }
             }
 
@@ -94,34 +133,8 @@ ToolBar {
                     id: menuEdit
                     y: parent.height
                     property alias settingRef: settingPanel
-                    //                        DMenuItem {
-                    //                            text: qsTr("Undo")
-                    //                        }
-                    //                        DMenuItem {
-                    //                            text: qsTr("Redo")
-                    //                        }
-                    //                        DMenuItem {
-                    //                            text: qsTr("Cut")
-                    //                        }
-                    //                        DMenuItem {
-                    //                            text: qsTr("Copy")
-                    //                        }
-                    //                        DMenuItem {
-                    //                            text: qsTr("Past")
-                    //                        }
-                    //                        DMenuItem {
-                    //                            text: qsTr("Delete")
-                    //                        }
-                    //                        DMenuItem {
-                    //                            text: qsTr("Select all")
-                    //                        }
-                    //                        DMenuItem {
-                    //                            text: qsTr("Invert all")
-                    //                        }
-                    DMenuItem {
-                        text: "Settings"
-                        onButtonPressed: settingsPopup.open()
-                    }
+
+                    DMenuItem { action: settingsAction }
                 }
             }
 
@@ -133,48 +146,11 @@ ToolBar {
                 DMenu {
                     id: menuView
                     y: parent.height
-                    DMenuItem {
-                        text: qsTr("Toogle full screen")
-                        onButtonPressed: {
-                            if (appWindow.visibility != Window.FullScreen)
-                                appWindow.visibility = Window.FullScreen
-                            else
-                                appWindow.visibility = Window.Windowed
-                        }
-                    }
-                    //                        DMenuItem {
-                    //                            text: qsTr("Toogle menu bar")
-                    //                        }
-                    DMenuItem {
-                        text: qsTr("Toogle left panel")
-                        onButtonPressed: {
-                            var leftPanel = appWindow.layout.getPanel("panelLeft")
-                            if (leftPanel.state === "Visible")
-                                leftPanel.state = "Invisible"
-                            else
-                                leftPanel.state = "Visible"
-                        }
-                    }
-                    DMenuItem {
-                        text: qsTr("Toogle right panel")
-                        onButtonPressed: {
-                            var rightPanel = appWindow.layout.getPanel("panelRight")
-                            if (rightPanel.state === "Visible")
-                                rightPanel.state = "Invisible"
-                            else
-                                rightPanel.state = "Visible"
-                        }
-                    }
-                    //                        DMenuItem {
-                    //                            text: qsTr("Font size up")
-                    //                        }
-                    //                        DMenuItem {
-                    //                            text: qsTr("Font size down")
-                    //                        }
-                    //                        DMenuItem {
-                    //                            text: qsTr("Reset font size")
-                    //                        }
-                    DMenuItem {
+                    DMenuItem { action: fullscreenAction }
+                //    DMenuItem { action: leftPanelAction }
+                //    DMenuItem { action: rightPanelAction }
+
+                    /*DMenuItem {
                         text: qsTr("Toogle console")
                         onButtonPressed: {
                             var console = appWindow.layout.getPanel("console")
@@ -183,10 +159,7 @@ ToolBar {
                             else
                                 console.state = "Visible"
                         }
-                    }
-                    //                        DMenuItem {
-                    //                            text: qsTr("Toogle property panel")
-                    //                        }
+                    }*/
                 }
             }
 
