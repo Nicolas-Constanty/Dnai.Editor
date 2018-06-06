@@ -85,6 +85,7 @@ namespace dnai
 
         Q_INVOKABLE void openSolution() override;
         Q_INVOKABLE void loadSolution(const QString& filename) override;
+        Q_INVOKABLE void newEditor(const QString &solutionToLoad = "");
         Q_INVOKABLE void notifyInformation(QString const &, std::function<void ()> func = [](){});
         Q_INVOKABLE void notifySuccess(QString const &text, std::function<void ()> func = []() {});
         Q_INVOKABLE void notifyError(QString const &text, std::function<void ()> func = []() {});

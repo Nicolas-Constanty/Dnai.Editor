@@ -81,25 +81,24 @@ namespace dnai
 	}
 
 	void Editor::loadSolution(const QString& filename)
-	{
-        qDebug() << "Load the solution";
-
-        if (loaded()) {
-            QProcess newEdit;
-
-            newEdit.setProgram(m_appname);
-            newEdit.setArguments({ filename });
-            newEdit.startDetached();
-            newEdit.waitForStarted();
-            return;
-        }
-
+    {
         setLoaded(true);
 		m_solution = new Solution();
 		if (!filename.isEmpty())
             m_solution->load(filename);
 
         m_solutionName = filename;
+    }
+
+    void Editor::newEditor(const QString &solutionToLoad)
+    {
+        QProcess newEdit;
+
+        newEdit.setProgram(m_appname);
+        newEdit.setArguments({ solutionToLoad });
+        newEdit.startDetached();
+        newEdit.waitForStarted();
+        return;
     }
 
     void Editor::startApp()
@@ -366,15 +365,29 @@ namespace dnai
                                 const QString &proj_desc)
     {
         const auto sol_path = path + "/" + name + ".dnaisolution";
+        const auto proj_path = path + "/" + proj_name + ".dnaiproject";
+
+        if (QFileInfo::exists(QUrl(sol_path).toLocalFile()))
+        {
+            notifyError("Unable to create solution at " + sol_path + " (file exist)");
+            return false;
+        }
+
+        if (QFileInfo::exists(QUrl(proj_path).toLocalFile()))
+        {
+            notifyError("Cannot create project at " + proj_path + " (file exist)");
+            return false;
+        }
+
         auto solution = new Solution(sol_path);
         solution->setName(name);
         solution->setDescription(description);
-        auto p = new Project(path + "/" + proj_name + ".dnaiproject");
+        auto p = new Project(proj_path);
         p->setName(proj_name);
         p->setDescription(proj_desc);
         solution->addProject(p);
         solution->save();
-        loadSolution(sol_path);
+        return true;
     }
 
     QQuickWindow *Editor::mainView()  {
