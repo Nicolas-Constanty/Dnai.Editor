@@ -358,7 +358,7 @@ namespace dnai
        // m_solution->save();
     }
 
-    void Editor::createSolution(const QString &name,
+    bool Editor::createSolution(const QString &name,
                                 const QString &description,
                                 const QString &path,
                                 const QString &proj_name,
