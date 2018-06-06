@@ -38,7 +38,8 @@ Rectangle {
         anchors.top: _title.bottom
         anchors.left: parent.left
         anchors.right: parent.right
-        anchors.bottom: parent.bottom
+        anchors.bottom: borderCreateId.top
+        clip: true
 //        focus: true
 
         highlight:  Item {
@@ -232,6 +233,7 @@ Rectangle {
     }
 
     Rectangle {
+        id: borderCreateId
         anchors.bottom: createProjectItemId.top
         anchors.left: parent.left
         anchors.right: parent.right
