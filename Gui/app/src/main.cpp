@@ -212,5 +212,14 @@ int main(int argc, char *argv[])
         qDebug() << "Error, your system in not compatible!";
     }
 #endif
+
+    dnai::Editor::instance().setAppName(argv[0]);
+
+    //dnai::Editor::instance().loadSolution("file://D:\\EIP\\Duly-GUI\\test.dnaisolution");
+
+    //if (argc > 1) {
+        //dnai::Editor::instance().loadSolution(argv[1]);
+    //}
+
     return dnai::App::exec();
 }

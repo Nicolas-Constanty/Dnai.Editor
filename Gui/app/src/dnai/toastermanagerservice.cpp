@@ -33,6 +33,11 @@ void ToasterManagerService::removeOne(Toast *toast) {
 }
 
 Toast *ToasterManagerService::createToast(QString const &text, std::function<void ()> func) {
+
+    //the main view is null when we load the project at editor start
+    if (dnai::Editor::instance().mainView() == nullptr)
+        return nullptr;
+
     QQmlComponent component(dnai::App::getEngineInstance(), "qrc:/resources/Components/Toast.qml");
 
     QQuickItem *obj = qobject_cast<QQuickItem*>(component.beginCreate(dnai::App::getEngineInstance()->rootContext()));
@@ -60,6 +65,8 @@ Toast *ToasterManagerService::createToast(QString const &text, std::function<voi
 
 void ToasterManagerService::notifyInformation(QString const &text, std::function<void ()> func) {
     Toast *toast = createToast(text, func);
+
+    if (toast == nullptr) return;
     toast->item()->setProperty("backgroundColor", "#00BFFF");
     toast->item()->setProperty("iconsFont", u8"\uf05a");
     toast->item()->setProperty("colorIconsFont", "white");
@@ -67,6 +74,8 @@ void ToasterManagerService::notifyInformation(QString const &text, std::function
 
 void ToasterManagerService::notifyError(QString const &text, std::function<void ()> func) {
     Toast *toast = createToast(text, func);
+
+    if (toast == nullptr) return;
     toast->item()->setProperty("backgroundColor", "#FF3333");
     toast->item()->setProperty("iconsFont", u8"\uf057");
     toast->item()->setProperty("colorIconsFont", "white");
@@ -74,6 +83,8 @@ void ToasterManagerService::notifyError(QString const &text, std::function<void 
 
 void ToasterManagerService::notifyWarning(QString const &text, std::function<void ()> func) {
     Toast *toast = createToast(text, func);
+
+    if (toast == nullptr) return;
     toast->item()->setProperty("backgroundColor", "orange");
     toast->item()->setProperty("iconsFont", u8"\uf06a");
     toast->item()->setProperty("colorIconsFont", "white");
@@ -81,6 +92,8 @@ void ToasterManagerService::notifyWarning(QString const &text, std::function<voi
 
 void ToasterManagerService::notifySuccess(QString const &text, std::function<void ()> func) {
     Toast *toast = createToast(text, func);
+
+    if (toast == nullptr) return;
     toast->item()->setProperty("backgroundColor", "#4C9900");
     toast->item()->setProperty("iconsFont", u8"\uf058");
     toast->item()->setProperty("colorIconsFont", "white");

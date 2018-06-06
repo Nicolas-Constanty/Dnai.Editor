@@ -20,7 +20,7 @@ namespace dnai
             using EntityMap = std::unordered_map<::core::EntityID, models::Entity *>;
 
         public:
-            EntityManager() = default;
+            EntityManager();
             ~EntityManager() = default;
 
         signals:

@@ -20,19 +20,15 @@ ApplicationWindow {
     }
 
     function openSolution (projectPath) {
-     //   if (projectPath) {
-            Editor.openSolution()
-         //   viewData.clear();
-          //  projectPath = "";
-            tabV.destroy()
-            _content.content.destroy()
-            Factory.createObjects("resources/Views/SolutionView.qml",
-                                  {
-                                      "openModal" : openProjectId,
-                                      "newModal" : newProjectPopup
-                                  }, _content)
-            _content.content = Factory.getObject()
-     //   }
+        Editor.openSolution()
+        tabV.destroy()
+        _content.content.destroy()
+        Factory.createObjects("resources/Views/SolutionView.qml",
+                              {
+                                  "openModal" : openProjectId,
+                                  "newModal" : newProjectPopup
+                              }, _content)
+        _content.content = Factory.getObject()
     }
 
     property alias appWindow: _root
@@ -72,6 +68,10 @@ ApplicationWindow {
                                 "newModal" : newProjectPopup
                             },
                             "Welcome")
+                    if (Editor.solutionName) {
+                        Editor.loadSolution(Editor.solutionName)
+                        openSolution();
+                    }
                 }
             }
         }
@@ -119,8 +119,15 @@ ApplicationWindow {
   //      selectExisting: true
         onAccepted: {
             console.log('allo ?')
-            Editor.loadSolution(openProjectId.fileUrl)
-            openSolution(openProjectId.fileUrl)
+            if (Editor.loaded)
+            {
+                Editor.loadSolution(openProjectId.fileUrl)
+            }
+            else
+            {
+                Editor.loadSolution(openProjectId.fileUrl)
+                openSolution(openProjectId.fileUrl)
+            }
         }
         onRejected: {
             //console.log("Canceled")
