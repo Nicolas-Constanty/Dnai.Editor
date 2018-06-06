@@ -104,6 +104,7 @@ Rectangle {
                 console.log('======== modèle des propriétés:', propertyPanel.model, "=========");
 
                 for(var i = propertyPanel.children.length; i > 0 ; i--) {
+                    propertyPanel.children[i-1].visible = false
                    propertyPanel.children[i-1].destroy()
                  }
                 var md = propertyPanel.model
