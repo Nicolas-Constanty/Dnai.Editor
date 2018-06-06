@@ -31,6 +31,8 @@ namespace dnai
 		if (m_instance == nullptr)
             m_instance = this;
         setupSettings();
+        if (argc > 1)
+            editor().setSolutionName(argv[1]);
         QTimer::singleShot(300, this, &App::loadSplashScreen);
 	}
 
@@ -177,9 +179,9 @@ namespace dnai
     }
 
     Editor &App::editor() const
-	{
-		return m_editor;
-	}
+    {
+        return m_editor;
+    }
 
 	QObject* App::createQmlComponent(const QString &path)
 	{

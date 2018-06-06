@@ -47,32 +47,34 @@ namespace dnai
                 //replicate its values on core
                 for (auto nam : enumtype->values())
                 {
-                    setValue(id, nam, val);
+                    setValue(id, nam, val, false);
                 }
             }
         }
 
-        void EnumHandler::setValue(quint32 entity, QString name, QJsonValue const &value)
+        void EnumHandler::setValue(quint32 entity, QString name, QJsonValue const &value, bool save)
         {
             if (name.isEmpty())
             {
                 name = QString("Empty ") + QString::number(qrand());
             }
 
+            qDebug() << "==Core== Enum.SetValue(" << entity << ", " << name << ", " << value << ") => save(" << save << ")";
             commands::CommandManager::Instance()->exec(
-                new commands::CoreCommand("Enum.SetValue", true,
+                new commands::CoreCommand("Enum.SetValue", save,
                     std::bind(&::core::enumeration::setValue, entity, name, value.toString()),
                     std::bind(&::core::enumeration::removeValue, entity, name)
                 )
             );
         }
 
-        void EnumHandler::removeValue(quint32 entity, QString const &name)
+        void EnumHandler::removeValue(quint32 entity, QString const &name, bool save)
         {
             const int value = manager.getEntity(entity).guiModel<models::gui::declarable::EnumType>()->values().indexOf(name);
 
+            qDebug() << "==Core== Enum.RemoveValue(" << entity << ", " << name << ") => save(" << save << ")";
             commands::CommandManager::Instance()->exec(
-                new commands::CoreCommand("Enum.SetValue", true,
+                new commands::CoreCommand("Enum.SetValue", save,
                     std::bind(&::core::enumeration::removeValue, entity, name),
                     std::bind(&::core::enumeration::setValue, entity, name, QString::number(value))
                 )
@@ -87,6 +89,7 @@ namespace dnai
             data->addEntry(name);
             commands::CoreCommand::Success();
             emit valueSet(data, name, val);
+            qDebug() << "==Core== Enum.ValueSet(" << enumeration << ", " << name << ", " << value << ")";
         }
 
         void EnumHandler::onSetValueError(::core::EntityID, const QString &name, QString const &value, const QString &message)
@@ -102,6 +105,7 @@ namespace dnai
             data->deleteEntry(name);
             commands::CoreCommand::Success();
             emit valueRemoved(data, name);
+            qDebug() << "==Core== Enum.ValueRemoved(" << enumeration << ", " << name << ")";
         }
 
         void EnumHandler::onRemoveValueError(::core::EntityID, const QString &name, const QString &message)

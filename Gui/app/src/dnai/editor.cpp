@@ -77,15 +77,29 @@ namespace dnai
 	{
         for (auto proj : m_solution->projects())
             if (const auto p = dynamic_cast<Project*>(proj))
-                gcore::HandlerManager::Instance().Project().create(p);
+                gcore::HandlerManager::Instance().Project().create(p, false);
 	}
 
 	void Editor::loadSolution(const QString& filename)
 	{
+        qDebug() << "Load the solution";
+
+        if (loaded()) {
+            QProcess newEdit;
+
+            newEdit.setProgram(m_appname);
+            newEdit.setArguments({ filename });
+            newEdit.startDetached();
+            newEdit.waitForStarted();
+            return;
+        }
+
         setLoaded(true);
 		m_solution = new Solution();
 		if (!filename.isEmpty())
             m_solution->load(filename);
+
+        m_solutionName = filename;
     }
 
     void Editor::startApp()
@@ -231,8 +245,13 @@ namespace dnai
 
 	dnai::models::ContextMenu* Editor::contextMenu() const
 	{
-		return m_contextMenu;
-	}
+        return m_contextMenu;
+    }
+
+    const QString &Editor::solutionName() const
+    {
+        return m_solutionName;
+    }
 
 	void Editor::registerEditorView(views::EditorView* view)
 	{
@@ -242,6 +261,16 @@ namespace dnai
     Session *Editor::session() const
     {
         return &App::currentInstance()->session();
+    }
+
+    void Editor::setAppName(const QString &name)
+    {
+        m_appname = name;
+    }
+
+    void Editor::setSolutionName(const QString &name)
+    {
+        m_solutionName = name;
     }
 
     void Editor::onInstructionAdded(models::Entity *, models::gui::Instruction *instruction)

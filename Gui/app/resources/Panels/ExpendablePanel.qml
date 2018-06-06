@@ -17,6 +17,7 @@ Rectangle {
     property alias control: _control
     default property alias _contentChildren: _content.data
     property real initialheight: 40
+    property bool saved: true
 
     border.color: AppSettings.theme["border"]["color"]
     border.width: AppSettings.theme["border"]["width"]
@@ -34,11 +35,25 @@ Rectangle {
         anchors.leftMargin: AppSettings.theme["border"]["width"]
         anchors.rightMargin: AppSettings.theme["border"]["width"]
         anchors.topMargin: AppSettings.theme["border"]["width"]
+
+        TextAwesomeSolid {
+            id: saveId
+            text: "\uf192"
+            anchors.left: parent.left
+            anchors.verticalCenter: parent.verticalCenter
+            anchors.leftMargin: 15
+            color: saved == true ? AppSettings.theme["background"]["greencolor"] : AppSettings.theme["text"]["errorColor"]
+
+//            anchors.top: parent.top
+//            anchors.bottom:
+        }
+
         TitlePanel {
             id: _title
             text: qsTr(_panel.title)
             horizontalAlignment: Text.AlignLeft
-            anchors.left: parent.left
+      //      anchors.horizontalCenter: parent.horizontalCenter
+            anchors.left: saveId.right
             anchors.leftMargin: 15
             anchors.verticalCenter: parent.verticalCenter
         }

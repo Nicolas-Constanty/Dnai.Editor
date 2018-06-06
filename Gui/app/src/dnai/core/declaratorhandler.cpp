@@ -62,7 +62,7 @@ namespace dnai
             {
                 child->setContainerId(id);
                 pendingDeclaration.push(child);
-                declare(id, child->entityType(), child->name(), static_cast<qint32>(child->visibility()));
+                declare(id, child->entityType(), child->name(), static_cast<qint32>(child->visibility()), false);
             }
         }
 
@@ -106,49 +106,47 @@ namespace dnai
         	return entity;
         }
 
-        void DeclaratorHandler::declare(quint32 parentId, qint32 type, QString name, qint32 visibility)
+        void DeclaratorHandler::declare(quint32 parentId, qint32 type, QString name, qint32 visibility, bool save)
         {
             if (parentId != ::core::UNDEFINED_ID)
             {
-                qDebug() << "core::declarator::declare("
+                qDebug() << "==Core== Declarator.Declare("
                          << parentId << ", "
                          << static_cast<::core::ENTITY>(type) << ", "
                          << name << ", "
-                         << ::core::VISIBILITY::PUBLIC << ")";
+                         << static_cast<core::VISIBILITY>(visibility) << ") => save(" << save << ")";
 
                 models::Entity *parent = &manager.getEntity(parentId);
 
                 commands::CommandManager::Instance()->exec(
-                    new commands::CoreCommand("Declarator.Declare", true,
+                    new commands::CoreCommand("Declarator.Declare", save,
                         /*
                          * Execute
                          */
                         [parent, type, name, visibility]() {
-                            qDebug() << "Declare " << name << " into " << parent->name() << "(" << parent->id() << ")";
                             ::core::declarator::declare(parent->id(), static_cast<::core::ENTITY>(type), name, static_cast<::core::VISIBILITY>(visibility));
                         },
                         /*
                          * Un-execute
                          */
                         [parent, name]() {
-                            qDebug() << "Remove " << name << " from " << parent->name() << "(" << parent->id() << ")";
                             ::core::declarator::remove(parent->id(), name);
                         }
                 ));
             }
             else
             {
-                qDebug() << "Cannot declare an entity into parent that have invalid id: " << parentId;
+                qWarning() << "==Core== Declarator.Declare: Cannot declare an entity into parent that have invalid id: " << parentId;
             }
         }
 
-        void DeclaratorHandler::remove(quint32 parentId, QString const &name)
+        void DeclaratorHandler::remove(quint32 parentId, QString const &name, bool save)
         {
             models::Entity *torm = findEntity(parentId, name);
 
             if (torm == nullptr)
             {
-                qDebug() << "No such entity " << name << " in EntityManager";
+                qWarning() << "==Core== Declarator.Remove: No such entity " << name << " in EntityManager";
                 return;
             }
 
@@ -156,10 +154,10 @@ namespace dnai
             ::core::ENTITY type = static_cast<::core::ENTITY>(torm->entityType());
             ::core::VISIBILITY visi = static_cast<::core::VISIBILITY>(torm->visibility());
 
-            qDebug() << "Core: DeclaratorHandler: Remove(" << parentId << ", " << name << ")";
+            qDebug() << "==Core== Declarator.Remove(" << parentId << ", " << name << ") => save(" << save << ")";
 
             commands::CommandManager::Instance()->exec(
-                new commands::CoreCommand("Declarator.Remove", true,
+                new commands::CoreCommand("Declarator.Remove", save,
                     /*
                      * Execute
                      */
@@ -174,19 +172,20 @@ namespace dnai
                     }));
         }
 
-        void DeclaratorHandler::move(const models::Entity &tomove, const models::Entity &newparent)
+        void DeclaratorHandler::move(const models::Entity &tomove, const models::Entity &newparent, bool save)
         {
             Q_UNUSED(tomove)
             Q_UNUSED(newparent)
+            Q_UNUSED(save)
         }
 
-        void DeclaratorHandler::rename(quint32 parentId, QString const &name, QString const &newname)
+        void DeclaratorHandler::rename(quint32 parentId, QString const &name, QString const &newname, bool save)
         {
             models::Entity &decl = manager.getEntity(parentId);
 
-            qDebug() << "Rename " << name << " to " << newname;
+            qDebug() << "==Core== Declarator.Rename(" << parentId << ", " << name << ", " << newname << ") => save(" << save << ")";
             commands::CommandManager::Instance()->exec(
-                new commands::CoreCommand("Declarator.Rename", true,
+                new commands::CoreCommand("Declarator.Rename", save,
                 [&decl, name, newname]() {
                     core::declarator::rename(decl.id(), name, newname);
                 },
@@ -196,13 +195,14 @@ namespace dnai
             ));
         }
 
-        void DeclaratorHandler::setVisibility(quint32 parentId, QString const &name, qint32 visibility)
+        void DeclaratorHandler::setVisibility(quint32 parentId, QString const &name, qint32 visibility, bool save)
         {
             models::Entity &decl = manager.getEntity(parentId);
             qint32 oldvisi = decl.visibility();
 
+            qDebug() << "==Core== Declarator.SetVisibility(" << parentId << ", " << name << ", " << visibility << ") => save(" << save << ")";
             commands::CommandManager::Instance()->exec(
-                new commands::CoreCommand("Declarator.SetVisibility", true,
+                new commands::CoreCommand("Declarator.SetVisibility", save,
                 [&decl, name, visibility](){
                     core::declarator::setVisibility(decl.id(), name, static_cast<core::VISIBILITY>(visibility));
                 },
@@ -274,7 +274,7 @@ namespace dnai
              */
             commands::CoreCommand::Success();
 
-            qDebug() << "Core: DeclaratorHandler: onDeclared("
+            qDebug() << "==Core== Declarator.Declared("
                      << declarator << ", "
                      << type << ", "
                      << name << ", "
@@ -322,9 +322,7 @@ namespace dnai
             {
                 commands::CoreCommand::Success();
 
-                qDebug() << "Core: DeclaratorHandler: onRemoved("
-                         << declarator << ", "
-                         << name << ")";
+                qDebug() << "==Core== Declarator.Removed(" << declarator << ", " << name << ")";
 
                 emit removed(torm);
 
@@ -348,7 +346,7 @@ namespace dnai
 
             if (entity != nullptr)
             {
-                qDebug() << "Entity " << name << " renamed in " << newname;
+                qDebug() << "==Core== Declarator.Renamed(" << declarator << ", " << name << ", " << newname <<  ")";
                 entity->setName(newname);
                 commands::CoreCommand::Success();
             }
@@ -370,7 +368,7 @@ namespace dnai
 
             if (entity != nullptr)
             {
-                qDebug() << "Entity " << name << " has visibility set to " << visibility;
+                qDebug() << "==Core== Declarator.VisibilitySet(" << declarator << ", " << name << ", " << visibility << ")";
                 entity->setVisibility(static_cast<qint32>(visibility));
                 commands::CoreCommand::Success();
             }

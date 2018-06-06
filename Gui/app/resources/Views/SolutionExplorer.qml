@@ -51,6 +51,7 @@ Rectangle {
         delegate: ExpendablePanel {
             id: _expPanel
             title: name
+            saved: item.saved
             panel.border.width: 0
             anchors.left: parent.left
             anchors.right: parent.right

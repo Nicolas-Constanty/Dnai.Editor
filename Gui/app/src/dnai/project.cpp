@@ -56,6 +56,8 @@ namespace dnai {
 		m_file->open(QIODevice::WriteOnly);
         m_file->write(QJsonDocument(obj).toJson(QJsonDocument::Compact));
 		m_file->close();
+        setSaved(true);
+        qDebug() << "halo ?";
     }
 
 	void Project::serialize(QJsonObject &obj) const
@@ -89,13 +91,26 @@ namespace dnai {
 		emit selectedEntityChanged(entity);
 	}
 
+    void Project::setSaved(bool save) {
+        m_save = save;
+        emit savedChanged(m_save);
+    }
+
+    bool Project::saved() const {
+        return m_save;
+    }
+
 	void Project::load(const QString& path)
 	{
 		m_filename = path;
+
+        qDebug() << "File url: " << path;
+        qDebug() << "File path: " << QUrl(m_filename).toLocalFile();
+
 		m_file = new QFile(QUrl(m_filename).toLocalFile());
 
 		if (!m_file->open(QIODevice::ReadOnly)) {
-			qWarning("Couldn't open file.");
+            qWarning() << "Couldn't open file: " << m_file->errorString();
 			return;
 		}
 
@@ -105,13 +120,13 @@ namespace dnai {
 			const QJsonObject obj(QJsonDocument::fromJson(data).object());
 			_deserialize(obj);
 			m_data = obj;
-		}
-		catch (std::exception &e) {
+        } catch (std::exception &e) {
 			Q_UNUSED(e)
 			exceptions::ExceptionManager::throwException(exceptions::GuiExeption("Error : Corrupted file"));
             qWarning("Couldn't parse file.");
 		}
-		m_file->close();
+        m_file->close();
+        setSaved(true);
     }
 
     void Project::loadFromJson(const QJsonObject &obj)

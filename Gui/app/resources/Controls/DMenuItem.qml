@@ -1,5 +1,5 @@
 import QtQuick 2.9
-import QtQuick.Controls 2.2
+import QtQuick.Controls 2.3
 import DNAI 1.0
 
 import "../Style"
@@ -11,8 +11,6 @@ MenuItem {
 
     property string iconpath: ""
 
-  //  property bool disable: false
-
     implicitWidth: Math.max(background ? background.implicitWidth : 0,
                             contentItem.implicitWidth + leftPadding + rightPadding)
     implicitHeight: Math.max(background ? background.implicitHeight : 0,
@@ -22,9 +20,7 @@ MenuItem {
 
     padding: 6
 
-    onEnabledChanged: {
-        console.log('CHANGED' + enabled)
-    }
+
 
     MouseArea {
         anchors.fill: parent
@@ -32,23 +28,11 @@ MenuItem {
         cursorShape: Qt.PointingHandCursor
 
         onPressed: {
-            if (control.enabled)
+            if (control.enabled) {
                 control.buttonPressed()
+                action.trigger()
+            }
         }
-
-       /* onEntered: {
-            console.log('HIII')
-            backgroundId.color = AppSettings.theme["background"]["lightColor"]
-        }
-
-        onPressed: {
-            //buttonPressed()
-        }
-
-        onExited: {
-            //backgroundId.visible = false
-            backgroundId.color =
-        }*/
     }
 
     contentItem: Item {

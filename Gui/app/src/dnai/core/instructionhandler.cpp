@@ -40,7 +40,7 @@ namespace dnai
             ::core::function::instruction::onUnlinkExecutionError(std::bind(&InstructionHandler::onUnlinkExecutionError, this, _1, _2, _3, _4));
         }
 
-        void InstructionHandler::remove(quint32 func, quint32 instruction)
+        void InstructionHandler::remove(quint32 func, quint32 instruction, bool save)
         {
             Q_UNUSED(func)
             Q_UNUSED(instruction)
@@ -55,13 +55,13 @@ namespace dnai
             );*/
         }
 
-        void InstructionHandler::setEntryPoint(quint32 function, quint32 instruction)
+        void InstructionHandler::setEntryPoint(quint32 function, quint32 instruction, bool save)
         {
             Q_UNUSED(function)
             Q_UNUSED(instruction)
         }
 
-        void InstructionHandler::linkData(quint32 function, quint32 instruction, const QString &input, quint32 fromInstruction, const QString &output)
+        void InstructionHandler::linkData(quint32 function, quint32 instruction, const QString &input, quint32 fromInstruction, const QString &output, bool save)
         {
             Q_UNUSED(function)
             Q_UNUSED(instruction)
@@ -70,14 +70,14 @@ namespace dnai
             Q_UNUSED(output)
         }
 
-        void InstructionHandler::unlinkData(quint32 function, quint32 instruction, const QString &input)
+        void InstructionHandler::unlinkData(quint32 function, quint32 instruction, const QString &input, bool save)
         {
             Q_UNUSED(function)
             Q_UNUSED(instruction)
             Q_UNUSED(input)
         }
 
-        void InstructionHandler::linkExecution(quint32 function, quint32 instruction, quint32 outPin, quint32 toInstruction)
+        void InstructionHandler::linkExecution(quint32 function, quint32 instruction, quint32 outPin, quint32 toInstruction, bool save)
         {
             Q_UNUSED(function)
             Q_UNUSED(instruction)
@@ -85,7 +85,7 @@ namespace dnai
             Q_UNUSED(toInstruction)
         }
 
-        void InstructionHandler::unlinkExecution(quint32 function, quint32 instruction, quint32 outPin)
+        void InstructionHandler::unlinkExecution(quint32 function, quint32 instruction, quint32 outPin, bool save)
         {
             Q_UNUSED(function)
             Q_UNUSED(instruction)

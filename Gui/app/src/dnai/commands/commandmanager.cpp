@@ -1,5 +1,7 @@
 #include "dnai/commands/commandmanager.h"
 #include "dnai/commands/debugdecorator.h"
+#include "dnai/editor.h"
+#include "dnai/project.h"
 
 namespace dnai
 {
@@ -40,11 +42,16 @@ namespace dnai
             }
 			if (c->isSave())
 			{
+                qDebug() << "Execute save";
 				c->executeSave();
 				m_undoList.push(c);
+                Project *dnaiProject = dynamic_cast<Project *>(Editor::instance().solution()->seletedProject());
+                if (dnaiProject) {
+                    dnaiProject->setSaved(false);
+                }
 			}
 			else
-				c->execute();
+                c->execute();
 		}
 
 

@@ -4,6 +4,15 @@ namespace dnai
 {
     namespace gcore
     {
+        EntityManager::EntityManager()
+        {
+            addEntity(1, *(new models::Entity(new models::gcore::Entity("Boolean", core::ENTITY::DATA_TYPE, 1))));
+            addEntity(2, *(new models::Entity(new models::gcore::Entity("Integer", core::ENTITY::DATA_TYPE, 2))));
+            addEntity(3, *(new models::Entity(new models::gcore::Entity("Floating", core::ENTITY::DATA_TYPE, 3))));
+            addEntity(4, *(new models::Entity(new models::gcore::Entity("Character", core::ENTITY::DATA_TYPE, 4))));
+            addEntity(5, *(new models::Entity(new models::gcore::Entity("String", core::ENTITY::DATA_TYPE, 5))));
+        }
+
         void EntityManager::addEntity(::core::EntityID id, models::Entity &entity)
         {
             entity.setId(id);
