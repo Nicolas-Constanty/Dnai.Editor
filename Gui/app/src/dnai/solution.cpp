@@ -38,6 +38,11 @@ namespace dnai
 		m_file->close();
 	}
 
+    QString Solution::path() const {
+        QFileInfo fi(m_file->fileName());
+        return fi.absolutePath();
+    }
+
 	void Solution::load(const QString& path)
 	{
 		m_filename = path;
@@ -123,8 +128,10 @@ namespace dnai
 
 	void Solution::addProject(IProject *proj)
 	{
+        beginInsertRows(QModelIndex(), m_projects.length(), m_projects.length());
 		if (!m_projects.contains(proj))
 			m_projects.append(proj);
+        endInsertRows();
 	}
 
 	interfaces::IProject *Solution::seletedProject() const

@@ -12,6 +12,7 @@ TextInput {
     property string errorText: ""
     property alias grparent: control.parent
     property bool canEdit: true
+    property bool enableBar: true
 
     font.family: AppSettings.theme["font"]["family"]
     font.pointSize: AppSettings.theme["font"]["pixelSize"]
@@ -72,6 +73,7 @@ TextInput {
         anchors.left: control.left
         anchors.right: control.right
         height: 3
+        visible: enableBar
         color:  (errorId.text) ? AppSettings.theme["text"]["errorColor"] : control.focus == true ? selectColor : deselectColor
     }
 

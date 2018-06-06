@@ -350,6 +350,15 @@ namespace dnai
         m_mainView = static_cast<QQuickWindow*>(mainView);
     }
 
+    void Editor::addProject(QString const &proj_name, QString const &proj_desc) {
+        QString glpath = m_solution->path() + "/" + proj_name + ".dnaiproject";
+        auto p = new Project(glpath);
+        p->setName(proj_name);
+        p->setDescription(proj_desc);
+        m_solution->addProject(p);
+       // m_solution->save();
+    }
+
     void Editor::createSolution(const QString &name,
                                 const QString &description,
                                 const QString &path,

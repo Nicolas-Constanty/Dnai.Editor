@@ -96,6 +96,7 @@ namespace dnai
         Q_INVOKABLE static void checkVersion();
 		//Q_INVOKABLE static dnai::models::EntityList *entities();
 		Q_INVOKABLE void registerMainView(QObject *);
+        Q_INVOKABLE void addProject(QString const &proj_name, QString const &proj_desc);
 		Q_INVOKABLE void createSolution(const QString &name,
 		                                const QString &description,
 		                                const QString &path,
