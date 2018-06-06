@@ -349,22 +349,36 @@ namespace dnai
         m_mainView = static_cast<QQuickWindow*>(mainView);
     }
 
-    void Editor::createSolution(const QString &name,
+    bool Editor::createSolution(const QString &name,
                                 const QString &description,
                                 const QString &path,
                                 const QString &proj_name,
                                 const QString &proj_desc)
     {
         const auto sol_path = path + "/" + name + ".dnaisolution";
+        const auto proj_path = path + "/" + proj_name + ".dnaiproject";
+
+        if (QFileInfo::exists(QUrl(sol_path).toLocalFile()))
+        {
+            notifyError("Unable to create solution at " + sol_path + " (file exist)");
+            return false;
+        }
+
+        if (QFileInfo::exists(QUrl(proj_path).toLocalFile()))
+        {
+            notifyError("Cannot create project at " + proj_path + " (file exist)");
+            return false;
+        }
+
         auto solution = new Solution(sol_path);
         solution->setName(name);
         solution->setDescription(description);
-        auto p = new Project(path + "/" + proj_name + ".dnaiproject");
+        auto p = new Project(proj_path);
         p->setName(proj_name);
         p->setDescription(proj_desc);
         solution->addProject(p);
         solution->save();
-        //loadSolution(sol_path);
+        return true;
     }
 
     QQuickWindow *Editor::mainView()  {

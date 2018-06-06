@@ -33,9 +33,9 @@ namespace dnai
 
 		for (auto p : m_projects)
 			p->save();
-		m_file->open(QIODevice::WriteOnly);
+        m_file->open(QIODevice::WriteOnly);
         m_file->write(QJsonDocument(obj).toJson(QJsonDocument::Compact));
-		m_file->close();
+        m_file->close();
 	}
 
 	void Solution::load(const QString& path)

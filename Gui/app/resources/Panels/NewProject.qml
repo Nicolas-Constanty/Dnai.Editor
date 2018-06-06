@@ -219,14 +219,16 @@ Item {
 
             onPressed: {
                 if (locationEditable.text && solutionNameEditable.text && nameEditable.text) {
-                    Editor.createSolution(nameEditable.text,
+                    if (Editor.createSolution(solutionNameEditable.text,
                                          "",
                                          locationEditable.text,
-                                         solutionNameEditable.text,
-                                         "");
-                    _newProj.projectCreated(nameEditable.text, locationEditable.text, solutionNameEditable.text);
-                    popup.close()
-                    resetData()
+                                         nameEditable.text,
+                                         ""))
+                    {
+                        _newProj.projectCreated(nameEditable.text, locationEditable.text, solutionNameEditable.text);
+                        popup.close();
+                        resetData();
+                    }
                 } else {
                     if (!locationEditable.text)
                         locationEditable.errorText = "Field is empty"
