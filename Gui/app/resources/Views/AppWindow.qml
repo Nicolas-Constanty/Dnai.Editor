@@ -20,19 +20,27 @@ ApplicationWindow {
     }
 
     function openSolution (projectPath) {
-        Editor.openSolution()
-        tabV.destroy()
-        _content.content.destroy()
-        Factory.createObjects("resources/Views/SolutionView.qml",
-                              {
-                                  "openModal" : openProjectId,
-                                  "newModal" : newProjectPopup
-                              }, _content)
-        _content.content = Factory.getObject()
+        if (Editor.loaded)
+        {
+            Editor.newEditor(projectPath);
+        }
+        else
+        {
+            Editor.loadSolution(projectPath);
+            Editor.openSolution()
+            tabV.destroy()
+            _content.content.destroy()
+            Factory.createObjects("resources/Views/SolutionView.qml",
+                                  {
+                                      "openModal" : openProjectId,
+                                      "newModal" : newProjectPopup
+                                  }, _content)
+            _content.content = Factory.getObject()
+        }
     }
 
     property alias appWindow: _root
-//    property alias layout: _layout
+
     width: AppSettings.isSettingsLoad() ? 1280 : 400
     height: AppSettings.isSettingsLoad() ? 720 : 150
     minimumHeight: 150
@@ -69,8 +77,7 @@ ApplicationWindow {
                             },
                             "Welcome")
                     if (Editor.solutionName) {
-                        Editor.loadSolution(Editor.solutionName)
-                        openSolution();
+                        openSolution(Editor.solutionName); //load fails
                     }
                 }
             }
@@ -81,9 +88,7 @@ ApplicationWindow {
         id: newProjectPopup
         x: parent.width / 2 - width / 2
         y: appWindow.height / 2 - height / 2
-    //    background: Rectangle {
-    //        color: AppSettings.theme["background"]["color"]
-    //    }
+
         width: newFileProjectPanel.widthValue
         height: newFileProjectPanel.heightValue
         modal: true
@@ -96,15 +101,7 @@ ApplicationWindow {
 
             onProjectCreated: function (projectName, path, solutionName) {
                 if (path) {
-                    Editor.openSolution()
-                    tabV.destroy()
-                    _content.content.destroy()
-                    Factory.createObjects("resources/Views/SolutionView.qml",
-                                          {
-                                              "openModal" : openProjectId,
-                                              "newModal" : newProjectPopup
-                                          }, _content)
-                    _content.content = Factory.getObject()
+                    openSolution(path + "/" + solutionName + ".dnaisolution");
                     popup.close();
                 }
             }
@@ -115,42 +112,13 @@ ApplicationWindow {
         id: openProjectId
         title: "Choose a Project name"
         folder: Qt.resolvedUrl(StandardPath.writableLocation((StandardPath.HomeLocation)))
-  //      selectFolder: true
-  //      selectExisting: true
+
         onAccepted: {
-            console.log('allo ?')
-            if (Editor.loaded)
-            {
-                Editor.loadSolution(openProjectId.fileUrl)
-            }
-            else
-            {
-                Editor.loadSolution(openProjectId.fileUrl)
-                openSolution(openProjectId.fileUrl)
-            }
+            openSolution(openProjectId.fileUrl);
         }
         onRejected: {
             //console.log("Canceled")
         }
 
     }
-
-   /* Modal {
-        id: openProjectPopup
-        x: parent.width / 2 - width / 2
-        y: _root.height / 2 - height / 2
-        width: openProjectPanel.widthValue
-        height: openProjectPanel.heightValue
-        contentItem: OpenProject {
-            anchors.fill: parent
-            id: openProjectPanel
-            popup: openProjectPopup
-
-            openButton.onClicked:
-            {
-                openSolution(projectPath, viewData)
-                popup.close();
-            }
-        }
-    }*/
 }

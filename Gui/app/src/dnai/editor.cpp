@@ -81,25 +81,24 @@ namespace dnai
 	}
 
 	void Editor::loadSolution(const QString& filename)
-	{
-        qDebug() << "Load the solution";
-
-        if (loaded()) {
-            QProcess newEdit;
-
-            newEdit.setProgram(m_appname);
-            newEdit.setArguments({ filename });
-            newEdit.startDetached();
-            newEdit.waitForStarted();
-            return;
-        }
-
+    {
         setLoaded(true);
 		m_solution = new Solution();
 		if (!filename.isEmpty())
             m_solution->load(filename);
 
         m_solutionName = filename;
+    }
+
+    void Editor::newEditor(const QString &solutionToLoad)
+    {
+        QProcess newEdit;
+
+        newEdit.setProgram(m_appname);
+        newEdit.setArguments({ solutionToLoad });
+        newEdit.startDetached();
+        newEdit.waitForStarted();
+        return;
     }
 
     void Editor::startApp()
@@ -365,7 +364,7 @@ namespace dnai
         p->setDescription(proj_desc);
         solution->addProject(p);
         solution->save();
-        loadSolution(sol_path);
+        //loadSolution(sol_path);
     }
 
     QQuickWindow *Editor::mainView()  {
