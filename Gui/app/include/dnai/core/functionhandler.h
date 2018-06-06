@@ -39,9 +39,9 @@ namespace dnai
             Q_INVOKABLE void pendingRmReturn(quint32 func, QString const &returnName);
 
         public:
-            Q_INVOKABLE void setParameter(quint32 func, QString const &paramName);
-            Q_INVOKABLE void setReturn(quint32 func, QString const &retName);
-            Q_INVOKABLE void addInstruction(quint32 func, quint32 instrType, QList<quint32> const &arguments);
+            Q_INVOKABLE void setParameter(quint32 func, QString const &paramName, bool save = true);
+            Q_INVOKABLE void setReturn(quint32 func, QString const &retName, bool save = true);
+            Q_INVOKABLE void addInstruction(quint32 func, quint32 instrType, QList<quint32> const &arguments, bool save = true);
 
         private:
             models::gui::declarable::Function *getFunctionData(::core::EntityID function, bool throws = false);

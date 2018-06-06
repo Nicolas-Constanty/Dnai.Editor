@@ -38,11 +38,11 @@ namespace dnai
             models::Entity *createEntity(::core::ENTITY type, models::Entity *parent);
 
         public:
-            Q_INVOKABLE void declare(quint32 parentId, qint32 type, QString name, qint32 visibility = static_cast<qint32>(::core::VISIBILITY::PUBLIC));
-            Q_INVOKABLE void remove(quint32 parentId, QString const &name);
-            void move(const models::Entity &tomove, const models::Entity &newparent);
-            Q_INVOKABLE void rename(quint32 parentId, QString const &name, QString const &newname);
-            Q_INVOKABLE void setVisibility(quint32 parentId, QString const &name, qint32 visibility);
+            Q_INVOKABLE void declare(quint32 parentId, qint32 type, QString name, qint32 visibility = static_cast<qint32>(::core::VISIBILITY::PUBLIC), bool save = true);
+            Q_INVOKABLE void remove(quint32 parentId, QString const &name, bool save = true);
+            void move(const models::Entity &tomove, const models::Entity &newparent, bool save = true);
+            Q_INVOKABLE void rename(quint32 parentId, QString const &name, QString const &newname, bool save = true);
+            Q_INVOKABLE void setVisibility(quint32 parentId, QString const &name, qint32 visibility, bool save = true);
 
         private:
             models::Entity *findEntity(::core::EntityID declarator, QString const &name);

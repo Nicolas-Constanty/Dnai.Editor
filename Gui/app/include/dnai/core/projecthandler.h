@@ -24,7 +24,7 @@ namespace dnai
             void setup();
 
         public:
-            Q_INVOKABLE void create(dnai::Project *tocreate);
+            Q_INVOKABLE void create(dnai::Project *tocreate, bool save = true);
 
         private:
             void onCreated(QString const &name, ::core::EntityID rootEntity);

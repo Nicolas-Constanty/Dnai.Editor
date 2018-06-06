@@ -120,8 +120,7 @@ namespace dnai {
 			const QJsonObject obj(QJsonDocument::fromJson(data).object());
 			_deserialize(obj);
 			m_data = obj;
-		}
-		catch (std::exception &e) {
+        } catch (std::exception &e) {
 			Q_UNUSED(e)
 			exceptions::ExceptionManager::throwException(exceptions::GuiExeption("Error : Corrupted file"));
             qWarning("Couldn't parse file.");

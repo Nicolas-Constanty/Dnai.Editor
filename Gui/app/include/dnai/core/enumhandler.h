@@ -28,8 +28,8 @@ namespace dnai
             void onEntityAdded(::core::EntityID id, models::Entity &entity);
 
         public:
-            Q_INVOKABLE void setValue(quint32 entity, QString name, QJsonValue const &value);
-            Q_INVOKABLE void removeValue(quint32 entity, QString const &name);
+            Q_INVOKABLE void setValue(quint32 entity, QString name, QJsonValue const &value, bool save = true);
+            Q_INVOKABLE void removeValue(quint32 entity, QString const &name, bool save = true);
 
         private:
             void onValueSet(::core::EntityID enumeration, QString const &name, QString const &value);

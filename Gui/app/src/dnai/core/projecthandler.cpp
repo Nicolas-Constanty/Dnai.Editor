@@ -25,10 +25,12 @@ namespace dnai
             ::core::global::onCreateProjectError(std::bind(&ProjectHandler::onCreateError, this, _1, _2));
         }
 
-        void ProjectHandler::create(Project *tocreate)
+        void ProjectHandler::create(Project *tocreate, bool save)
         {
+            qDebug() << "==Core== Project.Create(" << tocreate->name() << ") => save(" << save << ")";
+
             commands::CommandManager::Instance()->exec(new commands::CoreCommand(
-                "Project.Create", true,
+                "Project.Create", save,
                 [this, tocreate](){
                     pendingProjects.push(tocreate);
                     ::core::global::createProject(tocreate->name());
@@ -52,6 +54,7 @@ namespace dnai
             manager.addEntity(rootEntity, curr->getRoot());
 
             pendingProjects.pop();
+            qDebug() << "==Core== Project.Created(" << name << ", " << rootEntity << ")";
         }
 
         void ProjectHandler::onCreateError(const QString &name, const QString &error)

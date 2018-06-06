@@ -50,7 +50,7 @@ namespace dnai
                 && added.name() == pendingParams.front().second)
             {
                 params.push(&added);
-                setParameter(added.containerId(), added.name());
+                setParameter(added.containerId(), added.name(), false);
                 pendingParams.pop();
             }
             else if (!pendingRet.empty()
@@ -58,7 +58,7 @@ namespace dnai
                 && added.name() == pendingRet.front().second)
             {
                 returns.push(&added);
-                setReturn(added.containerId(), added.name());
+                setReturn(added.containerId(), added.name(), false);
                 pendingRet.pop();
             }
             else
@@ -130,17 +130,15 @@ namespace dnai
             pendingRmRet.push(std::make_pair(func, returnName));
         }
 
-        void FunctionHandler::setParameter(quint32 func, QString const &paramName)
+        void FunctionHandler::setParameter(quint32 func, QString const &paramName, bool save)
         {
             models::Entity &function = manager.getEntity(func);
 
-            qDebug() << "Set as parameter";
-
             if (getFunctionData(function.id()) != nullptr)
             {
-                qDebug() << "Really set as parameter";
+                qDebug() << "==Core== Function.SetParameter(" << func << ", " << paramName << ") => save(" << save << ")";
                 commands::CommandManager::Instance()->exec(
-                    new commands::CoreCommand("Function.SetParameter", true,
+                    new commands::CoreCommand("Function.SetParameter", save,
                         std::bind(&::core::function::setParameter, function.id(), paramName),
                         nullptr /* not implemented yet */
                     )
@@ -148,26 +146,30 @@ namespace dnai
             }
         }
 
-        void FunctionHandler::setReturn(quint32 func, QString const &retName)
+        void FunctionHandler::setReturn(quint32 func, QString const &retName, bool save)
         {
             models::Entity &function = manager.getEntity(func);
 
             if (getFunctionData(function.id()) != nullptr)
+            {
+                qDebug() << "==Core== Function.SetReturn(" << func << ", " << retName << ") => save(" << save << ")";
+
                 commands::CommandManager::Instance()->exec(
-                    new commands::CoreCommand("Function.SetReturn", true,
+                    new commands::CoreCommand("Function.SetReturn", save,
                         std::bind(&::core::function::setReturn, function.id(), retName),
                         nullptr /* not implemented yet */
                     )
-                            );
+                );
+            }
         }
 
-        void FunctionHandler::addInstruction(quint32 func, quint32 instrType, const QList<quint32> &arguments)
+        void FunctionHandler::addInstruction(quint32 func, quint32 instrType, const QList<quint32> &arguments, bool save)
         {
             models::Entity &function = manager.getEntity(func);
 
-            qDebug() << "Add instruction(" << func << ", " << instrType << ", " << arguments << ")";
+            qDebug() << "==Core== Function.AddInstruction(" << func << ", " << instrType << ", " << arguments << ") => save(" << save << ")";
             commands::CommandManager::Instance()->exec(
-                new commands::CoreCommand("Function.AddInstruction", true,
+                new commands::CoreCommand("Function.AddInstruction", save,
                     [&function, instrType, arguments](){
                         ::core::function::addInstruction(function.id(), static_cast<core::INSTRUCTION>(instrType), arguments.toStdList());
                     },
@@ -267,7 +269,7 @@ namespace dnai
                     while (!instructions.empty())
                     {
                         pendingInstruction.push(instructions.front());
-                        addInstruction((*it)->id(), instructions.front()->instruction_id(), linked.front());
+                        addInstruction((*it)->id(), instructions.front()->instruction_id(), linked.front(), false);
                         instructions.pop();
                         linked.pop();
                     }
@@ -298,7 +300,7 @@ namespace dnai
 
             if (gui != nullptr && param->name() == paramName)
             {
-                qDebug() << "Variable " << param->name() << "(" << param->id() << ") set as parameter";
+                qDebug() << "==Core== Function.ParameterSet(" << func << ", " << paramName << ")";
                 if (!gui->inputs().contains(param))
                     gui->addInput(param);
                 if (!function.childrenItem().contains(param))
@@ -340,6 +342,7 @@ namespace dnai
                     func.appendChild(var);
                 returns.pop();
                 commands::CoreCommand::Success();
+                qDebug() << "==Core== Function.ReturnSet(" << function << ", " << returnName << ")";
             }
         }
 
@@ -364,10 +367,8 @@ namespace dnai
 
             models::gui::declarable::Function *func = getFunctionData(function);
 
-            qDebug() << "Instruction added";
             if (func != nullptr)
             {
-                qDebug() << "===== Created ok =====";
                 models::gui::Instruction *instr;
 
                 if (pendingInstruction.empty())
@@ -391,6 +392,7 @@ namespace dnai
                     pendingInstruction.pop();
                 }
                 emit instructionAdded(&manager.getEntity(function), instr);
+                qDebug() << "==Core== Function.InstructionAdded(" << function << ", " << type << ", " << QList<EntityID>::fromStdList(arguments) << ", " << instruction << ")";
             }
 
             /*

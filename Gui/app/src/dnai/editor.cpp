@@ -77,7 +77,7 @@ namespace dnai
 	{
         for (auto proj : m_solution->projects())
             if (const auto p = dynamic_cast<Project*>(proj))
-                gcore::HandlerManager::Instance().Project().create(p);
+                gcore::HandlerManager::Instance().Project().create(p, false);
 	}
 
 	void Editor::loadSolution(const QString& filename)
