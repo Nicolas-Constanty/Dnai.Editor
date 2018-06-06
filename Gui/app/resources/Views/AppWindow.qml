@@ -112,6 +112,7 @@ ApplicationWindow {
         id: openProjectId
         title: "Choose a Project name"
         folder: Qt.resolvedUrl(StandardPath.writableLocation((StandardPath.HomeLocation)))
+        nameFilters: [ "DNAI Solution files (*.dnaisolution)" ]
 
         onAccepted: {
             openSolution(openProjectId.fileUrl);

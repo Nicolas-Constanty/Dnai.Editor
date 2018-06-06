@@ -23,13 +23,13 @@ ToolBar {
 
     Action {
         id: newProjectAction
-        text: qsTr("New project")
+        text: qsTr("New Solution")
         onTriggered: Editor.mainView().newProjectPopup.open()
         shortcut: StandardKey.New
     }
     Action {
         id: openAction
-        text: qsTr("Open project")
+        text: qsTr("Open Solution")
         onTriggered: Editor.mainView().openProjectId.open()
         shortcut: StandardKey.Open
     }
