@@ -35,12 +35,14 @@ namespace dnai {
             this, SLOT(addEntity(dnai::models::Entity*))
                     );
         m_filename = filename;
+        qDebug() << filename << ">>" << QUrl(m_filename).toLocalFile();
         m_file = new QFile(QUrl(m_filename).toLocalFile());
         m_rootItem = new models::Entity();
         m_rootItem->setIdx(index(0,0, QModelIndex()));
         const auto coreModel = new models::gcore::Entity("RootEntity", ::core::ENTITY::CONTEXT);
         m_rootEntity = new models::Entity(coreModel, m_rootItem, new models::gui::declarable::Context());
         m_rootEntity->setId(0);
+        m_rootItem->appendChild(m_rootEntity);
         QQmlEngine::setObjectOwnership(this, QQmlEngine::CppOwnership);
     }
 
@@ -55,7 +57,11 @@ namespace dnai {
         QJsonObject obj;
         serialize(obj);
 
-		m_file->open(QIODevice::WriteOnly);
+        if (!m_file->open(QIODevice::WriteOnly))
+        {
+            qWarning() << "Unable to open project file " << m_file->fileName() << ": " << m_file->errorString();
+            return;
+        }
         m_file->write(QJsonDocument(obj).toJson(QJsonDocument::Compact));
 		m_file->close();
         setSaved(true);
@@ -112,7 +118,7 @@ namespace dnai {
 		m_file = new QFile(QUrl(m_filename).toLocalFile());
 
 		if (!m_file->open(QIODevice::ReadOnly)) {
-            qWarning() << "Couldn't open file: " << m_file->errorString();
+            qWarning() << "Unable to open project file " << m_file->fileName() << ": " << m_file->errorString();
 			return;
 		}
 

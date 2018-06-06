@@ -350,12 +350,28 @@ namespace dnai
     }
 
     void Editor::addProject(QString const &proj_name, QString const &proj_desc) {
-        QString glpath = m_solution->path() + "/" + proj_name + ".dnaiproject";
+        QString glpath = "file:///" + m_solution->path() + "/" + proj_name + ".dnaiproject";
+
+        for (const interfaces::IProject *currProj : m_solution->projects()) {
+            if (currProj->fileName() == glpath)
+            {
+                notifyError("Project " + proj_name + " already exist");
+                return;
+            }
+        }
+
         auto p = new Project(glpath);
+
         p->setName(proj_name);
         p->setDescription(proj_desc);
         m_solution->addProject(p);
-       // m_solution->save();
+        p->setSaved(false);
+
+        gcore::HandlerManager::Instance().Project().create(p);
+
+        m_solution->save();
+
+        emit solutionChanged(dynamic_cast<dnai::Solution *>(m_solution));
     }
 
     bool Editor::createSolution(const QString &name,

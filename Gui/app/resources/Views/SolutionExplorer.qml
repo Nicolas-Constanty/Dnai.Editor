@@ -102,6 +102,10 @@ Rectangle {
             titleobj.font.pointSize: 8
             titleobj.font.capitalization: Font.AllUppercase
 
+            Component.onCompleted: {
+                console.log("Expendable panel item: ", item);
+            }
+
             TreeView {
                 id: tr
                 property bool init: false
@@ -207,7 +211,6 @@ Rectangle {
                         _expPanel.control.selected = true
                         last = _expPanel.control
                     }
-
                 }
 
                 onRowInserted: {

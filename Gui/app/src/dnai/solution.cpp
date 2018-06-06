@@ -202,7 +202,7 @@ namespace dnai
 		for (const auto projfilename : obj["projects"].toArray())
 		{
 			const QStringRef subString(&m_filename, 0, m_filename.lastIndexOf("/"));
-			const auto proj = new Project();
+            const auto proj = new Project(projfilename.toString());
 			proj->load(subString + "/" + projfilename.toString());
 			m_projects.append(proj);
 			qDebug() << "Successfully load the project :" << subString + "/" + projfilename.toString();
