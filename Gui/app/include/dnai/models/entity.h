@@ -115,7 +115,8 @@ namespace dnai
 			Q_PROPERTY(bool expanded READ expanded WRITE setExpanded NOTIFY expandedChanged)
 			Q_PROPERTY(dnai::models::Entity *parentRef READ parentRef CONSTANT)
 			Q_PROPERTY(dnai::models::Property *editableProperty READ editableProperty WRITE setEditableProperty NOTIFY editablePropertyChanged)
-                    //			Q_PROPERTY(EntityGUI *guiModel READ guiModel CONSTANT)
+            Q_PROPERTY(QVariant listColumn READ listColumn WRITE setListColumn NOTIFY listColumnChanged)
+        	//			Q_PROPERTY(EntityGUI *guiModel READ guiModel CONSTANT)
 
         public:
             explicit Entity();
@@ -159,6 +160,7 @@ namespace dnai
 			void setEditableProperty(Property *p);
 			virtual void appendChild(Entity* child) override;
 			QObject *guiProperties() const;
+			void setListColumn(const QVariant &column);
 
         signals:
 	        void isRootChanged(bool isroot);
@@ -174,13 +176,15 @@ namespace dnai
 	        void entityChildrenChanged(models::Entity *e);
 	        void expandedChanged(bool exp);
 	        void editablePropertyChanged(Property *p);
+			void listColumnChanged(const QVariant &var);
 
 	        //Implementation of ISerializable
         public:
 	        void serialize(QJsonObject& obj) const override;
 	        void _deserialize(const QJsonObject& obj) override;
 	        int columnCount() const override;
-	        Q_INVOKABLE QVariant listColumn() const;
+	        const QVariant &listColumn();
+			Q_INVOKABLE void addColumn(const QString &name);
 	        Q_INVOKABLE int row() const override;
 	        Q_INVOKABLE void setProp(int row, const QVariant &value);
 
@@ -196,6 +200,7 @@ namespace dnai
 	        QVariant m_entityChildren;
 	        QMap<QUuid, Column *> m_columns;
 	        QList<QObject *> m_columslist;
+			QVariant m_varcolumns;
 	        Property *m_editableProperty;
 
         };

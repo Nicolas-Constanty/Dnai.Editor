@@ -4,8 +4,6 @@ import DNAI.Enums 1.0
 
 NodeModel {
 
-    flowIn: false
-    flowOut: false
     inputs: ListModel {
         ListElement { t: IOType.Generic; n: "Value 1" }
     }

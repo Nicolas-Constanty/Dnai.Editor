@@ -93,7 +93,7 @@ namespace dnai
 			case EXPANDED:
                 return QVariant::fromValue(entity->expanded());
 			case LIST_COLUMN:
-				return QVariant::fromValue(entity->listColumn());
+				return entity->listColumn();
 			default: 
 				return QVariant();
 			}

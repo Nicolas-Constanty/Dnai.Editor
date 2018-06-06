@@ -251,6 +251,11 @@ namespace dnai
 			return dynamic_cast<QObject*>(m_dataGUI);
 		}
 
+		void Entity::setListColumn(const QVariant& column)
+		{
+			Q_UNUSED(column);
+		}
+
 		void Entity::serialize(QJsonObject& obj) const
 		{
 			QJsonArray ca;
@@ -361,10 +366,36 @@ namespace dnai
 			return 1;
 		}
 
-		QVariant Entity::listColumn() const
+		const QVariant &Entity::listColumn()
 		{
-			return QVariant::fromValue(m_columslist);
+			m_varcolumns = QVariant::fromValue(m_columslist);
+			return m_varcolumns;
         }
+
+		void Entity::addColumn(const QString& name)
+		{
+			const auto c = new Column(this);
+			const auto getRandomString = [](int size)
+			{
+				const QString possibleCharacters(" !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~");
+
+				QString randomString;
+				for (auto i = 0; i< size; ++i)
+				{
+					auto index = qrand() % possibleCharacters.length();
+					auto nextChar = possibleCharacters.at(index);
+					randomString.append(nextChar);
+				}
+				return randomString;
+			};
+			const auto uuid = QUuid::createUuidV5(QUuid::createUuid(), getRandomString(128));
+			c->setListIndex(uuid.toString());
+			c->setName(name);
+			m_columslist.append(c);
+			m_columns[uuid] = c;
+			qDebug() << "Hello nouvelle column";
+			emit listColumnChanged(listColumn());
+		}
 
 		int Entity::row() const
 		{

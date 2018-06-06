@@ -380,17 +380,17 @@ ViewZoneBack {
         else
             appendNextH(percent)
     }
-    MouseArea {
-        id: ma
-        acceptedButtons: Qt.LeftButton | Qt.RightButton
-        anchors.fill: parent
-        hoverEnabled: true
-        onClicked: {
-            if(mouse.button & Qt.RightButton) {
-                contextMenu.popup()
-            }
-        }
-    }
+//    MouseArea {
+//        id: ma
+//        acceptedButtons: Qt.LeftButton | Qt.RightButton
+//        anchors.fill: parent
+//        hoverEnabled: true
+//        onClicked: {
+//            if(mouse.button & Qt.RightButton) {
+//                contextMenu.popup()
+//            }
+//        }
+//    }
     Menu {
         id: contextMenu
         MenuItem {

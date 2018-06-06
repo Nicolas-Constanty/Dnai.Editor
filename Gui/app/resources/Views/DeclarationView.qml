@@ -1,6 +1,6 @@
 import QtQuick 2.9
 import QtQml.Models 2.3
-import QtQuick.Controls 2.2
+import QtQuick.Controls 2.4
 import QtGraphicalEffects 1.0
 
 import DNAI 1.0
@@ -15,9 +15,11 @@ import "../Components"
 
 Item {
     id: _item
-    property alias model: _contextColumns.model
+//    property alias model: _contextColumns.model
     property Project proj: null
     property var idx: null
+    property var parentEntity: null
+
     Component {
         id: _delegate
         Rectangle {
@@ -250,96 +252,115 @@ Item {
         }
     }
 
+    Component.onCompleted: {
+        console.log(parent)
+    }
+
     ScrollView {
+        id: _scrollColumn
         anchors.fill: parent
-        clip: true
-        ListView {
-            id: _contextColumns
-            anchors.fill: parent
-            spacing: -1
-            orientation: Qt.Horizontal
-            layoutDirection: Qt.LeftToRight
-            delegate: _delegate
-        }
-        Rectangle {
-            id: _listCreator
-            x: 300 * _contextColumns.count + 25
-            anchors.top: parent.top
-            anchors.topMargin: 15
-            width: 250
-            height: 30
-            color: "#80000000"
-            radius: 3
-            MText {
-                anchors.fill: parent
-                anchors.margins: 10
-                text: qsTr("Add new column...")
-                font.pointSize: AppSettings.theme["font"]["pixelSize"]
-                horizontalAlignment: Qt.AlignLeft
-                color: AppSettings.theme["text"]["disableColor"]
-                font.italic: true
+        contentHeight: _contentView.height
+        contentWidth: _contentView.width
+        ScrollBar.horizontal.interactive: true
+
+        Item {
+            id: _contentView
+            height: _item.height
+            width: childrenRect.width + 25
+
+            ListView {
+                id: _contextColumns
+                height: parent.height
+                width: _item.parentEntity.listColumn.length * 300
+                model: _item.parentEntity.listColumn
+                spacing: -1
+                orientation: Qt.Horizontal
+                layoutDirection: Qt.LeftToRight
+                delegate: _delegate
+                interactive: false
             }
-            MouseArea {
-                anchors.fill: parent
-                onPressed: {
-                    _popupList.open()
+            Rectangle {
+                id: _listCreator
+                anchors.left: _contextColumns.right
+                anchors.leftMargin: 25
+                width: 250
+                height: 30
+                color: "#80000000"
+                radius: 3
+                MText {
+                    anchors.fill: parent
+                    anchors.margins: 10
+                    text: qsTr("Add new column...")
+                    font.pointSize: AppSettings.theme["font"]["pixelSize"]
+                    horizontalAlignment: Qt.AlignLeft
+                    color: AppSettings.theme["text"]["disableColor"]
+                    font.italic: true
                 }
-            }
-            Popup {
-                id: _popupList
-                width: _listCreator.width + 12
-                height: _listCreator.height * 2 + 10
-                x: -6
-                y: -6
-                onOpened: {
-                    _textInput.forceActiveFocus()
+                MouseArea {
+                    anchors.fill: parent
+                    onPressed: {
+                        _popupList.open()
+                    }
                 }
-                background: Rectangle{
-                    color: AppSettings.theme["background"]["lightColor"]
-                    radius: 3
-                }
-                enter: Transition {
-                    NumberAnimation { property: "opacity"; from: 0.0; to: 1.0 }
-                }
-                exit: Transition {
-                    NumberAnimation { property: "opacity"; from: 1.0; to: 0.0 }
-                }
-                Rectangle {
+                Popup {
+                    id: _popupList
+                    width: _listCreator.width + 12
+                    height: _listCreator.height * 2 + 10
                     x: -6
                     y: -6
-                    width: 250
-                    height: 30
-                    color: "#80000000"
-                    border.color: AppSettings.theme["background"]["color"]
-                    radius: 3
-                    TextInput {
-                        id: _textInput
-                        anchors.fill: parent
-                        anchors.margins: 10
-                        color: AppSettings.theme["text"]["color"]
-                        wrapMode: TextEdit.WordWrap
-                        selectByMouse: true
-                        font.italic: true
-                        verticalAlignment: Qt.AlignVCenter
-                        font.family: AppSettings.theme["font"]["family"]
-                        MText {
+                    onOpened: {
+                        _textInput.forceActiveFocus()
+                    }
+                    background: Rectangle{
+                        color: AppSettings.theme["background"]["lightColor"]
+                        radius: 3
+                    }
+                    enter: Transition {
+                        NumberAnimation { property: "opacity"; from: 0.0; to: 1.0 }
+                    }
+                    exit: Transition {
+                        NumberAnimation { property: "opacity"; from: 1.0; to: 0.0 }
+                    }
+                    Rectangle {
+                        x: -6
+                        y: -6
+                        width: 250
+                        height: 30
+                        color: "#80000000"
+                        border.color: AppSettings.theme["background"]["color"]
+                        radius: 3
+                        TextInput {
+                            id: _textInput
                             anchors.fill: parent
-                            text: qsTr("Add new column...")
-                            font.pointSize: AppSettings.theme["font"]["pixelSize"]
-                            horizontalAlignment: Qt.AlignLeft
-                            color: AppSettings.theme["text"]["disableColor"]
+                            anchors.margins: 10
+                            color: AppSettings.theme["text"]["color"]
+                            wrapMode: TextEdit.WordWrap
+                            selectByMouse: true
                             font.italic: true
-                            visible: !parent.text
-                        }
-                        onAccepted: {
-                            _popupList.close()
-                            var t = _textInput.text
-                            _textInput.clear()
-//                            Manager.views.createDeclarationList(t)
+                            verticalAlignment: Qt.AlignVCenter
+                            font.family: AppSettings.theme["font"]["family"]
+                            MText {
+                                anchors.fill: parent
+                                text: qsTr("Add new column...")
+                                font.pointSize: AppSettings.theme["font"]["pixelSize"]
+                                horizontalAlignment: Qt.AlignLeft
+                                color: AppSettings.theme["text"]["disableColor"]
+                                font.italic: true
+                                visible: !parent.text
+                            }
+                            onAccepted: {
+                                var t = _textInput.text
+                                _popupList.close()
+                                _textInput.clear()
+                                _item.parentEntity.addColumn(t);
+        //                            Manager.views.createDeclarationList(t)
+                            }
                         }
                     }
                 }
             }
         }
+
     }
+
 }

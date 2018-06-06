@@ -9,6 +9,5 @@ Label {
     font.pointSize: 10
     verticalAlignment: Text.AlignVCenter
     horizontalAlignment: Text.AlignHCenter
-    renderType: Text.NativeRendering
     clip: true
 }

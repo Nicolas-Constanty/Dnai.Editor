@@ -32,36 +32,36 @@ namespace dnai
             setFlag(ItemAcceptsInputMethod, true);
 		}
 
-		void GenericNode::setFlowIn(bool f)
-		{
+		//void GenericNode::setFlowIn(bool f)
+		//{
 
-			if (f == m_flowIn)
-				return;
-			m_flowIn = f;
-			emit flowInChanged(f);
-		}
+		//	if (f == m_flowIn)
+		//		return;
+		//	m_flowIn = f;
+		//	emit flowInChanged(f);
+		//}
 
-		void GenericNode::setFlowOut(bool f)
-		{
-			if (f == m_flowOut)
-				return;
-			m_flowOut = f;
-			emit flowOutChanged(f);
-		}
+		//void GenericNode::setFlowOut(bool f)
+		//{
+		//	if (f == m_flowOut)
+		//		return;
+		//	m_flowOut = f;
+		//	emit flowOutChanged(f);
+		//}
 
-		void GenericNode::setFlowInItem(Flow *f)
-		{
-			if (f == m_flowInItem || f == nullptr)
-				return;
-			m_flowInItem = f;
-		}
+		//void GenericNode::setFlowInItem(Flow *f)
+		//{
+		//	if (f == m_flowInItem || f == nullptr)
+		//		return;
+		//	m_flowInItem = f;
+		//}
 
-		void GenericNode::setFlowOutItem(Flow *f)
-		{
-			if (f == m_flowOutItem || f == nullptr)
-				return;
-			m_flowOutItem = f;
-		}
+		//void GenericNode::setFlowOutItem(Flow *f)
+		//{
+		//	if (f == m_flowOutItem || f == nullptr)
+		//		return;
+		//	m_flowOutItem = f;
+		//}
 
 		void GenericNode::setHeader(RoundedRectangle *h)
 		{
@@ -84,9 +84,9 @@ namespace dnai
 		void GenericNode::updateInputs()
 		{
 			auto list = m_inputs.getList();
-			for (int i = 0; i < list.size(); i++)
+			for (auto i : list)
 			{
-				auto input = dynamic_cast<Input *>(list.at(i));
+				auto input = dynamic_cast<Input *>(i);
 				if (input && input->getLinkable()->isLink())
 				{
 					input->updateLink();
@@ -97,12 +97,38 @@ namespace dnai
 		void GenericNode::updateOutputs()
 		{
 			auto list = m_outputs.getList();
-			for (int i = 0; i < list.size(); i++)
+			for (auto i : list)
 			{
-				auto output = dynamic_cast<Output *>(list.at(i));
+				auto output = dynamic_cast<Output *>(i);
 				if (output && output->getLinkable()->isLink())
 				{
 					output->updateLink();
+				}
+			}
+		}
+
+		void GenericNode::updateFlowsIn()
+		{
+			auto list = m_flowsIn.getList();
+			for (auto i : list)
+			{
+				auto flowin = dynamic_cast<Flow *>(i);
+				if (flowin && flowin->getLinkable()->isLink())
+				{
+					flowin->updateLink();
+				}
+			}
+		}
+
+		void GenericNode::updateFlowsOut()
+		{
+			auto list = m_flowsOut.getList();
+			for (auto i : list)
+			{
+				auto flowout = dynamic_cast<Flow *>(i);
+				if (flowout && flowout->getLinkable()->isLink())
+				{
+					flowout->updateLink();
 				}
 			}
 		}
@@ -129,7 +155,7 @@ namespace dnai
             m_selected = nullptr;
         }
 
-        void GenericNode::resetBorderColor()
+        void GenericNode::resetBorderColor() const
         {
             m_content->resetBorderColor();
             m_header->resetBorderColor();
@@ -143,8 +169,7 @@ namespace dnai
                 m_holdClik = true;
                 m_startPos = position();
             }
-            commands::CommandManager::Instance()->registerCommand(new commands::MoveNodeCommand(this, p));
-			commands::CommandManager::Instance()->execAll();
+			commands::CommandManager::Instance()->exec(new commands::MoveNodeCommand(this, p));
 		}
 
         void GenericNode::move(const QPointF &vec)
@@ -152,18 +177,19 @@ namespace dnai
             setPosition(vec);
             updateInputs();
             updateOutputs();
-            if (m_flowInItem && m_flowInItem->isVisible())
-                m_flowInItem->updateLink();
-            if (m_flowOutItem && m_flowOutItem->isVisible())
-                m_flowOutItem->updateLink();
+			updateFlowsIn();
+			updateFlowsOut();
+            //if (m_flowInItem && m_flowInItem->isVisible())
+            //    m_flowInItem->updateLink();
+            //if (m_flowOutItem && m_flowOutItem->isVisible())
+            //    m_flowOutItem->updateLink();
         }
 
 		void GenericNode::mouseReleaseEvent(QMouseEvent *)
 		{
             if (m_holdClik)
             {
-                commands::CommandManager::Instance()->registerCommand(new commands::MoveNodeCommand(this, position(), true));
-				commands::CommandManager::Instance()->execAll();
+				commands::CommandManager::Instance()->exec(new commands::MoveNodeCommand(this, position(), true));
             }
 			m_offset.setX(0);
 			m_offset.setY(0);

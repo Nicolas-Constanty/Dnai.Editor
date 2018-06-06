@@ -5,8 +5,6 @@ import DNAI.Enums 1.0
 NodeModel {
     property int type: 0
     description: "Get the value of a variable"
-    flowIn: false
-    flowOut: false
     outputs: ListModel {
         ListElement { t: IOType.Int; n: "output" }
     }

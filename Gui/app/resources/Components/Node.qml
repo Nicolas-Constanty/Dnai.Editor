@@ -83,38 +83,42 @@ NodeForm {
         }
     ]
 
-    Flow {
-        id: _flowIn
-        radius: 6
-        borderWidth: 3
-        antialiasing: true
-        x: radius
-        y: headerRef.height / 2 - radius - radius / 3
-        visible: model.flowIn
-        typeFlow: FlowType.Enter
-        onLinked: {
-            console.log("yooooooooooooooo")
-        }
-
-//        Component.onCompleted: {
-//            for (var i in _flowIn)
-//                console.log(i, _flowIn[i])
+//    Flow {
+//        id: _flowIn
+//        radius: 6
+//        borderWidth: 3
+//        antialiasing: true
+//        x: radius
+//        y: headerRef.height / 2 - radius - radius / 3
+//        visible: model.flowIn
+//        typeFlow: FlowType.Enter
+//        onLinked: {
+//            console.log("Link input")
 //        }
-    }
+//        onUnlinked: {
+//            console.log("Unlink input")
+//        }
+//    }
 
-    Flow {
-        id: _flowOut
-        radius: 6
-        borderWidth: 3
-        antialiasing: true
-        x: parent.width - radius * 4
-        y: headerRef.height / 2 - radius - radius / 3
-        visible: model.flowOut
-        typeFlow: FlowType.Exit
-    }
+//    Flow {
+//        id: _flowOut
+//        radius: 6
+//        borderWidth: 3
+//        antialiasing: true
+//        x: parent.width - radius * 4
+//        y: headerRef.height / 2 - radius - radius / 3
+//        visible: model.flowOut
+//        typeFlow: FlowType.Exit
+//        onLinked: {
+//            console.log("Link output")
+//        }
+//        onUnlinked: {
+//            console.log("Unlink output")
+//        }
+//    }
 
-    flowInItem: _flowIn
-    flowOutItem: _flowOut
+//    flowInItem: _flowIn
+//    flowOutItem: _flowOut
 
     inputDelegate: Component {
         Item {

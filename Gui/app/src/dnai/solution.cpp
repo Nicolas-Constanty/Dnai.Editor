@@ -119,8 +119,10 @@ namespace dnai
 
 	void Solution::addProject(IProject *proj)
 	{
+        beginInsertRows(QModelIndex(), m_projects.length(), m_projects.length());
 		if (!m_projects.contains(proj))
 			m_projects.append(proj);
+        endInsertRows();
 	}
 
 	interfaces::IProject *Solution::seletedProject() const

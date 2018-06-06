@@ -99,8 +99,7 @@ namespace dnai
             {
 				m_hasMoved = false;
 				const auto c = new commands::MoveCanvasCommand(this, event->pos() - m_offset, true);
-				commands::CommandManager::Instance()->registerCommand(c);
-				commands::CommandManager::Instance()->execAll();
+				commands::CommandManager::Instance()->exec(c);
 			}
 			m_hasMoved = false;
 		}
@@ -110,8 +109,7 @@ namespace dnai
 			const auto offset = event->pos() - m_offset;
 			m_totalOffset += offset;
 			const auto c = new commands::MoveCanvasCommand(this, offset, false);
-			commands::CommandManager::Instance()->registerCommand(c);
-			commands::CommandManager::Instance()->execAll();
+			commands::CommandManager::Instance()->exec(c);
 			m_offset = event->pos();
 			m_hasMoved = true;
 		}
@@ -143,8 +141,7 @@ namespace dnai
                     QPointF((event->pos().x() - w) / w,
                             (event->pos().y() - h) / h);
                 const auto c = new commands::ZoomCanvasCommand(this, scale, offset);
-				commands::CommandManager::Instance()->registerCommand(c);
-				commands::CommandManager::Instance()->execAll();
+				commands::CommandManager::Instance()->exec(c);
             }
         }
 

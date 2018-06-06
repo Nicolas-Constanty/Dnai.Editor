@@ -178,10 +178,16 @@ namespace dnai
 
 		LinkableBezierItem* Flow::findLinkableBezierItem(GenericNode* n, const QPointF&p)
 		{
-            if (m_typeFlow == enums::FlowTypeRessouce::FlowType::Exit && n->flowInItem()->contains(p - n->flowInItem()->position()))
-				return n->flowInItem();
-            else if (m_typeFlow == enums::FlowTypeRessouce::FlowType::Enter && n->flowOutItem()->contains(p - n->flowOutItem()->position()))
-				return n->flowOutItem();
+            if (m_typeFlow == enums::FlowTypeRessouce::FlowType::Exit)
+            {
+                auto qlist = n->flowsOut().findFocused(p);
+                return (qlist.size() != 0) ? dynamic_cast<Flow*>(qlist.at(0)) : nullptr;
+            }
+            else if (m_typeFlow == enums::FlowTypeRessouce::FlowType::Enter)
+            {
+                auto qlist = n->flowsIn().findFocused(p);
+                return (qlist.size() != 0) ? dynamic_cast<Flow*>(qlist.at(0)) : nullptr;
+            }
 			return nullptr;
 		}
 

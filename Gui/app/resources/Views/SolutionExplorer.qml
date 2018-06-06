@@ -164,9 +164,10 @@ Rectangle {
                         {
                             view = tab.addView("resources/Views/DeclarationView.qml",
                                     {
-                                        "model" : model.listColumn(),
+//                                        "model" : model.listColumn,
                                         "idx" : index,
-                                        "proj" : index.model
+                                        "proj" : index.model,
+                                        "parentEntity": model
                                     },
                                     index.model.data(index, index.model.getRoleKey("name")))
                         }

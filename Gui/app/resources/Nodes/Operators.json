@@ -1,0 +1,385 @@
+﻿{
+  "operators": {
+    "outputs": 1,
+    "categories": {
+      "binaryOperator": {
+        "inputs": 2,
+        "categories": {
+          "logical": {
+            "categories": {
+              "int": {
+                "categories": {
+                  "And": {
+                    "name": "&&",
+                    "description": "",
+                    "instruction_id": 0
+                  },
+                  "Or": {
+                    "name": "||",
+                    "description": "",
+                    "instruction_id": 1
+                  },
+                  "Different": {
+                    "name": "!=",
+                    "description": "",
+                    "instruction_id": 2
+                  },
+                  "Equal": {
+                    "name": "==",
+                    "description": "",
+                    "instruction_id": 3
+                  },
+                  "Greater or equal than": {
+                    "name": ">=",
+                    "description": "",
+                    "instruction_id": 5
+                  },
+                  "Greater than": {
+                    "name": ">",
+                    "description": "",
+                    "instruction_id": 4
+                  },
+                  "Less or equal than": {
+                    "name": "<=",
+                    "description": "",
+                    "instruction_id": 7
+                  },
+                  "Less than": {
+                    "name": "<",
+                    "description": "",
+                    "instruction_id": 6
+                  }
+                }
+              },
+              "float": {
+                "categories": {
+                  "Different": {
+                    "name": "!=",
+                    "description": "",
+                    "instruction_id": 2
+                  },
+                  "Equal": {
+                    "name": "==",
+                    "description": "",
+                    "instruction_id": 3
+                  },
+                  "Greater or equal than": {
+                    "name": ">=",
+                    "description": "",
+                    "instruction_id": 5
+                  },
+                  "Greater than": {
+                    "name": ">",
+                    "description": "",
+                    "instruction_id": 4
+                  },
+                  "Less or equal than": {
+                    "name": "<=",
+                    "description": "",
+                    "instruction_id": 7
+                  },
+                  "Less than": {
+                    "name": "<",
+                    "description": "",
+                    "instruction_id": 6
+                  }
+                }
+              },
+              "bool": {
+                "categories": {
+                  "And": {
+                    "name": "&&",
+                    "description": "",
+                    "instruction_id": 0
+                  },
+                  "Or": {
+                    "name": "||",
+                    "description": "",
+                    "instruction_id": 1
+                  },
+                  "Different": {
+                    "name": "!=",
+                    "description": "",
+                    "instruction_id": 2
+                  },
+                  "Equal": {
+                    "name": "==",
+                    "description": "",
+                    "instruction_id": 3
+                  }
+                }
+              },
+              "char": {
+                "categories": {
+                  "Different": {
+                    "name": "!=",
+                    "description": "",
+                    "instruction_id": 2
+                  },
+                  "Equal": {
+                    "name": "==",
+                    "description": "",
+                    "instruction_id": 3
+                  },
+                  "Greater or equal than": {
+                    "name": ">=",
+                    "description": "",
+                    "instruction_id": 5
+                  },
+                  "Greater than": {
+                    "name": ">",
+                    "description": "",
+                    "instruction_id": 4
+                  },
+                  "Less or equal than": {
+                    "name": "<=",
+                    "description": "",
+                    "instruction_id": 7
+                  },
+                  "Less than": {
+                    "name": "<",
+                    "description": "",
+                    "instruction_id": 6
+                  }
+                }
+              },
+              "string": {
+                "categories": {
+                  "Different": {
+                    "name": "!=",
+                    "description": "",
+                    "instruction_id": 2
+                  },
+                  "Equal": {
+                    "name": "==",
+                    "description": "",
+                    "instruction_id": 3
+                  },
+                  "Greater or equal than": {
+                    "name": ">=",
+                    "description": "",
+                    "instruction_id": 5
+                  },
+                  "Greater than": {
+                    "name": ">",
+                    "description": "",
+                    "instruction_id": 4
+                  },
+                  "Less or equal than": {
+                    "name": "<=",
+                    "description": "",
+                    "instruction_id": 7
+                  },
+                  "Less than": {
+                    "name": "<",
+                    "description": "",
+                    "instruction_id": 6
+                  }
+                }
+              }
+            }
+          },
+          "others": {
+            "categories": {
+              "int": {
+                "categories": {
+                  "Add": {
+                    "name": "add",
+                    "description": "Add input 1 with input 2 and output res",
+                    "icon": "",
+                    "instruction_id": 12
+                  },
+                  "Binary And": {
+                    "name": "&",
+                    "description": "Binary And",
+                    "icon": "&",
+                    "instruction_id": 9
+                  },
+                  "Binary Or": {
+                    "name": "|",
+                    "description": "Binary Or",
+                    "icon": "|",
+                    "instruction_id": 10
+                  },
+                  "Divide": {
+                    "name": "/",
+                    "description": "Divide input 1 by input 2",
+                    "icon": "/",
+                    "instruction_id": 14,
+                    "menuName": ""
+                  },
+                  "Left shift": {
+                    "name": "<<",
+                    "description": "Binary left shift",
+                    "icon": "<<",
+                    "instruction_id": 17
+                  },
+                  "Modulo": {
+                    "name": "%",
+                    "description": "Modulo input 1 by input2",
+                    "icon": "%",
+                    "instruction_id": 16
+                  },
+                  "Multiplicate": {
+                    "name": "*",
+                    "description": "Multiplicate input 1 by input 2",
+                    "icon": "x",
+                    "instruction_id": 15
+                  },
+                  "Right shift": {
+                    "name": ">>",
+                    "description": "Binary right shift",
+                    "instruction_id": 18
+                  },
+                  "Substract": {
+                    "name": "-",
+                    "description": "Substract input 1 with input 2",
+                    "icon": "",
+                    "instruction_id": 13
+                  },
+                  "Xor": {
+                    "name": "\\^",
+                    "description": "Binary xor",
+                    "instruction_id": 11
+                  }
+                }
+              },
+              "float": {
+                "categories": {
+                  "Add": {
+                    "name": "add",
+                    "description": "Add input 1 with input 2 and output res",
+                    "icon": "",
+                    "instruction_id": 12
+                  },
+                  "Divide": {
+                    "name": "/",
+                    "description": "Divide input 1 by input 2",
+                    "icon": "/",
+                    "instruction_id": 14,
+                    "menuName": ""
+                  },
+                  "Multiplicate": {
+                    "name": "*",
+                    "description": "Multiplicate input 1 by input 2",
+                    "icon": "x",
+                    "instruction_id": 15
+                  },
+                  "Substract": {
+                    "name": "-",
+                    "description": "Substract input 1 with input 2",
+                    "icon": "",
+                    "instruction_id": 13
+                  }
+                }
+              },
+              "bool": {
+                "categories": {
+                  "Binary And": {
+                    "name": "&",
+                    "description": "Binary And",
+                    "icon": "&",
+                    "instruction_id": 9
+                  },
+                  "Binary Or": {
+                    "name": "|",
+                    "description": "Binary Or",
+                    "icon": "|",
+                    "instruction_id": 10
+                  }
+                }
+              },
+              "char": {
+                "categories": {
+                  "Add": {
+                    "name": "add",
+                    "description": "Add input 1 with input 2 and output res",
+                    "icon": "",
+                    "instruction_id": 12
+                  },
+                  "Substract": {
+                    "name": "-",
+                    "description": "Substract input 1 with input 2",
+                    "icon": "",
+                    "instruction_id": 13
+                  }
+                }
+              },
+              "string": {
+                "categories": {
+                  "Access": {
+                    "name": "Access",
+                    "description": "",
+                    "instruction_id": 8
+                  },
+                  "Add": {
+                    "name": "add",
+                    "description": "Add input 1 with input 2 and output res",
+                    "icon": "",
+                    "instruction_id": 12
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "unaryOperator": {
+        "inputs": 1,
+        "categories": {
+          "int": {
+            "categories": {
+              "Binary no": {
+                "name": "~",
+                "description": "Binary no",
+                "instruction_id": 19
+              },
+              "Logical no": {
+                "name": "!",
+                "description": "Logical no",
+                "instruction_id": 20
+              },
+              "Reverse": {
+                "name": "-1",
+                "description": "Multiplicate by -1",
+                "instruction_id": 21
+              }
+            }
+          },
+          "float": {
+            "categories": {
+              "Reverse": {
+                "name": "-1",
+                "description": "Multiplicate by -1",
+                "instruction_id": 21
+              }
+            }
+          },
+          "bool": {
+            "categories": {
+              "Binary no": {
+                "name": "~",
+                "description": "Binary no",
+                "instruction_id": 19
+              },
+              "Logical no": {
+                "name": "!",
+                "description": "Logical no",
+                "instruction_id": 20
+              }
+            }
+          },
+          "char": {
+            "categories": {
+              "Reverse": {
+                "name": "-1",
+                "description": "Multiplicate by -1",
+                "instruction_id": 21
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

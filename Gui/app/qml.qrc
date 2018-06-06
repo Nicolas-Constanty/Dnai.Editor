@@ -21,34 +21,9 @@
         <file>resources/Panels/ThemePanel.qml</file>
         <file>resources/Components/Node.qml</file>
         <file>resources/Forms/NodeForm.ui.qml</file>
-        <file>resources/Nodes/Operator/BinaryOperator/AccessModel.qml</file>
-        <file>resources/Nodes/Operator/BinaryOperator/AddNodeModel.qml</file>
-        <file>resources/Nodes/Operator/BinaryOperator/BinaryAndModel.qml</file>
-        <file>resources/Nodes/Operator/BinaryOperator/BinaryOrModel.qml</file>
-        <file>resources/Nodes/Operator/BinaryOperator/DivideModel.qml</file>
-        <file>resources/Nodes/Operator/BinaryOperator/LeftShiftModel.qml</file>
-        <file>resources/Nodes/Operator/BinaryOperator/ModuloModel.qml</file>
-        <file>resources/Nodes/Operator/BinaryOperator/MultiplicateModel.qml</file>
-        <file>resources/Nodes/Operator/BinaryOperator/RightShiftModel.qml</file>
-        <file>resources/Nodes/Operator/BinaryOperator/SubstractModel.qml</file>
-        <file>resources/Nodes/Operator/BinaryOperator/XorModel.qml</file>
         <file>resources/Nodes/Operator/BinaryOperatorModel.qml</file>
         <file>resources/Nodes/Operator/UnaryOperatorModel.qml</file>
         <file>resources/Nodes/NodeModel.qml</file>
-        <file>resources/Nodes/Operator/BinaryOperator/LogicalNodeModel.qml</file>
-        <file>resources/Nodes/Operator/BinaryOperator/Logical/AndModel.qml</file>
-        <file>resources/Nodes/Operator/BinaryOperator/Logical/DifferentModel.qml</file>
-        <file>resources/Nodes/Operator/BinaryOperator/Logical/EqualModel.qml</file>
-        <file>resources/Nodes/Operator/BinaryOperator/Logical/GreaterEqualModel.qml</file>
-        <file>resources/Nodes/Operator/BinaryOperator/Logical/GreaterModel.qml</file>
-        <file>resources/Nodes/Operator/BinaryOperator/Logical/LessEqualModel.qml</file>
-        <file>resources/Nodes/Operator/BinaryOperator/Logical/LessModel.qml</file>
-        <file>resources/Nodes/Operator/BinaryOperator/Logical/OrModel.qml</file>
-        <file>resources/Nodes/Operator/UnaryOperator/BNotModel.qml</file>
-        <file>resources/Nodes/Operator/UnaryOperator/DecrementModel.qml</file>
-        <file>resources/Nodes/Operator/UnaryOperator/IncrementModel.qml</file>
-        <file>resources/Nodes/Operator/UnaryOperator/NotModel.qml</file>
-        <file>resources/Nodes/Operator/UnaryOperator/ReverseModel.qml</file>
         <file>resources/Components/Printer.qml</file>
         <file>resources/Forms/ConsoleForm.ui.qml</file>
         <file>resources/Panels/DefaultPanel.qml</file>
@@ -181,5 +156,73 @@
         <file>resources/Forms/LoginForm.qml</file>
         <file>resources/Style/MTextClickable.qml</file>
         <file>resources/Style/MPopup.qml</file>
+        <file>resources/Nodes/Operator/BinaryOperator/Boolean/Logical/AndModel.qml</file>
+        <file>resources/Nodes/Operator/BinaryOperator/Boolean/Logical/DifferentModel.qml</file>
+        <file>resources/Nodes/Operator/BinaryOperator/Boolean/Logical/EqualModel.qml</file>
+        <file>resources/Nodes/Operator/BinaryOperator/Boolean/Logical/OrModel.qml</file>
+        <file>resources/Nodes/Operator/BinaryOperator/Boolean/BinaryAndModel.qml</file>
+        <file>resources/Nodes/Operator/BinaryOperator/Boolean/BinaryOrModel.qml</file>
+        <file>resources/Nodes/Operator/BinaryOperator/Boolean/LogicalNodeModel.qml</file>
+        <file>resources/Nodes/Operator/BinaryOperator/Character/Logical/DifferentModel.qml</file>
+        <file>resources/Nodes/Operator/BinaryOperator/Character/Logical/EqualModel.qml</file>
+        <file>resources/Nodes/Operator/BinaryOperator/Character/Logical/GreaterEqualModel.qml</file>
+        <file>resources/Nodes/Operator/BinaryOperator/Character/Logical/GreaterModel.qml</file>
+        <file>resources/Nodes/Operator/BinaryOperator/Character/Logical/LessEqualModel.qml</file>
+        <file>resources/Nodes/Operator/BinaryOperator/Character/Logical/LessModel.qml</file>
+        <file>resources/Nodes/Operator/BinaryOperator/Character/AddNodeModel.qml</file>
+        <file>resources/Nodes/Operator/BinaryOperator/Character/LogicalNodeModel.qml</file>
+        <file>resources/Nodes/Operator/BinaryOperator/Character/SubstractModel.qml</file>
+        <file>resources/Nodes/Operator/BinaryOperator/Floating/Logical/DifferentModel.qml</file>
+        <file>resources/Nodes/Operator/BinaryOperator/Floating/Logical/EqualModel.qml</file>
+        <file>resources/Nodes/Operator/BinaryOperator/Floating/Logical/GreaterEqualModel.qml</file>
+        <file>resources/Nodes/Operator/BinaryOperator/Floating/Logical/GreaterModel.qml</file>
+        <file>resources/Nodes/Operator/BinaryOperator/Floating/Logical/LessEqualModel.qml</file>
+        <file>resources/Nodes/Operator/BinaryOperator/Floating/Logical/LessModel.qml</file>
+        <file>resources/Nodes/Operator/BinaryOperator/Floating/AddNodeModel.qml</file>
+        <file>resources/Nodes/Operator/BinaryOperator/Floating/DivideModel.qml</file>
+        <file>resources/Nodes/Operator/BinaryOperator/Floating/LogicalNodeModel.qml</file>
+        <file>resources/Nodes/Operator/BinaryOperator/Floating/MultiplicateModel.qml</file>
+        <file>resources/Nodes/Operator/BinaryOperator/Floating/SubstractModel.qml</file>
+        <file>resources/Nodes/Operator/BinaryOperator/Integer/Logical/AndModel.qml</file>
+        <file>resources/Nodes/Operator/BinaryOperator/Integer/Logical/DifferentModel.qml</file>
+        <file>resources/Nodes/Operator/BinaryOperator/Integer/Logical/EqualModel.qml</file>
+        <file>resources/Nodes/Operator/BinaryOperator/Integer/Logical/GreaterEqualModel.qml</file>
+        <file>resources/Nodes/Operator/BinaryOperator/Integer/Logical/GreaterModel.qml</file>
+        <file>resources/Nodes/Operator/BinaryOperator/Integer/Logical/LessEqualModel.qml</file>
+        <file>resources/Nodes/Operator/BinaryOperator/Integer/Logical/LessModel.qml</file>
+        <file>resources/Nodes/Operator/BinaryOperator/Integer/Logical/OrModel.qml</file>
+        <file>resources/Nodes/Operator/BinaryOperator/Integer/AddNodeModel.qml</file>
+        <file>resources/Nodes/Operator/BinaryOperator/Integer/BinaryAndModel.qml</file>
+        <file>resources/Nodes/Operator/BinaryOperator/Integer/BinaryOrModel.qml</file>
+        <file>resources/Nodes/Operator/BinaryOperator/Integer/DivideModel.qml</file>
+        <file>resources/Nodes/Operator/BinaryOperator/Integer/LeftShiftModel.qml</file>
+        <file>resources/Nodes/Operator/BinaryOperator/Integer/LogicalNodeModel.qml</file>
+        <file>resources/Nodes/Operator/BinaryOperator/Integer/ModuloModel.qml</file>
+        <file>resources/Nodes/Operator/BinaryOperator/Integer/MultiplicateModel.qml</file>
+        <file>resources/Nodes/Operator/BinaryOperator/Integer/RightShiftModel.qml</file>
+        <file>resources/Nodes/Operator/BinaryOperator/Integer/SubstractModel.qml</file>
+        <file>resources/Nodes/Operator/BinaryOperator/Integer/XorModel.qml</file>
+        <file>resources/Nodes/Operator/BinaryOperator/String/Logical/DifferentModel.qml</file>
+        <file>resources/Nodes/Operator/BinaryOperator/String/Logical/EqualModel.qml</file>
+        <file>resources/Nodes/Operator/BinaryOperator/String/Logical/GreaterEqualModel.qml</file>
+        <file>resources/Nodes/Operator/BinaryOperator/String/Logical/GreaterModel.qml</file>
+        <file>resources/Nodes/Operator/BinaryOperator/String/Logical/LessEqualModel.qml</file>
+        <file>resources/Nodes/Operator/BinaryOperator/String/Logical/LessModel.qml</file>
+        <file>resources/Nodes/Operator/BinaryOperator/String/AccessModel.qml</file>
+        <file>resources/Nodes/Operator/BinaryOperator/String/AddNodeModel.qml</file>
+        <file>resources/Nodes/Operator/BinaryOperator/String/LogicalNodeModel.qml</file>
+        <file>resources/Nodes/Operator/UnaryOperator/Boolean/BNotModel.qml</file>
+        <file>resources/Nodes/Operator/UnaryOperator/Boolean/NotModel.qml</file>
+        <file>resources/Nodes/Operator/UnaryOperator/Character/DecrementModel.qml</file>
+        <file>resources/Nodes/Operator/UnaryOperator/Character/IncrementModel.qml</file>
+        <file>resources/Nodes/Operator/UnaryOperator/Character/ReverseModel.qml</file>
+        <file>resources/Nodes/Operator/UnaryOperator/Float/DecrementModel.qml</file>
+        <file>resources/Nodes/Operator/UnaryOperator/Float/IncrementModel.qml</file>
+        <file>resources/Nodes/Operator/UnaryOperator/Float/ReverseModel.qml</file>
+        <file>resources/Nodes/Operator/UnaryOperator/Integer/BNotModel.qml</file>
+        <file>resources/Nodes/Operator/UnaryOperator/Integer/DecrementModel.qml</file>
+        <file>resources/Nodes/Operator/UnaryOperator/Integer/IncrementModel.qml</file>
+        <file>resources/Nodes/Operator/UnaryOperator/Integer/NotModel.qml</file>
+        <file>resources/Nodes/Operator/UnaryOperator/Integer/ReverseModel.qml</file>
     </qresource>
 </RCC>
