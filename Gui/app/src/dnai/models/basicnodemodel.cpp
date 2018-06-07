@@ -7,7 +7,7 @@ namespace dnai {
 namespace models {
 	BasicNodeModel::BasicNodeModel(QObject *parent) : QAbstractListModel(parent)
     {
-        loadCurrentModel();
+//        loadCurrentModel();
     }
 
 	int BasicNodeModel::rowCount(const QModelIndex&) const

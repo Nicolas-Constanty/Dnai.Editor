@@ -224,5 +224,6 @@
         <file>resources/Nodes/Operator/UnaryOperator/Integer/IncrementModel.qml</file>
         <file>resources/Nodes/Operator/UnaryOperator/Integer/NotModel.qml</file>
         <file>resources/Nodes/Operator/UnaryOperator/Integer/ReverseModel.qml</file>
+        <file>resources/Nodes/Operators.json</file>
     </qresource>
 </RCC>

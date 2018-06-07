@@ -4,6 +4,8 @@
 #include <QQuickItem>
 #include <QQmlProperty>
 #include <QQuickView>
+#include <QJsonDocument>
+
 
 #include "dnai/editor.h"
 #include "dnai/solution.h"
@@ -15,17 +17,19 @@
 #include "dnai/views/canvasnode.h"
 #include "dnai/models/gui/declarable/function.h"
 #include "dnai/core/handlermanager.h"
+#include "dnai/exceptions/guiexception.h"
 
 namespace dnai
 {
 	Editor &Editor::m_instance = *(new Editor());
 
-	Editor::Editor(): m_solution(nullptr)
-	                  , m_selection(nullptr)
-	                  , m_editorView(nullptr)
-	                  , m_propertyView(nullptr)
-	                  , m_contextMenu(new models::ContextMenu())
-					  , m_propertyPanelProperties(nullptr)
+	Editor::Editor() : m_solution(nullptr)
+		, m_selection(nullptr)
+		, m_editorView(nullptr)
+		, m_propertyView(nullptr)
+		, m_contextMenu(new models::ContextMenu())
+		, m_propertyPanelProperties(nullptr)
+	    , m_contextMenuModel(nullptr)
 	{
 	}
 
@@ -251,6 +255,33 @@ namespace dnai
     {
         return m_solutionName;
     }
+
+	dnai::models::ContextMenuModel* Editor::contextMenuModel()
+	{
+		if (m_contextMenuModel == nullptr)
+		{
+			QFile file(":resources/Nodes/Operators.json");
+
+			if (!file.open(QIODevice::ReadOnly)) {
+				qWarning() << "Couldn't open file: " << file.errorString();
+                return nullptr;
+			}
+
+			const QByteArray data = file.readAll();
+
+			try {
+				const QJsonObject obj(QJsonDocument::fromJson(data).object());
+				m_contextMenuModel = new dnai::models::ContextMenuModel(obj);
+			}
+			catch (std::exception &e) {
+				Q_UNUSED(e)
+					exceptions::ExceptionManager::throwException(exceptions::GuiExeption("Error : Corrupted Solution file"));
+				qWarning("Couldn't parse file.");
+			}
+			file.close();
+		}
+		return m_contextMenuModel;
+	}
 
 	void Editor::registerEditorView(views::EditorView* view)
 	{

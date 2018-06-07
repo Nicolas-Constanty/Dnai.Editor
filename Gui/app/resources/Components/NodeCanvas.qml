@@ -4,14 +4,10 @@ import QtQuick.Controls 2.3
 import DNAI.Views 1.0
 import DNAI 1.0
 import DNAI.Models 1.0
+import Dnai.Controls 1.0
 
 import "../Style"
 import "../Nodes"
-import "../Nodes/Getter"
-import "../Nodes/Operator"
-import "../Nodes/Operator/BinaryOperator"
-import "../Nodes/Operator/BinaryOperator/Logical"
-import "../Nodes/Operator/UnaryOperator"
 import "../JavaScript/CreateComponent.js" as Factory
 
 CanvasNode {
@@ -52,7 +48,7 @@ CanvasNode {
 
     onContextMenuChanged: {
         Editor.updateContextMenu(nodeModel)
-        _menu.popup()
+        _menu2.open()
     }
 
     property var inputs: entityModel.inputModels
@@ -113,6 +109,14 @@ CanvasNode {
             variablesMenu = Factory.getObject()
             _menu.addMenu(variablesMenu)
         }
+    }
+
+    SearchableMenu {
+        id: _menu2
+        itemHeight: 30
+        itemWidth: 200
+        matchViewWidth: 300
+        model: Editor.contextMenuModel
     }
 
     Menu {

@@ -38,5 +38,6 @@
 #include "dnai/models/instruction.h"
 #include "dnai/models/listnode.h"
 #include "dnai/models/user.h"
+#include "dnai/models/contextMenuModel.h"
 
 #endif // DNAI_MODELS_H

@@ -4,6 +4,7 @@
 #include "dnai/editor.h"
 #include "dnai/project.h"
 #include "dnai/core/handlermanager.h"
+#include "dnai/models/ContextMenuModel.h"
 
 #if defined(_WIN32) && defined(_MSC_VER)
 #include "../../lib/lwintoast/wintoastlib.h"
@@ -214,7 +215,7 @@ int main(int argc, char *argv[])
 #endif
 
     dnai::Editor::instance().setAppName(argv[0]);
-
+	
     //dnai::Editor::instance().loadSolution("file://D:\\EIP\\Duly-GUI\\test.dnaisolution");
 
     //if (argc > 1) {

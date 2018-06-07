@@ -10,14 +10,9 @@ import "JavaScript/CreateComponent.js" as Factory
 import "Layouts"
 import "Views"
 import "Nodes"
-import "Nodes/Operator"
-import "Nodes/Operator/BinaryOperator"
-import "Nodes/Operator/BinaryOperator/Logical"
-import "Nodes/Operator/UnaryOperator"
 import "Panels"
 
 Window {
-    objectName: "SALUTmainView"
     id: _main
     visible: true
     modality: Qt.ApplicationModal

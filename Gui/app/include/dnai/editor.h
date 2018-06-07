@@ -12,6 +12,7 @@
 #include "models/basicnodemodel.h"
 #include "dnai/toastermanagerservice.h"
 #include "dnai/models/contextmenu.h"
+#include "dnai/models/ContextMenuModel.h"
 
 namespace dnai
 {
@@ -21,9 +22,9 @@ namespace dnai
 
 	class PropertyPanelProperties : public QObject {
 		Q_OBJECT
-			Q_PROPERTY(QStringList visibility READ visibility CONSTANT)
-			Q_PROPERTY(QStringList entityType READ entityType CONSTANT)
-			Q_PROPERTY(dnai::models::gui::declarable::VarTypeList *varTypes READ varTypes CONSTANT)
+        Q_PROPERTY(QStringList visibility READ visibility CONSTANT)
+        Q_PROPERTY(QStringList entityType READ entityType CONSTANT)
+        Q_PROPERTY(dnai::models::gui::declarable::VarTypeList *varTypes READ varTypes CONSTANT)
 
 	public:
 		explicit PropertyPanelProperties(QObject *parent = nullptr);
@@ -47,6 +48,7 @@ namespace dnai
 		Q_PROPERTY(dnai::models::ContextMenu *contextMenu READ contextMenu CONSTANT)
         Q_PROPERTY(bool loaded READ loaded WRITE setLoaded NOTIFY loadedChanged)
         Q_PROPERTY(QString solutionName READ solutionName)
+		Q_PROPERTY(dnai::models::ContextMenuModel *contextMenuModel READ contextMenuModel CONSTANT)
 
     protected:
         Editor();
@@ -73,6 +75,7 @@ namespace dnai
         bool loaded() const;
         dnai::models::ContextMenu *contextMenu() const;
         QString const &solutionName() const;
+		dnai::models::ContextMenuModel* contextMenuModel();
 
         void setLoaded(bool);
         Q_INVOKABLE void registerEditorView(views::EditorView *view);
@@ -147,6 +150,7 @@ namespace dnai
 		dnai::PropertyPanelProperties *m_propertyPanelProperties;
         QString m_appname;
         QString m_solutionName;
+		dnai::models::ContextMenuModel *m_contextMenuModel;
 
     private:
         std::queue<std::pair<quint32, quint32>> m_pendingInstruction;

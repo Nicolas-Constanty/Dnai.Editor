@@ -130,7 +130,8 @@ SOURCES += \
     src/dnai/models/property.cpp \
     src/dnai/core/instructionhandler.cpp \
     src/dnai/models/contextmenu.cpp \
-    src/dnai/models/gui/entitylist.cpp
+    src/dnai/models/gui/entitylist.cpp \
+    src/dnai/models/contextmenumodel.cpp
 
 
 RESOURCES += qml.qrc
@@ -313,7 +314,8 @@ HEADERS += \
     include/dnai/core/instructionhandler.h \
     include/dnai/models/gui/entitylist.h \
     include/dnai/models/contextmenu.h \
-    include/dnai/core/instructionmanager.h
+    include/dnai/core/instructionmanager.h \
+    include/dnai/models/contextMenuModel.h
 
 
 #LIB
