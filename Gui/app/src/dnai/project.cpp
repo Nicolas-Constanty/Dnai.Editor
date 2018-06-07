@@ -21,6 +21,7 @@ namespace dnai {
             gcore::HandlerManager::Instance().declarator(), SIGNAL(declared(dnai::models::Entity*)),
             this, SLOT(addEntity(dnai::models::Entity*))
                     );
+        QQmlEngine::setObjectOwnership(this, QQmlEngine::CppOwnership);
     }
 
     Project::Project(const QString &filename)
@@ -34,12 +35,15 @@ namespace dnai {
             this, SLOT(addEntity(dnai::models::Entity*))
                     );
         m_filename = filename;
+        qDebug() << filename << ">>" << QUrl(m_filename).toLocalFile();
         m_file = new QFile(QUrl(m_filename).toLocalFile());
         m_rootItem = new models::Entity();
         m_rootItem->setIdx(index(0,0, QModelIndex()));
         const auto coreModel = new models::gcore::Entity("RootEntity", ::core::ENTITY::CONTEXT);
         m_rootEntity = new models::Entity(coreModel, m_rootItem, new models::gui::declarable::Context());
         m_rootEntity->setId(0);
+        m_rootItem->appendChild(m_rootEntity);
+        QQmlEngine::setObjectOwnership(this, QQmlEngine::CppOwnership);
     }
 
     Project::~Project()
@@ -53,7 +57,11 @@ namespace dnai {
         QJsonObject obj;
         serialize(obj);
 
-		m_file->open(QIODevice::WriteOnly);
+        if (!m_file->open(QIODevice::WriteOnly))
+        {
+            qWarning() << "Unable to open project file " << m_file->fileName() << ": " << m_file->errorString();
+            return;
+        }
         m_file->write(QJsonDocument(obj).toJson(QJsonDocument::Compact));
 		m_file->close();
         setSaved(true);
@@ -110,7 +118,7 @@ namespace dnai {
 		m_file = new QFile(QUrl(m_filename).toLocalFile());
 
 		if (!m_file->open(QIODevice::ReadOnly)) {
-            qWarning() << "Couldn't open file: " << m_file->errorString();
+            qWarning() << "Unable to open project file " << m_file->fileName() << ": " << m_file->errorString();
 			return;
 		}
 
@@ -200,7 +208,7 @@ namespace dnai {
 	}
 
 	template<>
-	int Project::_foreachEntity(models::Entity *root, const std::function<int(models::Entity *)> &func) const
+    int Project::_foreachEntity<int>(models::Entity *root, const std::function<int(models::Entity *)> &func) const
 	{
 		int total = 0;
         const auto& list = root->childrenItem();
@@ -213,7 +221,7 @@ namespace dnai {
 			}
 		}
 		return total;
-	}
+    }
 
 	void Project::foreachEntity(const std::function<void(models::Entity *)> &func) const
 	{
@@ -228,16 +236,30 @@ namespace dnai {
 		}
 	}
 
+    /**
+     * @brief Project::expandedRows Count the number of children to display in treeview
+     * @details It do a breadth-first order traversal from the given node in each expanded children but stops depth research at first children collapsed
+     * @param parent The item that is expanded/collapse
+     * @return Number of child to display
+     */
 	int Project::expandedRows(const QModelIndex &parent) const
 	{
 		const auto item = getItem(parent);
-		const auto count = _foreachEntity<int>(item, [](models::Entity *e)
-		{
-			if (e->expanded())
-				return e->childCount();
-			return 0;
-		});
-        return count + (item->expanded() ? item->childCount() : 0);
+        auto count = 0;
+        std::queue<models::Entity *> entities;
+
+        entities.push(item);
+        while (!entities.empty())
+        {
+            if (entities.front()->expanded()) {
+                count += entities.front()->childCount();
+                for (models::Entity *child : entities.front()->childrenItem()) {
+                    entities.push(child);
+                }
+            }
+            entities.pop();
+        }
+        return count;
     }
 
     QModelIndex Project::getIndexOf(models::Entity *e) const

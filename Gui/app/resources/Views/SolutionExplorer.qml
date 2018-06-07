@@ -6,6 +6,8 @@ import DNAI 1.0
 import DNAI.Models 1.0
 import DNAI.Enums 1.0
 
+import Dnai.FontAwesome 1.0
+
 import "../Style"
 import "../Components"
 import "../Panels"
@@ -28,6 +30,7 @@ Rectangle {
         anchors.left: parent.left
         anchors.top: parent.top
     }
+
     ListView {
         id: list
         model: Editor.solution
@@ -35,7 +38,8 @@ Rectangle {
         anchors.top: _title.bottom
         anchors.left: parent.left
         anchors.right: parent.right
-        anchors.bottom: parent.bottom
+        anchors.bottom: borderCreateId.top
+        clip: true
 //        focus: true
 
         highlight:  Item {
@@ -97,6 +101,10 @@ Rectangle {
             titleobj.font.bold: true
             titleobj.font.pointSize: 8
             titleobj.font.capitalization: Font.AllUppercase
+
+            Component.onCompleted: {
+                console.log("Expendable panel item: ", item);
+            }
 
             TreeView {
                 id: tr
@@ -204,7 +212,6 @@ Rectangle {
                         _expPanel.control.selected = true
                         last = _expPanel.control
                     }
-
                 }
 
                 onRowInserted: {
@@ -228,6 +235,130 @@ Rectangle {
             }
         }
     }
+
+    Rectangle {
+        id: borderCreateId
+        anchors.bottom: createProjectItemId.top
+        anchors.left: parent.left
+        anchors.right: parent.right
+        height: 1
+        color: AppSettings.theme["shadowColor"]
+    }
+
+    Item {
+        property int heightValue: containerId.childrenRect.height
+        property bool editableProjectMode: false
+        id: createProjectItemId
+        anchors.bottom: parent.bottom
+        anchors.left: parent.left
+        anchors.right: parent.right
+        height: heightValue + 10
+
+        function cancel() {
+            createProjectItemId.editableProjectMode = false
+            projectNameEditableId.text = ""
+        }
+
+        Rectangle {
+            id: backgroundCreateProjectId
+            anchors.fill: parent
+            z: createProjectItemId.editableProjectMode ? parent.z : parent.z + 1
+            color: cursorId.containsMouse ? AppSettings.theme["text"]["color"] : "transparent"
+            opacity: cursorId.containsMouse ? 0.1 : 1.0
+
+            MouseArea {
+                id: cursorId
+                anchors.fill: parent
+                cursorShape: Qt.PointingHandCursor
+                hoverEnabled: true
+                enabled: !createProjectItemId.editableProjectMode
+
+                onReleased: {
+                    createProjectItemId.editableProjectMode = true
+                }
+
+            }
+        }
+
+        Item {
+            id: containerId
+            anchors.fill: parent
+            anchors.margins: 10
+
+            MLabel {
+                font.pointSize: 13
+                text: "Create Project"
+                anchors.left: parent.left
+                anchors.right: addId.left
+                anchors.rightMargin: 10
+                anchors.verticalCenter: parent.verticalCenter
+                visible: !createProjectItemId.editableProjectMode
+            }
+
+            EditableText {
+                id: projectNameEditableId
+                font.pointSize: 13
+                text: ""
+                placeholderText: ""
+                visible: createProjectItemId.editableProjectMode
+                focus: createProjectItemId.editableProjectMode
+                anchors.left: parent.left
+                anchors.right: addId.left
+                anchors.rightMargin: 10
+                anchors.verticalCenter: parent.verticalCenter
+                horizontalAlignment: TextInput.AlignLeft
+                enableBar: false
+                Keys.onEscapePressed: {
+                    createProjectItemId.editableProjectMode = false
+                    projectNameEditableId.text = ""
+                }
+                Keys.onReturnPressed: {
+                    createProjectItemId.editableProjectMode = false
+                    Editor.addProject(projectNameEditableId.text, "")
+                    projectNameEditableId.text = ""
+//                    cursorId.
+                }
+            }
+
+            TextAwesomeSolid {
+                id: addId
+                text: "\uf055"
+                anchors.verticalCenter: parent.verticalCenter
+                anchors.right: parent.right
+                font.pointSize: 20
+                rotation: createProjectItemId.editableProjectMode ? 45 : 0
+                color: mouseId.containsMouse == true ? AppSettings.theme["text"]["errorSelectedColor"] : createProjectItemId.editableProjectMode ? AppSettings.theme["text"]["errorColor"] : AppSettings.theme["background"]["bluecolor"]
+
+                Behavior on rotation {
+                    NumberAnimation { duration: 200 }
+                }
+
+                MouseArea {
+                    id: mouseId
+                    anchors.fill: parent
+                    hoverEnabled: createProjectItemId.editableProjectMode
+                    cursorShape: Qt.PointingHandCursor
+                    enabled: createProjectItemId.editableProjectMode
+
+                    onReleased: {
+                        createProjectItemId.cancel()
+                    }
+                }
+
+            }
+        }
+    }
+
+/*    TextAwesomeSolid {
+            id: arrowId
+            text: "\uf055"
+            anchors.verticalCenter: _title.verticalCenter
+            anchors.right: parent.bottom
+            anchors.rightMargin: 20
+            font.pointSize: 15
+            color: AppSettings.theme["background"]["bluecolor"]
+        }*/
+
 }
 
 

@@ -15,6 +15,7 @@ namespace dnai
 			virtual void addProject(IProject *) = 0;
 			virtual IProject *seletedProject() const = 0;
 			virtual bool selectProject(IProject *) = 0;
+            virtual QString path() const = 0;
 		};
 	}
 }

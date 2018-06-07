@@ -56,7 +56,8 @@
         "linkColor": "#000000",
         "selectionColor": "#000000",
         "accentColor": "#FF7043",
-        "errorColor": "#E88885"
+        "errorColor": "#E88885",
+        "errorSelectedColor": "#FF3232"
     },
     "canvas": {
         "background": "#4F4F4F",

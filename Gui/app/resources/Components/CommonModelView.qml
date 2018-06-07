@@ -74,7 +74,7 @@ Rectangle {
                 NumberAnimation {
                     target: _selectButton
                     property: "width"
-                    duration: 200
+                    duration: 100
                 }
             }
         },
@@ -111,14 +111,14 @@ Rectangle {
         indicator: Rectangle {
             anchors.fill: _selectButton
             color: AppSettings.getEntityColor(modelData.entityType)
-            TextAwesome {
-                anchors.fill: parent
+            TextAwesomeSolid {
+                anchors.centerIn: parent
                 text: "\uf00c"
                 font.pointSize: 15
                 visible: _selectButton.checked
                 color: "#99000000"
             }
-            LabelAwesome {
+            LabelAwesomeSolid {
                 id: _expandbutton
                 state: "Collapse"
                 states: [
@@ -158,14 +158,15 @@ Rectangle {
                     }
                 ]
                 anchors.bottom: parent.bottom
-                anchors.right: parent.right
-                anchors.left: parent.left
-                height: 8
+                anchors.horizontalCenter: parent.horizontalCenter
+//                anchors.right: parent.right
+//                anchors.left: parent.left
+                height: 12
                 padding: 0
-                text: state == "Collapse" ? "\uf0dd" : "\uf0d8"
+                text: state == "Collapse" ? "\uf0d7" : "\uf0d8"
                 color: "#99000000"
                 verticalAlignment: Qt.AlignBottom
-                font.pointSize: 10
+                font.pointSize: 15
                 background: Rectangle {
                     color: _expandbutton.hovered ? "#60ffffff" : "transparent"
                 }
@@ -214,7 +215,7 @@ Rectangle {
                 _itemview.state = "UnSelect"
         }
     }
-    ButtonAwesome {
+    ButtonAwesomeSolid {
         id: _openbutton
         visible: modelData.entityType === CoreEnums.FUNCTION
         anchors.right: _itemview.right

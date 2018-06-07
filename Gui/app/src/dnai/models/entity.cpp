@@ -1,4 +1,6 @@
+#include <QQmlEngine>
 #include <QJsonArray>
+
 #include "dnai/models/entity.h"
 #include "dnai/models/gui/declarable/variable.h"
 #include "dnai/models/gui/declarable/context.h"
@@ -22,6 +24,7 @@ namespace dnai
 				{ this, "entityType"}
 			};
             m_editableProperty = new Property(props);
+            QQmlEngine::setObjectOwnership(this, QQmlEngine::CppOwnership);
         }
 
         Entity::Entity(gcore::Entity *coremodel, Entity *parent, interfaces::IEntity *guimodel) :
@@ -36,6 +39,7 @@ namespace dnai
 				{ this, "entityType" }
 			};
 			m_editableProperty = new Property(props);
+            QQmlEngine::setObjectOwnership(this, QQmlEngine::CppOwnership);
         }
 
 		Entity::~Entity()

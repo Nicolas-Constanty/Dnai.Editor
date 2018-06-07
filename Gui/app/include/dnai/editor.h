@@ -85,6 +85,7 @@ namespace dnai
 
         Q_INVOKABLE void openSolution() override;
         Q_INVOKABLE void loadSolution(const QString& filename) override;
+        Q_INVOKABLE void newEditor(const QString &solutionToLoad = "");
         Q_INVOKABLE void notifyInformation(QString const &, std::function<void ()> func = [](){});
         Q_INVOKABLE void notifySuccess(QString const &text, std::function<void ()> func = []() {});
         Q_INVOKABLE void notifyError(QString const &text, std::function<void ()> func = []() {});
@@ -96,7 +97,8 @@ namespace dnai
         Q_INVOKABLE static void checkVersion();
 		//Q_INVOKABLE static dnai::models::EntityList *entities();
 		Q_INVOKABLE void registerMainView(QObject *);
-		Q_INVOKABLE void createSolution(const QString &name,
+        Q_INVOKABLE void addProject(QString const &proj_name, QString const &proj_desc);
+        Q_INVOKABLE bool createSolution(const QString &name,
 		                                const QString &description,
 		                                const QString &path,
 		                                const QString &proj_name,

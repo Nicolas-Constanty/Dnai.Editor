@@ -33,10 +33,15 @@ namespace dnai
 
 		for (auto p : m_projects)
 			p->save();
-		m_file->open(QIODevice::WriteOnly);
+        m_file->open(QIODevice::WriteOnly);
         m_file->write(QJsonDocument(obj).toJson(QJsonDocument::Compact));
-		m_file->close();
+        m_file->close();
 	}
+
+    QString Solution::path() const {
+        QFileInfo fi(m_file->fileName());
+        return fi.absolutePath();
+    }
 
 	void Solution::load(const QString& path)
 	{
@@ -197,7 +202,7 @@ namespace dnai
 		for (const auto projfilename : obj["projects"].toArray())
 		{
 			const QStringRef subString(&m_filename, 0, m_filename.lastIndexOf("/"));
-			const auto proj = new Project();
+            const auto proj = new Project(projfilename.toString());
 			proj->load(subString + "/" + projfilename.toString());
 			m_projects.append(proj);
 			qDebug() << "Successfully load the project :" << subString + "/" + projfilename.toString();
