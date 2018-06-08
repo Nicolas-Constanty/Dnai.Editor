@@ -2,7 +2,7 @@
 #include <QJsonObject>
 #include <QDebug>
 
-#include "dnai/models/ContextMenuModel.h"
+#include "dnai/models/contextMenuModel.h"
 
 namespace dnai
 {

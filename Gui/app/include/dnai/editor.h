@@ -12,7 +12,7 @@
 #include "models/basicnodemodel.h"
 #include "dnai/toastermanagerservice.h"
 #include "dnai/models/contextmenu.h"
-#include "dnai/models/ContextMenuModel.h"
+#include "dnai/models/contextMenuModel.h"
 
 namespace dnai
 {

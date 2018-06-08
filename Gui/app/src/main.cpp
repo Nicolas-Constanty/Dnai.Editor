@@ -4,14 +4,16 @@
 #include "dnai/editor.h"
 #include "dnai/project.h"
 #include "dnai/core/handlermanager.h"
-#include "dnai/models/ContextMenuModel.h"
+#include "dnai/models/contextMenuModel.h"
 
 #if defined(_WIN32) && defined(_MSC_VER)
 #include "../../lib/lwintoast/wintoastlib.h"
 using namespace WinToastLib;
 #include <QSslSocket>
-#include <signal.h>
 #include <tchar.h>
+#include <signal.h>
+#else
+#include <signal.h>
 #endif
 
 static QObject *editor_singleton_provider(QQmlEngine *engine, QJSEngine *scriptEngine)
