@@ -31,10 +31,7 @@
         <file>resources/Components/FunctionComponent.qml</file>
         <file>resources/Components/DeclarationComponent.qml</file>
         <file>resources/Images/WindowHandle.png</file>
-        <file>resources/Forms/NewProjectForm.ui.qml</file>
-        <file>resources/Forms/OpenProjectForm.ui.qml</file>
         <file>resources/Panels/NewProject.qml</file>
-        <file>resources/Panels/OpenProject.qml</file>
         <file>resources/Components/ContextContainer.qml</file>
         <file>resources/Forms/ContainerForm.ui.qml</file>
         <file>resources/Components/ClassContainer.qml</file>
@@ -87,7 +84,6 @@
         <file>resources/Panels/Upload.qml</file>
         <file>resources/Forms/UploadForm.ui.qml</file>
         <file>resources/Components/UserMenu.qml</file>
-        <file>resources/Forms/UserMenuForm.ui.qml</file>
         <file>resources/Images/default_user.png</file>
         <file>resources/Components/Modal.qml</file>
         <file>resources/Images/logo_300dpi_dnai.png</file>
@@ -153,7 +149,6 @@
         <file>resources/Properties/ParameterValue.qml</file>
         <file>resources/Components/GetterMenu.qml</file>
         <file>resources/Components/CustomMenuButton.qml</file>
-        <file>resources/Forms/LoginForm.qml</file>
         <file>resources/Style/MTextClickable.qml</file>
         <file>resources/Style/MPopup.qml</file>
         <file>resources/Nodes/Operator/BinaryOperator/Boolean/Logical/AndModel.qml</file>
