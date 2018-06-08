@@ -1,6 +1,6 @@
 import QtQuick 2.9
 import QtQml.Models 2.3
-import QtQuick.Controls 2.4
+import QtQuick.Controls 2.3
 import QtGraphicalEffects 1.0
 
 import DNAI 1.0

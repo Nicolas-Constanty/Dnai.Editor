@@ -220,7 +220,19 @@ namespace dnai
 				return entity->instructionId();
 			default:
 				return QVariant();
-			}
-		}
+            }
+        }
+
+        QHash<int, QByteArray> ContextMenuModel::roleNames() const
+        {
+            QHash<int, QByteArray> hash;
+            hash[ITEM] = "item";
+            hash[DESCRIPTION] = "description";
+            hash[NAME] = "name";
+            hash[INPUTS] = "inputs";
+            hash[OUTPUTS] = "outputs";
+            hash[INSTRUCTION_ID] = "instruction_id";
+            return hash;
+        }
 	}
 }

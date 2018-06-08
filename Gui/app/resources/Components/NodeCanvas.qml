@@ -117,6 +117,7 @@ CanvasNode {
         itemWidth: 200
         matchViewWidth: 300
         model: Editor.contextMenuModel
+//        triggeredAction: displayObj
     }
 
     Menu {
