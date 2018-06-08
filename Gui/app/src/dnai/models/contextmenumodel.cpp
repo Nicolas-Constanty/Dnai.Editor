@@ -43,8 +43,16 @@ namespace dnai
 			if (name == m_nodeName)
 				return;
 			m_nodeName = name;
-			emit nodeNameChanged(name);
-		}
+            emit nodeNameChanged(name);
+        }
+
+        void ContextMenuItem::setType(int t)
+        {
+            if (t == m_type)
+                return;
+            m_type = t;
+            emit typeChanged(t);
+        }
 
 		void ContextMenuItem::setName(const QString& name)
 		{
@@ -88,8 +96,13 @@ namespace dnai
 
 		int ContextMenuItem::columnCount() const
 		{
-			return 1;
-		}
+            return 1;
+        }
+
+        int ContextMenuItem::type() const
+        {
+            return m_type;
+        }
 
 		ContextMenuModel::ContextMenuModel(QObject* parent)
 		: QAbstractItemModel(parent), m_root(nullptr)
@@ -123,10 +136,20 @@ namespace dnai
 						auto category = new ContextMenuItem();
 						category->setName(categoryKey);
 						category->setNodeName(categoryObj["name"].toString());
-						category->setDescription(categoryObj["description"].toString());
-						category->setInputs(categoryObj["inputs"].toInt());
-						category->setOutputs(categoryObj["outputs"].toInt());
-						category->setInstructionId(categoryObj["instruction_id"].toInt());
+                        category->setDescription(categoryObj["description"].toString());
+                        if (parent && categoryObj["inputs"].toInt() == 0 && parent->inputs() != 0)
+                            category->setInputs(parent->inputs());
+                        else
+                            category->setInputs(categoryObj["inputs"].toInt());
+                        if (parent && categoryObj["outputs"].toInt() == 0 && parent->outputs() != 0)
+                            category->setOutputs(parent->outputs());
+                        else
+                            category->setOutputs(categoryObj["outputs"].toInt());
+                        if (parent && categoryObj["type"].toInt() == 0 && parent->type() != -1)
+                            category->setType(parent->type());
+                        else
+                            category->setType(categoryObj["type"].toInt());
+                        category->setInstructionId(categoryObj["instruction_id"].toInt());
 						parent->appendChild(category);
 						if (categoryObj.constFind("categories") != categoryObj.constEnd())
 							parseJsonObj(category, categoryObj);

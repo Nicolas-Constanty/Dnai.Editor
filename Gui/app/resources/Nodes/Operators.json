@@ -9,6 +9,7 @@
             "logical": {
               "categories": {
                 "int": {
+                  "type": 2,
                   "categories": {
                     "And": {
                       "name": "&&",
@@ -53,6 +54,7 @@
                   }
                 },
                 "float": {
+                  "type": 3,
                   "categories": {
                     "Different": {
                       "name": "!=",
@@ -87,6 +89,7 @@
                   }
                 },
                 "bool": {
+                  "type": 1,
                   "categories": {
                     "And": {
                       "name": "&&",
@@ -111,6 +114,7 @@
                   }
                 },
                 "char": {
+                  "type": 4,
                   "categories": {
                     "Different": {
                       "name": "!=",
@@ -145,6 +149,7 @@
                   }
                 },
                 "string": {
+                  "type": 5,
                   "categories": {
                     "Different": {
                       "name": "!=",
@@ -183,6 +188,7 @@
             "others": {
               "categories": {
                 "int": {
+                  "type": 2,
                   "categories": {
                     "Add": {
                       "name": "add",
@@ -246,6 +252,7 @@
                   }
                 },
                 "float": {
+                  "type": 3,
                   "categories": {
                     "Add": {
                       "name": "add",
@@ -275,6 +282,7 @@
                   }
                 },
                 "bool": {
+                  "type": 1,
                   "categories": {
                     "Binary And": {
                       "name": "&",
@@ -291,6 +299,7 @@
                   }
                 },
                 "char": {
+                  "type": 4,
                   "categories": {
                     "Add": {
                       "name": "add",
@@ -307,6 +316,7 @@
                   }
                 },
                 "string": {
+                  "type": 5,
                   "categories": {
                     "Access": {
                       "name": "Access",
@@ -329,6 +339,7 @@
           "inputs": 1,
           "categories": {
             "int": {
+              "type": 2,
               "categories": {
                 "Binary no": {
                   "name": "~",
@@ -348,6 +359,7 @@
               }
             },
             "float": {
+              "type": 3,
               "categories": {
                 "Reverse": {
                   "name": "-1",
@@ -357,6 +369,7 @@
               }
             },
             "bool": {
+              "type": 1,
               "categories": {
                 "Binary no": {
                   "name": "~",
@@ -371,6 +384,7 @@
               }
             },
             "char": {
+              "type": 4,
               "categories": {
                 "Reverse": {
                   "name": "-1",

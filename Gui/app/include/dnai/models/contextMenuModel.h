@@ -16,6 +16,7 @@ namespace dnai
 			Q_PROPERTY(int outputs READ outputs WRITE setOutputs NOTIFY outputsChanged)
 			Q_PROPERTY(int instructionId READ instructionId WRITE setInstructionId NOTIFY instructionIdChanged)
 			Q_PROPERTY(QString nodeName READ nodeName WRITE setNodeName NOTIFY nodeNameChanged)
+            Q_PROPERTY(int type READ type WRITE setType NOTIFY typeChanged)
 
 		public:
 			const QString &name() const;
@@ -25,6 +26,7 @@ namespace dnai
 			int instructionId() const;
 			const QString &nodeName() const;
 			int columnCount() const override;
+            int type() const;
 
 		public:
 			void setName(const QString &);
@@ -33,6 +35,7 @@ namespace dnai
 			void setOutputs(int);
 			void setInstructionId(int);
 			void setNodeName(const QString &name);
+            void setType(int t);
 
 		signals:
 			void nameChanged(const QString &);
@@ -41,6 +44,7 @@ namespace dnai
 			void outputsChanged(int);
 			void instructionIdChanged(int);
 			void nodeNameChanged(const QString &name);
+            void typeChanged(int t);
 
 		private:
 			QString m_name;
@@ -49,6 +53,7 @@ namespace dnai
 			int m_outputs;
 			int m_instructionId;
 			QString m_nodeName;
+            int m_type = -1;
 		};
 		class ContextMenuModel : public QAbstractItemModel
 		{
