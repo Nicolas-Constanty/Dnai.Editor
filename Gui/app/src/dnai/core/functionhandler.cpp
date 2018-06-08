@@ -391,8 +391,8 @@ namespace dnai
                     instr = pendingInstruction.front();
                     pendingInstruction.pop();
                 }
-                emit instructionAdded(&manager.getEntity(function), instr);
                 qDebug() << "==Core== Function.InstructionAdded(" << function << ", " << type << ", " << QList<EntityID>::fromStdList(arguments) << ", " << instruction << ")";
+                emit instructionAdded(&manager.getEntity(function), instr);
             }
 
             /*

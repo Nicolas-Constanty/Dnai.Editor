@@ -167,7 +167,10 @@ Rectangle {
                         if (model.entityType === 2)
                         {
                             view = tab.addView("resources/Components/NodeCanvas.qml",
-                                        {}, index.model.data(index, index.model.getRoleKey("name")))
+                                        {
+                                            "nodeModel": model
+                                        }, index.model.data(index, index.model.getRoleKey("name")))
+                            Editor.loadFunction(model)
                         }
                         else
                         {

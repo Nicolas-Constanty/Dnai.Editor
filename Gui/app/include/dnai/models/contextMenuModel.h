@@ -17,6 +17,7 @@ namespace dnai
 			Q_PROPERTY(int instructionId READ instructionId WRITE setInstructionId NOTIFY instructionIdChanged)
 			Q_PROPERTY(QString nodeName READ nodeName WRITE setNodeName NOTIFY nodeNameChanged)
             Q_PROPERTY(int type READ type WRITE setType NOTIFY typeChanged)
+            Q_PROPERTY(QList<qint32> construction READ construction WRITE setConstruction NOTIFY constructionChanged)
 
 		public:
 			const QString &name() const;
@@ -27,6 +28,7 @@ namespace dnai
 			const QString &nodeName() const;
 			int columnCount() const override;
             int type() const;
+            QList<qint32> const &construction() const;
 
 		public:
 			void setName(const QString &);
@@ -36,6 +38,7 @@ namespace dnai
 			void setInstructionId(int);
 			void setNodeName(const QString &name);
             void setType(int t);
+            void setConstruction(QList<qint32> const &value);
 
 		signals:
 			void nameChanged(const QString &);
@@ -45,6 +48,7 @@ namespace dnai
 			void instructionIdChanged(int);
 			void nodeNameChanged(const QString &name);
             void typeChanged(int t);
+            void constructionChanged(QList<qint32> const &value);
 
 		private:
 			QString m_name;
@@ -54,6 +58,7 @@ namespace dnai
 			int m_instructionId;
 			QString m_nodeName;
             int m_type = -1;
+            QList<qint32> m_construction;
 		};
 		class ContextMenuModel : public QAbstractItemModel
 		{
@@ -65,9 +70,11 @@ namespace dnai
 				ITEM,
 				DESCRIPTION,
 				INPUTS,
-				OUTPUTS,
-				INSTRUCTION_ID
+                OUTPUTS,
+                CONSTRUCTION,
+                INSTRUCTION_ID
 			};
+
 		public:
 			explicit ContextMenuModel(QObject *parent = nullptr);
 			explicit ContextMenuModel(const QJsonObject &doc, QObject *parent = nullptr);

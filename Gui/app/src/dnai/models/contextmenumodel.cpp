@@ -1,5 +1,6 @@
 #include <QJsonDocument>
 #include <QJsonObject>
+#include <QJsonArray>
 #include <QDebug>
 
 #include "dnai/models/contextMenuModel.h"
@@ -54,6 +55,14 @@ namespace dnai
             emit typeChanged(t);
         }
 
+        void ContextMenuItem::setConstruction(const QList<qint32> &value)
+        {
+            if (m_construction == value)
+                return;
+            m_construction = value;
+            emit constructionChanged(m_construction);
+        }
+
 		void ContextMenuItem::setName(const QString& name)
 		{
 			if (name == m_name)
@@ -104,6 +113,11 @@ namespace dnai
             return m_type;
         }
 
+        const QList<qint32> &ContextMenuItem::construction() const
+        {
+            return m_construction;
+        }
+
 		ContextMenuModel::ContextMenuModel(QObject* parent)
 		: QAbstractItemModel(parent), m_root(nullptr)
 		{
@@ -137,6 +151,16 @@ namespace dnai
 						category->setName(categoryKey);
 						category->setNodeName(categoryObj["name"].toString());
                         category->setDescription(categoryObj["description"].toString());
+                        if (categoryObj.contains("construction"))
+                        {
+                            QList<qint32> ctrs;
+
+                            for (QJsonValue val : categoryObj["construction"].toArray())
+                            {
+                                ctrs.append(val.toVariant().toInt());
+                            }
+                            category->setConstruction(ctrs);
+                        }
                         if (parent && categoryObj["inputs"].toInt() == 0 && parent->inputs() != 0)
                             category->setInputs(parent->inputs());
                         else
@@ -241,6 +265,8 @@ namespace dnai
 				return entity->outputs();
 			case INSTRUCTION_ID:
 				return entity->instructionId();
+            case CONSTRUCTION:
+                return QVariant::fromValue(entity->construction());
 			default:
 				return QVariant();
             }
@@ -255,6 +281,7 @@ namespace dnai
             hash[INPUTS] = "inputs";
             hash[OUTPUTS] = "outputs";
             hash[INSTRUCTION_ID] = "instruction_id";
+            hash[CONSTRUCTION] = "construction";
             return hash;
         }
 	}

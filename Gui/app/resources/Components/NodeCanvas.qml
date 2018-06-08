@@ -111,10 +111,9 @@ CanvasNode {
         }
     }
 
-    function displayObj(obj)
+    function onMenuNodeChoosen(choice)
     {
-        for (var i in obj)
-            console.log(i , obj[i])
+        Editor.createNode(canvas.nodeModel, choice.instructionId, choice.construction, canvas.mousePosition.x, canvas.mousePosition.y);
     }
 
     SearchableMenu {
@@ -123,7 +122,7 @@ CanvasNode {
         itemWidth: 200
         matchViewWidth: 300
         model: Editor.contextMenuModel
-        triggeredAction: displayObj
+        triggeredAction: onMenuNodeChoosen
     }
 
     Menu {
