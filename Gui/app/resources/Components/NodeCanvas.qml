@@ -111,13 +111,19 @@ CanvasNode {
         }
     }
 
+    function displayObj(obj)
+    {
+        for (var i in obj)
+            console.log(i , obj[i])
+    }
+
     SearchableMenu {
         id: _menu2
         itemHeight: 30
         itemWidth: 200
         matchViewWidth: 300
         model: Editor.contextMenuModel
-//        triggeredAction: displayObj
+        triggeredAction: displayObj
     }
 
     Menu {
