@@ -145,7 +145,6 @@ namespace dnai
         file.copy("C:\\Users\\GasparQ\\Desktop\\Test\\moreOrLess.dnai");
     }
 
-
 	const QList<interfaces::ICommand*>& Editor::actions() const
 	{
 		return m_actions;
@@ -175,7 +174,6 @@ namespace dnai
         emit loadedChanged(this->m_loaded);
     }
 
-
 	QQuickItem *Editor::selectedView() const
 	{
 		return m_seletedItem;
@@ -184,8 +182,6 @@ namespace dnai
     bool Editor::isSolutionLoad() const {
         return (m_solution != nullptr);
     }
-
-
 
 	void Editor::selectView(QQuickItem* i)
 	{
@@ -303,65 +299,98 @@ namespace dnai
         m_solutionName = name;
     }
 
+    void Editor::createNodeQMLComponent(models::ContextMenuItem *node, models::gui::Instruction *instruction, QQuickItem *parent) const
+    {
+        /*
+         * Node Components
+         */
+        QQmlComponent nodeComponent(App::getEngineInstance(), "qrc:/resources/Components/Node.qml");
+        QQmlComponent nodeModelComponent(App::getEngineInstance(), "qrc:/resources/Nodes/NodeModel.qml");
+
+        /*
+         * Create the NodeModel
+         */
+        QQuickItem *nodeModelObj = qobject_cast<QQuickItem *>(nodeModelComponent.beginCreate(App::getEngineInstance()->rootContext()));
+
+        if (node != nullptr)
+        {
+            nodeModelObj->setProperty("name", node->nodeName());
+            nodeModelObj->setProperty("description", node->description());
+            nodeModelObj->setProperty("icon", node->name());
+            nodeModelObj->setProperty("instruction_id", node->instructionId());
+        }
+
+        nodeModelComponent.completeCreate();
+
+        /*
+         * Create the Node
+         */
+        QQuickItem *nodeObj = qobject_cast<QQuickItem*>(nodeComponent.beginCreate(App::getEngineInstance()->rootContext()));
+        QQmlProperty model(nodeObj, "model", App::getEngineInstance());
+        QQmlProperty instruction_model(nodeObj, "instruction_model", App::getEngineInstance());
+
+        model.write(QVariant::fromValue(nodeModelObj));
+        instruction_model.write(QVariant::fromValue(instruction));
+        nodeObj->setParentItem(parent);
+        nodeObj->setX(instruction->x());
+        nodeObj->setY(instruction->y());
+
+        nodeComponent.completeCreate();
+    }
+
     void Editor::onInstructionAdded(models::Entity *, models::gui::Instruction *instruction)
     {
         if (m_pendingInstruction.empty())
             return;
 
-        quint32 x, y;
-
-        std::tie(x, y) = m_pendingInstruction.front();
-
-        qDebug() << "Editor instruction added: " << x << ", " << y;
-
-        //at reception, the editor must do this code
-        const QString path = "qrc:/resources/Components/Node.qml";
-        QQmlComponent component(App::getEngineInstance(), path);
-        QQuickItem *obj = qobject_cast<QQuickItem*>(component.beginCreate(App::getEngineInstance()->rootContext()));
-        QQmlProperty model(obj, "model", App::getEngineInstance());
-        model.write(QVariant::fromValue(App::currentInstance()->nodes()->createNode(static_cast<enums::QInstructionID::Instruction_ID>(instruction->instruction_id()))));
-        QQmlProperty instr(obj, "instruction_model", App::getEngineInstance());
-        instr.write(QVariant::fromValue(instruction));
         const auto view = qvariant_cast<QQuickItem *>(Editor::instance().selectedView()->property("currentView"));
         if (!view)
         {
             throw std::runtime_error("No canvas view found!");
         }
         const auto canvas = dynamic_cast<views::CanvasNode *>(view);
-        obj->setParentItem(canvas->content());
+
+        quint32 x, y;
+        models::ContextMenuItem *node;
+
+        std::tie(node, x, y) = m_pendingInstruction.front();
+
         instruction->setX(x - canvas->content()->x());
         instruction->setY(y - canvas->content()->y());
-        obj->setX(instruction->x());
-        obj->setY(instruction->y());
-        component.completeCreate();
+
+        createNodeQMLComponent(node, instruction, canvas->content());
+
         m_pendingInstruction.pop();
     }
 
     void Editor::onAddInstructionError(quint32 func, quint32 type, const QList<quint32> &args, const QString &msg)
     {
+        Q_UNUSED(func)
+        Q_UNUSED(type)
+        Q_UNUSED(args)
+        Q_UNUSED(msg)
+
         qDebug() << "Editor Instruction error";
         if (!m_pendingInstruction.empty())
             m_pendingInstruction.pop();
     }
 
-    void Editor::createNode(models::Entity *entity, quint32 type, QList<qint32> const &args, qint32 x, qint32 y)
+    void Editor::createNode(models::Entity *entity, models::ContextMenuItem *node, qint32 x, qint32 y)
     {
         auto function = dynamic_cast<models::gui::declarable::Function *>(entity->guiModel());
         if (function == nullptr) return;
 
         QList<quint32> topass;
 
-        for (qint32 curr : args) {
+        for (qint32 curr : node->construction()) {
             topass.append(static_cast<quint32>(curr));
         }
 
-        qDebug() << "Arguments: " << args;
-
         //call the core function to add instruction
-        dnai::gcore::HandlerManager::Instance().Function().addInstruction(entity->id(), type, topass);
+        dnai::gcore::HandlerManager::Instance().Function().addInstruction(entity->id(), node->instructionId(), topass);
 
         //save the positions when the instruction will be added
-        m_pendingInstruction.emplace(std::make_pair(x, y));
+        m_pendingInstruction.emplace(node, x, y);
     }
 
     void Editor::checkVersion()
@@ -371,10 +400,10 @@ namespace dnai
       //  app->onNotifyVersionChanged();
     }
 
-	//models::EntityList *Editor::entities()
-	//{
-	//	return models::Entity::m_entities;
-	//}
+    //models::EntityList *Editor::entities()
+    //{
+    //	return models::Entity::m_entities;
+    //}
 
     void Editor::registerMainView(QObject *mainView) {
         m_mainView = static_cast<QQuickWindow*>(mainView);
@@ -459,22 +488,12 @@ namespace dnai
 		if (!view)
 		{
 			throw std::runtime_error("No canvas view found!");
-		}
-		const QString path = "qrc:/resources/Components/Node.qml";
-		QQmlComponent component(App::getEngineInstance(), path);
+        }
 		const auto canvas = dynamic_cast<views::CanvasNode *>(view);
 
-		for (const auto instruction : function->instructions())
+        for (models::gui::Instruction *instruction : function->instructions())
 		{
-			QQuickItem *obj = qobject_cast<QQuickItem*>(component.beginCreate(App::getEngineInstance()->rootContext()));
-			QQmlProperty model(obj, "model", App::getEngineInstance());
-			model.write(QVariant::fromValue(App::currentInstance()->nodes()->createNode(static_cast<enums::QInstructionID::Instruction_ID>(instruction->instruction_id()))));
-            QQmlProperty instr(obj, "instruction_model", App::getEngineInstance());
-            instr.write(QVariant::fromValue(instruction));
-			obj->setParentItem(canvas->content());
-			obj->setX(instruction->x());
-			obj->setY(instruction->y());
-			component.completeCreate();
+            createNodeQMLComponent(nullptr, instruction, canvas->content());
 		}
 	}
 

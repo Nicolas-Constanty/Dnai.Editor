@@ -2,7 +2,7 @@
 #define DNAI_EDITOR_H
 
 #include <queue>
-#include <map>
+#include <tuple>
 
 #include <QQuickItem>
 #include "interfaces/ieditor.h"
@@ -84,7 +84,7 @@ namespace dnai
         Q_INVOKABLE QQuickItem *selectedView() const override;
         Q_INVOKABLE bool isSolutionLoad() const;
         Q_INVOKABLE void selectView(QQuickItem *i);
-        Q_INVOKABLE void createNode(dnai::models::Entity* entity, quint32 type, QList<qint32> const &args, qint32 x, qint32 y);
+        Q_INVOKABLE void createNode(dnai::models::Entity* entity, dnai::models::ContextMenuItem *node, qint32 x, qint32 y);
 
         Q_INVOKABLE void openSolution() override;
         Q_INVOKABLE void loadSolution(const QString& filename) override;
@@ -130,6 +130,9 @@ namespace dnai
         void solutionChanged(dnai::Solution *proj);
         void loadedChanged(bool);
 
+    private:
+        void createNodeQMLComponent(models::ContextMenuItem *node, models::gui::Instruction *instruction, QQuickItem *parent) const;
+
     public slots:
         void onInstructionAdded(models::Entity *func, models::gui::Instruction *instr);
         void onAddInstructionError(quint32 func, quint32 type, QList<quint32> const &args, QString const &msg);
@@ -153,7 +156,7 @@ namespace dnai
 		dnai::models::ContextMenuModel *m_contextMenuModel;
 
     private:
-        std::queue<std::pair<quint32, quint32>> m_pendingInstruction;
+        std::queue<std::tuple<models::ContextMenuItem *, quint32, quint32>> m_pendingInstruction;
         bool m_loaded = false;
 
     private:

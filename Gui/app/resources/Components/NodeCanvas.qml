@@ -113,7 +113,7 @@ CanvasNode {
 
     function onMenuNodeChoosen(choice)
     {
-        Editor.createNode(canvas.nodeModel, choice.instructionId, choice.construction, canvas.mousePosition.x, canvas.mousePosition.y);
+        Editor.createNode(canvas.nodeModel, choice, canvas.mousePosition.x, canvas.mousePosition.y);
     }
 
     SearchableMenu {
