@@ -96,7 +96,8 @@ namespace dnai
 			void parseJsonDocument(const QJsonObject &json);
 			void parseJsonObj(ContextMenuItem* parent, const QJsonObject& js);
 			ContextMenuItem *m_root;
-            ContextMenuItem *m_variableNode;
+            ContextMenuItem *m_variableGetter;
+            ContextMenuItem *m_variableSetter;
             QHash<int, ContextMenuItem*> m_hash;
 		};
 	}

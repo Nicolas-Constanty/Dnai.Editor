@@ -121,19 +121,34 @@ namespace dnai
         }
 
 		ContextMenuModel::ContextMenuModel(QObject* parent)
-        : QAbstractItemModel(parent), m_root(nullptr), m_variableNode(nullptr)
+        : QAbstractItemModel(parent), m_root(nullptr), m_variableGetter(nullptr)
 		{
 		}
 
 		ContextMenuModel::ContextMenuModel(const QJsonObject &doc, QObject* parent)
-        : QAbstractItemModel(parent), m_root(nullptr), m_variableNode(nullptr)
+        : QAbstractItemModel(parent), m_root(nullptr), m_variableGetter(nullptr)
 		{
-
+            /*
+             * Create root node
+             */
             m_root = new ContextMenuItem();
             m_root->setName("__Root");
-            m_variableNode = new ContextMenuItem();
-            m_variableNode->setName("Variables");
-            m_root->appendChild(m_variableNode);
+            /*
+             * Create variableGetter node
+             */
+            m_variableGetter = new ContextMenuItem();
+            m_variableGetter->setName("Variables getter");
+            m_root->appendChild(m_variableGetter);
+            /*
+             * Create variableSetter node
+             */
+            m_variableSetter = new ContextMenuItem();
+            m_variableSetter->setName("Variables setter");
+            /*
+             * Populate root model with getter and setter nodes
+             */
+            m_root->appendChild(m_variableGetter);
+
 			parseJsonDocument(doc);
 		}
 
@@ -302,14 +317,38 @@ namespace dnai
 
         void ContextMenuModel::appendVariable(Entity *entity)
         {
+            /*
+             * Create contextItem for getter
+             */
             auto item = new ContextMenuItem();
             item->setName(entity->name());
             item->setDescription(entity->description());
             item->setInputs(0);
             item->setOutputs(1);
+            item->setType(entity->entityType());
             item->setInstructionId(dnai::enums::QInstructionID::GETTER);
-            beginInsertRows(index(0, 0, QModelIndex()), m_variableNode->childCount(), m_variableNode->childCount());
-            m_variableNode->appendChild(item);
+            /*
+             * Append variable into getter list
+             */
+            beginInsertRows(index(0, 0, QModelIndex()), m_variableGetter->childCount(), m_variableGetter->childCount());
+            m_variableGetter->appendChild(item);
+            endInsertRows();
+
+            /*
+             * Create contextItem for setter
+             */
+            item = new ContextMenuItem();
+            item->setName(entity->name());
+            item->setDescription(entity->description());
+            item->setInputs(1);
+            item->setOutputs(0);
+            item->setType(entity->entityType());
+            item->setInstructionId(dnai::enums::QInstructionID::SETTER);
+            /*
+             * Append variable into setter list
+             */
+            beginInsertRows(index(1, 0, QModelIndex()), m_variableSetter->childCount(), m_variableSetter->childCount());
+            m_variableSetter->appendChild(item);
             endInsertRows();
         }
 	}
