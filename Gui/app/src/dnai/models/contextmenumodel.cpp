@@ -4,6 +4,8 @@
 #include <QDebug>
 
 #include "dnai/models/contextMenuModel.h"
+#include "dnai/models/entity.h"
+#include "dnai/enums/core/instructionid.h"
 
 namespace dnai
 {
@@ -119,21 +121,24 @@ namespace dnai
         }
 
 		ContextMenuModel::ContextMenuModel(QObject* parent)
-		: QAbstractItemModel(parent), m_root(nullptr)
+        : QAbstractItemModel(parent), m_root(nullptr), m_variableNode(nullptr)
 		{
 		}
 
 		ContextMenuModel::ContextMenuModel(const QJsonObject &doc, QObject* parent)
-		: QAbstractItemModel(parent), m_root(nullptr)
+        : QAbstractItemModel(parent), m_root(nullptr), m_variableNode(nullptr)
 		{
+
+            m_root = new ContextMenuItem();
+            m_root->setName("__Root");
+            m_variableNode = new ContextMenuItem();
+            m_variableNode->setName("Variables");
+            m_root->appendChild(m_variableNode);
 			parseJsonDocument(doc);
 		}
 
 		void ContextMenuModel::parseJsonDocument(const QJsonObject& json)
-		{
-			m_root = new ContextMenuItem();
-			m_root->setName("__Root");
-            qDebug() << "Root" << m_root;
+        {
 			parseJsonObj(m_root, json);
 		}
 
@@ -293,6 +298,19 @@ namespace dnai
         const QHash<int, ContextMenuItem *> &ContextMenuModel::instructions() const
         {
             return m_hash;
+        }
+
+        void ContextMenuModel::appendVariable(Entity *entity)
+        {
+            auto item = new ContextMenuItem();
+            item->setName(entity->name());
+            item->setDescription(entity->description());
+            item->setInputs(0);
+            item->setOutputs(1);
+            item->setInstructionId(dnai::enums::QInstructionID::GETTER);
+            beginInsertRows(index(0, 0, QModelIndex()), m_variableNode->childCount(), m_variableNode->childCount());
+            m_variableNode->appendChild(item);
+            endInsertRows();
         }
 	}
 }

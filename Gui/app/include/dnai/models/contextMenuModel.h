@@ -8,6 +8,7 @@ namespace dnai
 {
 	namespace models
 	{
+        class Entity;
 		class ContextMenuItem : public GenericTreeItem<ContextMenuItem>
 		{
 			Q_OBJECT
@@ -89,11 +90,13 @@ namespace dnai
             QHash<int, QByteArray> roleNames() const override;
 
             const QHash<int, ContextMenuItem*> &instructions() const;
+            void appendVariable(Entity *entity);
 
 		private:
 			void parseJsonDocument(const QJsonObject &json);
 			void parseJsonObj(ContextMenuItem* parent, const QJsonObject& js);
 			ContextMenuItem *m_root;
+            ContextMenuItem *m_variableNode;
             QHash<int, ContextMenuItem*> m_hash;
 		};
 	}

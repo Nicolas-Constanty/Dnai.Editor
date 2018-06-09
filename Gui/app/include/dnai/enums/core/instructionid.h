@@ -1,5 +1,5 @@
-#ifndef INSTRUCTION_ID
-#define INSTRUCTION_ID
+#ifndef DNAI_ENUM_INSTRUCTION_ID
+#define DNAI_ENUM_INSTRUCTION_ID
 
 #include <QObject>
 
@@ -58,4 +58,4 @@ public:
 }
 }
 
-#endif // INSTRUCTION_ID
+#endif // DNAI_ENUM_INSTRUCTION_ID

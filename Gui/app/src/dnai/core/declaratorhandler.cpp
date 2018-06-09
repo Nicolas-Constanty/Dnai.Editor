@@ -289,7 +289,8 @@ namespace dnai
 				&& todeclare->parentItem()->coreModel()->entityType() != ENTITY::FUNCTION
 				&& todeclare->coreModel()->entityType() == ENTITY::VARIABLE)
 			{
-				models::gui::declarable::Variable::variables()->append(todeclare);
+//				models::gui::declarable::Variable::variables()->append(todeclare);
+                Editor::instance().contextMenuModel()->appendVariable(todeclare);
 			}
             emit declared(todeclare);
         }
