@@ -173,7 +173,12 @@ namespace dnai
                             category->setType(parent->type());
                         else
                             category->setType(categoryObj["type"].toInt());
-                        category->setInstructionId(categoryObj["instruction_id"].toInt());
+                        if (!categoryObj["instruction_id"].isUndefined())
+                        {
+                            const auto instruction_id = categoryObj["instruction_id"].toInt();
+                            m_hash[instruction_id] = category;
+                            category->setInstructionId(instruction_id);
+                        }
 						parent->appendChild(category);
 						if (categoryObj.constFind("categories") != categoryObj.constEnd())
 							parseJsonObj(category, categoryObj);
@@ -283,6 +288,11 @@ namespace dnai
             hash[INSTRUCTION_ID] = "instruction_id";
             hash[CONSTRUCTION] = "construction";
             return hash;
+        }
+
+        const QHash<int, ContextMenuItem *> &ContextMenuModel::instructions() const
+        {
+            return m_hash;
         }
 	}
 }

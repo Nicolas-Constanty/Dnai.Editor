@@ -491,9 +491,10 @@ namespace dnai
         }
 		const auto canvas = dynamic_cast<views::CanvasNode *>(view);
 
+        const auto instructionsMap = m_contextMenuModel->instructions();
         for (models::gui::Instruction *instruction : function->instructions())
 		{
-            createNodeQMLComponent(nullptr, instruction, canvas->content());
+            createNodeQMLComponent(instructionsMap[instruction->instruction_id()], instruction, canvas->content());
 		}
 	}
 

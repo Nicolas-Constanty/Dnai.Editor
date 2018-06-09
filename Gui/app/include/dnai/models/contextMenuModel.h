@@ -1,6 +1,7 @@
 #ifndef DNAI_MODELS_CONTEXT_MENU_MODEL_H
 #define DNAI_MODELS_CONTEXT_MENU_MODEL_H
 #include <QAbstractItemModel>
+#include <QHash>
 #include "generictreeitem.h"
 
 namespace dnai
@@ -87,10 +88,13 @@ namespace dnai
 			QVariant data(const QModelIndex& index, int role) const override;
             QHash<int, QByteArray> roleNames() const override;
 
+            const QHash<int, ContextMenuItem*> &instructions() const;
+
 		private:
 			void parseJsonDocument(const QJsonObject &json);
 			void parseJsonObj(ContextMenuItem* parent, const QJsonObject& js);
 			ContextMenuItem *m_root;
+            QHash<int, ContextMenuItem*> m_hash;
 		};
 	}
 }
