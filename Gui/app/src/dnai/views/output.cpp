@@ -27,8 +27,15 @@ namespace dnai
 		void Output::componentComplete()
 		{
 			QQuickItem::componentComplete();
-			auto n = dynamic_cast<GenericNode *>(parentItem()->parentItem()->parentItem()->parentItem()->parentItem());
-			n->outputs().registerItem(this);
+            GenericNode *n = nullptr;
+            QQuickItem *parent = parentItem();
+            while (n == nullptr && parent != nullptr)
+            {
+                n = dynamic_cast<GenericNode *>(parent);
+                if (n)
+                    n->outputs().registerItem(this);
+                parent = parent->parentItem();
+            }
 		}
 
 		LinkableBezierItem* Output::findLinkableBezierItem(class GenericNode* n, const QPointF& p)
@@ -41,7 +48,7 @@ namespace dnai
 		{
 			auto list = m_linkable->links();
 			for (auto i = 0; i < list.size(); i++)
-			{
+            {
 				const auto l = list.at(i);
 				l->curve()->setRealPosition(getCanvasPos());
 				const auto io = dynamic_cast<Input *>(dynamic_cast<BaseIo *>(l->L1 != m_linkable ? l->L1 : l->L2)->parent());

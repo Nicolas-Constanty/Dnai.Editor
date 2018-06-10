@@ -305,22 +305,28 @@ namespace dnai
          * Node Components
          */
         QQmlComponent nodeComponent(App::getEngineInstance(), "qrc:/resources/Components/Node.qml");
-        QQmlComponent nodeModelComponent(App::getEngineInstance(), "qrc:/resources/Nodes/NodeModel.qml");
+        //QQmlComponent nodeModelComponent(App::getEngineInstance(), "qrc:/resources/Nodes/NodeModel.qml");
 
         /*
          * Create the NodeModel
          */
-        QQuickItem *nodeModelObj = qobject_cast<QQuickItem *>(nodeModelComponent.beginCreate(App::getEngineInstance()->rootContext()));
+        //QQuickItem *nodeModelObj = qobject_cast<QQuickItem *>(nodeModelComponent.beginCreate(App::getEngineInstance()->rootContext()));
 
+    /*    qDebug() << "=================>" << "NodeModel" << nodeModelObj;
         if (node != nullptr)
         {
             nodeModelObj->setProperty("name", node->nodeName());
             nodeModelObj->setProperty("description", node->description());
             nodeModelObj->setProperty("icon", node->name());
             nodeModelObj->setProperty("instruction_id", node->instructionId());
+            nodeModelObj->setProperty("inputs", node->inputs());
+            nodeModelObj->setProperty("outputs", node->outputs());
+            nodeModelObj->setProperty("flowIn", node->flowIn());
+            nodeModelObj->setProperty("flowOut", node->flowOut());
+            nodeModelObj->setProperty("construction", QVariant::fromValue(node->construction()));
         }
 
-        nodeModelComponent.completeCreate();
+        nodeModelComponent.completeCreate();*/
 
         /*
          * Create the Node
@@ -329,7 +335,7 @@ namespace dnai
         QQmlProperty model(nodeObj, "model", App::getEngineInstance());
         QQmlProperty instruction_model(nodeObj, "instruction_model", App::getEngineInstance());
 
-        model.write(QVariant::fromValue(nodeModelObj));
+        model.write(QVariant::fromValue(node));
         instruction_model.write(QVariant::fromValue(instruction));
         nodeObj->setParentItem(parent);
         nodeObj->setX(instruction->x());

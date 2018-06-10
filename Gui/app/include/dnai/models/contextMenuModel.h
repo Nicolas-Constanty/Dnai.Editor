@@ -20,6 +20,8 @@ namespace dnai
 			Q_PROPERTY(QString nodeName READ nodeName WRITE setNodeName NOTIFY nodeNameChanged)
             Q_PROPERTY(int type READ type WRITE setType NOTIFY typeChanged)
             Q_PROPERTY(QList<qint32> construction READ construction WRITE setConstruction NOTIFY constructionChanged)
+            Q_PROPERTY(int flowIn READ flowIn WRITE setFlowIn NOTIFY flowInChanged)
+            Q_PROPERTY(int flowOut READ flowOut WRITE setFlowOut NOTIFY flowOutChanged)
 
 		public:
 			const QString &name() const;
@@ -31,6 +33,8 @@ namespace dnai
 			int columnCount() const override;
             int type() const;
             QList<qint32> const &construction() const;
+            int flowIn() const;
+            int flowOut() const;
 
 		public:
 			void setName(const QString &);
@@ -41,6 +45,8 @@ namespace dnai
 			void setNodeName(const QString &name);
             void setType(int t);
             void setConstruction(QList<qint32> const &value);
+            void setFlowIn(int value);
+            void setFlowOut(int value);
 
 		signals:
 			void nameChanged(const QString &);
@@ -51,16 +57,20 @@ namespace dnai
 			void nodeNameChanged(const QString &name);
             void typeChanged(int t);
             void constructionChanged(QList<qint32> const &value);
+            void flowInChanged(int value);
+            void flowOutChanged(int value);
 
 		private:
 			QString m_name;
 			QString m_descrition;
-			int m_inputs;
-			int m_outputs;
-			int m_instructionId;
+			int m_inputs = 0;
+			int m_outputs = 0;
+			int m_instructionId = 0;
 			QString m_nodeName;
             int m_type = -1;
             QList<qint32> m_construction;
+			int m_flowIn = 0;
+			int m_flowOut = 0;
 		};
 		class ContextMenuModel : public QAbstractItemModel
 		{

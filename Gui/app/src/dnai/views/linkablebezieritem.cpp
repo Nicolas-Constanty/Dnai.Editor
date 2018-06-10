@@ -16,12 +16,15 @@ namespace dnai
 			setAcceptedMouseButtons(Qt::LeftButton);
 			setFlag(ItemAcceptsInputMethod, true);
 			m_currentHover = nullptr;
-            const auto view = qvariant_cast<QQuickItem *>(Editor::instance().selectedView()->property("currentView"));
-            if (!view)
+            if (Editor::instance().selectedView())
             {
-                throw std::runtime_error("No canvas view found!");
+                const auto view = qvariant_cast<QQuickItem *>(Editor::instance().selectedView()->property("currentView"));
+                if (view == nullptr)
+                {
+                    throw std::runtime_error("No canvas view found!");
+                }
+                m_canvas = dynamic_cast<CanvasNode *>(view);
             }
-            m_canvas = dynamic_cast<CanvasNode *>(view);
 		}
 
 

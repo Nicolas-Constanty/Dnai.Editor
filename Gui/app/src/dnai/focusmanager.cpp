@@ -27,6 +27,7 @@ namespace dnai
         QList<QQuickItem *> items;
         for (auto i = 0; i < m_items.size(); ++i) {
             auto item = m_items.at(i);
+
             if (item->contains(point
                 - item->position()))
             {
@@ -54,13 +55,15 @@ namespace dnai
 		QList<QQuickItem *> items;
         for (auto i = 0; i < m_items.size(); ++i) {
 			auto item = m_items.at(i);
-//            const auto si = dynamic_cast<views::ScalableItem *>(item->parentItem()->parentItem()->parentItem()->parentItem()->parentItem());
-            if (item->contains(point
-                - item->parentItem()->parentItem()->parentItem()->parentItem()->position()
-                - item->parentItem()->parentItem()->parentItem()->position()
-                - item->parentItem()->parentItem()->position()
-                - item->parentItem()->position()
-                - item->position()))
+//            qDebug() << "Pos 1" << item->contains(point);
+//            qDebug() << "Pos 2" <<  item->contains(point - item->position());
+//            qDebug() << "Pos 3" <<  item->contains(point - item->position() - item->parentItem()->position());
+//            qDebug() << "Pos 4" <<  item->contains(point - item->position() - item->parentItem()->position() - item->parentItem()->parentItem()->position());
+//            qDebug() << "Pos 5" <<  item->contains(point - item->position() - item->parentItem()->position() - item->parentItem()->parentItem()->position() - item->parentItem()->parentItem()->parentItem()->position());
+//            qDebug() << "Pos 6" <<  item->contains(point - item->position() - item->parentItem()->position() - item->parentItem()->parentItem()->position() - item->parentItem()->parentItem()->parentItem()->position() - item->parentItem()->parentItem()->parentItem()->parentItem()->position());
+
+            //            const auto si = dynamic_cast<views::ScalableItem *>(item->parentItem()->parentItem()->parentItem()->parentItem()->parentItem());
+            if (item->contains(point - item->position() - item->parentItem()->position() - item->parentItem()->parentItem()->position()))
 				items.append(item);
         }
 		return items;

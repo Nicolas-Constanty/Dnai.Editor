@@ -164,12 +164,25 @@ namespace dnai
 		void Flow::componentComplete()
 		{
 			QQuickItem::componentComplete();
+            GenericNode *n = nullptr;
+            QQuickItem *parent = parentItem();
+            while (n == nullptr && parent != nullptr)
+            {
+                n = dynamic_cast<GenericNode *>(parent);
+                if (n)
+                    if (m_typeFlow == enums::FlowTypeRessouce::FlowType::Exit)
+                        n->flowsOut().registerItem(this);
+                    else
+                        n->flowsIn().registerItem(this);
+                parent = parent->parentItem();
+            }
 		}
 
-		QPointF Flow::getCanvasPos() const
+        QPointF Flow::getCanvasPos() const
         {
-            return QPointF(parentItem()->position() + position() + QPointF(width() / 2, height() / 2));
-		}
+            return QPointF(mapToItem(m_canvas->content(), QPoint(0,0)) +
+                           QPointF(width() / 2, height() / 2));
+        }
 
 		const QColor& Flow::colorLink() const
 		{
@@ -180,12 +193,12 @@ namespace dnai
 		{
             if (m_typeFlow == enums::FlowTypeRessouce::FlowType::Exit)
             {
-                auto qlist = n->flowsOut().findFocused(p);
+                auto qlist = n->flowsIn().findFocused(p);
                 return (qlist.size() != 0) ? dynamic_cast<Flow*>(qlist.at(0)) : nullptr;
             }
             else if (m_typeFlow == enums::FlowTypeRessouce::FlowType::Enter)
             {
-                auto qlist = n->flowsIn().findFocused(p);
+                auto qlist = n->flowsOut().findFocused(p);
                 return (qlist.size() != 0) ? dynamic_cast<Flow*>(qlist.at(0)) : nullptr;
             }
 			return nullptr;

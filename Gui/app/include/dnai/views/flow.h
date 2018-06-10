@@ -44,8 +44,6 @@ namespace dnai
 			*/
 			virtual void componentComplete() override;
 
-			virtual QPointF getCanvasPos() const override;
-
 			virtual const QColor &colorLink() const override;
 
 			/**
@@ -61,7 +59,8 @@ namespace dnai
 			virtual void setHover() override;
 			virtual void setLink(Link *) override;
 
-		signals:
+            QPointF getCanvasPos() const override;
+        signals:
             void typeFlowChanged(enums::FlowTypeRessouce::FlowType t);
 			void linked(dnai::Link *link);
 			void unlinked(dnai::Link *link);

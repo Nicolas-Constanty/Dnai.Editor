@@ -49,7 +49,7 @@ namespace dnai
             emit nodeNameChanged(name);
         }
 
-        void ContextMenuItem::setType(int t)
+        void ContextMenuItem::setType(const int t)
         {
             if (t == m_type)
                 return;
@@ -119,6 +119,32 @@ namespace dnai
         {
             return m_construction;
         }
+
+		int ContextMenuItem::flowIn() const
+		{
+			return m_flowIn;
+		}
+
+		int ContextMenuItem::flowOut() const
+		{
+			return m_flowOut;
+		}
+
+		void ContextMenuItem::setFlowIn(const int value)
+		{
+			if (m_flowIn == value)
+				return;
+			m_flowIn = value;
+			emit flowInChanged(value);
+		}
+
+		void ContextMenuItem::setFlowOut(const int value)
+		{
+			if (m_flowOut == value)
+				return;
+			m_flowOut = value;
+			emit flowOutChanged(value);
+		}
 
 		ContextMenuModel::ContextMenuModel(QObject* parent)
         : QAbstractItemModel(parent), m_root(nullptr), m_variableGetter(nullptr)
@@ -199,6 +225,8 @@ namespace dnai
                             m_hash[instruction_id] = category;
                             category->setInstructionId(instruction_id);
                         }
+						category->setFlowIn(categoryObj["in"].toInt());
+						category->setFlowOut(categoryObj["out"].toInt());
 						parent->appendChild(category);
 						if (categoryObj.constFind("categories") != categoryObj.constEnd())
 							parseJsonObj(category, categoryObj);

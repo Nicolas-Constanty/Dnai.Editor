@@ -21,7 +21,7 @@ namespace dnai
 			Q_OBJECT
 
 			Q_PROPERTY(uint nbSegments READ nbSegments WRITE setNbSegments NOTIFY nbSegmentsChanged)
-            Q_PROPERTY(dnai::enums::IoTypeRessouce::IoType type READ type WRITE setType NOTIFY typeChanged)
+            Q_PROPERTY(int type READ type WRITE setType NOTIFY typeChanged)
 
 		public:
 			static BaseIo *CurrentHover;
@@ -58,15 +58,15 @@ namespace dnai
 
 		public:
 			uint nbSegments() const { return m_nbSegments; }
-            enums::IoTypeRessouce::IoType type() const { return m_type; }
+            int type() const { return m_type; }
 
 		public:
 			void setNbSegments(uint n);
-            void setType(enums::IoTypeRessouce::IoType type);
+            void setType(int type);
 
 		signals:
 			void nbSegmentsChanged(uint n);
-            void typeChanged(enums::IoTypeRessouce::IoType type);
+            void typeChanged(int type);
 
 		protected:
 			uint m_nbSegments;

@@ -4,6 +4,8 @@ import QtQuick.Dialogs 1.3
 
 import DNAI 1.0
 import Dnai.Controls 1.0
+import DNAI.Views 1.0
+
 
 import "../Style"
 import "../Components"
@@ -13,6 +15,24 @@ Rectangle {
     color: "#16000000"
     property FileDialog openModal: null
     property Modal newModal: null
+//    Rectangle {
+//        height: 10
+//        width: 10
+//    }
+
+//    Input {
+//        height: 10
+//        width: 10
+//        radius: 5
+//        type: 1
+//        borderWidth: 3
+//        borderColor: {
+//                AppSettings.theme["nodes"]["genericNode"]["border"]["color"]
+//        }
+//        fillColor: {
+//                AppSettings.theme["nodes"]["genericNode"]["color"]
+//        }
+//    }
 
     Column {
         anchors.centerIn: parent

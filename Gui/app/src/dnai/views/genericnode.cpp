@@ -96,9 +96,9 @@ namespace dnai
 
 		void GenericNode::updateOutputs()
 		{
-			auto list = m_outputs.getList();
+            auto list = m_outputs.getList();
 			for (auto i : list)
-			{
+            {
 				auto output = dynamic_cast<Output *>(i);
 				if (output && output->getLinkable()->isLink())
 				{

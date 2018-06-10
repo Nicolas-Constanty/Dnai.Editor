@@ -164,11 +164,11 @@ namespace dnai
 			update();
 		}
 
-        void Io::setType(enums::IoTypeRessouce::IoType type)
+        void Io::setType(int type)
 		{
 			if (type == m_type)
 				return;
-			m_type = type;
+			m_type = static_cast<enums::IoTypeRessouce::IoType>(type);
 			refreshBackendIo();
 			emit typeChanged(type);
 			update();
@@ -176,8 +176,8 @@ namespace dnai
 
 		QPointF Io::getCanvasPos() const
         {
-            return QPointF(mapToItem(m_canvas->content(), position()) +
-                QPointF(width() / 2, height() / 2));
+            return QPointF(mapToItem(m_canvas->content(), QPoint(0,0)) +
+                           QPointF(width() / 2, height() / 2));
 		}
 
 		GenericNode* Io::getNode() const

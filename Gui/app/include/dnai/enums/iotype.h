@@ -14,7 +14,7 @@ public:
     /**
     * \brief define all the handle type by the application
     */
-    enum IoType
+    enum IoType : qint32
     {
         Int,
         Float,
