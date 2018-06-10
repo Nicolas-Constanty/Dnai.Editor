@@ -316,7 +316,7 @@ namespace dnai
 
         if (node != nullptr)
         {
-            nodeModelObj->setProperty("name", node->nodeName());
+            nodeModelObj->setProperty("name", node->name());
             nodeModelObj->setProperty("description", node->description());
             nodeModelObj->setProperty("icon", node->name());
             nodeModelObj->setProperty("instruction_id", node->instructionId());

@@ -147,7 +147,7 @@ namespace dnai
             /*
              * Populate root model with getter and setter nodes
              */
-            m_root->appendChild(m_variableGetter);
+            m_root->appendChild(m_variableSetter);
 
 			parseJsonDocument(doc);
 		}
@@ -327,6 +327,7 @@ namespace dnai
             item->setOutputs(1);
             item->setType(entity->entityType());
             item->setInstructionId(dnai::enums::QInstructionID::GETTER);
+            item->setConstruction({static_cast<qint32>(entity->id())});
             /*
              * Append variable into getter list
              */
@@ -344,6 +345,7 @@ namespace dnai
             item->setOutputs(0);
             item->setType(entity->entityType());
             item->setInstructionId(dnai::enums::QInstructionID::SETTER);
+            item->setConstruction({static_cast<qint32>(entity->id())});
             /*
              * Append variable into setter list
              */
