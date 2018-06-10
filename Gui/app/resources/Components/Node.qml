@@ -43,7 +43,7 @@ GenericNode {
         antialiasing: true
         MLabel {
             id: _name
-            text: "Node name"
+            text:  _node.model.name
             anchors.top: parent.top
             anchors.topMargin: 5
             anchors.horizontalCenter: parent.horizontalCenter
@@ -51,7 +51,7 @@ GenericNode {
         }
         MLabel {
             id: _description
-            text: "This is the node description"
+            text:  _node.model.description
             font.italic: true
             anchors.top: parent.top
             anchors.topMargin: _name.height * 1.3
