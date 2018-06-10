@@ -285,13 +285,7 @@ namespace dnai
 
             //this triggers a entityAdded signal that will call onEntityAdded slot
             manager.addEntity(declaredId, *todeclare);
-			if (todeclare->parentItem()
-				&& todeclare->parentItem()->coreModel()->entityType() != ENTITY::FUNCTION
-				&& todeclare->coreModel()->entityType() == ENTITY::VARIABLE)
-			{
-//				models::gui::declarable::Variable::variables()->append(todeclare);
-                Editor::instance().contextMenuModel()->appendVariable(todeclare);
-			}
+
             emit declared(todeclare);
         }
 

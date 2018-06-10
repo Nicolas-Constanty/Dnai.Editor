@@ -112,6 +112,8 @@ namespace dnai
                         this, SLOT(onInstructionAdded(models::Entity*,models::gui::Instruction*)));
        QObject::connect(&dnai::gcore::HandlerManager::Instance().Function(), SIGNAL(addInstructionError(quint32,quint32,QList<quint32>,QString)),
                         this, SLOT(onAddInstructionError(quint32,quint32,QList<quint32>,QString)));
+       QObject::connect(&dnai::gcore::HandlerManager::Instance().Declarator(), SIGNAL(declared(dnai::models::Entity*)),
+                        this, SLOT(onEntityDeclared(dnai::models::Entity*)));
     }
 
 	void Editor::closeSolution()
@@ -373,6 +375,16 @@ namespace dnai
         qDebug() << "Editor Instruction error";
         if (!m_pendingInstruction.empty())
             m_pendingInstruction.pop();
+    }
+
+    void Editor::onEntityDeclared(models::Entity *declared)
+    {
+        if (declared->parentItem()
+            && declared->parentItem()->coreModel()->entityType() != ENTITY::FUNCTION
+            && declared->coreModel()->entityType() == ENTITY::VARIABLE)
+        {
+            contextMenuModel()->appendVariable(declared);
+        }
     }
 
     void Editor::createNode(models::Entity *entity, models::ContextMenuItem *node, qint32 x, qint32 y)

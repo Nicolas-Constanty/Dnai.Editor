@@ -136,6 +136,7 @@ namespace dnai
     public slots:
         void onInstructionAdded(models::Entity *func, models::gui::Instruction *instr);
         void onAddInstructionError(quint32 func, quint32 type, QList<quint32> const &args, QString const &msg);
+        void onEntityDeclared(dnai::models::Entity *declared);
 
     private:
         interfaces::ISolution *m_solution;
