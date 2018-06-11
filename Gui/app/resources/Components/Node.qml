@@ -105,7 +105,9 @@ GenericNode {
                     antialiasing: true
                     typeFlow: FlowType.Enter
                     onLinked: {
-                        console.log("Link output")
+                        console.log(outindex)
+                        console.log(instructionModel)
+                        console.log(_node.instruction_model)
                     }
                     onUnlinked: {
                         console.log("Unlink output")
@@ -173,7 +175,9 @@ GenericNode {
                     antialiasing: true
                     typeFlow: FlowType.Exit
                     onLinked: {
-                        console.log("Link output")
+                        console.log(outindex)
+                        console.log(instructionModel)
+                        console.log(_node.instruction_model)
                     }
                     onUnlinked: {
                         console.log("Unlink output")

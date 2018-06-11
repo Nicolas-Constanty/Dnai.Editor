@@ -4,6 +4,7 @@
 #include "dnai/link.h"
 #include "dnai/views/genericnode.h"
 #include "dnai/views/flow.h"
+#include "dnai/enums/guitype.h"
 
 namespace dnai
 {
@@ -32,7 +33,18 @@ namespace dnai
 				}
 				const auto l = BaseLinkable::connect(linkable, curve);
 				if (const auto fl = dynamic_cast<Flow *>(parent()))
-					emit fl->linked(l);
+				{
+					const auto flow = dynamic_cast<dnai::views::Flow *>(li->parent());
+					auto index = 0;
+					if (flow->typeFlow() == enums::FlowTypeRessouce::FlowType::Exit)
+						index = flow->getNode()->flowsOut().getList().indexOf(flow);
+					else
+					{
+						const auto flowp = dynamic_cast<dnai::views::Flow *>(parent());
+						index = flowp->getNode()->flowsOut().getList().indexOf(flowp);
+					}
+					emit fl->linked(index, flow->getNode()->property("instruction_model"));
+				}
 				return l;
 			}
 			return nullptr;
@@ -229,7 +241,9 @@ namespace dnai
 					if (n)
 					{
 						m_genericNode = n;
+						break;
 					}
+					parent = parent->parentItem();
 				}
 			}
 			return m_genericNode;

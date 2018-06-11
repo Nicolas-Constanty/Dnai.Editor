@@ -49,6 +49,11 @@ namespace dnai
 					void appendIoLink(dnai::models::gui::IoLink *);
 					void removeIoLink(dnai::models::gui::IoLink* link);
 
+					const QList<dnai::models::gui::FlowLink *> &flowlinks() const;
+					bool setFlowLinks(const QList<dnai::models::gui::FlowLink *> &);
+					void appendFlowLink(dnai::models::gui::FlowLink *);
+					void removeFlowLink(dnai::models::gui::FlowLink* link);
+
 					Q_INVOKABLE void addInput(models::Entity *var);
 					Q_INVOKABLE void addOutput(models::Entity *var);
 					Q_INVOKABLE void removeInput(const QString &name);

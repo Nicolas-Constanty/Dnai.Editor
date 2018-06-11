@@ -4,6 +4,7 @@
 #include "linkablebezieritem.h"
 #include "dnai/baselinkable.h"
 #include "dnai/enums/flowtype.h"
+#include "dnai/models/instruction.h"
 
 namespace dnai
 {
@@ -62,7 +63,7 @@ namespace dnai
             QPointF getCanvasPos() const override;
         signals:
             void typeFlowChanged(enums::FlowTypeRessouce::FlowType t);
-			void linked(dnai::Link *link);
+			void linked(int outindex, const QVariant &instructionModel);
 			void unlinked(dnai::Link *link);
 
 		private:

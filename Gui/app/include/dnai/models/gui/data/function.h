@@ -5,6 +5,7 @@
 #include "instruction.h"
 #include "dnai/models/gui/declarable/variable.h"
 #include "dnai/models/gui/instruction.h"
+#include "dnai/models/gui/flowlink.h"
 
 namespace dnai
 {
@@ -21,6 +22,8 @@ namespace dnai
 					QList<models::gui::Instruction*> instructions;
 					QList<declarable::Variable*> variables;
 					QList<models::gui::IoLink *> iolinks;
+					QList<models::gui::FlowLink *> flowlinks;
+
 
                     Function& operator=(const Function& other) = default;
 

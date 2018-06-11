@@ -27,6 +27,7 @@ namespace dnai
                     obj["outputs"] = serializeList<models::Entity>(m_data.outputs);
                     obj["instructions"] = serializeList<models::gui::Instruction>(m_data.instructions);
 					obj["iolinks"] = serializeList<models::gui::IoLink>(m_data.iolinks);
+					obj["flowlinks"] = serializeList<models::gui::IoLink>(m_data.iolinks);
 				}
 
 				void Function::_deserialize(const QJsonObject& obj)
@@ -48,6 +49,9 @@ namespace dnai
 					}
 					foreach(auto link, obj["iolinks"].toArray()) {
 						appendIoLink(models::gui::IoLink::deserialize(link.toObject()));
+					}
+					foreach(auto link, obj["flowlinks"].toArray()) {
+						appendFlowLink(models::gui::FlowLink::deserialize(link.toObject()));
 					}
 				}
 
@@ -256,6 +260,31 @@ namespace dnai
 				{
 					if (m_data.iolinks.contains(link))
 						m_data.iolinks.removeOne(link);
+				}
+
+				const QList<dnai::models::gui::FlowLink*>& Function::flowlinks() const
+				{
+					return m_data.flowlinks;
+				}
+
+				bool Function::setFlowLinks(const QList<dnai::models::gui::FlowLink*>& fl)
+				{
+					if (m_data.flowlinks == fl)
+						return false;
+					m_data.flowlinks = fl;
+					return true;
+				}
+
+				void Function::appendFlowLink(dnai::models::gui::FlowLink* fl)
+				{
+					if (!m_data.flowlinks.contains(fl))
+						m_data.flowlinks.append(fl);
+				}
+
+				void Function::removeFlowLink(dnai::models::gui::FlowLink* link)
+				{
+					if (m_data.flowlinks.contains(link))
+						m_data.flowlinks.removeOne(link);
 				}
 			}
 		}
