@@ -16,7 +16,9 @@ namespace dnai
             {
 				Q_OBJECT
 
+                Q_PROPERTY(qint32 uid READ Uid WRITE setUid)
                 Q_PROPERTY(QList<QString> linked READ linked WRITE setLinkedEntities)
+
 			public:
                 explicit Instruction(QObject *parent = nullptr);
                 //Implementation of ISerializable

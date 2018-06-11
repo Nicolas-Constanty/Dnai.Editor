@@ -301,34 +301,12 @@ namespace dnai
         m_solutionName = name;
     }
 
-    void Editor::createNodeQMLComponent(models::ContextMenuItem *node, models::gui::Instruction *instruction, QQuickItem *parent) const
+    void Editor::createNodeQMLComponent(models::ContextMenuItem *node, models::Entity *func, models::gui::Instruction *instruction, QQuickItem *parent) const
     {
         /*
          * Node Components
          */
         QQmlComponent nodeComponent(App::getEngineInstance(), "qrc:/resources/Components/Node.qml");
-        //QQmlComponent nodeModelComponent(App::getEngineInstance(), "qrc:/resources/Nodes/NodeModel.qml");
-
-        /*
-         * Create the NodeModel
-         */
-        //QQuickItem *nodeModelObj = qobject_cast<QQuickItem *>(nodeModelComponent.beginCreate(App::getEngineInstance()->rootContext()));
-
-    /*    qDebug() << "=================>" << "NodeModel" << nodeModelObj;
-        if (node != nullptr)
-        {
-            nodeModelObj->setProperty("name", node->name());
-            nodeModelObj->setProperty("description", node->description());
-            nodeModelObj->setProperty("icon", node->name());
-            nodeModelObj->setProperty("instruction_id", node->instructionId());
-            nodeModelObj->setProperty("inputs", node->inputs());
-            nodeModelObj->setProperty("outputs", node->outputs());
-            nodeModelObj->setProperty("flowIn", node->flowIn());
-            nodeModelObj->setProperty("flowOut", node->flowOut());
-            nodeModelObj->setProperty("construction", QVariant::fromValue(node->construction()));
-        }
-
-        nodeModelComponent.completeCreate();*/
 
         /*
          * Create the Node
@@ -336,9 +314,18 @@ namespace dnai
         QQuickItem *nodeObj = qobject_cast<QQuickItem*>(nodeComponent.beginCreate(App::getEngineInstance()->rootContext()));
         QQmlProperty model(nodeObj, "model", App::getEngineInstance());
         QQmlProperty instruction_model(nodeObj, "instruction_model", App::getEngineInstance());
+        QQmlProperty function_entity(nodeObj, "function_entity", App::getEngineInstance());
 
+        /*
+         * Write properties
+         */
         model.write(QVariant::fromValue(node));
         instruction_model.write(QVariant::fromValue(instruction));
+        function_entity.write(QVariant::fromValue(func));
+
+        /*
+         * Set parent and position
+         */
         nodeObj->setParentItem(parent);
         nodeObj->setX(instruction->x());
         nodeObj->setY(instruction->y());
@@ -346,7 +333,7 @@ namespace dnai
         nodeComponent.completeCreate();
     }
 
-    void Editor::onInstructionAdded(models::Entity *, models::gui::Instruction *instruction)
+    void Editor::onInstructionAdded(models::Entity *func, models::gui::Instruction *instruction)
     {
         if (m_pendingInstruction.empty())
             return;
@@ -366,7 +353,7 @@ namespace dnai
         instruction->setX(x - canvas->content()->x());
         instruction->setY(y - canvas->content()->y());
 
-        createNodeQMLComponent(node, instruction, canvas->content());
+        createNodeQMLComponent(node, func, instruction, canvas->content());
 
         m_pendingInstruction.pop();
     }
@@ -512,7 +499,7 @@ namespace dnai
         const auto instructionsMap = m_contextMenuModel->instructions();
         for (models::gui::Instruction *instruction : function->instructions())
 		{
-            createNodeQMLComponent(instructionsMap[instruction->instruction_id()], instruction, canvas->content());
+            createNodeQMLComponent(instructionsMap[instruction->instruction_id()], entity, instruction, canvas->content());
 		}
 	}
 

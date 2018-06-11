@@ -217,6 +217,16 @@ namespace dnai
                     }
                     return core::UNDEFINED_ID;
                 }
+
+                Instruction *Function::getInstruction(quint32 uid) const
+                {
+                    for (models::gui::Instruction *curr : data().instructions)
+                    {
+                        if (curr->Uid() == uid)
+                            return curr;
+                    }
+                    return nullptr;
+                }
 			}
 		}
 	}

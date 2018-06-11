@@ -131,7 +131,7 @@ namespace dnai
         void loadedChanged(bool);
 
     private:
-        void createNodeQMLComponent(models::ContextMenuItem *node, models::gui::Instruction *instruction, QQuickItem *parent) const;
+        void createNodeQMLComponent(models::ContextMenuItem *node, models::Entity *func, models::gui::Instruction *instruction, QQuickItem *parent) const;
 
     public slots:
         void onInstructionAdded(models::Entity *func, models::gui::Instruction *instr);

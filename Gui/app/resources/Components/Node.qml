@@ -5,6 +5,8 @@ import DNAI 1.0
 import DNAI.Enums 1.0
 import Dnai.FontAwesome 1.0
 
+import DNAI.Core 1.0
+
 import "../Forms"
 import "../Nodes"
 import "../Style"
@@ -18,6 +20,7 @@ GenericNode {
     property var model: null
     property var instruction_model: null
     property int paddingColumn: 10
+    property var function_entity: null
 
     state: "Open"
 
@@ -135,10 +138,12 @@ GenericNode {
                             AppSettings.theme["nodes"]["genericNode"]["color"]
                     }
                     onLinked: {
-                        console.log(name)
+                        /*console.log(name)
                         console.log(instructionModel)
                         console.log(_node.instruction_model)
                         console.log(_inputDel.name)
+                        console.log(_node.function_entity);*/
+                        Controller.Function.instruction.linkData(_node.function_entity.id, instructionModel.uid, name, _node.instruction_model.uid, _inputDel.name);
                     }
                     onUnlinked: {
                         console.log("Unlink output")

@@ -69,6 +69,8 @@ namespace dnai
                     Q_INVOKABLE quint32 getInputId(QString const &name) const;
                     Q_INVOKABLE quint32 getOutputId(QString const &name) const;
 
+                    models::gui::Instruction *getInstruction(quint32 uid) const;
+
 				signals:
 					void inputModelsChanged(dnai::models::gui::EntityList* inputs);
 					void outputModelsChanged(dnai::models::gui::EntityList* outputs);

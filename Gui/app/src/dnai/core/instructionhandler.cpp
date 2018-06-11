@@ -61,13 +61,20 @@ namespace dnai
             Q_UNUSED(instruction)
         }
 
-        void InstructionHandler::linkData(quint32 function, quint32 instruction, const QString &input, quint32 fromInstruction, const QString &output, bool save)
+        void InstructionHandler::linkData(quint32 function, quint32 from, const QString &output, quint32 to, const QString &input, bool save)
         {
-            Q_UNUSED(function)
-            Q_UNUSED(instruction)
-            Q_UNUSED(input)
-            Q_UNUSED(fromInstruction)
-            Q_UNUSED(output)
+            qDebug() << "==Core== Function.Instruction.LinkData(" << function << ", " << from << ", " << output << ", " << to << ", " << input << ") => save(" << save << ")";
+
+            models::Entity &func = manager.getEntity(function);
+
+            commands::CommandManager::Instance()->exec(new commands::CoreCommand("Function.Instruction.LinkData", save,
+                [&func, from, output, to, input]() {
+                    core::function::instruction::linkData(func.id(), from, output, to, input);
+                },
+                [&func, to, input]() {
+                    core::function::instruction::unlinkData(func.id(), to, input);
+                }
+            ));
         }
 
         void InstructionHandler::unlinkData(quint32 function, quint32 instruction, const QString &input, bool save)
@@ -118,23 +125,23 @@ namespace dnai
             Q_UNUSED(message)
         }
 
-        void InstructionHandler::onDataLinked(quint32 function, quint32 instruction, const QString &input, quint32 fromInstruction, const QString &output)
+        void InstructionHandler::onDataLinked(quint32 function, quint32 fromI, const QString &output, quint32 toI, const QString &input)
         {
-            Q_UNUSED(function)
-            Q_UNUSED(instruction)
-            Q_UNUSED(input)
-            Q_UNUSED(fromInstruction)
-            Q_UNUSED(output)
+            models::Entity &func = manager.getEntity(function);
+            models::gui::declarable::Function *dat = func.guiModel<models::gui::declarable::Function>();
+            models::gui::Instruction *from = dat->getInstruction(fromI);
+            models::gui::Instruction *to = dat->getInstruction(toI);
+
+            /* to do: implement the link in the model */
+
+            qDebug() << "==Core== Function.Instruction.DataLinked(" << function << ", " << fromI << ", " << output << ", " << toI << ", " << input << ")";
+
+            emit dataLinked(&func, from, output, to, input);
         }
 
-        void InstructionHandler::onLinkDataError(quint32 function, quint32 instruction, const QString &input, quint32 fromInstruction, const QString &output, const QString &message)
+        void InstructionHandler::onLinkDataError(quint32, quint32 from, const QString &output, quint32 to, const QString &input, const QString &message)
         {
-            Q_UNUSED(function)
-            Q_UNUSED(instruction)
-            Q_UNUSED(input)
-            Q_UNUSED(fromInstruction)
-            Q_UNUSED(output)
-            Q_UNUSED(message)
+            Editor::instance().notifyError("Unable to link instruction_" + QString::number(from) + "[" + output + "] to instruction_" + QString::number(to) + "[" + input + "]: " + message);
         }
 
         void InstructionHandler::onDataUnlinked(quint32 function, quint32 instruction, const QString &input)

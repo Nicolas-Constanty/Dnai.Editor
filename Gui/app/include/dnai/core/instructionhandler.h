@@ -35,8 +35,8 @@ namespace dnai
             void onEntryPointSet(quint32 function, quint32 instruction);
             void onSetEntryPointError(quint32 function, quint32 instruction, QString const &message);
 
-            void onDataLinked(quint32 function, quint32 instruction, QString const &input, quint32 fromInstruction, QString const &output);
-            void onLinkDataError(quint32 function, quint32 instruction, QString const &input, quint32 fromInstruction, QString const &output, QString const &message);
+            void onDataLinked(quint32 function, quint32 from, QString const &output, quint32 to, QString const &input);
+            void onLinkDataError(quint32 function, quint32 from, QString const &output, quint32 to, QString const &input, QString const &message);
 
             void onDataUnlinked(quint32 function, quint32 instruction, QString const &input);
             void onUnlinkDataError(quint32 function, quint32 instruction, QString const &input, QString const &message);
@@ -56,6 +56,7 @@ namespace dnai
              * onExecutionLinked
              * onExecutionUnlinked
              */
+            void dataLinked(models::Entity *func, models::gui::Instruction *from, QString const &output, models::gui::Instruction *to, QString const &input);
 
         private:
             EntityManager &manager;
