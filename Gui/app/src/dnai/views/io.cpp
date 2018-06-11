@@ -15,6 +15,7 @@ namespace dnai
 			LinkableBezierItem(parent)
 			, m_nbSegments(32)
             , m_type(enums::IoTypeRessouce::IoType::Int)
+			, m_genericNode(nullptr)
 
 		{
 			Io::refreshBackendIo();
@@ -180,9 +181,24 @@ namespace dnai
                            QPointF(width() / 2, height() / 2));
 		}
 
-		GenericNode* Io::getNode() const
+		GenericNode* Io::getNode()
 		{
-			return dynamic_cast<GenericNode *>(parentItem()->parentItem()->parentItem()->parentItem()->parentItem());
+			if (m_genericNode == nullptr)
+			{
+				GenericNode *n = nullptr;
+				QQuickItem *parent = parentItem();
+				while (n == nullptr && parent != nullptr)
+				{
+					n = dynamic_cast<GenericNode *>(parent);
+					if (n)
+					{
+						m_genericNode = n;
+						break;
+					}
+					parent = parent->parentItem();
+				}
+			}
+			return m_genericNode;
 		}
 
 		qreal Io::scaleFactor() const

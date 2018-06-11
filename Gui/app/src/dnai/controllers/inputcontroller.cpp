@@ -3,6 +3,10 @@
 #include "dnai/views/beziercurve.h"
 #include "dnai/views/output.h"
 #include "dnai/link.h"
+#include "dnai/views/input.h"
+#include "dnai/app.h"
+
+#include <QQmlProperty>
 
 namespace dnai
 {
@@ -27,6 +31,11 @@ namespace dnai
 					}
 					l = new Link(this, linkable);
 					l->setCurve(curve);
+					if (const auto input = dynamic_cast<dnai::views::Input *>(parent()))
+					{
+						const auto output = dynamic_cast<dnai::views::Output *>(li->parent());
+						emit input->linked(output->property("name"), output->getNode()->property("instruction_model"));
+					}
 					return l;
 				}
 				//TODO INSERT DEBUG "Link already exist"

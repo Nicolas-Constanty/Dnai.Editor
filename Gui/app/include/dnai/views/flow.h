@@ -54,7 +54,7 @@ namespace dnai
 			*/
 			virtual LinkableBezierItem *findLinkableBezierItem(GenericNode *n, const QPointF &p) override;
 			virtual void updateLink() override;
-			virtual GenericNode *getNode() const override;
+            virtual GenericNode *getNode() override;
 
 			virtual void setHover() override;
 			virtual void setLink(Link *) override;
@@ -67,6 +67,7 @@ namespace dnai
 
 		private:
             enums::FlowTypeRessouce::FlowType m_typeFlow;
+			GenericNode *m_genericNode;
 
 		protected:
 			void mousePressEvent(QMouseEvent* event) override;

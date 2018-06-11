@@ -130,6 +130,44 @@ namespace dnai
 			return m_flowOut;
 		}
 
+		const QStringList& ContextMenuItem::inputNames() const
+		{
+			return m_inputNames;
+		}
+
+		const QStringList& ContextMenuItem::outputNames() const
+		{
+			return m_outputNames;
+		}
+
+		void ContextMenuItem::appendInputName(const QString& name)
+		{
+			m_inputNames.append(name);
+			emit inputNamesChanged(m_inputNames);
+		}
+
+		void ContextMenuItem::appendOutputName(const QString& name)
+		{
+			m_outputNames.append(name);
+			emit outputNamesChanged(m_outputNames);
+		}
+
+		void ContextMenuItem::setInputNames(const QStringList& value)
+		{
+			if (m_inputNames == value)
+				return;
+			m_inputNames = value;
+			emit inputNamesChanged(value);
+		}
+
+		void ContextMenuItem::setOutputNames(const QStringList& value)
+		{
+			if (m_outputNames == value)
+				return;
+			m_outputNames = value;
+			emit outputNamesChanged(value);
+		}
+
 		void ContextMenuItem::setFlowIn(const int value)
 		{
 			if (m_flowIn == value)
@@ -225,6 +263,26 @@ namespace dnai
                             m_hash[instruction_id] = category;
                             category->setInstructionId(instruction_id);
                         }
+						if (parent && !categoryObj["output_names"].isArray() && !parent->outputNames().isEmpty())
+							category->setOutputNames(parent->outputNames());
+						else
+						{
+							const auto tab = categoryObj["output_names"].toArray();
+							for (const auto &value : tab)
+							{
+								category->appendOutputName(value.toString());
+							}
+						}
+						if (parent && !categoryObj["input_names"].isArray() && !parent->inputNames().isEmpty())
+							category->setInputNames(parent->inputNames());
+						else
+						{
+							const auto tab = categoryObj["input_names"].toArray();
+							for (const auto &value : tab)
+							{
+								category->appendInputName(value.toString());
+							}
+						}
 						category->setFlowIn(categoryObj["in"].toInt());
 						category->setFlowOut(categoryObj["out"].toInt());
 						parent->appendChild(category);

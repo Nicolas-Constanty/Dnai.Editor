@@ -9,7 +9,6 @@ namespace dnai
 	{
 		class Output : public Io
 		{
-
 		public:
 			explicit Output(QQuickItem *parent = nullptr);
 

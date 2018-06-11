@@ -24,7 +24,7 @@ namespace dnai
 			* \brief Make componentComplete Abstract
 			*/
 			virtual void componentComplete() override = 0;
-			virtual GenericNode *getNode() const = 0;
+			virtual GenericNode *getNode() = 0;
 
 			virtual const QColor &colorLink() const;
 

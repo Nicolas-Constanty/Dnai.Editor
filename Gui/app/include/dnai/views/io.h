@@ -48,7 +48,7 @@ namespace dnai
 
 			virtual QPointF getCanvasPos() const override;
 
-			virtual GenericNode *getNode() const override;
+			virtual GenericNode *getNode() override;
 
 			//Interface implementation
 		public:
@@ -67,14 +67,17 @@ namespace dnai
 		signals:
 			void nbSegmentsChanged(uint n);
             void typeChanged(int type);
+			void linked(const QVariant &name, const QVariant &instructionModel);
+			void unlinked(QObject *link);
 
 		protected:
 			uint m_nbSegments;
 
             enums::IoTypeRessouce::IoType m_type;
+			GenericNode *m_genericNode{};
 
 		protected:
-			bool m_holdClick;
+			bool m_holdClick{};
 
 			virtual void setHover() override;
 
