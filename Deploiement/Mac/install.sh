@@ -94,6 +94,18 @@ then
 
     $qmakebinary $dnaipropath
     make
+    
+    cd plugins
+    rm -rf Controls/*.o
+    rm -rf Controls/*.cpp
+    rm -rf Controls/*.h
+    rm -rf Controls/Makefile.*
+
+    rm -rf FontAwesome/*.o
+    rm -rf FontAwesome/*.cpp
+    rm -rf FontAwesome/*.h
+    rm -rf FontAwesome/Makefile.*
+    cd -
 
     cd app/DNAI.app/Contents/MacOS/
     mkdir settings
@@ -124,10 +136,18 @@ then
     echo "----- Create depandancy framework -----"
     sleep 1
     $deployqt DNAI.app -qmldir=$dnairessourcespath -verbose=2
+    
+    echo "----- Settings plugin -----"
+    sleep 3
+    mv plugins/Controls DNAI.app/Contents/PlugIns
+    mv plugins/FontAwesome DNAI.app/Contents/PlugIns
+    install_name_tool -add_rpath @rpath/../PlugIns/Controls/libdnaicontrolsplugin.dylib DNAI.app/Contents/MacOS/DNAI
+    install_name_tool -add_rpath @rpath/../PlugIns/FontAwesome/libdnaifontawesomeplugin.dylib DNAI.app/Contents/MacOS/DNAI
+    
     sleep 3
 
 
-
+    rm -rf plugins
     rm -rf Application
     mkdir Application
     mv -f DNAI.app Application
