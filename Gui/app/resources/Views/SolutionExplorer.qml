@@ -170,7 +170,9 @@ Rectangle {
                                         {
                                             "nodeModel": model
                                         }, index.model.data(index, index.model.getRoleKey("name")))
+                            console.log("Just before loading function");
                             Editor.loadFunction(model)
+                            console.log("Just after loading function");
                         }
                         else
                         {
@@ -228,7 +230,8 @@ Rectangle {
                 onRowRemoved: {
                     if (index.model.data(index, index.model.getRoleKey("expended")))
                     {
-                        _expPanel.height -= (end + 1 - start) * rowheight
+                        console.log("Full expanded rows: ", item.expandedRows());
+                        _expPanel.height = item.expandedRows() * rowheight + _expPanel.header.height + 5
                         _expPanel.initialheight = _expPanel.height
                     }
                 }

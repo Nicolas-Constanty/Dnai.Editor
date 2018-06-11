@@ -262,6 +262,15 @@ namespace dnai {
         return count;
     }
 
+    /**
+     * @brief Project::expandedRows Count the expanded rows of the entire project in the tree view
+     * @return Count of expanded rows from root
+     */
+    int Project::expandedRows() const
+    {
+        return expandedRows(getIndexOf(m_rootEntity)) + 1;
+    }
+
     QModelIndex Project::getIndexOf(models::Entity *e) const
     {
         QModelIndexList results = match(index(0, 0, QModelIndex()), EntityTree::ROLES::MODEL, QVariant::fromValue(e), 2, Qt::MatchRecursive);

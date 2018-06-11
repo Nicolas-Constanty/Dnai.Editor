@@ -51,7 +51,7 @@ namespace dnai
             void onDeclared(::core::EntityID declarator, ::core::ENTITY type, QString const &name, ::core::VISIBILITY visibility, ::core::EntityID declared);
             void onDeclareError(::core::EntityID declarator, ::core::ENTITY type, QString const &name, ::core::VISIBILITY visibility, QString const &message);
 
-            void onRemoved(::core::EntityID declarator, QString const &name);
+            void onRemoved(::core::EntityID declarator, QString const &name, std::list<EntityID> const &rmvList);
             void onRemoveError(::core::EntityID declarator, QString const &name, QString const &message);
 
             void onRenamed(::core::EntityID declarator, QString const &name, QString const &newname);

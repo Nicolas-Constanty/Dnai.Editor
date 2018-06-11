@@ -46,7 +46,7 @@ namespace dnai
             ::core::declarator::onDeclared(std::bind(&DeclaratorHandler::onDeclared, this, _1, _2, _3, _4, _5));
             ::core::declarator::onDeclareError(std::bind(&DeclaratorHandler::onDeclareError, this, _1, _2, _3, _4, _5));
 
-            ::core::declarator::onRemoved(std::bind(&DeclaratorHandler::onRemoved, this, _1, _2));
+            ::core::declarator::onRemoved(std::bind(&DeclaratorHandler::onRemoved, this, _1, _2, _3));
             ::core::declarator::onRemoveError(std::bind(&DeclaratorHandler::onRemoveError, this, _1, _2, _3));
 
             ::core::declarator::onRenamed(std::bind(&DeclaratorHandler::onRenamed, this, _1, _2, _3));
@@ -309,7 +309,7 @@ namespace dnai
             Editor::instance().notifyError("Unable to declare entity " + name + ": " + message);
         }
 
-        void DeclaratorHandler::onRemoved(::core::EntityID declarator, const QString &name)
+        void DeclaratorHandler::onRemoved(::core::EntityID declarator, const QString &name, std::list<EntityID> const &rmvList)
         {
             models::Entity *torm = findEntity(declarator, name);
 
@@ -317,12 +317,15 @@ namespace dnai
             {
                 commands::CoreCommand::Success();
 
-                qDebug() << "==Core== Declarator.Removed(" << declarator << ", " << name << ")";
+                qDebug() << "==Core== Declarator.Removed(" << declarator << ", " << name << ", " << QList<EntityID>::fromStdList(rmvList) << ")";
 
-                emit removed(torm);
+                for (EntityID id : rmvList) {
+                    models::Entity &rmd = manager.getEntity(id);
 
-                //this will trigger onEntityRemoved
-                manager.removeEntity(torm->id());
+                    emit removed(&rmd);
+                    //this will trigger onEntityRemoved
+                    manager.removeEntity(id);
+                }
             }
         }
 

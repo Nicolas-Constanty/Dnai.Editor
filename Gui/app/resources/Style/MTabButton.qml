@@ -13,6 +13,13 @@ TabButton {
     property TabView tv: null
     property Item refContent: null
 
+    function close() {
+        tv.removeView(refContent)
+        tv.swip.removeItem(refContent)
+        tv.bar.removeItem(control)
+        delete control
+    }
+
     width: text.length * font.pointSize + iconsize + margin * 2
 
     contentItem: Item {
@@ -50,10 +57,7 @@ TabButton {
                 onPressed: {
                     if (tv)
                     {
-                        tv.removeView(refContent)
-                        tv.swip.removeItem(refContent)
-                        tv.bar.removeItem(control)
-                        delete control
+                        close();
                     }
                 }
             }
