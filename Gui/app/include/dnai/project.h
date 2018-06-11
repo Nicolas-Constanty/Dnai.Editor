@@ -63,6 +63,7 @@ namespace dnai {
 
     public:
         Q_INVOKABLE int expandedRows(const QModelIndex& parent) const;
+        Q_INVOKABLE int expandedRows() const;
 
     private:
         QModelIndex getIndexOf(models::Entity *e) const;

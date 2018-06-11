@@ -1,6 +1,7 @@
 import QtQuick 2.0
 import QtQuick.Controls 2.2
 import DNAI 1.0
+import DNAI.Core 1.0
 
 import "../JavaScript/CreateComponent.js" as Factory
 import "../Style"
@@ -50,7 +51,13 @@ Item {
 
     function removeViewFromModel(model)
     {
-        delete listModel[model]
+        for (var i = 0; i < _bar.count; i++) {
+            if (_bar.itemAt(i).refContent === listModel[model])
+            {
+                _bar.itemAt(i).close();
+                break;
+            }
+        }
     }
 
     function removeView(v)
@@ -75,6 +82,7 @@ Item {
         id: _bar
         currentIndex: _swip.currentIndex
         onCurrentIndexChanged: {
+            //console.log("Curr index changed in bar: ", currentIndex);
             _swip.currentIndex = currentIndex
             currentView = _swip.itemAt(currentIndex)
         }
@@ -88,8 +96,16 @@ Item {
         anchors.topMargin: _bar.height
         padding: 0
         onCurrentIndexChanged: {
+            //console.log("Curr index changed in swip: ", currentIndex);
            _bar.currentIndex = currentIndex
            currentView = _swip.itemAt(currentIndex)
        }
+    }
+
+    Connections {
+        target: Controller.declarator
+        onRemoved : {
+            removeViewFromModel(entity)
+        }
     }
 }
