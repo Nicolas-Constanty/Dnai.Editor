@@ -3,6 +3,7 @@
 #include "dnai/views/beziercurve.h"
 #include "dnai/views/output.h"
 #include "dnai/link.h"
+#include "dnai/views/input.h"
 
 namespace dnai
 {
@@ -27,6 +28,8 @@ namespace dnai
 					}
 					l = new Link(this, linkable);
 					l->setCurve(curve);
+					if (const auto input = dynamic_cast<dnai::views::Input *>(parent()))
+						emit input->linked(l);
 					return l;
 				}
 				//TODO INSERT DEBUG "Link already exist"

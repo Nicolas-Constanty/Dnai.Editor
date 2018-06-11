@@ -1,5 +1,6 @@
 #include "dnai/controllers/outputcontroller.h"
 #include "dnai/controllers/inputcontroller.h"
+#include "dnai/views/output.h"
 
 namespace dnai
 {
@@ -17,7 +18,10 @@ namespace dnai
 			if (li != nullptr && li->getType() == getType())
 			{
 				li->unlinkAll();
-				return BaseIo::connect(linkable, curve);
+				const auto link = BaseIo::connect(linkable, curve);
+				if (const auto output = dynamic_cast<dnai::views::Output *>(parent()))
+					emit output->linked(link);
+				return link;
 			}
 			return nullptr;
 		}

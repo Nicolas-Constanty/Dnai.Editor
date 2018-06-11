@@ -130,6 +130,12 @@ GenericNode {
                     fillColor: {
                             AppSettings.theme["nodes"]["genericNode"]["color"]
                     }
+                    onLinked: {
+                        console.log("Link output")
+                    }
+                    onUnlinked: {
+                        console.log("Unlink output")
+                    }
                 }
             }
         }
@@ -179,6 +185,12 @@ GenericNode {
                     }
                     fillColor: {
                             AppSettings.theme["nodes"]["genericNode"]["color"]
+                    }
+                    onLinked: {
+                        console.log("Link output")
+                    }
+                    onUnlinked: {
+                        console.log("Unlink output")
                     }
                 }
             }

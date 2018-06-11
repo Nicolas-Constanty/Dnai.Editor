@@ -67,6 +67,8 @@ namespace dnai
 		signals:
 			void nbSegmentsChanged(uint n);
             void typeChanged(int type);
+			void linked(dnai::Link *link);
+			void unlinked(dnai::Link *link);
 
 		protected:
 			uint m_nbSegments;
