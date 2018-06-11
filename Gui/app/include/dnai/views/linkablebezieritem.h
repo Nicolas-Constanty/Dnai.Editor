@@ -29,6 +29,8 @@ namespace dnai
 			virtual const QColor &colorLink() const;
 
 			void unlinkAll();
+			void connect(LinkableBezierItem* a);
+
 
 		protected:
 			BezierCurve *m_currentCurve;

@@ -18,6 +18,8 @@
 #include "dnai/models/gui/declarable/function.h"
 #include "dnai/core/handlermanager.h"
 #include "dnai/exceptions/guiexception.h"
+#include "dnai/views/genericnode.h"
+#include "dnai/models/instruction.h"
 
 namespace dnai
 {
@@ -301,7 +303,7 @@ namespace dnai
         m_solutionName = name;
     }
 
-    void Editor::createNodeQMLComponent(models::ContextMenuItem *node, models::Entity *func, models::gui::Instruction *instruction, QQuickItem *parent) const
+	QQuickItem * Editor::createNodeQMLComponent(models::ContextMenuItem *node, models::Entity *func, models::gui::Instruction *instruction, QQuickItem *parent) const
     {
         /*
          * Node Components
@@ -331,6 +333,7 @@ namespace dnai
         nodeObj->setY(instruction->y());
 
         nodeComponent.completeCreate();
+		return nodeObj;
     }
 
     void Editor::onInstructionAdded(models::Entity *func, models::gui::Instruction *instruction)
@@ -497,10 +500,33 @@ namespace dnai
 		const auto canvas = dynamic_cast<views::CanvasNode *>(view);
 
         const auto instructionsMap = m_contextMenuModel->instructions();
+		QList<views::GenericNode *> nodes;
         for (models::gui::Instruction *instruction : function->instructions())
 		{
-            createNodeQMLComponent(instructionsMap[instruction->instruction_id()], entity, instruction, canvas->content());
+			nodes.append(dynamic_cast<views::GenericNode *>(createNodeQMLComponent(instructionsMap[instruction->instruction_id()], entity, instruction, canvas->content())));
 		}
+        for (models::gui::IoLink *iolink : function->iolinks())
+        {
+			const auto inputInstruction = function->getInstruction(iolink->data().inputUuid);
+			const auto outputInstruction = function->getInstruction(iolink->data().outputUuid);
+			views::GenericNode *n1 = nullptr;
+			views::GenericNode *n2 = nullptr;
+			for (auto node : nodes)
+			{
+				if (n1 == nullptr && qvariant_cast<models::gui::Instruction*>(node->property("instruction_model")) == inputInstruction)
+				{
+					n1 = node;
+				}
+				else if (n2 == nullptr && qvariant_cast<models::gui::Instruction*>(node->property("instruction_model")) == outputInstruction)
+				{
+					n2 = node;
+				}
+				if (n1 && n2)
+					break;
+			}
+			if (!n1 || !n2) return;
+			n1->createLink(iolink, n2);
+        }
 	}
 
 	void Editor::updateContextMenu(dnai::models::Entity* entity) const

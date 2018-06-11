@@ -6,6 +6,7 @@
 #include "dnai/models/gui/flow.h"
 #include "dnai/models/gui/input.h"
 #include "dnai/models/gui/output.h"
+#include "dnai/models/gui/iolink.h"
 
 namespace dnai
 {
@@ -20,12 +21,14 @@ namespace dnai
 				struct Instruction
 				{
 					quint32 uid;
+					QUuid guiUuid;
                     QList<models::gui::Input*> inputs;
 					QList<models::gui::Output*> outputs;
                     gui::Flow* flowIn = nullptr;
                     QList<gui::Flow*> flowOut;
 					qint32 instructionId = enums::QInstructionID::Instruction_ID::UNDEFINED;
                     QList<QString> linked;
+
 					Instruction& operator=(const Instruction& other) = default;
 					qint32 x = 0;
 					qint32 y = 0;
@@ -41,7 +44,8 @@ namespace dnai
 							inputs == other.inputs
 							&& outputs == other.outputs
 							&& flowIn == other.flowIn
-							&& instructionId == other.instructionId);
+							&& instructionId == other.instructionId
+							&& guiUuid == other.guiUuid);
                     }
 				};
 			}

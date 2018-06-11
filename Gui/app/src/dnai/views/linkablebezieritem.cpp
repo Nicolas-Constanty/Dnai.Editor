@@ -87,6 +87,30 @@ namespace dnai
 			}
 		}
 
+		void LinkableBezierItem::connect(LinkableBezierItem *a)
+		{
+			auto b = new BezierCurve(m_canvas->content());
+			b->setPosition(getCanvasPos());
+			b->setP1(QPoint(0, 0));
+			QColor cb(colorLink());
+			b->setFillColor(cb);
+			const QColor c((cb.red() < 205 ? cb.red() + 50 : 255),
+				(cb.green() < 205 ? cb.green() + 50 : 255),
+				(cb.blue() < 205 ? cb.blue() + 50 : 255),
+				cb.alpha());
+			const auto co = m_linkable->connect(a->getLinkable(), b);
+			if (co)
+			{
+				const auto p2(a->getCanvasPos());
+				b->setP4(p2);
+				b->setDotted(false);
+				b->setBack();
+//				setLink(co);
+//				afterRealease(co);
+				m_currentCurve = nullptr;
+			}
+		}
+
 		void LinkableBezierItem::mouseReleaseEvent(QMouseEvent *event)
 		{
 			if (event->button() != Qt::LeftButton || m_currentCurve == nullptr)

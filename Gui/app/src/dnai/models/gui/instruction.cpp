@@ -1,5 +1,4 @@
 #include <QJsonObject>
-#include <QJsonArray>
 #include "dnai/models/gui/instruction.h"
 #include "dnai/models/gui/declarable/variable.h"
 #include "dnai/models/entity.h"
@@ -12,6 +11,20 @@ namespace dnai
 		{
 			Instruction::Instruction(QObject* parent) : QObject(parent)
 			{
+				const auto getRandomString = [](int size)
+				{
+					const QString possibleCharacters(" !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~");
+
+					QString randomString;
+					for (auto i = 0; i< size; ++i)
+					{
+						auto index = qrand() % possibleCharacters.length();
+						auto nextChar = possibleCharacters.at(index);
+						randomString.append(nextChar);
+					}
+					return randomString;
+				};
+				m_data.guiUuid = QUuid::createUuidV5(QUuid::createUuid(), getRandomString(128));
 			}
 
 			void Instruction::serialize(QJsonObject& obj) const
@@ -50,6 +63,7 @@ namespace dnai
                 }
 
                 obj["linked"] = linkEntities;
+				obj["guiUuid"] = m_data.guiUuid.toString();
 			}
 
 			void Instruction::_deserialize(const QJsonObject& obj)
@@ -71,6 +85,8 @@ namespace dnai
                 foreach (auto link, obj["linked"].toArray()) {
                     m_data.linked.append(link.toString());
                 }
+				m_data.guiUuid = obj["guiUuid"].toString();
+				qDebug() << m_data.guiUuid;
 			}
 
 			const data::Instruction& Instruction::data() const
@@ -202,6 +218,19 @@ namespace dnai
                 m_data.linked = value;
                 return true;
             }
+
+			const QUuid& Instruction::guiUuid() const
+			{
+				return m_data.guiUuid;
+			}
+
+			bool Instruction::setGuiUuid(const QUuid& value)
+			{
+				if (value == m_data.guiUuid)
+					return false;
+				m_data.guiUuid = value;
+				return true;
+			}
 		}
 	}
 }

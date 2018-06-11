@@ -23,15 +23,10 @@ namespace dnai
 				void Function::serialize(QJsonObject& obj) const
 				{	
 					Entity::serialize(obj);
-                    QJsonArray instructions;
-                    foreach(const auto instruction, m_data.instructions) {
-                        QJsonObject var;
-                        instruction->serialize(var);
-                        instructions.append(var);
-                    }
                     obj["inputs"] = serializeList<models::Entity>(m_data.inputs);
                     obj["outputs"] = serializeList<models::Entity>(m_data.outputs);
-                    obj["instructions"] = instructions;
+                    obj["instructions"] = serializeList<models::gui::Instruction>(m_data.instructions);
+					obj["iolinks"] = serializeList<models::gui::IoLink>(m_data.iolinks);
 				}
 
 				void Function::_deserialize(const QJsonObject& obj)
@@ -43,15 +38,16 @@ namespace dnai
 						auto ent = models::Entity::deserialize(input.toObject(), core);
                         m_data.inputs.append(ent);
 					}
-
 					foreach(auto output, obj["outputs"].toArray()) {
 						const auto core = new gcore::Entity(::core::ENTITY::VARIABLE);
 						auto ent = models::Entity::deserialize(output.toObject(), core);
 						m_data.outputs.append(ent);
 					}
-
 					foreach(auto node, obj["instructions"].toArray()) {
 						addInstruction(Instruction::deserialize(node.toObject()));
+					}
+					foreach(auto link, obj["iolinks"].toArray()) {
+						appendIoLink(models::gui::IoLink::deserialize(link.toObject()));
 					}
 				}
 
@@ -196,8 +192,15 @@ namespace dnai
 
 				void Function::addInstruction(Instruction* instruction)
 				{
+					m_functionsHash[instruction->guiUuid()] = instruction;
 					m_data.instructions.append(instruction);
 				}
+
+				Instruction *Function::getInstruction(const QUuid &uuid)
+				{
+					return m_functionsHash[uuid];
+				}
+
                 quint32 Function::getInputId(const QString &name) const
                 {
                     for (models::Entity *curr : inputs())
@@ -227,6 +230,33 @@ namespace dnai
                     }
                     return nullptr;
                 }
+				const QList<dnai::models::gui::IoLink*> &Function::iolinks() const
+				{
+					return m_data.iolinks;
+				}
+
+				bool Function::setIoLinks(const QList<dnai::models::gui::IoLink*>& value)
+				{
+					if (value == m_data.iolinks)
+						return false;
+					m_data.iolinks = value;
+					return true;
+				}
+
+				void Function::appendIoLink(dnai::models::gui::IoLink* link)
+				{
+					if (!m_data.iolinks.contains(link))
+					{
+						qDebug() << "Append link";
+						m_data.iolinks.append(link);
+					}
+				}
+
+				void Function::removeIoLink(dnai::models::gui::IoLink* link)
+				{
+					if (m_data.iolinks.contains(link))
+						m_data.iolinks.removeOne(link);
+				}
 			}
 		}
 	}
