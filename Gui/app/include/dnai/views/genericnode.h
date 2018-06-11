@@ -5,6 +5,7 @@
 #include "flow.h"
 #include "canvasnode.h"
 #include "dnai/focusmanager.h"
+#include "dnai/models/gui/iolink.h"
 
 namespace dnai
 {
@@ -22,7 +23,8 @@ namespace dnai
 
         public:
             explicit GenericNode(QQuickItem *parent = nullptr);
-            /**
+	        void createLink(models::gui::IoLink *link, GenericNode *n2);
+	        /**
             * \brief Override updatePaintNode and draw a beautifull Node
             * \return QSGNode *
             */

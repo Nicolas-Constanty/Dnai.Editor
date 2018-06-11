@@ -7,6 +7,7 @@
                 "binaryOperator": {
                     "inputs": 2,
                     "input_names": ["LeftOperand", "RightOperand"],
+                    "input_diplay_names": ["Value 1", "Value 2"],
                     "categories": {
                         "logical": {
                             "categories": {
@@ -376,6 +377,7 @@
                 "unaryOperator": {
                     "inputs": 1,
                     "input_names": ["Operand"],
+                    "input_diplay_names": ["Value 1"],
                     "categories": {
                         "int": {
                             "type": 2,

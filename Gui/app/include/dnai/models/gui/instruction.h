@@ -57,6 +57,9 @@ namespace dnai
                 QList<QString> const &linked() const;
                 bool setLinkedEntities(QList<QString> const &value);
 
+				const QUuid &guiUuid() const;
+				bool setGuiUuid(const QUuid &value);
+
 			private:
 				data::Instruction m_data;
 			};

@@ -20,6 +20,7 @@ namespace dnai
 					QList<models::Entity*> outputs;
 					QList<models::gui::Instruction*> instructions;
 					QList<declarable::Variable*> variables;
+					QList<models::gui::IoLink *> iolinks;
 
                     Function& operator=(const Function& other) = default;
 

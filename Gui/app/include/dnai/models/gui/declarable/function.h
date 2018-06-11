@@ -38,12 +38,19 @@ namespace dnai
 					//Implementation of IInstruction
 					const QList<models::Entity*> &inputs() const;
 					bool setInputs(const QList<models::Entity*>& inputs);
+
 					const QList<models::Entity*> &outputs() const;
 					bool setOutputs(const QList<models::Entity*>& outputs);
+
 					const QList<models::gui::Instruction *> &instructions() const;
 
-                    Q_INVOKABLE void addInput(models::Entity *var);
-                    Q_INVOKABLE void addOutput(models::Entity *var);
+					const QList<dnai::models::gui::IoLink *> &iolinks() const;
+					bool setIoLinks(const QList<dnai::models::gui::IoLink *> &);
+					void appendIoLink(dnai::models::gui::IoLink *);
+					void removeIoLink(dnai::models::gui::IoLink* link);
+
+					Q_INVOKABLE void addInput(models::Entity *var);
+					Q_INVOKABLE void addOutput(models::Entity *var);
 					Q_INVOKABLE void removeInput(const QString &name);
 					Q_INVOKABLE void removeOutput(const QString &name);
 
@@ -53,7 +60,8 @@ namespace dnai
 					Q_INVOKABLE void moveInputDown(int index);
 					Q_INVOKABLE void moveOutputDown(int index);
 
-                    /*Q_INVOKABLE void updateInputName(int index, const QString &name);
+
+					/*Q_INVOKABLE void updateInputName(int index, const QString &name);
 					Q_INVOKABLE void updateInputVarType(int index, qint32 varType);
 
 					Q_INVOKABLE void updateOutputName(int index, const QString &name);
@@ -65,24 +73,25 @@ namespace dnai
 					void setOutputModels(EntityList* outputs);
 
 					void addInstruction(Instruction *instruction);
+					Instruction* getInstruction(const QUuid& uuid);
 
-                    Q_INVOKABLE quint32 getInputId(QString const &name) const;
-                    Q_INVOKABLE quint32 getOutputId(QString const &name) const;
+					Q_INVOKABLE quint32 getInputId(QString const &name) const;
+					Q_INVOKABLE quint32 getOutputId(QString const &name) const;
 
-                    models::gui::Instruction *getInstruction(quint32 uid) const;
+					models::gui::Instruction *getInstruction(quint32 uid) const;
 
 				signals:
 					void inputModelsChanged(dnai::models::gui::EntityList* inputs);
 					void outputModelsChanged(dnai::models::gui::EntityList* outputs);
 
-
 				private:
 					EntityList *m_finputs;
 					EntityList *m_foutputs;
+					QHash<QUuid, Instruction*> m_functionsHash;
 				};
-			}
-		}
-	}
-}
+				}
+				}
+				}
+				}
 
 #endif //DNAI_MODELS_GUI_DECLARABLE_FUNCTION_H

@@ -127,12 +127,21 @@ namespace dnai
 
         void InstructionHandler::onDataLinked(quint32 function, quint32 fromI, const QString &output, quint32 toI, const QString &input)
         {
+            qDebug() << "===============================================================================";
             models::Entity &func = manager.getEntity(function);
             models::gui::declarable::Function *dat = func.guiModel<models::gui::declarable::Function>();
             models::gui::Instruction *from = dat->getInstruction(fromI);
             models::gui::Instruction *to = dat->getInstruction(toI);
 
             /* to do: implement the link in the model */
+            auto iolink = new models::gui::IoLink();
+            models::gui::data::IoLink data;
+            data.inputName = input;
+            data.outputName = output;
+            data.inputUuid = from->guiUuid();
+            data.outputUuid = to->guiUuid();
+            iolink->setData(data);
+            dat->appendIoLink(iolink);
 
             qDebug() << "==Core== Function.Instruction.DataLinked(" << function << ", " << fromI << ", " << output << ", " << toI << ", " << input << ")";
 

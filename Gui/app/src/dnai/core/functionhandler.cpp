@@ -375,7 +375,6 @@ namespace dnai
                 {
                     instr = new models::gui::Instruction();
                     instr->setInstructionId(type);
-                    instr->setUid(instruction);
 
                     QList<QString> linked;
 
@@ -391,6 +390,7 @@ namespace dnai
                     instr = pendingInstruction.front();
                     pendingInstruction.pop();
                 }
+                instr->setUid(instruction);
                 qDebug() << "==Core== Function.InstructionAdded(" << function << ", " << type << ", " << QList<EntityID>::fromStdList(arguments) << ", " << instruction << ")";
                 emit instructionAdded(&manager.getEntity(function), instr);
             }
