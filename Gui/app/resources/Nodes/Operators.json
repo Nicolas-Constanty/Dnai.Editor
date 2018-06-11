@@ -2,9 +2,11 @@
     "categories": {
         "operators": {
             "outputs": 1,
+            "output_names": ["result"],
             "categories": {
                 "binaryOperator": {
                     "inputs": 2,
+                    "input_names": ["LeftOperand", "RightOperand"],
                     "categories": {
                         "logical": {
                             "categories": {
@@ -373,6 +375,7 @@
                 },
                 "unaryOperator": {
                     "inputs": 1,
+                    "input_names": ["Operand"],
                     "categories": {
                         "int": {
                             "type": 2,

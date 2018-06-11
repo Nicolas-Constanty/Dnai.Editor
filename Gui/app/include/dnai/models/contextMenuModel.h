@@ -2,6 +2,7 @@
 #define DNAI_MODELS_CONTEXT_MENU_MODEL_H
 #include <QAbstractItemModel>
 #include <QHash>
+#include <QStringList>
 #include "generictreeitem.h"
 
 namespace dnai
@@ -22,6 +23,8 @@ namespace dnai
             Q_PROPERTY(QList<qint32> construction READ construction WRITE setConstruction NOTIFY constructionChanged)
             Q_PROPERTY(int flowIn READ flowIn WRITE setFlowIn NOTIFY flowInChanged)
             Q_PROPERTY(int flowOut READ flowOut WRITE setFlowOut NOTIFY flowOutChanged)
+			Q_PROPERTY(QStringList inputNames READ inputNames WRITE setInputNames NOTIFY inputNamesChanged)
+			Q_PROPERTY(QStringList outputNames READ outputNames WRITE setOutputNames NOTIFY outputNamesChanged)
 
 		public:
 			const QString &name() const;
@@ -35,6 +38,10 @@ namespace dnai
             QList<qint32> const &construction() const;
             int flowIn() const;
             int flowOut() const;
+			const QStringList &inputNames() const;
+			const QStringList &outputNames() const;
+			void appendInputName(const QString &name);
+			void appendOutputName(const QString &name);
 
 		public:
 			void setName(const QString &);
@@ -47,6 +54,8 @@ namespace dnai
             void setConstruction(QList<qint32> const &value);
             void setFlowIn(int value);
             void setFlowOut(int value);
+			void setInputNames(const QStringList &value);
+			void setOutputNames(const QStringList &value);
 
 		signals:
 			void nameChanged(const QString &);
@@ -59,6 +68,8 @@ namespace dnai
             void constructionChanged(QList<qint32> const &value);
             void flowInChanged(int value);
             void flowOutChanged(int value);
+			void inputNamesChanged(const QStringList &value);
+			void outputNamesChanged(const QStringList &value);
 
 		private:
 			QString m_name;
@@ -71,6 +82,8 @@ namespace dnai
             QList<qint32> m_construction;
 			int m_flowIn = 0;
 			int m_flowOut = 0;
+			QStringList m_inputNames;
+			QStringList m_outputNames;
 		};
 		class ContextMenuModel : public QAbstractItemModel
 		{

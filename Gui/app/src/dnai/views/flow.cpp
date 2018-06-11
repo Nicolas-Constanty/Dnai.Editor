@@ -9,9 +9,9 @@ namespace dnai
 {
 	namespace views
 	{
-        FlowBackend::FlowBackend(enums::FlowTypeRessouce::FlowType t, QQuickItem* parent) :
+		FlowBackend::FlowBackend(enums::FlowTypeRessouce::FlowType t, QQuickItem* parent) :
 			BaseLinkable(parent),
-            m_typeFlow(t)
+			m_typeFlow(t)
 		{
 		}
 
@@ -41,6 +41,7 @@ namespace dnai
 		Flow::Flow(QQuickItem* parent) :
 			LinkableBezierItem(parent)
             , m_typeFlow(enums::FlowTypeRessouce::FlowType::Enter)
+			, m_genericNode(nullptr)
 		{
 			setFlag(ItemHasContents, true);
 			m_radius = 8;
@@ -216,9 +217,22 @@ namespace dnai
 			}
 		}
 
-		GenericNode* Flow::getNode() const
+        GenericNode* Flow::getNode()
 		{
-			return dynamic_cast<GenericNode *>(parentItem());
+			if (m_genericNode == nullptr)
+			{
+				GenericNode *n = nullptr;
+				QQuickItem *parent = parentItem();
+				while (n == nullptr && parent != nullptr)
+				{
+					n = dynamic_cast<GenericNode *>(parent);
+					if (n)
+					{
+						m_genericNode = n;
+					}
+				}
+			}
+			return m_genericNode;
 		}
 
 		void Flow::setLink(Link *l)

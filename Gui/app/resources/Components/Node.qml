@@ -84,6 +84,7 @@ GenericNode {
         anchors.topMargin: headerNode.borderWidth + 1
         visible: _node.state === "Open"
 
+        //Flow in list
         Column {
             id: _flowIn
             spacing: 10
@@ -110,6 +111,7 @@ GenericNode {
             }
         }
 
+        //Input list
         Column {
             spacing: 10
             width: 10
@@ -119,6 +121,8 @@ GenericNode {
             Repeater {
                 model: _node.model.inputs
                 delegate: Input {
+                    id: _inputDel
+                    property string name: ""
                     width: 10
                     height: 10
                     radius: 5
@@ -131,15 +135,22 @@ GenericNode {
                             AppSettings.theme["nodes"]["genericNode"]["color"]
                     }
                     onLinked: {
-                        console.log("Link output")
+                        console.log(name)
+                        console.log(instructionModel)
+                        console.log(_node.instruction_model)
+                        console.log(_inputDel.name)
                     }
                     onUnlinked: {
                         console.log("Unlink output")
+                    }
+                    Component.onCompleted: {
+                        name = _node.model.inputNames[index]
                     }
                 }
             }
         }
 
+        //Flow out List
         Column {
             id: _flowOut
             spacing: 10
@@ -166,6 +177,7 @@ GenericNode {
             }
         }
 
+        //Output List
         Column {
             spacing: 10
             width: 10
@@ -175,6 +187,8 @@ GenericNode {
             Repeater {
                 model: _node.model.outputs
                 delegate: Output {
+                    id: _outputDel
+                    property string name: ""
                     width: 10
                     height: 10
                     radius: 5
@@ -187,10 +201,16 @@ GenericNode {
                             AppSettings.theme["nodes"]["genericNode"]["color"]
                     }
                     onLinked: {
-                        console.log("Link output")
+                        console.log(name)
+                        console.log(instructionModel)
+                        console.log(_node.instruction_model)
+                        console.log(_outputDel.name)
                     }
                     onUnlinked: {
                         console.log("Unlink output")
+                    }
+                    Component.onCompleted: {
+                        name = _node.model.outputNames[index]
                     }
                 }
             }
