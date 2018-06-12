@@ -111,10 +111,19 @@ Rectangle {
         indicator: Rectangle {
             anchors.fill: _selectButton
             color: AppSettings.getEntityColor(modelData.entityType)
-            TextAwesomeSolid {
-                anchors.centerIn: parent
+
+            TextAwesomeSolid { // Entity checked
+                id: _entityCheck
+                anchors.top: parent.top
+                anchors.topMargin: 5
+                anchors.bottom: _expandbutton.top
+                anchors.bottomMargin: 5
+                anchors.right: parent.right
+                anchors.left: parent.left
+                horizontalAlignment: Text.AlignHCenter
+                verticalAlignment: Text.AlignVCenter
                 text: "\uf00c"
-                font.pointSize: 15
+                font.pointSize: 10
                 visible: _selectButton.checked
                 color: "#99000000"
             }
@@ -159,16 +168,24 @@ Rectangle {
                 ]
                 anchors.bottom: parent.bottom
                 anchors.horizontalCenter: parent.horizontalCenter
-//                anchors.right: parent.right
-//                anchors.left: parent.left
-                height: 12
+                anchors.right: parent.right
+                anchors.left: parent.left
+                horizontalAlignment: Label.AlignHCenter
                 padding: 0
                 text: state == "Collapse" ? "\uf0d7" : "\uf0d8"
                 color: "#99000000"
                 verticalAlignment: Qt.AlignBottom
-                font.pointSize: 15
+                font.pointSize: 8
                 background: Rectangle {
+                    anchors.fill: _expandbutton
                     color: _expandbutton.hovered ? "#60ffffff" : "transparent"
+                    Rectangle { // border top
+                        height: 1
+                        color: "#99000000"
+                        anchors.top: parent.top
+                        anchors.right: parent.right
+                        anchors.left: parent.left
+                    }
                 }
                 MouseArea {
                     id: _expender
@@ -180,13 +197,6 @@ Rectangle {
                             _expandbutton.state = "Collapse"
                     }
                 }
-            }
-            Rectangle {
-                height: 1
-                color: "#50000000"
-                anchors.top: _expandbutton.top
-                anchors.right: parent.right
-                anchors.left: parent.left
             }
         }
 
