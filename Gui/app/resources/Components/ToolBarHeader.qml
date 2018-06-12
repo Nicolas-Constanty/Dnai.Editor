@@ -343,7 +343,7 @@ ToolBar {
             //                }
         }
     }
-    Timer {
+    /*Timer {
         id: _timer
         running: false
         interval: 3000
@@ -355,8 +355,9 @@ ToolBar {
             if (running == true)
                 _buildButton.status = 3
         }
-    }
-    Button {
+    }*/
+
+    /*Button {
         property int status: 0
         id: _buildButton
         anchors.centerIn: parent
@@ -378,7 +379,7 @@ ToolBar {
             duration: 3000
             running: false
         }
-    }
+    }*/
     UserMenu {
         id: _usrmenu
         anchors.top: parent.top

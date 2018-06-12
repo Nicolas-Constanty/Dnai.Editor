@@ -12,6 +12,7 @@
 #include "functionhandler.h"
 #include "enumhandler.h"
 #include "listhandler.h"
+#include "globalhandler.h"
 
 namespace dnai
 {
@@ -25,6 +26,7 @@ namespace dnai
             Q_PROPERTY(VariableHandler *variable READ variable)
             Q_PROPERTY(EnumHandler *enumeration READ enumeration)
             Q_PROPERTY(FunctionHandler *Function READ function)
+            Q_PROPERTY(GlobalHandler *global READ global)
 
         private:
             HandlerManager();
@@ -41,6 +43,7 @@ namespace dnai
             VariableHandler *variable();
             EnumHandler *enumeration();
             FunctionHandler *function();
+            GlobalHandler *global();
 
             /*
              * Inner c++ properties
@@ -51,6 +54,7 @@ namespace dnai
             VariableHandler &Variable();
             EnumHandler &Enumeration();
             FunctionHandler &Function();
+            GlobalHandler &Global();
 
         private:
             EntityManager m_manager;
@@ -61,6 +65,7 @@ namespace dnai
             VariableHandler m_variable;
             EnumHandler m_enumeration;
             FunctionHandler m_function;
+            GlobalHandler m_global;
         };
     }
 }
