@@ -268,8 +268,20 @@ namespace dnai
 				void Function::removeIoLink(dnai::models::gui::IoLink* link)
 				{
 					if (m_data.iolinks.contains(link))
-						m_data.iolinks.removeOne(link);
-				}
+                        m_data.iolinks.removeOne(link);
+                }
+
+                IoLink *Function::findIOLink(const QUuid &instruction, const QString &input) const
+                {
+                    for (IoLink *curr : m_data.iolinks)
+                    {
+                        if (curr->data().inputUuid == instruction && curr->data().inputName == input)
+                        {
+                            return curr;
+                        }
+                    }
+                    return nullptr;
+                }
 
 				const QList<dnai::models::gui::FlowLink*>& Function::flowlinks() const
 				{
@@ -296,7 +308,7 @@ namespace dnai
                         m_data.flowlinks.removeOne(link);
                 }
 
-                FlowLink *Function::findFlowLink(const QUuid &from, quint32 outPin, const QUuid &to)
+                FlowLink *Function::findFlowLink(const QUuid &from, quint32 outPin, const QUuid &to) const
                 {
                     for (FlowLink *curr : m_data.flowlinks)
                     {

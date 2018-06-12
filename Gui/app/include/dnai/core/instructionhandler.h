@@ -51,12 +51,9 @@ namespace dnai
             /*
              * onRemoved
              * onEntryPointSet
-             * onDataLinked
-             * onDataUnlinked
-             * onExecutionLinked
-             * onExecutionUnlinked
              */
             void dataLinked(models::Entity *func, models::gui::Instruction *from, QString const &output, models::gui::Instruction *to, QString const &input);
+            void dataUnlinked(models::Entity *func, models::gui::Instruction *instruction, QString const &input);
             void executionLinked(models::Entity *func, models::gui::Instruction *from, quint32 outPin, models::gui::Instruction *to);
             void executionUnlinked(models::Entity *func, models::gui::Instruction *from, quint32 outPin);
 

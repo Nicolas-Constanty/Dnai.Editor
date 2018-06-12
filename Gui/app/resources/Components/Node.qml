@@ -156,6 +156,7 @@ GenericNode {
                         console.log(instructionModel)
                         console.log(_inputDel.name)
                         console.log(_node.instruction_model)
+                        Controller.Function.instruction.unlinkData(_node.function_entity.id, _node.instruction_model.uid, _inputDel.name);
                     }
                     Component.onCompleted: {
                         name = _node.model.inputNames[index]
@@ -223,6 +224,7 @@ GenericNode {
                         console.log(instructionModel)
                         console.log(_outputDel.name)
                         console.log(_node.instruction_model)
+                        Controller.Function.instruction.unlinkData(_node.function_entity.id, instruction_model.id, name);
                     }
                     Component.onCompleted: {
                         name = _node.model.outputNames[index]
