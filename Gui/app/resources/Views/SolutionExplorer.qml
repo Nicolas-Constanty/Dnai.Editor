@@ -7,6 +7,7 @@ import DNAI.Models 1.0
 import DNAI.Enums 1.0
 
 import Dnai.FontAwesome 1.0
+import DNAI.Core 1.0
 
 import "../Style"
 import "../Components"
@@ -29,6 +30,32 @@ Rectangle {
         font.capitalization: Font.AllUppercase
         anchors.left: parent.left
         anchors.top: parent.top
+    }
+
+    BuildButton {
+        id: _buildButton
+
+        anchors.top: _title.top
+        anchors.bottom: _title.bottom
+        anchors.right: parent.right
+        anchors.margins: 5
+
+        radius: 2
+
+        onBuild: {
+            Editor.buildSolution();
+        }
+
+        Connections {
+            target: Controller.global
+            onSaved: {
+                Editor.notifySuccess("Solution built in: " + path);
+                _buildButton.builded();
+            }
+            onSaveError: {
+                _buildButton.builded();
+            }
+        }
     }
 
     ListView {

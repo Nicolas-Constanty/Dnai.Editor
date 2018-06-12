@@ -139,13 +139,9 @@ namespace dnai
         m_toasterManagerService.notifyWarning(text, func);
     }
 
-    void Editor::onBuildSuccess() {
-        this->notifySuccess("Build succeeded !", [](){
-        });
-        //TODO REPLACE
-        QFile file("D:\\EIP\\Core\\TestCommand\\bin\\Debug\\moreOrLess.dnai");
-
-        file.copy("C:\\Users\\GasparQ\\Desktop\\Test\\moreOrLess.dnai");
+    void Editor::buildSolution() {
+        QString path = m_solution->fileName();
+        gcore::HandlerManager::Instance().Global().save(QUrl(path.replace(".dnaisolution", ".dnai")).toLocalFile());
     }
 
 	const QList<interfaces::ICommand*>& Editor::actions() const

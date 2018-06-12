@@ -148,5 +148,6 @@
         <file>resources/Style/MTextClickable.qml</file>
         <file>resources/Style/MPopup.qml</file>
         <file>resources/Nodes/Operators.json</file>
+        <file>resources/Components/BuildButton.qml</file>
     </qresource>
 </RCC>

@@ -133,7 +133,8 @@ SOURCES += \
     src/dnai/models/gui/entitylist.cpp \
     src/dnai/models/contextmenumodel.cpp \
     src/dnai/models/gui/iolink.cpp \
-    src/dnai/models/gui/flowlink.cpp
+    src/dnai/models/gui/flowlink.cpp \
+    src/dnai/core/globalhandler.cpp
 
 
 RESOURCES += qml.qrc
@@ -321,7 +322,8 @@ HEADERS += \
     include/dnai/models/gui/data/iolink.h \
     include/dnai/models/gui/iolink.h \
     include/dnai/models/gui/flowlink.h \
-    include/dnai/models/gui/data/flowlink.h
+    include/dnai/models/gui/data/flowlink.h \
+    include/dnai/core/globalhandler.h
 
 
 #LIB
