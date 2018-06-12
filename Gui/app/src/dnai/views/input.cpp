@@ -5,7 +5,6 @@
 #include "dnai/views/output.h"
 #include "dnai/views/input.h"
 #include "dnai/views/genericnode.h"
-#include "dnai/views/canvasnode.h"
 #include "dnai/controllers/inputcontroller.h"
 
 namespace dnai
@@ -27,7 +26,7 @@ namespace dnai
 		{
 			QQuickItem::componentComplete();
             GenericNode *n = nullptr;
-            QQuickItem *parent = parentItem();
+			auto parent = parentItem();
             while (n == nullptr && parent != nullptr)
             {
                 n = dynamic_cast<GenericNode *>(parent);
@@ -40,25 +39,37 @@ namespace dnai
 		LinkableBezierItem* Input::findLinkableBezierItem(GenericNode* n, const QPointF& p)
 		{
 			auto qlist = n->outputs().findFocused(p);
-			return (qlist.size() != 0) ? dynamic_cast<Io*>(qlist.at(0)) : nullptr;
+			return (!qlist.empty()) ? dynamic_cast<Io*>(qlist.at(0)) : nullptr;
 		}
 
 		void Input::updateLink()
 		{
 			auto list = m_linkable->links();
-			for (auto i = 0; i < list.size(); i++)
+			for (auto l : list)
 			{
-				const auto l = list.at(i);
 				l->curve()->setRealPosition(getCanvasPos());
 				const auto io = dynamic_cast<Output *>(dynamic_cast<BaseIo *>(l->L1 != m_linkable ? l->L1 : l->L2)->parent());
                 l->curve()->setP4(io->getCanvasPos());
 			}
 		}
 
+		void Input::unlinkAll()
+		{
+            qDebug() << "ici";
+			for (auto link : m_linkable->links())
+			{
+				const auto lb = dynamic_cast<Output *>(dynamic_cast<BaseLinkable *>(link->L1 == m_linkable ? link->L2 : link->L1)->parent());
+				emit unlinked(lb->property("name"), lb->getNode()->property("instruction_model"));
+			}
+			LinkableBezierItem::unlinkAll();
+		}
+
 		void Input::afterRealease(Link *l)
 		{
 			if (l == nullptr)
+			{
 				unlinkAll();
+			}
 		}
 	}
 }

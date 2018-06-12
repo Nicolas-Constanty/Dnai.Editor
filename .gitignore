@@ -67,3 +67,5 @@ Gui/app/GeneratedFiles/
 *.filters
 
 *.vcxproj
+
+*.TMP

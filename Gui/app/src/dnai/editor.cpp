@@ -1,7 +1,6 @@
 #include <tuple>
 
 #include <QObject>
-#include <QQuickItem>
 #include <QQmlProperty>
 #include <QQuickView>
 #include <QJsonDocument>
@@ -356,7 +355,10 @@ namespace dnai
         instruction->setX(x - canvas->content()->x());
         instruction->setY(y - canvas->content()->y());
 
-        createNodeQMLComponent(node, func, instruction, canvas->content());
+        if (createNodeQMLComponent(node, func, instruction, canvas->content()) == nullptr)
+        {
+			notifyWarning("Cannot create qml node");
+        }
 
         m_pendingInstruction.pop();
     }

@@ -68,7 +68,7 @@ namespace dnai
 			void nbSegmentsChanged(uint n);
             void typeChanged(int type);
 			void linked(const QVariant &name, const QVariant &instructionModel);
-			void unlinked(QObject *link);
+			void unlinked(const QVariant &name, const QVariant &instructionModel);
 
 		protected:
 			uint m_nbSegments;

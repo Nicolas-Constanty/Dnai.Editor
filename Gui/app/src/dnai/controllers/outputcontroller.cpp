@@ -18,11 +18,10 @@ namespace dnai
 
 			if (li != nullptr && li->getType() == getType())
 			{
-				li->unlinkAll();
 				const auto link = BaseIo::connect(linkable, curve);
 				if (const auto output = dynamic_cast<dnai::views::Output *>(parent()))
 				{
-					const auto input = dynamic_cast<dnai::views::Input *>(li->parent());
+                    const auto input = dynamic_cast<dnai::views::Input *>(li->parent());
 					emit output->linked(input->property("name"), input->getNode()->property("instruction_model"));
 				}
 				return link;

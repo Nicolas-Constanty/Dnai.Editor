@@ -55,6 +55,17 @@ namespace dnai
 				l->curve()->setP4(io->getCanvasPos());
 			}
 		}
+
+		void Output::unlinkAll()
+		{
+            qDebug() << "unlink";
+			for (auto link : m_linkable->links())
+			{
+				const auto lb = dynamic_cast<Input *>(dynamic_cast<BaseLinkable *>(link->L1 == m_linkable ? link->L2 : link->L1)->parent());
+				emit unlinked(lb->property("name"), lb->getNode()->property("instruction_model"));
+			}
+			LinkableBezierItem::unlinkAll();
+		}
 	}
 }
 

@@ -15,7 +15,7 @@ namespace dnai
 		class LinkableBezierItem : public CustomShape
 		{
 		public:
-			LinkableBezierItem(QQuickItem *parent = nullptr);
+			explicit LinkableBezierItem(QQuickItem *parent = nullptr);
             interfaces::ALinkable *getLinkable() const { return m_linkable; }
 			virtual QPointF getCanvasPos() const = 0;
 			virtual void updateLink() = 0;
