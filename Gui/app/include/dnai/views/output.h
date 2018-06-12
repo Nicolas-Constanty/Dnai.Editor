@@ -31,6 +31,7 @@ namespace dnai
 			virtual LinkableBezierItem *findLinkableBezierItem(GenericNode* n, const QPointF& p) override;
 
 			virtual void updateLink() override;
+			void unlinkAll() override;
 
 		private:
 

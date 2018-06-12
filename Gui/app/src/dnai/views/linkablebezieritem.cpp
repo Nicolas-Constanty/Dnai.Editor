@@ -9,8 +9,10 @@ namespace dnai
 {
 	namespace views
 	{
-		LinkableBezierItem::LinkableBezierItem(QQuickItem *parent) : CustomShape(parent), m_currentCurve(nullptr),
-			m_linkable(nullptr)
+		LinkableBezierItem::LinkableBezierItem(QQuickItem *parent) : CustomShape(parent)
+		, m_currentCurve(nullptr)
+		, m_linkable(nullptr)
+		, m_status(LinkStatus::Normal)
 		{
 			setAcceptHoverEvents(true);
 			setAcceptedMouseButtons(Qt::LeftButton);
@@ -39,7 +41,7 @@ namespace dnai
             const auto p(mapToItem(m_canvas->content(), event->pos()));
             m_currentCurve->setP4(p);
             auto qlist = m_canvas->focusManager().findFocused(p);
-			if (qlist.size() == 0)
+			if (qlist.empty())
 			{
 				if (m_currentHover)
 				{
@@ -92,12 +94,8 @@ namespace dnai
 			auto b = new BezierCurve(m_canvas->content());
 			b->setPosition(getCanvasPos());
 			b->setP1(QPoint(0, 0));
-			QColor cb(colorLink());
+			const auto cb(colorLink());
 			b->setFillColor(cb);
-			const QColor c((cb.red() < 205 ? cb.red() + 50 : 255),
-				(cb.green() < 205 ? cb.green() + 50 : 255),
-				(cb.blue() < 205 ? cb.blue() + 50 : 255),
-				cb.alpha());
 			const auto co = m_linkable->connect(a->getLinkable(), b);
 			if (co)
 			{
@@ -195,9 +193,8 @@ namespace dnai
 		{
 			setNormal();
 			auto list = m_linkable->links();
-			for (auto i = 0; i < list.size(); i++)
+			for (auto l : list)
 			{
-				auto l = list.at(i);
 				auto lb = dynamic_cast<LinkableBezierItem *>(dynamic_cast<BaseLinkable *>(l->L1 == m_linkable ? l->L2 : l->L1)->parent());
                 if (lb->getLinkable()->links().size() < 2)
                     lb->setNormal();

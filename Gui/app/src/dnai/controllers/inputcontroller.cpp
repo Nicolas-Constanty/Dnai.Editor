@@ -25,9 +25,10 @@ namespace dnai
 				auto l = getLink(linkable);
 				if (l == nullptr)
 				{
-					if (m_links.size() > 0)
+					if (!m_links.empty())
 					{
-						unlinkAll();
+						if (auto input = dynamic_cast<dnai::views::Input *>(parent()))
+							input->unlinkAll();
 					}
 					l = new Link(this, linkable);
 					l->setCurve(curve);

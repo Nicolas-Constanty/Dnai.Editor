@@ -4,7 +4,6 @@
 #include "dnai/link.h"
 #include "dnai/views/genericnode.h"
 #include "dnai/views/flow.h"
-#include "dnai/enums/guitype.h"
 
 namespace dnai
 {
@@ -37,7 +36,7 @@ namespace dnai
 				if (const auto fl = dynamic_cast<Flow *>(parent()))
 				{
 					const auto flow = dynamic_cast<dnai::views::Flow *>(li->parent());
-					auto index = 0;
+					int index;
 					if (flow->typeFlow() == enums::FlowTypeRessouce::FlowType::Exit)
 						index = flow->getNode()->flowsOut().getList().indexOf(flow);
 					else
@@ -169,8 +168,7 @@ namespace dnai
             if (t == m_typeFlow && m_linkable != nullptr)
 				return;
             m_typeFlow = t;
-			if (m_linkable)
-				delete m_linkable;
+			delete m_linkable;
 			m_linkable = new FlowBackend(t, this);
             emit typeFlowChanged(t);
 			update();
@@ -180,15 +178,21 @@ namespace dnai
 		{
 			QQuickItem::componentComplete();
             GenericNode *n = nullptr;
-            QQuickItem *parent = parentItem();
+			auto parent = parentItem();
             while (n == nullptr && parent != nullptr)
             {
                 n = dynamic_cast<GenericNode *>(parent);
                 if (n)
-                    if (m_typeFlow == enums::FlowTypeRessouce::FlowType::Exit)
-                        n->flowsOut().registerItem(this);
-                    else
-                        n->flowsIn().registerItem(this);
+                {
+					if (m_typeFlow == enums::FlowTypeRessouce::FlowType::Exit)
+					{
+						n->flowsOut().registerItem(this);
+					}
+					else {
+						n->flowsIn().registerItem(this);
+					}
+					break;
+                }
                 parent = parent->parentItem();
             }
 		}
@@ -233,12 +237,12 @@ namespace dnai
             if (m_typeFlow == enums::FlowTypeRessouce::FlowType::Exit)
             {
                 auto qlist = n->flowsIn().findFocused(p);
-                return (qlist.size() != 0) ? dynamic_cast<Flow*>(qlist.at(0)) : nullptr;
+                return (!qlist.empty()) ? dynamic_cast<Flow*>(qlist.at(0)) : nullptr;
             }
             else if (m_typeFlow == enums::FlowTypeRessouce::FlowType::Enter)
             {
                 auto qlist = n->flowsOut().findFocused(p);
-                return (qlist.size() != 0) ? dynamic_cast<Flow*>(qlist.at(0)) : nullptr;
+                return (!qlist.empty()) ? dynamic_cast<Flow*>(qlist.at(0)) : nullptr;
             }
 			return nullptr;
 		}
@@ -246,9 +250,8 @@ namespace dnai
 		void Flow::updateLink()
 		{
 			auto list = m_linkable->links();
-			for (auto i = 0; i < list.size(); i++)
+			for (auto l : list)
 			{
-				const auto l = list.at(i);
 				l->curve()->setPosition(getCanvasPos());
 				const auto io = dynamic_cast<Flow *>(dynamic_cast<FlowBackend *>(l->L1 != m_linkable ? l->L1 : l->L2)->parent());
 				l->curve()->setP4(io->getCanvasPos());
