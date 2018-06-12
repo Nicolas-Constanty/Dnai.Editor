@@ -110,7 +110,8 @@ GenericNode {
                         console.log(_node.instruction_model)
                     }
                     onUnlinked: {
-                        console.log("Unlink output")
+                        console.log(outindex)
+                        console.log(instructionModel)
                     }
                 }
             }
@@ -180,7 +181,8 @@ GenericNode {
                         console.log(_node.instruction_model)
                     }
                     onUnlinked: {
-                        console.log("Unlink output")
+                        console.log(outindex)
+                        console.log(instructionModel)
                     }
                 }
             }

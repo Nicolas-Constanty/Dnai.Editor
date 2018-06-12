@@ -61,10 +61,12 @@ namespace dnai
 			virtual void setLink(Link *) override;
 
             QPointF getCanvasPos() const override;
+			void unlinkAll() override;
+
         signals:
             void typeFlowChanged(enums::FlowTypeRessouce::FlowType t);
 			void linked(int outindex, const QVariant &instructionModel);
-			void unlinked(dnai::Link *link);
+			void unlinked(int outindex, const QVariant &instructionModel);
 
 		private:
             enums::FlowTypeRessouce::FlowType m_typeFlow;
