@@ -167,7 +167,6 @@ Rectangle {
                     }
                 ]
                 anchors.bottom: parent.bottom
-                anchors.horizontalCenter: parent.horizontalCenter
                 anchors.right: parent.right
                 anchors.left: parent.left
                 horizontalAlignment: Label.AlignHCenter
