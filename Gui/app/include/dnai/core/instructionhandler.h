@@ -57,6 +57,7 @@ namespace dnai
              * onExecutionUnlinked
              */
             void dataLinked(models::Entity *func, models::gui::Instruction *from, QString const &output, models::gui::Instruction *to, QString const &input);
+            void executionLinked(models::Entity *func, models::gui::Instruction *from, quint32 outPin, models::gui::Instruction *to);
 
         private:
             EntityManager &manager;
