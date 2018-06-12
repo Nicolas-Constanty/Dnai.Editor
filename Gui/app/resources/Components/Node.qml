@@ -105,9 +105,7 @@ GenericNode {
                     antialiasing: true
                     typeFlow: FlowType.Enter
                     onLinked: {
-                        console.log(outindex)
-                        console.log(instructionModel)
-                        console.log(_node.instruction_model)
+                        Controller.Function.instruction.linkExecution(_node.function_entity.id, instructionModel.uid, outindex, _node.instruction_model.uid);
                     }
                     onUnlinked: {
                         console.log("Unlink output")
@@ -140,11 +138,6 @@ GenericNode {
                             AppSettings.theme["nodes"]["genericNode"]["color"]
                     }
                     onLinked: {
-                        /*console.log(name)
-                        console.log(instructionModel)
-                        console.log(_node.instruction_model)
-                        console.log(_inputDel.name)
-                        console.log(_node.function_entity);*/
                         Controller.Function.instruction.linkData(_node.function_entity.id, instructionModel.uid, name, _node.instruction_model.uid, _inputDel.name);
                     }
                     onUnlinked: {
@@ -175,9 +168,7 @@ GenericNode {
                     antialiasing: true
                     typeFlow: FlowType.Exit
                     onLinked: {
-                        console.log(outindex)
-                        console.log(instructionModel)
-                        console.log(_node.instruction_model)
+                        Controller.Function.instruction.linkExecution(_node.function_entity.id, _node.instruction_model.uid, outindex, instructionModel.uid);
                     }
                     onUnlinked: {
                         console.log("Unlink output")
@@ -210,10 +201,7 @@ GenericNode {
                             AppSettings.theme["nodes"]["genericNode"]["color"]
                     }
                     onLinked: {
-                        console.log(name)
-                        console.log(instructionModel)
-                        console.log(_node.instruction_model)
-                        console.log(_outputDel.name)
+                        Controller.Function.instruction.linkData(_node.function_entity.id, _node.instruction_model.uid, _outputDel.name, instructionModel.uid, name);
                     }
                     onUnlinked: {
                         console.log("Unlink output")

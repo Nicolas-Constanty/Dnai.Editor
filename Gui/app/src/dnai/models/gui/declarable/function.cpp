@@ -250,8 +250,7 @@ namespace dnai
 				void Function::appendIoLink(dnai::models::gui::IoLink* link)
 				{
 					if (!m_data.iolinks.contains(link))
-					{
-						qDebug() << "Append link";
+                    {
 						m_data.iolinks.append(link);
 					}
 				}
