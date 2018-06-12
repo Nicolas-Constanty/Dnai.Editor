@@ -42,12 +42,6 @@ namespace dnai
 				const QList<models::gui::Flow*> &flowOut() const;
                 bool setFlowOut(const QList<models::gui::Flow*> &flow);
 
-				qint32 x() const;
-				bool setX(qint32 x);
-
-				qint32 y() const;
-				bool setY(qint32 y);
-
 				qint32 instruction_id() const;
 				bool setInstructionId(qint32 id);
 
@@ -59,6 +53,12 @@ namespace dnai
 
 				const QUuid &guiUuid() const;
 				bool setGuiUuid(const QUuid &value);
+
+				qint32 x() const;
+				Q_INVOKABLE bool setX(qint32 x);
+				
+				qint32 y() const;
+				Q_INVOKABLE bool setY(qint32 y);
 
 			private:
 				data::Instruction m_data;

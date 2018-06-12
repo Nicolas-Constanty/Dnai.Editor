@@ -28,9 +28,11 @@ namespace dnai
 			{
 				if (!li->links().empty())
 				{
-					if (const auto lb = dynamic_cast<LinkableBezierItem *>(li->parent()))
+					if (const auto lb = dynamic_cast<Flow *>(li->parent()))
 						lb->unlinkAll();
 				}
+				if (!links().empty())
+					dynamic_cast<Flow *>(parent())->unlinkAll();
 				const auto l = BaseLinkable::connect(linkable, curve);
 				if (const auto fl = dynamic_cast<Flow *>(parent()))
 				{
@@ -197,6 +199,30 @@ namespace dnai
                            QPointF(width() / 2, height() / 2));
         }
 
+		void Flow::unlinkAll()
+		{
+			for (auto link : m_linkable->links())
+			{
+				int index;
+				QVariant instruction;
+				const auto flow1 = dynamic_cast<Flow*>(dynamic_cast<FlowBackend*>(link->L1)->parent());
+				const auto flow2 = dynamic_cast<Flow*>(dynamic_cast<FlowBackend*>(link->L2)->parent());
+				if (flow1->typeFlow() == enums::FlowTypeRessouce::FlowType::Exit)
+				{
+					index = flow1->getNode()->flowsOut().getList().indexOf(flow1);
+					instruction = flow1->getNode()->property("instruction_model");
+				}
+				else
+				{
+					index = flow2->getNode()->flowsOut().getList().indexOf(flow2);
+					instruction = flow2->getNode()->property("instruction_model");
+				}
+				emit unlinked(index, instruction);
+			}
+
+			LinkableBezierItem::unlinkAll(); 
+		}
+
 		const QColor& Flow::colorLink() const
 		{
 			return m_borderColor;
@@ -271,7 +297,9 @@ namespace dnai
 		void Flow::afterRealease(Link *l)
 		{
 			if (l == nullptr)
+			{
 				unlinkAll();
+			}
 		}
 
 		void Flow::mousePressEvent(QMouseEvent* event)

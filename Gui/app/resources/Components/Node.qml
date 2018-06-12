@@ -24,6 +24,16 @@ GenericNode {
 
     state: "Open"
 
+    onXChanged: {
+        if (instruction_model)
+            instruction_model.setX(x)
+    }
+
+    onYChanged: {
+        if (instruction_model)
+            instruction_model.setY(y)
+    }
+
     RoundedRectangle {
         x: borderWidth * 2
         y: borderWidth * 2
@@ -108,7 +118,8 @@ GenericNode {
                         Controller.Function.instruction.linkExecution(_node.function_entity.id, instructionModel.uid, outindex, _node.instruction_model.uid);
                     }
                     onUnlinked: {
-                        console.log("Unlink output")
+                        console.log(outindex)
+                        console.log(instructionModel)
                     }
                 }
             }
@@ -171,7 +182,8 @@ GenericNode {
                         Controller.Function.instruction.linkExecution(_node.function_entity.id, _node.instruction_model.uid, outindex, instructionModel.uid);
                     }
                     onUnlinked: {
-                        console.log("Unlink output")
+                        console.log(outindex)
+                        console.log(instructionModel)
                     }
                 }
             }
