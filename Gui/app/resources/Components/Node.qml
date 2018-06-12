@@ -118,8 +118,7 @@ GenericNode {
                         Controller.Function.instruction.linkExecution(_node.function_entity.id, instructionModel.uid, outindex, _node.instruction_model.uid);
                     }
                     onUnlinked: {
-                        console.log(outindex)
-                        console.log(instructionModel)
+                        Controller.Function.instruction.unlinkExecution(_node.function_entity.id, instructionModel.uid, outindex);
                     }
                 }
             }
@@ -182,8 +181,7 @@ GenericNode {
                         Controller.Function.instruction.linkExecution(_node.function_entity.id, _node.instruction_model.uid, outindex, instructionModel.uid);
                     }
                     onUnlinked: {
-                        console.log(outindex)
-                        console.log(instructionModel)
+                        Controller.Function.instruction.unlinkExecution(_node.function_entity.id, _node.instruction_model.uid, outindex);
                     }
                 }
             }

@@ -82,6 +82,17 @@ namespace dnai
             Q_UNUSED(function)
             Q_UNUSED(instruction)
             Q_UNUSED(input)
+
+            /*qDebug() << "==Core== Function.Instruction.LinkData(" << function << ", " << instruction << ", " << input << ") => save(" << save << ")";
+
+            models::Entity &func = manager.getEntity(function);
+
+            commands::CommandManager::Instance()->exec(new commands::CoreCommand("Function.Instruction.UnlinkData", save,
+                [&func, instruction, input]() {
+                    core::function::instruction::unlinkData(func.id(), instruction, input);
+                },
+                nullptr; //relink data
+            ));*/
         }
 
         void InstructionHandler::linkExecution(quint32 function, quint32 instruction, quint32 outPin, quint32 toInstruction, bool save)
@@ -109,6 +120,30 @@ namespace dnai
             Q_UNUSED(function)
             Q_UNUSED(instruction)
             Q_UNUSED(outPin)
+
+            models::Entity &func = manager.getEntity(function);
+            models::gui::declarable::Function *data = func.guiModel<models::gui::declarable::Function>();
+            models::gui::Instruction *instr = data->getInstruction(instruction);
+            models::gui::FlowLink *focusedLink = data->findFlowLink(instr->guiUuid(), outPin);
+
+            if (focusedLink == nullptr)
+            {
+                qWarning() << "==Core== Function.Instruction.UnlinkExecution: The out pin " << outPin << " of the instruction " << instruction << " in function " << function << " is not linked";
+                return;
+            }
+
+            qDebug() << "==Core== Function.Instruction.UnlinkExecution(" << function << ", " << instruction << ", " << outPin << ") => save(" << save << ")";
+
+            models::gui::Instruction *toInstruction = data->getInstruction(focusedLink->data().to);
+
+            commands::CommandManager::Instance()->exec(new commands::CoreCommand("Function.Instruction.UnlinkExecution", save,
+                [&func, instr, outPin]() {
+                    core::function::instruction::unlinkExecution(func.id(), instr->Uid(), outPin);
+                },
+                [&func, instr, outPin, toInstruction]() {
+                    core::function::instruction::linkExecution(func.id(), instr->Uid(), outPin, toInstruction->Uid());
+                }
+            ));
         }
 
         void InstructionHandler::onRemoved(quint32 function, quint32 instruction)
@@ -184,16 +219,18 @@ namespace dnai
 
         void InstructionHandler::onExecutionLinked(quint32 function, quint32 instruction, quint32 outpin, quint32 toInstruction)
         {
-            Q_UNUSED(function)
-            Q_UNUSED(instruction)
-            Q_UNUSED(outpin)
-            Q_UNUSED(toInstruction)
             models::Entity &func = manager.getEntity(function);
             models::gui::declarable::Function *data = func.guiModel<models::gui::declarable::Function>();
             models::gui::Instruction *from = data->getInstruction(instruction);
             models::gui::Instruction *to = data->getInstruction(toInstruction);
+            models::gui::FlowLink *link = new models::gui::FlowLink();
+            models::gui::data::FlowLink flowdata;
 
-            /* todo: implement flow link here */
+            flowdata.from = from->guiUuid();
+            flowdata.to = to->guiUuid();
+            flowdata.outIndex = outpin;
+            link->setData(flowdata);
+            data->appendFlowLink(link);
 
             commands::CoreCommand::Success();
 
@@ -204,29 +241,33 @@ namespace dnai
 
         void InstructionHandler::onLinkExecutionError(quint32 function, quint32 instruction, quint32 outpin, quint32 toInstruction, const QString &message)
         {
-            Q_UNUSED(function)
-            Q_UNUSED(instruction)
-            Q_UNUSED(outpin)
-            Q_UNUSED(toInstruction)
-            Q_UNUSED(message)
-
             commands::CoreCommand::Error();
             Editor::instance().notifyError("Unable to link pin " + QString::number(outpin) + " of instruction " + QString::number(instruction) + " to instruction " + QString::number(toInstruction) + ": " + message);
         }
 
         void InstructionHandler::onExecutionUnlinked(quint32 function, quint32 instruction, quint32 outpin)
         {
-            Q_UNUSED(function)
-            Q_UNUSED(instruction)
-            Q_UNUSED(outpin)
+            models::Entity &func = manager.getEntity(function);
+            models::gui::declarable::Function *data = func.guiModel<models::gui::declarable::Function>();
+            models::gui::Instruction *from = data->getInstruction(instruction);
+            models::gui::FlowLink *lnk = data->findFlowLink(from->guiUuid(), outpin);
+
+            if (lnk != nullptr)
+            {
+                qDebug() << "==Core== Function.Instruction.ExecutionUnlinked(" << function << ", " << instruction << ", " << outpin << ")";
+                data->removeFlowLink(lnk);
+                emit executionUnlinked(&func, from, outpin);
+            }
+            else
+            {
+                qWarning() << "==Core== Function.Instruction.ExecutionUnlinked: Pin " << outpin << " of instruction " << instruction << "in function " << function << " is not linked";
+            }
         }
 
         void InstructionHandler::onUnlinkExecutionError(quint32 function, quint32 instruction, quint32 outpin, const QString &message)
         {
-            Q_UNUSED(function)
-            Q_UNUSED(instruction)
-            Q_UNUSED(outpin)
-            Q_UNUSED(message)
+            commands::CoreCommand::Success();
+            Editor::instance().notifyError("Unable to unlink pin " + QString::number(outpin) + " of instruction " + QString::number(instruction) + " in function " + QString::number(function) + ": " + message);
         }
     }
 }

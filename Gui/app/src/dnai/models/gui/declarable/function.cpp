@@ -234,6 +234,16 @@ namespace dnai
                     }
                     return nullptr;
                 }
+
+                Instruction *Function::getInstruction(const QUuid &guid) const
+                {
+                    for (models::gui::Instruction *curr : m_data.instructions)
+                    {
+                        if (curr->guiUuid() == guid)
+                            return curr;
+                    }
+                    return nullptr;
+                }
 				const QList<dnai::models::gui::IoLink*> &Function::iolinks() const
 				{
 					return m_data.iolinks;
@@ -283,8 +293,21 @@ namespace dnai
 				void Function::removeFlowLink(dnai::models::gui::FlowLink* link)
 				{
 					if (m_data.flowlinks.contains(link))
-						m_data.flowlinks.removeOne(link);
-				}
+                        m_data.flowlinks.removeOne(link);
+                }
+
+                FlowLink *Function::findFlowLink(const QUuid &from, quint32 outPin, const QUuid &to)
+                {
+                    for (FlowLink *curr : m_data.flowlinks)
+                    {
+                        if (curr->data().from == from && curr->data().outIndex == outPin)
+                        {
+                            if (to.isNull() || curr->data().to == to)
+                                return curr;
+                        }
+                    }
+                    return nullptr;
+                }
 			}
 		}
 	}

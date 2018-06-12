@@ -53,6 +53,7 @@ namespace dnai
 					bool setFlowLinks(const QList<dnai::models::gui::FlowLink *> &);
 					void appendFlowLink(dnai::models::gui::FlowLink *);
 					void removeFlowLink(dnai::models::gui::FlowLink* link);
+                    models::gui::FlowLink *findFlowLink(QUuid const &from, quint32 outPin, QUuid const &to = QUuid());
 
 					Q_INVOKABLE void addInput(models::Entity *var);
 					Q_INVOKABLE void addOutput(models::Entity *var);
@@ -78,12 +79,13 @@ namespace dnai
 					void setOutputModels(EntityList* outputs);
 
 					void addInstruction(Instruction *instruction);
-					Instruction* getInstruction(const QUuid& uuid);
+                    Instruction* getInstruction(const QUuid& uuid);
 
 					Q_INVOKABLE quint32 getInputId(QString const &name) const;
 					Q_INVOKABLE quint32 getOutputId(QString const &name) const;
 
-					models::gui::Instruction *getInstruction(quint32 uid) const;
+                    models::gui::Instruction *getInstruction(quint32 uid) const;
+                    models::gui::Instruction *getInstruction(const QUuid &guid) const;
 
 				signals:
 					void inputModelsChanged(dnai::models::gui::EntityList* inputs);
