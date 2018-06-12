@@ -1,6 +1,4 @@
-#include <QtQuick/qsgflatcolormaterial.h>
 #include <QSGSimpleRectNode>
-#include <QSizeF>
 
 
 #include "dnai/views/input.h"
@@ -53,6 +51,15 @@ namespace dnai
 				}
 			}
             input->connect(output);
+		}
+
+		void GenericNode::createFlowLink(models::gui::FlowLink* link, GenericNode *n2)
+		{
+			const auto filist = n2->flowsIn().getList();
+			const auto folist = flowsOut().getList();
+			const auto output = dynamic_cast<LinkableBezierItem *>(folist.at(link->data().outIndex));
+			auto input = dynamic_cast<LinkableBezierItem *>(filist.at(0));
+			input->connect(output);
 		}
 
 		//void GenericNode::setFlowIn(bool f)

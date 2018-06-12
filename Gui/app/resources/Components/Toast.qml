@@ -21,7 +21,7 @@ Rectangle {
     property string iconsFont
     property string colorIconsFont
     property bool clickEnable: true
-    property string parentWidthUpdate: parent.width
+    property string parentWidthUpdate: parent == null ? 200 : parent.width
 
     x: parentWidthUpdate - backgroundRect.width + marginsMore + backgroundRect.width
     y: 50 + yMargins

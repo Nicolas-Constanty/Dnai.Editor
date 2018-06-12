@@ -529,6 +529,28 @@ namespace dnai
 			if (!n1 || !n2) return;
 			n1->createLink(iolink, n2);
         }
+        for (auto flowlink : function->flowlinks())
+		{
+			const auto inputInstruction = function->getInstruction(flowlink->data().from);
+			const auto outputInstruction = function->getInstruction(flowlink->data().to);
+			views::GenericNode *n1 = nullptr;
+			views::GenericNode *n2 = nullptr;
+			for (auto node : nodes)
+			{
+				if (n1 == nullptr && qvariant_cast<models::gui::Instruction*>(node->property("instruction_model")) == inputInstruction)
+				{
+					n1 = node;
+				}
+				else if (n2 == nullptr && qvariant_cast<models::gui::Instruction*>(node->property("instruction_model")) == outputInstruction)
+				{
+					n2 = node;
+				}
+				if (n1 && n2)
+					break;
+			}
+			if (!n1 || !n2) return;
+			n1->createFlowLink(flowlink, n2);
+		}
 	}
 
 	void Editor::updateContextMenu(dnai::models::Entity* entity) const

@@ -27,7 +27,7 @@ namespace dnai
                     obj["outputs"] = serializeList<models::Entity>(m_data.outputs);
                     obj["instructions"] = serializeList<models::gui::Instruction>(m_data.instructions);
 					obj["iolinks"] = serializeList<models::gui::IoLink>(m_data.iolinks);
-					obj["flowlinks"] = serializeList<models::gui::IoLink>(m_data.iolinks);
+					obj["flowlinks"] = serializeList<models::gui::FlowLink>(m_data.flowlinks);
 				}
 
 				void Function::_deserialize(const QJsonObject& obj)
