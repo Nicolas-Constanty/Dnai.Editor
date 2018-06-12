@@ -24,6 +24,16 @@ GenericNode {
 
     state: "Open"
 
+    onXChanged: {
+        if (instruction_model)
+            instruction_model.setX(x)
+    }
+
+    onYChanged: {
+        if (instruction_model)
+            instruction_model.setY(y)
+    }
+
     RoundedRectangle {
         x: borderWidth * 2
         y: borderWidth * 2
