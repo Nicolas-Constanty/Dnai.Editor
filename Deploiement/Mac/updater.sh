@@ -26,7 +26,12 @@ then
 fi
 
 cd $app_path
-find $app_name -type f -follow -print|xargs stat -f "%A %N" > $current_dir/$mac_files
+find "$app_name/Contents/Frameworks" -type f -follow -print0|xargs -0 stat -f "%A %N" > $current_dir/$mac_files
+find "$app_name/Contents/Info.plist" -type f -follow -print0|xargs -0 stat -f "%A %N" >> $current_dir/$mac_files
+find "$app_name/Contents/MacOS" -type f -follow -print0|xargs -0 stat -f "%A %N" >> $current_dir/$mac_files
+find "$app_name/Contents/PkgInfo" -type f -follow -print0|xargs -0 stat -f "%A %N" >> $current_dir/$mac_files
+find "$app_name/Contents/PlugIns" -type f -follow -print0|xargs -0 stat -f "%A %N" >> $current_dir/$mac_files
+find "$app_name/Contents/Resources" -type f -follow -print0|xargs -0 stat -f "%A %N" >> $current_dir/$mac_files
 cd $current_dir
 
 cd $repository_update_path
