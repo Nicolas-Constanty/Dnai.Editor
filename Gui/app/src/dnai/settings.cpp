@@ -1,4 +1,5 @@
 #include <QDebug>
+#include <QDesktopServices>
 
 #include "dnai/app.h"
 #include "dnai/api/api.h"
@@ -191,7 +192,12 @@ namespace dnai
     void AppSettings::onNotifyVersionChanged() {
         if (isNewVersionAvailable()) {
             Editor::instance().notifyInformation("Switch to new version " + m_currentVersionAPI, [this]() {
-                App::currentInstance()->processManager()->launchUpdater(Editor::instance().version(), m_currentVersionAPI);
+#ifdef RELEASE
+                QDesktopServices::openUrl(QUrl("https://dnai.io/download/"));
+#else
+                QDesktopServices::openUrl(QUrl("https://preprod.dnai.io/download/"));
+#endif
+               // App::currentInstance()->processManager()->launchUpdater(Editor::instance().version(), m_currentVersionAPI);
             });
             /*Editor::instance().notifyError("Switch to new version " + m_currentVersionAPI, [this]() {
                 App::currentInstance()->processManager()->launchUpdater(Editor::instance().version(), m_currentVersionAPI);
