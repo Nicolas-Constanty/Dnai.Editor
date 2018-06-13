@@ -198,8 +198,6 @@ Item {
             } else {
                 errorId.text = "Fields empty."
             }
-
-            console.log("YOLO")
         }
     }
 
