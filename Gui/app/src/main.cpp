@@ -61,6 +61,7 @@ static void registerDNAI()
     qmlRegisterDnai(dnai::models::gui::declarable::VarTypeList, "VarTypeList");
     qmlRegisterDnai(dnai::models::gui::EntityList, "EntityList");
     qmlRegisterDnai(dnai::models::ContextMenu, "ContextMenu");
+    qmlRegisterDnai(dnai::models::ContextMenuModel, "ContextMenuModel");
 }
 
 static void registerEnums()
