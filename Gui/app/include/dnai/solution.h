@@ -24,6 +24,7 @@ namespace dnai
         Solution(const QString filename);
         ~Solution();
 		Q_INVOKABLE void save() override;
+        Q_INVOKABLE bool isProjectsSaved();
 		void load(const QString& path) override;
         virtual QString path() const override;
 		void close() override;
