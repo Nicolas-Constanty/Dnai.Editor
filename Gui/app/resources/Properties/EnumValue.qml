@@ -7,16 +7,13 @@ import Dnai.FontAwesome 1.0
 Item {
     id: _enumValue
 
-    /**
-     * Action buttons
-     */
-    property var onMoveUp: null
-    property var onMoveDown: null
-    property var onDelete: null
+    signal movedUp()
+    signal movedDown()
+    signal removed()
+    signal valueUpdated(string oldValue, string newValue)
 
-    property alias value: _value.text
+    property string value
     property real contentHeight: 24
-    property var updateValue: null
     property var model: null
     property var prop: null
 
@@ -38,14 +35,15 @@ Item {
         spacing: 2
         EditableText {
             id: _value
+            text: value
             width: _enumValue.width - _moveUpButton.width - _moveDownButton.width - _deleteButton.width - _row.spacing * 3
             height: _enumValue.contentHeight
             horizontalAlignment: TextInput.AlignLeft
             onAccepted: {
-                if (_enumValue.updateValue === null)
+                _enumValue.valueUpdated(_enumValue.value, _value.text);
+                /*if (_enumValue.updateValue === null)
                     return
-                console.log("yoooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo")
-                _enumValue.updateValue(_enumValue.model, _enumValue.prop, getIndex(), _value.text)
+                _enumValue.updateValue(_enumValue.model, _enumValue.prop, getIndex(), _value.text)*/
             }
         }
         ButtonAwesomeSolid {
@@ -56,8 +54,7 @@ Item {
             label.font.pointSize: 14
             rotation: 180
             onClicked: {
-                console.log("on clicked move up");
-                if (onMoveUp !== null) onMoveUp();
+                _enumValue.movedUp();
             }
         }
         ButtonAwesomeSolid {
@@ -67,7 +64,7 @@ Item {
             label.text: "\uf0d7"
             label.font.pointSize: 14
             onClicked: {
-                if (onMoveDown !== null) onMoveDown();
+                _enumValue.movedDown();
             }
         }
         ButtonAwesomeSolid {
@@ -77,7 +74,7 @@ Item {
             label.text: "\uf2ed"
             label.font.pointSize: 14
             onClicked: {
-                if (onDelete !== null) onDelete();
+                _enumValue.removed();
             }
         }
     }

@@ -43,53 +43,96 @@ namespace dnai
             //if entity is an enum
             if (enumtype != nullptr)
             {
-                int val = 0;
                 //replicate its values on core
-                for (auto nam : enumtype->values())
+                for (QString const &name : enumtype->values())
                 {
-                    setValue(id, nam, val, false);
+                    setValue(id, name, enumtype->getValue(name), false);
                 }
             }
         }
 
-        void EnumHandler::setValue(quint32 entity, QString name, QJsonValue const &value, bool save)
+        void EnumHandler::renameValue(quint32 entity, QString name, QString newName, bool save)
         {
+            models::Entity &enu = manager.getEntity(entity);
+            QString value = enu.guiModel<models::EnumType>()->getValue(name);
+
+            qDebug() << "==Core== Enum.RenameValue(" << entity << ", " << name << ", " << newName << ") => save(" << save << ")";
+
+            commands::CommandManager::Instance()->exec(new commands::CoreCommand("Enumeration.Rename", save,
+                [this, &enu, name, newName, value](){
+                    m_pendingRemove.push(name);
+                    core::enumeration::setValue(enu.id(), newName, value);
+                },
+                [this, &enu, name, newName, value]() {
+                    m_pendingRemove.push(newName);
+                    core::enumeration::setValue(enu.id(), name, value);
+                }
+            ));
+        }
+
+        void EnumHandler::setValue(quint32 entity, QString name, QString value, bool save)
+        {
+            models::Entity &enu = manager.getEntity(entity);
+
             if (name.isEmpty())
             {
-                name = QString("Empty ") + QString::number(qrand());
+                name = enu.name() + "(" + QString::number(qrand()) + ")";
             }
 
             qDebug() << "==Core== Enum.SetValue(" << entity << ", " << name << ", " << value << ") => save(" << save << ")";
+
             commands::CommandManager::Instance()->exec(
                 new commands::CoreCommand("Enum.SetValue", save,
-                    std::bind(&::core::enumeration::setValue, entity, name, value.toString()),
-                    std::bind(&::core::enumeration::removeValue, entity, name)
+                    [&enu, name, value]() {
+                        core::enumeration::setValue(enu.id(), name, value);
+                    },
+                    [&enu, name]() {
+                        core::enumeration::removeValue(enu.id(), name);
+                    }
                 )
             );
         }
 
         void EnumHandler::removeValue(quint32 entity, QString const &name, bool save)
         {
-            const int value = manager.getEntity(entity).guiModel<models::gui::declarable::EnumType>()->values().indexOf(name);
+            models::Entity &enu = manager.getEntity(entity);
+            const QString value = enu.guiModel<models::gui::declarable::EnumType>()->getValue(name);
 
             qDebug() << "==Core== Enum.RemoveValue(" << entity << ", " << name << ") => save(" << save << ")";
+
             commands::CommandManager::Instance()->exec(
                 new commands::CoreCommand("Enum.SetValue", save,
-                    std::bind(&::core::enumeration::removeValue, entity, name),
-                    std::bind(&::core::enumeration::setValue, entity, name, QString::number(value))
+                    [&enu, name] () {
+                        core::enumeration::removeValue(enu.id(), name);
+                    },
+                    [&enu, name, value]() {
+                        core::enumeration::setValue(enu.id(), name, value);
+                    }
                 )
             );
         }
 
         void EnumHandler::onValueSet(::core::EntityID enumeration, const QString &name, QString const &value)
         {
-            QJsonValue val = QJsonDocument::fromJson(value.toUtf8()).toVariant().toJsonValue();
-            models::gui::declarable::EnumType *data = manager.getEntity(enumeration).guiModel<models::gui::declarable::EnumType>();
+            models::Entity &enu = manager.getEntity(enumeration);
+            models::gui::declarable::EnumType *data = enu.guiModel<models::gui::declarable::EnumType>();
 
-            data->addEntry(name);
-            commands::CoreCommand::Success();
-            emit valueSet(data, name, val);
+            data->addEntry(name, value);
+
             qDebug() << "==Core== Enum.ValueSet(" << enumeration << ", " << name << ", " << value << ")";
+
+            //when an enum value is renamed, don't make a success until the old one is removed
+            if (!m_pendingRemove.empty())
+            {
+                core::enumeration::removeValue(enumeration, m_pendingRemove.front());
+                m_pendingRemove.pop();
+            }
+            else
+            {
+                commands::CoreCommand::Success();
+            }
+
+            emit valueSet(&enu, name, value);
         }
 
         void EnumHandler::onSetValueError(::core::EntityID, const QString &name, QString const &value, const QString &message)
@@ -100,11 +143,12 @@ namespace dnai
 
         void EnumHandler::onValueRemoved(::core::EntityID enumeration, const QString &name)
         {
-            models::gui::declarable::EnumType *data = manager.getEntity(enumeration).guiModel<models::gui::declarable::EnumType>();
+            models::Entity &enu = manager.getEntity(enumeration);
+            models::gui::declarable::EnumType *data = enu.guiModel<models::gui::declarable::EnumType>();
 
             data->deleteEntry(name);
             commands::CoreCommand::Success();
-            emit valueRemoved(data, name);
+            emit valueRemoved(&enu, name);
             qDebug() << "==Core== Enum.ValueRemoved(" << enumeration << ", " << name << ")";
         }
 

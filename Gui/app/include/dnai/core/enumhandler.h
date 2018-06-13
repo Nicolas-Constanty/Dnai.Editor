@@ -1,6 +1,8 @@
 #ifndef DNAI_CORE_ENUMHANDLER_H
 #define DNAI_CORE_ENUMHANDLER_H
 
+#include <queue>
+
 #include <QObject>
 
 #include "entitymanager.h"
@@ -21,14 +23,15 @@ namespace dnai
             void setup();
 
         signals:
-            void valueSet(dnai::models::gui::declarable::EnumType *enumeration, QString const &name, QJsonValue const &value);
-            void valueRemoved(dnai::models::gui::declarable::EnumType *enumeration, QString const &name);
+            void valueSet(dnai::models::Entity *enumeration, QString const &name, QString const &value);
+            void valueRemoved(dnai::models::Entity *enumeration, QString const &name);
 
         public slots:
             void onEntityAdded(::core::EntityID id, models::Entity &entity);
 
         public:
-            Q_INVOKABLE void setValue(quint32 entity, QString name, QJsonValue const &value, bool save = true);
+            Q_INVOKABLE void renameValue(quint32 entity, QString name, QString newName, bool save = true);
+            Q_INVOKABLE void setValue(quint32 entity, QString name, QString value, bool save = true);
             Q_INVOKABLE void removeValue(quint32 entity, QString const &name, bool save = true);
 
         private:
@@ -40,6 +43,9 @@ namespace dnai
 
         private:
             EntityManager &manager;
+
+        private:
+            std::queue<QString> m_pendingRemove;
         };
     }
 }
