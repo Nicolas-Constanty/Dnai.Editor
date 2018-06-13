@@ -278,6 +278,31 @@ namespace dnai
 		return m_contextMenuModel;
 	}
 
+	void Editor::setContextMenuModel(dnai::models::ContextMenuModel* ctx)
+	{
+		if (ctx == m_contextMenuModel)
+			return;
+		m_contextMenuModel = ctx;
+		emit contextMenuModelChanged(ctx);
+	}
+
+	void Editor::updateContextMenuModel(dnai::models::Entity* entity) const
+	{
+		const auto function = dynamic_cast<models::gui::declarable::Function *>(entity->guiModel());
+		if (function == nullptr) return;
+		m_contextMenuModel->clearParameters();
+		m_contextMenuModel->clearReturns();
+		for (auto param : function->inputs())
+		{
+			m_contextMenuModel->appendParameter(param);
+		}
+		for (auto ret : function->outputs())
+		{
+			m_contextMenuModel->appendReturn(ret);
+		}
+		emit contextMenuModelChanged(m_contextMenuModel);
+	}
+
 	void Editor::registerEditorView(views::EditorView* view)
 	{
 		m_editorView = view;
@@ -381,6 +406,11 @@ namespace dnai
             && declared->coreModel()->entityType() == ENTITY::VARIABLE)
         {
             contextMenuModel()->appendVariable(declared);
+			emit contextMenuModelChanged(contextMenuModel());
+        }
+        else if (declared->coreModel()->entityType() == ENTITY::ENUM_TYPE)
+        {
+            contextMenuModel()->appendEnumeration(declared);
         }
     }
 

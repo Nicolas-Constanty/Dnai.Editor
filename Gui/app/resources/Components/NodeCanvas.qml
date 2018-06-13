@@ -48,67 +48,8 @@ CanvasNode {
 
     onContextMenuChanged: {
         Editor.updateContextMenu(nodeModel)
+        Editor.updateContextMenuModel(nodeModel)
         _menu2.open()
-    }
-
-    property var inputs: entityModel.inputModels
-    property var outputs: entityModel.outputModels
-    property var variables: entityModel.inputModels
-
-
-    property var inputsMenu: null
-    property var outputsMenu: null
-    property var variablesMenu: null
-
-    onInputsChanged: {
-        if (inputsMenu != null)
-            _menu.removeMenu(inputsMenu)
-        if (entityModel.inputModels && entityModel.inputModels.rowCount() > 0)
-        {
-            Factory.createObjects("resources/Components/GetterMenu.qml",
-                                  {
-                                      "getterModel": entityModel.inputModels,
-                                      "title" : "Inputs",
-                                      "ctItem": content_item,
-                                      "canvas": canvas
-                                  }, _menu)
-            inputsMenu = Factory.getObject()
-            _menu.addMenu(inputsMenu)
-        }
-    }
-
-    onOutputsChanged: {
-        if (outputsMenu != null)
-            _menu.removeMenu(outputsMenu)
-        if (entityModel.outputModels && entityModel.outputModels.rowCount() > 0)
-        {
-            Factory.createObjects("resources/Components/GetterMenu.qml",
-                                  {
-                                      "getterModel": entityModel.outputModels,
-                                      "title" : "Outputs",
-                                      "ctItem": content_item,
-                                      "canvas": canvas
-                                  }, _menu)
-            outputsMenu = Factory.getObject()
-            _menu.addMenu(outputsMenu)
-        }
-    }
-
-    onVariablesChanged: {
-        if (variablesMenu != null)
-            _menu.removeMenu(variablesMenu)
-        if (Editor.contextMenu.variables && Editor.contextMenu.variables.rowCount() > 0)
-        {
-            Factory.createObjects("resources/Components/GetterMenu.qml",
-                                  {
-                                      "getterModel": Editor.contextMenu.variables,
-                                      "title" : "Variables",
-                                      "ctItem": content_item,
-                                      "canvas": canvas
-                                  }, _menu)
-            variablesMenu = Factory.getObject()
-            _menu.addMenu(variablesMenu)
-        }
     }
 
     function onMenuNodeChoosen(choice)
@@ -123,51 +64,6 @@ CanvasNode {
         matchViewWidth: 300
         model: Editor.contextMenuModel
         triggeredAction: onMenuNodeChoosen
-    }
-
-    Menu {
-        id: _menu
-
-
-
-
-
-//        onOpenedChanged: {
-//            if (_menu.opened)
-//            {
-//                Editor.updateContextMenu(nodeModel)
-//
-
-
-//            }
-//        }
-        Repeater {
-            model: Editor.nodes
-            delegate: Item {
-                Menu {
-                    id: _subMenu
-                    title: name
-                    Repeater {
-                        model: nodeModels
-                        delegate: Item {
-                            Action {
-                                id: _subMenu1
-                                text: menuName
-                                Component.onCompleted: {
-                                    _subMenu.addAction(_subMenu1)
-                                }
-                                onTriggered: {
-                                    Editor.createNode(canvas.nodeModel, item.instruction_id, [2, 2, 2], canvas.mousePosition.x, canvas.mousePosition.y)
-                                }
-                            }
-                        }
-                    }
-                }
-                Component.onCompleted: {
-                    _menu.addMenu(_subMenu)
-                }
-            }
-        }
     }
 
     MLabel {

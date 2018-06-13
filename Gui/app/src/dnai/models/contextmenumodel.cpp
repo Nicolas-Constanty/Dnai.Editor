@@ -1,7 +1,4 @@
 #include <QJsonDocument>
-#include <QJsonObject>
-#include <QJsonArray>
-#include <QDebug>
 
 #include "dnai/models/contextMenuModel.h"
 #include "dnai/models/entity.h"
@@ -196,7 +193,8 @@ namespace dnai
 		}
 
 		ContextMenuModel::ContextMenuModel(QObject* parent)
-        : QAbstractItemModel(parent), m_root(nullptr), m_variableGetter(nullptr)
+			: QAbstractItemModel(parent), m_root(nullptr), m_variableGetter(nullptr), m_variableSetter(nullptr),
+			  m_returns(nullptr), m_parameters(nullptr)
 		{
 		}
 
@@ -214,7 +212,6 @@ namespace dnai
              */
             m_variableGetter = new ContextMenuItem();
             m_variableGetter->setName("Variables getter");
-            m_root->appendChild(m_variableGetter);
 
             /*
              * Create variableSetter node
@@ -224,7 +221,53 @@ namespace dnai
             /*
              * Populate root model with getter and setter nodes
              */
+			m_root->appendChild(m_variableGetter);
             m_root->appendChild(m_variableSetter);
+
+            /*
+             * Create enum splitter menu
+             */
+            m_enumSplitters = new ContextMenuItem();
+            m_enumSplitters->setName("Enumerations");
+            /*
+             * Populate root model with getter and setter nodes
+             */
+            m_root->appendChild(m_enumSplitters);
+
+			/*
+			* Create parameters node
+			*/
+			m_parameters = new ContextMenuItem();
+			m_parameters->setName("Parameters");
+
+			/*
+			* Create return node
+			*/
+			m_returns = new ContextMenuItem();
+			m_returns->setName("Returns");
+			/*
+			* Populate root model with parameters and returns nodes
+			*/
+			m_root->appendChild(m_parameters);
+			m_root->appendChild(m_returns);
+
+			m_paramSetter = new ContextMenuItem();
+			m_paramSetter->setName("Setter");
+
+			m_paramGetter = new ContextMenuItem();
+			m_paramGetter->setName("Getter");
+
+			m_returnSetter = new ContextMenuItem();
+			m_returnSetter->setName("Setter");
+
+			m_returnGetter = new ContextMenuItem();
+			m_returnGetter->setName("Getter");
+
+			m_parameters->appendChild(m_paramSetter);
+			m_parameters->appendChild(m_paramGetter);
+
+			m_returns->appendChild(m_returnSetter);
+			m_returns->appendChild(m_returnGetter);
 
 			parseJsonDocument(doc);
 		}
@@ -297,8 +340,7 @@ namespace dnai
 						}
 						category->setFlowIn(categoryObj["in"].toInt());
 						category->setFlowOut(categoryObj["out"].toInt());
-						parent->appendChild(category);
-                        qDebug() << "===>Append item at path: " << category->fullPath();
+                        parent->appendChild(category);
                         m_hash[category->fullPath()] = category;
 						if (categoryObj.constFind("categories") != categoryObj.constEnd())
 							parseJsonObj(category, categoryObj);
@@ -428,7 +470,7 @@ namespace dnai
             item->setOutputNames({"reference"});
             item->setType(entity->entityType());
             item->setInstructionId(dnai::enums::QInstructionID::GETTER);
-            item->setConstruction({static_cast<qint32>(entity->id())});
+            item->setConstruction({entity->id()});
 
             /*
              * Append variable into getter list
@@ -455,7 +497,7 @@ namespace dnai
             item->setOutputNames({"reference"});
             item->setType(entity->entityType());
             item->setInstructionId(dnai::enums::QInstructionID::SETTER);
-            item->setConstruction({static_cast<qint32>(entity->id())});
+            item->setConstruction({entity->id()});
 
             /*
              * Append variable into setter list
@@ -464,9 +506,156 @@ namespace dnai
             m_variableSetter->appendChild(item);
             endInsertRows();
 
-            qDebug() << "=====> Append setter at path " << item->fullPath();
+            m_hash[item->fullPath()] = item;
+        }
+
+        void ContextMenuModel::appendEnumeration(Entity *entity)
+        {
+            ContextMenuItem *item = new ContextMenuItem();
+            models::EnumType *enu = entity->guiModel<models::EnumType>();
+
+            item->setName(entity->name());
+            item->setDescription(entity->description());
+            item->setInputs(0);
+            item->setOutputs(enu->values().count());
+            item->setOutputNames({enu->values()});
+            item->setInstructionId(dnai::enums::QInstructionID::ENUM_SPLITTER);
+            item->setConstruction({entity->id()});
+
+            beginInsertRows(index(2, 0, QModelIndex()), m_enumSplitters->childCount(), m_enumSplitters->childCount());
+            m_enumSplitters->appendChild(item);
+            endInsertRows();
 
             m_hash[item->fullPath()] = item;
         }
+
+		void ContextMenuModel::appendParameter(Entity* entity)
+		{
+			/*
+			* Create contextItem for getter
+			*/
+			auto item = new ContextMenuItem();
+			item->setName(entity->name());
+			item->setDescription(entity->description());
+			item->setInputs(0);
+			item->setOutputs(1);
+			item->setOutputNames({ "reference" });
+			item->setType(entity->entityType());
+			item->setInstructionId(dnai::enums::QInstructionID::GETTER);
+			item->setConstruction({ static_cast<qint32>(entity->id()) });
+
+			/*
+			* Append variable into getter list
+			*/
+			beginInsertRows(index(0, 0, index(2, 0, QModelIndex())), m_paramGetter->childCount(), m_paramGetter->childCount());
+			m_paramGetter->appendChild(item);
+			endInsertRows();
+
+			qDebug() << "=====> Append getter at path " << item->fullPath();
+
+			m_hash[item->fullPath()] = item;
+
+			/*
+			* Create contextItem for setter
+			*/
+			item = new ContextMenuItem();
+			item->setName(entity->name());
+			item->setDescription(entity->description());
+			item->setInputs(1);
+			item->setOutputs(1);
+			item->setFlowIn(1);
+			item->setInputNames({ "value" });
+			item->setFlowOut(1);
+			item->setOutputNames({ "reference" });
+			item->setType(entity->entityType());
+			item->setInstructionId(dnai::enums::QInstructionID::SETTER);
+			item->setConstruction({ static_cast<qint32>(entity->id()) });
+
+			/*
+			* Append variable into setter list
+			*/
+			beginInsertRows(index(1, 0, index(2, 0, QModelIndex())), m_paramSetter->childCount(), m_paramSetter->childCount());
+			m_paramSetter->appendChild(item);
+			endInsertRows();
+
+			qDebug() << "=====> Append setter at path " << item->fullPath();
+
+			m_hash[item->fullPath()] = item;
+		}
+
+		void ContextMenuModel::appendReturn(Entity* entity)
+		{
+			/*
+			* Create contextItem for getter
+			*/
+			auto item = new ContextMenuItem();
+			item->setName(entity->name());
+			item->setDescription(entity->description());
+			item->setInputs(0);
+			item->setOutputs(1);
+			item->setOutputNames({ "reference" });
+			item->setType(entity->entityType());
+			item->setInstructionId(dnai::enums::QInstructionID::GETTER);
+			item->setConstruction({ static_cast<qint32>(entity->id()) });
+
+			/*
+			* Append variable into getter list
+			*/
+			beginInsertRows(index(0, 0, index(3, 0, QModelIndex())), m_returnGetter->childCount(), m_paramGetter->childCount());
+			m_returnGetter->appendChild(item);
+			endInsertRows();
+
+			qDebug() << "=====> Append getter at path " << item->fullPath();
+
+			m_hash[item->fullPath()] = item;
+
+			/*
+			* Create contextItem for setter
+			*/
+			item = new ContextMenuItem();
+			item->setName(entity->name());
+			item->setDescription(entity->description());
+			item->setInputs(1);
+			item->setOutputs(1);
+			item->setFlowIn(1);
+			item->setInputNames({ "value" });
+			item->setFlowOut(1);
+			item->setOutputNames({ "reference" });
+			item->setType(entity->entityType());
+			item->setInstructionId(dnai::enums::QInstructionID::SETTER);
+			item->setConstruction({ static_cast<qint32>(entity->id()) });
+
+			/*
+			* Append variable into setter list
+			*/
+			beginInsertRows(index(1, 0, index(3, 0, QModelIndex())), m_returnSetter->childCount(), m_paramSetter->childCount());
+			qDebug() << "Add return setter";
+        	m_returnSetter->appendChild(item);
+			endInsertRows();
+
+			qDebug() << "=====> Append setter at path " << item->fullPath();
+
+			m_hash[item->fullPath()] = item;
+		}
+
+		void ContextMenuModel::clearParameters()
+		{
+			beginRemoveRows(index(0, 0, index(2, 0, QModelIndex())), 0, m_paramGetter->childCount());
+			m_paramGetter->deleteChildren();
+			endRemoveRows();
+			beginRemoveRows(index(1, 0, index(2, 0, QModelIndex())), 0, m_paramSetter->childCount());
+			m_paramSetter->deleteChildren();
+			endRemoveRows();
+		}
+
+		void ContextMenuModel::clearReturns()
+		{
+			beginRemoveRows(index(0, 0, index(3, 0, QModelIndex())), 0, m_returnGetter->childCount());
+			m_returnGetter->deleteChildren();
+			endRemoveRows();
+			beginRemoveRows(index(1, 0, index(3, 0, QModelIndex())), 0, m_returnSetter->childCount());
+			m_returnSetter->deleteChildren();
+			endRemoveRows();
+		}
 	}
 }
