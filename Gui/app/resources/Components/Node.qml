@@ -133,28 +133,75 @@ GenericNode {
             anchors.margins: _node.paddingColumn
             Repeater {
                 model: _node.model.inputs
-                delegate: Input {
-                    id: _inputDel
-                    property string name: ""
-                    width: 10
-                    height: 10
-                    radius: 5
-                    type: 1
-                    borderWidth: 3
-                    borderColor: {
-                            AppSettings.theme["nodes"]["genericNode"]["border"]["color"]
+                delegate: Item {
+
+                    width: childrenRect.width
+                    height: _inputDel.height
+
+                    Input {
+                        id: _inputDel
+                        property string name: ""
+                        width: 10
+                        height: 10
+                        radius: 5
+                        type: 1
+                        borderWidth: 3
+                        borderColor: {
+                                AppSettings.theme["nodes"]["genericNode"]["border"]["color"]
+                        }
+                        fillColor: {
+                                AppSettings.theme["nodes"]["genericNode"]["color"]
+                        }
+                        onLinked: {
+                            Controller.Function.instruction.linkData(_node.function_entity.id, instructionModel.uid, name, _node.instruction_model.uid, _inputDel.name);
+                        }
+                        onUnlinked: {
+                            Controller.Function.instruction.unlinkData(_node.function_entity.id, _node.instruction_model.uid, _inputDel.name);
+                        }
+                        Component.onCompleted: {
+                            name = _node.model.inputNames[index]
+
+                            var inpVal = _node.instruction_model.getInputValue(name);
+
+                            if (inpVal)
+                            {
+                                _inputValue.text = inpVal;
+                            }
+                        }
                     }
-                    fillColor: {
-                            AppSettings.theme["nodes"]["genericNode"]["color"]
+
+                    Text {
+                        id: _inputName
+
+                        anchors.left: _inputDel.right
+                        anchors.leftMargin: 5
+                        height: _inputDel.height
+
+                        text: _inputDel.name
+                        font.pointSize: 8
+
+                        color: "white"
                     }
-                    onLinked: {
-                        Controller.Function.instruction.linkData(_node.function_entity.id, instructionModel.uid, name, _node.instruction_model.uid, _inputDel.name);
-                    }
-                    onUnlinked: {
-                        Controller.Function.instruction.unlinkData(_node.function_entity.id, _node.instruction_model.uid, _inputDel.name);
-                    }
-                    Component.onCompleted: {
-                        name = _node.model.inputNames[index]
+
+                    EditableText {
+                        id: _inputValue
+
+                        visible: _inputDel.type >= 1 && _inputDel.type <= 5
+
+                        anchors.left: _inputName.right
+                        anchors.leftMargin: 5
+                        width: 50
+                        height: _inputDel.height
+
+                        text: ""
+                        placeholderText: ""
+                        font.pointSize: 7
+                        enableBar: false
+
+                        onAccepted: {
+                            if (_inputValue.text)
+                                Controller.Function.instruction.setInputValue(_node.function_entity.id, _node.instruction_model.uid, _inputDel.name, _inputValue.text);
+                        }
                     }
                 }
             }

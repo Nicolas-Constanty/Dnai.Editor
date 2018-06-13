@@ -354,13 +354,21 @@ namespace dnai
 
         nodeComponent.completeCreate();
 
-        instruction->setNodeMenuPath(node->fullPath());
-
 		return nodeObj;
     }
 
     void Editor::onInstructionAdded(models::Entity *func, models::gui::Instruction *instruction)
     {
+        qDebug() << "Instruction added";
+
+        for (models::gui::Input *curr : instruction->inputs())
+        {
+            qDebug() << "- " << curr->name() << ": " << curr->value();
+        }
+
+        qDebug() << "Input Right operand : " << instruction->getInput("RightOperand");
+        qDebug() << "Input Right operand value : " << instruction->getInputValue("RightOperand");
+
         if (m_pendingInstruction.empty())
             return;
 
@@ -382,6 +390,48 @@ namespace dnai
         if (createNodeQMLComponent(node, func, instruction, canvas->content()) == nullptr)
         {
 			notifyWarning("Cannot create qml node");
+        }
+
+        instruction->setNodeMenuPath(node->fullPath());
+
+        /*
+         * Building inputs
+         */
+        qDebug() << "Inputs: " << instruction->inputs();
+        if (instruction->inputs().empty())
+        {
+            QList<models::gui::Input *> inputs;
+
+            qDebug() << "Setting inputs";
+            for (QString const &curr : node->inputNames())
+            {
+                models::gui::Input *toadd = new models::gui::Input();
+
+                toadd->setName(curr);
+                inputs.append(toadd);
+            }
+
+            instruction->setInputs(inputs);
+        }
+
+        /*
+         * Building outputs
+         */
+        qDebug() << "Outputs: " << instruction->outputs();
+        if (instruction->outputs().empty())
+        {
+            QList<models::gui::Output *> outputs;
+
+            qDebug() << "Setting output";
+            for (QString const &curr : node->outputNames())
+            {
+                models::gui::Output *toadd = new models::gui::Output();
+
+                toadd->setName(curr);
+                outputs.append(toadd);
+            }
+
+            instruction->setOutputs(outputs);
         }
 
         m_pendingInstruction.pop();

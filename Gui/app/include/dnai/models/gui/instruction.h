@@ -32,6 +32,8 @@ namespace dnai
 				//Implementation of IInstruction
                 const QList<models::gui::Input*> &inputs() const;
                 bool setInputs(const QList<models::gui::Input*>& inputs);
+                models::gui::Input *getInput(QString const &name) const;
+                Q_INVOKABLE QString getInputValue(QString const &name) const;
 
 				const QList<models::gui::Output*> &outputs() const;
                 bool setOutputs(const QList<models::gui::Output*>& outputs);

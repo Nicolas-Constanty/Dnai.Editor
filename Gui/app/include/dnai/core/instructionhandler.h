@@ -27,6 +27,7 @@ namespace dnai
             Q_INVOKABLE void unlinkData(quint32 function, quint32 instruction, QString const &input, bool save = true);
             Q_INVOKABLE void linkExecution(quint32 function, quint32 instruction, quint32 outPin, quint32 toInstruction, bool save = true);
             Q_INVOKABLE void unlinkExecution(quint32 function, quint32 instruction, quint32 outPin, bool save = true);
+            Q_INVOKABLE void setInputValue(quint32 function, quint32 instruction, QString const &input, QString const &value, bool save = true);
 
         private:
             void onRemoved(quint32 function, quint32 instruction);
@@ -47,6 +48,9 @@ namespace dnai
             void onExecutionUnlinked(quint32 function, quint32 instruction, quint32 outpin);
             void onUnlinkExecutionError(quint32 function, quint32 instruction, quint32 outpin, QString const &message);
 
+            void onInputValueSet(quint32 function, quint32 instruction, QString const &input, QString const &value);
+            void onSetInputValueError(quint32 function, quint32 instruction, QString const &input, QString const &value, QString const &msg);
+
         signals:
             /*
              * onRemoved
@@ -56,6 +60,7 @@ namespace dnai
             void dataUnlinked(models::Entity *func, models::gui::Instruction *instruction, QString const &input);
             void executionLinked(models::Entity *func, models::gui::Instruction *from, quint32 outPin, models::gui::Instruction *to);
             void executionUnlinked(models::Entity *func, models::gui::Instruction *from, quint32 outPin);
+            void inputValueSet(models::Entity *func, models::gui::Instruction *instruction, QString const &input, QString const &value);
 
         private:
             EntityManager &manager;
