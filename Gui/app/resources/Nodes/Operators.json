@@ -448,6 +448,8 @@
         "flow control": {
             "categories" : {
                 "if": {
+                    "type": 1,
+                    "inputs": 1,
                     "name": "if",
                     "description": "",
                     "instruction_id": 26,
