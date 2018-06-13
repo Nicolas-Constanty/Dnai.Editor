@@ -1,6 +1,9 @@
 #ifndef DNAI_MODELS_GENERICTREEITEM_H
 #define DNAI_MODELS_GENERICTREEITEM_H
 
+#include <exception>
+
+#include <QDebug>
 #include <QModelIndex>
 
 namespace dnai
@@ -19,6 +22,14 @@ namespace dnai
             {
             }
             virtual void appendChild(T *child) {
+                child->m_parentItem = dynamic_cast<T *>(this);
+
+                if (child->m_parentItem == nullptr)
+                {
+                    qWarning() << "!!!!!! Your are trying to append a child with incompatible type in GenericTreeItem !!!!!!";
+                    throw std::runtime_error("Your are trying to append a child with incompatible type in GenericTreeItem");
+                }
+
                 m_childItems.append(child);
             }
             T *child(int row) const { return m_childItems.at(row); }

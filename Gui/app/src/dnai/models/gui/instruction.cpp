@@ -64,6 +64,7 @@ namespace dnai
 
                 obj["linked"] = linkEntities;
 				obj["guiUuid"] = m_data.guiUuid.toString();
+                obj["nodeMenuPath"] = nodeMenuPath();
 			}
 
 			void Instruction::_deserialize(const QJsonObject& obj)
@@ -86,7 +87,7 @@ namespace dnai
                     m_data.linked.append(link.toString());
                 }
 				m_data.guiUuid = obj["guiUuid"].toString();
-				qDebug() << m_data.guiUuid;
+                m_data.nodeMenuPath = obj["nodeMenuPath"].toString();
 			}
 
 			const data::Instruction& Instruction::data() const
@@ -229,8 +230,21 @@ namespace dnai
 				if (value == m_data.guiUuid)
 					return false;
 				m_data.guiUuid = value;
-				return true;
-			}
+                return true;
+            }
+
+            const QString &Instruction::nodeMenuPath() const
+            {
+                return m_data.nodeMenuPath;
+            }
+
+            bool Instruction::setNodeMenuPath(const QString &value)
+            {
+                if (nodeMenuPath() == value)
+                    return false;
+                m_data.nodeMenuPath = value;
+                return true;
+            }
 		}
 	}
 }

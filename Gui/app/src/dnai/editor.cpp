@@ -328,6 +328,9 @@ namespace dnai
         nodeObj->setY(instruction->y());
 
         nodeComponent.completeCreate();
+
+        instruction->setNodeMenuPath(node->fullPath());
+
 		return nodeObj;
     }
 
@@ -501,7 +504,7 @@ namespace dnai
 		QList<views::GenericNode *> nodes;
         for (models::gui::Instruction *instruction : function->instructions())
 		{
-			nodes.append(dynamic_cast<views::GenericNode *>(createNodeQMLComponent(instructionsMap[instruction->instruction_id()], entity, instruction, canvas->content())));
+            nodes.append(dynamic_cast<views::GenericNode *>(createNodeQMLComponent(instructionsMap[instruction->nodeMenuPath()], entity, instruction, canvas->content())));
 		}
         for (models::gui::IoLink *iolink : function->iolinks())
         {

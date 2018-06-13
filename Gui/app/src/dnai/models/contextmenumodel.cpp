@@ -10,8 +10,14 @@
 namespace dnai
 {
 	namespace models
-	{
-		const QString& ContextMenuItem::name() const
+    {
+        ContextMenuItem::ContextMenuItem(ContextMenuItem *parent) :
+            GenericTreeItem<ContextMenuItem>::GenericTreeItem(parent)
+        {
+
+        }
+
+        const QString& ContextMenuItem::name() const
 		{
 			return m_name;
 		}
@@ -149,8 +155,13 @@ namespace dnai
 		void ContextMenuItem::appendOutputName(const QString& name)
 		{
 			m_outputNames.append(name);
-			emit outputNamesChanged(m_outputNames);
-		}
+            emit outputNamesChanged(m_outputNames);
+        }
+
+        QString ContextMenuItem::fullPath() const
+        {
+            return (parentItem() != nullptr ? parentItem()->fullPath() : "") + "/" + name();
+        }
 
 		void ContextMenuItem::setInputNames(const QStringList& value)
 		{
@@ -197,12 +208,14 @@ namespace dnai
              */
             m_root = new ContextMenuItem();
             m_root->setName("__Root");
+
             /*
              * Create variableGetter node
              */
             m_variableGetter = new ContextMenuItem();
             m_variableGetter->setName("Variables getter");
             m_root->appendChild(m_variableGetter);
+
             /*
              * Create variableSetter node
              */
@@ -231,7 +244,7 @@ namespace dnai
 					for (const auto& categoryKey : categories.keys())
 					{
 						const auto categoryObj = categories[categoryKey].toObject();
-						auto category = new ContextMenuItem();
+                        auto category = new ContextMenuItem();
 						category->setName(categoryKey);
 						category->setNodeName(categoryObj["name"].toString());
                         category->setDescription(categoryObj["description"].toString());
@@ -260,7 +273,6 @@ namespace dnai
                         if (!categoryObj["instruction_id"].isUndefined())
                         {
                             const auto instruction_id = categoryObj["instruction_id"].toInt();
-                            m_hash[instruction_id] = category;
                             category->setInstructionId(instruction_id);
                         }
 						if (parent && !categoryObj["output_names"].isArray() && !parent->outputNames().isEmpty())
@@ -286,6 +298,8 @@ namespace dnai
 						category->setFlowIn(categoryObj["in"].toInt());
 						category->setFlowOut(categoryObj["out"].toInt());
 						parent->appendChild(category);
+                        qDebug() << "===>Append item at path: " << category->fullPath();
+                        m_hash[category->fullPath()] = category;
 						if (categoryObj.constFind("categories") != categoryObj.constEnd())
 							parseJsonObj(category, categoryObj);
 					}
@@ -396,7 +410,7 @@ namespace dnai
             return hash;
         }
 
-        const QHash<int, ContextMenuItem *> &ContextMenuModel::instructions() const
+        const QHash<QString, ContextMenuItem *> &ContextMenuModel::instructions() const
         {
             return m_hash;
         }
@@ -415,12 +429,17 @@ namespace dnai
             item->setType(entity->entityType());
             item->setInstructionId(dnai::enums::QInstructionID::GETTER);
             item->setConstruction({static_cast<qint32>(entity->id())});
+
             /*
              * Append variable into getter list
              */
             beginInsertRows(index(0, 0, QModelIndex()), m_variableGetter->childCount(), m_variableGetter->childCount());
             m_variableGetter->appendChild(item);
             endInsertRows();
+
+            qDebug() << "=====> Append getter at path " << item->fullPath();
+
+            m_hash[item->fullPath()] = item;
 
             /*
              * Create contextItem for setter
@@ -437,12 +456,17 @@ namespace dnai
             item->setType(entity->entityType());
             item->setInstructionId(dnai::enums::QInstructionID::SETTER);
             item->setConstruction({static_cast<qint32>(entity->id())});
+
             /*
              * Append variable into setter list
              */
             beginInsertRows(index(1, 0, QModelIndex()), m_variableSetter->childCount(), m_variableSetter->childCount());
             m_variableSetter->appendChild(item);
             endInsertRows();
+
+            qDebug() << "=====> Append setter at path " << item->fullPath();
+
+            m_hash[item->fullPath()] = item;
         }
 	}
 }
