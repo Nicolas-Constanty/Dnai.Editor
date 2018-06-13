@@ -382,6 +382,10 @@ namespace dnai
         {
             contextMenuModel()->appendVariable(declared);
         }
+        else if (declared->coreModel()->entityType() == ENTITY::ENUM_TYPE)
+        {
+            contextMenuModel()->appendEnumeration(declared);
+        }
     }
 
     void Editor::createNode(models::Entity *entity, models::ContextMenuItem *node, qint32 x, qint32 y)

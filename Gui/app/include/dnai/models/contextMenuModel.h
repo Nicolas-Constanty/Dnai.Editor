@@ -118,6 +118,7 @@ namespace dnai
 
             const QHash<QString, ContextMenuItem*> &instructions() const;
             void appendVariable(Entity *entity);
+            void appendEnumeration(Entity *entity);
 
 		private:
 			void parseJsonDocument(const QJsonObject &json);
@@ -125,6 +126,7 @@ namespace dnai
 			ContextMenuItem *m_root;
             ContextMenuItem *m_variableGetter;
             ContextMenuItem *m_variableSetter;
+            ContextMenuItem *m_enumSplitters;
             QHash<QString, ContextMenuItem*> m_hash;
 		};
 	}

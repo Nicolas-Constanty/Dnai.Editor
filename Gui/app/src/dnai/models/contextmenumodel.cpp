@@ -226,6 +226,16 @@ namespace dnai
              */
             m_root->appendChild(m_variableSetter);
 
+            /*
+             * Create enum splitter menu
+             */
+            m_enumSplitters = new ContextMenuItem();
+            m_enumSplitters->setName("Enumerations");
+            /*
+             * Populate root model with getter and setter nodes
+             */
+            m_root->appendChild(m_enumSplitters);
+
 			parseJsonDocument(doc);
 		}
 
@@ -297,8 +307,7 @@ namespace dnai
 						}
 						category->setFlowIn(categoryObj["in"].toInt());
 						category->setFlowOut(categoryObj["out"].toInt());
-						parent->appendChild(category);
-                        qDebug() << "===>Append item at path: " << category->fullPath();
+                        parent->appendChild(category);
                         m_hash[category->fullPath()] = category;
 						if (categoryObj.constFind("categories") != categoryObj.constEnd())
 							parseJsonObj(category, categoryObj);
@@ -428,7 +437,7 @@ namespace dnai
             item->setOutputNames({"reference"});
             item->setType(entity->entityType());
             item->setInstructionId(dnai::enums::QInstructionID::GETTER);
-            item->setConstruction({static_cast<qint32>(entity->id())});
+            item->setConstruction({entity->id()});
 
             /*
              * Append variable into getter list
@@ -455,7 +464,7 @@ namespace dnai
             item->setOutputNames({"reference"});
             item->setType(entity->entityType());
             item->setInstructionId(dnai::enums::QInstructionID::SETTER);
-            item->setConstruction({static_cast<qint32>(entity->id())});
+            item->setConstruction({entity->id()});
 
             /*
              * Append variable into setter list
@@ -464,7 +473,25 @@ namespace dnai
             m_variableSetter->appendChild(item);
             endInsertRows();
 
-            qDebug() << "=====> Append setter at path " << item->fullPath();
+            m_hash[item->fullPath()] = item;
+        }
+
+        void ContextMenuModel::appendEnumeration(Entity *entity)
+        {
+            ContextMenuItem *item = new ContextMenuItem();
+            models::EnumType *enu = entity->guiModel<models::EnumType>();
+
+            item->setName(entity->name());
+            item->setDescription(entity->description());
+            item->setInputs(0);
+            item->setOutputs(enu->values().count());
+            item->setOutputNames({enu->values()});
+            item->setInstructionId(dnai::enums::QInstructionID::ENUM_SPLITTER);
+            item->setConstruction({entity->id()});
+
+            beginInsertRows(index(2, 0, QModelIndex()), m_enumSplitters->childCount(), m_enumSplitters->childCount());
+            m_enumSplitters->appendChild(item);
+            endInsertRows();
 
             m_hash[item->fullPath()] = item;
         }
