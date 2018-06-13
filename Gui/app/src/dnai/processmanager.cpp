@@ -12,6 +12,7 @@
 #include <QDir>
 #include <cstdlib>
 #include <iostream>
+#include <QFileInfo>
 
 #include "dnai/processmanager.h"
 
@@ -46,7 +47,19 @@ void ProcessManager::launchUpdater(QString const &actualVer, QString const &newV
     int len = sizeof("/DNAI.app/Contents/MacOS");
     int idx = path.length() - (len - 1);
     path.remove(idx, len);
-    QString app = "\"" + m_updaterApp + "\" " +  actualVer + " " + newVersion + " \"" + path + "\" " + "DNAI";
+
+    QFile moveUpdater;
+    QString applicationUpdater = QDir::tempPath() + "/DNAI_UPDATER.app";
+    QFileInfo updaterFile(applicationUpdater);
+
+    if (updaterFile.exists()) {
+        QDir dir(applicationUpdater);
+        dir.removeRecursively();
+    }
+
+    moveUpdater.rename(m_updaterApp, applicationUpdater);
+
+    QString app = "\"" + applicationUpdater + "/Contents/MacOS/DNAI Updater\" " +  actualVer + " " + newVersion + " \"" + path + "\" " + "DNAI";
     qDebug() << app;
     proc.startDetached(app);
 #else
