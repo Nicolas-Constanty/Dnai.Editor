@@ -28,20 +28,6 @@ Rectangle {
         color: "white"
         font.pointSize: 8
         font.bold: true
-
-        MouseArea {
-            id: __build_area__
-
-            anchors.fill: parent
-            hoverEnabled: true
-
-            cursorShape: Qt.PointingHandCursor
-
-            onClicked: {
-                _rotator.start();
-                __this__.build();
-            }
-        }
     }
 
     TextAwesomeSolid {
@@ -68,5 +54,20 @@ Rectangle {
         anchors.fill: parent
         color: "white"
         opacity: __build_area__.containsMouse ? 0.1 : 0
+    }
+
+    MouseArea {
+        id: __build_area__
+
+        anchors.fill: parent
+        hoverEnabled: true
+        enabled: !_rotator.running
+
+        cursorShape: _rotator.running ? Qt.BusyCursor : Qt.PointingHandCursor
+
+        onClicked: {
+            _rotator.start();
+            __this__.build();
+        }
     }
 }

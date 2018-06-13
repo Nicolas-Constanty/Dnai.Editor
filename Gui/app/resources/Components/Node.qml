@@ -151,11 +151,6 @@ GenericNode {
                         Controller.Function.instruction.linkData(_node.function_entity.id, instructionModel.uid, name, _node.instruction_model.uid, _inputDel.name);
                     }
                     onUnlinked: {
-                        console.log("Unlink Input")
-                        console.log(name)
-                        console.log(instructionModel)
-                        console.log(_inputDel.name)
-                        console.log(_node.instruction_model)
                         Controller.Function.instruction.unlinkData(_node.function_entity.id, _node.instruction_model.uid, _inputDel.name);
                     }
                     Component.onCompleted: {
