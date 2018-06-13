@@ -38,29 +38,33 @@ BaseProperty {
                 anchors.right: parent.right
                 contentHeight: _panel.contentHeight
 
-                function moveUp() {
+                onMovedUp: {
                     if (_panel.model !== null)
                     {
                         _panel.model.moveUp(index)
                     }
                 }
-                onMoveUp: moveUp
 
-                function moveDown() {
+                onMovedDown: {
                     if (_panel.model !== null)
                     {
                         _panel.model.moveDown(index)
                     }
                 }
-                onMoveDown: moveDown
 
-                function deleteVal() {
+                onRemoved: {
                     if (_panel.model !== null)
                     {
                         Controller.enumeration.removeValue(entityID, value)
                     }
                 }
-                onDelete: deleteVal
+
+                onValueUpdated: {
+                    if (_panel.model !== null)
+                    {
+                        Controller.enumeration.renameValue(entityID, oldValue, newValue);
+                    }
+                }
             }
         }
     }
@@ -78,7 +82,7 @@ BaseProperty {
         onClicked: {
             if (_panel.model !== null)
             {
-                Controller.enumeration.setValue(entityID, "", Math.random());
+                Controller.enumeration.setValue(entityID, "", Math.floor(Math.random() * 1000));
                 //_panel.model.addEntry("");
                 _panel.height = _createButton.height + (_panel.contentHeight + _panel.valueSpacing) * _panel.model[prop].length + _panel.content.anchors.topMargin * 2 + header.height - _panel.valueSpacing + _panel.spacing * 2
             }

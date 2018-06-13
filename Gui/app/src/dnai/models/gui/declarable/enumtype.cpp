@@ -17,67 +17,70 @@ namespace dnai
 
                 const QStringList& EnumType::values() const
 				{
-					return m_data.values;
+                    return m_data.names;
 				}
 
 				void EnumType::moveUp(int initial)
 				{
 					if (initial < 0)
 						return;
-					const auto start = initial % m_data.values.length();
-					const auto end = (start <= 0) ? m_data.values.length() - 1 : start - 1;
-					m_data.values.swap(start, end);
-					emit valuesChanged(m_data.values);
+                    const auto start = initial % m_data.names.length();
+                    const auto end = (start <= 0) ? m_data.names.length() - 1 : start - 1;
+                    m_data.names.swap(start, end);
+                    emit valuesChanged(values());
 				}
 
-				void EnumType::addEntry(const QString& entry)
+                void EnumType::addEntry(const QString& entry, const QString &value)
                 {
-					for (const auto &val : m_data.values)
-						if (val == entry)
-							return;
-					m_data.values.append(entry);
-					emit valuesChanged(m_data.values);
+                    if (m_data.values.contains(entry))
+                        return;
+                    m_data.names.append(entry);
+                    m_data.values[entry] = value;
+                    emit valuesChanged(values());
 				}
 
 				void EnumType::deleteEntry(const QString& entry)
 				{
-					m_data.values.removeOne(entry);
-					emit valuesChanged(m_data.values);
+                    m_data.names.removeOne(entry);
+                    m_data.values.remove(entry);
+                    emit valuesChanged(values());
 				}
 
 				void EnumType::moveDown(int initial)
 				{
 					if (initial < 0)
 						return;
-					const auto start = initial % m_data.values.length();
-					const auto end = (start + 1) % m_data.values.length();
-					m_data.values.swap(start, end);
-					emit valuesChanged(m_data.values);
+                    const auto start = initial % m_data.names.length();
+                    const auto end = (start + 1) % m_data.names.length();
+                    m_data.names.swap(start, end);
+                    emit valuesChanged(values());
 				}
 
 				void EnumType::serialize(QJsonObject& obj) const
 				{
 					QJsonArray arr;
-					for (auto &val : m_data.values)
-					{
-						arr.append(val);
-					}
-					obj["enumvalues"] = arr;
-				}
 
-				void EnumType::setValues(const QStringList& list)
-				{
-					if (list == m_data.values)
-						return;
-					m_data.values = list;
-					emit valuesChanged(list);
-				}
+                    for (QString const &val : m_data.names)
+					{
+                        QJsonObject obj;
+
+                        obj["key"] =  val;
+                        obj["value"] = m_data.values[val];
+                        arr.append(obj);
+					}
+                    obj["enumvalues"] = arr;
+                }
+
+                const QString &EnumType::getValue(const QString &name) const
+                {
+                    return m_data.values.value(name);
+                }
 
 				void EnumType::_deserialize(const QJsonObject& obj)
 				{
-					for (const auto& val : obj["enumvalues"].toArray())
+                    for (const QJsonValue& val : obj["enumvalues"].toArray())
 					{
-						addEntry(val.toString());
+                        addEntry(val.toObject().value("key").toString(), val.toObject().value("value").toString());
 					}
 				}
 			}

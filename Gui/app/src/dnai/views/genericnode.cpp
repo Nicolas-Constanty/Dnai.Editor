@@ -32,8 +32,8 @@ namespace dnai
 
 		void GenericNode::createLink(models::gui::IoLink* link, GenericNode *n2)
 		{
-			const auto ilist = n2->inputs().getList();
-			const auto olist = outputs().getList();
+            const auto ilist = inputs().getList();
+            const auto olist = n2->outputs().getList();
 			LinkableBezierItem *input = nullptr;
 			LinkableBezierItem *output = nullptr;
 			for (auto i : ilist)

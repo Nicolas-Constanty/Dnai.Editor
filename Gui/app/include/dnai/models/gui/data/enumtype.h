@@ -14,7 +14,8 @@ namespace dnai
 			{
 				struct EnumType : Entity
 				{
-					QStringList values;
+                    QStringList names;
+                    QMap<QString, QString> values;
 					EnumType& operator=(const EnumType& other) = default;
 				};
 			}

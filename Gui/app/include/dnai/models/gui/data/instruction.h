@@ -28,6 +28,7 @@ namespace dnai
                     QList<gui::Flow*> flowOut;
 					qint32 instructionId = enums::QInstructionID::Instruction_ID::UNDEFINED;
                     QList<QString> linked;
+                    QString nodeMenuPath; //path of the ContextMenuItem in the ContextMenuModel : ex : "/operators/binary/int/add"
 
 					Instruction& operator=(const Instruction& other) = default;
 					qint32 x = 0;

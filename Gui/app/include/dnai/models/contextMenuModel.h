@@ -26,6 +26,9 @@ namespace dnai
 			Q_PROPERTY(QStringList inputNames READ inputNames WRITE setInputNames NOTIFY inputNamesChanged)
 			Q_PROPERTY(QStringList outputNames READ outputNames WRITE setOutputNames NOTIFY outputNamesChanged)
 
+        public:
+            ContextMenuItem(ContextMenuItem *parent = nullptr);
+
 		public:
 			const QString &name() const;
 			const QString &description() const;
@@ -42,6 +45,7 @@ namespace dnai
 			const QStringList &outputNames() const;
 			void appendInputName(const QString &name);
 			void appendOutputName(const QString &name);
+            QString fullPath() const;
 
 		public:
 			void setName(const QString &);
@@ -112,7 +116,7 @@ namespace dnai
 			QVariant data(const QModelIndex& index, int role) const override;
             QHash<int, QByteArray> roleNames() const override;
 
-            const QHash<int, ContextMenuItem*> &instructions() const;
+            const QHash<QString, ContextMenuItem*> &instructions() const;
             void appendVariable(Entity *entity);
 
 		private:
@@ -121,7 +125,7 @@ namespace dnai
 			ContextMenuItem *m_root;
             ContextMenuItem *m_variableGetter;
             ContextMenuItem *m_variableSetter;
-            QHash<int, ContextMenuItem*> m_hash;
+            QHash<QString, ContextMenuItem*> m_hash;
 		};
 	}
 }

@@ -54,6 +54,9 @@ namespace dnai
 				const QUuid &guiUuid() const;
 				bool setGuiUuid(const QUuid &value);
 
+                const QString &nodeMenuPath() const;
+                bool setNodeMenuPath(QString const &value);
+
 				qint32 x() const;
 				Q_INVOKABLE bool setX(qint32 x);
 				
