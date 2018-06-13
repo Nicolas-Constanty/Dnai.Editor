@@ -47,7 +47,7 @@ namespace dnai
             if (var != nullptr)
             {
                 //todo: add a system to save action into a map in order to execute it once done
-                if (var->varType() != ::core::UNDEFINED_ID) {}
+                if (var->varType() != ::core::UNDEFINED_ID)
                     setType(id, var->varType(), false);
                 if (!var->value().isEmpty())
                     setValue(id, var->value(), false);
@@ -59,36 +59,23 @@ namespace dnai
             qDebug() << "==Core== Variable.SetType(" << var << ", " << typ << ") => save(" << save << ")";
 
             models::Entity &variable = manager.getEntity(var);
+            models::Entity &type = manager.getEntity(typ);
+            core::EntityID oldType = getVariableData(variable.id(), true)->varType();
 
-            if (manager.contains(typ))
-            {
-                models::Entity &type = manager.getEntity(typ);
-                core::EntityID oldType = getVariableData(variable.id(), true)->varType();
-
-                commands::CommandManager::Instance()->exec(
-                    new commands::CoreCommand("Variable.SetType", save,
-                        /*
-                         * Execute
-                         */
-                        [&variable, &type]() {
-                            ::core::variable::setType(variable.id(), type.id());
-                        },
-                        /*
-                         * Un-execute
-                         */
-                        [oldType, &variable]() {
-                            ::core::variable::setType(variable.id(), oldType);
-                        }));
-            }
-
-            /*if (typ >= 1 && typ <= 5)
-            {
-                qDebug() << "Set scalar type";
-                commands::CommandManager::Instance()->exec(
-                    new commands::CoreCommand("Variable.SetType", true,
-                        std::bind(&::core::variable::setType, variable.id(), typ),
-                        std::bind(&::core::variable::setType, variable.id(), oldType)));
-            }*/
+            commands::CommandManager::Instance()->exec(
+                new commands::CoreCommand("Variable.SetType", save,
+                    /*
+                     * Execute
+                     */
+                    [&variable, &type]() {
+                        ::core::variable::setType(variable.id(), type.id());
+                    },
+                    /*
+                     * Un-execute
+                     */
+                    [oldType, &variable]() {
+                        ::core::variable::setType(variable.id(), oldType);
+                    }));
         }
 
         void VariableHandler::setValue(quint32 var, const QString &value, bool save)
@@ -125,29 +112,19 @@ namespace dnai
 
         void VariableHandler::onTypeSet(::core::EntityID variable, ::core::EntityID type)
         {
-            if (manager.contains(type) || (type >= 1 && type <= 5))
-            {
-                models::gui::declarable::Variable *var = getVariableData(variable);
+            models::gui::declarable::Variable *var = getVariableData(variable);
 
-                if (var != nullptr)
-                {
-                    commands::CoreCommand::Success();
-                    qDebug() << "==Core== Variable.TypeSet(" << variable << ", " << type << ")";
-                    var->setVarType(type);
-                }
-            }
+            commands::CoreCommand::Success();
+            qDebug() << "==Core== Variable.TypeSet(" << variable << ", " << type << ")";
+            var->setVarType(type);
         }
 
         void VariableHandler::onSetTypeError(::core::EntityID variable, ::core::EntityID type, const QString &message)
         {
-            if (manager.contains(type))
-            {
-                if (getVariableData(variable) != nullptr)
-                {
-                    commands::CoreCommand::Error();
-                    Editor::instance().notifyError(message.toUtf8());
-                }
-            }
+            models::Entity &var = manager.getEntity(variable);
+
+            commands::CoreCommand::Error();
+            Editor::instance().notifyError("Unable to set type for entity " + var.name() + ": " + message);
         }
 
         void VariableHandler::onValueSet(::core::EntityID variable, const QString &value)

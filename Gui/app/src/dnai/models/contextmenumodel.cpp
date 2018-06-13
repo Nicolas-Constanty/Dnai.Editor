@@ -411,6 +411,7 @@ namespace dnai
             item->setDescription(entity->description());
             item->setInputs(0);
             item->setOutputs(1);
+            item->setOutputNames({"reference"});
             item->setType(entity->entityType());
             item->setInstructionId(dnai::enums::QInstructionID::GETTER);
             item->setConstruction({static_cast<qint32>(entity->id())});
@@ -428,7 +429,11 @@ namespace dnai
             item->setName(entity->name());
             item->setDescription(entity->description());
             item->setInputs(1);
-            item->setOutputs(0);
+            item->setOutputs(1);
+            item->setFlowIn(1);
+            item->setInputNames({"value"});
+            item->setFlowOut(1);
+            item->setOutputNames({"reference"});
             item->setType(entity->entityType());
             item->setInstructionId(dnai::enums::QInstructionID::SETTER);
             item->setConstruction({static_cast<qint32>(entity->id())});
