@@ -48,7 +48,7 @@ namespace dnai
 		Q_PROPERTY(dnai::models::ContextMenu *contextMenu READ contextMenu CONSTANT)
         Q_PROPERTY(bool loaded READ loaded WRITE setLoaded NOTIFY loadedChanged)
         Q_PROPERTY(QString solutionName READ solutionName)
-		Q_PROPERTY(dnai::models::ContextMenuModel *contextMenuModel READ contextMenuModel CONSTANT)
+		Q_PROPERTY(dnai::models::ContextMenuModel *contextMenuModel READ contextMenuModel WRITE setContextMenuModel NOTIFY contextMenuModelChanged)
 
     protected:
         Editor();
@@ -76,6 +76,8 @@ namespace dnai
         dnai::models::ContextMenu *contextMenu() const;
         QString const &solutionName() const;
 		dnai::models::ContextMenuModel* contextMenuModel();
+		void setContextMenuModel(dnai::models::ContextMenuModel* ctx);
+		Q_INVOKABLE void updateContextMenuModel(dnai::models::Entity* entity) const;
 
         void setLoaded(bool);
         Q_INVOKABLE void registerEditorView(views::EditorView *view);
@@ -129,6 +131,7 @@ namespace dnai
     signals:
         void solutionChanged(dnai::Solution *proj);
         void loadedChanged(bool);
+		void contextMenuModelChanged(dnai::models::ContextMenuModel *m) const;
 
     private:
 		QQuickItem * createNodeQMLComponent(models::ContextMenuItem *node, models::Entity *func, models::gui::Instruction *instruction, QQuickItem *parent) const;
