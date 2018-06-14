@@ -39,6 +39,7 @@ namespace dnai
             Q_INVOKABLE void pendingRmReturn(quint32 func, QString const &returnName);
 
         public:
+            Q_INVOKABLE void setEntryPoint(quint32 function, quint32 instruction, bool save = true);
             Q_INVOKABLE void setParameter(quint32 func, QString const &paramName, bool save = true);
             Q_INVOKABLE void setReturn(quint32 func, QString const &retName, bool save = true);
             Q_INVOKABLE void addInstruction(quint32 func, quint32 instrType, QList<quint32> const &arguments, bool save = true);
@@ -50,6 +51,9 @@ namespace dnai
             void refreshPendingFunctionInstructions();
 
         private:
+            void onEntryPointSet(quint32 function, quint32 instruction);
+            void onSetEntryPointError(quint32 function, quint32 instruction, QString const &message);
+
             void onParameterSet(::core::EntityID function, QString const &paramName);
             void onSetParameterError(::core::EntityID function, QString const &paramName, QString const &message);
 
@@ -62,6 +66,7 @@ namespace dnai
         signals:
             void instructionAdded(models::Entity *function, models::gui::Instruction *instruction);
             void addInstructionError(quint32 func, quint32 instrType, QList<quint32> const &args, QString const &msg);
+            void entryPointSet(models::Entity *func, models::gui::Instruction *entry);
 
         private:
             EntityManager &manager;

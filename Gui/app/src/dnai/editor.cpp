@@ -578,14 +578,22 @@ namespace dnai
 		{
 			throw std::runtime_error("No canvas view found!");
         }
-		const auto canvas = dynamic_cast<views::CanvasNode *>(view);
+        const auto canvas = dynamic_cast<views::CanvasNode *>(view);
 
         const auto instructionsMap = m_contextMenuModel->instructions();
-		QList<views::GenericNode *> nodes;
+        QList<views::GenericNode *> nodes;
+
+        /*
+         * Create all nodes
+         */
         for (models::gui::Instruction *instruction : function->instructions())
 		{
             nodes.append(dynamic_cast<views::GenericNode *>(createNodeQMLComponent(instructionsMap[instruction->nodeMenuPath()], entity, instruction, canvas->content())));
 		}
+
+        /*
+         * Create io links
+         */
         for (models::gui::IoLink *iolink : function->iolinks())
         {
 			const auto inputInstruction = function->getInstruction(iolink->data().inputUuid);
@@ -608,6 +616,10 @@ namespace dnai
 			if (!n1 || !n2) return;
 			n1->createLink(iolink, n2);
         }
+
+        /*
+         * Create flow links
+         */
         for (auto flowlink : function->flowlinks())
 		{
 			const auto inputInstruction = function->getInstruction(flowlink->data().from);
@@ -630,7 +642,35 @@ namespace dnai
 			if (!n1 || !n2) return;
 			n1->createFlowLink(flowlink, n2);
 		}
-	}
+
+        /*
+         * Create entry point node
+         */
+        QQmlComponent nodeEntryPoint(App::getEngineInstance(), "qrc:/resources/Components/NodeEntryPoint.qml");
+        views::GenericNode *entryPointObj = dynamic_cast<views::GenericNode *>(qobject_cast<QQuickItem*>(nodeEntryPoint.beginCreate(App::getEngineInstance()->rootContext())));
+        QQmlProperty function_entity(entryPointObj, "function_entity", App::getEngineInstance());
+        models::gui::Instruction *entryInstr = function->entryPoint();
+
+        function_entity.write(QVariant::fromValue(entity));
+        entryPointObj->setParentItem(canvas->content());
+        entryPointObj->setX(function->entryPointX());
+        entryPointObj->setY(function->entryPointY());
+        nodeEntryPoint.completeCreate();
+
+        if (entryInstr != nullptr)
+        {
+            for (auto node : nodes)
+            {
+                if (qvariant_cast<models::gui::Instruction*>(node->property("instruction_model")) == entryInstr)
+                {
+                    entryPointObj->createFlowLink(new models::gui::FlowLink(), node);
+                    break;
+                }
+            }
+        }
+
+        nodes.append(entryPointObj);
+    }
 
 	void Editor::updateContextMenu(dnai::models::Entity* entity) const
 	{

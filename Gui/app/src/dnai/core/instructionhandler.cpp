@@ -24,9 +24,6 @@ namespace dnai
             ::core::function::instruction::onRemoved(std::bind(&InstructionHandler::onRemoved, this, _1, _2));
             ::core::function::instruction::onRemoveError(std::bind(&InstructionHandler::onRemoveError, this, _1, _2, _3));
 
-            ::core::function::instruction::onEntryPointSet(std::bind(&InstructionHandler::onEntryPointSet, this, _1, _2));
-            ::core::function::instruction::onSetEntryPointError(std::bind(&InstructionHandler::onSetEntryPointError, this, _1, _2, _3));
-
             ::core::function::instruction::onDataLinked(std::bind(&InstructionHandler::onDataLinked, this, _1, _2, _3, _4, _5));
             ::core::function::instruction::onLinkDataError(std::bind(&InstructionHandler::onLinkDataError, this, _1, _2, _3, _4, _5, _6));
 
@@ -56,12 +53,6 @@ namespace dnai
                     }
                 )
             );*/
-        }
-
-        void InstructionHandler::setEntryPoint(quint32 function, quint32 instruction, bool save)
-        {
-            Q_UNUSED(function)
-            Q_UNUSED(instruction)
         }
 
         void InstructionHandler::linkData(quint32 function, quint32 from, const QString &output, quint32 to, const QString &input, bool save)
@@ -185,19 +176,6 @@ namespace dnai
         }
 
         void InstructionHandler::onRemoveError(quint32 function, quint32 instruction, const QString &message)
-        {
-            Q_UNUSED(function)
-            Q_UNUSED(instruction)
-            Q_UNUSED(message)
-        }
-
-        void InstructionHandler::onEntryPointSet(quint32 function, quint32 instruction)
-        {
-            Q_UNUSED(function)
-            Q_UNUSED(instruction)
-        }
-
-        void InstructionHandler::onSetEntryPointError(quint32 function, quint32 instruction, const QString &message)
         {
             Q_UNUSED(function)
             Q_UNUSED(instruction)

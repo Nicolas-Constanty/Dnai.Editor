@@ -37,7 +37,6 @@ CanvasNode {
 
         Repeater {
             model: entityModel.instructions
-
         }
 
         onScaleChanged: {

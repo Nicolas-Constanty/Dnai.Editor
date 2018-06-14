@@ -26,6 +26,8 @@ namespace dnai
 					Q_OBJECT
 					Q_PROPERTY(dnai::models::gui::EntityList *inputModels READ inputModels WRITE setInputModels NOTIFY inputModelsChanged)
 					Q_PROPERTY(dnai::models::gui::EntityList *outputModels READ outputModels WRITE setOutputModels NOTIFY outputModelsChanged)
+                    Q_PROPERTY(qint32 entryPointX READ entryPointX WRITE setEntryPointX)
+                    Q_PROPERTY(qint32 entryPointY READ entryPointY WRITE setEntryPointY)
 
 				public:
 					explicit Function(QObject *parent = nullptr);
@@ -88,6 +90,15 @@ namespace dnai
                     models::gui::Instruction *getInstruction(quint32 uid) const;
                     models::gui::Instruction *getInstruction(const QUuid &guid) const;
 
+                    models::gui::Instruction *entryPoint() const;
+                    void setEntryPoint(QUuid uid);
+
+                    qint32 entryPointX() const;
+                    void setEntryPointX(qint32 x);
+
+                    qint32 entryPointY() const;
+                    void setEntryPointY(qint32 y);
+
 				signals:
 					void inputModelsChanged(dnai::models::gui::EntityList* inputs);
 					void outputModelsChanged(dnai::models::gui::EntityList* outputs);
@@ -95,11 +106,21 @@ namespace dnai
 				private:
 					EntityList *m_finputs;
 					EntityList *m_foutputs;
-					QHash<QUuid, Instruction*> m_functionsHash;
+                    QHash<QUuid, Instruction*> m_functionsHash;
+
+                private:
+                    struct EntryPoint
+                    {
+                        qint32 x = 0;
+                        qint32 y = 0;
+                        QUuid guid;
+                    };
+
+                    EntryPoint m_entryPoint;
 				};
-				}
-				}
-				}
-				}
+            }
+        }
+    }
+}
 
 #endif //DNAI_MODELS_GUI_DECLARABLE_FUNCTION_H

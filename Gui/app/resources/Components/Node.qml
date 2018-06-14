@@ -115,10 +115,16 @@ GenericNode {
                     antialiasing: true
                     typeFlow: FlowType.Enter
                     onLinked: {
-                        Controller.Function.instruction.linkExecution(_node.function_entity.id, instructionModel.uid, outindex, _node.instruction_model.uid);
+                        if (instructionModel)
+                            Controller.Function.instruction.linkExecution(_node.function_entity.id, instructionModel.uid, outindex, _node.instruction_model.uid);
+                        else
+                            Controller.Function.setEntryPoint(_node.function_entity.id, _node.instruction_model.uid);
                     }
                     onUnlinked: {
-                        Controller.Function.instruction.unlinkExecution(_node.function_entity.id, instructionModel.uid, outindex);
+                        if (instructionModel)
+                            Controller.Function.instruction.unlinkExecution(_node.function_entity.id, instructionModel.uid, outindex);
+                        else
+                            console.log("Unset entry point");
                     }
                 }
             }
