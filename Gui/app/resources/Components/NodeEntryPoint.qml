@@ -35,7 +35,7 @@ GenericNode {
         y: borderWidth * 2
 
         width: _name.width + _flow.width + 50
-        height: _name.height + 20
+        height: _name.height + 20 + 100
 
         radius: 10
         borderWidth: 1
@@ -56,6 +56,12 @@ GenericNode {
             anchors.margins: 10
 
             text:  "On called"
+
+            Rectangle {
+                anchors.fill: parent
+                color: "green"
+                opacity: 0.7
+            }
         }
 
         /*
@@ -63,6 +69,12 @@ GenericNode {
          */
         Flow {
             id: _flow
+
+            Rectangle {
+                anchors.fill: parent
+                color: "blue"
+                opacity: 0.7
+            }
 
             anchors.right: parent.right
             anchors.verticalCenter: parent.verticalCenter
@@ -78,9 +90,7 @@ GenericNode {
             antialiasing: true
 
             onLinked: {
-                console.log("Set entry point")
                 Controller.Function.setEntryPoint(__this__.function_entity.id, instructionModel.uid);
-                //Controller.Function.instruction.linkExecution(_node.function_entity.id, _node.instruction_model.uid, outindex, instructionModel.uid);
             }
 
             onUnlinked: {
