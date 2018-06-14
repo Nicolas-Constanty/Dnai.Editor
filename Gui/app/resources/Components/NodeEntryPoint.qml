@@ -35,7 +35,7 @@ GenericNode {
         y: borderWidth * 2
 
         width: _name.width + _flow.width + 50
-        height: _name.height + 20 + 100
+        height: _name.height + 20
 
         radius: 10
         borderWidth: 1
@@ -56,12 +56,6 @@ GenericNode {
             anchors.margins: 10
 
             text:  "On called"
-
-            Rectangle {
-                anchors.fill: parent
-                color: "green"
-                opacity: 0.7
-            }
         }
 
         /*
@@ -69,12 +63,6 @@ GenericNode {
          */
         Flow {
             id: _flow
-
-            Rectangle {
-                anchors.fill: parent
-                color: "blue"
-                opacity: 0.7
-            }
 
             anchors.right: parent.right
             anchors.verticalCenter: parent.verticalCenter
