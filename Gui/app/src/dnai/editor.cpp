@@ -581,6 +581,8 @@ namespace dnai
         }
         const auto canvas = dynamic_cast<views::CanvasNode *>(view);
 
+        updateContextMenuModel(entity);
+
         const auto instructionsMap = m_contextMenuModel->instructions();
         QList<views::GenericNode *> nodes;
 
@@ -589,7 +591,16 @@ namespace dnai
          */
         for (models::gui::Instruction *instruction : function->instructions())
 		{
-            nodes.append(dynamic_cast<views::GenericNode *>(createNodeQMLComponent(instructionsMap[instruction->nodeMenuPath()], entity, instruction, canvas->content())));
+            QString nodePath = instruction->nodeMenuPath();
+
+            if (instructionsMap.contains(nodePath))
+            {
+                nodes.append(dynamic_cast<views::GenericNode *>(createNodeQMLComponent(instructionsMap[nodePath], entity, instruction, canvas->content())));
+            }
+            else
+            {
+                throw std::runtime_error("No such node \"" + nodePath.toStdString() + "\" in context menu");
+            }
 		}
 
         /*

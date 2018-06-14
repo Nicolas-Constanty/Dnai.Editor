@@ -445,19 +445,20 @@
                 }
             }
         },
-        "flow control": {
+        "Statements": {
             "categories" : {
-                "if": {
+                "If": {
                     "type": 1,
                     "inputs": 1,
                     "name": "if",
                     "description": "",
                     "instruction_id": 26,
                     "construction": [1],
+                    "input_names": ["condition"],
                     "in": 1,
                     "out": 2
                 },
-                "while": {
+                "While": {
                     "name": "while",
                     "description": "",
                     "instruction_id": 28,

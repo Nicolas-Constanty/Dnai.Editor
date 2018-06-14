@@ -236,9 +236,7 @@ Rectangle {
                                                {
                                                    var ent = md["guiProperties"].getOutputId(name);
 
-                                                   var conv = [2, 1, 5]
-
-                                                   Controller.variable.setType(ent, conv[val]);
+                                                   Controller.variable.setType(ent, Editor.propertyPanelProperties.varTypes.getValueFromIndex(val));
                                                }
                                            })
                         }

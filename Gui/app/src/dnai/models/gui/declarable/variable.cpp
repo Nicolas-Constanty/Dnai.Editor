@@ -88,7 +88,9 @@ namespace dnai
 
 				int VarTypeList::getValueFromIndex(int value) const
 				{
-                    return m_values.values()[value];
+                    if (value < m_values.count())
+                        return m_values.values().at(value);
+                    throw std::out_of_range("No such value for index " + std::to_string(value));
 				}
 
 				const QVariant &VarTypeList::names()
