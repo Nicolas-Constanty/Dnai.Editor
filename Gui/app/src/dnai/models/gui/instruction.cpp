@@ -113,8 +113,27 @@ namespace dnai
 				if (m_data.inputs == inputs)
 					return false;
 				m_data.inputs = inputs;
-				return true;
-			}
+                return true;
+            }
+
+            Input *Instruction::getInput(const QString &name) const
+            {
+                for (Input *curr : m_data.inputs)
+                {
+                    if (curr->name() == name)
+                        return curr;
+                }
+                return nullptr;
+            }
+
+            QString Instruction::getInputValue(const QString &name) const
+            {
+                Input *input = getInput(name);
+
+                qDebug() << "Get input value of " << name;
+                if (input == nullptr) return "";
+                return input->value();
+            }
 
             const QList<models::gui::Output*> &Instruction::outputs() const
 			{

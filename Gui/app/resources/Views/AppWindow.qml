@@ -19,6 +19,8 @@ ApplicationWindow {
         Editor.checkVersion()
     }
 
+
+
     function openSolution (projectPath) {
         if (Editor.loaded)
         {
@@ -119,6 +121,31 @@ ApplicationWindow {
         }
         onRejected: {
             //console.log("Canceled")
+        }
+
+    }
+
+
+    /*Dialog {
+        id: messageDialog
+        title: "May I have your attention please"
+     //   text: "It's so cool that you are using Qt Quick."
+        onAccepted: {
+            console.log("And of course you could only agree.")
+            Qt.quit()
+        }
+       // icon: StandardIcon.Warning
+       // Component.onCompleted: visible = true
+    }*/
+
+
+
+    onClosing: {
+        console.log('alo ??')
+        close.accepted = true
+        if (Editor.solution.isProjectsSaved() == false) {
+           // messageDialog.visible = true
+           // close.accepted = false
         }
 
     }

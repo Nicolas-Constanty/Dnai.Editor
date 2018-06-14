@@ -28,6 +28,14 @@ namespace dnai
                     obj["instructions"] = serializeList<models::gui::Instruction>(m_data.instructions);
 					obj["iolinks"] = serializeList<models::gui::IoLink>(m_data.iolinks);
 					obj["flowlinks"] = serializeList<models::gui::FlowLink>(m_data.flowlinks);
+
+                    QJsonObject ep;
+
+                    ep["x"] = m_entryPoint.x;
+                    ep["y"] = m_entryPoint.y;
+                    ep["guid"] = m_entryPoint.guid.toString();
+
+                    obj["entryPoint"] = ep;
 				}
 
 				void Function::_deserialize(const QJsonObject& obj)
@@ -52,7 +60,14 @@ namespace dnai
 					}
 					foreach(auto link, obj["flowlinks"].toArray()) {
 						appendFlowLink(models::gui::FlowLink::deserialize(link.toObject()));
-					}
+                    }
+
+                    if (obj.contains("entryPoint"))
+                    {
+                        setEntryPointX(obj["entryPoint"]["x"].toInt());
+                        setEntryPointY(obj["entryPoint"]["y"].toInt());
+                        setEntryPoint(obj["entryPoint"]["guid"].toString());
+                    }
 				}
 
 				const QList<models::Entity*>& Function::inputs() const
@@ -244,6 +259,39 @@ namespace dnai
                     }
                     return nullptr;
                 }
+
+                Instruction *Function::entryPoint() const
+                {
+                    if (m_entryPoint.guid.isNull())
+                        return nullptr;
+                    return getInstruction(m_entryPoint.guid);
+                }
+
+                void Function::setEntryPoint(QUuid uid)
+                {
+                    m_entryPoint.guid = uid;
+                }
+
+                qint32 Function::entryPointX() const
+                {
+                    return m_entryPoint.x;
+                }
+
+                void Function::setEntryPointX(qint32 x)
+                {
+                    m_entryPoint.x = x;
+                }
+
+                qint32 Function::entryPointY() const
+                {
+                    return m_entryPoint.y;
+                }
+
+                void Function::setEntryPointY(qint32 y)
+                {
+                    m_entryPoint.y = y;
+                }
+
 				const QList<dnai::models::gui::IoLink*> &Function::iolinks() const
 				{
 					return m_data.iolinks;

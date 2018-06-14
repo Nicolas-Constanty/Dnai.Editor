@@ -38,6 +38,16 @@ namespace dnai
         m_file->close();
 	}
 
+    bool Solution::isProjectsSaved() {
+        for (auto p : m_projects) {
+            dnai::Project *project = dynamic_cast<dnai::Project *>(p);
+            if (project->saved() == false) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     QString Solution::path() const {
         QFileInfo fi(m_file->fileName());
         return fi.absolutePath();

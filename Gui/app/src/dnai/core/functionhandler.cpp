@@ -30,6 +30,8 @@ namespace dnai
             QObject::connect(&manager,  SIGNAL(entityRemoved(::core::EntityID,models::Entity&)),
                              this,      SLOT(onEntityRemoved(::core::EntityID,models::Entity&)));
 
+            ::core::function::onEntryPointSet(std::bind(&FunctionHandler::onEntryPointSet, this, _1, _2));
+            ::core::function::onSetEntryPointError(std::bind(&FunctionHandler::onSetEntryPointError, this, _1, _2, _3));
             ::core::function::onParameterSet(std::bind(&FunctionHandler::onParameterSet, this, _1, _2));
             ::core::function::onSetParameterError(std::bind(&FunctionHandler::onSetParameterError, this, _1, _2, _3));
             ::core::function::onReturnSet(std::bind(&FunctionHandler::onReturnSet, this, _1, _2));
@@ -128,6 +130,22 @@ namespace dnai
         void FunctionHandler::pendingRmReturn(quint32 func, const QString &returnName)
         {
             pendingRmRet.push(std::make_pair(func, returnName));
+        }
+
+        void FunctionHandler::setEntryPoint(quint32 function, quint32 instruction, bool save)
+        {
+            qDebug() << "==Core== Function.SetEntryPoint(" << function << ", " << instruction << ") => save(" << save << ")";
+
+            models::Entity &func = manager.getEntity(function);
+            models::Function *data = func.guiModel<models::Function>();
+            models::gui::Instruction *instr = data->getInstruction(instruction);
+
+            commands::CommandManager::Instance()->exec(new commands::CoreCommand("Function.SetEntryPoint", save,
+                [&func, instr](){
+                    core::function::setEntryPoint(func.id(), instr->Uid());
+                },
+                nullptr //unset entry point not implemented
+            ));
         }
 
         void FunctionHandler::setParameter(quint32 func, QString const &paramName, bool save)
@@ -282,6 +300,28 @@ namespace dnai
                     ++it;
                 }
             }
+        }
+
+        void FunctionHandler::onEntryPointSet(quint32 function, quint32 instruction)
+        {
+            models::Entity &func = manager.getEntity(function);
+            models::Function *data = func.guiModel<models::Function>();
+            models::gui::Instruction *instr = data->getInstruction(instruction);
+
+            qDebug() << "==Core== Function.EntryPointSet(" << function << ", " << instruction << ")";
+
+            data->setEntryPoint(instr->guiUuid());
+            commands::CoreCommand::Success();
+            emit entryPointSet(&func, instr);
+        }
+
+        void FunctionHandler::onSetEntryPointError(quint32 function, quint32 instruction, const QString &msg)
+        {
+            Q_UNUSED(function)
+            Q_UNUSED(instruction)
+
+            commands::CoreCommand::Error();
+            Editor::instance().notifyError("Unable to set entry point: " + msg);
         }
 
         void FunctionHandler::onParameterSet(::core::EntityID func, const QString &paramName)

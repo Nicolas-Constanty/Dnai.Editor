@@ -115,10 +115,16 @@ GenericNode {
                     antialiasing: true
                     typeFlow: FlowType.Enter
                     onLinked: {
-                        Controller.Function.instruction.linkExecution(_node.function_entity.id, instructionModel.uid, outindex, _node.instruction_model.uid);
+                        if (instructionModel)
+                            Controller.Function.instruction.linkExecution(_node.function_entity.id, instructionModel.uid, outindex, _node.instruction_model.uid);
+                        else
+                            Controller.Function.setEntryPoint(_node.function_entity.id, _node.instruction_model.uid);
                     }
                     onUnlinked: {
-                        Controller.Function.instruction.unlinkExecution(_node.function_entity.id, instructionModel.uid, outindex);
+                        if (instructionModel)
+                            Controller.Function.instruction.unlinkExecution(_node.function_entity.id, instructionModel.uid, outindex);
+                        else
+                            console.log("Unset entry point");
                     }
                 }
             }
@@ -131,6 +137,7 @@ GenericNode {
             anchors.left: parent.left
             anchors.top: _flowIn.bottom
             anchors.margins: _node.paddingColumn
+
             Repeater {
                 model: _node.model.inputs
                 delegate: Input {
@@ -155,6 +162,47 @@ GenericNode {
                     }
                     Component.onCompleted: {
                         name = _node.model.inputNames[index]
+
+                        var inpVal = _node.instruction_model.getInputValue(name);
+
+                        if (inpVal)
+                        {
+                            _inputValue.text = inpVal;
+                        }
+                    }
+
+                    Text {
+                        id: _inputName
+
+                        anchors.left: parent.right
+                        anchors.leftMargin: 5
+                        height: parent.height
+
+                        text: parent.name
+                        font.pointSize: 8
+
+                        color: "white"
+                    }
+
+                    EditableText {
+                        id: _inputValue
+
+                        visible: parent.type >= 1 && parent.type <= 5
+
+                        anchors.left: _inputName.right
+                        anchors.leftMargin: 5
+                        width: 50
+                        height: parent.height
+
+                        text: ""
+                        placeholderText: ""
+                        font.pointSize: 7
+                        enableBar: false
+
+                        onAccepted: {
+                            if (_inputValue.text)
+                                Controller.Function.instruction.setInputValue(_node.function_entity.id, _node.instruction_model.uid, _inputDel.name, _inputValue.text);
+                        }
                     }
                 }
             }

@@ -60,6 +60,7 @@ namespace dnai
 				m_data.listIndex = QUuid::fromString(obj["listIndex"].toString());
 				m_data.varType = obj["varType"].toInt();
 				m_data.value = obj["value"].toString();
+                qDebug() << "Input " << m_data.name << " = " << m_data.value;
 			}
 
 			const data::Input& Input::data() const

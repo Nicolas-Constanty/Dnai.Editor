@@ -24,9 +24,6 @@ namespace dnai
             ::core::function::instruction::onRemoved(std::bind(&InstructionHandler::onRemoved, this, _1, _2));
             ::core::function::instruction::onRemoveError(std::bind(&InstructionHandler::onRemoveError, this, _1, _2, _3));
 
-            ::core::function::instruction::onEntryPointSet(std::bind(&InstructionHandler::onEntryPointSet, this, _1, _2));
-            ::core::function::instruction::onSetEntryPointError(std::bind(&InstructionHandler::onSetEntryPointError, this, _1, _2, _3));
-
             ::core::function::instruction::onDataLinked(std::bind(&InstructionHandler::onDataLinked, this, _1, _2, _3, _4, _5));
             ::core::function::instruction::onLinkDataError(std::bind(&InstructionHandler::onLinkDataError, this, _1, _2, _3, _4, _5, _6));
 
@@ -38,6 +35,9 @@ namespace dnai
 
             ::core::function::instruction::onExecutionUnlinked(std::bind(&InstructionHandler::onExecutionUnlinked, this, _1, _2, _3));
             ::core::function::instruction::onUnlinkExecutionError(std::bind(&InstructionHandler::onUnlinkExecutionError, this, _1, _2, _3, _4));
+
+            ::core::function::instruction::onInputValueSet(std::bind(&InstructionHandler::onInputValueSet, this, _1, _2, _3, _4));
+            ::core::function::instruction::onSetInputValueError(std::bind(&InstructionHandler::onSetInputValueError, this, _1, _2, _3, _4, _5));
         }
 
         void InstructionHandler::remove(quint32 func, quint32 instruction, bool save)
@@ -53,12 +53,6 @@ namespace dnai
                     }
                 )
             );*/
-        }
-
-        void InstructionHandler::setEntryPoint(quint32 function, quint32 instruction, bool save)
-        {
-            Q_UNUSED(function)
-            Q_UNUSED(instruction)
         }
 
         void InstructionHandler::linkData(quint32 function, quint32 from, const QString &output, quint32 to, const QString &input, bool save)
@@ -154,6 +148,27 @@ namespace dnai
             ));
         }
 
+        void InstructionHandler::setInputValue(quint32 function, quint32 instruction, const QString &input, const QString &value, bool save)
+        {
+            models::Entity &func = manager.getEntity(function);
+            models::Function *data = func.guiModel<models::Function>();
+            models::gui::Instruction *instr = data->getInstruction(instruction);
+
+            QString oldValue = "";
+
+            qDebug() << "==Core== Function.Instruction.SetInputValue(" << function << ", " << instruction << ", " << input << ", " << value << ") => save(" << save << ")";
+
+            commands::CommandManager::Instance()->exec(new commands::CoreCommand("Function.Instruction.SetInputValue", save,
+                [&func, instr, input, value]() {
+                    core::function::instruction::setInputValue(func.id(), instr->Uid(), input, value);
+                },
+                [&func, instr, input, oldValue]() {
+                    if (!oldValue.isEmpty())
+                        core::function::instruction::setInputValue(func.id(), instr->Uid(), input, oldValue);
+                }
+            ));
+        }
+
         void InstructionHandler::onRemoved(quint32 function, quint32 instruction)
         {
             Q_UNUSED(function)
@@ -167,19 +182,6 @@ namespace dnai
             Q_UNUSED(message)
         }
 
-        void InstructionHandler::onEntryPointSet(quint32 function, quint32 instruction)
-        {
-            Q_UNUSED(function)
-            Q_UNUSED(instruction)
-        }
-
-        void InstructionHandler::onSetEntryPointError(quint32 function, quint32 instruction, const QString &message)
-        {
-            Q_UNUSED(function)
-            Q_UNUSED(instruction)
-            Q_UNUSED(message)
-        }
-
         void InstructionHandler::onDataLinked(quint32 function, quint32 fromI, const QString &output, quint32 toI, const QString &input)
         {
             models::Entity &func = manager.getEntity(function);
@@ -187,7 +189,6 @@ namespace dnai
             models::gui::Instruction *from = dat->getInstruction(fromI);
             models::gui::Instruction *to = dat->getInstruction(toI);
 
-            /* to do: implement the link in the model */
             auto iolink = new models::gui::IoLink();
             models::gui::data::IoLink data;
             data.inputName = input;
@@ -288,6 +289,29 @@ namespace dnai
         {
             commands::CoreCommand::Error();
             Editor::instance().notifyError("Unable to unlink pin " + QString::number(outpin) + " of instruction " + QString::number(instruction) + " in function " + QString::number(function) + ": " + message);
+        }
+
+        void InstructionHandler::onInputValueSet(quint32 function, quint32 instruction, const QString &input, const QString &value)
+        {
+            models::Entity &func = manager.getEntity(function);
+            models::Function *data = func.guiModel<models::Function>();
+            models::gui::Instruction *instr = data->getInstruction(instruction);
+            models::gui::Input *inp = instr->getInput(input);
+
+            inp->setValue(value);
+
+            qDebug() << "==Core== Function.Instruction.InputValueSet(" << function << ", " << instruction << ", " << input << ", " << value << ")";
+            commands::CoreCommand::Success();
+            emit inputValueSet(&func, instr, input, value);
+        }
+
+        void InstructionHandler::onSetInputValueError(quint32 function, quint32 instruction, const QString &input, const QString &value, const QString &msg)
+        {
+            Q_UNUSED(function)
+            Q_UNUSED(instruction)
+
+            commands::CoreCommand::Error();
+            Editor::instance().notifyError("Unable to value " + value + " to input " + input + ": " + msg);
         }
     }
 }
