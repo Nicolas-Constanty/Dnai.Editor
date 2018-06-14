@@ -411,12 +411,13 @@ namespace dnai
         else if (declared->coreModel()->entityType() == ENTITY::ENUM_TYPE)
         {
             contextMenuModel()->appendEnumeration(declared);
+			dnai::models::gui::declarable::Variable::varTypes()->append(declared->name(), declared->id());
         }
     }
 
     void Editor::createNode(models::Entity *entity, models::ContextMenuItem *node, qint32 x, qint32 y)
     {
-        auto function = dynamic_cast<models::gui::declarable::Function *>(entity->guiModel());
+	    const auto function = dynamic_cast<models::gui::declarable::Function *>(entity->guiModel());
         if (function == nullptr) return;
 
         QList<quint32> topass;

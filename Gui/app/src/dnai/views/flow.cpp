@@ -25,20 +25,21 @@ namespace dnai
 			const auto li = dynamic_cast<FlowBackend *>(linkable);
 			if (li != nullptr && li->getType() != getType())
 			{
-				if (!li->links().empty())
+				const auto f = dynamic_cast<Flow *>(li->parent());
+				if (!li->links().empty() && f->typeFlow() == enums::FlowTypeRessouce::FlowType::Exit)
 				{
-					if (const auto lb = dynamic_cast<Flow *>(li->parent()))
-						lb->unlinkAll();
+					f->unlinkAll();
 				}
-				if (!links().empty())
-					dynamic_cast<Flow *>(parent())->unlinkAll();
 				const auto l = BaseLinkable::connect(linkable, curve);
 				if (const auto fl = dynamic_cast<Flow *>(parent()))
 				{
 					const auto flow = dynamic_cast<dnai::views::Flow *>(li->parent());
 					int index;
 					if (flow->typeFlow() == enums::FlowTypeRessouce::FlowType::Exit)
+					{
+						
 						index = flow->getNode()->flowsOut().getList().indexOf(flow);
+					}
 					else
 					{
 						const auto flowp = dynamic_cast<dnai::views::Flow *>(parent());
