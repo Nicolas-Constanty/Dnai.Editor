@@ -12,8 +12,8 @@ import "../JavaScript/CreateComponent.js" as Factory
 
 CanvasNode {
     id: canvas
-    property var nodeModel: null
-    property var entityModel: null
+    property var nodeModel
+    property var entityModel: nodeModel.guiProperties
     clip: true
 //    anchors.fill: parent
     backgroundColor: AppSettings.theme["canvas"]["background"]
@@ -46,7 +46,7 @@ CanvasNode {
     content: content_item
 
     onContextMenuChanged: {
-        Editor.updateContextMenu(nodeModel)
+        //Editor.updateContextMenu(nodeModel)
         Editor.updateContextMenuModel(nodeModel)
         _menu2.open()
     }

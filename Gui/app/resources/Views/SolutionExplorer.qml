@@ -197,9 +197,7 @@ Rectangle {
                                         {
                                             "nodeModel": model
                                         }, index.model.data(index, index.model.getRoleKey("name")))
-                            console.log("Just before loading function");
                             Editor.loadFunction(model)
-                            console.log("Just after loading function");
                         }
                         else
                         {
