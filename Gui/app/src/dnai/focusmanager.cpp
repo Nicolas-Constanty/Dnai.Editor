@@ -1,4 +1,5 @@
 #include "dnai/focusmanager.h"
+#include "dnai/views/genericnode.h"
 
 namespace dnai
 {
@@ -61,9 +62,14 @@ namespace dnai
 //            qDebug() << "Pos 4" <<  item->contains(point - item->position() - item->parentItem()->position() - item->parentItem()->parentItem()->position());
 //            qDebug() << "Pos 5" <<  item->contains(point - item->position() - item->parentItem()->position() - item->parentItem()->parentItem()->position() - item->parentItem()->parentItem()->parentItem()->position());
 //            qDebug() << "Pos 6" <<  item->contains(point - item->position() - item->parentItem()->position() - item->parentItem()->parentItem()->position() - item->parentItem()->parentItem()->parentItem()->position() - item->parentItem()->parentItem()->parentItem()->parentItem()->position());
-
-            //            const auto si = dynamic_cast<views::ScalableItem *>(item->parentItem()->parentItem()->parentItem()->parentItem()->parentItem());
-            if (item->contains(point - item->position() - item->parentItem()->position() - item->parentItem()->parentItem()->position()))
+			auto p = item;
+			auto np = point;
+			while (dynamic_cast<views::GenericNode *>(p) == nullptr)
+			{
+				np -= p->position();
+				p = p->parentItem();
+			}
+            if (item->contains(np))
 				items.append(item);
         }
 		return items;
