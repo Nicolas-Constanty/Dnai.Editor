@@ -168,6 +168,7 @@ GenericNode {
                         if (inpVal)
                         {
                             _inputValue.text = inpVal;
+                            Controller.Function.instruction.setInputValue(_node.function_entity.id, _node.instruction_model.uid, _inputDel.name, _inputValue.text);
                         }
                     }
 

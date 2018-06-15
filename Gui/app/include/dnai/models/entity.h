@@ -110,8 +110,7 @@ namespace dnai
 			Q_PROPERTY(QString description READ description WRITE setDescription NOTIFY descriptionChanged)
 			Q_PROPERTY(QObject *guiProperties READ guiProperties CONSTANT)
 
-        	Q_PROPERTY(qint32 entityType READ entityType WRITE setEntityType NOTIFY entityTypeChanged)
-            Q_PROPERTY(gcore::Entity *coreModel READ coreModel WRITE setCoreModel NOTIFY coreModelChanged)
+            Q_PROPERTY(qint32 entityType READ entityType WRITE setEntityType NOTIFY entityTypeChanged)
 			Q_PROPERTY(bool expanded READ expanded WRITE setExpanded NOTIFY expandedChanged)
 			Q_PROPERTY(dnai::models::Entity *parentRef READ parentRef CONSTANT)
 			Q_PROPERTY(dnai::models::Property *editableProperty READ editableProperty WRITE setEditableProperty NOTIFY editablePropertyChanged)
