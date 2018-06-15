@@ -116,11 +116,31 @@ ToolBar {
                     id: menuFile
                     y: parent.height
 
-                    DMenuItem { action: newProjectAction }
-                    DMenuItem { action: openAction }
-                    DMenuItem { action: saveAction }
-                    DMenuItem { action: saveAsAction }
-                    DMenuItem { action: saveAllAction }
+                    DMenuItem {
+                        action: newProjectAction
+                        iconItem.text: "\uf15b"
+                        iconItem.font.pointSize: 8
+                    }
+                    DMenuItem {
+                        action: openAction
+                        iconItem.text: "\uf07c"
+                        iconItem.font.pointSize: 8
+                    }
+                    DMenuItem {
+                        action: saveAction
+                        iconItem.text: "\uf0c7"
+                        iconItem.font.pointSize: 8
+                    }
+                    DMenuItem {
+                        action: saveAsAction
+                        iconItem.text: "\uf0c7"
+                        iconItem.font.pointSize: 8
+                    }
+                    DMenuItem {
+                        action: saveAllAction
+                        iconItem.text: "\uf0c7"
+                        iconItem.font.pointSize: 8
+                    }
                 }
             }
 
@@ -135,7 +155,11 @@ ToolBar {
                     y: parent.height
                     property alias settingRef: settingPanel
 
-                    DMenuItem { action: settingsAction }
+                    DMenuItem {
+                        action: settingsAction
+                        iconItem.text: "\uf013"
+                        iconItem.font.pointSize: 8
+                    }
                 }
             }
 
@@ -147,7 +171,11 @@ ToolBar {
                 DMenu {
                     id: menuView
                     y: parent.height
-                    DMenuItem { action: fullscreenAction }
+                    DMenuItem {
+                        action: fullscreenAction
+                        iconItem.text: "\uf31e"
+                        iconItem.font.pointSize: 8
+                    }
                 //    DMenuItem { action: leftPanelAction }
                 //    DMenuItem { action: rightPanelAction }
 
