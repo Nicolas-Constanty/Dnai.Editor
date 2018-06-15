@@ -1,42 +1,79 @@
 {
-    "background": {
-        "color" : "#FAFAFA",
-        "darkColor" : "#212121",
-        "lightColor": "#616161",
-        "bluecolor": "#639DBD",
-        "greencolor": "#63BB8C"
+    "transparencies": {
+        "100": "#ff",
+        "95": "#F2",
+        "90": "#E6",
+        "85": "#D9",
+        "80": "#CC",
+        "75": "#BF",
+        "70": "#B3",
+        "65": "#A6",
+        "60": "#99",
+        "55": "#8C",
+        "50": "#80",
+        "45": "#73",
+        "40": "#66",
+        "35": "#59",
+        "30": "#4D",
+        "25": "#40",
+        "20": "#33",
+        "15": "#26",
+        "10": "#1A",
+        "5": "#0D",
+        "0": "#00"
+    },
+    "colors": {
+        "background": {
+            "base": "#424242",
+            "dark": "#212121",
+            "color1": "#847aff",
+            "color2": "#35334a",
+            "color3": "#535364",
+            "color4": "#d8c9ff",
+            "color5": "#ffffff"
+        },
+        "accent": {
+            "green": "#63bb8c",
+            "yellow": "#e8d685",
+            "blue": "#639dbd",
+            "red": "#e88885",
+            "purple": "#db96ff"
+        }
     },
     "border": {
-        "color": "#757575",
         "width": 1
     },
-    "entities" : {
-        "context" : {
-            "color" : "#00897B",
-            "icon" : "context.png"
+    "entities": {
+        "context": {
+            "color": "#00897B",
+            "icon": "context.png"
         },
-        "object_type" : {
-            "color" : "#039BE5",
-            "icon" : "class.png"
+        "object_type": {
+            "color": "#039BE5",
+            "icon": "class.png"
         },
-        "enum_type" : {
-            "color" : "#00D098",
-            "icon" : "enum.png"
+        "enum_type": {
+            "color": "#00D098",
+            "icon": "enum.png"
         },
-        "function" : {
-            "color" : "#8E24AA",
-            "icon" : "function.png"
+        "function": {
+            "color": "#8E24AA",
+            "icon": "function.png"
         },
-        "variable" : {
-            "color" : "#FB8C00",
-            "icon" : "variable.png"
+        "variable": {
+            "color": "#FB8C00",
+            "icon": "variable.png"
         }
     },
     "menu": {
         "background": {
-            "color" : "#1b1b1c",
-            "darkColor" : "#212121",
+            "color": "#424242",
+            "darkColor": "#212121",
             "lightColor": "#616161"
+        },
+        "border": {
+            "color": "#757575",
+            "width": 1
         }
     },
     "shadowColor": "#212121",
@@ -45,14 +82,15 @@
         "pixelSize": 10
     },
     "text": {
-        "color": "#000000",
+        "color": "#FAFAFA",
         "darkColor": "#000000",
-        "disableColor": "#000000",
-        "lightColor": "#000000",
+        "disableColor": "#60FFFFFF",
+        "lightColor": "#FFFFFF",
         "linkColor": "#000000",
         "selectionColor": "#000000",
         "accentColor": "#FF7043",
-        "errorColor": "#FE1B00"
+        "errorColor": "#E88885",
+        "errorSelectedColor": "#FF3232"
     },
     "canvas": {
         "background": "#4F4F4F",
@@ -67,51 +105,51 @@
     "nodes": {
         "borderWidth": 2,
         "genericNode": {
-            "color": "#29B6F6",
+            "color": "#000000",
             "border": {
-                "color": "#000000",
+                "color": "#29B6F6",
                 "width": 2
             }
         },
         "intNode": {
-            "color": "#9CCC65",
+            "color": "#000000",
             "border": {
-                "color": "#000000",
+                "color": "#9CCC65",
                 "width": 2
             }
         },
         "stringNode": {
-            "color": "#EC407A",
+            "color": "#000000",
             "border": {
-                "color": "#000000",
+                "color": "#EC407A",
                 "width": 2
             }
         },
         "boolNode": {
-            "color": "#FFA726",
+            "color": "#000000",
             "border": {
-                "color": "#000000",
+                "color": "#FFA726",
                 "width": 2
             }
         },
         "functionNode": {
-            "color": "#AB47BC",
+            "color": "#000000",
             "border": {
-                "color": "#000000",
+                "color": "#AB47BC",
                 "width": 2
             }
         },
         "classNode": {
-            "color": "#3F51B5",
+            "color": "#000000",
             "border": {
-                "color": "#000000",
+                "color": "#3F51B5",
                 "width": 2
             }
         },
         "listNode": {
-            "color": "#8D6E63",
+            "color": "#000000",
             "border": {
-                "color": "#000000",
+                "color": "#8D6E63",
                 "width": 2
             }
         }
@@ -158,30 +196,30 @@
         }
     },
     "button": {
-       "color": "#847AFF",
-       "hovercolor": "#8E84FF",
-       "text": {
-           "color": "#FFFFFF",
-           "hovercolor": "#FFFFFF"
-       }
-   },
-   "modal": {
-       "color": "#252526",
-       "border": {
-           "color": "#BCBCBC",
-           "width": 1
-       }
-   },
-   "editableText": {
-       "color": {
-           "border": {
-           "select": "#847AFF",
-           "deselect": "#4E4E5E"
-           },
-           "background": {
-               "select": "#333232",
-               "deselect": "#252526"
-           }
-       }
-   }
+        "color": "#847AFF",
+        "hovercolor": "#8E84FF",
+        "text": {
+            "color": "#FFFFFF",
+            "hovercolor": "#FFFFFF"
+        }
+    },
+    "modal": {
+        "color": "#252526",
+        "border": {
+            "color": "#BCBCBC",
+            "width": 1
+        }
+    },
+    "editableText": {
+        "color": {
+            "border": {
+                "select": "#847AFF",
+                "deselect": "#4E4E5E"
+            },
+            "background": {
+                "select": "#333232",
+                "deselect": "#252526"
+            }
+        }
+    }
 }

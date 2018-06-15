@@ -6,6 +6,7 @@ import QtQuick.Window 2.2
 
 import DNAI 1.0
 import Dnai.FontAwesome 1.0
+import Dnai.Settings 1.0
 
 import "../Panels"
 import "../Controls"
@@ -18,7 +19,7 @@ ToolBar {
     height: 40
     spacing: 0
     background: Rectangle {
-        color: AppSettings.theme["background"]["color"]
+        color: AppSettings.theme["colors"]["background"]["base"]
     }
 
     Action {
@@ -391,7 +392,7 @@ ToolBar {
     Modal {
         id: settingsPopup
         background: Rectangle {
-            color: AppSettings.theme["background"]["color"]
+            color: AppSettings.theme["colors"]["background"]["base"]
         }
 
         x: parent.width / 2 - width / 2

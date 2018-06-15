@@ -1,6 +1,7 @@
 import QtQuick 2.0
 
 import DNAI 1.0
+import Dnai.Settings 1.0
 import Dnai.FontAwesome 1.0
 
 import "../Style"
@@ -8,7 +9,7 @@ import "../Style"
 Rectangle {
     id: __this__
 
-    color: AppSettings.theme["background"]["greencolor"]
+    color: AppSettings.theme["colors"]["accent"]["green"]
 
     signal build()
 

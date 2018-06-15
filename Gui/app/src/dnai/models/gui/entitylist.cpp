@@ -20,6 +20,7 @@ namespace dnai
 
 			int EntityList::rowCount(const QModelIndex& parent) const
 			{
+                Q_UNUSED(parent)
 				if (!m_list) return 0;
 				return m_list->count();
 			}

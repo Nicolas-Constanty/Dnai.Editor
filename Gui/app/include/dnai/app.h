@@ -4,11 +4,9 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QDir>
-#include "settings.h"
 #include "processmanager.h"
 #include "views/appview.h"
 #include "views/instructionview.h"
-#include "models/basicnodemodel.h"
 #include "dnai/interfaces/iloadingclass.h"
 #include "session.h"
 #include "editor.h"
@@ -24,18 +22,17 @@ namespace dnai {
         void loadMainWindow();
 		void initProcessManager();
 	    bool eventFilter(QObject* o, QEvent* event) override;
-        void registerSettings(AppSettings* appSettings);
         void versionsUpdater();
         void onNotifyVersionChanged();
 
     public:
         Session &session();
-        AppSettings &settings() const;
         views::AppView &appView() const;
 	    QQmlApplicationEngine &engine();
-        models::BasicNodeModel *nodes() const;
         ProcessManager *processManager() const;
         Editor &editor() const;
+        bool isNewVersionAvailable() const;
+        qreal getSettingNumber(const QString &path);
 
     public:
         static void loadFonts();
@@ -52,17 +49,20 @@ namespace dnai {
         void loadSplashScreen();
     private:
         QQmlApplicationEngine m_engine;
-        AppSettings *m_settings;
         ProcessManager* m_processManager;
 	    views::AppView* m_appView;
-        models::BasicNodeModel *m_nodeModel;
         Session m_session;
 	    static App *m_instance;
         Editor &m_editor;
+        QString m_currentVersionAPI;
+        QMap<QString, qreal> m_loadedNumbers;
 
         QObject *createQmlComponent(const QString &path);
 	    static void setupSettings();
 		void initAppView();
+
+        void setVersion(const QString &ver);
+        void setAPIVersion(const QString &ver);
 
     protected:
         std::queue<std::function<void()>> init() override;

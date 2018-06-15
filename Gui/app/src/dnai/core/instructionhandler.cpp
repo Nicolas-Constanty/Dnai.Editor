@@ -44,6 +44,7 @@ namespace dnai
         {
             Q_UNUSED(func)
             Q_UNUSED(instruction)
+            Q_UNUSED(save)
             /*models::Entity &function = manager.getEntity(func);
 
             commands::CommandManager::Instance()->exec(
@@ -261,6 +262,7 @@ namespace dnai
 
         void InstructionHandler::onLinkExecutionError(quint32 function, quint32 instruction, quint32 outpin, quint32 toInstruction, const QString &message)
         {
+            Q_UNUSED(function)
             commands::CoreCommand::Error();
             Editor::instance().notifyError("Unable to link pin " + QString::number(outpin) + " of instruction " + QString::number(instruction) + " to instruction " + QString::number(toInstruction) + ": " + message);
         }

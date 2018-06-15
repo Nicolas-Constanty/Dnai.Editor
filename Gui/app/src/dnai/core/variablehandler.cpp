@@ -121,6 +121,7 @@ namespace dnai
 
         void VariableHandler::onSetTypeError(::core::EntityID variable, ::core::EntityID type, const QString &message)
         {
+            Q_UNUSED(type)
             models::Entity &var = manager.getEntity(variable);
 
             commands::CoreCommand::Error();

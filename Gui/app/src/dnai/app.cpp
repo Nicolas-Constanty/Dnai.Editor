@@ -1,6 +1,7 @@
 #include <QQuickWindow>
 #include <QDirIterator>
 #include <QFontDatabase>
+#include <QDesktopServices>
 
 #include "dnai/app.h"
 #include "dnai/processmanager.h"
@@ -22,10 +23,8 @@ namespace dnai
 {
     App *App::m_instance = nullptr;
     App::App(int& argc, char** argv) : QGuiApplication(argc, argv)
-	, m_settings(nullptr)
 	, m_processManager(nullptr)
 	, m_appView(nullptr)
-	, m_nodeModel(nullptr)
     , m_editor(Editor::instance())
 	{
 		if (m_instance == nullptr)
@@ -47,7 +46,6 @@ namespace dnai
     App::~App() {
 	    delete m_processManager;
 	    delete m_appView;
-	    delete m_nodeModel;
         qDebug() << "~" << "App";
     }
 
@@ -57,19 +55,19 @@ namespace dnai
 #else
 	    const QString softwares("windows");
 #endif
-        m_settings->setVersion(DNAI_VERSION_RELEASE);
-        m_settings->setAPIVersion(DNAI_VERSION_RELEASE);
+        setVersion(DNAI_VERSION_RELEASE);
+        setAPIVersion(DNAI_VERSION_RELEASE);
 
 
         api::get_download_object(softwares, "installer").map([this](http::Response response) -> http::Response {
             if (response.body.contains("currentVersion")) {
                 qDebug() << "enter ?";
-                m_settings->setAPIVersion(response.body["currentVersion"].toString());
+                setAPIVersion(response.body["currentVersion"].toString());
             }
            // m_settings->setAPIVersion("0.0.30");
             qDebug() << DNAI_VERSION_RELEASE;
             qDebug() << Editor::instance().version();
-            qDebug() << m_settings->currentVersionAPI();
+            qDebug() << m_currentVersionAPI;
 
 
             onNotifyVersionChanged();
@@ -85,10 +83,6 @@ namespace dnai
 
             return response;
         });
-    }
-
-    void App::onNotifyVersionChanged() {
-        m_settings->onNotifyVersionChanged();
     }
 
     void App::initProcessManager()
@@ -111,8 +105,10 @@ namespace dnai
 
 	void App::initAppView()
 	{
+        QVariant value = Editor::instance().settings()->value(api::settings_key);
+        api::setUser(value.value<api::User>());
+        qDebug() << "API ID: " << api::getId();
 		m_appView = new views::AppView();
-		m_nodeModel = new models::BasicNodeModel();
 	}
 
     std::queue<std::function<void()>> App::init()
@@ -128,7 +124,7 @@ namespace dnai
 	}
 
     void App::afterInit()
-    {
+    {          
     }
 
 	void App::loadFonts()
@@ -168,11 +164,6 @@ namespace dnai
 		return QGuiApplication::eventFilter(o, event);
 	}
 
-    models::BasicNodeModel *App::nodes() const
-	{
-		return m_nodeModel;
-	}
-
     ProcessManager *App::processManager() const
     {
         return m_processManager;
@@ -190,11 +181,6 @@ namespace dnai
         return component.create();
 	}
 
-    void App::registerSettings(AppSettings* appSettings)
-	{
-        m_settings = appSettings;
-	}
-
     App* App::currentInstance()
 	{
 		return m_instance;
@@ -203,11 +189,6 @@ namespace dnai
     QQmlApplicationEngine &App::engine()
 	{
 		return m_engine;
-	}
-
-    AppSettings &App::settings() const
-	{
-        return *m_settings;
 	}
 
     Session  &App::session()
@@ -298,5 +279,62 @@ namespace dnai
 #else
       return false;
 #endif
+  }
+
+  void App::setVersion(QString const &ver) {
+      Editor::instance().setVersion(ver);
+  }
+
+  void App::setAPIVersion(QString const &ver) {
+      m_currentVersionAPI = ver;
+  }
+
+  qreal App::getSettingNumber(const QString &path)
+  {
+
+      if (m_loadedNumbers.contains(path))
+      {
+
+          return m_loadedNumbers[path];
+      }
+      const auto s =  Editor::instance().settings()->value(path).toReal();
+      m_loadedNumbers[path] = s;
+      return m_loadedNumbers[path];
+  }
+
+  bool App::isNewVersionAvailable() const {
+      QStringList currentVersionList = Editor::instance().version().split('.');
+      QStringList currentVersionAPIList = m_currentVersionAPI.split('.');
+      int i = 0;
+
+      while (i < currentVersionAPIList.length() && i < currentVersionList.length()) {
+          if (currentVersionAPIList[i].toInt() > currentVersionList[i].toInt()) {
+              return true;
+          }
+          ++i;
+      }
+      return false;
+  }
+
+  void App::onNotifyVersionChanged() {
+      if (isNewVersionAvailable()) {
+          Editor::instance().notifyInformation("Switch to new version " + m_currentVersionAPI, [this]() {
+#ifdef RELEASE
+              QDesktopServices::openUrl(QUrl("https://dnai.io/download/"));
+#else
+              QDesktopServices::openUrl(QUrl("https://preprod.dnai.io/download/"));
+#endif
+             // App::currentInstance()->processManager()->launchUpdater(Editor::instance().version(), m_currentVersionAPI);
+          });
+          /*Editor::instance().notifyError("Switch to new version " + m_currentVersionAPI, [this]() {
+              App::currentInstance()->processManager()->launchUpdater(Editor::instance().version(), m_currentVersionAPI);
+          });
+          Editor::instance().notifySuccess("Switch to new version " + m_currentVersionAPI, [this]() {
+              App::currentInstance()->processManager()->launchUpdater(Editor::instance().version(), m_currentVersionAPI);
+          });
+          Editor::instance().notifyWarning("Switch to new version " + m_currentVersionAPI, [this]() {
+              App::currentInstance()->processManager()->launchUpdater(Editor::instance().version(), m_currentVersionAPI);
+          });*/
+      }
   }
 }

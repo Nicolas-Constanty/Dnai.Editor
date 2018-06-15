@@ -1,6 +1,8 @@
 import QtQuick 2.9
 import QtQuick.Controls 2.3
+
 import DNAI 1.0
+import Dnai.Settings 1.0
 
 import "../Style"
 
@@ -82,7 +84,7 @@ MenuItem {
             y: 1
             width: parent.width - 2
             height: parent.height - 2
-            color: control.pressed ? AppSettings.theme["background"]["darkColor"] : control.hovered ? AppSettings.theme["background"]["lightColor"] : "transparent"
+            color: control.pressed ? AppSettings.theme["colors"]["background"]["dark"] : control.hovered ? AppSettings.theme["colors"]["background"]["light"] : "transparent"
 
         }
     }

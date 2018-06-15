@@ -5,6 +5,7 @@ import QtGraphicalEffects 1.0
 import DNAI 1.0
 import DNAI.Models 1.0
 import DNAI.Enums 1.0
+import Dnai.Settings 1.0
 import Dnai.FontAwesome 1.0
 
 import "../Style"
@@ -18,12 +19,12 @@ Rectangle {
     implicitHeight: 40
     width: parent.parent.width
     height: 40
-    color: AppSettings.theme["background"]["color"]
+    color: AppSettings.theme["colors"]["background"]["base"]
     MouseArea {
         anchors.fill: parent;
         onClicked: {
             Editor.propertyView().model = modelData
-//            Manager.views.updatePropertyPanelModel(item)
+            Editor.solution.selectedEntity = _itemview
         }
     }
 
@@ -110,7 +111,7 @@ Rectangle {
         implicitWidth: parent.width * 0.04
         indicator: Rectangle {
             anchors.fill: _selectButton
-            color: AppSettings.getEntityColor(modelData.entityType)
+            color: AppSettings.theme["entities"][Number(modelData.entityType).toString()]["color"]
 
             TextAwesomeSolid { // Entity checked
                 id: _entityCheck
@@ -236,7 +237,7 @@ Rectangle {
         color: _openbutton.hovered ? AppSettings.theme["text"]["color"] : "#80DEEA"
         background: Rectangle {
             id: _openbuttonBack
-            color: _openbutton.hovered ? "#8080DEEA" : AppSettings.theme["background"]["color"]
+            color: _openbutton.hovered ? "#8080DEEA" : AppSettings.theme["colors"]["background"]["base"]
         }
         Rectangle {
             color: "transparent"
@@ -308,16 +309,22 @@ Rectangle {
             placeholderText: "comment..."
             background: Rectangle {
                 color: AppSettings.theme["menu"]["background"]["darkColor"]
-                border.color: AppSettings.theme["background"]["lightColor"]
+                border.color: AppSettings.theme["colors"]["background"]["light"]
             }
         }
     }
     layer.enabled: true
     layer.effect: DropShadow {
         transparentBorder: true
-        horizontalOffset: 3
-        verticalOffset: 3
+        horizontalOffset: 2
+        verticalOffset: 2
         samples: 17
         color: "#80000000"
+    }
+    Rectangle {
+        anchors.fill: parent
+        border.width: Editor.solution.selectedEntity === _itemview ? 1 : 0
+        border.color: AppSettings.theme["border"]["color"]
+        color: Editor.solution.selectedEntity === _itemview ? "#1A63BB8C" : "transparent"
     }
 }

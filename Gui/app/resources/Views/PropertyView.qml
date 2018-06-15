@@ -4,6 +4,7 @@ import QtQuick.Controls 2.2
 import DNAI 1.0
 import DNAI.Enums 1.0
 
+import Dnai.Settings 1.0
 import Dnai.Controls 1.0
 import Dnai.FontAwesome 1.0
 
@@ -401,13 +402,13 @@ Rectangle {
 //        frameVisible: false
 //        headerVisible: false
 //        style: TableViewStyle {
-//            backgroundColor :  AppSettings.theme["background"]["darkColor"]
-//            alternateBackgroundColor:  AppSettings.theme["background"]["darkColor"]
-//            highlightedTextColor: AppSettings.theme["background"]["color"]
+//            backgroundColor :  AppSettings.theme["colors"]["background"]["dark"]
+//            alternateBackgroundColor:  AppSettings.theme["colors"]["background"]["dark"]
+//            highlightedTextColor: AppSettings.theme["colors"]["background"]["base"]
 //            textColor : AppSettings.theme["text"]["color"]
 //        }
 //            itemDelegate: Rectangle {
-//                color: AppSettings.theme["background"]["darkColor"]
+//                color: AppSettings.theme["colors"]["background"]["dark"]
 //                // TODO Improve this declaration with javascript creation ?
 //                EditableText {
 //                    id: editText

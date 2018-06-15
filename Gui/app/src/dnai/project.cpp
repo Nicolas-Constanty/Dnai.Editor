@@ -124,9 +124,16 @@ namespace dnai {
 
 		const QByteArray data = m_file->readAll();
 
-		try {
-			const QJsonObject obj(QJsonDocument::fromJson(data).object());
-			_deserialize(obj);
+        try {
+            QJsonParseError err;
+            const QJsonObject obj(QJsonDocument::fromJson(data, &err).object());
+            if (err.error != QJsonParseError::NoError)
+            {
+                qWarning() << err.errorString() << "at character :" << err.offset;
+                m_file->close();
+                return;
+            }
+            _deserialize(obj);
 			m_data = obj;
         } catch (std::exception &e) {
 			Q_UNUSED(e)

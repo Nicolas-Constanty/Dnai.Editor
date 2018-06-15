@@ -19,3 +19,6 @@
 [submodule "Gui/plugins/FontAwesome"]
 	path = Gui/plugins/FontAwesome
 	url = https://github.com/Nicolas-Constanty/Dnai.SubModules.Libs.QtPlugins.FontAwesome.git
+[submodule "Gui/plugins/Settings"]
+	path = Gui/plugins/Settings
+	url = https://github.com/Nicolas-Constanty/Dnai.SubModules.Libs.QtPlugins.Settings.git

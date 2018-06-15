@@ -4,6 +4,7 @@ import QtQuick.Dialogs 1.3
 
 import DNAI 1.0
 import DNAI.Views 1.0
+import Dnai.Settings 1.0
 
 import "../Style"
 import "../Components"
@@ -48,7 +49,7 @@ ApplicationWindow {
     minimumHeight: 150
     minimumWidth: 400
     title: qsTr("DNAI")
-    color: AppSettings.theme["background"]["darkColor"]
+    color: AppSettings.theme["colors"]["background"]["dark"]
     visible: true
 
     ToolBarHeader {
@@ -141,9 +142,9 @@ ApplicationWindow {
 
 
     onClosing: {
-        console.log('alo ??')
+//        console.log('alo ??')
         close.accepted = true
-        if (Editor.solution.isProjectsSaved() == false) {
+        if (Editor.solution.isProjectsSaved() === false) {
            // messageDialog.visible = true
            // close.accepted = false
         }

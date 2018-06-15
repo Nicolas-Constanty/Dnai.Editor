@@ -1,8 +1,10 @@
 import QtQuick 2.4
 import QtQuick.Controls 2.2
-import DNAI 1.0
-import Dnai.FontAwesome 1.0
 import QtQuick.Dialogs 1.3
+
+import DNAI 1.0
+import Dnai.Settings 1.0
+import Dnai.FontAwesome 1.0
 
 import "../Forms"
 import "../Style"

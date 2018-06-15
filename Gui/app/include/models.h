@@ -30,7 +30,6 @@
 #include "dnai/models/gui/output.h"
 #include "dnai/models/gui/instruction.h"
 
-#include "dnai/models/basicnodemodel.h"
 #include "dnai/models/entity.h"
 #include "dnai/models/entitytree.h"
 #include "dnai/models/generictreeitem.h"

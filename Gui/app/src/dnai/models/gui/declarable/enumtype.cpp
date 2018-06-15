@@ -71,7 +71,7 @@ namespace dnai
                     obj["enumvalues"] = arr;
                 }
 
-                const QString &EnumType::getValue(const QString &name) const
+                QString EnumType::getValue(const QString &name) const
                 {
                     return m_data.values.value(name);
                 }

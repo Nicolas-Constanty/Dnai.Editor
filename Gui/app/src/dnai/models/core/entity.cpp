@@ -41,7 +41,7 @@ namespace dnai
 
 			}
 
-			bool Entity::setId(qint32 id)
+            bool Entity::setId(quint32 id)
 			{
 				if (m_data.id == id)
 					return false;
@@ -49,7 +49,7 @@ namespace dnai
 				return true;
 			}
 
-			qint32 Entity::id() const
+            quint32 Entity::id() const
 			{
 				return m_data.id;
 			}
@@ -94,7 +94,7 @@ namespace dnai
 				return m_data.type;
 			}
 
-			bool Entity::setContainerId(const qint32 c)
+            bool Entity::setContainerId(const quint32 c)
 			{
 				if (m_data.containerId == c)
 					return false;
@@ -102,7 +102,7 @@ namespace dnai
 				return true;
 			}
 
-			qint32 Entity::containerId() const
+            quint32 Entity::containerId() const
 			{
 				return m_data.containerId;
 			}

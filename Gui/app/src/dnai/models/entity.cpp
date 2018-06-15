@@ -63,7 +63,7 @@ namespace dnai
 			emit isRootChanged(isRoot);
 		}
 
-		qint32 Entity::id() const
+        qint32 Entity::id() const
 		{
 			return coreModel()->id();
 		}

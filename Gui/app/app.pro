@@ -77,7 +77,6 @@ SOURCES += \
     src/dnai/models/gui/input.cpp \
     src/dnai/models/gui/instruction.cpp \
     src/dnai/models/gui/output.cpp \
-    src/dnai/models/basicnodemodel.cpp \
     src/dnai/models/entity.cpp \
     src/dnai/models/entitytree.cpp \
     src/dnai/models/listnode.cpp \
@@ -114,7 +113,6 @@ SOURCES += \
     src/dnai/processmanager.cpp \
     src/dnai/project.cpp \
     src/dnai/session.cpp \
-    src/dnai/settings.cpp \
     src/dnai/solution.cpp \
     src/main.cpp \
     src/dnai/commands/corecommand.cpp \
@@ -240,7 +238,6 @@ HEADERS += \
     include/dnai/models/gui/input.h \
     include/dnai/models/gui/instruction.h \
     include/dnai/models/gui/output.h \
-    include/dnai/models/basicnodemodel.h \
     include/dnai/models/entity.h \
     include/dnai/models/entitytree.h \
     include/dnai/models/generictreeitem.h \
@@ -258,7 +255,6 @@ HEADERS += \
     include/dnai/views/contextview.h \
     include/dnai/views/customshape.h \
     include/dnai/views/declarationview.h \
-    include/dnai/views/editorview.h \
     include/dnai/views/flow.h \
     include/dnai/views/genericnode.h \
     include/dnai/views/input.h \
@@ -285,7 +281,6 @@ HEADERS += \
     include/dnai/processmanager.h \
     include/dnai/project.h \
     include/dnai/session.h \
-    include/dnai/settings.h \
     include/dnai/solution.h \
     include/api.h \
     include/commands.h \
@@ -303,8 +298,6 @@ HEADERS += \
     include/dnai/core/listhandler.h \
     include/dnai/core/objecthandler.h \
     include/dnai/core/projecthandler.h \
-    include/dnai/views/viewelement.h \
-    include/dnai/views/viewzone.h \
     include/dnai/views/editorview.h \
     include/dnai.h \
     include/exceptions.h \

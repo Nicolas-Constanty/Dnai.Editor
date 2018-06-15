@@ -65,7 +65,6 @@
         <file>resources/Style/MLabel.qml</file>
         <file>resources/Style/Title2.qml</file>
         <file>resources/Style/Title3.qml</file>
-        <file>settings/themes/dark1.json</file>
         <file>resources/Panels/ExpendablePanel.qml</file>
         <file>resources/Style/TitlePanel.qml</file>
         <file>resources/Style/MButton.qml</file>

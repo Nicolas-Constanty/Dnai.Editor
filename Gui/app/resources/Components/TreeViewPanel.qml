@@ -27,8 +27,8 @@ ExpendablePanel {
             role: "name"
         }
         style: TreeViewStyle {
-            alternateBackgroundColor : AppSettings.theme["background"]["darkColor"]
-            backgroundColor : AppSettings.theme["background"]["darkColor"]
+            alternateBackgroundColor : AppSettings.theme["colors"]["background"]["dark"]
+            backgroundColor : AppSettings.theme["colors"]["background"]["dark"]
             highlightedTextColor : AppSettings.theme["text"]["lightColor"]
             textColor : AppSettings.theme["text"]["color"]
         }

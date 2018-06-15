@@ -29,8 +29,9 @@ namespace dnai
 		, m_editorView(nullptr)
 		, m_propertyView(nullptr)
 		, m_contextMenu(new models::ContextMenu())
-		, m_propertyPanelProperties(nullptr)
+        , m_propertyPanelProperties(nullptr)
 	    , m_contextMenuModel(nullptr)
+        , m_settings(nullptr)
 	{
 	}
 
@@ -205,11 +206,6 @@ namespace dnai
 			return;
 		m_solution = sol;
         emit solutionChanged(sol);
-    }
-
-    models::BasicNodeModel *Editor::nodes() const
-    {
-        return App::currentInstance()->nodes();
     }
 
 	PropertyPanelProperties * Editor::propertyPanelProperties()
@@ -692,8 +688,28 @@ namespace dnai
 		if (func)
         {
             m_contextMenu->createFromEntity(entity);
-		}
-	}
+        }
+    }
+
+    QSettings *Editor::settings()
+    {
+        return m_settings;
+    }
+
+    void Editor::registerSettings(QSettings *settings)
+    {
+        m_settings = settings;
+    }
+
+    bool Editor::isNewVersionAvailable() const
+    {
+        return App::currentInstance()->isNewVersionAvailable();
+    }
+
+    qreal Editor::getSettingNumber(const QString &path)
+    {
+        return App::currentInstance()->getSettingNumber(path);
+    }
 
 	PropertyPanelProperties::PropertyPanelProperties(QObject *parent) : QObject(parent)
 	{

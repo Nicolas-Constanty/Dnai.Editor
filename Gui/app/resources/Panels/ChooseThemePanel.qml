@@ -2,11 +2,11 @@ import QtQuick 2.4
 import QtQuick.Controls 1.4
 import QtQuick.Window 2.3
 import DNAI 1.0
+import Dnai.Settings 1.0
 
 import "../JavaScript/CreateComponent.js" as Factory
 import "../Forms"
 import "../Layouts"
-import DNAI 1.0
 
 ChooseThemeForm {
     id: form
@@ -14,15 +14,16 @@ ChooseThemeForm {
     height: 200
     property var wind: null
 
-    panel.color: AppSettings.theme["background"]["color"]
+    panel.color: AppSettings.theme["colors"]["background"]["base"]
 
     Component.onCompleted:
     {
-        themes.model = AppSettings.getThemes()
+        themes.model = AppSettings.themeNames
     }
 
     themes.onCurrentTextChanged: {
-        AppSettings.loadTheme(themes.currentText)
+        if (themes.currentText < themes.length)
+            AppSettings.currentTheme = AppSettings.themeNames[themes.currentText]
     }
 
     validateButton.onClicked: {

@@ -29,14 +29,14 @@ namespace dnai
                 explicit Entity(qint32 id, const QString& name, ::core::ENTITY type = ::core::ENTITY::UNDEFINED, qint32 ctId = -1);
 				virtual ~Entity();
 
-				bool setId(qint32 id);
-				qint32 id() const;
+                bool setId(quint32 id);
+                quint32 id() const;
 
                 bool setEntityType(::core::ENTITY e);
                 ::core::ENTITY entityType() const;
 
-				bool setContainerId(qint32 c);
-				qint32 containerId() const;
+                bool setContainerId(quint32 c);
+                quint32 containerId() const;
 
 				bool setName(const QString &d);
 				const QString &name() const;

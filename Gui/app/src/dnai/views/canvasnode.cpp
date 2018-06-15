@@ -87,8 +87,7 @@ namespace dnai
             GenericNode::resetSelected();
 			if (event->button() == Qt::RightButton)
 			{
-				m_mousePosition = event->pos();
-				qDebug() << "Mouse position :" << m_mousePosition;
+                m_mousePosition = event->pos();
 				setContextMenu(!m_contextMenu);
 			}
 		}

@@ -26,15 +26,15 @@ ExpendablePanel {
         frameVisible: false
         headerVisible: false
         style: TableViewStyle {
-            backgroundColor :  AppSettings.theme["background"]["darkColor"]
-            alternateBackgroundColor:  AppSettings.theme["background"]["darkColor"]
-            highlightedTextColor: AppSettings.theme["background"]["color"]
+            backgroundColor :  AppSettings.theme["colors"]["background"]["dark"]
+            alternateBackgroundColor:  AppSettings.theme["colors"]["background"]["dark"]
+            highlightedTextColor: AppSettings.theme["colors"]["background"]["base"]
             textColor : AppSettings.theme["text"]["color"]
         }
 
 //        model: Manager.views.propertyPanelModel
         itemDelegate: Rectangle {
-            color: AppSettings.theme["background"]["darkColor"]
+            color: AppSettings.theme["colors"]["background"]["dark"]
             // TODO Improve this declaration with javascript creation ?
             EditableText {
                 visible: styleData.column === 1

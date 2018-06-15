@@ -4,6 +4,7 @@ import QtQuick.Controls 1.0 as C
 import QtQuick.Controls.Styles 1.0
 
 import DNAI 1.0
+import Dnai.Settings 1.0
 import Dnai.FontAwesome 1.0
 
 import "../Style"
