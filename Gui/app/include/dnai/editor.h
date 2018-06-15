@@ -4,14 +4,12 @@
 #include <queue>
 #include <tuple>
 
-#include <QQuickItem>
 #include <QSettings>
 #include "interfaces/ieditor.h"
 #include "dnai/views/editorview.h"
 #include "dnai/solution.h"
 #include "models/entity.h"
 #include "dnai/toastermanagerservice.h"
-#include "dnai/models/contextmenu.h"
 #include "dnai/models/contextMenuModel.h"
 
 namespace dnai
@@ -44,7 +42,6 @@ namespace dnai
         Q_PROPERTY(dnai::Solution *solution READ getSolution WRITE setSolution NOTIFY solutionChanged)
         Q_PROPERTY(dnai::Session *session READ session CONSTANT)  
 		Q_PROPERTY(dnai::PropertyPanelProperties *propertyPanelProperties READ propertyPanelProperties CONSTANT)
-		Q_PROPERTY(dnai::models::ContextMenu *contextMenu READ contextMenu CONSTANT)
         Q_PROPERTY(bool loaded READ loaded WRITE setLoaded NOTIFY loadedChanged)
         Q_PROPERTY(QString solutionName READ solutionName)
 		Q_PROPERTY(dnai::models::ContextMenuModel *contextMenuModel READ contextMenuModel WRITE setContextMenuModel NOTIFY contextMenuModelChanged)
@@ -72,7 +69,6 @@ namespace dnai
         void addView(QQuickItem* v) override;
         views::EditorView *mainView() const;
         bool loaded() const;
-        dnai::models::ContextMenu *contextMenu() const;
         QString const &solutionName() const;
 		dnai::models::ContextMenuModel* contextMenuModel();
 		void setContextMenuModel(dnai::models::ContextMenuModel* ctx);
@@ -111,7 +107,6 @@ namespace dnai
 		Q_INVOKABLE void registerPropertyView(QQuickItem *view);
 		Q_INVOKABLE QQuickItem* propertyView() const;
 		Q_INVOKABLE void loadFunction(dnai::models::Entity *entity) const;
-		Q_INVOKABLE void updateContextMenu(dnai::models::Entity *entity) const;
         Q_INVOKABLE QSettings *settings();
         Q_INVOKABLE void registerSettings(QSettings *settings);
 
@@ -156,7 +151,6 @@ namespace dnai
         ToasterManagerService m_toasterManagerService;
         QQuickWindow *m_mainView = nullptr;
         QQuickItem* m_propertyView;
-        models::ContextMenu* m_contextMenu;
 		dnai::PropertyPanelProperties *m_propertyPanelProperties;
         QString m_appname;
         QString m_solutionName;

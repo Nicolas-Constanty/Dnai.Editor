@@ -18,7 +18,6 @@
 #include "dnai/core/handlermanager.h"
 #include "dnai/exceptions/guiexception.h"
 #include "dnai/views/genericnode.h"
-#include "dnai/models/instruction.h"
 
 namespace dnai
 {
@@ -28,7 +27,6 @@ namespace dnai
 		, m_selection(nullptr)
 		, m_editorView(nullptr)
 		, m_propertyView(nullptr)
-		, m_contextMenu(new models::ContextMenu())
         , m_propertyPanelProperties(nullptr)
 	    , m_contextMenuModel(nullptr)
         , m_settings(nullptr)
@@ -236,11 +234,6 @@ namespace dnai
 	{
 		return m_editorView;
 	}
-
-	dnai::models::ContextMenu* Editor::contextMenu() const
-	{
-        return m_contextMenu;
-    }
 
     const QString &Editor::solutionName() const
     {
@@ -678,17 +671,6 @@ namespace dnai
         }
 
         nodes.append(entryPointObj);
-    }
-
-	void Editor::updateContextMenu(dnai::models::Entity* entity) const
-	{
-		if (entity == nullptr)
-            return;
-		const auto func = entity->guiModel<models::gui::declarable::Function>();
-		if (func)
-        {
-            m_contextMenu->createFromEntity(entity);
-        }
     }
 
     QSettings *Editor::settings()

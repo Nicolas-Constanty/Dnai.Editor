@@ -51,7 +51,6 @@ static void registerDNAI()
     qmlRegisterDnai(dnai::Solution, "Solution");
     qmlRegisterDnai(dnai::models::gui::declarable::VarTypeList, "VarTypeList");
     qmlRegisterDnai(dnai::models::gui::EntityList, "EntityList");
-    qmlRegisterDnai(dnai::models::ContextMenu, "ContextMenu");
     qmlRegisterDnai(dnai::models::ContextMenuModel, "ContextMenuModel");
 }
 
@@ -133,7 +132,6 @@ static void registerModels()
 {
 #define qmlRegisterModels(type, name) qmlRegisterType<type>("DNAI.Models", 1, 0, name)
     qmlRegisterModels(dnai::models::User, "User");
-    qmlRegisterModels(dnai::models::ListNode, "ListNode");
     qmlRegisterModels(dnai::models::Entity, "Entity");
     qmlRegisterModels(dnai::models::Column, "Column");
     qmlRegisterModels(dnai::models::EntityTree, "EntityTree");

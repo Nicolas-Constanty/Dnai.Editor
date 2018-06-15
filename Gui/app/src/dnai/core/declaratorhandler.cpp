@@ -12,6 +12,8 @@
 
 #include "dnai/editor.h"
 
+#include "dnai/models/gui/entitylist.h"
+
 using namespace std::placeholders;
 
 namespace dnai

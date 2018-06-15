@@ -4,6 +4,5 @@
 #include "dnai/controllers/consolecontroller.h"
 #include "dnai/controllers/inputcontroller.h"
 #include "dnai/controllers/outputcontroller.h"
-#include "dnai/controllers/propertypanel.h"
 
 #endif // DNAI_CONTROLLERS_H

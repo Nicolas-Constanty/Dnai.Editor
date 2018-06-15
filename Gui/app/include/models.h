@@ -33,10 +33,9 @@
 #include "dnai/models/entity.h"
 #include "dnai/models/entitytree.h"
 #include "dnai/models/generictreeitem.h"
-#include "dnai/models/guicorestruct.h"
 #include "dnai/models/instruction.h"
-#include "dnai/models/listnode.h"
 #include "dnai/models/user.h"
 #include "dnai/models/contextMenuModel.h"
+#include "dnai/models/gui/entitylist.h"
 
 #endif // DNAI_MODELS_H
