@@ -81,7 +81,6 @@ SOURCES += \
     src/dnai/models/entitytree.cpp \
     src/dnai/models/listnode.cpp \
     src/dnai/models/user.cpp \
-    src/dnai/views/appview.cpp \
     src/dnai/views/beziercurve.cpp \
     src/dnai/views/canvasnode.cpp \
     src/dnai/views/console.cpp \
@@ -92,9 +91,7 @@ SOURCES += \
     src/dnai/views/flow.cpp \
     src/dnai/views/genericnode.cpp \
     src/dnai/views/input.cpp \
-    src/dnai/views/instructionview.cpp \
     src/dnai/views/io.cpp \
-    src/dnai/views/layout.cpp \
     src/dnai/views/line.cpp \
     src/dnai/views/linkablebezieritem.cpp \
     src/dnai/views/output.cpp \
@@ -247,7 +244,6 @@ HEADERS += \
     include/dnai/models/user.h \
     include/dnai/utils/cx_string.h \
     include/dnai/utils/cx_stringlist.h \
-    include/dnai/views/appview.h \
     include/dnai/views/beziercurve.h \
     include/dnai/views/borderlesswindow.h \
     include/dnai/views/canvasnode.h \
@@ -258,9 +254,7 @@ HEADERS += \
     include/dnai/views/flow.h \
     include/dnai/views/genericnode.h \
     include/dnai/views/input.h \
-    include/dnai/views/instructionview.h \
     include/dnai/views/io.h \
-    include/dnai/views/layout.h \
     include/dnai/views/line.h \
     include/dnai/views/linkablebezieritem.h \
     include/dnai/views/output.h \

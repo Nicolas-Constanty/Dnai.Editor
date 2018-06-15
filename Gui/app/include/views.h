@@ -1,7 +1,6 @@
 #ifndef VIEWS_H
 #define VIEWS_H
 
-#include "dnai/views/appview.h"
 #include "dnai/views/beziercurve.h"
 #include "dnai/views/canvasnode.h"
 #include "dnai/views/console.h"
@@ -12,9 +11,7 @@
 #include "dnai/views/flow.h"
 #include "dnai/views/genericnode.h"
 #include "dnai/views/input.h"
-#include "dnai/views/instructionview.h"
 #include "dnai/views/io.h"
-#include "dnai/views/layout.h"
 #include "dnai/views/line.h"
 #include "dnai/views/linkablebezieritem.h"
 #include "dnai/views/output.h"

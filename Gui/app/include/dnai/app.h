@@ -3,10 +3,7 @@
 
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
-#include <QDir>
 #include "processmanager.h"
-#include "views/appview.h"
-#include "views/instructionview.h"
 #include "dnai/interfaces/iloadingclass.h"
 #include "session.h"
 #include "editor.h"
@@ -27,7 +24,6 @@ namespace dnai {
 
     public:
         Session &session();
-        views::AppView &appView() const;
 	    QQmlApplicationEngine &engine();
         ProcessManager *processManager() const;
         Editor &editor() const;
@@ -39,7 +35,6 @@ namespace dnai {
         static App *currentInstance();
 	    static QObject *createQmlObject(const QString &path);
         static QQmlEngine *getEngineInstance();
-		static views::InstructionView *instructionView();
 
         Q_INVOKABLE void onBuildStart();
         Q_INVOKABLE bool isMac();
@@ -50,7 +45,6 @@ namespace dnai {
     private:
         QQmlApplicationEngine m_engine;
         ProcessManager* m_processManager;
-	    views::AppView* m_appView;
         Session m_session;
 	    static App *m_instance;
         Editor &m_editor;

@@ -114,9 +114,6 @@ static void registerViews()
     qmlRegisterViews(dnai::views::Console, "Console");
     qmlRegisterViews(dnai::views::ContextView, "ContextView");
     qmlRegisterViews(dnai::views::DeclarationView, "DeclarationViewModel");
-    qmlRegisterViews(dnai::views::InstructionView, "InstructionViewModel");
-    qmlRegisterViews(dnai::views::Layout, "LayoutView");
-    qmlRegisterViews(dnai::views::AppView, "AppView");
     // OpenGL Geometries
     qmlRegisterViews(dnai::views::BezierCurve, "BezierCurve");
     qmlRegisterViews(dnai::views::Line, "Line");

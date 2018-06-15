@@ -24,7 +24,6 @@ namespace dnai
     App *App::m_instance = nullptr;
     App::App(int& argc, char** argv) : QGuiApplication(argc, argv)
 	, m_processManager(nullptr)
-	, m_appView(nullptr)
     , m_editor(Editor::instance())
 	{
 		if (m_instance == nullptr)
@@ -45,7 +44,6 @@ namespace dnai
 
     App::~App() {
 	    delete m_processManager;
-	    delete m_appView;
         qDebug() << "~" << "App";
     }
 
@@ -108,7 +106,6 @@ namespace dnai
         QVariant value = Editor::instance().settings()->value(api::settings_key);
         api::setUser(value.value<api::User>());
         qDebug() << "API ID: " << api::getId();
-		m_appView = new views::AppView();
 	}
 
     std::queue<std::function<void()>> App::init()
@@ -206,15 +203,6 @@ namespace dnai
         return const_cast<QQmlEngine *>(dynamic_cast<const QQmlEngine *>(&App::currentInstance()->engine()));
 	}
 
-    views::InstructionView* App::instructionView()
-	{
-		return dynamic_cast<views::InstructionView*>(currentInstance()->appView().layout()->contextView());
-	}
-
-    views::AppView &App::appView() const
-	{
-		return *m_appView;
-	}
 #if defined(_WIN32) && defined(_MSC_VER)
   class CustomHandler : public IWinToastHandler {
   public:
