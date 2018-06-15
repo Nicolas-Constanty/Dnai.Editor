@@ -52,7 +52,6 @@ SOURCES += \
     src/dnai/commands/commandmanager.cpp \
     src/dnai/commands/debugdecorator.cpp \
     src/dnai/commands/movecanvascommand.cpp \
-    src/dnai/commands/movecommand.cpp \
     src/dnai/commands/movenodecommand.cpp \
     src/dnai/commands/zoomcanvascommand.cpp \
     src/dnai/controllers/consolecontroller.cpp \
@@ -77,12 +76,9 @@ SOURCES += \
     src/dnai/models/gui/input.cpp \
     src/dnai/models/gui/instruction.cpp \
     src/dnai/models/gui/output.cpp \
-    src/dnai/models/basicnodemodel.cpp \
     src/dnai/models/entity.cpp \
     src/dnai/models/entitytree.cpp \
-    src/dnai/models/listnode.cpp \
     src/dnai/models/user.cpp \
-    src/dnai/views/appview.cpp \
     src/dnai/views/beziercurve.cpp \
     src/dnai/views/canvasnode.cpp \
     src/dnai/views/console.cpp \
@@ -93,9 +89,7 @@ SOURCES += \
     src/dnai/views/flow.cpp \
     src/dnai/views/genericnode.cpp \
     src/dnai/views/input.cpp \
-    src/dnai/views/instructionview.cpp \
     src/dnai/views/io.cpp \
-    src/dnai/views/layout.cpp \
     src/dnai/views/line.cpp \
     src/dnai/views/linkablebezieritem.cpp \
     src/dnai/views/output.cpp \
@@ -114,7 +108,6 @@ SOURCES += \
     src/dnai/processmanager.cpp \
     src/dnai/project.cpp \
     src/dnai/session.cpp \
-    src/dnai/settings.cpp \
     src/dnai/solution.cpp \
     src/main.cpp \
     src/dnai/commands/corecommand.cpp \
@@ -129,7 +122,6 @@ SOURCES += \
     src/dnai/views/toast.cpp \
     src/dnai/models/property.cpp \
     src/dnai/core/instructionhandler.cpp \
-    src/dnai/models/contextmenu.cpp \
     src/dnai/models/gui/entitylist.cpp \
     src/dnai/models/contextmenumodel.cpp \
     src/dnai/models/gui/iolink.cpp \
@@ -166,14 +158,11 @@ HEADERS += \
     include/dnai/commands/debugdecorator.h \
     include/dnai/commands/genericcommand.h \
     include/dnai/commands/movecanvascommand.h \
-    include/dnai/commands/movecommand.h \
     include/dnai/commands/movenodecommand.h \
-    include/dnai/commands/openpropertypanel.h \
     include/dnai/commands/zoomcanvascommand.h \
     include/dnai/controllers/consolecontroller.h \
     include/dnai/controllers/inputcontroller.h \
     include/dnai/controllers/outputcontroller.h \
-    include/dnai/controllers/propertypanel.h \
     include/dnai/enums/core/instructionid.h \
     include/dnai/enums/declarationtype.h \
     include/dnai/enums/flowtype.h \
@@ -241,17 +230,13 @@ HEADERS += \
     include/dnai/models/gui/input.h \
     include/dnai/models/gui/instruction.h \
     include/dnai/models/gui/output.h \
-    include/dnai/models/basicnodemodel.h \
     include/dnai/models/entity.h \
     include/dnai/models/entitytree.h \
     include/dnai/models/generictreeitem.h \
-    include/dnai/models/guicorestruct.h \
     include/dnai/models/instruction.h \
-    include/dnai/models/listnode.h \
     include/dnai/models/user.h \
     include/dnai/utils/cx_string.h \
     include/dnai/utils/cx_stringlist.h \
-    include/dnai/views/appview.h \
     include/dnai/views/beziercurve.h \
     include/dnai/views/borderlesswindow.h \
     include/dnai/views/canvasnode.h \
@@ -259,13 +244,10 @@ HEADERS += \
     include/dnai/views/contextview.h \
     include/dnai/views/customshape.h \
     include/dnai/views/declarationview.h \
-    include/dnai/views/editorview.h \
     include/dnai/views/flow.h \
     include/dnai/views/genericnode.h \
     include/dnai/views/input.h \
-    include/dnai/views/instructionview.h \
     include/dnai/views/io.h \
-    include/dnai/views/layout.h \
     include/dnai/views/line.h \
     include/dnai/views/linkablebezieritem.h \
     include/dnai/views/output.h \
@@ -286,7 +268,6 @@ HEADERS += \
     include/dnai/processmanager.h \
     include/dnai/project.h \
     include/dnai/session.h \
-    include/dnai/settings.h \
     include/dnai/solution.h \
     include/api.h \
     include/commands.h \
@@ -304,8 +285,6 @@ HEADERS += \
     include/dnai/core/listhandler.h \
     include/dnai/core/objecthandler.h \
     include/dnai/core/projecthandler.h \
-    include/dnai/views/viewelement.h \
-    include/dnai/views/viewzone.h \
     include/dnai/views/editorview.h \
     include/dnai.h \
     include/exceptions.h \
@@ -317,7 +296,6 @@ HEADERS += \
     include/dnai/models/property.h \
     include/dnai/core/instructionhandler.h \
     include/dnai/models/gui/entitylist.h \
-    include/dnai/models/contextmenu.h \
     include/dnai/core/instructionmanager.h \
     include/dnai/models/contextMenuModel.h \
     include/dnai/models/gui/data/iolink.h \

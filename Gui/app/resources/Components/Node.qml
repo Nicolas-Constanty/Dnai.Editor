@@ -1,9 +1,11 @@
 import QtQuick 2.9
 import QtQuick.Controls 2.2
 import DNAI.Views 1.0
+
 import DNAI 1.0
 import DNAI.Enums 1.0
 import Dnai.FontAwesome 1.0
+import Dnai.Settings 1.0
 
 import DNAI.Core 1.0
 

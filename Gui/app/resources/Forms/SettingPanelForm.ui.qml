@@ -3,6 +3,7 @@ import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
 
 import DNAI 1.0
+import Dnai.Settings 1.0
 
 import "../Panels"
 
@@ -16,7 +17,7 @@ Item {
         id: bar
         contentWidth: parent.width
         background: Rectangle {
-            color: AppSettings.theme["background"]["color"]
+            color: AppSettings.theme["colors"]["background"]["base"]
         }
         TabButton {
             text: qsTr("Theme")

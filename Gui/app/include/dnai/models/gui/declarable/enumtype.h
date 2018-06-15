@@ -28,7 +28,7 @@ namespace dnai
 					//Implementation of ISerializable
                     void serialize(QJsonObject& obj) const override;
 
-                    QString const &getValue(QString const &name) const;
+                    QString getValue(QString const &name) const;
 
 				signals:
 					void valuesChanged(const QStringList &val);

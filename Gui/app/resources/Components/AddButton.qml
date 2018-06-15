@@ -1,6 +1,7 @@
 import QtQuick 2.0
 import DNAI 1.0
 
+import Dnai.Settings 1.0
 import Dnai.FontAwesome 1.0
 
 import "../Style"
@@ -15,7 +16,7 @@ ButtonAwesomeSolid {
     background: Rectangle {
         id: background
         implicitHeight: 30
-        color: _control.hovered ?  AppSettings.theme["background"]["darkColor"] : AppSettings.theme["background"]["color"]
+        color: _control.hovered ?  AppSettings.theme["colors"]["background"]["dark"] : AppSettings.theme["colors"]["background"]["base"]
         Rectangle {
             id: _decoration
             anchors.top: parent.top

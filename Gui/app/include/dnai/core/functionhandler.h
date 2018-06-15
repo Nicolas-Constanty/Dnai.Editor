@@ -39,23 +39,23 @@ namespace dnai
             Q_INVOKABLE void pendingRmReturn(quint32 func, QString const &returnName);
 
         public:
-            Q_INVOKABLE void setEntryPoint(quint32 function, quint32 instruction, bool save = true);
-            Q_INVOKABLE void setParameter(quint32 func, QString const &paramName, bool save = true);
-            Q_INVOKABLE void setReturn(quint32 func, QString const &retName, bool save = true);
-            Q_INVOKABLE void addInstruction(quint32 func, quint32 instrType, QList<quint32> const &arguments, bool save = true);
+            Q_INVOKABLE void setEntryPoint(quint32 function, quint32 instruction, bool save = true) const;
+            Q_INVOKABLE void setParameter(quint32 func, QString const &paramName, bool save = true) const;
+            Q_INVOKABLE void setReturn(quint32 func, QString const &retName, bool save = true) const;
+            Q_INVOKABLE void addInstruction(quint32 func, quint32 instrType, QList<quint32> const &arguments, bool save = true) const;
 
         private:
-            models::gui::declarable::Function *getFunctionData(::core::EntityID function, bool throws = false);
+            models::gui::declarable::Function *getFunctionData(::core::EntityID function, bool throws = false) const;
 
         private:
             void refreshPendingFunctionInstructions();
 
         private:
             void onEntryPointSet(quint32 function, quint32 instruction);
-            void onSetEntryPointError(quint32 function, quint32 instruction, QString const &message);
+            void onSetEntryPointError(quint32 function, quint32 instruction, QString const &message) const;
 
             void onParameterSet(::core::EntityID function, QString const &paramName);
-            void onSetParameterError(::core::EntityID function, QString const &paramName, QString const &message);
+            void onSetParameterError(::core::EntityID function, QString const &paramName, QString const &message) const;
 
             void onReturnSet(::core::EntityID function, QString const &returnName);
             void onSetReturnError(::core::EntityID function, QString const &returnName, QString const &message);

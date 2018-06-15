@@ -3,6 +3,7 @@ import QtQuick 2.0
 import "../Style"
 
 import DNAI 1.0
+import Dnai.Settings 1.0
 
 Item {
     id: buttonItemId

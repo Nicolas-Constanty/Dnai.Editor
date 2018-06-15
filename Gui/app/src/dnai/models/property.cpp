@@ -27,11 +27,13 @@ namespace dnai
 
 		int Property::rowCount(const QModelIndex& parent) const
 		{
+            Q_UNUSED(parent)
 			return m_editableIndex.count();
 		}
 
 		int Property::columnCount(const QModelIndex& parent) const
 		{
+            Q_UNUSED(parent)
 			return 2;
 		}
 

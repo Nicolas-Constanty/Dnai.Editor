@@ -2,10 +2,13 @@ import QtQuick 2.0
 import QtQuick.Controls 1.4
 import QtQuick.Controls.Styles 1.4
 import QtQml.Models 2.3
+
+
 import DNAI 1.0
 import DNAI.Models 1.0
 import DNAI.Enums 1.0
 
+import Dnai.Settings 1.0
 import Dnai.FontAwesome 1.0
 import DNAI.Core 1.0
 
@@ -151,7 +154,7 @@ Rectangle {
                 itemDelegate: Item {
                     Image {
                         id: _icon
-                        source: "../Images/" + AppSettings.getEntityIcon(styleData.value.entityType)
+                        source: "../Images/" + AppSettings.theme["entities"][Number(styleData.value.entityType).toString()]["icon"]
                         height: 12
                         width: 12
                         anchors.verticalCenter: parent.verticalCenter
@@ -277,13 +280,12 @@ Rectangle {
     }
 
     Item {
-        property int heightValue: containerId.childrenRect.height
         property bool editableProjectMode: false
         id: createProjectItemId
         anchors.bottom: parent.bottom
         anchors.left: parent.left
         anchors.right: parent.right
-        height: heightValue + 10
+        height: addId.height + 20
 
         function cancel() {
             createProjectItemId.editableProjectMode = false
@@ -358,7 +360,7 @@ Rectangle {
                 anchors.right: parent.right
                 font.pointSize: 20
                 rotation: createProjectItemId.editableProjectMode ? 45 : 0
-                color: mouseId.containsMouse == true ? AppSettings.theme["text"]["errorSelectedColor"] : createProjectItemId.editableProjectMode ? AppSettings.theme["text"]["errorColor"] : AppSettings.theme["background"]["bluecolor"]
+                color: mouseId.containsMouse == true ? AppSettings.theme["text"]["errorSelectedColor"] : createProjectItemId.editableProjectMode ? AppSettings.theme["text"]["errorColor"] : AppSettings.theme["colors"]["accent"]["blue"]
 
                 Behavior on rotation {
                     NumberAnimation { duration: 200 }
@@ -387,7 +389,7 @@ Rectangle {
             anchors.right: parent.bottom
             anchors.rightMargin: 20
             font.pointSize: 15
-            color: AppSettings.theme["background"]["bluecolor"]
+            color: AppSettings.theme["colors"]["accent"]["blue"]
         }*/
 
 }

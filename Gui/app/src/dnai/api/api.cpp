@@ -126,7 +126,7 @@ const http::Config api::http_config = {
     void api::logout()
     {
         api::user = {};
-        App::currentInstance()->settings().setAPIValue(api::settings_key, QVariant::fromValue(api::user));
+        Editor::instance().settings()->setValue(api::settings_key, QVariant::fromValue(api::user));
     }
 
     QString const &api::getToken()
@@ -142,7 +142,7 @@ const http::Config api::http_config = {
     {
         api::user = user;
         if (api::rememberUser)
-            App::currentInstance()->settings().setAPIValue(api::settings_key, QVariant::fromValue(api::user));
+            Editor::instance().settings()->setValue(api::settings_key, QVariant::fromValue(api::user));
     }
 }
 

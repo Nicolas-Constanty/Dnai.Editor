@@ -25,14 +25,6 @@ static QObject *editor_singleton_provider(QQmlEngine *engine, QJSEngine *scriptE
     return &dnai::Editor::instance();
 }
 
-static QObject *settings_singleton_provider(QQmlEngine *engine, QJSEngine *scriptEngine)
-{
-    Q_UNUSED(engine)
-    Q_UNUSED(scriptEngine)
-
-    return new dnai::AppSettings();
-}
-
 static QObject *standardpath_singleton_provider(QQmlEngine *engine, QJSEngine *scriptEngine)
 {
     Q_UNUSED(engine)
@@ -53,14 +45,12 @@ static void registerDNAI()
 {
 #define qmlRegisterDnai(type, name) qmlRegisterType<type>("DNAI", 1, 0, name);
     qmlRegisterSingletonType<dnai::Editor>("DNAI", 1, 0, "Editor", editor_singleton_provider);
-    qmlRegisterSingletonType<dnai::AppSettings>("DNAI", 1, 0, "AppSettings", settings_singleton_provider);
     qmlRegisterSingletonType<QCStandardPaths>("DNAI", 1, 0, "StandardPath", standardpath_singleton_provider);
     qmlRegisterDnai(dnai::Session, "Session");
     qmlRegisterDnai(dnai::Project, "Project");
     qmlRegisterDnai(dnai::Solution, "Solution");
     qmlRegisterDnai(dnai::models::gui::declarable::VarTypeList, "VarTypeList");
     qmlRegisterDnai(dnai::models::gui::EntityList, "EntityList");
-    qmlRegisterDnai(dnai::models::ContextMenu, "ContextMenu");
     qmlRegisterDnai(dnai::models::ContextMenuModel, "ContextMenuModel");
 }
 
@@ -123,9 +113,6 @@ static void registerViews()
     qmlRegisterViews(dnai::views::Console, "Console");
     qmlRegisterViews(dnai::views::ContextView, "ContextView");
     qmlRegisterViews(dnai::views::DeclarationView, "DeclarationViewModel");
-    qmlRegisterViews(dnai::views::InstructionView, "InstructionViewModel");
-    qmlRegisterViews(dnai::views::Layout, "LayoutView");
-    qmlRegisterViews(dnai::views::AppView, "AppView");
     // OpenGL Geometries
     qmlRegisterViews(dnai::views::BezierCurve, "BezierCurve");
     qmlRegisterViews(dnai::views::Line, "Line");
@@ -145,8 +132,6 @@ static void registerModels()
 {
 #define qmlRegisterModels(type, name) qmlRegisterType<type>("DNAI.Models", 1, 0, name)
     qmlRegisterModels(dnai::models::User, "User");
-    qmlRegisterModels(dnai::models::BasicNodeModel, "BasicNodeModel");
-    qmlRegisterModels(dnai::models::ListNode, "ListNode");
     qmlRegisterModels(dnai::models::Entity, "Entity");
     qmlRegisterModels(dnai::models::Column, "Column");
     qmlRegisterModels(dnai::models::EntityTree, "EntityTree");

@@ -26,7 +26,7 @@ Panel {
                 }
                 background: Rectangle {
                     id: back
-                    color: button.pressed ? AppSettings.theme["background"]["darkColor"] : button.hovered ? AppSettings.theme["background"]["lightColor"] : "transparent"
+                    color: button.pressed ? AppSettings.theme["colors"]["background"]["dark"] : button.hovered ? AppSettings.theme["colors"]["background"]["light"] : "transparent"
                     border.color: AppSettings.theme["border"]["color"]
                 }
                 onClicked: {
@@ -43,7 +43,7 @@ Panel {
                 }
                 background: Rectangle {
                     id: back1
-                    color: button1.pressed ? AppSettings.theme["background"]["darkColor"] : button1.hovered ? AppSettings.theme["background"]["lightColor"] : "transparent"
+                    color: button1.pressed ? AppSettings.theme["colors"]["background"]["dark"] : button1.hovered ? AppSettings.theme["colors"]["background"]["light"] : "transparent"
                     border.color: AppSettings.theme["border"]["color"]
                 }
                 visible: model.modelData.asChild

@@ -4,6 +4,7 @@ import QtQuick.Controls 2.3
 import DNAI.Views 1.0
 import DNAI 1.0
 import DNAI.Models 1.0
+import Dnai.Settings 1.0
 import Dnai.Controls 1.0
 
 import "../Style"

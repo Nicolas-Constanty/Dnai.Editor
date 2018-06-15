@@ -8,17 +8,17 @@
 
 namespace dnai
 {
-	Solution::Solution(): m_selectedProject(nullptr), m_file(nullptr)
-    {
-    }
+	Solution::Solution(): m_selectedProject(nullptr), m_file(nullptr), m_selectedEntity(nullptr)
+	{
+	}
 
-    Solution::Solution(const QString filename)
-    {
-        m_filename = filename;
-        m_file = new QFile(QUrl(m_filename).toLocalFile());
-    }
+    Solution::Solution(const QString filename): m_selectedProject(nullptr)
+	{
+		m_filename = filename;
+		m_file = new QFile(QUrl(m_filename).toLocalFile());
+	}
 
-    Solution::~Solution()
+	Solution::~Solution()
     {
         while (!m_projects.isEmpty()) {
             delete m_projects.takeFirst();
@@ -70,8 +70,15 @@ namespace dnai
 		const QByteArray data = m_file->readAll();
 
 		try {
-			const QJsonObject obj(QJsonDocument::fromJson(data).object());
-			_deserialize(obj);
+            QJsonParseError err;
+            const QJsonObject obj(QJsonDocument::fromJson(data, &err).object());
+            if (err.error != QJsonParseError::NoError)
+            {
+                qWarning() << err.errorString() << "at character :" << err.offset;
+                m_file->close();
+                return;
+            }
+            _deserialize(obj);
 			m_data = obj;
 			if (!m_projects.isEmpty())
 				m_selectedProject = m_projects[0];
@@ -200,6 +207,19 @@ namespace dnai
 	Project* Solution::selectedProject() const
 	{
 		return dynamic_cast<Project*>(m_selectedProject);
+	}
+
+	QQuickItem* Solution::selectedEntity() const
+	{
+		return m_selectedEntity;
+	}
+
+	void Solution::setSelectedEntity(QQuickItem* entity)
+	{
+		if (entity == m_selectedEntity)
+			return;
+		m_selectedEntity = entity;
+		emit selectedEntityChanged(entity);
 	}
 
 	void Solution::_deserialize(const QJsonObject& obj)

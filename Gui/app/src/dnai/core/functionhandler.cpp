@@ -1,12 +1,12 @@
 #include <functional>
 #include <algorithm>
-#include <unordered_set>
 
 #include "dnai/core/functionhandler.h"
 
 #include "dnai/commands/commandmanager.h"
 #include "dnai/commands/corecommand.h"
 #include "dnai/models/instruction.h"
+#include "dnai/models/entity.h"
 
 #include "dnai/editor.h"
 
@@ -44,23 +44,23 @@ namespace dnai
 
         void FunctionHandler::onEntityAdded(::core::EntityID id, models::Entity &added)
         {
-            Q_UNUSED(id)
-            Q_UNUSED(added)
+			Q_UNUSED(id)
 
+			const auto containerId = added.coreModel()->data().containerId;
             if (!pendingParams.empty()
-                && added.containerId() == pendingParams.front().first
+                && containerId == pendingParams.front().first
                 && added.name() == pendingParams.front().second)
             {
                 params.push(&added);
-                setParameter(added.containerId(), added.name(), false);
+                setParameter(containerId, added.name(), false);
                 pendingParams.pop();
             }
             else if (!pendingRet.empty()
-                && added.containerId() == pendingRet.front().first
+                && containerId == pendingRet.front().first
                 && added.name() == pendingRet.front().second)
             {
                 returns.push(&added);
-                setReturn(added.containerId(), added.name(), false);
+                setReturn(containerId, added.name(), false);
                 pendingRet.pop();
             }
             else
@@ -92,20 +92,22 @@ namespace dnai
 
         void FunctionHandler::onEntityRemoved(EntityID id, models::Entity &removed)
         {
+            Q_UNUSED(id)
+			const auto containerId = removed.coreModel()->data().containerId;
             if (!pendingRmParam.empty()
-                && pendingRmParam.front().first == removed.containerId()
+                && pendingRmParam.front().first == containerId
                 && pendingRmParam.front().second == removed.name())
             {
-                models::Entity &func = manager.getEntity(removed.containerId());
+                models::Entity &func = manager.getEntity(containerId);
 
                 func.guiModel<models::gui::declarable::Function>()->removeInput(removed.name());
                 pendingRmParam.pop();
             }
             else if (!pendingRmRet.empty()
-                     && pendingRmRet.front().first == removed.containerId()
+                     && pendingRmRet.front().first == containerId
                      && pendingRmRet.front().second == removed.name())
             {
-                models::Entity &func = manager.getEntity(removed.containerId());
+                models::Entity &func = manager.getEntity(containerId);
 
                 func.guiModel<models::gui::declarable::Function>()->removeOutput(removed.name());
                 pendingRmRet.pop();
@@ -132,7 +134,7 @@ namespace dnai
             pendingRmRet.push(std::make_pair(func, returnName));
         }
 
-        void FunctionHandler::setEntryPoint(quint32 function, quint32 instruction, bool save)
+        void FunctionHandler::setEntryPoint(const quint32 function, quint32 instruction, bool save) const
         {
             qDebug() << "==Core== Function.SetEntryPoint(" << function << ", " << instruction << ") => save(" << save << ")";
 
@@ -148,7 +150,7 @@ namespace dnai
             ));
         }
 
-        void FunctionHandler::setParameter(quint32 func, QString const &paramName, bool save)
+        void FunctionHandler::setParameter(const quint32 func, QString const &paramName, bool save) const
         {
             models::Entity &function = manager.getEntity(func);
 
@@ -164,7 +166,7 @@ namespace dnai
             }
         }
 
-        void FunctionHandler::setReturn(quint32 func, QString const &retName, bool save)
+        void FunctionHandler::setReturn(const quint32 func, QString const &retName, bool save) const
         {
             models::Entity &function = manager.getEntity(func);
 
@@ -181,7 +183,7 @@ namespace dnai
             }
         }
 
-        void FunctionHandler::addInstruction(quint32 func, quint32 instrType, const QList<quint32> &arguments, bool save)
+        void FunctionHandler::addInstruction(const quint32 func, quint32 instrType, const QList<quint32> &arguments, bool save) const
         {
             models::Entity &function = manager.getEntity(func);
 
@@ -196,7 +198,7 @@ namespace dnai
             );
         }
 
-        models::gui::declarable::Function *FunctionHandler::getFunctionData(::core::EntityID function, bool throws)
+        models::gui::declarable::Function *FunctionHandler::getFunctionData(::core::EntityID function, bool throws) const
         {
             if (manager.contains(function))
             {
@@ -315,7 +317,7 @@ namespace dnai
             emit entryPointSet(&func, instr);
         }
 
-        void FunctionHandler::onSetEntryPointError(quint32 function, quint32 instruction, const QString &msg)
+        void FunctionHandler::onSetEntryPointError(quint32 function, quint32 instruction, const QString &msg) const
         {
             Q_UNUSED(function)
             Q_UNUSED(instruction)
@@ -350,7 +352,7 @@ namespace dnai
             }
         }
 
-        void FunctionHandler::onSetParameterError(::core::EntityID function, const QString &paramName, const QString &message)
+        void FunctionHandler::onSetParameterError(::core::EntityID function, const QString &paramName, const QString &message) const
         {
             Q_UNUSED(function)
             Q_UNUSED(paramName)

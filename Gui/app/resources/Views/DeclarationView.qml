@@ -6,8 +6,9 @@ import QtGraphicalEffects 1.0
 import DNAI 1.0
 import DNAI.Models 1.0
 import DNAI.Enums 1.0
-
 import DNAI.Core 1.0
+
+import Dnai.Settings 1.0
 import Dnai.FontAwesome 1.0
 
 import "../Style"
@@ -24,7 +25,7 @@ Item {
         id: _delegate
         Rectangle {
             id: _column
-            color: AppSettings.theme["background"]["lightColor"]
+            color: AppSettings.theme["colors"]["background"]["light"]
             border.color: AppSettings.theme["border"]["color"]
             border.width: AppSettings.theme["border"]["width"]
             height: _item.height
@@ -74,7 +75,7 @@ Item {
                     placeholderText: "comment..."
                     background: Rectangle {
                         color: AppSettings.theme["menu"]["background"]["darkColor"]
-                        border.color: AppSettings.theme["background"]["lightColor"]
+                        border.color: AppSettings.theme["colors"]["background"]["light"]
                     }
                 }
             }
@@ -190,7 +191,7 @@ Item {
                         AddButton {
                             id: _addClass
                             property int type: CoreEnums.OBJECT_TYPE
-                            decoration.color: AppSettings.getEntityColor(type)
+                            decoration.color: AppSettings.theme["entities"][Number(type).toString()]["color"]
                             width: 45
                             onPressed: {
                                 var name = proj.generateUniqueChildName(modelData.parentRef);
@@ -202,7 +203,7 @@ Item {
                         AddButton {
                             id: _addFunction
                             property int type: CoreEnums.FUNCTION
-                            decoration.color: AppSettings.getEntityColor(type)
+                            decoration.color: AppSettings.theme["entities"][Number(type).toString()]["color"]
                             width: 45
                             onPressed: {
                                 var name = proj.generateUniqueChildName(modelData.parentRef);
@@ -215,7 +216,7 @@ Item {
                             id: _addEnum
                             visible: (modelData.parentRef === null || modelData.parentRef.entityType === CoreEnums.CONTEXT || modelData.parentRef.entityType === CoreEnums.OBJECT_TYPE)
                             property int type: CoreEnums.ENUM_TYPE
-                            decoration.color: AppSettings.getEntityColor(type)
+                            decoration.color: AppSettings.theme["entities"][Number(type).toString()]["color"]
                             width: 45
                             onPressed: {
                                 var name = proj.generateUniqueChildName(modelData.parentRef);
@@ -227,7 +228,7 @@ Item {
                         AddButton {
                             id: _addVariable
                             property int type: CoreEnums.VARIABLE
-                            decoration.color: AppSettings.getEntityColor(type)
+                            decoration.color: AppSettings.theme["entities"][Number(type).toString()]["color"]
                             width: 45
                             onPressed: {
                                 var name = proj.generateUniqueChildName(modelData.parentRef);
@@ -281,6 +282,8 @@ Item {
             }
             Rectangle {
                 id: _listCreator
+                anchors.top: parent.top
+                anchors.topMargin: 15
                 anchors.left: _contextColumns.right
                 anchors.leftMargin: 25
                 width: 250
@@ -312,7 +315,7 @@ Item {
                         _textInput.forceActiveFocus()
                     }
                     background: Rectangle{
-                        color: AppSettings.theme["background"]["lightColor"]
+                        color: AppSettings.theme["colors"]["background"]["light"]
                         radius: 3
                     }
                     enter: Transition {
@@ -327,7 +330,7 @@ Item {
                         width: 250
                         height: 30
                         color: "#80000000"
-                        border.color: AppSettings.theme["background"]["color"]
+                        border.color: AppSettings.theme["colors"]["background"]["base"]
                         radius: 3
                         TextInput {
                             id: _textInput
@@ -353,7 +356,6 @@ Item {
                                 _popupList.close()
                                 _textInput.clear()
                                 _item.parentEntity.addColumn(t);
-        //                            Manager.views.createDeclarationList(t)
                             }
                         }
                     }

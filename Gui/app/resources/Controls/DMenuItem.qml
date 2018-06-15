@@ -1,6 +1,9 @@
 import QtQuick 2.9
 import QtQuick.Controls 2.3
+
 import DNAI 1.0
+import Dnai.Settings 1.0
+import Dnai.FontAwesome 1.0
 
 import "../Style"
 
@@ -9,7 +12,7 @@ MenuItem {
 
     signal buttonPressed()
 
-    property string iconpath: ""
+    property alias iconItem: _icon
 
     implicitWidth: Math.max(background ? background.implicitWidth : 0,
                             contentItem.implicitWidth + leftPadding + rightPadding)
@@ -37,17 +40,16 @@ MenuItem {
 
     contentItem: Item {
 
-
-
         Row {
             anchors.verticalCenter: parent.verticalCenter
             spacing: 4
-            Image {
-                source: control.iconpath
+            LabelAwesomeSolid {
+                id: _icon
                 verticalAlignment: Text.AlignVCenter
                 height: txt.implicitHeight
                 width: txt.implicitHeight
                 anchors.leftMargin: 4
+                color: control.enabled ? AppSettings.theme["text"]["color"] : AppSettings.theme["text"]["disableColor"]
             }
             MLabel {
                 id: txt
@@ -82,7 +84,7 @@ MenuItem {
             y: 1
             width: parent.width - 2
             height: parent.height - 2
-            color: control.pressed ? AppSettings.theme["background"]["darkColor"] : control.hovered ? AppSettings.theme["background"]["lightColor"] : "transparent"
+            color: control.pressed ? AppSettings.theme["colors"]["background"]["dark"] : control.hovered ? AppSettings.theme["colors"]["background"]["light"] : "transparent"
 
         }
     }

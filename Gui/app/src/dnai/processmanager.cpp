@@ -81,7 +81,7 @@ void ProcessManager::launchUpdater(QString const &actualVer, QString const &newV
     m_updaterApp = "\"" + m_updaterApp + "\" ";// +  actualVer + " " + newVersion + " \"" + QGuiApplication::applicationDirPath() + "\" " + "DNAI";
     qDebug() << "M_UPDATERAPP: " << m_updaterApp;
 
-    int idx = m_updaterApp.size();
+//    int idx = m_updaterApp.size();
     while (updaterDir.size() >= 0 && updaterDir.back() != '/') {
         updaterDir.remove(updaterDir.size() - 1, 1);
     }

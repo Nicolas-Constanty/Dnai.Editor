@@ -3,6 +3,7 @@ import QtQuick.Controls 2.2
 import QtGraphicalEffects 1.0
 
 import DNAI 1.0
+import Dnai.Settings 1.0
 import Dnai.FontAwesome 1.0
 
 import "../Style"
@@ -21,12 +22,12 @@ Rectangle {
 
     border.color: AppSettings.theme["border"]["color"]
     border.width: AppSettings.theme["border"]["width"]
-    color: AppSettings.theme["background"]["darkColor"]
+    color: AppSettings.theme["colors"]["background"]["dark"]
     clip: true
     Rectangle {
         id: _header
         clip: true
-        color: AppSettings.theme["background"]["color"]
+        color: AppSettings.theme["colors"]["background"]["base"]
         height: _title.implicitHeight * 1.2
         width: parent.width
         anchors.top: parent.top
@@ -42,7 +43,7 @@ Rectangle {
             anchors.left: parent.left
             anchors.verticalCenter: parent.verticalCenter
             anchors.leftMargin: 15
-            color: saved == true ? AppSettings.theme["background"]["greencolor"] : AppSettings.theme["text"]["errorColor"]
+            color: saved == true ? AppSettings.theme["colors"]["accent"]["green"] : AppSettings.theme["text"]["errorColor"]
 
 //            anchors.top: parent.top
 //            anchors.bottom:

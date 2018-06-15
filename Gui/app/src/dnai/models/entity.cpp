@@ -63,7 +63,7 @@ namespace dnai
 			emit isRootChanged(isRoot);
 		}
 
-		qint32 Entity::id() const
+        qint32 Entity::id() const
 		{
 			return coreModel()->id();
 		}
@@ -333,36 +333,13 @@ namespace dnai
 			
             foreach(const auto classe, obj["entities"].toArray()) {
 				QJsonObject o = classe.toObject();
-				qDebug() << o["name"].toString() << o["type"].toInt();
                 const auto coreModel = new models::gcore::Entity(static_cast<::core::ENTITY>(o["type"].toInt()));
                 Entity *parent = this;
                 const auto entity = Entity::deserialize(o, coreModel, parent);
-                qDebug() << entity->listIndex();
 				if (QUuid(entity->listIndex()).isNull() && !m_columns.empty())
 					entity->setListIndex(m_columns.keys().first().toString());
 				appendChild(entity);
-			}
-			//m_entities->add(this);
-   //         foreach(const auto context, obj["contexts"].toArray()) {
-   //             const auto coreModel = new models::core::Entity(enums::core::CONTEXT);
-   //             Entity *parent = this;
-   //             const auto entity = deserialize(context.toObject(), coreModel, parent);
-			//	appendChild(entity);
-			//}
-
-   //         foreach(const auto variable, obj["variables"].toArray()) {
-   //             const auto coreModel = new models::core::Entity(enums::core::VARIABLE);
-   //             Entity *parent = this;
-   //             const auto entity = Entity::deserialize(variable.toObject(),coreModel, parent);
-			//	appendChild(entity);
-			//}
-
-   //         foreach(const auto function, obj["functions"].toArray()) {
-   //             const auto coreModel = new models::core::Entity(enums::core::FUNCTION);
-   //             Entity *parent = this;
-   //             const auto entity = Entity::deserialize(function.toObject(), coreModel, parent);
-			//	appendChild(entity);
-			//}
+            }
         }
 
 		int Entity::columnCount() const

@@ -1,41 +1,76 @@
 {
-    "background": {
-        "color" : "#424242",
-        "darkColor" : "#212121",
-        "lightColor": "#616161",
-        "bluecolor": "#639DBD",
-        "greencolor": "#63BB8C"
+    "transparencies": {
+        "100": "#ff",
+        "95": "#F2",
+        "90": "#E6",
+        "85": "#D9",
+        "80": "#CC",
+        "75": "#BF",
+        "70": "#B3",
+        "65": "#A6",
+        "60": "#99",
+        "55": "#8C",
+        "50": "#80",
+        "45": "#73",
+        "40": "#66",
+        "35": "#59",
+        "30": "#4D",
+        "25": "#40",
+        "20": "#33",
+        "15": "#26",
+        "10": "#1A",
+        "5": "#0D",
+        "0": "#00"
+    },
+    "colors": {
+        "background": {
+            "base": "#424242",
+            "dark": "#212121",
+            "light": "#606060",
+            "color1": "#847aff",
+            "color2": "#35334a",
+            "color3": "#535364",
+            "color4": "#d8c9ff",
+            "color5": "#ffffff"
+        },
+        "accent": {
+            "green": "#63bb8c",
+            "yellow": "#e8d685",
+            "blue": "#639dbd",
+            "red": "#e88885",
+            "purple": "#db96ff"
+        }
     },
     "border": {
-        "color": "#757575",
+        "color": "#707070",
         "width": 1
     },
-    "entities" : {
-        "context" : {
-            "color" : "#00897B",
-            "icon" : "context.png"
+    "entities": {
+        "0": {
+            "color": "#00897B",
+            "icon": "context.png"
         },
-        "object_type" : {
-            "color" : "#039BE5",
-            "icon" : "class.png"
+        "5": {
+            "color": "#039BE5",
+            "icon": "class.png"
         },
-        "enum_type" : {
-            "color" : "#00D098",
-            "icon" : "enum.png"
+        "4": {
+            "color": "#00D098",
+            "icon": "enum.png"
         },
-        "function" : {
-            "color" : "#8E24AA",
-            "icon" : "function.png"
+        "2": {
+            "color": "#8E24AA",
+            "icon": "function.png"
         },
-        "variable" : {
-            "color" : "#FB8C00",
-            "icon" : "variable.png"
+        "1": {
+            "color": "#FB8C00",
+            "icon": "variable.png"
         }
     },
     "menu": {
         "background": {
-            "color" : "#424242",
-            "darkColor" : "#212121",
+            "color": "#424242",
+            "darkColor": "#212121",
             "lightColor": "#616161"
         },
         "border": {
@@ -162,7 +197,7 @@
             }
         }
     },
-     "button": {
+    "button": {
         "color": "#847AFF",
         "hovercolor": "#8E84FF",
         "text": {
@@ -180,8 +215,8 @@
     "editableText": {
         "color": {
             "border": {
-            "select": "#847AFF",
-            "deselect": "#4E4E5E"
+                "select": "#847AFF",
+                "deselect": "#4E4E5E"
             },
             "background": {
                 "select": "#333232",

@@ -3,6 +3,7 @@ import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.2
 
 import DNAI 1.0
+import Dnai.Settings 1.0
 import Dnai.FontAwesome 1.0
 
 import "../Forms"
@@ -120,21 +121,30 @@ Item {
 
     Rectangle {
         id: backgroundProfileId
-        color: containerId.visible == false ? AppSettings.theme["background"]["bluecolor"] : AppSettings.theme["background"]["greencolor"]
+        color: containerId.visible == false ? AppSettings.theme["colors"]["accent"]["blue"] : AppSettings.theme["colors"]["accent"]["green"]
         anchors.top: parent.top
         anchors.right: parent.right
         anchors.bottom: parent.bottom
         width: profileImageId.width + (profileImageId.anchors.rightMargin * 2)
 
-    TextAwesomeSolid {
-        id: profileImageId
-        text: "\uf2bd"
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.verticalCenter: parent.verticalCenter
-        anchors.rightMargin: 7
-        font.pointSize: 23
-        color: AppSettings.theme["text"]["color"]
-    }
+        Rectangle {
+            width: profileImageId.width - 4
+            height: width
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.verticalCenter: parent.verticalCenter
+            anchors.rightMargin: 7
+            color: AppSettings.theme["colors"]["background"]["base"]
+            radius: width / 2
+        }
+        TextAwesomeSolid {
+            id: profileImageId
+            text: "\uf2bd"
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.verticalCenter: parent.verticalCenter
+            anchors.rightMargin: 7
+            font.pointSize: 23
+            color: containerId.visible == false ? AppSettings.theme["colors"]["accent"]["blue"] : AppSettings.theme["colors"]["accent"]["green"]
+        }
     }
 
     Rectangle {
@@ -204,8 +214,8 @@ Item {
             usernameId.text = Editor.session.user.name
             onConnectionSuccess()
 
-           // root.fullname = Editor.session.user.name
-           // root.imgSrc = Editor.session.user.profile_url
+            // root.fullname = Editor.session.user.name
+            // root.imgSrc = Editor.session.user.profile_url
         }
     }
 }

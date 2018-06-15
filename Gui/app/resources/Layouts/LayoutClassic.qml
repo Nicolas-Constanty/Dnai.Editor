@@ -60,7 +60,7 @@ LayoutView {
 //        }
 
         background: Rectangle {
-             color: AppSettings.theme["background"]["darkColor"]
+             color: AppSettings.theme["colors"]["background"]["dark"]
              Rectangle {
                  anchors.bottom: parent.bottom
                  anchors.topMargin: 20
@@ -236,7 +236,7 @@ LayoutView {
 ////        }
 
 //        background: Rectangle {
-//             color: AppSettings.theme["background"]["darkColor"]
+//             color: AppSettings.theme["colors"]["background"]["dark"]
 //             Rectangle {
 //                 anchors.bottom: parent.bottom
 //                 anchors.topMargin: 20

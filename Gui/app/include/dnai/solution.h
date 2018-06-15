@@ -4,6 +4,8 @@
 #include "interfaces/isolution.h"
 #include "interfaces/iserializable.h"
 #include <QAbstractListModel>
+#include "models.h"
+#include <QQuickItem>
 
 namespace dnai
 {
@@ -12,6 +14,7 @@ namespace dnai
 	class Solution : public QAbstractListModel, public interfaces::ISolution, public interfaces::ASerializable<Solution>
 	{
         Q_OBJECT
+		Q_PROPERTY(QQuickItem *selectedEntity READ selectedEntity WRITE setSelectedEntity NOTIFY selectedEntityChanged)
 	public:
 		enum ROLES
 		{
@@ -46,6 +49,12 @@ namespace dnai
 		Q_INVOKABLE bool selectProject(dnai::Project*);
 		Q_INVOKABLE dnai::Project *selectedProject() const;
 
+		QQuickItem *selectedEntity() const;
+		void setSelectedEntity(QQuickItem *entity);
+
+	signals:
+		void selectedEntityChanged(QQuickItem *entity);
+
 	protected:
 		void _deserialize(const QJsonObject& obj) override;
 
@@ -62,7 +71,8 @@ namespace dnai
 		QString m_version;
 		QFile *m_file;
 		QString m_filename;
-        virtual QHash<int, QByteArray> roleNames() const override;
+		QQuickItem* m_selectedEntity;
+		virtual QHash<int, QByteArray> roleNames() const override;
 	};
 }
 

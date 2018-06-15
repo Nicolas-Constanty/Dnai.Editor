@@ -1,5 +1,7 @@
 import QtQuick 2.9
+
 import DNAI 1.0
+import Dnai.Settings 1.0
 import Dnai.FontAwesome 1.0
 
 TextInput {

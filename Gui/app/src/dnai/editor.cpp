@@ -18,7 +18,6 @@
 #include "dnai/core/handlermanager.h"
 #include "dnai/exceptions/guiexception.h"
 #include "dnai/views/genericnode.h"
-#include "dnai/models/instruction.h"
 
 namespace dnai
 {
@@ -28,9 +27,9 @@ namespace dnai
 		, m_selection(nullptr)
 		, m_editorView(nullptr)
 		, m_propertyView(nullptr)
-		, m_contextMenu(new models::ContextMenu())
-		, m_propertyPanelProperties(nullptr)
+        , m_propertyPanelProperties(nullptr)
 	    , m_contextMenuModel(nullptr)
+        , m_settings(nullptr)
 	{
 	}
 
@@ -207,11 +206,6 @@ namespace dnai
         emit solutionChanged(sol);
     }
 
-    models::BasicNodeModel *Editor::nodes() const
-    {
-        return App::currentInstance()->nodes();
-    }
-
 	PropertyPanelProperties * Editor::propertyPanelProperties()
 	{
 		if (!m_propertyPanelProperties)
@@ -240,11 +234,6 @@ namespace dnai
 	{
 		return m_editorView;
 	}
-
-	dnai::models::ContextMenu* Editor::contextMenu() const
-	{
-        return m_contextMenu;
-    }
 
     const QString &Editor::solutionName() const
     {
@@ -684,16 +673,25 @@ namespace dnai
         nodes.append(entryPointObj);
     }
 
-	void Editor::updateContextMenu(dnai::models::Entity* entity) const
-	{
-		if (entity == nullptr)
-            return;
-		const auto func = entity->guiModel<models::gui::declarable::Function>();
-		if (func)
-        {
-            m_contextMenu->createFromEntity(entity);
-		}
-	}
+    QSettings *Editor::settings()
+    {
+        return m_settings;
+    }
+
+    void Editor::registerSettings(QSettings *settings)
+    {
+        m_settings = settings;
+    }
+
+    bool Editor::isNewVersionAvailable() const
+    {
+        return App::currentInstance()->isNewVersionAvailable();
+    }
+
+    qreal Editor::getSettingNumber(const QString &path)
+    {
+        return App::currentInstance()->getSettingNumber(path);
+    }
 
 	PropertyPanelProperties::PropertyPanelProperties(QObject *parent) : QObject(parent)
 	{

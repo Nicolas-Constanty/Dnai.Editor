@@ -5,6 +5,7 @@ import QtQuick.Dialogs 1.2
 import QtGraphicalEffects 1.0
 import QtQuick.Layouts 1.3
 import DNAI 1.0
+import Dnai.Settings 1.0
 
 import "JavaScript/CreateComponent.js" as Factory
 import "Layouts"
@@ -19,6 +20,23 @@ Window {
     flags: Qt.SplashScreen
     color: "transparent"
     property alias main: _main
+    property bool isInit: false
+
+    SettingParameters {
+        id: _settingsParameters
+        themePaths: [
+            ":/settings/themes/dark.json",
+            ":/settings/themes/light.json"
+        ]
+    }
+
+    Component.onCompleted: {
+        AppSettings.parameters = _settingsParameters
+        Editor.registerSettings(AppSettings.settings)
+        //Load theme 1
+        AppSettings.currentTheme = AppSettings.themeNames[0]
+//        console.log(AppSettings.theme["colors"])
+    }
 
     function closeSplashScreen()
     {
@@ -47,17 +65,12 @@ Window {
         sourceComponent: _mainWindow
     }
 
-    Component.onCompleted:
-    {
-        AppSettings.init()
-    }
-
     Loader {
         id: _loader
         active: false
         asynchronous: true
         visible: status == Loader.Ready
-        sourceComponent: AppSettings.isSettingsLoad() ? _mainWindow : _selectTheme
+        sourceComponent: isInit ? _mainWindow : _selectTheme
     }
 
     Component {
@@ -80,12 +93,12 @@ Window {
 
         ApplicationWindow {
             id: _cw
-            width: AppSettings.isSettingsLoad() ? 1280 : 400
-            height: AppSettings.isSettingsLoad() ? 720 : 150
-            minimumHeight: 150
+            width: 400
+            height: 150
             minimumWidth: 400
+            minimumHeight: 150
             title: qsTr("DNAI")
-            color: AppSettings.theme["background"]["darkColor"]
+            color: AppSettings.theme["colors"]["background"]["dark"]
             visible: true
             ChooseThemePanel {
                 id: pane
