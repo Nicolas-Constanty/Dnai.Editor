@@ -282,6 +282,8 @@ Item {
             }
             Rectangle {
                 id: _listCreator
+                anchors.top: parent.top
+                anchors.topMargin: 15
                 anchors.left: _contextColumns.right
                 anchors.leftMargin: 25
                 width: 250
@@ -354,7 +356,6 @@ Item {
                                 _popupList.close()
                                 _textInput.clear()
                                 _item.parentEntity.addColumn(t);
-        //                            Manager.views.createDeclarationList(t)
                             }
                         }
                     }
