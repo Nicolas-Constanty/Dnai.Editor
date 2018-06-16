@@ -69,3 +69,5 @@ Gui/app/GeneratedFiles/
 *.vcxproj
 
 *.TMP
+
+*.dnai

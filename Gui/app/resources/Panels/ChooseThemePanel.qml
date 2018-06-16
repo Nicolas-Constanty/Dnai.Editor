@@ -22,8 +22,7 @@ ChooseThemeForm {
     }
 
     themes.onCurrentTextChanged: {
-        if (themes.currentText < themes.length)
-            AppSettings.currentTheme = AppSettings.themeNames[themes.currentText]
+        AppSettings.currentTheme = themes.currentText
     }
 
     validateButton.onClicked: {
