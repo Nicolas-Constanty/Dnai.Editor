@@ -253,12 +253,10 @@ Rectangle {
                             });
 
                             attrsView.add.connect(function () {
-                                var name = "Attribute" + Math.floor(Math.random() * 100);
-
-                                Controller.Class.addAttribute(md.id, name, 2, CoreEnums.PUBLIC);
+                                Controller.Class.addAttribute(md.id, "Attribute" + Math.floor(Math.random() * 100), 2, CoreEnums.PUBLIC);
                             });
                             attrsView.remove.connect(function (attrname) {
-                                console.log("Remove attribute: ", attrname);
+                                Controller.Class.removeAttribute(md.id, attrname);
                             });
                             attrsView.rename.connect(function (currname, newname) {
                                 console.log("Rename attribute ", currname, " into ", newname);

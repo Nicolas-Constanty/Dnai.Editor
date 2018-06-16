@@ -1,6 +1,9 @@
 #ifndef DNAI_CORE_OBJECTHANDLER_H
 #define DNAI_CORE_OBJECTHANDLER_H
 
+#include <unordered_map>
+#include <unordered_set>
+
 #include <QObject>
 
 #include "entitymanager.h"
@@ -20,19 +23,38 @@ namespace dnai
         public:
             void setup();
 
+        public slots:
+            void onEntityAdded(::core::EntityID id, models::Entity &entity);
+
         public:
             Q_INVOKABLE void addAttribute(quint32 obj, QString name, quint32 type, qint32 visi, bool save = true);
+            Q_INVOKABLE void removeAttribute(quint32 obj, QString name, bool save = true);
+
+        private:
+            bool isAttributePending(EntityID obj, QString const &name) const;
+            void removePendingAttribute(EntityID obj, QString const &name);
 
         private:
             void onAttributeAdded(EntityID obj, QString name, EntityID type, VISIBILITY visi);
             void onAddAttributeError(EntityID obj, QString name, EntityID type, VISIBILITY visi, QString msg);
 
+            void onAttributeRemoved(EntityID obj, QString name);
+            void onRemoveAttributeError(EntityID obj, QString name, QString msg);
+
         signals:
             void attributeAdded(models::Entity *obj, QString name, models::Entity *type, VISIBILITY visi);
+            void attributeRemoved(models::Entity *obj, QString name);
 
         private:
             EntityManager &manager;
 
+        private:
+            using AttrMap = std::unordered_map<models::Entity *, QList<QString>>;
+            AttrMap m_pendingAttributes;
+
+        private:
+            using AttrSet = std::unordered_set<std::string>;
+            AttrSet m_attributeAdded;
         };
     }
 }
