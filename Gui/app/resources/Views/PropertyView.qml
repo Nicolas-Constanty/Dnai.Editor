@@ -112,12 +112,14 @@ Rectangle {
                 for (var prop in md) {
                     if (prop === "name")
                     {
+                        console.log("Prop name")
                         createProperty("resources/Properties/StringProperty.qml", { "value":  md[prop], "name" : prop, "model": md, "prop": prop, "method": function(model, prop, value){
                             Controller.declarator.rename(md.containerId, md.name, value);
                         } })
                     }
                     else if (prop === "visibility")
                     {
+                        console.log("Prop visi")
                         createProperty("resources/Properties/DropDownProperty.qml", { "value": md[prop], "listmodel":  Editor.propertyPanelProperties.visibility, "name" : prop, "model": md, "prop": prop, "method": function(model, prop, value) {
                             console.log("Visibility:", value);
                             Controller.declarator.setVisibility(md.containerId, md.name, value);
@@ -126,6 +128,8 @@ Rectangle {
                     else if (prop === "entityType")
                     {
                         var val = md[prop]
+
+                        console.log("Prop type")
                         if (val === CoreEnums.VARIABLE)
                         {
                             var t = md["guiProperties"]["varType"]
@@ -241,14 +245,37 @@ Rectangle {
                                                }
                                            })
                         }
+                        else if (val === CoreEnums.OBJECT_TYPE)
+                        {
+                            var attrsView = createProperty("resources/Properties/AttributesProperty.qml", {
+                                "model": md,
+                                "name" : "Attributes"
+                            });
+
+                            attrsView.add.connect(function () {
+                                var name = "Attribute" + Math.floor(Math.random() * 100);
+
+                                Controller.Class.addAttribute(md.id, name, 2, CoreEnums.PUBLIC);
+                            });
+                            attrsView.remove.connect(function (attrname) {
+                                console.log("Remove attribute: ", attrname);
+                            });
+                            attrsView.rename.connect(function (currname, newname) {
+                                console.log("Rename attribute ", currname, " into ", newname);
+                            });
+                            attrsView.changeType.connect(function (vartypeIndex) {
+                                console.log("Change type to ", Editor.propertyPanelProperties.varTypes.getNameFromValue(Editor.propertyPanelProperties.varTypes.getValueFromIndex(vartypeIndex)))
+
+                                //Remove attribute
+                                //Add attribute
+                            });
+                        }
                     }
-                    //print(prop += " (" + typeof(md[prop]) + ") = " + md[prop]);
                 }
             }
             Component.onCompleted: {
                 Editor.registerPropertyView(propertyPanel);
             }
-
         }
     }
 }

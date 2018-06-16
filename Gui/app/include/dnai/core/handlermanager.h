@@ -27,6 +27,7 @@ namespace dnai
             Q_PROPERTY(EnumHandler *enumeration READ enumeration CONSTANT)
             Q_PROPERTY(FunctionHandler *Function READ function CONSTANT)
             Q_PROPERTY(GlobalHandler *global READ global CONSTANT)
+            Q_PROPERTY(ObjectHandler *Class READ getClass CONSTANT)
 
         private:
             HandlerManager();
@@ -44,6 +45,7 @@ namespace dnai
             EnumHandler *enumeration();
             FunctionHandler *function();
             GlobalHandler *global();
+            ObjectHandler *getClass();
 
             /*
              * Inner c++ properties
@@ -55,6 +57,7 @@ namespace dnai
             EnumHandler &Enumeration();
             FunctionHandler &Function();
             GlobalHandler &Global();
+            ObjectHandler &Class();
 
         private:
             EntityManager m_manager;
@@ -66,6 +69,7 @@ namespace dnai
             EnumHandler m_enumeration;
             FunctionHandler m_function;
             GlobalHandler m_global;
+            ObjectHandler m_object;
         };
     }
 }

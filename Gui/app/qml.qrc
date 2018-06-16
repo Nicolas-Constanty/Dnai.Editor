@@ -149,5 +149,6 @@
         <file>resources/Nodes/Operators.json</file>
         <file>resources/Components/BuildButton.qml</file>
         <file>resources/Components/NodeEntryPoint.qml</file>
+        <file>resources/Properties/AttributesProperty.qml</file>
     </qresource>
 </RCC>

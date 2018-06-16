@@ -15,6 +15,10 @@ BaseProperty {
     anchors.right: parent.right
     height: _panel.contentHeight + header.height + _panel.content.anchors.topMargin * 2
 
+    Component.onCompleted: {
+        console.log("Int property completed")
+    }
+
     Item {
         id: _property
         height: _panel.contentHeight
