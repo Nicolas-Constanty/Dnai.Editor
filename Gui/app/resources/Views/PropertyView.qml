@@ -259,13 +259,10 @@ Rectangle {
                                 Controller.Class.removeAttribute(md.id, attrname);
                             });
                             attrsView.rename.connect(function (currname, newname) {
-                                console.log("Rename attribute ", currname, " into ", newname);
+                                Controller.Class.renameAttribute(md.id, currname, newname);
                             });
-                            attrsView.changeType.connect(function (vartypeIndex) {
-                                console.log("Change type to ", Editor.propertyPanelProperties.varTypes.getNameFromValue(Editor.propertyPanelProperties.varTypes.getValueFromIndex(vartypeIndex)))
-
-                                //Remove attribute
-                                //Add attribute
+                            attrsView.changeType.connect(function (name, vartype) {
+                                Controller.Class.setAttributeType(md.id, name, vartype);
                             });
                         }
                     }

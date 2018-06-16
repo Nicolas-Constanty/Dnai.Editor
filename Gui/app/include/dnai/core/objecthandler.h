@@ -1,6 +1,7 @@
 #ifndef DNAI_CORE_OBJECTHANDLER_H
 #define DNAI_CORE_OBJECTHANDLER_H
 
+#include <queue>
 #include <unordered_map>
 #include <unordered_set>
 
@@ -29,6 +30,8 @@ namespace dnai
         public:
             Q_INVOKABLE void addAttribute(quint32 obj, QString name, quint32 type, qint32 visi, bool save = true);
             Q_INVOKABLE void removeAttribute(quint32 obj, QString name, bool save = true);
+            Q_INVOKABLE void renameAttribute(quint32 obj, QString name, QString newName, bool save = true);
+            Q_INVOKABLE void setAttributeType(quint32 obj, QString name, quint32 type, bool save = true);
 
         private:
             bool isAttributePending(EntityID obj, QString const &name) const;
@@ -41,12 +44,19 @@ namespace dnai
             void onAttributeRemoved(EntityID obj, QString name);
             void onRemoveAttributeError(EntityID obj, QString name, QString msg);
 
+            void onAttributeRenamed(EntityID obj, QString name, QString newName);
+            void onRenameAttributeError(EntityID obj, QString name, QString newName, QString msg);
+
         signals:
             void attributeAdded(models::Entity *obj, QString name, models::Entity *type, VISIBILITY visi);
             void attributeRemoved(models::Entity *obj, QString name);
+            void attributeRenamed(models::Entity *obj, QString name, QString newName);
 
         private:
             EntityManager &manager;
+
+        private:
+            std::queue<std::function<void()>> m_pendingAdd;
 
         private:
             using AttrMap = std::unordered_map<models::Entity *, QList<QString>>;

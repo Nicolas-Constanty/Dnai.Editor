@@ -23,6 +23,7 @@ namespace dnai
                     QStringList attributes();
                     void addAttribute(QString const &name, quint32 type);
                     void removeAttribute(QString const &name);
+                    void renameAttribute(QString const &name, QString const &newName);
                     Q_INVOKABLE quint32 getAttribute(QString name) const;
 
                 signals:

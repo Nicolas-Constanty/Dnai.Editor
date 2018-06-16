@@ -34,6 +34,13 @@ namespace dnai
                     emit attributesChanged(attributes());
                 }
 
+                void ObjectType::renameAttribute(const QString &name, const QString &newName)
+                {
+                    m_data.attributes[newName] = m_data.attributes[name];
+                    m_data.attributes.remove(name);
+                    emit attributesChanged(attributes());
+                }
+
                 quint32 ObjectType::getAttribute(QString name) const
                 {
                     return m_data.attributes.value(name);

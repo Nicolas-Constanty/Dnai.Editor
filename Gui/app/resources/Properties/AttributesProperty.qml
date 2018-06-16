@@ -14,7 +14,7 @@ BaseProperty {
     signal add()
     signal remove(string name)
     signal rename(string name, string newname)
-    signal changeType(int vartypeIndex)
+    signal changeType(string name, int vartypeIndex)
 
     anchors.left: parent.left
     anchors.right: parent.right
@@ -71,8 +71,33 @@ BaseProperty {
 
                 font.pointSize: 8
 
+                function getModelType()
+                {
+                    if (__this__.model)
+                        return __this__.model.guiProperties.getAttribute(modelData);
+                    return 2;
+                }
+
+                function getBoxType()
+                {
+                    return Editor.propertyPanelProperties.varTypes.getValueFromIndex(currentIndex);
+                }
+
+                function getModelIndex()
+                {
+                    return Editor.propertyPanelProperties.varTypes.getIndexFromValue(getModelType());
+                }
+
+                currentIndex: getModelIndex()
+
                 onCurrentIndexChanged: {
-                    __this__.changeType(__type__.currentIndex);
+                    if (getBoxType() === __this__.model.id)
+                    {
+                        Editor.notifyError("Cannot set an attribute of the type of the object");
+                        currentIndex = getModelIndex();
+                    }
+                    else if (getModelType() !== getBoxType())
+                        __this__.changeType(modelData, getBoxType());
                 }
             }
 

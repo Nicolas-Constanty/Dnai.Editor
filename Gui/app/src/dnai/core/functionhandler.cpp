@@ -400,49 +400,36 @@ namespace dnai
 
         void FunctionHandler::onInstructionAdded(EntityID function, INSTRUCTION type, const std::list<EntityID> &arguments, InstructionID instruction)
         {
+            models::Entity &func = manager.getEntity(function);
+            models::Function *data = func.guiModel<models::Function>();
+            models::gui::Instruction *instr;
+
+
+            qDebug() << "==Core== Function.InstructionAdded(" << function << ", " << type << ", " << QList<EntityID>::fromStdList(arguments) << ", " << instruction << ")";
+
             commands::CoreCommand::Success();
 
-            Q_UNUSED(function)
-            Q_UNUSED(type)
-            Q_UNUSED(arguments)
-            Q_UNUSED(instruction)
-
-            models::gui::declarable::Function *func = getFunctionData(function);
-
-            if (func != nullptr)
+            if (pendingInstruction.empty())
             {
-                models::gui::Instruction *instr;
+                instr = new models::gui::Instruction();
+                instr->setInstructionId(type);
 
-                if (pendingInstruction.empty())
-                {
-                    instr = new models::gui::Instruction();
-                    instr->setInstructionId(type);
+                QList<QString> linked;
 
-                    QList<QString> linked;
-
-                    for (quint32 curr : arguments) {
-                        linked.append(manager.getEntity(curr).fullName());
-                    }
-
-                    instr->setLinkedEntities(linked);
-                    func->addInstruction(instr);
+                for (quint32 curr : arguments) {
+                    linked.append(manager.getEntity(curr).fullName());
                 }
-                else
-                {
-                    instr = pendingInstruction.front();
-                    pendingInstruction.pop();
-                }
-                instr->setUid(instruction);
-                qDebug() << "==Core== Function.InstructionAdded(" << function << ", " << type << ", " << QList<EntityID>::fromStdList(arguments) << ", " << instruction << ")";
-                emit instructionAdded(&manager.getEntity(function), instr);
+
+                instr->setLinkedEntities(linked);
+                data->addInstruction(instr);
             }
-
-            /*
-             * Find the models::Entity
-             * Find the models::gui::declarable::function
-             * Create the correct instruction
-             * Add the instruction to function
-             */
+            else
+            {
+                instr = pendingInstruction.front();
+                pendingInstruction.pop();
+            }
+            instr->setUid(instruction);
+            emit instructionAdded(&func, instr);
         }
 
         void FunctionHandler::onAddInstructionError(EntityID function, INSTRUCTION type, const std::list<EntityID> &arguments, const QString &messsage)

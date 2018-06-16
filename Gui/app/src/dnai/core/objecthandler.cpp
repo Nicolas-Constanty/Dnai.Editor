@@ -29,6 +29,9 @@ namespace dnai
 
             core::object::onAttributeRemoved(std::bind(&ObjectHandler::onAttributeRemoved, this, _1, _2));
             core::object::onRemoveAttributeError(std::bind(&ObjectHandler::onRemoveAttributeError, this, _1, _2, _3));
+
+            core::object::onAttributeRenamed(std::bind(&ObjectHandler::onAttributeRenamed, this, _1, _2, _3));
+            core::object::onRenameAttributeError(std::bind(&ObjectHandler::onRenameAttributeError, this, _1, _2, _3, _4));
         }
 
         void ObjectHandler::onEntityAdded(EntityID id, models::Entity &entity)
@@ -130,6 +133,44 @@ namespace dnai
             ));
         }
 
+        void ObjectHandler::renameAttribute(quint32 obj, QString name, QString newName, bool save)
+        {
+            qDebug() << "==Core== Class.RenameAttribute(" << obj << ", " << name << ", " << newName << ") => save(" << save << ")";
+
+            models::Entity &object = manager.getEntity(obj);
+
+            commands::CommandManager::Instance()->exec(new commands::CoreCommand("Class.RenameAttribute", save,
+                [&object, name, newName]() {
+                    core::object::renameAttribtue(object.id(), name, newName);
+                },
+                [&object, name, newName]() {
+                    core::object::renameAttribtue(object.id(), newName, name);
+                }
+            ));
+        }
+
+        void ObjectHandler::setAttributeType(quint32 obj, QString name, quint32 typ, bool save)
+        {
+            models::Entity &object = manager.getEntity(obj);
+            models::ObjectType *data = object.guiModel<models::ObjectType>();
+            models::Entity &type = manager.getEntity(data->getAttribute(name));
+            models::Entity &newType = manager.getEntity(typ);
+
+            commands::CommandManager::Instance()->exec(new commands::CoreCommand("Class.SetAttributeType", save,
+                [this, &object, &newType, name]() {
+                    m_pendingAdd.push([&object, name, &newType]() {
+                        core::object::addAttribute(object.id(), name, newType.id(), VISIBILITY::PUBLIC);
+                    });
+                    core::object::removeAttribute(object.id(), name);
+                },
+                [this, &object, &type, name]() {
+                    m_pendingAdd.push([&object, name, &type](){
+                        core::object::addAttribute(object.id(), name, type.id(), VISIBILITY::PUBLIC);
+                    });
+                    core::object::removeAttribute(object.id(), name);
+                }
+            ));
+        }
 
         bool ObjectHandler::isAttributePending(EntityID obj, QString const &name) const
         {
@@ -181,8 +222,17 @@ namespace dnai
             models::ObjectType *data = object.guiModel<models::ObjectType>();
 
             qDebug() << "==Core== Class.AttributeRemove(" << obj << ", " << name << ")";
+
             data->removeAttribute(name);
-            commands::CoreCommand::Success();
+            if (!m_pendingAdd.empty())
+            {
+                m_pendingAdd.front()();
+                m_pendingAdd.pop();
+            }
+            else
+            {
+                commands::CoreCommand::Success();
+            }
             emit attributeRemoved(&object, name);
         }
 
@@ -192,6 +242,23 @@ namespace dnai
 
             commands::CoreCommand::Error();
             Editor::instance().notifyError("Unable to remove attribute " + name + ": " + msg);
+        }
+
+        void ObjectHandler::onAttributeRenamed(EntityID obj, QString name, QString newName)
+        {
+            models::Entity &object = manager.getEntity(obj);
+            models::ObjectType *data = object.guiModel<models::ObjectType>();
+
+            qDebug() << "==Core== Class.AttributeRenamed(" << obj << ", " << name << ", " << newName << ")";
+            data->renameAttribute(name, newName);
+            commands::CoreCommand::Success();
+            emit attributeRenamed(&object, name, newName);
+        }
+
+        void ObjectHandler::onRenameAttributeError(EntityID obj, QString name, QString newName, QString msg)
+        {
+            commands::CoreCommand::Error();
+            Editor::instance().notifyError("Unable to rename attribute " + name + " into " + newName + ": " + msg);
         }
     }
 }
