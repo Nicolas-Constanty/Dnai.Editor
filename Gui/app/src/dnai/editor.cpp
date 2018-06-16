@@ -452,6 +452,11 @@ namespace dnai
             contextMenuModel()->appendEnumeration(declared);
 			dnai::models::gui::declarable::Variable::varTypes()->append(declared->name(), declared->id());
         }
+        else if (declared->coreModel()->entityType() == ENTITY::OBJECT_TYPE)
+        {
+            contextMenuModel()->appendObject(declared);
+            dnai::models::gui::declarable::Variable::varTypes()->append(declared->name(), declared->id());
+        }
     }
 
     void Editor::createNode(models::Entity *entity, models::ContextMenuItem *node, qint32 x, qint32 y)

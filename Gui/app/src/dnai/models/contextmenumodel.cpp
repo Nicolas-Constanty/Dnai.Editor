@@ -269,6 +269,22 @@ namespace dnai
 			m_returns->appendChild(m_returnSetter);
 			m_returns->appendChild(m_returnGetter);
 
+            /*
+             * Create Object Getter/Setter menu
+             */
+            m_objects = new ContextMenuItem();
+            m_objects->setName("Classes");
+
+            m_root->appendChild(m_objects);
+
+            m_objectsGetter = new ContextMenuItem();
+            m_objectsGetter->setName("Get attributes");
+            m_objects->appendChild(m_objectsGetter);
+
+            m_objectsSetter = new ContextMenuItem();
+            m_objectsSetter->setName("Set attributes");
+            m_objects->appendChild(m_objectsSetter);
+
 			parseJsonDocument(doc);
 		}
 
@@ -655,7 +671,50 @@ namespace dnai
 			endRemoveRows();
 			beginRemoveRows(index(1, 0, index(3, 0, QModelIndex())), 0, m_returnSetter->childCount());
 			m_returnSetter->deleteChildren();
-			endRemoveRows();
-		}
+            endRemoveRows();
+        }
+
+        void ContextMenuModel::appendObject(Entity *entity)
+        {
+            models::ObjectType *data = entity->guiModel<models::ObjectType>();
+
+            auto item = new ContextMenuItem();
+            item->setName(entity->name());
+            item->setDescription("Get attributes of " + entity->name() + " variable");
+            item->setInputs(1);
+            item->setInputNames({"this"});
+            item->setOutputs(data->attributes().count());
+            item->setOutputNames(data->attributes());
+            item->setType(entity->entityType());
+            item->setInstructionId(dnai::enums::QInstructionID::GET_ATTRIBUTES);
+            item->setConstruction({entity->id()});
+
+            //append it
+            beginInsertRows(index(0, 0, QModelIndex()), m_objectsGetter->childCount(), m_objectsGetter->childCount());
+            m_objectsGetter->appendChild(item);
+            endInsertRows();
+
+            m_hash[item->fullPath()] = item;
+
+            item = new ContextMenuItem();
+            item->setName(entity->name());
+            item->setDescription("Set attributes of " + entity->name() + " variable");
+            item->setInputs(1 + data->attributes().count());
+            item->setInputNames(QStringList({"this"}) + data->attributes());
+            item->setOutputs(data->attributes().count());
+            item->setOutputNames(data->attributes());
+            item->setFlowIn(1);
+            item->setFlowOut(1);
+            item->setType(entity->entityType());
+            item->setInstructionId(dnai::enums::QInstructionID::SET_ATTRIBUTES);
+            item->setConstruction({entity->id()});
+
+            //append it
+            beginInsertRows(index(1, 0, QModelIndex()), m_objectsSetter->childCount(), m_objectsSetter->childCount());
+            m_objectsSetter->appendChild(item);
+            endInsertRows();
+
+            m_hash[item->fullPath()] = item;
+        }
 	}
 }
