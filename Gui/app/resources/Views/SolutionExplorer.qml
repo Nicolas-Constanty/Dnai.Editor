@@ -280,13 +280,12 @@ Rectangle {
     }
 
     Item {
-        property int heightValue: containerId.childrenRect.height
         property bool editableProjectMode: false
         id: createProjectItemId
         anchors.bottom: parent.bottom
         anchors.left: parent.left
         anchors.right: parent.right
-        height: heightValue + 10
+        height: addId.height + 20
 
         function cancel() {
             createProjectItemId.editableProjectMode = false

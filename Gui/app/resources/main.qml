@@ -35,6 +35,7 @@ Window {
         Editor.registerSettings(AppSettings.settings)
         //Load theme 1
         AppSettings.currentTheme = AppSettings.themeNames[0]
+        isInit = AppSettings.themeAlreadySet()
 //        console.log(AppSettings.theme["colors"])
     }
 

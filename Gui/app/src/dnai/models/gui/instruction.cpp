@@ -130,7 +130,6 @@ namespace dnai
             {
                 Input *input = getInput(name);
 
-                qDebug() << "Get input value of " << name;
                 if (input == nullptr) return "";
                 return input->value();
             }

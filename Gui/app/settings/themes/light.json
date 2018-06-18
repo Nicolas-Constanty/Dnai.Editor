@@ -24,8 +24,9 @@
     },
     "colors": {
         "background": {
-            "base": "#424242",
-            "dark": "#212121",
+            "base": "#f5f5f5",
+            "dark": "#f0f0f0",
+            "light": "#ffffff",
             "color1": "#847aff",
             "color2": "#35334a",
             "color3": "#535364",
@@ -41,26 +42,27 @@
         }
     },
     "border": {
+        "color": "#707070",
         "width": 1
     },
     "entities": {
-        "context": {
+        "0": {
             "color": "#00897B",
             "icon": "context.png"
         },
-        "object_type": {
+        "5": {
             "color": "#039BE5",
             "icon": "class.png"
         },
-        "enum_type": {
+        "4": {
             "color": "#00D098",
             "icon": "enum.png"
         },
-        "function": {
+        "2": {
             "color": "#8E24AA",
             "icon": "function.png"
         },
-        "variable": {
+        "1": {
             "color": "#FB8C00",
             "icon": "variable.png"
         }
@@ -82,7 +84,7 @@
         "pixelSize": 10
     },
     "text": {
-        "color": "#FAFAFA",
+        "color": "#000000",
         "darkColor": "#000000",
         "disableColor": "#60FFFFFF",
         "lightColor": "#FFFFFF",

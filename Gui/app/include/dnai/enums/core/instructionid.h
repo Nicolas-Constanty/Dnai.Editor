@@ -51,7 +51,9 @@ public:
         REMOVE,
         REMOVE_INDEX,
         SIZE,
-        FOREACH
+        FOREACH,
+        GET_ATTRIBUTES,
+        SET_ATTRIBUTES
     };
     Q_ENUM(Instruction_ID)
 };

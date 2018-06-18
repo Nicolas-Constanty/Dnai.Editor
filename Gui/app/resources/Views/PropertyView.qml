@@ -89,14 +89,14 @@ Rectangle {
             width: _container.width
             ItemDelegate {
                 id: _varTypeDelegate
-                width: _value.width
-                text: model.name
+                width: typeof(_value) === "undefined" ? 0 : _value.width
+                text: typeof(model) === "undefined" ? "" : model.name
                 contentItem: Text {
-                   text: model.name
+                   text: typeof(model) === "undefined" ? "" : model.name
                    elide: Text.ElideRight
                    verticalAlignment: Text.AlignVCenter
                 }
-                highlighted: control.highlightedIndex === index
+                highlighted: typeof(control) === "undefined" ? false : control.highlightedIndex === index
             }
             onModelChanged: {
                 if (propertyPanel.model === null)
@@ -112,12 +112,14 @@ Rectangle {
                 for (var prop in md) {
                     if (prop === "name")
                     {
+                        console.log("Prop name")
                         createProperty("resources/Properties/StringProperty.qml", { "value":  md[prop], "name" : prop, "model": md, "prop": prop, "method": function(model, prop, value){
                             Controller.declarator.rename(md.containerId, md.name, value);
                         } })
                     }
                     else if (prop === "visibility")
                     {
+                        console.log("Prop visi")
                         createProperty("resources/Properties/DropDownProperty.qml", { "value": md[prop], "listmodel":  Editor.propertyPanelProperties.visibility, "name" : prop, "model": md, "prop": prop, "method": function(model, prop, value) {
                             console.log("Visibility:", value);
                             Controller.declarator.setVisibility(md.containerId, md.name, value);
@@ -126,6 +128,8 @@ Rectangle {
                     else if (prop === "entityType")
                     {
                         var val = md[prop]
+
+                        console.log("Prop type")
                         if (val === CoreEnums.VARIABLE)
                         {
                             var t = md["guiProperties"]["varType"]
@@ -241,213 +245,41 @@ Rectangle {
                                                }
                                            })
                         }
+                        else if (val === CoreEnums.OBJECT_TYPE)
+                        {
+                            /*var attrsView = createProperty("resources/Properties/AttributesProperty.qml", {
+                                "model": md,
+                                "name" : "Attributes"
+                            });
+
+                            attrsView.add.connect(function () {
+                                Controller.Class.addAttribute(md.id, "Attribute" + Math.floor(Math.random() * 100), 2, CoreEnums.PUBLIC);
+                            });
+                            attrsView.remove.connect(function (attrname) {
+                                Controller.Class.removeAttribute(md.id, attrname);
+                            });
+                            attrsView.rename.connect(function (currname, newname) {
+                                Controller.Class.renameAttribute(md.id, currname, newname);
+                            });
+                            attrsView.changeType.connect(function (name, vartype) {
+                                Controller.Class.setAttributeType(md.id, name, vartype);
+                            });
+
+                            var funcView = createProperty("resources/Properties/ClassFunctionsProperty.qml",
+                                                          {
+                                                              "model": md,
+                                                              "name": "Functions"
+                                                          });
+                            funcView.setFunctionStatus.connect(function(name, member){
+                                console.log("Set function ", name, " status to ", member ? "member" : "static");
+                            });*/
+                        }
                     }
-                    //print(prop += " (" + typeof(md[prop]) + ") = " + md[prop]);
                 }
             }
             Component.onCompleted: {
                 Editor.registerPropertyView(propertyPanel);
             }
-
         }
     }
-
-
-//    MLabel {
-//        id: _title
-//        height: 35
-//        padding: 15
-//        text: title
-//        color: "#CCFFFFFF"
-//        font.family: "segoeuisl"
-//        font.pointSize: 10
-//        font.capitalization: Font.AllUppercase
-//        anchors.left: parent.left
-//        anchors.top: parent.top
-//    }
-
-//    SplitView {
-//        id: propertyView
-//        anchors.top: _title.bottom
-//        anchors.bottom: parent.bottom
-//        anchors.left: parent.left
-//        anchors.right: parent.right
-//        orientation: Qt.Horizontal
-//        property alias model: propertiesNameList.model
-
-//        Column {
-//            id: propertiesName
-//            width: propertyView.width / 2
-//            anchors.left: parent.left
-//            property real rectangleHeight: 0
-//            Repeater {
-//                id: propertiesNameList
-//                MLabel {
-//                    id: labelText
-//                    anchors.left: parent.left
-//                    anchors.right: parent.right
-//                    text: qsTr(model.name)
-//                    padding: 3
-//                    leftPadding: 4
-//                    horizontalAlignment: Text.AlignLeft
-//                    font.capitalization: Font.Capitalize
-//                    font.pointSize: 8
-//                    Rectangle {
-//                        anchors.left: parent.left
-//                        anchors.right: parent.right
-//                        anchors.bottom: parent.bottom
-//                        height: 1
-//                        color: AppSettings.theme["border"]["color"]
-//                    }
-//                    Component.onCompleted: {
-//                        propertiesName.rectangleHeight = labelText.height
-//                    }
-//                }
-//            }
-//        }
-//        Column {
-//            id: propertiesValue
-//            anchors.left: propertiesName.right
-//            anchors.right: parent.right
-//            Repeater {
-//                model: propertiesNameList.model
-//                Rectangle {
-//                    id: value
-//                    anchors.left: parent.left
-//                    anchors.right: parent.right
-//                    height: propertiesName.rectangleHeight
-//                    color: "transparent"
-//                    Rectangle {
-//                        anchors.left: parent.left
-//                        anchors.right: parent.right
-//                        anchors.bottom: parent.bottom
-//                        height: 1
-//                        color: AppSettings.theme["border"]["color"]
-//                    }
-//                    Component.onCompleted: {
-//                        var obj
-//                        if (model.name === "visibility")
-//                        {
-//                            Factory.createObjects("resources/Components/EnumComponent.qml",
-//                                                  {
-//                                                      "model" : Editor.propertyPanelProperties.visibility,
-//                                                      "modelIndex" : index,
-//                                                      "modelItem" : model.item
-//                                                  }, value)
-//                            obj = Factory.getObject()
-//                            obj.currentIndex = model.value
-//                            obj.anchors.fill = value
-//                        }
-//                        else if (model.name === "entityType")
-//                        {
-//                            Factory.createObjects("resources/Components/EnumComponent.qml",
-//                                                  {
-//                                                      "model" : Editor.propertyPanelProperties.entityType,
-//                                                      "modelIndex" : index,
-//                                                      "modelItem" : model.item
-//                                                  }, value)
-//                            obj = Factory.getObject()
-//                            obj.currentIndex = model.value
-//                            obj.anchors.fill = value
-//                        }
-//                        else if (model.name === "varType")
-//                        {
-//                            Factory.createObjects("resources/Components/EnumComponent.qml",
-//                                                  {
-//                                                      "model" : Editor.propertyPanelProperties.varType,
-//                                                      "modelIndex" : index,
-//                                                      "modelItem" : model.item
-//                                                  }, value)
-//                            obj = Factory.getObject()
-//                            obj.currentIndex = model.value
-//                            obj.anchors.fill = value
-//                        }
-//                        else
-//                        {
-//                            Factory.createObjects("resources/Components/EditableTextModel.qml",
-//                                                  {
-//                                                      "text" : model.value,
-//                                                      "index" : index,
-//                                                      "model" : model.item
-//                                                  }, value)
-//                            obj = Factory.getObject()
-//                            obj.anchors.fill = value
-//                        }
-//                    }
-//                }
-//            }
-//        }
-//        Component.onCompleted: {
-//            Editor.registerPropertyView(propertyView);
-//        }
-//    }
-
-
-//    TableView {
-//        id: propertyView
-//        anchors.top: _title.bottom
-//        anchors.bottom: parent.bottom
-//        anchors.left: parent.left
-//        anchors.right: parent.right
-//        TableViewColumn {
-//            role: "name"
-//            title: "Property name"
-//            width: propertyView.width / 3
-//        }
-//        TableViewColumn {
-//            role: "value"
-//            title: "Value"
-//            width: (2 * propertyView.width) / 3
-//        }
-//        frameVisible: false
-//        headerVisible: false
-//        style: TableViewStyle {
-//            backgroundColor :  AppSettings.theme["colors"]["background"]["dark"]
-//            alternateBackgroundColor:  AppSettings.theme["colors"]["background"]["dark"]
-//            highlightedTextColor: AppSettings.theme["colors"]["background"]["base"]
-//            textColor : AppSettings.theme["text"]["color"]
-//        }
-//            itemDelegate: Rectangle {
-//                color: AppSettings.theme["colors"]["background"]["dark"]
-//                // TODO Improve this declaration with javascript creation ?
-//                EditableText {
-//                    id: editText
-//                    visible: styleData.column === 1 && typeof(styleData.value) === "string"
-//                    text: styleData.value
-//                    focus: true
-//                    color: AppSettings.theme["text"]["color"]
-//                    onAccepted: {
-//                        propertyView.model.model().setProp(styleData.row, editText.text)
-//                    }
-//                }
-
-//                MText {
-//                    visible: styleData.column === 0
-//                    text: styleData.value
-//                    focus: true
-//                }
-//                Rectangle {
-//                    anchors {
-//                       right: parent.right
-//                       top: parent.top
-//                       bottom: parent.bottom
-//                   }
-//                   width: 1
-//                   color: AppSettings.theme["border"]["color"]
-//                }
-//                Rectangle {
-//                    y: -1
-//                    anchors{
-//                        right: parent.right
-//                        left: parent.left
-//                        bottom: parent.bottom
-//                    }
-//                    height: 1
-//                    color: AppSettings.theme["border"]["color"]
-//                }
-//            }
-//        Component.onCompleted: {
-//            Editor.registerPropertyView(propertyView);
-//        }
-//    }
 }

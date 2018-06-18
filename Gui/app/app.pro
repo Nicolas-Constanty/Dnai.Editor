@@ -126,7 +126,8 @@ SOURCES += \
     src/dnai/models/contextmenumodel.cpp \
     src/dnai/models/gui/iolink.cpp \
     src/dnai/models/gui/flowlink.cpp \
-    src/dnai/core/globalhandler.cpp
+    src/dnai/core/globalhandler.cpp \
+    src/dnai/core/objecthandler.cpp
 
 
 RESOURCES += qml.qrc

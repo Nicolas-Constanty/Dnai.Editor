@@ -15,15 +15,29 @@ namespace dnai
 				class ObjectType : public QObject, public Entity<data::ObjectType, ObjectType>
 				{
 					Q_OBJECT
+                    Q_PROPERTY(QStringList attributes READ attributes NOTIFY attributesChanged)
+                    Q_PROPERTY(QList<QVariant> functions READ functions NOTIFY functionsChanged)
+
 				public:
 					explicit ObjectType() = default;
-					const QList<ObjectType*>& classes() const;
-					const QList<Variable*>& variables() const;
-					const QList<Variable*>& attributes() const;
-					const QList<EnumType*>& enums() const;
-					const QList<ListType*>& listobjs() const;
-					const QList<Function*>& functions() const;
-					const QList<Function*>& methods() const;
+
+                    QStringList attributes();
+                    void addAttribute(QString const &name, quint32 type);
+                    void removeAttribute(QString const &name);
+                    void renameAttribute(QString const &name, QString const &newName);
+                    Q_INVOKABLE quint32 getAttribute(QString name) const;
+
+                public:
+                    QList<QVariant> functions() const;
+                    void addFunction(QString const &name);
+                    void removeFunction(QString const &name);
+                    void setFunctionStatus(QString const &name, bool member);
+
+                signals:
+                    void attributesChanged(QStringList attrs);
+                    void functionsChanged(QList<QVariant> functions);
+
+                public:
 					//Implementation of ISerializable
 					void serialize(QJsonObject& obj) const override;
 				protected:

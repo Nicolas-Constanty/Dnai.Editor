@@ -11,7 +11,8 @@ namespace dnai
             m_variable(m_manager),
             m_enumeration(m_manager),
             m_function(m_manager),
-            m_global()
+            m_global(),
+            m_object(m_manager)
         {
             m_project.setup();
             m_declarator.setup();
@@ -19,6 +20,7 @@ namespace dnai
             m_enumeration.setup();
             m_function.setup();
             m_global.setup();
+            m_object.setup();
         }
 
         HandlerManager &HandlerManager::Instance()
@@ -59,6 +61,11 @@ namespace dnai
             return &m_global;
         }
 
+        ObjectHandler *HandlerManager::getClass()
+        {
+            return &m_object;
+        }
+
         ProjectHandler &HandlerManager::Project()
         {
             return m_project;
@@ -87,6 +94,11 @@ namespace dnai
         GlobalHandler &HandlerManager::Global()
         {
             return m_global;
+        }
+
+        ObjectHandler &HandlerManager::Class()
+        {
+            return m_object;
         }
     }
 }

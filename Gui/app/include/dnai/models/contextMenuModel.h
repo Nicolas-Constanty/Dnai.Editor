@@ -123,21 +123,32 @@ namespace dnai
 			void appendReturn(Entity *entity);
 			void clearParameters();
 			void clearReturns();
+            void appendObject(Entity *entity);
 
 		private:
 			void parseJsonDocument(const QJsonObject &json);
 			void parseJsonObj(ContextMenuItem* parent, const QJsonObject& js);
 			ContextMenuItem *m_root;
+
             ContextMenuItem *m_variableGetter;
             ContextMenuItem *m_variableSetter;
+
             ContextMenuItem *m_enumSplitters;
+
             QHash<QString, ContextMenuItem*> m_hash;
+
 			ContextMenuItem* m_returns;
 			ContextMenuItem* m_parameters;
+
 			ContextMenuItem* m_paramSetter;
 			ContextMenuItem* m_paramGetter;
+
 			ContextMenuItem* m_returnSetter;
 			ContextMenuItem* m_returnGetter;
+
+            ContextMenuItem* m_objects;
+            ContextMenuItem* m_objectsGetter;
+            ContextMenuItem* m_objectsSetter;
 		};
 	}
 }
