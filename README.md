@@ -1,3 +1,15 @@
+# Dnai Editor - Source code
+
+[![Build Circle Ci](https://circleci.com/gh/Nicolas-Constanty/Dnai.Editor/tree/master.svg?style=shield)](https://circleci.com/gh/Nicolas-Constanty/Dnai.Editor/tree/master.svg?style=shield)
+
+[Dnai Editor](https://code.visualstudio.com) is a visual scripting software,
+ build with the [Qt Open Source](https://www.qt.io/download-qt-installer) version.
+ You can download it for Windows, and macOS on [Dnai website](https://dnai.io).
+
+You can compile the software using Qt >= 5.10.1, but you will need our "Core" library to run it properly.
+
+Our Core library sources remain private, so you can find the [latest version of the Core here]().
+
 <p align="center">
   <img alt="Main view screenshot" src="https://raw.githubusercontent.com/Nicolas-Constanty/Dnai.Editor/master/images/mainview.png">
 </p>
