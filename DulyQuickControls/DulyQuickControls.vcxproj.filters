@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Generated Files">
+      <UniqueIdentifier>{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;moc;h;def;odl;idl;res;</Extensions>
+    </Filter>
+    <Filter Include="Generated Files">
+      <UniqueIdentifier>{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;moc;h;def;odl;idl;res;</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{D9D6E242-F8AF-46E4-B9FD-80ECBC20BA3E}</UniqueIdentifier>
+      <Extensions>qrc;*</Extensions>
+      <ParseFiles>false</ParseFiles>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{D9D6E242-F8AF-46E4-B9FD-80ECBC20BA3E}</UniqueIdentifier>
+      <Extensions>qrc;*</Extensions>
+      <ParseFiles>false</ParseFiles>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="MoveCommand.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="baseio.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="beziercurve.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="commanddecorator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="commandmanager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="debugdecorator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dulycanvas.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="eventutilities.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="flow.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="focusmanager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="genericnode.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="input.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="io.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ioquickitem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="line.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="link.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="output.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="roundedrectangle.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_dulycanvas.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_dulycanvas.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_beziercurve.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_beziercurve.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_genericnode.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_genericnode.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_flow.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_flow.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_observablelist.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_observablelist.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_line.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_line.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_resourcesnode.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_resourcesnode.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_ioquickitem.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_ioquickitem.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_roundedrectangle.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_roundedrectangle.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_io.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_io.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\qrc_qml.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="baselinkable.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_customshape.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_customshape.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="customshape.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="linkablebezieritem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="MoveCommand.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="baseio.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <CustomBuild Include="beziercurve.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <ClInclude Include="commanddecorator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="commandmanager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="debugdecorator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <CustomBuild Include="dulycanvas.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <ClInclude Include="eventutilities.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <CustomBuild Include="flow.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <ClInclude Include="focusmanager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <CustomBuild Include="genericnode.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <ClInclude Include="icommand.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ilinkable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="input.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <CustomBuild Include="io.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="ioquickitem.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="line.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <ClInclude Include="link.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="linkabletype.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <CustomBuild Include="observablelist.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <ClInclude Include="output.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <CustomBuild Include="resourcesnode.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="roundedrectangle.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <ClInclude Include="baselinkable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="linkablebezieritem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="debug\moc_predefs.h.cbt">
+      <Filter>Generated Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="release\moc_predefs.h.cbt">
+      <Filter>Generated Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="customshape.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Components\AddNode.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\Components\AddNodeModel.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\Components\ColorPicker.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\Forms\ColorPickerForm.ui.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\Models\ColorPickerModel.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\Components\Container.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\Components\DropDown.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\Forms\DropDownForm.ui.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\Models\LanguageModel.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\Panels\LanguagePanel.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\Forms\LanguagePanelForm.ui.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\Components\Node.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\Components\NodeForm.ui.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\Components\NodeModel.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\Panels\NodePanel.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\Forms\NodePanelForm.ui.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\Panels\SettingPanel.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\Forms\SettingPanelForm.ui.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\Models\ThemeModel.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\Panels\ThemePanel.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\Forms\ThemePanelForm.ui.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\Components\ToolBarHeader.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="main.qml">
+      <Filter>Resource Files</Filter>
+    </None>
+    <CustomBuild Include="qml.qrc">
+      <Filter>Resource Files</Filter>
+    </CustomBuild>
+    <None Include="qtquickcontrols2.conf">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
+</Project>

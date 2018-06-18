@@ -22,3 +22,4 @@ script:
   - cd ../Server
   - ~/Qt/5.10.1/clang_64/bin/qmake Server.pro
   - make
+
