@@ -8,7 +8,7 @@ TARGET = Server
 CONFIG += console
 CONFIG -= app_bundle
 
-INCLUDEPATH += include/
+INCLUDEPATH = include/
 
 TEMPLATE = app
 

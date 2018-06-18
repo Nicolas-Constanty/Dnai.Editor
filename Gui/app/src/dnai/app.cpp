@@ -297,6 +297,9 @@ namespace dnai
           if (currentVersionAPIList[i].toInt() > currentVersionList[i].toInt()) {
               return true;
           }
+          if ( currentVersionList[i].toInt() > currentVersionAPIList[i].toInt()) {
+              break;
+          }
           ++i;
       }
       return false;
