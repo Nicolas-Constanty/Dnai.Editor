@@ -152,5 +152,6 @@
         <file>resources/Components/DialogPopup.qml</file>
         <file>resources/Properties/AttributesProperty.qml</file>
         <file>resources/Properties/ClassFunctionsProperty.qml</file>
+        <file>resources/JavaScript/Utils.js</file>
     </qresource>
 </RCC>

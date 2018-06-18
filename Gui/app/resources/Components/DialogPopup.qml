@@ -13,7 +13,6 @@ Item {
 
     property int widthValue: container.childrenRect.width + 40
     property int heightValue: container.childrenRect.height + 40
-    property var orientation: ListView.Horizontal
 
     height: heightValue
     width: widthValue
@@ -105,7 +104,7 @@ Item {
                     hoverColorRect: modelData.hoverColorRect
 
                     onPressed: {
-                        modelData.itemAnswer.callback()
+                        modelData.onPressedAction.callback()
                     }
                 }
         }

@@ -10,6 +10,7 @@ import "../Style"
 import "../Components"
 import "../Layouts"
 import "../Panels"
+import "../JavaScript/Utils.js" as Utils
 import "../JavaScript/CreateComponent.js" as Factory
 
 ApplicationWindow {
@@ -145,35 +146,28 @@ ApplicationWindow {
               "notHoverColor": AppSettings.theme["colors"]["background"]["color5"],
               "colorRect": AppSettings.theme["colors"]["background"]["base"],
               "hoverColorRect": AppSettings.theme["colors"]["background"]["light"],
-              "itemAnswer": noAnswer
+              "onPressedAction": Utils.createCallBack(noAnswer)
             }, {
                     "text": "Yes",
                     "hoverColor": AppSettings.theme["button"]["text"]["hovercolor"],
                     "notHoverColor": AppSettings.theme["button"]["text"]["color"],
                     "colorRect": AppSettings.theme["button"]["color"],
                     "hoverColorRect": AppSettings.theme["button"]["hovercolor"],
-                    "itemAnswer": yesAnswer
+                    "onPressedAction": Utils.createCallBack(yesAnswer)
                 }
 
             ]
 
-            Item {
-                id: yesAnswer
-
-                function callback() {
+                function yesAnswer() {
                     Editor.solution.save()
                     dialogPopup.close()
                     Qt.quit()
                 }
-            }
 
-            Item {
-                id: noAnswer
 
-                function callback() {
+                function noAnswer() {
                     Qt.quit()
                 }
-            }
 
         }
         width: dialogPopupItem.widthValue
