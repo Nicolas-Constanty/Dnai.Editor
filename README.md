@@ -28,7 +28,6 @@ git submodule update --init --recursive
 - Run qmake
 - Go to Projects->Build->Add Build step->Make
 - add "install" to the make argument
-- 
 <p align="center">
   <img alt="Main view screenshot" src="https://raw.githubusercontent.com/Nicolas-Constanty/Dnai.Editor/master/images/qmakeinstall.png">
 </p>
