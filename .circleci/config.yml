@@ -1,0 +1,32 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: babiole/xenial_qt5_10:v1
+    steps:
+      - checkout
+      - run:
+          name: init_submodules
+          command: |
+            apt-get -qq update
+            apt-get -q -y install git
+            git submodule sync
+            git submodule update --init
+      - run:
+          name: init_qt_variables
+          command: |
+            QTDIR="/opt/qt510";
+            PATH="$QTDIR/bin:$PATH";
+      - run:
+          name: compile
+          command: |
+            export CMAKE_PREFIX_PATH=/opt/qt510/lib/cmake
+            chmod +x ./scripts/build.sh
+            ./scripts/build.sh
+
+
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
