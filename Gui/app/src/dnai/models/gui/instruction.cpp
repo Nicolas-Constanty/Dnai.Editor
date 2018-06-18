@@ -2,6 +2,7 @@
 #include "dnai/models/gui/instruction.h"
 #include "dnai/models/gui/declarable/variable.h"
 #include "dnai/models/entity.h"
+#include "dnai/utils/random_utils.h"
 
 namespace dnai
 {
@@ -10,21 +11,8 @@ namespace dnai
 		namespace gui
 		{
 			Instruction::Instruction(QObject* parent) : QObject(parent)
-			{
-				const auto getRandomString = [](int size)
-				{
-					const QString possibleCharacters(" !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~");
-
-					QString randomString;
-					for (auto i = 0; i< size; ++i)
-					{
-						auto index = qrand() % possibleCharacters.length();
-						auto nextChar = possibleCharacters.at(index);
-						randomString.append(nextChar);
-					}
-					return randomString;
-				};
-				m_data.guiUuid = QUuid::createUuidV5(QUuid::createUuid(), getRandomString(128));
+            {
+                m_data.guiUuid = utils::generateUid();
 			}
 
 			void Instruction::serialize(QJsonObject& obj) const

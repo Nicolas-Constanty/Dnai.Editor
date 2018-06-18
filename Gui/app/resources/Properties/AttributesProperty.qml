@@ -3,6 +3,7 @@ import QtQuick.Controls 2.2
 
 import DNAI 1.0
 import Dnai.FontAwesome 1.0
+import DNAI.Core 1.0
 
 import "../Style"
 
@@ -74,7 +75,7 @@ BaseProperty {
                 function getModelType()
                 {
                     if (__this__.model)
-                        return __this__.model.guiProperties.getAttribute(modelData);
+                        return Controller.getEntity(__this__.model.guiProperties.getAttribute(modelData)).id;
                     return 2;
                 }
 

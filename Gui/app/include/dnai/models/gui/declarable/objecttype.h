@@ -22,17 +22,16 @@ namespace dnai
 					explicit ObjectType() = default;
 
                     QStringList attributes();
-                    void addAttribute(QString const &name, quint32 type);
+                    void addAttribute(QString const &name, QUuid const &type);
                     void removeAttribute(QString const &name);
                     void renameAttribute(QString const &name, QString const &newName);
-                    Q_INVOKABLE quint32 getAttribute(QString name) const;
+                    Q_INVOKABLE QUuid getAttribute(QString name) const;
 
                 public:
                     QStringList functions() const;
-                    void addFunction(QString const &name);
-                    void removeFunction(QString const &name);
-                    void setFunctionStatus(QString const &name, bool member);
-                    bool hasFunction(QString const &name);
+                    void addFunction(QUuid const &funcUid);
+                    void removeFunction(QUuid const &funcUid);
+                    bool hasFunction(QUuid const &funcUid);
                     Q_INVOKABLE bool isFunctionMember(QString name) const;
 
                 signals:

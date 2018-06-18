@@ -127,7 +127,8 @@ SOURCES += \
     src/dnai/models/gui/iolink.cpp \
     src/dnai/models/gui/flowlink.cpp \
     src/dnai/core/globalhandler.cpp \
-    src/dnai/core/objecthandler.cpp
+    src/dnai/core/objecthandler.cpp \
+    src/dnai/utils/random_utils.cpp
 
 
 RESOURCES += qml.qrc
@@ -302,7 +303,8 @@ HEADERS += \
     include/dnai/models/gui/iolink.h \
     include/dnai/models/gui/flowlink.h \
     include/dnai/models/gui/data/flowlink.h \
-    include/dnai/core/globalhandler.h
+    include/dnai/core/globalhandler.h \
+    include/dnai/utils/random_utils.h
 
 
 #LIB

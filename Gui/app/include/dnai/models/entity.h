@@ -68,34 +68,7 @@ namespace dnai
 	        gui::data::EntityColumn m_data;
             Entity *m_parent;
         };
-		/*class EntityList : public QAbstractListModel
-		{
-			Q_OBJECT
 
-		public:
-			EntityList(QObject *parent = nullptr) : QAbstractListModel(parent), m_list(nullptr)
-			{
-			}
-			enum Roles {
-				Name = Qt::UserRole + 1,
-				Type
-			};
-			explicit EntityList(QList<models::Entity*> *);
-			int rowCount(const QModelIndex& parent) const override;
-			QVariant data(const QModelIndex& index, int role) const override;
-			void append(models::Entity *var);
-			void moveUp(int index);
-			void moveDown(int index);
-			void remove(const QString &name);
-
-			bool setData(const QModelIndex& index, const QVariant& value, int role) override;
-			bool setData(int index, const QVariant& value, int role);
-
-		private:
-			QList<models::Entity*> *m_list;
-			QHash<int, QByteArray> roleNames() const override;
-
-		};*/
         class Entity : public interfaces::IModel<Entity>
         {
             Q_OBJECT
@@ -115,11 +88,10 @@ namespace dnai
 			Q_PROPERTY(dnai::models::Entity *parentRef READ parentRef CONSTANT)
 			Q_PROPERTY(dnai::models::Property *editableProperty READ editableProperty WRITE setEditableProperty NOTIFY editablePropertyChanged)
             Q_PROPERTY(QVariant listColumn READ listColumn WRITE setListColumn NOTIFY listColumnChanged)
-        	//			Q_PROPERTY(EntityGUI *guiModel READ guiModel CONSTANT)
+            //			Q_PROPERTY(EntityGUI *guiModel READ guiModel CONSTANT)
 
         public:
-            explicit Entity();
-            explicit Entity(gcore::Entity *coremodel, Entity *parent = nullptr, interfaces::IEntity *guimodel = nullptr);
+            explicit Entity(gcore::Entity *coremodel = nullptr, Entity *parent = nullptr, interfaces::IEntity *guimodel = nullptr, QUuid const &guid = QUuid());
 
             virtual ~Entity();
         public:
@@ -143,6 +115,7 @@ namespace dnai
 			Entity *parentRef() const;
 			const QMap<QUuid, Column *> &columns();
 			Property *editableProperty() const;
+            QUuid const &guid() const;
 
         public:
 			void setIsRoot(bool isRoot);
@@ -201,6 +174,7 @@ namespace dnai
 	        QList<QObject *> m_columslist;
 			QVariant m_varcolumns;
 	        Property *m_editableProperty;
+            QUuid m_guid;
 
         };
 

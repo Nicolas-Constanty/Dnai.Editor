@@ -7,6 +7,7 @@
 #include "dnai/models/gui/entitylist.h"
 
 #include "dnai/core/handlermanager.h"
+#include "dnai/utils/random_utils.h"
 #include "core.h"
 
 namespace dnai
@@ -15,22 +16,11 @@ namespace dnai
 	{
 		//EntityList *Entity::m_entities = new EntityList(new QList<models::Entity *>());
 
-        Entity::Entity() : IModel(nullptr), m_dataCore(nullptr), m_dataGUI(nullptr)
-        {
-			const QList<QPair<QObject *, QString>> props = {
-				{ this, "name"},
-				{ this, "description"},
-				{ this, "visibility"},
-				{ this, "entityType"}
-			};
-            m_editableProperty = new Property(props);
-            QQmlEngine::setObjectOwnership(this, QQmlEngine::CppOwnership);
-        }
-
-        Entity::Entity(gcore::Entity *coremodel, Entity *parent, interfaces::IEntity *guimodel) :
+        Entity::Entity(gcore::Entity *coremodel, Entity *parent, interfaces::IEntity *guimodel, QUuid const &guid) :
             IModel(parent),
             m_dataCore(coremodel),
-            m_dataGUI(guimodel)
+            m_dataGUI(guimodel),
+            m_guid(guid)
         {
 			const QList<QPair<QObject *, QString>> props = {
 				{ this, "name" },
@@ -40,6 +30,8 @@ namespace dnai
 			};
 			m_editableProperty = new Property(props);
             QQmlEngine::setObjectOwnership(this, QQmlEngine::CppOwnership);
+            if (m_guid.isNull())
+                m_guid = utils::generateUid();
         }
 
 		Entity::~Entity()
@@ -148,8 +140,13 @@ namespace dnai
 
 		Property *Entity::editableProperty() const
 		{
-			return m_editableProperty;
-		}
+            return m_editableProperty;
+        }
+
+        const QUuid &Entity::guid() const
+        {
+            return m_guid;
+        }
 
 		Entity* Entity::parentRef() const
 		{
@@ -281,6 +278,7 @@ namespace dnai
 				ea.append(o);
 			}
 			obj["entities"] = ea;
+            obj["guid"] = m_guid.toString();
 		}
 
 		void Entity::_deserialize(const QJsonObject& obj)
@@ -340,6 +338,9 @@ namespace dnai
 					entity->setListIndex(m_columns.keys().first().toString());
 				appendChild(entity);
             }
+
+            if (obj.contains("guid"))
+                m_guid = obj["guid"].toString();
         }
 
 		int Entity::columnCount() const

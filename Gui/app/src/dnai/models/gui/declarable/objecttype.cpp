@@ -4,6 +4,7 @@
 
 #include "dnai/models/gui/declarable/objecttype.h"
 #include "dnai/exceptions/notimplemented.h"
+#include "dnai/core/handlermanager.h"
 
 namespace dnai
 {
@@ -18,10 +19,11 @@ namespace dnai
                     return m_data.attributes.keys();
                 }
 
-                void ObjectType::addAttribute(const QString &name, quint32 type)
+                void ObjectType::addAttribute(const QString &name, QUuid const &type)
                 {
-                    if (m_data.attributes.contains(name) && m_data.attributes[name] == type)
+                    if (m_data.attributes.contains(name) && type == m_data.attributes[name])
                         return;
+
                     m_data.attributes[name] = type;
                     emit attributesChanged(attributes());
                 }
@@ -41,46 +43,60 @@ namespace dnai
                     emit attributesChanged(attributes());
                 }
 
-                quint32 ObjectType::getAttribute(QString name) const
+                QUuid ObjectType::getAttribute(QString name) const
                 {
                     return m_data.attributes.value(name);
                 }
 
                 QStringList ObjectType::functions() const
                 {
-                    return m_data.functions.keys();
+                    QStringList toret;
+
+                    for (QUuid const &curr :  m_data.functions)
+                    {
+                        models::Entity *func = dnai::gcore::HandlerManager::Instance().getEntity(curr);
+
+                        if (func != nullptr)
+                            toret.append(func->name());
+                    }
+                    return toret;
                 }
 
-                void ObjectType::addFunction(const QString &name)
+                void ObjectType::addFunction(const QUuid &funcUid)
                 {
-                    if (m_data.functions.contains(name))
+                    if (m_data.functions.contains(funcUid))
                         return;
-                    m_data.functions[name] = false;
+                    m_data.functions.append(funcUid);
                     emit functionsChanged(functions());
                 }
 
-                void ObjectType::removeFunction(const QString &name)
+                void ObjectType::removeFunction(const QUuid &funcUid)
                 {
-                    if (!m_data.functions.contains(name))
+                    if (!m_data.functions.contains(funcUid))
                         return;
-                    m_data.functions.remove(name);
+                    m_data.functions.removeOne(funcUid);
                     emit functionsChanged(functions());
                 }
 
-                void ObjectType::setFunctionStatus(const QString &name, bool member)
+                bool ObjectType::hasFunction(const QUuid &funcUid)
                 {
-                    m_data.functions[name] = member;
-                    emit functionsChanged(functions());
-                }
-
-                bool ObjectType::hasFunction(const QString &name)
-                {
-                    return m_data.functions.contains(name);
+                    return m_data.functions.contains(funcUid);
                 }
 
                 bool ObjectType::isFunctionMember(QString name) const
                 {
-                    return m_data.functions[name];
+                    for (QUuid const &curr : m_data.functions)
+                    {
+                        models::Entity *func = dnai::gcore::HandlerManager::Instance().getEntity(curr);
+
+                        if (func != nullptr && func->name() == name)
+                        {
+                            models::Function *data = func->guiModel<models::Function>();
+
+                            return data->hasInput("this"); //add the type of the object
+                        }
+                    }
+                    return false;
                 }
 
                 void ObjectType::serialize(QJsonObject &obj) const
@@ -91,11 +107,11 @@ namespace dnai
                      * Attributes
                      */
                     QJsonArray attrs;
-                    for (std::pair<QString, quint32> const &curr : m_data.attributes.toStdMap()) {
+                    for (std::pair<QString, QUuid> const &curr : m_data.attributes.toStdMap()) {
                         QJsonObject currAttr;
 
                         currAttr["key"] = curr.first;
-                        currAttr["value"] = static_cast<qint32>(curr.second);
+                        currAttr["value"] = curr.second.toString();
                         attrs.append(currAttr);
                     }
                     obj["attributes"] = attrs;
@@ -104,13 +120,9 @@ namespace dnai
                      * Functions
                      */
                     QJsonArray funcs;
-                    for (std::pair<QString, bool> const &curr : m_data.functions.toStdMap())
+                    for (QUuid const &curr : m_data.functions)
                     {
-                        QJsonObject currFunc;
-
-                        currFunc["name"] = curr.first;
-                        currFunc["member"] = curr.second;
-                        funcs.append(currFunc);
+                        funcs.append(curr.toString());
                     }
                     obj["functions"] = funcs;
                 }
@@ -128,7 +140,7 @@ namespace dnai
 
                         for (QJsonValue const &curr : attrs)
                         {
-                            addAttribute(curr.toObject()["key"].toString(), curr.toObject()["value"].toInt());
+                            addAttribute(curr.toObject()["key"].toString(), curr.toObject()["value"].toString());
                         }
                     }
 
@@ -141,10 +153,7 @@ namespace dnai
 
                         for (QJsonValue const &curr : funcs)
                         {
-                            QJsonObject obj = curr.toObject();
-
-                            addFunction(obj["name"].toString());
-                            setFunctionStatus(obj["name"].toString(), obj["member"].toBool());
+                            m_data.functions.append(curr.toString());
                         }
                     }
                 }

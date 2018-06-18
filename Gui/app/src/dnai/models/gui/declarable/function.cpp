@@ -260,6 +260,23 @@ namespace dnai
                     return nullptr;
                 }
 
+                bool Function::hasInput(const QString &name, quint32 type) const
+                {
+                    for (models::Entity *curr : m_data.inputs)
+                    {
+                        if (curr->name() == name)
+                        {
+                            if (type != core::UNDEFINED_ID)
+                            {
+                                models::Variable *data = curr->guiModel<models::Variable>();
+                                return data->varType() == type;
+                            }
+                            return true;
+                        }
+                    }
+                    return false;
+                }
+
                 Instruction *Function::entryPoint() const
                 {
                     if (m_entryPoint.guid.isNull())

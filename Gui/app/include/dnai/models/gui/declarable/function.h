@@ -90,6 +90,8 @@ namespace dnai
                     models::gui::Instruction *getInstruction(quint32 uid) const;
                     models::gui::Instruction *getInstruction(const QUuid &guid) const;
 
+                    bool hasInput(QString const &name, quint32 type = core::UNDEFINED_ID) const;
+
                     models::gui::Instruction *entryPoint() const;
                     void setEntryPoint(QUuid uid);
 

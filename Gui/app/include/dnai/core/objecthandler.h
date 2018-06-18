@@ -27,7 +27,6 @@ namespace dnai
         public slots:
             void onEntityAdded(::core::EntityID id, models::Entity &entity);
             void onEntityRemoved(::core::EntityID id, models::Entity &entity);
-            void onParameterSet(models::Entity *func, QString paramName);
 
         public:
             Q_INVOKABLE void addAttribute(quint32 obj, QString name, quint32 type, qint32 visi, bool save = true);
@@ -40,7 +39,7 @@ namespace dnai
         private:
             bool isAttributePending(EntityID obj, QString const &name) const;
             void removePendingAttribute(EntityID obj, QString const &name);
-            void refreshPendingAttributes(EntityID id);
+            void refreshPendingAttributes(models::Entity &entity);
 
         private:
             void onAttributeAdded(EntityID obj, QString name, EntityID type, VISIBILITY visi);

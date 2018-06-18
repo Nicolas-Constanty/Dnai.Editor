@@ -25,8 +25,6 @@ namespace dnai
         {
             QObject::connect(&manager,  SIGNAL(entityAdded(::core::EntityID,models::Entity&)),
                              this,      SLOT(onEntityAdded(::core::EntityID,models::Entity&)));
-            QObject::connect(HandlerManager::Instance().function(), SIGNAL(parameterSet(models::Entity*,QString)),
-                             this,      SLOT(onParameterSet(models::Entity*,QString)));
             QObject::connect(&manager,  SIGNAL(entityRemoved(::core::EntityID,models::Entity&)),
                              this,      SLOT(onEntityRemoved(::core::EntityID,models::Entity&)));
 
@@ -53,10 +51,12 @@ namespace dnai
 
                 for (QString const &curr :  data->attributes())
                 {
-                    EntityID attrId = data->getAttribute(curr);
+                    QUuid attrId = data->getAttribute(curr);
 
                     if (manager.contains(attrId))
-                        addAttribute(id, curr, attrId, static_cast<qint32>(VISIBILITY::PUBLIC), false);
+                    {
+                        addAttribute(id, curr, manager.getEntity(attrId)->id(), static_cast<qint32>(VISIBILITY::PUBLIC), false);
+                    }
                     else
                         pending.append(curr);
                 }
@@ -69,9 +69,9 @@ namespace dnai
                 {
                     models::ObjectType *data = entity.parentItem()->guiModel<models::ObjectType>();
 
-                    if (!data->hasFunction(entity.name()))
+                    if (!data->hasFunction(entity.guid()))
                     {
-                        data->addFunction(entity.name());
+                        data->addFunction(entity.guid());
                     }
                 }
                 break;
@@ -80,38 +80,17 @@ namespace dnai
                 break;
             }
 
-            refreshPendingAttributes(id);
+            refreshPendingAttributes(entity);
         }
 
         void ObjectHandler::onEntityRemoved(EntityID id, models::Entity &entity)
         {
-            if (static_cast<ENTITY>(entity.entityType()) == ENTITY::VARIABLE
-                && static_cast<ENTITY>(entity.parentItem()->entityType()) == ENTITY::FUNCTION
-                && static_cast<ENTITY>(entity.parentItem()->parentItem()->entityType()) == ENTITY::OBJECT_TYPE
-                && entity.name() == "this")
-            {
-                models::ObjectType *data = entity.parentItem()->parentItem()->guiModel<models::ObjectType>();
-
-                data->setFunctionStatus(entity.parentItem()->name(), false);
-                emit functionSetAsStatic(entity.parentItem()->parentItem(), entity.parentItem()->name());
-            }
             if (static_cast<ENTITY>(entity.entityType()) == ENTITY::FUNCTION
                 && static_cast<ENTITY>(entity.parentItem()->entityType()) == ENTITY::OBJECT_TYPE)
             {
                 models::ObjectType *data = entity.parentItem()->guiModel<models::ObjectType>();
 
-                data->removeFunction(entity.name());
-            }
-        }
-
-        void ObjectHandler::onParameterSet(models::Entity *func, QString paramName)
-        {
-            if (static_cast<ENTITY>(func->parentItem()->entityType()) == ENTITY::OBJECT_TYPE && paramName == "this")
-            {
-                models::ObjectType *data = func->parentItem()->guiModel<models::ObjectType>();
-
-                data->setFunctionStatus(func->name(), true);
-                emit functionSetAsMember(func->parentItem(), func->name(), func->findByName(paramName));
+                data->removeFunction(entity.guid());
             }
         }
 
@@ -138,14 +117,14 @@ namespace dnai
 
             models::Entity &object = manager.getEntity(obj);
             models::ObjectType *data = object.guiModel<models::ObjectType>();
-            models::Entity &typ = manager.getEntity(data->getAttribute(name));
+            models::Entity *typ = manager.getEntity(data->getAttribute(name));
 
             commands::CommandManager::Instance()->exec(new commands::CoreCommand("Class.RemoveAttribute", save,
                 [&object, name]() {
                     core::object::removeAttribute(object.id(), name);
                 },
-                [&object, name, &typ]() {
-                    core::object::addAttribute(object.id(), name, typ.id(), VISIBILITY::PUBLIC);
+                [&object, name, typ]() {
+                    core::object::addAttribute(object.id(), name, typ->id(), VISIBILITY::PUBLIC);
                 }
             ));
         }
@@ -158,10 +137,10 @@ namespace dnai
 
             commands::CommandManager::Instance()->exec(new commands::CoreCommand("Class.RenameAttribute", save,
                 [&object, name, newName]() {
-                    core::object::renameAttribtue(object.id(), name, newName);
+                    core::object::renameAttribute(object.id(), name, newName);
                 },
                 [&object, name, newName]() {
-                    core::object::renameAttribtue(object.id(), newName, name);
+                    core::object::renameAttribute(object.id(), newName, name);
                 }
             ));
         }
@@ -170,7 +149,7 @@ namespace dnai
         {
             models::Entity &object = manager.getEntity(obj);
             models::ObjectType *data = object.guiModel<models::ObjectType>();
-            models::Entity &type = manager.getEntity(data->getAttribute(name));
+            models::Entity *type = manager.getEntity(data->getAttribute(name));
             models::Entity &newType = manager.getEntity(typ);
 
             commands::CommandManager::Instance()->exec(new commands::CoreCommand("Class.SetAttributeType", save,
@@ -180,9 +159,9 @@ namespace dnai
                     });
                     core::object::removeAttribute(object.id(), name);
                 },
-                [this, &object, &type, name]() {
-                    m_pendingAdd.push([&object, name, &type](){
-                        core::object::addAttribute(object.id(), name, type.id(), VISIBILITY::PUBLIC);
+                [this, &object, type, name]() {
+                    m_pendingAdd.push([&object, name, type](){
+                        core::object::addAttribute(object.id(), name, type->id(), VISIBILITY::PUBLIC);
                     });
                     core::object::removeAttribute(object.id(), name);
                 }
@@ -245,7 +224,7 @@ namespace dnai
             m_attributeAdded.erase(it);
         }
 
-        void ObjectHandler::refreshPendingAttributes(EntityID id)
+        void ObjectHandler::refreshPendingAttributes(models::Entity &entity)
         {
             //for each object in map
             for (typename AttrMap::iterator currObjectIt = m_pendingAttributes.begin(); currObjectIt != m_pendingAttributes.end();)
@@ -259,13 +238,13 @@ namespace dnai
                 for (QList<QString>::iterator attrIt = attrList.begin(); attrIt != attrList.end();)
                 {
                     QString &attr = *attrIt;
-                    EntityID attrId = data->getAttribute(attr);
+                    QUuid attrId = data->getAttribute(attr);
 
                     //if the attribute correspond to the entity added
-                    if (attrId == id)
+                    if (attrId == entity.guid())
                     {
                         //add it
-                        addAttribute(object->id(), attr, attrId, static_cast<qint32>(VISIBILITY::PUBLIC), false);
+                        addAttribute(object->id(), attr, entity.id(), static_cast<qint32>(VISIBILITY::PUBLIC), false);
                         attrIt = attrList.erase(attrIt);
                     }
                     else
@@ -303,7 +282,7 @@ namespace dnai
             }
             else
             {
-                data->addAttribute(name, type.id());
+                data->addAttribute(name, type.guid());
             }
             commands::CoreCommand::Success();
             emit attributeAdded(&object, name, &type, visi);

@@ -62,6 +62,10 @@ namespace dnai
             GlobalHandler &Global();
             ObjectHandler &Class();
 
+        public:
+            Q_INVOKABLE dnai::models::Entity *getEntity(QUuid guid);
+            models::Entity &getEntity(quint32 id);
+
         private:
             EntityManager m_manager;
 
