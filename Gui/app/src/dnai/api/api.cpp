@@ -14,7 +14,7 @@ bool api::refreshing_token = false;
 quint64 api::refreshing_delta = 3600;
 const QString api::settings_key = "/current/user";
 const http::Config api::http_config = {
-    "https://api.preprod.dnai.io/",
+    "https://api.dnai.io/",
       {},
       {
         [](http::Url *url) {

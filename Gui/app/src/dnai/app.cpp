@@ -59,10 +59,8 @@ namespace dnai
 
         api::get_download_object(softwares, "installer").map([this](http::Response response) -> http::Response {
             if (response.body.contains("currentVersion")) {
-                qDebug() << "enter ?";
                 setAPIVersion(response.body["currentVersion"].toString());
             }
-           // m_settings->setAPIVersion("0.0.30");
             qDebug() << DNAI_VERSION_RELEASE;
             qDebug() << Editor::instance().version();
             qDebug() << m_currentVersionAPI;
@@ -307,7 +305,7 @@ namespace dnai
   void App::onNotifyVersionChanged() {
       if (isNewVersionAvailable()) {
           Editor::instance().notifyInformation("Switch to new version " + m_currentVersionAPI, [this]() {
-              QDesktopServices::openUrl(QUrl("https://preprod.dnai.io/download/"));
+              QDesktopServices::openUrl(QUrl("https://dnai.io/download/"));
              // App::currentInstance()->processManager()->launchUpdater(Editor::instance().version(), m_currentVersionAPI);
           });
           /*Editor::instance().notifyError("Switch to new version " + m_currentVersionAPI, [this]() {
