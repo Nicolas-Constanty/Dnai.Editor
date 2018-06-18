@@ -42,13 +42,7 @@ git submodule update --init --recursive
 
 **Adrien Wery** - Website API and Dnai.Editor ([github](https://github.com/Adpa18))
 
-**Axel Vencatarredy** - Website and Website API ([github](https://github.com/lvezia))
-
 **Fernand Veyrier** - Dnai.Core (virtual machine for compilation) and Unity3D Plugin ([github](https://github.com/FernandVEYRIER))
-
-**Louis Vezia** - Website ([github](https://github.com/sabalt))
-
-**Mathieu Tavernier** - Website ([github](https://github.com/avencat))
 
 **Nicolas Constanty** - Dnai.Editor and Website design ([github](https://github.com/Nicolas-Constanty))
 
