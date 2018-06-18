@@ -8,7 +8,7 @@
 
 You can compile the software using Qt >= 5.10.1, but you will need our "Core" library to run it properly.
 
-Our Core library sources remain private, so you can find the [latest version of the Core here]().
+Our Core library sources remain private, so you can find the [latest version of the Core here](https://github.com/Nicolas-Constanty/Dnai.Editor/releases).
 
 <p align="center">
   <img alt="Main view screenshot" src="https://raw.githubusercontent.com/Nicolas-Constanty/Dnai.Editor/master/images/mainview.png">
@@ -33,7 +33,7 @@ git submodule update --init --recursive
 </p>
 
 - Build Dnai project
-- Get the Core library from [here]()
+- Get the Core library from [here](https://github.com/Nicolas-Constanty/Dnai.Editor/releases)
 - Put binary files of the Server inside [YOUR BUILD DNAI FOLDER]/app
 - Put binary files of the Core inside [YOUR BUILD DNAI FOLDER]/app/Core
 - Press Run on Qt
