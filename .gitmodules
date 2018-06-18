@@ -1,0 +1,24 @@
+[submodule "Gui/lib/levent_client"]
+	path = Gui/lib/levent_client
+	url = https://github.com/Nicolas-Constanty/Dnai.SubModules.Libs.Gui.levent_client
+[submodule "Gui/lib/lcore_client"]
+	path = Gui/lib/lcore_client
+	url = https://github.com/Nicolas-Constanty/Dnai.SubModules.Libs.Gui.lcore_client
+[submodule "Gui/lib/lmactoasts"]
+	path = Gui/lib/lmactoasts
+	url = https://github.com/Nicolas-Constanty/Dnai.SubModules.Libs.Gui.Toasts.lmac.git
+[submodule "Gui/lib/lcerealization/repository"]
+	path = Gui/lib/lcerealization/repository
+	url = https://github.com/GasparQ/Cerealization.git
+[submodule "Gui/lib/lwintoast"]
+	path = Gui/lib/lwintoast
+	url = https://github.com/Nicolas-Constanty/Dnai.SubModules.Libs.Gui.Toasts.lwin.git
+[submodule "Gui/plugins/Controls"]
+	path = Gui/plugins/Controls
+	url = https://github.com/Nicolas-Constanty/Dnai.SubModules.Libs.QtPlugins.Controls.git
+[submodule "Gui/plugins/FontAwesome"]
+	path = Gui/plugins/FontAwesome
+	url = https://github.com/Nicolas-Constanty/Dnai.SubModules.Libs.QtPlugins.FontAwesome.git
+[submodule "Gui/plugins/Settings"]
+	path = Gui/plugins/Settings
+	url = https://github.com/Nicolas-Constanty/Dnai.SubModules.Libs.QtPlugins.Settings.git

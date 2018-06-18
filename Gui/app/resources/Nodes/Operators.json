@@ -1,0 +1,470 @@
+﻿{
+    "categories": {
+        "operators": {
+            "outputs": 1,
+            "output_names": ["result"],
+            "categories": {
+                "binaryOperator": {
+                    "inputs": 2,
+                    "input_names": ["LeftOperand", "RightOperand"],
+                    "input_diplay_names": ["Value 1", "Value 2"],
+                    "categories": {
+                        "logical": {
+                            "categories": {
+                                "int": {
+                                    "type": 2,
+                                    "categories": {
+                                        "Different": {
+                                            "name": "!=",
+                                            "description": "",
+                                            "instruction_id": 2,
+                                            "construction": [2, 2]
+                                        },
+                                        "Equal": {
+                                            "name": "==",
+                                            "description": "",
+                                            "instruction_id": 3,
+                                            "construction": [2, 2]
+                                        },
+                                        "Greater or equal than": {
+                                            "name": ">=",
+                                            "description": "",
+                                            "instruction_id": 5,
+                                            "construction": [2, 2]
+                                        },
+                                        "Greater than": {
+                                            "name": ">",
+                                            "description": "",
+                                            "instruction_id": 4,
+                                            "construction": [2, 2]
+                                        },
+                                        "Less or equal than": {
+                                            "name": "<=",
+                                            "description": "",
+                                            "instruction_id": 7,
+                                            "construction": [2, 2]
+                                        },
+                                        "Less than": {
+                                            "name": "<",
+                                            "description": "",
+                                            "instruction_id": 6,
+                                            "construction": [2, 2]
+                                        }
+                                    }
+                                },
+                                "float": {
+                                    "type": 3,
+                                    "categories": {
+                                        "Different": {
+                                            "name": "!=",
+                                            "description": "",
+                                            "instruction_id": 2,
+                                            "construction": [3, 3]
+                                        },
+                                        "Equal": {
+                                            "name": "==",
+                                            "description": "",
+                                            "instruction_id": 3,
+                                            "construction": [3, 3]
+                                        },
+                                        "Greater or equal than": {
+                                            "name": ">=",
+                                            "description": "",
+                                            "instruction_id": 5,
+                                            "construction": [3, 3]
+                                        },
+                                        "Greater than": {
+                                            "name": ">",
+                                            "description": "",
+                                            "instruction_id": 4,
+                                            "construction": [3, 3]
+                                        },
+                                        "Less or equal than": {
+                                            "name": "<=",
+                                            "description": "",
+                                            "instruction_id": 7,
+                                            "construction": [3, 3]
+                                        },
+                                        "Less than": {
+                                            "name": "<",
+                                            "description": "",
+                                            "instruction_id": 6,
+                                            "construction": [3, 3]
+                                        }
+                                    }
+                                },
+                                "bool": {
+                                    "type": 1,
+                                    "categories": {
+                                        "And": {
+                                            "name": "&&",
+                                            "description": "",
+                                            "instruction_id": 0,
+                                            "construction": []
+                                        },
+                                        "Or": {
+                                            "name": "||",
+                                            "description": "",
+                                            "instruction_id": 1,
+                                            "construction": []
+                                        },
+                                        "Different": {
+                                            "name": "!=",
+                                            "description": "",
+                                            "instruction_id": 2,
+                                            "construction": [1, 1]
+                                        },
+                                        "Equal": {
+                                            "name": "==",
+                                            "description": "",
+                                            "instruction_id": 3,
+                                            "construction": [1, 1]
+                                        }
+                                    }
+                                },
+                                "char": {
+                                    "type": 4,
+                                    "categories": {
+                                        "Different": {
+                                            "name": "!=",
+                                            "description": "",
+                                            "instruction_id": 2,
+                                            "construction": [4, 4]
+                                        },
+                                        "Equal": {
+                                            "name": "==",
+                                            "description": "",
+                                            "instruction_id": 3,
+                                            "construction": [4, 4]
+                                        },
+                                        "Greater or equal than": {
+                                            "name": ">=",
+                                            "description": "",
+                                            "instruction_id": 5,
+                                            "construction": [4, 4]
+                                        },
+                                        "Greater than": {
+                                            "name": ">",
+                                            "description": "",
+                                            "instruction_id": 4,
+                                            "construction": [4, 4]
+                                        },
+                                        "Less or equal than": {
+                                            "name": "<=",
+                                            "description": "",
+                                            "instruction_id": 7,
+                                            "construction": [4, 4]
+                                        },
+                                        "Less than": {
+                                            "name": "<",
+                                            "description": "",
+                                            "instruction_id": 6,
+                                            "construction": [4, 4]
+                                        }
+                                    }
+                                },
+                                "string": {
+                                    "type": 5,
+                                    "categories": {
+                                        "Different": {
+                                            "name": "!=",
+                                            "description": "",
+                                            "instruction_id": 2,
+                                            "construction": [5, 5]
+                                        },
+                                        "Equal": {
+                                            "name": "==",
+                                            "description": "",
+                                            "instruction_id": 3,
+                                            "construction": [5, 5]
+                                        },
+                                        "Greater or equal than": {
+                                            "name": ">=",
+                                            "description": "",
+                                            "instruction_id": 5,
+                                            "construction": [5, 5]
+                                        },
+                                        "Greater than": {
+                                            "name": ">",
+                                            "description": "",
+                                            "instruction_id": 4,
+                                            "construction": [5, 5]
+                                        },
+                                        "Less or equal than": {
+                                            "name": "<=",
+                                            "description": "",
+                                            "instruction_id": 7,
+                                            "construction": [5, 5]
+                                        },
+                                        "Less than": {
+                                            "name": "<",
+                                            "description": "",
+                                            "instruction_id": 6,
+                                            "construction": [5, 5]
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "others": {
+                            "categories": {
+                                "int": {
+                                    "type": 2,
+                                    "categories": {
+                                        "Add": {
+                                            "name": "add",
+                                            "description": "Add input 1 with input 2 and output res",
+                                            "icon": "+",
+                                            "instruction_id": 12,
+                                            "construction": [2, 2, 2]
+                                        },
+                                        "Binary And": {
+                                            "name": "&",
+                                            "description": "Binary And",
+                                            "icon": "&",
+                                            "instruction_id": 9,
+                                            "construction": [2, 2, 2]
+                                        },
+                                        "Binary Or": {
+                                            "name": "|",
+                                            "description": "Binary Or",
+                                            "icon": "|",
+                                            "instruction_id": 10,
+                                            "construction": [2, 2, 2]
+                                        },
+                                        "Divide": {
+                                            "name": "/",
+                                            "description": "Divide input 1 by input 2",
+                                            "icon": "/",
+                                            "instruction_id": 14,
+                                            "construction": [2, 2, 2]
+                                        },
+                                        "Left shift": {
+                                            "name": "<<",
+                                            "description": "Binary left shift",
+                                            "icon": "<<",
+                                            "instruction_id": 17,
+                                            "construction": [2, 2, 2]
+                                        },
+                                        "Modulo": {
+                                            "name": "%",
+                                            "description": "Modulo input 1 by input2",
+                                            "icon": "%",
+                                            "instruction_id": 16,
+                                            "construction": [2, 2, 2]
+                                        },
+                                        "Multiplicate": {
+                                            "name": "*",
+                                            "description": "Multiplicate input 1 by input 2",
+                                            "icon": "x",
+                                            "instruction_id": 15,
+                                            "construction": [2, 2, 2]
+                                        },
+                                        "Right shift": {
+                                            "name": ">>",
+                                            "description": "Binary right shift",
+                                            "instruction_id": 18,
+                                            "construction": [2, 2, 2]
+                                        },
+                                        "Substract": {
+                                            "name": "-",
+                                            "description": "Substract input 1 with input 2",
+                                            "icon": "",
+                                            "instruction_id": 13,
+                                            "construction": [2, 2, 2]
+                                        },
+                                        "Xor": {
+                                            "name": "\\^",
+                                            "description": "Binary xor",
+                                            "instruction_id": 11,
+                                            "construction": [2, 2, 2]
+                                        }
+                                    }
+                                },
+                                "float": {
+                                    "type": 3,
+                                    "categories": {
+                                        "Add": {
+                                            "name": "add",
+                                            "description": "Add input 1 with input 2 and output res",
+                                            "icon": "",
+                                            "instruction_id": 12,
+                                            "construction": [3, 3, 3]
+                                        },
+                                        "Divide": {
+                                            "name": "/",
+                                            "description": "Divide input 1 by input 2",
+                                            "icon": "/",
+                                            "instruction_id": 14,
+                                            "construction": [3, 3, 3]
+                                        },
+                                        "Multiplicate": {
+                                            "name": "*",
+                                            "description": "Multiplicate input 1 by input 2",
+                                            "icon": "x",
+                                            "instruction_id": 15,
+                                            "construction": [3, 3, 3]
+                                        },
+                                        "Substract": {
+                                            "name": "-",
+                                            "description": "Substract input 1 with input 2",
+                                            "icon": "",
+                                            "instruction_id": 13,
+                                            "construction": [3, 3, 3]
+                                        }
+                                    }
+                                },
+                                "bool": {
+                                    "type": 1,
+                                    "categories": {
+                                        "Binary And": {
+                                            "name": "&",
+                                            "description": "Binary And",
+                                            "icon": "&",
+                                            "instruction_id": 9,
+                                            "construction": [1, 1, 1]
+                                        },
+                                        "Binary Or": {
+                                            "name": "|",
+                                            "description": "Binary Or",
+                                            "icon": "|",
+                                            "instruction_id": 10,
+                                            "construction": [1, 1, 1]
+                                        }
+                                    }
+                                },
+                                "char": {
+                                    "type": 4,
+                                    "categories": {
+                                        "Add": {
+                                            "name": "add",
+                                            "description": "Add input 1 with input 2 and output res",
+                                            "icon": "",
+                                            "instruction_id": 12,
+                                            "construction": [4, 4, 4]
+                                        },
+                                        "Substract": {
+                                            "name": "-",
+                                            "description": "Substract input 1 with input 2",
+                                            "icon": "",
+                                            "instruction_id": 13,
+                                            "construction": [4, 4, 4]
+                                        }
+                                    }
+                                },
+                                "string": {
+                                    "type": 5,
+                                    "categories": {
+                                        "Access": {
+                                            "name": "Access",
+                                            "description": "",
+                                            "instruction_id": 8,
+                                            "construction": [5, 5, 5]
+                                        },
+                                        "Add": {
+                                            "name": "add",
+                                            "description": "Add input 1 with input 2 and output res",
+                                            "icon": "",
+                                            "instruction_id": 12,
+                                            "construction": [5, 5, 5]
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "unaryOperator": {
+                    "inputs": 1,
+                    "input_names": ["Operand"],
+                    "input_diplay_names": ["Value 1"],
+                    "categories": {
+                        "int": {
+                            "type": 2,
+                            "categories": {
+                                "Binary no": {
+                                    "name": "~",
+                                    "description": "Binary no",
+                                    "instruction_id": 19,
+                                    "construction": [2, 2]
+                                },
+                                "Logical no": {
+                                    "name": "!",
+                                    "description": "Logical no",
+                                    "instruction_id": 20,
+                                    "construction": [2]
+                                },
+                                "Reverse": {
+                                    "name": "-1",
+                                    "description": "Multiplicate by -1",
+                                    "instruction_id": 21,
+                                    "construction": [2, 2]
+                                }
+                            }
+                        },
+                        "float": {
+                            "type": 3,
+                            "categories": {
+                                "Reverse": {
+                                    "name": "-1",
+                                    "description": "Multiplicate by -1",
+                                    "instruction_id": 21,
+                                    "construction": [3, 3]
+                                }
+                            }
+                        },
+                        "bool": {
+                            "type": 1,
+                            "categories": {
+                                "Binary no": {
+                                    "name": "~",
+                                    "description": "Binary no",
+                                    "instruction_id": 19,
+                                    "construction": [1, 1]
+                                },
+                                "Logical no": {
+                                    "name": "!",
+                                    "description": "Logical no",
+                                    "instruction_id": 20,
+                                    "construction": [1]
+                                }
+                            }
+                        },
+                        "char": {
+                            "type": 4,
+                            "categories": {
+                                "Reverse": {
+                                    "name": "-1",
+                                    "description": "Multiplicate by -1",
+                                    "instruction_id": 21,
+                                    "construction": [4, 4]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "Statements": {
+            "categories" : {
+                "If": {
+                    "type": 1,
+                    "inputs": 1,
+                    "name": "if",
+                    "description": "",
+                    "instruction_id": 26,
+                    "construction": [1],
+                    "input_names": ["condition"],
+                    "in": 1,
+                    "out": 2
+                },
+                "While": {
+                    "name": "while",
+                    "description": "",
+                    "instruction_id": 28,
+                    "construction": [1]
+                }
+            }
+        }
+    }
+}

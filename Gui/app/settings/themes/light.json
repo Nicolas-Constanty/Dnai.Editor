@@ -1,0 +1,227 @@
+{
+    "transparencies": {
+        "100": "#ff",
+        "95": "#F2",
+        "90": "#E6",
+        "85": "#D9",
+        "80": "#CC",
+        "75": "#BF",
+        "70": "#B3",
+        "65": "#A6",
+        "60": "#99",
+        "55": "#8C",
+        "50": "#80",
+        "45": "#73",
+        "40": "#66",
+        "35": "#59",
+        "30": "#4D",
+        "25": "#40",
+        "20": "#33",
+        "15": "#26",
+        "10": "#1A",
+        "5": "#0D",
+        "0": "#00"
+    },
+    "colors": {
+        "background": {
+            "base": "#f5f5f5",
+            "dark": "#f0f0f0",
+            "light": "#ffffff",
+            "color1": "#847aff",
+            "color2": "#35334a",
+            "color3": "#535364",
+            "color4": "#d8c9ff",
+            "color5": "#ffffff"
+        },
+        "accent": {
+            "green": "#63bb8c",
+            "yellow": "#e8d685",
+            "blue": "#639dbd",
+            "red": "#e88885",
+            "purple": "#db96ff"
+        }
+    },
+    "border": {
+        "color": "#707070",
+        "width": 1
+    },
+    "entities": {
+        "0": {
+            "color": "#00897B",
+            "icon": "context.png"
+        },
+        "5": {
+            "color": "#039BE5",
+            "icon": "class.png"
+        },
+        "4": {
+            "color": "#00D098",
+            "icon": "enum.png"
+        },
+        "2": {
+            "color": "#8E24AA",
+            "icon": "function.png"
+        },
+        "1": {
+            "color": "#FB8C00",
+            "icon": "variable.png"
+        }
+    },
+    "menu": {
+        "background": {
+            "color": "#424242",
+            "darkColor": "#212121",
+            "lightColor": "#616161"
+        },
+        "border": {
+            "color": "#757575",
+            "width": 1
+        }
+    },
+    "shadowColor": "#212121",
+    "font": {
+        "family": ":/resources/fonts/segoeui.ttf",
+        "pixelSize": 10
+    },
+    "text": {
+        "color": "#000000",
+        "darkColor": "#000000",
+        "disableColor": "#60FFFFFF",
+        "lightColor": "#FFFFFF",
+        "linkColor": "#000000",
+        "selectionColor": "#000000",
+        "accentColor": "#FF7043",
+        "errorColor": "#E88885",
+        "errorSelectedColor": "#FF3232"
+    },
+    "canvas": {
+        "background": "#4F4F4F",
+        "grid": {
+            "step": 15,
+            "accentStep": 150,
+            "color": "#656565",
+            "selectColor": "#606060",
+            "accentColor": "#000000"
+        }
+    },
+    "nodes": {
+        "borderWidth": 2,
+        "genericNode": {
+            "color": "#000000",
+            "border": {
+                "color": "#29B6F6",
+                "width": 2
+            }
+        },
+        "intNode": {
+            "color": "#000000",
+            "border": {
+                "color": "#9CCC65",
+                "width": 2
+            }
+        },
+        "stringNode": {
+            "color": "#000000",
+            "border": {
+                "color": "#EC407A",
+                "width": 2
+            }
+        },
+        "boolNode": {
+            "color": "#000000",
+            "border": {
+                "color": "#FFA726",
+                "width": 2
+            }
+        },
+        "functionNode": {
+            "color": "#000000",
+            "border": {
+                "color": "#AB47BC",
+                "width": 2
+            }
+        },
+        "classNode": {
+            "color": "#000000",
+            "border": {
+                "color": "#3F51B5",
+                "width": 2
+            }
+        },
+        "listNode": {
+            "color": "#000000",
+            "border": {
+                "color": "#8D6E63",
+                "width": 2
+            }
+        }
+    },
+    "declarationView": {
+        "itemSize": 50,
+        "background": "#212121",
+        "border": {
+            "bolor": "#E0E0E0",
+            "width": 2
+        },
+        "radius": 1,
+        "declContext": {
+            "radius": 2,
+            "background": "#4CAF50",
+            "border": {
+                "bolor": "#A5D6A7",
+                "width": 2
+            }
+        },
+        "declClass": {
+            "radius": 25,
+            "background": "#03A9F4",
+            "border": {
+                "bolor": "#81D4FA",
+                "width": 2
+            }
+        },
+        "declFunction": {
+            "radius": 2,
+            "background": "#9C27B0",
+            "border": {
+                "bolor": "#E1BEE7",
+                "width": 2
+            }
+        },
+        "declVariable": {
+            "radius": 2,
+            "background": "#FF9800",
+            "border": {
+                "bolor": "#FFE0B2",
+                "width": 2
+            }
+        }
+    },
+    "button": {
+        "color": "#847AFF",
+        "hovercolor": "#8E84FF",
+        "text": {
+            "color": "#FFFFFF",
+            "hovercolor": "#FFFFFF"
+        }
+    },
+    "modal": {
+        "color": "#252526",
+        "border": {
+            "color": "#BCBCBC",
+            "width": 1
+        }
+    },
+    "editableText": {
+        "color": {
+            "border": {
+                "select": "#847AFF",
+                "deselect": "#4E4E5E"
+            },
+            "background": {
+                "select": "#333232",
+                "deselect": "#252526"
+            }
+        }
+    }
+}
