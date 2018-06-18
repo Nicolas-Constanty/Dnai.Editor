@@ -126,27 +126,67 @@ ApplicationWindow {
 
     }
 
+    Modal {
+        id: dialogPopup
+        x: _root.width / 2 - dialogPopupItem.width / 2
+        y: _root.height / 2 - dialogPopupItem.height / 2
+        contentItem: DialogPopup {
+            id: dialogPopupItem
+            anchors.fill: parent
+            popup: dialogPopup
+            title: "Warning"
+            description: "Do you want to save before leaving ?"
+            icon: "\uf071"
+            iconColor: AppSettings.theme["colors"]["accent"]["yellow"]
 
-    /*Dialog {
-        id: messageDialog
-        title: "May I have your attention please"
-     //   text: "It's so cool that you are using Qt Quick."
-        onAccepted: {
-            console.log("And of course you could only agree.")
-            Qt.quit()
+            buttonModel: [{
+              "text": "No",
+              "hoverColor": AppSettings.theme["colors"]["background"]["color5"],
+              "notHoverColor": AppSettings.theme["colors"]["background"]["color5"],
+              "colorRect": AppSettings.theme["colors"]["background"]["base"],
+              "hoverColorRect": AppSettings.theme["colors"]["background"]["light"],
+              "itemAnswer": noAnswer
+            }, {
+                    "text": "Yes",
+                    "hoverColor": AppSettings.theme["button"]["text"]["hovercolor"],
+                    "notHoverColor": AppSettings.theme["button"]["text"]["color"],
+                    "colorRect": AppSettings.theme["button"]["color"],
+                    "hoverColorRect": AppSettings.theme["button"]["hovercolor"],
+                    "itemAnswer": yesAnswer
+                }
+
+            ]
+
+            Item {
+                id: yesAnswer
+
+                function callback() {
+                    Editor.solution.save()
+                    dialogPopup.close()
+                    Qt.quit()
+                }
+            }
+
+            Item {
+                id: noAnswer
+
+                function callback() {
+                    Qt.quit()
+                }
+            }
+
         }
-       // icon: StandardIcon.Warning
-       // Component.onCompleted: visible = true
-    }*/
+        width: dialogPopupItem.widthValue
+        height: dialogPopupItem.heightValue
+    }
 
 
 
     onClosing: {
-//        console.log('alo ??')
         close.accepted = true
-        if (Editor.solution.isProjectsSaved() === false) {
-           // messageDialog.visible = true
-           // close.accepted = false
+        if (Editor.solution.isProjectsSaved() == false) {
+            dialogPopup.open()
+            close.accepted = false
         }
 
     }
