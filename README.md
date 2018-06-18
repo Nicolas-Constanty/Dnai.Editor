@@ -41,4 +41,4 @@ git submodule update --init --recursive
 
 ## License
 
-Licensed under the [(L)GPL v2/3 ](LICENSE.md) License, with Qt Open source licence.
+Licensed under the [(L)GPL v2/3 ](https://github.com/Nicolas-Constanty/Dnai.Editor/blob/master/LICENSE) License, with Qt Open source licence.
