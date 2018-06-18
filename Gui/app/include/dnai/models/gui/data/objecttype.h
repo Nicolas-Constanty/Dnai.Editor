@@ -21,14 +21,7 @@ namespace dnai
 				struct ObjectType : Entity
 				{
                     QMap<QString, quint32> attributes;
-                    //QList<QUuid> member_functions;
-                    /*QList<declarable::Variable*> variables;
-					QList<declarable::Function*> functions;
-					QList<declarable::Variable*> attributes;
-					QList<declarable::Function*> methods;
-					QList<declarable::ObjectType*> classes;
-					QList<declarable::EnumType*> enums;
-                    QList<declarable::ListType*> listobjs;*/
+                    QMap<QString, bool> functions;
 				};
 			}
 		}

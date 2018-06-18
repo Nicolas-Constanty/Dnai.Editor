@@ -454,8 +454,8 @@ namespace dnai
         }
         else if (declared->coreModel()->entityType() == ENTITY::OBJECT_TYPE)
         {
-            contextMenuModel()->appendObject(declared);
-            dnai::models::gui::declarable::Variable::varTypes()->append(declared->name(), declared->id());
+            /*contextMenuModel()->appendObject(declared);
+            dnai::models::gui::declarable::Variable::varTypes()->append(declared->name(), declared->id());*/
         }
     }
 

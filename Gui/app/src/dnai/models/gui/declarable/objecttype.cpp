@@ -46,6 +46,39 @@ namespace dnai
                     return m_data.attributes.value(name);
                 }
 
+                QList<QVariant> ObjectType::functions() const
+                {
+                    QList<QVariant> toret;
+
+                    for (std::pair<QString, bool> const &curr : m_data.functions.toStdMap())
+                    {
+                        toret.append(QVariant::fromValue(QPair<QString, bool>(curr.first, curr.second)));
+                    }
+                    return toret;
+                }
+
+                void ObjectType::addFunction(const QString &name)
+                {
+                    if (m_data.functions.contains(name))
+                        return;
+                    m_data.functions[name] = false;
+                    emit functionsChanged(functions());
+                }
+
+                void ObjectType::removeFunction(const QString &name)
+                {
+                    if (!m_data.functions.contains(name))
+                        return;
+                    m_data.functions.remove(name);
+                    emit functionsChanged(functions());
+                }
+
+                void ObjectType::setFunctionStatus(const QString &name, bool member)
+                {
+                    m_data.functions[name] = member;
+                    emit functionsChanged(functions());
+                }
+
                 void ObjectType::serialize(QJsonObject &obj) const
                 {
                     Entity::serialize(obj);

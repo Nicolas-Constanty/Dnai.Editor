@@ -16,6 +16,7 @@ namespace dnai
 				{
 					Q_OBJECT
                     Q_PROPERTY(QStringList attributes READ attributes NOTIFY attributesChanged)
+                    Q_PROPERTY(QList<QVariant> functions READ functions NOTIFY functionsChanged)
 
 				public:
 					explicit ObjectType() = default;
@@ -26,8 +27,15 @@ namespace dnai
                     void renameAttribute(QString const &name, QString const &newName);
                     Q_INVOKABLE quint32 getAttribute(QString name) const;
 
+                public:
+                    QList<QVariant> functions() const;
+                    void addFunction(QString const &name);
+                    void removeFunction(QString const &name);
+                    void setFunctionStatus(QString const &name, bool member);
+
                 signals:
                     void attributesChanged(QStringList attrs);
+                    void functionsChanged(QList<QVariant> functions);
 
                 public:
 					//Implementation of ISerializable

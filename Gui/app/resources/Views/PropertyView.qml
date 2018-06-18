@@ -247,7 +247,7 @@ Rectangle {
                         }
                         else if (val === CoreEnums.OBJECT_TYPE)
                         {
-                            var attrsView = createProperty("resources/Properties/AttributesProperty.qml", {
+                            /*var attrsView = createProperty("resources/Properties/AttributesProperty.qml", {
                                 "model": md,
                                 "name" : "Attributes"
                             });
@@ -264,6 +264,15 @@ Rectangle {
                             attrsView.changeType.connect(function (name, vartype) {
                                 Controller.Class.setAttributeType(md.id, name, vartype);
                             });
+
+                            var funcView = createProperty("resources/Properties/ClassFunctionsProperty.qml",
+                                                          {
+                                                              "model": md,
+                                                              "name": "Functions"
+                                                          });
+                            funcView.setFunctionStatus.connect(function(name, member){
+                                console.log("Set function ", name, " status to ", member ? "member" : "static");
+                            });*/
                         }
                     }
                 }
