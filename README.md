@@ -38,6 +38,26 @@ git submodule update --init --recursive
 - Put binary files of the Core inside [YOUR BUILD DNAI FOLDER]/app/Core
 - Press Run on Qt
 
+## Authors
+
+**Adrien Wery** - Website API and Dnai.Editor ([github](https://github.com/Adpa18))
+
+**Axel Vencatarredy** - Website and Website API ([github](https://github.com/lvezia))
+
+**Fernand Veyrier** - Dnai.Core (virtual machine for compilation) and Unity3D Plugin ([github](https://github.com/FernandVEYRIER))
+
+**Louis Vezia** - Website ([github](https://github.com/sabalt))
+
+**Mathieu Tavernier** - Website ([github](https://github.com/avencat))
+
+**Nicolas Constanty** - Dnai.Editor and Website design ([github](https://github.com/Nicolas-Constanty))
+
+**Quentin Gasparoto** - Dnai.Core (virtual machine for compilation) and Dnai.Editor ([github](https://github.com/GasparQ))
+
+**Victor Gouet** - Dnai.Server, Deploiement Windows/Mac and Dnai.Editor ([github](https://github.com/Gouet))
+
+See also the list of [contributors](https://github.com/Nicolas-Constanty/Dnai.Editor/graphs/contributors) who participated in this project.
+
 ## License
 
 Licensed under the [(L)GPL v2/3 ](https://github.com/Nicolas-Constanty/Dnai.Editor/blob/master/LICENSE) License, with Qt Open source licence.
