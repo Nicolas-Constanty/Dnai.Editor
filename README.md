@@ -1,97 +1,32 @@
-# Duly-GUI
-## MacOS X - Qt 5.10.1 ![images/32x32macosx.png](https://github.com/Nicolas-Constanty/Duly-GUI/blob/develop/images/32x32macosx.png?raw=true)
-[![Build Status](https://travis-ci.com/Nicolas-Constanty/Duly-GUI.svg?token=nS1bLRrsrvVj2arQnySY&branch=develop)](https://travis-ci.com/Nicolas-Constanty/Duly-GUI)
+<p align="center">
+  <img alt="Main view screenshot" src="https://raw.githubusercontent.com/Nicolas-Constanty/Dnai.Editor/master/images/mainview.png">
+</p>
 
+## Compilation
 
-## Ubuntu 16.04 - Qt 5.10 ![images/32x32ubuntu.png](https://github.com/Nicolas-Constanty/Duly-GUI/blob/develop/images/32x32ubuntu.png?raw=true)
-[![Develop](https://circleci.com/gh/Nicolas-Constanty/Duly-GUI/tree/develop.svg?style=shield&circle-token=8efe136465c22c6ebdc99f33f34bb7e702539ec9)](https://circleci.com/gh/Nicolas-Constanty/Duly-GUI/tree/develop)
+- Get the repository content
+```
+git clone https://github.com/Nicolas-Constanty/Dnai.Editor.git
+git submodule update --init --recursive
+```
+- Open Dnai.Editor/Server/Server.pro
+- Run qmake
+- Build the Server project
+- Open Dnai.Editor/Gui/DNAI.pro with Qt >= 5.10.1
+- Run qmake
+- Go to Projects->Build->Add Build step->Make
+- add "install" to the make argument
+- 
+<p align="center">
+  <img alt="Main view screenshot" src="https://raw.githubusercontent.com/Nicolas-Constanty/Dnai.Editor/master/images/qmakeinstall.png">
+</p>
 
-## Features status
+- Build Dnai project
+- Get the Core library from [here]()
+- Put binary files of the Server inside [YOUR BUILD DNAI FOLDER]/app
+- Put binary files of the Core inside [YOUR BUILD DNAI FOLDER]/app/Core
+- Press Run on Qt
 
-### Settings
-- [x] Language Panel
-- [x] Theme Panel
-- [x] Node Panel
-- [x] Update in realtime
+## License
 
-### Build
-- [x] Build button
-- [ ] Call core
-
-
-### Solution
-- [x] Save
-- [x] Load
-- [x] Open
-- [x] Create
-- [ ] Save as
-- [x] Close
-
-### Project
-- [x] Save
-- [x] Load
-- [x] Open
-- [x] Create
-- [ ] Save as
-- [x] Close
-
-### Node View
-- [x] Grid system
-- [x] Move
-- [x] Zoom in mouse direction
-- [x] Display zoom level
-
-### Node
-- [x] Create
-- [ ] Reverse Create
-- [x] Move
-- [x] Reverse Move
-- [x] Zoom
-- [x] Link
-- [ ] Reverse Link
-- [x] Unlink
-- [ ] Reverse Unlink
-- [ ] Link (Core)
-- [ ] Unlink (Core)
-
-### Declaration View
-
-#### Entity (Namespace, Object, Function, Variable)
-- [x] Create Entity
-- [x] Remove Entity
-- [x] Add Entity
-- [ ] Move Entity
-- [ ] Edit Entity
-- [ ] Declare Entity (Core)
-- [ ] Delete Entity (Core)
-- [ ] Revert possible
-
-#### Column
-  
-- [x] Create Column
-- [ ] Merge Column
-- [ ] Remove Column
-- [x] Edit Name
-- [x] Edit Description
-- [ ] Move Column
-- [ ] Revert Possible
-- [x] Serialize Column
-- [x] Unserialize Column
-
-#### Property View
-- [ ] Display property Name
-- [ ] Edit Entity Name
-- [ ] Edit Entity Description
-- [ ] Edit Entity Type
-- [ ] Edit Int
-- [ ] Edit String
-- [ ] Edit Boolean
-- [ ] Dropdown
-
-#### Table View
-- [x] Create tab
-- [x] Remove tab
-- [ ] Move tab
-- [x] Split left, right, top, bottom
-- [ ] Unsplit
-- [ ] Duplicate on split
+Licensed under the [(L)GPL v2/3 ](LICENSE.md) License, with Qt Open source licence.
