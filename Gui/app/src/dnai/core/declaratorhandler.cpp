@@ -288,6 +288,8 @@ namespace dnai
             //this triggers a entityAdded signal that will call onEntityAdded slot
             manager.addEntity(declaredId, *todeclare);
 
+            qDebug() << "Declared: " << todeclare->name();
+
             emit declared(todeclare);
         }
 

@@ -31,7 +31,7 @@ namespace dnai
         private:
             models::gui::declarable::Variable *getVariableData(::core::EntityID variable, bool throws = false);
 
-        private:
+        public:
             void onTypeSet(::core::EntityID variable, ::core::EntityID type);
             void onSetTypeError(::core::EntityID variable, ::core::EntityID type, QString const &message);
 

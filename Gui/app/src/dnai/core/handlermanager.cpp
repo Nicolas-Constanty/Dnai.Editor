@@ -14,6 +14,24 @@ namespace dnai
             m_global(),
             m_object(m_manager)
         {
+
+        }
+
+        HandlerManager &HandlerManager::Instance()
+        {
+            //need to instanciate with 'new' because Qt delete the instance
+            static HandlerManager *inst = nullptr;
+
+            if (inst == nullptr)
+            {
+                inst = new HandlerManager();
+                inst->setup();
+            }
+            return *inst;
+        }
+
+        void HandlerManager::setup()
+        {
             m_project.setup();
             m_declarator.setup();
             m_variable.setup();
@@ -21,14 +39,6 @@ namespace dnai
             m_function.setup();
             m_global.setup();
             m_object.setup();
-        }
-
-        HandlerManager &HandlerManager::Instance()
-        {
-            //need to instanciate with 'new' because Qt delete the instance
-            static HandlerManager *inst = new HandlerManager();
-
-            return *inst;
         }
 
         ProjectHandler *HandlerManager::project()

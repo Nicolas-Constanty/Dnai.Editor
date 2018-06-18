@@ -46,15 +46,9 @@ namespace dnai
                     return m_data.attributes.value(name);
                 }
 
-                QList<QVariant> ObjectType::functions() const
+                QStringList ObjectType::functions() const
                 {
-                    QList<QVariant> toret;
-
-                    for (std::pair<QString, bool> const &curr : m_data.functions.toStdMap())
-                    {
-                        toret.append(QVariant::fromValue(QPair<QString, bool>(curr.first, curr.second)));
-                    }
-                    return toret;
+                    return m_data.functions.keys();
                 }
 
                 void ObjectType::addFunction(const QString &name)
@@ -79,6 +73,16 @@ namespace dnai
                     emit functionsChanged(functions());
                 }
 
+                bool ObjectType::hasFunction(const QString &name)
+                {
+                    return m_data.functions.contains(name);
+                }
+
+                bool ObjectType::isFunctionMember(QString name) const
+                {
+                    return m_data.functions[name];
+                }
+
                 void ObjectType::serialize(QJsonObject &obj) const
                 {
                     Entity::serialize(obj);
@@ -95,6 +99,20 @@ namespace dnai
                         attrs.append(currAttr);
                     }
                     obj["attributes"] = attrs;
+
+                    /*
+                     * Functions
+                     */
+                    QJsonArray funcs;
+                    for (std::pair<QString, bool> const &curr : m_data.functions.toStdMap())
+                    {
+                        QJsonObject currFunc;
+
+                        currFunc["name"] = curr.first;
+                        currFunc["member"] = curr.second;
+                        funcs.append(currFunc);
+                    }
+                    obj["functions"] = funcs;
                 }
 
                 void ObjectType::_deserialize(const QJsonObject &obj)
@@ -111,6 +129,22 @@ namespace dnai
                         for (QJsonValue const &curr : attrs)
                         {
                             addAttribute(curr.toObject()["key"].toString(), curr.toObject()["value"].toInt());
+                        }
+                    }
+
+                    /*
+                     * Functions
+                     */
+                    if (obj.contains("functions"))
+                    {
+                        QJsonArray funcs = obj["functions"].toArray();
+
+                        for (QJsonValue const &curr : funcs)
+                        {
+                            QJsonObject obj = curr.toObject();
+
+                            addFunction(obj["name"].toString());
+                            setFunctionStatus(obj["name"].toString(), obj["member"].toBool());
                         }
                     }
                 }

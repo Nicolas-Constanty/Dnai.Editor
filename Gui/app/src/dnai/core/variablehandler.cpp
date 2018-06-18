@@ -44,7 +44,7 @@ namespace dnai
             Q_UNUSED(entity)
             models::gui::declarable::Variable *var = getVariableData(id);
 
-            if (var != nullptr)
+            if (var != nullptr && entity.name() != "this")
             {
                 //todo: add a system to save action into a map in order to execute it once done
                 if (var->varType() != ::core::UNDEFINED_ID)

@@ -26,16 +26,21 @@ namespace dnai
 
         public slots:
             void onEntityAdded(::core::EntityID id, models::Entity &entity);
+            void onEntityRemoved(::core::EntityID id, models::Entity &entity);
+            void onParameterSet(models::Entity *func, QString paramName);
 
         public:
             Q_INVOKABLE void addAttribute(quint32 obj, QString name, quint32 type, qint32 visi, bool save = true);
             Q_INVOKABLE void removeAttribute(quint32 obj, QString name, bool save = true);
             Q_INVOKABLE void renameAttribute(quint32 obj, QString name, QString newName, bool save = true);
             Q_INVOKABLE void setAttributeType(quint32 obj, QString name, quint32 type, bool save = true);
+            Q_INVOKABLE void setFunctionAsMember(quint32 obj, QString name, bool save = true);
+            Q_INVOKABLE void setFunctionAsStatic(quint32 obj, QString name, bool save = true);
 
         private:
             bool isAttributePending(EntityID obj, QString const &name) const;
             void removePendingAttribute(EntityID obj, QString const &name);
+            void refreshPendingAttributes(EntityID id);
 
         private:
             void onAttributeAdded(EntityID obj, QString name, EntityID type, VISIBILITY visi);
@@ -47,10 +52,15 @@ namespace dnai
             void onAttributeRenamed(EntityID obj, QString name, QString newName);
             void onRenameAttributeError(EntityID obj, QString name, QString newName, QString msg);
 
+            void onFunctionSetAsMember(EntityID obj, QString name, EntityID thisId);
+            void onSetFunctionAsMemberError(EntityID obj, QString name, QString msg);
+
         signals:
             void attributeAdded(models::Entity *obj, QString name, models::Entity *type, VISIBILITY visi);
             void attributeRemoved(models::Entity *obj, QString name);
             void attributeRenamed(models::Entity *obj, QString name, QString newName);
+            void functionSetAsMember(models::Entity *obj, QString name, models::Entity *thisParam);
+            void functionSetAsStatic(models::Entity *obj, QString name);
 
         private:
             EntityManager &manager;

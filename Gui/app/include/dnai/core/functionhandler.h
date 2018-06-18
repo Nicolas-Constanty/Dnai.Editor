@@ -50,7 +50,7 @@ namespace dnai
         private:
             void refreshPendingFunctionInstructions();
 
-        private:
+        public:
             void onEntryPointSet(quint32 function, quint32 instruction);
             void onSetEntryPointError(quint32 function, quint32 instruction, QString const &message) const;
 
@@ -67,6 +67,8 @@ namespace dnai
             void instructionAdded(models::Entity *function, models::gui::Instruction *instruction);
             void addInstructionError(quint32 func, quint32 instrType, QList<quint32> const &args, QString const &msg);
             void entryPointSet(models::Entity *func, models::gui::Instruction *entry);
+            void parameterSet(models::Entity *func, QString const &param);
+            void returnSet(models::Entity *func, QString const &param);
 
         private:
             EntityManager &manager;

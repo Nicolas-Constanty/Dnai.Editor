@@ -5,6 +5,8 @@
 #include "dnai/commands/commandmanager.h"
 #include "dnai/commands/corecommand.h"
 
+#include "dnai/core/handlermanager.h"
+
 #include "dnai/editor.h"
 
 using namespace std::placeholders;
@@ -23,6 +25,10 @@ namespace dnai
         {
             QObject::connect(&manager,  SIGNAL(entityAdded(::core::EntityID,models::Entity&)),
                              this,      SLOT(onEntityAdded(::core::EntityID,models::Entity&)));
+            QObject::connect(HandlerManager::Instance().function(), SIGNAL(parameterSet(models::Entity*,QString)),
+                             this,      SLOT(onParameterSet(models::Entity*,QString)));
+            QObject::connect(&manager,  SIGNAL(entityRemoved(::core::EntityID,models::Entity&)),
+                             this,      SLOT(onEntityRemoved(::core::EntityID,models::Entity&)));
 
             core::object::onAttributeAdded(std::bind(&ObjectHandler::onAttributeAdded, this, _1, _2, _3, _4));
             core::object::onAddAttributeError(std::bind(&ObjectHandler::onAddAttributeError, this, _1, _2, _3, _4, _5));
@@ -32,12 +38,16 @@ namespace dnai
 
             core::object::onAttributeRenamed(std::bind(&ObjectHandler::onAttributeRenamed, this, _1, _2, _3));
             core::object::onRenameAttributeError(std::bind(&ObjectHandler::onRenameAttributeError, this, _1, _2, _3, _4));
+
+            core::object::onFunctionSetAsMember(std::bind(&ObjectHandler::onFunctionSetAsMember, this, _1, _2, _3));
+            core::object::onSetFunctionAsMemberError(std::bind(&ObjectHandler::onSetFunctionAsMemberError, this, _1, _2, _3));
         }
 
         void ObjectHandler::onEntityAdded(EntityID id, models::Entity &entity)
         {
-            if (static_cast<ENTITY>(entity.entityType()) == ENTITY::OBJECT_TYPE)
+            switch (static_cast<ENTITY>(entity.entityType()))
             {
+            case ENTITY::OBJECT_TYPE: {
                 models::ObjectType *data = entity.guiModel<models::ObjectType>();
                 QList<QString> pending;
 
@@ -52,49 +62,56 @@ namespace dnai
                 }
                 if (!pending.isEmpty())
                     m_pendingAttributes[&entity] = pending;
+                break;
             }
-            else //refresh pending attributes
-            {
-                //for each object in map
-                for (typename AttrMap::iterator currObjectIt = m_pendingAttributes.begin(); currObjectIt != m_pendingAttributes.end();)
+            case ENTITY::FUNCTION: {
+                if (static_cast<ENTITY>(entity.parentItem()->entityType()) == ENTITY::OBJECT_TYPE)
                 {
-                    models::Entity *object = currObjectIt->first;
-                    models::ObjectType *data = object->guiModel<models::ObjectType>();
+                    models::ObjectType *data = entity.parentItem()->guiModel<models::ObjectType>();
 
-                    QList<QString> &attrList = currObjectIt->second;
-
-                    //for each attribute still waiting
-                    for (QList<QString>::iterator attrIt = attrList.begin(); attrIt != attrList.end();)
+                    if (!data->hasFunction(entity.name()))
                     {
-                        QString &attr = *attrIt;
-                        EntityID attrId = data->getAttribute(attr);
-
-                        //if the attribute correspond to the entity added
-                        if (attrId == id)
-                        {
-                            //add it
-                            addAttribute(object->id(), attr, attrId, static_cast<qint32>(VISIBILITY::PUBLIC), false);
-                            attrIt = attrList.erase(attrIt);
-                        }
-                        else
-                        {
-                            //either inc
-                            ++attrIt;
-                        }
-                    }
-
-                    //when there is no more pending attribute for this object
-                    if (attrList.isEmpty())
-                    {
-                        //remove it from map
-                        currObjectIt = m_pendingAttributes.erase(currObjectIt);
-                    }
-                    else
-                    {
-                        //either inc
-                        ++currObjectIt;
+                        data->addFunction(entity.name());
                     }
                 }
+                break;
+            }
+            default:
+                break;
+            }
+
+            refreshPendingAttributes(id);
+        }
+
+        void ObjectHandler::onEntityRemoved(EntityID id, models::Entity &entity)
+        {
+            if (static_cast<ENTITY>(entity.entityType()) == ENTITY::VARIABLE
+                && static_cast<ENTITY>(entity.parentItem()->entityType()) == ENTITY::FUNCTION
+                && static_cast<ENTITY>(entity.parentItem()->parentItem()->entityType()) == ENTITY::OBJECT_TYPE
+                && entity.name() == "this")
+            {
+                models::ObjectType *data = entity.parentItem()->parentItem()->guiModel<models::ObjectType>();
+
+                data->setFunctionStatus(entity.parentItem()->name(), false);
+                emit functionSetAsStatic(entity.parentItem()->parentItem(), entity.parentItem()->name());
+            }
+            if (static_cast<ENTITY>(entity.entityType()) == ENTITY::FUNCTION
+                && static_cast<ENTITY>(entity.parentItem()->entityType()) == ENTITY::OBJECT_TYPE)
+            {
+                models::ObjectType *data = entity.parentItem()->guiModel<models::ObjectType>();
+
+                data->removeFunction(entity.name());
+            }
+        }
+
+        void ObjectHandler::onParameterSet(models::Entity *func, QString paramName)
+        {
+            if (static_cast<ENTITY>(func->parentItem()->entityType()) == ENTITY::OBJECT_TYPE && paramName == "this")
+            {
+                models::ObjectType *data = func->parentItem()->guiModel<models::ObjectType>();
+
+                data->setFunctionStatus(func->name(), true);
+                emit functionSetAsMember(func->parentItem(), func->name(), func->findByName(paramName));
             }
         }
 
@@ -172,6 +189,50 @@ namespace dnai
             ));
         }
 
+        void ObjectHandler::setFunctionAsMember(quint32 obj, QString name, bool save)
+        {
+            models::Entity &object = manager.getEntity(obj);
+            models::Entity *func = object.findByName(name);
+
+            qDebug() << "==Core== Class.SetFunctionAsMember(" << obj << ", " << name << ") => save(" << save << ")";
+
+            if (func == nullptr)
+                throw new std::out_of_range("No such function named " + name.toStdString());
+
+            commands::CommandManager::Instance()->exec(new commands::CoreCommand("Class.SetFunctionAsMember", save,
+                [&object, &name, func]() {
+                    HandlerManager::Instance().Function().pendingParameter(func->id(), "this");
+                    core::object::setFunctionAsMember(object.id(), name);
+                },
+                [func]() {
+                    HandlerManager::Instance().Function().pendindRemoveParam(func->id(), "this");
+                    core::declarator::remove(func->id(), "this");
+                }
+            ));
+        }
+
+        void ObjectHandler::setFunctionAsStatic(quint32 obj, QString name, bool save)
+        {
+            models::Entity &object = manager.getEntity(obj);
+            models::Entity *func = object.findByName(name);
+
+            qDebug() << "==Core== Class.SetFunctionAsStatic(" << obj << ", " << name << ") => save(" << save << ")";
+
+            if (func == nullptr)
+                throw new std::out_of_range("No such function named " + name.toStdString());
+
+            commands::CommandManager::Instance()->exec(new commands::CoreCommand("Class.SetFunctionAsStatic", save,
+                [func]() {
+                    HandlerManager::Instance().Function().pendindRemoveParam(func->id(), "this");
+                    core::declarator::remove(func->id(), "this");
+                },
+                [&object, func, name]() {
+                    HandlerManager::Instance().Function().pendingParameter(func->id(), "this");
+                    core::object::setFunctionAsMember(object.id(), name);
+                }
+            ));
+        }
+
         bool ObjectHandler::isAttributePending(EntityID obj, QString const &name) const
         {
             return m_attributeAdded.find(std::to_string(obj) + name.toStdString()) != m_attributeAdded.end();
@@ -182,6 +243,50 @@ namespace dnai
             typename AttrSet::iterator it = m_attributeAdded.find(std::to_string(obj) + name.toStdString());
 
             m_attributeAdded.erase(it);
+        }
+
+        void ObjectHandler::refreshPendingAttributes(EntityID id)
+        {
+            //for each object in map
+            for (typename AttrMap::iterator currObjectIt = m_pendingAttributes.begin(); currObjectIt != m_pendingAttributes.end();)
+            {
+                models::Entity *object = currObjectIt->first;
+                models::ObjectType *data = object->guiModel<models::ObjectType>();
+
+                QList<QString> &attrList = currObjectIt->second;
+
+                //for each attribute still waiting
+                for (QList<QString>::iterator attrIt = attrList.begin(); attrIt != attrList.end();)
+                {
+                    QString &attr = *attrIt;
+                    EntityID attrId = data->getAttribute(attr);
+
+                    //if the attribute correspond to the entity added
+                    if (attrId == id)
+                    {
+                        //add it
+                        addAttribute(object->id(), attr, attrId, static_cast<qint32>(VISIBILITY::PUBLIC), false);
+                        attrIt = attrList.erase(attrIt);
+                    }
+                    else
+                    {
+                        //either inc
+                        ++attrIt;
+                    }
+                }
+
+                //when there is no more pending attribute for this object
+                if (attrList.isEmpty())
+                {
+                    //remove it from map
+                    currObjectIt = m_pendingAttributes.erase(currObjectIt);
+                }
+                else
+                {
+                    //either inc
+                    ++currObjectIt;
+                }
+            }
         }
 
         void ObjectHandler::onAttributeAdded(EntityID obj, QString name, EntityID typ, VISIBILITY visi)
@@ -259,6 +364,28 @@ namespace dnai
         {
             commands::CoreCommand::Error();
             Editor::instance().notifyError("Unable to rename attribute " + name + " into " + newName + ": " + msg);
+        }
+
+        void ObjectHandler::onFunctionSetAsMember(EntityID obj, QString name, EntityID thisId)
+        {
+            models::Entity &object = manager.getEntity(obj);
+            models::ObjectType *data = object.guiModel<models::ObjectType>();
+            models::Entity *func = object.findByName(name);
+
+            qDebug() << "==Core== Class.FunctionSetAsMember(" << obj << ", " << name << ", " << thisId << ")";
+            commands::CoreCommand::Success();
+            HandlerManager::Instance().Declarator().onDeclared(func->id(), ENTITY::VARIABLE, "this", VISIBILITY::PUBLIC, thisId);
+            HandlerManager::Instance().Variable().onTypeSet(thisId, object.id());
+            HandlerManager::Instance().Function().onParameterSet(func->id(), "this");
+            emit functionSetAsMember(&object, name, &manager.getEntity(thisId));
+        }
+
+        void ObjectHandler::onSetFunctionAsMemberError(EntityID obj, QString name, QString msg)
+        {
+            Q_UNUSED(obj)
+
+            commands::CoreCommand::Error();
+            Editor::instance().notifyError("Unable to set function " + name + " as member: " + msg);
         }
     }
 }

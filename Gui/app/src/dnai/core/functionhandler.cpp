@@ -349,6 +349,7 @@ namespace dnai
                     function.appendChild(param);
                 commands::CoreCommand::Success();
                 params.pop();
+                emit parameterSet(&function, paramName);
             }
         }
 
@@ -385,6 +386,7 @@ namespace dnai
                 returns.pop();
                 commands::CoreCommand::Success();
                 qDebug() << "==Core== Function.ReturnSet(" << function << ", " << returnName << ")";
+                emit returnSet(&func, returnName);
             }
         }
 

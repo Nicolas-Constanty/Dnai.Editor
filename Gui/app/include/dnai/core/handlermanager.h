@@ -35,6 +35,9 @@ namespace dnai
         public:
             static HandlerManager &Instance();
 
+        public:
+            void setup();
+
             /*
              * QML Properties
              */
