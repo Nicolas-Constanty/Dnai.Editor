@@ -23,9 +23,9 @@ then
 fi
 
 echo 'login :'
-read login #admin
+read login
 echo 'password :'
-read password #dnai
+read password
 
 res=$(curl -X POST "$baseURL"signin -H 'content-type: application/json' -d "{ \"login\": \"$login\", \"password\": \"$password\"}")
 token=$(echo $res | jq -r '.token')

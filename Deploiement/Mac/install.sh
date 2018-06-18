@@ -96,15 +96,11 @@ then
     make
     
     cd plugins
-    rm -rf Controls/*.o
-    rm -rf Controls/*.cpp
-    rm -rf Controls/*.h
-    rm -rf Controls/Makefile.*
+    rm -rf */*.o
+    rm -rf */*.cpp
+    rm -rf */*.h
+    rm -rf */Makefile.*
 
-    rm -rf FontAwesome/*.o
-    rm -rf FontAwesome/*.cpp
-    rm -rf FontAwesome/*.h
-    rm -rf FontAwesome/Makefile.*
     cd -
 
     cd app/DNAI.app/Contents/MacOS/
@@ -141,8 +137,10 @@ then
     sleep 3
     mv plugins/Controls DNAI.app/Contents/PlugIns
     mv plugins/FontAwesome DNAI.app/Contents/PlugIns
+    mv plugins/Settings DNAI.app/Contents/PlugIns
     install_name_tool -add_rpath @rpath/../PlugIns/Controls/libdnaicontrolsplugin.dylib DNAI.app/Contents/MacOS/DNAI
     install_name_tool -add_rpath @rpath/../PlugIns/FontAwesome/libdnaifontawesomeplugin.dylib DNAI.app/Contents/MacOS/DNAI
+    install_name_tool -add_rpath @rpath/../PlugIns/Settings/libdnaisettingsplugin.dylib DNAI.app/Contents/MacOS/DNAI
     
     sleep 3
 

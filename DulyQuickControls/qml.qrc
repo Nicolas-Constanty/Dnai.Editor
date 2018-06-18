@@ -1,0 +1,28 @@
+<RCC>
+    <qresource prefix="/">
+        <file>qtquickcontrols2.conf</file>
+        <file>main.qml</file>
+        <file>Resources/Components/ColorPicker.qml</file>
+        <file>Resources/Components/Container.qml</file>
+        <file>Resources/Components/DropDown.qml</file>
+        <file>Resources/Components/ToolBarHeader.qml</file>
+        <file>Resources/Forms/ColorPickerForm.ui.qml</file>
+        <file>Resources/Forms/DropDownForm.ui.qml</file>
+        <file>Resources/Forms/LanguagePanelForm.ui.qml</file>
+        <file>Resources/Forms/NodePanelForm.ui.qml</file>
+        <file>Resources/Forms/SettingPanelForm.ui.qml</file>
+        <file>Resources/Forms/ThemePanelForm.ui.qml</file>
+        <file>Resources/Models/ColorPickerModel.qml</file>
+        <file>Resources/Models/LanguageModel.qml</file>
+        <file>Resources/Models/ThemeModel.qml</file>
+        <file>Resources/Panels/LanguagePanel.qml</file>
+        <file>Resources/Panels/NodePanel.qml</file>
+        <file>Resources/Panels/SettingPanel.qml</file>
+        <file>Resources/Panels/ThemePanel.qml</file>
+        <file>Resources/Components/NodeForm.ui.qml</file>
+        <file>Resources/Components/Node.qml</file>
+        <file>Resources/Components/AddNodeModel.qml</file>
+        <file>Resources/Components/AddNode.qml</file>
+        <file>Resources/Components/NodeModel.qml</file>
+    </qresource>
+</RCC>
