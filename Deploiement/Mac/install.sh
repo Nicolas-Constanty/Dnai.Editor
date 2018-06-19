@@ -21,6 +21,7 @@ dnairessourcespath="/Users/victorgouet/Documents/DulyGUI/Duly-GUI/Gui/app/resour
 
 #DNAI CORE
 binarycorepath="$HOME/Documents/Rendu/Core/Duly/CoreDaemon/bin/Release/"
+csprojcorepath="$HOME/Documents/Rendu/Core/Duly/CoreDaemon/CoreDaemon.csproj"
 
 #DNAI SERVER
 serverpropath="../../Server/Server.pro"
@@ -116,9 +117,16 @@ then
     mkdir Core
     cd -
 
-    cp -rf $binarycorepath ./app/DNAI.app/Contents/MacOS/Core/
+    echo "---- Core generation ----"
+    msbuild $csprojcorepath /t:Rebuild /p:Configuration=Release;Platform=x64
+    cd $binarycorepath
+    mkbundle -o CoreDaemon --simple CoreDaemon.exe
+    cd -
+    cp -rf $binarycorepath/CoreDaemon ./app/DNAI.app/Contents/MacOS/Core/
+    echo "---- Core generation END ----"
+    sleep 3
 
-    cp $monopath ./app/DNAI.app/Contents/MacOS/Core/
+    #cp $monopath ./app/DNAI.app/Contents/MacOS/Core/
 
     rm *.o
     rm *.cpp

@@ -168,10 +168,12 @@ void ProcessManager::launch() {
 
     corePath.replace("{OUT_DIR}", QGuiApplication::applicationDirPath());
 
-    corePath.append(" -p ");
-    corePath.append(portStr);
+    QStringList argumentsCore;
 
-    m_core.start(corePath);
+    argumentsCore << "-p";
+    argumentsCore << portStr;
+
+    m_core.start(corePath, argumentsCore);
     if (m_core.waitForStarted() == false) {
         qDebug() << "[FAILED] LAUNCH Core has failed";
         qDebug() << "[FAILED]" << corePath;
