@@ -351,6 +351,7 @@ namespace dnai
                 qDebug() << "==Core== Declarator.Renamed(" << declarator << ", " << name << ", " << newname <<  ")";
                 entity->setName(newname);
                 commands::CoreCommand::Success();
+                emit renamed(entity, name, newname);
             }
         }
 

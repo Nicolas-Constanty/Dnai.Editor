@@ -114,6 +114,7 @@ namespace dnai
                         this, SLOT(onAddInstructionError(quint32,quint32,QList<quint32>,QString)));
        QObject::connect(&dnai::gcore::HandlerManager::Instance().Declarator(), SIGNAL(declared(dnai::models::Entity*)),
                         this, SLOT(onEntityDeclared(dnai::models::Entity*)));
+       contextMenuModel()->setup();
     }
 
 	void Editor::closeSolution()
@@ -440,21 +441,9 @@ namespace dnai
 
     void Editor::onEntityDeclared(models::Entity *declared)
     {
-        if (declared->parentItem()
-            && declared->parentItem()->coreModel()->entityType() != ENTITY::FUNCTION
-            && declared->coreModel()->entityType() == ENTITY::VARIABLE)
+        if (declared->coreModel()->entityType() == ENTITY::ENUM_TYPE
+            || declared->coreModel()->entityType() == ENTITY::OBJECT_TYPE)
         {
-            contextMenuModel()->appendVariable(declared);
-			emit contextMenuModelChanged(contextMenuModel());
-        }
-        else if (declared->coreModel()->entityType() == ENTITY::ENUM_TYPE)
-        {
-            contextMenuModel()->appendEnumeration(declared);
-			dnai::models::gui::declarable::Variable::varTypes()->append(declared->name(), declared->id());
-        }
-        else if (declared->coreModel()->entityType() == ENTITY::OBJECT_TYPE)
-        {
-            contextMenuModel()->appendObject(declared);
             dnai::models::gui::declarable::Variable::varTypes()->append(declared->name(), declared->id());
         }
     }

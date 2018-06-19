@@ -4,6 +4,7 @@
 #include <QHash>
 #include <QStringList>
 #include "generictreeitem.h"
+#include "core.h"
 
 namespace dnai
 {
@@ -119,19 +120,37 @@ namespace dnai
             const QHash<QString, ContextMenuItem*> &instructions() const;
             void appendVariable(Entity *entity);
             void appendEnumeration(Entity *entity);
-			void appendParameter(Entity *entity);
+
+            ContextMenuItem *m_variableGetter;
+            ContextMenuItem *m_variableSetter;
+            void appendParameter(Entity *entity);
 			void appendReturn(Entity *entity);
 			void clearParameters();
 			void clearReturns();
             void appendObject(Entity *entity);
 
+        private:
+            void addItem(ContextMenuItem *item, ContextMenuItem *parent, models::Entity *related = nullptr);
+            void removeItem(QString const &fullPath);
+            void clearItems(models::Entity *related);
+
+        public:
+            void setup();
+
+        public slots:
+            void onEntityDeclared(dnai::models::Entity *declared);
+            void onEntityRemoved(dnai::models::Entity *removed);
+            void onEntityRenamed(dnai::models::Entity *entity, QString name, QString newname);
+            void onEnumValueSet(dnai::models::Entity *enumeration, QString name, QString value);
+            void onEnumValueRemoved(dnai::models::Entity *enumeration, QString name);
+            void onObjectAttributeAdded(models::Entity *obj, QString name, models::Entity *type, VISIBILITY visi);
+            void onObjectAttributeRenamed(models::Entity *obj, QString name, QString newName);
+            void onObjectAttributeRemoved(models::Entity *obj, QString name);
+
 		private:
 			void parseJsonDocument(const QJsonObject &json);
 			void parseJsonObj(ContextMenuItem* parent, const QJsonObject& js);
 			ContextMenuItem *m_root;
-
-            ContextMenuItem *m_variableGetter;
-            ContextMenuItem *m_variableSetter;
 
             ContextMenuItem *m_enumSplitters;
 
@@ -149,6 +168,10 @@ namespace dnai
             ContextMenuItem* m_objects;
             ContextMenuItem* m_objectsGetter;
             ContextMenuItem* m_objectsSetter;
+
+        private:
+            QHash<models::Entity *, QList<QString>> m_entity_items;
+            QHash<QString, models::Entity *> m_items_entity;
 		};
 	}
 }

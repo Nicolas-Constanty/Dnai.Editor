@@ -69,13 +69,6 @@ namespace dnai
 					Q_INVOKABLE void moveInputDown(int index);
 					Q_INVOKABLE void moveOutputDown(int index);
 
-
-					/*Q_INVOKABLE void updateInputName(int index, const QString &name);
-					Q_INVOKABLE void updateInputVarType(int index, qint32 varType);
-
-					Q_INVOKABLE void updateOutputName(int index, const QString &name);
-                    Q_INVOKABLE void updateOutputVarType(int index, qint32 varType);*/
-
 					EntityList *inputModels() const;
 					EntityList *outputModels() const;
 					void setInputModels(EntityList* inputs);

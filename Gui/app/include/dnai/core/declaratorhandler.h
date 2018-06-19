@@ -31,7 +31,7 @@ namespace dnai
             void declared(dnai::models::Entity *entity);
             void removed(dnai::models::Entity *entity);
             void moved();
-            void renamed();
+            void renamed(dnai::models::Entity *entity, QString name, QString newName);
             void visibilitySet();
 
         private:

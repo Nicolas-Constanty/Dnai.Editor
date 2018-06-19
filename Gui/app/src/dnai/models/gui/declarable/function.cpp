@@ -157,31 +157,7 @@ namespace dnai
 				{
 					m_foutputs->moveDown(index);
 					emit outputModelsChanged(m_foutputs);
-				}
-
-                /*void Function::updateInputName(const int index, const QString& name)
-				{
-					m_finputs->setData(index, name, FunctionInputs::Name);
-					emit inputModelsChanged(m_finputs);
-				}
-
-				void Function::updateInputVarType(const int index, const qint32 varType)
-				{
-					m_finputs->setData(index, varType, FunctionInputs::Type);
-					emit inputModelsChanged(m_finputs);
-				}
-
-				void Function::updateOutputName(const int index, const QString& name)
-				{
-					m_foutputs->setData(index, name, FunctionInputs::Name);
-					emit outputModelsChanged(m_foutputs);
-				}
-
-				void Function::updateOutputVarType(const int index, const qint32 varType)
-				{
-					m_foutputs->setData(index, varType, FunctionInputs::Type);
-					emit outputModelsChanged(m_foutputs);
-                }*/
+                }
 
 				EntityList *Function::inputModels() const
 				{
