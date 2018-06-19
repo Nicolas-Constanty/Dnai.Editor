@@ -14,8 +14,8 @@ namespace dnai
 			{
 				struct Variable : Entity
 				{
-                    ::core::EntityID varType = 2;
-                    QString value = "";
+                    QUuid varType = "{149e81c5-fc6e-5cc7-a0a6-6f736a6487ca}"; //int type
+                    QString value = "0";
 				};
 			}
 		}

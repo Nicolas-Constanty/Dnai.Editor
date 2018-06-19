@@ -143,7 +143,7 @@ namespace dnai
             return m_editableProperty;
         }
 
-        const QUuid &Entity::guid() const
+        QUuid Entity::guid() const
         {
             return m_guid;
         }

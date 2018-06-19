@@ -43,7 +43,7 @@ namespace dnai
                 class Variable : public QObject, public interfaces::IVariable, public Entity<data::Variable, Variable>
                 {
 					Q_OBJECT
-					Q_PROPERTY(quint32 varType READ varType WRITE setVarType NOTIFY varTypeChanged)
+                    Q_PROPERTY(QUuid varType READ varType WRITE setVarType NOTIFY varTypeChanged)
 					Q_PROPERTY(QString value READ value WRITE setValue NOTIFY valueChanged)
 
 				public:
@@ -53,8 +53,8 @@ namespace dnai
 				protected:
 					void _deserialize(const QJsonObject& obj) override;
 				public:
-                    quint32 varType() const override;
-                    bool setVarType(quint32 id) override;
+                    QUuid varType() const override;
+                    bool setVarType(QUuid const &id) override;
 	                const QString &value() const override;
 	                bool setValue(const QString& value) override;
 
@@ -62,7 +62,7 @@ namespace dnai
 					static VarTypeList *varTypes();
 
 				signals:
-					void varTypeChanged(qint32 id);
+                    void varTypeChanged(QUuid id);
 					void valueChanged(const QString &variant);
 
                 private:

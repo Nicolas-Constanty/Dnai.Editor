@@ -80,7 +80,7 @@ namespace dnai
 				{
 					auto v = dynamic_cast<Variable*>(obj->guiModel());
 					if (n == "varType")
-						v->setVarType(value.toInt());
+                        v->setVarType(value.toString());
 				}
 			}
 		}

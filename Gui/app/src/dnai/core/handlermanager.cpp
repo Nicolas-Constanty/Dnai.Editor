@@ -116,9 +116,11 @@ namespace dnai
             return m_manager.getEntity(guid);
         }
 
-        models::Entity &HandlerManager::getEntity(quint32 id)
+        models::Entity *HandlerManager::getEntity(quint32 id)
         {
-            return m_manager.getEntity(id);
+            if (m_manager.contains(id))
+                return &m_manager.getEntity(id);
+            return nullptr;
         }
     }
 }

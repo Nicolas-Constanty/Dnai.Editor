@@ -2,6 +2,7 @@
 #define DNAI_CORE_VARIABLEHANDLER_H
 
 #include <QObject>
+#include <list>
 
 #include "entitymanager.h"
 #include "core.h"
@@ -29,6 +30,7 @@ namespace dnai
             Q_INVOKABLE void setValue(quint32 variable, QString const &value, bool save = true);
 
         private:
+            void refreshVariables(models::Entity &declared);
             models::gui::declarable::Variable *getVariableData(::core::EntityID variable, bool throws = false);
 
         public:
@@ -40,6 +42,9 @@ namespace dnai
 
         private:
             EntityManager &manager;
+
+        private:
+            std::list<models::Entity *> m_pendingVar;
         };
     }
 }

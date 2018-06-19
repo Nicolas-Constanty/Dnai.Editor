@@ -153,5 +153,6 @@
         <file>resources/Properties/AttributesProperty.qml</file>
         <file>resources/Properties/ClassFunctionsProperty.qml</file>
         <file>resources/JavaScript/Utils.js</file>
+        <file>resources/Components/VarTypeComboBox.qml</file>
     </qresource>
 </RCC>

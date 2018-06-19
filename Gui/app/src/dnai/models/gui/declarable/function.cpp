@@ -260,16 +260,15 @@ namespace dnai
                     return nullptr;
                 }
 
-                bool Function::hasInput(const QString &name, quint32 type) const
+                bool Function::hasInput(const QString &name, QUuid const &type) const
                 {
                     for (models::Entity *curr : m_data.inputs)
                     {
                         if (curr->name() == name)
                         {
-                            if (type != core::UNDEFINED_ID)
+                            if (!type.isNull())
                             {
-                                models::Variable *data = curr->guiModel<models::Variable>();
-                                return data->varType() == type;
+                                return curr->guiModel<models::Variable>()->varType() == type;
                             }
                             return true;
                         }

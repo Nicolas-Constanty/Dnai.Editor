@@ -38,7 +38,7 @@ BaseProperty {
             anchors.right: parent.right
             height: _panel.contentHeight
             name: model.name
-            varType: Editor.propertyPanelProperties.varTypes.getIndexFromValue(model.varType)
+            varType: model.varType
             paramModel: model
 
             moveDown: function () {

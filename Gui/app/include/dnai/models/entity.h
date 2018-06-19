@@ -74,6 +74,7 @@ namespace dnai
             Q_OBJECT
             Q_PROPERTY(qint32 id READ id WRITE setId NOTIFY idChanged)
             Q_PROPERTY(qint32 containerId READ containerId WRITE setContainerId NOTIFY containerIdChanged)
+            Q_PROPERTY(QUuid guid READ guid)
 			Q_PROPERTY(bool isRoot READ isRoot WRITE setIsRoot NOTIFY isRootChanged)
 			Q_PROPERTY(int index READ id WRITE setIndex NOTIFY indexChanged)
 			Q_PROPERTY(QString listIndex READ listIndex WRITE setListIndex NOTIFY listIndexChanged)
@@ -115,7 +116,7 @@ namespace dnai
 			Entity *parentRef() const;
 			const QMap<QUuid, Column *> &columns();
 			Property *editableProperty() const;
-            QUuid const &guid() const;
+            QUuid guid() const;
 
         public:
 			void setIsRoot(bool isRoot);
