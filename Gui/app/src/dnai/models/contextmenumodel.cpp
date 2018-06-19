@@ -732,6 +732,24 @@ namespace dnai
             }
         }
 
+        void ContextMenuModel::addItems(Entity *related)
+        {
+            if (related->parentItem()
+                && related->parentItem()->coreModel()->entityType() != ENTITY::FUNCTION
+                && related->coreModel()->entityType() == ENTITY::VARIABLE)
+            {
+                appendVariable(related);
+            }
+            else if (related->coreModel()->entityType() == ENTITY::ENUM_TYPE)
+            {
+                appendEnumeration(related);
+            }
+            else if (related->coreModel()->entityType() == ENTITY::OBJECT_TYPE)
+            {
+                appendObject(related);
+            }
+        }
+
         void ContextMenuModel::removeItem(const QString &fullPath)
         {
             ContextMenuItem *torm = m_hash[fullPath];
@@ -757,6 +775,12 @@ namespace dnai
             }
         }
 
+        void ContextMenuModel::refreshItems(Entity *related)
+        {
+            clearItems(related);
+            addItems(related);
+        }
+
         void ContextMenuModel::setup()
         {
             QObject::connect(dnai::gcore::HandlerManager::Instance().declarator(), SIGNAL(declared(dnai::models::Entity*)),
@@ -779,20 +803,7 @@ namespace dnai
 
         void ContextMenuModel::onEntityDeclared(Entity *declared)
         {
-            if (declared->parentItem()
-                && declared->parentItem()->coreModel()->entityType() != ENTITY::FUNCTION
-                && declared->coreModel()->entityType() == ENTITY::VARIABLE)
-            {
-                appendVariable(declared);
-            }
-            else if (declared->coreModel()->entityType() == ENTITY::ENUM_TYPE)
-            {
-                appendEnumeration(declared);
-            }
-            else if (declared->coreModel()->entityType() == ENTITY::OBJECT_TYPE)
-            {
-                appendObject(declared);
-            }
+            addItems(declared);
         }
 
         void ContextMenuModel::onEntityRemoved(Entity *removed)
@@ -802,33 +813,50 @@ namespace dnai
 
         void ContextMenuModel::onEntityRenamed(Entity *entity, QString name, QString newname)
         {
-            clearItems(entity);
-            onEntityDeclared(entity);
+            Q_UNUSED(name)
+            Q_UNUSED(newname)
+
+            refreshItems(entity);
         }
 
         void ContextMenuModel::onEnumValueSet(Entity *enumeration, QString name, QString value)
         {
+            Q_UNUSED(name)
+            Q_UNUSED(value)
 
+            refreshItems(enumeration);
         }
 
         void ContextMenuModel::onEnumValueRemoved(Entity *enumeration, QString name)
         {
+            Q_UNUSED(name)
 
+            refreshItems(enumeration);
         }
 
         void ContextMenuModel::onObjectAttributeAdded(Entity *obj, QString name, Entity *type, VISIBILITY visi)
         {
+            Q_UNUSED(name)
+            Q_UNUSED(type)
+            Q_UNUSED(visi)
 
+            refreshItems(obj);
         }
 
         void ContextMenuModel::onObjectAttributeRenamed(Entity *obj, QString name, QString newName)
         {
+            Q_UNUSED(obj)
+            Q_UNUSED(name)
+            Q_UNUSED(newName)
 
+            refreshItems(obj);
         }
 
         void ContextMenuModel::onObjectAttributeRemoved(Entity *obj, QString name)
         {
+            Q_UNUSED(name)
 
+            refreshItems(obj);
         }
 	}
 }

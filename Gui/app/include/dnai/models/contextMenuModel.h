@@ -131,8 +131,10 @@ namespace dnai
 
         private:
             void addItem(ContextMenuItem *item, ContextMenuItem *parent, models::Entity *related = nullptr);
+            void addItems(models::Entity *related);
             void removeItem(QString const &fullPath);
             void clearItems(models::Entity *related);
+            void refreshItems(models::Entity *related);
 
         public:
             void setup();

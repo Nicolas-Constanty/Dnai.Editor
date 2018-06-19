@@ -36,10 +36,10 @@ namespace dnai
 
 		Entity::~Entity()
         {
+            qDebug() << "~ Entity: " << fullName();
 			delete m_dataCore;
 			delete m_dataGUI;
-			delete m_editableProperty;
-			qDebug() << "~ Entity";
+            delete m_editableProperty;
 		}
 
 		bool Entity::isRoot() const
