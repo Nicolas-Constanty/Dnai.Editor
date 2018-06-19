@@ -9,37 +9,29 @@ ComboBox {
 
     property var typeGuid
 
-    signal typeChanged(var typeId, var newTypeId)
+    signal typeChanged(var oldType, var newType)
 
-    model: Editor.propertyPanelProperties.varTypes
+    model: Controller.types
     textRole: "name"
 
     font.pointSize: 8
 
-    function getModelType()
+    currentIndex: Controller.getTypeIndex(typeGuid)
+
+    function resetIndex()
     {
-        return Controller.getEntity(typeGuid);
+        currentIndex = Controller.getTypeIndex(typeGuid);
     }
 
-    function getBoxType()
-    {
-        var id = Editor.propertyPanelProperties.varTypes.getValueFromIndex(currentIndex);
-
-        return Controller.getEntity(id);
+    onTypeGuidChanged: {
+        resetIndex();
     }
-
-    function getModelIndex()
-    {
-        return Editor.propertyPanelProperties.varTypes.getIndexFromValue(getModelType().id);
-    }
-
-    currentIndex: getModelIndex()
 
     onCurrentIndexChanged: {
-        var boxType = getBoxType();
-        var modelType = getModelType();
+        var boxType = Controller.getType(currentIndex);
+        var modelType = Controller.getEntity(typeGuid);
 
         if (modelType.guid !== boxType.guid)
-            __this__.typeChanged(modelType.id, boxType.id);
+            __this__.typeChanged(modelType, boxType);
     }
 }

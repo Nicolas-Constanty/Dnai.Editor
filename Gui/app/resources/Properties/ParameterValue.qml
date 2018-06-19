@@ -13,16 +13,16 @@ Item {
     /**
      * Action buttons
      */
-    property var moveUp: null
-    property var moveDown: null
-    property var deleteValue: null
-    property var typeChanged: null
-    property var nameChanged: null
+    signal moveUp()
+    signal moveDown()
+    signal deleteValue()
+    signal typeChanged(var type)
+    signal nameChanged(string name)
 
     property real contentHeight: 24
     property var updateValue: null
     property var prop: null
-    property alias name: _name.text
+    property alias paramName: _name.text
     property alias varType: _type.typeGuid
     property var paramModel: null
 
@@ -42,7 +42,7 @@ Item {
             height: _parameterValue.contentHeight
             horizontalAlignment: TextInput.AlignLeft
             onAccepted: {
-                if (nameChanged !== null) nameChanged(_name.text)
+                _parameterValue.nameChanged(_name.text)
             }
         }
         VarTypeComboBox {
@@ -52,8 +52,7 @@ Item {
             width: (parent.width - _deleteButton.width) * 0.5
 
             onTypeChanged: {
-                if (_parameterValue.typeChanged !== null)
-                    _parameterValue.typeChanged(_type.currentIndex)
+                _parameterValue.typeChanged(newType)
             }
         }
         /*ButtonAwesomeSolid {
@@ -64,7 +63,6 @@ Item {
             label.font.pointSize: 14
             rotation: 180
             onClicked: {
-//                console.log("on clicked move up");
                 if (moveUp !== null) moveUp();
             }
         }
@@ -85,7 +83,7 @@ Item {
             label.text: "\uf2ed"
             label.font.pointSize: 8
             onClicked: {
-                if (deleteValue !== null) deleteValue();
+                _parameterValue.deleteValue();
             }
         }
     }

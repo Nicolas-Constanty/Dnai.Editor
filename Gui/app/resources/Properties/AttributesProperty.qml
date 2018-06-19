@@ -71,14 +71,14 @@ BaseProperty {
                 height: parent.height
 
                 onTypeChanged: {
-                    if (newTypeId === __this__.model.id)
+                    if (newType.id === __this__.model.id)
                     {
                         Editor.notifyError("Cannot set an attribute of the type of the object");
-                        currentIndex = __type__.getModelIndex();
+                        __type__.resetIndex();
                     }
                     else
                     {
-                        __this__.changeType(modelData, newTypeId);
+                        __this__.changeType(modelData, newType.id);
                     }
                 }
             }

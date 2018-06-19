@@ -4,7 +4,7 @@ namespace dnai
 {
     namespace gcore
     {
-        EntityManager::EntityManager()
+        void EntityManager::setup()
         {
             addEntity(1, *(new models::Entity(new models::gcore::Entity("Boolean", core::ENTITY::DATA_TYPE, 1), nullptr, nullptr, "{907ad50a-8f54-51ea-8c68-479d1d90a699}")));
             addEntity(2, *(new models::Entity(new models::gcore::Entity("Integer", core::ENTITY::DATA_TYPE, 2), nullptr, nullptr, "{149e81c5-fc6e-5cc7-a0a6-6f736a6487ca}")));

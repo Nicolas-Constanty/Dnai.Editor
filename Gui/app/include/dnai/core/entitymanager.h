@@ -21,8 +21,11 @@ namespace dnai
             using GUIEntityMap = QHash<QUuid, models::Entity *>;
 
         public:
-            EntityManager();
+            EntityManager() = default;
             ~EntityManager() = default;
+
+        public:
+            void setup();
 
         signals:
             void entityAdded(::core::EntityID id, models::Entity &entity);

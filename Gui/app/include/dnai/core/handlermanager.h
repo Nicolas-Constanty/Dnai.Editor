@@ -29,6 +29,8 @@ namespace dnai
             Q_PROPERTY(GlobalHandler *global READ global CONSTANT)
             Q_PROPERTY(ObjectHandler *Class READ getClass CONSTANT)
 
+            Q_PROPERTY(QList<QVariant> types READ types NOTIFY typesChanged)
+
         private:
             HandlerManager();
 
@@ -63,8 +65,20 @@ namespace dnai
             ObjectHandler &Class();
 
         public:
+            QList<QVariant> types();
+            Q_INVOKABLE dnai::models::Entity *getType(int index);
+            Q_INVOKABLE int getTypeIndex(QUuid typeuid);
+
+        public:
             Q_INVOKABLE dnai::models::Entity *getEntity(QUuid guid);
             Q_INVOKABLE dnai::models::Entity *getEntity(quint32 id);
+
+        public slots:
+            void onEntityAdded(::core::EntityID id, models::Entity &entity);
+            void onEntityRemoved(::core::EntityID id, models::Entity &entity);
+
+        signals:
+            void typesChanged(QList<QVariant> types);
 
         private:
             EntityManager m_manager;
@@ -77,6 +91,9 @@ namespace dnai
             FunctionHandler m_function;
             GlobalHandler m_global;
             ObjectHandler m_object;
+
+        private:
+            QList<models::Entity *>    m_types;
         };
     }
 }

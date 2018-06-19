@@ -32,6 +32,12 @@ namespace dnai
 
         void HandlerManager::setup()
         {
+            QObject::connect(&m_manager,    SIGNAL(entityAdded(::core::EntityID,models::Entity&)),
+                             this,          SLOT(onEntityAdded(::core::EntityID,models::Entity&)));
+            QObject::connect(&m_manager,    SIGNAL(entityRemoved(::core::EntityID,models::Entity&)),
+                             this,          SLOT(onEntityRemoved(::core::EntityID,models::Entity&)));
+
+            m_manager.setup();
             m_project.setup();
             m_declarator.setup();
             m_variable.setup();
@@ -111,6 +117,27 @@ namespace dnai
             return m_object;
         }
 
+        QList<QVariant> HandlerManager::types()
+        {
+            QList<QVariant> toret;
+
+            for (models::Entity *curr : m_types)
+            {
+                toret.append(QVariant::fromValue(curr));
+            }
+            return toret;
+        }
+
+        models::Entity *HandlerManager::getType(int index)
+        {
+            return m_types[index];
+        }
+
+        int HandlerManager::getTypeIndex(QUuid typeuid)
+        {
+            return m_types.indexOf(getEntity(typeuid));
+        }
+
         models::Entity *HandlerManager::getEntity(QUuid guid)
         {
             return m_manager.getEntity(guid);
@@ -121,6 +148,34 @@ namespace dnai
             if (m_manager.contains(id))
                 return &m_manager.getEntity(id);
             return nullptr;
+        }
+
+        void HandlerManager::onEntityAdded(EntityID id, models::Entity &entity)
+        {
+            Q_UNUSED(id)
+
+            ENTITY type = static_cast<ENTITY>(entity.entityType());
+
+            if (type == ENTITY::DATA_TYPE || type == ENTITY::ENUM_TYPE
+                || type == ENTITY::LIST_TYPE || type == ENTITY::OBJECT_TYPE)
+            {
+                m_types.append(&entity);
+                emit typesChanged(types());
+            }
+        }
+
+        void HandlerManager::onEntityRemoved(EntityID id, models::Entity &entity)
+        {
+            Q_UNUSED(id)
+
+            ENTITY type = static_cast<ENTITY>(entity.entityType());
+
+            if (type == ENTITY::DATA_TYPE || type == ENTITY::ENUM_TYPE
+                || type == ENTITY::LIST_TYPE || type == ENTITY::OBJECT_TYPE)
+            {
+                m_types.removeOne(&entity);
+                emit typesChanged(types());
+            }
         }
     }
 }
