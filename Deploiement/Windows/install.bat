@@ -65,7 +65,9 @@ DEL ".qmake.stash"
 cd DNAI
 md Core
 cd ..
-copy "C:\Users\Victor\Documents\EIP\Duly\CoreDaemon\bin\Release\*" "./DNAI/Core"
+
+"C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\MSBuild\15.0\Bin\MSBuild.exe" C:\Users\Victor\Documents\EIP\Duly\CoreDaemon\CoreDaemon.csproj  /t:Rebuild /p:Configuration=Release;Platform=x64;OutputPath=./Core
+copy "C:\Users\Victor\Documents\EIP\Duly\CoreDaemon\Core\*" "./DNAI/Core"
 
 rmdir /Y /s repos
 
