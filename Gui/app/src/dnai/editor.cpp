@@ -112,8 +112,6 @@ namespace dnai
                         this, SLOT(onInstructionAdded(models::Entity*,models::gui::Instruction*)));
        QObject::connect(&dnai::gcore::HandlerManager::Instance().Function(), SIGNAL(addInstructionError(quint32,quint32,QList<quint32>,QString)),
                         this, SLOT(onAddInstructionError(quint32,quint32,QList<quint32>,QString)));
-       QObject::connect(&dnai::gcore::HandlerManager::Instance().Declarator(), SIGNAL(declared(dnai::models::Entity*)),
-                        this, SLOT(onEntityDeclared(dnai::models::Entity*)));
        contextMenuModel()->setup();
     }
 
@@ -439,15 +437,6 @@ namespace dnai
             m_pendingInstruction.pop();
     }
 
-    void Editor::onEntityDeclared(models::Entity *declared)
-    {
-        if (declared->coreModel()->entityType() == ENTITY::ENUM_TYPE
-            || declared->coreModel()->entityType() == ENTITY::OBJECT_TYPE)
-        {
-            dnai::models::gui::declarable::Variable::varTypes()->append(declared->name(), declared->id());
-        }
-    }
-
     void Editor::createNode(models::Entity *entity, models::ContextMenuItem *node, qint32 x, qint32 y)
     {
 	    const auto function = dynamic_cast<models::gui::declarable::Function *>(entity->guiModel());
@@ -709,10 +698,5 @@ namespace dnai
 	const QStringList& PropertyPanelProperties::entityType() const
 	{
 		return m_entityType;
-	}
-
-	models::gui::declarable::VarTypeList *PropertyPanelProperties::varTypes() const
-	{
-		return models::gui::declarable::Variable::varTypes();
 	}
 }

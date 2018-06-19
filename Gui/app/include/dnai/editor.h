@@ -22,14 +22,12 @@ namespace dnai
 		Q_OBJECT
         Q_PROPERTY(QStringList visibility READ visibility CONSTANT)
         Q_PROPERTY(QStringList entityType READ entityType CONSTANT)
-        Q_PROPERTY(dnai::models::gui::declarable::VarTypeList *varTypes READ varTypes CONSTANT)
 
 	public:
 		explicit PropertyPanelProperties(QObject *parent = nullptr);
 
 		const QStringList &visibility() const;
-		const QStringList &entityType() const;
-		models::gui::declarable::VarTypeList *varTypes() const;
+        const QStringList &entityType() const;
 
 	private:
 		QStringList m_visibility;
@@ -137,7 +135,6 @@ namespace dnai
     public slots:
         void onInstructionAdded(models::Entity *func, models::gui::Instruction *instr);
         void onAddInstructionError(quint32 func, quint32 type, QList<quint32> const &args, QString const &msg);
-        void onEntityDeclared(dnai::models::Entity *declared);
 
     private:
         interfaces::ISolution *m_solution;

@@ -15,31 +15,7 @@ namespace dnai
 		{
             class EntityList;
 			namespace declarable
-			{
-				class VarTypeList : public QAbstractListModel
-				{
-					Q_OBJECT
-				public:
-					enum Roles {
-						Name = Qt::UserRole + 1,
-						Type
-					};
-					int rowCount(const QModelIndex& parent) const override;
-					void append(const QString& name, quint32);
-					void append(const QPair<QString, quint32>& value);
-					void remove(const QString &name);
-					QVariant data(const QModelIndex& index, int role) const override;
-
-					Q_INVOKABLE QString getNameFromValue(quint32 value);
-					Q_INVOKABLE int getIndexFromValue(quint32 value);
-					Q_INVOKABLE int getValueFromIndex(int value) const;
-					Q_INVOKABLE const QVariant &names();
-
-				private:
-					QMap<QString, quint32> m_values;
-					QVariant m_keys;
-					QHash<int, QByteArray> roleNames() const override;
-				};
+            {
                 class Variable : public QObject, public interfaces::IVariable, public Entity<data::Variable, Variable>
                 {
 					Q_OBJECT
@@ -58,15 +34,13 @@ namespace dnai
 	                const QString &value() const override;
 	                bool setValue(const QString& value) override;
 
-					static EntityList *variables();
-					static VarTypeList *varTypes();
+                    static EntityList *variables();
 
 				signals:
                     void varTypeChanged(QUuid id);
 					void valueChanged(const QString &variant);
 
                 private:
-					static VarTypeList *m_varTypes;
 					static EntityList *m_variables;
 				};
 			}
