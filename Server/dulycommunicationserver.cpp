@@ -1,3 +1,4 @@
+#include "packagemanager.h"
 #include "dulycommunicationserver.h"
 
 DulyCommunicationServer::DulyCommunicationServer(QTcpSocket *socket)
@@ -26,9 +27,12 @@ void DulyCommunicationServer::start() {
 }
 
 void DulyCommunicationServer::onRead() {
+    PackageManager<DulyCommunicationServer> packageManager;
     qDebug() << m_socket->readBufferSize();
     // note that QByteArray can be casted to char * and const char *
     QByteArray data = m_socket->readAll();
+
+    packageManager << data;
 
     qDebug() << data;
 }

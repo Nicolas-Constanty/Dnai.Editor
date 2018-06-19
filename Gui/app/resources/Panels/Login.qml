@@ -16,8 +16,8 @@ Item {
     property Modal popup
     property int popupWidth: 350
     property int popupHeight: inputField.childrenRect.height + 40
-    property string urlForgotPassword: "https://preprod.dnai.io/users/forgot-your-password/"
-    property string urlCreateAccount: "https://preprod.dnai.io/users/register/"
+    property string urlForgotPassword: "https://dnai.io/users/forgot-your-password/"
+    property string urlCreateAccount: "https://dnai.io/users/register/"
     height: popupHeight
     width: popupWidth
 
