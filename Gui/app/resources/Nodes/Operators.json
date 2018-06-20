@@ -461,8 +461,12 @@
                 "While": {
                     "name": "while",
                     "description": "",
-                    "instruction_id": 28,
-                    "construction": [1]
+                    "instruction_id": 27,
+                    "construction": [],
+                    "inputs": 1,
+                    "input_names": ["condition"],
+                    "in": 1,
+                    "out": 2
                 }
             }
         }

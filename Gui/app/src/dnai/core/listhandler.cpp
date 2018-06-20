@@ -42,13 +42,18 @@ namespace dnai
 
         void ListHandler::refreshTypes()
         {
-            for (models::Entity *curr : pendingLists)
+            for (std::list<models::Entity *>::iterator it = pendingLists.begin(); it != pendingLists.end();)
             {
-                models::ListType *data = curr->guiModel<models::ListType>();
+                models::ListType *data = (*it)->guiModel<models::ListType>();
 
                 if (manager.contains(data->storedType()))
                 {
-                    setType(curr->id(), manager.getEntity(data->storedType())->id(), false);
+                    setType((*it)->id(), manager.getEntity(data->storedType())->id(), false);
+                    it = pendingLists.erase(it);
+                }
+                else
+                {
+                    ++it;
                 }
             }
         }

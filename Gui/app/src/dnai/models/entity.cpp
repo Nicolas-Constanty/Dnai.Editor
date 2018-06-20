@@ -36,7 +36,7 @@ namespace dnai
 
 		Entity::~Entity()
         {
-            qDebug() << "~ Entity: " << fullName();
+            qDebug() << "~ Entity: " << name();
 			delete m_dataCore;
 			delete m_dataGUI;
             delete m_editableProperty;
