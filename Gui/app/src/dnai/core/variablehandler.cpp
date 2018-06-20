@@ -48,10 +48,7 @@ namespace dnai
                 if (entity.name() != "this")
                     m_pendingVar.push_back(&entity);
             }
-            else
-            {
-                refreshVariables(entity);
-            }
+            refreshVariables();
         }
 
         void VariableHandler::setType(quint32 var, quint32 typ, bool save)
@@ -101,15 +98,15 @@ namespace dnai
             }));
         }
 
-        void VariableHandler::refreshVariables(models::Entity &declared)
+        void VariableHandler::refreshVariables()
         {
             for (std::list<models::Entity *>::iterator it = m_pendingVar.begin(); it != m_pendingVar.end();)
             {
                 models::Variable *data = (*it)->guiModel<models::Variable>();
 
-                if (data->varType() == declared.guid())
+                if (manager.contains(data->varType()))
                 {
-                    setType((*it)->id(), declared.id(), false);
+                    setType((*it)->id(), manager.getEntity(data->varType())->id(), false);
                     if (!data->value().isEmpty())
                         setValue((*it)->id(), data->value(), false);
                     it = m_pendingVar.erase(it);

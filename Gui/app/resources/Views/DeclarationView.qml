@@ -170,13 +170,18 @@ Item {
                         NumberAnimation { property: "scale"; to: 1.0 }
                     }
                     footer: Row {
+                        id: _addRow
+
                         topPadding: 15
                         layoutDirection: Qt.RightToLeft
                         width: _sublist.width
                         spacing: 5
+
+                        property int itemWidth: (_sublist.width - spacing * (children.length - 1)) / children.length
+
                         AddButton {
                             id: _addContext
-                            width: 45
+                            width: _addRow.itemWidth
                             visible: (modelData.parentRef === null || modelData.parentRef.entityType === CoreEnums.CONTEXT)
                             onPressed: {
 //                                console.log(idx)
@@ -192,7 +197,7 @@ Item {
                             id: _addClass
                             property int type: CoreEnums.OBJECT_TYPE
                             decoration.color: AppSettings.theme["entities"][Number(type).toString()]["color"]
-                            width: 45
+                            width: _addRow.itemWidth
                             onPressed: {
                                 var name = proj.generateUniqueChildName(modelData.parentRef);
 
@@ -204,7 +209,7 @@ Item {
                             id: _addFunction
                             property int type: CoreEnums.FUNCTION
                             decoration.color: AppSettings.theme["entities"][Number(type).toString()]["color"]
-                            width: 45
+                            width: _addRow.itemWidth
                             onPressed: {
                                 var name = proj.generateUniqueChildName(modelData.parentRef);
 
@@ -217,7 +222,7 @@ Item {
                             visible: (modelData.parentRef === null || modelData.parentRef.entityType === CoreEnums.CONTEXT || modelData.parentRef.entityType === CoreEnums.OBJECT_TYPE)
                             property int type: CoreEnums.ENUM_TYPE
                             decoration.color: AppSettings.theme["entities"][Number(type).toString()]["color"]
-                            width: 45
+                            width: _addRow.itemWidth
                             onPressed: {
                                 var name = proj.generateUniqueChildName(modelData.parentRef);
 
@@ -229,7 +234,19 @@ Item {
                             id: _addVariable
                             property int type: CoreEnums.VARIABLE
                             decoration.color: AppSettings.theme["entities"][Number(type).toString()]["color"]
-                            width: 45
+                            width: _addRow.itemWidth
+                            onPressed: {
+                                var name = proj.generateUniqueChildName(modelData.parentRef);
+
+                                proj.addEntityColumnUid(modelData.parentRef.id, name, modelData.listIndex)
+                                Controller.declarator.declare(modelData.parentRef.id, type, name)
+                            }
+                        }
+                        AddButton {
+                            id: _addList
+                            property int type: CoreEnums.LIST_TYPE
+                            decoration.color: AppSettings.theme["entities"][Number(type).toString()]["color"]
+                            width: _addRow.itemWidth
                             onPressed: {
                                 var name = proj.generateUniqueChildName(modelData.parentRef);
 

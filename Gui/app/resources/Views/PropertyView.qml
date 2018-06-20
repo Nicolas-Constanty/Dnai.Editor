@@ -111,9 +111,10 @@ Rectangle {
                         {
                             var t = md["guiProperties"]["varType"]
 
-                            var varTypeView = createProperty("resources/Properties/VarTypeProperty.qml", {
+                            var varTypeView = createProperty("resources/Properties/SetTypeProperty.qml", {
                                 "name": "Type",
-                                "model": md
+                                "model": md,
+                                "prop": "varType"
                             });
 
                             varTypeView.typeChanged.connect(function(newTyp){
@@ -260,6 +261,17 @@ Rectangle {
                                     Controller.Class.setFunctionAsMember(md.id, name);
                                 else
                                     Controller.Class.setFunctionAsStatic(md.id, name);
+                            });
+                        }
+                        else if (val === CoreEnums.LIST_TYPE)
+                        {
+                            var listTypeView = createProperty("resources/Properties/SetTypeProperty.qml", {
+                                "name": "Type",
+                                "model": md,
+                                "prop": "storedType"
+                            });
+                            listTypeView.typeChanged.connect(function(newTyp){
+                                Controller.List.setType(md.id, newTyp.id);
                             });
                         }
                     }

@@ -81,7 +81,7 @@ namespace dnai
 			QString m_descrition;
 			int m_inputs = 0;
 			int m_outputs = 0;
-			int m_instructionId = 0;
+            int m_instructionId = -1;
 			QString m_nodeName;
             int m_type = -1;
             QList<qint32> m_construction;

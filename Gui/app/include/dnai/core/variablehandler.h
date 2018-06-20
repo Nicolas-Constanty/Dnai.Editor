@@ -30,7 +30,7 @@ namespace dnai
             Q_INVOKABLE void setValue(quint32 variable, QString const &value, bool save = true);
 
         private:
-            void refreshVariables(models::Entity &declared);
+            void refreshVariables();
             models::gui::declarable::Variable *getVariableData(::core::EntityID variable, bool throws = false);
 
         public:

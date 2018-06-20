@@ -37,9 +37,11 @@ GenericNode {
     }
 
     RoundedRectangle {
+        id: headerNode
+
         x: borderWidth * 2
         y: borderWidth * 2
-        id: headerNode
+
         implicitWidth: if (_name.width > _description.width
                                && _name.width * 1.5 > 100)
                            _name.width * 1.5
@@ -48,6 +50,7 @@ GenericNode {
                        else
                            200
         implicitHeight: _name.height * 1.3 + _description.height * 1.3
+
         bottomLeft: false
         bottomRight: false
         topRight: false
@@ -56,6 +59,7 @@ GenericNode {
         borderColor: "#7C7C7C"
         fillColor: "#aa101010"
         antialiasing: true
+
         MLabel {
             id: _name
             text:  _node.model.name
@@ -85,8 +89,15 @@ GenericNode {
 
         x: borderWidth * 2
         y: borderWidth * 2
+
         width: headerNode.width
         height: childrenRect.height + 2 * _node.paddingColumn
+
+        anchors.top: headerNode.bottom
+        anchors.topMargin: headerNode.borderWidth + 1
+
+        visible: _node.state === "Open"
+
         radius: headerNode.radius
         borderWidth: headerNode.borderWidth
         borderColor: headerNode.borderColor
@@ -95,9 +106,6 @@ GenericNode {
         topLeft: false
         topRight: false
         bottomLeft: false
-        anchors.top: headerNode.bottom
-        anchors.topMargin: headerNode.borderWidth + 1
-        visible: _node.state === "Open"
 
         //Flow in list
         Column {

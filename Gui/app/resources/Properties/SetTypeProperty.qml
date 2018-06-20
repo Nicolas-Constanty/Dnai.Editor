@@ -33,7 +33,7 @@ BaseProperty {
         VarTypeComboBox {
             id: _type
 
-            typeGuid: model ? model.guiProperties.varType : 0
+            typeGuid: model ? model.guiProperties[prop] : 0
 
             height: parent.height
 
@@ -48,9 +48,16 @@ BaseProperty {
     }
 
     onModelChanged: {
-        if (model)
+        if (model && prop)
         {
-            _type.typeGuid = model.guiProperties.varType;
+            _type.typeGuid = model.guiProperties[prop];
+        }
+    }
+
+    onPropChanged: {
+        if (model && prop)
+        {
+            _type.typeGuid = model.guiProperties[prop];
         }
     }
 }

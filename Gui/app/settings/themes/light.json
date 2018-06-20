@@ -65,6 +65,10 @@
         "1": {
             "color": "#FB8C00",
             "icon": "variable.png"
+        },
+        "6": {
+            "color": "#C4F9FF",
+            "icon": "list.png"
         }
     },
     "menu": {

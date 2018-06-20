@@ -17,7 +17,7 @@ namespace dnai
         class FunctionHandler : public QObject
         {
             Q_OBJECT
-            Q_PROPERTY(InstructionHandler *instruction READ instruction)
+            Q_PROPERTY(InstructionHandler *instruction READ instruction CONSTANT)
 
         public:
             FunctionHandler(EntityManager &manager);
@@ -64,9 +64,9 @@ namespace dnai
             void onAddInstructionError(::core::EntityID function, ::core::INSTRUCTION type, std::list<::core::EntityID> const &arguments, QString const &messsage);
 
         signals:
-            void instructionAdded(models::Entity *function, models::gui::Instruction *instruction);
+            void instructionAdded(models::Entity *func, models::gui::Instruction *instruction);
             void addInstructionError(quint32 func, quint32 instrType, QList<quint32> const &args, QString const &msg);
-            void entryPointSet(models::Entity *func, models::gui::Instruction *entry);
+            void entryPointSet(dnai::models::Entity *func, dnai::models::gui::Instruction *entry);
             void parameterSet(models::Entity *func, QString const &param);
             void returnSet(models::Entity *func, QString const &param);
 

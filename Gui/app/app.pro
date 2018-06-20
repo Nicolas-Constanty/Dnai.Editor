@@ -128,7 +128,8 @@ SOURCES += \
     src/dnai/models/gui/flowlink.cpp \
     src/dnai/core/globalhandler.cpp \
     src/dnai/core/objecthandler.cpp \
-    src/dnai/utils/random_utils.cpp
+    src/dnai/utils/random_utils.cpp \
+    src/dnai/core/listhandler.cpp
 
 
 RESOURCES += qml.qrc

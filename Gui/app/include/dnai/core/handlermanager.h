@@ -28,6 +28,7 @@ namespace dnai
             Q_PROPERTY(FunctionHandler *Function READ function CONSTANT)
             Q_PROPERTY(GlobalHandler *global READ global CONSTANT)
             Q_PROPERTY(ObjectHandler *Class READ getClass CONSTANT)
+            Q_PROPERTY(ListHandler *List READ List CONSTANT)
 
             Q_PROPERTY(QList<QVariant> types READ types NOTIFY typesChanged)
 
@@ -51,6 +52,7 @@ namespace dnai
             FunctionHandler *function();
             GlobalHandler *global();
             ObjectHandler *getClass();
+            ListHandler *List();
 
             /*
              * Inner c++ properties
@@ -91,6 +93,7 @@ namespace dnai
             FunctionHandler m_function;
             GlobalHandler m_global;
             ObjectHandler m_object;
+            ListHandler m_list;
 
         private:
             QList<models::Entity *>    m_types;

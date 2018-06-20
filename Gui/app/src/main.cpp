@@ -135,6 +135,7 @@ static void registerModels()
     qmlRegisterModels(dnai::models::Column, "Column");
     qmlRegisterModels(dnai::models::EntityTree, "EntityTree");
     qmlRegisterModels(dnai::models::gui::declarable::EnumType, "EnumType");
+    qmlRegisterModels(dnai::models::gui::Instruction, "Instruction");
 }
 
 static void registerCore() {
@@ -143,9 +144,9 @@ static void registerCore() {
             || !qmlRegisterUncreatableType<dnai::gcore::VariableHandler>("DNAI.Core", 1, 0, "VariableHandler", "Use DNAI.Core.Controller.variable")
             || !qmlRegisterUncreatableType<dnai::gcore::EnumHandler>("DNAI.Core", 1, 0, "EnumerationHandler", "Use DNAI.Core.Controller.enumeration")
             || !qmlRegisterUncreatableType<dnai::gcore::FunctionHandler>("DNAI.Core", 1, 0, "FunctionHandler", "Use DNAI.Core.Controller.function")
-            //instruction handler
+            || !qmlRegisterUncreatableType<dnai::gcore::InstructionHandler>("DNAI.Core", 1, 0, "InstructionHandler", "Use DNAI.Core.Controller.function.instruction")
             //list handler
-            //object handler
+            || !qmlRegisterUncreatableType<dnai::gcore::ObjectHandler>("DNAI.Core", 1, 0, "ObjectHandler", "Use DNAI.Core.Controller.Class")
             || !qmlRegisterSingletonType<dnai::gcore::HandlerManager>("DNAI.Core", 1, 0, "Controller", core_controller_singleton_provider))
         qDebug() << "Failed to register one core type";
 }

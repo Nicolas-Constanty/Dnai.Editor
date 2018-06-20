@@ -555,12 +555,29 @@ namespace dnai
 
         updateContextMenuModel(entity);
 
-        const auto instructionsMap = m_contextMenuModel->instructions();
         QList<views::GenericNode *> nodes;
+
+        /*
+         * Create entry point node
+         */
+        QQmlComponent nodeEntryPoint(App::getEngineInstance(), "qrc:/resources/Components/NodeEntryPoint.qml");
+        views::GenericNode *entryPointObj = dynamic_cast<views::GenericNode *>(qobject_cast<QQuickItem*>(nodeEntryPoint.beginCreate(App::getEngineInstance()->rootContext())));
+        QQmlProperty function_entity(entryPointObj, "function_entity", App::getEngineInstance());
+        models::gui::Instruction *entryInstr = function->entryPoint();
+
+        function_entity.write(QVariant::fromValue(entity));
+        entryPointObj->setParentItem(canvas->content());
+        entryPointObj->setX(function->entryPointX());
+        entryPointObj->setY(function->entryPointY());
+        nodeEntryPoint.completeCreate();
+
+        nodes.append(entryPointObj);
 
         /*
          * Create all nodes
          */
+        const auto instructionsMap = m_contextMenuModel->instructions();
+
         for (models::gui::Instruction *instruction : function->instructions())
 		{
             QString nodePath = instruction->nodeMenuPath();
@@ -628,19 +645,8 @@ namespace dnai
 		}
 
         /*
-         * Create entry point node
+         * Link entry point
          */
-        QQmlComponent nodeEntryPoint(App::getEngineInstance(), "qrc:/resources/Components/NodeEntryPoint.qml");
-        views::GenericNode *entryPointObj = dynamic_cast<views::GenericNode *>(qobject_cast<QQuickItem*>(nodeEntryPoint.beginCreate(App::getEngineInstance()->rootContext())));
-        QQmlProperty function_entity(entryPointObj, "function_entity", App::getEngineInstance());
-        models::gui::Instruction *entryInstr = function->entryPoint();
-
-        function_entity.write(QVariant::fromValue(entity));
-        entryPointObj->setParentItem(canvas->content());
-        entryPointObj->setX(function->entryPointX());
-        entryPointObj->setY(function->entryPointY());
-        nodeEntryPoint.completeCreate();
-
         if (entryInstr != nullptr)
         {
             for (auto node : nodes)
@@ -652,8 +658,6 @@ namespace dnai
                 }
             }
         }
-
-        nodes.append(entryPointObj);
     }
 
     QSettings *Editor::settings()
