@@ -10,8 +10,8 @@ jobs:
           command: |
             apt-get -qq update
             apt-get -q -y install git
-            git submodule sync
-            git submodule update --init
+            git pull --recurse-submodules
+            git submodule update --remote --recursive
       - run:
           name: init_qt_variables
           command: |
