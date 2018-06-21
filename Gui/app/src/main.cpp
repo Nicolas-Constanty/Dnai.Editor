@@ -192,12 +192,12 @@ int main(int argc, char *argv[])
     dnai::App app(argc, argv);
 
 #if defined(_WIN32) && defined(_MSC_VER)
-    WinToast::instance()->setAppName(L"DNAI");
-    WinToast::instance()->setAppUserModelId(
-                WinToast::configureAUMI(L"SaltyStudio", L"DNAI", L"DNAI.app", L"20161006"));
-    if (!WinToast::instance()->initialize()) {
-        qDebug() << "Error, your system in not compatible!";
-    }
+//    WinToast::instance()->setAppName(L"DNAI");
+//    WinToast::instance()->setAppUserModelId(
+//                WinToast::configureAUMI(L"SaltyStudio", L"DNAI", L"DNAI.app", L"20161006"));
+//    if (!WinToast::instance()->initialize()) {
+//        qDebug() << "Error, your system in not compatible!";
+//    }
 #endif
 
     dnai::Editor::instance().setAppName(argv[0]);
