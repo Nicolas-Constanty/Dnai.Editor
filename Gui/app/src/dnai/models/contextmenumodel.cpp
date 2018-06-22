@@ -992,8 +992,11 @@ namespace dnai
             ContextMenuItem *torm = m_hash[fullPath];
             models::Entity *related = m_items_entity[fullPath];
 
-            torm->parentItem()->removeOne(torm);
-            m_hash.remove(fullPath);
+            if (torm)
+            {
+                torm->parentItem()->removeOne(torm);
+                m_hash.remove(fullPath);
+            }
             if (related != nullptr)
             {
                 m_items_entity.remove(fullPath);
@@ -1036,6 +1039,8 @@ namespace dnai
                              this, SLOT(onObjectAttributeRenamed(models::Entity*,QString,QString)));
             QObject::connect(dnai::gcore::HandlerManager::Instance().getClass(), SIGNAL(attributeRemoved(models::Entity*,QString)),
                              this, SLOT(onObjectAttributeRemoved(models::Entity*,QString)));
+            QObject::connect(dnai::gcore::HandlerManager::Instance().List(), SIGNAL(typeSet(dnai::models::Entity*,dnai::models::Entity*)),
+                             this, SLOT(onListTypeSet(dnai::models::Entity*,dnai::models::Entity*)));
         }
 
         void ContextMenuModel::onEntityDeclared(Entity *declared)
@@ -1094,6 +1099,13 @@ namespace dnai
             Q_UNUSED(name)
 
             refreshItems(obj);
+        }
+
+        void ContextMenuModel::onListTypeSet(Entity *lst, Entity *type)
+        {
+            Q_UNUSED(type)
+
+            refreshItems(lst);
         }
 	}
 }

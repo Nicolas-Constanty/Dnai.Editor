@@ -41,12 +41,12 @@ CanvasNode {
         }
 
         onChildrenChanged: {
-            console.log("==C==");
+            /*console.log("==C==");
             for (var child in children)
             {
                 console.log("Child ", child, ": ", children[child]);
             }
-            console.log("=====");
+            console.log("=====");*/
         }
 
         Connections {

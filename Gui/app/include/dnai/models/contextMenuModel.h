@@ -1,4 +1,4 @@
-#ifndef DNAI_MODELS_CONTEXT_MENU_MODEL_H
+﻿#ifndef DNAI_MODELS_CONTEXT_MENU_MODEL_H
 #define DNAI_MODELS_CONTEXT_MENU_MODEL_H
 #include <QAbstractItemModel>
 #include <QHash>
@@ -149,6 +149,7 @@ namespace dnai
             void onObjectAttributeAdded(models::Entity *obj, QString name, models::Entity *type, VISIBILITY visi);
             void onObjectAttributeRenamed(models::Entity *obj, QString name, QString newName);
             void onObjectAttributeRemoved(models::Entity *obj, QString name);
+            void onListTypeSet(dnai::models::Entity *lst, dnai::models::Entity *type);
 
 		private:
 			void parseJsonDocument(const QJsonObject &json);
