@@ -9,7 +9,7 @@ ComboBox {
 
     property var typeGuid
 
-    signal typeChanged(var oldType, var newType)
+    signal typeChanged(var newType)
 
     model: Controller.types
     textRole: "name"
@@ -28,10 +28,6 @@ ComboBox {
     }
 
     onCurrentIndexChanged: {
-        var boxType = Controller.getType(currentIndex);
-        var modelType = Controller.getEntity(typeGuid);
-
-        if (modelType.guid !== boxType.guid)
-            __this__.typeChanged(modelType, boxType);
+        __this__.typeChanged(Controller.getType(currentIndex));
     }
 }

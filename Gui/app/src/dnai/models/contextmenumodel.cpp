@@ -287,7 +287,39 @@ namespace dnai
             m_objectsSetter->setName("Set attributes");
             m_objects->appendChild(m_objectsSetter);
 
-			parseJsonDocument(doc);
+            /*
+             * Create Lists menu
+             */
+            m_lists = new ContextMenuItem();
+            m_lists->setName("Lists");
+            m_root->appendChild(m_lists);
+
+            m_appends = new ContextMenuItem();
+            m_appends->setName("Append");
+            m_lists->appendChild(m_appends);
+
+            m_inserts = new ContextMenuItem();
+            m_inserts->setName("Insert");
+            m_lists->appendChild(m_inserts);
+
+            m_removes = new ContextMenuItem();
+            m_removes->setName("Remove");
+            m_lists->appendChild(m_removes);
+
+            m_removesAt = new ContextMenuItem();
+            m_removesAt->setName("Remove At");
+            m_lists->appendChild(m_removesAt);
+
+            m_sizes = new ContextMenuItem();
+            m_sizes->setName("Size");
+            m_lists->appendChild(m_sizes);
+
+            m_foreachs = new ContextMenuItem();
+            m_foreachs->setName("Foreach");
+
+            parseJsonDocument(doc);
+
+            m_hash["/" + m_root->name() + "/Statements"]->appendChild(m_foreachs);
 		}
 
 		void ContextMenuModel::parseJsonDocument(const QJsonObject& json)
@@ -718,13 +750,214 @@ namespace dnai
             endInsertRows();
         }
 
+        void ContextMenuModel::appendList(Entity *entity)
+        {
+            models::ListType *data = entity->guiModel<models::ListType>();
+            models::Entity *stored = dnai::gcore::HandlerManager::Instance().getEntity(data->storedType());
+
+            /*
+             * Foreach
+             */
+            auto foreachins = new ContextMenuItem();
+            foreachins->setName(entity->name());
+            foreachins->setDescription("Iterate over " + entity->name() + " elements");
+            foreachins->setInputs(1);
+            foreachins->setInputNames({"array"});
+            foreachins->setOutputs(2);
+            foreachins->setOutputNames({"index", "element"});
+            foreachins->setFlowIn(1);
+            foreachins->setFlowOut(2);
+            foreachins->setType(entity->entityType());
+            foreachins->setInstructionId(dnai::enums::QInstructionID::FOREACH);
+            foreachins->setConstruction({stored->id()});
+
+            addItem(foreachins, m_foreachs, entity);
+
+            /*
+             * Insert
+             */
+            auto insertins = new ContextMenuItem();
+            insertins->setName(entity->name());
+            insertins->setDescription("Insert element in " + entity->name() + " at index");
+            insertins->setInputs(3);
+            insertins->setInputNames({"array", "element", "index"});
+            insertins->setOutputs(1);
+            insertins->setOutputNames({"count"});
+            insertins->setFlowIn(1);
+            insertins->setFlowOut(1);
+            insertins->setType(entity->entityType());
+            insertins->setInstructionId(dnai::enums::QInstructionID::INSERT);
+            insertins->setConstruction({stored->id()});
+
+            addItem(insertins, m_inserts, entity);
+
+            /*
+             * Apend
+             */
+            auto appendins = new ContextMenuItem();
+            appendins->setName(entity->name());
+            appendins->setDescription("Append an element in " + entity->name());
+            appendins->setInputs(2);
+            appendins->setInputNames({"array", "element"});
+            appendins->setOutputs(1);
+            appendins->setOutputNames({"count"});
+            appendins->setFlowIn(1);
+            appendins->setFlowOut(1);
+            appendins->setType(entity->entityType());
+            appendins->setInstructionId(dnai::enums::QInstructionID::APPEND);
+            appendins->setConstruction({stored->id()});
+
+            addItem(appendins, m_appends, entity);
+
+            /*
+             * Remove
+             */
+            auto removeins = new ContextMenuItem();
+            removeins->setName(entity->name());
+            removeins->setDescription("Remove an element from " + entity->name());
+            removeins->setInputs(2);
+            removeins->setInputNames({"array", "element"});
+            removeins->setOutputs(1);
+            removeins->setOutputNames({"removed"});
+            removeins->setFlowIn(1);
+            removeins->setFlowOut(1);
+            removeins->setType(entity->entityType());
+            removeins->setInstructionId(dnai::enums::QInstructionID::REMOVE);
+            removeins->setConstruction({stored->id()});
+
+            addItem(removeins, m_removes, entity);
+
+            /*
+             * Remove at
+             */
+            auto removeAtins = new ContextMenuItem();
+            removeAtins->setName(entity->name());
+            removeAtins->setDescription("Remove an element at index in " + entity->name());
+            removeAtins->setInputs(2);
+            removeAtins->setInputNames({"array", "index"});
+            removeAtins->setOutputs(1);
+            removeAtins->setOutputNames({"removed"});
+            removeAtins->setFlowIn(1);
+            removeAtins->setFlowOut(1);
+            removeAtins->setType(entity->entityType());
+            removeAtins->setInstructionId(dnai::enums::QInstructionID::REMOVE_INDEX);
+            removeAtins->setConstruction({stored->id()});
+
+            addItem(removeAtins, m_removesAt, entity);
+
+            /*
+             * Size
+             */
+            auto sizeins = new ContextMenuItem();
+            sizeins->setName(entity->name());
+            sizeins->setDescription("Get the size of a " + entity->name());
+            sizeins->setInputs(1);
+            sizeins->setInputNames({"array"});
+            sizeins->setOutputs(1);
+            sizeins->setOutputNames({"count"});
+            sizeins->setFlowIn(1);
+            sizeins->setFlowOut(1);
+            sizeins->setType(entity->entityType());
+            sizeins->setInstructionId(dnai::enums::QInstructionID::SIZE);
+            sizeins->setConstruction({stored->id()});
+
+            addItem(sizeins, m_sizes, entity);
+
+            /*
+             * Binary operators
+             */
+            auto bopCat = new ContextMenuItem();
+            bopCat->setName(entity->name());
+
+            addItem(bopCat, m_hash["/__Root/operators/binaryOperator/others"], entity);
+
+            //access
+            auto accessins = new ContextMenuItem();
+            accessins->setName("Access");
+            accessins->setDescription("Get an element inside a " + entity->name());
+            accessins->setInputs(2);
+            accessins->setInputNames({"LeftOperand", "RightOperand"});
+            accessins->setOutputs(1);
+            accessins->setOutputNames({"result"});
+            accessins->setType(entity->entityType());
+            sizeins->setInstructionId(dnai::enums::QInstructionID::ACCESS);
+            sizeins->setConstruction({entity->id(), 2, stored->id()});
+
+            addItem(accessins, bopCat, entity);
+
+            //add
+            auto addins = new ContextMenuItem();
+            addins->setName("Add");
+            addins->setDescription("Add two " + entity->name() + "each other");
+            addins->setInputs(2);
+            addins->setInputNames({"LeftOperand", "RightOperand"});
+            addins->setOutputs(1);
+            addins->setOutputNames({"result"});
+            addins->setType(entity->entityType());
+            addins->setInstructionId(dnai::enums::QInstructionID::ADD);
+            addins->setConstruction({entity->id(), entity->id(), entity->id()});
+
+            addItem(addins, bopCat, entity);
+
+            //sub
+            auto subins = new ContextMenuItem();
+            subins->setName("Substract");
+            subins->setDescription("Substract two " + entity->name() + "each other");
+            subins->setInputs(2);
+            subins->setInputNames({"LeftOperand", "RightOperand"});
+            subins->setOutputs(1);
+            subins->setOutputNames({"result"});
+            subins->setType(entity->entityType());
+            subins->setInstructionId(dnai::enums::QInstructionID::SUB);
+            subins->setConstruction({entity->id(), entity->id(), entity->id()});
+
+            addItem(subins, bopCat, entity);
+
+            /*
+             * Logical operators
+             */
+            auto logCat = new ContextMenuItem();
+            logCat->setName(entity->name());
+
+            addItem(logCat, m_hash["/__Root/operators/binaryOperator/logical"], entity);
+
+            //equal
+            auto eqins = new ContextMenuItem();
+            eqins->setName("Equal");
+            eqins->setDescription("Check if 2 " + entity->name() + " contains same elements");
+            eqins->setInputs(2);
+            eqins->setInputNames({"LeftOperand", "RightOperand"});
+            eqins->setOutputs(1);
+            eqins->setOutputNames({"result"});
+            eqins->setType(entity->entityType());
+            eqins->setInstructionId(dnai::enums::QInstructionID::EQUAL);
+            eqins->setConstruction({entity->id(), entity->id()});
+
+            addItem(eqins, logCat, entity);
+
+            //different
+            auto difins = new ContextMenuItem();
+            difins->setName("Different");
+            difins->setDescription("Check if 2 " + entity->name() + " contains different elements");
+            difins->setInputs(2);
+            difins->setInputNames({"LeftOperand", "RightOperand"});
+            difins->setOutputs(1);
+            difins->setOutputNames({"result"});
+            difins->setType(entity->entityType());
+            difins->setInstructionId(dnai::enums::QInstructionID::DIFFERENT);
+            difins->setConstruction({entity->id(), entity->id()});
+
+            addItem(difins, logCat, entity);
+        }
+
         void ContextMenuModel::addItem(ContextMenuItem *item, ContextMenuItem *parent, models::Entity *related)
         {
             parent->appendChild(item);
 
             QString fullpath = item->fullPath(); //fullpath need to be generated after parent have been set
 
-            m_hash[fullpath] = item;
+            if (item->instructionId() != core::UNDEFINED_ID)
+                m_hash[fullpath] = item;
             if (related != nullptr)
             {
                 m_entity_items[related].append(fullpath);
@@ -747,6 +980,10 @@ namespace dnai
             else if (related->coreModel()->entityType() == ENTITY::OBJECT_TYPE)
             {
                 appendObject(related);
+            }
+            else if (related->coreModel()->entityType() == ENTITY::LIST_TYPE)
+            {
+                appendList(related);
             }
         }
 
