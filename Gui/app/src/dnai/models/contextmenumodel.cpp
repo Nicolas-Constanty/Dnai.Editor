@@ -862,6 +862,92 @@ namespace dnai
             sizeins->setConstruction({stored->id()});
 
             addItem(sizeins, m_sizes, entity);
+
+            /*
+             * Binary operators
+             */
+            auto bopCat = new ContextMenuItem();
+            bopCat->setName(entity->name());
+
+            addItem(bopCat, m_hash["/__Root/operators/binaryOperator/others"], entity);
+
+            //access
+            auto accessins = new ContextMenuItem();
+            accessins->setName("Access");
+            accessins->setDescription("Get an element inside a " + entity->name());
+            accessins->setInputs(2);
+            accessins->setInputNames({"LeftOperand", "RightOperand"});
+            accessins->setOutputs(1);
+            accessins->setOutputNames({"result"});
+            accessins->setType(entity->entityType());
+            sizeins->setInstructionId(dnai::enums::QInstructionID::ACCESS);
+            sizeins->setConstruction({entity->id(), 2, stored->id()});
+
+            addItem(accessins, bopCat, entity);
+
+            //add
+            auto addins = new ContextMenuItem();
+            addins->setName("Add");
+            addins->setDescription("Add two " + entity->name() + "each other");
+            addins->setInputs(2);
+            addins->setInputNames({"LeftOperand", "RightOperand"});
+            addins->setOutputs(1);
+            addins->setOutputNames({"result"});
+            addins->setType(entity->entityType());
+            addins->setInstructionId(dnai::enums::QInstructionID::ADD);
+            addins->setConstruction({entity->id(), entity->id(), entity->id()});
+
+            addItem(addins, bopCat, entity);
+
+            //sub
+            auto subins = new ContextMenuItem();
+            subins->setName("Substract");
+            subins->setDescription("Substract two " + entity->name() + "each other");
+            subins->setInputs(2);
+            subins->setInputNames({"LeftOperand", "RightOperand"});
+            subins->setOutputs(1);
+            subins->setOutputNames({"result"});
+            subins->setType(entity->entityType());
+            subins->setInstructionId(dnai::enums::QInstructionID::SUB);
+            subins->setConstruction({entity->id(), entity->id(), entity->id()});
+
+            addItem(subins, bopCat, entity);
+
+            /*
+             * Logical operators
+             */
+            auto logCat = new ContextMenuItem();
+            logCat->setName(entity->name());
+
+            addItem(logCat, m_hash["/__Root/operators/binaryOperator/logical"], entity);
+
+            //equal
+            auto eqins = new ContextMenuItem();
+            eqins->setName("Equal");
+            eqins->setDescription("Check if 2 " + entity->name() + " contains same elements");
+            eqins->setInputs(2);
+            eqins->setInputNames({"LeftOperand", "RightOperand"});
+            eqins->setOutputs(1);
+            eqins->setOutputNames({"result"});
+            eqins->setType(entity->entityType());
+            eqins->setInstructionId(dnai::enums::QInstructionID::EQUAL);
+            eqins->setConstruction({entity->id(), entity->id()});
+
+            addItem(eqins, logCat, entity);
+
+            //different
+            auto difins = new ContextMenuItem();
+            difins->setName("Different");
+            difins->setDescription("Check if 2 " + entity->name() + " contains different elements");
+            difins->setInputs(2);
+            difins->setInputNames({"LeftOperand", "RightOperand"});
+            difins->setOutputs(1);
+            difins->setOutputNames({"result"});
+            difins->setType(entity->entityType());
+            difins->setInstructionId(dnai::enums::QInstructionID::DIFFERENT);
+            difins->setConstruction({entity->id(), entity->id()});
+
+            addItem(difins, logCat, entity);
         }
 
         void ContextMenuModel::addItem(ContextMenuItem *item, ContextMenuItem *parent, models::Entity *related)
