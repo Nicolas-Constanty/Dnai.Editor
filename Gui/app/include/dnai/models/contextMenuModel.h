@@ -128,6 +128,7 @@ namespace dnai
 			void clearParameters();
 			void clearReturns();
             void appendObject(Entity *entity);
+            void appendList(Entity *entity);
 
         private:
             void addItem(ContextMenuItem *item, ContextMenuItem *parent, models::Entity *related = nullptr);
@@ -170,6 +171,14 @@ namespace dnai
             ContextMenuItem* m_objects;
             ContextMenuItem* m_objectsGetter;
             ContextMenuItem* m_objectsSetter;
+
+            ContextMenuItem* m_lists;
+            ContextMenuItem* m_foreachs;
+            ContextMenuItem* m_appends;
+            ContextMenuItem* m_inserts;
+            ContextMenuItem* m_removes;
+            ContextMenuItem* m_removesAt;
+            ContextMenuItem* m_sizes;
 
         private:
             QHash<models::Entity *, QList<QString>> m_entity_items;

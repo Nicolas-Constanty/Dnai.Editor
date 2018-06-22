@@ -283,6 +283,19 @@ GenericNode {
                     Component.onCompleted: {
                         name = _node.model.outputNames[index]
                     }
+
+                    Text {
+                        id: _outputName
+
+                        anchors.right: parent.left
+                        anchors.rightMargin: 5
+                        height: parent.height
+
+                        text: parent.name
+                        font.pointSize: 8
+
+                        color: "white"
+                    }
                 }
             }
         }
