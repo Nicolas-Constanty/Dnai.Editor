@@ -312,19 +312,19 @@ HEADERS += \
 DEPENDPATH += $${PWD}/../lib/
 INCLUDEPATH += $${PWD}/../lib/lcore_client/include/
 
-win32-msvc*{
-    DEPENDPATH += $${PWD}/../lib/lwintoast/
-    LIBS += -lwintoast
-} win32-g++ {
-} macx-clang* {
-#QT += core
-#QT += macextras
-#QT += gui
-    #DEPENDPATH += $${PWD}/../lib/MACToast/
-    #LIBS +=  -lMACToast
-    #LIBS += -framework Foundation
-    #INCLUDEPATH += /System/Library/Frameworks/Foundation.framework/Versions/C/Headers
-}
+#win32-msvc*{
+#    DEPENDPATH += $${PWD}/../lib/lwintoast/
+#    LIBS += -lwintoast
+#} win32-g++ {
+#} macx-clang* {
+##QT += core
+##QT += macextras
+##QT += gui
+#    #DEPENDPATH += $${PWD}/../lib/MACToast/
+#    #LIBS +=  -lMACToast
+#    #LIBS += -framework Foundation
+#    #INCLUDEPATH += /System/Library/Frameworks/Foundation.framework/Versions/C/Headers
+#}
 
 
 #begin library network
