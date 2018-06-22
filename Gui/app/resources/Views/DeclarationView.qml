@@ -38,6 +38,7 @@ Item {
                 anchors.left: parent.left
                 anchors.right: _commentbutton.left
                 placeholderText: "Section Title ..."
+                enableBar: false
             }
             ButtonAwesome {
                 id: _commentbutton
