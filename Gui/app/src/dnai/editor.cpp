@@ -471,6 +471,7 @@ namespace dnai
         m_mainView = static_cast<QQuickWindow*>(mainView);
     }
 
+
     void Editor::addProject(QString const &proj_name, QString const &proj_desc) {
         QString glpath = "file:///" + m_solution->path() + "/" + proj_name + ".dnaiproject";
 
@@ -530,6 +531,10 @@ namespace dnai
 
     QQuickWindow *Editor::mainView()  {
         return m_mainView;
+    }
+
+    QQuickItem *Editor::qmlMainView() {
+        return m_mainView->contentItem();
     }
 
     void Editor::registerPropertyView(QQuickItem *view)

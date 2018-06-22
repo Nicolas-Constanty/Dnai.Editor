@@ -156,5 +156,6 @@
         <file>resources/Components/VarTypeComboBox.qml</file>
         <file>resources/Images/list.png</file>
         <file>resources/Properties/SetTypeProperty.qml</file>
+        <file>resources/Components/MouseAreaToolTips.qml</file>
     </qresource>
 </RCC>

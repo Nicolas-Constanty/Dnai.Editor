@@ -102,6 +102,7 @@ namespace dnai
 		                                const QString &proj_name,
 		                                const QString &proj_desc);
 		Q_INVOKABLE QQuickWindow *mainView();
+        Q_INVOKABLE QQuickItem *qmlMainView();
 		Q_INVOKABLE void registerPropertyView(QQuickItem *view);
 		Q_INVOKABLE QQuickItem* propertyView() const;
 		Q_INVOKABLE void loadFunction(dnai::models::Entity *entity) const;

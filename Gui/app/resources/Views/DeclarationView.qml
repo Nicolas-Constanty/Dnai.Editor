@@ -38,6 +38,7 @@ Item {
                 anchors.left: parent.left
                 anchors.right: _commentbutton.left
                 placeholderText: "Section Title ..."
+                enableBar: false
             }
             ButtonAwesome {
                 id: _commentbutton
@@ -183,6 +184,8 @@ Item {
                             id: _addContext
                             width: _addRow.itemWidth
                             visible: (modelData.parentRef === null || modelData.parentRef.entityType === CoreEnums.CONTEXT)
+                            toolTipsText: "Context"
+
                             onPressed: {
 //                                console.log(idx)
 //                                console.log(modelData.listIndex)
@@ -198,6 +201,8 @@ Item {
                             property int type: CoreEnums.OBJECT_TYPE
                             decoration.color: AppSettings.theme["entities"][Number(type).toString()]["color"]
                             width: _addRow.itemWidth
+                            toolTipsText: "Class"
+
                             onPressed: {
                                 var name = proj.generateUniqueChildName(modelData.parentRef);
 
@@ -210,6 +215,8 @@ Item {
                             property int type: CoreEnums.FUNCTION
                             decoration.color: AppSettings.theme["entities"][Number(type).toString()]["color"]
                             width: _addRow.itemWidth
+                            toolTipsText: "Function"
+
                             onPressed: {
                                 var name = proj.generateUniqueChildName(modelData.parentRef);
 
@@ -223,6 +230,8 @@ Item {
                             property int type: CoreEnums.ENUM_TYPE
                             decoration.color: AppSettings.theme["entities"][Number(type).toString()]["color"]
                             width: _addRow.itemWidth
+                            toolTipsText: "Enum"
+
                             onPressed: {
                                 var name = proj.generateUniqueChildName(modelData.parentRef);
 
@@ -233,6 +242,8 @@ Item {
                         AddButton {
                             id: _addVariable
                             property int type: CoreEnums.VARIABLE
+                            toolTipsText: "Variable"
+
                             decoration.color: AppSettings.theme["entities"][Number(type).toString()]["color"]
                             width: _addRow.itemWidth
                             onPressed: {
@@ -245,6 +256,8 @@ Item {
                         AddButton {
                             id: _addList
                             property int type: CoreEnums.LIST_TYPE
+                            toolTipsText: "List"
+
                             decoration.color: AppSettings.theme["entities"][Number(type).toString()]["color"]
                             width: _addRow.itemWidth
                             onPressed: {
