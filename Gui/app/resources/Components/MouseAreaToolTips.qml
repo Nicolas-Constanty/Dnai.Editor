@@ -10,8 +10,8 @@ MouseArea {
     id: mouseArea
     hoverEnabled: true
 
-    property int absX: mapToGlobal(mouseArea.mouseX + mouseArea.x, mouseArea.mouseY).x
-    property int absY: mapToGlobal(mouseArea.mouseX + mouseArea.x, mouseArea.mouseY).y
+    property int absX: Editor.qmlMainView().mapFromItem(mouseArea, mouseArea.mouseX, mouseArea.mouseY).x
+    property int absY: Editor.qmlMainView().mapFromItem(mouseArea, mouseArea.mouseX, mouseArea.mouseY).y
 
     property string text: "Did you know"
 
@@ -19,8 +19,8 @@ MouseArea {
         id: rectId
         visible: mouseArea.containsMouse && timerId.timerTriggered
         parent: Editor.qmlMainView()
-        x: (mouseArea.absX + rectId.width) > Editor.qmlMainView().width ? mouseArea.absX - (rectId.width * 1) : mouseArea.absX
-        y: (mouseArea.absY + rectId.height) > Editor.qmlMainView().height ? mouseArea.absY - (rectId.height * 2) - 20 : mouseArea.absY - 20
+        x: (mouseArea.absX + rectId.width) > Editor.qmlMainView().width ? mouseArea.absX - (rectId.width * 1) : mouseArea.absX + 10
+        y: (mouseArea.absY + rectId.height) > Editor.qmlMainView().height ? mouseArea.absY - (rectId.height * 1)  : mouseArea.absY + 10
         z: Editor.qmlMainView().z + 1
         height: textId.height + 20
         width: textId.width + 20 + icons.width
