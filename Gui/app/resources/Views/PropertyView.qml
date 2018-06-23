@@ -221,7 +221,9 @@ Rectangle {
                             });
                             retView.typeChanged.connect(function(name, type) {
                                 var ent = md["guiProperties"].getOutputId(name);
-                                Controller.variable.setType(ent, type.id);
+
+                                if (Controller.getEntity(ent).guiProperties.varType !== type.guid)
+                                    Controller.variable.setType(ent, type.id);
                             });
                             retView.moveUp.connect(function(index){
                                 md["guiProperties"].moveOutputUp(index)

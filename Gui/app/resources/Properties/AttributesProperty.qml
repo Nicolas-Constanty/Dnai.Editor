@@ -76,7 +76,7 @@ BaseProperty {
                         Editor.notifyError("Cannot set an attribute of the type of the object");
                         __type__.resetIndex();
                     }
-                    else
+                    else if (newType.guid !== __this__.model.guiProperties.getAttribute(modelData))
                     {
                         __this__.changeType(modelData, newType.id);
                     }

@@ -56,8 +56,9 @@ namespace dnai
             qDebug() << "==Core== Variable.SetType(" << var << ", " << typ << ") => save(" << save << ")";
 
             models::Entity &variable = manager.getEntity(var);
+            models::Variable *data = variable.guiModel<models::Variable>();
             models::Entity &type = manager.getEntity(typ);
-            models::Entity *oldType = manager.getEntity(getVariableData(variable.id(), true)->varType());
+            models::Entity *oldType = manager.getEntity(data->varType());
 
             commands::CommandManager::Instance()->exec(
                 new commands::CoreCommand("Variable.SetType", save,
@@ -71,7 +72,8 @@ namespace dnai
                      * Un-execute
                      */
                     [oldType, &variable]() {
-                        ::core::variable::setType(variable.id(), oldType->id());
+                        if (oldType != nullptr)
+                            ::core::variable::setType(variable.id(), oldType->id());
                     }));
         }
 
@@ -88,14 +90,16 @@ namespace dnai
                      * Execute
                      */
                     [&variable, value]() {
-                      ::core::variable::setValue(variable.id(), value);
+                        ::core::variable::setValue(variable.id(), value);
                     },
                     /*
                      * Un-execute
                      */
                     [&variable, oldval]() {
-                      ::core::variable::setValue(variable.id(), oldval);
-            }));
+                        if (!oldval.isEmpty())
+                            ::core::variable::setValue(variable.id(), oldval);
+                    }
+            ));
         }
 
         void VariableHandler::refreshVariables()
