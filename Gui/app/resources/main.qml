@@ -46,7 +46,7 @@ Window {
 
     function load()
     {
-        _loader.active = true;
+        _loadermain.active = true;
     }
 
     function loadMain()
@@ -66,12 +66,20 @@ Window {
         sourceComponent: _mainWindow
     }
 
-    Loader {
+    /*Loader {
         id: _loader
         active: false
         asynchronous: true
         visible: status == Loader.Ready
         sourceComponent: isInit ? _mainWindow : _selectTheme
+    }*/
+
+    onIsInitChanged: {
+        if (isInit) {
+            console.log('init:', _mainWindow)
+        } else {
+            console.log('not init:', _selectTheme)
+        }
     }
 
     Component {
@@ -81,6 +89,7 @@ Window {
             id: appViewMain
             width: 1280
             height: 720
+            visible: isInit
             Component.onCompleted: {
                 Editor.registerMainView(appViewMain)
                 closeSplashScreen()
