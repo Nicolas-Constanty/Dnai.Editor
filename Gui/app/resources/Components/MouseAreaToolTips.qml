@@ -19,8 +19,8 @@ MouseArea {
         id: rectId
         visible: mouseArea.containsMouse && timerId.timerTriggered
         parent: Editor.qmlMainView()
-        x: (mouseArea.absX + rectId.width) > Editor.qmlMainView().width ? mouseArea.absX - (rectId.width * 1) : mouseArea.absX + 10
-        y: (mouseArea.absY + rectId.height) > Editor.qmlMainView().height ? mouseArea.absY - (rectId.height * 1)  : mouseArea.absY + 10
+        x: (mouseArea.absX + rectId.width + 10) > Editor.qmlMainView().width ? mouseArea.absX - (rectId.width * 1) : mouseArea.absX + 10
+        y: (mouseArea.absY + rectId.height + 10) > Editor.qmlMainView().height ? mouseArea.absY - (rectId.height * 1)  : mouseArea.absY + 10
         z: Editor.qmlMainView().z + 1
         height: textId.height + 20
         width: textId.width + 20 + icons.width
