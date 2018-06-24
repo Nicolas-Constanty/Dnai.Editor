@@ -1,6 +1,8 @@
 #include <QQmlEngine>
 #include <QJsonArray>
 
+#include "dnai/utils/random_utils.h"
+
 #include "dnai/models/entity.h"
 #include "dnai/models/gui/declarable/variable.h"
 #include "dnai/models/gui/declarable/context.h"
@@ -185,8 +187,7 @@ namespace dnai
 		void Entity::setName(const QString& name) const
 		{
 			if (coreModel()->setName(name))
-			{
-				qDebug() << "NAME" << name;
+            {
 				emit nameChanged(name);
 			}
 		}
@@ -313,7 +314,6 @@ namespace dnai
             case ::core::ENTITY::ENUM_TYPE:
             {
                 m_dataGUI = gui::declarable::EnumType::deserialize(obj);
-				qDebug() << dynamic_cast<QObject*>(m_dataGUI);
                 break;
             }
             case ::core::ENTITY::OBJECT_TYPE:
@@ -356,26 +356,14 @@ namespace dnai
 
 		void Entity::addColumn(const QString& name)
 		{
-			const auto c = new Column(this);
-			const auto getRandomString = [](int size)
-			{
-				const QString possibleCharacters(" !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~");
+            const auto c = new Column(this);
+            const auto uuid = utils::generateUid();
 
-				QString randomString;
-				for (auto i = 0; i< size; ++i)
-				{
-					auto index = qrand() % possibleCharacters.length();
-					auto nextChar = possibleCharacters.at(index);
-					randomString.append(nextChar);
-				}
-				return randomString;
-			};
-			const auto uuid = QUuid::createUuidV5(QUuid::createUuid(), getRandomString(128));
 			c->setListIndex(uuid.toString());
 			c->setName(name);
 			m_columslist.append(c);
-			m_columns[uuid] = c;
-			qDebug() << "Hello nouvelle column";
+            m_columns[uuid] = c;
+
 			emit listColumnChanged(listColumn());
 		}
 
@@ -432,26 +420,12 @@ namespace dnai
 		{
 			m_data.name = obj["name"].toString();
 			m_data.description = obj["description"].toString();
-            auto uuid = QUuid(obj["listIndex"].toString());
-			if (uuid.isNull())
-			{
-                const auto getRandomString = [](int size)
-				{
-					const QString possibleCharacters(" !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~");
-
-					QString randomString;
-					for (auto i = 0; i< size; ++i)
-					{
-						auto index = qrand() % possibleCharacters.length();
-						auto nextChar = possibleCharacters.at(index);
-						randomString.append(nextChar);
-					}
-					return randomString;
-				};
-				uuid = QUuid::createUuidV5(QUuid::createUuid(), getRandomString(128));
-				qDebug() << "New Uuid generated" << uuid;
-			}
-            m_data.listIndex = uuid;
+            m_data.listIndex = QUuid(obj["listIndex"].toString());
+            if (m_data.listIndex.isNull())
+            {
+                m_data.listIndex = utils::generateUid();
+                qDebug() << "==Entity== List index is null: Generating " << m_data.listIndex;
+            }
 		}
 
 		const gui::data::EntityColumn& Column::datas() const

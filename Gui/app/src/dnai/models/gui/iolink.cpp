@@ -20,8 +20,7 @@ namespace dnai
 			}
 
 			void IoLink::serialize(QJsonObject& obj) const
-			{
-				qDebug() << "Serialize io links";
+            {
 				obj["inputName"] = m_data.inputName;
 				obj["outputName"] = m_data.outputName;
 				obj["inputUuid"] = m_data.inputUuid.toString();

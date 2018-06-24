@@ -148,7 +148,7 @@ static void registerCore() {
             //list handler
             || !qmlRegisterUncreatableType<dnai::gcore::ObjectHandler>("DNAI.Core", 1, 0, "ObjectHandler", "Use DNAI.Core.Controller.Class")
             || !qmlRegisterSingletonType<dnai::gcore::HandlerManager>("DNAI.Core", 1, 0, "Controller", core_controller_singleton_provider))
-        qDebug() << "Failed to register one core type";
+        qDebug() << "==main== Failed to register one core type";
 }
 
 static void registerQml()
@@ -167,7 +167,7 @@ static void registerCustomTypes()
 void error_callBack(int signal) {
     dnai::App::currentInstance()->processManager()->closeAll();
 
-    qDebug() << "The program will crash with signal " << signal;
+    qDebug() << "==main== The program will crash with signal " << signal;
     abort();
 }
 

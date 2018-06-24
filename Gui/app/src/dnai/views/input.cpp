@@ -54,8 +54,7 @@ namespace dnai
 		}
 
 		void Input::unlinkAll()
-		{
-            qDebug() << "ici";
+        {
 			for (auto link : m_linkable->links())
 			{
 				const auto lb = dynamic_cast<Output *>(dynamic_cast<BaseLinkable *>(link->L1 == m_linkable ? link->L2 : link->L1)->parent());

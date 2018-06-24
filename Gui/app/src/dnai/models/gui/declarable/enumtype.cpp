@@ -60,6 +60,7 @@ namespace dnai
 				{
 					QJsonArray arr;
 
+                    Entity::serialize(obj);
                     for (QString const &val : m_data.names)
 					{
                         QJsonObject obj;
@@ -78,6 +79,7 @@ namespace dnai
 
 				void EnumType::_deserialize(const QJsonObject& obj)
 				{
+                    Entity::_deserialize(obj);
                     for (const QJsonValue& val : obj["enumvalues"].toArray())
 					{
                         addEntry(val.toObject().value("key").toString(), val.toObject().value("value").toString());

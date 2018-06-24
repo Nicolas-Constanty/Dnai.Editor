@@ -347,16 +347,6 @@ namespace dnai
 
     void Editor::onInstructionAdded(models::Entity *func, models::gui::Instruction *instruction)
     {
-        qDebug() << "Instruction added";
-
-        for (models::gui::Input *curr : instruction->inputs())
-        {
-            qDebug() << "- " << curr->name() << ": " << curr->value();
-        }
-
-        qDebug() << "Input Right operand : " << instruction->getInput("RightOperand");
-        qDebug() << "Input Right operand value : " << instruction->getInputValue("RightOperand");
-
         if (m_pendingInstruction.empty())
             return;
 
@@ -385,12 +375,10 @@ namespace dnai
         /*
          * Building inputs
          */
-        qDebug() << "Inputs: " << instruction->inputs();
         if (instruction->inputs().empty())
         {
             QList<models::gui::Input *> inputs;
 
-            qDebug() << "Setting inputs";
             for (QString const &curr : node->inputNames())
             {
                 models::gui::Input *toadd = new models::gui::Input();
@@ -405,12 +393,10 @@ namespace dnai
         /*
          * Building outputs
          */
-        qDebug() << "Outputs: " << instruction->outputs();
         if (instruction->outputs().empty())
         {
             QList<models::gui::Output *> outputs;
 
-            qDebug() << "Setting output";
             for (QString const &curr : node->outputNames())
             {
                 models::gui::Output *toadd = new models::gui::Output();
@@ -432,7 +418,6 @@ namespace dnai
         Q_UNUSED(args)
         Q_UNUSED(msg)
 
-        qDebug() << "Editor Instruction error";
         if (!m_pendingInstruction.empty())
             m_pendingInstruction.pop();
     }

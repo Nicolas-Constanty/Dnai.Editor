@@ -61,19 +61,16 @@ namespace dnai
             if (response.body.contains("currentVersion")) {
                 setAPIVersion(response.body["currentVersion"].toString());
             }
-            qDebug() << DNAI_VERSION_RELEASE;
-            qDebug() << Editor::instance().version();
-            qDebug() << m_currentVersionAPI;
+            qDebug() << "==App== DNAI release version:" << DNAI_VERSION_RELEASE;
+            qDebug() << "==App== Editor version: " << Editor::instance().version();
+            qDebug() << "==App== API version: " << m_currentVersionAPI;
 
 
             onNotifyVersionChanged();
             return response;
         },
         [this](http::Response response) -> http::Response {
-            qDebug() << "ERROR";
-            Editor::instance().notifyError("Could not check for update.", []() {
-
-            });
+            Editor::instance().notifyError("Could not check for update.");
        //     m_settings->setAPIVersion("0.0.30");
        //     onNotifyVersionChanged();
 
@@ -103,7 +100,7 @@ namespace dnai
 	{
         QVariant value = Editor::instance().settings()->value(api::settings_key);
         api::setUser(value.value<api::User>());
-        qDebug() << "API ID: " << api::getId();
+        qDebug() << "==App== API id: " << api::getId();
 	}
 
     std::queue<std::function<void()>> App::init()
