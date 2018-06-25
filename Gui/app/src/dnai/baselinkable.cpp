@@ -24,8 +24,13 @@ namespace dnai
 			return l;
 		}
 		//TODO INSERT DEBUG "Link already exist"
-		return nullptr;
-	}
+        return nullptr;
+    }
+
+    Link *BaseLinkable::asyncConnect(interfaces::ALinkable *linkable)
+    {
+        return connect(linkable, nullptr);
+    }
 
 	void BaseLinkable::unlink(ALinkable *linkable)
 	{

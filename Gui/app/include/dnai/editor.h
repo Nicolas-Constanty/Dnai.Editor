@@ -136,6 +136,9 @@ namespace dnai
     public slots:
         void onInstructionAdded(models::Entity *func, models::gui::Instruction *instr);
         void onAddInstructionError(quint32 func, quint32 type, QList<quint32> const &args, QString const &msg);
+        void onInstructionDataLinked(dnai::models::Entity *func, dnai::models::gui::Instruction *from, QString output, dnai::models::gui::Instruction *to, QString input);
+        void onExecutionLinked(dnai::models::Entity *func, dnai::models::gui::Instruction *from, quint32 outPin, dnai::models::gui::Instruction *to);
+        void onEntryPointSet(dnai::models::Entity *func, dnai::models::gui::Instruction *entry);
 
     private:
         interfaces::ISolution *m_solution;

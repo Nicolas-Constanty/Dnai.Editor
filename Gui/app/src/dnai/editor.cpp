@@ -108,10 +108,21 @@ namespace dnai
     void Editor::startApp()
     {
        App::currentInstance()->load();
+
        QObject::connect(&dnai::gcore::HandlerManager::Instance().Function(), SIGNAL(instructionAdded(models::Entity*,models::gui::Instruction*)),
                         this, SLOT(onInstructionAdded(models::Entity*,models::gui::Instruction*)));
        QObject::connect(&dnai::gcore::HandlerManager::Instance().Function(), SIGNAL(addInstructionError(quint32,quint32,QList<quint32>,QString)),
                         this, SLOT(onAddInstructionError(quint32,quint32,QList<quint32>,QString)));
+
+       QObject::connect(dnai::gcore::HandlerManager::Instance().Function().instruction(), SIGNAL(dataLinked(dnai::models::Entity *, dnai::models::gui::Instruction *, QString, dnai::models::gui::Instruction *, QString)),
+                        this, SLOT(onInstructionDataLinked(dnai::models::Entity *, dnai::models::gui::Instruction *, QString, dnai::models::gui::Instruction *, QString)));
+
+       QObject::connect(dnai::gcore::HandlerManager::Instance().Function().instruction(), SIGNAL(executionLinked(dnai::models::Entity*,dnai::models::gui::Instruction*,quint32,dnai::models::gui::Instruction*)),
+                        this, SLOT(onExecutionLinked(dnai::models::Entity*,dnai::models::gui::Instruction*,quint32,dnai::models::gui::Instruction*)));
+
+       QObject::connect(&dnai::gcore::HandlerManager::Instance().Function(), SIGNAL(entryPointSet(dnai::models::Entity*, dnai::models::gui::Instruction*)),
+                        this, SLOT(onEntryPointSet(dnai::models::Entity *, dnai::models::gui::Instruction *)));
+
        contextMenuModel()->setup();
     }
 
@@ -422,6 +433,106 @@ namespace dnai
             m_pendingInstruction.pop();
     }
 
+    void Editor::onInstructionDataLinked(models::Entity *func, models::gui::Instruction *from, QString output, models::gui::Instruction *to, QString input)
+    {
+        Q_UNUSED(output);
+        Q_UNUSED(input);
+        const auto view = qvariant_cast<QQuickItem *>(Editor::instance().selectedView()->property("currentView"));
+        if (!view)
+        {
+            throw std::runtime_error("No canvas view found!");
+        }
+        const auto canvas = dynamic_cast<views::CanvasNode *>(view);
+        views::GenericNode *n1 = nullptr;
+        views::GenericNode *n2 = nullptr;
+        const auto content =  canvas->content();
+        for (auto i = 0; i< content->childItems().size(); i++)
+        {
+            auto node = dynamic_cast<dnai::views::GenericNode*>(content->childItems().at(i));
+            if (node)
+            {
+                if (n1 == nullptr && qvariant_cast<models::gui::Instruction*>(node->property("instruction_model")) == to)
+                {
+                    n1 = node;
+                }
+                else if (n2 == nullptr && qvariant_cast<models::gui::Instruction*>(node->property("instruction_model")) == from)
+                {
+                    n2 = node;
+                }
+                if (n1 && n2)
+                    break;
+            }
+        }
+        if (n1 && n2)
+        {
+            const auto function = dynamic_cast<models::gui::declarable::Function *>(func->guiModel());
+            if (function)
+            {
+                n1->createLink(function->iolinks().last(), n2);
+            }
+        }
+    }
+
+    void Editor::onExecutionLinked(models::Entity *func, models::gui::Instruction *from, quint32 outPin, models::gui::Instruction *to)
+    {
+        Q_UNUSED(outPin);
+        const auto view = qvariant_cast<QQuickItem *>(Editor::instance().selectedView()->property("currentView"));
+        if (!view)
+        {
+            throw std::runtime_error("No canvas view found!");
+        }
+        const auto canvas = dynamic_cast<views::CanvasNode *>(view);
+        views::GenericNode *n1 = nullptr;
+        views::GenericNode *n2 = nullptr;
+        const auto content =  canvas->content();
+        for (auto i = 0; i< content->childItems().size(); i++)
+        {
+            auto node = dynamic_cast<dnai::views::GenericNode*>(content->childItems().at(i));
+            if (node)
+            {
+                if (n1 == nullptr && qvariant_cast<models::gui::Instruction*>(node->property("instruction_model")) == from)
+                {
+                    n1 = node;
+                }
+                else if (n2 == nullptr && qvariant_cast<models::gui::Instruction*>(node->property("instruction_model")) == to)
+                {
+                    n2 = node;
+                }
+                if (n1 && n2)
+                    break;
+            }
+        }
+        if (n1 && n2)
+        {
+            const auto function = dynamic_cast<models::gui::declarable::Function *>(func->guiModel());
+            if (function)
+            {
+                n1->createFlowLink(function->flowlinks().last(), n2);
+            }
+        }
+    }
+
+    void Editor::onEntryPointSet(models::Entity *func, models::gui::Instruction *entry)
+    {
+        const auto view = qvariant_cast<QQuickItem *>(Editor::instance().selectedView()->property("currentView"));
+        if (!view)
+        {
+            throw std::runtime_error("No canvas view found!");
+        }
+        const auto canvas = dynamic_cast<views::CanvasNode *>(view);
+        const auto content =  canvas->content();
+        for (auto i = 0; i< content->childItems().size(); i++)
+        {
+            auto node = dynamic_cast<dnai::views::GenericNode*>(content->childItems().at(i));
+            if (node && qvariant_cast<models::gui::Instruction*>(node->property("instruction_model")) == entry)
+            {
+                const auto entry = dynamic_cast<dnai::views::GenericNode*>(canvas->entry());
+                entry->createFlowLink(new models::gui::FlowLink(), node);
+                break;
+            }
+        }
+    }
+
     void Editor::createNode(models::Entity *entity, models::ContextMenuItem *node, qint32 x, qint32 y)
     {
 	    const auto function = dynamic_cast<models::gui::declarable::Function *>(entity->guiModel());
@@ -562,6 +673,8 @@ namespace dnai
         nodeEntryPoint.completeCreate();
 
         nodes.append(entryPointObj);
+
+        canvas->registerEntry(entryPointObj);
 
         /*
          * Create all nodes

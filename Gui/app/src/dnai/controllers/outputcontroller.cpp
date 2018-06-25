@@ -18,15 +18,25 @@ namespace dnai
 
 			if (li != nullptr && li->getType() == getType())
 			{
-				const auto link = BaseIo::connect(linkable, curve);
-				if (const auto output = dynamic_cast<dnai::views::Output *>(parent()))
-				{
-                    const auto input = dynamic_cast<dnai::views::Input *>(li->parent());
-					emit output->linked(input->property("name"), input->getNode()->property("instruction_model"));
-				}
-				return link;
+                const auto link = BaseIo::connect(linkable, curve);
+                return link;
 			}
-			return nullptr;
-		}
+            return nullptr;
+        }
+
+        Link *OutputController::asyncConnect(interfaces::ALinkable *linkable)
+        {
+            const auto li = dynamic_cast<InputController *>(linkable);
+
+            if (li != nullptr && li->getType() == getType())
+            {
+                if (const auto output = dynamic_cast<dnai::views::Output *>(parent()))
+                {
+                    const auto input = dynamic_cast<dnai::views::Input *>(li->parent());
+                    emit output->linked(input->property("name"), input->getNode()->property("instruction_model"));
+                }
+            }
+            return nullptr;
+        }
 	}
 }

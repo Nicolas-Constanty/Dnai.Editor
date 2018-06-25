@@ -31,18 +31,36 @@ namespace dnai
 							input->unlinkAll();
 					}
 					l = new Link(this, linkable);
-					l->setCurve(curve);
-					if (const auto input = dynamic_cast<dnai::views::Input *>(parent()))
-					{
-						const auto output = dynamic_cast<dnai::views::Output *>(li->parent());
-						emit input->linked(output->property("name"), output->getNode()->property("instruction_model"));
-					}
+                    l->setCurve(curve);
 					return l;
 				}
 				//TODO INSERT DEBUG "Link already exist"
 				return nullptr;
 			}
-			return nullptr;
-		}
+            return nullptr;
+        }
+
+        Link *InputController::asyncConnect(interfaces::ALinkable *linkable)
+        {
+            const auto li = dynamic_cast<controllers::OutputController *>(linkable);
+            if (li != nullptr && li->getType() == getType())
+            {
+                auto l = getLink(linkable);
+                if (l == nullptr)
+                {
+                    if (!m_links.empty())
+                    {
+                        if (auto input = dynamic_cast<dnai::views::Input *>(parent()))
+                            input->unlinkAll();
+                    }
+                    if (const auto input = dynamic_cast<dnai::views::Input *>(parent()))
+                    {
+                        const auto output = dynamic_cast<dnai::views::Output *>(li->parent());
+                        emit input->linked(output->property("name"), output->getNode()->property("instruction_model"));
+                    }
+                }
+            }
+            return nullptr;
+        }
 	}
 }

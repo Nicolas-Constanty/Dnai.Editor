@@ -30,27 +30,42 @@ namespace dnai
 				{
 					f->unlinkAll();
 				}
-				const auto l = BaseLinkable::connect(linkable, curve);
-				if (const auto fl = dynamic_cast<Flow *>(parent()))
-				{
-					const auto flow = dynamic_cast<dnai::views::Flow *>(li->parent());
-					int index;
-					if (flow->typeFlow() == enums::FlowTypeRessouce::FlowType::Exit)
-					{
-						
-						index = flow->getNode()->flowsOut().getList().indexOf(flow);
-					}
-					else
-					{
-						const auto flowp = dynamic_cast<dnai::views::Flow *>(parent());
-						index = flowp->getNode()->flowsOut().getList().indexOf(flowp);
-					}
-					emit fl->linked(index, flow->getNode()->property("instruction_model"));
-				}
+                const auto l = BaseLinkable::connect(linkable, curve);
 				return l;
 			}
-			return nullptr;
-		}
+            return nullptr;
+        }
+
+        Link *FlowBackend::asyncConnect(interfaces::ALinkable *linkable)
+        {
+            qDebug() << "Hello";
+            const auto li = dynamic_cast<FlowBackend *>(linkable);
+            if (li != nullptr && li->getType() != getType())
+            {
+                const auto f = dynamic_cast<Flow *>(li->parent());
+                if (!li->links().empty() && f->typeFlow() == enums::FlowTypeRessouce::FlowType::Exit)
+                {
+                    f->unlinkAll();
+                }
+                if (const auto fl = dynamic_cast<Flow *>(parent()))
+                {
+                    const auto flow = dynamic_cast<dnai::views::Flow *>(li->parent());
+                    int index;
+                    if (flow->typeFlow() == enums::FlowTypeRessouce::FlowType::Exit)
+                    {
+
+                        index = flow->getNode()->flowsOut().getList().indexOf(flow);
+                    }
+                    else
+                    {
+                        const auto flowp = dynamic_cast<dnai::views::Flow *>(parent());
+                        index = flowp->getNode()->flowsOut().getList().indexOf(flowp);
+                    }
+                    emit fl->linked(index, flow->getNode()->property("instruction_model"));
+                }
+            }
+            return nullptr;
+        }
 
 		Flow::Flow(QQuickItem* parent) :
 			LinkableBezierItem(parent)

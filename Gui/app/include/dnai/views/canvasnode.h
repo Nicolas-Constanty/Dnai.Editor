@@ -55,6 +55,7 @@ namespace dnai
 			QQuickItem *content() const { return m_content; }
             bool contextMenu() const { return m_contextMenu; }
 			const QPoint &mousePosition() const { return m_mousePosition; }
+            QQuickItem *entry() const { return m_entry; }
 
 		public:
 			void setGridStep(int step);
@@ -65,6 +66,8 @@ namespace dnai
             void setContent(QQuickItem *ct);
 			void setContextMenu(bool b);
             void resetContent();
+            void registerEntry(QQuickItem *entry);
+
 
 		signals:
 			void gridStepChanged(int step);
@@ -96,6 +99,7 @@ namespace dnai
 			QPointF	m_gridOffset;
 			QPointF m_origin;
             QQuickItem *m_content;
+            QQuickItem *m_entry = nullptr;
 
 		protected:
 			void mousePressEvent(QMouseEvent* event) override;

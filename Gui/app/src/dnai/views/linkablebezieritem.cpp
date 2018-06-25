@@ -133,7 +133,7 @@ namespace dnai
 				const auto cs = findLinkableBezierItem(node, p1);
 				if (cs)
 				{
-					const auto c = m_linkable->connect(cs->getLinkable(), m_currentCurve);
+                    const auto c = m_linkable->asyncConnect(cs->getLinkable());
 					if (c == nullptr)
 					{
 						delete(m_currentCurve);
@@ -141,13 +141,13 @@ namespace dnai
 					}
 					else
 					{
-						const auto p2(cs->getCanvasPos());
+						/*const auto p2(cs->getCanvasPos());
 						m_currentCurve->setP4(p2);
 						m_currentCurve->setDotted(false);
-						m_currentCurve->setBack();
+						m_currentCurve->setBack();*/
 						setLink(c);
 					}
-					afterRealease(c);
+                    afterRealease(c);
 					m_currentCurve = nullptr;
 					return;
 				}

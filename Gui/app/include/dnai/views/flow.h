@@ -22,6 +22,8 @@ namespace dnai
 
 			Link *connect(ALinkable* linkable, BezierCurve* curve) override;
 
+            Link *asyncConnect(ALinkable* linkable) override;
+
 		protected:
             enums::FlowTypeRessouce::FlowType m_typeFlow;
 		};
