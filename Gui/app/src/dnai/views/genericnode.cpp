@@ -62,6 +62,11 @@ namespace dnai
 			input->connect(output);
 		}
 
+        void GenericNode::unlinkIo(quint32 in)
+        {
+            dynamic_cast<Input*>(m_inputs.getList().at(in))->unlinkAll();
+        }
+
         void GenericNode::unlinkFlow(quint32 pin)
         {
            dynamic_cast<Flow*>(m_flowsOut.getList().at(pin))->unlinkAll();

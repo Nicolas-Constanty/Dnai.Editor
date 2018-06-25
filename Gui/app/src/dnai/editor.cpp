@@ -127,6 +127,8 @@ namespace dnai
        QObject::connect(dnai::gcore::HandlerManager::Instance().Function().instruction(), SIGNAL(executionUnlinked(dnai::models::Entity*,dnai::models::gui::Instruction*,quint32)),
                         this, SLOT(onExecutionUnlinked(dnai::models::Entity*,dnai::models::gui::Instruction*,quint32)));
 
+       QObject::connect(dnai::gcore::HandlerManager::Instance().Function().instruction(), SIGNAL(dataUnlinked(dnai::models::Entity*, dnai::models::gui::Instruction*, QString)),
+                        this, SLOT(onDataUnlinked(dnai::models::Entity*,dnai::models::gui::Instruction*,QString)));
 
        contextMenuModel()->setup();
     }
@@ -554,6 +556,37 @@ namespace dnai
             if (node && qvariant_cast<models::gui::Instruction*>(node->property("instruction_model")) == from)
             {
                 node->unlinkFlow(outPin);
+                break;
+            }
+        }
+    }
+
+    void Editor::onDataUnlinked(models::Entity *func, models::gui::Instruction *instruction, QString input)
+    {
+        Q_UNUSED(func)
+        const auto view = qvariant_cast<QQuickItem *>(Editor::instance().selectedView()->property("currentView"));
+        if (!view)
+        {
+            throw std::runtime_error("No canvas view found!");
+        }
+        const auto canvas = dynamic_cast<views::CanvasNode *>(view);
+        const auto content =  canvas->content();
+        for (auto i = 0; i< content->childItems().size(); i++)
+        {
+            auto node = dynamic_cast<dnai::views::GenericNode*>(content->childItems().at(i));
+            if (node && qvariant_cast<models::gui::Instruction*>(node->property("instruction_model")) == instruction)
+            {
+                const auto ilist = instruction->inputs();
+                auto index = 0;
+                for(models::gui::Input* in : ilist)
+                {
+                    if (in->data().name == input)
+                    {
+                        node->unlinkIo(index);
+                        break;
+                    }
+                    ++index;
+                }
                 break;
             }
         }
