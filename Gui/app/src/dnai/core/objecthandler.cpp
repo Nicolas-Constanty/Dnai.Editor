@@ -354,8 +354,8 @@ namespace dnai
             qDebug() << "==Core== Class.FunctionSetAsMember(" << obj << ", " << name << ", " << thisId << ")";
             commands::CoreCommand::Success();
             HandlerManager::Instance().Declarator().onDeclared(func->id(), ENTITY::VARIABLE, "this", VISIBILITY::PUBLIC, thisId);
-            HandlerManager::Instance().Variable().onTypeSet(thisId, object.id());
             HandlerManager::Instance().Function().onParameterSet(func->id(), "this");
+            HandlerManager::Instance().Variable().setType(thisId, object.id());
             emit functionSetAsMember(&object, name, &manager.getEntity(thisId));
         }
 
