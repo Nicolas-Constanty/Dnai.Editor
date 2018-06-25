@@ -25,6 +25,8 @@ namespace dnai
             explicit GenericNode(QQuickItem *parent = nullptr);
 	        void createLink(models::gui::IoLink *link, GenericNode *n2);
 	        void createFlowLink(models::gui::FlowLink* link, GenericNode* n2);
+            void unlinkFlow(quint32 pin);
+
 	        /**
             * \brief Override updatePaintNode and draw a beautifull Node
             * \return QSGNode *

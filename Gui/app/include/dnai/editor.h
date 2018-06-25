@@ -139,6 +139,7 @@ namespace dnai
         void onInstructionDataLinked(dnai::models::Entity *func, dnai::models::gui::Instruction *from, QString output, dnai::models::gui::Instruction *to, QString input);
         void onExecutionLinked(dnai::models::Entity *func, dnai::models::gui::Instruction *from, quint32 outPin, dnai::models::gui::Instruction *to);
         void onEntryPointSet(dnai::models::Entity *func, dnai::models::gui::Instruction *entry);
+        void onExecutionUnlinked(dnai::models::Entity *func, dnai::models::gui::Instruction *from, quint32 outPin);
 
     private:
         interfaces::ISolution *m_solution;

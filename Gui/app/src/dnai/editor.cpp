@@ -123,6 +123,11 @@ namespace dnai
        QObject::connect(&dnai::gcore::HandlerManager::Instance().Function(), SIGNAL(entryPointSet(dnai::models::Entity*, dnai::models::gui::Instruction*)),
                         this, SLOT(onEntryPointSet(dnai::models::Entity *, dnai::models::gui::Instruction *)));
 
+
+       QObject::connect(dnai::gcore::HandlerManager::Instance().Function().instruction(), SIGNAL(executionUnlinked(dnai::models::Entity*,dnai::models::gui::Instruction*,quint32)),
+                        this, SLOT(onExecutionUnlinked(dnai::models::Entity*,dnai::models::gui::Instruction*,quint32)));
+
+
        contextMenuModel()->setup();
     }
 
@@ -528,6 +533,27 @@ namespace dnai
             {
                 const auto entry = dynamic_cast<dnai::views::GenericNode*>(canvas->entry());
                 entry->createFlowLink(new models::gui::FlowLink(), node);
+                break;
+            }
+        }
+    }
+
+    void Editor::onExecutionUnlinked(models::Entity *func, models::gui::Instruction *from, quint32 outPin)
+    {
+        Q_UNUSED(func)
+        const auto view = qvariant_cast<QQuickItem *>(Editor::instance().selectedView()->property("currentView"));
+        if (!view)
+        {
+            throw std::runtime_error("No canvas view found!");
+        }
+        const auto canvas = dynamic_cast<views::CanvasNode *>(view);
+        const auto content =  canvas->content();
+        for (auto i = 0; i< content->childItems().size(); i++)
+        {
+            auto node = dynamic_cast<dnai::views::GenericNode*>(content->childItems().at(i));
+            if (node && qvariant_cast<models::gui::Instruction*>(node->property("instruction_model")) == from)
+            {
+                node->unlinkFlow(outPin);
                 break;
             }
         }
