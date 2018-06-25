@@ -314,6 +314,18 @@ namespace dnai
             m_sizes->setName("Size");
             m_lists->appendChild(m_sizes);
 
+            m_clears = new ContextMenuItem();
+            m_clears->setName("Clear");
+            m_lists->appendChild(m_clears);
+
+            m_fills = new ContextMenuItem();
+            m_fills->setName("Fill");
+            m_lists->appendChild(m_fills);
+
+            m_setValueAts = new ContextMenuItem();
+            m_setValueAts->setName("SetValueAt");
+            m_lists->appendChild(m_setValueAts);
+
             m_foreachs = new ContextMenuItem();
             m_foreachs->setName("Foreach");
 
@@ -862,13 +874,64 @@ namespace dnai
             sizeins->setInputNames({"array"});
             sizeins->setOutputs(1);
             sizeins->setOutputNames({"count"});
-            sizeins->setFlowIn(1);
-            sizeins->setFlowOut(1);
             sizeins->setType(entity->entityType());
             sizeins->setInstructionId(dnai::enums::QInstructionID::SIZE);
             sizeins->setConstruction({stored->id()});
 
             addItem(sizeins, m_sizes, entity);
+
+            /*
+             * Clear
+             */
+            auto clearins = new ContextMenuItem();
+            clearins->setName(entity->name());
+            clearins->setDescription("Clear an array from its elements");
+            clearins->setInputs(1);
+            clearins->setInputNames({"array"});
+            clearins->setOutputs(0);
+            clearins->setFlowIn(1);
+            clearins->setFlowOut(1);
+            clearins->setType(entity->entityType());
+            clearins->setInstructionId(dnai::enums::QInstructionID::CLEAR);
+            clearins->setConstruction({stored->id()});
+
+            addItem(clearins, m_clears, entity);
+
+            /*
+             * Fill
+             */
+            auto fillins = new ContextMenuItem();
+            fillins->setName(entity->name());
+            fillins->setDescription("Fill an array with an elements n times");
+            fillins->setInputs(3);
+            fillins->setInputNames({"array", "element", "count"});
+            fillins->setOutputs(1);
+            fillins->setOutputNames({"count"});
+            fillins->setFlowIn(1);
+            fillins->setFlowOut(1);
+            fillins->setType(entity->entityType());
+            fillins->setInstructionId(dnai::enums::QInstructionID::FILL);
+            fillins->setConstruction({stored->id()});
+
+            addItem(fillins, m_fills, entity);
+
+            /*
+             * Set value at
+             */
+            auto setvalueatins = new ContextMenuItem();
+            setvalueatins->setName(entity->name());
+            setvalueatins->setDescription("Set the value of a " + entity->name() + " at a specific index");
+            setvalueatins->setInputs(3);
+            setvalueatins->setInputNames({"array", "value", "index"});
+            setvalueatins->setOutputs(1);
+            setvalueatins->setOutputNames({"value"});
+            setvalueatins->setFlowIn(1);
+            setvalueatins->setFlowOut(1);
+            setvalueatins->setType(entity->entityType());
+            setvalueatins->setInstructionId(dnai::enums::QInstructionID::SET_VALUE_AT);
+            setvalueatins->setConstruction({stored->id()});
+
+            addItem(setvalueatins, m_setValueAts, entity);
 
             /*
              * Binary operators
@@ -887,8 +950,8 @@ namespace dnai
             accessins->setOutputs(1);
             accessins->setOutputNames({"result"});
             accessins->setType(entity->entityType());
-            sizeins->setInstructionId(dnai::enums::QInstructionID::ACCESS);
-            sizeins->setConstruction({entity->id(), 2, stored->id()});
+            accessins->setInstructionId(dnai::enums::QInstructionID::ACCESS);
+            accessins->setConstruction({entity->id(), 2, stored->id()});
 
             addItem(accessins, bopCat, entity);
 
@@ -982,6 +1045,8 @@ namespace dnai
                 oupNames.append(curr->name());
             }
             callfuncins->setOutputNames(oupNames);
+            callfuncins->setFlowIn(1);
+            callfuncins->setFlowOut(1);
             callfuncins->setType(entity->entityType());
             callfuncins->setInstructionId(dnai::enums::QInstructionID::FUNCTION_CALL);
             callfuncins->setConstruction({entity->id()});

@@ -45,8 +45,7 @@ namespace dnai
 
             if (var != nullptr)
             {
-                if (entity.name() != "this")
-                    m_pendingVar.push_back(&entity);
+                m_pendingVar.push_back(&entity);
             }
             refreshVariables();
         }

@@ -183,6 +183,9 @@ namespace dnai
             ContextMenuItem* m_removes;
             ContextMenuItem* m_removesAt;
             ContextMenuItem* m_sizes;
+            ContextMenuItem* m_clears;
+            ContextMenuItem* m_fills;
+            ContextMenuItem* m_setValueAts;
 
             ContextMenuItem* m_functions;
 

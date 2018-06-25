@@ -46,7 +46,7 @@ Window {
 
     function load()
     {
-        _loadermain.active = true;
+        _loader.active = true;
     }
 
     function loadMain()
@@ -66,20 +66,12 @@ Window {
         sourceComponent: _mainWindow
     }
 
-    /*Loader {
+    Loader {
         id: _loader
         active: false
         asynchronous: true
         visible: status == Loader.Ready
-        sourceComponent: isInit ? _mainWindow : _selectTheme
-    }*/
-
-    onIsInitChanged: {
-        if (isInit) {
-            console.log('init:', _mainWindow)
-        } else {
-            console.log('not init:', _selectTheme)
-        }
+        sourceComponent: /*isInit ? _mainWindow : */_selectTheme
     }
 
     Component {

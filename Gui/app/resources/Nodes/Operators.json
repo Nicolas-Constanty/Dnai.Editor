@@ -467,6 +467,22 @@
                     "input_names": ["condition"],
                     "in": 1,
                     "out": 2
+                },
+                "Break": {
+                    "name": "break",
+                    "description": "Break a loop execution",
+                    "instruction_id": 36,
+                    "construction": [],
+                    "in": 1,
+                    "out": 0
+                },
+                "Continue": {
+                    "name": "continue",
+                    "description": "Continue the execution of a loop",
+                    "instructiond_id": 37,
+                    "construction": [],
+                    "in": 1,
+                    "out": 0
                 }
             }
         }
