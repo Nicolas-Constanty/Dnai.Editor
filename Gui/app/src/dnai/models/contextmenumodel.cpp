@@ -317,6 +317,13 @@ namespace dnai
             m_foreachs = new ContextMenuItem();
             m_foreachs->setName("Foreach");
 
+            /*
+             * Functions
+             */
+            m_functions = new ContextMenuItem();
+            m_functions->setName("Functions");
+            m_root->appendChild(m_functions);
+
             parseJsonDocument(doc);
 
             m_hash["/" + m_root->name() + "/Statements"]->appendChild(m_foreachs);
@@ -950,6 +957,38 @@ namespace dnai
             addItem(difins, logCat, entity);
         }
 
+        void ContextMenuModel::appendFunction(Entity *entity)
+        {
+            models::Function *data = entity->guiModel<models::Function>();
+
+            auto callfuncins = new ContextMenuItem();
+
+            callfuncins->setName(entity->name());
+            callfuncins->setDescription(entity->description());
+            callfuncins->setInputs(data->inputs().count());
+            QStringList inpNames;
+
+            for (models::Entity *curr : data->inputs())
+            {
+                inpNames.append(curr->name());
+            }
+            callfuncins->setInputNames(inpNames);
+
+            callfuncins->setOutputs(data->outputs().count());
+            QStringList oupNames;
+
+            for (models::Entity *curr : data->outputs())
+            {
+                oupNames.append(curr->name());
+            }
+            callfuncins->setOutputNames(oupNames);
+            callfuncins->setType(entity->entityType());
+            callfuncins->setInstructionId(dnai::enums::QInstructionID::FUNCTION_CALL);
+            callfuncins->setConstruction({entity->id()});
+
+            addItem(callfuncins, m_functions, entity);
+        }
+
         void ContextMenuModel::addItem(ContextMenuItem *item, ContextMenuItem *parent, models::Entity *related)
         {
             parent->appendChild(item);
@@ -967,23 +1006,27 @@ namespace dnai
 
         void ContextMenuModel::addItems(Entity *related)
         {
-            if (related->parentItem()
-                && related->parentItem()->coreModel()->entityType() != ENTITY::FUNCTION
-                && related->coreModel()->entityType() == ENTITY::VARIABLE)
+            switch (related->coreModel()->entityType())
             {
-                appendVariable(related);
-            }
-            else if (related->coreModel()->entityType() == ENTITY::ENUM_TYPE)
-            {
+            case ENTITY::ENUM_TYPE:
                 appendEnumeration(related);
-            }
-            else if (related->coreModel()->entityType() == ENTITY::OBJECT_TYPE)
-            {
+                break;
+            case ENTITY::OBJECT_TYPE:
                 appendObject(related);
-            }
-            else if (related->coreModel()->entityType() == ENTITY::LIST_TYPE)
-            {
+                break;
+            case ENTITY::LIST_TYPE:
                 appendList(related);
+                break;
+            case ENTITY::FUNCTION:
+                appendFunction(related);
+                break;
+            default: {
+                if (related->parentItem()
+                    && related->parentItem()->coreModel()->entityType() != ENTITY::FUNCTION
+                    && related->coreModel()->entityType() == ENTITY::VARIABLE)
+                    appendVariable(related);
+                break;
+            }
             }
         }
 
@@ -1041,6 +1084,10 @@ namespace dnai
                              this, SLOT(onObjectAttributeRemoved(models::Entity*,QString)));
             QObject::connect(dnai::gcore::HandlerManager::Instance().List(), SIGNAL(typeSet(dnai::models::Entity*,dnai::models::Entity*)),
                              this, SLOT(onListTypeSet(dnai::models::Entity*,dnai::models::Entity*)));
+            QObject::connect(dnai::gcore::HandlerManager::Instance().function(), SIGNAL(parameterSet(dnai::models::Entity*,QString)),
+                             this, SLOT(onParameterSet(dnai::models::Entity*,QString)));
+            QObject::connect(dnai::gcore::HandlerManager::Instance().function(), SIGNAL(returnSet(dnai::models::Entity*,QString)),
+                             this, SLOT(onReturnSet(dnai::models::Entity*,QString)));
         }
 
         void ContextMenuModel::onEntityDeclared(Entity *declared)
@@ -1106,6 +1153,20 @@ namespace dnai
             Q_UNUSED(type)
 
             refreshItems(lst);
+        }
+
+        void ContextMenuModel::onParameterSet(Entity *func, QString param)
+        {
+            Q_UNUSED(param)
+
+            refreshItems(func);
+        }
+
+        void ContextMenuModel::onReturnSet(Entity *func, QString ret)
+        {
+            Q_UNUSED(ret)
+
+            refreshItems(func);
         }
 	}
 }

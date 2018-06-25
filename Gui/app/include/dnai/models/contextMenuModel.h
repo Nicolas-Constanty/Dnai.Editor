@@ -129,6 +129,7 @@ namespace dnai
 			void clearReturns();
             void appendObject(Entity *entity);
             void appendList(Entity *entity);
+            void appendFunction(Entity *entity);
 
         private:
             void addItem(ContextMenuItem *item, ContextMenuItem *parent, models::Entity *related = nullptr);
@@ -150,6 +151,8 @@ namespace dnai
             void onObjectAttributeRenamed(models::Entity *obj, QString name, QString newName);
             void onObjectAttributeRemoved(models::Entity *obj, QString name);
             void onListTypeSet(dnai::models::Entity *lst, dnai::models::Entity *type);
+            void onParameterSet(dnai::models::Entity *func, QString param);
+            void onReturnSet(dnai::models::Entity *func, QString ret);
 
 		private:
 			void parseJsonDocument(const QJsonObject &json);
@@ -180,6 +183,8 @@ namespace dnai
             ContextMenuItem* m_removes;
             ContextMenuItem* m_removesAt;
             ContextMenuItem* m_sizes;
+
+            ContextMenuItem* m_functions;
 
         private:
             QHash<models::Entity *, QList<QString>> m_entity_items;

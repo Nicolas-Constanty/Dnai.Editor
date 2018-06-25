@@ -67,8 +67,8 @@ namespace dnai
             void instructionAdded(models::Entity *func, models::gui::Instruction *instruction);
             void addInstructionError(quint32 func, quint32 instrType, QList<quint32> const &args, QString const &msg);
             void entryPointSet(dnai::models::Entity *func, dnai::models::gui::Instruction *entry);
-            void parameterSet(models::Entity *func, QString const &param);
-            void returnSet(models::Entity *func, QString const &param);
+            void parameterSet(dnai::models::Entity *func, QString param);
+            void returnSet(dnai::models::Entity *func, QString ret);
 
         private:
             EntityManager &manager;
