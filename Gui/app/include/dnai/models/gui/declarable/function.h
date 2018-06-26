@@ -75,6 +75,7 @@ namespace dnai
 					void setOutputModels(EntityList* outputs);
 
 					void addInstruction(Instruction *instruction);
+                    void removeInstruction(Instruction *instruction);
                     Instruction* getInstruction(const QUuid& uuid);
 
 					Q_INVOKABLE quint32 getInputId(QString const &name) const;
