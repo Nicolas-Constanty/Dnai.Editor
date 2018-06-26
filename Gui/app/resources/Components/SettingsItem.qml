@@ -6,6 +6,8 @@ import "../Style"
 Item {
     id: _control
     property alias content: _content.content
+    property alias contentItem: _content
+
     property string text: "Item"
     height: 40
     MLabel {

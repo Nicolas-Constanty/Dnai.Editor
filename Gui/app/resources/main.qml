@@ -100,7 +100,7 @@ Window {
             minimumWidth: 400
             minimumHeight: 150
             title: qsTr("DNAI")
-            color: AppSettings.theme["colors"]["background"]["dark"]
+            color: AppSettings.theme.colors.background.dark
             visible: true
             ChooseThemePanel {
                 id: pane

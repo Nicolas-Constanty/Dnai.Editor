@@ -178,10 +178,9 @@ ApplicationWindow {
 
     onClosing: {
         close.accepted = true
-        if (Editor.solution.isProjectsSaved() == false) {
+        if (Editor.solution && Editor.solution.isProjectsSaved() === false) {
             dialogPopup.open()
             close.accepted = false
         }
-
     }
 }

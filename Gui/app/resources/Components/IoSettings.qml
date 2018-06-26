@@ -4,6 +4,7 @@ import QtQuick.Controls 2.2
 import Dnai.Controls 1.0
 import Dnai.FontAwesome 1.0
 import Dnai.Settings 1.0
+import DNAI.Core 1.0
 
 Item {
     id: _inputItem
@@ -85,6 +86,7 @@ Item {
             text: "Input color"
             content: Component {
                 Row {
+                    property alias seletctedType: _selectedType
                     spacing: 10
                     height: parent.height
                     Rectangle {
@@ -111,7 +113,9 @@ Item {
                         }
                     }
                     ComboBox {
-                        model: ["Integer","Boolean","Character","String"]
+                        id: _selectedType
+                        model: Controller.types
+                        textRole: "name"
                     }
                 }
             }
@@ -141,11 +145,11 @@ Item {
                 onPointingColorChanged: {
                     if (_swicht.checked)
                     {
-                        _innerColorDisplay.color = _controlWheel.pointingColor
+                        AppSettings.theme["types"][_firstView.contentItem.children[0].children[0].seletctedType.currentText]["inner"] = _controlWheel.pointingColor
                     }
                     else
                     {
-                        _outerColorDisplay.color = _controlWheel.pointingColor
+                        AppSettings.theme["types"][_firstView.contentItem.children[0].children[0].seletctedType.currentText]["outer"] = _controlWheel.pointingColor
                     }
                 }
             }
@@ -155,13 +159,13 @@ Item {
                 height: 70
                 width: height
                 radius: width / 2
-                color: "blue"
+                color: AppSettings.theme["types"][_firstView.contentItem.children[0].children[0].seletctedType.currentText]["outer"]
                 Rectangle {
                     id: _innerColorDisplay
                     height: _outerColorDisplay.height * 0.75
                     width: height
                     radius: width / 2
-                    color: "black"
+                    color: AppSettings.theme["types"][_firstView.contentItem.children[0].children[0].seletctedType.currentText]["inner"]
                     anchors.centerIn: parent
                 }
             }

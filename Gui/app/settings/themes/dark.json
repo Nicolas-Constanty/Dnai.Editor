@@ -45,6 +45,32 @@
         "color": "#707070",
         "width": 1
     },
+    "types": {
+        "Boolean" : {
+            "inner": "#000000",
+            "outer": "#FFA726"
+        },
+        "Floating" : {
+            "inner": "#000000",
+            "outer": "#9CCC65"
+        },
+        "Integer" : {
+            "inner": "#000000",
+            "outer": "#BBDEFB"
+        },
+        "Character" : {
+            "inner": "#000000",
+            "outer": "#EF5350"
+        },
+        "String" : {
+            "inner": "#000000",
+            "outer": "#7E57C2"
+        },
+        "Generic" : {
+            "inner": "#000000",
+            "outer": "#42A5F5"
+        }
+    },
     "entities": {
         "0": {
             "color": "#00897B",
