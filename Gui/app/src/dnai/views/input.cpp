@@ -71,7 +71,7 @@ namespace dnai
 		{
 			if (l == nullptr)
 			{
-				unlinkAll();
+                asyncUnlinkAll();
 			}
 		}
 	}
