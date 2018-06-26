@@ -98,7 +98,7 @@ namespace dnai
                     core::function::instruction::unlinkData(func.id(), to->Uid(), input);
                 },
                 [&func, from, output, to, input]() {
-                    core::function::instruction::linkData(func.id(), to->Uid(), input, from->Uid(), output);
+                    core::function::instruction::linkData(func.id(), from->Uid(), output, to->Uid(), input);
                 }
             ));
         }
