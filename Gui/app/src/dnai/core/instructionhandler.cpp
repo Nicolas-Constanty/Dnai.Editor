@@ -21,9 +21,6 @@ namespace dnai
 
         void InstructionHandler::setup()
         {
-            ::core::function::instruction::onRemoved(std::bind(&InstructionHandler::onRemoved, this, _1, _2));
-            ::core::function::instruction::onRemoveError(std::bind(&InstructionHandler::onRemoveError, this, _1, _2, _3));
-
             ::core::function::instruction::onDataLinked(std::bind(&InstructionHandler::onDataLinked, this, _1, _2, _3, _4, _5));
             ::core::function::instruction::onLinkDataError(std::bind(&InstructionHandler::onLinkDataError, this, _1, _2, _3, _4, _5, _6));
 
@@ -38,22 +35,6 @@ namespace dnai
 
             ::core::function::instruction::onInputValueSet(std::bind(&InstructionHandler::onInputValueSet, this, _1, _2, _3, _4));
             ::core::function::instruction::onSetInputValueError(std::bind(&InstructionHandler::onSetInputValueError, this, _1, _2, _3, _4, _5));
-        }
-
-        void InstructionHandler::remove(quint32 func, quint32 instruction, bool save)
-        {
-            Q_UNUSED(func)
-            Q_UNUSED(instruction)
-            Q_UNUSED(save)
-            /*models::Entity &function = manager.getEntity(func);
-
-            commands::CommandManager::Instance()->exec(
-                new commands::CoreCommand("Function.Instruction.Remove", true,
-                    [&function]() {
-                        ::core::function::instruction()
-                    }
-                )
-            );*/
         }
 
         void InstructionHandler::linkData(quint32 function, quint32 from, const QString &output, quint32 to, const QString &input, bool save)
@@ -168,19 +149,6 @@ namespace dnai
                         core::function::instruction::setInputValue(func.id(), instr->Uid(), input, oldValue);
                 }
             ));
-        }
-
-        void InstructionHandler::onRemoved(quint32 function, quint32 instruction)
-        {
-            Q_UNUSED(function)
-            Q_UNUSED(instruction)
-        }
-
-        void InstructionHandler::onRemoveError(quint32 function, quint32 instruction, const QString &message)
-        {
-            Q_UNUSED(function)
-            Q_UNUSED(instruction)
-            Q_UNUSED(message)
         }
 
         void InstructionHandler::onDataLinked(quint32 function, quint32 fromI, const QString &output, quint32 toI, const QString &input)

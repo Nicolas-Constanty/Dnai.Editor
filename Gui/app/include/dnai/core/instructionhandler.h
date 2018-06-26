@@ -21,16 +21,11 @@ namespace dnai
             void setup();
 
         public:
-            Q_INVOKABLE void remove(quint32 function, quint32 instruction, bool save = true);
             Q_INVOKABLE void linkData(quint32 function, quint32 instruction, QString const &input, quint32 fromInstruction, QString const &output, bool save = true);
             Q_INVOKABLE void unlinkData(quint32 function, quint32 instruction, QString const &input, bool save = true);
             Q_INVOKABLE void linkExecution(quint32 function, quint32 instruction, quint32 outPin, quint32 toInstruction, bool save = true);
             Q_INVOKABLE void unlinkExecution(quint32 function, quint32 instruction, quint32 outPin, bool save = true);
             Q_INVOKABLE void setInputValue(quint32 function, quint32 instruction, QString const &input, QString const &value, bool save = true);
-
-        private:
-            void onRemoved(quint32 function, quint32 instruction);
-            void onRemoveError(quint32 function, quint32 instruction, QString const &message);
 
             void onDataLinked(quint32 function, quint32 from, QString const &output, quint32 to, QString const &input);
             void onLinkDataError(quint32 function, quint32 from, QString const &output, quint32 to, QString const &input, QString const &message);

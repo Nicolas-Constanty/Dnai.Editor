@@ -48,31 +48,49 @@ CanvasNode {
             }
             console.log("=====");*/
         }
+    }
 
-        Connections {
-            target: Controller.Function.instruction
+    Connections {
+        target: Controller.Function.instruction
 
-            onDataLinked: {
-                console.log("data linked in func ", func.name, ": ", from.uid, '(', output, ')->', to.uid, '(', input, ')');
-            }
-            onDataUnlinked: {
-                console.log("data unlinked in func ", func.name, ': ', instruction.uid, '(', input ,')')
-            }
-            onExecutionLinked: {
-                console.log("flow linked in func ", func.name, ': ', from.uid, '(', outPin, ')->', to.uid);
-            }
-            onExecutionUnlinked: {
-                console.log("flow unlinked in func ", func.name, ': ', from.uid, '(', outPin, ')');
-            }
+        onDataLinked: {
+            console.log("data linked in func ", func.name, ": ", from.uid, '(', output, ')->', to.uid, '(', input, ')');
         }
+        onDataUnlinked: {
+            console.log("data unlinked in func ", func.name, ': ', instruction.uid, '(', input ,')')
+        }
+        onExecutionLinked: {
+            console.log("flow linked in func ", func.name, ': ', from.uid, '(', outPin, ')->', to.uid);
+        }
+        onExecutionUnlinked: {
+            console.log("flow unlinked in func ", func.name, ': ', from.uid, '(', outPin, ')');
+        }
+    }
 
-        Connections {
-            target: Controller.Function
-            onEntryPointSet: {
-                console.log("entry point set for ", func, "(", func.id, ") => ", func.name, " at instruction ", entry.uid);
+    Connections {
+        target: Controller.Function
+        onEntryPointSet: {
+            console.log("entry point set for ", func, "(", func.id, ") => ", func.name, " at instruction ", entry.uid);
+        }
+        onInstructionRemoved: {
+            if (nodeModel.id === func.id)
+            {
+                for (var i in content_item.children)
+                {
+                    var currItem = content_item.children[i];
+
+                    if (currItem.instruction_model && currItem.instruction_model.uid === instruction.uid)
+                    {
+                        currItem.parent = null;
+                        currItem.visible = false;
+                        delete currItem;
+                        break;
+                    }
+                }
             }
         }
     }
+
     content: content_item
 
     onContextMenuChanged: {

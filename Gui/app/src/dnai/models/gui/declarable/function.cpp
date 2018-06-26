@@ -188,8 +188,14 @@ namespace dnai
 				void Function::addInstruction(Instruction* instruction)
 				{
 					m_functionsHash[instruction->guiUuid()] = instruction;
-					m_data.instructions.append(instruction);
-				}
+                    m_data.instructions.append(instruction);
+                }
+
+                void Function::removeInstruction(Instruction *instruction)
+                {
+                    m_functionsHash.remove(instruction->guiUuid());
+                    m_data.instructions.removeOne(instruction);
+                }
 
 				Instruction *Function::getInstruction(const QUuid &uuid)
 				{
