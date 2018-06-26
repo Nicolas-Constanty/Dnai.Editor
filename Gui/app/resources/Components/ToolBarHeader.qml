@@ -11,6 +11,7 @@ import Dnai.Settings 1.0
 import "../Panels"
 import "../Controls"
 import "../Style"
+import "../Views"
 
 ToolBar {
     property alias menuEditRef: menuEdit
@@ -153,7 +154,6 @@ ToolBar {
                 DMenu {
                     id: menuEdit
                     y: parent.height
-                    property alias settingRef: settingPanel
 
                     DMenuItem {
                         action: settingsAction
@@ -417,22 +417,10 @@ ToolBar {
     }
 
     //SETTINGS PANEL
-    Modal {
+    Settings {
         id: settingsPopup
-        background: Rectangle {
-            color: AppSettings.theme["colors"]["background"]["base"]
-        }
-
         x: parent.width / 2 - width / 2
         y: appWindow.height / 2 - height / 2
-        width: 640
-        height: 480
-        modal: true
-        focus: true
-        closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutside
-        contentItem: SettingPanel {
-            anchors.fill: parent
-            id: settingPanel
-        }
+        width: 480
     }
 }
