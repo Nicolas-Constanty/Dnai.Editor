@@ -29,6 +29,7 @@ namespace dnai
 			virtual const QColor &colorLink() const;
 
 			virtual void unlinkAll();
+            virtual void asyncUnlinkAll();
 			void connect(LinkableBezierItem* a);
 
 

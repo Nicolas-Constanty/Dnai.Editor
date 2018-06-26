@@ -221,27 +221,30 @@ namespace dnai
 
 		void Flow::unlinkAll()
 		{
-			for (auto link : m_linkable->links())
-			{
-				int index;
-				QVariant instruction;
-				const auto flow1 = dynamic_cast<Flow*>(dynamic_cast<FlowBackend*>(link->L1)->parent());
-				const auto flow2 = dynamic_cast<Flow*>(dynamic_cast<FlowBackend*>(link->L2)->parent());
-				if (flow1->typeFlow() == enums::FlowTypeRessouce::FlowType::Exit)
-				{
-					index = flow1->getNode()->flowsOut().getList().indexOf(flow1);
-					instruction = flow1->getNode()->property("instruction_model");
-				}
-				else
-				{
-					index = flow2->getNode()->flowsOut().getList().indexOf(flow2);
-					instruction = flow2->getNode()->property("instruction_model");
-				}
-				emit unlinked(index, instruction);
-			}
+            LinkableBezierItem::unlinkAll();
+        }
 
-			LinkableBezierItem::unlinkAll(); 
-		}
+        void Flow::asyncUnlinkAll()
+        {
+            for (auto link : m_linkable->links())
+            {
+                int index;
+                QVariant instruction;
+                const auto flow1 = dynamic_cast<Flow*>(dynamic_cast<FlowBackend*>(link->L1)->parent());
+                const auto flow2 = dynamic_cast<Flow*>(dynamic_cast<FlowBackend*>(link->L2)->parent());
+                if (flow1->typeFlow() == enums::FlowTypeRessouce::FlowType::Exit)
+                {
+                    index = flow1->getNode()->flowsOut().getList().indexOf(flow1);
+                    instruction = flow1->getNode()->property("instruction_model");
+                }
+                else
+                {
+                    index = flow2->getNode()->flowsOut().getList().indexOf(flow2);
+                    instruction = flow2->getNode()->property("instruction_model");
+                }
+                emit unlinked(index, instruction);
+            }
+        }
 
 		const QColor& Flow::colorLink() const
 		{
@@ -317,7 +320,7 @@ namespace dnai
 		{
 			if (l == nullptr)
 			{
-				unlinkAll();
+                asyncUnlinkAll();
 			}
 		}
 

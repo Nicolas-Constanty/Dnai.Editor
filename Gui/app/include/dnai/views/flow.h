@@ -64,6 +64,7 @@ namespace dnai
 
             QPointF getCanvasPos() const override;
 			void unlinkAll() override;
+            void asyncUnlinkAll() override;
 
         signals:
             void typeFlowChanged(enums::FlowTypeRessouce::FlowType t);

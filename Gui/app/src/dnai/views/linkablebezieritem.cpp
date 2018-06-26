@@ -199,8 +199,13 @@ namespace dnai
                 if (lb->getLinkable()->links().size() < 2)
                     lb->setNormal();
 			}
-			m_linkable->unlinkAll();
-		}
+            m_linkable->unlinkAll();
+        }
+
+        void LinkableBezierItem::asyncUnlinkAll()
+        {
+            unlinkAll();
+        }
 	}
 	
 }

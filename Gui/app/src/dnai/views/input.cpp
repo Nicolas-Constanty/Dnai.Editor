@@ -55,13 +55,17 @@ namespace dnai
 
 		void Input::unlinkAll()
         {
-			for (auto link : m_linkable->links())
-			{
-				const auto lb = dynamic_cast<Output *>(dynamic_cast<BaseLinkable *>(link->L1 == m_linkable ? link->L2 : link->L1)->parent());
-				emit unlinked(lb->property("name"), lb->getNode()->property("instruction_model"));
-			}
-			LinkableBezierItem::unlinkAll();
-		}
+            LinkableBezierItem::unlinkAll();
+        }
+
+        void Input::asyncUnlinkAll()
+        {
+            for (auto link : m_linkable->links())
+            {
+                const auto lb = dynamic_cast<Output *>(dynamic_cast<BaseLinkable *>(link->L1 == m_linkable ? link->L2 : link->L1)->parent());
+                emit unlinked(lb->property("name"), lb->getNode()->property("instruction_model"));
+            }
+        }
 
 		void Input::afterRealease(Link *l)
 		{

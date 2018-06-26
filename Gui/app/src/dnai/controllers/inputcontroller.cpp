@@ -28,7 +28,7 @@ namespace dnai
 					if (!m_links.empty())
 					{
 						if (auto input = dynamic_cast<dnai::views::Input *>(parent()))
-							input->unlinkAll();
+                            input->unlinkAll();
 					}
 					l = new Link(this, linkable);
                     l->setCurve(curve);
@@ -51,7 +51,7 @@ namespace dnai
                     if (!m_links.empty())
                     {
                         if (auto input = dynamic_cast<dnai::views::Input *>(parent()))
-                            input->unlinkAll();
+                            input->asyncUnlinkAll();
                     }
                     if (const auto input = dynamic_cast<dnai::views::Input *>(parent()))
                     {
