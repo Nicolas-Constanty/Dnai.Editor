@@ -20,6 +20,7 @@ namespace dnai
             Q_PROPERTY(dnai::views::Flow *flowOutItem READ flowOutItem WRITE setFlowOutItem NOTIFY flowOutItemChanged)*/
             Q_PROPERTY(dnai::views::RoundedRectangle *header READ header WRITE setHeader NOTIFY headerChanged)
             Q_PROPERTY(dnai::views::RoundedRectangle *content READ content WRITE setContent NOTIFY contentChanged)
+            Q_PROPERTY(bool selected READ selected CONSTANT)
 
         public:
             explicit GenericNode(QQuickItem *parent = nullptr);
@@ -54,6 +55,7 @@ namespace dnai
             //Flow *flowOutItem() const { return m_flowOutItem; }
             RoundedRectangle *header() const { return m_header; }
             RoundedRectangle *content() const { return m_content; }
+            bool selected() const;
 
         public:
             /*void setFlowIn(bool f);

@@ -365,30 +365,44 @@ namespace dnai
 
     void Editor::onInstructionAdded(models::Entity *func, models::gui::Instruction *instruction)
     {
-        if (m_pendingInstruction.empty())
-            return;
-
         const auto view = qvariant_cast<QQuickItem *>(Editor::instance().selectedView()->property("currentView"));
         if (!view)
         {
-            throw std::runtime_error("No canvas view found!");
+            return;
         }
         const auto canvas = dynamic_cast<views::CanvasNode *>(view);
+        if (!canvas)
+        {
+            return;
+        }
 
-        quint32 x, y;
         models::ContextMenuItem *node;
 
-        std::tie(node, x, y) = m_pendingInstruction.front();
+        if (!m_pendingInstruction.empty())
+        {
+            quint32 x, y;
 
-        instruction->setX(x - canvas->content()->x());
-        instruction->setY(y - canvas->content()->y());
+            std::tie(node, x, y) = m_pendingInstruction.front();
+            instruction->setX(x - canvas->content()->x());
+            instruction->setY(y - canvas->content()->y());
+            instruction->setNodeMenuPath(node->fullPath());
+            m_pendingInstruction.pop();
+        }
+        else
+        {
+            node = contextMenuModel()->instructions()[instruction->nodeMenuPath()];
+        }
+
+        if (node == nullptr)
+        {
+            qWarning() << "==Editor== No such node in context menu: " << instruction->nodeMenuPath();
+            return;
+        }
 
         if (createNodeQMLComponent(node, func, instruction, canvas->content()) == nullptr)
         {
 			notifyWarning("Cannot create qml node");
         }
-
-        instruction->setNodeMenuPath(node->fullPath());
 
         /*
          * Building inputs
@@ -425,8 +439,6 @@ namespace dnai
 
             instruction->setOutputs(outputs);
         }
-
-        m_pendingInstruction.pop();
     }
 
     void Editor::onAddInstructionError(quint32 func, quint32 type, const QList<quint32> &args, const QString &msg)

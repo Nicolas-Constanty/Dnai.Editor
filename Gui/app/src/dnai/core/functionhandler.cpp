@@ -223,7 +223,23 @@ namespace dnai
             }
 
             commands::CommandManager::Instance()->exec(new commands::CoreCommand("Function.RemoveInstruction", save,
-                [&function, instr](){
+                [&function, data, instr](){
+
+                    //remove data links
+                    for (models::gui::Input *curr : instr->inputs())
+                    {
+                        core::function::instruction::unlinkData(function.id(), instr->Uid(), curr->name());
+                    }
+
+                    //remove execution links
+                    for (models::gui::FlowLink *lnk : data->flowlinks())
+                    {
+                        if (lnk->data().to == instr->guiUuid())
+                        {
+                            core::function::instruction::unlinkExecution(function.id(), data->getInstruction(lnk->data().from)->Uid(), lnk->data().outIndex);
+                        }
+                    }
+
                     core::function::removeInstruction(function.id(), instr->Uid());
                 },
                 [&function, instr, construction](){

@@ -195,6 +195,11 @@ namespace dnai
             m_selected = nullptr;
         }
 
+        bool GenericNode::selected() const
+        {
+            return m_selected == this;
+        }
+
         void GenericNode::resetBorderColor() const
         {
             m_content->resetBorderColor();

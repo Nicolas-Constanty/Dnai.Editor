@@ -50,6 +50,18 @@ CanvasNode {
         }
     }
 
+    Keys.onDeletePressed: {
+        for (var i in content.children)
+        {
+            var node = content.children[i];
+
+            if (node.selected)
+            {
+                Controller.Function.removeInstruction(nodeModel.id, node.instruction_model.uid);
+            }
+        }
+    }
+
     Connections {
         target: Controller.Function.instruction
 
