@@ -247,11 +247,6 @@ namespace dnai
             }
         }
 
-		const QColor& Flow::colorLink() const
-		{
-            return m_fillColor;
-		}
-
 		LinkableBezierItem* Flow::findLinkableBezierItem(GenericNode* n, const QPointF&p)
 		{
             if (m_typeFlow == enums::FlowTypeRessouce::FlowType::Exit)
@@ -359,6 +354,22 @@ namespace dnai
         {
             return m_isHover;
         }
+
+
+        void Flow::setCurveColor(const QColor &colorCurve)
+        {
+            if (m_colorCurve == colorCurve)
+                return;
+
+            m_colorCurve = colorCurve;
+            emit curveColorChanged(m_colorCurve);
+        }
+
+        const QColor &Flow::curveColor() const
+        {
+            return m_colorCurve;
+        }
+
 	}
 }
 

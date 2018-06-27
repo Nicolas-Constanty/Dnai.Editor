@@ -26,14 +26,13 @@ namespace dnai
 			virtual void componentComplete() override = 0;
 			virtual GenericNode *getNode() = 0;
 
-			virtual const QColor &colorLink() const;
-
 			virtual void unlinkAll();
             virtual void asyncUnlinkAll();
 			void connect(LinkableBezierItem* a);
 
             virtual void setIsLink(bool isLink) = 0;
             virtual void setIsHover(bool isHover) = 0;
+            virtual const QColor &curveColor() const = 0;
 
 		protected:
 			BezierCurve *m_currentCurve;

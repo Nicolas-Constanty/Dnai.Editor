@@ -135,6 +135,7 @@ GenericNode {
                     borderWidth: 3
                     antialiasing: true
                     typeFlow: FlowType.Enter
+                    curveColor: AppSettings.theme["types"][varType]["outer"]
                     borderColor: isHover ? AppSettings.theme["flow"]["inner"] :  AppSettings.theme["flow"]["outer"]
                     fillColor: isLink || isHover ? AppSettings.theme["flow"]["outer"] : AppSettings.theme["flow"]["inner"]
                     onLinked: {
@@ -182,6 +183,7 @@ GenericNode {
                     height: 10
                     radius: 5
                     borderWidth: 3
+                    curveColor: AppSettings.theme["types"][varType]["outer"]
                     borderColor: isHover ? AppSettings.theme["types"][varType]["inner"] : AppSettings.theme["types"][varType]["outer"]
                     fillColor: isLink || isHover ? AppSettings.theme["types"][varType]["outer"] : AppSettings.theme["types"][varType]["inner"]
                     onLinked: {
@@ -272,6 +274,7 @@ GenericNode {
                     borderWidth: 3
                     antialiasing: true
                     typeFlow: FlowType.Exit
+                    curveColor: AppSettings.theme["types"][varType]["outer"]
                     borderColor: isHover ? AppSettings.theme["flow"]["inner"] :  AppSettings.theme["flow"]["outer"]
                     fillColor: isLink || isHover ? AppSettings.theme["flow"]["outer"] : AppSettings.theme["flow"]["inner"]
                     onLinked: {
@@ -313,6 +316,7 @@ GenericNode {
                     height: 10
                     radius: 5
                     borderWidth: 3
+                    curveColor: AppSettings.theme["types"][varType]["outer"]
                     borderColor: isHover ? AppSettings.theme["types"][varType]["inner"] : AppSettings.theme["types"][varType]["outer"]
                     fillColor: isLink || isHover ? AppSettings.theme["types"][varType]["outer"] : AppSettings.theme["types"][varType]["inner"]
                     onLinked: {

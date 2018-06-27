@@ -29,12 +29,6 @@ namespace dnai
             }
 		}
 
-
-		const QColor &LinkableBezierItem::colorLink() const
-		{
-            return m_fillColor;
-		}
-
 		void LinkableBezierItem::mouseMoveEvent(QMouseEvent *event)
 		{
             if (m_currentCurve == nullptr) return;
@@ -70,7 +64,7 @@ namespace dnai
                 auto b = new BezierCurve(m_canvas->content());
                 b->setPosition(getCanvasPos());
 				b->setP1(QPoint(0, 0));
-                QColor cb(m_fillColor);
+                QColor cb(curveColor());
                 b->setFillColor(cb);
 				const QColor c((cb.red() < 205 ? cb.red() + 50 : 255),
 					(cb.green() < 205 ? cb.green() + 50 : 255),
@@ -88,7 +82,7 @@ namespace dnai
 			auto b = new BezierCurve(m_canvas->content());
             b->setPosition(getCanvasPos());
             b->setP1(QPoint(0, 0));
-            const auto cb(m_borderColor);
+            const auto cb(curveColor());
 			b->setFillColor(cb);
 			const auto co = m_linkable->connect(a->getLinkable(), b);
 			if (co)

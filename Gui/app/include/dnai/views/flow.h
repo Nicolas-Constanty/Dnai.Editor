@@ -34,6 +34,7 @@ namespace dnai
             Q_PROPERTY(dnai::enums::FlowTypeRessouce::FlowType typeFlow READ typeFlow WRITE setTypeFlow NOTIFY typeFlowChanged)
             Q_PROPERTY(bool isLink READ isLink WRITE setIsLink NOTIFY isLinkChanged)
             Q_PROPERTY(bool isHover READ isHover WRITE setIsHover NOTIFY isHoverChanged)
+            Q_PROPERTY(QColor curveColor READ curveColor WRITE setCurveColor NOTIFY curveColorChanged)
 
 		public:
 			explicit Flow(QQuickItem *parent = nullptr);
@@ -47,9 +48,7 @@ namespace dnai
 			/**
 			* \brief Override componentComplete, and init some values
 			*/
-			virtual void componentComplete() override;
-
-			virtual const QColor &colorLink() const override;
+            virtual void componentComplete() override;
 
 			/**
 			* \brief Override findIo, return the IO under the point p of the Node n
@@ -72,10 +71,14 @@ namespace dnai
 
             bool isHover() const;
 
+            virtual const QColor &curveColor() const override;
+
         public slots:
             virtual void setIsLink(bool isLink) override;
 
             virtual void setIsHover(bool isHover) override;
+
+            void setCurveColor(const QColor &colorCurve);
 
         signals:
             void typeFlowChanged(enums::FlowTypeRessouce::FlowType t);
@@ -86,6 +89,8 @@ namespace dnai
 
             void isHoverChanged(bool isHover);
 
+            void curveColorChanged(const QColor &colorCurve);
+
         private:
             enums::FlowTypeRessouce::FlowType m_typeFlow;
 			GenericNode *m_genericNode;
@@ -93,6 +98,8 @@ namespace dnai
             bool m_isLink;
 
             bool m_isHover;
+
+            QColor m_colorCurve;
 
         protected:
 			void mousePressEvent(QMouseEvent* event) override;

@@ -187,6 +187,11 @@ namespace dnai
             return m_isHover;
         }
 
+        const QColor &Io::curveColor() const
+        {
+            return m_curveColor;
+        }
+
         void Io::setIsLink(bool isLink)
         {
             if (m_isLink == isLink)
@@ -205,6 +210,15 @@ namespace dnai
             emit isHoverChanged(m_isHover);
         }
 
+        void Io::setCurveColor(const QColor &curveColor)
+        {
+            if (m_curveColor == curveColor)
+                return;
+
+            m_curveColor = curveColor;
+            emit curveColorChanged(m_curveColor);
+        }
+
         QPointF Io::getCanvasPos() const
         {
             return QPointF(mapToItem(m_canvas->content(), QPoint(0,0)) +
@@ -212,8 +226,8 @@ namespace dnai
         }
 
         GenericNode* Io::getNode()
-		{
-			if (m_genericNode == nullptr)
+        {
+            if (m_genericNode == nullptr)
 			{
 				GenericNode *n = nullptr;
 				QQuickItem *parent = parentItem();

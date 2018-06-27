@@ -24,10 +24,13 @@ namespace dnai
             Q_PROPERTY(int type READ type WRITE setType NOTIFY typeChanged)
             Q_PROPERTY(bool isLink READ isLink WRITE setIsLink NOTIFY isLinkChanged)
             Q_PROPERTY(bool isHover READ isHover WRITE setIsHover NOTIFY isHoverChanged)
+            Q_PROPERTY(QColor curveColor READ curveColor WRITE setCurveColor NOTIFY curveColorChanged)
 
             bool m_isLink;
 
             bool m_isHover;
+
+            QColor m_curveColor;
 
         public:
 			static BaseIo *CurrentHover;
@@ -74,10 +77,14 @@ namespace dnai
 
             bool isHover() const;
 
+            virtual const QColor &curveColor() const override;
+
         public slots:
             virtual void setIsLink(bool isLink) override;
 
             virtual void setIsHover(bool isHover) override;
+
+            void setCurveColor(const QColor &curveColor);
 
         signals:
 			void nbSegmentsChanged(uint n);
@@ -88,6 +95,8 @@ namespace dnai
             void isLinkChanged(bool isLink);
 
             void isHoverChanged(bool isHover);
+
+            void curveColorChanged(const QColor &curveColor);
 
         protected:
 			uint m_nbSegments;
