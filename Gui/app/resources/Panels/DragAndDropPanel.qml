@@ -16,9 +16,5 @@ ExpendablePanel {
         anchors.topMargin: 10
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 10
-        // TODO Why it's broken here ?
-//        NodeModelViewer {
-//            anchors.fill: parent
-//        }
     }
 }

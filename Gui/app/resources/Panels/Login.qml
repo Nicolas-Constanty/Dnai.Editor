@@ -164,7 +164,6 @@ Item {
 
     }
         onCheckedChanged: {
-            console.log(checkboxRememberId.checked)
             Editor.session.rememberUser = checkboxRememberId.checked
         }
     }

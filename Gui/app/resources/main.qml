@@ -8,7 +8,6 @@ import DNAI 1.0
 import Dnai.Settings 1.0
 
 import "JavaScript/CreateComponent.js" as Factory
-import "Layouts"
 import "Views"
 import "Nodes"
 import "Panels"
@@ -36,7 +35,6 @@ Window {
         //Load theme 1
         AppSettings.currentTheme = AppSettings.themeNames[0]
         isInit = AppSettings.themeLoaded
-//        console.log(AppSettings.theme["colors"])
     }
 
     function closeSplashScreen()

@@ -39,15 +39,6 @@ CanvasNode {
         onScaleChanged: {
             zoomText.text = Math.round(content_item.scale * 100) + "%"
         }
-
-        onChildrenChanged: {
-            /*console.log("==C==");
-            for (var child in children)
-            {
-                console.log("Child ", child, ": ", children[child]);
-            }
-            console.log("=====");*/
-        }
     }
 
     Keys.onDeletePressed: {

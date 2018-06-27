@@ -187,9 +187,6 @@ Item {
                             toolTipsText: "Context"
 
                             onPressed: {
-//                                console.log(idx)
-//                                console.log(modelData.listIndex)
-
                                 var name = proj.generateUniqueChildName(modelData.parentRef);
 
                                 proj.addEntityColumnUid(modelData.parentRef.id, name, modelData.listIndex)

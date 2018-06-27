@@ -8,7 +8,6 @@ import Dnai.Settings 1.0
 
 import "../Style"
 import "../Components"
-import "../Layouts"
 import "../Panels"
 import "../JavaScript/Utils.js" as Utils
 import "../JavaScript/CreateComponent.js" as Factory
@@ -121,10 +120,6 @@ ApplicationWindow {
         onAccepted: {
             openSolution(openProjectId.fileUrl);
         }
-        onRejected: {
-            //console.log("Canceled")
-        }
-
     }
 
     Modal {
