@@ -30,7 +30,6 @@ namespace dnai
 				{ this, "visibility" },
 				{ this, "entityType" }
 			};
-			m_editableProperty = new Property(props);
             QQmlEngine::setObjectOwnership(this, QQmlEngine::CppOwnership);
             if (m_guid.isNull())
                 m_guid = utils::generateUid();
@@ -41,7 +40,6 @@ namespace dnai
             qDebug() << "~ Entity: " << name();
 			delete m_dataCore;
 			delete m_dataGUI;
-            delete m_editableProperty;
 		}
 
 		bool Entity::isRoot() const
@@ -130,19 +128,6 @@ namespace dnai
 			{
 				emit expandedChanged(exp);
 			}
-        }
-
-		void Entity::setEditableProperty(Property* p)
-		{
-			if (m_editableProperty == p)
-				return;
-			m_editableProperty = p;
-			emit editablePropertyChanged(p);
-		}
-
-		Property *Entity::editableProperty() const
-		{
-            return m_editableProperty;
         }
 
         QUuid Entity::guid() const
@@ -371,14 +356,6 @@ namespace dnai
 		{
 			return IModel<Entity>::row();
 		}
-
-		void Entity::setProp(int row, const QVariant& value)
-		{
-			if (m_editableProperty)
-			{
-				m_editableProperty->setProp(row, value);
-            }
-        }
 
         Entity *Entity::findByName(const QString &name) const
         {

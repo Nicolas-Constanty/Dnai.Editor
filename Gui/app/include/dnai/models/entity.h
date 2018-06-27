@@ -8,7 +8,6 @@
 #include "gui/data/entitycolum.h"
 #include "gui/declarable/variable.h"
 #include "gui/declarable/context.h"
-#include "dnai/models/property.h"
 
 namespace dnai
 {
@@ -87,9 +86,7 @@ namespace dnai
             Q_PROPERTY(qint32 entityType READ entityType WRITE setEntityType NOTIFY entityTypeChanged)
 			Q_PROPERTY(bool expanded READ expanded WRITE setExpanded NOTIFY expandedChanged)
 			Q_PROPERTY(dnai::models::Entity *parentRef READ parentRef CONSTANT)
-			Q_PROPERTY(dnai::models::Property *editableProperty READ editableProperty WRITE setEditableProperty NOTIFY editablePropertyChanged)
             Q_PROPERTY(QVariant listColumn READ listColumn WRITE setListColumn NOTIFY listColumnChanged)
-            //			Q_PROPERTY(EntityGUI *guiModel READ guiModel CONSTANT)
 
         public:
             explicit Entity(gcore::Entity *coremodel = nullptr, Entity *parent = nullptr, interfaces::IEntity *guimodel = nullptr, QUuid const &guid = QUuid());
@@ -115,7 +112,6 @@ namespace dnai
             bool expanded() const;
 			Entity *parentRef() const;
 			const QMap<QUuid, Column *> &columns();
-			Property *editableProperty() const;
             QUuid guid() const;
 
         public:
@@ -130,7 +126,6 @@ namespace dnai
             void setDescription(const QString& description);
             virtual void setCoreModel(gcore::Entity *model);
 			void setExpanded(bool exp);
-			void setEditableProperty(Property *p);
 			virtual void appendChild(Entity* child) override;
 			QObject *guiProperties() const;
 			void setListColumn(const QVariant &column);
@@ -148,7 +143,6 @@ namespace dnai
 	        void coreModelChanged(gcore::Entity *model);
 	        void entityChildrenChanged(models::Entity *e);
 	        void expandedChanged(bool exp);
-	        void editablePropertyChanged(Property *p);
 			void listColumnChanged(const QVariant &var);
 
 	        //Implementation of ISerializable
@@ -159,7 +153,6 @@ namespace dnai
 	        const QVariant &listColumn();
 			Q_INVOKABLE void addColumn(const QString &name);
 	        Q_INVOKABLE int row() const override;
-	        Q_INVOKABLE void setProp(int row, const QVariant &value);
 
         public:
 	        models::Entity *findByName(QString const &name) const;
@@ -174,7 +167,6 @@ namespace dnai
 	        QMap<QUuid, Column *> m_columns;
 	        QList<QObject *> m_columslist;
 			QVariant m_varcolumns;
-	        Property *m_editableProperty;
             QUuid m_guid;
 
         };

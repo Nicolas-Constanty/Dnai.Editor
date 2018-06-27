@@ -268,24 +268,5 @@ namespace dnai
                 l->curve()->setFillColor(color);
             }
         }
-
-//		void Io::setLink(Link *l)
-//		{
-//			resetShape();
-//			setFillColor(m_borderColor);
-//			if (l == nullptr) return;
-//			auto cs = dynamic_cast<Io *>(dynamic_cast<BaseIo*>(l->L1 != m_linkable ? l->L1 : l->L2)->parent());
-//			cs->setLink(nullptr);
-//			LinkableBezierItem::setLink(nullptr);
-//		}
-
-//		void Io::setHover()
-//		{
-//			if (m_status == LinkStatus::Hover) return;
-//			const auto c(m_borderColor);
-//			setBorderColor(m_fillColor);
-//			setFillColor(c);
-//			LinkableBezierItem::setHover();
-//		}
 	}
 }

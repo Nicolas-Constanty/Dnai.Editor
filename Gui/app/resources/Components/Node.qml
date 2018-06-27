@@ -135,8 +135,8 @@ GenericNode {
                     borderWidth: 3
                     antialiasing: true
                     typeFlow: FlowType.Enter
-                    curveColor: AppSettings.theme["types"][varType]["outer"]
-                    borderColor: isHover ? AppSettings.theme["flow"]["inner"] :  AppSettings.theme["flow"]["outer"]
+                    curveColor: AppSettings.theme["flow"]["outer"]
+                    borderColor: isHover ? AppSettings.theme["flow"]["inner"] : AppSettings.theme["flow"]["outer"]
                     fillColor: isLink || isHover ? AppSettings.theme["flow"]["outer"] : AppSettings.theme["flow"]["inner"]
                     onLinked: {
                         if (instructionModel)
@@ -274,8 +274,8 @@ GenericNode {
                     borderWidth: 3
                     antialiasing: true
                     typeFlow: FlowType.Exit
-                    curveColor: AppSettings.theme["types"][varType]["outer"]
-                    borderColor: isHover ? AppSettings.theme["flow"]["inner"] :  AppSettings.theme["flow"]["outer"]
+                    curveColor: AppSettings.theme["flow"]["outer"]
+                    borderColor: isHover ? AppSettings.theme["flow"]["inner"] : AppSettings.theme["flow"]["outer"]
                     fillColor: isLink || isHover ? AppSettings.theme["flow"]["outer"] : AppSettings.theme["flow"]["inner"]
                     onLinked: {
                         Controller.Function.instruction.linkExecution(_node.function_entity.id, _node.instruction_model.uid, outindex, instructionModel.uid);

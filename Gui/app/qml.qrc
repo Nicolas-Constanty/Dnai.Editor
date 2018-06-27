@@ -8,13 +8,11 @@
         <file>resources/Components/ToolBarHeader.qml</file>
         <file>resources/Forms/ColorPickerForm.ui.qml</file>
         <file>resources/Forms/DropDownForm.ui.qml</file>
-        <file>resources/Forms/NodePanelForm.ui.qml</file>
         <file>resources/Models/ColorPickerModel.qml</file>
         <file>resources/Models/LanguageModel.qml</file>
         <file>resources/Models/ThemeModel.qml</file>
         <file>resources/Panels/NodePanel.qml</file>
         <file>resources/Components/Node.qml</file>
-        <file>resources/Forms/NodeForm.ui.qml</file>
         <file>resources/Components/Printer.qml</file>
         <file>resources/Forms/ConsoleForm.ui.qml</file>
         <file>resources/Panels/DefaultPanel.qml</file>

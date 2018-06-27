@@ -120,7 +120,6 @@ SOURCES += \
     src/dnai/core/enumhandler.cpp \
     src/dnai/toastermanagerservice.cpp \
     src/dnai/views/toast.cpp \
-    src/dnai/models/property.cpp \
     src/dnai/core/instructionhandler.cpp \
     src/dnai/models/gui/entitylist.cpp \
     src/dnai/models/contextmenumodel.cpp \
@@ -295,7 +294,6 @@ HEADERS += \
     $${PWD}/../lib/lcore_client/include/core.h \
     include/dnai/toastermanagerservice.h \
     include/dnai/views/toast.h \
-    include/dnai/models/property.h \
     include/dnai/core/instructionhandler.h \
     include/dnai/models/gui/entitylist.h \
     include/dnai/core/instructionmanager.h \
