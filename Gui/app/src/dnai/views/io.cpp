@@ -260,6 +260,15 @@ namespace dnai
 			return (position() / scale()) + QPointF((width() / scale() - width()) / 2, (height() / scale() - height()) / 2);
 		}
 
+        void Io::redrawLinks(const QColor &color)
+        {
+            auto list = m_linkable->links();
+            for (auto l : list)
+            {
+                l->curve()->setFillColor(color);
+            }
+        }
+
 //		void Io::setLink(Link *l)
 //		{
 //			resetShape();

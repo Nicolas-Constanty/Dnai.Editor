@@ -86,6 +86,8 @@ namespace dnai
 
             void setCurveColor(const QColor &curveColor);
 
+            void redrawLinks(const QColor &color);
+
         signals:
 			void nbSegmentsChanged(uint n);
             void typeChanged(int type);

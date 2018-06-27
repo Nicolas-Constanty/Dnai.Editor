@@ -15,6 +15,7 @@ namespace dnai
 			Io(parent)
 		{
 			m_linkable = new controllers::InputController(m_type, this);
+            QObject::connect(this, SIGNAL(curveColorChanged(const QColor&)), this, SLOT(redrawLinks(const QColor&)));
 		}
 
 		void Input::refreshBackendIo()
