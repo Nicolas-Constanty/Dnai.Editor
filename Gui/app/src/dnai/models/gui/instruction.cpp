@@ -16,23 +16,9 @@ namespace dnai
 			}
 
 			void Instruction::serialize(QJsonObject& obj) const
-			{
-				QJsonArray inputs;
-				foreach(const auto input, m_data.inputs) {
-					QJsonObject var;
-					input->serialize(var);
-					inputs.append(var);
-				}
-
-				QJsonArray outputs;
-				foreach(const auto output, m_data.outputs) {
-					QJsonObject var;
-					output->serialize(var);
-					outputs.append(var);
-				}
-
-				obj["inputs"] = inputs;
-				obj["outputs"] = outputs;
+            {
+                obj["inputs"] = serializeList<Input>(m_data.inputs);
+                obj["outputs"] = serializeList<Output>(m_data.outputs);
 				QJsonObject temp;
                 if (m_data.flowIn != nullptr)
                 {
@@ -61,7 +47,8 @@ namespace dnai
 					auto ent = gui::Input::deserialize(input.toObject());
 					m_data.inputs.append(ent);
 		        }
-				foreach(auto output, obj["m_outputs"].toArray()) {
+                foreach(auto output, obj["outputs"].toArray()) {
+                    qDebug() << "Output deserilized";
 					auto ent = gui::Output::deserialize(output.toObject());
 					m_data.outputs.append(ent);
 				}
@@ -106,6 +93,8 @@ namespace dnai
 
             Input *Instruction::getInput(const QString &name) const
             {
+                qDebug() << name << m_data.inputs.length();
+
                 for (Input *curr : m_data.inputs)
                 {
                     if (curr->name() == name)
@@ -122,6 +111,14 @@ namespace dnai
                 return input->value();
             }
 
+            QString Instruction::getInputType(const QString &name) const
+            {
+                Input *input = getInput(name);
+
+                if (input == nullptr) return "";
+                return input->varType().toString();
+            }
+
             const QList<models::gui::Output*> &Instruction::outputs() const
 			{
 				return m_data.outputs;
@@ -132,8 +129,27 @@ namespace dnai
 				if (m_data.outputs == outputs)
 					return false;
 				m_data.outputs = outputs;
-				return true;
-			}
+                return true;
+            }
+
+            Output *Instruction::getOutput(const QString &name) const
+            {
+                qDebug() << name << m_data.outputs.length();
+                for (Output *curr : m_data.outputs)
+                {
+                    if (curr->name() == name)
+                        return curr;
+                }
+                return nullptr;
+            }
+
+            QString Instruction::getOutputType(const QString &name) const
+            {
+                Output *output = getOutput(name);
+
+                if (output == nullptr) return "";
+                return output->varType().toString();
+            }
 
 			models::gui::Flow* Instruction::flowIn() const
 			{

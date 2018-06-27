@@ -114,7 +114,14 @@ Item {
                     }
                     ComboBox {
                         id: _selectedType
-                        model: Controller.types
+                        property var types: Controller.types
+                        property var completeType: null
+                        model: completeType
+                        onTypesChanged: {
+                            completeType = types
+                            completeType.push({"name": "Generic"})
+                        }
+
                         textRole: "name"
                     }
                 }

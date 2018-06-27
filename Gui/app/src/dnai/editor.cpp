@@ -399,18 +399,12 @@ namespace dnai
             return;
         }
 
-        if (createNodeQMLComponent(node, func, instruction, canvas->content()) == nullptr)
-        {
-			notifyWarning("Cannot create qml node");
-        }
-
         /*
          * Building inputs
          */
         if (instruction->inputs().empty())
         {
             QList<models::gui::Input *> inputs;
-
             for (QString const &curr : node->inputNames())
             {
                 models::gui::Input *toadd = new models::gui::Input();
@@ -439,6 +433,11 @@ namespace dnai
 
             instruction->setOutputs(outputs);
         }
+
+        if (createNodeQMLComponent(node, func, instruction, canvas->content()) == nullptr)
+        {
+			notifyWarning("Cannot create qml node");
+        }       
     }
 
     void Editor::onAddInstructionError(quint32 func, quint32 type, const QList<quint32> &args, const QString &msg)

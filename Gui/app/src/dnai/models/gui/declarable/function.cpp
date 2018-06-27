@@ -114,6 +114,7 @@ namespace dnai
 
                 void Function::addOutput(models::Entity *var)
 				{
+                    qDebug() << "================Add output";
 					for (auto i : m_data.outputs)
 					{
                         if (i->name() == var->name())

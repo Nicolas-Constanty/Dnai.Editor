@@ -102,7 +102,8 @@ namespace dnai
 				INPUTS,
                 OUTPUTS,
                 CONSTRUCTION,
-                INSTRUCTION_ID
+                INSTRUCTION_ID,
+                TYPE
 			};
 
 		public:

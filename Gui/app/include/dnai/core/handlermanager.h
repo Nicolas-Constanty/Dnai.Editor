@@ -74,6 +74,7 @@ namespace dnai
         public:
             Q_INVOKABLE dnai::models::Entity *getEntity(QUuid guid);
             Q_INVOKABLE dnai::models::Entity *getEntity(quint32 id);
+            Q_INVOKABLE dnai::models::Entity *getEntityByFullName(const QString &name);
 
         public slots:
             void onEntityAdded(::core::EntityID id, models::Entity &entity);

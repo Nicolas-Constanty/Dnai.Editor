@@ -501,6 +501,8 @@ namespace dnai
 				return entity->outputs();
 			case INSTRUCTION_ID:
 				return entity->instructionId();
+            case TYPE:
+                return entity->type();
             case CONSTRUCTION:
                 return QVariant::fromValue(entity->construction());
 			default:
@@ -518,6 +520,7 @@ namespace dnai
             hash[OUTPUTS] = "outputs";
             hash[INSTRUCTION_ID] = "instruction_id";
             hash[CONSTRUCTION] = "construction";
+            hash[TYPE] = "type_id";
             return hash;
         }
 

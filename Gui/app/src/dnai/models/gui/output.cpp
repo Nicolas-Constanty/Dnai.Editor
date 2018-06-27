@@ -58,7 +58,7 @@ namespace dnai
 				m_data.description = obj["description"].toString();
 				m_data.index = obj["index"].toInt();
 				m_data.listIndex = QUuid::fromString(obj["listIndex"].toString());
-                m_data.varType = obj["varType"].toString();
+                m_data.varType = QUuid::fromString(obj["varType"].toString());
 				m_data.value = obj["value"].toString();
 			}
 

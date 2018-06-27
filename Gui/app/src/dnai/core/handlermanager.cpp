@@ -157,6 +157,11 @@ namespace dnai
             return nullptr;
         }
 
+        models::Entity *HandlerManager::getEntityByFullName(const QString &name)
+        {
+            return m_manager.findByFullname(name);
+        }
+
         void HandlerManager::onEntityAdded(EntityID id, models::Entity &entity)
         {
             Q_UNUSED(id)

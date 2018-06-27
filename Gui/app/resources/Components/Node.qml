@@ -153,16 +153,16 @@ GenericNode {
                 delegate: Input {
                     id: _inputDel
                     property string name: ""
+                    property string varType: ""
                     width: 10
                     height: 10
                     radius: 5
-                    type: 1
                     borderWidth: 3
                     borderColor: {
-                            AppSettings.theme["nodes"]["genericNode"]["border"]["color"]
+                        AppSettings.theme["types"][varType]["outer"]
                     }
                     fillColor: {
-                            AppSettings.theme["nodes"]["genericNode"]["color"]
+                        AppSettings.theme["types"][varType]["inner"]
                     }
                     onLinked: {
                         Controller.Function.instruction.linkData(_node.function_entity.id, instructionModel.uid, name, _node.instruction_model.uid, _inputDel.name);
@@ -172,14 +172,19 @@ GenericNode {
                     }
                     Component.onCompleted: {
                         name = _node.model.inputNames[index]
-
-                        var inpVal = _node.instruction_model.getInputValue(name);
-
-                        if (inpVal)
+                        var typeEntity = Controller.getEntityByFullName(_node.instruction_model.linked[index])
+                        if (typeEntity.guiProperties !== null)
                         {
-                            _inputValue.text = inpVal;
-                            Controller.Function.instruction.setInputValue(_node.function_entity.id, _node.instruction_model.uid, _inputDel.name, _inputValue.text);
+                            if (typeof(typeEntity.guiProperties.varType) === "undefined")
+                                varType = "Generic"
+                            else
+                                varType = Controller.getType(Controller.getTypeIndex(typeEntity.guiProperties.varType)).name
                         }
+                        else
+                        {
+                            varType = _node.instruction_model.linked[index];
+                        }
+
                     }
 
                     Text {
@@ -258,16 +263,16 @@ GenericNode {
                 delegate: Output {
                     id: _outputDel
                     property string name: ""
+                    property string varType: ""
                     width: 10
                     height: 10
                     radius: 5
-                    type: 1
                     borderWidth: 3
                     borderColor: {
-                            AppSettings.theme["nodes"]["genericNode"]["border"]["color"]
+                        AppSettings.theme["types"][varType]["outer"]
                     }
                     fillColor: {
-                            AppSettings.theme["nodes"]["genericNode"]["color"]
+                        AppSettings.theme["types"][varType]["inner"]
                     }
                     onLinked: {
                         Controller.Function.instruction.linkData(_node.function_entity.id, _node.instruction_model.uid, _outputDel.name, instructionModel.uid, name);
@@ -282,6 +287,19 @@ GenericNode {
                     }
                     Component.onCompleted: {
                         name = _node.model.outputNames[index]
+                        var typeEntity = Controller.getEntityByFullName(_node.instruction_model.linked[_node.model.construction.length + index - 1])
+                        if (typeEntity.guiProperties !== null)
+                        {
+                            if (typeof(typeEntity.guiProperties.varType) === "undefined")
+                                varType = "Generic"
+                            else
+                                varType = Controller.getType(Controller.getTypeIndex(typeEntity.guiProperties.varType)).name
+                        }
+                        else
+                        {
+                            varType = _node.instruction_model.linked[_node.model.construction.length + index - 1];
+                        }
+
                     }
 
                     Text {
