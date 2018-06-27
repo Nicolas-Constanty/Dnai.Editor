@@ -32,6 +32,8 @@ namespace dnai
             virtual void asyncUnlinkAll();
 			void connect(LinkableBezierItem* a);
 
+            virtual void setIsLink(bool isLink) = 0;
+            virtual void setIsHover(bool isHover) = 0;
 
 		protected:
 			BezierCurve *m_currentCurve;
@@ -55,8 +57,8 @@ namespace dnai
 			* \brief Override mousePressEvent
 			* \param event
 			*/
-			virtual void mousePressEvent(QMouseEvent *event) override;
-			/**
+             virtual void mousePressEvent(QMouseEvent *event) override;
+            /**
 			* \brief Override mouseReleaseEvent
 			* \param event
 			*/
@@ -64,19 +66,19 @@ namespace dnai
 
 			virtual void afterRealease(Link *l);
 
-			virtual void setHover();
-			virtual void setNormal();
-			virtual void setLink(Link *);
+//			virtual void setHover();
+//			virtual void setNormal();
+//			virtual void setLink(Link *);
 
 			enum LinkStatus {
 				Normal,
 				Hover,
 				Linked
-			};
+            };
 
 		protected:
             interfaces::ALinkable *m_linkable;
-			LinkableBezierItem *m_currentHover;
+//			LinkableBezierItem *m_currentHover;
 			LinkStatus m_status;
 
 		};

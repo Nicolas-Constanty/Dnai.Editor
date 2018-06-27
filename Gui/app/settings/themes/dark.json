@@ -45,6 +45,10 @@
         "color": "#707070",
         "width": 1
     },
+    "flow": {
+      "inner": "#424242",
+      "outer": "#ffffff"
+    },
     "types": {
         "Boolean" : {
             "inner": "#000000",

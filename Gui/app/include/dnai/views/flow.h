@@ -32,6 +32,8 @@ namespace dnai
 		{
 			Q_OBJECT
             Q_PROPERTY(dnai::enums::FlowTypeRessouce::FlowType typeFlow READ typeFlow WRITE setTypeFlow NOTIFY typeFlowChanged)
+            Q_PROPERTY(bool isLink READ isLink WRITE setIsLink NOTIFY isLinkChanged)
+            Q_PROPERTY(bool isHover READ isHover WRITE setIsHover NOTIFY isHoverChanged)
 
 		public:
 			explicit Flow(QQuickItem *parent = nullptr);
@@ -59,23 +61,40 @@ namespace dnai
 			virtual void updateLink() override;
             virtual GenericNode *getNode() override;
 
-			virtual void setHover() override;
-			virtual void setLink(Link *) override;
+//			virtual void setHover() override;
+//			virtual void setLink(Link *) override;
 
             QPointF getCanvasPos() const override;
 			void unlinkAll() override;
             void asyncUnlinkAll() override;
+
+            bool isLink() const;
+
+            bool isHover() const;
+
+        public slots:
+            virtual void setIsLink(bool isLink) override;
+
+            virtual void setIsHover(bool isHover) override;
 
         signals:
             void typeFlowChanged(enums::FlowTypeRessouce::FlowType t);
 			void linked(int outindex, const QVariant &instructionModel);
 			void unlinked(int outindex, const QVariant &instructionModel);
 
-		private:
+            void isLinkChanged(bool isLink);
+
+            void isHoverChanged(bool isHover);
+
+        private:
             enums::FlowTypeRessouce::FlowType m_typeFlow;
 			GenericNode *m_genericNode;
 
-		protected:
+            bool m_isLink;
+
+            bool m_isHover;
+
+        protected:
 			void mousePressEvent(QMouseEvent* event) override;
 			virtual void afterRealease(Link *l) override;
 		};

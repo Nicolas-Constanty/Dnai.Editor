@@ -56,6 +56,7 @@ namespace dnai
 		void Input::unlinkAll()
         {
             LinkableBezierItem::unlinkAll();
+            setIsLink(false);
         }
 
         void Input::asyncUnlinkAll()

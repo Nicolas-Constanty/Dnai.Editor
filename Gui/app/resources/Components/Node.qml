@@ -118,12 +118,25 @@ GenericNode {
             Repeater {
                 model: _node.model.flowIn
                 delegate: Flow {
+                    MouseArea {
+                        anchors.fill: parent
+                        hoverEnabled: true
+                        propagateComposedEvents: true
+                        onContainsMouseChanged: {
+                            isHover = containsMouse
+                        }
+                        onPressed: {
+                            mouse.accepted = false
+                        }
+                    }
                     radius: 6
                     width: 12
                     height: 12
                     borderWidth: 3
                     antialiasing: true
                     typeFlow: FlowType.Enter
+                    borderColor: isHover ? AppSettings.theme["flow"]["inner"] :  AppSettings.theme["flow"]["outer"]
+                    fillColor: isLink || isHover ? AppSettings.theme["flow"]["outer"] : AppSettings.theme["flow"]["inner"]
                     onLinked: {
                         if (instructionModel)
                             Controller.Function.instruction.linkExecution(_node.function_entity.id, instructionModel.uid, outindex, _node.instruction_model.uid);
@@ -151,6 +164,17 @@ GenericNode {
             Repeater {
                 model: _node.model.inputs
                 delegate: Input {
+                    MouseArea {
+                        anchors.fill: parent
+                        hoverEnabled: true
+                        propagateComposedEvents: true
+                        onContainsMouseChanged: {
+                            isHover = containsMouse
+                        }
+                        onPressed: {
+                            mouse.accepted = false
+                        }
+                    }
                     id: _inputDel
                     property string name: ""
                     property string varType: ""
@@ -158,12 +182,8 @@ GenericNode {
                     height: 10
                     radius: 5
                     borderWidth: 3
-                    borderColor: {
-                        AppSettings.theme["types"][varType]["outer"]
-                    }
-                    fillColor: {
-                        AppSettings.theme["types"][varType]["inner"]
-                    }
+                    borderColor: isHover ? AppSettings.theme["types"][varType]["inner"] : AppSettings.theme["types"][varType]["outer"]
+                    fillColor: isLink || isHover ? AppSettings.theme["types"][varType]["outer"] : AppSettings.theme["types"][varType]["inner"]
                     onLinked: {
                         Controller.Function.instruction.linkData(_node.function_entity.id, instructionModel.uid, name, _node.instruction_model.uid, _inputDel.name);
                     }
@@ -235,12 +255,25 @@ GenericNode {
             Repeater {
                 model: _node.model.flowOut
                 delegate: Flow {
+                    MouseArea {
+                        anchors.fill: parent
+                        hoverEnabled: true
+                        propagateComposedEvents: true
+                        onContainsMouseChanged: {
+                            isHover = containsMouse
+                        }
+                        onPressed: {
+                            mouse.accepted = false
+                        }
+                    }
                     radius: 6
                     width: 17
                     height: 17
                     borderWidth: 3
                     antialiasing: true
                     typeFlow: FlowType.Exit
+                    borderColor: isHover ? AppSettings.theme["flow"]["inner"] :  AppSettings.theme["flow"]["outer"]
+                    fillColor: isLink || isHover ? AppSettings.theme["flow"]["outer"] : AppSettings.theme["flow"]["inner"]
                     onLinked: {
                         Controller.Function.instruction.linkExecution(_node.function_entity.id, _node.instruction_model.uid, outindex, instructionModel.uid);
                     }
@@ -264,16 +297,24 @@ GenericNode {
                     id: _outputDel
                     property string name: ""
                     property string varType: ""
+                    MouseArea {
+                        anchors.fill: parent
+                        hoverEnabled: true
+                        propagateComposedEvents: true
+                        onContainsMouseChanged: {
+                            isHover = containsMouse
+                        }
+                        onPressed: {
+                            mouse.accepted = false
+                        }
+                    }
+
                     width: 10
                     height: 10
                     radius: 5
                     borderWidth: 3
-                    borderColor: {
-                        AppSettings.theme["types"][varType]["outer"]
-                    }
-                    fillColor: {
-                        AppSettings.theme["types"][varType]["inner"]
-                    }
+                    borderColor: isHover ? AppSettings.theme["types"][varType]["inner"] : AppSettings.theme["types"][varType]["outer"]
+                    fillColor: isLink || isHover ? AppSettings.theme["types"][varType]["outer"] : AppSettings.theme["types"][varType]["inner"]
                     onLinked: {
                         Controller.Function.instruction.linkData(_node.function_entity.id, _node.instruction_model.uid, _outputDel.name, instructionModel.uid, name);
                     }

@@ -38,7 +38,6 @@ namespace dnai
 
         Link *FlowBackend::asyncConnect(interfaces::ALinkable *linkable)
         {
-            qDebug() << "Hello";
             const auto li = dynamic_cast<FlowBackend *>(linkable);
             if (li != nullptr && li->getType() != getType())
             {
@@ -53,7 +52,6 @@ namespace dnai
                     int index;
                     if (flow->typeFlow() == enums::FlowTypeRessouce::FlowType::Exit)
                     {
-
                         index = flow->getNode()->flowsOut().getList().indexOf(flow);
                     }
                     else
@@ -71,6 +69,8 @@ namespace dnai
 			LinkableBezierItem(parent)
             , m_typeFlow(enums::FlowTypeRessouce::FlowType::Enter)
 			, m_genericNode(nullptr)
+            , m_isLink(false)
+            , m_isHover(false)
 		{
 			setFlag(ItemHasContents, true);
 			m_radius = 8;
@@ -222,6 +222,7 @@ namespace dnai
 		void Flow::unlinkAll()
 		{
             LinkableBezierItem::unlinkAll();
+            setIsLink(false);
         }
 
         void Flow::asyncUnlinkAll()
@@ -248,7 +249,7 @@ namespace dnai
 
 		const QColor& Flow::colorLink() const
 		{
-			return m_borderColor;
+            return m_fillColor;
 		}
 
 		LinkableBezierItem* Flow::findLinkableBezierItem(GenericNode* n, const QPointF&p)
@@ -297,23 +298,23 @@ namespace dnai
 			return m_genericNode;
 		}
 
-		void Flow::setLink(Link *l)
-		{
-			setBorderWidth(0);
-			setFillColor(QColor(255, 255, 255));
-			if (l == nullptr) return;
-			auto f = dynamic_cast<Flow *>(dynamic_cast<FlowBackend *>(l->L1 != m_linkable ? l->L1 : l->L2)->parent());
-			f->setLink(nullptr);
-			LinkableBezierItem::setLink(nullptr);
-		}
+//		void Flow::setLink(Link *l)
+//		{
+//			setBorderWidth(0);
+//			setFillColor(QColor(255, 255, 255));
+//			if (l == nullptr) return;
+//			auto f = dynamic_cast<Flow *>(dynamic_cast<FlowBackend *>(l->L1 != m_linkable ? l->L1 : l->L2)->parent());
+//			f->setLink(nullptr);
+//			LinkableBezierItem::setLink(nullptr);
+//		}
 
-		void Flow::setHover()
-		{
-			if (m_status == LinkStatus::Hover) return;
-			setBorderColor(QColor(255, 170, 0));
-			setFillColor(QColor(255, 170, 0));
-			LinkableBezierItem::setHover();
-		}
+//		void Flow::setHover()
+//		{
+//			if (m_status == LinkStatus::Hover) return;
+//			setBorderColor(QColor(255, 170, 0));
+//			setFillColor(QColor(255, 170, 0));
+//			LinkableBezierItem::setHover();
+//		}
 
 
 		void Flow::afterRealease(Link *l)
@@ -330,6 +331,34 @@ namespace dnai
 			if (m_currentCurve)
 				m_currentCurve->setLineWidth(3);
 		}
+
+        void Flow::setIsLink(bool isLink)
+        {
+            if (m_isLink == isLink)
+                return;
+
+            m_isLink = isLink;
+            emit isLinkChanged(m_isLink);
+        }
+
+        bool Flow::isLink() const
+        {
+            return m_isLink;
+        }
+
+        void Flow::setIsHover(bool isHover)
+        {
+            if (m_isHover == isHover)
+                return;
+
+            m_isHover = isHover;
+            emit isHoverChanged(m_isHover);
+        }
+
+        bool Flow::isHover() const
+        {
+            return m_isHover;
+        }
 	}
 }
 

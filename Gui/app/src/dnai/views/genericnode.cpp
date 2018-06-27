@@ -34,23 +34,25 @@ namespace dnai
 		{
             const auto ilist = inputs().getList();
             const auto olist = n2->outputs().getList();
-			LinkableBezierItem *input = nullptr;
-			LinkableBezierItem *output = nullptr;
+            LinkableBezierItem *input = nullptr;
+            LinkableBezierItem *output = nullptr;
 			for (auto i : ilist)
 			{
 				if (i->property("name").toString() == link->data().inputName)
 				{
-					input = dynamic_cast<LinkableBezierItem *>(i);
+                    input = dynamic_cast<LinkableBezierItem *>(i);
 				}
 			}
 			for (auto o : olist)
 			{
                 if (o->property("name").toString() == link->data().outputName)
 				{
-					output = dynamic_cast<LinkableBezierItem *>(o);
-				}
+                    output = dynamic_cast<LinkableBezierItem *>(o);
+                }
 			}
             input->connect(output);
+            input->setIsLink(true);
+            output->setIsLink(true);
 		}
 
 		void GenericNode::createFlowLink(models::gui::FlowLink* link, GenericNode *n2)
@@ -60,6 +62,8 @@ namespace dnai
 			const auto output = dynamic_cast<LinkableBezierItem *>(folist.at(link->data().outIndex));
 			auto input = dynamic_cast<LinkableBezierItem *>(filist.at(0));
 			input->connect(output);
+            input->setIsLink(true);
+            output->setIsLink(true);
 		}
 
         void GenericNode::unlinkIo(quint32 in)

@@ -25,9 +25,10 @@ namespace dnai
 				auto l = getLink(linkable);
 				if (l == nullptr)
 				{
+                    auto input = dynamic_cast<dnai::views::Input *>(parent());
 					if (!m_links.empty())
 					{
-						if (auto input = dynamic_cast<dnai::views::Input *>(parent()))
+                        if (input)
                             input->unlinkAll();
 					}
 					l = new Link(this, linkable);

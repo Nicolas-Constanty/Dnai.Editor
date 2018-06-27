@@ -56,6 +56,7 @@ namespace dnai
 		QList<QQuickItem *> items;
         for (auto i = 0; i < m_items.size(); ++i) {
 			auto item = m_items.at(i);
+            item->setProperty("isHover", false);
 //            qDebug() << "Pos 1" << item->contains(point);
 //            qDebug() << "Pos 2" <<  item->contains(point - item->position());
 //            qDebug() << "Pos 3" <<  item->contains(point - item->position() - item->parentItem()->position());
