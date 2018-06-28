@@ -48,9 +48,17 @@ namespace dnai
 
         private:
             models::gui::declarable::Function *getFunctionData(::core::EntityID function, bool throws = false) const;
+            std::list<quint32> getConstructionList(models::gui::Instruction *instr) const;
+
+        private:
+            models::gui::Instruction *createInstruction(qint32 type, std::list<quint32> const &constrution = std::list<quint32>());
 
         private:
             void refreshPendingFunctionInstructions();
+            QString getInstructionHash(QUuid funcguid, qint32 type) const;
+
+        public:
+            void rebuildInstruction(models::gui::Instruction *instr);
 
         public:
             void onEntryPointSet(quint32 function, quint32 instruction);
@@ -113,6 +121,10 @@ namespace dnai
             QHash<QString, QStack<models::gui::Instruction *>> removedInstructions;
             //map that contains added instructions
             QHash<QString, QStack<models::gui::Instruction *>> addedInstructions;
+
+        private:
+            //instruction function map
+            QHash<models::gui::Instruction *, models::Entity *> instructionsFunction;
         };
     }
 }

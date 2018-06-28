@@ -77,7 +77,7 @@ namespace dnai
 
         const QString Entity::fullName() const
         {
-            if (parentItem() == nullptr)
+            if (parentItem() == nullptr || isRoot())
                 return coreModel() ? name() : "";
             return parentItem()->fullName() + "." + name();
         }

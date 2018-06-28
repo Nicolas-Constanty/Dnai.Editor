@@ -91,6 +91,16 @@ namespace dnai
                 return true;
             }
 
+            bool Instruction::hasInput(const QString &name) const
+            {
+                for (Input *curr : m_data.inputs)
+                {
+                    if (curr->name() == name)
+                        return true;
+                }
+                return false;
+            }
+
             Input *Instruction::getInput(const QString &name) const
             {
                 qDebug() << name << m_data.inputs.length();
@@ -121,8 +131,18 @@ namespace dnai
 
             const QList<models::gui::Output*> &Instruction::outputs() const
 			{
-				return m_data.outputs;
-			}
+                return m_data.outputs;
+            }
+
+            bool Instruction::hasOutput(const QString &name) const
+            {
+                for (Output *curr : m_data.outputs)
+                {
+                    if (curr->name() == name)
+                        return true;
+                }
+                return false;
+            }
 
             bool Instruction::setOutputs(const QList<models::gui::Output*>& outputs)
 			{

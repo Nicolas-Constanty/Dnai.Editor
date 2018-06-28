@@ -1,6 +1,9 @@
 #ifndef DNAI_CORE_INSTRUCTIONHANDLER_H
 #define DNAI_CORE_INSTRUCTIONHANDLER_H
 
+#include <unordered_map>
+#include <queue>
+
 #include <QObject>
 
 #include "entitymanager.h"
@@ -42,6 +45,24 @@ namespace dnai
             void onInputValueSet(quint32 function, quint32 instruction, QString const &input, QString const &value);
             void onSetInputValueError(quint32 function, quint32 instruction, QString const &input, QString const &value, QString const &msg);
 
+        public slots:
+            void onInstructionAdded(models::Entity *func, models::gui::Instruction *instruction);
+            void onInstructionRemoved(dnai::models::Entity *func, dnai::models::gui::Instruction *instruction);
+
+        public:
+            static models::gui::IoLink *createIoLink(QUuid const &from, QString const &output, QUuid const &to, QString const &input);
+            static models::gui::FlowLink *createFlowLink(QUuid const &from, int outindex, QUuid const &to);
+
+        private:
+            void refreshLinks();
+
+        public:
+            bool contains(QUuid const &instGuid) const;
+            models::gui::Instruction *getInstruction(QUuid const &guid) const;
+
+        public:
+            QList<models::gui::Instruction *> getInstructionsOfPath(QString const &nodeMenupath) const;
+
         signals:
             /*
              * onRemoved
@@ -54,6 +75,12 @@ namespace dnai
 
         private:
             EntityManager &manager;
+
+        private:
+            QHash<QUuid, models::gui::Instruction *> m_instructions;
+
+            std::unordered_map<models::gui::IoLink *, models::Entity *> iolink_to_replicate;
+            std::unordered_map<models::gui::FlowLink *, models::Entity *> flowlink_to_replicate;
         };
     }
 }

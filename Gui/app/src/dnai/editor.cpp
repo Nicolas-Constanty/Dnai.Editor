@@ -294,19 +294,19 @@ namespace dnai
 
 	void Editor::updateContextMenuModel(dnai::models::Entity* entity) const
 	{
-		const auto function = dynamic_cast<models::gui::declarable::Function *>(entity->guiModel());
+        /*const auto function = dynamic_cast<models::gui::declarable::Function *>(entity->guiModel());
 		if (function == nullptr) return;
-		m_contextMenuModel->clearParameters();
-		m_contextMenuModel->clearReturns();
+        m_contextMenuModel->hideParameters();
+        m_contextMenuModel->hideReturns();
 		for (auto param : function->inputs())
 		{
-			m_contextMenuModel->appendParameter(param);
+            m_contextMenuModel->displayParameter(param);
 		}
 		for (auto ret : function->outputs())
 		{
-			m_contextMenuModel->appendReturn(ret);
-		}
-		emit contextMenuModelChanged(m_contextMenuModel);
+            m_contextMenuModel->displayReturn(ret);
+        }
+        emit contextMenuModelChanged(m_contextMenuModel);*/
 	}
 
 	void Editor::registerEditorView(views::EditorView* view)
@@ -366,20 +366,18 @@ namespace dnai
     void Editor::onInstructionAdded(models::Entity *func, models::gui::Instruction *instruction)
     {
         const auto view = qvariant_cast<QQuickItem *>(Editor::instance().selectedView()->property("currentView"));
-        if (!view)
-        {
-            return;
-        }
         const auto canvas = dynamic_cast<views::CanvasNode *>(view);
-        if (!canvas)
-        {
-            return;
-        }
 
         models::ContextMenuItem *node;
 
         if (!m_pendingInstruction.empty())
         {
+            if (canvas == nullptr)
+            {
+                qWarning() << "==Editor== No node canvas opened";
+                return;
+            }
+
             quint32 x, y;
 
             std::tie(node, x, y) = m_pendingInstruction.front();
@@ -399,6 +397,11 @@ namespace dnai
             return;
         }
 
+        if (canvas != nullptr && createNodeQMLComponent(node, func, instruction, canvas->content()) == nullptr)
+        {
+			notifyWarning("Cannot create qml node");
+        }
+
         /*
          * Building inputs
          */
@@ -414,6 +417,19 @@ namespace dnai
             }
 
             instruction->setInputs(inputs);
+        }
+
+        models::Function *data = func->guiModel<models::Function>();
+
+        for (models::gui::IoLink *curr : data->iolinks())
+        {
+            models::gui::Instruction *from = dnai::gcore::HandlerManager::Instance().function()->instruction()->getInstruction(curr->data().outputUuid);
+            models::gui::Instruction *to = dnai::gcore::HandlerManager::Instance().function()->instruction()->getInstruction(curr->data().inputUuid);
+
+            if (curr->data().inputUuid == instruction->guiUuid() && from != nullptr)
+            {
+                dnai::gcore::HandlerManager::Instance().function()->instruction()->linkData(func->id(), from->Uid(), curr->data().outputName, to->Uid(), curr->data().inputName, false);
+            }
         }
 
         /*
@@ -433,11 +449,6 @@ namespace dnai
 
             instruction->setOutputs(outputs);
         }
-
-        if (createNodeQMLComponent(node, func, instruction, canvas->content()) == nullptr)
-        {
-			notifyWarning("Cannot create qml node");
-        }       
     }
 
     void Editor::onAddInstructionError(quint32 func, quint32 type, const QList<quint32> &args, const QString &msg)
@@ -458,9 +469,15 @@ namespace dnai
         const auto view = qvariant_cast<QQuickItem *>(Editor::instance().selectedView()->property("currentView"));
         if (!view)
         {
-            throw std::runtime_error("No canvas view found!");
+            return;
         }
         const auto canvas = dynamic_cast<views::CanvasNode *>(view);
+
+        if (canvas == nullptr)
+        {
+            return;
+        }
+
         views::GenericNode *n1 = nullptr;
         views::GenericNode *n2 = nullptr;
         const auto content =  canvas->content();
@@ -497,9 +514,15 @@ namespace dnai
         const auto view = qvariant_cast<QQuickItem *>(Editor::instance().selectedView()->property("currentView"));
         if (!view)
         {
-            throw std::runtime_error("No canvas view found!");
+            return;
         }
         const auto canvas = dynamic_cast<views::CanvasNode *>(view);
+
+        if (canvas == nullptr)
+        {
+            return;
+        }
+
         views::GenericNode *n1 = nullptr;
         views::GenericNode *n2 = nullptr;
         const auto content =  canvas->content();
@@ -535,9 +558,15 @@ namespace dnai
         const auto view = qvariant_cast<QQuickItem *>(Editor::instance().selectedView()->property("currentView"));
         if (!view)
         {
-            throw std::runtime_error("No canvas view found!");
+            return;
         }
         const auto canvas = dynamic_cast<views::CanvasNode *>(view);
+
+        if (canvas == nullptr)
+        {
+            return;
+        }
+
         const auto content =  canvas->content();
         for (auto i = 0; i< content->childItems().size(); i++)
         {
@@ -557,9 +586,15 @@ namespace dnai
         const auto view = qvariant_cast<QQuickItem *>(Editor::instance().selectedView()->property("currentView"));
         if (!view)
         {
-            throw std::runtime_error("No canvas view found!");
+            return;
         }
         const auto canvas = dynamic_cast<views::CanvasNode *>(view);
+
+        if (canvas == nullptr)
+        {
+            return;
+        }
+
         const auto content =  canvas->content();
         for (auto i = 0; i< content->childItems().size(); i++)
         {
@@ -578,9 +613,15 @@ namespace dnai
         const auto view = qvariant_cast<QQuickItem *>(Editor::instance().selectedView()->property("currentView"));
         if (!view)
         {
-            throw std::runtime_error("No canvas view found!");
+            return;
         }
         const auto canvas = dynamic_cast<views::CanvasNode *>(view);
+
+        if (canvas == nullptr)
+        {
+            return;
+        }
+
         const auto content =  canvas->content();
         for (auto i = 0; i< content->childItems().size(); i++)
         {

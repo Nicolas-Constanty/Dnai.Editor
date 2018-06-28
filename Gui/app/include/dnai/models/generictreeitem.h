@@ -62,6 +62,15 @@ namespace dnai
                 while (!m_childItems.isEmpty())
                     delete m_childItems.takeFirst();
             }
+
+            void removeChildren()
+            {
+                while (!m_childItems.isEmpty())
+                {
+                    m_childItems.takeFirst()->m_parentItem = nullptr;
+                }
+            }
+
         private:
             QList<T*> m_childItems;
             T *m_parentItem;
