@@ -2,6 +2,11 @@
 
 [![Build Circle Ci](https://circleci.com/gh/Nicolas-Constanty/Dnai.Editor/tree/master.svg?style=shield)](https://circleci.com/gh/Nicolas-Constanty/Dnai.Editor/tree/master.svg?style=shield)
 
+[![Build status](https://ci.appveyor.com/api/projects/status/gjcxsjh80jo76coe/branch/master?svg=true)](https://ci.appveyor.com/project/Nicolas-Constanty/dnai-editor/branch/master)
+
+[![Build status](https://ci.appveyor.com/api/projects/status/gjcxsjh80jo76coe/branch/master?svg=true)](https://ci.appveyor.com/project/Nicolas-Constanty/dnai-editor/branch/develop)
+
+
 [Dnai Editor](https://code.visualstudio.com) is a visual scripting software,
  build with the [Qt Open Source](https://www.qt.io/download-qt-installer) version.
  You can download it for Windows, and macOS on [Dnai website](https://dnai.io).
