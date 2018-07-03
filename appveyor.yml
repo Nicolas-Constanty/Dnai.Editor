@@ -26,9 +26,22 @@ build_script:
   - copy "%ProgramFiles(x86)%\Microsoft Visual Studio\2017\Community\VC\Redist\MSVC\%MREDIST%\x64\Microsoft.VC141.CRT\*" "./app/release/"
   - copy "%ProgramFiles(x86)%\Microsoft Visual Studio\2017\Community\VC\Redist\MSVC\%MREDIST%\x64\Microsoft.VC141.CXXAMP\*" "./app/release/"
   - copy "%ProgramFiles(x86)%\Microsoft Visual Studio\2017\Community\VC\Redist\MSVC\%MREDIST%\x64\Microsoft.VC141.OpenMP\*" "./app/release/"
-  - RENAME "app/release" "DNAI"
-  - move "app/DNAI" "./"
+  - mkdir %APPVEYOR_BUILD_FOLDER%-Dnai
+  - move "app/release" %APPVEYOR_BUILD_FOLDER%-Dnai
+  - move "app/DNAI" %APPVEYOR_BUILD_FOLDER%-Dnai
+  - cd %APPVEYOR_BUILD_FOLDER%-Dnai
   - rmdir /s /Q app
   - rmdir /s /Q lib
   - DEL Makefile
   - DEL ".qmake.stash"
+  - rmdir /s /Q Users
+  - rmdir /s /Q src
+  - DEL *.cpp
+  - DEL *.h
+  - mkdir %APPVEYOR_BUILD_FOLDER%-server
+  - cd %APPVEYOR_BUILD_FOLDER%-server
+  - qmake.exe -o %APPVEYOR_BUILD_FOLDER%-server -r -Wall -spec win32-msvc CONFIG+=%CONFIGURATION% %APPVEYOR_BUILD_FOLDER%/Server && jom qmake_all
+  - jom
+  - move "release\Server.exe" %APPVEYOR_BUILD_FOLDER%-Dnai
+  - cd %APPVEYOR_BUILD_FOLDER%-Dnai
+  - md DNAI_UPDATER
