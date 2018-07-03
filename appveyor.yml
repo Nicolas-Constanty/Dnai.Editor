@@ -4,8 +4,8 @@ configuration:
   - release
 
 install:
-  - set QTDIR=C:\Qt\5.10.1\msvc2017_64
-  - set PATH=%QT_DIR%\bin;%PATH%
+  - set QTDIR=C:\Qt\5.11.0\msvc2017_64
+  - set PATH=%QTDIR%\bin;%PATH%
   - set PATH=C:\Qt\Tools\QtCreator\bin;%PATH%
 
 before_build:
