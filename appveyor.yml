@@ -21,8 +21,10 @@ build_script:
   - jom
   - jom install
   - windeployqt.exe "./app/release/DNAI.exe" -qmldir=%APPVEYOR_BUILD_FOLDER%\Gui\app\resources -verbose=2
-  - copy "%ProgramFiles(x86)%\Microsoft Visual Studio\2017\Enterprise\VC\Redist\MSVC\14.13.26020\x64\Microsoft.VC141.CRT\*" "./app/release/"
-  - copy "%ProgramFiles(x86)%\Microsoft Visual Studio\2017\Enterprise\VC\Redist\MSVC\14.13.26020\x64\Microsoft.VC141.CXXAMP\*" "./app/release/"
-  - copy "%ProgramFiles(x86)%\Microsoft Visual Studio\2017\Enterprise\VC\Redist\MSVC\14.13.26020\x64\Microsoft.VC141.OpenMP\*" "./app/release/"
+  - dir /b "%ProgramFiles(x86)%\Microsoft Visual Studio\2017\Community\VC\Redist\MSVC" | %APPVEYOR_BUILD_FOLDER%\scripts\tail.exe -1 > mredist.txt
+  - set /p MREDIST=<mredist.txt
+  - copy "%ProgramFiles(x86)%\Microsoft Visual Studio\2017\Community\VC\Redist\MSVC\%MREDIST%\x64\Microsoft.VC141.CRT\*" "./app/release/"
+  - copy "%ProgramFiles(x86)%\Microsoft Visual Studio\2017\Community\VC\Redist\MSVC\%MREDIST%\x64\Microsoft.VC141.CXXAMP\*" "./app/release/"
+  - copy "%ProgramFiles(x86)%\Microsoft Visual Studio\2017\Community\VC\Redist\MSVC\%MREDIST%\x64\Microsoft.VC141.OpenMP\*" "./app/release/"
   - RENAME "app/release" "DNAI"
   - move "app/DNAI" "./"
