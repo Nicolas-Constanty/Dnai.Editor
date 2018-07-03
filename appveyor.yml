@@ -55,7 +55,7 @@ build_script:
   - cd %APPVEYOR_BUILD_FOLDER%
   - git clone https://duly-eip.visualstudio.com/_git/Duly
   - mkdir %APPVEYOR_BUILD_FOLDER%-Core
-  - "%ProgramFiles(x86)%\Microsoft Visual Studio\2017\Community\MSBuild\15.0\Bin\MSBuild.exe" %APPVEYOR_BUILD_FOLDER%\Duly\CoreDaemon\CoreDaemon.csproj  /t:Rebuild /p:Configuration=Release;Platform=x64;OutputPath=%APPVEYOR_BUILD_FOLDER%-Core
+  - & '%ProgramFiles(x86)%\Microsoft Visual Studio\2017\Community\MSBuild\15.0\Bin\MSBuild.exe' %APPVEYOR_BUILD_FOLDER%\Duly\CoreDaemon\CoreDaemon.csproj  /t:Rebuild /p:Configuration=Release;Platform=x64;OutputPath=%APPVEYOR_BUILD_FOLDER%-Core
   - mkdir %APPVEYOR_BUILD_FOLDER%\Dnai\Dnai-Editor_%APPVEYOR_BUILD_VERSION%\Core
   - copy "%APPVEYOR_BUILD_FOLDER%-Core\*" %APPVEYOR_BUILD_FOLDER%\Dnai\Dnai-Editor_%APPVEYOR_BUILD_VERSION%\Core
   - robocopy %APPVEYOR_BUILD_FOLDER%\Deploiement\Windows\libs %APPVEYOR_BUILD_FOLDER%\Dnai\Dnai-Editor_%APPVEYOR_BUILD_VERSION% /E
@@ -63,8 +63,8 @@ build_script:
   - robocopy %APPVEYOR_BUILD_FOLDER%\Dnai "%APPVEYOR_BUILD_FOLDER%\Deploiement\Windows\DNAISetup\packages\com.vendor.product\data\Dnai" /E
   - cd %APPVEYOR_BUILD_FOLDER%\Deploiement\Windows\DNAISetup
   - C:\Qt\Tools\QtInstallerFramework\3.0\bin\binarycreator.exe -c config\config.xml -p packages %PACKAGE_NAME%.exe
-  - "%ProgramFiles(x86)%\Windows Kits\10\bin\x64\signtool.exe" sign -v -f MySPC.pfx -t http://timestamp.verisign.com/scripts/timstamp.dll %PACKAGE_NAME%.exe
-  - "%ProgramFiles(x86)%\Windows Kits\10\bin\x64\signtool.exe" verify %PACKAGE_NAME%.exe
+  - & '%ProgramFiles(x86)%\Windows Kits\10\bin\x64\signtool.exe' sign -v -f MySPC.pfx -t http://timestamp.verisign.com/scripts/timstamp.dll %PACKAGE_NAME%.exe
+  - & '%ProgramFiles(x86)%\Windows Kits\10\bin\x64\signtool.exe' verify %PACKAGE_NAME%.exe
   - mkdir %APPVEYOR_BUILD_FOLDER%\Windows_x64
   - move %PACKAGE_NAME%.exe %APPVEYOR_BUILD_FOLDER%\Windows_x64
   
