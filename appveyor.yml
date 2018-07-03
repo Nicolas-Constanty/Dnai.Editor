@@ -4,7 +4,7 @@ configuration:
   - release
   
 artifacts:
-  - path: %APPVEYOR_BUILD_FOLDER%\Dnai
+  - path: Dnai
     name: Dnai
 
 install:
