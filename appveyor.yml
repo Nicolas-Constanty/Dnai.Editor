@@ -13,7 +13,7 @@ install:
 
 before_build:
  - mkdir %APPVEYOR_BUILD_FOLDER%-build
- - qmake -o %APPVEYOR_BUILD_FOLDER%-build -r -Wall -Wlogic -Wparser CONFIG+=%CONFIGURATION% %APPVEYOR_BUILD_FOLDER%
+ - qmake -o %APPVEYOR_BUILD_FOLDER%-build -r -Wall -Wlogic -Wparser CONFIG+=%CONFIGURATION% %APPVEYOR_BUILD_FOLDER%/Gui
 
 build_script:
   - cd %APPVEYOR_BUILD_FOLDER%-build
