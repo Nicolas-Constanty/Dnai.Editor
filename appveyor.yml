@@ -38,6 +38,16 @@ build_script:
   - cd %APPVEYOR_BUILD_FOLDER%-server
   - qmake.exe -o %APPVEYOR_BUILD_FOLDER%-server -r -Wall -spec win32-msvc CONFIG+=%CONFIGURATION% %APPVEYOR_BUILD_FOLDER%/Server && jom qmake_all
   - jom
-  - move "release\Server.exe" %APPVEYOR_BUILD_FOLDER%\Dnai
+  - move "release\Server.exe" %APPVEYOR_BUILD_FOLDER%\Dnai\Dnai-Editor_%APPVEYOR_BUILD_VERSION%
   - cd %APPVEYOR_BUILD_FOLDER%\Dnai
-  - md DNAI_UPDATER
+  - cd %APPVEYOR_BUILD_FOLDER%
+  - git clone https://github.com/Gouet/Software-updater.git
+  - mkdir %APPVEYOR_BUILD_FOLDER%\Software-updater\build
+  - cd %APPVEYOR_BUILD_FOLDER%\Software-updater\build
+  - qmake.exe -o %APPVEYOR_BUILD_FOLDER%\Software-updater\build -r -Wall -spec win32-msvc CONFIG+=%CONFIGURATION% %APPVEYOR_BUILD_FOLDER%\Software-updater\SoftwareUpdater && jom qmake_all
+  - jom.exe
+  - mkdir %APPVEYOR_BUILD_FOLDER%\Dnai\Dnai-Editor_%APPVEYOR_BUILD_VERSION%\DNAI_UPDATER
+  - move "release\DNAI Updater.exe" "%APPVEYOR_BUILD_FOLDER%\Dnai\Dnai-Editor_%APPVEYOR_BUILD_VERSION%\DNAI_UPDATER"
+  - windeployqt.exe "%APPVEYOR_BUILD_FOLDER%\Dnai\Dnai-Editor_%APPVEYOR_BUILD_VERSION%\DNAI_UPDATER\DNAI Updater.exe" -qmldir=%APPVEYOR_BUILD_FOLDER%\Software-updater\SoftwareUpdater\qml -verbose=2
+  - copy "%APPVEYOR_BUILD_FOLDER%\Software-updater\SoftwareUpdater\lib\libeay32.dll" "%APPVEYOR_BUILD_FOLDER%\Dnai\Dnai-Editor_%APPVEYOR_BUILD_VERSION%\DNAI_UPDATER"
+  - copy "%APPVEYOR_BUILD_FOLDER%\Software-updater\SoftwareUpdater\lib\ssleay32.dll" "%APPVEYOR_BUILD_FOLDER%\Dnai\Dnai-Editor_%APPVEYOR_BUILD_VERSION%\DNAI_UPDATER"
