@@ -2,7 +2,7 @@
 
 [![Build Circle Ci](https://circleci.com/gh/Nicolas-Constanty/Dnai.Editor/tree/master.svg?style=shield)](https://circleci.com/gh/Nicolas-Constanty/Dnai.Editor/tree/master.svg?style=shield)
 [![Build status](https://ci.appveyor.com/api/projects/status/gjcxsjh80jo76coe/branch/master?svg=true&passingText=master%20-%20passed&pendingText=master%20-%20pending&failingText=master%20-%20failed)](https://ci.appveyor.com/project/Nicolas-Constanty/dnai-editor/branch/master)
-[![Build status](https://ci.appveyor.com/api/projects/status/gjcxsjh80jo76coe/branch/master?svg=true&passingText=develop%20-%20passed&pendingText=develop%20-%20pending&failingText=develop%20-%20failed)](https://ci.appveyor.com/project/Nicolas-Constanty/dnai-editor/branch/develop)
+[![Build status](https://ci.appveyor.com/api/projects/status/gjcxsjh80jo76coe/branch/develop?svg=true&passingText=develop%20-%20passed&pendingText=develop%20-%20pending&failingText=develop%20-%20failed)](https://ci.appveyor.com/project/Nicolas-Constanty/dnai-editor/branch/develop)
 
 
 [Dnai Editor](https://code.visualstudio.com) is a visual scripting software,
