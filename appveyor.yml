@@ -4,20 +4,21 @@ configuration:
   - release
 
 install:
-  - set QTDIR=C:\Qt\5.11.0\msvc2017_64
-  - set PATH=%PATH%;%QTDIR%\bin
-  - '%QTDIR%\bin\qtenv2.bat'
-  - qmake -v
-  - call "%ProgramFiles(x86)%\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" x64
-  - set make=nmake.exe
-  - set CL=/MP
+  - set QTDIR=C:\Qt\5.10.1\msvc2017_64
+  - set PATH=%QT_DIR%\bin;%PATH%
+  - set PATH=C:\Qt\Tools\QtCreator\bin;%PATH%
 
 before_build:
+ - rmdir /s DNAI
+ - rmdir /s "C:\Deploiement\Windows\DNAISetup\packages\com.vendor.product\data"
+ - md "C:\Deploiement\Windows\DNAISetup\packages\com.vendor.product\data"
  - cd %APPVEYOR_BUILD_FOLDER%
  - git submodule update --init --recursive
+ - call "%ProgramFiles(x86)%\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" x64
  - mkdir %APPVEYOR_BUILD_FOLDER%-build
- - qmake -o %APPVEYOR_BUILD_FOLDER%-build -Wall CONFIG+=%CONFIGURATION% %APPVEYOR_BUILD_FOLDER%/Gui
+ - cd %APPVEYOR_BUILD_FOLDER%-build
+ - qmake -o %APPVEYOR_BUILD_FOLDER%-build -r -Wall -spec win32-msvc CONFIG+=%CONFIGURATION% %APPVEYOR_BUILD_FOLDER%/Gui && jom qmake_all
 
 build_script:
-  - cd %APPVEYOR_BUILD_FOLDER%-build
-  - '%make%'
+  - jom
+  - jom install
