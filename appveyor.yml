@@ -28,3 +28,7 @@ build_script:
   - copy "%ProgramFiles(x86)%\Microsoft Visual Studio\2017\Community\VC\Redist\MSVC\%MREDIST%\x64\Microsoft.VC141.OpenMP\*" "./app/release/"
   - RENAME "app/release" "DNAI"
   - move "app/DNAI" "./"
+  - rmdir /s /Q app
+  - rmdir /s /Q lib
+  - DEL Makefile
+  - DEL ".qmake.stash"
