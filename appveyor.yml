@@ -10,7 +10,7 @@ install:
   - set PACKAGE_NAME=Dnai-Editor_%APPVEYOR_BUILD_VERSION%
   
 artifacts:
-  - path: %APPVEYOR_BUILD_FOLDER%\Deploiement\Windows\DNAISetup\Dnai-Editor_%APPVEYOR_BUILD_VERSION%.exe
+  - path: Windows_x64
     name: Windows_x64_Dnai-Editor_%APPVEYOR_BUILD_VERSION%
 
 before_build:
@@ -65,4 +65,6 @@ build_script:
   - C:\Qt\Tools\QtInstallerFramework\3.0\bin\binarycreator.exe -c config\config.xml -p packages %PACKAGE_NAME%.exe
   - "%ProgramFiles(x86)%\Windows Kits\10\bin\x64\signtool.exe" sign -v -f MySPC.pfx -t http://timestamp.verisign.com/scripts/timstamp.dll %PACKAGE_NAME%.exe
   - "%ProgramFiles(x86)%\Windows Kits\10\bin\x64\signtool.exe" verify %PACKAGE_NAME%.exe
+  - mkdir %APPVEYOR_BUILD_FOLDER%\Windows_x64
+  - move %PACKAGE_NAME%.exe %APPVEYOR_BUILD_FOLDER%\Windows_x64
   
