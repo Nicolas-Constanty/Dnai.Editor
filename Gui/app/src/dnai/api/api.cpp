@@ -58,7 +58,7 @@ const http::Config api::http_config = {
 
     http::Observable &api::refresh_token()
     {
-        qDebug() << "REFRESHTOKEN: " << api::user.refresh_token;
+        qDebug() << "==API== REFRESHTOKEN: " << api::user.refresh_token;
         api::refreshing_token = true;
         return http::Service::url("refresh")
                 ->headers(

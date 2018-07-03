@@ -37,8 +37,8 @@ namespace dnai
             public:
 	            const data::Output& data() const override;
 	            bool setData(const data::Output& data) override;
-                quint32 varType() const override;
-                bool setVarType(quint32 id) override;
+                QUuid varType() const override;
+                bool setVarType(QUuid const &id) override;
                 const QString &value() const override;
                 bool setValue(const QString& value) override;
 	            const QString name() const;

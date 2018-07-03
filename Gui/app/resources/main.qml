@@ -8,7 +8,6 @@ import DNAI 1.0
 import Dnai.Settings 1.0
 
 import "JavaScript/CreateComponent.js" as Factory
-import "Layouts"
 import "Views"
 import "Nodes"
 import "Panels"
@@ -35,8 +34,7 @@ Window {
         Editor.registerSettings(AppSettings.settings)
         //Load theme 1
         AppSettings.currentTheme = AppSettings.themeNames[0]
-        isInit = AppSettings.themeAlreadySet()
-//        console.log(AppSettings.theme["colors"])
+        isInit = AppSettings.themeLoaded
     }
 
     function closeSplashScreen()
@@ -71,7 +69,7 @@ Window {
         active: false
         asynchronous: true
         visible: status == Loader.Ready
-        sourceComponent: isInit ? _mainWindow : _selectTheme
+        sourceComponent: /*isInit ? _mainWindow : */_selectTheme
     }
 
     Component {
@@ -81,6 +79,7 @@ Window {
             id: appViewMain
             width: 1280
             height: 720
+            visible: isInit
             Component.onCompleted: {
                 Editor.registerMainView(appViewMain)
                 closeSplashScreen()
@@ -99,7 +98,7 @@ Window {
             minimumWidth: 400
             minimumHeight: 150
             title: qsTr("DNAI")
-            color: AppSettings.theme["colors"]["background"]["dark"]
+            color: AppSettings.theme.colors.background.dark
             visible: true
             ChooseThemePanel {
                 id: pane

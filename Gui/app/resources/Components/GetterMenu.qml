@@ -32,41 +32,6 @@ Menu {
                     console.log('node model: ', nodeModel);
 
                     Editor.createNode(nodeModel, InstructionID.GETTER, [model.entity.id], canvas.mousePosition.x, canvas.mousePosition.y);
-
-                    /*if (model.varType === 0)
-                    {
-                        console.log("create Node getter")
-                        Factory.createObjects(
-                            "resources/Nodes/Getter/IntGetter.qml",
-                            { "model" : model, "name" : model.name, "description" : "" })
-                        obj = Factory.getObject()
-                        Factory.createObjects(
-                                    "resources/Components/Node.qml",
-                                    { "model": obj, "x": canvas.mousePosition.x, "y": canvas.mousePosition.y },
-                                    _inputs.ctItem)
-                    }
-                    else if (Editor.varTypes.getNameFromValue(model.varType) === "Boolean")
-                    {
-                        Factory.createObjects(
-                            "resources/Nodes/Getter/BoolGetter.qml",
-                            { "model" : model, "name" : model.name, "description" : "" })
-                        obj = Factory.getObject()
-                        Factory.createObjects(
-                                    "resources/Components/Node.qml",
-                                    { "model": obj, "x": canvas.mousePosition.x, "y": canvas.mousePosition.y },
-                                    _inputs.ctItem)
-                    }
-                    else if (Editor.varTypes.getNameFromValue(model.varType) === "String")
-                    {
-                        Factory.createObjects(
-                            "resources/Nodes/Getter/StringGetter.qml",
-                            { "model" : model, "name" : model.name, "description" : "" })
-                        obj = Factory.getObject()
-                        Factory.createObjects(
-                                    "resources/Components/Node.qml",
-                                    { "model": obj, "x": canvas.mousePosition.x, "y": canvas.mousePosition.y },
-                                    _inputs.ctItem)
-                    }*/
                 }
             }
         }

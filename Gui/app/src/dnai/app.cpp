@@ -61,19 +61,16 @@ namespace dnai
             if (response.body.contains("currentVersion")) {
                 setAPIVersion(response.body["currentVersion"].toString());
             }
-            qDebug() << DNAI_VERSION_RELEASE;
-            qDebug() << Editor::instance().version();
-            qDebug() << m_currentVersionAPI;
+            qDebug() << "==App== DNAI release version:" << DNAI_VERSION_RELEASE;
+            qDebug() << "==App== Editor version: " << Editor::instance().version();
+            qDebug() << "==App== API version: " << m_currentVersionAPI;
 
 
             onNotifyVersionChanged();
             return response;
         },
         [this](http::Response response) -> http::Response {
-            qDebug() << "ERROR";
-            Editor::instance().notifyError("Could not check for update.", []() {
-
-            });
+            Editor::instance().notifyError("Could not check for update.");
        //     m_settings->setAPIVersion("0.0.30");
        //     onNotifyVersionChanged();
 
@@ -103,7 +100,7 @@ namespace dnai
 	{
         QVariant value = Editor::instance().settings()->value(api::settings_key);
         api::setUser(value.value<api::User>());
-        qDebug() << "API ID: " << api::getId();
+        qDebug() << "==App== API id: " << api::getId();
 	}
 
     std::queue<std::function<void()>> App::init()
@@ -202,55 +199,55 @@ namespace dnai
 	}
 
 #if defined(_WIN32) && defined(_MSC_VER)
-  class CustomHandler : public IWinToastHandler {
-  public:
-      void toastActivated() const override
-      {
-          std::wcout << L"The user clicked in this toast" << std::endl;
-      }
+//  class CustomHandler : public IWinToastHandler {
+//  public:
+//      void toastActivated() const override
+//      {
+//          std::wcout << L"The user clicked in this toast" << std::endl;
+//      }
 
-      void toastActivated(int actionIndex) const override
-      {
-          std::wcout << L"The user clicked on button #" << actionIndex << L" in this toast" << std::endl;
-      }
+//      void toastActivated(int actionIndex) const override
+//      {
+//          std::wcout << L"The user clicked on button #" << actionIndex << L" in this toast" << std::endl;
+//      }
 
-      void toastFailed() const override
-      {
-          std::wcout << L"Error showing current toast" << std::endl;
-      }
-      void toastDismissed(WinToastDismissalReason state) const override
-      {
-          switch (state) {
-          case UserCanceled:
-              std::wcout << L"The user dismissed this toast" << std::endl;
-              break;
-          case ApplicationHidden:
-              std::wcout <<  L"The application hid the toast using ToastNotifier.hide()" << std::endl;
-              break;
-          case TimedOut:
-              std::wcout << L"The toast has timed out" << std::endl;
-              break;
-          default:
-              std::wcout << L"Toast not activated" << std::endl;
-              break;
-          }
-      }
-  };
+//      void toastFailed() const override
+//      {
+//          std::wcout << L"Error showing current toast" << std::endl;
+//      }
+//      void toastDismissed(WinToastDismissalReason state) const override
+//      {
+//          switch (state) {
+//          case UserCanceled:
+//              std::wcout << L"The user dismissed this toast" << std::endl;
+//              break;
+//          case ApplicationHidden:
+//              std::wcout <<  L"The application hid the toast using ToastNotifier.hide()" << std::endl;
+//              break;
+//          case TimedOut:
+//              std::wcout << L"The toast has timed out" << std::endl;
+//              break;
+//          default:
+//              std::wcout << L"Toast not activated" << std::endl;
+//              break;
+//          }
+//      }
+//  };
 #endif
   void App::onBuildStart()
   {
 #if defined(_WIN32) && defined(_MSC_VER)
-     WinToastTemplate templ = WinToastTemplate(WinToastTemplate::ImageAndText04);
-     templ.setTextField(QString("Build Start at :").toStdWString(), WinToastTemplate::FirstLine);
-     QDateTime dateTime = dateTime.currentDateTime();
-     QString dateTimeString = dateTime.toString("yyyy-MM-dd hh:mm:ss");
-     templ.setTextField(dateTimeString.toStdWString(), WinToastTemplate::SecondLine);
-     templ.setTextField(QString("by Nicolas C").toStdWString(), WinToastTemplate::ThirdLine);
-     templ.setExpiration(10000);
+//     WinToastTemplate templ = WinToastTemplate(WinToastTemplate::ImageAndText04);
+//     templ.setTextField(QString("Build Start at :").toStdWString(), WinToastTemplate::FirstLine);
+//     QDateTime dateTime = dateTime.currentDateTime();
+//     QString dateTimeString = dateTime.toString("yyyy-MM-dd hh:mm:ss");
+//     templ.setTextField(dateTimeString.toStdWString(), WinToastTemplate::SecondLine);
+//     templ.setTextField(QString("by Nicolas C").toStdWString(), WinToastTemplate::ThirdLine);
+//     templ.setExpiration(10000);
 
-     if (WinToast::instance()->showToast(templ, new CustomHandler()) < 0) {
-         qDebug() << "Error", "Could not launch your toast notification!";
-     }
+//     if (WinToast::instance()->showToast(templ, new CustomHandler()) < 0) {
+//         qDebug() << "Error", "Could not launch your toast notification!";
+//     }
 #endif
 #if defined(Q_OS_MAC)
     //ToastMac macToast;

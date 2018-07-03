@@ -20,10 +20,6 @@ Item {
     signal pressedYes()
     signal pressedNo()
 
-    Component.onCompleted: {
-        console.log("-------------------- " + heightValue)
-    }
-
     property string title: ""
     property string description: ""
     property string icon: ""

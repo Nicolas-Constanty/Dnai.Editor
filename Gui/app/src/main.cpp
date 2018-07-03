@@ -49,7 +49,6 @@ static void registerDNAI()
     qmlRegisterDnai(dnai::Session, "Session");
     qmlRegisterDnai(dnai::Project, "Project");
     qmlRegisterDnai(dnai::Solution, "Solution");
-    qmlRegisterDnai(dnai::models::gui::declarable::VarTypeList, "VarTypeList");
     qmlRegisterDnai(dnai::models::gui::EntityList, "EntityList");
     qmlRegisterDnai(dnai::models::ContextMenuModel, "ContextMenuModel");
 }
@@ -136,6 +135,7 @@ static void registerModels()
     qmlRegisterModels(dnai::models::Column, "Column");
     qmlRegisterModels(dnai::models::EntityTree, "EntityTree");
     qmlRegisterModels(dnai::models::gui::declarable::EnumType, "EnumType");
+    qmlRegisterModels(dnai::models::gui::Instruction, "Instruction");
 }
 
 static void registerCore() {
@@ -144,11 +144,11 @@ static void registerCore() {
             || !qmlRegisterUncreatableType<dnai::gcore::VariableHandler>("DNAI.Core", 1, 0, "VariableHandler", "Use DNAI.Core.Controller.variable")
             || !qmlRegisterUncreatableType<dnai::gcore::EnumHandler>("DNAI.Core", 1, 0, "EnumerationHandler", "Use DNAI.Core.Controller.enumeration")
             || !qmlRegisterUncreatableType<dnai::gcore::FunctionHandler>("DNAI.Core", 1, 0, "FunctionHandler", "Use DNAI.Core.Controller.function")
-            //instruction handler
+            || !qmlRegisterUncreatableType<dnai::gcore::InstructionHandler>("DNAI.Core", 1, 0, "InstructionHandler", "Use DNAI.Core.Controller.function.instruction")
             //list handler
-            //object handler
+            || !qmlRegisterUncreatableType<dnai::gcore::ObjectHandler>("DNAI.Core", 1, 0, "ObjectHandler", "Use DNAI.Core.Controller.Class")
             || !qmlRegisterSingletonType<dnai::gcore::HandlerManager>("DNAI.Core", 1, 0, "Controller", core_controller_singleton_provider))
-        qDebug() << "Failed to register one core type";
+        qDebug() << "==main== Failed to register one core type";
 }
 
 static void registerQml()
@@ -167,7 +167,7 @@ static void registerCustomTypes()
 void error_callBack(int signal) {
     dnai::App::currentInstance()->processManager()->closeAll();
 
-    qDebug() << "The program will crash with signal " << signal;
+    qDebug() << "==main== The program will crash with signal " << signal;
     abort();
 }
 
@@ -192,12 +192,12 @@ int main(int argc, char *argv[])
     dnai::App app(argc, argv);
 
 #if defined(_WIN32) && defined(_MSC_VER)
-    WinToast::instance()->setAppName(L"DNAI");
-    WinToast::instance()->setAppUserModelId(
-                WinToast::configureAUMI(L"SaltyStudio", L"DNAI", L"DNAI.app", L"20161006"));
-    if (!WinToast::instance()->initialize()) {
-        qDebug() << "Error, your system in not compatible!";
-    }
+//    WinToast::instance()->setAppName(L"DNAI");
+//    WinToast::instance()->setAppUserModelId(
+//                WinToast::configureAUMI(L"SaltyStudio", L"DNAI", L"DNAI.app", L"20161006"));
+//    if (!WinToast::instance()->initialize()) {
+//        qDebug() << "Error, your system in not compatible!";
+//    }
 #endif
 
     dnai::Editor::instance().setAppName(argv[0]);

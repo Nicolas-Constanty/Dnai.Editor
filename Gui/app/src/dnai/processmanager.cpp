@@ -31,7 +31,7 @@ ProcessManager::~ProcessManager() {
 }
 
 void ProcessManager::closeAll() {
-    qDebug() << "close server process and core process !";
+    qDebug() << "==ProcessManager== Closing server process and core process";
     m_server.close();
     m_core.close();
 }
@@ -76,17 +76,17 @@ void ProcessManager::launchUpdater(QString const &actualVer, QString const &newV
     args.push_back(QGuiApplication::applicationDirPath());
 
     args.push_back("DNAI");
-    qDebug() << "applicationDirPath: " << QGuiApplication::applicationDirPath();
+    qDebug() << "==ProcessManager== ApplicationDirPath: " << QGuiApplication::applicationDirPath();
     QString updaterDir = m_updaterApp;
     m_updaterApp = "\"" + m_updaterApp + "\" ";// +  actualVer + " " + newVersion + " \"" + QGuiApplication::applicationDirPath() + "\" " + "DNAI";
-    qDebug() << "M_UPDATERAPP: " << m_updaterApp;
+    qDebug() << "==ProcessManager== Updater application: " << m_updaterApp;
 
 //    int idx = m_updaterApp.size();
     while (updaterDir.size() >= 0 && updaterDir.back() != '/') {
         updaterDir.remove(updaterDir.size() - 1, 1);
     }
     updaterDir.remove(updaterDir.size() - 1, 1);
-    qDebug() << "UPDATERDIR: " << updaterDir;
+    qDebug() << "==ProcessManager== Updater directory: " << updaterDir;
 
     /*QDir dirRemove(QDir::tempPath() + "/DNAI_UPDATER");
 
@@ -95,12 +95,12 @@ void ProcessManager::launchUpdater(QString const &actualVer, QString const &newV
     QDir dir;
 
     bool returnRename = dir.rename(updaterDir, QDir::tempPath() + "/DNAI_UPDATER");
-    qDebug() << returnRename;
+    qDebug() << "==ProcessManager== Updater renamed directory: " << returnRename;
     proc.startDetached(QDir::tempPath() + "/DNAI_UPDATER/DNAI Updater.exe", args);
 
 #endif
     } else {
-        qDebug() << "[WARNING] can't launch DNAI Updater";
+        qDebug() << "==ProcessManager== [WARNING] Can't launch DNAI Updater";
     }
 }
 
@@ -128,14 +128,14 @@ void ProcessManager::launch() {
 
     m_port = findUnusedPort();
     if (m_port <= 0) {
-        qDebug() << "no port disponible" << m_port;
+        qDebug() << "==ProcessManager== No port available" << m_port;
         return;
     }
 
     QString serverPath = settingsBin.value("BINARIES/server", "").toString();
     if (serverPath.size() == 0) {
-        qDebug() << "failed to launch server from file " << m_file;
-        qDebug() << "DO BINARIES/server=\"./PATH/Server\" ";
+        qDebug() << "==ProcessManager== Failed to launch server from file " << m_file;
+        qDebug() << "==ProcessManager== DO BINARIES/server=\"./PATH/Server\" ";
         return;
     }
 
@@ -150,19 +150,19 @@ void ProcessManager::launch() {
 
     m_server.start(serverPath, argumentsServer);
     if (m_server.waitForStarted() == false) {
-        qDebug() << "[FAILED] LAUNCH Server has failed";
-        qDebug() << "[FAILED]" << serverPath;
+        qDebug() << "==ProcessManager== [FAILED] Failed to launch Server";
+        qDebug() << "==ProcessManager== [FAILED]" << serverPath;
         return;
     }
 
-    qDebug() << "Server started on port: " << portStr;
+    qDebug() << "==ProcessManager== Server started on port: " << portStr;
 
     sem.acquire();
 
     QString corePath = settingsBin.value("BINARIES/core", "").toString();
     if (corePath.size() == 0) {
-        qDebug() << "failed to launch core from file " << m_file;
-        qDebug() << "DO BINARIES/core=\"[mono] ./PATH/CoreDaemon.exe\" ";
+        qDebug() << "==ProcessManager== Failed to launch Core from file " << m_file;
+        qDebug() << "==ProcessManager== DO BINARIES/core=\"[mono] ./PATH/CoreDaemon.exe\" ";
         return;
     }
 
@@ -175,13 +175,12 @@ void ProcessManager::launch() {
 
     m_core.start(corePath, argumentsCore);
     if (m_core.waitForStarted() == false) {
-        qDebug() << "[FAILED] LAUNCH Core has failed";
-        qDebug() << "[FAILED]" << corePath;
+        qDebug() << "==ProcessManager== [FAILED] Failed to launch Core";
+        qDebug() << "==ProcessManager== [FAILED]" << corePath;
         return;
     }
 
-    qDebug() << "PROCESSES OK !";
-  //  QThread::sleep(10);
+    qDebug() << "==ProcessManager== Server and Core successfully launched (Processes OK)!";
 }
 
 qint16 ProcessManager::getServerPort() {

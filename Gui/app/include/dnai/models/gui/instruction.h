@@ -30,13 +30,17 @@ namespace dnai
 				const data::Instruction& data() const override;
 				bool setData(const data::Instruction& data) override;
 				//Implementation of IInstruction
-                const QList<models::gui::Input*> &inputs() const;
+                Q_INVOKABLE const QList<models::gui::Input*> &inputs() const;
                 bool setInputs(const QList<models::gui::Input*>& inputs);
-                models::gui::Input *getInput(QString const &name) const;
+                Q_INVOKABLE models::gui::Input *getInput(QString const &name) const;
                 Q_INVOKABLE QString getInputValue(QString const &name) const;
+                Q_INVOKABLE QString getInputType(QString const &name) const;
 
-				const QList<models::gui::Output*> &outputs() const;
+
+                const QList<models::gui::Output*> &outputs() const;
                 bool setOutputs(const QList<models::gui::Output*>& outputs);
+                Q_INVOKABLE models::gui::Output *getOutput(QString const &name) const;
+                Q_INVOKABLE QString getOutputType(QString const &name) const;
 
 				models::gui::Flow* flowIn() const;
                 bool setFlowIn(models::gui::Flow* flow);
@@ -65,7 +69,7 @@ namespace dnai
 				qint32 y() const;
 				Q_INVOKABLE bool setY(qint32 y);
 
-			private:
+            private:
 				data::Instruction m_data;
 			};
 		}

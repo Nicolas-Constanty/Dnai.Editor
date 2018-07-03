@@ -1,9 +1,10 @@
-#ifndef DNAI_MODELS_CONTEXT_MENU_MODEL_H
+﻿#ifndef DNAI_MODELS_CONTEXT_MENU_MODEL_H
 #define DNAI_MODELS_CONTEXT_MENU_MODEL_H
 #include <QAbstractItemModel>
 #include <QHash>
 #include <QStringList>
 #include "generictreeitem.h"
+#include "core.h"
 
 namespace dnai
 {
@@ -80,7 +81,7 @@ namespace dnai
 			QString m_descrition;
 			int m_inputs = 0;
 			int m_outputs = 0;
-			int m_instructionId = 0;
+            int m_instructionId = -1;
 			QString m_nodeName;
             int m_type = -1;
             QList<qint32> m_construction;
@@ -101,7 +102,8 @@ namespace dnai
 				INPUTS,
                 OUTPUTS,
                 CONSTRUCTION,
-                INSTRUCTION_ID
+                INSTRUCTION_ID,
+                TYPE
 			};
 
 		public:
@@ -119,19 +121,44 @@ namespace dnai
             const QHash<QString, ContextMenuItem*> &instructions() const;
             void appendVariable(Entity *entity);
             void appendEnumeration(Entity *entity);
-			void appendParameter(Entity *entity);
+
+            ContextMenuItem *m_variableGetter;
+            ContextMenuItem *m_variableSetter;
+            void appendParameter(Entity *entity);
 			void appendReturn(Entity *entity);
 			void clearParameters();
 			void clearReturns();
             void appendObject(Entity *entity);
+            void appendList(Entity *entity);
+            void appendFunction(Entity *entity);
+
+        private:
+            void addItem(ContextMenuItem *item, ContextMenuItem *parent, models::Entity *related = nullptr);
+            void addItems(models::Entity *related);
+            void removeItem(QString const &fullPath);
+            void clearItems(models::Entity *related);
+            void refreshItems(models::Entity *related);
+
+        public:
+            void setup();
+
+        public slots:
+            void onEntityDeclared(dnai::models::Entity *declared);
+            void onEntityRemoved(dnai::models::Entity *removed);
+            void onEntityRenamed(dnai::models::Entity *entity, QString name, QString newname);
+            void onEnumValueSet(dnai::models::Entity *enumeration, QString name, QString value);
+            void onEnumValueRemoved(dnai::models::Entity *enumeration, QString name);
+            void onObjectAttributeAdded(models::Entity *obj, QString name, models::Entity *type, VISIBILITY visi);
+            void onObjectAttributeRenamed(models::Entity *obj, QString name, QString newName);
+            void onObjectAttributeRemoved(models::Entity *obj, QString name);
+            void onListTypeSet(dnai::models::Entity *lst, dnai::models::Entity *type);
+            void onParameterSet(dnai::models::Entity *func, QString param);
+            void onReturnSet(dnai::models::Entity *func, QString ret);
 
 		private:
 			void parseJsonDocument(const QJsonObject &json);
 			void parseJsonObj(ContextMenuItem* parent, const QJsonObject& js);
 			ContextMenuItem *m_root;
-
-            ContextMenuItem *m_variableGetter;
-            ContextMenuItem *m_variableSetter;
 
             ContextMenuItem *m_enumSplitters;
 
@@ -149,6 +176,23 @@ namespace dnai
             ContextMenuItem* m_objects;
             ContextMenuItem* m_objectsGetter;
             ContextMenuItem* m_objectsSetter;
+
+            ContextMenuItem* m_lists;
+            ContextMenuItem* m_foreachs;
+            ContextMenuItem* m_appends;
+            ContextMenuItem* m_inserts;
+            ContextMenuItem* m_removes;
+            ContextMenuItem* m_removesAt;
+            ContextMenuItem* m_sizes;
+            ContextMenuItem* m_clears;
+            ContextMenuItem* m_fills;
+            ContextMenuItem* m_setValueAts;
+
+            ContextMenuItem* m_functions;
+
+        private:
+            QHash<models::Entity *, QList<QString>> m_entity_items;
+            QHash<QString, models::Entity *> m_items_entity;
 		};
 	}
 }

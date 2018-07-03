@@ -3,8 +3,10 @@ import QtQuick.Controls 2.2
 
 import DNAI 1.0
 import Dnai.FontAwesome 1.0
+import DNAI.Core 1.0
 
 import "../Style"
+import "../Components"
 
 BaseProperty {
     id: __this__
@@ -60,44 +62,24 @@ BaseProperty {
             /*
              * Attribute type
              */
-            ComboBox {
+            VarTypeComboBox {
                 id: __type__
+
+                typeGuid: __this__.model ? __this__.model.guiProperties.getAttribute(modelData) : 0
 
                 width: (parent.width - __remove__.width) * 0.5
                 height: parent.height
 
-                model: Editor.propertyPanelProperties.varTypes
-                textRole: "name"
-
-                font.pointSize: 8
-
-                function getModelType()
-                {
-                    if (__this__.model)
-                        return __this__.model.guiProperties.getAttribute(modelData);
-                    return 2;
-                }
-
-                function getBoxType()
-                {
-                    return Editor.propertyPanelProperties.varTypes.getValueFromIndex(currentIndex);
-                }
-
-                function getModelIndex()
-                {
-                    return Editor.propertyPanelProperties.varTypes.getIndexFromValue(getModelType());
-                }
-
-                currentIndex: getModelIndex()
-
-                onCurrentIndexChanged: {
-                    if (getBoxType() === __this__.model.id)
+                onTypeChanged: {
+                    if (newType.id === __this__.model.id)
                     {
                         Editor.notifyError("Cannot set an attribute of the type of the object");
-                        currentIndex = getModelIndex();
+                        __type__.resetIndex();
                     }
-                    else if (getModelType() !== getBoxType())
-                        __this__.changeType(modelData, getBoxType());
+                    else if (newType.guid !== __this__.model.guiProperties.getAttribute(modelData))
+                    {
+                        __this__.changeType(modelData, newType.id);
+                    }
                 }
             }
 

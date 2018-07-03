@@ -38,6 +38,8 @@ namespace dnai
             ::core::function::onSetReturnError(std::bind(&FunctionHandler::onSetReturnError, this, _1, _2, _3));
             ::core::function::onInstructionAdded(std::bind(&FunctionHandler::onInstructionAdded, this, _1, _2, _3, _4));
             ::core::function::onAddInstructionError(std::bind(&FunctionHandler::onAddInstructionError, this, _1, _2, _3, _4));
+            ::core::function::onInstructionRemoved(std::bind(&FunctionHandler::onInstructionRemoved, this, _1, _2));
+            ::core::function::onRemoveInstructionError(std::bind(&FunctionHandler::onRemoveInstructionError, this, _1, _2, _3));
 
             m_instruction.setup();
         }
@@ -188,14 +190,62 @@ namespace dnai
             models::Entity &function = manager.getEntity(func);
 
             qDebug() << "==Core== Function.AddInstruction(" << func << ", " << instrType << ", " << arguments << ") => save(" << save << ")";
-            commands::CommandManager::Instance()->exec(
-                new commands::CoreCommand("Function.AddInstruction", save,
-                    [&function, instrType, arguments](){
-                        ::core::function::addInstruction(function.id(), static_cast<core::INSTRUCTION>(instrType), arguments.toStdList());
-                    },
-                    nullptr // find a system to get the freshly created instruction id in order to remove it
-                )
-            );
+            commands::CommandManager::Instance()->exec(new commands::CoreCommand("Function.AddInstruction", save,
+                [&function, instrType, arguments](){
+                    ::core::function::addInstruction(function.id(), static_cast<core::INSTRUCTION>(instrType), arguments.toStdList());
+                },
+                [this, &function, instrType](){
+                    QString insId = function.guid().toString() + QString::number(instrType);
+
+                    if (addedInstructions[insId].empty())
+                    {
+                        qWarning() << "==Core== Function.AddInstruction(undo): No such entity to remove";
+                        throw std::runtime_error("AddedInstruction map is empty");
+                    }
+
+                    models::gui::Instruction *torm = addedInstructions[insId].back();
+
+                    core::function::removeInstruction(function.id(), torm->Uid());
+                }
+            ));
+        }
+
+        void FunctionHandler::removeInstruction(quint32 func, quint32 instruction, bool save)
+        {
+            models::Entity &function = manager.getEntity(func);
+            models::Function *data = function.guiModel<models::Function>();
+            models::gui::Instruction *instr = data->getInstruction(instruction);
+            std::list<quint32> construction;
+
+            for (QString const &curr : instr->linked())
+            {
+                construction.push_back(manager.findByFullname(curr)->id());
+            }
+
+            commands::CommandManager::Instance()->exec(new commands::CoreCommand("Function.RemoveInstruction", save,
+                [&function, data, instr](){
+
+                    //remove data links
+                    for (models::gui::Input *curr : instr->inputs())
+                    {
+                        core::function::instruction::unlinkData(function.id(), instr->Uid(), curr->name());
+                    }
+
+                    //remove execution links
+                    for (models::gui::FlowLink *lnk : data->flowlinks())
+                    {
+                        if (lnk->data().to == instr->guiUuid())
+                        {
+                            core::function::instruction::unlinkExecution(function.id(), data->getInstruction(lnk->data().from)->Uid(), lnk->data().outIndex);
+                        }
+                    }
+
+                    core::function::removeInstruction(function.id(), instr->Uid());
+                },
+                [&function, instr, construction](){
+                    core::function::addInstruction(function.id(), static_cast<INSTRUCTION>(instr->instruction_id()), construction);
+                }
+            ));
         }
 
         models::gui::declarable::Function *FunctionHandler::getFunctionData(::core::EntityID function, bool throws) const
@@ -349,6 +399,7 @@ namespace dnai
                     function.appendChild(param);
                 commands::CoreCommand::Success();
                 params.pop();
+                emit parameterSet(&function, paramName);
             }
         }
 
@@ -385,6 +436,7 @@ namespace dnai
                 returns.pop();
                 commands::CoreCommand::Success();
                 qDebug() << "==Core== Function.ReturnSet(" << function << ", " << returnName << ")";
+                emit returnSet(&func, returnName);
             }
         }
 
@@ -409,7 +461,15 @@ namespace dnai
 
             commands::CoreCommand::Success();
 
-            if (pendingInstruction.empty())
+            QString instrId = func.guid().toString() + QString::number(type);
+
+            if (!removedInstructions[instrId].empty())
+            {
+                instr = removedInstructions[instrId].back();
+                removedInstructions[instrId].pop_back();
+                data->addInstruction(instr);
+            }
+            else if (pendingInstruction.empty())
             {
                 instr = new models::gui::Instruction();
                 instr->setInstructionId(type);
@@ -428,6 +488,7 @@ namespace dnai
                 instr = pendingInstruction.front();
                 pendingInstruction.pop();
             }
+            addedInstructions[instrId].push_back(instr);
             instr->setUid(instruction);
             emit instructionAdded(&func, instr);
         }
@@ -441,6 +502,34 @@ namespace dnai
             commands::CoreCommand::Error();
             Editor::instance().notifyError("Unable to create instruction: " + messsage);
             emit addInstructionError(function, type, QList<quint32>::fromStdList(arguments), messsage);
+        }
+
+        void FunctionHandler::onInstructionRemoved(EntityID function, InstructionID instruction)
+        {
+            models::Entity &func = manager.getEntity(function);
+            models::Function *data = func.guiModel<models::Function>();
+            models::gui::Instruction *instr = data->getInstruction(instruction);
+            QString instrId = func.guid().toString() + QString::number(instr->instruction_id());
+
+            qDebug() << "==Core== Function.InstructionRemoved(" << function << ", " << instruction << ")";
+
+            commands::CoreCommand::Success();
+
+            data->removeInstruction(instr);
+
+            removedInstructions[instrId].push_back(instr);
+            addedInstructions[instrId].removeOne(instr);
+
+            emit instructionRemoved(&func, instr);
+        }
+
+        void FunctionHandler::onRemoveInstructionError(EntityID funtion, InstructionID instruction, QString msg)
+        {
+            Q_UNUSED(funtion)
+            Q_UNUSED(instruction)
+
+            commands::CoreCommand::Error();
+            Editor::instance().notifyError("Unable to remove instruction: " + msg);
         }
 
         InstructionHandler *FunctionHandler::instruction()

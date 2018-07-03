@@ -18,37 +18,37 @@
                                             "name": "!=",
                                             "description": "",
                                             "instruction_id": 2,
-                                            "construction": [2, 2]
+                                            "construction": [2, 2, 1]
                                         },
                                         "Equal": {
                                             "name": "==",
                                             "description": "",
                                             "instruction_id": 3,
-                                            "construction": [2, 2]
+                                            "construction": [2, 2, 1]
                                         },
                                         "Greater or equal than": {
                                             "name": ">=",
                                             "description": "",
                                             "instruction_id": 5,
-                                            "construction": [2, 2]
+                                            "construction": [2, 2, 1]
                                         },
                                         "Greater than": {
                                             "name": ">",
                                             "description": "",
                                             "instruction_id": 4,
-                                            "construction": [2, 2]
+                                            "construction": [2, 2, 1]
                                         },
                                         "Less or equal than": {
                                             "name": "<=",
                                             "description": "",
                                             "instruction_id": 7,
-                                            "construction": [2, 2]
+                                            "construction": [2, 2, 1]
                                         },
                                         "Less than": {
                                             "name": "<",
                                             "description": "",
                                             "instruction_id": 6,
-                                            "construction": [2, 2]
+                                            "construction": [2, 2, 1]
                                         }
                                     }
                                 },
@@ -59,37 +59,37 @@
                                             "name": "!=",
                                             "description": "",
                                             "instruction_id": 2,
-                                            "construction": [3, 3]
+                                            "construction": [3, 3, 1]
                                         },
                                         "Equal": {
                                             "name": "==",
                                             "description": "",
                                             "instruction_id": 3,
-                                            "construction": [3, 3]
+                                            "construction": [3, 3, 1]
                                         },
                                         "Greater or equal than": {
                                             "name": ">=",
                                             "description": "",
                                             "instruction_id": 5,
-                                            "construction": [3, 3]
+                                            "construction": [3, 3, 1]
                                         },
                                         "Greater than": {
                                             "name": ">",
                                             "description": "",
                                             "instruction_id": 4,
-                                            "construction": [3, 3]
+                                            "construction": [3, 3, 1]
                                         },
                                         "Less or equal than": {
                                             "name": "<=",
                                             "description": "",
                                             "instruction_id": 7,
-                                            "construction": [3, 3]
+                                            "construction": [3, 3, 1]
                                         },
                                         "Less than": {
                                             "name": "<",
                                             "description": "",
                                             "instruction_id": 6,
-                                            "construction": [3, 3]
+                                            "construction": [3, 3, 1]
                                         }
                                     }
                                 },
@@ -100,25 +100,25 @@
                                             "name": "&&",
                                             "description": "",
                                             "instruction_id": 0,
-                                            "construction": []
+                                            "construction": [1]
                                         },
                                         "Or": {
                                             "name": "||",
                                             "description": "",
                                             "instruction_id": 1,
-                                            "construction": []
+                                            "construction": [1]
                                         },
                                         "Different": {
                                             "name": "!=",
                                             "description": "",
                                             "instruction_id": 2,
-                                            "construction": [1, 1]
+                                            "construction": [1, 1, 1]
                                         },
                                         "Equal": {
                                             "name": "==",
                                             "description": "",
                                             "instruction_id": 3,
-                                            "construction": [1, 1]
+                                            "construction": [1, 1, 1]
                                         }
                                     }
                                 },
@@ -129,37 +129,37 @@
                                             "name": "!=",
                                             "description": "",
                                             "instruction_id": 2,
-                                            "construction": [4, 4]
+                                            "construction": [4, 4, 1]
                                         },
                                         "Equal": {
                                             "name": "==",
                                             "description": "",
                                             "instruction_id": 3,
-                                            "construction": [4, 4]
+                                            "construction": [4, 4, 1]
                                         },
                                         "Greater or equal than": {
                                             "name": ">=",
                                             "description": "",
                                             "instruction_id": 5,
-                                            "construction": [4, 4]
+                                            "construction": [4, 4, 1]
                                         },
                                         "Greater than": {
                                             "name": ">",
                                             "description": "",
                                             "instruction_id": 4,
-                                            "construction": [4, 4]
+                                            "construction": [4, 4, 1]
                                         },
                                         "Less or equal than": {
                                             "name": "<=",
                                             "description": "",
                                             "instruction_id": 7,
-                                            "construction": [4, 4]
+                                            "construction": [4, 4, 1]
                                         },
                                         "Less than": {
                                             "name": "<",
                                             "description": "",
                                             "instruction_id": 6,
-                                            "construction": [4, 4]
+                                            "construction": [4, 4, 1]
                                         }
                                     }
                                 },
@@ -170,37 +170,37 @@
                                             "name": "!=",
                                             "description": "",
                                             "instruction_id": 2,
-                                            "construction": [5, 5]
+                                            "construction": [5, 5, 1]
                                         },
                                         "Equal": {
                                             "name": "==",
                                             "description": "",
                                             "instruction_id": 3,
-                                            "construction": [5, 5]
+                                            "construction": [5, 5, 1]
                                         },
                                         "Greater or equal than": {
                                             "name": ">=",
                                             "description": "",
                                             "instruction_id": 5,
-                                            "construction": [5, 5]
+                                            "construction": [5, 5, 1]
                                         },
                                         "Greater than": {
                                             "name": ">",
                                             "description": "",
                                             "instruction_id": 4,
-                                            "construction": [5, 5]
+                                            "construction": [5, 5, 1]
                                         },
                                         "Less or equal than": {
                                             "name": "<=",
                                             "description": "",
                                             "instruction_id": 7,
-                                            "construction": [5, 5]
+                                            "construction": [5, 5, 1]
                                         },
                                         "Less than": {
                                             "name": "<",
                                             "description": "",
                                             "instruction_id": 6,
-                                            "construction": [5, 5]
+                                            "construction": [5, 5, 1]
                                         }
                                     }
                                 }
@@ -461,8 +461,28 @@
                 "While": {
                     "name": "while",
                     "description": "",
-                    "instruction_id": 28,
-                    "construction": [1]
+                    "instruction_id": 27,
+                    "construction": [],
+                    "inputs": 1,
+                    "input_names": ["condition"],
+                    "in": 1,
+                    "out": 2
+                },
+                "Break": {
+                    "name": "break",
+                    "description": "Break a loop execution",
+                    "instruction_id": 36,
+                    "construction": [],
+                    "in": 1,
+                    "out": 0
+                },
+                "Continue": {
+                    "name": "continue",
+                    "description": "Continue the execution of a loop",
+                    "instructiond_id": 37,
+                    "construction": [],
+                    "in": 1,
+                    "out": 0
                 }
             }
         }

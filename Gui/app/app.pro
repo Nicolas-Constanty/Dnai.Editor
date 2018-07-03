@@ -120,14 +120,15 @@ SOURCES += \
     src/dnai/core/enumhandler.cpp \
     src/dnai/toastermanagerservice.cpp \
     src/dnai/views/toast.cpp \
-    src/dnai/models/property.cpp \
     src/dnai/core/instructionhandler.cpp \
     src/dnai/models/gui/entitylist.cpp \
     src/dnai/models/contextmenumodel.cpp \
     src/dnai/models/gui/iolink.cpp \
     src/dnai/models/gui/flowlink.cpp \
     src/dnai/core/globalhandler.cpp \
-    src/dnai/core/objecthandler.cpp
+    src/dnai/core/objecthandler.cpp \
+    src/dnai/utils/random_utils.cpp \
+    src/dnai/core/listhandler.cpp
 
 
 RESOURCES += qml.qrc
@@ -293,7 +294,6 @@ HEADERS += \
     $${PWD}/../lib/lcore_client/include/core.h \
     include/dnai/toastermanagerservice.h \
     include/dnai/views/toast.h \
-    include/dnai/models/property.h \
     include/dnai/core/instructionhandler.h \
     include/dnai/models/gui/entitylist.h \
     include/dnai/core/instructionmanager.h \
@@ -302,26 +302,27 @@ HEADERS += \
     include/dnai/models/gui/iolink.h \
     include/dnai/models/gui/flowlink.h \
     include/dnai/models/gui/data/flowlink.h \
-    include/dnai/core/globalhandler.h
+    include/dnai/core/globalhandler.h \
+    include/dnai/utils/random_utils.h
 
 
 #LIB
 DEPENDPATH += $${PWD}/../lib/
 INCLUDEPATH += $${PWD}/../lib/lcore_client/include/
 
-win32-msvc*{
-    DEPENDPATH += $${PWD}/../lib/lwintoast/
-    LIBS += -lwintoast
-} win32-g++ {
-} macx-clang* {
-#QT += core
-#QT += macextras
-#QT += gui
-    #DEPENDPATH += $${PWD}/../lib/MACToast/
-    #LIBS +=  -lMACToast
-    #LIBS += -framework Foundation
-    #INCLUDEPATH += /System/Library/Frameworks/Foundation.framework/Versions/C/Headers
-}
+#win32-msvc*{
+#    DEPENDPATH += $${PWD}/../lib/lwintoast/
+#    LIBS += -lwintoast
+#} win32-g++ {
+#} macx-clang* {
+##QT += core
+##QT += macextras
+##QT += gui
+#    #DEPENDPATH += $${PWD}/../lib/MACToast/
+#    #LIBS +=  -lMACToast
+#    #LIBS += -framework Foundation
+#    #INCLUDEPATH += /System/Library/Frameworks/Foundation.framework/Versions/C/Headers
+#}
 
 
 #begin library network

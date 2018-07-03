@@ -7,6 +7,8 @@ import Dnai.FontAwesome 1.0
 import "../Style"
 
 ButtonAwesomeSolid {
+    signal pressed()
+    property string toolTipsText: ""
     id: _control
     property alias decoration: _decoration
     text: "\uf055"
@@ -24,6 +26,16 @@ ButtonAwesomeSolid {
             anchors.right: parent.right
             implicitHeight: 5
             color: "#00897B"
+        }
+
+        MouseAreaToolTips {
+            anchors.fill: parent
+            cursorShape: Qt.PointingHandCursor
+            text: _control.toolTipsText
+
+            onPressed:  {
+                _control.pressed()
+            }
         }
     }
 }

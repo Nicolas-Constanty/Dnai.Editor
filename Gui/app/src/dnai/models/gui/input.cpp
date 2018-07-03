@@ -46,7 +46,7 @@ namespace dnai
 				obj["description"] = m_data.description;
 				obj["index"] = m_data.index;
                 obj["listIndex"] = m_data.listIndex.toString();
-                obj["varType"] = static_cast<int>(m_data.varType);
+                obj["varType"] = m_data.varType.toString();
                 obj["value"] = QJsonValue::fromVariant(m_data.value);
 			}
 
@@ -58,9 +58,8 @@ namespace dnai
 				m_data.description = obj["description"].toString();
 				m_data.index = obj["index"].toInt();
 				m_data.listIndex = QUuid::fromString(obj["listIndex"].toString());
-				m_data.varType = obj["varType"].toInt();
-				m_data.value = obj["value"].toString();
-                qDebug() << "Input " << m_data.name << " = " << m_data.value;
+                m_data.varType = QUuid::fromString(obj["varType"].toString());
+                m_data.value = obj["value"].toString();
 			}
 
 			const data::Input& Input::data() const
@@ -76,12 +75,12 @@ namespace dnai
 				return true;
 			}
 
-            quint32 Input::varType() const
+            QUuid Input::varType() const
 			{
 				return m_data.varType;
 			}
 
-            bool Input::setVarType(quint32 id)
+            bool Input::setVarType(QUuid const &id)
 			{
 				if (m_data.varType == id)
 					return false;

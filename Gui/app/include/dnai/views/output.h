@@ -32,6 +32,7 @@ namespace dnai
 
 			virtual void updateLink() override;
 			void unlinkAll() override;
+            void asyncUnlinkAll() override;
 
 		private:
 

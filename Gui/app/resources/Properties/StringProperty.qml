@@ -41,7 +41,6 @@ BaseProperty {
             onAccepted: {
                 if (_panel.method !== null)
                 {
-                    console.log(_panel.method)
                     _panel.method(_panel.model, _panel.prop, _value.text)
                 }
             }

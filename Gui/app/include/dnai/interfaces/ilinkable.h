@@ -39,6 +39,8 @@ namespace dnai {
             */
             virtual Link *connect(ALinkable *linkable, views::BezierCurve *curve) = 0;
 
+            virtual Link *asyncConnect(ALinkable *linkable) = 0;
+
             /**
             * \brief Break a link between linkable
             * \param linkable

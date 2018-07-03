@@ -6,6 +6,7 @@ import DNAI 1.0
 import DNAI.Models 1.0
 import Dnai.Settings 1.0
 import Dnai.Controls 1.0
+import DNAI.Core 1.0
 
 import "../Style"
 import "../Nodes"
@@ -16,7 +17,6 @@ CanvasNode {
     property var nodeModel
     property var entityModel: nodeModel.guiProperties
     clip: true
-//    anchors.fill: parent
     backgroundColor: AppSettings.theme["canvas"]["background"]
     gridStep: AppSettings.theme["canvas"]["grid"]["step"]
     gridColor: AppSettings.theme["canvas"]["grid"]["color"]
@@ -36,25 +36,75 @@ CanvasNode {
         x: canvas.width/2
         y: canvas.height/2
 
-        Repeater {
-            model: entityModel.instructions
-        }
-
         onScaleChanged: {
             zoomText.text = Math.round(content_item.scale * 100) + "%"
         }
     }
+
+    Keys.onDeletePressed: {
+        for (var i in content.children)
+        {
+            var node = content.children[i];
+
+            if (node.selected)
+            {
+                Controller.Function.removeInstruction(nodeModel.id, node.instruction_model.uid);
+            }
+        }
+    }
+
+    Connections {
+        target: Controller.Function.instruction
+
+        onDataLinked: {
+            console.log("data linked in func ", func.name, ": ", from.uid, '(', output, ')->', to.uid, '(', input, ')');
+        }
+        onDataUnlinked: {
+            console.log("data unlinked in func ", func.name, ': ', instruction.uid, '(', input ,')')
+        }
+        onExecutionLinked: {
+            console.log("flow linked in func ", func.name, ': ', from.uid, '(', outPin, ')->', to.uid);
+        }
+        onExecutionUnlinked: {
+            console.log("flow unlinked in func ", func.name, ': ', from.uid, '(', outPin, ')');
+        }
+    }
+
+    Connections {
+        target: Controller.Function
+        onEntryPointSet: {
+            console.log("entry point set for ", func, "(", func.id, ") => ", func.name, " at instruction ", entry.uid);
+        }
+        onInstructionRemoved: {
+            if (nodeModel.id === func.id)
+            {
+                for (var i in content_item.children)
+                {
+                    var currItem = content_item.children[i];
+
+                    if (currItem.instruction_model && currItem.instruction_model.uid === instruction.uid)
+                    {
+                        currItem.parent = null;
+                        currItem.visible = false;
+                        delete currItem;
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
     content: content_item
 
     onContextMenuChanged: {
-        //Editor.updateContextMenu(nodeModel)
         Editor.updateContextMenuModel(nodeModel)
         _menu2.open()
     }
 
     function onMenuNodeChoosen(choice)
     {
-        Editor.createNode(canvas.nodeModel, choice, canvas.mousePosition.x, canvas.mousePosition.y);
+        if (choice.instructionId !== -1)
+            Editor.createNode(canvas.nodeModel, choice, canvas.mousePosition.x, canvas.mousePosition.y);
     }
 
     SearchableMenu {

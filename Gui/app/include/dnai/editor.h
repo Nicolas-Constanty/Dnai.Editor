@@ -22,14 +22,12 @@ namespace dnai
 		Q_OBJECT
         Q_PROPERTY(QStringList visibility READ visibility CONSTANT)
         Q_PROPERTY(QStringList entityType READ entityType CONSTANT)
-        Q_PROPERTY(dnai::models::gui::declarable::VarTypeList *varTypes READ varTypes CONSTANT)
 
 	public:
 		explicit PropertyPanelProperties(QObject *parent = nullptr);
 
 		const QStringList &visibility() const;
-		const QStringList &entityType() const;
-		models::gui::declarable::VarTypeList *varTypes() const;
+        const QStringList &entityType() const;
 
 	private:
 		QStringList m_visibility;
@@ -104,6 +102,7 @@ namespace dnai
 		                                const QString &proj_name,
 		                                const QString &proj_desc);
 		Q_INVOKABLE QQuickWindow *mainView();
+        Q_INVOKABLE QQuickItem *qmlMainView();
 		Q_INVOKABLE void registerPropertyView(QQuickItem *view);
 		Q_INVOKABLE QQuickItem* propertyView() const;
 		Q_INVOKABLE void loadFunction(dnai::models::Entity *entity) const;
@@ -137,7 +136,11 @@ namespace dnai
     public slots:
         void onInstructionAdded(models::Entity *func, models::gui::Instruction *instr);
         void onAddInstructionError(quint32 func, quint32 type, QList<quint32> const &args, QString const &msg);
-        void onEntityDeclared(dnai::models::Entity *declared);
+        void onInstructionDataLinked(dnai::models::Entity *func, dnai::models::gui::Instruction *from, QString output, dnai::models::gui::Instruction *to, QString input);
+        void onExecutionLinked(dnai::models::Entity *func, dnai::models::gui::Instruction *from, quint32 outPin, dnai::models::gui::Instruction *to);
+        void onEntryPointSet(dnai::models::Entity *func, dnai::models::gui::Instruction *entry);
+        void onExecutionUnlinked(dnai::models::Entity *func, dnai::models::gui::Instruction *from, quint32 outPin);
+        void onDataUnlinked(dnai::models::Entity *func, dnai::models::gui::Instruction *instruction, QString input);
 
     private:
         interfaces::ISolution *m_solution;

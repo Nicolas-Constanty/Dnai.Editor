@@ -4,6 +4,8 @@ import DNAI.Views 1.0
 import DNAI.Enums 1.0
 import DNAI.Core 1.0
 
+import Dnai.Settings 1.0
+
 import "../Style"
 
 GenericNode {
@@ -64,9 +66,25 @@ GenericNode {
         Flow {
             id: _flow
 
+            MouseArea {
+                anchors.fill: parent
+                hoverEnabled: true
+                propagateComposedEvents: true
+                onContainsMouseChanged: {
+                    _flow.isHover = containsMouse
+                }
+                onPressed: {
+                    mouse.accepted = false
+                }
+            }
+
             anchors.right: parent.right
             anchors.verticalCenter: parent.verticalCenter
             anchors.margins: 10
+
+            curveColor: AppSettings.theme["flow"]["outer"]
+            borderColor: isHover ? AppSettings.theme["flow"]["inner"] : AppSettings.theme["flow"]["outer"]
+            fillColor: isLink || isHover ? AppSettings.theme["flow"]["outer"] : AppSettings.theme["flow"]["inner"]
 
             width: 17
             height: 17

@@ -13,14 +13,12 @@ BaseProperty {
     property real valueSpacing: 5
     property ButtonAwesomeSolid createButton: _createButton
 
-    property var addValue: null
-
-    property var moveDown: null
-    property var moveUp: null
-    property var deleteValue: null
-    property var nameChanged: null
-    property var typeChanged: null
-
+    signal addValue()
+    signal deleteValue(string name)
+    signal typeChanged(string name, var type)
+    signal renamed(string name, string newName)
+    signal moveUp(int index)
+    signal moveDown(int index)
 
     anchors.left: parent.left
     anchors.right: parent.right
@@ -37,28 +35,26 @@ BaseProperty {
             anchors.left: parent.left
             anchors.right: parent.right
             height: _panel.contentHeight
-            name: model.name
-            varType: Editor.propertyPanelProperties.varTypes.getIndexFromValue(model.varType)
+            paramName: model.name
+            varType: model.varType
             paramModel: model
 
-            moveDown: function () {
+            onMoveDown: {
                 _panel.moveDown(index)
             }
-            moveUp: function () {
+            onMoveUp: {
                 _panel.moveUp(index)
             }
-            deleteValue: function () {
+            onDeleteValue: {
                 _panel.deleteValue(name)
                 _inputs.height -= _panel.contentHeight + _panel.valueSpacing
                 _panel.height -= _panel.contentHeight + _panel.valueSpacing
             }
-            nameChanged: function (n) {
-                _panel.nameChanged(index, model.name, n)
+            onNameChanged: {
+                _panel.renamed(model.name, name)
             }
-            typeChanged: function (t) {
-                console.log("model: ", paramModel.id);
-                console.log("_inputs[index]: ", _inputs[index]);
-                _panel.typeChanged(index, name, t)
+            onTypeChanged: {
+                _panel.typeChanged(name, type)
             }
         }
     }

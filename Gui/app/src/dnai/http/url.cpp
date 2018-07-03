@@ -180,7 +180,7 @@ namespace dnai {
 
             for (auto it = m_headers.begin(); it != m_headers.end(); ++it) {
                 request.setRawHeader(it.key().toLatin1(), it.value().toLatin1());
-                qDebug() << it.key() << ": " << it.value();
+                qDebug() << "==URL== header(" << it.key() << "): " << it.value();
             }
 
             QNetworkReply *reply;
@@ -211,16 +211,16 @@ namespace dnai {
             auto observable = new Observable(reply);
             connect(reply, SIGNAL(finished()), observable, SLOT(onResponse()));
 
-            qInfo() << "HTTP: Request " << m_method << " " << m_url;
+            qInfo() << "==URL== HTTP: Request " << m_method << " " << m_url;
 
             return (*observable).map(
                 [&](Response response)-> Response {
-                    qInfo() << "HTTP: Response " << m_method << " " << m_url;
+                    qInfo() << "==URL== HTTP: Response " << m_method << " " << m_url;
                     qInfo().noquote() << response;
                     return response;
                 },
                 [&](Response response)-> Response {
-                    qInfo() << "HTTP: Error " << m_method << " " << m_url;
+                    qInfo() << "==URL== HTTP: Error " << m_method << " " << m_url;
                     qInfo().noquote() << response;
                     return response;
                 }

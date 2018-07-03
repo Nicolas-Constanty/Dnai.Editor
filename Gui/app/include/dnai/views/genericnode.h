@@ -20,11 +20,16 @@ namespace dnai
             Q_PROPERTY(dnai::views::Flow *flowOutItem READ flowOutItem WRITE setFlowOutItem NOTIFY flowOutItemChanged)*/
             Q_PROPERTY(dnai::views::RoundedRectangle *header READ header WRITE setHeader NOTIFY headerChanged)
             Q_PROPERTY(dnai::views::RoundedRectangle *content READ content WRITE setContent NOTIFY contentChanged)
+            Q_PROPERTY(bool selected READ selected CONSTANT)
 
         public:
             explicit GenericNode(QQuickItem *parent = nullptr);
 	        void createLink(models::gui::IoLink *link, GenericNode *n2);
 	        void createFlowLink(models::gui::FlowLink* link, GenericNode* n2);
+            void unlinkFlow(quint32 pin);
+            void unlinkIo(quint32 in);
+
+
 	        /**
             * \brief Override updatePaintNode and draw a beautifull Node
             * \return QSGNode *
@@ -50,6 +55,7 @@ namespace dnai
             //Flow *flowOutItem() const { return m_flowOutItem; }
             RoundedRectangle *header() const { return m_header; }
             RoundedRectangle *content() const { return m_content; }
+            bool selected() const;
 
         public:
             /*void setFlowIn(bool f);

@@ -15,6 +15,7 @@ namespace dnai
 			Io(parent)
 		{
 			m_linkable = new controllers::InputController(m_type, this);
+            QObject::connect(this, SIGNAL(curveColorChanged(const QColor&)), this, SLOT(redrawLinks(const QColor&)));
 		}
 
 		void Input::refreshBackendIo()
@@ -54,21 +55,25 @@ namespace dnai
 		}
 
 		void Input::unlinkAll()
-		{
-            qDebug() << "ici";
-			for (auto link : m_linkable->links())
-			{
-				const auto lb = dynamic_cast<Output *>(dynamic_cast<BaseLinkable *>(link->L1 == m_linkable ? link->L2 : link->L1)->parent());
-				emit unlinked(lb->property("name"), lb->getNode()->property("instruction_model"));
-			}
-			LinkableBezierItem::unlinkAll();
-		}
+        {
+            LinkableBezierItem::unlinkAll();
+            setIsLink(false);
+        }
+
+        void Input::asyncUnlinkAll()
+        {
+            for (auto link : m_linkable->links())
+            {
+                const auto lb = dynamic_cast<Output *>(dynamic_cast<BaseLinkable *>(link->L1 == m_linkable ? link->L2 : link->L1)->parent());
+                emit unlinked(lb->property("name"), lb->getNode()->property("instruction_model"));
+            }
+        }
 
 		void Input::afterRealease(Link *l)
 		{
 			if (l == nullptr)
 			{
-				unlinkAll();
+                asyncUnlinkAll();
 			}
 		}
 	}

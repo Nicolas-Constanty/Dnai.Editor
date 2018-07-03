@@ -40,7 +40,8 @@ namespace dnai
 
         void CoreCommand::Success()
         {
-            commandQueue.pop();
+            if (!commandQueue.empty())
+                commandQueue.pop();
         }
 
         void CoreCommand::Error()

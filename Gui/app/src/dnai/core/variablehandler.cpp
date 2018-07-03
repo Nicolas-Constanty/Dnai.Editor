@@ -41,17 +41,13 @@ namespace dnai
 
         void VariableHandler::onEntityAdded(::core::EntityID id, models::Entity &entity)
         {
-            Q_UNUSED(entity)
             models::gui::declarable::Variable *var = getVariableData(id);
 
             if (var != nullptr)
             {
-                //todo: add a system to save action into a map in order to execute it once done
-                if (var->varType() != ::core::UNDEFINED_ID)
-                    setType(id, var->varType(), false);
-                if (!var->value().isEmpty())
-                    setValue(id, var->value(), false);
+                m_pendingVar.push_back(&entity);
             }
+            refreshVariables();
         }
 
         void VariableHandler::setType(quint32 var, quint32 typ, bool save)
@@ -59,8 +55,9 @@ namespace dnai
             qDebug() << "==Core== Variable.SetType(" << var << ", " << typ << ") => save(" << save << ")";
 
             models::Entity &variable = manager.getEntity(var);
+            models::Variable *data = variable.guiModel<models::Variable>();
             models::Entity &type = manager.getEntity(typ);
-            core::EntityID oldType = getVariableData(variable.id(), true)->varType();
+            models::Entity *oldType = manager.getEntity(data->varType());
 
             commands::CommandManager::Instance()->exec(
                 new commands::CoreCommand("Variable.SetType", save,
@@ -74,7 +71,8 @@ namespace dnai
                      * Un-execute
                      */
                     [oldType, &variable]() {
-                        ::core::variable::setType(variable.id(), oldType);
+                        if (oldType != nullptr)
+                            ::core::variable::setType(variable.id(), oldType->id());
                     }));
         }
 
@@ -91,14 +89,36 @@ namespace dnai
                      * Execute
                      */
                     [&variable, value]() {
-                      ::core::variable::setValue(variable.id(), value);
+                        ::core::variable::setValue(variable.id(), value);
                     },
                     /*
                      * Un-execute
                      */
                     [&variable, oldval]() {
-                      ::core::variable::setValue(variable.id(), oldval);
-                    }));
+                        if (!oldval.isEmpty())
+                            ::core::variable::setValue(variable.id(), oldval);
+                    }
+            ));
+        }
+
+        void VariableHandler::refreshVariables()
+        {
+            for (std::list<models::Entity *>::iterator it = m_pendingVar.begin(); it != m_pendingVar.end();)
+            {
+                models::Variable *data = (*it)->guiModel<models::Variable>();
+
+                if (manager.contains(data->varType()))
+                {
+                    setType((*it)->id(), manager.getEntity(data->varType())->id(), false);
+                    if (!data->value().isEmpty())
+                        setValue((*it)->id(), data->value(), false);
+                    it = m_pendingVar.erase(it);
+                }
+                else
+                {
+                    ++it;
+                }
+            }
         }
 
         models::gui::declarable::Variable   *VariableHandler::getVariableData(::core::EntityID variable, bool throws)
@@ -113,10 +133,11 @@ namespace dnai
         void VariableHandler::onTypeSet(::core::EntityID variable, ::core::EntityID type)
         {
             models::gui::declarable::Variable *var = getVariableData(variable);
+            models::Entity &typ = manager.getEntity(type);
 
             commands::CoreCommand::Success();
             qDebug() << "==Core== Variable.TypeSet(" << variable << ", " << type << ")";
-            var->setVarType(type);
+            var->setVarType(typ.guid());
         }
 
         void VariableHandler::onSetTypeError(::core::EntityID variable, ::core::EntityID type, const QString &message)

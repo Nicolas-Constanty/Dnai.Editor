@@ -8,7 +8,6 @@
 #include "gui/data/entitycolum.h"
 #include "gui/declarable/variable.h"
 #include "gui/declarable/context.h"
-#include "dnai/models/property.h"
 
 namespace dnai
 {
@@ -68,39 +67,13 @@ namespace dnai
 	        gui::data::EntityColumn m_data;
             Entity *m_parent;
         };
-		/*class EntityList : public QAbstractListModel
-		{
-			Q_OBJECT
 
-		public:
-			EntityList(QObject *parent = nullptr) : QAbstractListModel(parent), m_list(nullptr)
-			{
-			}
-			enum Roles {
-				Name = Qt::UserRole + 1,
-				Type
-			};
-			explicit EntityList(QList<models::Entity*> *);
-			int rowCount(const QModelIndex& parent) const override;
-			QVariant data(const QModelIndex& index, int role) const override;
-			void append(models::Entity *var);
-			void moveUp(int index);
-			void moveDown(int index);
-			void remove(const QString &name);
-
-			bool setData(const QModelIndex& index, const QVariant& value, int role) override;
-			bool setData(int index, const QVariant& value, int role);
-
-		private:
-			QList<models::Entity*> *m_list;
-			QHash<int, QByteArray> roleNames() const override;
-
-		};*/
         class Entity : public interfaces::IModel<Entity>
         {
             Q_OBJECT
             Q_PROPERTY(qint32 id READ id WRITE setId NOTIFY idChanged)
             Q_PROPERTY(qint32 containerId READ containerId WRITE setContainerId NOTIFY containerIdChanged)
+            Q_PROPERTY(QUuid guid READ guid)
 			Q_PROPERTY(bool isRoot READ isRoot WRITE setIsRoot NOTIFY isRootChanged)
 			Q_PROPERTY(int index READ id WRITE setIndex NOTIFY indexChanged)
 			Q_PROPERTY(QString listIndex READ listIndex WRITE setListIndex NOTIFY listIndexChanged)
@@ -113,13 +86,10 @@ namespace dnai
             Q_PROPERTY(qint32 entityType READ entityType WRITE setEntityType NOTIFY entityTypeChanged)
 			Q_PROPERTY(bool expanded READ expanded WRITE setExpanded NOTIFY expandedChanged)
 			Q_PROPERTY(dnai::models::Entity *parentRef READ parentRef CONSTANT)
-			Q_PROPERTY(dnai::models::Property *editableProperty READ editableProperty WRITE setEditableProperty NOTIFY editablePropertyChanged)
             Q_PROPERTY(QVariant listColumn READ listColumn WRITE setListColumn NOTIFY listColumnChanged)
-        	//			Q_PROPERTY(EntityGUI *guiModel READ guiModel CONSTANT)
 
         public:
-            explicit Entity();
-            explicit Entity(gcore::Entity *coremodel, Entity *parent = nullptr, interfaces::IEntity *guimodel = nullptr);
+            explicit Entity(gcore::Entity *coremodel = nullptr, Entity *parent = nullptr, interfaces::IEntity *guimodel = nullptr, QUuid const &guid = QUuid());
 
             virtual ~Entity();
         public:
@@ -142,7 +112,7 @@ namespace dnai
             bool expanded() const;
 			Entity *parentRef() const;
 			const QMap<QUuid, Column *> &columns();
-			Property *editableProperty() const;
+            QUuid guid() const;
 
         public:
 			void setIsRoot(bool isRoot);
@@ -156,7 +126,6 @@ namespace dnai
             void setDescription(const QString& description);
             virtual void setCoreModel(gcore::Entity *model);
 			void setExpanded(bool exp);
-			void setEditableProperty(Property *p);
 			virtual void appendChild(Entity* child) override;
 			QObject *guiProperties() const;
 			void setListColumn(const QVariant &column);
@@ -174,7 +143,6 @@ namespace dnai
 	        void coreModelChanged(gcore::Entity *model);
 	        void entityChildrenChanged(models::Entity *e);
 	        void expandedChanged(bool exp);
-	        void editablePropertyChanged(Property *p);
 			void listColumnChanged(const QVariant &var);
 
 	        //Implementation of ISerializable
@@ -185,7 +153,6 @@ namespace dnai
 	        const QVariant &listColumn();
 			Q_INVOKABLE void addColumn(const QString &name);
 	        Q_INVOKABLE int row() const override;
-	        Q_INVOKABLE void setProp(int row, const QVariant &value);
 
         public:
 	        models::Entity *findByName(QString const &name) const;
@@ -200,7 +167,7 @@ namespace dnai
 	        QMap<QUuid, Column *> m_columns;
 	        QList<QObject *> m_columslist;
 			QVariant m_varcolumns;
-	        Property *m_editableProperty;
+            QUuid m_guid;
 
         };
 
