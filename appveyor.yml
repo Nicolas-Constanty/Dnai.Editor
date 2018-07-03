@@ -2,6 +2,10 @@ image: Visual Studio 2017
 
 configuration:
   - release
+  
+artifacts:
+  - path: %APPVEYOR_BUILD_FOLDER%\Dnai
+    name: Dnai
 
 install:
   - set QTDIR=C:\Qt\5.11.0\msvc2017_64
