@@ -24,11 +24,11 @@ namespace dnai {
         static const http::Config http_config;
         static const QString settings_key;
         static bool rememberUser;
-    private:
+    public:
         static bool refreshing_token;
         static quint64 refreshing_delta;
 
-    private:
+    public:
         static const QString client_id;
         static const QString client_secret;
         static User user;
