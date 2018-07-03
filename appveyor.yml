@@ -28,7 +28,7 @@ build_script:
   - copy "%ProgramFiles(x86)%\Microsoft Visual Studio\2017\Community\VC\Redist\MSVC\%MREDIST%\x64\Microsoft.VC141.OpenMP\*" "./app/release/"
   - mkdir %APPVEYOR_BUILD_FOLDER%\Dnai
   - RENAME "app/release" Dnai-Editor_%APPVEYOR_BUILD_VERSION%
-  - move Dnai-Editor_%APPVEYOR_BUILD_VERSION% %APPVEYOR_BUILD_FOLDER%\Dnai
+  - move "app/Dnai-Editor_%APPVEYOR_BUILD_VERSION%" %APPVEYOR_BUILD_FOLDER%\Dnai
   - cd %APPVEYOR_BUILD_FOLDER%\Dnai
   - mkdir %APPVEYOR_BUILD_FOLDER%-server
   - cd %APPVEYOR_BUILD_FOLDER%-server
