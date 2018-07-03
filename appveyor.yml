@@ -1,15 +1,16 @@
 image: Visual Studio 2017
 
+configuration:
+  - release
+
 install:
   - set QTDIR=C:\Qt\5.11.0\msvc2017_64
   - set PATH=%PATH%;%QTDIR%\bin
 
 before_build:
-- cmd: |-
-    cd C:\projects\dnai-editor\Gui
-    mkdir build
-    qmake -r -Wall -Wlogic -Wparser ..
+ - mkdir %APPVEYOR_BUILD_FOLDER%-build
+ - qmake -o %APPVEYOR_BUILD_FOLDER%-build -r -Wall -Wlogic -Wparser CONFIG+=%CONFIGURATION% %APPVEYOR_BUILD_FOLDER%
 
 build:
-  cd C:\projects\dnai-editor\Gui
+  cd %APPVEYOR_BUILD_FOLDER%-build
   nmake.exe
