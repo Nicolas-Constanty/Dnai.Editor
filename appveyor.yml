@@ -20,4 +20,4 @@ before_build:
 
 build_script:
   - cd %APPVEYOR_BUILD_FOLDER%-build
-  - make
+  - '%make%'
