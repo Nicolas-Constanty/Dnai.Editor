@@ -6,13 +6,13 @@ install:
 
 before_build:
 - cmd: |-
-    cd C:\projects\Dnai.Editor\Gui
+    cd C:\projects\dnai-editor\Gui
     mkdir build
     cd build
     cmake --version
     cmake .. -G "Visual Studio 15 2017 Win64"
 
 build:
-  project: C:\projects\Dnai.Editor\Gui\build\DNAI.sln
+  project: C:\projects\dnai-editor\Gui\build\DNAI.sln
   verbosity: minimal
   parallel: true
