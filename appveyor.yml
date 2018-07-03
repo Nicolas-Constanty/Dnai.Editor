@@ -12,6 +12,7 @@ install:
   - set make=nmake.exe
 
 before_build:
+ - cd %APPVEYOR_BUILD_FOLDER%
  - git submodule update --init --recursive
  - mkdir %APPVEYOR_BUILD_FOLDER%-build
  - qmake -o %APPVEYOR_BUILD_FOLDER%-build -r -Wall -Wlogic -Wparser CONFIG+=%CONFIGURATION% %APPVEYOR_BUILD_FOLDER%/Gui
