@@ -1,0 +1,24 @@
+image: Visual Studio 2017
+
+configuration:
+  - release
+
+install:
+  - set QTDIR=C:\Qt\5.11.0\msvc2017_64
+  - set PATH=%QTDIR%\bin;%PATH%
+  - set PATH=C:\Qt\Tools\QtCreator\bin;%PATH%
+
+before_build:
+ - if exist C:\DNAI\ rmdir /s /Q C:\DNAI
+ - if exist "C:\Deploiement\Windows\DNAISetup\packages\com.vendor.product\data\" rmdir /s /Q "C:\Deploiement\Windows\DNAISetup\packages\com.vendor.product\data"
+ - md "C:\Deploiement\Windows\DNAISetup\packages\com.vendor.product\data"
+ - cd %APPVEYOR_BUILD_FOLDER%
+ - git submodule update --init --recursive
+ - call "%ProgramFiles(x86)%\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" x64
+ - mkdir %APPVEYOR_BUILD_FOLDER%-build
+ - cd %APPVEYOR_BUILD_FOLDER%-build
+ - qmake -o %APPVEYOR_BUILD_FOLDER%-build -r -Wall -spec win32-msvc CONFIG+=%CONFIGURATION% %APPVEYOR_BUILD_FOLDER%/Gui && jom qmake_all
+
+build_script:
+  - jom
+  - jom install
