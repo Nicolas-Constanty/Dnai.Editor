@@ -9,8 +9,8 @@ install:
   - set PATH=C:\Qt\Tools\QtCreator\bin;%PATH%
 
 before_build:
- - if exist C:\DNAI\ rmdir /s C:\DNAI
- - if exist "C:\Deploiement\Windows\DNAISetup\packages\com.vendor.product\data\" rmdir /s "C:\Deploiement\Windows\DNAISetup\packages\com.vendor.product\data"
+ - if exist C:\DNAI\ rmdir /s /Q C:\DNAI
+ - if exist "C:\Deploiement\Windows\DNAISetup\packages\com.vendor.product\data\" rmdir /s /Q "C:\Deploiement\Windows\DNAISetup\packages\com.vendor.product\data"
  - md "C:\Deploiement\Windows\DNAISetup\packages\com.vendor.product\data"
  - cd %APPVEYOR_BUILD_FOLDER%
  - git submodule update --init --recursive
