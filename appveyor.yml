@@ -8,11 +8,8 @@ before_build:
 - cmd: |-
     cd C:\projects\dnai-editor\Gui
     mkdir build
-    cd build
-    cmake --version
-    cmake .. -G "Visual Studio 15 2017 Win64"
+    qmake -r -Wall -Wlogic -Wparser ..
 
 build:
-  project: C:\projects\dnai-editor\Gui\build\DNAI.sln
-  verbosity: minimal
-  parallel: true
+  cd C:\projects\dnai-editor\Gui
+  nmake.exe
