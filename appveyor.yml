@@ -6,11 +6,15 @@ configuration:
 install:
   - set QTDIR=C:\Qt\5.11.0\msvc2017_64
   - set PATH=%PATH%;%QTDIR%\bin
+  - '%QTDIR%\bin\qtenv2.bat'
+  - qmake -v
+  - call "%ProgramFiles(x86)%\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" x64
+  - set make=nmake.exe
 
 before_build:
  - mkdir %APPVEYOR_BUILD_FOLDER%-build
  - qmake -o %APPVEYOR_BUILD_FOLDER%-build -r -Wall -Wlogic -Wparser CONFIG+=%CONFIGURATION% %APPVEYOR_BUILD_FOLDER%
 
 build:
-  cd %APPVEYOR_BUILD_FOLDER%-build
-  nmake.exe
+  - cd %APPVEYOR_BUILD_FOLDER%-build
+  - '%make%'
