@@ -10,6 +10,7 @@ install:
   - qmake -v
   - call "%ProgramFiles(x86)%\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" x64
   - set make=nmake.exe
+  - set CL=/MP
 
 before_build:
  - cd %APPVEYOR_BUILD_FOLDER%
