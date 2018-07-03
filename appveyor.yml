@@ -20,7 +20,7 @@ build_script:
   - cd %APPVEYOR_BUILD_FOLDER%-build
   - jom
   - jom install
-  - windeployqt.exe "./app/release/DNAI.exe" -qmldir=C:\Users\Victor\Documents\EIP\Duly-GUI\Gui\app\resources -verbose=2
+  - windeployqt.exe "./app/release/DNAI.exe" -qmldir=%APPVEYOR_BUILD_FOLDER%\Gui\app\resources -verbose=2
   - copy "%ProgramFiles(x86)%\Microsoft Visual Studio\2017\Enterprise\VC\Redist\MSVC\14.13.26020\x64\Microsoft.VC141.CRT\*" "./app/release/"
   - copy "%ProgramFiles(x86)%\Microsoft Visual Studio\2017\Enterprise\VC\Redist\MSVC\14.13.26020\x64\Microsoft.VC141.CXXAMP\*" "./app/release/"
   - copy "%ProgramFiles(x86)%\Microsoft Visual Studio\2017\Enterprise\VC\Redist\MSVC\14.13.26020\x64\Microsoft.VC141.OpenMP\*" "./app/release/"
