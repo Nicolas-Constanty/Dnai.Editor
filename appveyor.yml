@@ -55,7 +55,7 @@ build_script:
   - copy "%APPVEYOR_BUILD_FOLDER%\Software-updater\SoftwareUpdater\lib\libeay32.dll" "%APPVEYOR_BUILD_FOLDER%\Dnai\Dnai-Editor_%APPVEYOR_BUILD_VERSION%\DNAI_UPDATER"
   - copy "%APPVEYOR_BUILD_FOLDER%\Software-updater\SoftwareUpdater\lib\ssleay32.dll" "%APPVEYOR_BUILD_FOLDER%\Dnai\Dnai-Editor_%APPVEYOR_BUILD_VERSION%\DNAI_UPDATER"
   - cd %APPVEYOR_BUILD_FOLDER%
-  - git clone https://duly-eip.visualstudio.com/_git/Duly
+  - git clone https://%AppVeyorToken%@duly-eip.visualstudio.com/_git/Duly
   - mkdir %APPVEYOR_BUILD_FOLDER%-Core
   - MSBuild.exe %APPVEYOR_BUILD_FOLDER%\Duly\CoreDaemon\CoreDaemon.csproj  /t:Rebuild /p:Configuration=Release;Platform=x64;OutputPath=%APPVEYOR_BUILD_FOLDER%-Core
   - mkdir %APPVEYOR_BUILD_FOLDER%\Dnai\Dnai-Editor_%APPVEYOR_BUILD_VERSION%\Core
