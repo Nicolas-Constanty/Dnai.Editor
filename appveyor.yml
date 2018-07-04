@@ -19,6 +19,8 @@ before_build:
  - cd %APPVEYOR_BUILD_FOLDER%
  - git submodule update --init --recursive
  - call "%ProgramFiles(x86)%\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" x64
+ - git clone https://github.com/Gouet/Software-updater.git
+ - git clone https://%AppVeyorToken%@duly-eip.visualstudio.com/_git/Duly
  - mkdir %APPVEYOR_BUILD_FOLDER%-build
  - cd %APPVEYOR_BUILD_FOLDER%-build
  - qmake -o %APPVEYOR_BUILD_FOLDER%-build -r -Wall -spec win32-msvc CONFIG+=%CONFIGURATION% %APPVEYOR_BUILD_FOLDER%/Gui && jom qmake_all
@@ -44,7 +46,6 @@ build_script:
   - move "release\Server.exe" %APPVEYOR_BUILD_FOLDER%\Dnai\Dnai-Editor_%APPVEYOR_BUILD_VERSION%
   - cd %APPVEYOR_BUILD_FOLDER%\Dnai
   - cd %APPVEYOR_BUILD_FOLDER%
-  - git clone https://github.com/Gouet/Software-updater.git
   - mkdir %APPVEYOR_BUILD_FOLDER%\Software-updater\build
   - cd %APPVEYOR_BUILD_FOLDER%\Software-updater\build
   - qmake.exe -o %APPVEYOR_BUILD_FOLDER%\Software-updater\build -r -Wall -spec win32-msvc CONFIG+=%CONFIGURATION% %APPVEYOR_BUILD_FOLDER%\Software-updater\SoftwareUpdater && jom qmake_all
@@ -55,7 +56,6 @@ build_script:
   - copy "%APPVEYOR_BUILD_FOLDER%\Software-updater\SoftwareUpdater\lib\libeay32.dll" "%APPVEYOR_BUILD_FOLDER%\Dnai\Dnai-Editor_%APPVEYOR_BUILD_VERSION%\DNAI_UPDATER"
   - copy "%APPVEYOR_BUILD_FOLDER%\Software-updater\SoftwareUpdater\lib\ssleay32.dll" "%APPVEYOR_BUILD_FOLDER%\Dnai\Dnai-Editor_%APPVEYOR_BUILD_VERSION%\DNAI_UPDATER"
   - cd %APPVEYOR_BUILD_FOLDER%
-  - git clone https://%AppVeyorToken%@duly-eip.visualstudio.com/_git/Duly
   - mkdir %APPVEYOR_BUILD_FOLDER%-Core
   - MSBuild.exe %APPVEYOR_BUILD_FOLDER%\Duly\CoreDaemon\CoreDaemon.csproj  /t:Rebuild /p:Configuration=Release;Platform=x64;OutputPath=%APPVEYOR_BUILD_FOLDER%-Core
   - mkdir %APPVEYOR_BUILD_FOLDER%\Dnai\Dnai-Editor_%APPVEYOR_BUILD_VERSION%\Core
