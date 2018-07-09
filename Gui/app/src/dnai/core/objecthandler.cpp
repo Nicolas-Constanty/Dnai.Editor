@@ -85,6 +85,7 @@ namespace dnai
 
         void ObjectHandler::onEntityRemoved(EntityID id, models::Entity &entity)
         {
+            Q_UNUSED(id)
             if (static_cast<ENTITY>(entity.entityType()) == ENTITY::FUNCTION
                 && static_cast<ENTITY>(entity.parentItem()->entityType()) == ENTITY::OBJECT_TYPE)
             {
@@ -341,6 +342,7 @@ namespace dnai
 
         void ObjectHandler::onRenameAttributeError(EntityID obj, QString name, QString newName, QString msg)
         {
+            Q_UNUSED(obj)
             commands::CoreCommand::Error();
             Editor::instance().notifyError("Unable to rename attribute " + name + " into " + newName + ": " + msg);
         }
@@ -348,7 +350,7 @@ namespace dnai
         void ObjectHandler::onFunctionSetAsMember(EntityID obj, QString name, EntityID thisId)
         {
             models::Entity &object = manager.getEntity(obj);
-            models::ObjectType *data = object.guiModel<models::ObjectType>();
+//            models::ObjectType *data = object.guiModel<models::ObjectType>();
             models::Entity *func = object.findByName(name);
 
             qDebug() << "==Core== Class.FunctionSetAsMember(" << obj << ", " << name << ", " << thisId << ")";

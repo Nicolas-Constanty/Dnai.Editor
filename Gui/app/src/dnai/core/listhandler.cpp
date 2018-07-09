@@ -30,6 +30,7 @@ namespace dnai
 
         void ListHandler::onEntityAdded(EntityID id, models::Entity &entity)
         {
+            Q_UNUSED(id)
             if (static_cast<ENTITY>(entity.entityType()) == ENTITY::LIST_TYPE)
             {
                 models::ListType *data = entity.guiModel<models::ListType>();
