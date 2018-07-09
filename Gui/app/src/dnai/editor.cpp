@@ -532,6 +532,7 @@ namespace dnai
 
     void Editor::onEntryPointSet(models::Entity *func, models::gui::Instruction *entry)
     {
+        Q_UNUSED(func)
         const auto view = qvariant_cast<QQuickItem *>(Editor::instance().selectedView()->property("currentView"));
         if (!view)
         {
