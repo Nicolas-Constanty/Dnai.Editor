@@ -77,7 +77,7 @@ Window {
             id: appViewMain
             width: 1280
             height: 720
-            visible: isInit
+            visible: AppSettings.themeLoaded
             Component.onCompleted: {
                 Editor.registerMainView(appViewMain)
                 closeSplashScreen()

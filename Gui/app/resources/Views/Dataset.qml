@@ -38,13 +38,14 @@ Popup {
     }
 
     Column {
-//            visible: _control.opacity == 1.0
+        //            visible: _control.opacity == 1.0
         anchors.left: parent.left
         anchors.right: parent.right
-        spacing: 10
+        spacing: 0
         clip: true
         Item {
-            height: childrenRect.height
+            id: _title
+            height: childrenRect.height + 40
             anchors.left: parent.left
             anchors.right: parent.right
             MLabel {
@@ -54,6 +55,46 @@ Popup {
             }
         }
 
+
+        Item {
+            height: 40
+            anchors.left: parent.left
+            anchors.right: parent.right
+            Row {
+                id: _rowLabel
+                spacing: 10
+                anchors.fill: parent
+                MLabel {
+                    id: selectedLabel
+                    width: 60
+                    text: "Selected"
+                    anchors.verticalCenter: parent.verticalCenter
+                }
+                Rectangle {
+                    id: splitterLabel
+                    width: AppSettings.theme["border"]["width"]
+                    height: 40
+                    color: AppSettings.theme["border"]["color"]
+                }
+                MLabel {
+                    width: parent.width - labelLabel.width - selectedLabel.width - 2 * splitterLabel.width - _rowLabel.spacing * 4
+                    text: "Folder name"
+                    anchors.verticalCenter: parent.verticalCenter
+                }
+                Rectangle {
+                    width: AppSettings.theme["border"]["width"]
+                    height: 40
+                    color: AppSettings.theme["border"]["color"]
+                }
+                MLabel {
+                    id: labelLabel
+                    width: 200
+                    text: "Label"
+                    horizontalAlignment: "AlignHCenter"
+                    anchors.verticalCenter: parent.verticalCenter
+                }
+            }
+        }
         Rectangle {
             height: AppSettings.theme["border"]["width"]
             anchors.left: parent.left
@@ -88,7 +129,7 @@ Popup {
                 label: "4"
             }
         }
-        ListView {
+        Repeater {
             model: libraryModel
             anchors.left: parent.left
             anchors.right: parent.right
@@ -97,17 +138,68 @@ Popup {
                 anchors.left: parent.left
                 anchors.right: parent.right
                 Row {
+                    id: _row
+                    spacing: 10
                     anchors.fill: parent
                     CheckBox {
+                        id: selectedBox
+                        width: 60
                         checked: model.selected
+                        anchors.verticalCenter: parent.verticalCenter
+                    }
+                    Rectangle {
+                        id: splitter
+                        width: AppSettings.theme["border"]["width"]
+                        height: 40
+                        color: AppSettings.theme["border"]["color"]
                     }
                     MLabel {
+                        width: parent.width - labelText.width - selectedBox.width - 2 * splitter.width - _row.spacing * 4
                         text: model.folderName
+                        horizontalAlignment: "AlignLeft"
+                        anchors.verticalCenter: parent.verticalCenter
+                    }
+                    Rectangle {
+                        width: AppSettings.theme["border"]["width"]
+                        height: 40
+                        color: AppSettings.theme["border"]["color"]
                     }
                     EditableText {
+                        id: labelText
+                        width: 200
                         text: model.label
+                        horizontalAlignment: "AlignHCenter"
+                        anchors.verticalCenter: parent.verticalCenter
                     }
                 }
+                Rectangle {
+                    height: AppSettings.theme["border"]["width"]
+                    anchors.left: parent.left
+                    anchors.right: parent.right
+                    anchors.bottom: parent.bottom
+                    color: AppSettings.theme["border"]["color"]
+                }
+            }
+        }
+
+        Item {
+            height: 40
+            anchors.left: parent.left
+            anchors.right: parent.right
+            CheckBox {
+                anchors.verticalCenter: parent.verticalCenter
+                text: "Auto generate .csv"
+                checked: true
+            }
+        }
+        Item {
+            height: 40
+            anchors.left: parent.left
+            anchors.right: parent.right
+            CheckBox {
+                anchors.verticalCenter: parent.verticalCenter
+                text: "Suffle data"
+                checked: true
             }
         }
     }
