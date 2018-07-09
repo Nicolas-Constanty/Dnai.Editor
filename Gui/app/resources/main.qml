@@ -19,7 +19,6 @@ Window {
     flags: Qt.SplashScreen
     color: "transparent"
     property alias main: _main
-    property bool isInit: false
 
     SettingParameters {
         id: _settingsParameters
@@ -34,7 +33,6 @@ Window {
         Editor.registerSettings(AppSettings.settings)
         //Load theme 1
         AppSettings.currentTheme = AppSettings.themeNames[0]
-        isInit = AppSettings.themeLoaded
     }
 
     function closeSplashScreen()
@@ -69,7 +67,7 @@ Window {
         active: false
         asynchronous: true
         visible: status == Loader.Ready
-        sourceComponent: /*isInit ? _mainWindow : */_selectTheme
+        sourceComponent: AppSettings.themeLoaded ? _mainWindow : _selectTheme
     }
 
     Component {
