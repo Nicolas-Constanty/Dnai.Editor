@@ -70,3 +70,5 @@ Gui/app/GeneratedFiles/
 *.TMP
 
 *.dnai
+
+build/
