@@ -22,3 +22,6 @@
 [submodule "Gui/plugins/Settings"]
 	path = Gui/plugins/Settings
 	url = https://github.com/Nicolas-Constanty/Dnai.SubModules.Libs.QtPlugins.Settings.git
+[submodule "Gui/plugins/Theme"]
+	path = Gui/plugins/Theme
+	url = https://github.com/Nicolas-Constanty/Dnai.SubModules.Libs.QtPlugins.Theme.git
