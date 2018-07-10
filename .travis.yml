@@ -15,8 +15,7 @@ script:
       /Volumes/qt-opensource-mac-x64-5.10.1/qt-opensource-mac-x64-5.10.1.app/Contents/MacOS/qt-opensource-mac-x64-5.10.1 --platform minimal --script qt_script_osx.qs;
     fi
   - cd Gui
-  - git submodule init
-  - git submodule update
+  - git submodule update --init --recursive
   - ~/Qt/5.10.1/clang_64/bin/qmake DNAI.pro
   - make
   - cd ../Server
