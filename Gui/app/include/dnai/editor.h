@@ -15,6 +15,10 @@
 
 namespace dnai
 {
+    namespace views {
+        class CanvasNode;
+        class GenericNode;
+    }
     class App;
     class Project;
     class Session;
@@ -171,6 +175,11 @@ namespace dnai
 
     private:
         static Editor &m_instance;
+        void foreachContentView(std::function<bool (QQuickItem *, views::CanvasNode *)> &func);
+        void loadNodes(QList<views::GenericNode *> &nodes, models::gui::declarable::Function *function, dnai::models::Entity *entity, views::CanvasNode *canvas) const;
+        void loadLinks(QList<views::GenericNode *> &nodes, models::gui::declarable::Function *function) const;
+        void loadFlows(QList<views::GenericNode *> &nodes, models::gui::declarable::Function *function) const;
+//        void setInputOutputNode(QList<views::GenericNode *> &nodes, models::gui::Instruction *inputInstruction, models::gui::Instruction *outputInstruction, views::GenericNode *n1, views::GenericNode *n2) const;
     };
     }
 
