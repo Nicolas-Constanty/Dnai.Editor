@@ -1067,7 +1067,14 @@ namespace dnai
             Q_UNUSED(name)
             Q_UNUSED(newname)
 
-            refreshItems(entity);
+            if (entity->parentItem()->entityType() == static_cast<qint32>(ENTITY::FUNCTION))
+            {
+                refreshItems(entity->parentItem());
+            }
+            else
+            {
+                refreshItems(entity);
+            }
         }
 
         void ContextMenuModel::onEnumValueSet(Entity *enumeration, QString name, QString value)

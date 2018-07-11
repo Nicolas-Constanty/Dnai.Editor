@@ -60,6 +60,9 @@ namespace dnai
         public:
             void rebuildInstruction(models::gui::Instruction *instr);
 
+        private:
+            void refreshRebuild();
+
         public:
             void onEntryPointSet(quint32 function, quint32 instruction);
             void onSetEntryPointError(quint32 function, quint32 instruction, QString const &message) const;
@@ -125,6 +128,13 @@ namespace dnai
         private:
             //instruction function map
             QHash<models::gui::Instruction *, models::Entity *> instructionsFunction;
+
+        private:
+            //map to store instruction that are currently rebuilding
+            QHash<models::gui::Instruction *, models::gui::Instruction *> pendingRebuild;
+
+            //list of instructions to rebuild
+            QList<models::gui::Instruction *> toRebuild;
         };
     }
 }

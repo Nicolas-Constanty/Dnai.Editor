@@ -419,19 +419,6 @@ namespace dnai
             instruction->setInputs(inputs);
         }
 
-        models::Function *data = func->guiModel<models::Function>();
-
-        for (models::gui::IoLink *curr : data->iolinks())
-        {
-            models::gui::Instruction *from = dnai::gcore::HandlerManager::Instance().function()->instruction()->getInstruction(curr->data().outputUuid);
-            models::gui::Instruction *to = dnai::gcore::HandlerManager::Instance().function()->instruction()->getInstruction(curr->data().inputUuid);
-
-            if (curr->data().inputUuid == instruction->guiUuid() && from != nullptr)
-            {
-                dnai::gcore::HandlerManager::Instance().function()->instruction()->linkData(func->id(), from->Uid(), curr->data().outputName, to->Uid(), curr->data().inputName, false);
-            }
-        }
-
         /*
          * Building outputs
          */
@@ -448,6 +435,27 @@ namespace dnai
             }
 
             instruction->setOutputs(outputs);
+        }
+
+        /*
+         * Handle instruction data links
+         */
+        models::Function *data = func->guiModel<models::Function>();
+        QList<models::gui::IoLink *> links = data->iolinks();
+
+        for (models::gui::IoLink *curr : links)
+        {
+            models::gui::Instruction *from = dnai::gcore::HandlerManager::Instance().function()->instruction()->getInstruction(curr->data().outputUuid);
+            models::gui::Instruction *to = dnai::gcore::HandlerManager::Instance().function()->instruction()->getInstruction(curr->data().inputUuid);
+
+            if ((curr->data().inputUuid == instruction->guiUuid() && from != nullptr)
+                || (curr->data().outputUuid == instruction->guiUuid() && to != nullptr))
+            {
+                if (from->hasOutput(curr->data().outputName) && to->hasInput(curr->data().inputName))
+                    dnai::gcore::HandlerManager::Instance().function()->instruction()->linkData(func->id(), from->Uid(), curr->data().outputName, to->Uid(), curr->data().inputName, false);
+                else
+                    data->removeIoLink(curr);
+            }
         }
     }
 
@@ -814,6 +822,13 @@ namespace dnai
         {
 			const auto inputInstruction = function->getInstruction(iolink->data().inputUuid);
 			const auto outputInstruction = function->getInstruction(iolink->data().outputUuid);
+
+            if (inputInstruction == nullptr || outputInstruction == nullptr)
+                continue;
+
+            qDebug() << "==Editor== Link input instruction(" << inputInstruction->guiUuid() << ") => " << inputInstruction->nodeMenuPath();
+            qDebug() << "==Editor== Link output instruction(" << outputInstruction->guiUuid() << ") => " << outputInstruction->nodeMenuPath();
+
 			views::GenericNode *n1 = nullptr;
 			views::GenericNode *n2 = nullptr;
 			for (auto node : nodes)
@@ -840,6 +855,13 @@ namespace dnai
 		{
 			const auto inputInstruction = function->getInstruction(flowlink->data().from);
 			const auto outputInstruction = function->getInstruction(flowlink->data().to);
+
+            if (inputInstruction == nullptr || outputInstruction == nullptr)
+                continue;
+
+            qDebug() << "==Editor== Link input instruction(" << inputInstruction->guiUuid() << ") => " << inputInstruction->nodeMenuPath();
+            qDebug() << "==Editor== Link output instruction(" << outputInstruction->guiUuid() << ") => " << outputInstruction->nodeMenuPath();
+
 			views::GenericNode *n1 = nullptr;
 			views::GenericNode *n2 = nullptr;
 			for (auto node : nodes)

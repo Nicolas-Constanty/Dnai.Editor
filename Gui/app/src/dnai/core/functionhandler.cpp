@@ -391,7 +391,14 @@ namespace dnai
          */
         void FunctionHandler::rebuildInstruction(models::gui::Instruction *instr)
         {
-            qDebug() << "Rebuild instruction: " << instr->Uid();
+            if (pendingRebuild.contains(instr))
+            {
+                qDebug() << "==Core== Pending rebuild mode: " << instr->Uid();
+                toRebuild.append(pendingRebuild[instr]);
+                return;
+            }
+
+            qDebug() << "==Core== Rebuild instruction: " << instr->Uid() << "(" << instr->nodeMenuPath() << ")";
 
             models::Entity *func = instructionsFunction[instr];
             models::Function *data = func->guiModel<models::Function>();
@@ -399,6 +406,8 @@ namespace dnai
 
             edited->setNodeMenuPath(instr->nodeMenuPath());
             edited->setLinkedEntities(instr->linked());
+            edited->setX(instr->x());
+            edited->setY(instr->y());
 
             QList<models::gui::IoLink *> iolnks = data->iolinks();
 
@@ -408,18 +417,32 @@ namespace dnai
                 if (curr->data().inputUuid == instr->guiUuid())
                 {
                     if (instr->hasInput(curr->data().inputName))
+                    {
                         core::function::instruction::unlinkData(func->id(), instr->Uid(), curr->data().inputName);
-
-                    data->appendIoLink(InstructionHandler::createIoLink(curr->data().outputUuid, curr->data().outputName, edited->guiUuid(), curr->data().inputName));
+                        data->appendIoLink(InstructionHandler::createIoLink(curr->data().outputUuid, curr->data().outputName, edited->guiUuid(), curr->data().inputName));
+                    }
+                    else
+                    {
+                        data->removeIoLink(curr);
+                    }
                 }
                 else if (curr->data().outputUuid == instr->guiUuid())
                 {
                     models::gui::Instruction *to = data->getInstruction(curr->data().inputUuid);
 
                     if (to != nullptr && to->hasInput(curr->data().inputName))
+                    {
                         core::function::instruction::unlinkData(func->id(), to->Uid(), curr->data().inputName);
+                    }
+                    else
+                    {
+                        data->removeIoLink(curr);
+                    }
 
-                    data->appendIoLink(InstructionHandler::createIoLink(edited->guiUuid(), curr->data().outputName, curr->data().inputUuid, curr->data().inputName));
+                    if (instr->hasOutput(curr->data().outputName))
+                    {
+                        data->appendIoLink(InstructionHandler::createIoLink(edited->guiUuid(), curr->data().outputName, curr->data().inputUuid, curr->data().inputName));
+                    }
                 }
             }
 
@@ -433,7 +456,13 @@ namespace dnai
                     models::gui::Instruction *from = data->getInstruction(curr->data().from);
 
                     if (from != nullptr)
+                    {
                         core::function::instruction::unlinkExecution(func->id(), from->Uid(), curr->data().outIndex);
+                    }
+                    else
+                    {
+                        data->removeFlowLink(curr);
+                    }
 
                     data->appendFlowLink(InstructionHandler::createFlowLink(curr->data().from, curr->data().outIndex, edited->guiUuid()));
                 }
@@ -448,10 +477,23 @@ namespace dnai
             removedInstructions[getInstructionHash(func->guid(), edited->instruction_id())].push_back(edited);
             core::function::addInstruction(func->id(), static_cast<INSTRUCTION>(instr->instruction_id()), getConstructionList(instr));
 
+            if (data->entryPoint() == instr)
+                data->setEntryPoint(edited->guiUuid());
+
             //remove instruction
             core::function::removeInstruction(func->id(), instr->Uid());
 
             //link data and link flows will be replicated when added
+            pendingRebuild[instr] = edited;
+        }
+
+        void FunctionHandler::refreshRebuild()
+        {
+            for (models::gui::Instruction *curr : toRebuild)
+            {
+                rebuildInstruction(curr);
+            }
+            toRebuild.clear();
         }
 
         void FunctionHandler::onEntryPointSet(quint32 function, quint32 instruction)
@@ -582,6 +624,10 @@ namespace dnai
             addedInstructions[instrId].push_back(instr);
             instr->setUid(instruction);
             instructionsFunction[instr] = &func;
+
+            if (data->entryPoint() == instr)
+                core::function::setEntryPoint(func.id(), instr->Uid());
+
             emit instructionAdded(&func, instr);
         }
 
@@ -611,10 +657,39 @@ namespace dnai
 
             removedInstructions[instrId].push_back(instr);
             addedInstructions[instrId].removeOne(instr);
+            QList<models::gui::IoLink *> iotorm;
+            QList<models::gui::FlowLink *> fltorm;
+
+            for (models::gui::IoLink *curr : data->iolinks())
+            {
+                if (curr->data().inputUuid == instr->guiUuid() || curr->data().outputUuid == instr->guiUuid())
+                {
+                    iotorm.append(curr);
+                }
+            }
+
+            for (models::gui::IoLink *curr : iotorm)
+            {
+                data->removeIoLink(curr);
+            }
+
+            for (models::gui::FlowLink *curr : data->flowlinks())
+            {
+                if (curr->data().from == instr->guiUuid() || curr->data().to == instr->guiUuid())
+                {
+                    fltorm.append(curr);
+                }
+            }
+
+            for (models::gui::FlowLink *curr : fltorm)
+            {
+                data->removeFlowLink(curr);
+            }
 
             emit instructionRemoved(&func, instr);
 
             instructionsFunction.remove(instr);
+            refreshRebuild();
         }
 
         void FunctionHandler::onRemoveInstructionError(EntityID funtion, InstructionID instruction, QString msg)
