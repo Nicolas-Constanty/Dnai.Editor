@@ -2,6 +2,7 @@ import QtQuick 2.0
 import QtQuick.Controls 2.2
 
 import Dnai.Controls 1.0
+import Dnai.Theme 1.0
 
 BaseProperty {
     id: _panel
@@ -28,7 +29,7 @@ BaseProperty {
             verticalAlignment: Text.AlignVCenter
             color: "#ffffff"
         }
-        EditableText {
+        TextField {
             id: _value
             text: "MyName"
             height: _panel.contentHeight

@@ -115,7 +115,7 @@
     "shadowColor": "#212121",
     "font": {
         "family": ":/resources/fonts/segoeui.ttf",
-        "pixelSize": 10
+        "pointSize": 10
     },
     "text": {
         "color": "#FAFAFA",

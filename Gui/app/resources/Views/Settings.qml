@@ -7,10 +7,9 @@ import QtGraphicalEffects 1.0 as Qg
 import Dnai.Controls 1.0
 import Dnai.FontAwesome 1.0
 import Dnai.Settings 1.0
-
+import Dnai.Theme 1.0
 
 import "../Components"
-import "../Style"
 
 Popup {
     id: _control
@@ -51,7 +50,7 @@ Popup {
             height: childrenRect.height
             anchors.left: parent.left
             anchors.right: parent.right
-            MLabel {
+            Label {
                 text: "Settings"
                 font.pointSize: 14
                 anchors.horizontalCenter: parent.horizontalCenter
@@ -73,6 +72,8 @@ Popup {
             text: "Selected theme"
             content: Component {
                 ComboBox {
+                    anchors.verticalCenter: parent.verticalCenter
+                    height: 26
                     Component.onCompleted:
                     {
                         model = AppSettings.themeNames

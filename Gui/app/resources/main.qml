@@ -57,7 +57,7 @@ Window {
     Loader {
         id: _loadermain
         active: false
-        asynchronous: false
+        asynchronous: true
         visible: status == Loader.Ready
         sourceComponent: _mainWindow
     }

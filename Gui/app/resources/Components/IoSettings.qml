@@ -5,6 +5,7 @@ import Dnai.Controls 1.0
 import Dnai.FontAwesome 1.0
 import Dnai.Settings 1.0
 import DNAI.Core 1.0
+import Dnai.Theme 1.0
 
 Item {
     id: _inputItem
@@ -114,6 +115,7 @@ Item {
                     }
                     ComboBox {
                         id: _selectedType
+                        anchors.verticalCenter: parent.verticalCenter
                         property var types: Controller.types
                         property var completeType: null
                         model: completeType
