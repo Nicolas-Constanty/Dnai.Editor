@@ -158,14 +158,8 @@ namespace dnai
             models::gui::Instruction *from = dat->getInstruction(fromI);
             models::gui::Instruction *to = dat->getInstruction(toI);
 
-            auto iolink = new models::gui::IoLink();
-            models::gui::data::IoLink data;
-            data.inputName = input;
-            data.outputName = output;
-            data.inputUuid = to->guiUuid();
-            data.outputUuid = from->guiUuid();
-            iolink->setData(data);
-            dat->appendIoLink(iolink);
+            if (!dat->findIOLink(to->guiUuid(), input))
+                dat->appendIoLink(createIoLink(from->guiUuid(), output, to->guiUuid(), input));
 
             commands::CoreCommand::Success();
 
@@ -212,14 +206,9 @@ namespace dnai
             models::gui::declarable::Function *data = func.guiModel<models::gui::declarable::Function>();
             models::gui::Instruction *from = data->getInstruction(instruction);
             models::gui::Instruction *to = data->getInstruction(toInstruction);
-            models::gui::FlowLink *link = new models::gui::FlowLink();
-            models::gui::data::FlowLink flowdata;
 
-            flowdata.from = from->guiUuid();
-            flowdata.to = to->guiUuid();
-            flowdata.outIndex = outpin;
-            link->setData(flowdata);
-            data->appendFlowLink(link);
+            if (!data->findFlowLink(from->guiUuid(), outpin, to->guiUuid()))
+                data->appendFlowLink(createFlowLink(from->guiUuid(), outpin, to->guiUuid()));
 
             commands::CoreCommand::Success();
 
@@ -282,6 +271,119 @@ namespace dnai
 
             commands::CoreCommand::Error();
             Editor::instance().notifyError("Unable to value " + value + " to input " + input + ": " + msg);
+        }
+
+        void InstructionHandler::onInstructionAdded(models::Entity *func, models::gui::Instruction *instruction)
+        {
+            models::Function *data = func->guiModel<models::Function>();
+
+            m_instructions[instruction->guiUuid()] = instruction;
+
+            for (models::gui::FlowLink *curr : data->flowlinks())
+            {
+                if (curr->data().to == instruction->guiUuid())
+                {
+                    flowlink_to_replicate[curr] = func;
+                }
+            }
+
+            refreshLinks();
+        }
+
+        void InstructionHandler::onInstructionRemoved(models::Entity *func, models::gui::Instruction *instruction)
+        {
+            Q_UNUSED(func)
+
+            m_instructions.remove(instruction->guiUuid());
+        }
+
+        models::gui::IoLink *InstructionHandler::createIoLink(const QUuid &from, const QString &output, const QUuid &to, const QString &input)
+        {
+            models::gui::IoLink *iolink = new models::gui::IoLink();
+            models::gui::data::IoLink data;
+
+            data.outputUuid = from;
+            data.outputName = output;
+
+            data.inputUuid = to;
+            data.inputName = input;
+
+            iolink->setData(data);
+            return iolink;
+        }
+
+        models::gui::FlowLink *InstructionHandler::createFlowLink(const QUuid &from, int outindex, const QUuid &to)
+        {
+            models::gui::FlowLink *link = new models::gui::FlowLink();
+            models::gui::data::FlowLink flowdata;
+
+            flowdata.from = from;
+            flowdata.to = to;
+            flowdata.outIndex = outindex;
+            link->setData(flowdata);
+            return link;
+        }
+
+        void InstructionHandler::refreshLinks()
+        {
+            for (std::unordered_map<models::gui::IoLink *, models::Entity *>::iterator it = iolink_to_replicate.begin(); it != iolink_to_replicate.end();)
+            {
+                models::gui::IoLink *curr = it->first;
+                models::Entity *func = it->second;
+                models::gui::Instruction *from = getInstruction(curr->data().outputUuid);
+                models::gui::Instruction *to = getInstruction(curr->data().inputUuid);
+
+                if (from != nullptr && from->hasOutput(curr->data().outputName)
+                    && to != nullptr && to->hasInput(curr->data().inputName))
+                {
+                    linkData(func->id(), from->Uid(), curr->data().outputName, to->Uid(), curr->data().inputName, false);
+                    it = iolink_to_replicate.erase(it);
+                }
+                else
+                {
+                    ++it;
+                }
+            }
+
+            for (std::unordered_map<models::gui::FlowLink *, models::Entity *>::iterator it = flowlink_to_replicate.begin(); it != flowlink_to_replicate.end();)
+            {
+                models::gui::FlowLink *curr = it->first;
+                models::Entity *func = it->second;
+                models::gui::Instruction *from = getInstruction(curr->data().from);
+                models::gui::Instruction *to = getInstruction(curr->data().to);
+
+                if (from != nullptr && to != nullptr)
+                {
+                    linkExecution(func->id(), from->Uid(), curr->data().outIndex, to->Uid(), false);
+                    it = flowlink_to_replicate.erase(it);
+                }
+                else
+                {
+                    ++it;
+                }
+            }
+        }
+
+        bool InstructionHandler::contains(const QUuid &instGuid) const
+        {
+            return m_instructions.contains(instGuid);
+        }
+
+        models::gui::Instruction *InstructionHandler::getInstruction(const QUuid &guid) const
+        {
+            return m_instructions[guid];
+        }
+
+        QList<models::gui::Instruction *> InstructionHandler::getInstructionsOfPath(const QString &nodeMenupath) const
+        {
+            QList<models::gui::Instruction *> lst;
+
+            for (models::gui::Instruction *curr : m_instructions)
+            {
+                if (curr->nodeMenuPath() == nodeMenupath)
+                    lst.append(curr);
+            }
+            return lst;
         }
     }
 }

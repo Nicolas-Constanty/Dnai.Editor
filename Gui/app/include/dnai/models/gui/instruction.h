@@ -29,15 +29,17 @@ namespace dnai
 			public:
 				const data::Instruction& data() const override;
 				bool setData(const data::Instruction& data) override;
+
 				//Implementation of IInstruction
                 Q_INVOKABLE const QList<models::gui::Input*> &inputs() const;
                 bool setInputs(const QList<models::gui::Input*>& inputs);
                 Q_INVOKABLE models::gui::Input *getInput(QString const &name) const;
+                bool hasInput(QString const &name) const;
                 Q_INVOKABLE QString getInputValue(QString const &name) const;
                 Q_INVOKABLE QString getInputType(QString const &name) const;
 
-
                 const QList<models::gui::Output*> &outputs() const;
+                bool hasOutput(QString const &name) const;
                 bool setOutputs(const QList<models::gui::Output*>& outputs);
                 Q_INVOKABLE models::gui::Output *getOutput(QString const &name) const;
                 Q_INVOKABLE QString getOutputType(QString const &name) const;

@@ -50,6 +50,13 @@ namespace dnai
                     output = dynamic_cast<LinkableBezierItem *>(o);
                 }
 			}
+
+            if (input == nullptr || output == nullptr)
+            {
+                qWarning() << "==GenericNode== Unable to link " << link->data().outputName << " to " << link->data().inputName;
+                return;
+            }
+
             input->connect(output);
             input->setIsLink(true);
             output->setIsLink(true);
