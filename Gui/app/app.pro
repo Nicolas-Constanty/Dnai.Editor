@@ -128,7 +128,13 @@ SOURCES += \
     src/dnai/core/globalhandler.cpp \
     src/dnai/core/objecthandler.cpp \
     src/dnai/utils/random_utils.cpp \
-    src/dnai/core/listhandler.cpp
+    src/dnai/core/listhandler.cpp \
+    src/dnai/ml/datasethandler.cpp \
+    src/dnai/models/ml/dataset.cpp \
+    src/dnai/models/ml/hyperparameters.cpp \
+    src/dnai/models/ml/mlproject.cpp \
+    src/dnai/ml/mlhandler.cpp \
+    src/dnai/utils/iterableqqmlpropertymap.cpp
 
 
 RESOURCES += qml.qrc
@@ -303,7 +309,17 @@ HEADERS += \
     include/dnai/models/gui/flowlink.h \
     include/dnai/models/gui/data/flowlink.h \
     include/dnai/core/globalhandler.h \
-    include/dnai/utils/random_utils.h
+    include/dnai/utils/random_utils.h \
+    include/dnai/ml/datasethandler.h \
+    include/dnai/ml/mlhandler.h \
+    include/dnai/models/ml/mlproject.h \
+    include/dnai/models/ml/dataset.h \
+    include/dnai/models/ml/model.h \
+    include/dnai/models/ml/hyperparameters.h \
+    include/dnai/ml.h \
+    include/ml.h \
+    include/dnai/utils/iterableqqmlpropertymap.h \
+    include/utils.h
 
 
 #LIB

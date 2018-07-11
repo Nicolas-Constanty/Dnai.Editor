@@ -57,7 +57,7 @@ Window {
     Loader {
         id: _loadermain
         active: false
-        asynchronous: false
+        asynchronous: true
         visible: status == Loader.Ready
         sourceComponent: _mainWindow
     }
@@ -77,7 +77,7 @@ Window {
             id: appViewMain
             width: 1280
             height: 720
-            visible: isInit
+            visible: AppSettings.themeLoaded
             Component.onCompleted: {
                 Editor.registerMainView(appViewMain)
                 closeSplashScreen()
