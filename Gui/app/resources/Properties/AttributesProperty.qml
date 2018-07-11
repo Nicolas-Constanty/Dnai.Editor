@@ -39,26 +39,7 @@ BaseProperty {
             width: parent.width
             height: __this__.attributeHeight
 
-            spacing: 2
-
-            /*
-             * Attribute name
-             */
-            TextField {
-                id: __name__
-
-                width: parent.width - 2 * _row.spacing - __type__.width - __remove__.width
-                height: 26
-                anchors.verticalCenter: parent.verticalCenter
-
-                text: modelData
-
-                font.pointSize: 8
-
-                onAccepted: {
-                    __this__.rename(modelData, __name__.text);
-                }
-            }
+            spacing: 4
 
             /*
              * Attribute type
@@ -80,6 +61,25 @@ BaseProperty {
                     {
                         __this__.changeType(modelData, newType.id);
                     }
+                }
+            }
+
+            /*
+             * Attribute name
+             */
+            TextField {
+                id: __name__
+
+                width: parent.width - 2 * _row.spacing - __type__.width - __remove__.width
+                height: 26
+                anchors.verticalCenter: parent.verticalCenter
+
+                text: modelData
+
+                font.pointSize: 8
+
+                onAccepted: {
+                    __this__.rename(modelData, __name__.text);
                 }
             }
 

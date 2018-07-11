@@ -36,16 +36,8 @@ Item {
 
         width: parent.width
 
-        spacing: 2
-        TextField {
-            id: _name
-            width: parent.width - _deleteButton.width - _row.spacing * 2 - _type.width
-            height: 26
-            font.pointSize: 8
-            onAccepted: {
-                _parameterValue.nameChanged(_name.text)
-            }
-        }
+        spacing: 4
+
         VarTypeComboBox {
             id: _type
 
@@ -55,6 +47,18 @@ Item {
                 _parameterValue.typeChanged(newType)
             }
         }
+
+        TextField {
+            id: _name
+            width: parent.width - _deleteButton.width - _row.spacing * 2 - _type.width
+            height: 26
+            font.pointSize: 8
+            anchors.verticalCenter: parent.verticalCenter
+            onAccepted: {
+                _parameterValue.nameChanged(_name.text)
+            }
+        }
+
         /*ButtonAwesomeSolid {
             id: _moveUpButton
             height: _parameterValue.contentHeight

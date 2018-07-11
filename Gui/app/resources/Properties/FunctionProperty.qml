@@ -10,7 +10,7 @@ BaseProperty {
     id: _panel
     property var listmodel: null
 
-    property real contentHeight: 24
+    property real contentHeight: 30
     property real valueSpacing: 5
     property Button createButton: _createButton
 

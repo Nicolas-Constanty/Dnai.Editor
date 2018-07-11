@@ -11,6 +11,7 @@
 #include "models/entity.h"
 #include "dnai/toastermanagerservice.h"
 #include "dnai/models/contextMenuModel.h"
+#include "dnai/ml/mlhandler.h"
 
 namespace dnai
 {
@@ -43,6 +44,7 @@ namespace dnai
         Q_PROPERTY(bool loaded READ loaded WRITE setLoaded NOTIFY loadedChanged)
         Q_PROPERTY(QString solutionName READ solutionName)
 		Q_PROPERTY(dnai::models::ContextMenuModel *contextMenuModel READ contextMenuModel WRITE setContextMenuModel NOTIFY contextMenuModelChanged)
+        Q_PROPERTY(dnai::ml::MlHandler * mlHandler READ mlHandler CONSTANT)
 
     protected:
         Editor();
@@ -125,6 +127,8 @@ namespace dnai
         void setAppName(QString const &name);
         void setSolutionName(QString const &name);
 
+        dnai::ml::MlHandler * mlHandler();
+
     signals:
         void solutionChanged(dnai::Solution *proj);
         void loadedChanged(bool);
@@ -159,6 +163,7 @@ namespace dnai
         QString m_solutionName;
 		dnai::models::ContextMenuModel *m_contextMenuModel;
         QSettings *m_settings;
+        dnai::ml::MlHandler m_mlHandler;
 
     private:
         std::queue<std::tuple<models::ContextMenuItem *, quint32, quint32>> m_pendingInstruction;

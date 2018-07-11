@@ -1,10 +1,13 @@
 import QtQuick 2.0
 import QtQuick.Controls 2.2
+import QtQuick.Dialogs 1.3
 
 import Dnai.Controls 1.0
 import Dnai.FontAwesome 1.0
 import Dnai.Settings 1.0
 import Dnai.Theme 1.0
+
+import DNAI 1.0
 
 Popup {
     id: _control
@@ -33,6 +36,23 @@ Popup {
             }
             onClicked: {
                 _control.close()
+            }
+        }
+    }
+
+    FileDialog {
+        id: _fd
+        title: "Select a dataset folder"
+        folder: Qt.resolvedUrl(StandardPath.writableLocation((StandardPath.HomeLocation)))
+        selectFolder : true
+        selectExisting: true
+
+        onAccepted: {
+            var res = Editor.mlHandler.dataset.createFromPath(_fd.fileUrl)
+            if (res !== null)
+            {
+                console.log(res, res.labels)
+                _control.model = res.labels
             }
         }
     }
@@ -68,6 +88,9 @@ Popup {
                     awesomeIcon.text: "\uf07c"
                     awesomeIcon.size: 20
                     anchors.centerIn: parent
+                    onClicked: {
+                        _fd.open()
+                    }
                 }
             }
         }
@@ -98,7 +121,7 @@ Popup {
                         color: AppSettings.theme["border"]["color"]
                     }
                     Label {
-                        width: parent.width - labelLabel.width - selectedLabel.width - 2 * splitterLabel.width - _rowLabel.spacing * 4
+                        width: parent.width - labelLabel.width - selectedLabel.width - 2 * splitterLabel.width - _rowLabel.spacing * 6 - labelCount.width
                         text: "Folder name"
                         anchors.verticalCenter: parent.verticalCenter
                     }
@@ -114,45 +137,28 @@ Popup {
                         horizontalAlignment: "AlignHCenter"
                         anchors.verticalCenter: parent.verticalCenter
                     }
+                    Rectangle {
+                        width: AppSettings.theme["border"]["width"]
+                        height: 40
+                        color: AppSettings.theme["border"]["color"]
+                    }
+                    Label {
+                        id: labelCount
+                        width: 80
+                        text: "Count"
+                        horizontalAlignment: "AlignHCenter"
+                        anchors.verticalCenter: parent.verticalCenter
+                    }
                 }
             }
             Rectangle {
-                height: AppSettings.theme["border"]["width"]
+                height: AppSettings.theme["border"]["width"] * 2
                 anchors.left: parent.left
                 anchors.right: parent.right
                 color: AppSettings.theme["border"]["color"]
             }
-            ListModel {
-                id: libraryModel
-                ListElement {
-                    selected: false
-                    folderName: "Img_0"
-                    label: "0"
-                }
-                ListElement {
-                    selected: false
-                    folderName: "Img_1"
-                    label: "1"
-                }
-                ListElement {
-                    selected: false
-                    folderName: "Img_2"
-                    label: "2"
-                }
-                ListElement {
-                    selected: false
-                    folderName: "Img_3"
-                    label: "3"
-                }
-                ListElement {
-                    selected: false
-                    folderName: "Img_4"
-                    label: "4"
-                }
-            }
             Repeater {
                 id: _folderList
-//                        model: libraryModel
                 anchors.left: parent.left
                 anchors.right: parent.right
                 delegate: Item {
@@ -166,7 +172,7 @@ Popup {
                         CheckBox {
                             id: selectedBox
                             width: 60
-                            checked: model.selected
+                            checked: model.obj.selected
                             anchors.verticalCenter: parent.verticalCenter
                         }
                         Rectangle {
@@ -176,8 +182,8 @@ Popup {
                             color: AppSettings.theme["border"]["color"]
                         }
                         Label {
-                            width: parent.width - labelText.width - selectedBox.width - 2 * splitter.width - _row.spacing * 4
-                            text: model.folderName
+                            width: parent.width - labelText.width - selectedBox.width - 2 * splitter.width - _row.spacing * 6 - labelcount.width
+                            text: model.key
                             horizontalAlignment: "AlignLeft"
                             anchors.verticalCenter: parent.verticalCenter
                         }
@@ -189,10 +195,20 @@ Popup {
                         TextField {
                             id: labelText
                             width: 200
-                            text: model.label
+                            text: model.obj.value
                             horizontalAlignment: "AlignHCenter"
                             anchors.verticalCenter: parent.verticalCenter
                             enableBar: false
+                        }
+                        Rectangle {
+                            width: AppSettings.theme["border"]["width"]
+                            height: 40
+                            color: AppSettings.theme["border"]["color"]
+                        }
+                        Label {
+                            id: labelcount
+                            width: 80
+                            text: model.obj.count
                         }
                     }
                     Rectangle {

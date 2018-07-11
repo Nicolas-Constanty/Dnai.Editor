@@ -1,7 +1,9 @@
 #ifndef PROJECT_H
 #define PROJECT_H
+
 #include "models/entitytree.h"
 #include "interfaces/iproject.h"
+#include "models/ml/mlproject.h"
 
 namespace dnai {
 struct Count {
@@ -23,7 +25,9 @@ namespace dnai {
 		Q_PROPERTY(dnai::models::Entity *selectedEntity READ selectedEntity WRITE setSelectedEntity NOTIFY selectedEntityChanged)
 		Q_PROPERTY(int childCount READ childCount CONSTANT)
         Q_PROPERTY(bool saved READ saved WRITE setSaved NOTIFY savedChanged)
-	public:
+        Q_PROPERTY(dnai::models::ml::MlProject * mlData READ mlData CONSTANT)
+
+    public:
         Project();
         Project(const QString &filename);
         ~Project();
@@ -60,6 +64,10 @@ namespace dnai {
 		void foreachEntity(const std::function<void(models::Entity*)> &func) const;
 	    int childCount() const;
         models::Entity &getRoot() const;
+        models::ml::MlProject *mlData();
+
+    public:
+        models::ml::MlProject &MlData();
 
     public:
         Q_INVOKABLE int expandedRows(const QModelIndex& parent) const;
@@ -91,6 +99,7 @@ namespace dnai {
 	    QString m_version;
 	    models::Entity* m_rootEntity;
         QMap<QString, QString>  m_entityColumnUid;
+        models::ml::MlProject m_mlData;
         bool m_save = true;
     };
 
