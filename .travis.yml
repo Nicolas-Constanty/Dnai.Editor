@@ -12,6 +12,7 @@ before_script:
   - export QTDIR=~/Qt/5.10.1/clang_64
   - export PATH=$QTDIR/bin:$PATH
   - brew install lcov
+  - sudo easy_install pip
   - sudo pip install codecov
 
 script:
