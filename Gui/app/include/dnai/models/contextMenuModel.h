@@ -168,7 +168,9 @@ namespace dnai
         private:
             QHash<models::Entity *, QList<QString>> m_entity_items;
             QHash<QString, models::Entity *> m_items_entity;
-		};
+            ContextMenuItem *createGetter(Entity *entity);
+            ContextMenuItem *createSetter(Entity *entity);
+        };
 	}
 }
 

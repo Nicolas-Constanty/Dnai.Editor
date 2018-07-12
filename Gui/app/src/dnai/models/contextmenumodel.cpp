@@ -12,9 +12,7 @@ namespace dnai
     {
         ContextMenuItem::ContextMenuItem(ContextMenuItem *parent) :
             GenericTreeItem<ContextMenuItem>::GenericTreeItem(parent)
-        {
-
-        }
+        {}
 
         const QString& ContextMenuItem::name() const
 		{
@@ -202,9 +200,7 @@ namespace dnai
             m_classes(nullptr),
             m_variables(nullptr),
             m_enumerations(nullptr)
-		{
-
-		}
+        {}
 
         ContextMenuModel::ContextMenuModel(const QJsonObject &doc, QObject* parent) :
             QAbstractItemModel(parent)
@@ -483,27 +479,8 @@ namespace dnai
             addItem(splitter, m_enumerations, entity);
         }
 
-		void ContextMenuModel::appendParameter(Entity* entity)
-		{
-            ContextMenuItem *parameters = m_hash["/" + m_root->name() + "/" + m_functions->name() + "/" + entity->parentItem()->fullName() + "/Parameters"];
-
-			/*
-			* Create contextItem for getter
-			*/
-            ContextMenuItem *getter = new ContextMenuItem();
-            getter->setName("Get " + entity->name());
-            getter->setDescription(entity->description());
-            getter->setInputs(0);
-            getter->setOutputs(1);
-            getter->setOutputNames({ "reference" });
-            getter->setInstructionId(dnai::enums::QInstructionID::GETTER);
-            getter->setConstruction({ static_cast<qint32>(entity->id()) });
-
-            addItem(getter, parameters, entity);
-
-			/*
-			* Create contextItem for setter
-			*/
+        ContextMenuItem * ContextMenuModel::createSetter(Entity* entity)
+        {
             ContextMenuItem *setter = new ContextMenuItem();
             setter->setName("Set " + entity->name());
             setter->setDescription(entity->description());
@@ -515,6 +492,37 @@ namespace dnai
             setter->setFlowOut(1);
             setter->setInstructionId(dnai::enums::QInstructionID::SETTER);
             setter->setConstruction({ entity->id() });
+            return setter;
+        }
+
+        ContextMenuItem *ContextMenuModel::createGetter(Entity* entity)
+        {
+            ContextMenuItem *getter = new ContextMenuItem();
+            getter->setName("Get " + entity->name());
+            getter->setDescription(entity->description());
+            getter->setInputs(0);
+            getter->setOutputs(1);
+            getter->setOutputNames({ "reference" });
+            getter->setInstructionId(dnai::enums::QInstructionID::GETTER);
+            getter->setConstruction({ static_cast<qint32>(entity->id()) });
+            return getter;
+        }
+
+		void ContextMenuModel::appendParameter(Entity* entity)
+		{
+            ContextMenuItem *parameters = m_hash["/" + m_root->name() + "/" + m_functions->name() + "/" + entity->parentItem()->fullName() + "/Parameters"];
+
+			/*
+			* Create contextItem for getter
+			*/
+            auto getter = createGetter(entity);
+
+            addItem(getter, parameters, entity);
+
+			/*
+			* Create contextItem for setter
+			*/
+            auto setter = createSetter(entity);
 
             addItem(setter, parameters, entity);
         }
@@ -526,31 +534,14 @@ namespace dnai
             /*
             * Create contextItem for getter
             */
-            ContextMenuItem *getter = new ContextMenuItem();
-            getter->setName("Get " + entity->name());
-            getter->setDescription(entity->description());
-            getter->setInputs(0);
-            getter->setOutputs(1);
-            getter->setOutputNames({ "reference" });
-            getter->setInstructionId(dnai::enums::QInstructionID::GETTER);
-            getter->setConstruction({ entity->id() });
+            auto getter = createGetter(entity);
 
             addItem(getter, returns, entity);
 
             /*
             * Create contextItem for setter
             */
-            ContextMenuItem *setter = new ContextMenuItem();
-            setter->setName("Set " + entity->name());
-            setter->setDescription(entity->description());
-            setter->setInputs(1);
-            setter->setInputNames({ "value" });
-            setter->setOutputs(1);
-            setter->setOutputNames({ "reference" });
-            setter->setFlowIn(1);
-            setter->setFlowOut(1);
-            setter->setInstructionId(dnai::enums::QInstructionID::SETTER);
-            setter->setConstruction({ entity->id() });
+            auto setter = createSetter(entity);
 
             addItem(setter, returns, entity);
         }
