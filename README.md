@@ -1,5 +1,6 @@
 # Dnai Editor - Source code
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/efe297bd47224b9bb99fc9af4615f34f)](https://app.codacy.com/app/nicolas.constanty/Dnai.Editor?utm_source=github.com&utm_medium=referral&utm_content=Nicolas-Constanty/Dnai.Editor&utm_campaign=badger)
 [![Build Circle Ci](https://circleci.com/gh/Nicolas-Constanty/Dnai.Editor/tree/master.svg?style=shield)](https://circleci.com/gh/Nicolas-Constanty/Dnai.Editor/tree/master.svg?style=shield)
 
 [Dnai Editor](https://code.visualstudio.com) is a visual scripting software,
