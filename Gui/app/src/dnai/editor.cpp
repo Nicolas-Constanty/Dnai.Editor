@@ -804,87 +804,69 @@ namespace dnai
         }
     }
 
-    void Editor::loadLinks(QList<views::GenericNode *> &nodes, models::gui::declarable::Function *function) const
+    void Editor::loadLinks(const QList<views::GenericNode *> &nodes, models::gui::declarable::Function *function) const
     {
-        for (models::gui::IoLink *iolink : function->iolinks())
+        for (auto iolink : function->iolinks())
         {
             const auto inputInstruction = function->getInstruction(iolink->data().inputUuid);
             const auto outputInstruction = function->getInstruction(iolink->data().outputUuid);
 
-            if (inputInstruction == nullptr || outputInstruction == nullptr)
+            std::function<void(views::GenericNode *n1, views::GenericNode *n2)> func = [&](views::GenericNode *n1, views::GenericNode *n2){
+                qDebug() << "==Editor== Link input instruction(" << inputInstruction->guiUuid() << ") => " << inputInstruction->nodeMenuPath();
+                qDebug() << "==Editor== Link output instruction(" << outputInstruction->guiUuid() << ") => " << outputInstruction->nodeMenuPath();
+                n1->createLink(iolink, n2);
+            };
+            if (setInputOutputNode(nodes, inputInstruction, outputInstruction, func))
                 continue;
-
-            qDebug() << "==Editor== Link input instruction(" << inputInstruction->guiUuid() << ") => " << inputInstruction->nodeMenuPath();
-            qDebug() << "==Editor== Link output instruction(" << outputInstruction->guiUuid() << ") => " << outputInstruction->nodeMenuPath();
-
-            views::GenericNode *n1 = nullptr;
-            views::GenericNode *n2 = nullptr;
-            for (auto node : nodes)
-            {
-                if (n1 == nullptr && qvariant_cast<models::gui::Instruction*>(node->property("instruction_model")) == inputInstruction)
-                {
-                    n1 = node;
-                }
-                else if (n2 == nullptr && qvariant_cast<models::gui::Instruction*>(node->property("instruction_model")) == outputInstruction)
-                {
-                    n2 = node;
-                }
-                if (n1 && n2)
-                    break;
-            }
-            if (!n1 || !n2) return;
-            n1->createLink(iolink, n2);
         }
     }
 
-    void Editor::loadFlows(QList<views::GenericNode *> &nodes, models::gui::declarable::Function *function) const
+    void Editor::loadFlows(const QList<views::GenericNode *> &nodes, models::gui::declarable::Function *function) const
     {
+
         for (auto flowlink : function->flowlinks())
         {
             const auto inputInstruction = function->getInstruction(flowlink->data().from);
             const auto outputInstruction = function->getInstruction(flowlink->data().to);
 
-            if (inputInstruction == nullptr || outputInstruction == nullptr)
+            std::function<void(views::GenericNode *n1, views::GenericNode *n2)> func = [&](views::GenericNode *n1, views::GenericNode *n2){
+                qDebug() << "==Editor== Link input instruction(" << inputInstruction->guiUuid() << ") => " << inputInstruction->nodeMenuPath();
+                qDebug() << "==Editor== Link output instruction(" << outputInstruction->guiUuid() << ") => " << outputInstruction->nodeMenuPath();
+                n1->createFlowLink(flowlink, n2);
+            };
+            if (setInputOutputNode(nodes, inputInstruction, outputInstruction, func))
                 continue;
-
-            qDebug() << "==Editor== Link input instruction(" << inputInstruction->guiUuid() << ") => " << inputInstruction->nodeMenuPath();
-            qDebug() << "==Editor== Link output instruction(" << outputInstruction->guiUuid() << ") => " << outputInstruction->nodeMenuPath();
-
-            views::GenericNode *n1 = nullptr;
-            views::GenericNode *n2 = nullptr;
-            for (auto node : nodes)
-            {
-                if (n1 == nullptr && qvariant_cast<models::gui::Instruction*>(node->property("instruction_model")) == inputInstruction)
-                {
-                    n1 = node;
-                }
-                else if (n2 == nullptr && qvariant_cast<models::gui::Instruction*>(node->property("instruction_model")) == outputInstruction)
-                {
-                    n2 = node;
-                }
-                if (n1 && n2)
-                    break;
-            }            if (!n1 || !n2) return;
-            n1->createFlowLink(flowlink, n2);
         }
     }
 
-//    void Editor::setInputOutputNode(QList<views::GenericNode *> &nodes, models::gui::Instruction *inputInstruction, models::gui::Instruction *outputInstruction, views::GenericNode *n1, views::GenericNode *n2) const
-//    {
-//        for (auto node : nodes)
-//        {
-//            if (n1 == nullptr && qvariant_cast<models::gui::Instruction*>(node->property("instruction_model")) == inputInstruction)
-//            {
-//                n1 = node;
-//            }
-//            else if (n2 == nullptr && qvariant_cast<models::gui::Instruction*>(node->property("instruction_model")) == outputInstruction)
-//            {
-//                n2 = node;
-//            }
-//            if (n1 && n2)
-//                break;
-//        }
-//    }
+    bool Editor::setInputOutputNode(const QList<views::GenericNode *> &nodes,
+                                    models::gui::Instruction *inputInstruction,
+                                    models::gui::Instruction *outputInstruction,
+                                    std::function<void(views::GenericNode *n1, views::GenericNode *n2)> &func
+                                    ) const
+    {
+        if (inputInstruction == nullptr || outputInstruction == nullptr)
+            return true;
+        views::GenericNode *n1 = nullptr;
+        views::GenericNode *n2 = nullptr;
+        for (auto node : nodes)
+        {
+            if (n1 == nullptr && qvariant_cast<models::gui::Instruction*>(node->property("instruction_model")) == inputInstruction)
+            {
+                n1 = node;
+            }
+            else if (n2 == nullptr && qvariant_cast<models::gui::Instruction*>(node->property("instruction_model")) == outputInstruction)
+            {
+                n2 = node;
+            }
+            if (n1 && n2)
+            {
+                func(n1, n2);
+                break;
+            }
+        }
+        return false;
+    }
 
     QSettings *Editor::settings()
     {

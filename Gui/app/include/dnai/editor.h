@@ -177,9 +177,10 @@ namespace dnai
         static Editor &m_instance;
         void foreachContentView(std::function<bool (QQuickItem *, views::CanvasNode *)> &func);
         void loadNodes(QList<views::GenericNode *> &nodes, models::gui::declarable::Function *function, dnai::models::Entity *entity, views::CanvasNode *canvas) const;
-        void loadLinks(QList<views::GenericNode *> &nodes, models::gui::declarable::Function *function) const;
-        void loadFlows(QList<views::GenericNode *> &nodes, models::gui::declarable::Function *function) const;
-//        void setInputOutputNode(QList<views::GenericNode *> &nodes, models::gui::Instruction *inputInstruction, models::gui::Instruction *outputInstruction, views::GenericNode *n1, views::GenericNode *n2) const;
+        void loadLinks(const QList<views::GenericNode *> &nodes, models::gui::declarable::Function *function) const;
+        void loadFlows(const QList<views::GenericNode *> &nodes, models::gui::declarable::Function *function) const;
+//        void setInputOutputNode(const QList<views::GenericNode *> &nodes, models::gui::Instruction *inputInstruction, models::gui::Instruction *outputInstruction, views::GenericNode *n1, views::GenericNode *n2) const;
+        bool setInputOutputNode(const QList<views::GenericNode *> &nodes, models::gui::Instruction *inputInstruction, models::gui::Instruction *outputInstruction, std::function<void (views::GenericNode *, views::GenericNode *)> &func) const;
     };
     }
 
