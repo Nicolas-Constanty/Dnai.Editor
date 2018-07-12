@@ -4,7 +4,7 @@ configuration:
   - release
 
 install:
-  - set QTDIR=C:\Qt\5.11.0\msvc2017_64
+  - set QTDIR=C:\Qt\5.11\msvc2017_64
   - set PATH=%QTDIR%\bin;%PATH%
   - set PATH=C:\Qt\Tools\QtCreator\bin;%PATH%
   - set PACKAGE_NAME=Dnai-Editor_%APPVEYOR_BUILD_VERSION%

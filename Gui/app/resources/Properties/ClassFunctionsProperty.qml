@@ -1,7 +1,7 @@
 import QtQuick 2.0
 import QtQuick.Controls 2.2
 
-import "../Style"
+import Dnai.Theme 1.0
 
 BaseProperty {
     id: __this__
@@ -29,7 +29,7 @@ BaseProperty {
             width: parent.width
             height: __this__.functionHeight
 
-            MLabel {
+            Label {
                 id: __name__
 
                 width: parent.width * 0.5

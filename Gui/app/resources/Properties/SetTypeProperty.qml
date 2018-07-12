@@ -3,6 +3,7 @@ import QtQuick 2.0
 import QtQuick 2.0
 import QtQuick.Controls 2.2
 import Dnai.Controls 1.0
+import Dnai.Theme 1.0
 
 import "../Components"
 
@@ -35,7 +36,7 @@ BaseProperty {
 
             typeGuid: model ? model.guiProperties[prop] : 0
 
-            height: parent.height
+            anchors.verticalCenter: parent.verticalCenter
 
             anchors.right: parent.right
             anchors.left: _label.right

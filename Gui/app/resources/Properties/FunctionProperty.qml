@@ -2,6 +2,7 @@ import QtQuick 2.0
 import QtQuick.Controls 2.2
 import Dnai.Controls 1.0
 import Dnai.FontAwesome 1.0
+import Dnai.Theme 1.0
 
 import DNAI 1.0
 
@@ -9,9 +10,9 @@ BaseProperty {
     id: _panel
     property var listmodel: null
 
-    property real contentHeight: 24
+    property real contentHeight: 30
     property real valueSpacing: 5
-    property ButtonAwesomeSolid createButton: _createButton
+    property Button createButton: _createButton
 
     signal addValue()
     signal deleteValue(string name)
@@ -59,14 +60,14 @@ BaseProperty {
         }
     }
 
-    ButtonAwesomeSolid {
+    Button {
         id: _createButton
-        label.text: "\uf055"
+        awesomeIcon.text: "\uf055"
         anchors.horizontalCenter: parent.horizontalCenter
-        label.font.pointSize: 30
+        awesomeIcon.size: 30
         height: 40
         width: 40
-        color: "#ffffff"
+        awesomeIcon.color: "#ffffff"
         background: Rectangle {
             color: "transparent"
         }

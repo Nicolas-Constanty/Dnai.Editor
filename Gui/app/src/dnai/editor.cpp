@@ -329,7 +329,12 @@ namespace dnai
         m_solutionName = name;
     }
 
-	QQuickItem * Editor::createNodeQMLComponent(models::ContextMenuItem *node, models::Entity *func, models::gui::Instruction *instruction, QQuickItem *parent) const
+    ml::MlHandler *Editor::mlHandler()
+    {
+        return &m_mlHandler;
+    }
+
+    QQuickItem * Editor::createNodeQMLComponent(models::ContextMenuItem *node, models::Entity *func, models::gui::Instruction *instruction, QQuickItem *parent) const
     {
         /*
          * Node Components

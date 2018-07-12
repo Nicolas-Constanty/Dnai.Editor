@@ -2,6 +2,8 @@ import QtQuick 2.0
 import QtQuick.Controls 2.2
 import Dnai.Controls 1.0
 
+import Dnai.Theme 1.0
+
 BaseProperty {
     id: _panel
     property var listmodel: null
@@ -33,12 +35,12 @@ BaseProperty {
         }
         ComboBox {
             id: _value
-            height: contentHeight
             model: _panel.listmodel
             anchors.right: parent.right
             anchors.left: _label.right
             anchors.leftMargin: 5
             textRole: _panel.textRole
+            anchors.verticalCenter: parent.verticalCenter
 
             onCurrentIndexChanged: {
                 if (_panel.method !== null && init)

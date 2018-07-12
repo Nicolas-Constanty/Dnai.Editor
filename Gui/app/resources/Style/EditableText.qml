@@ -17,7 +17,7 @@ TextInput {
     property bool enableBar: true
 
     font.family: AppSettings.theme["font"]["family"]
-    font.pointSize: AppSettings.theme["font"]["pixelSize"]
+    font.pointSize: AppSettings.theme["font"]["pointSize"]
     horizontalAlignment: Qt.AlignHCenter
     verticalAlignment: Qt.AlignVCenter
     color: AppSettings.theme["text"]["color"]
@@ -61,7 +61,7 @@ TextInput {
         anchors.top: parent.top
         anchors.bottom: parent.bottom
         text: control.placeholderText
-        font.pointSize: AppSettings.theme["font"]["pixelSize"]
+        font.pointSize: AppSettings.theme["font"]["pointSize"]
         color: AppSettings.theme["text"]["disableColor"]
         font.italic: true
         visible: !control.text

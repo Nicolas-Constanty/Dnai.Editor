@@ -1,7 +1,7 @@
 import QtQuick 2.0
 import QtQuick.Controls 2.2
 
-import "../Style"
+import Dnai.Theme 1.0
 
 Item {
     id: _control
@@ -10,7 +10,7 @@ Item {
 
     property string text: "Item"
     height: 40
-    MLabel {
+    Label {
         anchors.left: parent.left
         height: parent.height
         text: qsTr(_control.text)

@@ -123,5 +123,6 @@
         <file>resources/Views/Settings.qml</file>
         <file>resources/Components/IoSettings.qml</file>
         <file>resources/Components/SettingsItem.qml</file>
+        <file>resources/Views/Dataset.qml</file>
     </qresource>
 </RCC>
