@@ -81,10 +81,14 @@ namespace dnai
 					Q_INVOKABLE quint32 getInputId(QString const &name) const;
 					Q_INVOKABLE quint32 getOutputId(QString const &name) const;
 
+                    models::Entity *getInput(QString const &name) const;
+                    models::Entity *getOutput(QString const &name) const;
+
                     models::gui::Instruction *getInstruction(quint32 uid) const;
                     models::gui::Instruction *getInstruction(const QUuid &guid) const;
 
                     bool hasInput(QString const &name, QUuid const &type = QUuid()) const;
+                    bool hasOutput(QString const &name, QUuid const &type = QUuid()) const;
 
                     models::gui::Instruction *entryPoint() const;
                     void setEntryPoint(QUuid uid);

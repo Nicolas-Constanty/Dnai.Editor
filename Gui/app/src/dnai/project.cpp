@@ -398,6 +398,16 @@ namespace dnai {
         return *m_rootEntity;
     }
 
+    models::ml::MlProject *Project::mlData()
+    {
+        return &m_mlData;
+    }
+
+    models::ml::MlProject &Project::MlData()
+    {
+        return m_mlData;
+    }
+
     const QJsonObject &Project::jsonData() const
     {
        /* const auto rootentity = static_cast<models::Entity *>(m_rootItem->child(0));

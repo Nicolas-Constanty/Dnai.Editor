@@ -11,9 +11,14 @@
 #include "models/entity.h"
 #include "dnai/toastermanagerservice.h"
 #include "dnai/models/contextMenuModel.h"
+#include "dnai/ml/mlhandler.h"
 
 namespace dnai
 {
+    namespace views {
+        class CanvasNode;
+        class GenericNode;
+    }
     class App;
     class Project;
     class Session;
@@ -38,11 +43,12 @@ namespace dnai
 	{
 		Q_OBJECT
         Q_PROPERTY(dnai::Solution *solution READ getSolution WRITE setSolution NOTIFY solutionChanged)
-        Q_PROPERTY(dnai::Session *session READ session CONSTANT)  
-		Q_PROPERTY(dnai::PropertyPanelProperties *propertyPanelProperties READ propertyPanelProperties CONSTANT)
+        Q_PROPERTY(dnai::Session *session READ session CONSTANT)
+        Q_PROPERTY(dnai::PropertyPanelProperties *propertyPanelProperties READ propertyPanelProperties CONSTANT)
         Q_PROPERTY(bool loaded READ loaded WRITE setLoaded NOTIFY loadedChanged)
         Q_PROPERTY(QString solutionName READ solutionName)
 		Q_PROPERTY(dnai::models::ContextMenuModel *contextMenuModel READ contextMenuModel WRITE setContextMenuModel NOTIFY contextMenuModelChanged)
+        Q_PROPERTY(dnai::ml::MlHandler * mlHandler READ mlHandler CONSTANT)
 
     protected:
         Editor();
@@ -125,6 +131,8 @@ namespace dnai
         void setAppName(QString const &name);
         void setSolutionName(QString const &name);
 
+        dnai::ml::MlHandler * mlHandler();
+
     signals:
         void solutionChanged(dnai::Solution *proj);
         void loadedChanged(bool);
@@ -159,6 +167,7 @@ namespace dnai
         QString m_solutionName;
 		dnai::models::ContextMenuModel *m_contextMenuModel;
         QSettings *m_settings;
+        dnai::ml::MlHandler m_mlHandler;
 
     private:
         std::queue<std::tuple<models::ContextMenuItem *, quint32, quint32>> m_pendingInstruction;
@@ -166,6 +175,12 @@ namespace dnai
 
     private:
         static Editor &m_instance;
+        void foreachContentView(std::function<bool (QQuickItem *, views::CanvasNode *)> &func);
+        void loadNodes(QList<views::GenericNode *> &nodes, models::gui::declarable::Function *function, dnai::models::Entity *entity, views::CanvasNode *canvas) const;
+        void loadLinks(const QList<views::GenericNode *> &nodes, models::gui::declarable::Function *function) const;
+        void loadFlows(const QList<views::GenericNode *> &nodes, models::gui::declarable::Function *function) const;
+//        void setInputOutputNode(const QList<views::GenericNode *> &nodes, models::gui::Instruction *inputInstruction, models::gui::Instruction *outputInstruction, views::GenericNode *n1, views::GenericNode *n2) const;
+        bool setInputOutputNode(const QList<views::GenericNode *> &nodes, models::gui::Instruction *inputInstruction, models::gui::Instruction *outputInstruction, std::function<void (views::GenericNode *, views::GenericNode *)> &func) const;
     };
     }
 

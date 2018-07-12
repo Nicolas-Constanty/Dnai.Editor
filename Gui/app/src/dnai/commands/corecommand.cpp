@@ -11,9 +11,7 @@ namespace dnai
             Command(name, save),
             exec(exec),
             undo(undo)
-        {
-
-        }
+        {}
 
         void CoreCommand::execute() const
         {

@@ -11,8 +11,7 @@ namespace dnai
 	{
         class EntityTree : public QAbstractItemModel
 		{
-			Q_OBJECT
-		
+            Q_OBJECT
 		public:
 			enum ROLES
 			{
@@ -43,7 +42,7 @@ namespace dnai
 
         protected:
             Entity * getItem(const QModelIndex& index) const;
-			virtual QHash<int, QByteArray> roleNames() const override;
+            QHash<int, QByteArray> roleNames() const override;
 			Entity *m_rootItem;
 		};
 	}

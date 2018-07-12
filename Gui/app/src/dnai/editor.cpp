@@ -294,19 +294,20 @@ namespace dnai
 
 	void Editor::updateContextMenuModel(dnai::models::Entity* entity) const
 	{
-		const auto function = dynamic_cast<models::gui::declarable::Function *>(entity->guiModel());
+        Q_UNUSED(entity);
+        /*const auto function = dynamic_cast<models::gui::declarable::Function *>(entity->guiModel());
 		if (function == nullptr) return;
-		m_contextMenuModel->clearParameters();
-		m_contextMenuModel->clearReturns();
+        m_contextMenuModel->hideParameters();
+        m_contextMenuModel->hideReturns();
 		for (auto param : function->inputs())
 		{
-			m_contextMenuModel->appendParameter(param);
+            m_contextMenuModel->displayParameter(param);
 		}
 		for (auto ret : function->outputs())
 		{
-			m_contextMenuModel->appendReturn(ret);
-		}
-		emit contextMenuModelChanged(m_contextMenuModel);
+            m_contextMenuModel->displayReturn(ret);
+        }
+        emit contextMenuModelChanged(m_contextMenuModel);*/
 	}
 
 	void Editor::registerEditorView(views::EditorView* view)
@@ -329,7 +330,12 @@ namespace dnai
         m_solutionName = name;
     }
 
-	QQuickItem * Editor::createNodeQMLComponent(models::ContextMenuItem *node, models::Entity *func, models::gui::Instruction *instruction, QQuickItem *parent) const
+    ml::MlHandler *Editor::mlHandler()
+    {
+        return &m_mlHandler;
+    }
+
+    QQuickItem * Editor::createNodeQMLComponent(models::ContextMenuItem *node, models::Entity *func, models::gui::Instruction *instruction, QQuickItem *parent) const
     {
         /*
          * Node Components
@@ -366,20 +372,18 @@ namespace dnai
     void Editor::onInstructionAdded(models::Entity *func, models::gui::Instruction *instruction)
     {
         const auto view = qvariant_cast<QQuickItem *>(Editor::instance().selectedView()->property("currentView"));
-        if (!view)
-        {
-            return;
-        }
         const auto canvas = dynamic_cast<views::CanvasNode *>(view);
-        if (!canvas)
-        {
-            return;
-        }
 
         models::ContextMenuItem *node;
 
         if (!m_pendingInstruction.empty())
         {
+            if (canvas == nullptr)
+            {
+                qWarning() << "==Editor== No node canvas opened";
+                return;
+            }
+
             quint32 x, y;
 
             std::tie(node, x, y) = m_pendingInstruction.front();
@@ -397,6 +401,11 @@ namespace dnai
         {
             qWarning() << "==Editor== No such node in context menu: " << instruction->nodeMenuPath();
             return;
+        }
+
+        if (canvas != nullptr && createNodeQMLComponent(node, func, instruction, canvas->content()) == nullptr)
+        {
+			notifyWarning("Cannot create qml node");
         }
 
         /*
@@ -434,10 +443,26 @@ namespace dnai
             instruction->setOutputs(outputs);
         }
 
-        if (createNodeQMLComponent(node, func, instruction, canvas->content()) == nullptr)
+        /*
+         * Handle instruction data links
+         */
+        models::Function *data = func->guiModel<models::Function>();
+        QList<models::gui::IoLink *> links = data->iolinks();
+
+        for (models::gui::IoLink *curr : links)
         {
-			notifyWarning("Cannot create qml node");
-        }       
+            models::gui::Instruction *from = dnai::gcore::HandlerManager::Instance().function()->instruction()->getInstruction(curr->data().outputUuid);
+            models::gui::Instruction *to = dnai::gcore::HandlerManager::Instance().function()->instruction()->getInstruction(curr->data().inputUuid);
+
+            if ((curr->data().inputUuid == instruction->guiUuid() && from != nullptr)
+                || (curr->data().outputUuid == instruction->guiUuid() && to != nullptr))
+            {
+                if (from->hasOutput(curr->data().outputName) && to->hasInput(curr->data().inputName))
+                    dnai::gcore::HandlerManager::Instance().function()->instruction()->linkData(func->id(), from->Uid(), curr->data().outputName, to->Uid(), curr->data().inputName, false);
+                else
+                    data->removeIoLink(curr);
+            }
+        }
     }
 
     void Editor::onAddInstructionError(quint32 func, quint32 type, const QList<quint32> &args, const QString &msg)
@@ -451,22 +476,29 @@ namespace dnai
             m_pendingInstruction.pop();
     }
 
+    void Editor::foreachContentView(std::function<bool(QQuickItem *item, views::CanvasNode *)> &func)
+    {
+        const auto view = qvariant_cast<QQuickItem *>(Editor::instance().selectedView()->property("currentView"));
+        if (!view) return;
+        const auto canvas = dynamic_cast<views::CanvasNode *>(view);
+        if (canvas == nullptr) return;
+        const auto content =  canvas->content();
+        for (auto i = 0; i< content->childItems().size(); i++)
+        {
+            if (func(content->childItems().at(i), canvas))
+                break;
+        }
+    }
+
     void Editor::onInstructionDataLinked(models::Entity *func, models::gui::Instruction *from, QString output, models::gui::Instruction *to, QString input)
     {
         Q_UNUSED(output);
         Q_UNUSED(input);
-        const auto view = qvariant_cast<QQuickItem *>(Editor::instance().selectedView()->property("currentView"));
-        if (!view)
-        {
-            throw std::runtime_error("No canvas view found!");
-        }
-        const auto canvas = dynamic_cast<views::CanvasNode *>(view);
         views::GenericNode *n1 = nullptr;
         views::GenericNode *n2 = nullptr;
-        const auto content =  canvas->content();
-        for (auto i = 0; i< content->childItems().size(); i++)
-        {
-            auto node = dynamic_cast<dnai::views::GenericNode*>(content->childItems().at(i));
+        std::function<bool(QQuickItem *item, views::CanvasNode *canvas)> callback = [&](QQuickItem *item, views::CanvasNode *canvas) {
+            Q_UNUSED(canvas);
+            auto node = dynamic_cast<dnai::views::GenericNode*>(item);
             if (node)
             {
                 if (n1 == nullptr && qvariant_cast<models::gui::Instruction*>(node->property("instruction_model")) == to)
@@ -478,9 +510,11 @@ namespace dnai
                     n2 = node;
                 }
                 if (n1 && n2)
-                    break;
+                    return true;
             }
-        }
+            return false;
+        };
+        foreachContentView(callback);
         if (n1 && n2)
         {
             const auto function = dynamic_cast<models::gui::declarable::Function *>(func->guiModel());
@@ -494,18 +528,11 @@ namespace dnai
     void Editor::onExecutionLinked(models::Entity *func, models::gui::Instruction *from, quint32 outPin, models::gui::Instruction *to)
     {
         Q_UNUSED(outPin);
-        const auto view = qvariant_cast<QQuickItem *>(Editor::instance().selectedView()->property("currentView"));
-        if (!view)
-        {
-            throw std::runtime_error("No canvas view found!");
-        }
-        const auto canvas = dynamic_cast<views::CanvasNode *>(view);
         views::GenericNode *n1 = nullptr;
         views::GenericNode *n2 = nullptr;
-        const auto content =  canvas->content();
-        for (auto i = 0; i< content->childItems().size(); i++)
-        {
-            auto node = dynamic_cast<dnai::views::GenericNode*>(content->childItems().at(i));
+        std::function<bool(QQuickItem *item, views::CanvasNode *canvas)> callback = [&](QQuickItem *item, views::CanvasNode *canvas) {
+            Q_UNUSED(canvas);
+            auto node = dynamic_cast<dnai::views::GenericNode*>(item);
             if (node)
             {
                 if (n1 == nullptr && qvariant_cast<models::gui::Instruction*>(node->property("instruction_model")) == from)
@@ -517,9 +544,11 @@ namespace dnai
                     n2 = node;
                 }
                 if (n1 && n2)
-                    break;
+                    return true;
             }
-        }
+            return false;
+        };
+        foreachContentView(callback);
         if (n1 && n2)
         {
             const auto function = dynamic_cast<models::gui::declarable::Function *>(func->guiModel());
@@ -533,59 +562,41 @@ namespace dnai
     void Editor::onEntryPointSet(models::Entity *func, models::gui::Instruction *entry)
     {
         Q_UNUSED(func)
-        const auto view = qvariant_cast<QQuickItem *>(Editor::instance().selectedView()->property("currentView"));
-        if (!view)
-        {
-            throw std::runtime_error("No canvas view found!");
-        }
-        const auto canvas = dynamic_cast<views::CanvasNode *>(view);
-        const auto content =  canvas->content();
-        for (auto i = 0; i< content->childItems().size(); i++)
-        {
-            auto node = dynamic_cast<dnai::views::GenericNode*>(content->childItems().at(i));
+        std::function<bool(QQuickItem *item, views::CanvasNode *canvas)> callback = [&](QQuickItem *item, views::CanvasNode *canvas) {
+            auto node = dynamic_cast<dnai::views::GenericNode*>(item);
             if (node && qvariant_cast<models::gui::Instruction*>(node->property("instruction_model")) == entry)
             {
                 const auto entry = dynamic_cast<dnai::views::GenericNode*>(canvas->entry());
                 entry->createFlowLink(new models::gui::FlowLink(), node);
-                break;
+                return true;
             }
-        }
+            return false;
+        };
+        foreachContentView(callback);
     }
 
     void Editor::onExecutionUnlinked(models::Entity *func, models::gui::Instruction *from, quint32 outPin)
     {
         Q_UNUSED(func)
-        const auto view = qvariant_cast<QQuickItem *>(Editor::instance().selectedView()->property("currentView"));
-        if (!view)
-        {
-            throw std::runtime_error("No canvas view found!");
-        }
-        const auto canvas = dynamic_cast<views::CanvasNode *>(view);
-        const auto content =  canvas->content();
-        for (auto i = 0; i< content->childItems().size(); i++)
-        {
-            auto node = dynamic_cast<dnai::views::GenericNode*>(content->childItems().at(i));
+        std::function<bool(QQuickItem *item, views::CanvasNode *canvas)> callback = [&](QQuickItem *item, views::CanvasNode *canvas) {
+            Q_UNUSED(canvas);
+            auto node = dynamic_cast<dnai::views::GenericNode*>(item);
             if (node && qvariant_cast<models::gui::Instruction*>(node->property("instruction_model")) == from)
             {
                 node->unlinkFlow(outPin);
-                break;
+                return true;
             }
-        }
+            return false;
+        };
+        foreachContentView(callback);
     }
 
     void Editor::onDataUnlinked(models::Entity *func, models::gui::Instruction *instruction, QString input)
     {
         Q_UNUSED(func)
-        const auto view = qvariant_cast<QQuickItem *>(Editor::instance().selectedView()->property("currentView"));
-        if (!view)
-        {
-            throw std::runtime_error("No canvas view found!");
-        }
-        const auto canvas = dynamic_cast<views::CanvasNode *>(view);
-        const auto content =  canvas->content();
-        for (auto i = 0; i< content->childItems().size(); i++)
-        {
-            auto node = dynamic_cast<dnai::views::GenericNode*>(content->childItems().at(i));
+        std::function<bool(QQuickItem *item, views::CanvasNode *canvas)> callback = [&](QQuickItem *item, views::CanvasNode *canvas) {
+            Q_UNUSED(canvas);
+            auto node = dynamic_cast<dnai::views::GenericNode*>(item);
             if (node && qvariant_cast<models::gui::Instruction*>(node->property("instruction_model")) == instruction)
             {
                 const auto ilist = instruction->inputs();
@@ -599,9 +610,11 @@ namespace dnai
                     }
                     ++index;
                 }
-                break;
+                return true;
             }
-        }
+            return false;
+        };
+        foreachContentView(callback);
     }
 
     void Editor::createNode(models::Entity *entity, models::ContextMenuItem *node, qint32 x, qint32 y)
@@ -750,74 +763,17 @@ namespace dnai
         /*
          * Create all nodes
          */
-        const auto instructionsMap = m_contextMenuModel->instructions();
-
-        for (models::gui::Instruction *instruction : function->instructions())
-		{
-            QString nodePath = instruction->nodeMenuPath();
-
-            if (instructionsMap.contains(nodePath))
-            {
-                nodes.append(dynamic_cast<views::GenericNode *>(createNodeQMLComponent(instructionsMap[nodePath], entity, instruction, canvas->content())));
-            }
-            else
-            {
-                throw std::runtime_error("No such node \"" + nodePath.toStdString() + "\" in context menu");
-            }
-		}
+        loadNodes(nodes, function, entity, canvas);
 
         /*
          * Create io links
          */
-        for (models::gui::IoLink *iolink : function->iolinks())
-        {
-			const auto inputInstruction = function->getInstruction(iolink->data().inputUuid);
-			const auto outputInstruction = function->getInstruction(iolink->data().outputUuid);
-			views::GenericNode *n1 = nullptr;
-			views::GenericNode *n2 = nullptr;
-			for (auto node : nodes)
-			{
-				if (n1 == nullptr && qvariant_cast<models::gui::Instruction*>(node->property("instruction_model")) == inputInstruction)
-				{
-					n1 = node;
-				}
-				else if (n2 == nullptr && qvariant_cast<models::gui::Instruction*>(node->property("instruction_model")) == outputInstruction)
-				{
-					n2 = node;
-				}
-				if (n1 && n2)
-					break;
-			}
-			if (!n1 || !n2) return;
-			n1->createLink(iolink, n2);
-        }
+        loadLinks(nodes, function);
 
         /*
          * Create flow links
          */
-        for (auto flowlink : function->flowlinks())
-		{
-			const auto inputInstruction = function->getInstruction(flowlink->data().from);
-			const auto outputInstruction = function->getInstruction(flowlink->data().to);
-			views::GenericNode *n1 = nullptr;
-			views::GenericNode *n2 = nullptr;
-			for (auto node : nodes)
-			{
-				if (n1 == nullptr && qvariant_cast<models::gui::Instruction*>(node->property("instruction_model")) == inputInstruction)
-				{
-					n1 = node;
-				}
-				else if (n2 == nullptr && qvariant_cast<models::gui::Instruction*>(node->property("instruction_model")) == outputInstruction)
-				{
-					n2 = node;
-				}
-				if (n1 && n2)
-					break;
-			}
-			if (!n1 || !n2) return;
-			n1->createFlowLink(flowlink, n2);
-		}
-
+        loadFlows(nodes, function);
         /*
          * Link entry point
          */
@@ -832,6 +788,88 @@ namespace dnai
                 }
             }
         }
+    }
+
+    void Editor::loadNodes(QList<views::GenericNode *> &nodes, models::gui::declarable::Function *function, dnai::models::Entity* entity, views::CanvasNode *canvas) const
+    {
+        const auto instructionsMap = m_contextMenuModel->instructions();
+
+        for (models::gui::Instruction *instruction : function->instructions())
+        {
+            QString nodePath = instruction->nodeMenuPath();
+
+            if (instructionsMap.contains(nodePath))
+            {
+                nodes.append(dynamic_cast<views::GenericNode *>(createNodeQMLComponent(instructionsMap[nodePath], entity, instruction, canvas->content())));
+            }
+            else
+            {
+                throw std::runtime_error("No such node \"" + nodePath.toStdString() + "\" in context menu");
+            }
+        }
+    }
+
+    void Editor::loadLinks(const QList<views::GenericNode *> &nodes, models::gui::declarable::Function *function) const
+    {
+        for (auto iolink : function->iolinks())
+        {
+            const auto inputInstruction = function->getInstruction(iolink->data().inputUuid);
+            const auto outputInstruction = function->getInstruction(iolink->data().outputUuid);
+
+            std::function<void(views::GenericNode *n1, views::GenericNode *n2)> func = [&](views::GenericNode *n1, views::GenericNode *n2){
+                qDebug() << "==Editor== Link input instruction(" << inputInstruction->guiUuid() << ") => " << inputInstruction->nodeMenuPath();
+                qDebug() << "==Editor== Link output instruction(" << outputInstruction->guiUuid() << ") => " << outputInstruction->nodeMenuPath();
+                n1->createLink(iolink, n2);
+            };
+            if (setInputOutputNode(nodes, inputInstruction, outputInstruction, func))
+                continue;
+        }
+    }
+
+    void Editor::loadFlows(const QList<views::GenericNode *> &nodes, models::gui::declarable::Function *function) const
+    {
+        for (auto flowlink : function->flowlinks())
+        {
+            const auto inputInstruction = function->getInstruction(flowlink->data().from);
+            const auto outputInstruction = function->getInstruction(flowlink->data().to);
+
+            std::function<void(views::GenericNode *n1, views::GenericNode *n2)> func = [&](views::GenericNode *n1, views::GenericNode *n2){
+                qDebug() << "==Editor== Link input instruction(" << inputInstruction->guiUuid() << ") => " << inputInstruction->nodeMenuPath();
+                qDebug() << "==Editor== Link output instruction(" << outputInstruction->guiUuid() << ") => " << outputInstruction->nodeMenuPath();
+                n1->createFlowLink(flowlink, n2);
+            };
+            if (setInputOutputNode(nodes, inputInstruction, outputInstruction, func))
+                continue;
+        }
+    }
+
+    bool Editor::setInputOutputNode(const QList<views::GenericNode *> &nodes,
+                                    models::gui::Instruction *inputInstruction,
+                                    models::gui::Instruction *outputInstruction,
+                                    std::function<void(views::GenericNode *n1, views::GenericNode *n2)> &func
+                                    ) const
+    {
+        if (inputInstruction == nullptr || outputInstruction == nullptr)
+            return true;
+        views::GenericNode *n1 = nullptr;
+        views::GenericNode *n2 = nullptr;
+        for (auto node : nodes)
+        {
+            if (n1 == nullptr && qvariant_cast<models::gui::Instruction*>(node->property("instruction_model")) == inputInstruction)
+            {
+                n1 = node;
+            }
+            else if (n2 == nullptr && qvariant_cast<models::gui::Instruction*>(node->property("instruction_model")) == outputInstruction)
+            {
+                n2 = node;
+            }
+            if (n1 && n2)
+            {
+                func(n1, n2);
+                break;
+            }
+        }
+        return false;
     }
 
     QSettings *Editor::settings()

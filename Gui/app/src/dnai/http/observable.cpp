@@ -4,9 +4,7 @@
 namespace dnai {
     namespace  http {
         Observable::Observable(QNetworkReply *reply): QObject (nullptr), m_reply(reply)
-        {
-
-        }
+        {}
 
         void Observable::onResponse()
         {

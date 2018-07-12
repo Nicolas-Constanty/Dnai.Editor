@@ -55,7 +55,6 @@ SOURCES += \
     src/dnai/commands/movenodecommand.cpp \
     src/dnai/commands/zoomcanvascommand.cpp \
     src/dnai/controllers/consolecontroller.cpp \
-    src/dnai/controllers/icontroller.cpp \
     src/dnai/controllers/inputcontroller.cpp \
     src/dnai/controllers/outputcontroller.cpp \
     src/dnai/enums/qcstandardpaths.cpp \
@@ -101,7 +100,6 @@ SOURCES += \
     src/dnai/baseio.cpp \
     src/dnai/baselinkable.cpp \
     src/dnai/editor.cpp \
-    src/dnai/entitiesfactory.cpp \
     src/dnai/eventutilities.cpp \
     src/dnai/focusmanager.cpp \
     src/dnai/link.cpp \
@@ -128,7 +126,13 @@ SOURCES += \
     src/dnai/core/globalhandler.cpp \
     src/dnai/core/objecthandler.cpp \
     src/dnai/utils/random_utils.cpp \
-    src/dnai/core/listhandler.cpp
+    src/dnai/core/listhandler.cpp \
+    src/dnai/ml/datasethandler.cpp \
+    src/dnai/models/ml/dataset.cpp \
+    src/dnai/models/ml/hyperparameters.cpp \
+    src/dnai/models/ml/mlproject.cpp \
+    src/dnai/ml/mlhandler.cpp \
+    src/dnai/utils/iterableqqmlpropertymap.cpp
 
 
 RESOURCES += qml.qrc
@@ -291,7 +295,7 @@ HEADERS += \
     include/exceptions.h \
     include/interfaces.h \
     include/dnai/core/handlermanager.h \
-    $${PWD}/../lib/lcore_client/include/core.h \
+    ../lib/lcore_client/include/core.h \
     include/dnai/toastermanagerservice.h \
     include/dnai/views/toast.h \
     include/dnai/core/instructionhandler.h \
@@ -303,7 +307,16 @@ HEADERS += \
     include/dnai/models/gui/flowlink.h \
     include/dnai/models/gui/data/flowlink.h \
     include/dnai/core/globalhandler.h \
-    include/dnai/utils/random_utils.h
+    include/dnai/utils/random_utils.h \
+    include/dnai/ml/datasethandler.h \
+    include/dnai/ml/mlhandler.h \
+    include/dnai/models/ml/mlproject.h \
+    include/dnai/models/ml/dataset.h \
+    include/dnai/models/ml/model.h \
+    include/dnai/models/ml/hyperparameters.h \
+    include/ml.h \
+    include/dnai/utils/iterableqqmlpropertymap.h \
+    include/utils.h
 
 
 #LIB

@@ -19,7 +19,7 @@ namespace dnai
 
 		public:
 			explicit CustomShape(QQuickItem *parent = nullptr);
-			virtual QSGNode *updatePaintNode(QSGNode *, UpdatePaintNodeData *) override;
+            QSGNode *updatePaintNode(QSGNode *, UpdatePaintNodeData *) override;
 
 		public:
 			qreal radius() const { return m_radius; }

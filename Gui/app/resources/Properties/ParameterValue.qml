@@ -4,6 +4,7 @@ import QtQuick.Controls 2.2
 import DNAI 1.0
 import Dnai.Controls 1.0
 import Dnai.FontAwesome 1.0
+import Dnai.Theme 1.0
 
 import "../Components"
 
@@ -35,26 +36,29 @@ Item {
 
         width: parent.width
 
-        spacing: 2
-        EditableText {
-            id: _name
-            width: (parent.width - _deleteButton.width) * 0.5
-            height: _parameterValue.contentHeight
-            horizontalAlignment: TextInput.AlignLeft
-            onAccepted: {
-                _parameterValue.nameChanged(_name.text)
-            }
-        }
+        spacing: 4
+
         VarTypeComboBox {
             id: _type
 
-            height: _parameterValue.contentHeight
-            width: (parent.width - _deleteButton.width) * 0.5
+            anchors.verticalCenter: parent.verticalCenter
 
             onTypeChanged: {
                 _parameterValue.typeChanged(newType)
             }
         }
+
+        TextField {
+            id: _name
+            width: parent.width - _deleteButton.width - _row.spacing * 2 - _type.width
+            height: 26
+            font.pointSize: 8
+            anchors.verticalCenter: parent.verticalCenter
+            onAccepted: {
+                _parameterValue.nameChanged(_name.text)
+            }
+        }
+
         /*ButtonAwesomeSolid {
             id: _moveUpButton
             height: _parameterValue.contentHeight
@@ -76,12 +80,15 @@ Item {
                 if (moveDown !== null) moveDown();
             }
         }*/
-        ButtonAwesomeSolid {
+        Button {
             id: _deleteButton
             height: _parameterValue.contentHeight
-            width: 40
-            label.text: "\uf2ed"
-            label.font.pointSize: 8
+            awesomeIcon.text: "\uf2ed"
+            awesomeIcon.size: 8
+            topPadding: 0
+            bottomPadding: 0
+            anchors.verticalCenter: parent.verticalCenter
+
             onClicked: {
                 _parameterValue.deleteValue();
             }

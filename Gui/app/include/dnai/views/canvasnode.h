@@ -39,7 +39,7 @@ namespace dnai
 			* \brief Override updatePaintNode and draw a beautifull canvas
 			* \return QSGNode *
 			*/
-			virtual QSGNode *updatePaintNode(QSGNode *, UpdatePaintNodeData *) override;
+            QSGNode *updatePaintNode(QSGNode *, UpdatePaintNodeData *) override;
 			void moveCanvas(const QPointF& pos);
 			void zoom(const double& scale, const QPointF& offset);
 

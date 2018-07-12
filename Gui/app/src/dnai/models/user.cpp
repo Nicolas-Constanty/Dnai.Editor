@@ -4,14 +4,10 @@ namespace dnai {
     namespace models {
 
        User::User(): QObject(nullptr)
-       {
-
-       }
+       {}
 
        User::~User()
-       {
-
-       }
+       {}
 
        QString User::name() const
        {
@@ -42,12 +38,12 @@ namespace dnai {
        {
            m_files = files;
        }
-       
+
        QJsonObject User::currentFileData() const
        {
            return m_currentFileData;
        }
-       
+
        void User::setCurrentFileData(const QJsonObject &currentFileData)
        {
            m_currentFileData = currentFileData;

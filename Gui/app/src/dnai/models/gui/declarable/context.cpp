@@ -10,9 +10,7 @@ namespace dnai
 			namespace declarable
 			{
 				Context::Context(QObject* parent) : QObject(parent)
-				{
-					
-				}
+                {}
 
 				const QList<declarable::Context*> &Context::contexts() const
 				{

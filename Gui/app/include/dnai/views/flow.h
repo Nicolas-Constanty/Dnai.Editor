@@ -38,7 +38,7 @@ namespace dnai
 
 		public:
 			explicit Flow(QQuickItem *parent = nullptr);
-			virtual QSGNode *updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *) override;
+            QSGNode *updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *) override;
 
 		public:
             enums::FlowTypeRessouce::FlowType typeFlow() const { return m_typeFlow; }
@@ -48,7 +48,7 @@ namespace dnai
 			/**
 			* \brief Override componentComplete, and init some values
 			*/
-            virtual void componentComplete() override;
+            void componentComplete() override;
 
 			/**
 			* \brief Override findIo, return the IO under the point p of the Node n
@@ -56,12 +56,9 @@ namespace dnai
 			* \param p
 			* \return Io *
 			*/
-			virtual LinkableBezierItem *findLinkableBezierItem(GenericNode *n, const QPointF &p) override;
-			virtual void updateLink() override;
-            virtual GenericNode *getNode() override;
-
-//			virtual void setHover() override;
-//			virtual void setLink(Link *) override;
+            LinkableBezierItem *findLinkableBezierItem(GenericNode *n, const QPointF &p) override;
+            void updateLink() override;
+            GenericNode *getNode() override;
 
             QPointF getCanvasPos() const override;
 			void unlinkAll() override;
@@ -71,12 +68,12 @@ namespace dnai
 
             bool isHover() const;
 
-            virtual const QColor &curveColor() const override;
+            const QColor &curveColor() const override;
 
         public slots:
-            virtual void setIsLink(bool isLink) override;
+            void setIsLink(bool isLink) override;
 
-            virtual void setIsHover(bool isHover) override;
+            void setIsHover(bool isHover) override;
 
             void setCurveColor(const QColor &colorCurve);
 
@@ -103,7 +100,7 @@ namespace dnai
 
         protected:
 			void mousePressEvent(QMouseEvent* event) override;
-			virtual void afterRealease(Link *l) override;
+            void afterRealease(Link *l) override;
 		};
 	}
 }

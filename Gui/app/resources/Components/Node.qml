@@ -225,7 +225,7 @@ GenericNode {
                     EditableText {
                         id: _inputValue
 
-                        visible: parent.type >= 1 && parent.type <= 5
+                        //visible: parent.type >= 1 && parent.type <= 5
 
                         anchors.left: _inputName.right
                         anchors.leftMargin: 5

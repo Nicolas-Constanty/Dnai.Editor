@@ -5,7 +5,6 @@
 #include "dnai/editor.h"
 #include "dnai/project.h"
 #include "dnai/core/handlermanager.h"
-#include "dnai/models/contextMenuModel.h"
 
 #if defined(_WIN32) && defined(_MSC_VER)
 #include "../../lib/lwintoast/wintoastlib.h"
@@ -51,11 +50,12 @@ static void registerDNAI()
     qmlRegisterDnai(dnai::Solution, "Solution");
     qmlRegisterDnai(dnai::models::gui::EntityList, "EntityList");
     qmlRegisterDnai(dnai::models::ContextMenuModel, "ContextMenuModel");
+    qmlRegisterDnai(dnai::models::ml::Dataset, "Dataset");
+    qmlRegisterDnai(dnai::utils::IterableQQmlPropertyMap, "IterableQQmlPropertyMap");
 }
 
 static void registerEnums()
 {
-
 #define qmlRegisterEnums(type, name) qmlRegisterType<type>("DNAI.Enums", 1, 0, name)
     qmlRegisterEnums(dnai::enums::IoTypeRessouce, "IOType");
     qmlRegisterEnums(dnai::enums::FlowTypeRessouce, "FlowType");

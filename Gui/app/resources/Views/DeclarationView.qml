@@ -321,7 +321,7 @@ Item {
                     anchors.fill: parent
                     anchors.margins: 10
                     text: qsTr("Add new column...")
-                    font.pointSize: AppSettings.theme["font"]["pixelSize"]
+                    font.pointSize: AppSettings.theme["font"]["pointSize"]
                     horizontalAlignment: Qt.AlignLeft
                     color: AppSettings.theme["text"]["disableColor"]
                     font.italic: true
@@ -372,7 +372,7 @@ Item {
                             MText {
                                 anchors.fill: parent
                                 text: qsTr("Add new column...")
-                                font.pointSize: AppSettings.theme["font"]["pixelSize"]
+                                font.pointSize: AppSettings.theme["font"]["pointSize"]
                                 horizontalAlignment: Qt.AlignLeft
                                 color: AppSettings.theme["text"]["disableColor"]
                                 font.italic: true

@@ -21,9 +21,7 @@ namespace dnai
     {
         EnumHandler::EnumHandler(EntityManager &manager) :
             manager(manager)
-        {
-
-        }
+        {}
 
         void EnumHandler::setup()
         {

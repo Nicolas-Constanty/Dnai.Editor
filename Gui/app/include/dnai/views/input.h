@@ -15,12 +15,12 @@ namespace dnai
 			/**
 			* \brief Refresh BackendIO for Input
 			*/
-			virtual void refreshBackendIo() override;
+            void refreshBackendIo() override;
 
 			/**
 			* \brief Override componentComplete, and init some values
 			*/
-			virtual void componentComplete() override;
+            void componentComplete() override;
 
 			/**
 			* \brief Override findIo, return the IO under the point p of the Node n
@@ -28,14 +28,13 @@ namespace dnai
 			* \param p
 			* \return Io *
 			*/
-			virtual LinkableBezierItem *findLinkableBezierItem(GenericNode *n, const QPointF &p) override;
-			virtual void updateLink() override;
+            LinkableBezierItem *findLinkableBezierItem(GenericNode *n, const QPointF &p) override;
+            void updateLink() override;
 			void unlinkAll() override;
             void asyncUnlinkAll() override;
 
 		protected:
-			virtual void afterRealease(Link *l) override;
-
+            void afterRealease(Link *l) override;
 		};
 	}
 }

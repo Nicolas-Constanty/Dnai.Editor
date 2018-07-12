@@ -38,7 +38,6 @@ namespace dnai
 			private:
 				QList<models::Entity*> *m_list;
 				QHash<int, QByteArray> roleNames() const override;
-
 			};
 		}
 	}

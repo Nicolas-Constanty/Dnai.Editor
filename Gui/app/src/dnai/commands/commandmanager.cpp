@@ -83,7 +83,6 @@ namespace dnai
 					m_redoList.pop();
 					m_undoList.push(command);
 				}
-
 			}
 		}
 
@@ -100,7 +99,6 @@ namespace dnai
 					m_undoList.pop();
 					m_redoList.push(command);
 				}
-
 			}
 		}
 

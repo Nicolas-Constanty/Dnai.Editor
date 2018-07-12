@@ -48,7 +48,7 @@ namespace dnai
 
             public:
                 //will replicate the current entity into the CoreDaemon
-                virtual void replicate() const override;
+                void replicate() const override;
 
 				// IModelData implementation
 			public:

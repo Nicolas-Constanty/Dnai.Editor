@@ -3,6 +3,7 @@ import QtQuick.Controls 2.2
 
 import Dnai.Controls 1.0
 import Dnai.FontAwesome 1.0
+import Dnai.Theme 1.0
 
 Item {
     id: _enumValue
@@ -33,7 +34,7 @@ Item {
         anchors.top: parent.top
         anchors.bottom: parent.bottom
         spacing: 2
-        EditableText {
+        TextField {
             id: _value
             text: value
             width: _enumValue.width - _moveUpButton.width - _moveDownButton.width - _deleteButton.width - _row.spacing * 3
@@ -46,33 +47,33 @@ Item {
                 _enumValue.updateValue(_enumValue.model, _enumValue.prop, getIndex(), _value.text)*/
             }
         }
-        ButtonAwesomeSolid {
+        Button {
             id: _moveUpButton
             height: _enumValue.contentHeight
             width: _enumValue.contentHeight
-            label.text: "\uf0d7"
-            label.font.pointSize: 14
+            awesomeIcon.text: "\uf0d7"
+            awesomeIcon.size: 14
             rotation: 180
             onClicked: {
                 _enumValue.movedUp();
             }
         }
-        ButtonAwesomeSolid {
+        Button {
             id: _moveDownButton
             height: _enumValue.contentHeight
             width: _enumValue.contentHeight
-            label.text: "\uf0d7"
-            label.font.pointSize: 14
+            awesomeIcon.text: "\uf0d7"
+            awesomeIcon.size: 14
             onClicked: {
                 _enumValue.movedDown();
             }
         }
-        ButtonAwesomeSolid {
+        Button {
             id: _deleteButton
             height: _enumValue.contentHeight
             width: _enumValue.contentHeight
-            label.text: "\uf2ed"
-            label.font.pointSize: 14
+            awesomeIcon.text: "\uf2ed"
+            awesomeIcon.size: 14
             onClicked: {
                 _enumValue.removed();
             }

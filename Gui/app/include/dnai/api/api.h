@@ -24,6 +24,7 @@ namespace dnai {
         static const http::Config http_config;
         static const QString settings_key;
         static bool rememberUser;
+
     public:
         static bool refreshing_token;
         static quint64 refreshing_delta;

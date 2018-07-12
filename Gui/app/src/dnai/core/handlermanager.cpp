@@ -14,9 +14,7 @@ namespace dnai
             m_global(),
             m_object(m_manager),
             m_list(m_manager)
-        {
-
-        }
+        {}
 
         HandlerManager &HandlerManager::Instance()
         {
