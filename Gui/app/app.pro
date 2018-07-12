@@ -295,7 +295,7 @@ HEADERS += \
     include/exceptions.h \
     include/interfaces.h \
     include/dnai/core/handlermanager.h \
-    $${PWD}/../lib/lcore_client/include/core.h \
+    ../lib/lcore_client/include/core.h \
     include/dnai/toastermanagerservice.h \
     include/dnai/views/toast.h \
     include/dnai/core/instructionhandler.h \
@@ -314,7 +314,6 @@ HEADERS += \
     include/dnai/models/ml/dataset.h \
     include/dnai/models/ml/model.h \
     include/dnai/models/ml/hyperparameters.h \
-    include/dnai/ml.h \
     include/ml.h \
     include/dnai/utils/iterableqqmlpropertymap.h \
     include/utils.h

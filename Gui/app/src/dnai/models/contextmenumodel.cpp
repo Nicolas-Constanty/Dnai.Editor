@@ -1117,11 +1117,13 @@ namespace dnai
 
         void ContextMenuModel::onParameterSet(Entity *func, QString param)
         {
+            Q_UNUSED(param);
             refreshItems(func);
         }
 
         void ContextMenuModel::onReturnSet(Entity *func, QString ret)
         {
+            Q_UNUSED(ret);
             refreshItems(func);
         }
 	}

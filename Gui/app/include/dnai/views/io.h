@@ -26,12 +26,6 @@ namespace dnai
             Q_PROPERTY(bool isHover READ isHover WRITE setIsHover NOTIFY isHoverChanged)
             Q_PROPERTY(QColor curveColor READ curveColor WRITE setCurveColor NOTIFY curveColorChanged)
 
-            bool m_isLink;
-
-            bool m_isHover;
-
-            QColor m_curveColor;
-
         public:
 			static BaseIo *CurrentHover;
 
@@ -102,9 +96,11 @@ namespace dnai
 
         protected:
 			uint m_nbSegments;
-
             enums::IoTypeRessouce::IoType m_type;
-			GenericNode *m_genericNode{};
+            GenericNode *m_genericNode;
+            bool m_isLink;
+            bool m_isHover;
+            QColor m_curveColor;
 
 		protected:
             bool m_holdClick{};
