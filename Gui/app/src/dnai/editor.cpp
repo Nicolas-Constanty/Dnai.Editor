@@ -294,6 +294,7 @@ namespace dnai
 
 	void Editor::updateContextMenuModel(dnai::models::Entity* entity) const
 	{
+        Q_UNUSED(entity);
         /*const auto function = dynamic_cast<models::gui::declarable::Function *>(entity->guiModel());
 		if (function == nullptr) return;
         m_contextMenuModel->hideParameters();
@@ -496,6 +497,7 @@ namespace dnai
         views::GenericNode *n1 = nullptr;
         views::GenericNode *n2 = nullptr;
         std::function<bool(QQuickItem *item, views::CanvasNode *canvas)> callback = [&](QQuickItem *item, views::CanvasNode *canvas) {
+            Q_UNUSED(canvas);
             auto node = dynamic_cast<dnai::views::GenericNode*>(item);
             if (node)
             {
@@ -529,6 +531,7 @@ namespace dnai
         views::GenericNode *n1 = nullptr;
         views::GenericNode *n2 = nullptr;
         std::function<bool(QQuickItem *item, views::CanvasNode *canvas)> callback = [&](QQuickItem *item, views::CanvasNode *canvas) {
+            Q_UNUSED(canvas);
             auto node = dynamic_cast<dnai::views::GenericNode*>(item);
             if (node)
             {
@@ -576,6 +579,7 @@ namespace dnai
     {
         Q_UNUSED(func)
         std::function<bool(QQuickItem *item, views::CanvasNode *canvas)> callback = [&](QQuickItem *item, views::CanvasNode *canvas) {
+            Q_UNUSED(canvas);
             auto node = dynamic_cast<dnai::views::GenericNode*>(item);
             if (node && qvariant_cast<models::gui::Instruction*>(node->property("instruction_model")) == from)
             {
@@ -591,6 +595,7 @@ namespace dnai
     {
         Q_UNUSED(func)
         std::function<bool(QQuickItem *item, views::CanvasNode *canvas)> callback = [&](QQuickItem *item, views::CanvasNode *canvas) {
+            Q_UNUSED(canvas);
             auto node = dynamic_cast<dnai::views::GenericNode*>(item);
             if (node && qvariant_cast<models::gui::Instruction*>(node->property("instruction_model")) == instruction)
             {
@@ -823,7 +828,6 @@ namespace dnai
 
     void Editor::loadFlows(const QList<views::GenericNode *> &nodes, models::gui::declarable::Function *function) const
     {
-
         for (auto flowlink : function->flowlinks())
         {
             const auto inputInstruction = function->getInstruction(flowlink->data().from);

@@ -21,8 +21,8 @@ namespace dnai
 				}
 
 				void Function::serialize(QJsonObject& obj) const
-				{	
-					Entity::serialize(obj);
+                {
+                    Entity::serialize(obj);
                     obj["inputs"] = serializeList<models::Entity>(m_data.inputs);
                     obj["outputs"] = serializeList<models::Entity>(m_data.outputs);
                     obj["instructions"] = serializeList<models::gui::Instruction>(m_data.instructions);
@@ -56,7 +56,6 @@ namespace dnai
 						addInstruction(Instruction::deserialize(node.toObject()));
 					}
 					foreach(auto link, obj["iolinks"].toArray()) {
-
                         models::gui::IoLink *toappend = models::gui::IoLink::deserialize(link.toObject());
 
                         if (findIOLink(toappend->data().inputUuid, toappend->data().inputName) == nullptr)

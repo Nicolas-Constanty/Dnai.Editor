@@ -22,9 +22,9 @@ namespace dnai
 			public:
                 explicit Instruction(QObject *parent = nullptr);
                 //Implementation of ISerializable
-                virtual void serialize(QJsonObject& obj) const override;
+                void serialize(QJsonObject& obj) const override;
 			protected:
-                virtual void _deserialize(const QJsonObject& obj) override;
+                void _deserialize(const QJsonObject& obj) override;
 				//Implementation of IModelData
 			public:
 				const data::Instruction& data() const override;

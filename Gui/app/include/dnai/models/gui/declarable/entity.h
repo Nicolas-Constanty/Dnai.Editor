@@ -22,7 +22,7 @@ namespace dnai
 					Entity() = default;
 					virtual ~Entity() override = default;
 
-					virtual bool setData(const T& data) override
+                    bool setData(const T& data) override
 					{
 						if (m_data == data)
 							return false;
@@ -35,7 +35,7 @@ namespace dnai
 						return m_data.index;
 					}
 
-					virtual bool setIndex(const int index) override
+                    bool setIndex(const int index) override
 					{
 						if (m_data.index == index)
 							return false;
@@ -43,12 +43,12 @@ namespace dnai
 						return true;
 					}
 
-					virtual QUuid listIndex() const override
+                    QUuid listIndex() const override
 					{
 						return m_data.listIndex;
 					}
 
-					virtual bool setListIndex(QUuid listIndex) override
+                    bool setListIndex(QUuid listIndex) override
 					{
 						if (m_data.listIndex == listIndex)
 							return false;
@@ -56,12 +56,12 @@ namespace dnai
 						return true;
 					}
 
-					virtual const QString& description() const override
+                    const QString& description() const override
 					{
 						return m_data.description;
 					}
 
-					virtual bool setDescription(const QString& description) override
+                    bool setDescription(const QString& description) override
 					{
 						if (m_data.description == description)
 							return false;
@@ -69,12 +69,12 @@ namespace dnai
 						return true;
 					}
 
-					virtual bool expanded() const override
+                    bool expanded() const override
 					{
 						return m_data.expanded;
 					}
 
-					virtual bool setExpanded(bool exp) override
+                    bool setExpanded(bool exp) override
 					{
 						if (m_data.expanded == exp)
 							return false;
@@ -82,12 +82,12 @@ namespace dnai
 						return true;
 					}
 
-					virtual const T& data() const override
+                    const T& data() const override
 					{
 						return m_data;
 					}
 
-					virtual void serialize(QJsonObject& obj) const override
+                    void serialize(QJsonObject& obj) const override
 					{
 //						obj["expanded"] = m_data.expanded;
 						obj["description"] = m_data.description;
@@ -95,7 +95,7 @@ namespace dnai
 						obj["listIndex"] = m_data.listIndex.toString();
 					}
 				protected:
-					virtual void _deserialize(const QJsonObject& obj) override
+                    void _deserialize(const QJsonObject& obj) override
 					{
 //						m_data.expanded = obj["expanded"].toBool();
 						m_data.description = obj["description"].toString();

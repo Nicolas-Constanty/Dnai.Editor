@@ -22,9 +22,7 @@ namespace dnai
     {
         DeclaratorHandler::DeclaratorHandler(EntityManager &manager) :
             manager(manager)
-        {
-
-        }
+        {}
 
         DeclaratorHandler::~DeclaratorHandler()
         {

@@ -24,9 +24,7 @@ namespace dnai
     {
         VariableHandler::VariableHandler(EntityManager &manager) :
             manager(manager)
-        {
-
-        }
+        {}
 
         void VariableHandler::setup()
         {

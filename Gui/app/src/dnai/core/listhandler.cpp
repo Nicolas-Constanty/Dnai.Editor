@@ -15,9 +15,7 @@ namespace dnai
     {
         ListHandler::ListHandler(EntityManager &manager) :
             manager(manager)
-        {
-
-        }
+        {}
 
         void ListHandler::setup()
         {

@@ -20,7 +20,6 @@ namespace dnai
             manager(manager),
             m_instruction(manager)
         {
-
         }
 
         void FunctionHandler::setup()
@@ -223,7 +222,6 @@ namespace dnai
 
             commands::CommandManager::Instance()->exec(new commands::CoreCommand("Function.RemoveInstruction", save,
                 [&function, data, instr](){
-
                     //remove data links
                     for (models::gui::Input *curr : instr->inputs())
                     {

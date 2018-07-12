@@ -53,17 +53,17 @@ namespace dnai
 			* \brief Override updatePaintNode and draw a beautifull IO
 			* \return
 			*/
-			virtual QSGNode *updatePaintNode(QSGNode *, UpdatePaintNodeData *) override;
+            QSGNode *updatePaintNode(QSGNode *, UpdatePaintNodeData *) override;
 
-			virtual QPointF getCanvasPos() const override;
+            QPointF getCanvasPos() const override;
 
-			virtual GenericNode *getNode() override;
+            GenericNode *getNode() override;
 
 			//Interface implementation
 		public:
-			virtual qreal scaleFactor() const override;
-			virtual QPointF scalePos() const override;
-			virtual QPointF realPos() const override;
+            qreal scaleFactor() const override;
+            QPointF scalePos() const override;
+            QPointF realPos() const override;
 
 		public:
 			uint nbSegments() const { return m_nbSegments; }
@@ -77,12 +77,12 @@ namespace dnai
 
             bool isHover() const;
 
-            virtual const QColor &curveColor() const override;
+            const QColor &curveColor() const override;
 
         public slots:
-            virtual void setIsLink(bool isLink) override;
+            void setIsLink(bool isLink) override;
 
-            virtual void setIsHover(bool isHover) override;
+            void setIsHover(bool isHover) override;
 
             void setCurveColor(const QColor &curveColor);
 
@@ -107,12 +107,7 @@ namespace dnai
 			GenericNode *m_genericNode{};
 
 		protected:
-			bool m_holdClick{};
-
-//			virtual void setHover() override;
-
-//			virtual void setLink(Link *l) override;
-
+            bool m_holdClick{};
 		};
 	}
 }

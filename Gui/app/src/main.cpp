@@ -56,7 +56,6 @@ static void registerDNAI()
 
 static void registerEnums()
 {
-
 #define qmlRegisterEnums(type, name) qmlRegisterType<type>("DNAI.Enums", 1, 0, name)
     qmlRegisterEnums(dnai::enums::IoTypeRessouce, "IOType");
     qmlRegisterEnums(dnai::enums::FlowTypeRessouce, "FlowType");

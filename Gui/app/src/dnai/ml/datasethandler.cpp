@@ -16,6 +16,7 @@ DatasetHandler::DatasetHandler(QObject *parent) : QObject(parent)
 
 int DatasetHandler::open(const QString &path)
 {
+    Q_UNUSED(path)
     return 0;
 }
 

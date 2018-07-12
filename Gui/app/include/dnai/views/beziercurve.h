@@ -32,7 +32,7 @@ namespace dnai
 			* \brief Override Base and draw a beautifull bezier curve
 			* \return QSGNode *
 			*/
-			virtual QSGNode *updatePaintNode(QSGNode *, UpdatePaintNodeData *) override;
+            QSGNode *updatePaintNode(QSGNode *, UpdatePaintNodeData *) override;
 
 			void setBack();
 

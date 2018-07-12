@@ -15,9 +15,7 @@ namespace dnai
     {
         InstructionHandler::InstructionHandler(EntityManager &manager) :
             manager(manager)
-        {
-
-        }
+        {}
 
         void InstructionHandler::setup()
         {

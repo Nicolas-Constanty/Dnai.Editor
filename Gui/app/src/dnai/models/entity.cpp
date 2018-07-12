@@ -181,7 +181,6 @@ namespace dnai
         {
             if (coreModel()->setVisibility(static_cast<core::VISIBILITY>(v)))
 			{
-				
                 emit Entity::visibilityChanged(v);
 			}
 		}
@@ -313,7 +312,6 @@ namespace dnai
             }
             default: ;
             }
-			
             foreach(const auto classe, obj["entities"].toArray()) {
 				QJsonObject o = classe.toObject();
                 const auto coreModel = new models::gcore::Entity(static_cast<::core::ENTITY>(o["type"].toInt()));

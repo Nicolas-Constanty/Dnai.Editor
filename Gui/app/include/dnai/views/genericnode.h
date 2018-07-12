@@ -34,13 +34,12 @@ namespace dnai
             * \brief Override updatePaintNode and draw a beautifull Node
             * \return QSGNode *
             */
-            virtual QSGNode *updatePaintNode(QSGNode *, UpdatePaintNodeData *) override;
-            virtual void componentComplete() override;
+            QSGNode *updatePaintNode(QSGNode *, UpdatePaintNodeData *) override;
+            void componentComplete() override;
             void resetBorderColor() const;
             void move(const QPointF &vec);
             const QPointF &startPos() const { return m_startPos; }
             static void resetSelected();
-            //virtual bool contains(const QPointF &point) const override;
 
         public:
             FocusManagerIo &inputs() { return m_inputs; }
@@ -104,17 +103,17 @@ namespace dnai
             * \brief Override mouseMoveEvent
             * \param event
             */
-            virtual void mouseMoveEvent(QMouseEvent *event) override;
+            void mouseMoveEvent(QMouseEvent *event) override;
             /**
             * \brief Override mousePressEvent
             * \param event
             */
-            virtual void mousePressEvent(QMouseEvent *event) override;
+            void mousePressEvent(QMouseEvent *event) override;
             /**
             * \brief Override mouseReleaseEvent
             * \param event
             */
-            virtual void mouseReleaseEvent(QMouseEvent *event) override;
+            void mouseReleaseEvent(QMouseEvent *event) override;
         };
     }
 }

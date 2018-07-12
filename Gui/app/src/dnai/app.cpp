@@ -116,8 +116,7 @@ namespace dnai
 	}
 
     void App::afterInit()
-    {          
-    }
+    {}
 
 	void App::loadFonts()
     {
@@ -274,10 +273,8 @@ namespace dnai
 
   qreal App::getSettingNumber(const QString &path)
   {
-
       if (m_loadedNumbers.contains(path))
       {
-
           return m_loadedNumbers[path];
       }
       const auto s =  Editor::instance().settings()->value(path).toReal();

@@ -51,23 +51,19 @@ namespace dnai
 			* \brief Override mouseMoveEvent
 			* \param event
 			*/
-			virtual void mouseMoveEvent(QMouseEvent *event) override;
+            void mouseMoveEvent(QMouseEvent *event) override;
 			/**
 			* \brief Override mousePressEvent
 			* \param event
 			*/
-             virtual void mousePressEvent(QMouseEvent *event) override;
+             void mousePressEvent(QMouseEvent *event) override;
             /**
 			* \brief Override mouseReleaseEvent
 			* \param event
 			*/
-			virtual void mouseReleaseEvent(QMouseEvent *event) override;
+            void mouseReleaseEvent(QMouseEvent *event) override;
 
-			virtual void afterRealease(Link *l);
-
-//			virtual void setHover();
-//			virtual void setNormal();
-//			virtual void setLink(Link *);
+            virtual void afterRealease(Link *l);
 
 			enum LinkStatus {
 				Normal,
@@ -77,7 +73,6 @@ namespace dnai
 
 		protected:
             interfaces::ALinkable *m_linkable;
-//			LinkableBezierItem *m_currentHover;
 			LinkStatus m_status;
 
 		};

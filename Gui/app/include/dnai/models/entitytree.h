@@ -43,7 +43,7 @@ namespace dnai
 
         protected:
             Entity * getItem(const QModelIndex& index) const;
-			virtual QHash<int, QByteArray> roleNames() const override;
+            QHash<int, QByteArray> roleNames() const override;
 			Entity *m_rootItem;
 		};
 	}

@@ -15,9 +15,7 @@ namespace dnai
     {
         ProjectHandler::ProjectHandler(EntityManager &manager) :
             manager(manager)
-        {
-
-        }
+        {}
 
         void ProjectHandler::setup()
         {
