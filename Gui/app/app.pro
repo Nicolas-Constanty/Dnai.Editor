@@ -337,6 +337,14 @@ INCLUDEPATH += $${PWD}/../lib/lcore_client/include/
 #    #INCLUDEPATH += /System/Library/Frameworks/Foundation.framework/Versions/C/Headers
 #}
 
+# In debug mode, turn on gcov and UBSAN
+CONFIG(debug, debug|release) {
+
+  # gcov
+  unix:QMAKE_CXXFLAGS += -fprofile-arcs -ftest-coverage
+  unix:LIBS += -lgcov
+}
+
 
 #begin library network
 LIBS += -L$${PWD}/../lib/ -lcore_client -levent_client -lcerealization

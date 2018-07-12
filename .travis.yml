@@ -11,6 +11,8 @@ cache:
 before_script:
   - export QTDIR=~/Qt/5.10.1/clang_64
   - export PATH=$QTDIR/bin:$PATH
+  - brew install lcov
+  - pip install codecov
 
 script:
   - if [ ! -e ~/Qt/5.10.1/ ] ; then
@@ -21,7 +23,13 @@ script:
   - git submodule update --init --recursive
   - cd Gui
   - qmake DNAI.pro
-  - make
+  - make debug
+  - ./app/DNAI.app/Contents/MacOS/DNAI --profile
+  - ./get_code_cov
+  - codecov
   - cd ../Server
   - qmake Server.pro
   - make
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
