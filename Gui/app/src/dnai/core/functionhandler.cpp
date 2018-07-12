@@ -491,7 +491,8 @@ namespace dnai
         {
             for (models::gui::Instruction *curr : toRebuild)
             {
-                rebuildInstruction(curr);
+                if (curr->Uid() != core::UNDEFINED_ID)
+                    rebuildInstruction(curr);
             }
             toRebuild.clear();
         }

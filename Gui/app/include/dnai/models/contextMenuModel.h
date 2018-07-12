@@ -15,17 +15,17 @@ namespace dnai
 		{
 			Q_OBJECT
 			Q_PROPERTY(QString name READ name WRITE setName NOTIFY nameChanged)
-			Q_PROPERTY(QString description READ description WRITE setDescription NOTIFY descriptionChanged)
-			Q_PROPERTY(int inputs READ inputs WRITE setInputs NOTIFY inputsChanged)
-			Q_PROPERTY(int outputs READ outputs WRITE setOutputs NOTIFY outputsChanged)
+            Q_PROPERTY(QString description READ description WRITE setDescription NOTIFY descriptionChanged)
 			Q_PROPERTY(int instructionId READ instructionId WRITE setInstructionId NOTIFY instructionIdChanged)
 			Q_PROPERTY(QString nodeName READ nodeName WRITE setNodeName NOTIFY nodeNameChanged)
             Q_PROPERTY(int type READ type WRITE setType NOTIFY typeChanged)
             Q_PROPERTY(QList<qint32> construction READ construction WRITE setConstruction NOTIFY constructionChanged)
             Q_PROPERTY(int flowIn READ flowIn WRITE setFlowIn NOTIFY flowInChanged)
             Q_PROPERTY(int flowOut READ flowOut WRITE setFlowOut NOTIFY flowOutChanged)
-			Q_PROPERTY(QStringList inputNames READ inputNames WRITE setInputNames NOTIFY inputNamesChanged)
-			Q_PROPERTY(QStringList outputNames READ outputNames WRITE setOutputNames NOTIFY outputNamesChanged)
+            Q_PROPERTY(int inputSize READ inputSize NOTIFY inputSizeChanged)
+            Q_PROPERTY(int outputSize READ outputSize NOTIFY outputSizeChanged)
+            Q_PROPERTY(QStringList inputNames READ inputNames NOTIFY inputNamesChanged)
+            Q_PROPERTY(QStringList outputNames READ outputNames NOTIFY outputNamesChanged)
 
         public:
             ContextMenuItem(ContextMenuItem *parent = nullptr);
@@ -33,8 +33,12 @@ namespace dnai
 		public:
 			const QString &name() const;
 			const QString &description() const;
-			int inputs() const;
-			int outputs() const;
+            const QMap<QString, QString> &inputs() const;
+            const QMap<QString, QString> &inputsDisplayNames() const;
+            int inputSize() const;
+            const QMap<QString, QString> &outputs() const;
+            const QMap<QString, QString> &outputsDisplayNames() const;
+            int outputSize() const;
 			int instructionId() const;
 			const QString &nodeName() const;
 			int columnCount() const override;
@@ -42,53 +46,57 @@ namespace dnai
             QList<qint32> const &construction() const;
             int flowIn() const;
             int flowOut() const;
-			const QStringList &inputNames() const;
-			const QStringList &outputNames() const;
-			void appendInputName(const QString &name);
-			void appendOutputName(const QString &name);
+            QStringList inputNames() const;
+            QStringList outputNames() const;
+            Q_INVOKABLE QString getInput(QString name) const;
+            Q_INVOKABLE QString getOutput(QString name) const;
+            Q_INVOKABLE QString getInputDisplayName(QString name) const;
+            Q_INVOKABLE QString getOutputDisplayName(QString name) const;
             QString fullPath() const;
 
 		public:
 			void setName(const QString &);
-			void setDescription(const QString &);
-			void setInputs(int);
-			void setOutputs(int);
+            void setDescription(const QString &);
 			void setInstructionId(int);
 			void setNodeName(const QString &name);
             void setType(int t);
             void setConstruction(QList<qint32> const &value);
             void setFlowIn(int value);
             void setFlowOut(int value);
-			void setInputNames(const QStringList &value);
-			void setOutputNames(const QStringList &value);
+            void addInput(const QString &name, const QString &type, const QString &displayName);
+            void addInputs(const QMap<QString, QString> &inputs, const QMap<QString, QString> &displayNames);
+            void addOutput(const QString &name, const QString &type, const QString &displayName);
+            void addOutputs(const QMap<QString, QString> &outputs, const QMap<QString, QString> &displayNames);
 
 		signals:
 			void nameChanged(const QString &);
-			void descriptionChanged(const QString &);
-			void inputsChanged(int);
-			void outputsChanged(int);
+            void descriptionChanged(const QString &);
 			void instructionIdChanged(int);
 			void nodeNameChanged(const QString &name);
             void typeChanged(int t);
             void constructionChanged(QList<qint32> const &value);
             void flowInChanged(int value);
             void flowOutChanged(int value);
+            void inputSizeChanged(int value);
+            void outputSizeChanged(int value);
 			void inputNamesChanged(const QStringList &value);
 			void outputNamesChanged(const QStringList &value);
 
 		private:
 			QString m_name;
-			QString m_descrition;
-			int m_inputs = 0;
-			int m_outputs = 0;
+            QString m_descrition;
             int m_instructionId = -1;
 			QString m_nodeName;
             int m_type = -1;
             QList<qint32> m_construction;
 			int m_flowIn = 0;
 			int m_flowOut = 0;
-			QStringList m_inputNames;
-			QStringList m_outputNames;
+
+            QMap<QString, QString> m_inputs;
+            QMap<QString, QString> m_inputDisplayNames;
+
+            QMap<QString, QString> m_outputs;
+            QMap<QString, QString> m_outputDisplayNames;
 		};
 		class ContextMenuModel : public QAbstractItemModel
 		{

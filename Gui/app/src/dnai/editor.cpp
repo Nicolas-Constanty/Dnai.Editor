@@ -413,6 +413,7 @@ namespace dnai
                 models::gui::Input *toadd = new models::gui::Input();
 
                 toadd->setName(curr);
+                toadd->setVarType(node->getInput(curr));
                 inputs.append(toadd);
             }
 
@@ -431,6 +432,7 @@ namespace dnai
                 models::gui::Output *toadd = new models::gui::Output();
 
                 toadd->setName(curr);
+                toadd->setVarType(node->getOutput(curr));
                 outputs.append(toadd);
             }
 

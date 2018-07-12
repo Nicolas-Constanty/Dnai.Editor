@@ -9,7 +9,7 @@ class QJsonObject;
 namespace dnai
 {
 	namespace interfaces
-	{
+    {
 		class IVariable
 		{
 		public:

@@ -26,15 +26,35 @@ namespace dnai
 			return m_descrition;
 		}
 
-		int ContextMenuItem::inputs() const
+        const QMap<QString, QString> &ContextMenuItem::inputs() const
 		{
-			return m_inputs;
-		}
+            return m_inputs;
+        }
 
-		int ContextMenuItem::outputs() const
+        const QMap<QString, QString> &ContextMenuItem::inputsDisplayNames() const
+        {
+            return m_inputDisplayNames;
+        }
+
+        int ContextMenuItem::inputSize() const
+        {
+            return m_inputs.size();
+        }
+
+        const QMap<QString, QString> &ContextMenuItem::outputs() const
 		{
-			return m_outputs;
-		}
+            return m_outputs;
+        }
+
+        const QMap<QString, QString> &ContextMenuItem::outputsDisplayNames() const
+        {
+            return m_outputDisplayNames;
+        }
+
+        int ContextMenuItem::outputSize() const
+        {
+            return m_outputs.size();
+        }
 
 		int ContextMenuItem::instructionId() const
 		{
@@ -84,23 +104,7 @@ namespace dnai
 				return;
 			m_descrition = descr;
 			emit descriptionChanged(descr);
-		}
-
-		void ContextMenuItem::setInputs(int i)
-		{
-			if (i == m_inputs)
-				return;
-			m_inputs = i;
-			emit inputsChanged(i);
-		}
-
-		void ContextMenuItem::setOutputs(int o)
-		{
-			if (o == m_outputs)
-				return;
-			m_outputs = o;
-			emit outputsChanged(o);
-		}
+        }
 
 		void ContextMenuItem::setInstructionId(int instr)
 		{
@@ -135,26 +139,34 @@ namespace dnai
 			return m_flowOut;
 		}
 
-		const QStringList& ContextMenuItem::inputNames() const
+        QStringList ContextMenuItem::inputNames() const
 		{
-			return m_inputNames;
+            return m_inputs.keys();
 		}
 
-		const QStringList& ContextMenuItem::outputNames() const
+        QStringList ContextMenuItem::outputNames() const
 		{
-			return m_outputNames;
-		}
+            return m_outputs.keys();
+        }
 
-		void ContextMenuItem::appendInputName(const QString& name)
-		{
-			m_inputNames.append(name);
-			emit inputNamesChanged(m_inputNames);
-		}
+        QString ContextMenuItem::getInput(QString name) const
+        {
+            return m_inputs[name];
+        }
 
-		void ContextMenuItem::appendOutputName(const QString& name)
-		{
-			m_outputNames.append(name);
-            emit outputNamesChanged(m_outputNames);
+        QString ContextMenuItem::getOutput(QString name) const
+        {
+            return m_outputs[name];
+        }
+
+        QString ContextMenuItem::getInputDisplayName(QString name) const
+        {
+            return m_inputDisplayNames[name];
+        }
+
+        QString ContextMenuItem::getOutputDisplayName(QString name) const
+        {
+            return m_outputDisplayNames[name];
         }
 
         QString ContextMenuItem::fullPath() const
@@ -162,21 +174,37 @@ namespace dnai
             return (parentItem() != nullptr ? parentItem()->fullPath() : "") + "/" + name();
         }
 
-		void ContextMenuItem::setInputNames(const QStringList& value)
-		{
-			if (m_inputNames == value)
-				return;
-			m_inputNames = value;
-			emit inputNamesChanged(value);
-		}
+        void ContextMenuItem::addInput(const QString &name, const QString &type, const QString &displayName)
+        {
+            m_inputs[name] = type;
+            m_inputDisplayNames[name] = displayName;
+            emit inputNamesChanged(inputNames());
+            emit inputSizeChanged(inputSize());
+        }
 
-		void ContextMenuItem::setOutputNames(const QStringList& value)
-		{
-			if (m_outputNames == value)
-				return;
-			m_outputNames = value;
-			emit outputNamesChanged(value);
-		}
+        void ContextMenuItem::addInputs(const QMap<QString, QString> &inputs, const QMap<QString, QString> &displayNames)
+        {
+            m_inputs.unite(inputs);
+            m_inputDisplayNames.unite(displayNames);
+            emit inputNamesChanged(inputNames());
+            emit inputSizeChanged(inputSize());
+        }
+
+        void ContextMenuItem::addOutput(const QString &name, const QString &type, const QString &displayName)
+        {
+            m_outputs[name] = type;
+            m_outputDisplayNames[name] = displayName;
+            emit outputNamesChanged(outputNames());
+            emit outputSizeChanged(outputSize());
+        }
+
+        void ContextMenuItem::addOutputs(const QMap<QString, QString> &outputs, const QMap<QString, QString> &displayNames)
+        {
+            m_outputs.unite(outputs);
+            m_outputDisplayNames.unite(displayNames);
+            emit outputNamesChanged(outputNames());
+            emit outputSizeChanged(outputSize());
+        }
 
 		void ContextMenuItem::setFlowIn(const int value)
 		{
@@ -250,10 +278,14 @@ namespace dnai
 
 		void ContextMenuModel::parseJsonObj(ContextMenuItem *parent, const QJsonObject &js)
 		{
+            qDebug() << "Parse menu";
 			for (const auto& key : js.keys())
-			{
+            {
+                qDebug() << "Curr key" << key;
 				if (key == "categories")
 				{
+                    qDebug() << "Found categories";
+
 					const auto categories = js[key].toObject();
 					for (const auto& categoryKey : categories.keys())
 					{
@@ -262,6 +294,9 @@ namespace dnai
 						category->setName(categoryKey);
 						category->setNodeName(categoryObj["name"].toString());
                         category->setDescription(categoryObj["description"].toString());
+
+                        qDebug() << "Creating category" << categoryKey;
+
                         if (categoryObj.contains("construction"))
                         {
                             QList<qint32> ctrs;
@@ -272,47 +307,55 @@ namespace dnai
                             }
                             category->setConstruction(ctrs);
                         }
-                        if (parent && categoryObj["inputs"].toInt() == 0 && parent->inputs() != 0)
-                            category->setInputs(parent->inputs());
-                        else
-                            category->setInputs(categoryObj["inputs"].toInt());
-                        if (parent && categoryObj["outputs"].toInt() == 0 && parent->outputs() != 0)
-                            category->setOutputs(parent->outputs());
-                        else
-                            category->setOutputs(categoryObj["outputs"].toInt());
+
                         if (parent && categoryObj["type"].toInt() == 0 && parent->type() != -1)
                             category->setType(parent->type());
                         else
                             category->setType(categoryObj["type"].toInt());
+
                         if (!categoryObj["instruction_id"].isUndefined())
                         {
                             const auto instruction_id = categoryObj["instruction_id"].toInt();
                             category->setInstructionId(instruction_id);
                         }
-						if (parent && !categoryObj["output_names"].isArray() && !parent->outputNames().isEmpty())
-							category->setOutputNames(parent->outputNames());
-						else
-						{
-							const auto tab = categoryObj["output_names"].toArray();
-							for (const auto &value : tab)
-							{
-								category->appendOutputName(value.toString());
-							}
-						}
-						if (parent && !categoryObj["input_names"].isArray() && !parent->inputNames().isEmpty())
-							category->setInputNames(parent->inputNames());
-						else
-						{
-							const auto tab = categoryObj["input_names"].toArray();
-							for (const auto &value : tab)
-							{
-								category->appendInputName(value.toString());
-							}
-						}
+
+                        if (parent && parent->inputs().size() > 0)
+                        {
+                            category->addInputs(parent->inputs(), parent->inputsDisplayNames());
+                        }
+
+                        if (categoryObj["inputs"].isArray())
+                        {
+                            for (QJsonValue input : categoryObj["inputs"].toArray())
+                            {
+                                QJsonObject obj = input.toObject();
+
+                                category->addInput(obj["name"].toString(), obj["type"].toString(), obj["display_name"].toString());
+                            }
+                        }
+
+                        if (parent && parent->outputs().size() > 0)
+                        {
+                            category->addOutputs(parent->outputs(), parent->outputsDisplayNames());
+                        }
+
+                        if (categoryObj["outputs"].isArray())
+                        {
+                            for (QJsonValue output : categoryObj["outputs"].toArray())
+                            {
+                                QJsonObject obj = output.toObject();
+
+                                category->addOutput(obj["name"].toString(), obj["type"].toString(), obj["display_name"].toString());
+                            }
+                        }
+
 						category->setFlowIn(categoryObj["in"].toInt());
 						category->setFlowOut(categoryObj["out"].toInt());
                         parent->appendChild(category);
                         m_hash[category->fullPath()] = category;
+
+                        qDebug() << "Register: " << category->fullPath();
+
 						if (categoryObj.constFind("categories") != categoryObj.constEnd())
 							parseJsonObj(category, categoryObj);
 					}
@@ -398,9 +441,9 @@ namespace dnai
 			case Qt::DisplayRole:
 				return entity->name();
 			case INPUTS:
-				return entity->inputs();
+                return entity->inputs().size();
 			case OUTPUTS:
-				return entity->outputs();
+                return entity->outputs().size();
 			case INSTRUCTION_ID:
 				return entity->instructionId();
             case TYPE:
@@ -433,6 +476,8 @@ namespace dnai
 
         void ContextMenuModel::appendVariable(Entity *entity)
         {
+            QString varType = entity->guiModel<Variable>()->varType().toString();
+
             /*
              * Variable getter
              */
@@ -440,9 +485,7 @@ namespace dnai
 
             getter->setName("Get " + entity->fullName());
             getter->setDescription(entity->description());
-            getter->setInputs(0);
-            getter->setOutputs(1);
-            getter->setOutputNames({"reference"});
+            getter->addOutput("reference", varType, "Value");
             getter->setInstructionId(dnai::enums::QInstructionID::GETTER);
             getter->setConstruction({entity->id()});
 
@@ -455,10 +498,8 @@ namespace dnai
 
             setter->setName("Set " + entity->fullName());
             setter->setDescription(entity->description());
-            setter->setInputs(1);
-            setter->setInputNames({"value"});
-            setter->setOutputs(1);
-            setter->setOutputNames({"reference"});
+            setter->addInput("value", varType, "Value");
+            setter->addOutput("reference", varType, "Value");
             setter->setFlowIn(1);
             setter->setFlowOut(1);
             setter->setInstructionId(dnai::enums::QInstructionID::SETTER);
@@ -474,9 +515,10 @@ namespace dnai
 
             splitter->setName(entity->fullName());
             splitter->setDescription(entity->description());
-            splitter->setInputs(0);
-            splitter->setOutputs(enu->values().count());
-            splitter->setOutputNames({enu->values()});
+            for (QString curr : enu->values())
+            {
+                splitter->addOutput(curr, "{149e81c5-fc6e-5cc7-a0a6-6f736a6487ca}", curr); //integer
+            }
             splitter->setInstructionId(dnai::enums::QInstructionID::ENUM_SPLITTER);
             splitter->setConstruction({entity->id()});
 
@@ -485,6 +527,7 @@ namespace dnai
 
 		void ContextMenuModel::appendParameter(Entity* entity)
 		{
+            QString varType = entity->guiModel<Variable>()->varType().toString();
             ContextMenuItem *parameters = m_hash["/" + m_root->name() + "/" + m_functions->name() + "/" + entity->parentItem()->fullName() + "/Parameters"];
 
 			/*
@@ -493,11 +536,9 @@ namespace dnai
             ContextMenuItem *getter = new ContextMenuItem();
             getter->setName("Get " + entity->name());
             getter->setDescription(entity->description());
-            getter->setInputs(0);
-            getter->setOutputs(1);
-            getter->setOutputNames({ "reference" });
+            getter->addOutput("reference", varType, "Value");
             getter->setInstructionId(dnai::enums::QInstructionID::GETTER);
-            getter->setConstruction({ static_cast<qint32>(entity->id()) });
+            getter->setConstruction({ entity->id() });
 
             addItem(getter, parameters, entity);
 
@@ -507,10 +548,8 @@ namespace dnai
             ContextMenuItem *setter = new ContextMenuItem();
             setter->setName("Set " + entity->name());
             setter->setDescription(entity->description());
-            setter->setInputs(1);
-            setter->setInputNames({ "value" });
-            setter->setOutputs(1);
-            setter->setOutputNames({ "reference" });
+            setter->addInput("value", varType, "Value");
+            setter->addOutput("reference", varType, "Value");
             setter->setFlowIn(1);
             setter->setFlowOut(1);
             setter->setInstructionId(dnai::enums::QInstructionID::SETTER);
@@ -521,6 +560,7 @@ namespace dnai
 
         void ContextMenuModel::appendReturn(Entity* entity)
         {
+            QString varType = entity->guiModel<Variable>()->varType().toString();
             ContextMenuItem *returns = m_hash["/" + m_root->name() + "/" + m_functions->name() + "/" + entity->parentItem()->fullName() + "/Returns"];
 
             /*
@@ -529,9 +569,7 @@ namespace dnai
             ContextMenuItem *getter = new ContextMenuItem();
             getter->setName("Get " + entity->name());
             getter->setDescription(entity->description());
-            getter->setInputs(0);
-            getter->setOutputs(1);
-            getter->setOutputNames({ "reference" });
+            getter->addOutput("reference", varType, "Value");
             getter->setInstructionId(dnai::enums::QInstructionID::GETTER);
             getter->setConstruction({ entity->id() });
 
@@ -543,10 +581,8 @@ namespace dnai
             ContextMenuItem *setter = new ContextMenuItem();
             setter->setName("Set " + entity->name());
             setter->setDescription(entity->description());
-            setter->setInputs(1);
-            setter->setInputNames({ "value" });
-            setter->setOutputs(1);
-            setter->setOutputNames({ "reference" });
+            setter->addInput("value", varType, "Value");
+            setter->addOutput("reference", varType, "Value");
             setter->setFlowIn(1);
             setter->setFlowOut(1);
             setter->setInstructionId(dnai::enums::QInstructionID::SETTER);
@@ -569,14 +605,9 @@ namespace dnai
             ContextMenuItem *getAttributes = new ContextMenuItem();
             getAttributes->setName("Get attributes");
             getAttributes->setDescription("Get attributes of " + entity->name() + " variable");
-            getAttributes->setInputs(1);
-            getAttributes->setInputNames({"this"});
-            getAttributes->setOutputs(data->attributes().count());
-            getAttributes->setOutputNames(data->attributes());
+            getAttributes->addInput("this", entity->guid().toString(), "Target");
             getAttributes->setInstructionId(dnai::enums::QInstructionID::GET_ATTRIBUTES);
             getAttributes->setConstruction({entity->id()});
-
-            addItem(getAttributes, entityCategory, entity);
 
             /*
              * Set attributes
@@ -584,16 +615,23 @@ namespace dnai
             ContextMenuItem *setAttributes = new ContextMenuItem();
             setAttributes->setName("Set attributes");
             setAttributes->setDescription("Set attributes of " + entity->name() + " variable");
-            setAttributes->setInputs(1 + data->attributes().count());
-            setAttributes->setInputNames(QStringList({"this"}) + data->attributes());
-            setAttributes->setOutputs(data->attributes().count());
-            setAttributes->setOutputNames(data->attributes());
+            setAttributes->addInput("this", entity->guid().toString(), "Target");
             setAttributes->setFlowIn(1);
             setAttributes->setFlowOut(1);
             setAttributes->setType(entity->entityType());
             setAttributes->setInstructionId(dnai::enums::QInstructionID::SET_ATTRIBUTES);
             setAttributes->setConstruction({entity->id()});
 
+            for (const QString &curr : data->attributes())
+            {
+                QString attrType = dnai::gcore::HandlerManager::Instance().getEntity(data->getAttribute(curr))->guid().toString();
+
+                getAttributes->addOutput(curr, attrType, curr);
+                setAttributes->addInput(curr, attrType, curr);
+                setAttributes->addOutput(curr, attrType, curr);
+            }
+
+            addItem(getAttributes, entityCategory, entity);
             addItem(setAttributes, entityCategory, entity);
         }
 
@@ -601,6 +639,9 @@ namespace dnai
         {
             models::ListType *data = entity->guiModel<models::ListType>();
             models::Entity *stored = dnai::gcore::HandlerManager::Instance().getEntity(data->storedType());
+
+            QString listType = entity->guid().toString();
+            QString storedType = stored->guid().toString();
 
             ContextMenuItem *entityCategory = new ContextMenuItem();
             entityCategory->setName(entity->fullName());
@@ -612,10 +653,9 @@ namespace dnai
             ContextMenuItem *foreachins = new ContextMenuItem();
             foreachins->setName("Foreach");
             foreachins->setDescription("Iterate over " + entity->name() + " elements");
-            foreachins->setInputs(1);
-            foreachins->setInputNames({"array"});
-            foreachins->setOutputs(2);
-            foreachins->setOutputNames({"index", "element"});
+            foreachins->addInput("array", listType, "Target");
+            foreachins->addOutput("index", "{149e81c5-fc6e-5cc7-a0a6-6f736a6487ca}", "Index"); //integer
+            foreachins->addOutput("element", storedType, "Element");
             foreachins->setFlowIn(1);
             foreachins->setFlowOut(2);
             foreachins->setInstructionId(dnai::enums::QInstructionID::FOREACH);
@@ -629,10 +669,10 @@ namespace dnai
             ContextMenuItem *insertins = new ContextMenuItem();
             insertins->setName("Insert at");
             insertins->setDescription("Insert element in " + entity->name() + " at index");
-            insertins->setInputs(3);
-            insertins->setInputNames({"array", "element", "index"});
-            insertins->setOutputs(1);
-            insertins->setOutputNames({"count"});
+            insertins->addInput("array", listType, "Target");
+            insertins->addInput("element", storedType, "Element");
+            insertins->addInput("index", "{149e81c5-fc6e-5cc7-a0a6-6f736a6487ca}", "Index"); //integer
+            insertins->addOutput("count", "{149e81c5-fc6e-5cc7-a0a6-6f736a6487ca}", "Size"); //integer
             insertins->setFlowIn(1);
             insertins->setFlowOut(1);
             insertins->setType(entity->entityType());
@@ -647,10 +687,9 @@ namespace dnai
             ContextMenuItem *appendins = new ContextMenuItem();
             appendins->setName("Append");
             appendins->setDescription("Append an element in " + entity->name());
-            appendins->setInputs(2);
-            appendins->setInputNames({"array", "element"});
-            appendins->setOutputs(1);
-            appendins->setOutputNames({"count"});
+            appendins->addInput("array", listType, "Target");
+            appendins->addInput("element", storedType, "Element");
+            appendins->addOutput("count", "{149e81c5-fc6e-5cc7-a0a6-6f736a6487ca}", "Size"); //integer
             appendins->setFlowIn(1);
             appendins->setFlowOut(1);
             appendins->setType(entity->entityType());
@@ -665,10 +704,9 @@ namespace dnai
             ContextMenuItem *removeins = new ContextMenuItem();
             removeins->setName("Remove");
             removeins->setDescription("Remove an element from " + entity->name());
-            removeins->setInputs(2);
-            removeins->setInputNames({"array", "element"});
-            removeins->setOutputs(1);
-            removeins->setOutputNames({"removed"});
+            removeins->addInput("array", listType, "Target");
+            removeins->addInput("element", storedType, "Element");
+            removeins->addOutput("removed", storedType, "Removed");
             removeins->setFlowIn(1);
             removeins->setFlowOut(1);
             removeins->setType(entity->entityType());
@@ -683,10 +721,9 @@ namespace dnai
             ContextMenuItem *removeAtins = new ContextMenuItem();
             removeAtins->setName("Remove at");
             removeAtins->setDescription("Remove an element at index in " + entity->name());
-            removeAtins->setInputs(2);
-            removeAtins->setInputNames({"array", "index"});
-            removeAtins->setOutputs(1);
-            removeAtins->setOutputNames({"removed"});
+            removeAtins->addInput("array", listType, "Target");
+            removeAtins->addInput("index", "{149e81c5-fc6e-5cc7-a0a6-6f736a6487ca}", "Index");
+            removeAtins->addOutput("removed", storedType, "Removed");
             removeAtins->setFlowIn(1);
             removeAtins->setFlowOut(1);
             removeAtins->setType(entity->entityType());
@@ -701,10 +738,8 @@ namespace dnai
             ContextMenuItem *sizeins = new ContextMenuItem();
             sizeins->setName("Size");
             sizeins->setDescription("Get the size of a " + entity->name());
-            sizeins->setInputs(1);
-            sizeins->setInputNames({"array"});
-            sizeins->setOutputs(1);
-            sizeins->setOutputNames({"count"});
+            sizeins->addInput("array", listType, "Target");
+            sizeins->addOutput("count", "{149e81c5-fc6e-5cc7-a0a6-6f736a6487ca}", "Size"); //integer
             sizeins->setType(entity->entityType());
             sizeins->setInstructionId(dnai::enums::QInstructionID::SIZE);
             sizeins->setConstruction({stored->id()});
@@ -717,9 +752,7 @@ namespace dnai
             ContextMenuItem *clearins = new ContextMenuItem();
             clearins->setName("Clear");
             clearins->setDescription("Clear an array from its elements");
-            clearins->setInputs(1);
-            clearins->setInputNames({"array"});
-            clearins->setOutputs(0);
+            clearins->addInput("array", listType, "Target");
             clearins->setFlowIn(1);
             clearins->setFlowOut(1);
             clearins->setType(entity->entityType());
@@ -734,10 +767,10 @@ namespace dnai
             ContextMenuItem *fillins = new ContextMenuItem();
             fillins->setName("Fill");
             fillins->setDescription("Fill an array with an elements n times");
-            fillins->setInputs(3);
-            fillins->setInputNames({"array", "element", "count"});
-            fillins->setOutputs(1);
-            fillins->setOutputNames({"count"});
+            fillins->addInput("array", listType, "Target");
+            fillins->addInput("element", storedType, "Element");
+            fillins->addInput("count", "{149e81c5-fc6e-5cc7-a0a6-6f736a6487ca}", "Count");
+            fillins->addOutput("count", "{149e81c5-fc6e-5cc7-a0a6-6f736a6487ca}", "Size");
             fillins->setFlowIn(1);
             fillins->setFlowOut(1);
             fillins->setType(entity->entityType());
@@ -752,10 +785,10 @@ namespace dnai
             ContextMenuItem *setvalueatins = new ContextMenuItem();
             setvalueatins->setName("Set value at");
             setvalueatins->setDescription("Set the value of a " + entity->name() + " at a specific index");
-            setvalueatins->setInputs(3);
-            setvalueatins->setInputNames({"array", "value", "index"});
-            setvalueatins->setOutputs(1);
-            setvalueatins->setOutputNames({"value"});
+            setvalueatins->addInput("array", listType, "Target");
+            setvalueatins->addInput("value", storedType, "Value");
+            setvalueatins->addInput("index", "{149e81c5-fc6e-5cc7-a0a6-6f736a6487ca}", "Index");
+            setvalueatins->addOutput("value", storedType, "Value");
             setvalueatins->setFlowIn(1);
             setvalueatins->setFlowOut(1);
             setvalueatins->setType(entity->entityType());
@@ -776,10 +809,9 @@ namespace dnai
             auto accessins = new ContextMenuItem();
             accessins->setName("Access");
             accessins->setDescription("Get an element inside a " + entity->name());
-            accessins->setInputs(2);
-            accessins->setInputNames({"LeftOperand", "RightOperand"});
-            accessins->setOutputs(1);
-            accessins->setOutputNames({"result"});
+            accessins->addInput("LeftOperand", listType, "Target");
+            accessins->addInput("RightOperand", "{149e81c5-fc6e-5cc7-a0a6-6f736a6487ca}", "Index");
+            accessins->addOutput("result", storedType, "Element");
             accessins->setType(entity->entityType());
             accessins->setInstructionId(dnai::enums::QInstructionID::ACCESS);
             accessins->setConstruction({entity->id(), 2, stored->id()});
@@ -790,10 +822,9 @@ namespace dnai
             auto addins = new ContextMenuItem();
             addins->setName("Add");
             addins->setDescription("Add two " + entity->name() + "each other");
-            addins->setInputs(2);
-            addins->setInputNames({"LeftOperand", "RightOperand"});
-            addins->setOutputs(1);
-            addins->setOutputNames({"result"});
+            addins->addInput("LeftOperand", listType, "List 1");
+            addins->addInput("RightOperand", listType, "List 2");
+            addins->addOutput("result", listType, "Result");
             addins->setType(entity->entityType());
             addins->setInstructionId(dnai::enums::QInstructionID::ADD);
             addins->setConstruction({entity->id(), entity->id(), entity->id()});
@@ -804,10 +835,9 @@ namespace dnai
             auto subins = new ContextMenuItem();
             subins->setName("Substract");
             subins->setDescription("Substract two " + entity->name() + "each other");
-            subins->setInputs(2);
-            subins->setInputNames({"LeftOperand", "RightOperand"});
-            subins->setOutputs(1);
-            subins->setOutputNames({"result"});
+            subins->addInput("LeftOperand", listType, "Ref list");
+            subins->addInput("RightOperand", listType, "Sub list");
+            subins->addOutput("result", listType, "Result");
             subins->setType(entity->entityType());
             subins->setInstructionId(dnai::enums::QInstructionID::SUB);
             subins->setConstruction({entity->id(), entity->id(), entity->id()});
@@ -826,10 +856,9 @@ namespace dnai
             auto eqins = new ContextMenuItem();
             eqins->setName("Equal");
             eqins->setDescription("Check if 2 " + entity->name() + " contains same elements");
-            eqins->setInputs(2);
-            eqins->setInputNames({"LeftOperand", "RightOperand"});
-            eqins->setOutputs(1);
-            eqins->setOutputNames({"result"});
+            eqins->addInput("LeftOperand", listType, "List 1");
+            eqins->addInput("RightOperand", listType, "List 2");
+            eqins->addOutput("result", "{907ad50a-8f54-51ea-8c68-479d1d90a699}", "Result"); //boolean
             eqins->setType(entity->entityType());
             eqins->setInstructionId(dnai::enums::QInstructionID::EQUAL);
             eqins->setConstruction({entity->id(), entity->id()});
@@ -840,10 +869,9 @@ namespace dnai
             auto difins = new ContextMenuItem();
             difins->setName("Different");
             difins->setDescription("Check if 2 " + entity->name() + " contains different elements");
-            difins->setInputs(2);
-            difins->setInputNames({"LeftOperand", "RightOperand"});
-            difins->setOutputs(1);
-            difins->setOutputNames({"result"});
+            difins->addInput("LeftOperand", listType, "List 1");
+            difins->addInput("RightOperand", listType, "List 2");
+            difins->addOutput("result", "{907ad50a-8f54-51ea-8c68-479d1d90a699}", "Result"); //boolean
             difins->setType(entity->entityType());
             difins->setInstructionId(dnai::enums::QInstructionID::DIFFERENT);
             difins->setConstruction({entity->id(), entity->id()});
@@ -873,25 +901,19 @@ namespace dnai
             ContextMenuItem *callfuncins = new ContextMenuItem();
             callfuncins->setName("Call");
             callfuncins->setDescription("Call function " + entity->fullName());
-            callfuncins->setInputs(data->inputs().count());
-            QStringList inpNames;
 
             for (models::Entity *curr : data->inputs())
             {
-                inpNames.append(curr->name());
+                callfuncins->addInput(curr->name(), curr->guiModel<Variable>()->varType().toString(), curr->name());
                 refreshItems(curr);
             }
-            callfuncins->setInputNames(inpNames);
-
-            callfuncins->setOutputs(data->outputs().count());
-            QStringList oupNames;
 
             for (models::Entity *curr : data->outputs())
             {
-                oupNames.append(curr->name());
+                callfuncins->addOutput(curr->name(), curr->guiModel<Variable>()->varType().toString(), curr->name());
                 refreshItems(curr);
             }
-            callfuncins->setOutputNames(oupNames);
+
             callfuncins->setFlowIn(1);
             callfuncins->setFlowOut(1);
             callfuncins->setType(entity->entityType());

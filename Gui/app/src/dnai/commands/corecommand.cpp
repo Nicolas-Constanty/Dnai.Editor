@@ -46,6 +46,9 @@ namespace dnai
 
         void CoreCommand::Error()
         {
+            if (commandQueue.empty())
+                return;
+
             CommandManager::Instance()->removeCommand(commandQueue.front());
             commandQueue.pop();
         }

@@ -20,7 +20,7 @@ namespace dnai
 			{
 				struct Instruction
 				{
-					quint32 uid;
+                    quint32 uid = core::UNDEFINED_ID;
 					QUuid guiUuid;
                     QList<models::gui::Input*> inputs;
 					QList<models::gui::Output*> outputs;

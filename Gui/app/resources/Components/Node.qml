@@ -24,6 +24,20 @@ GenericNode {
     property int paddingColumn: 10
     property var function_entity: null
 
+    function stringToColor(str)
+    {
+        var hash = 0;
+        for (var i = 0; i < str.length; i++) {
+            hash = str.charCodeAt(i) + ((hash << 5) - hash);
+        }
+        var colour = '#';
+        for (var c = 0; c < 3; c++) {
+            var value = (hash >> (c * 8)) & 0xFF;
+            colour += ('00' + value.toString(16)).substr(-2);
+        }
+        return Qt.lighter(colour);
+    }
+
     state: "Open"
 
     onXChanged: {
@@ -163,7 +177,7 @@ GenericNode {
             anchors.margins: _node.paddingColumn
 
             Repeater {
-                model: _node.model.inputs
+                model: _node.model.inputSize
                 delegate: Input {
                     MouseArea {
                         anchors.fill: parent
@@ -178,14 +192,16 @@ GenericNode {
                     }
                     id: _inputDel
                     property string name: ""
-                    property string varType: ""
+                    property string innerColor: "black"
+                    property string outerColor: "black"
+
                     width: 10
                     height: 10
                     radius: 5
                     borderWidth: 3
-                    curveColor: AppSettings.theme["types"][varType]["outer"]
-                    borderColor: isHover ? AppSettings.theme["types"][varType]["inner"] : AppSettings.theme["types"][varType]["outer"]
-                    fillColor: isLink || isHover ? AppSettings.theme["types"][varType]["outer"] : AppSettings.theme["types"][varType]["inner"]
+                    curveColor: outerColor
+                    borderColor: isHover ? innerColor : outerColor
+                    fillColor: isLink || isHover ? outerColor : innerColor
                     onLinked: {
                         Controller.Function.instruction.linkData(_node.function_entity.id, instructionModel.uid, name, _node.instruction_model.uid, _inputDel.name);
                     }
@@ -194,19 +210,23 @@ GenericNode {
                     }
                     Component.onCompleted: {
                         name = _node.model.inputNames[index]
-                        var typeEntity = Controller.getEntityByFullName(_node.instruction_model.linked[index])
-                        if (typeEntity.guiProperties !== null)
+                        var inpType = Controller.getEntityGui(_node.model.getInput(name));
+                        var generatedColor = _node.stringToColor(inpType.guid + "");
+
+                        if (inpType.id <= 5)
                         {
-                            if (typeof(typeEntity.guiProperties.varType) === "undefined")
-                                varType = "Generic"
-                            else
-                                varType = Controller.getType(Controller.getTypeIndex(typeEntity.guiProperties.varType)).name
+                            innerColor = AppSettings.theme["types"][inpType.name]["inner"];
+                            outerColor = AppSettings.theme["types"][inpType.name]["outer"];
                         }
                         else
                         {
-                            varType = _node.instruction_model.linked[index];
+                            innerColor = "black";
+                            outerColor = generatedColor;
                         }
 
+
+                        console.log('inner: ', innerColor);
+                        console.log("outer: ", outerColor);
                     }
 
                     Text {
@@ -216,7 +236,7 @@ GenericNode {
                         anchors.leftMargin: 5
                         height: parent.height
 
-                        text: parent.name
+                        text: _node.model.getInputDisplayName(parent.name)
                         font.pointSize: 8
 
                         color: "white"
@@ -295,11 +315,13 @@ GenericNode {
             anchors.top: _flowOut.bottom
             anchors.margins: _node.paddingColumn
             Repeater {
-                model: _node.model.outputs
+                model: _node.model.outputSize
                 delegate: Output {
                     id: _outputDel
                     property string name: ""
-                    property string varType: ""
+                    property string innerColor : "black"
+                    property string outerColor : "black"
+
                     MouseArea {
                         anchors.fill: parent
                         hoverEnabled: true
@@ -316,9 +338,9 @@ GenericNode {
                     height: 10
                     radius: 5
                     borderWidth: 3
-                    curveColor: AppSettings.theme["types"][varType]["outer"]
-                    borderColor: isHover ? AppSettings.theme["types"][varType]["inner"] : AppSettings.theme["types"][varType]["outer"]
-                    fillColor: isLink || isHover ? AppSettings.theme["types"][varType]["outer"] : AppSettings.theme["types"][varType]["inner"]
+                    curveColor: outerColor
+                    borderColor: isHover ? innerColor : outerColor
+                    fillColor: isLink || isHover ? outerColor : innerColor
                     onLinked: {
                         Controller.Function.instruction.linkData(_node.function_entity.id, _node.instruction_model.uid, _outputDel.name, instructionModel.uid, name);
                     }
@@ -332,19 +354,19 @@ GenericNode {
                     }
                     Component.onCompleted: {
                         name = _node.model.outputNames[index]
-                        var typeEntity = Controller.getEntityByFullName(_node.instruction_model.linked[_node.model.construction.length + index - 1])
-                        if (typeEntity.guiProperties !== null)
+                        var oupType = Controller.getEntityGui(_node.model.getOutput(name));
+                        var generatedColor = _node.stringToColor(oupType.guid + "");
+
+                        if (oupType.id <= 5)
                         {
-                            if (typeof(typeEntity.guiProperties.varType) === "undefined")
-                                varType = "Generic"
-                            else
-                                varType = Controller.getType(Controller.getTypeIndex(typeEntity.guiProperties.varType)).name
+                            innerColor = AppSettings.theme["types"][oupType.name]["inner"];
+                            outerColor = AppSettings.theme["types"][oupType.name]["outer"];
                         }
                         else
                         {
-                            varType = _node.instruction_model.linked[_node.model.construction.length + index - 1];
+                            innerColor = "black";
+                            outerColor = generatedColor;
                         }
-
                     }
 
                     Text {
@@ -354,7 +376,7 @@ GenericNode {
                         anchors.rightMargin: 5
                         height: parent.height
 
-                        text: parent.name
+                        text: _node.model.getOutputDisplayName(parent.name)
                         font.pointSize: 8
 
                         color: "white"
