@@ -67,7 +67,7 @@ namespace dnai
 
 				qint32 x() const;
 				Q_INVOKABLE bool setX(qint32 x);
-				
+
 				qint32 y() const;
 				Q_INVOKABLE bool setY(qint32 y);
 

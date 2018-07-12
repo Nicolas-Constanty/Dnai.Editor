@@ -74,7 +74,6 @@ namespace dnai
 		protected:
             interfaces::ALinkable *m_linkable;
 			LinkStatus m_status;
-
 		};
 	}
 }

@@ -13,18 +13,13 @@ namespace dnai
 		}
 
 		void Command::execute() const
-		{
-			
-		}
+        {}
 
 		void Command::unExcute() const
-		{
-			
-		}
+        {}
 
 		void Command::executeSave()
-		{
-		}
+        {}
 
 		bool Command::isSave() const
 		{
