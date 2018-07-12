@@ -11,8 +11,7 @@ namespace dnai
 	{
         class EntityTree : public QAbstractItemModel
 		{
-			Q_OBJECT
-		
+            Q_OBJECT
 		public:
 			enum ROLES
 			{

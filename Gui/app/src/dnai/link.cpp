@@ -17,7 +17,6 @@ namespace dnai
 
 	Link::~Link()
 	{
-
 		if (m_bezierCurve)
 			delete m_bezierCurve;
 	}

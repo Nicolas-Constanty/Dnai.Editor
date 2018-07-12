@@ -33,7 +33,6 @@ void ToasterManagerService::removeOne(Toast *toast) {
 }
 
 Toast *ToasterManagerService::createToast(QString const &text, std::function<void ()> func) {
-
     //the main view is null when we load the project at editor start
     if (dnai::Editor::instance().mainView() == nullptr)
         return nullptr;

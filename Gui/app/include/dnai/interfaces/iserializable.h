@@ -34,7 +34,7 @@ namespace dnai {
 		{
 		public:
 			virtual ~ASerializable() = default;
-			virtual void serialize(QJsonObject &obj) const override = 0;
+            void serialize(QJsonObject &obj) const override = 0;
 
 			template<class DataType>
 			QJsonArray serializeList(const QList<DataType *> &datalist) const
@@ -72,7 +72,7 @@ namespace dnai {
                 return dynamic_cast<T *>(n);
             }
 		protected:
-			virtual void _deserialize(const QJsonObject &obj) override = 0;
+            void _deserialize(const QJsonObject &obj) override = 0;
 		};
     }
 }

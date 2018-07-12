@@ -55,7 +55,6 @@ SOURCES += \
     src/dnai/commands/movenodecommand.cpp \
     src/dnai/commands/zoomcanvascommand.cpp \
     src/dnai/controllers/consolecontroller.cpp \
-    src/dnai/controllers/icontroller.cpp \
     src/dnai/controllers/inputcontroller.cpp \
     src/dnai/controllers/outputcontroller.cpp \
     src/dnai/enums/qcstandardpaths.cpp \
@@ -101,7 +100,6 @@ SOURCES += \
     src/dnai/baseio.cpp \
     src/dnai/baselinkable.cpp \
     src/dnai/editor.cpp \
-    src/dnai/entitiesfactory.cpp \
     src/dnai/eventutilities.cpp \
     src/dnai/focusmanager.cpp \
     src/dnai/link.cpp \

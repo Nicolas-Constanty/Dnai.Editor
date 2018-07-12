@@ -20,7 +20,7 @@ namespace dnai
 					//IModelData implementation
 				public:
 					Entity() = default;
-					virtual ~Entity() override = default;
+                    ~Entity() override = default;
 
                     bool setData(const T& data) override
 					{
@@ -30,7 +30,7 @@ namespace dnai
 						return true;
 					}
 
-					virtual int index() const override
+                    int index() const override
 					{
 						return m_data.index;
 					}

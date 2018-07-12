@@ -18,7 +18,6 @@ namespace dnai
             void unExcute() const override;
             bool isSave() const override;
             QString infos() const override;
-
 		};
 
 	}

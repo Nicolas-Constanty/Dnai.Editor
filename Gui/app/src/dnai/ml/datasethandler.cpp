@@ -10,9 +10,7 @@ namespace dnai {
 namespace ml {
 
 DatasetHandler::DatasetHandler(QObject *parent) : QObject(parent)
-{
-
-}
+{}
 
 int DatasetHandler::open(const QString &path)
 {

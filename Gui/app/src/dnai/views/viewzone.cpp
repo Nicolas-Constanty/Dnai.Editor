@@ -51,9 +51,7 @@ namespace dnai
 		}
 
 		void ViewZone::removeView()
-		{
-
-		}
+		{}
 
 		void ViewZone::split(SplitDirection dir)
 		{

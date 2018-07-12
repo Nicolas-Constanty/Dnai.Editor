@@ -36,7 +36,6 @@ public:
 private:
     models::User *m_user;
     bool m_rememberUser;
-
 };
 }
 

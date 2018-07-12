@@ -49,7 +49,7 @@ namespace dnai
 			void nameChanged(const QString &desc);
 			void listIndexChanged(const QString list);
         private:
-			virtual QHash<int, QByteArray> roleNames() const override;
+            QHash<int, QByteArray> roleNames() const override;
         public:
 	        void serialize(QJsonObject& obj) const override;
         protected:

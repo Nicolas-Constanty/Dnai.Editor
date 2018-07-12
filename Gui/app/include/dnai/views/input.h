@@ -35,7 +35,6 @@ namespace dnai
 
 		protected:
             void afterRealease(Link *l) override;
-
 		};
 	}
 }

@@ -23,7 +23,7 @@ namespace dnai
 			/**
 			* \brief Make componentComplete Abstract
 			*/
-			virtual void componentComplete() override = 0;
+            void componentComplete() override = 0;
 			virtual GenericNode *getNode() = 0;
 
 			virtual void unlinkAll();

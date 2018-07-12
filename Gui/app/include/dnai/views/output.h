@@ -33,9 +33,6 @@ namespace dnai
             void updateLink() override;
 			void unlinkAll() override;
             void asyncUnlinkAll() override;
-
-		private:
-
 		};
 	}
 }

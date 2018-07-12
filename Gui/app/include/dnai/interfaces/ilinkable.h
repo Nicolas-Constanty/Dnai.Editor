@@ -50,7 +50,7 @@ namespace dnai {
             /**
             * \brief Break all the links between linkable
             */
-            virtual void unlinkAll() override = 0;
+            void unlinkAll() override = 0;
 
             /**
             * \brief Add a link
@@ -68,7 +68,7 @@ namespace dnai {
             * \brief is linkable is actually
             * \return bool
             */
-            virtual bool isLink() override = 0;
+            bool isLink() override = 0;
 
             /**
             * \brief return the link between this and linkable

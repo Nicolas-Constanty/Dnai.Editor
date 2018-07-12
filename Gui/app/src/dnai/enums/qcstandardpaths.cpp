@@ -53,9 +53,7 @@ console.log(StandardPaths.standardLocations(StandardPaths.ConfigLocation)); // G
  */
 
 QCStandardPaths::QCStandardPaths(QObject *parent) : QObject(parent)
-{
-
-}
+{}
 
 QCStandardPaths::~QCStandardPaths()
 {

@@ -66,7 +66,6 @@ namespace dnai
 			* \return int
 			*/
 			int getNumberRoundedCorner() const;
-
 		};
 	}
 }

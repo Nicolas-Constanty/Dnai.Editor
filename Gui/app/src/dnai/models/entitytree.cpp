@@ -6,9 +6,7 @@ namespace dnai
 	namespace models
     {
     EntityTree::EntityTree(QObject *parent) : QAbstractItemModel(parent), m_rootItem(nullptr)
-    {
-
-    }
+    {}
 
     QModelIndex EntityTree::index(const int row, const int column, const QModelIndex& parent) const
         {
@@ -94,8 +92,8 @@ namespace dnai
                 return QVariant::fromValue(entity->expanded());
 			case LIST_COLUMN:
 				return entity->listColumn();
-			default: 
-				return QVariant();
+            default:
+                return QVariant();
 			}
 		}
 

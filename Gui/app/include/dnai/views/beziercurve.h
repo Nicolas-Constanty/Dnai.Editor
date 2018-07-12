@@ -96,7 +96,6 @@ namespace dnai
             QVector2D m_lastScale;
 			qreal m_saveWidth;
 			qreal m_saveHeight;
-
 		};
 	}
 }

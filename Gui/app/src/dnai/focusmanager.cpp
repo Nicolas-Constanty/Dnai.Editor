@@ -4,9 +4,7 @@
 namespace dnai
 {
 	FocusManager::FocusManager()
-	{
-
-	}
+    {}
 
 	FocusManager::~FocusManager() {}
 
@@ -44,9 +42,7 @@ namespace dnai
 	}
 
 	FocusManagerIo::FocusManagerIo()
-	{
-
-	}
+	{}
 
 	FocusManagerIo::~FocusManagerIo() {}
 

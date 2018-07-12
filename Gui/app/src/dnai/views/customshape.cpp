@@ -21,7 +21,6 @@ namespace dnai
 
 		void CustomShape::setRadius(qreal radius)
 		{
-
 			if (radius == m_radius)
 				return;
 			m_radius = radius;

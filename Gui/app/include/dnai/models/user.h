@@ -9,11 +9,11 @@ namespace dnai {
 namespace models {
 class User: public QObject {
     Q_OBJECT
-
     Q_PROPERTY(QString name READ name WRITE setName NOTIFY nameChanged)
     Q_PROPERTY(QString profile_url READ profile_url WRITE setProfile_url NOTIFY profile_urlChanged)
     Q_PROPERTY(QJsonArray files READ files WRITE setFiles NOTIFY filesChanged)
     Q_PROPERTY(QJsonObject currentFileData READ currentFileData WRITE setCurrentFileData NOTIFY currentFileDataChanged)
+
 public:
     User();
     ~User();
