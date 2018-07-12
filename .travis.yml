@@ -14,9 +14,9 @@ before_script:
   - brew install lcov
   - brew upgrade python
   - curl -O http://python-distribute.org/distribute_setup.py
-  - python distribute_setup.py
+  - python3 distribute_setup.py
   - curl -O https://raw.github.com/pypa/pip/master/contrib/get-pip.py
-  - python get-pip.py
+  - python3 get-pip.py
   - sudo pip install codecov
 
 
