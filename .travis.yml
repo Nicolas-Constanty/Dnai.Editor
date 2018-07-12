@@ -12,7 +12,7 @@ before_script:
   - export QTDIR=~/Qt/5.10.1/clang_64
   - export PATH=$QTDIR/bin:$PATH
   - brew install lcov
-  - pip install codecov
+  - sudo pip install codecov
 
 script:
   - if [ ! -e ~/Qt/5.10.1/ ] ; then
