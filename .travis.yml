@@ -8,7 +8,7 @@ cache:
   directories:
     - ~/Qt/
     
-before-script:
+before_script:
   - export QTDIR=~/Qt/5.10.1/clang_64/bin/qmake
   - export PATH=$QTDIR/bin:$PATH
 
