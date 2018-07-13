@@ -80,9 +80,6 @@ ApplicationWindow {
                                 "newModal" : newProjectPopup
                             },
                             "Welcome")
-                    if (Editor.solutionName) {
-                        openSolution(Editor.solutionName); //load fails
-                    }
                 }
             }
         }

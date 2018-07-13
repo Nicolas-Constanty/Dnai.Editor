@@ -68,6 +68,11 @@ Window {
         asynchronous: true
         visible: status == Loader.Ready
         sourceComponent: AppSettings.themeLoaded ? _mainWindow : _selectTheme
+        onLoaded: {
+            if (Editor.solutionName) {
+                item.openSolution(Editor.solutionName);
+            }
+        }
     }
 
     Component {
