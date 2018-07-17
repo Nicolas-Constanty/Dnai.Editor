@@ -410,39 +410,37 @@ namespace dnai
         /*
          * Building inputs
          */
-        if (instruction->inputs().empty())
+        QList<models::gui::Input *> inputs;
+
+        for (QString const &curr : node->inputNames())
         {
-            QList<models::gui::Input *> inputs;
-            for (QString const &curr : node->inputNames())
-            {
-                models::gui::Input *toadd = new models::gui::Input();
+            models::gui::Input *toadd = new models::gui::Input();
 
-                toadd->setName(curr);
-                toadd->setVarType(node->getInput(curr));
-                inputs.append(toadd);
-            }
-
-            instruction->setInputs(inputs);
+            toadd->setName(curr);
+            toadd->setVarType(QUuid::fromString(node->getInput(curr)));
+            inputs.append(toadd);
+            qDebug() << "==Editor== Set " << curr << " input type to " << toadd->varType().toString();
         }
+
+        instruction->setInputs(inputs);
 
         /*
          * Building outputs
          */
-        if (instruction->outputs().empty())
+
+        QList<models::gui::Output *> outputs;
+
+        for (QString const &curr : node->outputNames())
         {
-            QList<models::gui::Output *> outputs;
+            models::gui::Output *toadd = new models::gui::Output();
 
-            for (QString const &curr : node->outputNames())
-            {
-                models::gui::Output *toadd = new models::gui::Output();
-
-                toadd->setName(curr);
-                toadd->setVarType(node->getOutput(curr));
-                outputs.append(toadd);
-            }
-
-            instruction->setOutputs(outputs);
+            toadd->setName(curr);
+            toadd->setVarType(QUuid::fromString(node->getOutput(curr)));
+            outputs.append(toadd);
+            qDebug() << "==Editor== Set " << curr << " output type to " << toadd->varType().toString();
         }
+
+        instruction->setOutputs(outputs);
 
         /*
          * Handle instruction data links

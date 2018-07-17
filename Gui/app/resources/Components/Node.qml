@@ -203,7 +203,11 @@ GenericNode {
                     borderColor: isHover ? innerColor : outerColor
                     fillColor: isLink || isHover ? outerColor : innerColor
                     onLinked: {
-                        Controller.Function.instruction.linkData(_node.function_entity.id, instructionModel.uid, name, _node.instruction_model.uid, _inputDel.name);
+                        if (instructionModel.getOutputType(name) === _node.instruction_model.getInputType(_inputDel.name))
+                        {
+                            console.log('out type: ', instructionModel.getOutputType(name), ' vs in type: ', _node.instruction_model.getInputType(_inputDel.name));
+                            Controller.Function.instruction.linkData(_node.function_entity.id, instructionModel.uid, name, _node.instruction_model.uid, _inputDel.name);
+                        }
                     }
                     onUnlinked: {
                         Controller.Function.instruction.unlinkData(_node.function_entity.id, _node.instruction_model.uid, _inputDel.name);
@@ -342,14 +346,13 @@ GenericNode {
                     borderColor: isHover ? innerColor : outerColor
                     fillColor: isLink || isHover ? outerColor : innerColor
                     onLinked: {
-                        Controller.Function.instruction.linkData(_node.function_entity.id, _node.instruction_model.uid, _outputDel.name, instructionModel.uid, name);
+                        if (_node.instruction_model.getOutputType(_outputDel.name) === instructionModel.getInputType(name))
+                        {
+                            console.log('in type: ', instructionModel.getInputType(name), ' vs out type: ', _node.instruction_model.getOutputType(_outputDel.name));
+                            Controller.Function.instruction.linkData(_node.function_entity.id, _node.instruction_model.uid, _outputDel.name, instructionModel.uid, name);
+                        }
                     }
                     onUnlinked: {
-                        console.log("Unlink Output")
-                        console.log(name)
-                        console.log(instructionModel)
-                        console.log(_outputDel.name)
-                        console.log(_node.instruction_model)
                         Controller.Function.instruction.unlinkData(_node.function_entity.id, instruction_model.id, name);
                     }
                     Component.onCompleted: {

@@ -511,18 +511,32 @@ namespace dnai
         void ContextMenuModel::appendEnumeration(Entity *entity)
         {
             models::EnumType *enu = entity->guiModel<models::EnumType>();
-            ContextMenuItem *splitter = new ContextMenuItem();
+            QString enuType = entity->guid().toString();
 
+            ContextMenuItem *splitter = new ContextMenuItem();
             splitter->setName(entity->fullName());
             splitter->setDescription(entity->description());
             for (QString curr : enu->values())
             {
-                splitter->addOutput(curr, "{149e81c5-fc6e-5cc7-a0a6-6f736a6487ca}", curr); //integer
+                splitter->addOutput(curr, enuType, curr);
             }
             splitter->setInstructionId(dnai::enums::QInstructionID::ENUM_SPLITTER);
             splitter->setConstruction({entity->id()});
 
             addItem(splitter, m_enumerations, entity);
+
+            /*ContextMenuItem *log_b_op = m_hash[m_root->name() + "/" + ]
+
+            ContextMenuItem *eq = new ContextMenuItem();
+            eq->setName("Equal");
+            eq->setDescription("Check if two enum values are equal");
+            eq->addInput("LeftOperand", enuType, "Value 1");
+            eq->addInput("RightOperand", enuType, "Value 2");
+            eq->addOutput("result", enuType, "Result");
+            eq->setInstructionId(dnai::enums::QInstructionID::EQUAL);
+            eq->setConstruction({entity->id(), entity->id()});
+
+            addItem(eq, , entity);*/
         }
 
 		void ContextMenuModel::appendParameter(Entity* entity)
