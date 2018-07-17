@@ -13,7 +13,7 @@ MouseArea {
     property int absX: Editor.qmlMainView().mapFromItem(mouseArea, mouseArea.mouseX, mouseArea.mouseY).x
     property int absY: Editor.qmlMainView().mapFromItem(mouseArea, mouseArea.mouseX, mouseArea.mouseY).y
 
-    property string text: "Did you know"
+    property string text: qsTr("Did you know")
 
     Rectangle {
         id: rectId

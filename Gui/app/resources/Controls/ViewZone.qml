@@ -380,26 +380,26 @@ Item {
     Menu {
         id: contextMenu
         MenuItem {
-            text: "SplitLeft"
+            text: qsTr("SplitLeft")
             onClicked: {
 //                appendNextV()
                 split(0, rootItem.width, rootItem.height)
             }
         }
         MenuItem {
-            text: "SplitRight"
+            text: qsTr("SplitRight")
             onClicked: {
                 split(1, rootItem.width, rootItem.height)
             }
         }
         MenuItem {
-            text: "SplitTop"
+            text: qsTr("SplitTop")
             onClicked: {
                 split(2, rootItem.width, rootItem.height)
             }
         }
         MenuItem {
-            text: "SplitBottom"
+            text: qsTr("SplitBottom")
             onClicked: {
                 split(3, rootItem.width, rootItem.height)
             }

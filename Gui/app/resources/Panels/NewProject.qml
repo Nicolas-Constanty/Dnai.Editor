@@ -45,7 +45,7 @@ Item {
 
     FileDialog {
         id: fileDialog
-        title: "Choose a directory"
+        title: qsTr("Choose a directory")
         folder: Qt.resolvedUrl(StandardPath.writableLocation((StandardPath.HomeLocation)))
         selectFolder: true
         selectExisting: true
@@ -115,7 +115,7 @@ Item {
 
         MLabel {
             id: title
-            text: "Create new project"
+            text: qsTr("Create new project")
             anchors.top: parent.top
             anchors.horizontalCenter: parent.horizontalCenter
             font.pointSize: 14
@@ -123,7 +123,7 @@ Item {
 
         MLabel {
             id: name
-            text: "Name:"
+            text: qsTr("Name:")
             anchors.top: title.bottom
             anchors.topMargin: 20
             anchors.verticalCenter: nameEditable.verticalCenter
@@ -140,7 +140,7 @@ Item {
             height: 30
             horizontalAlignment: TextInput.AlignLeft
             KeyNavigation.tab: solutionNameEditable
-            placeholderText: "Project's name ..."
+            placeholderText: qsTr("Project's name ...")
             onTextChanged: {
                 solutionNameEditable.text = nameEditable.text
             }
@@ -148,7 +148,7 @@ Item {
 
         MLabel {
             id: location
-            text: "Location:"
+            text: qsTr("Location:")
             anchors.top: nameEditable.bottom
             anchors.topMargin: 20
             anchors.verticalCenter: locationEditable.verticalCenter
@@ -177,7 +177,7 @@ Item {
             anchors.bottom: locationEditable.bottom
             width: browseLocation.textWidth + 20
             height: browseLocation.textHeight + 20
-            textValue: "Browse..."
+            textValue: qsTr("Browse...")
             textPointSize: 12
 
             onPressed: {
@@ -187,7 +187,7 @@ Item {
 
         MLabel {
             id: solutioName
-            text: "Solution name:"
+            text: qsTr("Solution name:")
             anchors.top: locationEditable.bottom
             anchors.topMargin: 20
             anchors.verticalCenter: solutionNameEditable.verticalCenter
@@ -204,7 +204,7 @@ Item {
             height: 30
             horizontalAlignment: TextInput.AlignLeft
             KeyNavigation.tab: nameEditable
-            placeholderText: "Project's solution name ..."
+            placeholderText: qsTr("Project's solution name ...")
         }
 
         CustomMenuButton {
@@ -214,7 +214,7 @@ Item {
             anchors.horizontalCenter: parent.horizontalCenter
             width: validateButton.textWidth + 20
             height: validateButton.textHeight + 20
-            textValue: "Create Project"
+            textValue: qsTr("Create Project")
 
             onPressed: {
                 if (locationEditable.text && solutionNameEditable.text && nameEditable.text) {
@@ -230,19 +230,19 @@ Item {
                     }
                 } else {
                     if (!locationEditable.text)
-                        locationEditable.errorText = "Field is empty"
+                        locationEditable.errorText = qsTr("Field is empty")
                     else {
                         locationEditable.errorText = ""
                     }
 
                     if (!nameEditable.text)
-                        nameEditable.errorText = "Field is empty"
+                        nameEditable.errorText = qsTr("Field is empty")
                     else {
                         nameEditable.errorText = ""
                     }
 
                     if (!solutionNameEditable.text)
-                        solutionNameEditable.errorText = "Field is empty"
+                        solutionNameEditable.errorText = qsTr("Field is empty")
                     else {
                         solutionNameEditable.errorText = ""
                     }

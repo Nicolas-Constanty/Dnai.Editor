@@ -79,7 +79,7 @@ ApplicationWindow {
                                 "openModal" : openProjectId,
                                 "newModal" : newProjectPopup
                             },
-                            "Welcome")
+                            qsTr("Welcome"))
                     if (Editor.solutionName) {
                         openSolution(Editor.solutionName); //load fails
                     }

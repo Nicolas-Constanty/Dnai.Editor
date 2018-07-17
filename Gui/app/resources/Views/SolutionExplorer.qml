@@ -320,7 +320,7 @@ Rectangle {
 
             MLabel {
                 font.pointSize: 13
-                text: "Create Project"
+                text: qsTr("Create Project")
                 anchors.left: parent.left
                 anchors.right: addId.left
                 anchors.rightMargin: 10

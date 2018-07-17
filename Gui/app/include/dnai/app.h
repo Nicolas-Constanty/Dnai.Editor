@@ -3,6 +3,8 @@
 
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
+#include <QTranslator>
+
 #include "processmanager.h"
 #include "dnai/interfaces/iloadingclass.h"
 #include "session.h"
@@ -50,6 +52,7 @@ namespace dnai {
         Editor &m_editor;
         QString m_currentVersionAPI;
         QMap<QString, qreal> m_loadedNumbers;
+        QTranslator m_translator;
 
         QObject *createQmlComponent(const QString &path);
 	    static void setupSettings();

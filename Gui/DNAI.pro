@@ -9,3 +9,9 @@ lib.file = lib/lib.pro
 qtplugins.file = plugins/plugins.pro
 
 app.depends = qtplugins lib
+
+CODECFORSRC = UTF-8
+
+TRANSLATIONS = dnai_fr_FR.ts \
+               dnai_en_US.ts
+

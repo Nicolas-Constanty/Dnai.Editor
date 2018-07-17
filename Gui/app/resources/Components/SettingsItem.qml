@@ -8,7 +8,7 @@ Item {
     property alias content: _content.content
     property alias contentItem: _content
 
-    property string text: "Item"
+    property string text: qsTr("Item")
     height: 40
     Label {
         anchors.left: parent.left

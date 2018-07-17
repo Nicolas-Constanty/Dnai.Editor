@@ -14,7 +14,6 @@ win32:RC_FILE = dnai.rc
 unix:ICON = DNAI_icon.icns
 }
 
-
 #INSTALLS += settingsfolderconf
 
 # The following define makes your compiler emit warnings if you use

@@ -21,7 +21,7 @@ ViewZone {
                         "openModal" : _parent.openModal,
                         "newModal" : _parent.newModal
                     },
-                    "Welcome")
+                    qsTr("Welcome"))
 //            selectStart()
         }
     }

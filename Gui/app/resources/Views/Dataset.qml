@@ -68,7 +68,7 @@ Popup {
             anchors.left: parent.left
             anchors.right: parent.right
             Label {
-                text: "Dataset"
+                text: qsTr("Dataset")
                 font.pointSize: 14
                 anchors.horizontalCenter: parent.horizontalCenter
             }
@@ -84,7 +84,7 @@ Popup {
                 anchors.left: parent.left
                 anchors.right: parent.right
                 Button {
-                    text: "Select a dataset folder"
+                    text: qsTr("Select a dataset folder")
                     awesomeIcon.text: "\uf07c"
                     awesomeIcon.size: 20
                     anchors.centerIn: parent
@@ -111,7 +111,7 @@ Popup {
                     Label {
                         id: selectedLabel
                         width: 60
-                        text: "Selected"
+                        text: qsTr("Selected")
                         anchors.verticalCenter: parent.verticalCenter
                     }
                     Rectangle {
@@ -122,7 +122,7 @@ Popup {
                     }
                     Label {
                         width: parent.width - labelLabel.width - selectedLabel.width - 2 * splitterLabel.width - _rowLabel.spacing * 6 - labelCount.width
-                        text: "Folder name"
+                        text: qsTr("Folder name")
                         anchors.verticalCenter: parent.verticalCenter
                     }
                     Rectangle {
@@ -133,7 +133,7 @@ Popup {
                     Label {
                         id: labelLabel
                         width: 200
-                        text: "Label"
+                        text: qsTr("Label")
                         horizontalAlignment: "AlignHCenter"
                         anchors.verticalCenter: parent.verticalCenter
                     }
@@ -145,80 +145,95 @@ Popup {
                     Label {
                         id: labelCount
                         width: 80
-                        text: "Count"
+                        text: qsTr("Count")
                         horizontalAlignment: "AlignHCenter"
                         anchors.verticalCenter: parent.verticalCenter
                     }
                 }
             }
             Rectangle {
-                height: AppSettings.theme["border"]["width"] * 2
+                height: AppSettings.theme["border"]["width"] * 2 + 1
                 anchors.left: parent.left
                 anchors.right: parent.right
                 color: AppSettings.theme["border"]["color"]
             }
-            Repeater {
-                id: _folderList
+
+            ScrollView {
+                id: _scrollbar
+                height: 200
                 anchors.left: parent.left
                 anchors.right: parent.right
-                delegate: Item {
-                    height: 40
-                    anchors.left: parent.left
-                    anchors.right: parent.right
-                    Row {
-                        id: _row
-                        spacing: 10
-                        anchors.fill: parent
-                        CheckBox {
-                            id: selectedBox
-                            width: 60
-                            checked: model.obj.selected
-                            anchors.verticalCenter: parent.verticalCenter
-                        }
-                        Rectangle {
-                            id: splitter
-                            width: AppSettings.theme["border"]["width"]
+                clip: true
+                Column {
+                    width: _scrollbar.width
+                    Repeater {
+                        id: _folderList
+                        width: _scrollbar.width
+                        delegate: Item {
                             height: 40
-                            color: AppSettings.theme["border"]["color"]
+                            width: _scrollbar.width
+                            Component.onCompleted: {
+                                console.log(model)
+                                console.log(model.obj)
+                            }
+
+                            Row {
+                                id: _row
+                                spacing: 10
+                                anchors.fill: parent
+                                CheckBox {
+                                    id: selectedBox
+                                    width: 60
+                                    checked: model.obj.selected
+                                    anchors.verticalCenter: parent.verticalCenter
+                                }
+                                Rectangle {
+                                    id: splitter
+                                    width: AppSettings.theme["border"]["width"]
+                                    height: 40
+                                    color: AppSettings.theme["border"]["color"]
+                                }
+                                Label {
+                                    width: parent.width - labelText.width - selectedBox.width - 2 * splitter.width - _row.spacing * 6 - labelcount.width
+                                    text: model.key
+                                    horizontalAlignment: "AlignLeft"
+                                    anchors.verticalCenter: parent.verticalCenter
+                                }
+                                Rectangle {
+                                    width: AppSettings.theme["border"]["width"]
+                                    height: 40
+                                    color: AppSettings.theme["border"]["color"]
+                                }
+                                TextField {
+                                    id: labelText
+                                    width: 200
+                                    text: model.obj.value
+                                    horizontalAlignment: "AlignHCenter"
+                                    anchors.verticalCenter: parent.verticalCenter
+                                    enableBar: false
+                                }
+                                Rectangle {
+                                    width: AppSettings.theme["border"]["width"]
+                                    height: 40
+                                    color: AppSettings.theme["border"]["color"]
+                                }
+                                Label {
+                                    id: labelcount
+                                    width: 80
+                                    text: model.obj.count
+                                }
+                            }
+                            Rectangle {
+                                height: AppSettings.theme["border"]["width"]
+                                anchors.left: parent.left
+                                anchors.right: parent.right
+                                anchors.bottom: parent.bottom
+                                color: AppSettings.theme["border"]["color"]
+                            }
                         }
-                        Label {
-                            width: parent.width - labelText.width - selectedBox.width - 2 * splitter.width - _row.spacing * 6 - labelcount.width
-                            text: model.key
-                            horizontalAlignment: "AlignLeft"
-                            anchors.verticalCenter: parent.verticalCenter
-                        }
-                        Rectangle {
-                            width: AppSettings.theme["border"]["width"]
-                            height: 40
-                            color: AppSettings.theme["border"]["color"]
-                        }
-                        TextField {
-                            id: labelText
-                            width: 200
-                            text: model.obj.value
-                            horizontalAlignment: "AlignHCenter"
-                            anchors.verticalCenter: parent.verticalCenter
-                            enableBar: false
-                        }
-                        Rectangle {
-                            width: AppSettings.theme["border"]["width"]
-                            height: 40
-                            color: AppSettings.theme["border"]["color"]
-                        }
-                        Label {
-                            id: labelcount
-                            width: 80
-                            text: model.obj.count
-                        }
-                    }
-                    Rectangle {
-                        height: AppSettings.theme["border"]["width"]
-                        anchors.left: parent.left
-                        anchors.right: parent.right
-                        anchors.bottom: parent.bottom
-                        color: AppSettings.theme["border"]["color"]
                     }
                 }
+
             }
 
             Item {
@@ -228,7 +243,7 @@ Popup {
                 CheckBox {
                     id: _autogenerate
                     anchors.verticalCenter: parent.verticalCenter
-                    text: "Auto generate .csv"
+                    text: qsTr("Auto generate .csv")
                     checked: true
                 }
             }
@@ -238,7 +253,7 @@ Popup {
                 anchors.right: parent.right
                 CheckBox {
                     anchors.verticalCenter: parent.verticalCenter
-                    text: "Suffle data"
+                    text: qsTr("Suffle data")
                     checked: true
                 }
             }
@@ -252,7 +267,8 @@ Popup {
                     Label {
                         id: _labelExisting
                         enabled: !_autogenerate.checked
-                        text: "Use existing .csv"
+                        text: qsTr("Use existing .csv")
+                        color: !_autogenerate.checked ? AppSettings.theme.text.color : AppSettings.theme.text.disableColor
                     }
                     TextField {
                         width: parent.width - _labelExisting.width - _browse.width - parent.spacing * 3
@@ -260,11 +276,28 @@ Popup {
                     }
                     Button {
                         id: _browse
-                        text: "Browse"
+                        text: qsTr("Browse")
                         width: 200
                         enabled: !_autogenerate.checked
                     }
                 }
+            }
+            Item {
+                visible: _autogenerate.checked
+                height: 40
+                anchors.left: parent.left
+                anchors.right: parent.right
+                Button {
+                    text: qsTr("Generate")
+                    anchors.centerIn: parent
+                }
+            }
+        }
+        Column {
+            anchors.left: parent.left
+            anchors.right: parent.right
+            Label {
+                text: qsTr("Dataset Info")
             }
         }
     }

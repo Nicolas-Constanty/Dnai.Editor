@@ -84,7 +84,7 @@ Item {
             id: _firstView
             height: 40
             width: _inputItem.width
-            text: "Input color"
+            text: qsTr("Input color")
             content: Component {
                 Row {
                     property alias seletctedType: _selectedType

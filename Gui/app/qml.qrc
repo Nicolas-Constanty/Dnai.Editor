@@ -9,7 +9,6 @@
         <file>resources/Forms/DropDownForm.ui.qml</file>
         <file>resources/Models/ColorPickerModel.qml</file>
         <file>resources/Models/LanguageModel.qml</file>
-        <file>resources/Panels/NodePanel.qml</file>
         <file>resources/Components/Node.qml</file>
         <file>resources/Components/Printer.qml</file>
         <file>resources/Forms/ConsoleForm.ui.qml</file>
@@ -17,7 +16,6 @@
         <file>resources/Components/ConsoleComponent.qml</file>
         <file>resources/Components/DeclarationComponent.qml</file>
         <file>resources/Images/WindowHandle.png</file>
-        <file>resources/Panels/NewProject.qml</file>
         <file>resources/Forms/ContainerForm.ui.qml</file>
         <file>resources/JavaScript/CreateComponent.js</file>
         <file>resources/Panels/ChooseThemePanel.qml</file>
@@ -25,7 +23,6 @@
         <file>settings/themes/dark.json</file>
         <file>settings/themes/light.json</file>
         <file>resources/Panels/Panel.qml</file>
-        <file>resources/Panels/PanelTop.qml</file>
         <file>resources/Controls/DMenuItem.qml</file>
         <file>resources/Controls/DMenu.qml</file>
         <file>resources/Controls/DToolButton.qml</file>
@@ -38,12 +35,10 @@
         <file>resources/Panels/ExpendablePanel.qml</file>
         <file>resources/Style/TitlePanel.qml</file>
         <file>resources/Style/MButton.qml</file>
-        <file>resources/Panels/DragAndDropPanel.qml</file>
         <file>resources/Components/DeclarationList.qml</file>
         <file>resources/Components/CommonModelView.qml</file>
         <file>resources/Style/EditableText.qml</file>
         <file>resources/Components/AddButton.qml</file>
-        <file>resources/Panels/Login.qml</file>
         <file>resources/Panels/Upload.qml</file>
         <file>resources/Forms/UploadForm.ui.qml</file>
         <file>resources/Components/UserMenu.qml</file>
@@ -124,5 +119,7 @@
         <file>resources/Components/IoSettings.qml</file>
         <file>resources/Components/SettingsItem.qml</file>
         <file>resources/Views/Dataset.qml</file>
+        <file>resources/Panels/Login.qml</file>
+        <file>resources/Panels/NewProject.qml</file>
     </qresource>
 </RCC>

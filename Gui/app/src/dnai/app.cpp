@@ -31,6 +31,10 @@ namespace dnai
         setupSettings();
         if (argc > 1)
             editor().setSolutionName(argv[1]);
+        QString locale = QLocale::system().name();
+
+        m_translator.load(QString("dnai_") + locale, applicationDirPath());
+        qDebug() << "Translator " << QString("dnai_") + locale << QGuiApplication::installTranslator(&m_translator);
         QTimer::singleShot(300, this, &App::loadSplashScreen);
 	}
 

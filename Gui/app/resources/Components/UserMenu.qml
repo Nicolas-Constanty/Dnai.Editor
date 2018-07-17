@@ -90,7 +90,7 @@ Item {
         }
         MTextClickable {
             id: logoutId
-            text: "Sign out"
+            text: qsTr("Sign out")
             font.pointSize: 8
             anchors.right: parent.right
             onPressed: {
@@ -111,7 +111,7 @@ Item {
 
     MText {
         id: signInId
-        text: "Sign In"
+        text: qsTr("Sign In")
         anchors.rightMargin: 15
         anchors.right: backgroundProfileId.left
         anchors.verticalCenter: backgroundProfileId.verticalCenter

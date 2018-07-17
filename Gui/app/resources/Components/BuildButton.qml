@@ -25,7 +25,7 @@ Rectangle {
         anchors.centerIn: parent
         visible: !_rotator.running
 
-        text: "Build"
+        text: qsTr("Build")
         color: "white"
         font.pointSize: 8
         font.bold: true

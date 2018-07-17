@@ -89,7 +89,7 @@ Item {
             anchors.top: parent.top
             anchors.topMargin: 20
             anchors.horizontalCenter: parent.horizontalCenter
-            text: "Login"
+            text: qsTr("Login")
             color: AppSettings.theme["text"]["color"]
             font.pointSize: 14
         }
@@ -104,7 +104,7 @@ Item {
         anchors.leftMargin: 20
         anchors.topMargin: 60
         font.pointSize: 12
-        text: "Username or Email :"
+        text: qsTr("Username or Email :")
         color: AppSettings.theme["text"]["color"]
     }
 
@@ -128,7 +128,7 @@ Item {
         anchors.left: usernameId.left
         anchors.topMargin: 60
         font.pointSize: 12
-        text: "Password :"
+        text: qsTr("Password :")
         color: AppSettings.theme["text"]["color"]
     }
 
@@ -159,7 +159,7 @@ Item {
 
         label: Text {
             color: AppSettings.theme["text"]["color"]
-            text: "Remember me"
+            text: qsTr("Remember me")
         }
 
     }
@@ -189,14 +189,14 @@ Item {
         anchors.rightMargin: 20
         anchors.leftMargin: 20
         height: 37
-        textValue: "Sign In"
+        textValue: qsTr("Sign In")
 
         onPressed: {
             if (usernameEditableId.text && passwordEditableId.text) {
                 errorId.text = ""
                 Editor.session.signin(usernameEditableId.text, passwordEditableId.text);
             } else {
-                errorId.text = "Fields empty."
+                errorId.text = qsTr("Fields empty.")
             }
         }
     }
@@ -206,7 +206,7 @@ Item {
         anchors.top: loginButtonId.bottom
         anchors.horizontalCenter: inputField.horizontalCenter
         anchors.topMargin: 20
-        text: "You don't have an account yet ?"
+        text: qsTr("You don't have an account yet ?")
 
         onPressed: {
             Qt.openUrlExternally(urlCreateAccount)
@@ -219,7 +219,7 @@ Item {
         anchors.horizontalCenter: createAccountId.horizontalCenter
         anchors.topMargin: 20
       //  anchors.bottom: inputField.bottom
-        text: "Forgot password ?"
+        text: qsTr("Forgot password ?")
 
         onPressed: {
             Qt.openUrlExternally(urlForgotPassword)
@@ -232,7 +232,7 @@ Item {
         target: Editor.session
 
         onApiErrors: {
-            errorId.text = "Wrong password or username."
+            errorId.text = qsTr("Wrong password or username.")
             console.log( "Invalid Credentials")
         }
 

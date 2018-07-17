@@ -31,7 +31,7 @@ BaseProperty {
         }
         TextField {
             id: _value
-            text: "MyName"
+            text: qsTr("MyName")
             height: _panel.contentHeight
             anchors.left: _label.right
             anchors.leftMargin: 3

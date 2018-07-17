@@ -51,7 +51,7 @@ Popup {
             anchors.left: parent.left
             anchors.right: parent.right
             Label {
-                text: "Settings"
+                text: qsTr("Settings")
                 font.pointSize: 14
                 anchors.horizontalCenter: parent.horizontalCenter
             }
@@ -69,7 +69,7 @@ Popup {
             height: 40
             anchors.left: parent.left
             anchors.right: parent.right
-            text: "Selected theme"
+            text: qsTr("Selected theme")
             content: Component {
                 ComboBox {
                     anchors.verticalCenter: parent.verticalCenter

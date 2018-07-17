@@ -3,9 +3,9 @@ import QtQuick 2.9
 ListModel {
     id: listModel
     ListElement {
-        text: "French"
+        text: qsTr("French")
     }
     ListElement {
-        text: "English"
+        text: qsTr("English")
     }
 }
