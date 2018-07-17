@@ -8,9 +8,4 @@ lib.file = lib/lib.pro
 
 qtplugins.file = plugins/plugins.pro
 
-win32-g++ {
-    app.depends = qtplugins lib
-}
-unix:!macx {
-    app.depends = qtplugins lib
-}
+app.depends = qtplugins lib
