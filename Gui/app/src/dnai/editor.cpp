@@ -410,37 +410,43 @@ namespace dnai
         /*
          * Building inputs
          */
-        QList<models::gui::Input *> inputs;
-
-        for (QString const &curr : node->inputNames())
+        if (instruction->inputs().empty())
         {
-            models::gui::Input *toadd = new models::gui::Input();
+            QList<models::gui::Input *> inputs;
 
-            toadd->setName(curr);
-            toadd->setVarType(QUuid::fromString(node->getInput(curr)));
-            inputs.append(toadd);
-            qDebug() << "==Editor== Set " << curr << " input type to " << toadd->varType().toString();
+            for (QString const &curr : node->inputNames())
+            {
+                models::gui::Input *toadd = new models::gui::Input();
+
+                toadd->setName(curr);
+                toadd->setVarType(QUuid::fromString(node->getInput(curr)));
+                inputs.append(toadd);
+                qDebug() << "==Editor== Set " << curr << " input type to " << toadd->varType().toString();
+            }
+
+            instruction->setInputs(inputs);
         }
-
-        instruction->setInputs(inputs);
 
         /*
          * Building outputs
          */
 
-        QList<models::gui::Output *> outputs;
-
-        for (QString const &curr : node->outputNames())
+        if (instruction->outputs().empty())
         {
-            models::gui::Output *toadd = new models::gui::Output();
+            QList<models::gui::Output *> outputs;
 
-            toadd->setName(curr);
-            toadd->setVarType(QUuid::fromString(node->getOutput(curr)));
-            outputs.append(toadd);
-            qDebug() << "==Editor== Set " << curr << " output type to " << toadd->varType().toString();
+            for (QString const &curr : node->outputNames())
+            {
+                models::gui::Output *toadd = new models::gui::Output();
+
+                toadd->setName(curr);
+                toadd->setVarType(QUuid::fromString(node->getOutput(curr)));
+                outputs.append(toadd);
+                qDebug() << "==Editor== Set " << curr << " output type to " << toadd->varType().toString();
+            }
+
+            instruction->setOutputs(outputs);
         }
-
-        instruction->setOutputs(outputs);
 
         /*
          * Handle instruction data links

@@ -184,7 +184,7 @@ ToolBar {
                     }
                 }
             }
-            DToolButton {
+            /*DToolButton {
 
                 text: qsTr("ML")
                 onButtonPressed: menuML.open()
@@ -200,7 +200,7 @@ ToolBar {
                         iconItem.font.pointSize: 8
                     }
                 }
-            }
+            }*/
 
         }
     }

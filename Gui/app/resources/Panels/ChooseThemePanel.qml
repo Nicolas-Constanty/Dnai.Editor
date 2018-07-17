@@ -26,7 +26,7 @@ ChooseThemeForm {
 
     validateButton.onClicked: {
         form.visible = false
-        wind.close()
-        main.loadMain()
+        main.show();
+        AppSettings.themeLoaded = true;
     }
 }

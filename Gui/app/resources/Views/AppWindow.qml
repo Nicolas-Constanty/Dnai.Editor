@@ -167,8 +167,6 @@ ApplicationWindow {
         height: dialogPopupItem.heightValue
     }
 
-
-
     onClosing: {
         close.accepted = true
         if (Editor.solution && Editor.solution.isProjectsSaved() === false) {

@@ -171,7 +171,8 @@ namespace dnai
         void InstructionHandler::onLinkDataError(quint32, quint32 from, const QString &output, quint32 to, const QString &input, const QString &message)
         {
             commands::CoreCommand::Error();
-            Editor::instance().notifyError("Unable to link instruction_" + QString::number(from) + "[" + output + "] to instruction_" + QString::number(to) + "[" + input + "]: " + message);
+            qWarning() << "==Core== Instruction.LinkDataError: " << "Unable to link instruction_" + QString::number(from) + "[" + output + "] to instruction_" + QString::number(to) + "[" + input + "]: " + message;
+            //Editor::instance().notifyError("Unable to link instruction_" + QString::number(from) + "[" + output + "] to instruction_" + QString::number(to) + "[" + input + "]: " + message);
         }
 
         void InstructionHandler::onDataUnlinked(quint32 function, quint32 instruction, const QString &input)
@@ -197,7 +198,8 @@ namespace dnai
         void InstructionHandler::onUnlinkDataError(quint32 function, quint32 instruction, const QString &input, const QString &message)
         {
             commands::CoreCommand::Error();
-            Editor::instance().notifyError("Unable to unlink input " + input + " of instruction " + QString::number(instruction) + " in function " + QString::number(function) + ": " + message);
+            qWarning() << "==Core== Instruction.UnlinkDataError: " << "Unable to unlink input " + input + " of instruction " + QString::number(instruction) + " in function " + QString::number(function) + ": " + message;
+            //Editor::instance().notifyError("Unable to unlink input " + input + " of instruction " + QString::number(instruction) + " in function " + QString::number(function) + ": " + message);
         }
 
         void InstructionHandler::onExecutionLinked(quint32 function, quint32 instruction, quint32 outpin, quint32 toInstruction)
