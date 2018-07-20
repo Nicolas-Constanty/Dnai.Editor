@@ -21,7 +21,7 @@
 
 namespace dnai
 {
-	Editor &Editor::m_instance = *(new Editor());
+    Editor *Editor::m_instance = nullptr;
 
 	Editor::Editor() : m_solution(nullptr)
 		, m_selection(nullptr)
@@ -30,7 +30,7 @@ namespace dnai
         , m_propertyPanelProperties(nullptr)
 	    , m_contextMenuModel(nullptr)
         , m_settings(nullptr)
-	{
+    {
 	}
 
 	Editor::~Editor()
@@ -107,7 +107,7 @@ namespace dnai
 
     void Editor::startApp()
     {
-       App::currentInstance()->load();
+       App::currentInstance().load();
 
        QObject::connect(&dnai::gcore::HandlerManager::Instance().Function(), SIGNAL(instructionAdded(models::Entity*,models::gui::Instruction*)),
                         this, SLOT(onInstructionAdded(models::Entity*,models::gui::Instruction*)));
@@ -212,7 +212,9 @@ namespace dnai
 
 	Editor& Editor::instance()
 	{
-        return m_instance;
+        if (m_instance == nullptr)
+            m_instance = new Editor();
+        return *m_instance;
     }
 
     void Editor::setSolution(dnai::Solution* sol)
@@ -316,7 +318,7 @@ namespace dnai
 
     Session *Editor::session() const
     {
-        return &App::currentInstance()->session();
+        return &App::currentInstance().session();
     }
 
     void Editor::setAppName(const QString &name)
@@ -684,8 +686,7 @@ namespace dnai
 
     void Editor::checkVersion()
     {
-        auto app = App::currentInstance();
-        app->versionsUpdater();
+        App::currentInstance().versionsUpdater();
       //  app->onNotifyVersionChanged();
     }
 
@@ -822,6 +823,7 @@ namespace dnai
             }
             else
             {
+                qDebug() << instructionsMap;
                 throw std::runtime_error("No such node \"" + nodePath.toStdString() + "\" in context menu");
             }
 		}
@@ -920,12 +922,12 @@ namespace dnai
 
     bool Editor::isNewVersionAvailable() const
     {
-        return App::currentInstance()->isNewVersionAvailable();
+        return App::currentInstance().isNewVersionAvailable();
     }
 
     qreal Editor::getSettingNumber(const QString &path)
     {
-        return App::currentInstance()->getSettingNumber(path);
+        return App::currentInstance().getSettingNumber(path);
     }
 
 	PropertyPanelProperties::PropertyPanelProperties(QObject *parent) : QObject(parent)

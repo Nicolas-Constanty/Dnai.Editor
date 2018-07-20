@@ -9,7 +9,7 @@ class ProcessManager : public QObject {
     Q_OBJECT
 
 public:
-    ProcessManager(QString const &file);
+    ProcessManager(QString const &file = "");
     ~ProcessManager();
 
     void launch();
@@ -20,14 +20,19 @@ private:
     quint16 findUnusedPort() const;
 
 public:
-    qint16 getServerPort();
+    quint16 getServerPort();
 
+    void setFile(const QString &file);
+
+private slots:
+    void setTimeOut();
 private:
     QString m_file;
     QProcess m_server;
     QProcess m_core;
     QString m_updaterApp;
     quint16 m_port;
+    bool m_isTimeOut;
 };
 
 #endif // PROCESSMANAGER_H

@@ -17,7 +17,6 @@ ApplicationWindow {
     property alias openProjectId: openProjectId
     property alias newProjectPopup: newProjectPopup
     Component.onCompleted: {
-        console.log("Hello")
         Editor.checkVersion()
     }
 
