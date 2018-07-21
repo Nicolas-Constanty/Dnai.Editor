@@ -159,6 +159,7 @@ namespace dnai
             void onListTypeSet(dnai::models::Entity *lst, dnai::models::Entity *type);
             void onParameterSet(dnai::models::Entity *func, QString param);
             void onReturnSet(dnai::models::Entity *func, QString ret);
+            void onVariableTypeSet(dnai::models::Entity *var, dnai::models::Entity *type);
 
 		private:
 			void parseJsonDocument(const QJsonObject &json);
@@ -170,6 +171,8 @@ namespace dnai
             ContextMenuItem *m_classes;
             ContextMenuItem *m_variables;
             ContextMenuItem *m_enumerations;
+
+            bool m_functionRebuilding;
 
             QHash<QString, ContextMenuItem*> m_hash;
 

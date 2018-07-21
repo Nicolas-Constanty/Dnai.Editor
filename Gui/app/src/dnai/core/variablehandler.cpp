@@ -132,12 +132,14 @@ namespace dnai
 
         void VariableHandler::onTypeSet(::core::EntityID variable, ::core::EntityID type)
         {
-            models::gui::declarable::Variable *var = getVariableData(variable);
-            models::Entity &typ = manager.getEntity(type);
+            models::Entity *var = &manager.getEntity(variable);
+            models::Variable *data = var->guiModel<models::Variable>();
+            models::Entity *typ = &manager.getEntity(type);
 
             commands::CoreCommand::Success();
             qDebug() << "==Core== Variable.TypeSet(" << variable << ", " << type << ")";
-            var->setVarType(typ.guid());
+            data->setVarType(typ->guid());
+            emit typeSet(var, typ);
         }
 
         void VariableHandler::onSetTypeError(::core::EntityID variable, ::core::EntityID type, const QString &message)
@@ -151,15 +153,13 @@ namespace dnai
 
         void VariableHandler::onValueSet(::core::EntityID variable, const QString &value)
         {
-            models::gui::declarable::Variable *var = getVariableData(variable);
+            models::Entity *var = &manager.getEntity(variable);
+            models::Variable *data = var->guiModel<models::Variable>();
 
-            if (var != nullptr)
-            {
-                commands::CoreCommand::Success();
-
-                qDebug() << "==Core== Variable.ValueSet(" << variable << ", " << value << ")";
-                var->setValue(value);
-            }
+            commands::CoreCommand::Success();
+            qDebug() << "==Core== Variable.ValueSet(" << variable << ", " << value << ")";
+            data->setValue(value);
+            emit valueSet(var, value);
         }
 
         void VariableHandler::onSetValueError(::core::EntityID variable, const QString &value, const QString &message)

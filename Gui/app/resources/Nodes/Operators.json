@@ -740,6 +740,14 @@
                     "construction": [],
                     "in": 1,
                     "out": 0
+                },
+                "Return": {
+                    "name": "return",
+                    "description": "Immediately quit the function",
+                    "instruction_id": 41,
+                    "construction": [],
+                    "in": 1,
+                    "out": 0
                 }
             }
         }

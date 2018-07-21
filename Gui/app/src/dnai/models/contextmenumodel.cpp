@@ -229,7 +229,8 @@ namespace dnai
             m_lists(nullptr),
             m_classes(nullptr),
             m_variables(nullptr),
-            m_enumerations(nullptr)
+            m_enumerations(nullptr),
+            m_functionRebuilding(false)
 		{
 
 		}
@@ -525,18 +526,31 @@ namespace dnai
 
             addItem(splitter, m_enumerations, entity);
 
-            /*ContextMenuItem *log_b_op = m_hash[m_root->name() + "/" + ]
+            ContextMenuItem *log_b_op = m_hash["/" + m_root->name() + "/operators/binaryOperator/logical"];
+
+            ContextMenuItem *enum_log_cat = new ContextMenuItem();
+            enum_log_cat->setName(entity->fullName());
+            addItem(enum_log_cat, log_b_op, entity);
 
             ContextMenuItem *eq = new ContextMenuItem();
             eq->setName("Equal");
             eq->setDescription("Check if two enum values are equal");
             eq->addInput("LeftOperand", enuType, "Value 1");
             eq->addInput("RightOperand", enuType, "Value 2");
-            eq->addOutput("result", enuType, "Result");
+            eq->addOutput("result", "{907ad50a-8f54-51ea-8c68-479d1d90a699}", "Result");
             eq->setInstructionId(dnai::enums::QInstructionID::EQUAL);
             eq->setConstruction({entity->id(), entity->id()});
+            addItem(eq, enum_log_cat, entity);
 
-            addItem(eq, , entity);*/
+            ContextMenuItem *ne = new ContextMenuItem();
+            ne->setName("Different");
+            ne->setDescription("Check if two enum values are different");
+            ne->addInput("LeftOperand", enuType, "Value 1");
+            ne->addInput("RightOperand", enuType, "Value 2");
+            ne->addOutput("result", "{907ad50a-8f54-51ea-8c68-479d1d90a699}", "Result");
+            ne->setInstructionId(dnai::enums::QInstructionID::DIFFERENT);
+            ne->setConstruction({entity->id(), entity->id()});
+            addItem(ne, enum_log_cat, entity);
         }
 
 		void ContextMenuModel::appendParameter(Entity* entity)
@@ -895,6 +909,8 @@ namespace dnai
 
         void ContextMenuModel::appendFunction(Entity *entity)
         {
+            m_functionRebuilding = true;
+
             models::Function *data = entity->guiModel<models::Function>();
 
             ContextMenuItem *funcCat = new ContextMenuItem();
@@ -935,6 +951,8 @@ namespace dnai
             callfuncins->setConstruction({entity->id()});
 
             addItem(callfuncins, funcCat, entity);
+
+            m_functionRebuilding = false;
         }
 
         void ContextMenuModel::addItem(ContextMenuItem *item, ContextMenuItem *parent, models::Entity *related)
@@ -987,6 +1005,8 @@ namespace dnai
                     {
                         appendVariable(related);
                     }
+                    if (!m_functionRebuilding)
+                        refreshItems(func);
                 }
                 else
                 {
@@ -1037,14 +1057,17 @@ namespace dnai
         {
             clearItems(related);
             addItems(related);
+            QList<models::gui::Instruction *> instructions;
 
             for (QString const &curr : m_entity_items[related])
             {
                 for (models::gui::Instruction *torebuild : dnai::gcore::HandlerManager::Instance().function()->instruction()->getInstructionsOfPath(curr))
                 {
-                    dnai::gcore::HandlerManager::Instance().function()->rebuildInstruction(torebuild);
+                    instructions.append(torebuild);
                 }
             }
+
+            dnai::gcore::HandlerManager::Instance().function()->rebuildInstructions(instructions);
         }
 
         void ContextMenuModel::setup()
@@ -1071,6 +1094,8 @@ namespace dnai
                              this, SLOT(onParameterSet(dnai::models::Entity*,QString)));
             QObject::connect(dnai::gcore::HandlerManager::Instance().function(), SIGNAL(returnSet(dnai::models::Entity*,QString)),
                              this, SLOT(onReturnSet(dnai::models::Entity*,QString)));
+            QObject::connect(dnai::gcore::HandlerManager::Instance().variable(), SIGNAL(typeSet(dnai::models::Entity*,dnai::models::Entity*)),
+                             this, SLOT(onVariableTypeSet(dnai::models::Entity*,dnai::models::Entity*)));
         }
 
         void ContextMenuModel::onEntityDeclared(Entity *declared)
@@ -1095,6 +1120,10 @@ namespace dnai
                 {
                     clearItems(curr);
                 }
+            }
+            if (removed->parentItem() && removed->parentItem()->entityType() == static_cast<qint32>(ENTITY::FUNCTION))
+            {
+                refreshItems(removed->parentItem());
             }
         }
 
@@ -1168,6 +1197,12 @@ namespace dnai
         void ContextMenuModel::onReturnSet(Entity *func, QString ret)
         {
             refreshItems(func);
+        }
+
+        void ContextMenuModel::onVariableTypeSet(Entity *var, Entity *type)
+        {
+            Q_UNUSED(type);
+            refreshItems(var);
         }
 	}
 }

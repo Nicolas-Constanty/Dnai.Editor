@@ -402,11 +402,6 @@ namespace dnai
             return;
         }
 
-        if (canvas != nullptr && createNodeQMLComponent(node, func, instruction, canvas->content()) == nullptr)
-        {
-			notifyWarning("Cannot create qml node");
-        }
-
         /*
          * Building inputs
          */
@@ -425,6 +420,12 @@ namespace dnai
             }
 
             instruction->setInputs(inputs);
+        }
+
+        for (models::gui::Input *curr : instruction->inputs())
+        {
+            if (!curr->value().isEmpty())
+                dnai::gcore::HandlerManager::Instance().function()->instruction()->setInputValue(func->id(), instruction->Uid(), curr->name(), curr->value(), false);
         }
 
         /*
@@ -467,6 +468,11 @@ namespace dnai
                 else
                     data->removeIoLink(curr);
             }
+        }
+
+        if (canvas != nullptr && createNodeQMLComponent(node, func, instruction, canvas->content()) == nullptr)
+        {
+            notifyWarning("Cannot create qml node");
         }
     }
 

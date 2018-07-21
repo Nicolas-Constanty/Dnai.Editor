@@ -223,7 +223,7 @@ namespace dnai
         {
             Q_UNUSED(function)
             commands::CoreCommand::Error();
-            Editor::instance().notifyError("Unable to link pin " + QString::number(outpin) + " of instruction " + QString::number(instruction) + " to instruction " + QString::number(toInstruction) + ": " + message);
+            qWarning() << "==Core== Function.Instruction.LinkExecutionError(" << function << ", " << instruction << ", " << outpin << ", " << toInstruction << ", " << message << ")";
         }
 
         void InstructionHandler::onExecutionUnlinked(quint32 function, quint32 instruction, quint32 outpin)
@@ -283,7 +283,8 @@ namespace dnai
 
             for (models::gui::FlowLink *curr : data->flowlinks())
             {
-                if (curr->data().to == instruction->guiUuid())
+                if (curr->data().to == instruction->guiUuid()
+                    || curr->data().from == instruction->guiUuid())
                 {
                     flowlink_to_replicate[curr] = func;
                 }
