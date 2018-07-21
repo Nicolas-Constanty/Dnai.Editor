@@ -1005,8 +1005,6 @@ namespace dnai
                     {
                         appendVariable(related);
                     }
-                    if (!m_functionRebuilding)
-                        refreshItems(func);
                 }
                 else
                 {
@@ -1202,6 +1200,18 @@ namespace dnai
         void ContextMenuModel::onVariableTypeSet(Entity *var, Entity *type)
         {
             Q_UNUSED(type);
+
+            if (var->parentItem()->entityType() == static_cast<qint32>(ENTITY::FUNCTION))
+            {
+                models::Function *data = var->parentItem()->guiModel<models::Function>();
+
+                if (data->hasInput(var->name()) || data->hasOutput(var->name()))
+                {
+                    refreshItems(var->parentItem());
+                    return;
+                }
+            }
+
             refreshItems(var);
         }
 	}

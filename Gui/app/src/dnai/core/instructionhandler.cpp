@@ -249,7 +249,8 @@ namespace dnai
         void InstructionHandler::onUnlinkExecutionError(quint32 function, quint32 instruction, quint32 outpin, const QString &message)
         {
             commands::CoreCommand::Error();
-            Editor::instance().notifyError("Unable to unlink pin " + QString::number(outpin) + " of instruction " + QString::number(instruction) + " in function " + QString::number(function) + ": " + message);
+            //Editor::instance().notifyError("Unable to unlink pin " + QString::number(outpin) + " of instruction " + QString::number(instruction) + " in function " + QString::number(function) + ": " + message);
+            qWarning() << "==Core== Function.Instruction.UnlinkExecutionError(" << function << ", " << instruction << ", " << outpin << ", " << message << ")";
         }
 
         void InstructionHandler::onInputValueSet(quint32 function, quint32 instruction, const QString &input, const QString &value)

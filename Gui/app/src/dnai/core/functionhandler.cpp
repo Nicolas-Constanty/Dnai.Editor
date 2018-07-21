@@ -443,6 +443,9 @@ namespace dnai
                     //remove instruction
                     removeInstruction(func->id(), instruction->Uid(), false);
 
+                    instruction->setInputs({});
+                    instruction->setOutputs({});
+
                     //add instruction
                     addInstruction(func->id(), instruction->instruction_id(), QList<quint32>::fromStdList(getConstructionList(instruction)), false);
 
@@ -456,9 +459,19 @@ namespace dnai
 
                 for (models::gui::IoLink *curr : it.value())
                 {
-                    models::gui::IoLink *toadd = new models::gui::IoLink();
-                    toadd->setData(curr->data());
-                    data->appendIoLink(toadd);
+                    /*models::gui::Instruction *from = data->getInstruction(curr->data().outputUuid);
+                    models::gui::Instruction *to = data->getInstruction(curr->data().inputUuid);
+
+                    if (from && to && from->getOutputType(curr->data().outputName) == to->getInputType(curr->data().inputName))
+                    {*/
+                        models::gui::IoLink *toadd = new models::gui::IoLink();
+                        toadd->setData(curr->data());
+                        data->appendIoLink(toadd);
+                    /*}
+                    else
+                    {
+                        data->removeIoLink(curr);
+                    }*/
                 }
             }
 

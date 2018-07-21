@@ -464,9 +464,12 @@ namespace dnai
                 || (curr->data().outputUuid == instruction->guiUuid() && to != nullptr))
             {
                 if (from->hasOutput(curr->data().outputName) && to->hasInput(curr->data().inputName))
-                    dnai::gcore::HandlerManager::Instance().function()->instruction()->linkData(func->id(), from->Uid(), curr->data().outputName, to->Uid(), curr->data().inputName, false);
-                else
-                    data->removeIoLink(curr);
+                {
+                    if (from->getOutputType(curr->data().outputName) == to->getInputType(curr->data().inputName))
+                        dnai::gcore::HandlerManager::Instance().function()->instruction()->linkData(func->id(), from->Uid(), curr->data().outputName, to->Uid(), curr->data().inputName, false);
+                    else
+                        data->removeIoLink(curr);
+                }
             }
         }
 
