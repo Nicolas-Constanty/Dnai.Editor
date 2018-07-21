@@ -29,8 +29,8 @@ namespace dnai
                              this,      SLOT(onEntityAdded(::core::EntityID,models::Entity&)));
             QObject::connect(&manager,  SIGNAL(entityRemoved(::core::EntityID,models::Entity&)),
                              this,      SLOT(onEntityRemoved(::core::EntityID,models::Entity&)));
-            QObject::connect(this,              SIGNAL(instructionAdded(models::Entity*,models::gui::Instruction*)),
-                             &m_instruction,    SLOT(onInstructionAdded(models::Entity*,models::gui::Instruction*)));
+            QObject::connect(this,              SIGNAL(instructionAdded(dnai::models::Entity*,dnai::models::gui::Instruction*)),
+                             &m_instruction,    SLOT(onInstructionAdded(dnai::models::Entity*,dnai::models::gui::Instruction*)));
             QObject::connect(this,              SIGNAL(instructionRemoved(dnai::models::Entity*,dnai::models::gui::Instruction*)),
                              &m_instruction,    SLOT(onInstructionRemoved(dnai::models::Entity*,dnai::models::gui::Instruction*)));
 
@@ -627,6 +627,9 @@ namespace dnai
 
             if (data->entryPoint() == instr)
                 core::function::setEntryPoint(func.id(), instr->Uid());
+
+            //need to call it now because it builds inputs and set position
+            Editor::instance().finishInstructionBuilding(&func, instr);
 
             emit instructionAdded(&func, instr);
         }

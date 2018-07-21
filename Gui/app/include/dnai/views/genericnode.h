@@ -25,7 +25,7 @@ namespace dnai
         public:
             explicit GenericNode(QQuickItem *parent = nullptr);
 	        void createLink(models::gui::IoLink *link, GenericNode *n2);
-	        void createFlowLink(models::gui::FlowLink* link, GenericNode* n2);
+            void createFlowLink(models::gui::FlowLink* link, GenericNode* n2);
             void unlinkFlow(quint32 pin);
             void unlinkIo(quint32 in);
 
@@ -56,6 +56,9 @@ namespace dnai
             RoundedRectangle *header() const { return m_header; }
             RoundedRectangle *content() const { return m_content; }
             bool selected() const;
+
+        public:
+            Q_INVOKABLE void clear();
 
         public:
             /*void setFlowIn(bool f);

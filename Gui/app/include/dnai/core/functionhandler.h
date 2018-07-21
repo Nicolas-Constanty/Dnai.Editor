@@ -78,7 +78,7 @@ namespace dnai
             void onRemoveInstructionError(::core::EntityID funtion, ::core::InstructionID instruction, QString msg);
 
         signals:
-            void instructionAdded(models::Entity *func, models::gui::Instruction *instruction);
+            void instructionAdded(dnai::models::Entity *func, dnai::models::gui::Instruction *instruction);
             void addInstructionError(quint32 func, quint32 instrType, QList<quint32> const &args, QString const &msg);
             void instructionRemoved(dnai::models::Entity *func, dnai::models::gui::Instruction *instruction);
             void entryPointSet(dnai::models::Entity *func, dnai::models::gui::Instruction *entry);

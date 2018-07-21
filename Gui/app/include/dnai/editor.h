@@ -19,6 +19,10 @@ namespace dnai
     class Project;
     class Session;
 
+    namespace views {
+        class GenericNode;
+    }
+
 	class PropertyPanelProperties : public QObject {
 		Q_OBJECT
         Q_PROPERTY(QStringList visibility READ visibility CONSTANT)
@@ -70,7 +74,9 @@ namespace dnai
         views::EditorView *mainView() const;
         bool loaded() const;
         QString const &solutionName() const;
-		dnai::models::ContextMenuModel* contextMenuModel();
+
+        void loadContextMenuModel();
+        dnai::models::ContextMenuModel* contextMenuModel() const;
 		void setContextMenuModel(dnai::models::ContextMenuModel* ctx);
 		Q_INVOKABLE void updateContextMenuModel(dnai::models::Entity* entity) const;
 
@@ -134,17 +140,19 @@ namespace dnai
         void loadedChanged(bool);
 		void contextMenuModelChanged(dnai::models::ContextMenuModel *m) const;
 
-    private:
-		QQuickItem * createNodeQMLComponent(models::ContextMenuItem *node, models::Entity *func, models::gui::Instruction *instruction, QQuickItem *parent) const;
+    public:
+        Q_INVOKABLE QQuickItem * createNodeQMLComponent(dnai::models::Entity *func, dnai::models::gui::Instruction *instruction, QQuickItem *parent) const;
+        Q_INVOKABLE void setAsEntryPoint(dnai::views::GenericNode *instruction, dnai::views::GenericNode *entry);
+        Q_INVOKABLE void createFlowLink(dnai::views::GenericNode *from, dnai::views::GenericNode *to, dnai::models::Entity *func, dnai::models::gui::Instruction *fromIns, qint32 outpin, dnai::models::gui::Instruction *toIns) const;
+        Q_INVOKABLE void removeFlowLink(dnai::views::GenericNode *instruction, qint32 outpin) const;
+        Q_INVOKABLE void createIOLink(dnai::views::GenericNode *from, dnai::views::GenericNode *to, dnai::models::Entity *func, dnai::models::gui::Instruction *instr, QString input) const;
+        Q_INVOKABLE void removeIOLink(dnai::views::GenericNode *instruction, dnai::models::gui::Instruction *instr, QString input) const;
+
+    public:
+        Q_INVOKABLE void finishInstructionBuilding(dnai::models::Entity *func, dnai::models::gui::Instruction *instr);
 
     public slots:
-        void onInstructionAdded(models::Entity *func, models::gui::Instruction *instr);
         void onAddInstructionError(quint32 func, quint32 type, QList<quint32> const &args, QString const &msg);
-        void onInstructionDataLinked(dnai::models::Entity *func, dnai::models::gui::Instruction *from, QString output, dnai::models::gui::Instruction *to, QString input);
-        void onExecutionLinked(dnai::models::Entity *func, dnai::models::gui::Instruction *from, quint32 outPin, dnai::models::gui::Instruction *to);
-        void onEntryPointSet(dnai::models::Entity *func, dnai::models::gui::Instruction *entry);
-        void onExecutionUnlinked(dnai::models::Entity *func, dnai::models::gui::Instruction *from, quint32 outPin);
-        void onDataUnlinked(dnai::models::Entity *func, dnai::models::gui::Instruction *instruction, QString input);
 
     private:
         interfaces::ISolution *m_solution;

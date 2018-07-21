@@ -17,6 +17,7 @@ namespace dnai
 				Q_OBJECT
 
                 Q_PROPERTY(qint32 uid READ Uid WRITE setUid)
+                Q_PROPERTY(QString guid READ guid)
                 Q_PROPERTY(QList<QString> linked READ linked WRITE setLinkedEntities)
 
 			public:
@@ -59,7 +60,8 @@ namespace dnai
                 QList<QString> const &linked() const;
                 bool setLinkedEntities(QList<QString> const &value);
 
-				const QUuid &guiUuid() const;
+                const QUuid &guiUuid() const;
+                QString guid() const;
 				bool setGuiUuid(const QUuid &value);
 
                 const QString &nodeMenuPath() const;

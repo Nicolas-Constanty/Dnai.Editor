@@ -28,7 +28,7 @@ namespace dnai
 			setAcceptHoverEvents(true);
 			setAcceptedMouseButtons(Qt::LeftButton);
             setFlag(ItemAcceptsInputMethod, true);
-		}
+        }
 
 		void GenericNode::createLink(models::gui::IoLink* link, GenericNode *n2)
 		{
@@ -209,6 +209,29 @@ namespace dnai
         bool GenericNode::selected() const
         {
             return m_selected == this;
+        }
+
+        void GenericNode::clear()
+        {
+            for (QQuickItem *curr : inputs().getList())
+            {
+                dynamic_cast<Input *>(curr)->unlinkAll();
+            }
+
+            for (QQuickItem *curr : outputs().getList())
+            {
+                dynamic_cast<Output *>(curr)->unlinkAll();
+            }
+
+            for (QQuickItem *curr : flowsIn().getList())
+            {
+                dynamic_cast<Flow *>(curr)->unlinkAll();
+            }
+
+            for (QQuickItem *curr : flowsOut().getList())
+            {
+                dynamic_cast<Flow *>(curr)->unlinkAll();
+            }
         }
 
         void GenericNode::resetBorderColor() const

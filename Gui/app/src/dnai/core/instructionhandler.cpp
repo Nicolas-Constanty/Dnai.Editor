@@ -280,6 +280,7 @@ namespace dnai
         {
             models::Function *data = func->guiModel<models::Function>();
 
+            qDebug() << "Add instruction : " << instruction->guiUuid();
             m_instructions[instruction->guiUuid()] = instruction;
 
             for (models::gui::FlowLink *curr : data->flowlinks())
@@ -292,11 +293,38 @@ namespace dnai
             }
 
             refreshLinks();
+
+            /*
+             * Handle instruction data links
+             */
+            QList<models::gui::IoLink *> links = data->iolinks();
+
+            for (models::gui::IoLink *curr : links)
+            {
+                models::gui::Instruction *from = getInstruction(curr->data().outputUuid);
+                models::gui::Instruction *to = getInstruction(curr->data().inputUuid);
+
+                qDebug() << " ==> IOLink: " << curr->data().outputUuid << "[" << from << "] ->" << curr->data().inputUuid << "[" << to << "]";
+
+                if ((curr->data().inputUuid == instruction->guiUuid() || curr->data().outputUuid == instruction->guiUuid())
+                     && from != nullptr && to != nullptr)
+                {
+                    if (from->hasOutput(curr->data().outputName) && to->hasInput(curr->data().inputName))
+                    {
+                        if (from->getOutputType(curr->data().outputName) == to->getInputType(curr->data().inputName))
+                            linkData(func->id(), from->Uid(), curr->data().outputName, to->Uid(), curr->data().inputName, false);
+                        else
+                            data->removeIoLink(curr);
+                    }
+                }
+            }
         }
 
         void InstructionHandler::onInstructionRemoved(models::Entity *func, models::gui::Instruction *instruction)
         {
             Q_UNUSED(func)
+
+            qDebug() << "Remove instruction : " << instruction->guiUuid();
 
             m_instructions.remove(instruction->guiUuid());
         }

@@ -1,5 +1,6 @@
 #ifndef DNAI_MODELS_GUI_IOLINK
 #define DNAI_MODELS_GUI_IOLINK
+
 #include "dnai/interfaces/imodeldata.h"
 #include "dnai/interfaces/iserializable.h"
 #include "data/iolink.h"
@@ -10,8 +11,8 @@ namespace dnai
 	{
 		namespace gui
 		{
-			class IoLink : public interfaces::IModelData<data::IoLink>, public interfaces::ASerializable<IoLink>
-			{
+            class IoLink : public interfaces::IModelData<data::IoLink>, public interfaces::ASerializable<IoLink>
+            {
 			public:
 				const data::IoLink& data() const override;
 				bool setData(const data::IoLink& data) override;

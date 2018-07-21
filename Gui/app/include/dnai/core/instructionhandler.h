@@ -46,7 +46,7 @@ namespace dnai
             void onSetInputValueError(quint32 function, quint32 instruction, QString const &input, QString const &value, QString const &msg);
 
         public slots:
-            void onInstructionAdded(models::Entity *func, models::gui::Instruction *instruction);
+            void onInstructionAdded(dnai::models::Entity *func, dnai::models::gui::Instruction *instruction);
             void onInstructionRemoved(dnai::models::Entity *func, dnai::models::gui::Instruction *instruction);
 
         public:
