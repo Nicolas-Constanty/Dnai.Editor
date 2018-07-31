@@ -75,6 +75,7 @@ namespace dnai
             QList<T*> m_childItems;
             T *m_parentItem;
             QModelIndex m_idx;
+
         };
     }
 }

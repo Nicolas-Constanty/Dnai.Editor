@@ -26,7 +26,7 @@ namespace dnai
 			* \brief Override updatePaintNode and draw a magnificient rounded rectangle
 			* \return QSGNode *
 			*/
-            QSGNode *updatePaintNode(QSGNode *, UpdatePaintNodeData *) override;
+			virtual QSGNode *updatePaintNode(QSGNode *, UpdatePaintNodeData *) override;
 
 		public:
 			bool topLeft() const { return m_topLeft; }
@@ -66,6 +66,7 @@ namespace dnai
 			* \return int
 			*/
 			int getNumberRoundedCorner() const;
+
 		};
 	}
 }

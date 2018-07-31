@@ -86,6 +86,7 @@ const http::Config api::http_config = {
     {
         //TODO when API work `/users/me` and remove John Doe
         return http::Service::url("users", api::user.id.toLatin1().data())->get().map([](http::Response response) -> http::Response {
+
             return response;
         });
     }

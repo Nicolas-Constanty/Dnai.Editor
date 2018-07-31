@@ -31,10 +31,52 @@ CanvasNode {
             }
         }
     ]
+
     Item {
         id: content_item
         x: canvas.width/2
         y: canvas.height/2
+        property var instuctionNodeMap: ({})
+        property int currSize: 0
+
+        function getNodeFrom(guid)
+        {
+            return content_item.instuctionNodeMap[guid];
+        }
+
+        function addNode(func, instr)
+        {
+            content_item.instuctionNodeMap[instr.guid] = Editor.createNodeQMLComponent(func, instr, content_item);
+            console.log("adding node for ", instr.guid, " => ", getNodeFrom(instr.guid));
+        }
+
+        function removeNode(instr)
+        {
+            var qmlNode = getNodeFrom(instr.guid);
+
+            qmlNode.parent = null;
+            qmlNode.visible = false;
+            qmlNode.clear();
+            delete qmlNode;
+            delete content_item.instuctionNodeMap[instr.guid];
+        }
+
+        onChildrenChanged: {
+            if (children.length === 0)
+            {
+                currSize = 0;
+                return;
+            }
+
+            var item = children[children.length - 1];
+
+            if (children.length > currSize && item.instruction_model)
+            {
+                instuctionNodeMap[item.instruction_model.guid] = item;
+            }
+
+            currSize = children.length;
+        }
 
         onScaleChanged: {
             zoomText.text = Math.round(content_item.scale * 100) + "%"
@@ -57,39 +99,60 @@ CanvasNode {
         target: Controller.Function.instruction
 
         onDataLinked: {
-            console.log("data linked in func ", func.name, ": ", from.uid, '(', output, ')->', to.uid, '(', input, ')');
+            if (func.id === nodeModel.id)
+            {
+                var nodeFrom = content_item.getNodeFrom(from.guid);
+                var nodeTo = content_item.getNodeFrom(to.guid);
+
+                Editor.createIOLink(nodeTo, nodeFrom, func, to, input);
+            }
         }
+
         onDataUnlinked: {
-            console.log("data unlinked in func ", func.name, ': ', instruction.uid, '(', input ,')')
+            if (func.id === nodeModel.id)
+            {
+                Editor.removeIOLink(content_item.getNodeFrom(instruction.guid), instruction, input);
+            }
         }
+
         onExecutionLinked: {
-            console.log("flow linked in func ", func.name, ': ', from.uid, '(', outPin, ')->', to.uid);
+            if (func.id === nodeModel.id)
+            {
+                var nodeFrom = content_item.getNodeFrom(from.guid);
+                var nodeTo = content_item.getNodeFrom(to.guid);
+
+                Editor.createFlowLink(nodeFrom, nodeTo, func, from, outPin, to);
+            }
         }
         onExecutionUnlinked: {
-            console.log("flow unlinked in func ", func.name, ': ', from.uid, '(', outPin, ')');
+            if (func.id === nodeModel.id)
+            {
+                Editor.removeFlowLink(content_item.getNodeFrom(from.guid), outPin);
+            }
         }
     }
 
     Connections {
         target: Controller.Function
+
         onEntryPointSet: {
-            console.log("entry point set for ", func, "(", func.id, ") => ", func.name, " at instruction ", entry.uid);
+            if (nodeModel.id === func.id)
+            {
+                Editor.setAsEntryPoint(content_item.getNodeFrom(entry.guid), canvas.entry);
+            }
         }
+
+        onInstructionAdded: {
+            if (nodeModel.id === func.id)
+            {
+                content_item.addNode(func, instruction);
+            }
+        }
+
         onInstructionRemoved: {
             if (nodeModel.id === func.id)
             {
-                for (var i in content_item.children)
-                {
-                    var currItem = content_item.children[i];
-
-                    if (currItem.instruction_model && currItem.instruction_model.uid === instruction.uid)
-                    {
-                        currItem.parent = null;
-                        currItem.visible = false;
-                        delete currItem;
-                        break;
-                    }
-                }
+                content_item.removeNode(instruction);
             }
         }
     }
@@ -104,7 +167,13 @@ CanvasNode {
     function onMenuNodeChoosen(choice)
     {
         if (choice.instructionId !== -1)
-            Editor.createNode(canvas.nodeModel, choice, canvas.mousePosition.x, canvas.mousePosition.y);
+        {
+            Editor.createNode(
+                canvas.nodeModel,
+                choice,
+                canvas.mousePosition.x - content_item.x,
+                canvas.mousePosition.y - content_item.y);
+        }
     }
 
     SearchableMenu {

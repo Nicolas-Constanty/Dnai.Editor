@@ -26,6 +26,8 @@ namespace dnai
             Q_PROPERTY(bool contextMenu READ contextMenu WRITE setContextMenu NOTIFY contextMenuChanged)
 			Q_PROPERTY(QPoint mousePosition READ mousePosition CONSTANT)
 
+            Q_PROPERTY(QQuickItem *entry READ entry)
+
 			explicit CanvasNode(QQuickItem *parent = nullptr);
 			~CanvasNode();
 
@@ -39,7 +41,7 @@ namespace dnai
 			* \brief Override updatePaintNode and draw a beautifull canvas
 			* \return QSGNode *
 			*/
-            QSGNode *updatePaintNode(QSGNode *, UpdatePaintNodeData *) override;
+			virtual QSGNode *updatePaintNode(QSGNode *, UpdatePaintNodeData *) override;
 			void moveCanvas(const QPointF& pos);
 			void zoom(const double& scale, const QPointF& offset);
 

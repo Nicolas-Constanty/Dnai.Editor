@@ -15,13 +15,13 @@
 
 namespace dnai
 {
-    namespace views {
-        class CanvasNode;
-        class GenericNode;
-    }
     class App;
     class Project;
     class Session;
+
+    namespace views {
+        class GenericNode;
+    }
 
 	class PropertyPanelProperties : public QObject {
 		Q_OBJECT
@@ -43,8 +43,8 @@ namespace dnai
 	{
 		Q_OBJECT
         Q_PROPERTY(dnai::Solution *solution READ getSolution WRITE setSolution NOTIFY solutionChanged)
-        Q_PROPERTY(dnai::Session *session READ session CONSTANT)
-        Q_PROPERTY(dnai::PropertyPanelProperties *propertyPanelProperties READ propertyPanelProperties CONSTANT)
+        Q_PROPERTY(dnai::Session *session READ session CONSTANT)  
+		Q_PROPERTY(dnai::PropertyPanelProperties *propertyPanelProperties READ propertyPanelProperties CONSTANT)
         Q_PROPERTY(bool loaded READ loaded WRITE setLoaded NOTIFY loadedChanged)
         Q_PROPERTY(QString solutionName READ solutionName)
 		Q_PROPERTY(dnai::models::ContextMenuModel *contextMenuModel READ contextMenuModel WRITE setContextMenuModel NOTIFY contextMenuModelChanged)
@@ -74,7 +74,9 @@ namespace dnai
         views::EditorView *mainView() const;
         bool loaded() const;
         QString const &solutionName() const;
-		dnai::models::ContextMenuModel* contextMenuModel();
+
+        void loadContextMenuModel();
+        dnai::models::ContextMenuModel* contextMenuModel() const;
 		void setContextMenuModel(dnai::models::ContextMenuModel* ctx);
 		Q_INVOKABLE void updateContextMenuModel(dnai::models::Entity* entity) const;
 
@@ -138,17 +140,19 @@ namespace dnai
         void loadedChanged(bool);
 		void contextMenuModelChanged(dnai::models::ContextMenuModel *m) const;
 
-    private:
-		QQuickItem * createNodeQMLComponent(models::ContextMenuItem *node, models::Entity *func, models::gui::Instruction *instruction, QQuickItem *parent) const;
+    public:
+        Q_INVOKABLE QQuickItem * createNodeQMLComponent(dnai::models::Entity *func, dnai::models::gui::Instruction *instruction, QQuickItem *parent) const;
+        Q_INVOKABLE void setAsEntryPoint(dnai::views::GenericNode *instruction, dnai::views::GenericNode *entry);
+        Q_INVOKABLE void createFlowLink(dnai::views::GenericNode *from, dnai::views::GenericNode *to, dnai::models::Entity *func, dnai::models::gui::Instruction *fromIns, qint32 outpin, dnai::models::gui::Instruction *toIns) const;
+        Q_INVOKABLE void removeFlowLink(dnai::views::GenericNode *instruction, qint32 outpin) const;
+        Q_INVOKABLE void createIOLink(dnai::views::GenericNode *from, dnai::views::GenericNode *to, dnai::models::Entity *func, dnai::models::gui::Instruction *instr, QString input) const;
+        Q_INVOKABLE void removeIOLink(dnai::views::GenericNode *instruction, dnai::models::gui::Instruction *instr, QString input) const;
+
+    public:
+        Q_INVOKABLE void finishInstructionBuilding(dnai::models::Entity *func, dnai::models::gui::Instruction *instr);
 
     public slots:
-        void onInstructionAdded(models::Entity *func, models::gui::Instruction *instr);
         void onAddInstructionError(quint32 func, quint32 type, QList<quint32> const &args, QString const &msg);
-        void onInstructionDataLinked(dnai::models::Entity *func, dnai::models::gui::Instruction *from, QString output, dnai::models::gui::Instruction *to, QString input);
-        void onExecutionLinked(dnai::models::Entity *func, dnai::models::gui::Instruction *from, quint32 outPin, dnai::models::gui::Instruction *to);
-        void onEntryPointSet(dnai::models::Entity *func, dnai::models::gui::Instruction *entry);
-        void onExecutionUnlinked(dnai::models::Entity *func, dnai::models::gui::Instruction *from, quint32 outPin);
-        void onDataUnlinked(dnai::models::Entity *func, dnai::models::gui::Instruction *instruction, QString input);
 
     private:
         interfaces::ISolution *m_solution;
@@ -174,13 +178,7 @@ namespace dnai
         bool m_loaded = false;
 
     private:
-        static Editor &m_instance;
-        void foreachContentView(std::function<bool (QQuickItem *, views::CanvasNode *)> &func);
-        void loadNodes(QList<views::GenericNode *> &nodes, models::gui::declarable::Function *function, dnai::models::Entity *entity, views::CanvasNode *canvas) const;
-        void loadLinks(const QList<views::GenericNode *> &nodes, models::gui::declarable::Function *function) const;
-        void loadFlows(const QList<views::GenericNode *> &nodes, models::gui::declarable::Function *function) const;
-//        void setInputOutputNode(const QList<views::GenericNode *> &nodes, models::gui::Instruction *inputInstruction, models::gui::Instruction *outputInstruction, views::GenericNode *n1, views::GenericNode *n2) const;
-        bool setInputOutputNode(const QList<views::GenericNode *> &nodes, models::gui::Instruction *inputInstruction, models::gui::Instruction *outputInstruction, std::function<void (views::GenericNode *, views::GenericNode *)> &func) const;
+        static Editor *m_instance;
     };
     }
 

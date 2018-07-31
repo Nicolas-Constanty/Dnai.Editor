@@ -34,6 +34,7 @@ namespace dnai
 		protected:
             QStringList m_text;
             ConsoleMode m_mode;
+
 		};
 	}
 }

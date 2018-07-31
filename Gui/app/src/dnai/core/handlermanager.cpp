@@ -14,7 +14,9 @@ namespace dnai
             m_global(),
             m_object(m_manager),
             m_list(m_manager)
-        {}
+        {
+
+        }
 
         HandlerManager &HandlerManager::Instance()
         {
@@ -146,6 +148,11 @@ namespace dnai
         models::Entity *HandlerManager::getEntity(QUuid guid)
         {
             return m_manager.getEntity(guid);
+        }
+
+        models::Entity *HandlerManager::getEntityGui(QUuid guid)
+        {
+            return getEntity(guid);
         }
 
         models::Entity *HandlerManager::getEntity(quint32 id)

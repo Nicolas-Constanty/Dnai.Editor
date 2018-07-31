@@ -7,7 +7,9 @@ namespace dnai
 	}
 
 	BaseIo::~BaseIo()
-    {}
+	{
+
+	}
 
     void BaseIo::setType(enums::IoTypeRessouce::IoType t)
 	{

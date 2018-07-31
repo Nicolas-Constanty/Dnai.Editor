@@ -11,7 +11,9 @@ namespace dnai
 			namespace declarable
 			{
 				EnumType::EnumType(QObject* parent) : QObject(parent)
-                {}
+				{
+
+				}
 
                 const QStringList& EnumType::values() const
 				{

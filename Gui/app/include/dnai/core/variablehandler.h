@@ -40,6 +40,10 @@ namespace dnai
             void onValueSet(::core::EntityID variable, QString const &value);
             void onSetValueError(::core::EntityID variable, QString const &value, QString const &message);
 
+        signals:
+            void typeSet(dnai::models::Entity *variable, dnai::models::Entity *type);
+            void valueSet(dnai::models::Entity *variable, QString value);
+
         private:
             EntityManager &manager;
 

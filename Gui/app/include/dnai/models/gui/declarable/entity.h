@@ -20,9 +20,9 @@ namespace dnai
 					//IModelData implementation
 				public:
 					Entity() = default;
-                    ~Entity() override = default;
+					virtual ~Entity() override = default;
 
-                    bool setData(const T& data) override
+					virtual bool setData(const T& data) override
 					{
 						if (m_data == data)
 							return false;
@@ -30,12 +30,12 @@ namespace dnai
 						return true;
 					}
 
-                    int index() const override
+					virtual int index() const override
 					{
 						return m_data.index;
 					}
 
-                    bool setIndex(const int index) override
+					virtual bool setIndex(const int index) override
 					{
 						if (m_data.index == index)
 							return false;
@@ -43,12 +43,12 @@ namespace dnai
 						return true;
 					}
 
-                    QUuid listIndex() const override
+					virtual QUuid listIndex() const override
 					{
 						return m_data.listIndex;
 					}
 
-                    bool setListIndex(QUuid listIndex) override
+					virtual bool setListIndex(QUuid listIndex) override
 					{
 						if (m_data.listIndex == listIndex)
 							return false;
@@ -56,12 +56,12 @@ namespace dnai
 						return true;
 					}
 
-                    const QString& description() const override
+					virtual const QString& description() const override
 					{
 						return m_data.description;
 					}
 
-                    bool setDescription(const QString& description) override
+					virtual bool setDescription(const QString& description) override
 					{
 						if (m_data.description == description)
 							return false;
@@ -69,12 +69,12 @@ namespace dnai
 						return true;
 					}
 
-                    bool expanded() const override
+					virtual bool expanded() const override
 					{
 						return m_data.expanded;
 					}
 
-                    bool setExpanded(bool exp) override
+					virtual bool setExpanded(bool exp) override
 					{
 						if (m_data.expanded == exp)
 							return false;
@@ -82,12 +82,12 @@ namespace dnai
 						return true;
 					}
 
-                    const T& data() const override
+					virtual const T& data() const override
 					{
 						return m_data;
 					}
 
-                    void serialize(QJsonObject& obj) const override
+					virtual void serialize(QJsonObject& obj) const override
 					{
 //						obj["expanded"] = m_data.expanded;
 						obj["description"] = m_data.description;
@@ -95,7 +95,7 @@ namespace dnai
 						obj["listIndex"] = m_data.listIndex.toString();
 					}
 				protected:
-                    void _deserialize(const QJsonObject& obj) override
+					virtual void _deserialize(const QJsonObject& obj) override
 					{
 //						m_data.expanded = obj["expanded"].toBool();
 						m_data.description = obj["description"].toString();

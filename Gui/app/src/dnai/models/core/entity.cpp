@@ -37,7 +37,9 @@ namespace dnai
 			}
 
 			Entity::~Entity()
-            {}
+			{
+
+			}
 
             bool Entity::setId(quint32 id)
 			{

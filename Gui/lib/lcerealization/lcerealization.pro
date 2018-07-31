@@ -5,7 +5,9 @@ TARGET = cerealization
 CONFIG += staticlib
 CONFIG += c++14
 DESTDIR = $$PWD/../
-
+CONFIG(release, debug|release) {
+DEFINES += QT_NO_DEBUG_OUTPUT
+}
 TEMPLATE = lib
 
 CEREAL_ROOT = $$PWD/repository

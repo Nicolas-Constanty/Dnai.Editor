@@ -96,11 +96,15 @@ namespace dnai
          */
         EntityManager::iterator::iterator(const EntityMap::iterator &it) :
             it(it)
-        {}
+        {
+
+        }
 
         EntityManager::iterator::iterator(const iterator &ref) :
             it(ref.it)
-        {}
+        {
+
+        }
 
         EntityManager::iterator &EntityManager::iterator::operator =(iterator const &ref)
         {
@@ -148,11 +152,15 @@ namespace dnai
 
         EntityManager::const_iterator::const_iterator(const EntityMap::const_iterator &it) :
             it(it)
-        {}
+        {
+
+        }
 
         EntityManager::const_iterator::const_iterator(const const_iterator &ref) :
             it(ref.it)
-        {}
+        {
+
+        }
 
         EntityManager::const_iterator &EntityManager::const_iterator::operator =(const_iterator const &ref)
         {

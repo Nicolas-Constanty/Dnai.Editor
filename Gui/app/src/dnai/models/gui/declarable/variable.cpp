@@ -14,7 +14,9 @@ namespace dnai
 				EntityList *Variable::m_variables = new EntityList(new QList<models::Entity*>());
 
 				Variable::Variable(QObject* parent) : QObject(parent)
-                {}
+				{
+
+				}
 
 				void Variable::serialize(QJsonObject& obj) const
 				{

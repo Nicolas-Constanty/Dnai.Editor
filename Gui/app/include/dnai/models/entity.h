@@ -32,7 +32,7 @@ namespace dnai
 	        {
 	        }
             explicit Column(Entity * e, QObject *parent = nullptr);
-            int rowCount(const QModelIndex& parent = QModelIndex()) const override;
+            virtual int rowCount(const QModelIndex& parent = QModelIndex()) const override;
             QVariant data(const QModelIndex& index, int role) const override;
 	        void append(Entity* e, const QModelIndex& parent = QModelIndex());
 	        void remove(Entity* e, const QModelIndex& parent = QModelIndex());
@@ -49,7 +49,7 @@ namespace dnai
 			void nameChanged(const QString &desc);
 			void listIndexChanged(const QString list);
         private:
-            QHash<int, QByteArray> roleNames() const override;
+			virtual QHash<int, QByteArray> roleNames() const override;
         public:
 	        void serialize(QJsonObject& obj) const override;
         protected:
@@ -126,7 +126,7 @@ namespace dnai
             void setDescription(const QString& description);
             virtual void setCoreModel(gcore::Entity *model);
 			void setExpanded(bool exp);
-            void appendChild(Entity* child) override;
+			virtual void appendChild(Entity* child) override;
 			QObject *guiProperties() const;
 			void setListColumn(const QVariant &column);
 
@@ -156,8 +156,9 @@ namespace dnai
 
         public:
 	        models::Entity *findByName(QString const &name) const;
-            Q_INVOKABLE quint32 findIdByName(QString const &name) const;
-
+	        Q_INVOKABLE quint32 findIdByName(QString const &name) const;
+	        //static EntityList *m_entities;
+			
         private:
 	        gcore::Entity *m_dataCore;
 	        interfaces::IEntity *m_dataGUI;
@@ -167,6 +168,7 @@ namespace dnai
 	        QList<QObject *> m_columslist;
 			QVariant m_varcolumns;
             QUuid m_guid;
+
         };
 
         using Context = dnai::models::gui::declarable::Context;

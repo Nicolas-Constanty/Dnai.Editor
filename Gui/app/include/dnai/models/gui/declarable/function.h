@@ -50,13 +50,13 @@ namespace dnai
 					bool setIoLinks(const QList<dnai::models::gui::IoLink *> &);
 					void appendIoLink(dnai::models::gui::IoLink *);
 					void removeIoLink(dnai::models::gui::IoLink* link);
-                    IoLink *findIOLink(QUuid const &instruction, QString const &input) const;
+                    Q_INVOKABLE dnai::models::gui::IoLink *findIOLink(QUuid const &instruction, QString const &input) const;
 
 					const QList<dnai::models::gui::FlowLink *> &flowlinks() const;
 					bool setFlowLinks(const QList<dnai::models::gui::FlowLink *> &);
 					void appendFlowLink(dnai::models::gui::FlowLink *);
 					void removeFlowLink(dnai::models::gui::FlowLink* link);
-                    models::gui::FlowLink *findFlowLink(QUuid const &from, quint32 outPin, QUuid const &to = QUuid()) const;
+                    Q_INVOKABLE dnai::models::gui::FlowLink *findFlowLink(QUuid const &from, quint32 outPin, QUuid const &to = QUuid()) const;
 
 					Q_INVOKABLE void addInput(models::Entity *var);
 					Q_INVOKABLE void addOutput(models::Entity *var);

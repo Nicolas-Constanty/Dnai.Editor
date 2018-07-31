@@ -16,11 +16,11 @@ namespace dnai
 
 			//Implementation of ICommand
         public:
-            void execute() const override;
-            void executeSave() override;
-            void unExcute() const override;
-            QString infos() const override;
-            bool isSave() const override;
+			virtual void execute() const override;
+			virtual void executeSave() override;
+			virtual void unExcute() const override;
+			virtual QString infos() const override;
+			virtual bool isSave() const override;
 
 	        /**
 	         * \brief Get the command name

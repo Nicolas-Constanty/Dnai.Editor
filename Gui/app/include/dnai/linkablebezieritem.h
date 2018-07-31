@@ -20,7 +20,7 @@ namespace dnai
 		/**
 		* \brief Make componentComplete Abstract
 		*/
-        void componentComplete() override = 0;
+		virtual void componentComplete() override = 0;
 		virtual GenericNode *getNode() const = 0;
 
 		virtual const QColor &colorLink() const;
@@ -43,17 +43,17 @@ namespace dnai
 		* \brief Override mouseMoveEvent
 		* \param event
 		*/
-        void mouseMoveEvent(QMouseEvent *event) override;
+		virtual void mouseMoveEvent(QMouseEvent *event) override;
 		/**
 		* \brief Override mousePressEvent
 		* \param event
 		*/
-        void mousePressEvent(QMouseEvent *event) override;
+		virtual void mousePressEvent(QMouseEvent *event) override;
 		/**
 		* \brief Override mouseReleaseEvent
 		* \param event
 		*/
-        void mouseReleaseEvent(QMouseEvent *event) override;
+		virtual void mouseReleaseEvent(QMouseEvent *event) override;
 
 		virtual void afterRealease(Link *l);
 

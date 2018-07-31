@@ -77,6 +77,7 @@ namespace dnai
 			drawGrid(m_gridStep, 1, m_gridColor);
 
 			drawGrid(m_accentGridStep, 2, m_accentGridColor);
+
 		}
 
 		void CanvasNode::mousePressEvent(QMouseEvent* event)
@@ -131,7 +132,8 @@ namespace dnai
             {
 				const auto scale = m_content->scale() + 0.1 * event->angleDelta().y() / 120;
 				if (scale == m_content->scale() || scale < 0.5f || scale > 2.1f)
-                    return;
+					return;
+				
                 const auto w = width() / 2;
                 const auto h = height() / 2;
                 const auto offset = (scale < m_content->scale() ? 1 : -1) *

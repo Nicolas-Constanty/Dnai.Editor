@@ -17,7 +17,6 @@ ApplicationWindow {
     property alias openProjectId: openProjectId
     property alias newProjectPopup: newProjectPopup
     Component.onCompleted: {
-        console.log("Hello")
         Editor.checkVersion()
     }
 
@@ -80,9 +79,6 @@ ApplicationWindow {
                                 "newModal" : newProjectPopup
                             },
                             "Welcome")
-                    if (Editor.solutionName) {
-                        openSolution(Editor.solutionName); //load fails
-                    }
                 }
             }
         }
@@ -169,8 +165,6 @@ ApplicationWindow {
         width: dialogPopupItem.widthValue
         height: dialogPopupItem.heightValue
     }
-
-
 
     onClosing: {
         close.accepted = true

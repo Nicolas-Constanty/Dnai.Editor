@@ -45,21 +45,8 @@ Window {
         _loader.active = true;
     }
 
-    function loadMain()
-    {
-        _loadermain.active = true
-    }
-
     SplashScreen {
         id: _splashScreen
-    }
-
-    Loader {
-        id: _loadermain
-        active: false
-        asynchronous: true
-        visible: status == Loader.Ready
-        sourceComponent: _mainWindow
     }
 
     Loader {
@@ -68,6 +55,12 @@ Window {
         asynchronous: true
         visible: status == Loader.Ready
         sourceComponent: AppSettings.themeLoaded ? _mainWindow : _selectTheme
+        onLoaded: {
+            _main.hide();
+            if (AppSettings.themeLoaded && Editor.solutionName) {
+                item.openSolution(Editor.solutionName);
+            }
+        }
     }
 
     Component {
@@ -77,11 +70,14 @@ Window {
             id: appViewMain
             width: 1280
             height: 720
-            visible: AppSettings.themeLoaded
+            visible: true
             Component.onCompleted: {
                 Editor.registerMainView(appViewMain)
                 closeSplashScreen()
-                _main.close()
+            }
+
+            onClosing: {
+                _main.close();
             }
         }
     }
@@ -103,8 +99,11 @@ Window {
                 Component.onCompleted: {
                     pane.wind = _cw
                     closeSplashScreen()
-                    _main.close()
                 }
+            }
+
+            onClosing: {
+                _main.close();
             }
         }
     }

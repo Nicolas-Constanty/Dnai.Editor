@@ -26,7 +26,7 @@ namespace dnai
 					//Implementation of ISerializable
 					void serialize(QJsonObject& obj) const override;
 				protected:
-                    void _deserialize(const QJsonObject& obj) override;
+					virtual void _deserialize(const QJsonObject& obj) override;
 				};
 			}
 		}

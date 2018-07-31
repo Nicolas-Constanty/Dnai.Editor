@@ -24,7 +24,7 @@ namespace dnai
 
 				inline bool EntityColumn::operator!=(const EntityColumn& other) const
 				{
-                    return (other == *this);
+					return (other != *this);
 				}
 
 				inline bool EntityColumn::operator==(const EntityColumn& other) const

@@ -72,7 +72,8 @@ namespace dnai
             Q_INVOKABLE int getTypeIndex(QUuid typeuid);
 
         public:
-            Q_INVOKABLE dnai::models::Entity *getEntity(QUuid guid);
+            dnai::models::Entity *getEntity(QUuid guid);
+            Q_INVOKABLE dnai::models::Entity *getEntityGui(QUuid guid);
             Q_INVOKABLE dnai::models::Entity *getEntity(quint32 id);
             Q_INVOKABLE dnai::models::Entity *getEntityByFullName(const QString &name);
 

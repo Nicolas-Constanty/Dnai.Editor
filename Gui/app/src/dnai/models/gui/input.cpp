@@ -85,7 +85,7 @@ namespace dnai
 				if (m_data.varType == id)
 					return false;
 				m_data.varType = id;
-				return false;
+                return true;
 			}
 
             const QString &Input::value() const

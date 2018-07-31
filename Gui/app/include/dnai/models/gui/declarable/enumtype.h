@@ -34,7 +34,7 @@ namespace dnai
 					void valuesChanged(const QStringList &val);
 
 				protected:
-                    void _deserialize(const QJsonObject& obj) override;
+					virtual void _deserialize(const QJsonObject& obj) override;
 				};
 			}
 		}

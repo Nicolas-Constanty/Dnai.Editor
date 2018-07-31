@@ -17,14 +17,15 @@ namespace dnai
 				Q_OBJECT
 
                 Q_PROPERTY(qint32 uid READ Uid WRITE setUid)
+                Q_PROPERTY(QString guid READ guid)
                 Q_PROPERTY(QList<QString> linked READ linked WRITE setLinkedEntities)
 
 			public:
                 explicit Instruction(QObject *parent = nullptr);
                 //Implementation of ISerializable
-                void serialize(QJsonObject& obj) const override;
+                virtual void serialize(QJsonObject& obj) const override;
 			protected:
-                void _deserialize(const QJsonObject& obj) override;
+                virtual void _deserialize(const QJsonObject& obj) override;
 				//Implementation of IModelData
 			public:
 				const data::Instruction& data() const override;
@@ -59,7 +60,8 @@ namespace dnai
                 QList<QString> const &linked() const;
                 bool setLinkedEntities(QList<QString> const &value);
 
-				const QUuid &guiUuid() const;
+                const QUuid &guiUuid() const;
+                QString guid() const;
 				bool setGuiUuid(const QUuid &value);
 
                 const QString &nodeMenuPath() const;
@@ -67,7 +69,7 @@ namespace dnai
 
 				qint32 x() const;
 				Q_INVOKABLE bool setX(qint32 x);
-
+				
 				qint32 y() const;
 				Q_INVOKABLE bool setY(qint32 y);
 

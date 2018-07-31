@@ -29,7 +29,7 @@ namespace dnai
 			* \brief Override updatePaintNode and draw a Line
 			* \return QSGNode *
 			*/
-            QSGNode *updatePaintNode(QSGNode *, UpdatePaintNodeData *) override;
+			virtual QSGNode *updatePaintNode(QSGNode *, UpdatePaintNodeData *) override;
 			/**
 			* \brief Static function Draw and return a Line
 			* \param p1

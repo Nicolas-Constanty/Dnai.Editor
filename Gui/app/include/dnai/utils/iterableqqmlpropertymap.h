@@ -20,7 +20,7 @@ public:
         KEY
     };
 
-    int rowCount(const QModelIndex& parent = QModelIndex()) const override;
+    virtual int rowCount(const QModelIndex& parent = QModelIndex()) const override;
     QVariant data(const QModelIndex& index, int role) const override;
 
     QVariant value(const QString &key) const;
@@ -38,7 +38,7 @@ public:
     QVariant operator[](const QString &key) const;
 
 private:
-    QHash<int, QByteArray> roleNames() const override;
+    virtual QHash<int, QByteArray> roleNames() const override;
 
 signals:
     void valueChanged(const QString &key, const QVariant &value);

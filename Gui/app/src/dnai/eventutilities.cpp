@@ -4,7 +4,9 @@
 namespace dnai
 {
 	EventUtilities::EventUtilities()
-    {}
+	{
+
+	}
 
 	bool EventUtilities::isHoverRectF(const QRectF &r, QMouseEvent *e)
 	{

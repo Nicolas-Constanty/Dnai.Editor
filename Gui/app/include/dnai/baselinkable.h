@@ -17,32 +17,32 @@ namespace dnai {
 		* \param curve
 		* \return Link *
 		*/
-        Link *connect(interfaces::ALinkable *linkable, views::BezierCurve *curve) override;
+        virtual Link *connect(interfaces::ALinkable *linkable, views::BezierCurve *curve) override;
 
-        Link *asyncConnect(interfaces::ALinkable *linkable) override;
+        virtual Link *asyncConnect(interfaces::ALinkable *linkable) override;
 
 		/**
 		* \brief Break a link between linkable
 		* \param linkable
 		*/
-        void unlink(interfaces::ALinkable *linkable) override;
+        virtual void unlink(interfaces::ALinkable *linkable) override;
 
 		/**
 		* \brief Break all the links between linkable
 		*/
-        void unlinkAll() override;
+		virtual void unlinkAll() override;
 
 		/**
 		* \brief Add a link
 		* \param l
 		*/
-        void addLink(Link *l) override;
+		virtual void addLink(Link *l) override;
 
 		/**
 		* \brief Remove a link
 		* \param l
 		*/
-        void removeLink(Link *l) override;
+		virtual void removeLink(Link *l) override;
 
 		/**
 		* \brief is linkable is actually

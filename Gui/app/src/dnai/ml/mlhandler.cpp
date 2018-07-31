@@ -4,7 +4,9 @@ namespace dnai {
 namespace ml {
 
 MlHandler::MlHandler(QObject *parent) : QObject(parent)
-{}
+{
+
+}
 
 DatasetHandler *MlHandler::dataset()
 {

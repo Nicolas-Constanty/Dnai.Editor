@@ -56,6 +56,7 @@ static void registerDNAI()
 
 static void registerEnums()
 {
+
 #define qmlRegisterEnums(type, name) qmlRegisterType<type>("DNAI.Enums", 1, 0, name)
     qmlRegisterEnums(dnai::enums::IoTypeRessouce, "IOType");
     qmlRegisterEnums(dnai::enums::FlowTypeRessouce, "FlowType");
@@ -165,24 +166,17 @@ static void registerCustomTypes()
 }
 
 void error_callBack(int signal) {
-    dnai::App::currentInstance()->processManager()->closeAll();
-
-    qDebug() << "==main== The program will crash with signal " << signal;
-    abort();
+   dnai::App::currentInstance().close(signal);
+   exit(signal);
 }
 
 int main(int argc, char *argv[])
 {
-#if defined(Q_OS_WIN)
-    // Just to load ssl library.
-    // I don't know why. Don't ask me.
-    QLoggingCategory::setFilterRules("qt.network.ssl.warning=false");
+
     signal(SIGSEGV, error_callBack);
     signal(SIGABRT, error_callBack);
-#else
-    signal(SIGSEGV, error_callBack);
-    signal(SIGABRT, error_callBack);
-#endif
+    signal(SIGINT, error_callBack);
+    signal(SIGTERM, error_callBack);
 
     registerQml();
     registerCustomTypes();
@@ -191,22 +185,8 @@ int main(int argc, char *argv[])
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     dnai::App app(argc, argv);
 
-#if defined(_WIN32) && defined(_MSC_VER)
-//    WinToast::instance()->setAppName(L"DNAI");
-//    WinToast::instance()->setAppUserModelId(
-//                WinToast::configureAUMI(L"SaltyStudio", L"DNAI", L"DNAI.app", L"20161006"));
-//    if (!WinToast::instance()->initialize()) {
-//        qDebug() << "Error, your system in not compatible!";
-//    }
-#endif
 
     dnai::Editor::instance().setAppName(argv[0]);
-
-    //dnai::Editor::instance().loadSolution("file://D:\\EIP\\Duly-GUI\\test.dnaisolution");
-
-    //if (argc > 1) {
-    //dnai::Editor::instance().loadSolution(argv[1]);
-    //}
 
     return dnai::App::exec();
 }

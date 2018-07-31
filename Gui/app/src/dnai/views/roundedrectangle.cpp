@@ -129,13 +129,13 @@ namespace dnai
 			// Normal + Border      Total = 12 * 4 - (4 - nCorner) * 2
 			// Normal               Total = 6 * 4
 
-            //  Normal + AA + Border
+			//  Normal + AA + Border 
 			//							TOTAL =  (8.5 * (m_nbSegments -1)) * nCorner + 14 * 4 - (4 - nCorner) * 2 + 4
-            //  Normal + AA
+			//  Normal + AA 
 			//							TOTAL =  (4 * (m_nbSegments -1)) * nCorner + 9 * 4 - (4 - nCorner) + 4
-            //  Normal + Border
+			//  Normal + Border 
 			//							TOTAL =  (6 * (m_nbSegments -1)) * nCorner + 12 * 4 - (4 - nCorner) * 2 + 4
-            //  Normal
+			//  Normal 
 			//							TOTAL =  (2.5 * (m_nbSegments -1)) * nCorner + 6 * 4 + 4
             const int nbVertice = (aa) ?
 				(m_borderWidth > 0 ?

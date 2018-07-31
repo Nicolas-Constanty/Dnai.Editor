@@ -23,7 +23,7 @@ namespace dnai
 			/**
 			* \brief Make componentComplete Abstract
 			*/
-            void componentComplete() override = 0;
+			virtual void componentComplete() override = 0;
 			virtual GenericNode *getNode() = 0;
 
 			virtual void unlinkAll();
@@ -51,19 +51,23 @@ namespace dnai
 			* \brief Override mouseMoveEvent
 			* \param event
 			*/
-            void mouseMoveEvent(QMouseEvent *event) override;
+			virtual void mouseMoveEvent(QMouseEvent *event) override;
 			/**
 			* \brief Override mousePressEvent
 			* \param event
 			*/
-             void mousePressEvent(QMouseEvent *event) override;
+             virtual void mousePressEvent(QMouseEvent *event) override;
             /**
 			* \brief Override mouseReleaseEvent
 			* \param event
 			*/
-            void mouseReleaseEvent(QMouseEvent *event) override;
+			virtual void mouseReleaseEvent(QMouseEvent *event) override;
 
-            virtual void afterRealease(Link *l);
+			virtual void afterRealease(Link *l);
+
+//			virtual void setHover();
+//			virtual void setNormal();
+//			virtual void setLink(Link *);
 
 			enum LinkStatus {
 				Normal,
@@ -73,7 +77,9 @@ namespace dnai
 
 		protected:
             interfaces::ALinkable *m_linkable;
+//			LinkableBezierItem *m_currentHover;
 			LinkStatus m_status;
+
 		};
 	}
 }

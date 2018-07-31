@@ -29,7 +29,7 @@ namespace dnai
 		Q_INVOKABLE void save() override;
         Q_INVOKABLE bool isProjectsSaved();
 		void load(const QString& path) override;
-        QString path() const override;
+        virtual QString path() const override;
 		void close() override;
 		const QString& version() const override;
 		void setVersion(const QString& version) override;
@@ -72,7 +72,7 @@ namespace dnai
 		QFile *m_file;
 		QString m_filename;
 		QQuickItem* m_selectedEntity;
-        QHash<int, QByteArray> roleNames() const override;
+		virtual QHash<int, QByteArray> roleNames() const override;
 	};
 }
 

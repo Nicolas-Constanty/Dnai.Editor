@@ -14,25 +14,25 @@ namespace dnai {
         Q_OBJECT
     public:
         App(int & argc, char **argv);
-		~App();
+        ~App() override;
 
         void loadMainWindow();
 		void initProcessManager();
 	    bool eventFilter(QObject* o, QEvent* event) override;
         void versionsUpdater();
         void onNotifyVersionChanged();
+        void close(int retcode=0);
 
     public:
         Session &session();
 	    QQmlApplicationEngine &engine();
-        ProcessManager *processManager() const;
-        Editor &editor() const;
+        ProcessManager &processManager();
         bool isNewVersionAvailable() const;
         qreal getSettingNumber(const QString &path);
 
     public:
         static void loadFonts();
-        static App *currentInstance();
+        static App &currentInstance();
 	    static QObject *createQmlObject(const QString &path);
         static QQmlEngine *getEngineInstance();
 
@@ -44,10 +44,9 @@ namespace dnai {
         void loadSplashScreen();
     private:
         QQmlApplicationEngine m_engine;
-        ProcessManager* m_processManager;
+        ProcessManager m_processManager;
         Session m_session;
-	    static App *m_instance;
-        Editor &m_editor;
+        static App *m_instance;
         QString m_currentVersionAPI;
         QMap<QString, qreal> m_loadedNumbers;
 

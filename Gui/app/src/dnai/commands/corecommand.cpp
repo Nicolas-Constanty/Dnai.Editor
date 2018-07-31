@@ -11,7 +11,9 @@ namespace dnai
             Command(name, save),
             exec(exec),
             undo(undo)
-        {}
+        {
+
+        }
 
         void CoreCommand::execute() const
         {
@@ -44,6 +46,9 @@ namespace dnai
 
         void CoreCommand::Error()
         {
+            if (commandQueue.empty())
+                return;
+
             CommandManager::Instance()->removeCommand(commandQueue.front());
             commandQueue.pop();
         }

@@ -23,14 +23,10 @@ namespace dnai
 {
     App *App::m_instance = nullptr;
     App::App(int& argc, char** argv) : QGuiApplication(argc, argv)
-	, m_processManager(nullptr)
-    , m_editor(Editor::instance())
 	{
-		if (m_instance == nullptr)
-            m_instance = this;
         setupSettings();
         if (argc > 1)
-            editor().setSolutionName(argv[1]);
+            Editor::instance().setSolutionName(argv[1]);
         QTimer::singleShot(300, this, &App::loadSplashScreen);
 	}
 
@@ -43,8 +39,13 @@ namespace dnai
     }
 
     App::~App() {
-	    delete m_processManager;
         qDebug() << "~" << "App";
+    }
+
+    void App::close(int retcode)
+    {
+        m_processManager.closeAll();
+        exit(retcode);
     }
 
     void App::versionsUpdater() {
@@ -69,7 +70,7 @@ namespace dnai
             onNotifyVersionChanged();
             return response;
         },
-        [this](http::Response response) -> http::Response {
+        [](http::Response response) -> http::Response {
             Editor::instance().notifyError("Could not check for update.");
        //     m_settings->setAPIVersion("0.0.30");
        //     onNotifyVersionChanged();
@@ -81,12 +82,12 @@ namespace dnai
     void App::initProcessManager()
 	{
 #ifdef Q_OS_MAC
-		m_processManager = new ProcessManager(QGuiApplication::applicationDirPath() + "/settings/conf/mac/bin_info.cfg");
+        m_processManager.setFile(QGuiApplication::applicationDirPath() + "/settings/conf/mac/bin_info.cfg");
 #else
-        m_processManager = new ProcessManager(QGuiApplication::applicationDirPath() + "/settings/conf/windows/bin_info.cfg");
+        m_processManager.setFile(QGuiApplication::applicationDirPath() + "/settings/conf/windows/bin_info.cfg");
 #endif
-		m_processManager->launch();
-        core::connect(m_processManager->getServerPort()); //connect core client
+        m_processManager.launch();
+        core::connect(m_processManager.getServerPort()); //connect core client
 	}
 
     void App::setupSettings()
@@ -116,7 +117,8 @@ namespace dnai
 	}
 
     void App::afterInit()
-    {}
+    {          
+    }
 
 	void App::loadFonts()
     {
@@ -155,14 +157,9 @@ namespace dnai
 		return QGuiApplication::eventFilter(o, event);
 	}
 
-    ProcessManager *App::processManager() const
+    ProcessManager &App::processManager()
     {
         return m_processManager;
-    }
-
-    Editor &App::editor() const
-    {
-        return m_editor;
     }
 
 	QObject* App::createQmlComponent(const QString &path)
@@ -172,9 +169,11 @@ namespace dnai
         return component.create();
 	}
 
-    App* App::currentInstance()
+    App &App::currentInstance()
 	{
-		return m_instance;
+        if (m_instance == nullptr)
+            m_instance = dynamic_cast<App*>(instance());
+        return *m_instance;
 	}
 
     QQmlApplicationEngine &App::engine()
@@ -189,12 +188,12 @@ namespace dnai
 
 	QObject* App::createQmlObject(const QString& path)
 	{
-        return App::currentInstance()->createQmlComponent(path);
+        return currentInstance().createQmlComponent(path);
 	}
 
     QQmlEngine *App::getEngineInstance()
 	{
-        return const_cast<QQmlEngine *>(dynamic_cast<const QQmlEngine *>(&App::currentInstance()->engine()));
+        return const_cast<QQmlEngine *>(dynamic_cast<const QQmlEngine *>(&currentInstance().engine()));
 	}
 
 #if defined(_WIN32) && defined(_MSC_VER)
@@ -273,8 +272,10 @@ namespace dnai
 
   qreal App::getSettingNumber(const QString &path)
   {
+
       if (m_loadedNumbers.contains(path))
       {
+
           return m_loadedNumbers[path];
       }
       const auto s =  Editor::instance().settings()->value(path).toReal();
@@ -301,7 +302,7 @@ namespace dnai
 
   void App::onNotifyVersionChanged() {
       if (isNewVersionAvailable()) {
-          Editor::instance().notifyInformation("Switch to new version " + m_currentVersionAPI, [this]() {
+          Editor::instance().notifyInformation("Switch to new version " + m_currentVersionAPI, []() {
               QDesktopServices::openUrl(QUrl("https://dnai.io/download/"));
              // App::currentInstance()->processManager()->launchUpdater(Editor::instance().version(), m_currentVersionAPI);
           });
@@ -314,6 +315,6 @@ namespace dnai
           Editor::instance().notifyWarning("Switch to new version " + m_currentVersionAPI, [this]() {
               App::currentInstance()->processManager()->launchUpdater(Editor::instance().version(), m_currentVersionAPI);
           });*/
-      }
-  }
+}
+}
 }

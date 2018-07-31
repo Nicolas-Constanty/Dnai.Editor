@@ -8,6 +8,7 @@ namespace dnai
 	class Link
 	{
 	public:
+
         interfaces::ALinkable *L1;
         interfaces::ALinkable *L2;
 

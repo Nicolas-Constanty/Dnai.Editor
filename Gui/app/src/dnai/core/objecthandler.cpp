@@ -17,7 +17,9 @@ namespace dnai
     {
         ObjectHandler::ObjectHandler(EntityManager &manager) :
             manager(manager)
-        {}
+        {
+
+        }
 
         void ObjectHandler::setup()
         {

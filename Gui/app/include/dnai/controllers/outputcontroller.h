@@ -21,6 +21,7 @@ namespace dnai
 			Link *connect(ALinkable *linkable, views::BezierCurve *curve) override;
 
             Link *asyncConnect(ALinkable *linkable) override;
+
 		};
 	}
 }

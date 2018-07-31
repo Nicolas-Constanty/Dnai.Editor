@@ -25,7 +25,7 @@ namespace dnai
         public:
             explicit GenericNode(QQuickItem *parent = nullptr);
 	        void createLink(models::gui::IoLink *link, GenericNode *n2);
-	        void createFlowLink(models::gui::FlowLink* link, GenericNode* n2);
+            void createFlowLink(models::gui::FlowLink* link, GenericNode* n2);
             void unlinkFlow(quint32 pin);
             void unlinkIo(quint32 in);
 
@@ -34,12 +34,13 @@ namespace dnai
             * \brief Override updatePaintNode and draw a beautifull Node
             * \return QSGNode *
             */
-            QSGNode *updatePaintNode(QSGNode *, UpdatePaintNodeData *) override;
-            void componentComplete() override;
+            virtual QSGNode *updatePaintNode(QSGNode *, UpdatePaintNodeData *) override;
+            virtual void componentComplete() override;
             void resetBorderColor() const;
             void move(const QPointF &vec);
             const QPointF &startPos() const { return m_startPos; }
             static void resetSelected();
+            //virtual bool contains(const QPointF &point) const override;
 
         public:
             FocusManagerIo &inputs() { return m_inputs; }
@@ -55,6 +56,9 @@ namespace dnai
             RoundedRectangle *header() const { return m_header; }
             RoundedRectangle *content() const { return m_content; }
             bool selected() const;
+
+        public:
+            Q_INVOKABLE void clear();
 
         public:
             /*void setFlowIn(bool f);
@@ -103,17 +107,17 @@ namespace dnai
             * \brief Override mouseMoveEvent
             * \param event
             */
-            void mouseMoveEvent(QMouseEvent *event) override;
+            virtual void mouseMoveEvent(QMouseEvent *event) override;
             /**
             * \brief Override mousePressEvent
             * \param event
             */
-            void mousePressEvent(QMouseEvent *event) override;
+            virtual void mousePressEvent(QMouseEvent *event) override;
             /**
             * \brief Override mouseReleaseEvent
             * \param event
             */
-            void mouseReleaseEvent(QMouseEvent *event) override;
+            virtual void mouseReleaseEvent(QMouseEvent *event) override;
         };
     }
 }

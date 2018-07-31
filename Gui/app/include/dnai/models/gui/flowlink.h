@@ -1,5 +1,6 @@
 #ifndef DNAI_MODELS_GUI_FLOWLINK
 #define DNAI_MODELS_GUI_FLOWLINK
+
 #include "dnai/interfaces/imodeldata.h"
 #include "data/flowlink.h"
 #include "dnai/interfaces/iserializable.h"
@@ -10,7 +11,7 @@ namespace dnai
 	{
 		namespace gui
 		{
-			class FlowLink : public interfaces::IModelData<data::FlowLink>, public interfaces::ASerializable<FlowLink>
+            class FlowLink : public interfaces::IModelData<data::FlowLink>, public interfaces::ASerializable<FlowLink>
 			{
 			public:
 				const data::FlowLink& data() const override;

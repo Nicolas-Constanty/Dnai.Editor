@@ -15,7 +15,9 @@ namespace dnai
     {
         InstructionHandler::InstructionHandler(EntityManager &manager) :
             manager(manager)
-        {}
+        {
+
+        }
 
         void InstructionHandler::setup()
         {
@@ -169,7 +171,8 @@ namespace dnai
         void InstructionHandler::onLinkDataError(quint32, quint32 from, const QString &output, quint32 to, const QString &input, const QString &message)
         {
             commands::CoreCommand::Error();
-            Editor::instance().notifyError("Unable to link instruction_" + QString::number(from) + "[" + output + "] to instruction_" + QString::number(to) + "[" + input + "]: " + message);
+            qWarning() << "==Core== Instruction.LinkDataError: " << "Unable to link instruction_" + QString::number(from) + "[" + output + "] to instruction_" + QString::number(to) + "[" + input + "]: " + message;
+            //Editor::instance().notifyError("Unable to link instruction_" + QString::number(from) + "[" + output + "] to instruction_" + QString::number(to) + "[" + input + "]: " + message);
         }
 
         void InstructionHandler::onDataUnlinked(quint32 function, quint32 instruction, const QString &input)
@@ -195,7 +198,8 @@ namespace dnai
         void InstructionHandler::onUnlinkDataError(quint32 function, quint32 instruction, const QString &input, const QString &message)
         {
             commands::CoreCommand::Error();
-            Editor::instance().notifyError("Unable to unlink input " + input + " of instruction " + QString::number(instruction) + " in function " + QString::number(function) + ": " + message);
+            qWarning() << "==Core== Instruction.UnlinkDataError: " << "Unable to unlink input " + input + " of instruction " + QString::number(instruction) + " in function " + QString::number(function) + ": " + message;
+            //Editor::instance().notifyError("Unable to unlink input " + input + " of instruction " + QString::number(instruction) + " in function " + QString::number(function) + ": " + message);
         }
 
         void InstructionHandler::onExecutionLinked(quint32 function, quint32 instruction, quint32 outpin, quint32 toInstruction)
@@ -219,7 +223,7 @@ namespace dnai
         {
             Q_UNUSED(function)
             commands::CoreCommand::Error();
-            Editor::instance().notifyError("Unable to link pin " + QString::number(outpin) + " of instruction " + QString::number(instruction) + " to instruction " + QString::number(toInstruction) + ": " + message);
+            qWarning() << "==Core== Function.Instruction.LinkExecutionError(" << function << ", " << instruction << ", " << outpin << ", " << toInstruction << ", " << message << ")";
         }
 
         void InstructionHandler::onExecutionUnlinked(quint32 function, quint32 instruction, quint32 outpin)
@@ -245,7 +249,8 @@ namespace dnai
         void InstructionHandler::onUnlinkExecutionError(quint32 function, quint32 instruction, quint32 outpin, const QString &message)
         {
             commands::CoreCommand::Error();
-            Editor::instance().notifyError("Unable to unlink pin " + QString::number(outpin) + " of instruction " + QString::number(instruction) + " in function " + QString::number(function) + ": " + message);
+            //Editor::instance().notifyError("Unable to unlink pin " + QString::number(outpin) + " of instruction " + QString::number(instruction) + " in function " + QString::number(function) + ": " + message);
+            qWarning() << "==Core== Function.Instruction.UnlinkExecutionError(" << function << ", " << instruction << ", " << outpin << ", " << message << ")";
         }
 
         void InstructionHandler::onInputValueSet(quint32 function, quint32 instruction, const QString &input, const QString &value)
@@ -275,22 +280,51 @@ namespace dnai
         {
             models::Function *data = func->guiModel<models::Function>();
 
+            qDebug() << "Add instruction : " << instruction->guiUuid();
             m_instructions[instruction->guiUuid()] = instruction;
 
             for (models::gui::FlowLink *curr : data->flowlinks())
             {
-                if (curr->data().to == instruction->guiUuid())
+                if (curr->data().to == instruction->guiUuid()
+                    || curr->data().from == instruction->guiUuid())
                 {
                     flowlink_to_replicate[curr] = func;
                 }
             }
 
             refreshLinks();
+
+            /*
+             * Handle instruction data links
+             */
+            QList<models::gui::IoLink *> links = data->iolinks();
+
+            for (models::gui::IoLink *curr : links)
+            {
+                models::gui::Instruction *from = getInstruction(curr->data().outputUuid);
+                models::gui::Instruction *to = getInstruction(curr->data().inputUuid);
+
+                qDebug() << " ==> IOLink: " << curr->data().outputUuid << "[" << from << "] ->" << curr->data().inputUuid << "[" << to << "]";
+
+                if ((curr->data().inputUuid == instruction->guiUuid() || curr->data().outputUuid == instruction->guiUuid())
+                     && from != nullptr && to != nullptr)
+                {
+                    if (from->hasOutput(curr->data().outputName) && to->hasInput(curr->data().inputName))
+                    {
+                        if (from->getOutputType(curr->data().outputName) == to->getInputType(curr->data().inputName))
+                            linkData(func->id(), from->Uid(), curr->data().outputName, to->Uid(), curr->data().inputName, false);
+                        else
+                            data->removeIoLink(curr);
+                    }
+                }
+            }
         }
 
         void InstructionHandler::onInstructionRemoved(models::Entity *func, models::gui::Instruction *instruction)
         {
             Q_UNUSED(func)
+
+            qDebug() << "Remove instruction : " << instruction->guiUuid();
 
             m_instructions.remove(instruction->guiUuid());
         }

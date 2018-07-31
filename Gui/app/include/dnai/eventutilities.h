@@ -33,6 +33,7 @@ namespace dnai
 		* \return
 		*/
 		static bool isHoverCircle(const qreal ra, QMouseEvent *e);
+
 	};
 }
 

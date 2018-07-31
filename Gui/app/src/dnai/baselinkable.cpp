@@ -10,7 +10,9 @@ namespace dnai
 	}
 
 	BaseLinkable::~BaseLinkable()
-    {}
+	{
+
+	}
 
     Link *BaseLinkable::connect(ALinkable *linkable, views::BezierCurve *curve)
 	{

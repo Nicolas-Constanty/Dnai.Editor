@@ -5,8 +5,9 @@
 namespace dnai {
     namespace  http {
         Url::Url(QNetworkAccessManager *manager, QUrl const &url)
-            : QObject (nullptr), m_manager(manager), m_url(url)
-        {}
+            : QObject (nullptr), m_manager(manager), m_url(url) {
+
+        }
 
         Observable &Url::head()
         {
@@ -38,6 +39,7 @@ namespace dnai {
 
             for (auto it = body.begin(); it != body.end(); ++it) {
                 query.addQueryItem(it.key(), it.value());
+
             }
             return post(query.query(QUrl::FullyEncoded).toUtf8());
         }

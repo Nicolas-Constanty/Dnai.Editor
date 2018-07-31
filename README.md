@@ -1,9 +1,17 @@
 # Dnai Editor - Source code
 
-[![Build Circle Ci](https://circleci.com/gh/Nicolas-Constanty/Dnai.Editor/tree/master.svg?style=shield)](https://circleci.com/gh/Nicolas-Constanty/Dnai.Editor/tree/master.svg?style=shield)
-[![Build status](https://ci.appveyor.com/api/projects/status/gjcxsjh80jo76coe/branch/master?svg=true&passingText=master%20-%20passing&pendingText=master%20-%20pending&failingText=master%20-%20failing)](https://ci.appveyor.com/project/Nicolas-Constanty/dnai-editor/branch/master)
-[![Build status](https://ci.appveyor.com/api/projects/status/gjcxsjh80jo76coe/branch/develop?svg=true&passingText=develop%20-%20passing&pendingText=develop%20-%20pending&failingText=develop%20-%20failing)](https://ci.appveyor.com/project/Nicolas-Constanty/dnai-editor/branch/develop)
+[![Build status](https://ci.appveyor.com/api/projects/status/gjcxsjh80jo76coe/branch/master?svg=true&passingText=master%20-%20Windows%2010%20-%20passing&pendingText=master%20-%20Windows%2010%20-%20pending&failingText=master%20-%20Windows%2010%20-%20failing)](https://ci.appveyor.com/project/Nicolas-Constanty/dnai-editor/branch/master)
+[![Build status](https://ci.appveyor.com/api/projects/status/gjcxsjh80jo76coe/branch/develop?svg=true&passingText=develop%20-%20Windows%2010%20-%20passing&pendingText=develop%20-%20Windows%2010%20-%20pending&failingText=develop%20-%20Windows%2010%20-%20failing)](https://ci.appveyor.com/project/Nicolas-Constanty/dnai-editor/branch/develop)
+
+[![Build Status](https://img.shields.io/travis/Nicolas-Constanty/Dnai.Editor/master.svg?label=master%20-%20MacOS)](https://travis-ci.org/Nicolas-Constanty/Dnai.Editor)
+[![Build Status](https://img.shields.io/travis/Nicolas-Constanty/Dnai.Editor/develop.svg?label=develop%20-%20MacOS)](https://travis-ci.org/Nicolas-Constanty/Dnai.Editor)
+
+[![Build Circle Ci](https://img.shields.io/circleci/project/github/Nicolas-Constanty/Dnai.Editor/master.svg?label=master%20-%20Ubuntu)](https://circleci.com/gh/Nicolas-Constanty/Duly-GUI/tree/master)
+[![Build Circle Ci](https://img.shields.io/circleci/project/github/Nicolas-Constanty/Dnai.Editor/develop.svg?label=develop%20-%20Ubuntu)](https://circleci.com/gh/Nicolas-Constanty/Duly-GUI/tree/develop)
+
 [![CodeFactor](https://www.codefactor.io/repository/github/nicolas-constanty/dnai.editor/badge)](https://www.codefactor.io/repository/github/nicolas-constanty/dnai.editor)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/f5ad248cb0884d53a206b12154e3295b)](https://www.codacy.com/app/nicolas.constanty/Dnai.Editor?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Nicolas-Constanty/Dnai.Editor&amp;utm_campaign=Badge_Grade)
+
 
 
 [Dnai Editor](https://code.visualstudio.com) is a visual scripting software,

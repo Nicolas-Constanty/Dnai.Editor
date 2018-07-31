@@ -50,7 +50,7 @@ namespace dnai
 		* \param point
 		* \return
 		*/
-        QList<QQuickItem *> findFocused(const QPointF &point) override;
+		virtual QList<QQuickItem *> findFocused(const QPointF &point) override;
 	};
 }
 

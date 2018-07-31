@@ -22,7 +22,9 @@ namespace dnai
     {
         DeclaratorHandler::DeclaratorHandler(EntityManager &manager) :
             manager(manager)
-        {}
+        {
+
+        }
 
         DeclaratorHandler::~DeclaratorHandler()
         {
@@ -322,9 +324,10 @@ namespace dnai
                 for (EntityID id : rmvList) {
                     models::Entity &rmd = manager.getEntity(id);
 
-                    emit removed(&rmd);
                     //this will trigger onEntityRemoved
                     manager.removeEntity(id);
+
+                    emit removed(&rmd);
                 }
             }
         }
