@@ -28,29 +28,38 @@ namespace dnai
 			setAcceptHoverEvents(true);
 			setAcceptedMouseButtons(Qt::LeftButton);
             setFlag(ItemAcceptsInputMethod, true);
-		}
+        }
 
 		void GenericNode::createLink(models::gui::IoLink* link, GenericNode *n2)
 		{
             const auto ilist = inputs().getList();
             const auto olist = n2->outputs().getList();
-			LinkableBezierItem *input = nullptr;
-			LinkableBezierItem *output = nullptr;
+            LinkableBezierItem *input = nullptr;
+            LinkableBezierItem *output = nullptr;
 			for (auto i : ilist)
 			{
 				if (i->property("name").toString() == link->data().inputName)
 				{
-					input = dynamic_cast<LinkableBezierItem *>(i);
+                    input = dynamic_cast<LinkableBezierItem *>(i);
 				}
 			}
 			for (auto o : olist)
 			{
                 if (o->property("name").toString() == link->data().outputName)
 				{
-					output = dynamic_cast<LinkableBezierItem *>(o);
-				}
+                    output = dynamic_cast<LinkableBezierItem *>(o);
+                }
 			}
+
+            if (input == nullptr || output == nullptr)
+            {
+                qWarning() << "==GenericNode== Unable to link " << link->data().outputName << " to " << link->data().inputName;
+                return;
+            }
+
             input->connect(output);
+            input->setIsLink(true);
+            output->setIsLink(true);
 		}
 
 		void GenericNode::createFlowLink(models::gui::FlowLink* link, GenericNode *n2)
@@ -60,7 +69,19 @@ namespace dnai
 			const auto output = dynamic_cast<LinkableBezierItem *>(folist.at(link->data().outIndex));
 			auto input = dynamic_cast<LinkableBezierItem *>(filist.at(0));
 			input->connect(output);
+            input->setIsLink(true);
+            output->setIsLink(true);
 		}
+
+        void GenericNode::unlinkIo(quint32 in)
+        {
+            dynamic_cast<Input*>(m_inputs.getList().at(in))->unlinkAll();
+        }
+
+        void GenericNode::unlinkFlow(quint32 pin)
+        {
+           dynamic_cast<Flow*>(m_flowsOut.getList().at(pin))->unlinkAll();
+        }
 
 		//void GenericNode::setFlowIn(bool f)
 		//{
@@ -183,6 +204,34 @@ namespace dnai
             if (m_selected)
                 m_selected->resetBorderColor();
             m_selected = nullptr;
+        }
+
+        bool GenericNode::selected() const
+        {
+            return m_selected == this;
+        }
+
+        void GenericNode::clear()
+        {
+            for (QQuickItem *curr : inputs().getList())
+            {
+                dynamic_cast<Input *>(curr)->unlinkAll();
+            }
+
+            for (QQuickItem *curr : outputs().getList())
+            {
+                dynamic_cast<Output *>(curr)->unlinkAll();
+            }
+
+            for (QQuickItem *curr : flowsIn().getList())
+            {
+                dynamic_cast<Flow *>(curr)->unlinkAll();
+            }
+
+            for (QQuickItem *curr : flowsOut().getList())
+            {
+                dynamic_cast<Flow *>(curr)->unlinkAll();
+            }
         }
 
         void GenericNode::resetBorderColor() const

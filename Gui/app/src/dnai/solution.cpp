@@ -54,16 +54,16 @@ namespace dnai
     }
 
 	void Solution::load(const QString& path)
-	{
-		m_filename = path;
+    {
+        m_filename = path;
+        QString fileurl = QUrl(m_filename).toLocalFile();
 
-        qDebug() << "File url: " << m_filename;
-        qDebug() << "File path: " << QUrl(m_filename).toLocalFile();
+        qDebug() << "==Solution== Loading solution from " << m_filename << "<=>" << fileurl;
 
-		m_file = new QFile(QUrl(m_filename).toLocalFile());
+        m_file = new QFile(fileurl);
 
         if (!m_file->open(QIODevice::ReadOnly)) {
-            qWarning() << "Couldn't open file: " << m_file->errorString();
+            qWarning() << "==Solution== Couldn't open file: " << m_file->errorString();
 			return;
 		}
 
@@ -74,7 +74,7 @@ namespace dnai
             const QJsonObject obj(QJsonDocument::fromJson(data, &err).object());
             if (err.error != QJsonParseError::NoError)
             {
-                qWarning() << err.errorString() << "at character :" << err.offset;
+                qWarning() << "==Solution== " << err.errorString() << "at character :" << err.offset;
                 m_file->close();
                 return;
             }
@@ -86,7 +86,7 @@ namespace dnai
 		catch (std::exception &e) {
 			Q_UNUSED(e)
             exceptions::ExceptionManager::throwException(exceptions::GuiExeption("Error : Corrupted Solution file"));
-            qWarning("Couldn't parse file.");
+            qWarning() << "==Solution== Couldn't parse file.";
 		}
 		m_file->close();
 	}
@@ -225,7 +225,7 @@ namespace dnai
 	void Solution::_deserialize(const QJsonObject& obj)
 	{
 		if (obj["version"].toString() != Editor::instance().version())
-			qWarning() << "Warning this solution file (" << m_filename << ") wasn't created with the same editor's version (" << obj["version"].toString() << "!= current" << Editor::instance().version() << ")";
+            qWarning() << "==Solution== Warning this solution file (" << m_filename << ") wasn't created with the same editor's version (" << obj["version"].toString() << "!= current" << Editor::instance().version() << ")";
 
 		m_name = obj["name"].toString();
 		m_description = obj["description"].toString();
@@ -235,7 +235,7 @@ namespace dnai
             const auto proj = new Project(projfilename.toString());
 			proj->load(subString + "/" + projfilename.toString());
 			m_projects.append(proj);
-			qDebug() << "Successfully load the project :" << subString + "/" + projfilename.toString();
+            qDebug() << "==Soltution== Successfully load the project :" << subString + "/" + projfilename.toString();
 			if (m_selectedProject == nullptr)
 				selectProject(proj);
 		}

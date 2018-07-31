@@ -2,6 +2,7 @@ import QtQuick 2.0
 import QtQuick.Controls 2.2
 import Dnai.Controls 1.0
 import Dnai.FontAwesome 1.0
+import Dnai.Theme 1.0
 
 import DNAI 1.0
 
@@ -9,18 +10,16 @@ BaseProperty {
     id: _panel
     property var listmodel: null
 
-    property real contentHeight: 24
+    property real contentHeight: 30
     property real valueSpacing: 5
-    property ButtonAwesomeSolid createButton: _createButton
+    property Button createButton: _createButton
 
-    property var addValue: null
-
-    property var moveDown: null
-    property var moveUp: null
-    property var deleteValue: null
-    property var nameChanged: null
-    property var typeChanged: null
-
+    signal addValue()
+    signal deleteValue(string name)
+    signal typeChanged(string name, var type)
+    signal renamed(string name, string newName)
+    signal moveUp(int index)
+    signal moveDown(int index)
 
     anchors.left: parent.left
     anchors.right: parent.right
@@ -37,40 +36,38 @@ BaseProperty {
             anchors.left: parent.left
             anchors.right: parent.right
             height: _panel.contentHeight
-            name: model.name
-            varType: Editor.propertyPanelProperties.varTypes.getIndexFromValue(model.varType)
+            paramName: model.name
+            varType: model.varType
             paramModel: model
 
-            moveDown: function () {
+            onMoveDown: {
                 _panel.moveDown(index)
             }
-            moveUp: function () {
+            onMoveUp: {
                 _panel.moveUp(index)
             }
-            deleteValue: function () {
+            onDeleteValue: {
                 _panel.deleteValue(name)
                 _inputs.height -= _panel.contentHeight + _panel.valueSpacing
                 _panel.height -= _panel.contentHeight + _panel.valueSpacing
             }
-            nameChanged: function (n) {
-                _panel.nameChanged(index, model.name, n)
+            onNameChanged: {
+                _panel.renamed(model.name, name)
             }
-            typeChanged: function (t) {
-                console.log("model: ", paramModel.id);
-                console.log("_inputs[index]: ", _inputs[index]);
-                _panel.typeChanged(index, name, t)
+            onTypeChanged: {
+                _panel.typeChanged(name, type)
             }
         }
     }
 
-    ButtonAwesomeSolid {
+    Button {
         id: _createButton
-        label.text: "\uf055"
+        awesomeIcon.text: "\uf055"
         anchors.horizontalCenter: parent.horizontalCenter
-        label.font.pointSize: 30
+        awesomeIcon.size: 30
         height: 40
         width: 40
-        color: "#ffffff"
+        awesomeIcon.color: "#ffffff"
         background: Rectangle {
             color: "transparent"
         }

@@ -31,7 +31,7 @@ namespace dnai
             void declared(dnai::models::Entity *entity);
             void removed(dnai::models::Entity *entity);
             void moved();
-            void renamed();
+            void renamed(dnai::models::Entity *entity, QString name, QString newName);
             void visibilitySet();
 
         private:
@@ -47,7 +47,7 @@ namespace dnai
         private:
             models::Entity *findEntity(::core::EntityID declarator, QString const &name);
 
-        private:
+        public:
             void onDeclared(::core::EntityID declarator, ::core::ENTITY type, QString const &name, ::core::VISIBILITY visibility, ::core::EntityID declared);
             void onDeclareError(::core::EntityID declarator, ::core::ENTITY type, QString const &name, ::core::VISIBILITY visibility, QString const &message);
 

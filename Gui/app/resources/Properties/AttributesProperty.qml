@@ -3,8 +3,10 @@ import QtQuick.Controls 2.2
 
 import DNAI 1.0
 import Dnai.FontAwesome 1.0
+import DNAI.Core 1.0
+import Dnai.Theme 1.0
 
-import "../Style"
+import "../Components"
 
 BaseProperty {
     id: __this__
@@ -33,20 +35,44 @@ BaseProperty {
         height: model.length * __this__.attributeHeight
 
         delegate: Row {
-
+            id: _row
             width: parent.width
             height: __this__.attributeHeight
 
-            spacing: 2
+            spacing: 4
+
+            /*
+             * Attribute type
+             */
+            VarTypeComboBox {
+                id: __type__
+
+                typeGuid: __this__.model ? __this__.model.guiProperties.getAttribute(modelData) : 0
+
+                anchors.verticalCenter: parent.verticalCenter
+
+                onTypeChanged: {
+                    if (newType.id === __this__.model.id)
+                    {
+                        Editor.notifyError("Cannot set an attribute of the type of the object");
+                        __type__.resetIndex();
+                    }
+                    else if (newType.guid !== __this__.model.guiProperties.getAttribute(modelData))
+                    {
+                        __this__.changeType(modelData, newType.id);
+                    }
+                }
+            }
 
             /*
              * Attribute name
              */
-            EditableText {
+            TextField {
                 id: __name__
 
-                width: (parent.width - __remove__.width) * 0.5
-                height: parent.height
+                width: parent.width - 2 * _row.spacing - __type__.width - __remove__.width
+                height: 26
+                anchors.verticalCenter: parent.verticalCenter
 
                 text: modelData
 
@@ -58,61 +84,19 @@ BaseProperty {
             }
 
             /*
-             * Attribute type
-             */
-            ComboBox {
-                id: __type__
-
-                width: (parent.width - __remove__.width) * 0.5
-                height: parent.height
-
-                model: Editor.propertyPanelProperties.varTypes
-                textRole: "name"
-
-                font.pointSize: 8
-
-                function getModelType()
-                {
-                    if (__this__.model)
-                        return __this__.model.guiProperties.getAttribute(modelData);
-                    return 2;
-                }
-
-                function getBoxType()
-                {
-                    return Editor.propertyPanelProperties.varTypes.getValueFromIndex(currentIndex);
-                }
-
-                function getModelIndex()
-                {
-                    return Editor.propertyPanelProperties.varTypes.getIndexFromValue(getModelType());
-                }
-
-                currentIndex: getModelIndex()
-
-                onCurrentIndexChanged: {
-                    if (getBoxType() === __this__.model.id)
-                    {
-                        Editor.notifyError("Cannot set an attribute of the type of the object");
-                        currentIndex = getModelIndex();
-                    }
-                    else if (getModelType() !== getBoxType())
-                        __this__.changeType(modelData, getBoxType());
-                }
-            }
-
-            /*
              * Attribute remove
              */
-            ButtonAwesomeSolid {
+            Button {
                 id: __remove__
 
-                width: 40
                 height: parent.height
 
-                label.text: "\uf2ed"
-
+                topPadding: 0
+                bottomPadding: 0
+                awesomeIcon.text: "\uf2ed"
+                awesomeIcon.size: 8
                 font.pointSize: 8
+                anchors.verticalCenter: parent.verticalCenter
 
                 onClicked: {
                     __this__.remove(__name__.text);
@@ -124,13 +108,18 @@ BaseProperty {
     /*
      * Button to add
      */
-    ButtonAwesomeSolid {
+    Button {
         id: __add__
 
-        anchors.left: parent.left
-        anchors.right: parent.right
-
-        label.text: "\uf055"
+        awesomeIcon.text: "\uf055"
+        anchors.horizontalCenter: parent.horizontalCenter
+        awesomeIcon.size: 30
+        height: 40
+        width: 40
+        awesomeIcon.color: "#ffffff"
+        background: Rectangle {
+            color: "transparent"
+        }
 
         Component.onCompleted: {
             console.log("Attributes button: Dim(", width, "x", height, ")");

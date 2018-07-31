@@ -82,7 +82,6 @@ Item {
         id: _bar
         currentIndex: _swip.currentIndex
         onCurrentIndexChanged: {
-            //console.log("Curr index changed in bar: ", currentIndex);
             _swip.currentIndex = currentIndex
             currentView = _swip.itemAt(currentIndex)
         }
@@ -96,7 +95,6 @@ Item {
         anchors.topMargin: _bar.height
         padding: 0
         onCurrentIndexChanged: {
-            //console.log("Curr index changed in swip: ", currentIndex);
            _bar.currentIndex = currentIndex
            currentView = _swip.itemAt(currentIndex)
        }

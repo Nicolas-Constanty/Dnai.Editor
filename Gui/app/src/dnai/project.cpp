@@ -35,7 +35,7 @@ namespace dnai {
             this, SLOT(addEntity(dnai::models::Entity*))
                     );
         m_filename = filename;
-        qDebug() << filename << ">>" << QUrl(m_filename).toLocalFile();
+        qDebug() << "==Project== Loading " << filename << "<=>" << QUrl(m_filename).toLocalFile();
         m_file = new QFile(QUrl(m_filename).toLocalFile());
         m_rootItem = new models::Entity();
         m_rootItem->setIdx(index(0,0, QModelIndex()));
@@ -59,13 +59,13 @@ namespace dnai {
 
         if (!m_file->open(QIODevice::WriteOnly))
         {
-            qWarning() << "Unable to open project file " << m_file->fileName() << ": " << m_file->errorString();
+            qWarning() << "==Project== Unable to open project file " << m_file->fileName() << ": " << m_file->errorString();
             return;
         }
         m_file->write(QJsonDocument(obj).toJson(QJsonDocument::Compact));
+        qDebug() << "==Project== Project saved into " << m_file->fileName();
 		m_file->close();
         setSaved(true);
-        qDebug() << "halo ?";
     }
 
 	void Project::serialize(QJsonObject &obj) const
@@ -112,13 +112,10 @@ namespace dnai {
 	{
 		m_filename = path;
 
-        qDebug() << "File url: " << path;
-        qDebug() << "File path: " << QUrl(m_filename).toLocalFile();
-
 		m_file = new QFile(QUrl(m_filename).toLocalFile());
 
 		if (!m_file->open(QIODevice::ReadOnly)) {
-            qWarning() << "Unable to open project file " << m_file->fileName() << ": " << m_file->errorString();
+            qWarning() << "==Project== Unable to open project file " << m_file->fileName() << ": " << m_file->errorString();
 			return;
 		}
 
@@ -129,7 +126,7 @@ namespace dnai {
             const QJsonObject obj(QJsonDocument::fromJson(data, &err).object());
             if (err.error != QJsonParseError::NoError)
             {
-                qWarning() << err.errorString() << "at character :" << err.offset;
+                qWarning() << "==Project==" << err.errorString() << "at character :" << err.offset;
                 m_file->close();
                 return;
             }
@@ -138,7 +135,7 @@ namespace dnai {
         } catch (std::exception &e) {
 			Q_UNUSED(e)
 			exceptions::ExceptionManager::throwException(exceptions::GuiExeption("Error : Corrupted file"));
-            qWarning("Couldn't parse file.");
+            qWarning() << "==Project== Couldn't parse file.";
 		}
         m_file->close();
         setSaved(true);
@@ -362,22 +359,13 @@ namespace dnai {
         guiModel->setIndex(idx);
 
         QString key = QString::number(parentItem->id()) + entity->name();
-
-        qDebug() << this;
-
-        qDebug() << "Search for: " << key;
-
         QMap<QString, QString>::iterator itIndex = m_entityColumnUid.find(key);
 
         if (itIndex != m_entityColumnUid.end())
         {
-            qDebug() << itIndex.value();
-            qDebug() << "Setting list index: " << itIndex.value();
             guiModel->setListIndex(itIndex.value());
             m_entityColumnUid.erase(itIndex);
         }
-
-        qDebug() << "Adding entity";
 
         parentItem->appendChild(entity);
 
@@ -396,7 +384,7 @@ namespace dnai {
     void Project::addEntityColumnUid(quint32 parentId, const QString &name, const QString &listIndex)
     {
         QString key = QString::number(parentId) + name;
-        qDebug() << "IndexMap[" << key << "] = " << listIndex;
+
         m_entityColumnUid.insert(key, listIndex);
     }
 
@@ -408,6 +396,16 @@ namespace dnai {
     models::Entity &Project::getRoot() const
     {
         return *m_rootEntity;
+    }
+
+    models::ml::MlProject *Project::mlData()
+    {
+        return &m_mlData;
+    }
+
+    models::ml::MlProject &Project::MlData()
+    {
+        return m_mlData;
     }
 
     const QJsonObject &Project::jsonData() const

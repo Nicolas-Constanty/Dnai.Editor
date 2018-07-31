@@ -1,206 +1,268 @@
 ﻿{
     "categories": {
         "operators": {
-            "outputs": 1,
-            "output_names": ["result"],
             "categories": {
                 "binaryOperator": {
-                    "inputs": 2,
-                    "input_names": ["LeftOperand", "RightOperand"],
-                    "input_diplay_names": ["Value 1", "Value 2"],
                     "categories": {
                         "logical": {
+                            "outputs": [
+                                {
+                                    "name": "result",
+                                    "type": "{907ad50a-8f54-51ea-8c68-479d1d90a699}",
+                                    "display_name": "Result"
+                                }
+                            ],
                             "categories": {
                                 "int": {
                                     "type": 2,
+                                    "inputs": [
+                                        {
+                                            "name": "LeftOperand",
+                                            "type": "{149e81c5-fc6e-5cc7-a0a6-6f736a6487ca}",
+                                            "display_name": "Value 1"
+                                        },
+                                        {
+                                            "name": "RightOperand",
+                                            "type": "{149e81c5-fc6e-5cc7-a0a6-6f736a6487ca}",
+                                            "display_name": "Value 2"
+                                        }
+                                    ],
                                     "categories": {
                                         "Different": {
                                             "name": "!=",
                                             "description": "",
                                             "instruction_id": 2,
-                                            "construction": [2, 2]
+                                            "construction": [2, 2, 1]
                                         },
                                         "Equal": {
                                             "name": "==",
                                             "description": "",
                                             "instruction_id": 3,
-                                            "construction": [2, 2]
+                                            "construction": [2, 2, 1]
                                         },
                                         "Greater or equal than": {
                                             "name": ">=",
                                             "description": "",
                                             "instruction_id": 5,
-                                            "construction": [2, 2]
+                                            "construction": [2, 2, 1]
                                         },
                                         "Greater than": {
                                             "name": ">",
                                             "description": "",
                                             "instruction_id": 4,
-                                            "construction": [2, 2]
+                                            "construction": [2, 2, 1]
                                         },
                                         "Less or equal than": {
                                             "name": "<=",
                                             "description": "",
                                             "instruction_id": 7,
-                                            "construction": [2, 2]
+                                            "construction": [2, 2, 1]
                                         },
                                         "Less than": {
                                             "name": "<",
                                             "description": "",
                                             "instruction_id": 6,
-                                            "construction": [2, 2]
+                                            "construction": [2, 2, 1]
                                         }
                                     }
                                 },
                                 "float": {
                                     "type": 3,
+                                    "inputs": [
+                                        {
+                                            "name": "LeftOperand",
+                                            "type": "{0db5b2f0-5384-5579-9433-f92bbf306aef}",
+                                            "display_name": "Value 1"
+                                        },
+                                        {
+                                            "name": "RightOperand",
+                                            "type": "{0db5b2f0-5384-5579-9433-f92bbf306aef}",
+                                            "display_name": "Value 2"
+                                        }
+                                    ],
                                     "categories": {
                                         "Different": {
                                             "name": "!=",
                                             "description": "",
                                             "instruction_id": 2,
-                                            "construction": [3, 3]
+                                            "construction": [3, 3, 1]
                                         },
                                         "Equal": {
                                             "name": "==",
                                             "description": "",
                                             "instruction_id": 3,
-                                            "construction": [3, 3]
+                                            "construction": [3, 3, 1]
                                         },
                                         "Greater or equal than": {
                                             "name": ">=",
                                             "description": "",
                                             "instruction_id": 5,
-                                            "construction": [3, 3]
+                                            "construction": [3, 3, 1]
                                         },
                                         "Greater than": {
                                             "name": ">",
                                             "description": "",
                                             "instruction_id": 4,
-                                            "construction": [3, 3]
+                                            "construction": [3, 3, 1]
                                         },
                                         "Less or equal than": {
                                             "name": "<=",
                                             "description": "",
                                             "instruction_id": 7,
-                                            "construction": [3, 3]
+                                            "construction": [3, 3, 1]
                                         },
                                         "Less than": {
                                             "name": "<",
                                             "description": "",
                                             "instruction_id": 6,
-                                            "construction": [3, 3]
+                                            "construction": [3, 3, 1]
                                         }
                                     }
                                 },
                                 "bool": {
                                     "type": 1,
+                                    "inputs": [
+                                        {
+                                            "name": "LeftOperand",
+                                            "type": "{907ad50a-8f54-51ea-8c68-479d1d90a699}",
+                                            "display_name": "Value 1"
+                                        },
+                                        {
+                                            "name": "RightOperand",
+                                            "type": "{907ad50a-8f54-51ea-8c68-479d1d90a699}",
+                                            "display_name": "Value 2"
+                                        }
+                                    ],
                                     "categories": {
                                         "And": {
                                             "name": "&&",
                                             "description": "",
                                             "instruction_id": 0,
-                                            "construction": []
+                                            "construction": [1]
                                         },
                                         "Or": {
                                             "name": "||",
                                             "description": "",
                                             "instruction_id": 1,
-                                            "construction": []
+                                            "construction": [1]
                                         },
                                         "Different": {
                                             "name": "!=",
                                             "description": "",
                                             "instruction_id": 2,
-                                            "construction": [1, 1]
+                                            "construction": [1, 1, 1]
                                         },
                                         "Equal": {
                                             "name": "==",
                                             "description": "",
                                             "instruction_id": 3,
-                                            "construction": [1, 1]
+                                            "construction": [1, 1, 1]
                                         }
                                     }
                                 },
                                 "char": {
                                     "type": 4,
+                                    "inputs": [
+                                        {
+                                            "name": "LeftOperand",
+                                            "type": "{22f34ba1-b80d-595b-b485-e1ff3d1e1283}",
+                                            "display_name": "Value 1"
+                                        },
+                                        {
+                                            "name": "RightOperand",
+                                            "type": "{22f34ba1-b80d-595b-b485-e1ff3d1e1283}",
+                                            "display_name": "Value 2"
+                                        }
+                                    ],
                                     "categories": {
                                         "Different": {
                                             "name": "!=",
                                             "description": "",
                                             "instruction_id": 2,
-                                            "construction": [4, 4]
+                                            "construction": [4, 4, 1]
                                         },
                                         "Equal": {
                                             "name": "==",
                                             "description": "",
                                             "instruction_id": 3,
-                                            "construction": [4, 4]
+                                            "construction": [4, 4, 1]
                                         },
                                         "Greater or equal than": {
                                             "name": ">=",
                                             "description": "",
                                             "instruction_id": 5,
-                                            "construction": [4, 4]
+                                            "construction": [4, 4, 1]
                                         },
                                         "Greater than": {
                                             "name": ">",
                                             "description": "",
                                             "instruction_id": 4,
-                                            "construction": [4, 4]
+                                            "construction": [4, 4, 1]
                                         },
                                         "Less or equal than": {
                                             "name": "<=",
                                             "description": "",
                                             "instruction_id": 7,
-                                            "construction": [4, 4]
+                                            "construction": [4, 4, 1]
                                         },
                                         "Less than": {
                                             "name": "<",
                                             "description": "",
                                             "instruction_id": 6,
-                                            "construction": [4, 4]
+                                            "construction": [4, 4, 1]
                                         }
                                     }
                                 },
                                 "string": {
                                     "type": 5,
+                                    "inputs": [
+                                        {
+                                            "name": "LeftOperand",
+                                            "type": "{dd0b3137-38d0-5521-879a-1abfc6a5c664}",
+                                            "display_name": "Value 1"
+                                        },
+                                        {
+                                            "name": "RightOperand",
+                                            "type": "{dd0b3137-38d0-5521-879a-1abfc6a5c664}",
+                                            "display_name": "Value 2"
+                                        }
+                                    ],
                                     "categories": {
                                         "Different": {
                                             "name": "!=",
                                             "description": "",
                                             "instruction_id": 2,
-                                            "construction": [5, 5]
+                                            "construction": [5, 5, 1]
                                         },
                                         "Equal": {
                                             "name": "==",
                                             "description": "",
                                             "instruction_id": 3,
-                                            "construction": [5, 5]
+                                            "construction": [5, 5, 1]
                                         },
                                         "Greater or equal than": {
                                             "name": ">=",
                                             "description": "",
                                             "instruction_id": 5,
-                                            "construction": [5, 5]
+                                            "construction": [5, 5, 1]
                                         },
                                         "Greater than": {
                                             "name": ">",
                                             "description": "",
                                             "instruction_id": 4,
-                                            "construction": [5, 5]
+                                            "construction": [5, 5, 1]
                                         },
                                         "Less or equal than": {
                                             "name": "<=",
                                             "description": "",
                                             "instruction_id": 7,
-                                            "construction": [5, 5]
+                                            "construction": [5, 5, 1]
                                         },
                                         "Less than": {
                                             "name": "<",
                                             "description": "",
                                             "instruction_id": 6,
-                                            "construction": [5, 5]
+                                            "construction": [5, 5, 1]
                                         }
                                     }
                                 }
@@ -210,6 +272,25 @@
                             "categories": {
                                 "int": {
                                     "type": 2,
+                                    "inputs": [
+                                        {
+                                            "name": "LeftOperand",
+                                            "type": "{149e81c5-fc6e-5cc7-a0a6-6f736a6487ca}",
+                                            "display_name": "Value 1"
+                                        },
+                                        {
+                                            "name": "RightOperand",
+                                            "type": "{149e81c5-fc6e-5cc7-a0a6-6f736a6487ca}",
+                                            "display_name": "Value 2"
+                                        }
+                                    ],
+                                    "outputs": [
+                                        {
+                                            "name": "result",
+                                            "type": "{149e81c5-fc6e-5cc7-a0a6-6f736a6487ca}",
+                                            "display_name": "Result"
+                                        }
+                                    ],
                                     "categories": {
                                         "Add": {
                                             "name": "add",
@@ -283,6 +364,25 @@
                                 },
                                 "float": {
                                     "type": 3,
+                                    "inputs": [
+                                        {
+                                            "name": "LeftOperand",
+                                            "type": "{0db5b2f0-5384-5579-9433-f92bbf306aef}",
+                                            "display_name": "Value 1"
+                                        },
+                                        {
+                                            "name": "RightOperand",
+                                            "type": "{0db5b2f0-5384-5579-9433-f92bbf306aef}",
+                                            "display_name": "Value 2"
+                                        }
+                                    ],
+                                    "outputs": [
+                                        {
+                                            "name": "result",
+                                            "type": "{0db5b2f0-5384-5579-9433-f92bbf306aef}",
+                                            "display_name": "Result"
+                                        }
+                                    ],
                                     "categories": {
                                         "Add": {
                                             "name": "add",
@@ -316,6 +416,25 @@
                                 },
                                 "bool": {
                                     "type": 1,
+                                    "inputs": [
+                                        {
+                                            "name": "LeftOperand",
+                                            "type": "{907ad50a-8f54-51ea-8c68-479d1d90a699}",
+                                            "display_name": "Value 1"
+                                        },
+                                        {
+                                            "name": "RightOperand",
+                                            "type": "{907ad50a-8f54-51ea-8c68-479d1d90a699}",
+                                            "display_name": "Value 2"
+                                        }
+                                    ],
+                                    "outputs": [
+                                        {
+                                            "name": "result",
+                                            "type": "{907ad50a-8f54-51ea-8c68-479d1d90a699}",
+                                            "display_name": "Result"
+                                        }
+                                    ],
                                     "categories": {
                                         "Binary And": {
                                             "name": "&",
@@ -335,6 +454,25 @@
                                 },
                                 "char": {
                                     "type": 4,
+                                    "inputs": [
+                                        {
+                                            "name": "LeftOperand",
+                                            "type": "{22f34ba1-b80d-595b-b485-e1ff3d1e1283}",
+                                            "display_name": "Value 1"
+                                        },
+                                        {
+                                            "name": "RightOperand",
+                                            "type": "{22f34ba1-b80d-595b-b485-e1ff3d1e1283}",
+                                            "display_name": "Value 2"
+                                        }
+                                    ],
+                                    "outputs": [
+                                        {
+                                            "name": "result",
+                                            "type": "{22f34ba1-b80d-595b-b485-e1ff3d1e1283}",
+                                            "display_name": "Result"
+                                        }
+                                    ],
                                     "categories": {
                                         "Add": {
                                             "name": "add",
@@ -354,19 +492,54 @@
                                 },
                                 "string": {
                                     "type": 5,
+                                    "inputs": [
+                                        {
+                                            "name": "LeftOperand",
+                                            "type": "{dd0b3137-38d0-5521-879a-1abfc6a5c664}",
+                                            "display_name": "Value 1"
+                                        }
+                                    ],
                                     "categories": {
                                         "Access": {
                                             "name": "Access",
                                             "description": "",
                                             "instruction_id": 8,
-                                            "construction": [5, 5, 5]
+                                            "construction": [5, 2, 4],
+                                            "inputs": [
+                                                {
+                                                    "name": "RightOperand",
+                                                    "type": "{149e81c5-fc6e-5cc7-a0a6-6f736a6487ca}",
+                                                    "display_name": "Value 2"
+                                                }
+                                            ],
+                                            "outputs": [
+                                                {
+                                                    "name": "result",
+                                                    "type": "{22f34ba1-b80d-595b-b485-e1ff3d1e1283}",
+                                                    "display_name": "Result"
+                                                }
+                                            ]
                                         },
                                         "Add": {
                                             "name": "add",
                                             "description": "Add input 1 with input 2 and output res",
                                             "icon": "",
                                             "instruction_id": 12,
-                                            "construction": [5, 5, 5]
+                                            "construction": [5, 5, 5],
+                                            "inputs": [
+                                                {
+                                                    "name": "RightOperand",
+                                                    "type": "{dd0b3137-38d0-5521-879a-1abfc6a5c664}",
+                                                    "display_name": "Value 2"
+                                                }
+                                            ],
+                                            "outputs": [
+                                                {
+                                                    "name": "result",
+                                                    "type": "{dd0b3137-38d0-5521-879a-1abfc6a5c664}",
+                                                    "display_name": "Result"
+                                                }
+                                            ]
                                         }
                                     }
                                 }
@@ -375,35 +548,81 @@
                     }
                 },
                 "unaryOperator": {
-                    "inputs": 1,
-                    "input_names": ["Operand"],
-                    "input_diplay_names": ["Value 1"],
                     "categories": {
                         "int": {
                             "type": 2,
+                            "inputs": [
+                                {
+                                    "name": "Operand",
+                                    "type": "{149e81c5-fc6e-5cc7-a0a6-6f736a6487ca}",
+                                    "display_name": "Value 1"
+                                }
+                            ],
+                            "outputs": [
+                                {
+                                    "name": "result",
+                                    "type": "{149e81c5-fc6e-5cc7-a0a6-6f736a6487ca}",
+                                    "display_name": "Result"
+                                }
+                            ],
                             "categories": {
                                 "Binary no": {
                                     "name": "~",
                                     "description": "Binary no",
                                     "instruction_id": 19,
-                                    "construction": [2, 2]
+                                    "construction": [2, 2],
+                                    "outputs": [
+                                        {
+                                            "name": "result",
+                                            "type": "{149e81c5-fc6e-5cc7-a0a6-6f736a6487ca}",
+                                            "display_name": "Result"
+                                        }
+                                    ]
                                 },
                                 "Logical no": {
                                     "name": "!",
                                     "description": "Logical no",
                                     "instruction_id": 20,
-                                    "construction": [2]
+                                    "construction": [2],
+                                    "outputs": [
+                                        {
+                                            "name": "result",
+                                            "type": "{907ad50a-8f54-51ea-8c68-479d1d90a699}",
+                                            "display_name": "Result"
+                                        }
+                                    ]
                                 },
                                 "Reverse": {
                                     "name": "-1",
                                     "description": "Multiplicate by -1",
                                     "instruction_id": 21,
-                                    "construction": [2, 2]
+                                    "construction": [2, 2],
+                                    "outputs": [
+                                        {
+                                            "name": "result",
+                                            "type": "{149e81c5-fc6e-5cc7-a0a6-6f736a6487ca}",
+                                            "display_name": "Result"
+                                        }
+                                    ]
                                 }
                             }
                         },
                         "float": {
                             "type": 3,
+                            "inputs": [
+                                {
+                                    "name": "Operand",
+                                    "type": "{0db5b2f0-5384-5579-9433-f92bbf306aef}",
+                                    "display_name": "Value 1"
+                                }
+                            ],
+                            "outputs": [
+                                {
+                                    "name": "result",
+                                    "type": "{0db5b2f0-5384-5579-9433-f92bbf306aef}",
+                                    "display_name": "Result"
+                                }
+                            ],
                             "categories": {
                                 "Reverse": {
                                     "name": "-1",
@@ -415,6 +634,20 @@
                         },
                         "bool": {
                             "type": 1,
+                            "inputs": [
+                                {
+                                    "name": "Operand",
+                                    "type": "{907ad50a-8f54-51ea-8c68-479d1d90a699}",
+                                    "display_name": "Value 1"
+                                }
+                            ],
+                            "outputs": [
+                                {
+                                    "name": "result",
+                                    "type": "{907ad50a-8f54-51ea-8c68-479d1d90a699}",
+                                    "display_name": "Result"
+                                }
+                            ],
                             "categories": {
                                 "Binary no": {
                                     "name": "~",
@@ -432,6 +665,20 @@
                         },
                         "char": {
                             "type": 4,
+                            "inputs": [
+                                {
+                                    "name": "Operand",
+                                    "type": "{22f34ba1-b80d-595b-b485-e1ff3d1e1283}",
+                                    "display_name": "Value 1"
+                                }
+                            ],
+                            "outputs": [
+                                {
+                                    "name": "result",
+                                    "type": "{22f34ba1-b80d-595b-b485-e1ff3d1e1283}",
+                                    "display_name": "Result"
+                                }
+                            ],
                             "categories": {
                                 "Reverse": {
                                     "name": "-1",
@@ -449,20 +696,58 @@
             "categories" : {
                 "If": {
                     "type": 1,
-                    "inputs": 1,
                     "name": "if",
                     "description": "",
                     "instruction_id": 26,
                     "construction": [1],
-                    "input_names": ["condition"],
+                    "inputs": [
+                        {
+                            "name": "condition",
+                            "type": "{907ad50a-8f54-51ea-8c68-479d1d90a699}",
+                            "display_name": "Condition"
+                        }
+                    ],
                     "in": 1,
                     "out": 2
                 },
                 "While": {
                     "name": "while",
                     "description": "",
-                    "instruction_id": 28,
-                    "construction": [1]
+                    "instruction_id": 27,
+                    "construction": [],
+                    "inputs": [
+                        {
+                            "name": "condition",
+                            "type": "{907ad50a-8f54-51ea-8c68-479d1d90a699}",
+                            "display_name": "Condition"
+                        }
+                    ],
+                    "in": 1,
+                    "out": 2
+                },
+                "Break": {
+                    "name": "break",
+                    "description": "Break a loop execution",
+                    "instruction_id": 36,
+                    "construction": [],
+                    "in": 1,
+                    "out": 0
+                },
+                "Continue": {
+                    "name": "continue",
+                    "description": "Continue the execution of a loop",
+                    "instructiond_id": 37,
+                    "construction": [],
+                    "in": 1,
+                    "out": 0
+                },
+                "Return": {
+                    "name": "return",
+                    "description": "Immediately quit the function",
+                    "instruction_id": 41,
+                    "construction": [],
+                    "in": 1,
+                    "out": 0
                 }
             }
         }

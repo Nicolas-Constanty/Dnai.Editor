@@ -56,10 +56,17 @@ namespace dnai
 						addInstruction(Instruction::deserialize(node.toObject()));
 					}
 					foreach(auto link, obj["iolinks"].toArray()) {
-						appendIoLink(models::gui::IoLink::deserialize(link.toObject()));
+
+                        models::gui::IoLink *toappend = models::gui::IoLink::deserialize(link.toObject());
+
+                        if (findIOLink(toappend->data().inputUuid, toappend->data().inputName) == nullptr)
+                            appendIoLink(toappend);
 					}
 					foreach(auto link, obj["flowlinks"].toArray()) {
-						appendFlowLink(models::gui::FlowLink::deserialize(link.toObject()));
+                        models::gui::FlowLink *toappend = models::gui::FlowLink::deserialize(link.toObject());
+
+                        if (findFlowLink(toappend->data().from, toappend->data().outIndex, toappend->data().to) == nullptr)
+                            appendFlowLink(toappend);
                     }
 
                     if (obj.contains("entryPoint"))
@@ -113,7 +120,7 @@ namespace dnai
 				}
 
                 void Function::addOutput(models::Entity *var)
-				{
+                {
 					for (auto i : m_data.outputs)
 					{
                         if (i->name() == var->name())
@@ -157,31 +164,7 @@ namespace dnai
 				{
 					m_foutputs->moveDown(index);
 					emit outputModelsChanged(m_foutputs);
-				}
-
-                /*void Function::updateInputName(const int index, const QString& name)
-				{
-					m_finputs->setData(index, name, FunctionInputs::Name);
-					emit inputModelsChanged(m_finputs);
-				}
-
-				void Function::updateInputVarType(const int index, const qint32 varType)
-				{
-					m_finputs->setData(index, varType, FunctionInputs::Type);
-					emit inputModelsChanged(m_finputs);
-				}
-
-				void Function::updateOutputName(const int index, const QString& name)
-				{
-					m_foutputs->setData(index, name, FunctionInputs::Name);
-					emit outputModelsChanged(m_foutputs);
-				}
-
-				void Function::updateOutputVarType(const int index, const qint32 varType)
-				{
-					m_foutputs->setData(index, varType, FunctionInputs::Type);
-					emit outputModelsChanged(m_foutputs);
-                }*/
+                }
 
 				EntityList *Function::inputModels() const
 				{
@@ -212,8 +195,14 @@ namespace dnai
 				void Function::addInstruction(Instruction* instruction)
 				{
 					m_functionsHash[instruction->guiUuid()] = instruction;
-					m_data.instructions.append(instruction);
-				}
+                    m_data.instructions.append(instruction);
+                }
+
+                void Function::removeInstruction(Instruction *instruction)
+                {
+                    m_functionsHash.remove(instruction->guiUuid());
+                    m_data.instructions.removeOne(instruction);
+                }
 
 				Instruction *Function::getInstruction(const QUuid &uuid)
 				{
@@ -222,22 +211,36 @@ namespace dnai
 
                 quint32 Function::getInputId(const QString &name) const
                 {
-                    for (models::Entity *curr : inputs())
-                    {
-                        if (curr->name() == name)
-                            return curr->id();
-                    }
-                    return core::UNDEFINED_ID;
+                    models::Entity *inp = getInput(name);
+
+                    return inp ? inp->id() : core::UNDEFINED_ID;
                 }
 
                 quint32 Function::getOutputId(const QString &name) const
                 {
+                    models::Entity *oup = getOutput(name);
+
+                    return oup ? oup->id() : core::UNDEFINED_ID;
+                }
+
+                models::Entity *Function::getInput(const QString &name) const
+                {
+                    for (models::Entity *curr : inputs())
+                    {
+                        if (curr->name() == name)
+                            return curr;
+                    }
+                    return nullptr;
+                }
+
+                models::Entity *Function::getOutput(const QString &name) const
+                {
                     for (models::Entity *curr : outputs())
                     {
                         if (curr->name() == name)
-                            return curr->id();
+                            return curr;
                     }
-                    return core::UNDEFINED_ID;
+                    return nullptr;
                 }
 
                 Instruction *Function::getInstruction(quint32 uid) const
@@ -258,6 +261,38 @@ namespace dnai
                             return curr;
                     }
                     return nullptr;
+                }
+
+                bool Function::hasInput(const QString &name, QUuid const &type) const
+                {
+                    for (models::Entity *curr : m_data.inputs)
+                    {
+                        if (curr->name() == name)
+                        {
+                            if (!type.isNull())
+                            {
+                                return curr->guiModel<models::Variable>()->varType() == type;
+                            }
+                            return true;
+                        }
+                    }
+                    return false;
+                }
+
+                bool Function::hasOutput(const QString &name, const QUuid &type) const
+                {
+                    for (models::Entity *curr : m_data.outputs)
+                    {
+                        if (curr->name() == name)
+                        {
+                            if (!type.isNull())
+                            {
+                                return curr->guiModel<models::Variable>()->varType() == type;
+                            }
+                            return true;
+                        }
+                    }
+                    return false;
                 }
 
                 Instruction *Function::entryPoint() const

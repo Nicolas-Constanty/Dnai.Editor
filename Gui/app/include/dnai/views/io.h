@@ -22,8 +22,17 @@ namespace dnai
 
 			Q_PROPERTY(uint nbSegments READ nbSegments WRITE setNbSegments NOTIFY nbSegmentsChanged)
             Q_PROPERTY(int type READ type WRITE setType NOTIFY typeChanged)
+            Q_PROPERTY(bool isLink READ isLink WRITE setIsLink NOTIFY isLinkChanged)
+            Q_PROPERTY(bool isHover READ isHover WRITE setIsHover NOTIFY isHoverChanged)
+            Q_PROPERTY(QColor curveColor READ curveColor WRITE setCurveColor NOTIFY curveColorChanged)
 
-		public:
+            bool m_isLink;
+
+            bool m_isHover;
+
+            QColor m_curveColor;
+
+        public:
 			static BaseIo *CurrentHover;
 
 		public:
@@ -64,13 +73,34 @@ namespace dnai
 			void setNbSegments(uint n);
             void setType(int type);
 
-		signals:
+            bool isLink() const;
+
+            bool isHover() const;
+
+            virtual const QColor &curveColor() const override;
+
+        public slots:
+            virtual void setIsLink(bool isLink) override;
+
+            virtual void setIsHover(bool isHover) override;
+
+            void setCurveColor(const QColor &curveColor);
+
+            void redrawLinks(const QColor &color);
+
+        signals:
 			void nbSegmentsChanged(uint n);
             void typeChanged(int type);
 			void linked(const QVariant &name, const QVariant &instructionModel);
 			void unlinked(const QVariant &name, const QVariant &instructionModel);
 
-		protected:
+            void isLinkChanged(bool isLink);
+
+            void isHoverChanged(bool isHover);
+
+            void curveColorChanged(const QColor &curveColor);
+
+        protected:
 			uint m_nbSegments;
 
             enums::IoTypeRessouce::IoType m_type;
@@ -79,9 +109,9 @@ namespace dnai
 		protected:
 			bool m_holdClick{};
 
-			virtual void setHover() override;
+//			virtual void setHover() override;
 
-			virtual void setLink(Link *l) override;
+//			virtual void setLink(Link *l) override;
 
 		};
 	}

@@ -21,7 +21,7 @@
 
 namespace dnai
 {
-	Editor &Editor::m_instance = *(new Editor());
+    Editor *Editor::m_instance = nullptr;
 
 	Editor::Editor() : m_solution(nullptr)
 		, m_selection(nullptr)
@@ -30,7 +30,7 @@ namespace dnai
         , m_propertyPanelProperties(nullptr)
 	    , m_contextMenuModel(nullptr)
         , m_settings(nullptr)
-	{
+    {
 	}
 
 	Editor::~Editor()
@@ -107,13 +107,12 @@ namespace dnai
 
     void Editor::startApp()
     {
-       App::currentInstance()->load();
-       QObject::connect(&dnai::gcore::HandlerManager::Instance().Function(), SIGNAL(instructionAdded(models::Entity*,models::gui::Instruction*)),
-                        this, SLOT(onInstructionAdded(models::Entity*,models::gui::Instruction*)));
+       App::currentInstance().load();
+
        QObject::connect(&dnai::gcore::HandlerManager::Instance().Function(), SIGNAL(addInstructionError(quint32,quint32,QList<quint32>,QString)),
                         this, SLOT(onAddInstructionError(quint32,quint32,QList<quint32>,QString)));
-       QObject::connect(&dnai::gcore::HandlerManager::Instance().Declarator(), SIGNAL(declared(dnai::models::Entity*)),
-                        this, SLOT(onEntityDeclared(dnai::models::Entity*)));
+
+       loadContextMenuModel();
     }
 
 	void Editor::closeSolution()
@@ -195,7 +194,9 @@ namespace dnai
 
 	Editor& Editor::instance()
 	{
-        return m_instance;
+        if (m_instance == nullptr)
+            m_instance = new Editor();
+        return *m_instance;
     }
 
     void Editor::setSolution(dnai::Solution* sol)
@@ -240,30 +241,32 @@ namespace dnai
         return m_solutionName;
     }
 
-	dnai::models::ContextMenuModel* Editor::contextMenuModel()
-	{
-		if (m_contextMenuModel == nullptr)
-		{
-			QFile file(":resources/Nodes/Operators.json");
+    void Editor::loadContextMenuModel()
+    {
+        QFile file(":resources/Nodes/Operators.json");
 
-			if (!file.open(QIODevice::ReadOnly)) {
-				qWarning() << "Couldn't open file: " << file.errorString();
-                return nullptr;
-			}
+        if (!file.open(QIODevice::ReadOnly)) {
+            qWarning() << "Couldn't open file: " << file.errorString();
+            return;
+        }
 
-			const QByteArray data = file.readAll();
+        const QByteArray data = file.readAll();
 
-			try {
-				const QJsonObject obj(QJsonDocument::fromJson(data).object());
-				m_contextMenuModel = new dnai::models::ContextMenuModel(obj);
-			}
-			catch (std::exception &e) {
-				Q_UNUSED(e)
-					exceptions::ExceptionManager::throwException(exceptions::GuiExeption("Error : Corrupted Solution file"));
-				qWarning("Couldn't parse file.");
-			}
-			file.close();
-		}
+        try {
+            const QJsonObject obj(QJsonDocument::fromJson(data).object());
+            m_contextMenuModel = new dnai::models::ContextMenuModel(obj);
+        }
+        catch (std::exception &e) {
+            Q_UNUSED(e)
+                exceptions::ExceptionManager::throwException(exceptions::GuiExeption("Error : Corrupted Solution file"));
+            qWarning("Couldn't parse file.");
+        }
+        file.close();
+        m_contextMenuModel->setup();
+    }
+
+    dnai::models::ContextMenuModel* Editor::contextMenuModel() const
+    {
 		return m_contextMenuModel;
 	}
 
@@ -277,19 +280,19 @@ namespace dnai
 
 	void Editor::updateContextMenuModel(dnai::models::Entity* entity) const
 	{
-		const auto function = dynamic_cast<models::gui::declarable::Function *>(entity->guiModel());
+        /*const auto function = dynamic_cast<models::gui::declarable::Function *>(entity->guiModel());
 		if (function == nullptr) return;
-		m_contextMenuModel->clearParameters();
-		m_contextMenuModel->clearReturns();
+        m_contextMenuModel->hideParameters();
+        m_contextMenuModel->hideReturns();
 		for (auto param : function->inputs())
 		{
-			m_contextMenuModel->appendParameter(param);
+            m_contextMenuModel->displayParameter(param);
 		}
 		for (auto ret : function->outputs())
 		{
-			m_contextMenuModel->appendReturn(ret);
-		}
-		emit contextMenuModelChanged(m_contextMenuModel);
+            m_contextMenuModel->displayReturn(ret);
+        }
+        emit contextMenuModelChanged(m_contextMenuModel);*/
 	}
 
 	void Editor::registerEditorView(views::EditorView* view)
@@ -299,7 +302,7 @@ namespace dnai
 
     Session *Editor::session() const
     {
-        return &App::currentInstance()->session();
+        return &App::currentInstance().session();
     }
 
     void Editor::setAppName(const QString &name)
@@ -312,7 +315,12 @@ namespace dnai
         m_solutionName = name;
     }
 
-	QQuickItem * Editor::createNodeQMLComponent(models::ContextMenuItem *node, models::Entity *func, models::gui::Instruction *instruction, QQuickItem *parent) const
+    ml::MlHandler *Editor::mlHandler()
+    {
+        return &m_mlHandler;
+    }
+
+    QQuickItem * Editor::createNodeQMLComponent(models::Entity *func, models::gui::Instruction *instruction, QQuickItem *parent) const
     {
         /*
          * Node Components
@@ -330,7 +338,7 @@ namespace dnai
         /*
          * Write properties
          */
-        model.write(QVariant::fromValue(node));
+        model.write(QVariant::fromValue(contextMenuModel()->instructions()[instruction->nodeMenuPath()]));
         instruction_model.write(QVariant::fromValue(instruction));
         function_entity.write(QVariant::fromValue(func));
 
@@ -343,87 +351,125 @@ namespace dnai
 
         nodeComponent.completeCreate();
 
-		return nodeObj;
+        return nodeObj;
     }
 
-    void Editor::onInstructionAdded(models::Entity *func, models::gui::Instruction *instruction)
+    void Editor::setAsEntryPoint(views::GenericNode *instruction, views::GenericNode *entry)
     {
-        qDebug() << "Instruction added";
+        entry->createFlowLink(new models::gui::FlowLink(), instruction);
+    }
 
-        for (models::gui::Input *curr : instruction->inputs())
+    void Editor::createFlowLink(dnai::views::GenericNode *from, dnai::views::GenericNode *to, dnai::models::Entity *func, dnai::models::gui::Instruction *fromIns, qint32 outpin, dnai::models::gui::Instruction *toIns) const
+    {
+        models::Function *data = func->guiModel<models::Function>();
+        models::gui::FlowLink *link = data->findFlowLink(fromIns->guiUuid(), outpin, toIns->guiUuid());
+
+        if (link == nullptr)
+            throw std::runtime_error("No such link for outpin " + std::to_string(outpin) + " of instrution " + std::to_string(fromIns->Uid()));
+        from->createFlowLink(link, to);
+    }
+
+    void Editor::removeFlowLink(views::GenericNode *instruction, qint32 outpin) const
+    {
+        instruction->unlinkFlow(outpin);
+    }
+
+    void Editor::createIOLink(views::GenericNode *from, views::GenericNode *to, dnai::models::Entity *func, dnai::models::gui::Instruction *instr, QString input) const
+    {
+        models::Function *data = func->guiModel<models::Function>();
+        dnai::models::gui::IoLink   *link = data->findIOLink(instr->guiUuid(), input);
+
+        if (link == nullptr)
+            throw std::runtime_error("No such link for input " + input.toStdString() + " of instrution " + std::to_string(instr->Uid()));
+        from->createLink(link, to);
+    }
+
+    void Editor::removeIOLink(views::GenericNode *instruction, dnai::models::gui::Instruction *instr, QString input) const
+    {
+        int index = 0;
+
+        for (models::gui::Input *curr : instr->inputs())
         {
-            qDebug() << "- " << curr->name() << ": " << curr->value();
+            if (curr->name() == input)
+            {
+                instruction->unlinkIo(index);
+                return;
+            }
+            ++index;
         }
+    }
 
-        qDebug() << "Input Right operand : " << instruction->getInput("RightOperand");
-        qDebug() << "Input Right operand value : " << instruction->getInputValue("RightOperand");
-
-        if (m_pendingInstruction.empty())
-            return;
-
-        const auto view = qvariant_cast<QQuickItem *>(Editor::instance().selectedView()->property("currentView"));
-        if (!view)
-        {
-            throw std::runtime_error("No canvas view found!");
-        }
-        const auto canvas = dynamic_cast<views::CanvasNode *>(view);
-
-        quint32 x, y;
+    void Editor::finishInstructionBuilding(models::Entity *func, models::gui::Instruction *instruction)
+    {
         models::ContextMenuItem *node;
 
-        std::tie(node, x, y) = m_pendingInstruction.front();
-
-        instruction->setX(x - canvas->content()->x());
-        instruction->setY(y - canvas->content()->y());
-
-        if (createNodeQMLComponent(node, func, instruction, canvas->content()) == nullptr)
+        if (!m_pendingInstruction.empty())
         {
-			notifyWarning("Cannot create qml node");
+            quint32 x, y;
+
+            std::tie(node, x, y) = m_pendingInstruction.front();
+            instruction->setX(x);
+            instruction->setY(y);
+            instruction->setNodeMenuPath(node->fullPath());
+            m_pendingInstruction.pop();
+        }
+        else
+        {
+            node = contextMenuModel()->instructions()[instruction->nodeMenuPath()];
         }
 
-        instruction->setNodeMenuPath(node->fullPath());
+        if (node == nullptr)
+        {
+            qWarning() << "==Editor== No such node in context menu: " << instruction->nodeMenuPath();
+            return;
+        }
 
         /*
          * Building inputs
          */
-        qDebug() << "Inputs: " << instruction->inputs();
         if (instruction->inputs().empty())
         {
             QList<models::gui::Input *> inputs;
 
-            qDebug() << "Setting inputs";
             for (QString const &curr : node->inputNames())
             {
                 models::gui::Input *toadd = new models::gui::Input();
 
                 toadd->setName(curr);
+                toadd->setVarType(QUuid::fromString(node->getInput(curr)));
                 inputs.append(toadd);
+                qDebug() << "==Editor== Set " << curr << " input type to " << toadd->varType().toString();
             }
 
             instruction->setInputs(inputs);
         }
 
+        for (models::gui::Input *curr : instruction->inputs())
+        {
+            if (!curr->value().isEmpty())
+                dnai::gcore::HandlerManager::Instance().function()->instruction()->setInputValue(func->id(), instruction->Uid(), curr->name(), curr->value(), false);
+        }
+
         /*
          * Building outputs
          */
-        qDebug() << "Outputs: " << instruction->outputs();
+
         if (instruction->outputs().empty())
         {
             QList<models::gui::Output *> outputs;
 
-            qDebug() << "Setting output";
             for (QString const &curr : node->outputNames())
             {
                 models::gui::Output *toadd = new models::gui::Output();
 
                 toadd->setName(curr);
+                toadd->setVarType(QUuid::fromString(node->getOutput(curr)));
                 outputs.append(toadd);
+                qDebug() << "==Editor== Set " << curr << " output type to " << toadd->varType().toString();
             }
 
             instruction->setOutputs(outputs);
         }
-
-        m_pendingInstruction.pop();
     }
 
     void Editor::onAddInstructionError(quint32 func, quint32 type, const QList<quint32> &args, const QString &msg)
@@ -433,30 +479,8 @@ namespace dnai
         Q_UNUSED(args)
         Q_UNUSED(msg)
 
-        qDebug() << "Editor Instruction error";
         if (!m_pendingInstruction.empty())
             m_pendingInstruction.pop();
-    }
-
-    void Editor::onEntityDeclared(models::Entity *declared)
-    {
-        if (declared->parentItem()
-            && declared->parentItem()->coreModel()->entityType() != ENTITY::FUNCTION
-            && declared->coreModel()->entityType() == ENTITY::VARIABLE)
-        {
-            contextMenuModel()->appendVariable(declared);
-			emit contextMenuModelChanged(contextMenuModel());
-        }
-        else if (declared->coreModel()->entityType() == ENTITY::ENUM_TYPE)
-        {
-            contextMenuModel()->appendEnumeration(declared);
-			dnai::models::gui::declarable::Variable::varTypes()->append(declared->name(), declared->id());
-        }
-        else if (declared->coreModel()->entityType() == ENTITY::OBJECT_TYPE)
-        {
-            /*contextMenuModel()->appendObject(declared);
-            dnai::models::gui::declarable::Variable::varTypes()->append(declared->name(), declared->id());*/
-        }
     }
 
     void Editor::createNode(models::Entity *entity, models::ContextMenuItem *node, qint32 x, qint32 y)
@@ -479,8 +503,7 @@ namespace dnai
 
     void Editor::checkVersion()
     {
-        auto app = App::currentInstance();
-        app->versionsUpdater();
+        App::currentInstance().versionsUpdater();
       //  app->onNotifyVersionChanged();
     }
 
@@ -492,6 +515,7 @@ namespace dnai
     void Editor::registerMainView(QObject *mainView) {
         m_mainView = static_cast<QQuickWindow*>(mainView);
     }
+
 
     void Editor::addProject(QString const &proj_name, QString const &proj_desc) {
         QString glpath = "file:///" + m_solution->path() + "/" + proj_name + ".dnaiproject";
@@ -554,6 +578,10 @@ namespace dnai
         return m_mainView;
     }
 
+    QQuickItem *Editor::qmlMainView() {
+        return m_mainView->contentItem();
+    }
+
     void Editor::registerPropertyView(QQuickItem *view)
     {
 		m_propertyView = view;
@@ -577,22 +605,42 @@ namespace dnai
 
         updateContextMenuModel(entity);
 
-        const auto instructionsMap = m_contextMenuModel->instructions();
         QList<views::GenericNode *> nodes;
+
+        /*
+         * Create entry point node
+         */
+        QQmlComponent nodeEntryPoint(App::getEngineInstance(), "qrc:/resources/Components/NodeEntryPoint.qml");
+        views::GenericNode *entryPointObj = dynamic_cast<views::GenericNode *>(qobject_cast<QQuickItem*>(nodeEntryPoint.beginCreate(App::getEngineInstance()->rootContext())));
+        QQmlProperty function_entity(entryPointObj, "function_entity", App::getEngineInstance());
+        models::gui::Instruction *entryInstr = function->entryPoint();
+
+        function_entity.write(QVariant::fromValue(entity));
+        entryPointObj->setParentItem(canvas->content());
+        entryPointObj->setX(function->entryPointX());
+        entryPointObj->setY(function->entryPointY());
+        nodeEntryPoint.completeCreate();
+
+        nodes.append(entryPointObj);
+
+        canvas->registerEntry(entryPointObj);
 
         /*
          * Create all nodes
          */
+        const auto instructionsMap = m_contextMenuModel->instructions();
+
         for (models::gui::Instruction *instruction : function->instructions())
 		{
             QString nodePath = instruction->nodeMenuPath();
 
             if (instructionsMap.contains(nodePath))
             {
-                nodes.append(dynamic_cast<views::GenericNode *>(createNodeQMLComponent(instructionsMap[nodePath], entity, instruction, canvas->content())));
+                nodes.append(dynamic_cast<views::GenericNode *>(createNodeQMLComponent(entity, instruction, canvas->content())));
             }
             else
             {
+                qDebug() << instructionsMap;
                 throw std::runtime_error("No such node \"" + nodePath.toStdString() + "\" in context menu");
             }
 		}
@@ -604,6 +652,13 @@ namespace dnai
         {
 			const auto inputInstruction = function->getInstruction(iolink->data().inputUuid);
 			const auto outputInstruction = function->getInstruction(iolink->data().outputUuid);
+
+            if (inputInstruction == nullptr || outputInstruction == nullptr)
+                continue;
+
+            qDebug() << "==Editor== Link input instruction(" << inputInstruction->guiUuid() << ") => " << inputInstruction->nodeMenuPath();
+            qDebug() << "==Editor== Link output instruction(" << outputInstruction->guiUuid() << ") => " << outputInstruction->nodeMenuPath();
+
 			views::GenericNode *n1 = nullptr;
 			views::GenericNode *n2 = nullptr;
 			for (auto node : nodes)
@@ -630,6 +685,13 @@ namespace dnai
 		{
 			const auto inputInstruction = function->getInstruction(flowlink->data().from);
 			const auto outputInstruction = function->getInstruction(flowlink->data().to);
+
+            if (inputInstruction == nullptr || outputInstruction == nullptr)
+                continue;
+
+            qDebug() << "==Editor== Link input instruction(" << inputInstruction->guiUuid() << ") => " << inputInstruction->nodeMenuPath();
+            qDebug() << "==Editor== Link output instruction(" << outputInstruction->guiUuid() << ") => " << outputInstruction->nodeMenuPath();
+
 			views::GenericNode *n1 = nullptr;
 			views::GenericNode *n2 = nullptr;
 			for (auto node : nodes)
@@ -650,19 +712,8 @@ namespace dnai
 		}
 
         /*
-         * Create entry point node
+         * Link entry point
          */
-        QQmlComponent nodeEntryPoint(App::getEngineInstance(), "qrc:/resources/Components/NodeEntryPoint.qml");
-        views::GenericNode *entryPointObj = dynamic_cast<views::GenericNode *>(qobject_cast<QQuickItem*>(nodeEntryPoint.beginCreate(App::getEngineInstance()->rootContext())));
-        QQmlProperty function_entity(entryPointObj, "function_entity", App::getEngineInstance());
-        models::gui::Instruction *entryInstr = function->entryPoint();
-
-        function_entity.write(QVariant::fromValue(entity));
-        entryPointObj->setParentItem(canvas->content());
-        entryPointObj->setX(function->entryPointX());
-        entryPointObj->setY(function->entryPointY());
-        nodeEntryPoint.completeCreate();
-
         if (entryInstr != nullptr)
         {
             for (auto node : nodes)
@@ -674,8 +725,6 @@ namespace dnai
                 }
             }
         }
-
-        nodes.append(entryPointObj);
     }
 
     QSettings *Editor::settings()
@@ -690,12 +739,12 @@ namespace dnai
 
     bool Editor::isNewVersionAvailable() const
     {
-        return App::currentInstance()->isNewVersionAvailable();
+        return App::currentInstance().isNewVersionAvailable();
     }
 
     qreal Editor::getSettingNumber(const QString &path)
     {
-        return App::currentInstance()->getSettingNumber(path);
+        return App::currentInstance().getSettingNumber(path);
     }
 
 	PropertyPanelProperties::PropertyPanelProperties(QObject *parent) : QObject(parent)
@@ -720,10 +769,5 @@ namespace dnai
 	const QStringList& PropertyPanelProperties::entityType() const
 	{
 		return m_entityType;
-	}
-
-	models::gui::declarable::VarTypeList *PropertyPanelProperties::varTypes() const
-	{
-		return models::gui::declarable::Variable::varTypes();
 	}
 }

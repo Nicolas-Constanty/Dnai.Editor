@@ -1,12 +1,15 @@
 #include <QQmlEngine>
 #include <QJsonArray>
 
+#include "dnai/utils/random_utils.h"
+
 #include "dnai/models/entity.h"
 #include "dnai/models/gui/declarable/variable.h"
 #include "dnai/models/gui/declarable/context.h"
 #include "dnai/models/gui/entitylist.h"
 
 #include "dnai/core/handlermanager.h"
+#include "dnai/utils/random_utils.h"
 #include "core.h"
 
 namespace dnai
@@ -15,22 +18,11 @@ namespace dnai
 	{
 		//EntityList *Entity::m_entities = new EntityList(new QList<models::Entity *>());
 
-        Entity::Entity() : IModel(nullptr), m_dataCore(nullptr), m_dataGUI(nullptr)
-        {
-			const QList<QPair<QObject *, QString>> props = {
-				{ this, "name"},
-				{ this, "description"},
-				{ this, "visibility"},
-				{ this, "entityType"}
-			};
-            m_editableProperty = new Property(props);
-            QQmlEngine::setObjectOwnership(this, QQmlEngine::CppOwnership);
-        }
-
-        Entity::Entity(gcore::Entity *coremodel, Entity *parent, interfaces::IEntity *guimodel) :
+        Entity::Entity(gcore::Entity *coremodel, Entity *parent, interfaces::IEntity *guimodel, QUuid const &guid) :
             IModel(parent),
             m_dataCore(coremodel),
-            m_dataGUI(guimodel)
+            m_dataGUI(guimodel),
+            m_guid(guid)
         {
 			const QList<QPair<QObject *, QString>> props = {
 				{ this, "name" },
@@ -38,16 +30,16 @@ namespace dnai
 				{ this, "visibility" },
 				{ this, "entityType" }
 			};
-			m_editableProperty = new Property(props);
             QQmlEngine::setObjectOwnership(this, QQmlEngine::CppOwnership);
+            if (m_guid.isNull())
+                m_guid = utils::generateUid();
         }
 
 		Entity::~Entity()
         {
+            qDebug() << "~ Entity: " << name();
 			delete m_dataCore;
 			delete m_dataGUI;
-			delete m_editableProperty;
-			qDebug() << "~ Entity";
 		}
 
 		bool Entity::isRoot() const
@@ -85,7 +77,7 @@ namespace dnai
 
         const QString Entity::fullName() const
         {
-            if (parentItem() == nullptr)
+            if (parentItem() == nullptr || isRoot())
                 return coreModel() ? name() : "";
             return parentItem()->fullName() + "." + name();
         }
@@ -138,18 +130,10 @@ namespace dnai
 			}
         }
 
-		void Entity::setEditableProperty(Property* p)
-		{
-			if (m_editableProperty == p)
-				return;
-			m_editableProperty = p;
-			emit editablePropertyChanged(p);
-		}
-
-		Property *Entity::editableProperty() const
-		{
-			return m_editableProperty;
-		}
+        QUuid Entity::guid() const
+        {
+            return m_guid;
+        }
 
 		Entity* Entity::parentRef() const
 		{
@@ -188,8 +172,7 @@ namespace dnai
 		void Entity::setName(const QString& name) const
 		{
 			if (coreModel()->setName(name))
-			{
-				qDebug() << "NAME" << name;
+            {
 				emit nameChanged(name);
 			}
 		}
@@ -281,6 +264,7 @@ namespace dnai
 				ea.append(o);
 			}
 			obj["entities"] = ea;
+            obj["guid"] = m_guid.toString();
 		}
 
 		void Entity::_deserialize(const QJsonObject& obj)
@@ -315,7 +299,6 @@ namespace dnai
             case ::core::ENTITY::ENUM_TYPE:
             {
                 m_dataGUI = gui::declarable::EnumType::deserialize(obj);
-				qDebug() << dynamic_cast<QObject*>(m_dataGUI);
                 break;
             }
             case ::core::ENTITY::OBJECT_TYPE:
@@ -340,6 +323,9 @@ namespace dnai
 					entity->setListIndex(m_columns.keys().first().toString());
 				appendChild(entity);
             }
+
+            if (obj.contains("guid"))
+                m_guid = obj["guid"].toString();
         }
 
 		int Entity::columnCount() const
@@ -355,26 +341,14 @@ namespace dnai
 
 		void Entity::addColumn(const QString& name)
 		{
-			const auto c = new Column(this);
-			const auto getRandomString = [](int size)
-			{
-				const QString possibleCharacters(" !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~");
+            const auto c = new Column(this);
+            const auto uuid = utils::generateUid();
 
-				QString randomString;
-				for (auto i = 0; i< size; ++i)
-				{
-					auto index = qrand() % possibleCharacters.length();
-					auto nextChar = possibleCharacters.at(index);
-					randomString.append(nextChar);
-				}
-				return randomString;
-			};
-			const auto uuid = QUuid::createUuidV5(QUuid::createUuid(), getRandomString(128));
 			c->setListIndex(uuid.toString());
 			c->setName(name);
 			m_columslist.append(c);
-			m_columns[uuid] = c;
-			qDebug() << "Hello nouvelle column";
+            m_columns[uuid] = c;
+
 			emit listColumnChanged(listColumn());
 		}
 
@@ -382,14 +356,6 @@ namespace dnai
 		{
 			return IModel<Entity>::row();
 		}
-
-		void Entity::setProp(int row, const QVariant& value)
-		{
-			if (m_editableProperty)
-			{
-				m_editableProperty->setProp(row, value);
-            }
-        }
 
         Entity *Entity::findByName(const QString &name) const
         {
@@ -431,26 +397,12 @@ namespace dnai
 		{
 			m_data.name = obj["name"].toString();
 			m_data.description = obj["description"].toString();
-            auto uuid = QUuid(obj["listIndex"].toString());
-			if (uuid.isNull())
-			{
-                const auto getRandomString = [](int size)
-				{
-					const QString possibleCharacters(" !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~");
-
-					QString randomString;
-					for (auto i = 0; i< size; ++i)
-					{
-						auto index = qrand() % possibleCharacters.length();
-						auto nextChar = possibleCharacters.at(index);
-						randomString.append(nextChar);
-					}
-					return randomString;
-				};
-				uuid = QUuid::createUuidV5(QUuid::createUuid(), getRandomString(128));
-				qDebug() << "New Uuid generated" << uuid;
-			}
-            m_data.listIndex = uuid;
+            m_data.listIndex = QUuid(obj["listIndex"].toString());
+            if (m_data.listIndex.isNull())
+            {
+                m_data.listIndex = utils::generateUid();
+                qDebug() << "==Entity== List index is null: Generating " << m_data.listIndex;
+            }
 		}
 
 		const gui::data::EntityColumn& Column::datas() const

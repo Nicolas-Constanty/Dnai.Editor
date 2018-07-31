@@ -253,6 +253,11 @@ namespace dnai
             }
         }
 
+        void CanvasNode::registerEntry(QQuickItem *entry)
+        {
+            m_entry = entry;
+        }
+
 		QSGNode *CanvasNode::updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *)
 		{
 			auto n = static_cast<QSGSimpleRectNode *>(oldNode);

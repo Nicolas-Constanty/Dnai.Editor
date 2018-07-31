@@ -6,7 +6,6 @@ import Dnai.Settings 1.0
 
 import "../JavaScript/CreateComponent.js" as Factory
 import "../Forms"
-import "../Layouts"
 
 ChooseThemeForm {
     id: form
@@ -27,7 +26,7 @@ ChooseThemeForm {
 
     validateButton.onClicked: {
         form.visible = false
-        wind.close()
-        main.loadMain()
+        main.show();
+        AppSettings.themeLoaded = true;
     }
 }

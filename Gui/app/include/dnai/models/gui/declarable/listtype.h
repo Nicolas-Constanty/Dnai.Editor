@@ -15,13 +15,22 @@ namespace dnai
 			{
 				class ListType : public QObject, public Entity<data::ListType, ListType>
 				{
-					Q_OBJECT
+                    Q_OBJECT
+                    Q_PROPERTY(QUuid storedType READ storedType NOTIFY storedTypeChanged)
+
 				public:
                     explicit ListType() = default;
 					//Implementation of ISerializable
 					void serialize(QJsonObject& obj) const override;
 				protected:
 					void _deserialize(const QJsonObject& obj) override;
+
+                public:
+                    QUuid storedType() const;
+                    void setStoredType(QUuid const &value);
+
+                signals:
+                    void storedTypeChanged(QUuid type);
 				};
 			}
 		}

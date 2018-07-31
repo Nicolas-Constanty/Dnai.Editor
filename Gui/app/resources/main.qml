@@ -8,7 +8,6 @@ import DNAI 1.0
 import Dnai.Settings 1.0
 
 import "JavaScript/CreateComponent.js" as Factory
-import "Layouts"
 import "Views"
 import "Nodes"
 import "Panels"
@@ -20,7 +19,6 @@ Window {
     flags: Qt.SplashScreen
     color: "transparent"
     property alias main: _main
-    property bool isInit: false
 
     SettingParameters {
         id: _settingsParameters
@@ -35,8 +33,6 @@ Window {
         Editor.registerSettings(AppSettings.settings)
         //Load theme 1
         AppSettings.currentTheme = AppSettings.themeNames[0]
-        isInit = AppSettings.themeAlreadySet()
-//        console.log(AppSettings.theme["colors"])
     }
 
     function closeSplashScreen()
@@ -49,21 +45,8 @@ Window {
         _loader.active = true;
     }
 
-    function loadMain()
-    {
-        _loadermain.active = true
-    }
-
     SplashScreen {
         id: _splashScreen
-    }
-
-    Loader {
-        id: _loadermain
-        active: false
-        asynchronous: false
-        visible: status == Loader.Ready
-        sourceComponent: _mainWindow
     }
 
     Loader {
@@ -71,7 +54,13 @@ Window {
         active: false
         asynchronous: true
         visible: status == Loader.Ready
-        sourceComponent: isInit ? _mainWindow : _selectTheme
+        sourceComponent: AppSettings.themeLoaded ? _mainWindow : _selectTheme
+        onLoaded: {
+            _main.hide();
+            if (AppSettings.themeLoaded && Editor.solutionName) {
+                item.openSolution(Editor.solutionName);
+            }
+        }
     }
 
     Component {
@@ -81,10 +70,14 @@ Window {
             id: appViewMain
             width: 1280
             height: 720
+            visible: true
             Component.onCompleted: {
                 Editor.registerMainView(appViewMain)
                 closeSplashScreen()
-                _main.close()
+            }
+
+            onClosing: {
+                _main.close();
             }
         }
     }
@@ -99,15 +92,18 @@ Window {
             minimumWidth: 400
             minimumHeight: 150
             title: qsTr("DNAI")
-            color: AppSettings.theme["colors"]["background"]["dark"]
+            color: AppSettings.theme.colors.background.dark
             visible: true
             ChooseThemePanel {
                 id: pane
                 Component.onCompleted: {
                     pane.wind = _cw
                     closeSplashScreen()
-                    _main.close()
                 }
+            }
+
+            onClosing: {
+                _main.close();
             }
         }
     }

@@ -20,8 +20,8 @@ namespace dnai
 			{
 				struct ObjectType : Entity
 				{
-                    QMap<QString, quint32> attributes;
-                    QMap<QString, bool> functions;
+                    QMap<QString, QUuid> attributes;
+                    QList<QUuid> functions;
 				};
 			}
 		}

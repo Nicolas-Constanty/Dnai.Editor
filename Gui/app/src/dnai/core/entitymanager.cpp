@@ -4,19 +4,20 @@ namespace dnai
 {
     namespace gcore
     {
-        EntityManager::EntityManager()
+        void EntityManager::setup()
         {
-            addEntity(1, *(new models::Entity(new models::gcore::Entity("Boolean", core::ENTITY::DATA_TYPE, 1))));
-            addEntity(2, *(new models::Entity(new models::gcore::Entity("Integer", core::ENTITY::DATA_TYPE, 2))));
-            addEntity(3, *(new models::Entity(new models::gcore::Entity("Floating", core::ENTITY::DATA_TYPE, 3))));
-            addEntity(4, *(new models::Entity(new models::gcore::Entity("Character", core::ENTITY::DATA_TYPE, 4))));
-            addEntity(5, *(new models::Entity(new models::gcore::Entity("String", core::ENTITY::DATA_TYPE, 5))));
+            addEntity(1, *(new models::Entity(new models::gcore::Entity("Boolean", core::ENTITY::DATA_TYPE, 1), nullptr, nullptr, "{907ad50a-8f54-51ea-8c68-479d1d90a699}")));
+            addEntity(2, *(new models::Entity(new models::gcore::Entity("Integer", core::ENTITY::DATA_TYPE, 2), nullptr, nullptr, "{149e81c5-fc6e-5cc7-a0a6-6f736a6487ca}")));
+            addEntity(3, *(new models::Entity(new models::gcore::Entity("Floating", core::ENTITY::DATA_TYPE, 3), nullptr, nullptr, "{0db5b2f0-5384-5579-9433-f92bbf306aef}")));
+            addEntity(4, *(new models::Entity(new models::gcore::Entity("Character", core::ENTITY::DATA_TYPE, 4), nullptr, nullptr, "{22f34ba1-b80d-595b-b485-e1ff3d1e1283}")));
+            addEntity(5, *(new models::Entity(new models::gcore::Entity("String", core::ENTITY::DATA_TYPE, 5), nullptr, nullptr, "{dd0b3137-38d0-5521-879a-1abfc6a5c664}")));
         }
 
         void EntityManager::addEntity(::core::EntityID id, models::Entity &entity)
         {
             entity.setId(id);
             entities[id] = &entity;
+            g_entities[entity.guid()] = &entity;
             emit entityAdded(id, entity);
         }
 
@@ -26,6 +27,7 @@ namespace dnai
             models::Entity &tosend = *it->second;
 
             entities.erase(it);
+            g_entities.remove(tosend.guid());
             emit entityRemoved(id, tosend);
         }
 
@@ -34,14 +36,29 @@ namespace dnai
             return entities.find(id) != entities.end();
         }
 
+        bool EntityManager::contains(const QUuid &guid) const
+        {
+            return g_entities.contains(guid);
+        }
+
         const models::Entity &EntityManager::getEntity(::core::EntityID id) const
         {
             return *entities.at(id);
         }
 
+        const models::Entity *EntityManager::getEntity(const QUuid &id) const
+        {
+            return g_entities.value(id, nullptr);
+        }
+
         models::Entity &EntityManager::getEntity(::core::EntityID id)
         {
             return *entities.at(id);
+        }
+
+        models::Entity *EntityManager::getEntity(const QUuid &id)
+        {
+            return g_entities.value(id, nullptr);
         }
 
         const models::Entity *EntityManager::findByFullname(const QString &fullName) const

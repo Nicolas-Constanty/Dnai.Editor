@@ -23,14 +23,10 @@ namespace dnai
 {
     App *App::m_instance = nullptr;
     App::App(int& argc, char** argv) : QGuiApplication(argc, argv)
-	, m_processManager(nullptr)
-    , m_editor(Editor::instance())
 	{
-		if (m_instance == nullptr)
-            m_instance = this;
         setupSettings();
         if (argc > 1)
-            editor().setSolutionName(argv[1]);
+            Editor::instance().setSolutionName(argv[1]);
         QTimer::singleShot(300, this, &App::loadSplashScreen);
 	}
 
@@ -43,8 +39,13 @@ namespace dnai
     }
 
     App::~App() {
-	    delete m_processManager;
         qDebug() << "~" << "App";
+    }
+
+    void App::close(int retcode)
+    {
+        m_processManager.closeAll();
+        exit(retcode);
     }
 
     void App::versionsUpdater() {
@@ -61,19 +62,16 @@ namespace dnai
             if (response.body.contains("currentVersion")) {
                 setAPIVersion(response.body["currentVersion"].toString());
             }
-            qDebug() << DNAI_VERSION_RELEASE;
-            qDebug() << Editor::instance().version();
-            qDebug() << m_currentVersionAPI;
+            qDebug() << "==App== DNAI release version:" << DNAI_VERSION_RELEASE;
+            qDebug() << "==App== Editor version: " << Editor::instance().version();
+            qDebug() << "==App== API version: " << m_currentVersionAPI;
 
 
             onNotifyVersionChanged();
             return response;
         },
-        [this](http::Response response) -> http::Response {
-            qDebug() << "ERROR";
-            Editor::instance().notifyError("Could not check for update.", []() {
-
-            });
+        [](http::Response response) -> http::Response {
+            Editor::instance().notifyError("Could not check for update.");
        //     m_settings->setAPIVersion("0.0.30");
        //     onNotifyVersionChanged();
 
@@ -84,12 +82,12 @@ namespace dnai
     void App::initProcessManager()
 	{
 #ifdef Q_OS_MAC
-		m_processManager = new ProcessManager(QGuiApplication::applicationDirPath() + "/settings/conf/mac/bin_info.cfg");
+        m_processManager.setFile(QGuiApplication::applicationDirPath() + "/settings/conf/mac/bin_info.cfg");
 #else
-        m_processManager = new ProcessManager(QGuiApplication::applicationDirPath() + "/settings/conf/windows/bin_info.cfg");
+        m_processManager.setFile(QGuiApplication::applicationDirPath() + "/settings/conf/windows/bin_info.cfg");
 #endif
-		m_processManager->launch();
-        core::connect(m_processManager->getServerPort()); //connect core client
+        m_processManager.launch();
+        core::connect(m_processManager.getServerPort()); //connect core client
 	}
 
     void App::setupSettings()
@@ -103,7 +101,7 @@ namespace dnai
 	{
         QVariant value = Editor::instance().settings()->value(api::settings_key);
         api::setUser(value.value<api::User>());
-        qDebug() << "API ID: " << api::getId();
+        qDebug() << "==App== API id: " << api::getId();
 	}
 
     std::queue<std::function<void()>> App::init()
@@ -159,14 +157,9 @@ namespace dnai
 		return QGuiApplication::eventFilter(o, event);
 	}
 
-    ProcessManager *App::processManager() const
+    ProcessManager &App::processManager()
     {
         return m_processManager;
-    }
-
-    Editor &App::editor() const
-    {
-        return m_editor;
     }
 
 	QObject* App::createQmlComponent(const QString &path)
@@ -176,9 +169,11 @@ namespace dnai
         return component.create();
 	}
 
-    App* App::currentInstance()
+    App &App::currentInstance()
 	{
-		return m_instance;
+        if (m_instance == nullptr)
+            m_instance = dynamic_cast<App*>(instance());
+        return *m_instance;
 	}
 
     QQmlApplicationEngine &App::engine()
@@ -193,64 +188,64 @@ namespace dnai
 
 	QObject* App::createQmlObject(const QString& path)
 	{
-        return App::currentInstance()->createQmlComponent(path);
+        return currentInstance().createQmlComponent(path);
 	}
 
     QQmlEngine *App::getEngineInstance()
 	{
-        return const_cast<QQmlEngine *>(dynamic_cast<const QQmlEngine *>(&App::currentInstance()->engine()));
+        return const_cast<QQmlEngine *>(dynamic_cast<const QQmlEngine *>(&currentInstance().engine()));
 	}
 
 #if defined(_WIN32) && defined(_MSC_VER)
-  class CustomHandler : public IWinToastHandler {
-  public:
-      void toastActivated() const override
-      {
-          std::wcout << L"The user clicked in this toast" << std::endl;
-      }
+//  class CustomHandler : public IWinToastHandler {
+//  public:
+//      void toastActivated() const override
+//      {
+//          std::wcout << L"The user clicked in this toast" << std::endl;
+//      }
 
-      void toastActivated(int actionIndex) const override
-      {
-          std::wcout << L"The user clicked on button #" << actionIndex << L" in this toast" << std::endl;
-      }
+//      void toastActivated(int actionIndex) const override
+//      {
+//          std::wcout << L"The user clicked on button #" << actionIndex << L" in this toast" << std::endl;
+//      }
 
-      void toastFailed() const override
-      {
-          std::wcout << L"Error showing current toast" << std::endl;
-      }
-      void toastDismissed(WinToastDismissalReason state) const override
-      {
-          switch (state) {
-          case UserCanceled:
-              std::wcout << L"The user dismissed this toast" << std::endl;
-              break;
-          case ApplicationHidden:
-              std::wcout <<  L"The application hid the toast using ToastNotifier.hide()" << std::endl;
-              break;
-          case TimedOut:
-              std::wcout << L"The toast has timed out" << std::endl;
-              break;
-          default:
-              std::wcout << L"Toast not activated" << std::endl;
-              break;
-          }
-      }
-  };
+//      void toastFailed() const override
+//      {
+//          std::wcout << L"Error showing current toast" << std::endl;
+//      }
+//      void toastDismissed(WinToastDismissalReason state) const override
+//      {
+//          switch (state) {
+//          case UserCanceled:
+//              std::wcout << L"The user dismissed this toast" << std::endl;
+//              break;
+//          case ApplicationHidden:
+//              std::wcout <<  L"The application hid the toast using ToastNotifier.hide()" << std::endl;
+//              break;
+//          case TimedOut:
+//              std::wcout << L"The toast has timed out" << std::endl;
+//              break;
+//          default:
+//              std::wcout << L"Toast not activated" << std::endl;
+//              break;
+//          }
+//      }
+//  };
 #endif
   void App::onBuildStart()
   {
 #if defined(_WIN32) && defined(_MSC_VER)
-     WinToastTemplate templ = WinToastTemplate(WinToastTemplate::ImageAndText04);
-     templ.setTextField(QString("Build Start at :").toStdWString(), WinToastTemplate::FirstLine);
-     QDateTime dateTime = dateTime.currentDateTime();
-     QString dateTimeString = dateTime.toString("yyyy-MM-dd hh:mm:ss");
-     templ.setTextField(dateTimeString.toStdWString(), WinToastTemplate::SecondLine);
-     templ.setTextField(QString("by Nicolas C").toStdWString(), WinToastTemplate::ThirdLine);
-     templ.setExpiration(10000);
+//     WinToastTemplate templ = WinToastTemplate(WinToastTemplate::ImageAndText04);
+//     templ.setTextField(QString("Build Start at :").toStdWString(), WinToastTemplate::FirstLine);
+//     QDateTime dateTime = dateTime.currentDateTime();
+//     QString dateTimeString = dateTime.toString("yyyy-MM-dd hh:mm:ss");
+//     templ.setTextField(dateTimeString.toStdWString(), WinToastTemplate::SecondLine);
+//     templ.setTextField(QString("by Nicolas C").toStdWString(), WinToastTemplate::ThirdLine);
+//     templ.setExpiration(10000);
 
-     if (WinToast::instance()->showToast(templ, new CustomHandler()) < 0) {
-         qDebug() << "Error", "Could not launch your toast notification!";
-     }
+//     if (WinToast::instance()->showToast(templ, new CustomHandler()) < 0) {
+//         qDebug() << "Error", "Could not launch your toast notification!";
+//     }
 #endif
 #if defined(Q_OS_MAC)
     //ToastMac macToast;
@@ -307,7 +302,7 @@ namespace dnai
 
   void App::onNotifyVersionChanged() {
       if (isNewVersionAvailable()) {
-          Editor::instance().notifyInformation("Switch to new version " + m_currentVersionAPI, [this]() {
+          Editor::instance().notifyInformation("Switch to new version " + m_currentVersionAPI, []() {
               QDesktopServices::openUrl(QUrl("https://dnai.io/download/"));
              // App::currentInstance()->processManager()->launchUpdater(Editor::instance().version(), m_currentVersionAPI);
           });
@@ -320,6 +315,6 @@ namespace dnai
           Editor::instance().notifyWarning("Switch to new version " + m_currentVersionAPI, [this]() {
               App::currentInstance()->processManager()->launchUpdater(Editor::instance().version(), m_currentVersionAPI);
           });*/
-      }
-  }
+}
+}
 }

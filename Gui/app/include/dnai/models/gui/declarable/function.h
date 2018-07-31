@@ -50,13 +50,13 @@ namespace dnai
 					bool setIoLinks(const QList<dnai::models::gui::IoLink *> &);
 					void appendIoLink(dnai::models::gui::IoLink *);
 					void removeIoLink(dnai::models::gui::IoLink* link);
-                    IoLink *findIOLink(QUuid const &instruction, QString const &input) const;
+                    Q_INVOKABLE dnai::models::gui::IoLink *findIOLink(QUuid const &instruction, QString const &input) const;
 
 					const QList<dnai::models::gui::FlowLink *> &flowlinks() const;
 					bool setFlowLinks(const QList<dnai::models::gui::FlowLink *> &);
 					void appendFlowLink(dnai::models::gui::FlowLink *);
 					void removeFlowLink(dnai::models::gui::FlowLink* link);
-                    models::gui::FlowLink *findFlowLink(QUuid const &from, quint32 outPin, QUuid const &to = QUuid()) const;
+                    Q_INVOKABLE dnai::models::gui::FlowLink *findFlowLink(QUuid const &from, quint32 outPin, QUuid const &to = QUuid()) const;
 
 					Q_INVOKABLE void addInput(models::Entity *var);
 					Q_INVOKABLE void addOutput(models::Entity *var);
@@ -69,26 +69,26 @@ namespace dnai
 					Q_INVOKABLE void moveInputDown(int index);
 					Q_INVOKABLE void moveOutputDown(int index);
 
-
-					/*Q_INVOKABLE void updateInputName(int index, const QString &name);
-					Q_INVOKABLE void updateInputVarType(int index, qint32 varType);
-
-					Q_INVOKABLE void updateOutputName(int index, const QString &name);
-                    Q_INVOKABLE void updateOutputVarType(int index, qint32 varType);*/
-
 					EntityList *inputModels() const;
 					EntityList *outputModels() const;
 					void setInputModels(EntityList* inputs);
 					void setOutputModels(EntityList* outputs);
 
 					void addInstruction(Instruction *instruction);
+                    void removeInstruction(Instruction *instruction);
                     Instruction* getInstruction(const QUuid& uuid);
 
 					Q_INVOKABLE quint32 getInputId(QString const &name) const;
 					Q_INVOKABLE quint32 getOutputId(QString const &name) const;
 
+                    models::Entity *getInput(QString const &name) const;
+                    models::Entity *getOutput(QString const &name) const;
+
                     models::gui::Instruction *getInstruction(quint32 uid) const;
                     models::gui::Instruction *getInstruction(const QUuid &guid) const;
+
+                    bool hasInput(QString const &name, QUuid const &type = QUuid()) const;
+                    bool hasOutput(QString const &name, QUuid const &type = QUuid()) const;
 
                     models::gui::Instruction *entryPoint() const;
                     void setEntryPoint(QUuid uid);

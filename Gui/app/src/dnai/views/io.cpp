@@ -15,7 +15,9 @@ namespace dnai
 			LinkableBezierItem(parent)
 			, m_nbSegments(32)
             , m_type(enums::IoTypeRessouce::IoType::Int)
-			, m_genericNode(nullptr)
+            , m_genericNode(nullptr)
+            , m_isLink(false)
+            , m_isHover(false)
 
 		{
 			Io::refreshBackendIo();
@@ -173,17 +175,59 @@ namespace dnai
 			refreshBackendIo();
 			emit typeChanged(type);
 			update();
-		}
+        }
 
-		QPointF Io::getCanvasPos() const
+        bool Io::isLink() const
+        {
+            return m_isLink;
+        }
+
+        bool Io::isHover() const
+        {
+            return m_isHover;
+        }
+
+        const QColor &Io::curveColor() const
+        {
+            return m_curveColor;
+        }
+
+        void Io::setIsLink(bool isLink)
+        {
+            if (m_isLink == isLink)
+                return;
+
+            m_isLink = isLink;
+            emit isLinkChanged(m_isLink);
+        }
+
+        void Io::setIsHover(bool isHover)
+        {
+            if (m_isHover == isHover)
+                return;
+
+            m_isHover = isHover;
+            emit isHoverChanged(m_isHover);
+        }
+
+        void Io::setCurveColor(const QColor &curveColor)
+        {
+            if (m_curveColor == curveColor)
+                return;
+
+            m_curveColor = curveColor;
+            emit curveColorChanged(m_curveColor);
+        }
+
+        QPointF Io::getCanvasPos() const
         {
             return QPointF(mapToItem(m_canvas->content(), QPoint(0,0)) +
                            QPointF(width() / 2, height() / 2));
-		}
+        }
 
-		GenericNode* Io::getNode()
-		{
-			if (m_genericNode == nullptr)
+        GenericNode* Io::getNode()
+        {
+            if (m_genericNode == nullptr)
 			{
 				GenericNode *n = nullptr;
 				QQuickItem *parent = parentItem();
@@ -216,23 +260,13 @@ namespace dnai
 			return (position() / scale()) + QPointF((width() / scale() - width()) / 2, (height() / scale() - height()) / 2);
 		}
 
-		void Io::setLink(Link *l)
-		{
-			resetShape();
-			setFillColor(m_borderColor);
-			if (l == nullptr) return;
-			auto cs = dynamic_cast<Io *>(dynamic_cast<BaseIo*>(l->L1 != m_linkable ? l->L1 : l->L2)->parent());
-			cs->setLink(nullptr);
-			LinkableBezierItem::setLink(nullptr);
-		}
-
-		void Io::setHover()
-		{
-			if (m_status == LinkStatus::Hover) return;
-			const auto c(m_borderColor);
-			setBorderColor(m_fillColor);
-			setFillColor(c);
-			LinkableBezierItem::setHover();
-		}
+        void Io::redrawLinks(const QColor &color)
+        {
+            auto list = m_linkable->links();
+            for (auto l : list)
+            {
+                l->curve()->setFillColor(color);
+            }
+        }
 	}
 }

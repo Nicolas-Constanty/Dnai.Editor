@@ -38,4 +38,9 @@
 #include "dnai/models/contextMenuModel.h"
 #include "dnai/models/gui/entitylist.h"
 
+#include "dnai/models/ml/dataset.h"
+#include "dnai/models/ml/hyperparameters.h"
+#include "dnai/models/ml/mlproject.h"
+#include "dnai/models/ml/model.h"
+
 #endif // DNAI_MODELS_H

@@ -53,7 +53,13 @@ public:
         SIZE,
         FOREACH,
         GET_ATTRIBUTES,
-        SET_ATTRIBUTES
+        SET_ATTRIBUTES,
+        BREAK,
+        CONTINUE,
+        CLEAR,
+        FILL,
+        SET_VALUE_AT,
+        RETURN
     };
     Q_ENUM(Instruction_ID)
 };

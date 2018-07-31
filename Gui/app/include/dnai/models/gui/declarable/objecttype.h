@@ -11,31 +11,32 @@ namespace dnai
 		namespace gui
 		{
 			namespace declarable
-			{
+            {
 				class ObjectType : public QObject, public Entity<data::ObjectType, ObjectType>
 				{
 					Q_OBJECT
                     Q_PROPERTY(QStringList attributes READ attributes NOTIFY attributesChanged)
-                    Q_PROPERTY(QList<QVariant> functions READ functions NOTIFY functionsChanged)
+                    Q_PROPERTY(QStringList functions READ functions NOTIFY functionsChanged)
 
 				public:
 					explicit ObjectType() = default;
 
                     QStringList attributes();
-                    void addAttribute(QString const &name, quint32 type);
+                    void addAttribute(QString const &name, QUuid const &type);
                     void removeAttribute(QString const &name);
                     void renameAttribute(QString const &name, QString const &newName);
-                    Q_INVOKABLE quint32 getAttribute(QString name) const;
+                    Q_INVOKABLE QUuid getAttribute(QString name) const;
 
                 public:
-                    QList<QVariant> functions() const;
-                    void addFunction(QString const &name);
-                    void removeFunction(QString const &name);
-                    void setFunctionStatus(QString const &name, bool member);
+                    QStringList functions() const;
+                    void addFunction(QUuid const &funcUid);
+                    void removeFunction(QUuid const &funcUid);
+                    bool hasFunction(QUuid const &funcUid);
+                    Q_INVOKABLE bool isFunctionMember(QString name) const;
 
                 signals:
                     void attributesChanged(QStringList attrs);
-                    void functionsChanged(QList<QVariant> functions);
+                    void functionsChanged(QStringList functions);
 
                 public:
 					//Implementation of ISerializable

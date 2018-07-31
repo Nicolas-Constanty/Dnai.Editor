@@ -19,6 +19,8 @@ namespace dnai {
 		*/
         virtual Link *connect(interfaces::ALinkable *linkable, views::BezierCurve *curve) override;
 
+        virtual Link *asyncConnect(interfaces::ALinkable *linkable) override;
+
 		/**
 		* \brief Break a link between linkable
 		* \param linkable

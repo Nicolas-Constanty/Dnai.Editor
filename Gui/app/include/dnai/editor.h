@@ -11,6 +11,7 @@
 #include "models/entity.h"
 #include "dnai/toastermanagerservice.h"
 #include "dnai/models/contextMenuModel.h"
+#include "dnai/ml/mlhandler.h"
 
 namespace dnai
 {
@@ -18,18 +19,20 @@ namespace dnai
     class Project;
     class Session;
 
+    namespace views {
+        class GenericNode;
+    }
+
 	class PropertyPanelProperties : public QObject {
 		Q_OBJECT
         Q_PROPERTY(QStringList visibility READ visibility CONSTANT)
         Q_PROPERTY(QStringList entityType READ entityType CONSTANT)
-        Q_PROPERTY(dnai::models::gui::declarable::VarTypeList *varTypes READ varTypes CONSTANT)
 
 	public:
 		explicit PropertyPanelProperties(QObject *parent = nullptr);
 
 		const QStringList &visibility() const;
-		const QStringList &entityType() const;
-		models::gui::declarable::VarTypeList *varTypes() const;
+        const QStringList &entityType() const;
 
 	private:
 		QStringList m_visibility;
@@ -45,6 +48,7 @@ namespace dnai
         Q_PROPERTY(bool loaded READ loaded WRITE setLoaded NOTIFY loadedChanged)
         Q_PROPERTY(QString solutionName READ solutionName)
 		Q_PROPERTY(dnai::models::ContextMenuModel *contextMenuModel READ contextMenuModel WRITE setContextMenuModel NOTIFY contextMenuModelChanged)
+        Q_PROPERTY(dnai::ml::MlHandler * mlHandler READ mlHandler CONSTANT)
 
     protected:
         Editor();
@@ -70,7 +74,9 @@ namespace dnai
         views::EditorView *mainView() const;
         bool loaded() const;
         QString const &solutionName() const;
-		dnai::models::ContextMenuModel* contextMenuModel();
+
+        void loadContextMenuModel();
+        dnai::models::ContextMenuModel* contextMenuModel() const;
 		void setContextMenuModel(dnai::models::ContextMenuModel* ctx);
 		Q_INVOKABLE void updateContextMenuModel(dnai::models::Entity* entity) const;
 
@@ -104,6 +110,7 @@ namespace dnai
 		                                const QString &proj_name,
 		                                const QString &proj_desc);
 		Q_INVOKABLE QQuickWindow *mainView();
+        Q_INVOKABLE QQuickItem *qmlMainView();
 		Q_INVOKABLE void registerPropertyView(QQuickItem *view);
 		Q_INVOKABLE QQuickItem* propertyView() const;
 		Q_INVOKABLE void loadFunction(dnai::models::Entity *entity) const;
@@ -126,18 +133,26 @@ namespace dnai
         void setAppName(QString const &name);
         void setSolutionName(QString const &name);
 
+        dnai::ml::MlHandler * mlHandler();
+
     signals:
         void solutionChanged(dnai::Solution *proj);
         void loadedChanged(bool);
 		void contextMenuModelChanged(dnai::models::ContextMenuModel *m) const;
 
-    private:
-		QQuickItem * createNodeQMLComponent(models::ContextMenuItem *node, models::Entity *func, models::gui::Instruction *instruction, QQuickItem *parent) const;
+    public:
+        Q_INVOKABLE QQuickItem * createNodeQMLComponent(dnai::models::Entity *func, dnai::models::gui::Instruction *instruction, QQuickItem *parent) const;
+        Q_INVOKABLE void setAsEntryPoint(dnai::views::GenericNode *instruction, dnai::views::GenericNode *entry);
+        Q_INVOKABLE void createFlowLink(dnai::views::GenericNode *from, dnai::views::GenericNode *to, dnai::models::Entity *func, dnai::models::gui::Instruction *fromIns, qint32 outpin, dnai::models::gui::Instruction *toIns) const;
+        Q_INVOKABLE void removeFlowLink(dnai::views::GenericNode *instruction, qint32 outpin) const;
+        Q_INVOKABLE void createIOLink(dnai::views::GenericNode *from, dnai::views::GenericNode *to, dnai::models::Entity *func, dnai::models::gui::Instruction *instr, QString input) const;
+        Q_INVOKABLE void removeIOLink(dnai::views::GenericNode *instruction, dnai::models::gui::Instruction *instr, QString input) const;
+
+    public:
+        Q_INVOKABLE void finishInstructionBuilding(dnai::models::Entity *func, dnai::models::gui::Instruction *instr);
 
     public slots:
-        void onInstructionAdded(models::Entity *func, models::gui::Instruction *instr);
         void onAddInstructionError(quint32 func, quint32 type, QList<quint32> const &args, QString const &msg);
-        void onEntityDeclared(dnai::models::Entity *declared);
 
     private:
         interfaces::ISolution *m_solution;
@@ -156,13 +171,14 @@ namespace dnai
         QString m_solutionName;
 		dnai::models::ContextMenuModel *m_contextMenuModel;
         QSettings *m_settings;
+        dnai::ml::MlHandler m_mlHandler;
 
     private:
         std::queue<std::tuple<models::ContextMenuItem *, quint32, quint32>> m_pendingInstruction;
         bool m_loaded = false;
 
     private:
-        static Editor &m_instance;
+        static Editor *m_instance;
     };
     }
 

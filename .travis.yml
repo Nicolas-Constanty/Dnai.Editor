@@ -7,6 +7,10 @@ os: osx
 cache:
   directories:
     - ~/Qt/
+    
+before_script:
+  - export QTDIR=~/Qt/5.10.1/clang_64
+  - export PATH=$QTDIR/bin:$PATH
 
 script:
   - if [ ! -e ~/Qt/5.10.1/ ] ; then
@@ -14,12 +18,10 @@ script:
       sudo hdiutil attach -noverify ./qt-opensource-mac-x64-5.10.1.dmg;
       /Volumes/qt-opensource-mac-x64-5.10.1/qt-opensource-mac-x64-5.10.1.app/Contents/MacOS/qt-opensource-mac-x64-5.10.1 --platform minimal --script qt_script_osx.qs;
     fi
+  - git submodule update --init --recursive
   - cd Gui
-  - git submodule init
-  - git submodule update
-  - ~/Qt/5.10.1/clang_64/bin/qmake DNAI.pro
-  - make
+  - qmake DNAI.pro
+  - make -j 8
   - cd ../Server
-  - ~/Qt/5.10.1/clang_64/bin/qmake Server.pro
-  - make
-
+  - qmake Server.pro
+  - make -j 8

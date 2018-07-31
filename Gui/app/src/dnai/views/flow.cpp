@@ -30,32 +30,47 @@ namespace dnai
 				{
 					f->unlinkAll();
 				}
-				const auto l = BaseLinkable::connect(linkable, curve);
-				if (const auto fl = dynamic_cast<Flow *>(parent()))
-				{
-					const auto flow = dynamic_cast<dnai::views::Flow *>(li->parent());
-					int index;
-					if (flow->typeFlow() == enums::FlowTypeRessouce::FlowType::Exit)
-					{
-						
-						index = flow->getNode()->flowsOut().getList().indexOf(flow);
-					}
-					else
-					{
-						const auto flowp = dynamic_cast<dnai::views::Flow *>(parent());
-						index = flowp->getNode()->flowsOut().getList().indexOf(flowp);
-					}
-					emit fl->linked(index, flow->getNode()->property("instruction_model"));
-				}
+                const auto l = BaseLinkable::connect(linkable, curve);
 				return l;
 			}
-			return nullptr;
-		}
+            return nullptr;
+        }
+
+        Link *FlowBackend::asyncConnect(interfaces::ALinkable *linkable)
+        {
+            const auto li = dynamic_cast<FlowBackend *>(linkable);
+            if (li != nullptr && li->getType() != getType())
+            {
+                const auto f = dynamic_cast<Flow *>(li->parent());
+                if (!li->links().empty() && f->typeFlow() == enums::FlowTypeRessouce::FlowType::Exit)
+                {
+                    f->unlinkAll();
+                }
+                if (const auto fl = dynamic_cast<Flow *>(parent()))
+                {
+                    const auto flow = dynamic_cast<dnai::views::Flow *>(li->parent());
+                    int index;
+                    if (flow->typeFlow() == enums::FlowTypeRessouce::FlowType::Exit)
+                    {
+                        index = flow->getNode()->flowsOut().getList().indexOf(flow);
+                    }
+                    else
+                    {
+                        const auto flowp = dynamic_cast<dnai::views::Flow *>(parent());
+                        index = flowp->getNode()->flowsOut().getList().indexOf(flowp);
+                    }
+                    emit fl->linked(index, flow->getNode()->property("instruction_model"));
+                }
+            }
+            return nullptr;
+        }
 
 		Flow::Flow(QQuickItem* parent) :
 			LinkableBezierItem(parent)
             , m_typeFlow(enums::FlowTypeRessouce::FlowType::Enter)
 			, m_genericNode(nullptr)
+            , m_isLink(false)
+            , m_isHover(false)
 		{
 			setFlag(ItemHasContents, true);
 			m_radius = 8;
@@ -206,32 +221,31 @@ namespace dnai
 
 		void Flow::unlinkAll()
 		{
-			for (auto link : m_linkable->links())
-			{
-				int index;
-				QVariant instruction;
-				const auto flow1 = dynamic_cast<Flow*>(dynamic_cast<FlowBackend*>(link->L1)->parent());
-				const auto flow2 = dynamic_cast<Flow*>(dynamic_cast<FlowBackend*>(link->L2)->parent());
-				if (flow1->typeFlow() == enums::FlowTypeRessouce::FlowType::Exit)
-				{
-					index = flow1->getNode()->flowsOut().getList().indexOf(flow1);
-					instruction = flow1->getNode()->property("instruction_model");
-				}
-				else
-				{
-					index = flow2->getNode()->flowsOut().getList().indexOf(flow2);
-					instruction = flow2->getNode()->property("instruction_model");
-				}
-				emit unlinked(index, instruction);
-			}
+            LinkableBezierItem::unlinkAll();
+            setIsLink(false);
+        }
 
-			LinkableBezierItem::unlinkAll(); 
-		}
-
-		const QColor& Flow::colorLink() const
-		{
-			return m_borderColor;
-		}
+        void Flow::asyncUnlinkAll()
+        {
+            for (auto link : m_linkable->links())
+            {
+                int index;
+                QVariant instruction;
+                const auto flow1 = dynamic_cast<Flow*>(dynamic_cast<FlowBackend*>(link->L1)->parent());
+                const auto flow2 = dynamic_cast<Flow*>(dynamic_cast<FlowBackend*>(link->L2)->parent());
+                if (flow1->typeFlow() == enums::FlowTypeRessouce::FlowType::Exit)
+                {
+                    index = flow1->getNode()->flowsOut().getList().indexOf(flow1);
+                    instruction = flow1->getNode()->property("instruction_model");
+                }
+                else
+                {
+                    index = flow2->getNode()->flowsOut().getList().indexOf(flow2);
+                    instruction = flow2->getNode()->property("instruction_model");
+                }
+                emit unlinked(index, instruction);
+            }
+        }
 
 		LinkableBezierItem* Flow::findLinkableBezierItem(GenericNode* n, const QPointF&p)
 		{
@@ -279,30 +293,30 @@ namespace dnai
 			return m_genericNode;
 		}
 
-		void Flow::setLink(Link *l)
-		{
-			setBorderWidth(0);
-			setFillColor(QColor(255, 255, 255));
-			if (l == nullptr) return;
-			auto f = dynamic_cast<Flow *>(dynamic_cast<FlowBackend *>(l->L1 != m_linkable ? l->L1 : l->L2)->parent());
-			f->setLink(nullptr);
-			LinkableBezierItem::setLink(nullptr);
-		}
+//		void Flow::setLink(Link *l)
+//		{
+//			setBorderWidth(0);
+//			setFillColor(QColor(255, 255, 255));
+//			if (l == nullptr) return;
+//			auto f = dynamic_cast<Flow *>(dynamic_cast<FlowBackend *>(l->L1 != m_linkable ? l->L1 : l->L2)->parent());
+//			f->setLink(nullptr);
+//			LinkableBezierItem::setLink(nullptr);
+//		}
 
-		void Flow::setHover()
-		{
-			if (m_status == LinkStatus::Hover) return;
-			setBorderColor(QColor(255, 170, 0));
-			setFillColor(QColor(255, 170, 0));
-			LinkableBezierItem::setHover();
-		}
+//		void Flow::setHover()
+//		{
+//			if (m_status == LinkStatus::Hover) return;
+//			setBorderColor(QColor(255, 170, 0));
+//			setFillColor(QColor(255, 170, 0));
+//			LinkableBezierItem::setHover();
+//		}
 
 
 		void Flow::afterRealease(Link *l)
 		{
 			if (l == nullptr)
 			{
-				unlinkAll();
+                asyncUnlinkAll();
 			}
 		}
 
@@ -312,6 +326,50 @@ namespace dnai
 			if (m_currentCurve)
 				m_currentCurve->setLineWidth(3);
 		}
+
+        void Flow::setIsLink(bool isLink)
+        {
+            if (m_isLink == isLink)
+                return;
+
+            m_isLink = isLink;
+            emit isLinkChanged(m_isLink);
+        }
+
+        bool Flow::isLink() const
+        {
+            return m_isLink;
+        }
+
+        void Flow::setIsHover(bool isHover)
+        {
+            if (m_isHover == isHover)
+                return;
+
+            m_isHover = isHover;
+            emit isHoverChanged(m_isHover);
+        }
+
+        bool Flow::isHover() const
+        {
+            return m_isHover;
+        }
+
+
+        void Flow::setCurveColor(const QColor &colorCurve)
+        {
+            if (m_colorCurve == colorCurve)
+                return;
+
+            m_colorCurve = colorCurve;
+            emit curveColorChanged(m_colorCurve);
+        }
+
+        const QColor &Flow::curveColor() const
+        {
+            return m_colorCurve;
+        }
+
 	}
 }
 

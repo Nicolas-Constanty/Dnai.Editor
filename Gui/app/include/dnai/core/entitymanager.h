@@ -18,10 +18,14 @@ namespace dnai
 
         private:
             using EntityMap = std::unordered_map<::core::EntityID, models::Entity *>;
+            using GUIEntityMap = QHash<QUuid, models::Entity *>;
 
         public:
-            EntityManager();
+            EntityManager() = default;
             ~EntityManager() = default;
+
+        public:
+            void setup();
 
         signals:
             void entityAdded(::core::EntityID id, models::Entity &entity);
@@ -32,9 +36,12 @@ namespace dnai
             void removeEntity(::core::EntityID id);
 
             bool contains(::core::EntityID id) const;
+            bool contains(QUuid const &guid) const;
 
             const models::Entity &getEntity(::core::EntityID id) const;
+            const models::Entity *getEntity(QUuid const &id) const;
             models::Entity &getEntity(::core::EntityID id);
+            models::Entity *getEntity(QUuid const &id);
 
             const models::Entity *findByFullname(QString const &fullName) const;
             models::Entity *findByFullname(QString const &fullName);
@@ -44,6 +51,7 @@ namespace dnai
 
         private:
             EntityMap entities;
+            GUIEntityMap g_entities;
 
             /*
              * Iterator

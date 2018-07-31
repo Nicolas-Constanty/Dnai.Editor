@@ -5,6 +5,7 @@
 #include <map>
 
 #include <QObject>
+#include <QStack>
 
 #include "entitymanager.h"
 
@@ -17,7 +18,7 @@ namespace dnai
         class FunctionHandler : public QObject
         {
             Q_OBJECT
-            Q_PROPERTY(InstructionHandler *instruction READ instruction)
+            Q_PROPERTY(InstructionHandler *instruction READ instruction CONSTANT)
 
         public:
             FunctionHandler(EntityManager &manager);
@@ -43,14 +44,24 @@ namespace dnai
             Q_INVOKABLE void setParameter(quint32 func, QString const &paramName, bool save = true) const;
             Q_INVOKABLE void setReturn(quint32 func, QString const &retName, bool save = true) const;
             Q_INVOKABLE void addInstruction(quint32 func, quint32 instrType, QList<quint32> const &arguments, bool save = true) const;
+            Q_INVOKABLE void removeInstruction(quint32 func, quint32 instruction, bool save = true);
 
         private:
             models::gui::declarable::Function *getFunctionData(::core::EntityID function, bool throws = false) const;
+            std::list<quint32> getConstructionList(models::gui::Instruction *instr) const;
+            QList<QString> getLinkedEntities(std::list<quint32> const &construction) const;
+
+        private:
+            models::gui::Instruction *createInstruction(qint32 type, std::list<quint32> const &constrution = std::list<quint32>());
 
         private:
             void refreshPendingFunctionInstructions();
+            QString getInstructionHash(QUuid funcguid, qint32 type) const;
 
-        private:
+        public:
+            void rebuildInstructions(QList<models::gui::Instruction *> instructions);
+
+        public:
             void onEntryPointSet(quint32 function, quint32 instruction);
             void onSetEntryPointError(quint32 function, quint32 instruction, QString const &message) const;
 
@@ -63,10 +74,16 @@ namespace dnai
             void onInstructionAdded(::core::EntityID function, ::core::INSTRUCTION type, std::list<::core::EntityID> const &arguments, ::core::InstructionID instruction);
             void onAddInstructionError(::core::EntityID function, ::core::INSTRUCTION type, std::list<::core::EntityID> const &arguments, QString const &messsage);
 
+            void onInstructionRemoved(::core::EntityID function, ::core::InstructionID instruction);
+            void onRemoveInstructionError(::core::EntityID funtion, ::core::InstructionID instruction, QString msg);
+
         signals:
-            void instructionAdded(models::Entity *function, models::gui::Instruction *instruction);
+            void instructionAdded(dnai::models::Entity *func, dnai::models::gui::Instruction *instruction);
             void addInstructionError(quint32 func, quint32 instrType, QList<quint32> const &args, QString const &msg);
-            void entryPointSet(models::Entity *func, models::gui::Instruction *entry);
+            void instructionRemoved(dnai::models::Entity *func, dnai::models::gui::Instruction *instruction);
+            void entryPointSet(dnai::models::Entity *func, dnai::models::gui::Instruction *entry);
+            void parameterSet(dnai::models::Entity *func, QString param);
+            void returnSet(dnai::models::Entity *func, QString ret);
 
         private:
             EntityManager &manager;
@@ -99,6 +116,20 @@ namespace dnai
 
             //this queue is used to try to declare instructions once an entity is added
             std::list<models::Entity *> pendingFunctionInstructions;
+
+        private:
+            //map that contains removed instructions
+            QHash<QString, QStack<models::gui::Instruction *>> removedInstructions;
+            //map that contains added instructions
+            QHash<QString, QStack<models::gui::Instruction *>> addedInstructions;
+
+        private:
+            //instruction function map
+            QHash<models::gui::Instruction *, models::Entity *> instructionsFunction;
+
+        private:
+            //map to store instruction that are currently rebuilding
+            QSet<models::gui::Instruction *> pendingRebuild;
         };
     }
 }

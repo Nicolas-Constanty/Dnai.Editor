@@ -22,6 +22,8 @@ namespace dnai
 
 			Link *connect(ALinkable* linkable, BezierCurve* curve) override;
 
+            Link *asyncConnect(ALinkable* linkable) override;
+
 		protected:
             enums::FlowTypeRessouce::FlowType m_typeFlow;
 		};
@@ -30,6 +32,9 @@ namespace dnai
 		{
 			Q_OBJECT
             Q_PROPERTY(dnai::enums::FlowTypeRessouce::FlowType typeFlow READ typeFlow WRITE setTypeFlow NOTIFY typeFlowChanged)
+            Q_PROPERTY(bool isLink READ isLink WRITE setIsLink NOTIFY isLinkChanged)
+            Q_PROPERTY(bool isHover READ isHover WRITE setIsHover NOTIFY isHoverChanged)
+            Q_PROPERTY(QColor curveColor READ curveColor WRITE setCurveColor NOTIFY curveColorChanged)
 
 		public:
 			explicit Flow(QQuickItem *parent = nullptr);
@@ -43,9 +48,7 @@ namespace dnai
 			/**
 			* \brief Override componentComplete, and init some values
 			*/
-			virtual void componentComplete() override;
-
-			virtual const QColor &colorLink() const override;
+            virtual void componentComplete() override;
 
 			/**
 			* \brief Override findIo, return the IO under the point p of the Node n
@@ -57,22 +60,48 @@ namespace dnai
 			virtual void updateLink() override;
             virtual GenericNode *getNode() override;
 
-			virtual void setHover() override;
-			virtual void setLink(Link *) override;
+//			virtual void setHover() override;
+//			virtual void setLink(Link *) override;
 
             QPointF getCanvasPos() const override;
 			void unlinkAll() override;
+            void asyncUnlinkAll() override;
+
+            bool isLink() const;
+
+            bool isHover() const;
+
+            virtual const QColor &curveColor() const override;
+
+        public slots:
+            virtual void setIsLink(bool isLink) override;
+
+            virtual void setIsHover(bool isHover) override;
+
+            void setCurveColor(const QColor &colorCurve);
 
         signals:
             void typeFlowChanged(enums::FlowTypeRessouce::FlowType t);
 			void linked(int outindex, const QVariant &instructionModel);
 			void unlinked(int outindex, const QVariant &instructionModel);
 
-		private:
+            void isLinkChanged(bool isLink);
+
+            void isHoverChanged(bool isHover);
+
+            void curveColorChanged(const QColor &colorCurve);
+
+        private:
             enums::FlowTypeRessouce::FlowType m_typeFlow;
 			GenericNode *m_genericNode;
 
-		protected:
+            bool m_isLink;
+
+            bool m_isHover;
+
+            QColor m_colorCurve;
+
+        protected:
 			void mousePressEvent(QMouseEvent* event) override;
 			virtual void afterRealease(Link *l) override;
 		};

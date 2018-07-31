@@ -324,9 +324,10 @@ namespace dnai
                 for (EntityID id : rmvList) {
                     models::Entity &rmd = manager.getEntity(id);
 
-                    emit removed(&rmd);
                     //this will trigger onEntityRemoved
                     manager.removeEntity(id);
+
+                    emit removed(&rmd);
                 }
             }
         }
@@ -349,6 +350,7 @@ namespace dnai
                 qDebug() << "==Core== Declarator.Renamed(" << declarator << ", " << name << ", " << newname <<  ")";
                 entity->setName(newname);
                 commands::CoreCommand::Success();
+                emit renamed(entity, name, newname);
             }
         }
 

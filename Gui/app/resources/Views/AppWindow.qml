@@ -8,7 +8,6 @@ import Dnai.Settings 1.0
 
 import "../Style"
 import "../Components"
-import "../Layouts"
 import "../Panels"
 import "../JavaScript/Utils.js" as Utils
 import "../JavaScript/CreateComponent.js" as Factory
@@ -80,9 +79,6 @@ ApplicationWindow {
                                 "newModal" : newProjectPopup
                             },
                             "Welcome")
-                    if (Editor.solutionName) {
-                        openSolution(Editor.solutionName); //load fails
-                    }
                 }
             }
         }
@@ -121,10 +117,6 @@ ApplicationWindow {
         onAccepted: {
             openSolution(openProjectId.fileUrl);
         }
-        onRejected: {
-            //console.log("Canceled")
-        }
-
     }
 
     Modal {
@@ -174,14 +166,11 @@ ApplicationWindow {
         height: dialogPopupItem.heightValue
     }
 
-
-
     onClosing: {
         close.accepted = true
-        if (Editor.solution.isProjectsSaved() == false) {
+        if (Editor.solution && Editor.solution.isProjectsSaved() === false) {
             dialogPopup.open()
             close.accepted = false
         }
-
     }
 }

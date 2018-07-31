@@ -24,6 +24,20 @@ GenericNode {
     property int paddingColumn: 10
     property var function_entity: null
 
+    function stringToColor(str)
+    {
+        var hash = 0;
+        for (var i = 0; i < str.length; i++) {
+            hash = str.charCodeAt(i) + ((hash << 5) - hash);
+        }
+        var colour = '#';
+        for (var c = 0; c < 3; c++) {
+            var value = (hash >> (c * 8)) & 0xFF;
+            colour += ('00' + value.toString(16)).substr(-2);
+        }
+        return Qt.lighter(colour);
+    }
+
     state: "Open"
 
     onXChanged: {
@@ -37,9 +51,11 @@ GenericNode {
     }
 
     RoundedRectangle {
+        id: headerNode
+
         x: borderWidth * 2
         y: borderWidth * 2
-        id: headerNode
+
         implicitWidth: if (_name.width > _description.width
                                && _name.width * 1.5 > 100)
                            _name.width * 1.5
@@ -48,6 +64,7 @@ GenericNode {
                        else
                            200
         implicitHeight: _name.height * 1.3 + _description.height * 1.3
+
         bottomLeft: false
         bottomRight: false
         topRight: false
@@ -56,6 +73,7 @@ GenericNode {
         borderColor: "#7C7C7C"
         fillColor: "#aa101010"
         antialiasing: true
+
         MLabel {
             id: _name
             text:  _node.model.name
@@ -85,8 +103,15 @@ GenericNode {
 
         x: borderWidth * 2
         y: borderWidth * 2
+
         width: headerNode.width
         height: childrenRect.height + 2 * _node.paddingColumn
+
+        anchors.top: headerNode.bottom
+        anchors.topMargin: headerNode.borderWidth + 1
+
+        visible: _node.state === "Open"
+
         radius: headerNode.radius
         borderWidth: headerNode.borderWidth
         borderColor: headerNode.borderColor
@@ -95,9 +120,6 @@ GenericNode {
         topLeft: false
         topRight: false
         bottomLeft: false
-        anchors.top: headerNode.bottom
-        anchors.topMargin: headerNode.borderWidth + 1
-        visible: _node.state === "Open"
 
         //Flow in list
         Column {
@@ -110,12 +132,26 @@ GenericNode {
             Repeater {
                 model: _node.model.flowIn
                 delegate: Flow {
+                    MouseArea {
+                        anchors.fill: parent
+                        hoverEnabled: true
+                        propagateComposedEvents: true
+                        onContainsMouseChanged: {
+                            isHover = containsMouse
+                        }
+                        onPressed: {
+                            mouse.accepted = false
+                        }
+                    }
                     radius: 6
                     width: 12
                     height: 12
                     borderWidth: 3
                     antialiasing: true
                     typeFlow: FlowType.Enter
+                    curveColor: AppSettings.theme["flow"]["outer"]
+                    borderColor: isHover ? AppSettings.theme["flow"]["inner"] : AppSettings.theme["flow"]["outer"]
+                    fillColor: isLink || isHover ? AppSettings.theme["flow"]["outer"] : AppSettings.theme["flow"]["inner"]
                     onLinked: {
                         if (instructionModel)
                             Controller.Function.instruction.linkExecution(_node.function_entity.id, instructionModel.uid, outindex, _node.instruction_model.uid);
@@ -141,36 +177,54 @@ GenericNode {
             anchors.margins: _node.paddingColumn
 
             Repeater {
-                model: _node.model.inputs
+                model: _node.model.inputSize
                 delegate: Input {
+                    MouseArea {
+                        anchors.fill: parent
+                        hoverEnabled: true
+                        propagateComposedEvents: true
+                        onContainsMouseChanged: {
+                            isHover = containsMouse
+                        }
+                        onPressed: {
+                            mouse.accepted = false
+                        }
+                    }
                     id: _inputDel
                     property string name: ""
+                    property string innerColor: "black"
+                    property string outerColor: "black"
+
                     width: 10
                     height: 10
                     radius: 5
-                    type: 1
                     borderWidth: 3
-                    borderColor: {
-                            AppSettings.theme["nodes"]["genericNode"]["border"]["color"]
-                    }
-                    fillColor: {
-                            AppSettings.theme["nodes"]["genericNode"]["color"]
-                    }
+                    curveColor: outerColor
+                    borderColor: isHover ? innerColor : outerColor
+                    fillColor: isLink || isHover ? outerColor : innerColor
                     onLinked: {
-                        Controller.Function.instruction.linkData(_node.function_entity.id, instructionModel.uid, name, _node.instruction_model.uid, _inputDel.name);
+                        if (instructionModel.getOutputType(name) === _node.instruction_model.getInputType(_inputDel.name))
+                        {
+                            Controller.Function.instruction.linkData(_node.function_entity.id, instructionModel.uid, name, _node.instruction_model.uid, _inputDel.name);
+                        }
                     }
                     onUnlinked: {
                         Controller.Function.instruction.unlinkData(_node.function_entity.id, _node.instruction_model.uid, _inputDel.name);
                     }
                     Component.onCompleted: {
                         name = _node.model.inputNames[index]
+                        var inpType = Controller.getEntityGui(_node.instruction_model.getInputType(name));
+                        var generatedColor = _node.stringToColor(inpType.guid + "");
 
-                        var inpVal = _node.instruction_model.getInputValue(name);
-
-                        if (inpVal)
+                        if (inpType.id <= 5)
                         {
-                            _inputValue.text = inpVal;
-                            Controller.Function.instruction.setInputValue(_node.function_entity.id, _node.instruction_model.uid, _inputDel.name, _inputValue.text);
+                            innerColor = AppSettings.theme["types"][inpType.name]["inner"];
+                            outerColor = AppSettings.theme["types"][inpType.name]["outer"];
+                        }
+                        else
+                        {
+                            innerColor = "black";
+                            outerColor = generatedColor;
                         }
                     }
 
@@ -181,7 +235,7 @@ GenericNode {
                         anchors.leftMargin: 5
                         height: parent.height
 
-                        text: parent.name
+                        text: _node.model.getInputDisplayName(parent.name)
                         font.pointSize: 8
 
                         color: "white"
@@ -190,7 +244,7 @@ GenericNode {
                     EditableText {
                         id: _inputValue
 
-                        visible: parent.type >= 1 && parent.type <= 5
+                        //visible: parent.type >= 1 && parent.type <= 5
 
                         anchors.left: _inputName.right
                         anchors.leftMargin: 5
@@ -201,6 +255,10 @@ GenericNode {
                         placeholderText: ""
                         font.pointSize: 7
                         enableBar: false
+
+                        Component.onCompleted: {
+                            _inputValue.text = _node.instruction_model.getInputValue(_inputDel.name);
+                        }
 
                         onAccepted: {
                             if (_inputValue.text)
@@ -222,12 +280,26 @@ GenericNode {
             Repeater {
                 model: _node.model.flowOut
                 delegate: Flow {
+                    MouseArea {
+                        anchors.fill: parent
+                        hoverEnabled: true
+                        propagateComposedEvents: true
+                        onContainsMouseChanged: {
+                            isHover = containsMouse
+                        }
+                        onPressed: {
+                            mouse.accepted = false
+                        }
+                    }
                     radius: 6
                     width: 17
                     height: 17
                     borderWidth: 3
                     antialiasing: true
                     typeFlow: FlowType.Exit
+                    curveColor: AppSettings.theme["flow"]["outer"]
+                    borderColor: isHover ? AppSettings.theme["flow"]["inner"] : AppSettings.theme["flow"]["outer"]
+                    fillColor: isLink || isHover ? AppSettings.theme["flow"]["outer"] : AppSettings.theme["flow"]["inner"]
                     onLinked: {
                         Controller.Function.instruction.linkExecution(_node.function_entity.id, _node.instruction_model.uid, outindex, instructionModel.uid);
                     }
@@ -246,34 +318,70 @@ GenericNode {
             anchors.top: _flowOut.bottom
             anchors.margins: _node.paddingColumn
             Repeater {
-                model: _node.model.outputs
+                model: _node.model.outputSize
                 delegate: Output {
                     id: _outputDel
                     property string name: ""
+                    property string innerColor : "black"
+                    property string outerColor : "black"
+
+                    MouseArea {
+                        anchors.fill: parent
+                        hoverEnabled: true
+                        propagateComposedEvents: true
+                        onContainsMouseChanged: {
+                            isHover = containsMouse
+                        }
+                        onPressed: {
+                            mouse.accepted = false
+                        }
+                    }
+
                     width: 10
                     height: 10
                     radius: 5
-                    type: 1
                     borderWidth: 3
-                    borderColor: {
-                            AppSettings.theme["nodes"]["genericNode"]["border"]["color"]
-                    }
-                    fillColor: {
-                            AppSettings.theme["nodes"]["genericNode"]["color"]
-                    }
+                    curveColor: outerColor
+                    borderColor: isHover ? innerColor : outerColor
+                    fillColor: isLink || isHover ? outerColor : innerColor
                     onLinked: {
-                        Controller.Function.instruction.linkData(_node.function_entity.id, _node.instruction_model.uid, _outputDel.name, instructionModel.uid, name);
+                        if (_node.instruction_model.getOutputType(_outputDel.name) === instructionModel.getInputType(name))
+                        {
+                            console.log('in type: ', instructionModel.getInputType(name), ' vs out type: ', _node.instruction_model.getOutputType(_outputDel.name));
+                            Controller.Function.instruction.linkData(_node.function_entity.id, _node.instruction_model.uid, _outputDel.name, instructionModel.uid, name);
+                        }
                     }
                     onUnlinked: {
-                        console.log("Unlink Output")
-                        console.log(name)
-                        console.log(instructionModel)
-                        console.log(_outputDel.name)
-                        console.log(_node.instruction_model)
                         Controller.Function.instruction.unlinkData(_node.function_entity.id, instruction_model.id, name);
                     }
                     Component.onCompleted: {
                         name = _node.model.outputNames[index]
+                        var oupType = Controller.getEntityGui(_node.instruction_model.getOutputType(name));
+                        var generatedColor = _node.stringToColor(oupType.guid + "");
+
+                        if (oupType.id <= 5)
+                        {
+                            innerColor = AppSettings.theme["types"][oupType.name]["inner"];
+                            outerColor = AppSettings.theme["types"][oupType.name]["outer"];
+                        }
+                        else
+                        {
+                            innerColor = "black";
+                            outerColor = generatedColor;
+                        }
+                    }
+
+                    Text {
+                        id: _outputName
+
+                        anchors.right: parent.left
+                        anchors.rightMargin: 5
+                        height: parent.height
+
+                        text: _node.model.getOutputDisplayName(parent.name)
+                        font.pointSize: 8
+
+                        color: "white"
                     }
                 }
             }
@@ -281,230 +389,3 @@ GenericNode {
 
     }
 }
-
-    //        ListView {
-    //            id: _inputs
-    //            anchors.topMargin: 10
-    //            width: 10
-    //            anchors.left: parent.left
-    //            spacing: 10
-    //            interactive: false
-    //            model: _node.model.inputs
-    //            Component.onCompleted: {
-    //                console.log("Inputs", _node.model.inputs)
-    //            }
-    //        }
-    //        ListView {
-    //            id: _outputs
-    //            anchors.topMargin: 10
-    //            anchors.right: parent.right
-    //            spacing: 10
-    //            width: 10
-    //            interactive: false
-    //            model: _node.model.outputs
-    //            delegate: Rectangle {
-    //                width: 10
-    //                height: 10
-    //                color: "red"
-    //            }
-    //        }
-
-
-//NodeForm {
-//    id: nodeForm
-
-//    property var model: null
-//    property var instruction_model: null
-
-////    onInstruction_modelChanged: {
-////        model.model = instruction_model
-////    }
-
-//    inputs: model.inputs
-//    outputs: model.outputs
-//    name: model.name
-//    description: model.description
-//    icon: model.icon
-
-//    state: "Open"
-//    states: [
-//        State{
-//            name: "Open"
-//            PropertyChanges{ target: nodeForm.headerRef; width: nodeForm.headerRef.implicitWidth }
-//            PropertyChanges{ target: nodeForm.headerRef; height: nodeForm.headerRef.implicitHeight }
-//            PropertyChanges{ target: nodeForm.headerRef; radius: 10 }
-//            PropertyChanges{ target: nodeForm.headerRef; topRight: false }
-//            PropertyChanges{ target: nodeForm.headerRef; bottomLeft: false }
-//            PropertyChanges{ target: nodeForm.headerRef; bottomRight: false }
-//        },
-//        State{
-//            name:"Close"
-//            PropertyChanges{ target: nodeForm.headerRef; width: 60 }
-//            PropertyChanges{ target: nodeForm.headerRef; height: 60 }
-//            PropertyChanges{ target: nodeForm.headerRef; radius: 20 }
-//            PropertyChanges{ target: nodeForm.headerRef; topRight: true }
-//            PropertyChanges{ target: nodeForm.headerRef; bottomLeft: true }
-//            PropertyChanges{ target: nodeForm.headerRef; bottomRight: true }
-//        }
-//    ]
-//    transitions: [
-//        Transition {
-//            from: "Open"
-//            to: "Close"
-
-//            SequentialAnimation{
-//                NumberAnimation {
-//                    target: nodeForm.headerRef
-//                    property: "width"
-//                    duration: 200
-//                    easing.type: Easing.InOutQuad
-//                }
-//                NumberAnimation {
-//                    target: nodeForm.headerRef
-//                    property: "height"
-//                    duration: 200
-//                    easing.type: Easing.InOutQuad
-//                }
-//            }
-//        },
-//        Transition {
-//            from: "Close"
-//            to: "Open"
-//            SequentialAnimation{
-//                NumberAnimation {
-//                    target: nodeForm.headerRef
-//                    property: "width"
-//                    duration: 200
-//                }
-//                NumberAnimation {
-//                    target: nodeForm.headerRef
-//                    property: "height"
-//                    duration: 200
-//                    easing.type: Easing.InOutQuad
-//                }
-//            }
-//        }
-//    ]
-
-////    Flow {
-////        id: _flowIn
-////        radius: 6
-////        borderWidth: 3
-////        antialiasing: true
-////        x: radius
-////        y: headerRef.height / 2 - radius - radius / 3
-////        visible: model.flowIn
-////        typeFlow: FlowType.Enter
-////        onLinked: {
-////            console.log("Link input")
-////        }
-////        onUnlinked: {
-////            console.log("Unlink input")
-////        }
-////    }
-
-////    Flow {
-////        id: _flowOut
-////        radius: 6
-////        borderWidth: 3
-////        antialiasing: true
-////        x: parent.width - radius * 4
-////        y: headerRef.height / 2 - radius - radius / 3
-////        visible: model.flowOut
-////        typeFlow: FlowType.Exit
-////        onLinked: {
-////            console.log("Link output")
-////        }
-////        onUnlinked: {
-////            console.log("Unlink output")
-////        }
-////    }
-
-////    flowInItem: _flowIn
-////    flowOutItem: _flowOut
-
-////    inputDelegate: Component {
-////        Item {
-////            width: 10
-////            height: 10
-////            x: i.radius * 2
-////            Input {
-////                id: i
-////                radius: 5
-////                type: nodeForm.model.construction[index]
-////                borderWidth: 3
-////                borderColor: {
-////                    var typename = Editor.propertyPanelProperties.varTypes.getNameFromValue(type)
-////                    if (typename === "Integer")
-////                        AppSettings.theme["nodes"]["intNode"]["border"]["color"]
-////                    else if (typename === "String")
-////                        AppSettings.theme["nodes"]["stringNode"]["border"]["color"]
-////                    else if (typename === "Boolean")
-////                        AppSettings.theme["nodes"]["boolNode"]["border"]["color"]
-////                    else
-////                        AppSettings.theme["nodes"]["genericNode"]["border"]["color"]
-////                }
-////                fillColor: {
-////                    var typename = Editor.propertyPanelProperties.varTypes.getNameFromValue(type)
-////                    if (typename === "Integer")
-////                        AppSettings.theme["nodes"]["intNode"]["color"]
-////                    else if (typename === "String")
-////                        AppSettings.theme["nodes"]["stringNode"]["color"]
-////                    else if (typename === "Boolean")
-////                        AppSettings.theme["nodes"]["boolNode"]["color"]
-////                    else
-////                        AppSettings.theme["nodes"]["genericNode"]["color"]
-////                }
-//////                MLabel {
-//////                    anchors.topMargin: - i.radius / 2
-//////                    anchors.leftMargin: i.radius * 4
-//////                    text: n
-//////                    anchors.left: parent.left
-//////                    anchors.top: parent.top
-//////                }
-////            }
-////        }
-////    }
-////    outputDelegate: Component {
-////        Item {
-////            width: o.width
-////            height: o.height
-////            x: parent.parent.parent.width - o.radius * 4
-////            Output {
-////                id: o
-////                radius: 5
-////                type: nodeForm.model.construction[index]
-////                borderWidth: 3
-////                borderColor: {
-////                    var typename = Editor.propertyPanelProperties.varTypes.getNameFromValue(type)
-////                    if (typename === "Integer")
-////                        AppSettings.theme["nodes"]["intNode"]["border"]["color"]
-////                    else if (typename === "String")
-////                        AppSettings.theme["nodes"]["stringNode"]["border"]["color"]
-////                    else if (typename === "Boolean")
-////                        AppSettings.theme["nodes"]["boolNode"]["border"]["color"]
-////                    else
-////                        AppSettings.theme["nodes"]["genericNode"]["border"]["color"]
-////                }
-////                fillColor: {
-////                    var typename = Editor.propertyPanelProperties.varTypes.getNameFromValue(type)
-////                    if (typename === "Integer")
-////                        AppSettings.theme["nodes"]["intNode"]["color"]
-////                    else if (typename === "String")
-////                        AppSettings.theme["nodes"]["stringNode"]["color"]
-////                    else if (typename === "Boolean")
-////                        AppSettings.theme["nodes"]["boolNode"]["color"]
-////                    else
-////                        AppSettings.theme["nodes"]["genericNode"]["color"]
-////                }
-//////                MLabel {
-//////                    anchors.topMargin: - o.radius / 2
-//////                    anchors.leftMargin: - o.radius - width
-//////                    text: n
-//////                    anchors.left: parent.left
-//////                    anchors.top: parent.top
-//////                }
-////            }
-////        }
-////    }
-//}

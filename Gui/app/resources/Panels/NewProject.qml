@@ -52,9 +52,6 @@ Item {
         onAccepted: {
             locationEditable.text = fileDialog.fileUrl
         }
-        onRejected: {
-            //console.log("Canceled")
-        }
     }
 
     MouseArea {

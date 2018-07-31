@@ -93,7 +93,7 @@ namespace dnai
 					result = true;
 				}
 				else if (role == Type)
-					result = dynamic_cast<models::gui::declarable::Variable*>(m_list->at(index.row())->guiModel())->setVarType(value.toInt());
+                    result = dynamic_cast<models::gui::declarable::Variable*>(m_list->at(index.row())->guiModel())->setVarType(value.toString());
 				if (result)
 					emit dataChanged(index, index);
 

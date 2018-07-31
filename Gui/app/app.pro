@@ -9,12 +9,27 @@ INCLUDEPATH += include/
 TARGET = DNAI
 TEMPLATE = app
 
-CONFIG(release, debug|release) {
 win32:RC_FILE = dnai.rc
 unix:ICON = DNAI_icon.icns
+
+CONFIG(release, debug|release) {
+    DESTDIR = release
+    OBJECTS_DIR = release/.obj
+    MOC_DIR = release/.moc
+    RCC_DIR = release/.rcc
+    UI_DIR = release/.ui
+}
+CONFIG(debug, debug|release) {
+    DESTDIR = debug
+    OBJECTS_DIR = debug/.obj
+    MOC_DIR = debug/.moc
+    RCC_DIR = debug/.rcc
+    UI_DIR = debug/.ui
 }
 
-
+#CONFIG(release, debug|release) {
+#DEFINES += QT_NO_DEBUG_OUTPUT
+#}
 #INSTALLS += settingsfolderconf
 
 # The following define makes your compiler emit warnings if you use
@@ -120,14 +135,21 @@ SOURCES += \
     src/dnai/core/enumhandler.cpp \
     src/dnai/toastermanagerservice.cpp \
     src/dnai/views/toast.cpp \
-    src/dnai/models/property.cpp \
     src/dnai/core/instructionhandler.cpp \
     src/dnai/models/gui/entitylist.cpp \
     src/dnai/models/contextmenumodel.cpp \
     src/dnai/models/gui/iolink.cpp \
     src/dnai/models/gui/flowlink.cpp \
     src/dnai/core/globalhandler.cpp \
-    src/dnai/core/objecthandler.cpp
+    src/dnai/core/objecthandler.cpp \
+    src/dnai/utils/random_utils.cpp \
+    src/dnai/core/listhandler.cpp \
+    src/dnai/ml/datasethandler.cpp \
+    src/dnai/models/ml/dataset.cpp \
+    src/dnai/models/ml/hyperparameters.cpp \
+    src/dnai/models/ml/mlproject.cpp \
+    src/dnai/ml/mlhandler.cpp \
+    src/dnai/utils/iterableqqmlpropertymap.cpp
 
 
 RESOURCES += qml.qrc
@@ -137,11 +159,6 @@ QML_IMPORT_PATH =
 
 # Additional import path used to resolve QML modules just for Qt Quick Designer
 QML_DESIGNER_IMPORT_PATH =
-
-# Default rules for deployment.
-qnx: target.path = /tmp/$${TARGET}/bin
-else: unix:!android: target.path = /usr/local/bin/$${TARGET}/bin
-!isEmpty(target.path): INSTALLS += target
 
 DISTFILES += \
     dnai.ico
@@ -293,7 +310,6 @@ HEADERS += \
     $${PWD}/../lib/lcore_client/include/core.h \
     include/dnai/toastermanagerservice.h \
     include/dnai/views/toast.h \
-    include/dnai/models/property.h \
     include/dnai/core/instructionhandler.h \
     include/dnai/models/gui/entitylist.h \
     include/dnai/core/instructionmanager.h \
@@ -302,51 +318,51 @@ HEADERS += \
     include/dnai/models/gui/iolink.h \
     include/dnai/models/gui/flowlink.h \
     include/dnai/models/gui/data/flowlink.h \
-    include/dnai/core/globalhandler.h
+    include/dnai/core/globalhandler.h \
+    include/dnai/utils/random_utils.h \
+    include/dnai/ml/datasethandler.h \
+    include/dnai/ml/mlhandler.h \
+    include/dnai/models/ml/mlproject.h \
+    include/dnai/models/ml/dataset.h \
+    include/dnai/models/ml/model.h \
+    include/dnai/models/ml/hyperparameters.h \
+    include/ml.h \
+    include/dnai/utils/iterableqqmlpropertymap.h \
+    include/utils.h
 
 
 #LIB
 DEPENDPATH += $${PWD}/../lib/
 INCLUDEPATH += $${PWD}/../lib/lcore_client/include/
 
-win32-msvc*{
-    DEPENDPATH += $${PWD}/../lib/lwintoast/
-    LIBS += -lwintoast
-} win32-g++ {
-} macx-clang* {
-#QT += core
-#QT += macextras
-#QT += gui
-    #DEPENDPATH += $${PWD}/../lib/MACToast/
-    #LIBS +=  -lMACToast
-    #LIBS += -framework Foundation
-    #INCLUDEPATH += /System/Library/Frameworks/Foundation.framework/Versions/C/Headers
-}
+#win32-msvc*{
+#    DEPENDPATH += $${PWD}/../lib/lwintoast/
+#    LIBS += -lwintoast
+#} win32-g++ {
+#} macx-clang* {
+##QT += core
+##QT += macextras
+##QT += gui
+#    #DEPENDPATH += $${PWD}/../lib/MACToast/
+#    #LIBS +=  -lMACToast
+#    #LIBS += -framework Foundation
+#    #INCLUDEPATH += /System/Library/Frameworks/Foundation.framework/Versions/C/Headers
+#}
 
 
 #begin library network
 LIBS += -L$${PWD}/../lib/ -lcore_client -levent_client -lcerealization
 
-#-lDataComEvent
 
-#CONFIG(release, debug|release) {
-#unix:LIBS += -L$${PWD}/../lib/DataComEvent/Library/ -lprotobuf
-#win32:LIBS += -L$${PWD}/../lib/DataComEvent/Library/ -llibprotobuf
-#}
-#CONFIG(debug, debug|release) {
-#unix:LIBS += -L$${PWD}/../lib/DataComEvent/Library/ -lprotobuf
-#win32:LIBS += -L$${PWD}/../lib/DataComEvent/Library/ -llibprotobufd
-#}
-
-#end library Data Event
 CONFIG(release, debug|release) {
-win32:settingsfolder.path = $${OUT_PWD}/release/settings
+settingsfolder.path = $${OUT_PWD}/release/settings
+
 }
 CONFIG(debug, debug|release) {
-win32:settingsfolder.path = $${OUT_PWD}/debug/settings
+settingsfolder.path = $${OUT_PWD}/debug/settings
 }
 
-unix:settingsfolder.path = /usr/local/bin/$${TARGET}/bin/$${TARGET}.app/Contents/MacOS/settings
+
 settingsfolder.files = settings/*
 
 #settingsfolderconf.path = $${OUT_PWD}/settings/conf
