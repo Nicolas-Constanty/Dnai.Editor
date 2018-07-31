@@ -1,110 +1,114 @@
-artifacts: 
-  - 
-    name: Windows_x64_Dnai-Editor_%APPVEYOR_BUILD_VERSION%
-    path: Windows_x64
-  - 
-    name: Windows_x64_Core
-    path: Core
-before_build: 
-  - 
-    checkout: 
-      - "cd %APPVEYOR_BUILD_FOLDER%"
-      - "git submodule update --init --recursive"
-      - "git clone https://github.com/Gouet/Software-updater.git"
-      - "git clone https://%AppVeyorToken%@duly-eip.visualstudio.com/_git/Duly"
-build_script: 
-  - 
-    build_editor: 
-      - "mkdir %APPVEYOR_BUILD_FOLDER%-build"
-      - "cd %APPVEYOR_BUILD_FOLDER%-build"
-      - "qmake -o %APPVEYOR_BUILD_FOLDER%-build -r -Wall -spec win32-msvc CONFIG+=%CONFIGURATION% %APPVEYOR_BUILD_FOLDER%/Gui && jom qmake_all"
-      - jom
-      - "jom install"
-  - 
-    install_editor: 
-      - "windeployqt.exe \"./app/release/DNAI.exe\" -qmldir=%APPVEYOR_BUILD_FOLDER%\\Gui\\app\\resources -verbose=2"
-      - "dir /b \"%ProgramFiles(x86)%\\Microsoft Visual Studio\\2017\\Community\\VC\\Redist\\MSVC\" | tail.exe -1 > mredist.txt"
-      - "set /p MREDIST=<mredist.txt"
-      - "copy \"%ProgramFiles(x86)%\\Microsoft Visual Studio\\2017\\Community\\VC\\Redist\\MSVC\\%MREDIST%\\x64\\Microsoft.VC141.CRT\\*\" \"./app/release/\""
-      - "copy \"%ProgramFiles(x86)%\\Microsoft Visual Studio\\2017\\Community\\VC\\Redist\\MSVC\\%MREDIST%\\x64\\Microsoft.VC141.CXXAMP\\*\" \"./app/release/\""
-      - "copy \"%ProgramFiles(x86)%\\Microsoft Visual Studio\\2017\\Community\\VC\\Redist\\MSVC\\%MREDIST%\\x64\\Microsoft.VC141.OpenMP\\*\" \"./app/release/\""
-      - "mkdir %APPVEYOR_BUILD_FOLDER%\\Dnai"
-      - "mkdir %APPVEYOR_BUILD_FOLDER%\\Dnai\\Editor"
-      - "RENAME \"app/release\" %APPVEYOR_BUILD_VERSION%"
-      - "move \"app/%APPVEYOR_BUILD_VERSION%\" %APPVEYOR_BUILD_FOLDER%\\Dnai\\Editor"
-  - 
-    build_server: 
-      - "cd %APPVEYOR_BUILD_FOLDER%\\Dnai"
-      - "mkdir %APPVEYOR_BUILD_FOLDER%-server"
-      - "cd %APPVEYOR_BUILD_FOLDER%-server"
-      - "qmake.exe -o %APPVEYOR_BUILD_FOLDER%-server -r -Wall -spec win32-msvc CONFIG+=%CONFIGURATION% %APPVEYOR_BUILD_FOLDER%/Server && jom qmake_all"
-      - jom
-  - 
-    install_server: 
-      - "move \"release\\Server.exe\" %INSTALL_FOLDER%"
-  - 
-    build_updater: 
-      - "mkdir %APPVEYOR_BUILD_FOLDER%\\Software-updater\\build"
-      - "cd %APPVEYOR_BUILD_FOLDER%\\Software-updater\\build"
-      - "qmake.exe -o %APPVEYOR_BUILD_FOLDER%\\Software-updater\\build -r -Wall -spec win32-msvc CONFIG+=%CONFIGURATION% %APPVEYOR_BUILD_FOLDER%\\Software-updater\\SoftwareUpdater && jom qmake_all"
-      - jom.exe
-  - 
-    install_updater: 
-      - "mkdir %INSTALL_FOLDER%\\DNAI_UPDATER"
-      - "move \"release\\DNAI Updater.exe\" \"%INSTALL_FOLDER%\\DNAI_UPDATER\""
-      - "windeployqt.exe \"%INSTALL_FOLDER%\\DNAI_UPDATER\\DNAI Updater.exe\" -qmldir=%APPVEYOR_BUILD_FOLDER%\\Software-updater\\SoftwareUpdater\\qml -verbose=2"
-      - "copy \"%APPVEYOR_BUILD_FOLDER%\\Software-updater\\SoftwareUpdater\\lib\\libeay32.dll\" \"%INSTALL_FOLDER%\\DNAI_UPDATER\""
-      - "copy \"%APPVEYOR_BUILD_FOLDER%\\Software-updater\\SoftwareUpdater\\lib\\ssleay32.dll\" \"%INSTALL_FOLDER%\\DNAI_UPDATER\""
-  - 
-    build_core: 
-      - "cd %APPVEYOR_BUILD_FOLDER%\\Duly"
-      - "mkdir %APPVEYOR_BUILD_FOLDER%\\Core"
-      - "nuget restore CorePackage.sln"
-      - "MSBuild.exe %APPVEYOR_BUILD_FOLDER%\\Duly\\CoreDaemon\\CoreDaemon.csproj  /t:Rebuild /p:Configuration=Release;Platform=x64;OutputPath=%APPVEYOR_BUILD_FOLDER%\\Core"
-  - 
-    install_core: 
-      - "mkdir %INSTALL_FOLDER%\\Core"
-      - "copy \"%APPVEYOR_BUILD_FOLDER%\\Core\\*\" %INSTALL_FOLDER%\\Core"
-  - 
-    build_setup: 
-      - "DEL %INSTALL_FOLDER%\\*.cpp"
-      - "start /wait robocopy %APPVEYOR_BUILD_FOLDER%\\Deploiement\\Windows\\libs %INSTALL_FOLDER% /E"
-      - "if %errorlevel% gtr 7 exit %errorlevel%"
-      - "mkdir \"%APPVEYOR_BUILD_FOLDER%\\Deploiement\\Windows\\DNAISetup\\packages\\com.vendor.product\\data\\Dnai\""
-      - "start /wait robocopy %APPVEYOR_BUILD_FOLDER%\\Dnai \"%APPVEYOR_BUILD_FOLDER%\\Deploiement\\Windows\\DNAISetup\\packages\\com.vendor.product\\data\\Dnai\" /E"
-      - "if %errorlevel% gtr 7 exit %errorlevel%"
-      - "cd %APPVEYOR_BUILD_FOLDER%\\Deploiement\\Windows\\DNAISetup"
-      - "C:\\Qt\\Tools\\QtInstallerFramework\\3.0\\bin\\binarycreator.exe -c config\\config.xml -p packages %PACKAGE_NAME%.exe"
-      - "signtool.exe sign -v -f MySPC.pfx -t http://timestamp.verisign.com/scripts/timstamp.dll %PACKAGE_NAME%.exe"
-      - "start /wait signtool.exe verify %PACKAGE_NAME%.exe"
-  - 
-    create_artefacts: 
-      - "mkdir %APPVEYOR_BUILD_FOLDER%\\Windows_x64"
-      - "move %PACKAGE_NAME%.exe %APPVEYOR_BUILD_FOLDER%\\Windows_x64"
-configuration: 
+image: Visual Studio 2017
+
+configuration:
   - release
-image: "Visual Studio 2017"
+
 install: 
-  - 
-    install_qt: 
-      - "set QTDIR=C:\\Qt\\5.11\\msvc2017_64"
-      - "set PATH=%QTDIR%\\bin;%PATH%"
-      - "set PATH=C:\\Qt\\Tools\\QtCreator\\bin;%PATH%"
-  - 
-    install_windows_utils: 
-      - "set PATH=\"%ProgramFiles(x86)%\\Microsoft Visual Studio\\2017\\Community\\MSBuild\\15.0\\Bin;%PATH%\""
-      - "set PATH=\"%ProgramFiles(x86)%\\Windows Kits\\10\\bin\\x64\\;%PATH%\""
-  - 
-    install_jq: 
-      - "mkdir %APPVEYOR_BUILD_FOLDER%\\Downloads"
-      - "cd %APPVEYOR_BUILD_FOLDER%\\Downloads"
-      - "Start-FileDownload https://github.com/stedolan/jq/releases/download/jq-1.5/jq-win64.exe"
-      - "set PATH=%APPVEYOR_BUILD_FOLDER%\\Downloads;%PATH%"
-  - 
-    install_tail: 
-      - "set PATH=%APPVEYOR_BUILD_FOLDER%\\scripts;%PATH%"
-  - 
-    set_install_env: 
-      - "set PACKAGE_NAME=Dnai-Editor_%APPVEYOR_BUILD_VERSION%"
-      - "set INSTALL_FOLDER=%APPVEYOR_BUILD_FOLDER%\\Dnai\\Editor\\%APPVEYOR_BUILD_VERSION%"
-      - "call \"%ProgramFiles(x86)%\\Microsoft Visual Studio 14.0\\VC\\vcvarsall.bat\" x64"
+#INSTALL QT
+  - |-
+    set QTDIR=C:\Qt\5.11\msvc2017_64
+    set PATH=%QTDIR%\bin;%PATH%
+    set PATH=C:\Qt\Tools\QtCreator\bin;%PATH%
+#INSTALL WINDOWS UTILS
+  - |-
+    set PATH="%ProgramFiles(x86)%\Microsoft Visual Studio\2017\Community\MSBuild\15.0\Bin;%PATH%"
+    set PATH="%ProgramFiles(x86)%\Windows Kits\10\bin\x64\;%PATH%"
+#INSTALL JQ
+  - |-
+    mkdir %APPVEYOR_BUILD_FOLDER%\Downloads
+    cd %APPVEYOR_BUILD_FOLDER%\Downloads
+    Start-FileDownload https://github.com/stedolan/jq/releases/download/jq-1.5/jq-win64.exe
+    set PATH=%APPVEYOR_BUILD_FOLDER%\Downloads;%PATH%
+#INSTALL TAIL
+  - |-
+    set PATH=%APPVEYOR_BUILD_FOLDER%\scripts;%PATH%
+#INSTALL ENV
+  - |-
+    set PACKAGE_NAME=Dnai-Editor_%APPVEYOR_BUILD_VERSION%
+    set INSTALL_FOLDER=%APPVEYOR_BUILD_FOLDER%\Dnai\Editor\%APPVEYOR_BUILD_VERSION%
+    call "%ProgramFiles(x86)%\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" x64
+
+artifacts:
+  - path: Windows_x64
+    name: Windows_x64_Dnai-Editor_%APPVEYOR_BUILD_VERSION%
+  
+  - path: Core
+    name: Windows_x64_Core
+
+before_build:
+#CHECKOUT
+  - |-
+    cd %APPVEYOR_BUILD_FOLDER%
+    git submodule update --init --recursive
+    git clone https://github.com/Gouet/Software-updater.git
+    git clone https://%AppVeyorToken%@duly-eip.visualstudio.com/_git/Duly
+
+build_script:
+#BUILD SCRIPT
+  - |-
+    mkdir %APPVEYOR_BUILD_FOLDER%-build
+    cd %APPVEYOR_BUILD_FOLDER%-build
+    qmake -o %APPVEYOR_BUILD_FOLDER%-build -r -Wall -spec win32-msvc CONFIG+=%CONFIGURATION% %APPVEYOR_BUILD_FOLDER%/Gui && jom qmake_all
+    jom
+    jom install
+#INSTALL EDITOR
+  - |-
+   windeployqt.exe "./app/release/DNAI.exe" -qmldir=%APPVEYOR_BUILD_FOLDER%\Gui\app\resources -verbose=2
+   dir /b "%ProgramFiles(x86)%\Microsoft Visual Studio\2017\Community\VC\Redist\MSVC" | tail.exe -1 > mredist.txt
+   set /p MREDIST=<mredist.txt
+   copy "%ProgramFiles(x86)%\Microsoft Visual Studio\2017\Community\VC\Redist\MSVC\%MREDIST%\x64\Microsoft.VC141.CRT\*" "./app/release/"
+   copy "%ProgramFiles(x86)%\Microsoft Visual Studio\2017\Community\VC\Redist\MSVC\%MREDIST%\x64\Microsoft.VC141.CXXAMP\*" "./app/release/"
+   copy "%ProgramFiles(x86)%\Microsoft Visual Studio\2017\Community\VC\Redist\MSVC\%MREDIST%\x64\Microsoft.VC141.OpenMP\*" "./app/release/"
+   mkdir %APPVEYOR_BUILD_FOLDER%\Dnai
+   mkdir %APPVEYOR_BUILD_FOLDER%\Dnai\Editor
+   RENAME "app/release" %APPVEYOR_BUILD_VERSION%
+   move "app/%APPVEYOR_BUILD_VERSION%" %APPVEYOR_BUILD_FOLDER%\Dnai\Editor
+#BUILD SERVER
+  - |-
+   cd %APPVEYOR_BUILD_FOLDER%\Dnai
+   mkdir %APPVEYOR_BUILD_FOLDER%-server
+   cd %APPVEYOR_BUILD_FOLDER%-server
+   qmake.exe -o %APPVEYOR_BUILD_FOLDER%-server -r -Wall -spec win32-msvc CONFIG+=%CONFIGURATION% %APPVEYOR_BUILD_FOLDER%/Server && jom qmake_all
+   jom
+#INSTALL SERVER
+  - |-
+   move "release\Server.exe" %INSTALL_FOLDER%
+#BUILD UPDATER
+  - |-
+   mkdir %APPVEYOR_BUILD_FOLDER%\Software-updater\build
+   cd %APPVEYOR_BUILD_FOLDER%\Software-updater\build
+   qmake.exe -o %APPVEYOR_BUILD_FOLDER%\Software-updater\build -r -Wall -spec win32-msvc CONFIG+=%CONFIGURATION% %APPVEYOR_BUILD_FOLDER%\Software-updater\SoftwareUpdater && jom qmake_all
+   jom.exe
+#INSTALL UPDATER
+  - |-
+   mkdir %INSTALL_FOLDER%\DNAI_UPDATER
+   move "release\DNAI Updater.exe" "%INSTALL_FOLDER%\DNAI_UPDATER"
+   windeployqt.exe "%INSTALL_FOLDER%\DNAI_UPDATER\DNAI Updater.exe" -qmldir=%APPVEYOR_BUILD_FOLDER%\Software-updater\SoftwareUpdater\qml -verbose=2
+   copy "%APPVEYOR_BUILD_FOLDER%\Software-updater\SoftwareUpdater\lib\libeay32.dll" "%INSTALL_FOLDER%\DNAI_UPDATER"
+   copy "%APPVEYOR_BUILD_FOLDER%\Software-updater\SoftwareUpdater\lib\ssleay32.dll" "%INSTALL_FOLDER%\DNAI_UPDATER"
+#BUILD CORE
+  - |-
+   cd %APPVEYOR_BUILD_FOLDER%\Duly
+   mkdir %APPVEYOR_BUILD_FOLDER%\Core
+   nuget restore CorePackage.sln
+   MSBuild.exe %APPVEYOR_BUILD_FOLDER%\Duly\CoreDaemon\CoreDaemon.csproj  /t:Rebuild /p:Configuration=Release;Platform=x64;OutputPath=%APPVEYOR_BUILD_FOLDER%\Core
+#INSTALL CORE
+  - |-
+   mkdir %INSTALL_FOLDER%\Core
+   copy "%APPVEYOR_BUILD_FOLDER%\Core\*" %INSTALL_FOLDER%\Core
+#BUILD SETUP
+  - |-
+   DEL %INSTALL_FOLDER%\*.cpp
+   start /wait robocopy %APPVEYOR_BUILD_FOLDER%\Deploiement\Windows\libs %INSTALL_FOLDER% /E
+   if %errorlevel% gtr 7 exit %errorlevel%
+   mkdir "%APPVEYOR_BUILD_FOLDER%\Deploiement\Windows\DNAISetup\packages\com.vendor.product\data\Dnai"
+   start /wait robocopy %APPVEYOR_BUILD_FOLDER%\Dnai "%APPVEYOR_BUILD_FOLDER%\Deploiement\Windows\DNAISetup\packages\com.vendor.product\data\Dnai" /E
+   if %errorlevel% gtr 7 exit %errorlevel%
+   cd %APPVEYOR_BUILD_FOLDER%\Deploiement\Windows\DNAISetup
+   C:\Qt\Tools\QtInstallerFramework\3.0\bin\binarycreator.exe -c config\config.xml -p packages %PACKAGE_NAME%.exe
+   signtool.exe sign -v -f MySPC.pfx -t http://timestamp.verisign.com/scripts/timstamp.dll %PACKAGE_NAME%.exe
+   start /wait signtool.exe verify %PACKAGE_NAME%.exe
+#CREATE ARTEFACTS
+  - |-
+   mkdir %APPVEYOR_BUILD_FOLDER%\Windows_x64
+   move %PACKAGE_NAME%.exe %APPVEYOR_BUILD_FOLDER%\Windows_x64
