@@ -5,25 +5,25 @@ configuration:
 
 install: 
 # INSTALL QT
- - ps: >-
+ - ps: |-
     set QTDIR=C:\Qt\5.11\msvc2017_64
     set PATH=%QTDIR%\bin;%PATH%
     set PATH=C:\Qt\Tools\QtCreator\bin;%PATH%
 # INSTALL WINDOWS UTILS
- - ps: >-
+ - ps: |-
     set PATH="%ProgramFiles(x86)%\Microsoft Visual Studio\2017\Community\MSBuild\15.0\Bin;%PATH%"
     set PATH="%ProgramFiles(x86)%\Windows Kits\10\bin\x64\;%PATH%"
 # INSTALL JQ
- - ps: >-
+ - ps: |-
     mkdir %APPVEYOR_BUILD_FOLDER%\Downloads
     cd %APPVEYOR_BUILD_FOLDER%\Downloads
     Start-FileDownload https://github.com/stedolan/jq/releases/download/jq-1.5/jq-win64.exe
     set PATH=%APPVEYOR_BUILD_FOLDER%\Downloads;%PATH%
 # INSTALL TAIL
- - ps: >-
+ - ps: |-
     set PATH=%APPVEYOR_BUILD_FOLDER%\scripts;%PATH%
 # INSTALL ENV
- - ps: >-
+ - ps: |-
     set PACKAGE_NAME=Dnai-Editor_%APPVEYOR_BUILD_VERSION%
     set INSTALL_FOLDER=%APPVEYOR_BUILD_FOLDER%\Dnai\Editor\%APPVEYOR_BUILD_VERSION%
     call "%ProgramFiles(x86)%\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" x64
@@ -37,7 +37,7 @@ artifacts:
 
 before_build:
 # CHECKOUT
- - ps: >-
+ - ps: |-
     cd %APPVEYOR_BUILD_FOLDER%
     git submodule update --init --recursive
     git clone https://github.com/Gouet/Software-updater.git
@@ -45,14 +45,14 @@ before_build:
 
 build_script:
 # BUILD SCRIPT
- - ps: >-
+ - ps: |-
     mkdir %APPVEYOR_BUILD_FOLDER%-build
     cd %APPVEYOR_BUILD_FOLDER%-build
     qmake -o %APPVEYOR_BUILD_FOLDER%-build -r -Wall -spec win32-msvc CONFIG+=%CONFIGURATION% %APPVEYOR_BUILD_FOLDER%/Gui && jom qmake_all
     jom
     jom install
 # INSTALL EDITOR
- - ps: >-
+ - ps: |-
     windeployqt.exe "./app/release/DNAI.exe" -qmldir=%APPVEYOR_BUILD_FOLDER%\Gui\app\resources -verbose=2
     dir /b "%ProgramFiles(x86)%\Microsoft Visual Studio\2017\Community\VC\Redist\MSVC" | tail.exe -1 > mredist.txt
     set /p MREDIST=<mredist.txt
@@ -64,40 +64,40 @@ build_script:
     RENAME "app/release" %APPVEYOR_BUILD_VERSION%
     move "app/%APPVEYOR_BUILD_VERSION%" %APPVEYOR_BUILD_FOLDER%\Dnai\Editor
 # BUILD SERVER
- - ps: >-
+ - ps: |-
     cd %APPVEYOR_BUILD_FOLDER%\Dnai
     mkdir %APPVEYOR_BUILD_FOLDER%-server
     cd %APPVEYOR_BUILD_FOLDER%-server
     qmake.exe -o %APPVEYOR_BUILD_FOLDER%-server -r -Wall -spec win32-msvc CONFIG+=%CONFIGURATION% %APPVEYOR_BUILD_FOLDER%/Server && jom qmake_all
     jom
 # INSTALL SERVER
- - ps: >-
+ - ps: |-
     move "release\Server.exe" %INSTALL_FOLDER%
 # BUILD UPDATER
- - ps: >-
+ - ps: |-
     mkdir %APPVEYOR_BUILD_FOLDER%\Software-updater\build
     cd %APPVEYOR_BUILD_FOLDER%\Software-updater\build
     qmake.exe -o %APPVEYOR_BUILD_FOLDER%\Software-updater\build -r -Wall -spec win32-msvc CONFIG+=%CONFIGURATION% %APPVEYOR_BUILD_FOLDER%\Software-updater\SoftwareUpdater && jom qmake_all
     jom.exe
 # INSTALL UPDATER
- - ps: >-
+ - ps: |-
     mkdir %INSTALL_FOLDER%\DNAI_UPDATER
     move "release\DNAI Updater.exe" "%INSTALL_FOLDER%\DNAI_UPDATER"
     windeployqt.exe "%INSTALL_FOLDER%\DNAI_UPDATER\DNAI Updater.exe" -qmldir=%APPVEYOR_BUILD_FOLDER%\Software-updater\SoftwareUpdater\qml -verbose=2
     copy "%APPVEYOR_BUILD_FOLDER%\Software-updater\SoftwareUpdater\lib\libeay32.dll" "%INSTALL_FOLDER%\DNAI_UPDATER"
     copy "%APPVEYOR_BUILD_FOLDER%\Software-updater\SoftwareUpdater\lib\ssleay32.dll" "%INSTALL_FOLDER%\DNAI_UPDATER"
 # BUILD CORE
- - ps: >-
+ - ps: |-
     cd %APPVEYOR_BUILD_FOLDER%\Duly
     mkdir %APPVEYOR_BUILD_FOLDER%\Core
     nuget restore CorePackage.sln
     MSBuild.exe %APPVEYOR_BUILD_FOLDER%\Duly\CoreDaemon\CoreDaemon.csproj  /t:Rebuild /p:Configuration=Release;Platform=x64;OutputPath=%APPVEYOR_BUILD_FOLDER%\Core
 # INSTALL CORE
- - ps: >-
+ - ps: |-
     mkdir %INSTALL_FOLDER%\Core
     copy "%APPVEYOR_BUILD_FOLDER%\Core\*" %INSTALL_FOLDER%\Core
 # BUILD SETUP
- - ps: >-
+ - ps: |-
     DEL %INSTALL_FOLDER%\*.cpp
     start /wait robocopy %APPVEYOR_BUILD_FOLDER%\Deploiement\Windows\libs %INSTALL_FOLDER% /E
     if %errorlevel% gtr 7 exit %errorlevel%
@@ -109,6 +109,6 @@ build_script:
     signtool.exe sign -v -f MySPC.pfx -t http://timestamp.verisign.com/scripts/timstamp.dll %PACKAGE_NAME%.exe
     start /wait signtool.exe verify %PACKAGE_NAME%.exe
 # CREATE ARTEFACTS
- - ps: >-
+ - ps: |-
     mkdir %APPVEYOR_BUILD_FOLDER%\Windows_x64
     move %PACKAGE_NAME%.exe %APPVEYOR_BUILD_FOLDER%\Windows_x64
