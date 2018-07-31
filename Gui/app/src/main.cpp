@@ -165,7 +165,6 @@ static void registerCustomTypes()
     qRegisterMetaTypeStreamOperators<dnai::api::User>("User");
 }
 
-void error_callBack(int signal) __attribute__((noreturn));
 void error_callBack(int signal) {
    dnai::App::currentInstance().close(signal);
    exit(signal);
