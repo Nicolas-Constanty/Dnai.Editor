@@ -26,6 +26,8 @@ namespace dnai
             Q_PROPERTY(bool contextMenu READ contextMenu WRITE setContextMenu NOTIFY contextMenuChanged)
 			Q_PROPERTY(QPoint mousePosition READ mousePosition CONSTANT)
 
+            Q_PROPERTY(QQuickItem *entry READ entry)
+
 			explicit CanvasNode(QQuickItem *parent = nullptr);
 			~CanvasNode();
 

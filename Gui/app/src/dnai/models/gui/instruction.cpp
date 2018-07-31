@@ -264,8 +264,13 @@ namespace dnai
 
 			const QUuid& Instruction::guiUuid() const
 			{
-				return m_data.guiUuid;
-			}
+                return m_data.guiUuid;
+            }
+
+            QString Instruction::guid() const
+            {
+                return guiUuid().toString();
+            }
 
 			bool Instruction::setGuiUuid(const QUuid& value)
 			{

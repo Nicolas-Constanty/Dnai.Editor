@@ -58,7 +58,8 @@ public:
         CONTINUE,
         CLEAR,
         FILL,
-        SET_VALUE_AT
+        SET_VALUE_AT,
+        RETURN
     };
     Q_ENUM(Instruction_ID)
 };

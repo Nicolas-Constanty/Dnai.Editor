@@ -49,6 +49,7 @@ namespace dnai
         private:
             models::gui::declarable::Function *getFunctionData(::core::EntityID function, bool throws = false) const;
             std::list<quint32> getConstructionList(models::gui::Instruction *instr) const;
+            QList<QString> getLinkedEntities(std::list<quint32> const &construction) const;
 
         private:
             models::gui::Instruction *createInstruction(qint32 type, std::list<quint32> const &constrution = std::list<quint32>());
@@ -58,10 +59,7 @@ namespace dnai
             QString getInstructionHash(QUuid funcguid, qint32 type) const;
 
         public:
-            void rebuildInstruction(models::gui::Instruction *instr);
-
-        private:
-            void refreshRebuild();
+            void rebuildInstructions(QList<models::gui::Instruction *> instructions);
 
         public:
             void onEntryPointSet(quint32 function, quint32 instruction);
@@ -80,7 +78,7 @@ namespace dnai
             void onRemoveInstructionError(::core::EntityID funtion, ::core::InstructionID instruction, QString msg);
 
         signals:
-            void instructionAdded(models::Entity *func, models::gui::Instruction *instruction);
+            void instructionAdded(dnai::models::Entity *func, dnai::models::gui::Instruction *instruction);
             void addInstructionError(quint32 func, quint32 instrType, QList<quint32> const &args, QString const &msg);
             void instructionRemoved(dnai::models::Entity *func, dnai::models::gui::Instruction *instruction);
             void entryPointSet(dnai::models::Entity *func, dnai::models::gui::Instruction *entry);
@@ -131,10 +129,7 @@ namespace dnai
 
         private:
             //map to store instruction that are currently rebuilding
-            QHash<models::gui::Instruction *, models::gui::Instruction *> pendingRebuild;
-
-            //list of instructions to rebuild
-            QList<models::gui::Instruction *> toRebuild;
+            QSet<models::gui::Instruction *> pendingRebuild;
         };
     }
 }

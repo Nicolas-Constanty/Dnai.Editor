@@ -205,7 +205,6 @@ GenericNode {
                     onLinked: {
                         if (instructionModel.getOutputType(name) === _node.instruction_model.getInputType(_inputDel.name))
                         {
-                            console.log('out type: ', instructionModel.getOutputType(name), ' vs in type: ', _node.instruction_model.getInputType(_inputDel.name));
                             Controller.Function.instruction.linkData(_node.function_entity.id, instructionModel.uid, name, _node.instruction_model.uid, _inputDel.name);
                         }
                     }
@@ -214,7 +213,7 @@ GenericNode {
                     }
                     Component.onCompleted: {
                         name = _node.model.inputNames[index]
-                        var inpType = Controller.getEntityGui(_node.model.getInput(name));
+                        var inpType = Controller.getEntityGui(_node.instruction_model.getInputType(name));
                         var generatedColor = _node.stringToColor(inpType.guid + "");
 
                         if (inpType.id <= 5)
@@ -227,10 +226,6 @@ GenericNode {
                             innerColor = "black";
                             outerColor = generatedColor;
                         }
-
-
-                        console.log('inner: ', innerColor);
-                        console.log("outer: ", outerColor);
                     }
 
                     Text {
@@ -260,6 +255,10 @@ GenericNode {
                         placeholderText: ""
                         font.pointSize: 7
                         enableBar: false
+
+                        Component.onCompleted: {
+                            _inputValue.text = _node.instruction_model.getInputValue(_inputDel.name);
+                        }
 
                         onAccepted: {
                             if (_inputValue.text)
@@ -357,7 +356,7 @@ GenericNode {
                     }
                     Component.onCompleted: {
                         name = _node.model.outputNames[index]
-                        var oupType = Controller.getEntityGui(_node.model.getOutput(name));
+                        var oupType = Controller.getEntityGui(_node.instruction_model.getOutputType(name));
                         var generatedColor = _node.stringToColor(oupType.guid + "");
 
                         if (oupType.id <= 5)
