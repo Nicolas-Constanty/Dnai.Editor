@@ -4,7 +4,6 @@
 #include "dnai/interfaces/iclone.h"
 #include "dnai/interfaces/icommand.h"
 #include "dnai/interfaces/ieditor.h"
-#include "dnai/interfaces/icontroller.h"
 #include "dnai/interfaces/ieditoraction.h"
 #include "dnai/interfaces/ieditormodel.h"
 #include "dnai/interfaces/ientity.h"
