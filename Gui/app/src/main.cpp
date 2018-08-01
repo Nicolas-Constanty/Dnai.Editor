@@ -2,6 +2,7 @@
 #include <QLoggingCategory>
 
 #include "dnai.h"
+#include "dnai/app.h"
 #include "dnai/editor.h"
 #include "dnai/project.h"
 #include "dnai/core/handlermanager.h"

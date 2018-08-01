@@ -1,0 +1,1 @@
+move "release\Server.exe" %INSTALL_FOLDER%

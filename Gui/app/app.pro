@@ -70,7 +70,6 @@ SOURCES += \
     src/dnai/commands/movenodecommand.cpp \
     src/dnai/commands/zoomcanvascommand.cpp \
     src/dnai/controllers/consolecontroller.cpp \
-    src/dnai/controllers/icontroller.cpp \
     src/dnai/controllers/inputcontroller.cpp \
     src/dnai/controllers/outputcontroller.cpp \
     src/dnai/enums/qcstandardpaths.cpp \
@@ -116,7 +115,6 @@ SOURCES += \
     src/dnai/baseio.cpp \
     src/dnai/baselinkable.cpp \
     src/dnai/editor.cpp \
-    src/dnai/entitiesfactory.cpp \
     src/dnai/eventutilities.cpp \
     src/dnai/focusmanager.cpp \
     src/dnai/link.cpp \
@@ -200,7 +198,6 @@ HEADERS += \
     include/dnai/http/url.h \
     include/dnai/interfaces/iclone.h \
     include/dnai/interfaces/icommand.h \
-    include/dnai/interfaces/icontroller.h \
     include/dnai/interfaces/ieditor.h \
     include/dnai/interfaces/ieditoraction.h \
     include/dnai/interfaces/ieditormodel.h \
@@ -276,7 +273,6 @@ HEADERS += \
     include/dnai/baseio.h \
     include/dnai/baselinkable.h \
     include/dnai/editor.h \
-    include/dnai/entitiesfactory.h \
     include/dnai/eventutilities.h \
     include/dnai/focusmanager.h \
     include/dnai/link.h \

@@ -1,0 +1,2 @@
+mkdir %APPVEYOR_BUILD_FOLDER%\Windows_x64
+move %PACKAGE_NAME%.exe %APPVEYOR_BUILD_FOLDER%\Windows_x64
