@@ -194,6 +194,7 @@ fi
 
 echo "----- Generate DMG file -----\n\n"
 sleep 1
+cd $TRAVIS_BUILD_DIR/scripts/mac
 ./dmg-generator.sh
 
 if [ $? -eq 1 ]
@@ -203,7 +204,7 @@ then
 fi
 
 echo "----- SUCCESS TO GENERATE DMG -----"
-
+cd $TRAVIS_BUILD_DIR/scripts/mac
 if [ $release == true ]
 then
     ./request.sh --release $version
