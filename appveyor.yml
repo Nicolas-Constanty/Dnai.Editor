@@ -61,6 +61,12 @@ build_script:
 # BUILD ARTEFACTS
   - if %APPVEYOR_REPO_TAG% equ true build_artefacts
 
-deploy_script:
+deploy:
+  - provider: Environment
+    name: Github
+    on:
+      APPVEYOR_REPO_TAG: true
+
+after_deploy:
 # DEPLOY
   - if %APPVEYOR_REPO_TAG% equ true deploy

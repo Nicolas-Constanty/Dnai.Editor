@@ -49,8 +49,9 @@ cd $TRAVIS_BUILD_DIR/dependencies
 git clone https://github.com/Gouet/Software-updater.git
 git clone https://$TravisToken@duly-eip.visualstudio.com/_git/Duly
 
-$TRAVIS_BUILD_DIR/build=$TRAVIS_BUILD_DIR/build
-mkdir $TRAVIS_BUILD_DIR/build
+build_dir=$TRAVIS_BUILD_DIR/build
+install_dir=$install_dir/app/DNAI.app/Contents/MacOS/
+mkdir $build_dir
 
 
 # GESTION DES ARGUMENTS
@@ -101,45 +102,40 @@ rm -rf DNAI-Installer.dmg
 
 if [ $compile == true ]
 then
-    cd $TRAVIS_BUILD_DIR/build
-
+    cd $build_dir
 
     $qmakebinary $dnaipropath
     make -j 8
     
-    ls -la
     cd plugins
-    ls -la
     rm -rf */*.o
     rm -rf */*.cpp
     rm -rf */*.h
     rm -rf */Makefile.*
 
-    cd -
-
-    cd app/DNAI.app/Contents/MacOS/
+    cd $install_dir
+    
     mkdir settings
-    cd -
-    cp -rf $dnaisettingpath ./app/DNAI.app/Contents/MacOS/settings
+    cp -rf $dnaisettingpath $install_dir/settings
 
     $qmakebinary $serverpropath
     make -j 8
-    cp Server app/DNAI.app/Contents/MacOS/
+    cp Server $install_dir
 
-    cd app/DNAI.app/Contents/MacOS/
+    cd $install_dir
     mkdir Core
-    cd -
+    cd $build_dir
 
     echo "---- Core generation ----"
     msbuild $csprojcorepath /t:Rebuild /p:Configuration=Release;Platform=x64
     cd $binarycorepath
     mkbundle -o CoreDaemon --simple CoreDaemon.exe
-    cd -
-    cp -rf $binarycorepath/CoreDaemon ./app/DNAI.app/Contents/MacOS/Core/
+    cd $TRAVIS_BUILD_DIR/build
+    cp -rf $binarycorepath/CoreDaemon $install_dir/Core/
     echo "---- Core generation END ----"
     sleep 3
 
-    #cp $monopath ./app/DNAI.app/Contents/MacOS/Core/
+    #cp $monopath $install_dir/Core/
 
     rm *.o
     rm *.cpp
