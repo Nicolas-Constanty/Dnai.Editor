@@ -48,7 +48,7 @@ mkdir $TRAVIS_BUILD_DIR/dependencies
 cd $TRAVIS_BUILD_DIR/dependencies
 git clone https://github.com/Gouet/Software-updater.git
 git clone https://$TravisToken@duly-eip.visualstudio.com/_git/Duly
-git clone https://github.com/Gouet/DNAI_updaters.git
+
 
 # GESTION DES ARGUMENTS
 
@@ -102,7 +102,7 @@ then
 
 
     $qmakebinary $dnaipropath
-    make
+    make -j 8
     
     cd plugins
     rm -rf */*.o
@@ -118,7 +118,7 @@ then
     cp -rf $dnaisettingpath ./app/DNAI.app/Contents/MacOS/settings
 
     $qmakebinary $serverpropath
-    make
+    make -j 8
     cp Server app/DNAI.app/Contents/MacOS/
 
     cd app/DNAI.app/Contents/MacOS/
@@ -179,7 +179,7 @@ then
     rm -rf "DNAI Updater.app"
 
     $qmakebinary $updaterpropath
-    make
+    make -j 8
     $deployqt "DNAI Updater.app" -qmldir=$updateressourcespath -verbose=2
 
     rm *.o
