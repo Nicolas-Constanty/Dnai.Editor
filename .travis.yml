@@ -28,7 +28,7 @@ script:
       make -j 8;
    else
       wget https://download.mono-project.com/archive/5.10.1/macos-10-universal/MonoFramework-MDK-5.10.1.47.macos10.xamarin.universal.pkg;
-      sudo installer -pkg ./MonoFramework-MDK-5.10.1.47.macos10.xamarin.universal.pkg;
+      sudo installer -pkg ./MonoFramework-MDK-5.10.1.47.macos10.xamarin.universal.pkg -target /;
       cd ./scripts/mac;
       chmod +x install.sh;
       ./install.sh --compile=true --release="$TRAVIS_TAG";
