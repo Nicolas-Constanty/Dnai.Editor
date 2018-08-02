@@ -12,9 +12,9 @@ install:
   - set PATH="%ProgramFiles(x86)%\Microsoft Visual Studio\2017\Community\MSBuild\15.0\Bin;%PATH%"
   - set PATH="%ProgramFiles(x86)%\Windows Kits\10\bin\x64\;%PATH%"
 # INSTALL JQ
-  - if %APPVEYOR_REPO_TAG% equ true if %APPVEYOR_REPO_BRANCH% == master install_jq
+  - if %APPVEYOR_REPO_TAG% equ true if %APPVEYOR_REPO_BRANCH% == testci install_jq
 # INSTALL TAIL
-  - if %APPVEYOR_REPO_TAG% equ true if %APPVEYOR_REPO_BRANCH% == master set PATH=%APPVEYOR_BUILD_FOLDER%\scripts;%PATH%
+  - if %APPVEYOR_REPO_TAG% equ true if %APPVEYOR_REPO_BRANCH% == testci set PATH=%APPVEYOR_BUILD_FOLDER%\scripts;%PATH%
 # INSTALL ENV
   - set PACKAGE_NAME=Dnai-Editor_%APPVEYOR_BUILD_VERSION%
   - set INSTALL_FOLDER=%APPVEYOR_BUILD_FOLDER%\Dnai\Editor\%APPVEYOR_BUILD_VERSION%
@@ -32,31 +32,31 @@ before_build:
 # CHECKOUT
   - cd %APPVEYOR_BUILD_FOLDER%
   - git submodule update --init --recursive
-  - if %APPVEYOR_REPO_TAG% equ true if %APPVEYOR_REPO_BRANCH% == master git clone https://github.com/Gouet/Software-updater.git
-  - if %APPVEYOR_REPO_TAG% equ true if %APPVEYOR_REPO_BRANCH% == master git clone https://%AppVeyorToken%@duly-eip.visualstudio.com/_git/Duly
+  - if %APPVEYOR_REPO_TAG% equ true if %APPVEYOR_REPO_BRANCH% == testci git clone https://github.com/Gouet/Software-updater.git
+  - if %APPVEYOR_REPO_TAG% equ true if %APPVEYOR_REPO_BRANCH% == testci git clone https://%AppVeyorToken%@duly-eip.visualstudio.com/_git/Duly
 
 build_script:
 # BUILD EDITOR
   - build_editor
 # INSTALL EDITOR
-  - if %APPVEYOR_REPO_TAG% equ true if %APPVEYOR_REPO_BRANCH% == master install_editor
+  - if %APPVEYOR_REPO_TAG% equ true if %APPVEYOR_REPO_BRANCH% == testci install_editor
 # BUILD SERVER
   - build_server
 # INSTALL SERVER
-  - if %APPVEYOR_REPO_TAG% equ true if %APPVEYOR_REPO_BRANCH% == master install_server
+  - if %APPVEYOR_REPO_TAG% equ true if %APPVEYOR_REPO_BRANCH% == testci install_server
 # BUILD UPDATER
-  - if %APPVEYOR_REPO_TAG% equ true if %APPVEYOR_REPO_BRANCH% == master build_updater
+  - if %APPVEYOR_REPO_TAG% equ true if %APPVEYOR_REPO_BRANCH% == testci build_updater
 # INSTALL UPDATER
-  - if %APPVEYOR_REPO_TAG% equ true if %APPVEYOR_REPO_BRANCH% == master install_updater
+  - if %APPVEYOR_REPO_TAG% equ true if %APPVEYOR_REPO_BRANCH% == testci install_updater
 # BUILD CORE
-  - if %APPVEYOR_REPO_TAG% equ true if %APPVEYOR_REPO_BRANCH% == master build_core
+  - if %APPVEYOR_REPO_TAG% equ true if %APPVEYOR_REPO_BRANCH% == testci build_core
 # INSTALL CORE
-  - if %APPVEYOR_REPO_TAG% equ true if %APPVEYOR_REPO_BRANCH% == master install_core
+  - if %APPVEYOR_REPO_TAG% equ true if %APPVEYOR_REPO_BRANCH% == testci install_core
 # BUILD SETUP
-  - if %APPVEYOR_REPO_TAG% equ true if %APPVEYOR_REPO_BRANCH% == master build_setup
+  - if %APPVEYOR_REPO_TAG% equ true if %APPVEYOR_REPO_BRANCH% == testci build_setup
 # BUILD ARTEFACTS
-  - if %APPVEYOR_REPO_TAG% equ true if %APPVEYOR_REPO_BRANCH% == master build_artefacts
+  - if %APPVEYOR_REPO_TAG% equ true if %APPVEYOR_REPO_BRANCH% == testci build_artefacts
 
 deploy_script:
 # DEPLOY
-  - if %APPVEYOR_REPO_TAG% equ true if %APPVEYOR_REPO_BRANCH% == master deploy
+  - if %APPVEYOR_REPO_TAG% equ true if %APPVEYOR_REPO_BRANCH% == testci deploy
