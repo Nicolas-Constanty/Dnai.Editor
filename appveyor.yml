@@ -4,6 +4,8 @@ configuration:
  - release
 
 install:
+  - echo %APPVEYOR_REPO_TAG%
+  - if %APPVEYOR_REPO_TAG% equ true echo istagged
 # INSTALL ENV
   - set PACKAGE_NAME=Dnai-Editor_%APPVEYOR_BUILD_VERSION%
   - set INSTALL_FOLDER=%APPVEYOR_BUILD_FOLDER%\Dnai\Editor\%APPVEYOR_BUILD_VERSION%
