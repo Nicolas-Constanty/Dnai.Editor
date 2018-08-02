@@ -14,7 +14,6 @@ fart.exe --remove -C --c-style %windows_file% "%APPVEYOR_BUILD_FOLDER%\\Deploiem
 
 cd %repository_path%
 
-git checkout -f master
 git tag %version%
 git branch %version%-branch %version%
 git checkout %version%-branch

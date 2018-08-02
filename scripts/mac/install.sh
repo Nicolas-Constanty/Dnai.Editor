@@ -52,7 +52,7 @@ git clone https://github.com/Gouet/DNAI_updaters.git
 
 build_dir=$TRAVIS_BUILD_DIR/build
 mkdir $build_dir
-install_dir=$build_dir/app/DNAI.app/Contents/MacOS/
+install_dir=$build_dir/app/release/DNAI.app/Contents/MacOS/
 
 # GESTION DES ARGUMENTS
 
@@ -104,7 +104,11 @@ if [ $compile == true ]
 then
     cd $build_dir
 
-    $qmakebinary $dnaipropath
+    VERSION_MAJOR=$(echo $version | cut -d. -f1)
+    VERSION_MINOR=$(echo $version | cut -d. -f2)
+    VERSION_BUILD=$(echo $version | cut -d. -f3)
+
+    $qmakebinary "VERSION_MAJOR=$VERSION_MAJOR" "VERSION_MINOR=$VERSION_MINOR" "VERSION_BUILD=$VERSION_BUILD" $dnaipropath
     make -j 8
     
     cd plugins
