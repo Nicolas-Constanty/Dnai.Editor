@@ -20,8 +20,8 @@ dnaisettingpath="$TRAVIS_BUILD_DIR/Gui/app/settings/"
 dnairessourcespath="$TRAVIS_BUILD_DIR/Gui/app/resources/"
 
 #DNAI CORE
-binarycorepath="$TRAVIS_BUILD_DIR/dependencies/bin/Release/"
-csprojcorepath="$TRAVIS_BUILD_DIR/dependencies/CoreDaemon.csproj"
+binarycorepath="$TRAVIS_BUILD_DIR/dependencies/Duly/CoreDaemon/bin/Release/"
+csprojcorepath="$TRAVIS_BUILD_DIR/dependencies/Duly/CoreDaemon/CoreDaemon.csproj"
 
 #DNAI SERVER
 serverpropath="$TRAVIS_BUILD_DIR/Server/Server.pro"

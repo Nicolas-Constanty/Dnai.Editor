@@ -27,7 +27,7 @@ script:
       qmake Server.pro;
       make -j 8;
    else
-      wget https://download.mono-project.com/archive/5.10.1/macos-10-universal/MonoFramework-MDK-5.10.1.47.macos10.xamarin.universal.pkg;
+      wget https://download.mono-project.com/archive/5.10.1/macos-10-universal/MonoFramework-MDK-5.10.1.47.macos10.xamarin.universal.pkg > /dev/null;
       sudo installer -pkg ./MonoFramework-MDK-5.10.1.47.macos10.xamarin.universal.pkg -target /;
       cd ./scripts/mac;
       chmod +x install.sh;
