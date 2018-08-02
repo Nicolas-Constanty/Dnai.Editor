@@ -3,7 +3,12 @@ image: Visual Studio 2017
 configuration:
  - release
 
-install: 
+install:
+# INSTALL ENV
+  - set PACKAGE_NAME=Dnai-Editor_%APPVEYOR_BUILD_VERSION%
+  - set INSTALL_FOLDER=%APPVEYOR_BUILD_FOLDER%\Dnai\Editor\%APPVEYOR_BUILD_VERSION%
+  - call "%ProgramFiles(x86)%\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" x64
+  - set PATH=%APPVEYOR_BUILD_FOLDER%\scripts\windows;%PATH%
 # INSTALL QT
   - set QTDIR=C:\Qt\5.11\msvc2017_64
   - set PATH=%QTDIR%\bin;%PATH%
@@ -15,11 +20,6 @@ install:
   - if %APPVEYOR_REPO_TAG% equ true install_jq
 # INSTALL TAIL
   - if %APPVEYOR_REPO_TAG% equ true set PATH=%APPVEYOR_BUILD_FOLDER%\scripts;%PATH%
-# INSTALL ENV
-  - set PACKAGE_NAME=Dnai-Editor_%APPVEYOR_BUILD_VERSION%
-  - set INSTALL_FOLDER=%APPVEYOR_BUILD_FOLDER%\Dnai\Editor\%APPVEYOR_BUILD_VERSION%
-  - call "%ProgramFiles(x86)%\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" x64
-  - set PATH=%APPVEYOR_BUILD_FOLDER%\scripts\windows;%PATH%
 
 artifacts:
  - path: Windows_x64
