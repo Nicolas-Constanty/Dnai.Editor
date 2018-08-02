@@ -111,30 +111,25 @@ then
     $qmakebinary "VERSION_MAJOR=$VERSION_MAJOR" "VERSION_MINOR=$VERSION_MINOR" "VERSION_BUILD=$VERSION_BUILD" $dnaipropath
     make -j 8
     
-    cd plugins
-    rm -rf */*.o
-    rm -rf */*.cpp
-    rm -rf */*.h
-    rm -rf */Makefile.*
+    rm -rf plugins/*.o
+    rm -rf plugins/*.cpp
+    rm -rf plugins/*.h
+    rm -rf plugins/Makefile.*
 
-    cd $install_dir
-    
-    mkdir settings
+    mkdir $install_dir/settings
     cp -rf $dnaisettingpath $install_dir/settings
 
     $qmakebinary $serverpropath
     make -j 8
     cp Server $install_dir
 
-    cd $install_dir
-    mkdir Core
-    cd $build_dir
+    mkdir $install_dir/Core
 
     echo "---- Core generation ----"
-    msbuild $csprojcorepath /t:Rebuild /p:Configuration=Release;Platform=x64
+    /Library/Frameworks/Mono.framework/Commands/msbuild $csprojcorepath /t:Rebuild /p:Configuration=Release;Platform=x64
     cd $binarycorepath
-    mkbundle -o CoreDaemon --simple CoreDaemon.exe
-    cd $TRAVIS_BUILD_DIR/build
+    /Library/Frameworks/Mono.framework/Commands/mkbundle -o CoreDaemon --simple CoreDaemon.exe
+    cd $build_dir
     cp -rf $binarycorepath/CoreDaemon $install_dir/Core/
     echo "---- Core generation END ----"
     sleep 3
