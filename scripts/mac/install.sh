@@ -49,6 +49,9 @@ cd $TRAVIS_BUILD_DIR/dependencies
 git clone https://github.com/Gouet/Software-updater.git
 git clone https://$TravisToken@duly-eip.visualstudio.com/_git/Duly
 
+$TRAVIS_BUILD_DIR/build=$TRAVIS_BUILD_DIR/build
+mkdir $TRAVIS_BUILD_DIR/build
+
 
 # GESTION DES ARGUMENTS
 
@@ -98,13 +101,15 @@ rm -rf DNAI-Installer.dmg
 
 if [ $compile == true ]
 then
-    rm -rf Application
+    cd $TRAVIS_BUILD_DIR/build
 
 
     $qmakebinary $dnaipropath
     make -j 8
     
+    ls -la
     cd plugins
+    ls -la
     rm -rf */*.o
     rm -rf */*.cpp
     rm -rf */*.h
