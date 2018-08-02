@@ -13,16 +13,16 @@ install:
 # INSTALL WINDOWS UTILS
   - set PATH="%ProgramFiles(x86)%\Microsoft Visual Studio\2017\Community\MSBuild\15.0\Bin;%PATH%"
   - set PATH="%ProgramFiles(x86)%\Windows Kits\10\bin\x64\;%PATH%"
-# INSTALL JQ
-  - if %APPVEYOR_REPO_TAG% equ true mkdir %APPVEYOR_BUILD_FOLDER%\Downloads
-  - if %APPVEYOR_REPO_TAG% equ true cd %APPVEYOR_BUILD_FOLDER%\Downloads
-  - ps: install_jq
-  - if %APPVEYOR_REPO_TAG% equ true set PATH=%APPVEYOR_BUILD_FOLDER%\Downloads;%PATH%
 # INSTALL ENV
   - set PACKAGE_NAME=Dnai-Editor_%APPVEYOR_BUILD_VERSION%
   - set INSTALL_FOLDER=%APPVEYOR_BUILD_FOLDER%\Dnai\Editor\%APPVEYOR_BUILD_VERSION%
   - call "%ProgramFiles(x86)%\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" x64
   - set PATH=%APPVEYOR_BUILD_FOLDER%\scripts\windows;%PATH%
+# INSTALL JQ
+  - if %APPVEYOR_REPO_TAG% equ true mkdir %APPVEYOR_BUILD_FOLDER%\Downloads
+  - if %APPVEYOR_REPO_TAG% equ true cd %APPVEYOR_BUILD_FOLDER%\Downloads
+  - ps: install_jq
+  - if %APPVEYOR_REPO_TAG% equ true set PATH=%APPVEYOR_BUILD_FOLDER%\Downloads;%PATH%
 
 artifacts:
  - path: Windows_x64
