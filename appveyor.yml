@@ -37,6 +37,7 @@ before_build:
 
 build_script:
 # BUILD EDITOR
+  - FOR /f "tokens=1,2,3 delims=." %%a IN ("%APPVEYOR_REPO_TAG_NAME%") do set VERSION_MAJOR=%%a&set VERSION_MINOR=%%b&set VERSION_BUILD=%%c
   - build_editor
 # INSTALL EDITOR
   - if %APPVEYOR_REPO_TAG% equ true if %APPVEYOR_REPO_BRANCH% == testci install_editor
