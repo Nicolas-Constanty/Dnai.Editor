@@ -126,6 +126,7 @@ then
     mkdir $install_dir/Core
 
     echo "---- Core generation ----"
+    /Library/Frameworks/Mono.framework/Commands/mono --runtime=v4.0 nuget.exe restore $csprojcorepath
     /Library/Frameworks/Mono.framework/Commands/msbuild $csprojcorepath /t:Rebuild /p:Configuration=Release;Platform=x64
     cd $binarycorepath
     /Library/Frameworks/Mono.framework/Commands/mkbundle -o CoreDaemon --simple CoreDaemon.exe

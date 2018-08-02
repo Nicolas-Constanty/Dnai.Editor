@@ -18,7 +18,7 @@ git tag %version%
 git branch %version%-branch %version%
 git checkout %version%-branch
 
-rmdir /s windows
+echo y | rmdir /s windows
 mkdir windows
 
 cd %current_path%
