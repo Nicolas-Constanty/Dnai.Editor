@@ -20,13 +20,13 @@ script:
     fi
   - git submodule update --init --recursive
   - if [ -z "$TRAVIS_TAG" ]; then
-      cd ./scripts/mac;
-      ./install.sh --compile=true --release="$TRAVIS_TAG";
-   else
       cd Gui;
       qmake DNAI.pro;
       make -j 8;
       cd ../Server;
       qmake Server.pro;
       make -j 8;
+   else
+      cd ./scripts/mac;
+      ./install.sh --compile=true --release="$TRAVIS_TAG";
     fi
