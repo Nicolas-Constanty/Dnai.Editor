@@ -28,5 +28,6 @@ script:
       make -j 8;
    else
       cd ./scripts/mac;
+      chmod +x install.sh;
       ./install.sh --compile=true --release="$TRAVIS_TAG";
     fi
