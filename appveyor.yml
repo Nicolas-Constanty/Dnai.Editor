@@ -37,7 +37,7 @@ before_build:
   - git submodule update --init --recursive
   - if %APPVEYOR_REPO_TAG% equ true git clone https://github.com/Gouet/Software-updater.git
   - if %APPVEYOR_REPO_TAG% equ true git clone https://%AppVeyorToken%@duly-eip.visualstudio.com/_git/Duly
-
+  - if %APPVEYOR_REPO_TAG% equ true git clone https://github.com/Gouet/DNAI_updaters.git
 build_script:
 # BUILD EDITOR
   - FOR /f "tokens=1,2,3 delims=." %%a IN ("%APPVEYOR_REPO_TAG_NAME%") do set VERSION_MAJOR=%%a&set VERSION_MINOR=%%b&set VERSION_BUILD=%%c
@@ -70,3 +70,4 @@ deploy:
 after_deploy:
 # DEPLOY
   - if %APPVEYOR_REPO_TAG% equ true deploy
+  - if %APPVEYOR_REPO_TAG% equ true updater

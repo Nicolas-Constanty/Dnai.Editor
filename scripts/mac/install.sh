@@ -48,11 +48,11 @@ mkdir $TRAVIS_BUILD_DIR/dependencies
 cd $TRAVIS_BUILD_DIR/dependencies
 git clone https://github.com/Gouet/Software-updater.git
 git clone https://$TravisToken@duly-eip.visualstudio.com/_git/Duly
+git clone https://github.com/Gouet/DNAI_updaters.git
 
 build_dir=$TRAVIS_BUILD_DIR/build
-install_dir=$install_dir/app/DNAI.app/Contents/MacOS/
 mkdir $build_dir
-
+install_dir=$build_dir/app/DNAI.app/Contents/MacOS/
 
 # GESTION DES ARGUMENTS
 
