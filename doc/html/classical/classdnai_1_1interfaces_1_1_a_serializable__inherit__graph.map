@@ -1,0 +1,4 @@
+<map id="dnai::interfaces::ASerializable&lt; T &gt;" name="dnai::interfaces::ASerializable&lt; T &gt;">
+<area shape="rect" id="node3" href="$classdnai_1_1interfaces_1_1_i_model.html" title="This class allow you to create a new serializable model and allow you to use it in a tree..." alt="" coords="25,344,211,421"/>
+<area shape="rect" id="node2" href="$classdnai_1_1interfaces_1_1_i_serializable.html" title="Allow inherited class to serialize and deserialize itself. " alt="" coords="24,5,212,112"/>
+</map>

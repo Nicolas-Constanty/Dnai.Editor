@@ -1,0 +1,12 @@
+digraph "dnai::interfaces::IVariable"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="{dnai::interfaces::IVariable\n||+ ~IVariable()\l+ varType()\l+ setVarType()\l+ value()\l+ setValue()\l}",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",arrowtail="onormal",fontname="Helvetica"];
+  Node2 [label="{dnai::models::gui::\ldeclarable::Variable\n|+ varType\l+ value\l- m_variables\l|+ Variable()\l+ serialize()\l+ varType()\l+ setVarType()\l+ value()\l+ setValue()\l+ variables()\l# _deserialize()\l}",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classdnai_1_1models_1_1gui_1_1declarable_1_1_variable.html"];
+  Node1 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",arrowtail="onormal",fontname="Helvetica"];
+  Node3 [label="{dnai::models::gui::\lInput\n|+ id\l+ linkedId\l- m_data\l|+ Input()\l+ id()\l+ setId()\l+ linkedId()\l+ setLinkedId()\l+ serialize()\l+ data()\l+ setData()\l+ varType()\l+ setVarType()\l+ value()\l+ setValue()\l+ name()\l+ setName()\l# _deserialize()\l}",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classdnai_1_1models_1_1gui_1_1_input.html"];
+  Node1 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",arrowtail="onormal",fontname="Helvetica"];
+  Node4 [label="{dnai::models::gui::\lOutput\n|+ id\l+ linkedId\l- m_data\l|+ Output()\l+ id()\l+ setId()\l+ linkedId()\l+ setLinkedId()\l+ serialize()\l+ data()\l+ setData()\l+ varType()\l+ setVarType()\l+ value()\l+ setValue()\l+ name()\l+ setName()\l# _deserialize()\l}",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classdnai_1_1models_1_1gui_1_1_output.html"];
+}

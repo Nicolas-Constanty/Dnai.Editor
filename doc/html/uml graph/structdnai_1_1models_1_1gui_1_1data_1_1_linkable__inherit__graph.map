@@ -1,0 +1,5 @@
+<map id="dnai::models::gui::data::Linkable" name="dnai::models::gui::data::Linkable">
+<area shape="rect" id="node2" href="$structdnai_1_1models_1_1gui_1_1data_1_1_flow.html" title="{dnai::models::gui::\ldata::Flow\n||+ operator=()\l+ operator!=()\l+ operator==()\l}" alt="" coords="5,189,135,311"/>
+<area shape="rect" id="node3" href="$structdnai_1_1models_1_1gui_1_1data_1_1_input.html" title="{dnai::models::gui::\ldata::Input\n|+ name\l|+ operator=()\l+ operator!=()\l+ operator==()\l}" alt="" coords="159,189,288,311"/>
+<area shape="rect" id="node4" href="$structdnai_1_1models_1_1gui_1_1data_1_1_output.html" title="{dnai::models::gui::\ldata::Output\n|+ name\l|+ operator=()\l+ operator!=()\l+ operator==()\l}" alt="" coords="312,189,441,311"/>
+</map>

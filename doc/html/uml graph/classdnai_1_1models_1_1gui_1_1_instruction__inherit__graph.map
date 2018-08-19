@@ -1,0 +1,5 @@
+<map id="dnai::models::gui::Instruction" name="dnai::models::gui::Instruction">
+<area shape="rect" id="node3" href="$classdnai_1_1interfaces_1_1_i_model_data.html" title="{dnai::interfaces::IModel\lData\&lt; data::Instruction \&gt;\n||+ ~IModelData()\l+ data()\l+ setData()\l}" alt="" coords="100,175,267,296"/>
+<area shape="rect" id="node4" href="$classdnai_1_1interfaces_1_1_a_serializable.html" title="{dnai::interfaces::ASerializable\l\&lt; Instruction \&gt;\n||+ ~ASerializable()\l+ serialize()\l+ serializeList()\l+ deserialize()\l# _deserialize()\l}" alt="" coords="291,160,486,311"/>
+<area shape="rect" id="node5" href="$classdnai_1_1interfaces_1_1_i_serializable.html" title="Allow inherited class to serialize and deserialize itself. " alt="" coords="295,5,483,112"/>
+</map>

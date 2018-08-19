@@ -1,0 +1,5 @@
+<map id="dnai::interfaces::IModel&lt; T &gt;" name="dnai::interfaces::IModel&lt; T &gt;">
+<area shape="rect" id="node2" href="$classdnai_1_1models_1_1_generic_tree_item.html" title="{dnai::models::GenericTree\lItem\&lt; T \&gt;\n|&#45; m_childItems\l&#45; m_parentItem\l&#45; m_idx\l|+ GenericTreeItem()\l+ ~GenericTreeItem()\l+ appendChild()\l+ child()\l+ childrenItem()\l+ childCount()\l+ columnCount()\l+ row()\l+ parentItem()\l+ idxmodel()\l+ setIdx()\l+ removeOne()\l+ deleteChildren()\l+ removeChildren()\l}" alt="" coords="5,160,180,472"/>
+<area shape="rect" id="node4" href="$classdnai_1_1interfaces_1_1_a_serializable.html" title="Allow inherited class to serialize and deserialize itself. " alt="" coords="204,248,429,384"/>
+<area shape="rect" id="node5" href="$classdnai_1_1interfaces_1_1_i_serializable.html" title="Allow inherited class to serialize and deserialize itself. " alt="" coords="223,5,411,112"/>
+</map>

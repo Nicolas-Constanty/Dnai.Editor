@@ -1,0 +1,6 @@
+digraph "dnai::interfaces::ILoadingClass"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="{dnai::interfaces::ILoading\lClass\n|- m_statusPercent\l- m_status\l- m_registeredEvents\l|+ statusPercent()\l+ status()\l+ registerBeforeStart()\l+ registerReady()\l+ registerUpdateStatus()\l+ ~ILoadingClass()\l+ load()\l# ILoadingClass()\l# init()\l# execAllEvent()\l}",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+}

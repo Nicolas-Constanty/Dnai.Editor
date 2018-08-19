@@ -1,0 +1,10 @@
+<map id="Gui/app/src/dnai/models/core/entity.cpp" name="Gui/app/src/dnai/models/core/entity.cpp">
+<area shape="rect" id="node3" href="$core_2entity_8h.html" title="dnai/models/core/entity.h" alt="" coords="321,95,489,121"/>
+<area shape="rect" id="node11" href="$commandmanager_8h.html" title="dnai/commands/commandmanager.h" alt="" coords="880,95,1116,121"/>
+<area shape="rect" id="node6" href="$entitydata_8h.html" title="entitydata.h" alt="" coords="442,169,533,196"/>
+<area shape="rect" id="node8" href="$imodeldata_8h.html" title="dnai/interfaces/imodeldata.h" alt="" coords="557,169,741,196"/>
+<area shape="rect" id="node9" href="$iserializable_8h.html" title="dnai/interfaces/iserializable.h" alt="" coords="85,169,274,196"/>
+<area shape="rect" id="node14" href="$icommand_8h.html" title="dnai/interfaces/icommand.h" alt="" coords="765,169,946,196"/>
+<area shape="rect" id="node15" href="$consolecontroller_8h.html" title="dnai/controllers/consolecontroller.h" alt="" coords="1131,169,1353,196"/>
+<area shape="rect" id="node18" href="$console_8h.html" title="dnai/views/console.h" alt="" coords="1279,244,1421,271"/>
+</map>

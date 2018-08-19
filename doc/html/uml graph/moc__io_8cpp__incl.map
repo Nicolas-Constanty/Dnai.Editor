@@ -1,0 +1,33 @@
+<map id="Gui/app/GeneratedFiles/Debug/moc_io.cpp" name="Gui/app/GeneratedFiles/Debug/moc_io.cpp">
+<area shape="rect" id="node2" href="$io_8h.html" title="../../include/dnai\l/views/io.h" alt="" coords="415,95,530,136"/>
+<area shape="rect" id="node4" href="$baseio_8h.html" title="dnai/baseio.h" alt="" coords="607,184,706,211"/>
+<area shape="rect" id="node9" href="$iotype_8h.html" title="enums/iotype.h" alt="" coords="1501,259,1612,285"/>
+<area shape="rect" id="node11" href="$eventutilities_8h.html" title="dnai/eventutilities.h" alt="" coords="252,184,384,211"/>
+<area shape="rect" id="node13" href="$beziercurve_8h.html" title="beziercurve.h" alt="" coords="110,408,209,435"/>
+<area shape="rect" id="node15" href="$genericnode_8h.html" title="genericnode.h" alt="" coords="476,184,579,211"/>
+<area shape="rect" id="node19" href="$views_2linkablebezieritem_8h.html" title="linkablebezieritem.h" alt="" coords="348,333,485,360"/>
+<area shape="rect" id="node47" href="$iscalable_8h.html" title="dnai/interfaces/iscalable.h" alt="" coords="1373,184,1545,211"/>
+<area shape="rect" id="node5" href="$baselinkable_8h.html" title="baselinkable.h" alt="" coords="612,333,717,360"/>
+<area shape="rect" id="node7" href="$ilinkable_8h.html" title="dnai/interfaces/ilinkable.h" alt="" coords="605,408,773,435"/>
+<area shape="rect" id="node16" href="$roundedrectangle_8h.html" title="roundedrectangle.h" alt="" coords="192,333,324,360"/>
+<area shape="rect" id="node18" href="$views_2flow_8h.html" title="flow.h" alt="" coords="695,259,749,285"/>
+<area shape="rect" id="node20" href="$canvasnode_8h.html" title="canvasnode.h" alt="" coords="419,408,521,435"/>
+<area shape="rect" id="node25" href="$focusmanager_8h.html" title="dnai/focusmanager.h" alt="" coords="469,483,612,509"/>
+<area shape="rect" id="node45" href="$iolink_8h.html" title="dnai/models/gui/iolink.h" alt="" coords="1232,565,1391,591"/>
+<area shape="rect" id="node17" href="$customshape_8h.html" title="customshape.h" alt="" coords="233,408,344,435"/>
+<area shape="rect" id="node26" href="$flowtype_8h.html" title="dnai/enums/flowtype.h" alt="" coords="1107,333,1257,360"/>
+<area shape="rect" id="node27" href="$instruction_8h.html" title="dnai/models/instruction.h" alt="" coords="741,333,908,360"/>
+<area shape="rect" id="node22" href="$line_8h.html" title="line.h" alt="" coords="329,483,382,509"/>
+<area shape="rect" id="node28" href="$core_2entity_8h.html" title="core/entity.h" alt="" coords="760,483,855,509"/>
+<area shape="rect" id="node37" href="$entity_8h.html" title="entity.h" alt="" coords="969,408,1035,435"/>
+<area shape="rect" id="node31" href="$entitydata_8h.html" title="entitydata.h" alt="" coords="613,565,703,591"/>
+<area shape="rect" id="node33" href="$imodeldata_8h.html" title="dnai/interfaces/imodeldata.h" alt="" coords="1063,654,1247,681"/>
+<area shape="rect" id="node34" href="$iserializable_8h.html" title="dnai/interfaces/iserializable.h" alt="" coords="1389,654,1578,681"/>
+<area shape="rect" id="node38" href="$gui_2declarable_2entity_8h.html" title="dnai/models/gui/declarable\l/entity.h" alt="" coords="1031,557,1207,599"/>
+<area shape="rect" id="node41" href="$imodel_8h.html" title="dnai/interfaces/imodel.h" alt="" coords="1467,565,1625,591"/>
+<area shape="rect" id="node42" href="$entitycolum_8h.html" title="gui/data/entitycolum.h" alt="" coords="721,654,872,681"/>
+<area shape="rect" id="node43" href="$declarable_2variable_8h.html" title="gui/declarable/variable.h" alt="" coords="1215,483,1375,509"/>
+<area shape="rect" id="node44" href="$declarable_2context_8h.html" title="gui/declarable/context.h" alt="" coords="981,483,1141,509"/>
+<area shape="rect" id="node39" href="$gui_2data_2entity_8h.html" title="dnai/models/gui/data\l/entity.h" alt="" coords="896,647,1039,688"/>
+<area shape="rect" id="node46" href="$data_2iolink_8h.html" title="data/iolink.h" alt="" coords="1272,654,1364,681"/>
+</map>

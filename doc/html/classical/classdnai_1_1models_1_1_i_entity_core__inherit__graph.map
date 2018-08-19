@@ -1,0 +1,5 @@
+<map id="dnai::models::IEntityCore" name="dnai::models::IEntityCore">
+<area shape="rect" id="node2" href="$classdnai_1_1models_1_1_entity_core.html" title="dnai::models::EntityCore" alt="" coords="114,80,279,107"/>
+<area shape="rect" id="node3" href="$classdnai_1_1models_1_1_attribute_core.html" title="dnai::models::AttributeCore" alt="" coords="5,155,185,181"/>
+<area shape="rect" id="node4" href="$classdnai_1_1models_1_1_variable_core.html" title="dnai::models::VariableCore" alt="" coords="210,155,389,181"/>
+</map>

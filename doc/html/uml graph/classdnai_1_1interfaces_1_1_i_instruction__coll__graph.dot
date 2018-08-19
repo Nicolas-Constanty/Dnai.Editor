@@ -1,0 +1,6 @@
+digraph "dnai::interfaces::IInstruction"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="{dnai::interfaces::IInstruction\n||+ ~IInstruction()\l+ inputs()\l+ setInputs()\l+ outputs()\l+ setOutputs()\l+ flowIn()\l+ setFlowIn()\l+ flowOut()\l+ setFlowOut()\l}",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+}

@@ -1,0 +1,30 @@
+digraph "dnai::commands::MoveNodeCommand"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="{dnai::commands::MoveNode\lCommand\n|- m_vec\l- m_lastPos\l|+ MoveNodeCommand()\l+ execute()\l+ executeSave()\l+ unExcute()\l+ infos()\l}",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+  Node2 -> Node1 [dir="back",color="midnightblue",fontsize="10",style="solid",arrowtail="onormal",fontname="Helvetica"];
+  Node2 [label="{dnai::commands::Command\n|# m_name\l# m_save\l- CommandEvent\l|+ Command()\l+ execute()\l+ executeSave()\l+ unExcute()\l+ infos()\l+ isSave()\l+ name()\l}",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classdnai_1_1commands_1_1_command.html"];
+  Node3 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",arrowtail="onormal",fontname="Helvetica"];
+  Node3 [label="{QEvent\n||}",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
+  Node4 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",arrowtail="onormal",fontname="Helvetica"];
+  Node4 [label="{dnai::interfaces::ICommand\n||# ~ICommand()\l# execute()\l# executeSave()\l# unExcute()\l# infos()\l# isSave()\l}",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classdnai_1_1interfaces_1_1_i_command.html"];
+  Node5 -> Node1 [color="grey25",fontsize="10",style="solid",label=" -m_n" ,arrowhead="odiamond",fontname="Helvetica"];
+  Node5 [label="{dnai::views::GenericNode\n|+ header\l+ content\l+ selected\l- m_offset\l- m_holdClik\l- m_startPos\l|+ GenericNode()\l+ createLink()\l+ createFlowLink()\l+ unlinkFlow()\l+ unlinkIo()\l+ updatePaintNode()\l+ componentComplete()\l+ resetBorderColor()\l+ move()\l+ startPos()\land 10 more...\l+ resetSelected()\l# mouseMoveEvent()\l# mousePressEvent()\l# mouseReleaseEvent()\l- updateInputs()\l- updateOutputs()\l- updateFlowsIn()\l- updateFlowsOut()\l}",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classdnai_1_1views_1_1_generic_node.html"];
+  Node6 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",arrowtail="onormal",fontname="Helvetica"];
+  Node6 [label="{QQuickItem\n||}",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
+  Node5 -> Node5 [color="grey25",fontsize="10",style="solid",label=" -m_selected" ,arrowhead="odiamond",fontname="Helvetica"];
+  Node7 -> Node5 [color="grey25",fontsize="10",style="solid",label=" -m_content\n-m_header" ,arrowhead="odiamond",fontname="Helvetica"];
+  Node7 [label="{dnai::views::RoundedRectangle\n|+ topLeft\l+ topRight\l+ bottomLeft\l+ bottomRight\l+ roundedSegments\l- m_topLeft\l- m_topRight\l- m_bottomLeft\l- m_bottomRight\l- m_nbSegments\l|+ RoundedRectangle()\l+ updatePaintNode()\l+ topLeft()\l+ topRight()\l+ bottomLeft()\l+ bottomRight()\l+ roundedSegments()\l+ setTopLeft()\l+ setTopRight()\l+ setBottomLeft()\l+ setBottomRight()\l+ setRoundedSegments()\l- getNumberRoundedCorner()\l}",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classdnai_1_1views_1_1_rounded_rectangle.html"];
+  Node8 -> Node7 [dir="back",color="midnightblue",fontsize="10",style="solid",arrowtail="onormal",fontname="Helvetica"];
+  Node8 [label="{dnai::views::CustomShape\n|+ radius\l+ borderWidth\l+ fillColor\l+ borderColor\l# m_radius\l# m_borderWidth\l# m_fillColor\l# m_borderColor\l# m_saveRadius\l# m_saveBorderWidth\l# m_saveFillColor\l# m_saveBorderColor\l# m_savePos\l|+ CustomShape()\l+ updatePaintNode()\l+ radius()\l+ borderWidth()\l+ fillColor()\l+ borderColor()\l+ setRadius()\l+ setBorderWidth()\l+ setFillColor()\l+ setBorderColor()\land 6 more...\l}",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classdnai_1_1views_1_1_custom_shape.html"];
+  Node6 -> Node8 [dir="back",color="midnightblue",fontsize="10",style="solid",arrowtail="onormal",fontname="Helvetica"];
+  Node9 -> Node5 [color="grey25",fontsize="10",style="solid",label=" -m_canvas" ,arrowhead="odiamond",fontname="Helvetica"];
+  Node9 [label="{dnai::views::CanvasNode\n|+ gridStep\l+ accentGridStep\l+ gridColor\l+ accentGridColor\l+ backgroundColor\l+ content\l+ contextMenu\l+ mousePosition\l+ entry\l- m_gridStep\l- m_accentGridStep\l- m_gridColor\l- m_accentGridColor\l- m_backgroundColor\l- m_hasMoved\l- m_totalOffset\l- m_contextMenu\l- m_mousePosition\l- m_lines\l- m_offset\l- m_gridOffset\l- m_origin\l- m_content\l- m_entry\l|+ CanvasNode()\l+ ~CanvasNode()\l+ focusManager()\l+ updatePaintNode()\l+ moveCanvas()\l+ zoom()\l+ gridStep()\l+ accentGridStep()\l+ gridColor()\l+ accentGridColor()\land 16 more...\l# mousePressEvent()\l# mouseReleaseEvent()\l# mouseMoveEvent()\l# wheelEvent()\l- createGrid()\l}",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classdnai_1_1views_1_1_canvas_node.html"];
+  Node6 -> Node9 [dir="back",color="midnightblue",fontsize="10",style="solid",arrowtail="onormal",fontname="Helvetica"];
+  Node10 -> Node9 [color="grey25",fontsize="10",style="solid",label=" -m_focusManager" ,arrowhead="odiamond",fontname="Helvetica"];
+  Node10 [label="{dnai::FocusManager\n|# m_items\l|+ FocusManager()\l+ ~FocusManager()\l+ registerItem()\l+ deleteItem()\l+ findFocused()\l+ getList()\l}",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classdnai_1_1_focus_manager.html"];
+  Node11 -> Node5 [color="grey25",fontsize="10",style="solid",label=" -m_outputs\n-m_flowsOut\n-m_inputs\n-m_flowsIn" ,arrowhead="odiamond",fontname="Helvetica"];
+  Node11 [label="{dnai::FocusManagerIo\n||+ FocusManagerIo()\l+ ~FocusManagerIo()\l+ findFocused()\l}",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classdnai_1_1_focus_manager_io.html"];
+  Node10 -> Node11 [dir="back",color="midnightblue",fontsize="10",style="solid",arrowtail="onormal",fontname="Helvetica"];
+}

@@ -1,0 +1,16 @@
+digraph "dnai::models::ml::Dataset"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="{dnai::models::ml::Dataset\n|+ data\l+ name\l+ path\l+ samples\l+ training\l+ test\l+ autoGenerateCsv\l+ shuffleData\l+ csvPath\l+ labels\l- m_data\l|+ Dataset()\l+ ~Dataset()\l+ name()\l+ path()\l+ samples()\l+ training()\l+ test()\l+ autoGenerateCsv()\l+ shuffleData()\l+ csvPath()\l+ labels()\l+ serialize()\l+ data()\l+ setName()\l+ setPath()\l+ setSamples()\l+ setTraining()\l+ setTest()\l+ setAutoGenerateCsv()\l+ setShuffleData()\l+ setCsvPath()\l+ setLabels()\l+ setData()\l# _deserialize()\l}",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+  Node2 -> Node1 [dir="back",color="midnightblue",fontsize="10",style="solid",arrowtail="onormal",fontname="Helvetica"];
+  Node2 [label="{QObject\n||}",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
+  Node3 -> Node1 [dir="back",color="midnightblue",fontsize="10",style="solid",arrowtail="onormal",fontname="Helvetica"];
+  Node3 [label="{dnai::interfaces::ASerializable\l\< Dataset \>\n||+ ~ASerializable()\l+ serialize()\l+ serializeList()\l+ deserialize()\l# _deserialize()\l}",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classdnai_1_1interfaces_1_1_a_serializable.html"];
+  Node4 -> Node3 [dir="back",color="firebrick4",fontsize="10",style="solid",arrowtail="onormal",fontname="Helvetica"];
+  Node4 [label="{dnai::interfaces::ISerializable\n||+ ~ISerializable()\l+ serialize()\l# _deserialize()\l}",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classdnai_1_1interfaces_1_1_i_serializable.html",tooltip="Allow inherited class to serialize and deserialize itself. "];
+  Node5 -> Node1 [color="grey25",fontsize="10",style="solid",label=" -m_labels" ,arrowhead="odiamond",fontname="Helvetica"];
+  Node5 [label="{dnai::utils::IterableQQml\lPropertyMap\n|- m_map\l|+ IterableQQmlPropertyMap()\l+ rowCount()\l+ data()\l+ value()\l+ insert()\l+ clear()\l+ keys()\l+ count()\l+ size()\l+ isEmpty()\l+ contains()\l+ operator[]()\l+ operator[]()\l- roleNames()\l}",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classdnai_1_1utils_1_1_iterable_q_qml_property_map.html"];
+  Node6 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",arrowtail="onormal",fontname="Helvetica"];
+  Node6 [label="{QAbstractListModel\n||}",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
+}

@@ -1,0 +1,3 @@
+<map id="dnai::models::EntityTree" name="dnai::models::EntityTree">
+<area shape="rect" id="node3" href="$classdnai_1_1_project.html" title="{dnai::Project\n|+ selectedEntity\l+ childCount\l+ saved\l+ mlData\l&#45; m_file\l&#45; count\l&#45; m_selectedEntity\l&#45; m_filename\l&#45; m_description\l&#45; m_data\l&#45; m_version\l&#45; m_rootEntity\l&#45; m_entityColumnUid\l&#45; m_mlData\l&#45; m_save\l|+ Project()\l+ Project()\l+ ~Project()\l+ jsonData()\l+ serialize()\l+ _deserialize()\l+ selectedEntity()\l+ setSelectedEntity()\l+ setSaved()\l+ save()\land 22 more...\l+ removeEntity()\l+ addEntity()\l&#45; getIndexOf()\l&#45; getColumnOf()\l&#45; _foreachEntity()\l&#45; _foreachEntity()\l}" alt="" coords="14,373,159,891"/>
+</map>

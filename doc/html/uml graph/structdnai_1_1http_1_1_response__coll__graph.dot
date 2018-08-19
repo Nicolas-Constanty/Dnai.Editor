@@ -1,0 +1,8 @@
+digraph "dnai::http::Response"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="{dnai::http::Response\n|+ body\l|+ operator QString()\l}",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+  Node2 -> Node1 [color="grey25",fontsize="10",style="solid",label=" +status" ,arrowhead="odiamond",fontname="Helvetica"];
+  Node2 [label="{dnai::http::Status\n|+ code\l+ message\l|}",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structdnai_1_1http_1_1_status.html"];
+}

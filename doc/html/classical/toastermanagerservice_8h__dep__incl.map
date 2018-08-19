@@ -1,0 +1,36 @@
+<map id="Gui/app/include/dnai/toastermanagerservice.h" name="Gui/app/include/dnai/toastermanagerservice.h">
+<area shape="rect" id="node2" href="$editor_8h.html" title="Gui/app/include/dnai\l/editor.h" alt="" coords="1630,95,1770,136"/>
+<area shape="rect" id="node10" href="$toastermanagerservice_8cpp.html" title="Gui/app/src/dnai/toastermanagerservice.cpp" alt="" coords="827,281,1103,307"/>
+<area shape="rect" id="node34" href="$moc__toastermanagerservice_8cpp.html" title="Gui/app/GeneratedFiles\l/Debug/moc_toastermanagerservice.cpp" alt="" coords="1794,95,2049,136"/>
+<area shape="rect" id="node35" href="$toast_8cpp.html" title="Gui/app/src/dnai/views\l/toast.cpp" alt="" coords="2073,95,2225,136"/>
+<area shape="rect" id="node3" href="$app_8h.html" title="Gui/app/include/dnai\l/app.h" alt="" coords="3198,184,3338,225"/>
+<area shape="rect" id="node9" href="$editor_8cpp.html" title="Gui/app/src/dnai/editor.cpp" alt="" coords="2189,281,2368,307"/>
+<area shape="rect" id="node16" href="$main_8cpp.html" title="Gui/app/src/main.cpp" alt="" coords="4196,281,4343,307"/>
+<area shape="rect" id="node17" href="$moc__editor_8cpp.html" title="Gui/app/GeneratedFiles\l/Debug/moc_editor.cpp" alt="" coords="27,184,186,225"/>
+<area shape="rect" id="node18" href="$commandmanager_8cpp.html" title="Gui/app/src/dnai/commands\l/commandmanager.cpp" alt="" coords="210,184,395,225"/>
+<area shape="rect" id="node19" href="$declaratorhandler_8cpp.html" title="Gui/app/src/dnai/core\l/declaratorhandler.cpp" alt="" coords="419,184,570,225"/>
+<area shape="rect" id="node20" href="$enumhandler_8cpp.html" title="Gui/app/src/dnai/core\l/enumhandler.cpp" alt="" coords="595,184,741,225"/>
+<area shape="rect" id="node21" href="$functionhandler_8cpp.html" title="Gui/app/src/dnai/core\l/functionhandler.cpp" alt="" coords="765,184,912,225"/>
+<area shape="rect" id="node22" href="$globalhandler_8cpp.html" title="Gui/app/src/dnai/core\l/globalhandler.cpp" alt="" coords="936,184,1083,225"/>
+<area shape="rect" id="node23" href="$instructionhandler_8cpp.html" title="Gui/app/src/dnai/core\l/instructionhandler.cpp" alt="" coords="1107,184,1261,225"/>
+<area shape="rect" id="node24" href="$listhandler_8cpp.html" title="Gui/app/src/dnai/core\l/listhandler.cpp" alt="" coords="1285,184,1432,225"/>
+<area shape="rect" id="node25" href="$objecthandler_8cpp.html" title="Gui/app/src/dnai/core\l/objecthandler.cpp" alt="" coords="1456,184,1603,225"/>
+<area shape="rect" id="node26" href="$projecthandler_8cpp.html" title="Gui/app/src/dnai/core\l/projecthandler.cpp" alt="" coords="1627,184,1773,225"/>
+<area shape="rect" id="node27" href="$variablehandler_8cpp.html" title="Gui/app/src/dnai/core\l/variablehandler.cpp" alt="" coords="1797,184,1944,225"/>
+<area shape="rect" id="node28" href="$models_2gui_2flow_8cpp.html" title="Gui/app/src/dnai/models\l/gui/flow.cpp" alt="" coords="1968,184,2131,225"/>
+<area shape="rect" id="node29" href="$project_8cpp.html" title="Gui/app/src/dnai/project.cpp" alt="" coords="2155,191,2341,218"/>
+<area shape="rect" id="node30" href="$session_8cpp.html" title="Gui/app/src/dnai/session.cpp" alt="" coords="2365,191,2555,218"/>
+<area shape="rect" id="node31" href="$solution_8cpp.html" title="Gui/app/src/dnai/solution.cpp" alt="" coords="2579,191,2770,218"/>
+<area shape="rect" id="node32" href="$editorview_8cpp.html" title="Gui/app/src/dnai/views\l/editorview.cpp" alt="" coords="2795,184,2947,225"/>
+<area shape="rect" id="node33" href="$viewzone_8cpp.html" title="Gui/app/src/dnai/views\l/viewzone.cpp" alt="" coords="2971,184,3123,225"/>
+<area shape="rect" id="node4" href="$moc__app_8cpp.html" title="Gui/app/GeneratedFiles\l/Debug/moc_app.cpp" alt="" coords="2923,273,3082,315"/>
+<area shape="rect" id="node5" href="$icontroller_8h.html" title="Gui/app/include/dnai\l/interfaces/icontroller.h" alt="" coords="3106,273,3259,315"/>
+<area shape="rect" id="node6" href="$api_8cpp.html" title="Gui/app/src/dnai/api\l/api.cpp" alt="" coords="3284,273,3423,315"/>
+<area shape="rect" id="node7" href="$app_8cpp.html" title="Gui/app/src/dnai/app.cpp" alt="" coords="3447,281,3614,307"/>
+<area shape="rect" id="node8" href="$inputcontroller_8cpp.html" title="Gui/app/src/dnai/controllers\l/inputcontroller.cpp" alt="" coords="3639,273,3820,315"/>
+<area shape="rect" id="node11" href="$canvasnode_8cpp.html" title="Gui/app/src/dnai/views\l/canvasnode.cpp" alt="" coords="3844,273,3996,315"/>
+<area shape="rect" id="node12" href="$contextview_8cpp.html" title="Gui/app/src/dnai/views\l/contextview.cpp" alt="" coords="4020,273,4172,315"/>
+<area shape="rect" id="node13" href="$declarationview_8cpp.html" title="Gui/app/src/dnai/views\l/declarationview.cpp" alt="" coords="2392,273,2544,315"/>
+<area shape="rect" id="node14" href="$genericnode_8cpp.html" title="Gui/app/src/dnai/views\l/genericnode.cpp" alt="" coords="2568,273,2720,315"/>
+<area shape="rect" id="node15" href="$linkablebezieritem_8cpp.html" title="Gui/app/src/dnai/views\l/linkablebezieritem.cpp" alt="" coords="2744,273,2899,315"/>
+</map>

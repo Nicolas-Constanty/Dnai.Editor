@@ -1,0 +1,137 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" href="$classdnai_1_1models_1_1gcore_1_1_i_entity_core.html" title="dnai::models::gcore\l::IEntityCore" alt="" coords="561,5,697,47"/>
+<area shape="rect" id="node2" href="$classdnai_1_1models_1_1gcore_1_1_entity.html" title="dnai::models::gcore\l::Entity" alt="" coords="826,71,962,112"/>
+<area shape="rect" id="node3" href="$classdnai_1_1interfaces_1_1_i_model_data.html" title="dnai::interfaces::IModel\lData\&lt; T \&gt;" alt="" coords="277,3285,433,3327"/>
+<area shape="rect" id="node4" href="$classdnai_1_1models_1_1gui_1_1declarable_1_1_entity.html" title="dnai::models::gui::\ldeclarable::Entity\&lt;\l T, U \&gt;" alt="" coords="564,3219,695,3275"/>
+<area shape="rect" id="node5" href="$classdnai_1_1interfaces_1_1_i_model_data.html" title="dnai::interfaces::IModel\lData\&lt; data::Context \&gt;" alt="" coords="277,2608,433,2649"/>
+<area shape="rect" id="node6" href="$classdnai_1_1models_1_1gui_1_1declarable_1_1_entity.html" title="dnai::models::gui::\ldeclarable::Entity\&lt;\l data::Context, Context \&gt;" alt="" coords="545,2754,714,2810"/>
+<area shape="rect" id="node7" href="$classdnai_1_1models_1_1gui_1_1declarable_1_1_context.html" title="dnai::models::gui::\ldeclarable::Context" alt="" coords="827,2512,961,2553"/>
+<area shape="rect" id="node8" href="$classdnai_1_1interfaces_1_1_i_model_data.html" title="dnai::interfaces::IModel\lData\&lt; data::EnumType \&gt;" alt="" coords="271,2907,439,2948"/>
+<area shape="rect" id="node9" href="$classdnai_1_1models_1_1gui_1_1declarable_1_1_entity.html" title="dnai::models::gui::\ldeclarable::Entity\&lt;\l data::EnumType, EnumType \&gt;" alt="" coords="528,2885,731,2941"/>
+<area shape="rect" id="node10" href="$classdnai_1_1models_1_1gui_1_1declarable_1_1_enum_type.html" title="dnai::models::gui::\ldeclarable::EnumType" alt="" coords="819,2727,969,2768"/>
+<area shape="rect" id="node11" href="$classdnai_1_1interfaces_1_1_i_model_data.html" title="dnai::interfaces::IModel\lData\&lt; data::Flow \&gt;" alt="" coords="277,2164,433,2205"/>
+<area shape="rect" id="node12" href="$classdnai_1_1models_1_1gui_1_1_flow.html" title="dnai::models::gui::Flow" alt="" coords="551,2506,707,2533"/>
+<area shape="rect" id="node13" href="$classdnai_1_1interfaces_1_1_i_model_data.html" title="dnai::interfaces::IModel\lData\&lt; data::FlowLink \&gt;" alt="" coords="276,3664,433,3705"/>
+<area shape="rect" id="node14" href="$classdnai_1_1models_1_1gui_1_1_flow_link.html" title="dnai::models::gui::\lFlowLink" alt="" coords="565,3631,694,3672"/>
+<area shape="rect" id="node15" href="$classdnai_1_1interfaces_1_1_i_model_data.html" title="dnai::interfaces::IModel\lData\&lt; data::Function \&gt;" alt="" coords="277,3037,433,3079"/>
+<area shape="rect" id="node16" href="$classdnai_1_1models_1_1gui_1_1declarable_1_1_entity.html" title="dnai::models::gui::\ldeclarable::Entity\&lt;\l data::Function, Function \&gt;" alt="" coords="540,2965,719,3021"/>
+<area shape="rect" id="node17" href="$classdnai_1_1models_1_1gui_1_1declarable_1_1_function.html" title="dnai::models::gui::\ldeclarable::Function" alt="" coords="825,2948,963,2989"/>
+<area shape="rect" id="node18" href="$classdnai_1_1interfaces_1_1_i_model_data.html" title="dnai::interfaces::IModel\lData\&lt; data::Input \&gt;" alt="" coords="277,3416,433,3457"/>
+<area shape="rect" id="node19" href="$classdnai_1_1models_1_1gui_1_1_input.html" title="dnai::models::gui::\lInput" alt="" coords="565,3353,694,3395"/>
+<area shape="rect" id="node20" href="$classdnai_1_1interfaces_1_1_i_model_data.html" title="dnai::interfaces::IModel\lData\&lt; data::Instruction \&gt;" alt="" coords="271,391,438,432"/>
+<area shape="rect" id="node21" href="$classdnai_1_1models_1_1gui_1_1_instruction.html" title="dnai::models::gui::\lInstruction" alt="" coords="565,319,694,360"/>
+<area shape="rect" id="node22" href="$classdnai_1_1interfaces_1_1_i_model_data.html" title="dnai::interfaces::IModel\lData\&lt; data::IoLink \&gt;" alt="" coords="277,4393,433,4435"/>
+<area shape="rect" id="node23" href="$classdnai_1_1models_1_1gui_1_1_io_link.html" title="dnai::models::gui::\lIoLink" alt="" coords="565,4161,694,4203"/>
+<area shape="rect" id="node24" href="$classdnai_1_1interfaces_1_1_i_model_data.html" title="dnai::interfaces::IModel\lData\&lt; data::Linkable \&gt;" alt="" coords="277,2360,433,2401"/>
+<area shape="rect" id="node25" href="$classdnai_1_1models_1_1gui_1_1_linkable.html" title="dnai::models::gui::\lLinkable" alt="" coords="565,2557,694,2599"/>
+<area shape="rect" id="node26" href="$classdnai_1_1interfaces_1_1_i_model_data.html" title="dnai::interfaces::IModel\lData\&lt; data::ListType \&gt;" alt="" coords="277,195,433,236"/>
+<area shape="rect" id="node27" href="$classdnai_1_1models_1_1gui_1_1declarable_1_1_entity.html" title="dnai::models::gui::\ldeclarable::Entity\&lt;\l data::ListType, ListType \&gt;" alt="" coords="541,187,718,243"/>
+<area shape="rect" id="node28" href="$classdnai_1_1models_1_1gui_1_1declarable_1_1_list_type.html" title="dnai::models::gui::\ldeclarable::ListType" alt="" coords="825,319,963,360"/>
+<area shape="rect" id="node29" href="$classdnai_1_1interfaces_1_1_i_model_data.html" title="dnai::interfaces::IModel\lData\&lt; data::ObjectType \&gt;" alt="" coords="269,2477,441,2519"/>
+<area shape="rect" id="node30" href="$classdnai_1_1models_1_1gui_1_1declarable_1_1_entity.html" title="dnai::models::gui::\ldeclarable::Entity\&lt;\l data::ObjectType, ObjectType \&gt;" alt="" coords="524,2674,735,2730"/>
+<area shape="rect" id="node31" href="$classdnai_1_1models_1_1gui_1_1declarable_1_1_object_type.html" title="dnai::models::gui::\ldeclarable::ObjectType" alt="" coords="817,2328,971,2369"/>
+<area shape="rect" id="node32" href="$classdnai_1_1interfaces_1_1_i_model_data.html" title="dnai::interfaces::IModel\lData\&lt; data::Output \&gt;" alt="" coords="277,4211,433,4252"/>
+<area shape="rect" id="node33" href="$classdnai_1_1models_1_1gui_1_1_output.html" title="dnai::models::gui::\lOutput" alt="" coords="565,3504,694,3545"/>
+<area shape="rect" id="node34" href="$classdnai_1_1interfaces_1_1_i_model_data.html" title="dnai::interfaces::IModel\lData\&lt; data::Variable \&gt;" alt="" coords="277,3168,433,3209"/>
+<area shape="rect" id="node35" href="$classdnai_1_1models_1_1gui_1_1declarable_1_1_entity.html" title="dnai::models::gui::\ldeclarable::Entity\&lt;\l data::Variable, Variable \&gt;" alt="" coords="543,3095,716,3151"/>
+<area shape="rect" id="node36" href="$classdnai_1_1models_1_1gui_1_1declarable_1_1_variable.html" title="dnai::models::gui::\ldeclarable::Variable" alt="" coords="826,3103,962,3144"/>
+<area shape="rect" id="node37" href="$classdnai_1_1interfaces_1_1_i_model_data.html" title="dnai::interfaces::IModel\lData\&lt; EntityData \&gt;" alt="" coords="551,71,707,112"/>
+<area shape="rect" id="node38" href="$classdnai_1_1interfaces_1_1_i_savable.html" title="dnai::interfaces::ISavable" alt="" coords="16,3478,183,3505"/>
+<area shape="rect" id="node39" href="$classdnai_1_1interfaces_1_1_i_editor.html" title="dnai::interfaces::IEditor" alt="" coords="277,2426,432,2453"/>
+<area shape="rect" id="node41" href="$classdnai_1_1interfaces_1_1_i_project.html" title="dnai::interfaces::IProject" alt="" coords="273,3926,436,3953"/>
+<area shape="rect" id="node40" href="$classdnai_1_1_editor.html" title="dnai::Editor" alt="" coords="585,2623,673,2650"/>
+<area shape="rect" id="node42" href="$classdnai_1_1interfaces_1_1_i_solution.html" title="dnai::interfaces::ISolution" alt="" coords="545,3863,713,3890"/>
+<area shape="rect" id="node44" href="$classdnai_1_1_project.html" title="dnai::Project" alt="" coords="582,3914,677,3941"/>
+<area shape="rect" id="node43" href="$classdnai_1_1_solution.html" title="dnai::Solution" alt="" coords="843,3863,945,3890"/>
+<area shape="rect" id="node45" href="$classdnai_1_1interfaces_1_1_i_scalable.html" title="This interface allow to create custom scale for inherited object. " alt="" coords="809,4687,979,4714"/>
+<area shape="rect" id="node46" href="$classdnai_1_1views_1_1_io.html" title="dnai::views::Io" alt="" coords="1063,4687,1166,4714"/>
+<area shape="rect" id="node47" href="$classdnai_1_1views_1_1_input.html" title="dnai::views::Input" alt="" coords="1253,4713,1375,4739"/>
+<area shape="rect" id="node48" href="$classdnai_1_1views_1_1_output.html" title="dnai::views::Output" alt="" coords="1248,4662,1380,4689"/>
+<area shape="rect" id="node49" href="$classdnai_1_1interfaces_1_1_i_serializable.html" title="Allow inherited class to serialize and deserialize itself. " alt="" coords="5,2979,193,3006"/>
+<area shape="rect" id="node50" href="$classdnai_1_1interfaces_1_1_a_serializable.html" title="dnai::interfaces::ASerializable\l\&lt; Column \&gt;" alt="" coords="257,3795,452,3836"/>
+<area shape="rect" id="node52" href="$classdnai_1_1interfaces_1_1_a_serializable.html" title="dnai::interfaces::ASerializable\l\&lt; Context \&gt;" alt="" coords="257,2673,452,2715"/>
+<area shape="rect" id="node53" href="$classdnai_1_1interfaces_1_1_a_serializable.html" title="dnai::interfaces::ASerializable\l\&lt; data::Linkable \&gt;" alt="" coords="257,2295,452,2336"/>
+<area shape="rect" id="node54" href="$classdnai_1_1interfaces_1_1_a_serializable.html" title="dnai::interfaces::ASerializable\l\&lt; Dataset \&gt;" alt="" coords="257,129,452,171"/>
+<area shape="rect" id="node56" href="$classdnai_1_1interfaces_1_1_a_serializable.html" title="dnai::interfaces::ASerializable\l\&lt; Entity \&gt;" alt="" coords="532,384,727,425"/>
+<area shape="rect" id="node60" href="$classdnai_1_1interfaces_1_1_a_serializable.html" title="dnai::interfaces::ASerializable\l\&lt; EnumType \&gt;" alt="" coords="257,2841,452,2883"/>
+<area shape="rect" id="node61" href="$classdnai_1_1interfaces_1_1_a_serializable.html" title="dnai::interfaces::ASerializable\l\&lt; Flow \&gt;" alt="" coords="257,2229,452,2271"/>
+<area shape="rect" id="node62" href="$classdnai_1_1interfaces_1_1_a_serializable.html" title="dnai::interfaces::ASerializable\l\&lt; FlowLink \&gt;" alt="" coords="257,3599,452,3640"/>
+<area shape="rect" id="node63" href="$classdnai_1_1interfaces_1_1_a_serializable.html" title="dnai::interfaces::ASerializable\l\&lt; Function \&gt;" alt="" coords="257,2972,452,3013"/>
+<area shape="rect" id="node64" href="$classdnai_1_1interfaces_1_1_a_serializable.html" title="dnai::interfaces::ASerializable\l\&lt; HyperParameters \&gt;" alt="" coords="257,325,452,367"/>
+<area shape="rect" id="node66" href="$classdnai_1_1interfaces_1_1_a_serializable.html" title="dnai::interfaces::ASerializable\l\&lt; Input \&gt;" alt="" coords="257,3351,452,3392"/>
+<area shape="rect" id="node67" href="$classdnai_1_1interfaces_1_1_a_serializable.html" title="dnai::interfaces::ASerializable\l\&lt; Instruction \&gt;" alt="" coords="257,687,452,728"/>
+<area shape="rect" id="node68" href="$classdnai_1_1interfaces_1_1_a_serializable.html" title="dnai::interfaces::ASerializable\l\&lt; IoLink \&gt;" alt="" coords="257,4028,452,4069"/>
+<area shape="rect" id="node69" href="$classdnai_1_1interfaces_1_1_a_serializable.html" title="dnai::interfaces::ASerializable\l\&lt; ListType \&gt;" alt="" coords="257,260,452,301"/>
+<area shape="rect" id="node70" href="$classdnai_1_1interfaces_1_1_a_serializable.html" title="dnai::interfaces::ASerializable\l\&lt; ObjectType \&gt;" alt="" coords="257,2543,452,2584"/>
+<area shape="rect" id="node71" href="$classdnai_1_1interfaces_1_1_a_serializable.html" title="dnai::interfaces::ASerializable\l\&lt; Output \&gt;" alt="" coords="257,3533,452,3575"/>
+<area shape="rect" id="node72" href="$classdnai_1_1interfaces_1_1_a_serializable.html" title="dnai::interfaces::ASerializable\l\&lt; Project \&gt;" alt="" coords="257,3860,452,3901"/>
+<area shape="rect" id="node73" href="$classdnai_1_1interfaces_1_1_a_serializable.html" title="dnai::interfaces::ASerializable\l\&lt; Solution \&gt;" alt="" coords="257,3729,452,3771"/>
+<area shape="rect" id="node74" href="$classdnai_1_1interfaces_1_1_a_serializable.html" title="dnai::interfaces::ASerializable\&lt; U \&gt;" alt="" coords="241,3234,468,3261"/>
+<area shape="rect" id="node75" href="$classdnai_1_1interfaces_1_1_a_serializable.html" title="dnai::interfaces::ASerializable\l\&lt; Variable \&gt;" alt="" coords="257,3103,452,3144"/>
+<area shape="rect" id="node76" href="$classdnai_1_1interfaces_1_1_a_serializable.html" title="Allow inherited class to serialize and deserialize itself. " alt="" coords="242,2739,467,2766"/>
+<area shape="rect" id="node78" href="$classdnai_1_1interfaces_1_1_i_editor_model.html" title="dnai::interfaces::IEditor\lModel" alt="" coords="277,4145,432,4187"/>
+<area shape="rect" id="node79" href="$classdnai_1_1interfaces_1_1_i_entity.html" title="dnai::interfaces::IEntity" alt="" coords="277,2790,432,2817"/>
+<area shape="rect" id="node80" href="$classdnai_1_1interfaces_1_1_i_view_zone.html" title="dnai::interfaces::IViewZone" alt="" coords="266,4094,443,4121"/>
+<area shape="rect" id="node51" href="$classdnai_1_1models_1_1_column.html" title="dnai::models::Column" alt="" coords="555,3806,703,3833"/>
+<area shape="rect" id="node55" href="$classdnai_1_1models_1_1ml_1_1_dataset.html" title="dnai::models::ml::Dataset" alt="" coords="544,137,715,163"/>
+<area shape="rect" id="node57" href="$classdnai_1_1interfaces_1_1_i_model.html" title="dnai::interfaces::IModel\l\&lt; Entity \&gt;" alt="" coords="816,2040,972,2081"/>
+<area shape="rect" id="node58" href="$classdnai_1_1models_1_1_entity.html" title="dnai::models::Entity" alt="" coords="1045,2047,1184,2074"/>
+<area shape="rect" id="node59" href="$classdnai_1_1models_1_1_instruction.html" title="dnai::models::Instruction" alt="" coords="1232,2047,1396,2074"/>
+<area shape="rect" id="node65" href="$classdnai_1_1models_1_1ml_1_1_hyper_parameters.html" title="dnai::models::ml::HyperParameters" alt="" coords="516,267,743,294"/>
+<area shape="rect" id="node77" href="$classdnai_1_1interfaces_1_1_i_model.html" title="This class allow you to create a new serializable model and allow you to use it in a tree..." alt="" coords="801,2641,987,2667"/>
+<area shape="rect" id="node81" href="$classdnai_1_1views_1_1_view_zone.html" title="dnai::views::ViewZone" alt="" coords="555,4254,704,4281"/>
+<area shape="rect" id="node82" href="$classdnai_1_1interfaces_1_1_i_variable.html" title="dnai::interfaces::IVariable" alt="" coords="271,3482,439,3509"/>
+<area shape="rect" id="node83" href="$classdnai_1_1interfaces_1_1_i_view_element.html" title="dnai::interfaces::IViewElement" alt="" coords="256,4459,453,4486"/>
+<area shape="rect" id="node84" href="$classdnai_1_1views_1_1_view_element.html" title="dnai::views::ViewElement" alt="" coords="545,4409,714,4435"/>
+<area shape="rect" id="node86" href="$classdnai_1_1models_1_1_context_menu_model.html" title="dnai::models::ContextMenu\lModel" alt="" coords="264,4328,445,4369"/>
+<area shape="rect" id="node87" href="$classdnai_1_1models_1_1_entity_tree.html" title="dnai::models::EntityTree" alt="" coords="273,4277,436,4303"/>
+<area shape="rect" id="node89" href="$classdnai_1_1models_1_1gui_1_1_entity_list.html" title="dnai::models::gui::\lEntityList" alt="" coords="565,3965,694,4007"/>
+<area shape="rect" id="node90" href="$classdnai_1_1utils_1_1_iterable_q_qml_property_map.html" title="dnai::utils::IterableQQml\lPropertyMap" alt="" coords="548,4031,711,4072"/>
+<area shape="rect" id="node92" href="$classdnai_1_1_app_context.html" title="dnai::AppContext" alt="" coords="568,501,691,527"/>
+<area shape="rect" id="node93" href="$classdnai_1_1enums_1_1_declaration_type_ressouce.html" title="dnai::enums::Declaration\lTypeRessouce" alt="" coords="546,552,713,593"/>
+<area shape="rect" id="node94" href="$classdnai_1_1enums_1_1_flow_type_ressouce.html" title="dnai::enums::FlowTypeRessouce" alt="" coords="522,618,737,645"/>
+<area shape="rect" id="node95" href="$classdnai_1_1enums_1_1_io_type_ressouce.html" title="dnai::enums::IoTypeRessouce" alt="" coords="531,669,728,695"/>
+<area shape="rect" id="node96" href="$classdnai_1_1enums_1_1_q_instruction_i_d.html" title="dnai::enums::QInstructionID" alt="" coords="538,719,721,746"/>
+<area shape="rect" id="node97" href="$classdnai_1_1gcore_1_1_declarator_handler.html" title="dnai::gcore::DeclaratorHandler" alt="" coords="531,770,728,797"/>
+<area shape="rect" id="node98" href="$classdnai_1_1gcore_1_1_entity_manager.html" title="dnai::gcore::EntityManager" alt="" coords="540,821,719,847"/>
+<area shape="rect" id="node99" href="$classdnai_1_1gcore_1_1_enum_handler.html" title="dnai::gcore::EnumHandler" alt="" coords="543,871,715,898"/>
+<area shape="rect" id="node100" href="$classdnai_1_1gcore_1_1_function_handler.html" title="dnai::gcore::FunctionHandler" alt="" coords="535,922,723,949"/>
+<area shape="rect" id="node101" href="$classdnai_1_1gcore_1_1_global_handler.html" title="dnai::gcore::GlobalHandler" alt="" coords="542,973,717,999"/>
+<area shape="rect" id="node102" href="$classdnai_1_1gcore_1_1_handler_manager.html" title="dnai::gcore::HandlerManager" alt="" coords="535,1023,723,1050"/>
+<area shape="rect" id="node103" href="$classdnai_1_1gcore_1_1_instruction_handler.html" title="dnai::gcore::Instruction\lHandler" alt="" coords="552,1075,707,1116"/>
+<area shape="rect" id="node104" href="$classdnai_1_1gcore_1_1_list_handler.html" title="dnai::gcore::ListHandler" alt="" coords="550,1141,709,1167"/>
+<area shape="rect" id="node105" href="$classdnai_1_1gcore_1_1_object_handler.html" title="dnai::gcore::ObjectHandler" alt="" coords="541,1191,717,1218"/>
+<area shape="rect" id="node106" href="$classdnai_1_1gcore_1_1_project_handler.html" title="dnai::gcore::ProjectHandler" alt="" coords="540,1242,719,1269"/>
+<area shape="rect" id="node107" href="$classdnai_1_1gcore_1_1_variable_handler.html" title="dnai::gcore::VariableHandler" alt="" coords="537,1293,722,1319"/>
+<area shape="rect" id="node108" href="$classdnai_1_1http_1_1_observable.html" title="dnai::http::Observable" alt="" coords="555,1343,703,1370"/>
+<area shape="rect" id="node109" href="$classdnai_1_1http_1_1_url.html" title="dnai::http::Url" alt="" coords="579,1394,679,1421"/>
+<area shape="rect" id="node110" href="$classdnai_1_1ml_1_1_dataset_handler.html" title="dnai::ml::DatasetHandler" alt="" coords="547,1445,712,1471"/>
+<area shape="rect" id="node111" href="$classdnai_1_1ml_1_1_ml_handler.html" title="dnai::ml::MlHandler" alt="" coords="562,1495,697,1522"/>
+<area shape="rect" id="node112" href="$classdnai_1_1models_1_1_generic_tree_item.html" title="dnai::models::GenericTree\lItem\&lt; T \&gt;" alt="" coords="542,2288,717,2329"/>
+<area shape="rect" id="node113" href="$classdnai_1_1models_1_1ml_1_1_label.html" title="dnai::models::ml::Label" alt="" coords="551,1546,708,1573"/>
+<area shape="rect" id="node114" href="$classdnai_1_1models_1_1ml_1_1_ml_project.html" title="dnai::models::ml::MlProject" alt="" coords="539,1597,720,1623"/>
+<area shape="rect" id="node115" href="$classdnai_1_1models_1_1ml_1_1_model.html" title="dnai::models::ml::Model" alt="" coords="549,1647,710,1674"/>
+<area shape="rect" id="node116" href="$classdnai_1_1models_1_1_user.html" title="dnai::models::User" alt="" coords="564,1698,695,1725"/>
+<area shape="rect" id="node117" href="$classdnai_1_1_property_panel_properties.html" title="dnai::PropertyPanelProperties" alt="" coords="532,1749,727,1775"/>
+<area shape="rect" id="node118" href="$classdnai_1_1_session.html" title="dnai::Session" alt="" coords="579,1799,680,1826"/>
+<area shape="rect" id="node119" href="$classdnai_1_1models_1_1_generic_tree_item.html" title="dnai::models::GenericTree\lItem\&lt; ContextMenuItem \&gt;" alt="" coords="542,1851,717,1892"/>
+<area shape="rect" id="node121" href="$classdnai_1_1models_1_1_generic_tree_item.html" title="dnai::models::GenericTree\lItem\&lt; Entity \&gt;" alt="" coords="542,2171,717,2212"/>
+<area shape="rect" id="node122" href="$class_process_manager.html" title="ProcessManager" alt="" coords="569,1967,689,1994"/>
+<area shape="rect" id="node123" href="$class_q_c_standard_paths.html" title="QCStandardPaths" alt="" coords="566,2018,693,2045"/>
+<area shape="rect" id="node124" href="$class_toast.html" title="Toast" alt="" coords="602,2069,657,2095"/>
+<area shape="rect" id="node125" href="$class_toaster_manager_service.html" title="ToasterManagerService" alt="" coords="551,2119,708,2146"/>
+<area shape="rect" id="node120" href="$classdnai_1_1models_1_1_context_menu_item.html" title="dnai::models::ContextMenuItem" alt="" coords="791,1858,997,1885"/>
+<area shape="rect" id="node127" href="$classdnai_1_1views_1_1_bezier_curve.html" title="dnai::views::BezierCurve" alt="" coords="548,4763,711,4790"/>
+<area shape="rect" id="node128" href="$classdnai_1_1views_1_1_canvas_node.html" title="dnai::views::CanvasNode" alt="" coords="547,4814,712,4841"/>
+<area shape="rect" id="node129" href="$classdnai_1_1views_1_1_console.html" title="dnai::views::Console" alt="" coords="559,4459,699,4486"/>
+<area shape="rect" id="node130" href="$classdnai_1_1views_1_1_context_view.html" title="dnai::views::ContextView" alt="" coords="546,4510,713,4537"/>
+<area shape="rect" id="node132" href="$classdnai_1_1views_1_1_custom_shape.html" title="dnai::views::CustomShape" alt="" coords="542,4561,717,4587"/>
+<area shape="rect" id="node137" href="$classdnai_1_1views_1_1_editor_view.html" title="dnai::views::EditorView" alt="" coords="552,4611,707,4638"/>
+<area shape="rect" id="node138" href="$classdnai_1_1views_1_1_generic_node.html" title="dnai::views::GenericNode" alt="" coords="545,4662,713,4689"/>
+<area shape="rect" id="node139" href="$classdnai_1_1views_1_1_line.html" title="dnai::views::Line" alt="" coords="571,4713,688,4739"/>
+<area shape="rect" id="node131" href="$classdnai_1_1views_1_1_declaration_view.html" title="dnai::views::DeclarationView" alt="" coords="801,4485,987,4511"/>
+<area shape="rect" id="node133" href="$classdnai_1_1_linkable_bezier_item.html" title="dnai::LinkableBezierItem" alt="" coords="812,4586,976,4613"/>
+<area shape="rect" id="node134" href="$classdnai_1_1views_1_1_linkable_bezier_item.html" title="dnai::views::LinkableBezierItem" alt="" coords="793,4637,995,4663"/>
+<area shape="rect" id="node136" href="$classdnai_1_1views_1_1_rounded_rectangle.html" title="dnai::views::RoundedRectangle" alt="" coords="793,4535,995,4562"/>
+<area shape="rect" id="node135" href="$classdnai_1_1views_1_1_flow.html" title="dnai::views::Flow" alt="" coords="1055,4637,1175,4663"/>
+</map>

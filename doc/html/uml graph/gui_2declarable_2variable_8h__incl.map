@@ -1,0 +1,10 @@
+<map id="DNAI/app/include/dnai/models/gui/declarable/variable.h" name="DNAI/app/include/dnai/models/gui/declarable/variable.h">
+<area shape="rect" id="node3" href="$ivariable_8h.html" title="dnai/interfaces/ivariable.h" alt="" coords="100,117,267,143"/>
+<area shape="rect" id="node5" href="$gui_2data_2variable_8h.html" title="dnai/models/gui/data\l/variable.h" alt="" coords="291,109,433,151"/>
+<area shape="rect" id="node9" href="$gui_2declarable_2entity_8h.html" title="entity.h" alt="" coords="553,117,619,143"/>
+<area shape="rect" id="node7" href="$gui_2data_2entity_8h.html" title="entity.h" alt="" coords="421,199,487,225"/>
+<area shape="rect" id="node10" href="$imodeldata_8h.html" title="dnai/interfaces/imodeldata.h" alt="" coords="691,199,875,225"/>
+<area shape="rect" id="node11" href="$iserializable_8h.html" title="dnai/interfaces/iserializable.h" alt="" coords="207,199,397,225"/>
+<area shape="rect" id="node13" href="$ientity_8h.html" title="dnai/interfaces/ientity.h" alt="" coords="511,199,667,225"/>
+<area shape="rect" id="node14" href="$notimplemented_8h.html" title="dnai/exceptions/notimplemented.h" alt="" coords="900,199,1120,225"/>
+</map>

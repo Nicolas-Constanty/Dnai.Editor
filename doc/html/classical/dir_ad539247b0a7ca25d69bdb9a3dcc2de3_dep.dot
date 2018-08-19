@@ -1,0 +1,11 @@
+digraph "Gui/app/include/dnai/ml" {
+  compound=true
+  node [ fontsize="10", fontname="Helvetica"];
+  edge [ labelfontsize="10", labelfontname="Helvetica"];
+  subgraph clusterdir_2412b997a73e0eba9ea0a70041d765c1 {
+    graph [ bgcolor="#ddddee", pencolor="black", label="dnai" fontname="Helvetica", fontsize="10", URL="dir_2412b997a73e0eba9ea0a70041d765c1.html"]
+  dir_ad539247b0a7ca25d69bdb9a3dcc2de3 [shape=box, label="ml", style="filled", fillcolor="#eeeeff", pencolor="black", URL="dir_ad539247b0a7ca25d69bdb9a3dcc2de3.html"];
+  }
+  dir_dbb159655f87b667c3e0034feb684b28 [shape=box label="models" fillcolor="white" style="filled" color="red" URL="dir_dbb159655f87b667c3e0034feb684b28.html"];
+  dir_ad539247b0a7ca25d69bdb9a3dcc2de3->dir_dbb159655f87b667c3e0034feb684b28 [headlabel="1", labeldistance=1.5 headhref="dir_000019_000015.html"];
+}

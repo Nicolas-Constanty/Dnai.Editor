@@ -1,0 +1,4 @@
+<map id="dnai::interfaces::IEditor" name="dnai::interfaces::IEditor">
+<area shape="rect" id="node3" href="$classdnai_1_1_editor.html" title="{dnai::Editor\n|+ solution\l+ session\l+ propertyPanelProperties\l+ loaded\l+ solutionName\l+ contextMenuModel\l+ mlHandler\l&#45; m_solution\l&#45; m_seletedItem\l&#45; m_viewZones\l&#45; m_selections\l&#45; m_selection\l&#45; m_actions\l&#45; m_version\l&#45; m_editorView\l&#45; m_toasterManagerService\l&#45; m_mainView\land 9 more...\l&#45; m_instance\l|+ Editor()\l+ Editor()\l+ operator=()\l+ operator=()\l+ version()\l+ setVersion()\l+ save()\l+ restoreViewState()\l+ saveViewState()\l+ closeSolution()\land 55 more...\l+ checkVersion()\l+ instance()\l+ onAddInstructionError()\l# Editor()\l# ~Editor()\l}" alt="" coords="5,432,185,993"/>
+<area shape="rect" id="node2" href="$classdnai_1_1interfaces_1_1_i_savable.html" title="{dnai::interfaces::ISavable\n||+ ~ISavable()\l+ save()\l}" alt="" coords="12,5,179,97"/>
+</map>

@@ -1,0 +1,31 @@
+<map id="Gui/app/src/dnai/views/contextview.cpp" name="Gui/app/src/dnai/views/contextview.cpp">
+<area shape="rect" id="node2" href="$contextview_8h.html" title="dnai/views/contextview.h" alt="" coords="831,95,993,121"/>
+<area shape="rect" id="node4" href="$app_8h.html" title="dnai/app.h" alt="" coords="553,95,636,121"/>
+<area shape="rect" id="node7" href="$processmanager_8h.html" title="processmanager.h" alt="" coords="138,475,267,502"/>
+<area shape="rect" id="node11" href="$iloadingclass_8h.html" title="dnai/interfaces/iloadingclass.h" alt="" coords="1646,169,1842,196"/>
+<area shape="rect" id="node15" href="$session_8h.html" title="session.h" alt="" coords="342,393,421,420"/>
+<area shape="rect" id="node19" href="$editor_8h.html" title="editor.h" alt="" coords="922,169,987,196"/>
+<area shape="rect" id="node16" href="$user_8h.html" title="dnai/models/user.h" alt="" coords="685,475,817,502"/>
+<area shape="rect" id="node22" href="$ieditor_8h.html" title="interfaces/ieditor.h" alt="" coords="1067,319,1195,345"/>
+<area shape="rect" id="node28" href="$editorview_8h.html" title="dnai/views/editorview.h" alt="" coords="789,319,941,345"/>
+<area shape="rect" id="node29" href="$solution_8h.html" title="dnai/solution.h" alt="" coords="1204,244,1311,271"/>
+<area shape="rect" id="node37" href="$entity_8h.html" title="dnai/models/entity.h" alt="" coords="1505,393,1644,420"/>
+<area shape="rect" id="node41" href="$context_menu_model_8h.html" title="dnai/models/contextMenuModel.h" alt="" coords="2253,393,2470,420"/>
+<area shape="rect" id="node45" href="$toastermanagerservice_8h.html" title="dnai/toastermanagerservice.h" alt="" coords="450,244,641,271"/>
+<area shape="rect" id="node49" href="$mlhandler_8h.html" title="dnai/ml/mlhandler.h" alt="" coords="534,393,669,420"/>
+<area shape="rect" id="node23" href="$icommand_8h.html" title="icommand.h" alt="" coords="948,393,1041,420"/>
+<area shape="rect" id="node24" href="$isavable_8h.html" title="isavable.h" alt="" coords="1047,565,1126,591"/>
+<area shape="rect" id="node25" href="$isolution_8h.html" title="isolution.h" alt="" coords="1119,393,1201,420"/>
+<area shape="rect" id="node26" href="$iproject_8h.html" title="iproject.h" alt="" coords="1119,475,1193,502"/>
+<area shape="rect" id="node27" href="$iserializable_8h.html" title="iserializable.h" alt="" coords="1180,647,1281,673"/>
+<area shape="rect" id="node31" href="$models_8h.html" title="models.h" alt="" coords="1419,319,1493,345"/>
+<area shape="rect" id="node32" href="$core_2entity_8h.html" title="dnai/models/core/entity.h" alt="" coords="2105,475,2273,502"/>
+<area shape="rect" id="node34" href="$declarable_2context_8h.html" title="dnai/models/gui/declarable\l/context.h" alt="" coords="1319,468,1495,509"/>
+<area shape="rect" id="node35" href="$gui_2declarable_2entity_8h.html" title="dnai/models/gui/declarable\l/entity.h" alt="" coords="1319,557,1495,599"/>
+<area shape="rect" id="node36" href="$declarable_2variable_8h.html" title="dnai/models/gui/declarable\l/variable.h" alt="" coords="1519,468,1695,509"/>
+<area shape="rect" id="node39" href="$generictreeitem_8h.html" title="dnai/models/generictreeitem.h" alt="" coords="1919,565,2115,591"/>
+<area shape="rect" id="node38" href="$imodel_8h.html" title="dnai/interfaces/imodel.h" alt="" coords="1821,475,1979,502"/>
+<area shape="rect" id="node40" href="$entitycolum_8h.html" title="gui/data/entitycolum.h" alt="" coords="893,475,1043,502"/>
+<area shape="rect" id="node48" href="$toast_8h.html" title="dnai/views/toast.h" alt="" coords="539,319,664,345"/>
+<area shape="rect" id="node50" href="$datasethandler_8h.html" title="datasethandler.h" alt="" coords="542,475,661,502"/>
+</map>
