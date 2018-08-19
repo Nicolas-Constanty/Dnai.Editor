@@ -12,8 +12,6 @@
 [![CodeFactor](https://www.codefactor.io/repository/github/nicolas-constanty/dnai.editor/badge)](https://www.codefactor.io/repository/github/nicolas-constanty/dnai.editor)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/f5ad248cb0884d53a206b12154e3295b)](https://www.codacy.com/app/nicolas.constanty/Dnai.Editor?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Nicolas-Constanty/Dnai.Editor&amp;utm_campaign=Badge_Grade)
 
-
-
 [Dnai Editor](https://dnai.io) is a visual scripting software. Dnai is visual node aim to help people to create, share and use IA and algorithm across multiple solution. For now we have a plugin for Unity3D that allow the user to integrate directly an Algorithm or an IA from our solution. We are working on integrating our solution into a javascript module. Dnai.Editor is a part of our big project Dnai, witch contain already a website, a hub for sharing ia and a Unity3D plugin for integrating ia generated with Dnai.Editor.
 
 This sofware is build with the [Qt Open Source](https://www.qt.io/download-qt-installer) version.
@@ -26,6 +24,13 @@ Our Core library sources remain private, so you can find the [latest version of 
 <p align="center">
   <img alt="Main view screenshot" src="https://raw.githubusercontent.com/Nicolas-Constanty/Dnai.Editor/master/images/mainview.png">
 </p>
+
+
+## Documentation technique
+
+[Developer documentation](./html/classical/index.html).
+
+[Developer documentation with uml style](./html/uml%20graph/index.html).
 
 ## Compilation
 
