@@ -26,12 +26,6 @@ Our Core library sources remain private, so you can find the [latest version of 
   <img alt="Main view screenshot" src="https://raw.githubusercontent.com/Nicolas-Constanty/Dnai.Editor/master/images/mainview.png">
 </p>
 
-## Documentation technique
-
-[Developer documentation](./html/classical/index.html).
-
-[Developer documentation with uml style](./html/uml%20graph/index.html).
-
 ## Compilation
 
 - Get the repository content
