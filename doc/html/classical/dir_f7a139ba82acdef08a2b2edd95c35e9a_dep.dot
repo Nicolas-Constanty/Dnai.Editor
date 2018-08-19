@@ -1,0 +1,18 @@
+digraph "Gui/app/include/dnai/commands" {
+  compound=true
+  node [ fontsize="10", fontname="Helvetica"];
+  edge [ labelfontsize="10", labelfontname="Helvetica"];
+  subgraph clusterdir_2412b997a73e0eba9ea0a70041d765c1 {
+    graph [ bgcolor="#ddddee", pencolor="black", label="dnai" fontname="Helvetica", fontsize="10", URL="dir_2412b997a73e0eba9ea0a70041d765c1.html"]
+  dir_f7a139ba82acdef08a2b2edd95c35e9a [shape=box, label="commands", style="filled", fillcolor="#eeeeff", pencolor="black", URL="dir_f7a139ba82acdef08a2b2edd95c35e9a.html"];
+  }
+  dir_f22f730c820323ae7cd577d31ed039e6 [shape=box label="controllers" URL="dir_f22f730c820323ae7cd577d31ed039e6.html"];
+  dir_6ede093656b80714efff831912af079c [shape=box label="views" URL="dir_6ede093656b80714efff831912af079c.html"];
+  dir_fab32e8ecd62f5bef2d81ed4b3015dad [shape=box label="interfaces" URL="dir_fab32e8ecd62f5bef2d81ed4b3015dad.html"];
+  dir_f22f730c820323ae7cd577d31ed039e6->dir_6ede093656b80714efff831912af079c [headlabel="1", labeldistance=1.5 headhref="dir_000008_000018.html"];
+  dir_6ede093656b80714efff831912af079c->dir_fab32e8ecd62f5bef2d81ed4b3015dad [headlabel="4", labeldistance=1.5 headhref="dir_000018_000014.html"];
+  dir_fab32e8ecd62f5bef2d81ed4b3015dad->dir_f7a139ba82acdef08a2b2edd95c35e9a [headlabel="1", labeldistance=1.5 headhref="dir_000014_000007.html"];
+  dir_f7a139ba82acdef08a2b2edd95c35e9a->dir_f22f730c820323ae7cd577d31ed039e6 [headlabel="1", labeldistance=1.5 headhref="dir_000007_000008.html"];
+  dir_f7a139ba82acdef08a2b2edd95c35e9a->dir_6ede093656b80714efff831912af079c [headlabel="3", labeldistance=1.5 headhref="dir_000007_000018.html"];
+  dir_f7a139ba82acdef08a2b2edd95c35e9a->dir_fab32e8ecd62f5bef2d81ed4b3015dad [headlabel="3", labeldistance=1.5 headhref="dir_000007_000014.html"];
+}

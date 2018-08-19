@@ -1,4 +1,3 @@
-DEL %INSTALL_FOLDER%\*.cpp
 start /wait robocopy %APPVEYOR_BUILD_FOLDER%\Deploiement\Windows\libs %INSTALL_FOLDER% /E
 if %errorlevel% gtr 7 exit %errorlevel%
 mkdir "%APPVEYOR_BUILD_FOLDER%\Deploiement\Windows\DNAISetup\packages\com.vendor.product\data\Dnai"

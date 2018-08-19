@@ -1,0 +1,34 @@
+<map id="Gui/app/include/dnai/core/objecthandler.h" name="Gui/app/include/dnai/core/objecthandler.h">
+<area shape="rect" id="node6" href="$entitymanager_8h.html" title="entitymanager.h" alt="" coords="369,95,483,121"/>
+<area shape="rect" id="node8" href="$entity_8h.html" title="dnai/models/entity.h" alt="" coords="511,169,650,196"/>
+<area shape="rect" id="node9" href="$core_2entity_8h.html" title="dnai/models/core/entity.h" alt="" coords="398,773,566,799"/>
+<area shape="rect" id="node17" href="$gui_2declarable_2entity_8h.html" title="dnai/models/gui/declarable\l/entity.h" alt="" coords="1471,855,1647,896"/>
+<area shape="rect" id="node21" href="$imodel_8h.html" title="dnai/interfaces/imodel.h" alt="" coords="609,683,768,710"/>
+<area shape="rect" id="node25" href="$entitycolum_8h.html" title="gui/data/entitycolum.h" alt="" coords="5,326,156,353"/>
+<area shape="rect" id="node26" href="$declarable_2variable_8h.html" title="gui/declarable/variable.h" alt="" coords="1638,773,1798,799"/>
+<area shape="rect" id="node31" href="$declarable_2context_8h.html" title="gui/declarable/context.h" alt="" coords="969,244,1129,271"/>
+<area shape="rect" id="node11" href="$entitydata_8h.html" title="entitydata.h" alt="" coords="333,862,423,889"/>
+<area shape="rect" id="node13" href="$imodeldata_8h.html" title="dnai/interfaces/imodeldata.h" alt="" coords="2046,1033,2230,1060"/>
+<area shape="rect" id="node14" href="$iserializable_8h.html" title="dnai/interfaces/iserializable.h" alt="" coords="1539,1033,1729,1060"/>
+<area shape="rect" id="node18" href="$gui_2data_2entity_8h.html" title="dnai/models/gui/data\l/entity.h" alt="" coords="1036,944,1179,985"/>
+<area shape="rect" id="node20" href="$ientity_8h.html" title="dnai/interfaces/ientity.h" alt="" coords="1440,951,1596,978"/>
+<area shape="rect" id="node22" href="$generictreeitem_8h.html" title="dnai/models/generictreeitem.h" alt="" coords="591,773,787,799"/>
+<area shape="rect" id="node27" href="$ivariable_8h.html" title="dnai/interfaces/ivariable.h" alt="" coords="1773,862,1940,889"/>
+<area shape="rect" id="node29" href="$data_2variable_8h.html" title="dnai/models/gui/data\l/variable.h" alt="" coords="767,855,909,896"/>
+<area shape="rect" id="node32" href="$data_2context_8h.html" title="dnai/models/gui/data\l/context.h" alt="" coords="1307,319,1449,360"/>
+<area shape="rect" id="node33" href="$declarable_2function_8h.html" title="dnai/models/gui/declarable\l/function.h" alt="" coords="2110,587,2286,628"/>
+<area shape="rect" id="node44" href="$declarable_2objecttype_8h.html" title="dnai/models/gui/declarable\l/objecttype.h" alt="" coords="1290,408,1466,449"/>
+<area shape="rect" id="node46" href="$declarable_2enumtype_8h.html" title="dnai/models/gui/declarable\l/enumtype.h" alt="" coords="1137,765,1313,807"/>
+<area shape="rect" id="node49" href="$declarable_2listtype_8h.html" title="dnai/models/gui/declarable\l/listtype.h" alt="" coords="1387,765,1563,807"/>
+<area shape="rect" id="node35" href="$iinstruction_8h.html" title="dnai/interfaces/iinstruction.h" alt="" coords="2599,862,2783,889"/>
+<area shape="rect" id="node36" href="$models_2gui_2flow_8h.html" title="dnai/models/gui/flow.h" alt="" coords="2405,951,2556,978"/>
+<area shape="rect" id="node38" href="$data_2function_8h.html" title="dnai/models/gui/data\l/function.h" alt="" coords="2260,676,2403,717"/>
+<area shape="rect" id="node37" href="$models_2gui_2data_2flow_8h.html" title="data/flow.h" alt="" coords="2439,1033,2523,1060"/>
+<area shape="rect" id="node39" href="$gui_2data_2instruction_8h.html" title="instruction.h" alt="" coords="2431,862,2525,889"/>
+<area shape="rect" id="node42" href="$gui_2instruction_8h.html" title="dnai/models/gui/instruction.h" alt="" coords="2375,773,2563,799"/>
+<area shape="rect" id="node43" href="$flowlink_8h.html" title="dnai/models/gui/flowlink.h" alt="" coords="1930,951,2101,978"/>
+<area shape="rect" id="node41" href="$instructionid_8h.html" title="dnai/enums/core/instructionid.h" alt="" coords="2581,951,2783,978"/>
+<area shape="rect" id="node45" href="$data_2objecttype_8h.html" title="dnai/models/gui/data\l/objecttype.h" alt="" coords="1343,497,1485,539"/>
+<area shape="rect" id="node47" href="$data_2enumtype_8h.html" title="dnai/models/gui/data\l/enumtype.h" alt="" coords="1203,855,1345,896"/>
+<area shape="rect" id="node50" href="$data_2listtype_8h.html" title="dnai/models/gui/data\l/listtype.h" alt="" coords="1036,855,1179,896"/>
+</map>

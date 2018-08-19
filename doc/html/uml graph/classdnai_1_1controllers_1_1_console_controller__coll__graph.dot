@@ -1,0 +1,10 @@
+digraph "dnai::controllers::ConsoleController"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="{dnai::controllers::\lConsoleController\n||+ ConsoleController()\l+ writeLine()\l+ setConsole()\l+ view()\l}",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+  Node2 -> Node1 [color="grey25",fontsize="10",style="solid",label=" -m_view" ,arrowhead="odiamond",fontname="Helvetica"];
+  Node2 [label="{dnai::views::Console\n|+ text\l+ mode\l# m_text\l# m_mode\l|+ Console()\l+ text()\l+ setText()\l+ mode()\l+ setMode()\l+ addText()\l}",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classdnai_1_1views_1_1_console.html"];
+  Node3 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",arrowtail="onormal",fontname="Helvetica"];
+  Node3 [label="{QQuickItem\n||}",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
+}

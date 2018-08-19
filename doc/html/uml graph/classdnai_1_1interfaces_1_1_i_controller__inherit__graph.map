@@ -1,0 +1,3 @@
+<map id="dnai::interfaces::IController" name="dnai::interfaces::IController">
+<area shape="rect" id="node2" href="$classdnai_1_1interfaces_1_1_a_controller.html" title="{dnai::interfaces::AController\l\&lt; T, U \&gt;\n|# m_model\l# m_createCommand\l# m_views\l# m_viewPath\l|+ AController()\l+ AController()\l+ operator=()\l+ ~AController()\l+ model()\l+ setModel()\l+ path()\l+ views()\l+ addViewToCurrentContext()\l+ asyncCreate()\l+ create()\l}" alt="" coords="5,175,197,457"/>
+</map>

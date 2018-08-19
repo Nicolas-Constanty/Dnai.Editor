@@ -1,0 +1,8 @@
+digraph "dnai::views::Line"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="{dnai::views::Line\n|+ p1\l+ p2\l+ lineWidth\l+ lineColor\l- m_p1\l- m_p2\l- m_lineWidth\l- m_lineColor\l|+ Line()\l+ Line()\l+ Line()\l+ Line()\l+ ~Line()\l+ updatePaintNode()\l+ p1()\l+ p2()\l+ lineWidth()\l+ lineColor()\l+ setP1()\l+ setP2()\l+ setLineWidth()\l+ setLineColor()\l+ CreateRawLine()\l}",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+  Node2 -> Node1 [dir="back",color="midnightblue",fontsize="10",style="solid",arrowtail="onormal",fontname="Helvetica"];
+  Node2 [label="{QQuickItem\n||}",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
+}

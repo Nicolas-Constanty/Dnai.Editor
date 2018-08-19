@@ -3,7 +3,9 @@ image: Visual Studio 2017
 configuration:
  - release
 
-install: 
+install:
+  - echo %APPVEYOR_REPO_TAG%
+  - if %APPVEYOR_REPO_TAG% equ true echo istagged
 # INSTALL QT
   - set QTDIR=C:\Qt\5.11\msvc2017_64
   - set PATH=%QTDIR%\bin;%PATH%
@@ -11,19 +13,20 @@ install:
 # INSTALL WINDOWS UTILS
   - set PATH="%ProgramFiles(x86)%\Microsoft Visual Studio\2017\Community\MSBuild\15.0\Bin;%PATH%"
   - set PATH="%ProgramFiles(x86)%\Windows Kits\10\bin\x64\;%PATH%"
-# INSTALL JQ
-  - if %APPVEYOR_REPO_TAG% equ true if %APPVEYOR_REPO_BRANCH% == master install_jq
-# INSTALL TAIL
-  - if %APPVEYOR_REPO_TAG% equ true if %APPVEYOR_REPO_BRANCH% == master set PATH=%APPVEYOR_BUILD_FOLDER%\scripts;%PATH%
 # INSTALL ENV
-  - set PACKAGE_NAME=Dnai-Editor_%APPVEYOR_BUILD_VERSION%
-  - set INSTALL_FOLDER=%APPVEYOR_BUILD_FOLDER%\Dnai\Editor\%APPVEYOR_BUILD_VERSION%
+  - set PACKAGE_NAME=Dnai-Editor_%APPVEYOR_REPO_TAG_NAME%
+  - set INSTALL_FOLDER=%APPVEYOR_BUILD_FOLDER%\Dnai\Editor\%APPVEYOR_REPO_TAG_NAME%
   - call "%ProgramFiles(x86)%\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" x64
   - set PATH=%APPVEYOR_BUILD_FOLDER%\scripts\windows;%PATH%
+# INSTALL JQ
+  - if %APPVEYOR_REPO_TAG% equ true mkdir %APPVEYOR_BUILD_FOLDER%\Downloads
+  - if %APPVEYOR_REPO_TAG% equ true cd %APPVEYOR_BUILD_FOLDER%\Downloads
+  - ps: install_jq
+  - if %APPVEYOR_REPO_TAG% equ true set PATH=%APPVEYOR_BUILD_FOLDER%\Downloads;%PATH%
 
 artifacts:
  - path: Windows_x64
-   name: Windows_x64_Dnai-Editor_%APPVEYOR_BUILD_VERSION%
+   name: Windows_x64_Dnai-Editor_%APPVEYOR_REPO_TAG_NAME%
   
  - path: Core
    name: Windows_x64_Core
@@ -32,31 +35,39 @@ before_build:
 # CHECKOUT
   - cd %APPVEYOR_BUILD_FOLDER%
   - git submodule update --init --recursive
-  - if %APPVEYOR_REPO_TAG% equ true if %APPVEYOR_REPO_BRANCH% == master git clone https://github.com/Gouet/Software-updater.git
-  - if %APPVEYOR_REPO_TAG% equ true if %APPVEYOR_REPO_BRANCH% == master git clone https://%AppVeyorToken%@duly-eip.visualstudio.com/_git/Duly
-
+  - if %APPVEYOR_REPO_TAG% equ true git clone https://github.com/Gouet/Software-updater.git
+  - if %APPVEYOR_REPO_TAG% equ true git clone https://%AppVeyorToken%@duly-eip.visualstudio.com/_git/Duly
+  - if %APPVEYOR_REPO_TAG% equ true git clone https://github.com/Gouet/DNAI_updaters.git
 build_script:
 # BUILD EDITOR
+  - FOR /f "tokens=1,2,3 delims=." %%a IN ("%APPVEYOR_REPO_TAG_NAME%") do set VERSION_MAJOR=%%a&set VERSION_MINOR=%%b&set VERSION_BUILD=%%c
   - build_editor
 # INSTALL EDITOR
-  - if %APPVEYOR_REPO_TAG% equ true if %APPVEYOR_REPO_BRANCH% == master install_editor
+  - if %APPVEYOR_REPO_TAG% equ true install_editor
 # BUILD SERVER
   - build_server
 # INSTALL SERVER
-  - if %APPVEYOR_REPO_TAG% equ true if %APPVEYOR_REPO_BRANCH% == master install_server
+  - if %APPVEYOR_REPO_TAG% equ true install_server
 # BUILD UPDATER
-  - if %APPVEYOR_REPO_TAG% equ true if %APPVEYOR_REPO_BRANCH% == master build_updater
+  - if %APPVEYOR_REPO_TAG% equ true build_updater
 # INSTALL UPDATER
-  - if %APPVEYOR_REPO_TAG% equ true if %APPVEYOR_REPO_BRANCH% == master install_updater
+  - if %APPVEYOR_REPO_TAG% equ true install_updater
 # BUILD CORE
-  - if %APPVEYOR_REPO_TAG% equ true if %APPVEYOR_REPO_BRANCH% == master build_core
+  - if %APPVEYOR_REPO_TAG% equ true build_core
 # INSTALL CORE
-  - if %APPVEYOR_REPO_TAG% equ true if %APPVEYOR_REPO_BRANCH% == master install_core
+  - if %APPVEYOR_REPO_TAG% equ true install_core
 # BUILD SETUP
-  - if %APPVEYOR_REPO_TAG% equ true if %APPVEYOR_REPO_BRANCH% == master build_setup
+  - if %APPVEYOR_REPO_TAG% equ true build_setup
 # BUILD ARTEFACTS
-  - if %APPVEYOR_REPO_TAG% equ true if %APPVEYOR_REPO_BRANCH% == master build_artefacts
+  - if %APPVEYOR_REPO_TAG% equ true build_artefacts
 
-deploy_script:
+deploy:
+  - provider: Environment
+    name: Github
+    on:
+      APPVEYOR_REPO_TAG: true
+
+after_deploy:
 # DEPLOY
-  - if %APPVEYOR_REPO_TAG% equ true if %APPVEYOR_REPO_BRANCH% == master deploy
+  - if %APPVEYOR_REPO_TAG% equ true deploy
+  - if %APPVEYOR_REPO_TAG% equ true updater

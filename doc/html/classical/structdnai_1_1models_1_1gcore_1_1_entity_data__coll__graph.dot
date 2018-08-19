@@ -1,0 +1,6 @@
+digraph "dnai::models::gcore::EntityData"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="{dnai::models::gcore\l::EntityData\n|+ id\l+ containerId\l+ type\l+ name\l+ visibility\l|+ EntityData()\l+ EntityData()\l+ ~EntityData()\l+ operator=()\l+ operator!=()\l+ operator==()\l}",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+}

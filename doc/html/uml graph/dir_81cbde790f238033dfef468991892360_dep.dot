@@ -1,0 +1,11 @@
+digraph "Gui/app/src/dnai/utils" {
+  compound=true
+  node [ fontsize="10", fontname="Helvetica"];
+  edge [ labelfontsize="10", labelfontname="Helvetica"];
+  subgraph clusterdir_31b18548f5bdf03a43dffc2cb4c0607c {
+    graph [ bgcolor="#ddddee", pencolor="black", label="dnai" fontname="Helvetica", fontsize="10", URL="dir_31b18548f5bdf03a43dffc2cb4c0607c.html"]
+  dir_81cbde790f238033dfef468991892360 [shape=box, label="utils", style="filled", fillcolor="#eeeeff", pencolor="black", URL="dir_81cbde790f238033dfef468991892360.html"];
+  }
+  dir_6e89066b6e3a1edc14e01dd7a1c1fb19 [shape=box label="include" fillcolor="white" style="filled" color="red" URL="dir_6e89066b6e3a1edc14e01dd7a1c1fb19.html"];
+  dir_81cbde790f238033dfef468991892360->dir_6e89066b6e3a1edc14e01dd7a1c1fb19 [headlabel="2", labeldistance=1.5 headhref="dir_000040_000004.html"];
+}

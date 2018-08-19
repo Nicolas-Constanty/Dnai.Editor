@@ -1,0 +1,28 @@
+<map id="Gui/app/include/interfaces.h" name="Gui/app/include/interfaces.h">
+<area shape="rect" id="node2" href="$iclone_8h.html" title="dnai/interfaces/iclone.h" alt="" coords="5,80,160,107"/>
+<area shape="rect" id="node3" href="$icommand_8h.html" title="dnai/interfaces/icommand.h" alt="" coords="813,155,995,181"/>
+<area shape="rect" id="node5" href="$ieditor_8h.html" title="dnai/interfaces/ieditor.h" alt="" coords="378,80,534,107"/>
+<area shape="rect" id="node7" href="$isavable_8h.html" title="isavable.h" alt="" coords="238,311,317,338"/>
+<area shape="rect" id="node8" href="$isolution_8h.html" title="isolution.h" alt="" coords="286,155,367,181"/>
+<area shape="rect" id="node9" href="$iproject_8h.html" title="iproject.h" alt="" coords="289,229,364,256"/>
+<area shape="rect" id="node11" href="$iserializable_8h.html" title="iserializable.h" alt="" coords="1121,311,1223,338"/>
+<area shape="rect" id="node14" href="$ieditoraction_8h.html" title="dnai/interfaces/ieditoraction.h" alt="" coords="939,80,1130,107"/>
+<area shape="rect" id="node16" href="$ieditormodel_8h.html" title="ieditormodel.h" alt="" coords="1327,155,1430,181"/>
+<area shape="rect" id="node18" href="$ientity_8h.html" title="dnai/interfaces/ientity.h" alt="" coords="1147,155,1303,181"/>
+<area shape="rect" id="node20" href="$ifactory_8h.html" title="dnai/interfaces/ifactory.h" alt="" coords="1256,80,1419,107"/>
+<area shape="rect" id="node24" href="$iinstruction_8h.html" title="dnai/interfaces/iinstruction.h" alt="" coords="1856,80,2040,107"/>
+<area shape="rect" id="node27" href="$imodeldata_8h.html" title="dnai/interfaces/imodeldata.h" alt="" coords="2309,229,2493,256"/>
+<area shape="rect" id="node30" href="$ilinkable_8h.html" title="dnai/interfaces/ilinkable.h" alt="" coords="1664,80,1832,107"/>
+<area shape="rect" id="node32" href="$iloadingclass_8h.html" title="dnai/interfaces/iloadingclass.h" alt="" coords="1443,80,1639,107"/>
+<area shape="rect" id="node34" href="$imodel_8h.html" title="dnai/interfaces/imodel.h" alt="" coords="2274,80,2433,107"/>
+<area shape="rect" id="node39" href="$iobservable_8h.html" title="dnai/interfaces/iobservable.h" alt="" coords="2065,80,2250,107"/>
+<area shape="rect" id="node40" href="$iscalable_8h.html" title="dnai/interfaces/iscalable.h" alt="" coords="2709,80,2881,107"/>
+<area shape="rect" id="node42" href="$isingleton_8h.html" title="dnai/interfaces/isingleton.h" alt="" coords="2457,80,2633,107"/>
+<area shape="rect" id="node43" href="$ivariable_8h.html" title="dnai/interfaces/ivariable.h" alt="" coords="2905,80,3071,107"/>
+<area shape="rect" id="node45" href="$iviewelement_8h.html" title="dnai/interfaces/iviewelement.h" alt="" coords="493,155,688,181"/>
+<area shape="rect" id="node46" href="$iviewzone_8h.html" title="dnai/interfaces/iviewzone.h" alt="" coords="619,80,795,107"/>
+<area shape="rect" id="node25" href="$models_2gui_2flow_8h.html" title="dnai/models/gui/flow.h" alt="" coords="2002,155,2153,181"/>
+<area shape="rect" id="node28" href="$models_2gui_2data_2flow_8h.html" title="data/flow.h" alt="" coords="2137,229,2221,256"/>
+<area shape="rect" id="node29" href="$data_2linkable_8h.html" title="dnai/models/gui/data\l/linkable.h" alt="" coords="2107,304,2250,345"/>
+<area shape="rect" id="node35" href="$generictreeitem_8h.html" title="dnai/models/generictreeitem.h" alt="" coords="2619,155,2815,181"/>
+</map>

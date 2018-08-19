@@ -1,0 +1,7 @@
+<map id="Gui/app/include/ml.h" name="Gui/app/include/ml.h">
+<area shape="rect" id="node2" href="$datasethandler_8h.html" title="dnai/ml/datasethandler.h" alt="" coords="96,155,260,181"/>
+<area shape="rect" id="node11" href="$mlhandler_8h.html" title="dnai/ml/mlhandler.h" alt="" coords="5,80,140,107"/>
+<area shape="rect" id="node4" href="$dataset_8h.html" title="dnai/models/ml/dataset.h" alt="" coords="146,229,314,256"/>
+<area shape="rect" id="node6" href="$iserializable_8h.html" title="dnai/interfaces/iserializable.h" alt="" coords="126,304,315,331"/>
+<area shape="rect" id="node9" href="$iterableqqmlpropertymap_8h.html" title="dnai/utils/iterableqqmlpropertymap.h" alt="" coords="391,304,621,331"/>
+</map>

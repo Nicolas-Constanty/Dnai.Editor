@@ -1,0 +1,18 @@
+<map id="Gui/app/include/dnai/interfaces/iloadingclass.h" name="Gui/app/include/dnai/interfaces/iloadingclass.h">
+<area shape="rect" id="node2" href="$app_8h.html" title="Gui/app/include/dnai\l/app.h" alt="" coords="1316,95,1456,136"/>
+<area shape="rect" id="node16" href="$interfaces_8h.html" title="Gui/app/include/interfaces.h" alt="" coords="1973,102,2156,129"/>
+<area shape="rect" id="node3" href="$moc__app_8cpp.html" title="Gui/app/GeneratedFiles\l/Debug/moc_app.cpp" alt="" coords="5,184,164,225"/>
+<area shape="rect" id="node4" href="$icontroller_8h.html" title="Gui/app/include/dnai\l/interfaces/icontroller.h" alt="" coords="188,184,341,225"/>
+<area shape="rect" id="node5" href="$api_8cpp.html" title="Gui/app/src/dnai/api\l/api.cpp" alt="" coords="366,184,505,225"/>
+<area shape="rect" id="node6" href="$app_8cpp.html" title="Gui/app/src/dnai/app.cpp" alt="" coords="529,191,696,218"/>
+<area shape="rect" id="node7" href="$inputcontroller_8cpp.html" title="Gui/app/src/dnai/controllers\l/inputcontroller.cpp" alt="" coords="721,184,902,225"/>
+<area shape="rect" id="node8" href="$editor_8cpp.html" title="Gui/app/src/dnai/editor.cpp" alt="" coords="926,191,1105,218"/>
+<area shape="rect" id="node9" href="$toastermanagerservice_8cpp.html" title="Gui/app/src/dnai/toastermanagerservice.cpp" alt="" coords="1129,191,1405,218"/>
+<area shape="rect" id="node10" href="$canvasnode_8cpp.html" title="Gui/app/src/dnai/views\l/canvasnode.cpp" alt="" coords="1430,184,1582,225"/>
+<area shape="rect" id="node11" href="$contextview_8cpp.html" title="Gui/app/src/dnai/views\l/contextview.cpp" alt="" coords="1606,184,1758,225"/>
+<area shape="rect" id="node12" href="$declarationview_8cpp.html" title="Gui/app/src/dnai/views\l/declarationview.cpp" alt="" coords="1782,184,1934,225"/>
+<area shape="rect" id="node13" href="$genericnode_8cpp.html" title="Gui/app/src/dnai/views\l/genericnode.cpp" alt="" coords="1958,184,2110,225"/>
+<area shape="rect" id="node14" href="$linkablebezieritem_8cpp.html" title="Gui/app/src/dnai/views\l/linkablebezieritem.cpp" alt="" coords="2134,184,2289,225"/>
+<area shape="rect" id="node15" href="$main_8cpp.html" title="Gui/app/src/main.cpp" alt="" coords="2309,273,2455,300"/>
+<area shape="rect" id="node17" href="$dnai_8h.html" title="Gui/app/include/dnai.h" alt="" coords="2364,191,2515,218"/>
+</map>

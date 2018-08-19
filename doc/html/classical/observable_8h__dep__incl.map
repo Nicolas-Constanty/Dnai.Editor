@@ -1,0 +1,17 @@
+<map id="Gui/app/include/dnai/http/observable.h" name="Gui/app/include/dnai/http/observable.h">
+<area shape="rect" id="node2" href="$moc__observable_8cpp.html" title="Gui/app/GeneratedFiles\l/Debug/moc_observable.cpp" alt="" coords="5,95,191,136"/>
+<area shape="rect" id="node3" href="$url_8h.html" title="Gui/app/include/dnai\l/http/url.h" alt="" coords="393,95,533,136"/>
+<area shape="rect" id="node6" href="$http_8h.html" title="Gui/app/include/http.h" alt="" coords="326,281,475,307"/>
+<area shape="rect" id="node13" href="$dnai_2api_2api_8h.html" title="Gui/app/include/dnai\l/api/api.h" alt="" coords="832,184,972,225"/>
+<area shape="rect" id="node16" href="$observable_8cpp.html" title="Gui/app/src/dnai/http\l/observable.cpp" alt="" coords="609,95,752,136"/>
+<area shape="rect" id="node4" href="$moc__url_8cpp.html" title="Gui/app/GeneratedFiles\l/Debug/moc_url.cpp" alt="" coords="267,184,425,225"/>
+<area shape="rect" id="node5" href="$service_8h.html" title="Gui/app/include/dnai\l/http/service.h" alt="" coords="501,184,641,225"/>
+<area shape="rect" id="node12" href="$url_8cpp.html" title="Gui/app/src/dnai/http\l/url.cpp" alt="" coords="665,184,808,225"/>
+<area shape="rect" id="node10" href="$api_8cpp.html" title="Gui/app/src/dnai/api\l/api.cpp" alt="" coords="667,273,806,315"/>
+<area shape="rect" id="node11" href="$service_8cpp.html" title="Gui/app/src/dnai/http\l/service.cpp" alt="" coords="500,273,643,315"/>
+<area shape="rect" id="node7" href="$dnai_8h.html" title="Gui/app/include/dnai.h" alt="" coords="539,363,689,389"/>
+<area shape="rect" id="node9" href="$app_8cpp.html" title="Gui/app/src/dnai/app.cpp" alt="" coords="820,363,987,389"/>
+<area shape="rect" id="node8" href="$main_8cpp.html" title="Gui/app/src/main.cpp" alt="" coords="541,437,687,464"/>
+<area shape="rect" id="node14" href="$api_8h.html" title="Gui/app/include/api.h" alt="" coords="830,281,974,307"/>
+<area shape="rect" id="node15" href="$session_8cpp.html" title="Gui/app/src/dnai/session.cpp" alt="" coords="1049,281,1240,307"/>
+</map>

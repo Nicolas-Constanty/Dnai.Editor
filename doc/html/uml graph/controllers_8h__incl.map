@@ -1,0 +1,10 @@
+<map id="Gui/app/include/controllers.h" name="Gui/app/include/controllers.h">
+<area shape="rect" id="node2" href="$consolecontroller_8h.html" title="dnai/controllers/consolecontroller.h" alt="" coords="73,155,295,181"/>
+<area shape="rect" id="node6" href="$inputcontroller_8h.html" title="dnai/controllers/inputcontroller.h" alt="" coords="461,80,667,107"/>
+<area shape="rect" id="node12" href="$outputcontroller_8h.html" title="dnai/controllers/outputcontroller.h" alt="" coords="222,80,437,107"/>
+<area shape="rect" id="node5" href="$console_8h.html" title="dnai/views/console.h" alt="" coords="5,229,147,256"/>
+<area shape="rect" id="node7" href="$baseio_8h.html" title="dnai/baseio.h" alt="" coords="364,155,463,181"/>
+<area shape="rect" id="node8" href="$baselinkable_8h.html" title="baselinkable.h" alt="" coords="222,229,327,256"/>
+<area shape="rect" id="node11" href="$iotype_8h.html" title="enums/iotype.h" alt="" coords="403,229,514,256"/>
+<area shape="rect" id="node9" href="$ilinkable_8h.html" title="dnai/interfaces/ilinkable.h" alt="" coords="200,304,368,331"/>
+</map>

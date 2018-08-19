@@ -1,0 +1,11 @@
+digraph "Gui/app/src/dnai/models/gui/declarable" {
+  compound=true
+  node [ fontsize="10", fontname="Helvetica"];
+  edge [ labelfontsize="10", labelfontname="Helvetica"];
+  subgraph clusterdir_93de4bdbd8d576627c0e91c425fed3d9 {
+    graph [ bgcolor="#ddddee", pencolor="black", label="gui" fontname="Helvetica", fontsize="10", URL="dir_93de4bdbd8d576627c0e91c425fed3d9.html"]
+  dir_b60ab5fac535355896d745549f27ef25 [shape=box, label="declarable", style="filled", fillcolor="#eeeeff", pencolor="black", URL="dir_b60ab5fac535355896d745549f27ef25.html"];
+  }
+  dir_6e89066b6e3a1edc14e01dd7a1c1fb19 [shape=box label="include" fillcolor="white" style="filled" color="red" URL="dir_6e89066b6e3a1edc14e01dd7a1c1fb19.html"];
+  dir_b60ab5fac535355896d745549f27ef25->dir_6e89066b6e3a1edc14e01dd7a1c1fb19 [headlabel="20", labeldistance=1.5 headhref="dir_000037_000004.html"];
+}

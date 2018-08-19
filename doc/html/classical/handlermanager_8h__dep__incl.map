@@ -1,0 +1,11 @@
+<map id="Gui/app/include/dnai/core/handlermanager.h" name="Gui/app/include/dnai/core/handlermanager.h">
+<area shape="rect" id="node2" href="$moc__handlermanager_8cpp.html" title="Gui/app/GeneratedFiles\l/Debug/moc_handlermanager.cpp" alt="" coords="5,95,221,136"/>
+<area shape="rect" id="node3" href="$handlermanager_8cpp.html" title="Gui/app/src/dnai/core\l/handlermanager.cpp" alt="" coords="245,95,392,136"/>
+<area shape="rect" id="node4" href="$objecthandler_8cpp.html" title="Gui/app/src/dnai/core\l/objecthandler.cpp" alt="" coords="416,95,563,136"/>
+<area shape="rect" id="node5" href="$editor_8cpp.html" title="Gui/app/src/dnai/editor.cpp" alt="" coords="587,102,765,129"/>
+<area shape="rect" id="node6" href="$contextmenumodel_8cpp.html" title="Gui/app/src/dnai/models\l/contextmenumodel.cpp" alt="" coords="789,95,952,136"/>
+<area shape="rect" id="node7" href="$entity_8cpp.html" title="Gui/app/src/dnai/models\l/entity.cpp" alt="" coords="976,95,1139,136"/>
+<area shape="rect" id="node8" href="$objecttype_8cpp.html" title="Gui/app/src/dnai/models\l/gui/declarable/objecttype.cpp" alt="" coords="1163,95,1357,136"/>
+<area shape="rect" id="node9" href="$project_8cpp.html" title="Gui/app/src/dnai/project.cpp" alt="" coords="1382,102,1567,129"/>
+<area shape="rect" id="node10" href="$main_8cpp.html" title="Gui/app/src/main.cpp" alt="" coords="1592,102,1739,129"/>
+</map>
