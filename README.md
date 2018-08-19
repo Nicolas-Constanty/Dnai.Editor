@@ -29,6 +29,7 @@ Our Core library sources remain private, so you can find the [latest version of 
 ## Documentation technique
 
 [Developer documentation](./html/classical/index.html).
+
 [Developer documentation with uml style](./html/uml%20graph/index.html).
 
 ## Compilation
