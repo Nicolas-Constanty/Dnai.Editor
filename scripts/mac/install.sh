@@ -137,18 +137,18 @@ then
 
     echo "----- Create depandancy framework -----"
     sleep 1
-    $deployqt $install_dir/../.. -qmldir=$dnairessourcespath -verbose=2
+    $deployqt $install_dir../.. -qmldir=$dnairessourcespath -verbose=2
     
     echo "----- Settings plugin -----"
     sleep 3
-    mv $build_dir/plugins/Controls $install_dir/../PlugIns
-    mv $build_dir/plugins/FontAwesome $install_dir/../PlugIns
-    mv $build_dir/plugins/Settings $install_dir/../PlugIns
+    mv $build_dir/plugins/Controls $install_dir../PlugIns
+    mv $build_dir/plugins/FontAwesome $install_dir../PlugIns
+    mv $build_dir/plugins/Settings $install_dir../PlugIns
     install_name_tool -add_rpath @rpath/../PlugIns/Controls/libdnaicontrolsplugin.dylib $install_dir/DNAI
     install_name_tool -add_rpath @rpath/../PlugIns/FontAwesome/libdnaifontawesomeplugin.dylib $install_dir/DNAI
     install_name_tool -add_rpath @rpath/../PlugIns/Settings/libdnaisettingsplugin.dylib $install_dir/DNAI
 
-    mv -f $install_dir/../.. $final_dir
+    mv -f $install_dir../.. $final_dir
     cd $final_dir/DNAI.app/Contents/MacOS/
 
     echo "----- Setting Server -----\n\n"
