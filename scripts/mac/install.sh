@@ -55,7 +55,8 @@ build_dir=$TRAVIS_BUILD_DIR/build
 mkdir $build_dir
 
 install_dir=$build_dir/app/release/DNAI.app/Contents/MacOS/
-final_dir="$TRAVIS_BUILD_DIR/Application/"
+install_dir_app=$build_dir/app/release/DNAI.app/
+final_dir="$TRAVIS_BUILD_DIR/Application"
 mkdir $final_dir
 
 # GESTION DES ARGUMENTS
@@ -134,11 +135,10 @@ then
     cd $build_dir
     cp -rf $binarycorepath/CoreDaemon $install_dir/Core/
     echo "---- Core generation END ----"
-    sleep 3
 
     echo "----- Create depandancy framework -----"
     sleep 1
-    $deployqt $install_dir../.. -qmldir=$dnairessourcespath -verbose=2
+    $deployqt $install_dir_app -qmldir=$dnairessourcespath -verbose=2
     
     echo "----- Settings plugin -----"
     sleep 3
@@ -149,7 +149,7 @@ then
     install_name_tool -add_rpath @rpath/../PlugIns/FontAwesome/libdnaifontawesomeplugin.dylib $install_dir/DNAI
     install_name_tool -add_rpath @rpath/../PlugIns/Settings/libdnaisettingsplugin.dylib $install_dir/DNAI
 
-    mv -f $install_dir../.. $final_dir
+    mv -f $install_dir_app $final_dir
     cd $final_dir/DNAI.app/Contents/MacOS/
 
     echo "----- Setting Server -----\n\n"
