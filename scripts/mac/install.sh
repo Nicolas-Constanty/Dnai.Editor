@@ -56,6 +56,7 @@ mkdir $build_dir
 
 install_dir=$build_dir/app/release/DNAI.app/Contents/MacOS/
 final_dir="$TRAVIS_BUILD_DIR/Application/"
+mkdir $final_dir
 
 # GESTION DES ARGUMENTS
 
