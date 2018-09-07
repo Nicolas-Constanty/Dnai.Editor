@@ -30,6 +30,9 @@ cd %repository_path%
 git add --all
 git commit -m "new version %version% on windows"
 
+git remote rm origin
+git remote add origin https://Gouet:%GithubRW%@github.com/Gouet/DNAI_updaters.git
+
 git tag -d %version%
 git tag %version%
 
