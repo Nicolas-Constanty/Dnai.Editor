@@ -19,6 +19,7 @@ fi
 
 if [ $release_version == null ]
 then
+	echo "--- NO VERSION EXIT REQUEST ---"
     exit 1
 fi
 

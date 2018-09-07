@@ -93,17 +93,17 @@ then
     exit 1
 fi
 
-if [ $release == true ]
-then
-    echo "WARNING ! ARE YOU SURE YOU WANT TO UPDATE SOFTWARE VERSION ? Press [yes|no]."
-    read sure_version
-    if [ $sure_version != "yes" ]
-    then
-	exit 1
-    fi
-fi
+# if [ $release == true ]
+# then
+#     echo "WARNING ! ARE YOU SURE YOU WANT TO UPDATE SOFTWARE VERSION ? Press [yes|no]."
+#     read sure_version
+#     if [ $sure_version != "yes" ]
+#     then
+# 	exit 1
+#     fi
+# fi
 
-rm -rf DNAI-Installer.dmg
+# rm -rf DNAI-Installer.dmg
 
 if [ $compile == true ]
 then
@@ -188,6 +188,7 @@ echo "----- SUCCESS TO GENERATE DMG -----"
 cd $TRAVIS_BUILD_DIR/scripts/mac
 if [ $release == true ]
 then
+	echo "--- START REQUEST ---"
     ./request.sh --release $version
     if [ $? -eq 0 ]
     then
@@ -196,5 +197,5 @@ then
 	exit 0
     fi
 fi
-
+echo "------ FAILED -----"
 exit 1
