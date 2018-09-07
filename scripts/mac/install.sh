@@ -159,7 +159,6 @@ then
     otool -L Server
 
 #DEPLOY UPDATER DNAI
-    rm -rf "DNAI Updater.app"
 
     $qmakebinary $updaterpropath
     make -j 8
