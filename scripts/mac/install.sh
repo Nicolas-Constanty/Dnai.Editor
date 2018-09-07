@@ -148,9 +148,8 @@ then
     install_name_tool -add_rpath @rpath/../PlugIns/FontAwesome/libdnaifontawesomeplugin.dylib $install_dir/DNAI
     install_name_tool -add_rpath @rpath/../PlugIns/Settings/libdnaisettingsplugin.dylib $install_dir/DNAI
 
-    mkdir Application
     mv -f $install_dir/../.. $final_dir
-    cd $install_dir
+    cd $final_dir/DNAI.app/Contents/MacOS/
 
     echo "----- Setting Server -----\n\n"
     sleep 1
@@ -158,7 +157,6 @@ then
     install_name_tool -change @rpath/QtNetwork.framework/Versions/5/QtNetwork @executable_path/../Frameworks/QtNetwork.framework/Versions/5/QtNetwork ./Server
     install_name_tool -change @rpath/QtCore.framework/Versions/5/QtCore @executable_path/../Frameworks/QtCore.framework/Versions/5/QtCore ./Server
     otool -L Server
-    cd -
 
 #DEPLOY UPDATER DNAI
     rm -rf "DNAI Updater.app"
