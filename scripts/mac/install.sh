@@ -22,6 +22,7 @@ dnairessourcespath="$TRAVIS_BUILD_DIR/Gui/app/resources/"
 #DNAI CORE
 binarycorepath="$TRAVIS_BUILD_DIR/dependencies/Duly/CoreDaemon/bin/Release/"
 csprojcorepath="$TRAVIS_BUILD_DIR/dependencies/Duly/CoreDaemon/CoreDaemon.csproj"
+csprojcorepackagepath="$TRAVIS_BUILD_DIR/dependencies/Duly/CorePackage.sln"
 
 #DNAI SERVER
 serverpropath="$TRAVIS_BUILD_DIR/Server/Server.pro"
@@ -128,7 +129,7 @@ then
     echo "---- Core generation ----"
     brew install nuget
     brew link --overwrite mono
-    nuget restore $csprojcorepath
+    nuget restore $csprojcorepackagepath
     /Library/Frameworks/Mono.framework/Commands/msbuild $csprojcorepath /t:Rebuild /p:Configuration=Release;Platform=x64
     cd $binarycorepath
     /Library/Frameworks/Mono.framework/Commands/mkbundle -o CoreDaemon --simple CoreDaemon.exe
