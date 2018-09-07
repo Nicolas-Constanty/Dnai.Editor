@@ -126,8 +126,8 @@ then
     mkdir $install_dir/Core
 
     echo "---- Core generation ----"
-    rm '/usr/local/share/man/man1/al.1'
     brew install nuget
+    brew link --overwrite mono
     nuget restore $csprojcorepath
     /Library/Frameworks/Mono.framework/Commands/msbuild $csprojcorepath /t:Rebuild /p:Configuration=Release;Platform=x64
     cd $binarycorepath

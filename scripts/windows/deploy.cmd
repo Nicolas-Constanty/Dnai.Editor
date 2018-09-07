@@ -1,5 +1,5 @@
 set SLUG=installer
-set API_LINK=https://api.preprod.dnai.io
+set API_LINK=https://api.dnai.io
 curl -X POST %API_LINK%/signin -H "authorization: Basic YWRtaW46ZG5haQ=="  -H "content-type: application/json" -d "{ \"login\": \"%DEPLOY_LOGIN%\", \"password\": \"%DEPLOY_PASSWORD%\"}" > tmpSIGNIN
 set /p contents= < tmpSIGNIN
 DEL tmpSIGNIN
