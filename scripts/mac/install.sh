@@ -160,16 +160,14 @@ then
 
 #DEPLOY UPDATER DNAI
 
+    rm -rf $build_dir
+    mkdir $build_dir
+    cd $build_dir
     $qmakebinary $updaterpropath
     make -j 8
     $deployqt "DNAI Updater.app" -qmldir=$updateressourcespath -verbose=2
 
-    rm *.o
-    rm *.cpp
-    rm *.h
-    rm Makefile
-
-    mv "DNAI Updater.app" ./Application/DNAI.app/Contents/Frameworks
+    mv "DNAI Updater.app" $final_dir/DNAI.app/Contents/Frameworks
 
     sleep 3
 fi
