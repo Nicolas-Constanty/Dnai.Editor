@@ -53,7 +53,9 @@ git clone https://github.com/Gouet/DNAI_updaters.git
 
 build_dir=$TRAVIS_BUILD_DIR/build
 mkdir $build_dir
+
 install_dir=$build_dir/app/release/DNAI.app/Contents/MacOS/
+final_dir="$TRAVIS_BUILD_DIR/Application/"
 
 # GESTION DES ARGUMENTS
 
@@ -111,11 +113,6 @@ then
 
     $qmakebinary "VERSION_MAJOR=$VERSION_MAJOR" "VERSION_MINOR=$VERSION_MINOR" "VERSION_BUILD=$VERSION_BUILD" $dnaipropath
     make -j 8
-    
-    rm -rf plugins/*.o
-    rm -rf plugins/*.cpp
-    rm -rf plugins/*.h
-    rm -rf plugins/Makefile.*
 
     mkdir $install_dir/settings
     cp -rf $dnaisettingpath $install_dir/settings
@@ -138,38 +135,22 @@ then
     echo "---- Core generation END ----"
     sleep 3
 
-    #cp $monopath $install_dir/Core/
-
-    rm *.o
-    rm *.cpp
-    rm -rf lib/
-    rm *.h
-    rm Server
-    cp -rf app/DNAI.app ./
-    rm -rf app
-    rm Makefile
-
     echo "----- Create depandancy framework -----"
     sleep 1
-    $deployqt DNAI.app -qmldir=$dnairessourcespath -verbose=2
+    $deployqt $install_dir/../.. -qmldir=$dnairessourcespath -verbose=2
     
     echo "----- Settings plugin -----"
     sleep 3
-    mv plugins/Controls DNAI.app/Contents/PlugIns
-    mv plugins/FontAwesome DNAI.app/Contents/PlugIns
-    mv plugins/Settings DNAI.app/Contents/PlugIns
-    install_name_tool -add_rpath @rpath/../PlugIns/Controls/libdnaicontrolsplugin.dylib DNAI.app/Contents/MacOS/DNAI
-    install_name_tool -add_rpath @rpath/../PlugIns/FontAwesome/libdnaifontawesomeplugin.dylib DNAI.app/Contents/MacOS/DNAI
-    install_name_tool -add_rpath @rpath/../PlugIns/Settings/libdnaisettingsplugin.dylib DNAI.app/Contents/MacOS/DNAI
-    
-    sleep 3
+    mv $build_dir/plugins/Controls $install_dir/../PlugIns
+    mv $build_dir/plugins/FontAwesome $install_dir/../PlugIns
+    mv $build_dir/plugins/Settings $install_dir/../PlugIns
+    install_name_tool -add_rpath @rpath/../PlugIns/Controls/libdnaicontrolsplugin.dylib $install_dir/DNAI
+    install_name_tool -add_rpath @rpath/../PlugIns/FontAwesome/libdnaifontawesomeplugin.dylib $install_dir/DNAI
+    install_name_tool -add_rpath @rpath/../PlugIns/Settings/libdnaisettingsplugin.dylib $install_dir/DNAI
 
-
-    rm -rf plugins
-    rm -rf Application
     mkdir Application
-    mv -f DNAI.app Application
-    cd Application/DNAI.app/Contents/MacOS
+    mv -f $install_dir/../.. $final_dir
+    cd $install_dir
 
     echo "----- Setting Server -----\n\n"
     sleep 1
