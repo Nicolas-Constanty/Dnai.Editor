@@ -4,6 +4,7 @@ import "../Style"
 
 import DNAI 1.0
 import Dnai.Settings 1.0
+import Dnai.Theme 1.0
 
 Item {
     id: buttonItemId
@@ -26,7 +27,7 @@ Item {
         anchors.fill: parent
         color: buttonItemId.colorRect
 
-        MLabel {
+        Label {
 
             id: buttonLaunchText
             text: buttonItemId.textValue

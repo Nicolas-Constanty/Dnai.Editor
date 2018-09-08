@@ -4,6 +4,7 @@ import QtQuick.Controls 2.3
 import DNAI 1.0
 import Dnai.Settings 1.0
 import Dnai.FontAwesome 1.0
+import Dnai.Theme 1.0
 
 import "../Style"
 
@@ -51,7 +52,7 @@ MenuItem {
                 anchors.leftMargin: 4
                 color: control.enabled ? AppSettings.theme["text"]["color"] : AppSettings.theme["text"]["disableColor"]
             }
-            MLabel {
+            Label {
                 id: txt
                 leftPadding: control.checkable && !control.mirrored ? control.indicator.width + control.spacing : 0
                 rightPadding: control.checkable && control.mirrored ? control.indicator.width + control.spacing : 0

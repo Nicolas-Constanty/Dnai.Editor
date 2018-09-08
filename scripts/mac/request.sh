@@ -1,8 +1,8 @@
 #!/bin/sh
 
 #VARIABLES
-baseURL='https://api.preprod.dnai.io/'
-dmg_path="./"
+baseURL='https://api.dnai.io/'
+dmg_path="$TRAVIS_BUILD_DIR/Application/"
 dmg_name="DNAI-Installer.dmg"
 slug="installer"
 #END
@@ -19,6 +19,7 @@ fi
 
 if [ $release_version == null ]
 then
+	echo "--- NO VERSION EXIT REQUEST ---"
     exit 1
 fi
 

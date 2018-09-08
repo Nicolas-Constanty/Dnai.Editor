@@ -5,10 +5,13 @@ import QtQuick.Dialogs 1.3
 import DNAI 1.0
 import Dnai.Settings 1.0
 import Dnai.FontAwesome 1.0
+import Dnai.Controls 1.0
+import Dnai.Theme 1.0
+
 
 import "../Forms"
-import "../Style"
 import "../Components"
+import "../Style"
 
 Item {
     id: _newProj
@@ -113,7 +116,7 @@ Item {
 
 
 
-        MLabel {
+        Label {
             id: title
             text: "Create new project"
             anchors.top: parent.top
@@ -121,7 +124,7 @@ Item {
             font.pointSize: 14
         }
 
-        MLabel {
+        Label {
             id: name
             text: "Name:"
             anchors.top: title.bottom
@@ -130,7 +133,7 @@ Item {
             font.pointSize: 12
         }
 
-        EditableText {
+        TextField {
             id: nameEditable
             anchors.top: title.bottom
             anchors.topMargin: 20
@@ -146,7 +149,7 @@ Item {
             }
         }
 
-        MLabel {
+        Label {
             id: location
             text: "Location:"
             anchors.top: nameEditable.bottom
@@ -155,7 +158,7 @@ Item {
             font.pointSize: 12
         }
 
-        EditableText {
+        TextField {
             id: locationEditable
             anchors.top: nameEditable.bottom
             anchors.topMargin: 20
@@ -185,7 +188,7 @@ Item {
             }
         }
 
-        MLabel {
+        Label {
             id: solutioName
             text: "Solution name:"
             anchors.top: locationEditable.bottom
@@ -194,7 +197,7 @@ Item {
             font.pointSize: 12
         }
 
-        EditableText {
+        TextField {
             id: solutionNameEditable
             anchors.top: locationEditable.bottom
             anchors.topMargin: 20

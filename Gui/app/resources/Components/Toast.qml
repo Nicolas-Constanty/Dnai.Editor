@@ -5,6 +5,7 @@ import QtGraphicalEffects 1.0
 
 import DNAI 1.0
 import Dnai.FontAwesome 1.0
+import Dnai.Theme 1.0
 
 import "../Style"
 
@@ -59,7 +60,7 @@ Rectangle {
         color: colorIconsFont
     }
 
-    MText {
+    Label {
      //   anchors.fill: parent
         anchors.left: icons.right
         anchors.right: backgroundRect.right

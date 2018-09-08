@@ -3,6 +3,8 @@ import QtQuick.Controls 2.2
 import Qt.labs.settings 1.0
 
 import DNAI 1.0
+import Dnai.Theme 1.0
+
 import "../Style"
 
 Item {
@@ -24,7 +26,7 @@ Item {
         anchors.right: parent.right
         anchors.left: parent.left
         id: colorPickerForm
-        MLabel {
+        Label {
             id: label
             height: parent.height
             anchors.left: parent.left

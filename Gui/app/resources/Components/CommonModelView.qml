@@ -7,6 +7,7 @@ import DNAI.Models 1.0
 import DNAI.Enums 1.0
 import Dnai.Settings 1.0
 import Dnai.FontAwesome 1.0
+import Dnai.Theme 1.0
 
 import "../Style"
 import "../JavaScript/CreateComponent.js" as Factory
@@ -284,7 +285,7 @@ Rectangle {
         anchors.rightMargin: 5
         anchors.top: _itemview.top
         anchors.bottom: _itemview.bottom
-        MText {
+        Label {
             id: _itemName
             font.pointSize: 10
             anchors.top: parent.top

@@ -21,8 +21,9 @@ Rectangle {
         anchors.centerIn: parent
         spacing: 15
         LinkButton {
+            cursorShape: Qt.PointingHandCursor
             text: qsTr("Create new project")
-            mousearea.onPressed: {
+            onPressed: {
                 if (newModal !== null)
                     newProjectPopup.open()
             }
@@ -34,8 +35,9 @@ Rectangle {
             anchors.horizontalCenter: parent.horizontalCenter
         }
         LinkButton {
+            cursorShape: Qt.PointingHandCursor
             text: qsTr("Open a project")
-            mousearea.onPressed: {
+            onPressed: {
                 if (openModal !== null)
                     openProjectId.open()
             }

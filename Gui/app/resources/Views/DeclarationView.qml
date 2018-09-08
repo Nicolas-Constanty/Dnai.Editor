@@ -10,6 +10,7 @@ import DNAI.Core 1.0
 
 import Dnai.Settings 1.0
 import Dnai.FontAwesome 1.0
+import Dnai.Theme 1.0
 
 import "../Style"
 import "../Components"
@@ -30,7 +31,7 @@ Item {
             border.width: AppSettings.theme["border"]["width"]
             height: _item.height
             width: 300
-            EditableText {
+            TextField {
                 id: _title
                 text: modelData.name
                 anchors.top: parent.top
@@ -90,7 +91,7 @@ Item {
                 anchors.leftMargin: 25
                 anchors.rightMargin: 30
                 height: 30
-                MLabel {
+                Label {
                     id: _selectInfo
                     property int selectCount: 0
                     anchors.left: parent.left
@@ -317,7 +318,7 @@ Item {
                 height: 30
                 color: "#80000000"
                 radius: 3
-                MText {
+                Label {
                     anchors.fill: parent
                     anchors.margins: 10
                     text: qsTr("Add new column...")
@@ -369,7 +370,7 @@ Item {
                             font.italic: true
                             verticalAlignment: Qt.AlignVCenter
                             font.family: AppSettings.theme["font"]["family"]
-                            MText {
+                            Label {
                                 anchors.fill: parent
                                 text: qsTr("Add new column...")
                                 font.pointSize: AppSettings.theme["font"]["pointSize"]

@@ -1,8 +1,8 @@
 import QtQuick 2.0
-import "../Style"
+import Dnai.Theme 1.0
 
 
-EditableText {
+TextField {
 
     property var model: null
     property int index: 0

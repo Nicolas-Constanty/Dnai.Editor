@@ -1,7 +1,7 @@
 #!/bin/sh                                                                                                                                                                                   
 
 #VARIABLES                                                                                                                                                                                   
-app_path="./Application/"
+app_path="$TRAVIS_BUILD_DIR/Application/"
 app_name="DNAI.app"
 
 repository_update_path="$TRAVIS_BUILD_DIR/dependencies/DNAI_updaters"
@@ -54,6 +54,9 @@ git commit -m "new version $release_version on mac"
 
 git tag -d $release_version
 git tag $release_version
+
+git remote rm origin
+git remote add origin https://Gouet:$GithubRW@github.com/Gouet/DNAI_updaters.git
 
 git push origin :$release_version
 git push origin $release_version

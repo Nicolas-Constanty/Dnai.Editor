@@ -3,6 +3,7 @@ import QtQuick 2.0
 import DNAI 1.0
 import Dnai.Settings 1.0
 import Dnai.FontAwesome 1.0
+import Dnai.Theme 1.0
 
 import "../Style"
 
@@ -20,7 +21,7 @@ Rectangle {
 
     width: __build_label__.width + 20
 
-    MLabel {
+    Label {
         id: __build_label__
         anchors.centerIn: parent
         visible: !_rotator.running

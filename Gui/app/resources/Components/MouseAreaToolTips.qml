@@ -1,8 +1,10 @@
 import QtQuick 2.10
+import QtQuick.Controls 2.2
 
 import DNAI 1.0
 import Dnai.Settings 1.0
 import Dnai.FontAwesome 1.0
+import Dnai.Theme 1.0
 
 import "../Style"
 
@@ -59,7 +61,7 @@ MouseArea {
             color: AppSettings.theme["colors"]["background"]["color5"]
         }
 
-        MText {
+        Label {
             id: textId
             anchors.left: icons.right
             anchors.leftMargin: 5

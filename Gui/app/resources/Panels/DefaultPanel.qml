@@ -1,5 +1,6 @@
 import QtQuick 2.0
 import QtQuick.Controls 2.0
+import Dnai.Theme 1.0
 
 import "../Style"
 
@@ -51,7 +52,7 @@ Item {
                             height: childrenRect.height
                             color: "transparent"
 
-                            MLabel {
+                            Label {
                                 text: defaultPanel.title
                                 rightPadding: 10
                                 textFormat: Text.PlainText

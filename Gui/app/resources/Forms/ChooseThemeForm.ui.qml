@@ -2,7 +2,7 @@ import QtQuick 2.9
 import QtQuick.Controls 2.2
 import QtQuick.Controls.Styles 1.4
 
-import "../Style"
+import Dnai.Theme 1.0
 
 Item {
     width: 400
@@ -19,23 +19,32 @@ Item {
         width: 400
         height: 150
 
-        MLabel {
-            id: label
-            x: 29
-            y: 44
-            text: qsTr("Please select a theme :")
-        }
+        Item {
+            anchors.top: parent.top
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.bottom: validate.top
+            anchors.bottomMargin: 10
+            anchors.margins: 20
+            Label {
+                id: label
+                text: qsTr("Please select a theme :")
+                anchors.left: parent.left
+                anchors.verticalCenter: parent.verticalCenter
+            }
 
-        ComboBox {
-            id: comboBox
-            x: 231
-            y: 31
+            ComboBox {
+                id: comboBox
+                anchors.right: parent.right
+                anchors.verticalCenter: parent.verticalCenter
+            }
         }
 
         Button {
             id: validate
-            x: 168
-            y: 94
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: 10
+
             text: qsTr("Ok")
             anchors.horizontalCenter: parent.horizontalCenter
         }
