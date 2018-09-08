@@ -4,6 +4,7 @@ import QtQuick.Controls 2.2
 import QtQuick.Controls.Styles 1.4
 
 import DNAI 1.0
+import Dnai.Theme 1.0
 import "../Style"
 
 Panel {
@@ -21,7 +22,7 @@ Panel {
             Button {
                 id: button
                 height: view.height
-                contentItem: MText {
+                contentItem: Label {
                     text: model.modelData.path
                 }
                 background: Rectangle {
@@ -38,7 +39,7 @@ Panel {
                 anchors.left: button.right
                 anchors.leftMargin: -1
                 height: view.height
-                contentItem: MText {
+                contentItem: Label {
                     text: ">"
                 }
                 background: Rectangle {

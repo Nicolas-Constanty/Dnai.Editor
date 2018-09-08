@@ -15,7 +15,8 @@ ToolButton {
                             contentItem.implicitWidth + leftPadding + rightPadding)
     implicitHeight: 40
 
-    contentItem: Title3 {
+    contentItem: Label {
+        font.pointSize: 12
         text: control.text
         color: control.enabled ? (control.visualFocus ? AppSettings.theme["text"]["lightColor"] : AppSettings.theme["text"]["color"]) : AppSettings.theme["text"]["disableColor"]
         elide: Text.ElideRight

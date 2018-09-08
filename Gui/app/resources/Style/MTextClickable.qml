@@ -1,7 +1,8 @@
 import QtQuick 2.0
-import DNAI 1.0
 
-MText {
+import Dnai.Theme 1.0
+
+Label {
     id: clickableTextId
     font.underline: true
 

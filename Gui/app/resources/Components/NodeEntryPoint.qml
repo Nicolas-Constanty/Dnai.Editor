@@ -5,6 +5,7 @@ import DNAI.Enums 1.0
 import DNAI.Core 1.0
 
 import Dnai.Settings 1.0
+import Dnai.Theme 1.0
 
 import "../Style"
 
@@ -50,7 +51,7 @@ GenericNode {
         /*
          * Name
          */
-        MLabel {
+        Label {
             id: _name
 
             anchors.left: parent.left

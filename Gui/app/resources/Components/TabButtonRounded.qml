@@ -3,6 +3,7 @@ import QtQuick.Controls 2.2
 
 import DNAI 1.0
 import DNAI.Views 1.0
+import Dnai.Theme 1.0
 
 import "../Style"
 
@@ -16,7 +17,7 @@ TabButton {
     property TabBar refTabBar: undefined
     implicitHeight: 20
     width: implicitWidth + 40
-    contentItem: MLabel {
+    contentItem: Label {
         id: _text
         text: qsTr(_control.text)
         anchors.fill: parent

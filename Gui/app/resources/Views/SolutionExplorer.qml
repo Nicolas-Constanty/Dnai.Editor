@@ -8,9 +8,11 @@ import DNAI 1.0
 import DNAI.Models 1.0
 import DNAI.Enums 1.0
 
+import Dnai.Theme 1.0
 import Dnai.Settings 1.0
 import Dnai.FontAwesome 1.0
 import DNAI.Core 1.0
+import Dnai.Theme 1.0
 
 import "../Style"
 import "../Components"
@@ -22,7 +24,7 @@ Rectangle {
     property string title: "solution explorer"
     property real rowheight: 16
     property var last: null
-    MLabel {
+    Label {
         id: _title
         height: 35
         padding: 15
@@ -160,7 +162,7 @@ Rectangle {
                         anchors.verticalCenter: parent.verticalCenter
                         antialiasing: true
                     }
-                    MLabel {
+                    Label {
                         text: (styleData.value.name !== undefined) ? styleData.value.name : ""
                         horizontalAlignment: Text.AlignLeft
                         font.family: "segoeui"
@@ -318,7 +320,7 @@ Rectangle {
             anchors.fill: parent
             anchors.margins: 10
 
-            MLabel {
+            Label {
                 font.pointSize: 13
                 text: "Create Project"
                 anchors.left: parent.left
@@ -328,7 +330,7 @@ Rectangle {
                 visible: !createProjectItemId.editableProjectMode
             }
 
-            EditableText {
+            TextField {
                 id: projectNameEditableId
                 font.pointSize: 13
                 text: ""

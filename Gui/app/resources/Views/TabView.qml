@@ -2,6 +2,7 @@ import QtQuick 2.0
 import QtQuick.Controls 2.2
 import DNAI 1.0
 import DNAI.Core 1.0
+import Dnai.Theme 1.0
 
 import "../JavaScript/CreateComponent.js" as Factory
 import "../Style"
@@ -78,7 +79,7 @@ Item {
         _swip.setCurrentIndex(index)
     }
 
-    MTabBar {
+    TabBar {
         id: _bar
         currentIndex: _swip.currentIndex
         onCurrentIndexChanged: {

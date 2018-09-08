@@ -1,5 +1,6 @@
 import QtQuick 2.0
+import Dnai.Theme 1.0
 
-MLabel {
+Label {
     font.pointSize: 11
 }
