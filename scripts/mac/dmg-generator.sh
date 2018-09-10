@@ -11,5 +11,5 @@ $TRAVIS_BUILD_DIR/scripts/mac/yoursway-create-dmg/create-dmg \
 --hide-extension DNAI.app \
 --text-size 16 \
 --app-drop-link 540 265 \
-DNAI-Installer.dmg \
+$TRAVIS_BUILD_DIR/DNAI-Installer.dmg \
 $TRAVIS_BUILD_DIR/Application/
