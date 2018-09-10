@@ -58,7 +58,7 @@ namespace dnai
         Editor(Editor&&) = delete;                  // Move construct
         Editor& operator=(Editor const&) = delete;  // Copy assign
         Editor& operator=(Editor &&) = delete;      // Move assign
-        const QString& version() const override;
+        Q_INVOKABLE const QString& version() const override;
         void setVersion(const QString& version) override;
         void save() override;
         void restoreViewState(const QJsonObject& obj) override;
