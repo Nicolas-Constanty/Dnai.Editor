@@ -1,0 +1,2 @@
+mkdir %INSTALL_FOLDER%\Core
+copy "%APPVEYOR_BUILD_FOLDER%\Core\*" %INSTALL_FOLDER%\Core

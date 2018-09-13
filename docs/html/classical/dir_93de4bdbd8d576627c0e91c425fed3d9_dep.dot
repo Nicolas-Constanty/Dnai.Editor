@@ -1,0 +1,17 @@
+digraph "Gui/app/src/dnai/models/gui" {
+  compound=true
+  node [ fontsize="10", fontname="Helvetica"];
+  edge [ labelfontsize="10", labelfontname="Helvetica"];
+  subgraph clusterdir_1bf8b75102dd4a6cc610df6ebee3e6bd {
+    graph [ bgcolor="#ddddee", pencolor="black", label="models" fontname="Helvetica", fontsize="10", URL="dir_1bf8b75102dd4a6cc610df6ebee3e6bd.html"]
+  subgraph clusterdir_93de4bdbd8d576627c0e91c425fed3d9 {
+    graph [ bgcolor="#eeeeff", pencolor="black", label="" URL="dir_93de4bdbd8d576627c0e91c425fed3d9.html"];
+    dir_93de4bdbd8d576627c0e91c425fed3d9 [shape=plaintext label="gui"];
+    dir_34ea36a2c9542ca1e53cf1cb3e000ee5 [shape=box label="data" color="black" fillcolor="white" style="filled" URL="dir_34ea36a2c9542ca1e53cf1cb3e000ee5.html"];
+    dir_b60ab5fac535355896d745549f27ef25 [shape=box label="declarable" color="black" fillcolor="white" style="filled" URL="dir_b60ab5fac535355896d745549f27ef25.html"];
+  }
+  }
+  dir_6e89066b6e3a1edc14e01dd7a1c1fb19 [shape=box label="include" fillcolor="white" style="filled" color="red" URL="dir_6e89066b6e3a1edc14e01dd7a1c1fb19.html"];
+  dir_34ea36a2c9542ca1e53cf1cb3e000ee5->dir_6e89066b6e3a1edc14e01dd7a1c1fb19 [headlabel="1", labeldistance=1.5 headhref="dir_000036_000004.html"];
+  dir_b60ab5fac535355896d745549f27ef25->dir_6e89066b6e3a1edc14e01dd7a1c1fb19 [headlabel="20", labeldistance=1.5 headhref="dir_000037_000004.html"];
+}

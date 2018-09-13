@@ -6,10 +6,12 @@ import QtQuick.Controls.Styles 1.0
 import DNAI 1.0
 import Dnai.Settings 1.0
 import Dnai.FontAwesome 1.0
+import Dnai.Controls 1.0
+import Dnai.Theme 1.0
 
-import "../Style"
-import "../Forms";
+import "../Forms"
 import "../Components"
+import "../Style"
 
 Item {
     id: loginViewId
@@ -84,7 +86,7 @@ Item {
         anchors.leftMargin: 40
         anchors.rightMargin: 40
 
-        MLabel {
+        Label {
             id: loginLabelId
             anchors.top: parent.top
             anchors.topMargin: 20
@@ -97,7 +99,7 @@ Item {
 
 
 
-    MLabel {
+    Label {
         id: usernameId
         anchors.top: loginLabelId.top
         anchors.left: inputField.left
@@ -108,7 +110,7 @@ Item {
         color: AppSettings.theme["text"]["color"]
     }
 
-    EditableText {
+    TextField {
         id: usernameEditableId
         anchors.top: usernameId.bottom
         anchors.left: inputField.left
@@ -122,7 +124,7 @@ Item {
         KeyNavigation.tab: passwordEditableId
     }
 
-    MLabel {
+    Label {
         id: passwordId
         anchors.top: usernameEditableId.bottom
         anchors.left: usernameId.left
@@ -132,7 +134,7 @@ Item {
         color: AppSettings.theme["text"]["color"]
     }
 
-    EditableText {
+    TextField {
         id: passwordEditableId
         anchors.top: passwordId.bottom
         anchors.left: inputField.left
@@ -168,7 +170,7 @@ Item {
         }
     }
 
-    MLabel {
+    Label {
         id: errorId
         text: ""
         color: AppSettings.theme["text"]["errorColor"]

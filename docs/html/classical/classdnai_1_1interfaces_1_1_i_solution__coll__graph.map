@@ -1,0 +1,5 @@
+<map id="dnai::interfaces::ISolution" name="dnai::interfaces::ISolution">
+<area shape="rect" id="node2" href="$classdnai_1_1interfaces_1_1_i_project.html" title="{dnai::interfaces::IProject\n||+ ~IProject()\l+ load()\l+ close()\l+ version()\l+ setVersion()\l+ fileName()\l+ setFileName()\l+ name()\l+ setName()\l+ description()\l+ setDescription()\l+ jsonData()\l}" alt="" coords="107,160,270,399"/>
+<area shape="rect" id="node3" href="$classdnai_1_1interfaces_1_1_i_savable.html" title="{dnai::interfaces::ISavable\n||+ ~ISavable()\l+ save()\l}" alt="" coords="5,13,172,105"/>
+<area shape="rect" id="node4" href="$classdnai_1_1interfaces_1_1_i_serializable.html" title="Allow inherited class to serialize and deserialize itself. " alt="" coords="196,5,384,112"/>
+</map>

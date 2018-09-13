@@ -1,0 +1,4 @@
+<map id="dnai::interfaces::AController&lt; T, U &gt;" name="dnai::interfaces::AController&lt; T, U &gt;">
+<area shape="rect" id="node2" href="$classdnai_1_1interfaces_1_1_i_controller.html" title="{dnai::interfaces::IController\n||+ ~IController()\l+ views()\l+ createView()\l# createCommand()\l}" alt="" coords="5,20,181,141"/>
+<area shape="rect" id="node3" href="$classdnai_1_1interfaces_1_1_i_command.html" title="{dnai::interfaces::ICommand\n||# ~ICommand()\l# execute()\l# executeSave()\l# unExcute()\l# infos()\l# isSave()\l}" alt="" coords="206,5,386,156"/>
+</map>

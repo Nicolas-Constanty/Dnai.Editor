@@ -1,0 +1,4 @@
+<map id="dnai::models::Column" name="dnai::models::Column">
+<area shape="rect" id="node3" href="$classdnai_1_1interfaces_1_1_a_serializable.html" title="{dnai::interfaces::ASerializable\l\&lt; Column \&gt;\n||+ ~ASerializable()\l+ serialize()\l+ serializeList()\l+ deserialize()\l# _deserialize()\l}" alt="" coords="167,160,362,311"/>
+<area shape="rect" id="node4" href="$classdnai_1_1interfaces_1_1_i_serializable.html" title="Allow inherited class to serialize and deserialize itself. " alt="" coords="171,5,359,112"/>
+</map>

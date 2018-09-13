@@ -1,0 +1,33 @@
+<map id="Gui/app/GeneratedFiles/Debug/moc_projecthandler.cpp" name="Gui/app/GeneratedFiles/Debug/moc_projecthandler.cpp">
+<area shape="rect" id="node2" href="$projecthandler_8h.html" title="../../include/dnai\l/core/projecthandler.h" alt="" coords="560,95,707,136"/>
+<area shape="rect" id="node5" href="$project_8h.html" title="dnai/project.h" alt="" coords="527,184,627,211"/>
+<area shape="rect" id="node47" href="$entitymanager_8h.html" title="entitymanager.h" alt="" coords="1599,259,1713,285"/>
+<area shape="rect" id="node6" href="$entitytree_8h.html" title="models/entitytree.h" alt="" coords="403,259,536,285"/>
+<area shape="rect" id="node39" href="$iproject_8h.html" title="interfaces/iproject.h" alt="" coords="143,259,278,285"/>
+<area shape="rect" id="node42" href="$mlproject_8h.html" title="models/ml/mlproject.h" alt="" coords="502,408,653,435"/>
+<area shape="rect" id="node8" href="$entity_8h.html" title="entity.h" alt="" coords="1623,333,1689,360"/>
+<area shape="rect" id="node15" href="$iserializable_8h.html" title="dnai/interfaces/iserializable.h" alt="" coords="673,840,863,867"/>
+<area shape="rect" id="node9" href="$core_2entity_8h.html" title="dnai/models/core/entity.h" alt="" coords="2112,579,2280,606"/>
+<area shape="rect" id="node18" href="$gui_2declarable_2entity_8h.html" title="dnai/models/gui/declarable\l/entity.h" alt="" coords="1389,661,1565,703"/>
+<area shape="rect" id="node22" href="$imodel_8h.html" title="dnai/interfaces/imodel.h" alt="" coords="1323,490,1482,517"/>
+<area shape="rect" id="node26" href="$entitycolum_8h.html" title="gui/data/entitycolum.h" alt="" coords="2497,408,2647,435"/>
+<area shape="rect" id="node27" href="$declarable_2variable_8h.html" title="gui/declarable/variable.h" alt="" coords="1005,579,1165,606"/>
+<area shape="rect" id="node31" href="$declarable_2context_8h.html" title="gui/declarable/context.h" alt="" coords="1576,408,1736,435"/>
+<area shape="rect" id="node12" href="$entitydata_8h.html" title="entitydata.h" alt="" coords="2229,669,2320,695"/>
+<area shape="rect" id="node14" href="$imodeldata_8h.html" title="dnai/interfaces/imodeldata.h" alt="" coords="1585,758,1769,785"/>
+<area shape="rect" id="node19" href="$gui_2data_2entity_8h.html" title="dnai/models/gui/data\l/entity.h" alt="" coords="2011,751,2154,792"/>
+<area shape="rect" id="node21" href="$ientity_8h.html" title="dnai/interfaces/ientity.h" alt="" coords="1237,758,1393,785"/>
+<area shape="rect" id="node23" href="$generictreeitem_8h.html" title="dnai/models/generictreeitem.h" alt="" coords="1891,579,2087,606"/>
+<area shape="rect" id="node28" href="$ivariable_8h.html" title="dnai/interfaces/ivariable.h" alt="" coords="823,669,990,695"/>
+<area shape="rect" id="node30" href="$data_2variable_8h.html" title="dnai/models/gui/data\l/variable.h" alt="" coords="2062,661,2205,703"/>
+<area shape="rect" id="node32" href="$data_2context_8h.html" title="dnai/models/gui/data\l/context.h" alt="" coords="1506,483,1649,524"/>
+<area shape="rect" id="node33" href="$declarable_2function_8h.html" title="dnai/models/gui/declarable\l/function.h" alt="" coords="805,572,981,613"/>
+<area shape="rect" id="node36" href="$declarable_2objecttype_8h.html" title="dnai/models/gui/declarable\l/objecttype.h" alt="" coords="1589,572,1765,613"/>
+<area shape="rect" id="node37" href="$declarable_2enumtype_8h.html" title="dnai/models/gui/declarable\l/enumtype.h" alt="" coords="1189,572,1365,613"/>
+<area shape="rect" id="node38" href="$declarable_2listtype_8h.html" title="dnai/models/gui/declarable\l/listtype.h" alt="" coords="1389,572,1565,613"/>
+<area shape="rect" id="node35" href="$iinstruction_8h.html" title="dnai/interfaces/iinstruction.h" alt="" coords="1164,669,1348,695"/>
+<area shape="rect" id="node41" href="$isavable_8h.html" title="isavable.h" alt="" coords="122,333,201,360"/>
+<area shape="rect" id="node43" href="$dataset_8h.html" title="dataset.h" alt="" coords="222,490,298,517"/>
+<area shape="rect" id="node46" href="$model_8h.html" title="model.h" alt="" coords="510,490,578,517"/>
+<area shape="rect" id="node45" href="$iterableqqmlpropertymap_8h.html" title="dnai/utils/iterableqqmlpropertymap.h" alt="" coords="145,579,375,606"/>
+</map>

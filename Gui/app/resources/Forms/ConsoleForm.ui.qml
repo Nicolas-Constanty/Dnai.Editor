@@ -4,6 +4,7 @@ import QtQuick.Layouts 1.3
 
 import DNAI 1.0
 import DNAI.Views 1.0
+import Dnai.Theme 1.0
 
 import "../Style"
 
@@ -58,7 +59,7 @@ Item {
                             height: parent.height
 
                             color: "transparent"
-                            MLabel {
+                            Label {
                                 id: labelName
                                 text: defaultPanel.title
                                 rightPadding: 10

@@ -1,0 +1,12 @@
+<map id="Gui/app/include/dnai/exceptions/exceptionmanager.h" name="Gui/app/include/dnai/exceptions/exceptionmanager.h">
+<area shape="rect" id="node2" href="$exceptions_8h.html" title="Gui/app/include/exceptions.h" alt="" coords="5,102,196,129"/>
+<area shape="rect" id="node3" href="$editor_8cpp.html" title="Gui/app/src/dnai/editor.cpp" alt="" coords="221,102,399,129"/>
+<area shape="rect" id="node4" href="$enumtype_8cpp.html" title="Gui/app/src/dnai/models\l/gui/declarable/enumtype.cpp" alt="" coords="423,95,615,136"/>
+<area shape="rect" id="node5" href="$listtype_8cpp.html" title="Gui/app/src/dnai/models\l/gui/declarable/listtype.cpp" alt="" coords="640,95,817,136"/>
+<area shape="rect" id="node6" href="$models_2gui_2flow_8cpp.html" title="Gui/app/src/dnai/models\l/gui/flow.cpp" alt="" coords="842,95,1005,136"/>
+<area shape="rect" id="node7" href="$models_2gui_2input_8cpp.html" title="Gui/app/src/dnai/models\l/gui/input.cpp" alt="" coords="1029,95,1191,136"/>
+<area shape="rect" id="node8" href="$models_2gui_2output_8cpp.html" title="Gui/app/src/dnai/models\l/gui/output.cpp" alt="" coords="1215,95,1378,136"/>
+<area shape="rect" id="node9" href="$project_8cpp.html" title="Gui/app/src/dnai/project.cpp" alt="" coords="1403,102,1588,129"/>
+<area shape="rect" id="node10" href="$solution_8cpp.html" title="Gui/app/src/dnai/solution.cpp" alt="" coords="1612,102,1803,129"/>
+<area shape="rect" id="node11" href="$viewzone_8cpp.html" title="Gui/app/src/dnai/views\l/viewzone.cpp" alt="" coords="1827,95,1979,136"/>
+</map>

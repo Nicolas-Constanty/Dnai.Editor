@@ -1,0 +1,7 @@
+<map id="Gui/app/include/dnai/commands/zoomcanvascommand.h" name="Gui/app/include/dnai/commands/zoomcanvascommand.h">
+<area shape="rect" id="node3" href="$command_8h.html" title="command.h" alt="" coords="167,95,258,121"/>
+<area shape="rect" id="node7" href="$canvasnode_8h.html" title="dnai/views/canvasnode.h" alt="" coords="331,95,495,121"/>
+<area shape="rect" id="node5" href="$icommand_8h.html" title="dnai/interfaces/icommand.h" alt="" coords="122,169,303,196"/>
+<area shape="rect" id="node9" href="$line_8h.html" title="line.h" alt="" coords="578,169,631,196"/>
+<area shape="rect" id="node13" href="$focusmanager_8h.html" title="dnai/focusmanager.h" alt="" coords="391,169,533,196"/>
+</map>

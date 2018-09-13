@@ -1,0 +1,14 @@
+<map id="Gui/app/include/dnai/core/enumhandler.h" name="Gui/app/include/dnai/core/enumhandler.h">
+<area shape="rect" id="node2" href="$moc__enumhandler_8cpp.html" title="Gui/app/GeneratedFiles\l/Debug/moc_enumhandler.cpp" alt="" coords="569,95,767,136"/>
+<area shape="rect" id="node3" href="$handlermanager_8h.html" title="Gui/app/include/dnai\l/core/handlermanager.h" alt="" coords="791,95,950,136"/>
+<area shape="rect" id="node13" href="$enumhandler_8cpp.html" title="Gui/app/src/dnai/core\l/enumhandler.cpp" alt="" coords="975,95,1121,136"/>
+<area shape="rect" id="node4" href="$moc__handlermanager_8cpp.html" title="Gui/app/GeneratedFiles\l/Debug/moc_handlermanager.cpp" alt="" coords="5,184,221,225"/>
+<area shape="rect" id="node5" href="$handlermanager_8cpp.html" title="Gui/app/src/dnai/core\l/handlermanager.cpp" alt="" coords="245,184,392,225"/>
+<area shape="rect" id="node6" href="$objecthandler_8cpp.html" title="Gui/app/src/dnai/core\l/objecthandler.cpp" alt="" coords="416,184,563,225"/>
+<area shape="rect" id="node7" href="$editor_8cpp.html" title="Gui/app/src/dnai/editor.cpp" alt="" coords="587,191,765,218"/>
+<area shape="rect" id="node8" href="$contextmenumodel_8cpp.html" title="Gui/app/src/dnai/models\l/contextmenumodel.cpp" alt="" coords="789,184,952,225"/>
+<area shape="rect" id="node9" href="$entity_8cpp.html" title="Gui/app/src/dnai/models\l/entity.cpp" alt="" coords="976,184,1139,225"/>
+<area shape="rect" id="node10" href="$objecttype_8cpp.html" title="Gui/app/src/dnai/models\l/gui/declarable/objecttype.cpp" alt="" coords="1163,184,1357,225"/>
+<area shape="rect" id="node11" href="$project_8cpp.html" title="Gui/app/src/dnai/project.cpp" alt="" coords="1382,191,1567,218"/>
+<area shape="rect" id="node12" href="$main_8cpp.html" title="Gui/app/src/main.cpp" alt="" coords="1592,191,1739,218"/>
+</map>

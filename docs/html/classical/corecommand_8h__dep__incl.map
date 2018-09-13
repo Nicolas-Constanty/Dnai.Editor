@@ -1,0 +1,15 @@
+<map id="Gui/app/include/dnai/commands/corecommand.h" name="Gui/app/include/dnai/commands/corecommand.h">
+<area shape="rect" id="node2" href="$commands_8h.html" title="Gui/app/include/commands.h" alt="" coords="5,102,196,129"/>
+<area shape="rect" id="node5" href="$corecommand_8cpp.html" title="Gui/app/src/dnai/commands\l/corecommand.cpp" alt="" coords="220,95,405,136"/>
+<area shape="rect" id="node6" href="$declaratorhandler_8cpp.html" title="Gui/app/src/dnai/core\l/declaratorhandler.cpp" alt="" coords="429,95,580,136"/>
+<area shape="rect" id="node7" href="$enumhandler_8cpp.html" title="Gui/app/src/dnai/core\l/enumhandler.cpp" alt="" coords="605,95,751,136"/>
+<area shape="rect" id="node8" href="$functionhandler_8cpp.html" title="Gui/app/src/dnai/core\l/functionhandler.cpp" alt="" coords="775,95,922,136"/>
+<area shape="rect" id="node9" href="$globalhandler_8cpp.html" title="Gui/app/src/dnai/core\l/globalhandler.cpp" alt="" coords="946,95,1093,136"/>
+<area shape="rect" id="node10" href="$instructionhandler_8cpp.html" title="Gui/app/src/dnai/core\l/instructionhandler.cpp" alt="" coords="1117,95,1271,136"/>
+<area shape="rect" id="node11" href="$listhandler_8cpp.html" title="Gui/app/src/dnai/core\l/listhandler.cpp" alt="" coords="1295,95,1442,136"/>
+<area shape="rect" id="node12" href="$objecthandler_8cpp.html" title="Gui/app/src/dnai/core\l/objecthandler.cpp" alt="" coords="1466,95,1613,136"/>
+<area shape="rect" id="node13" href="$projecthandler_8cpp.html" title="Gui/app/src/dnai/core\l/projecthandler.cpp" alt="" coords="1637,95,1783,136"/>
+<area shape="rect" id="node14" href="$variablehandler_8cpp.html" title="Gui/app/src/dnai/core\l/variablehandler.cpp" alt="" coords="1807,95,1954,136"/>
+<area shape="rect" id="node3" href="$dnai_8h.html" title="Gui/app/include/dnai.h" alt="" coords="25,184,176,211"/>
+<area shape="rect" id="node4" href="$main_8cpp.html" title="Gui/app/src/main.cpp" alt="" coords="27,259,174,285"/>
+</map>

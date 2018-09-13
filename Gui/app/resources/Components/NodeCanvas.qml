@@ -7,6 +7,7 @@ import DNAI.Models 1.0
 import Dnai.Settings 1.0
 import Dnai.Controls 1.0
 import DNAI.Core 1.0
+import Dnai.Theme 1.0
 
 import "../Style"
 import "../Nodes"
@@ -185,7 +186,7 @@ CanvasNode {
         triggeredAction: onMenuNodeChoosen
     }
 
-    MLabel {
+    Label {
         id: zoomText
         text: (content_item.scale * 100) + "%"
         anchors.right: parent.right

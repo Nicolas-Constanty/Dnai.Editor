@@ -1,0 +1,4 @@
+<map id="dnai::views::ViewZone" name="dnai::views::ViewZone">
+<area shape="rect" id="node3" href="$classdnai_1_1interfaces_1_1_i_view_zone.html" title="{dnai::interfaces::IViewZone\n||+ ~IViewZone()\l+ open()\l+ close()\l+ focusNext()\l+ focusPrev()\l+ addView()\l+ views()\l+ removeView()\l+ split()\l}" alt="" coords="121,160,298,355"/>
+<area shape="rect" id="node4" href="$classdnai_1_1interfaces_1_1_i_serializable.html" title="Allow inherited class to serialize and deserialize itself. " alt="" coords="115,5,303,112"/>
+</map>

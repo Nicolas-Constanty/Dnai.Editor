@@ -1,0 +1,34 @@
+<map id="Gui/app/include/dnai/views/canvasnode.h" name="Gui/app/include/dnai/views/canvasnode.h">
+<area shape="rect" id="node2" href="$moc__canvasnode_8cpp.html" title="Gui/app/GeneratedFiles\l/Debug/moc_canvasnode.cpp" alt="" coords="5,95,197,136"/>
+<area shape="rect" id="node3" href="$views_2linkablebezieritem_8h.html" title="Gui/app/include/dnai\l/views/linkablebezieritem.h" alt="" coords="1739,95,1915,136"/>
+<area shape="rect" id="node6" href="$genericnode_8h.html" title="Gui/app/include/dnai\l/views/genericnode.h" alt="" coords="1307,273,1450,315"/>
+<area shape="rect" id="node11" href="$views_8h.html" title="Gui/app/include/views.h" alt="" coords="1719,549,1878,575"/>
+<area shape="rect" id="node16" href="$genericnode_8cpp.html" title="Gui/app/src/dnai/views\l/genericnode.cpp" alt="" coords="708,541,860,583"/>
+<area shape="rect" id="node18" href="$views_2output_8cpp.html" title="Gui/app/src/dnai/views\l/output.cpp" alt="" coords="884,541,1036,583"/>
+<area shape="rect" id="node23" href="$editor_8cpp.html" title="Gui/app/src/dnai/editor.cpp" alt="" coords="323,370,501,397"/>
+<area shape="rect" id="node25" href="$canvasnode_8cpp.html" title="Gui/app/src/dnai/views\l/canvasnode.cpp" alt="" coords="2321,363,2473,404"/>
+<area shape="rect" id="node27" href="$linkablebezieritem_8cpp.html" title="Gui/app/src/dnai/views\l/linkablebezieritem.cpp" alt="" coords="1835,363,1989,404"/>
+<area shape="rect" id="node28" href="$movecanvascommand_8h.html" title="Gui/app/include/dnai\l/commands/movecanvascommand.h" alt="" coords="2133,95,2365,136"/>
+<area shape="rect" id="node30" href="$movecanvascommand_8cpp.html" title="Gui/app/src/dnai/commands\l/movecanvascommand.cpp" alt="" coords="2041,184,2226,225"/>
+<area shape="rect" id="node31" href="$zoomcanvascommand_8h.html" title="Gui/app/include/dnai\l/commands/zoomcanvascommand.h" alt="" coords="2409,95,2644,136"/>
+<area shape="rect" id="node33" href="$beziercurve_8cpp.html" title="Gui/app/src/dnai/views\l/beziercurve.cpp" alt="" coords="2829,95,2981,136"/>
+<area shape="rect" id="node4" href="$views_2flow_8h.html" title="Gui/app/include/dnai\l/views/flow.h" alt="" coords="1673,184,1813,225"/>
+<area shape="rect" id="node8" href="$io_8h.html" title="Gui/app/include/dnai\l/views/io.h" alt="" coords="1443,363,1583,404"/>
+<area shape="rect" id="node5" href="$moc__flow_8cpp.html" title="Gui/app/GeneratedFiles\l/Debug/moc_flow.cpp" alt="" coords="1550,273,1709,315"/>
+<area shape="rect" id="node26" href="$views_2flow_8cpp.html" title="Gui/app/src/dnai/views\l/flow.cpp" alt="" coords="1608,363,1760,404"/>
+<area shape="rect" id="node7" href="$moc__genericnode_8cpp.html" title="Gui/app/GeneratedFiles\l/Debug/moc_genericnode.cpp" alt="" coords="1072,363,1267,404"/>
+<area shape="rect" id="node17" href="$views_2input_8cpp.html" title="Gui/app/src/dnai/views\l/input.cpp" alt="" coords="1060,541,1212,583"/>
+<area shape="rect" id="node21" href="$movenodecommand_8h.html" title="Gui/app/include/dnai\l/commands/movenodecommand.h" alt="" coords="577,363,797,404"/>
+<area shape="rect" id="node24" href="$focusmanager_8cpp.html" title="Gui/app/src/dnai/focusmanager.cpp" alt="" coords="821,370,1048,397"/>
+<area shape="rect" id="node9" href="$moc__io_8cpp.html" title="Gui/app/GeneratedFiles\l/Debug/moc_io.cpp" alt="" coords="1459,452,1618,493"/>
+<area shape="rect" id="node10" href="$views_2input_8h.html" title="Gui/app/include/dnai\l/views/input.h" alt="" coords="1079,452,1219,493"/>
+<area shape="rect" id="node19" href="$views_2output_8h.html" title="Gui/app/include/dnai\l/views/output.h" alt="" coords="1243,452,1383,493"/>
+<area shape="rect" id="node20" href="$io_8cpp.html" title="Gui/app/src/dnai/views\l/io.cpp" alt="" coords="1693,452,1845,493"/>
+<area shape="rect" id="node14" href="$inputcontroller_8cpp.html" title="Gui/app/src/dnai/controllers\l/inputcontroller.cpp" alt="" coords="1441,541,1623,583"/>
+<area shape="rect" id="node15" href="$outputcontroller_8cpp.html" title="Gui/app/src/dnai/controllers\l/outputcontroller.cpp" alt="" coords="1236,541,1417,583"/>
+<area shape="rect" id="node12" href="$dnai_8h.html" title="Gui/app/include/dnai.h" alt="" coords="2230,631,2381,657"/>
+<area shape="rect" id="node13" href="$main_8cpp.html" title="Gui/app/src/main.cpp" alt="" coords="2232,705,2379,732"/>
+<area shape="rect" id="node22" href="$movenodecommand_8cpp.html" title="Gui/app/src/dnai/commands\l/movenodecommand.cpp" alt="" coords="577,452,762,493"/>
+<area shape="rect" id="node29" href="$commands_8h.html" title="Gui/app/include/commands.h" alt="" coords="2302,191,2493,218"/>
+<area shape="rect" id="node32" href="$zoomcanvascommand_8cpp.html" title="Gui/app/src/dnai/commands\l/zoomcanvascommand.cpp" alt="" coords="2569,184,2754,225"/>
+</map>

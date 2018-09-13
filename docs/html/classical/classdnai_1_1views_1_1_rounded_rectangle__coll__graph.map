@@ -1,0 +1,3 @@
+<map id="dnai::views::RoundedRectangle" name="dnai::views::RoundedRectangle">
+<area shape="rect" id="node2" href="$classdnai_1_1views_1_1_custom_shape.html" title="{dnai::views::CustomShape\n|+ radius\l+ borderWidth\l+ fillColor\l+ borderColor\l# m_radius\l# m_borderWidth\l# m_fillColor\l# m_borderColor\l# m_saveRadius\l# m_saveBorderWidth\l# m_saveFillColor\l# m_saveBorderColor\l# m_savePos\l|+ CustomShape()\l+ updatePaintNode()\l+ radius()\l+ borderWidth()\l+ fillColor()\l+ borderColor()\l+ setRadius()\l+ setBorderWidth()\l+ setFillColor()\l+ setBorderColor()\land 6 more...\l}" alt="" coords="19,131,194,531"/>
+</map>

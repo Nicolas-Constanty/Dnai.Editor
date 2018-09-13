@@ -1,0 +1,14 @@
+<map id="dnai::models::IModel" name="dnai::models::IModel">
+<area shape="rect" id="node3" href="$classdnai_1_1models_1_1_class.html" title="dnai::models::Class" alt="" coords="597,18,734,45"/>
+<area shape="rect" id="node4" href="$classdnai_1_1models_1_1_common.html" title="dnai::models::Common" alt="" coords="384,170,540,197"/>
+<area shape="rect" id="node5" href="$classdnai_1_1models_1_1_context.html" title="dnai::models::Context" alt="" coords="591,69,740,96"/>
+<area shape="rect" id="node6" href="$classdnai_1_1models_1_1_flow.html" title="dnai::models::Flow" alt="" coords="600,272,731,298"/>
+<area shape="rect" id="node7" href="$classdnai_1_1models_1_1_function.html" title="dnai::models::Function" alt="" coords="588,120,743,146"/>
+<area shape="rect" id="node8" href="$classdnai_1_1models_1_1_node.html" title="dnai::models::Node" alt="" coords="598,170,733,197"/>
+<area shape="rect" id="node10" href="$classdnai_1_1models_1_1_identity.html" title="dnai::models::Identity" alt="" coords="389,322,535,349"/>
+<area shape="rect" id="node11" href="$classdnai_1_1models_1_1_input.html" title="dnai::models::Input" alt="" coords="599,348,731,374"/>
+<area shape="rect" id="node12" href="$classdnai_1_1models_1_1_output.html" title="dnai::models::Output" alt="" coords="594,424,737,450"/>
+<area shape="rect" id="node13" href="$classdnai_1_1models_1_1_position.html" title="dnai::models::Position" alt="" coords="387,69,537,96"/>
+<area shape="rect" id="node2" href="$classdnai_1_1models_1_1_i_clone.html" title="dnai::models::IClone" alt="" coords="5,196,145,222"/>
+<area shape="rect" id="node9" href="$classdnai_1_1_project.html" title="dnai::Project" alt="" coords="618,221,713,248"/>
+</map>

@@ -1,0 +1,12 @@
+digraph "dnai::Editor"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="{dnai::Editor\n|+ solution\l+ session\l+ propertyPanelProperties\l+ loaded\l+ solutionName\l+ contextMenuModel\l+ mlHandler\l- m_solution\l- m_seletedItem\l- m_viewZones\l- m_selections\l- m_selection\l- m_actions\l- m_version\l- m_editorView\l- m_toasterManagerService\l- m_mainView\land 9 more...\l- m_instance\l|+ Editor()\l+ Editor()\l+ operator=()\l+ operator=()\l+ version()\l+ setVersion()\l+ save()\l+ restoreViewState()\l+ saveViewState()\l+ closeSolution()\land 55 more...\l+ checkVersion()\l+ instance()\l+ onAddInstructionError()\l# Editor()\l# ~Editor()\l}",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+  Node2 -> Node1 [dir="back",color="midnightblue",fontsize="10",style="solid",arrowtail="onormal",fontname="Helvetica"];
+  Node2 [label="{QObject\n||}",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
+  Node3 -> Node1 [dir="back",color="midnightblue",fontsize="10",style="solid",arrowtail="onormal",fontname="Helvetica"];
+  Node3 [label="{dnai::interfaces::IEditor\n||+ IEditor()\l+ IEditor()\l+ operator=()\l+ operator=()\l+ ~IEditor()\l+ version()\l+ setVersion()\l+ restoreViewState()\l+ saveViewState()\l+ openSolution()\land 9 more...\l# IEditor()\l}",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classdnai_1_1interfaces_1_1_i_editor.html"];
+  Node4 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",arrowtail="onormal",fontname="Helvetica"];
+  Node4 [label="{dnai::interfaces::ISavable\n||+ ~ISavable()\l+ save()\l}",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classdnai_1_1interfaces_1_1_i_savable.html"];
+}

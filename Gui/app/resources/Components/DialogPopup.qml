@@ -1,10 +1,11 @@
 import QtQuick 2.0
 
-import "../Style"
-
 import DNAI 1.0
 import Dnai.FontAwesome 1.0
 import Dnai.Settings 1.0
+import Dnai.Theme 1.0
+
+import "../Style"
 
 Item {
     id: mainItem
@@ -53,7 +54,7 @@ Item {
 
         anchors.margins: 20
 
-        MLabel {
+        Label {
             id: titleId
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.top: parent.top
@@ -71,7 +72,7 @@ Item {
             color: iconColor
         }
 
-        MLabel {
+        Label {
             id: descId
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.top: titleId.bottom

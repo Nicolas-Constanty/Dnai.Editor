@@ -5,6 +5,7 @@ import QtQuick.Layouts 1.2
 import DNAI 1.0
 import Dnai.Settings 1.0
 import Dnai.FontAwesome 1.0
+import Dnai.Theme 1.0
 
 import "../Forms"
 import "../Panels"
@@ -83,7 +84,7 @@ Item {
         anchors.right: backgroundProfileId.left
         anchors.rightMargin: 10
 
-        MText {
+        Label {
             id: usernameId
             text: ""
             font.pointSize: 9
@@ -109,7 +110,7 @@ Item {
         color: AppSettings.theme["shadowColor"]
     }
 
-    MText {
+    Label {
         id: signInId
         text: "Sign In"
         anchors.rightMargin: 15

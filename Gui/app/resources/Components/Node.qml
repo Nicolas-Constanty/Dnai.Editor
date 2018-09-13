@@ -6,6 +6,7 @@ import DNAI 1.0
 import DNAI.Enums 1.0
 import Dnai.FontAwesome 1.0
 import Dnai.Settings 1.0
+import Dnai.Theme 1.0
 
 import DNAI.Core 1.0
 
@@ -74,7 +75,7 @@ GenericNode {
         fillColor: "#aa101010"
         antialiasing: true
 
-        MLabel {
+        Label {
             id: _name
             text:  _node.model.name
             anchors.top: parent.top
@@ -82,7 +83,7 @@ GenericNode {
             anchors.horizontalCenter: parent.horizontalCenter
             visible: _node.state === "Open"
         }
-        MLabel {
+        Label {
             id: _description
             text:  _node.model.description
             font.italic: true
@@ -241,7 +242,7 @@ GenericNode {
                         color: "white"
                     }
 
-                    EditableText {
+                    TextField {
                         id: _inputValue
 
                         //visible: parent.type >= 1 && parent.type <= 5

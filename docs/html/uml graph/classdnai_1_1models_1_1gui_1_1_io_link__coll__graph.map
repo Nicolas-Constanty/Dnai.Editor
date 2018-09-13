@@ -1,0 +1,6 @@
+<map id="dnai::models::gui::IoLink" name="dnai::models::gui::IoLink">
+<area shape="rect" id="node2" href="$classdnai_1_1interfaces_1_1_i_model_data.html" title="{dnai::interfaces::IModel\lData\&lt; data::IoLink \&gt;\n||+ ~IModelData()\l+ data()\l+ setData()\l}" alt="" coords="5,183,161,305"/>
+<area shape="rect" id="node3" href="$classdnai_1_1interfaces_1_1_a_serializable.html" title="{dnai::interfaces::ASerializable\l\&lt; IoLink \&gt;\n||+ ~ASerializable()\l+ serialize()\l+ serializeList()\l+ deserialize()\l# _deserialize()\l}" alt="" coords="186,169,381,319"/>
+<area shape="rect" id="node4" href="$classdnai_1_1interfaces_1_1_i_serializable.html" title="Allow inherited class to serialize and deserialize itself. " alt="" coords="189,5,377,112"/>
+<area shape="rect" id="node5" href="$structdnai_1_1models_1_1gui_1_1data_1_1_io_link.html" title="{dnai::models::gui::\ldata::IoLink\n|+ inputName\l+ outputName\l+ inputUuid\l+ outputUuid\l|+ operator=()\l+ operator!=()\l+ operator==()\l}" alt="" coords="405,161,535,327"/>
+</map>

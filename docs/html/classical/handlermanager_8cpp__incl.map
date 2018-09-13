@@ -1,0 +1,36 @@
+<map id="Gui/app/src/dnai/core/handlermanager.cpp" name="Gui/app/src/dnai/core/handlermanager.cpp">
+<area shape="rect" id="node2" href="$handlermanager_8h.html" title="dnai/core/handlermanager.h" alt="" coords="1615,95,1797,121"/>
+<area shape="rect" id="node4" href="$entitymanager_8h.html" title="entitymanager.h" alt="" coords="1574,319,1689,345"/>
+<area shape="rect" id="node29" href="$projecthandler_8h.html" title="projecthandler.h" alt="" coords="1529,169,1643,196"/>
+<area shape="rect" id="node39" href="$declaratorhandler_8h.html" title="declaratorhandler.h" alt="" coords="1372,169,1504,196"/>
+<area shape="rect" id="node40" href="$variablehandler_8h.html" title="variablehandler.h" alt="" coords="27,244,145,271"/>
+<area shape="rect" id="node42" href="$objecthandler_8h.html" title="objecthandler.h" alt="" coords="1848,244,1959,271"/>
+<area shape="rect" id="node44" href="$functionhandler_8h.html" title="functionhandler.h" alt="" coords="2207,169,2327,196"/>
+<area shape="rect" id="node48" href="$enumhandler_8h.html" title="enumhandler.h" alt="" coords="2457,244,2563,271"/>
+<area shape="rect" id="node49" href="$listhandler_8h.html" title="listhandler.h" alt="" coords="1680,244,1772,271"/>
+<area shape="rect" id="node50" href="$globalhandler_8h.html" title="globalhandler.h" alt="" coords="1293,244,1402,271"/>
+<area shape="rect" id="node7" href="$entity_8h.html" title="dnai/models/entity.h" alt="" coords="793,393,931,420"/>
+<area shape="rect" id="node8" href="$core_2entity_8h.html" title="dnai/models/core/entity.h" alt="" coords="543,632,711,659"/>
+<area shape="rect" id="node16" href="$gui_2declarable_2entity_8h.html" title="dnai/models/gui/declarable\l/entity.h" alt="" coords="997,707,1173,748"/>
+<area shape="rect" id="node20" href="$imodel_8h.html" title="dnai/interfaces/imodel.h" alt="" coords="341,550,500,577"/>
+<area shape="rect" id="node22" href="$entitycolum_8h.html" title="gui/data/entitycolum.h" alt="" coords="787,468,937,495"/>
+<area shape="rect" id="node23" href="$declarable_2variable_8h.html" title="gui/declarable/variable.h" alt="" coords="1063,632,1223,659"/>
+<area shape="rect" id="node27" href="$declarable_2context_8h.html" title="gui/declarable/context.h" alt="" coords="1114,468,1274,495"/>
+<area shape="rect" id="node10" href="$entitydata_8h.html" title="entitydata.h" alt="" coords="466,714,557,741"/>
+<area shape="rect" id="node12" href="$imodeldata_8h.html" title="dnai/interfaces/imodeldata.h" alt="" coords="646,803,830,830"/>
+<area shape="rect" id="node13" href="$iserializable_8h.html" title="dnai/interfaces/iserializable.h" alt="" coords="334,885,523,912"/>
+<area shape="rect" id="node17" href="$gui_2data_2entity_8h.html" title="dnai/models/gui/data\l/entity.h" alt="" coords="1187,796,1329,837"/>
+<area shape="rect" id="node19" href="$ientity_8h.html" title="dnai/interfaces/ientity.h" alt="" coords="1007,803,1163,830"/>
+<area shape="rect" id="node21" href="$generictreeitem_8h.html" title="dnai/models/generictreeitem.h" alt="" coords="323,632,519,659"/>
+<area shape="rect" id="node24" href="$ivariable_8h.html" title="dnai/interfaces/ivariable.h" alt="" coords="1353,803,1520,830"/>
+<area shape="rect" id="node25" href="$data_2variable_8h.html" title="dnai/models/gui/data\l/variable.h" alt="" coords="1197,707,1340,748"/>
+<area shape="rect" id="node28" href="$data_2context_8h.html" title="dnai/models/gui/data\l/context.h" alt="" coords="1123,543,1265,584"/>
+<area shape="rect" id="node31" href="$project_8h.html" title="dnai/project.h" alt="" coords="1168,244,1268,271"/>
+<area shape="rect" id="node32" href="$entitytree_8h.html" title="models/entitytree.h" alt="" coords="589,319,722,345"/>
+<area shape="rect" id="node33" href="$iproject_8h.html" title="interfaces/iproject.h" alt="" coords="865,319,1000,345"/>
+<area shape="rect" id="node36" href="$mlproject_8h.html" title="models/ml/mlproject.h" alt="" coords="1369,550,1520,577"/>
+<area shape="rect" id="node35" href="$isavable_8h.html" title="isavable.h" alt="" coords="689,393,768,420"/>
+<area shape="rect" id="node37" href="$dataset_8h.html" title="dataset.h" alt="" coords="1349,632,1425,659"/>
+<area shape="rect" id="node38" href="$model_8h.html" title="model.h" alt="" coords="1501,632,1569,659"/>
+<area shape="rect" id="node47" href="$instructionhandler_8h.html" title="instructionhandler.h" alt="" coords="2085,244,2220,271"/>
+</map>

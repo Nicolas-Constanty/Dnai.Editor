@@ -2,6 +2,7 @@ import QtQuick 2.9
 import QtQuick.Dialogs 1.2
 import QtQuick.Controls 2.2
 import Qt.labs.settings 1.0
+import Dnai.Theme 1.0
 
 import DNAI 1.0
 import "../Style"
@@ -24,7 +25,7 @@ Item {
         anchors.right: parent.right
         anchors.left: parent.left
         id: colorPickerForm
-        MLabel {
+        Label {
             id: label
             text: qsTr("Label")
             anchors.left: parent.left

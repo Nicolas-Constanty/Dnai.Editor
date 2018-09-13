@@ -4,6 +4,8 @@ import QtQuick.Controls.Styles 1.4
 
 import DNAI 1.0
 import DNAI.Models 1.0
+import Dnai.Theme 1.0
+
 import "../Style"
 
 ExpendablePanel {
@@ -36,13 +38,13 @@ ExpendablePanel {
         itemDelegate: Rectangle {
             color: AppSettings.theme["colors"]["background"]["dark"]
             // TODO Improve this declaration with javascript creation ?
-            EditableText {
+            TextField {
                 visible: styleData.column === 1
                 text: styleData.value
                 focus: true
                 color: AppSettings.theme["text"]["color"]
             }
-            MText {
+            Label {
                 visible: styleData.column === 0
                 text: styleData.value
                 focus: true

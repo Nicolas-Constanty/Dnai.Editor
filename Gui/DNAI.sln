@@ -1,26 +1,25 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27703.2026
-MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DNAI", "app\DNAI.vcxproj", "{C4D446FE-7937-3C68-A916-2E25E14906D6}"
+# Visual Studio 2017
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DNAI", "C:/Users/nicol/Desktop/Dnai.Editor/Gui/app\DNAI.vcxproj", "{AB0443D2-EAC8-3E5B-A0B1-738CB078357E}"
 	ProjectSection(ProjectDependencies) = postProject
-		{FE538E16-F3CC-380B-BC1C-04BD2E65A5A1} = {FE538E16-F3CC-380B-BC1C-04BD2E65A5A1}
-		{9110C714-09DE-3EDA-95DB-DA2965AEF4CA} = {9110C714-09DE-3EDA-95DB-DA2965AEF4CA}
-		{9A8669DA-5A38-32E6-94E8-C95C9F26AD3B} = {9A8669DA-5A38-32E6-94E8-C95C9F26AD3B}
-		{C5551EB3-36E4-3CA5-A5A0-F1464DDE88CF} = {C5551EB3-36E4-3CA5-A5A0-F1464DDE88CF}
+		{B1725216-DAA7-355F-B761-A18FCEE79D8E} = {B1725216-DAA7-355F-B761-A18FCEE79D8E}
+		{4FC589CB-F7DA-39FB-AC04-6768F28C8664} = {4FC589CB-F7DA-39FB-AC04-6768F28C8664}
+		{EE97FB40-3A64-3483-832F-562DFF1F0A78} = {EE97FB40-3A64-3483-832F-562DFF1F0A78}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "dnaifontawesomeplugin", "plugins\FontAwesome\dnaifontawesomeplugin.vcxproj", "{9B3AE157-3C8F-3EF2-B2C6-C2006B89E9D4}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "dnaisettingsplugin", "C:/Users/nicol/Desktop/Dnai.Editor/Gui/plugins/Settings\dnaisettingsplugin.vcxproj", "{FB9B1D10-8BC0-3D2D-BF28-9CC6E4E2D3A9}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "dnaicontrolsplugin", "plugins\Controls\dnaicontrolsplugin.vcxproj", "{3A09BE7C-34E7-3D4F-AF38-BAE67DB68B9D}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "dnaifontawesomeplugin", "C:/Users/nicol/Desktop/Dnai.Editor/Gui/plugins/FontAwesome\dnaifontawesomeplugin.vcxproj", "{207785B5-1E9E-33D3-AC55-656EA78272B7}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "event_client", "lib\levent_client\event_client.vcxproj", "{9A8669DA-5A38-32E6-94E8-C95C9F26AD3B}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "dnaicontrolsplugin", "C:/Users/nicol/Desktop/Dnai.Editor/Gui/plugins/Controls\dnaicontrolsplugin.vcxproj", "{3C9A799B-FFDB-3272-A820-4973B478DD60}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cerealization", "lib\lcerealization\cerealization.vcxproj", "{C5551EB3-36E4-3CA5-A5A0-F1464DDE88CF}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "dnaithemeplugin", "C:/Users/nicol/Desktop/Dnai.Editor/Gui/plugins/Theme\dnaithemeplugin.vcxproj", "{D1924DD4-6392-3F08-91F8-A88FB69A3D50}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "core_client", "lib\lcore_client\core_client.vcxproj", "{9110C714-09DE-3EDA-95DB-DA2965AEF4CA}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "event_client", "C:/Users/nicol/Desktop/Dnai.Editor/Gui/lib/levent_client\event_client.vcxproj", "{4FC589CB-F7DA-39FB-AC04-6768F28C8664}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "wintoast", "lib\lwintoast\wintoast.vcxproj", "{FE538E16-F3CC-380B-BC1C-04BD2E65A5A1}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cerealization", "C:/Users/nicol/Desktop/Dnai.Editor/Gui/lib/lcerealization\cerealization.vcxproj", "{EE97FB40-3A64-3483-832F-562DFF1F0A78}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "core_client", "C:/Users/nicol/Desktop/Dnai.Editor/Gui/lib/lcore_client\core_client.vcxproj", "{B1725216-DAA7-355F-B761-A18FCEE79D8E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -28,40 +27,41 @@ Global
 		Release|x64 = Release|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{C4D446FE-7937-3C68-A916-2E25E14906D6}.Debug|x64.ActiveCfg = Debug|x64
-		{C4D446FE-7937-3C68-A916-2E25E14906D6}.Debug|x64.Build.0 = Debug|x64
-		{C4D446FE-7937-3C68-A916-2E25E14906D6}.Release|x64.ActiveCfg = Release|x64
-		{C4D446FE-7937-3C68-A916-2E25E14906D6}.Release|x64.Build.0 = Release|x64
-		{9B3AE157-3C8F-3EF2-B2C6-C2006B89E9D4}.Debug|x64.ActiveCfg = Debug|x64
-		{9B3AE157-3C8F-3EF2-B2C6-C2006B89E9D4}.Debug|x64.Build.0 = Debug|x64
-		{9B3AE157-3C8F-3EF2-B2C6-C2006B89E9D4}.Release|x64.ActiveCfg = Release|x64
-		{9B3AE157-3C8F-3EF2-B2C6-C2006B89E9D4}.Release|x64.Build.0 = Release|x64
-		{3A09BE7C-34E7-3D4F-AF38-BAE67DB68B9D}.Debug|x64.ActiveCfg = Debug|x64
-		{3A09BE7C-34E7-3D4F-AF38-BAE67DB68B9D}.Debug|x64.Build.0 = Debug|x64
-		{3A09BE7C-34E7-3D4F-AF38-BAE67DB68B9D}.Release|x64.ActiveCfg = Release|x64
-		{3A09BE7C-34E7-3D4F-AF38-BAE67DB68B9D}.Release|x64.Build.0 = Release|x64
-		{9A8669DA-5A38-32E6-94E8-C95C9F26AD3B}.Debug|x64.ActiveCfg = Debug|x64
-		{9A8669DA-5A38-32E6-94E8-C95C9F26AD3B}.Debug|x64.Build.0 = Debug|x64
-		{9A8669DA-5A38-32E6-94E8-C95C9F26AD3B}.Release|x64.ActiveCfg = Release|x64
-		{9A8669DA-5A38-32E6-94E8-C95C9F26AD3B}.Release|x64.Build.0 = Release|x64
-		{C5551EB3-36E4-3CA5-A5A0-F1464DDE88CF}.Debug|x64.ActiveCfg = Debug|x64
-		{C5551EB3-36E4-3CA5-A5A0-F1464DDE88CF}.Debug|x64.Build.0 = Debug|x64
-		{C5551EB3-36E4-3CA5-A5A0-F1464DDE88CF}.Release|x64.ActiveCfg = Release|x64
-		{C5551EB3-36E4-3CA5-A5A0-F1464DDE88CF}.Release|x64.Build.0 = Release|x64
-		{9110C714-09DE-3EDA-95DB-DA2965AEF4CA}.Debug|x64.ActiveCfg = Debug|x64
-		{9110C714-09DE-3EDA-95DB-DA2965AEF4CA}.Debug|x64.Build.0 = Debug|x64
-		{9110C714-09DE-3EDA-95DB-DA2965AEF4CA}.Release|x64.ActiveCfg = Release|x64
-		{9110C714-09DE-3EDA-95DB-DA2965AEF4CA}.Release|x64.Build.0 = Release|x64
-		{FE538E16-F3CC-380B-BC1C-04BD2E65A5A1}.Debug|x64.ActiveCfg = Debug|x64
-		{FE538E16-F3CC-380B-BC1C-04BD2E65A5A1}.Debug|x64.Build.0 = Debug|x64
-		{FE538E16-F3CC-380B-BC1C-04BD2E65A5A1}.Release|x64.ActiveCfg = Release|x64
-		{FE538E16-F3CC-380B-BC1C-04BD2E65A5A1}.Release|x64.Build.0 = Release|x64
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
+		{AB0443D2-EAC8-3E5B-A0B1-738CB078357E}.Debug|x64.ActiveCfg = Debug|x64
+		{AB0443D2-EAC8-3E5B-A0B1-738CB078357E}.Debug|x64.Build.0 = Debug|x64
+		{AB0443D2-EAC8-3E5B-A0B1-738CB078357E}.Release|x64.ActiveCfg = Release|x64
+		{AB0443D2-EAC8-3E5B-A0B1-738CB078357E}.Release|x64.Build.0 = Release|x64
+		{FB9B1D10-8BC0-3D2D-BF28-9CC6E4E2D3A9}.Debug|x64.ActiveCfg = Debug|x64
+		{FB9B1D10-8BC0-3D2D-BF28-9CC6E4E2D3A9}.Debug|x64.Build.0 = Debug|x64
+		{FB9B1D10-8BC0-3D2D-BF28-9CC6E4E2D3A9}.Release|x64.ActiveCfg = Release|x64
+		{FB9B1D10-8BC0-3D2D-BF28-9CC6E4E2D3A9}.Release|x64.Build.0 = Release|x64
+		{207785B5-1E9E-33D3-AC55-656EA78272B7}.Debug|x64.ActiveCfg = Debug|x64
+		{207785B5-1E9E-33D3-AC55-656EA78272B7}.Debug|x64.Build.0 = Debug|x64
+		{207785B5-1E9E-33D3-AC55-656EA78272B7}.Release|x64.ActiveCfg = Release|x64
+		{207785B5-1E9E-33D3-AC55-656EA78272B7}.Release|x64.Build.0 = Release|x64
+		{3C9A799B-FFDB-3272-A820-4973B478DD60}.Debug|x64.ActiveCfg = Debug|x64
+		{3C9A799B-FFDB-3272-A820-4973B478DD60}.Debug|x64.Build.0 = Debug|x64
+		{3C9A799B-FFDB-3272-A820-4973B478DD60}.Release|x64.ActiveCfg = Release|x64
+		{3C9A799B-FFDB-3272-A820-4973B478DD60}.Release|x64.Build.0 = Release|x64
+		{D1924DD4-6392-3F08-91F8-A88FB69A3D50}.Debug|x64.ActiveCfg = Debug|x64
+		{D1924DD4-6392-3F08-91F8-A88FB69A3D50}.Debug|x64.Build.0 = Debug|x64
+		{D1924DD4-6392-3F08-91F8-A88FB69A3D50}.Release|x64.ActiveCfg = Release|x64
+		{D1924DD4-6392-3F08-91F8-A88FB69A3D50}.Release|x64.Build.0 = Release|x64
+		{4FC589CB-F7DA-39FB-AC04-6768F28C8664}.Debug|x64.ActiveCfg = Debug|x64
+		{4FC589CB-F7DA-39FB-AC04-6768F28C8664}.Debug|x64.Build.0 = Debug|x64
+		{4FC589CB-F7DA-39FB-AC04-6768F28C8664}.Release|x64.ActiveCfg = Release|x64
+		{4FC589CB-F7DA-39FB-AC04-6768F28C8664}.Release|x64.Build.0 = Release|x64
+		{EE97FB40-3A64-3483-832F-562DFF1F0A78}.Debug|x64.ActiveCfg = Debug|x64
+		{EE97FB40-3A64-3483-832F-562DFF1F0A78}.Debug|x64.Build.0 = Debug|x64
+		{EE97FB40-3A64-3483-832F-562DFF1F0A78}.Release|x64.ActiveCfg = Release|x64
+		{EE97FB40-3A64-3483-832F-562DFF1F0A78}.Release|x64.Build.0 = Release|x64
+		{B1725216-DAA7-355F-B761-A18FCEE79D8E}.Debug|x64.ActiveCfg = Debug|x64
+		{B1725216-DAA7-355F-B761-A18FCEE79D8E}.Debug|x64.Build.0 = Debug|x64
+		{B1725216-DAA7-355F-B761-A18FCEE79D8E}.Release|x64.ActiveCfg = Release|x64
+		{B1725216-DAA7-355F-B761-A18FCEE79D8E}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		Qt5Version = msvc2017_64
-		SolutionGuid = {88D2DDB4-809D-438C-9D7A-F10019FCFF2D}
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
 	EndGlobalSection
 EndGlobal

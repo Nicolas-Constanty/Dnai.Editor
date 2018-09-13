@@ -1,0 +1,8 @@
+digraph "dnai::models::ContextMenuModel"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="{dnai::models::ContextMenu\lModel\n|- m_root\l- m_functions\l- m_lists\l- m_classes\l- m_variables\l- m_enumerations\l- m_functionRebuilding\l- m_hash\l- m_entity_items\l- m_items_entity\l|+ ContextMenuModel()\l+ ContextMenuModel()\l+ index()\l+ parent()\l+ getItem()\l+ rowCount()\l+ columnCount()\l+ data()\l+ roleNames()\l+ instructions()\l+ setup()\l+ onEntityDeclared()\l+ onEntityRemoved()\l+ onEntityRenamed()\l+ onEnumValueSet()\l+ onEnumValueRemoved()\l+ onObjectAttributeAdded()\l+ onObjectAttributeRenamed()\l+ onObjectAttributeRemoved()\l+ onListTypeSet()\l+ onParameterSet()\l+ onReturnSet()\l+ onVariableTypeSet()\l- appendVariable()\l- appendEnumeration()\l- appendParameter()\l- appendReturn()\l- appendObject()\l- appendList()\l- appendFunction()\l- addItem()\l- addItems()\l- removeItem()\l- clearItems()\l- refreshItems()\l- parseJsonDocument()\l- parseJsonObj()\l}",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+  Node2 -> Node1 [dir="back",color="midnightblue",fontsize="10",style="solid",arrowtail="onormal",fontname="Helvetica"];
+  Node2 [label="{QAbstractItemModel\n||}",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
+}
