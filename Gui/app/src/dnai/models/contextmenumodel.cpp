@@ -652,7 +652,12 @@ namespace dnai
 
             for (const QString &curr : data->attributes())
             {
-                QString attrType = dnai::gcore::HandlerManager::Instance().getEntity(data->getAttribute(curr))->guid().toString();
+                models::Entity *attype = dnai::gcore::HandlerManager::Instance().getEntity(data->getAttribute(curr));
+
+                if (attype == nullptr)
+                    continue;
+
+                QString attrType = attype->guid().toString();
 
                 getAttributes->addOutput(curr, attrType, curr);
                 setAttributes->addInput(curr, attrType, curr);
