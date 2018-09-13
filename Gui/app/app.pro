@@ -9,12 +9,27 @@ INCLUDEPATH += include/
 TARGET = DNAI
 TEMPLATE = app
 
-CONFIG(release, debug|release) {
 win32:RC_FILE = dnai.rc
 unix:ICON = DNAI_icon.icns
+
+CONFIG(release, debug|release) {
+    DESTDIR = release
+    OBJECTS_DIR = release/.obj
+    MOC_DIR = release/.moc
+    RCC_DIR = release/.rcc
+    UI_DIR = release/.ui
+}
+CONFIG(debug, debug|release) {
+    DESTDIR = debug
+    OBJECTS_DIR = debug/.obj
+    MOC_DIR = debug/.moc
+    RCC_DIR = debug/.rcc
+    UI_DIR = debug/.ui
 }
 
-
+#CONFIG(release, debug|release) {
+#DEFINES += QT_NO_DEBUG_OUTPUT
+#}
 #INSTALLS += settingsfolderconf
 
 # The following define makes your compiler emit warnings if you use
@@ -144,11 +159,6 @@ QML_IMPORT_PATH =
 
 # Additional import path used to resolve QML modules just for Qt Quick Designer
 QML_DESIGNER_IMPORT_PATH =
-
-# Default rules for deployment.
-qnx: target.path = /tmp/$${TARGET}/bin
-else: unix:!android: target.path = /usr/local/bin/$${TARGET}/bin
-!isEmpty(target.path): INSTALLS += target
 
 DISTFILES += \
     dnai.ico
@@ -316,7 +326,6 @@ HEADERS += \
     include/dnai/models/ml/dataset.h \
     include/dnai/models/ml/model.h \
     include/dnai/models/ml/hyperparameters.h \
-    include/dnai/ml.h \
     include/ml.h \
     include/dnai/utils/iterableqqmlpropertymap.h \
     include/utils.h
@@ -344,26 +353,16 @@ INCLUDEPATH += $${PWD}/../lib/lcore_client/include/
 #begin library network
 LIBS += -L$${PWD}/../lib/ -lcore_client -levent_client -lcerealization
 
-#-lDataComEvent
 
-#CONFIG(release, debug|release) {
-#unix:LIBS += -L$${PWD}/../lib/DataComEvent/Library/ -lprotobuf
-#win32:LIBS += -L$${PWD}/../lib/DataComEvent/Library/ -llibprotobuf
-#}
-#CONFIG(debug, debug|release) {
-#unix:LIBS += -L$${PWD}/../lib/DataComEvent/Library/ -lprotobuf
-#win32:LIBS += -L$${PWD}/../lib/DataComEvent/Library/ -llibprotobufd
-#}
-
-#end library Data Event
 CONFIG(release, debug|release) {
-win32:settingsfolder.path = $${OUT_PWD}/release/settings
+settingsfolder.path = $${OUT_PWD}/release/settings
+
 }
 CONFIG(debug, debug|release) {
-win32:settingsfolder.path = $${OUT_PWD}/debug/settings
+settingsfolder.path = $${OUT_PWD}/debug/settings
 }
 
-unix:settingsfolder.path = /usr/local/bin/$${TARGET}/bin/$${TARGET}.app/Contents/MacOS/settings
+
 settingsfolder.files = settings/*
 
 #settingsfolderconf.path = $${OUT_PWD}/settings/conf

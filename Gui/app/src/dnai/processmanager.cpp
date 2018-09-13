@@ -13,6 +13,7 @@
 #include <cstdlib>
 #include <iostream>
 #include <QFileInfo>
+#include <QTimer>
 
 #include "dnai/processmanager.h"
 
@@ -22,18 +23,37 @@ ProcessManager::ProcessManager(QString const &file)
       m_server(),
       m_core(),
       m_updaterApp(),
-      m_port(0)
+      m_port(0),
+      m_isTimeOut(false)
 {
 }
 
+void ProcessManager::setFile(const QString &file)
+{
+    m_file = file;
+}
+
 ProcessManager::~ProcessManager() {
-    closeAll();
+}
+
+void ProcessManager::setTimeOut()
+{
+    m_isTimeOut = true;
 }
 
 void ProcessManager::closeAll() {
     qDebug() << "==ProcessManager== Closing server process and core process";
-    m_server.close();
-    m_core.close();
+    m_server.terminate();
+    m_core.terminate();
+
+    //Continue after terminate or timeout
+    QTimer *timer = new QTimer;
+    timer->setSingleShot(true);
+    connect(timer, SIGNAL(timeout()), this, SLOT(setTimeOut()));
+    timer->start(8000);
+
+    while ((!m_server.atEnd() || !m_core.atEnd()) && !m_isTimeOut)
+        QThread::msleep(200);
 }
 
 
@@ -176,13 +196,14 @@ void ProcessManager::launch() {
     m_core.start(corePath, argumentsCore);
     if (m_core.waitForStarted() == false) {
         qDebug() << "==ProcessManager== [FAILED] Failed to launch Core";
-        qDebug() << "==ProcessManager== [FAILED]" << corePath;
-        return;
+        qDebug() << "==ProcessManager== [FAILED]" << corePath <<  argumentsCore;
+        abort();
+//        return;
     }
 
     qDebug() << "==ProcessManager== Server and Core successfully launched (Processes OK)!";
 }
 
-qint16 ProcessManager::getServerPort() {
+quint16 ProcessManager::getServerPort() {
     return m_port;
 }

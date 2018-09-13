@@ -178,7 +178,7 @@ namespace dnai
         bool m_loaded = false;
 
     private:
-        static Editor &m_instance;
+        static Editor *m_instance;
     };
     }
 
