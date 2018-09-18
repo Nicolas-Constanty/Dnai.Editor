@@ -12,7 +12,11 @@
 [![CodeFactor](https://www.codefactor.io/repository/github/nicolas-constanty/dnai.editor/badge)](https://www.codefactor.io/repository/github/nicolas-constanty/dnai.editor)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/f5ad248cb0884d53a206b12154e3295b)](https://www.codacy.com/app/nicolas.constanty/Dnai.Editor?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Nicolas-Constanty/Dnai.Editor&amp;utm_campaign=Badge_Grade)
 
+## Introduction
 
+<p align="center">
+  <img alt="Main view screenshot" src="https://raw.githubusercontent.com/Nicolas-Constanty/Dnai.Editor/master/images/youtube_demo.jpg">
+</p>
 
 [Dnai Editor](https://code.visualstudio.com) is a visual scripting software,
  build with the [Qt Open Source](https://www.qt.io/download-qt-installer) version.
