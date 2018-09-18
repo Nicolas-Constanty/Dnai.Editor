@@ -14,9 +14,9 @@
 
 ## Introduction
 
-<div align="center">
-  <a href="https://www.youtube.com/watch?v=7lFM3htAfNI"><img src="https://raw.githubusercontent.com/Nicolas-Constanty/Dnai.Editor/master/images/youtube_demo.jpg" alt="IMAGE ALT TEXT"></a>
-</div>
+<p align="center">
+  <a href="https://www.youtube.com/watch?v=7lFM3htAfNI"><img src="https://raw.githubusercontent.com/Nicolas-Constanty/Dnai.Editor/master/images/youtube_demo.jpg" height="300" alt="IMAGE ALT TEXT"></a>
+</p>
 
 [Dnai Editor](https://code.visualstudio.com) is a visual scripting software,
  build with the [Qt Open Source](https://www.qt.io/download-qt-installer) version.
