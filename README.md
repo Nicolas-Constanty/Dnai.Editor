@@ -26,9 +26,9 @@ You can compile the software using Qt >= 5.10.1, but you will need our "Core" li
 
 Our Core library sources remain private, so you can find the [latest version of the Core here](https://github.com/Nicolas-Constanty/Dnai.Editor/releases).
 
-<p align="center">
-  <img alt="Main view screenshot" src="https://raw.githubusercontent.com/Nicolas-Constanty/Dnai.Editor/master/images/mainview.png">
-</p>
+<div align="center">
+  <a href="https://www.youtube.com/watch?v=7lFM3htAfNI"><img src="https://raw.githubusercontent.com/Nicolas-Constanty/Dnai.Editor/master/images/mainview.png" alt="IMAGE ALT TEXT"></a>
+</div>
 
 ## Compilation
 
