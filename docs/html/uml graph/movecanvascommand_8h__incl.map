@@ -1,7 +1,0 @@
-<map id="Gui/app/include/dnai/commands/movecanvascommand.h" name="Gui/app/include/dnai/commands/movecanvascommand.h">
-<area shape="rect" id="node2" href="$command_8h.html" title="command.h" alt="" coords="167,95,258,121"/>
-<area shape="rect" id="node6" href="$canvasnode_8h.html" title="dnai/views/canvasnode.h" alt="" coords="331,95,495,121"/>
-<area shape="rect" id="node4" href="$icommand_8h.html" title="dnai/interfaces/icommand.h" alt="" coords="122,169,303,196"/>
-<area shape="rect" id="node8" href="$line_8h.html" title="line.h" alt="" coords="578,169,631,196"/>
-<area shape="rect" id="node12" href="$focusmanager_8h.html" title="dnai/focusmanager.h" alt="" coords="391,169,533,196"/>
-</map>

@@ -1,9 +1,0 @@
-<map id="Gui/app/include/http.h" name="Gui/app/include/http.h">
-<area shape="rect" id="node2" href="$config_8h.html" title="dnai/http/config.h" alt="" coords="5,155,127,181"/>
-<area shape="rect" id="node4" href="$types_8h.html" title="types.h" alt="" coords="132,229,197,256"/>
-<area shape="rect" id="node6" href="$interceptor_8h.html" title="dnai/http/interceptor.h" alt="" coords="203,80,351,107"/>
-<area shape="rect" id="node7" href="$observable_8h.html" title="dnai/http/observable.h" alt="" coords="427,229,575,256"/>
-<area shape="rect" id="node10" href="$response_8h.html" title="response.h" alt="" coords="339,304,425,331"/>
-<area shape="rect" id="node14" href="$service_8h.html" title="dnai/http/service.h" alt="" coords="575,80,701,107"/>
-<area shape="rect" id="node20" href="$url_8h.html" title="url.h" alt="" coords="477,155,524,181"/>
-</map>

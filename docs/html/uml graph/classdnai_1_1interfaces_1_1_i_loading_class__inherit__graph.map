@@ -1,3 +1,0 @@
-<map id="dnai::interfaces::ILoadingClass" name="dnai::interfaces::ILoadingClass">
-<area shape="rect" id="node2" href="$classdnai_1_1_app.html" title="{dnai::App\n|&#45; m_engine\l&#45; m_processManager\l&#45; m_session\l&#45; m_currentVersionAPI\l&#45; m_loadedNumbers\l&#45; m_instance\l|+ App()\l+ ~App()\l+ loadMainWindow()\l+ initProcessManager()\l+ eventFilter()\l+ versionsUpdater()\l+ onNotifyVersionChanged()\l+ close()\l+ session()\l+ engine()\land 6 more...\l+ loadFonts()\l+ currentInstance()\l+ createQmlObject()\l+ getEngineInstance()\l+ loadSplashScreen()\l# init()\l&#45; createQmlComponent()\l&#45; initAppView()\l&#45; setVersion()\l&#45; setAPIVersion()\l&#45; setupSettings()\l}" alt="" coords="5,307,189,765"/>
-</map>

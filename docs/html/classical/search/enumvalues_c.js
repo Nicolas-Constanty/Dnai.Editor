@@ -1,7 +1,0 @@
-var searchData=
-[
-  ['name',['NAME',['../classdnai_1_1models_1_1_context_menu_model.html#ae88df7d87e124997c4606939940f0399a33a3499f422a2d2d5b423350538472a0',1,'dnai::models::ContextMenuModel::NAME()'],['../classdnai_1_1models_1_1_entity_tree.html#aee7132f72f01d7178545ec4e75128470a477dee31205b2d05a996ce8ab8dc4c16',1,'dnai::models::EntityTree::NAME()'],['../classdnai_1_1_solution.html#ac68af5c786d622b619d887f27be23012ad8f3907c1df3c45f65708e946d0193a4',1,'dnai::Solution::NAME()'],['../classdnai_1_1models_1_1gui_1_1_entity_list.html#aa55475147733fccede2b45f1e926d5cdab6c1fd9f78e88cb8068b4ae736a8d6ce',1,'dnai::models::gui::EntityList::Name()']]],
-  ['none',['None',['../classdnai_1_1enums_1_1_declaration_type_ressouce.html#a3bf502585eb48b134aebd3f9ec9325f3a3c3e7a4a7494dbb7010d6ab7f6a6d24c',1,'dnai::enums::DeclarationTypeRessouce']]],
-  ['normal',['Normal',['../classdnai_1_1_linkable_bezier_item.html#a9573e9e17dc9874bd531b768bca0357ca79c55cdc3400abc54511835a5bc13dfd',1,'dnai::LinkableBezierItem::Normal()'],['../classdnai_1_1views_1_1_console.html#ad6f6e00713f2cff2fa96d5e974fef956acaa285e4c72a61c40cfcccf8780a4dec',1,'dnai::views::Console::Normal()'],['../classdnai_1_1views_1_1_linkable_bezier_item.html#a9e83f24861df1eacabff730d604092e2a317259f9ed817f206ef6f333072074af',1,'dnai::views::LinkableBezierItem::Normal()']]],
-  ['not',['NOT',['../classdnai_1_1enums_1_1_q_instruction_i_d.html#ac38def4192cc90ac6f5298d49dc1c224a536548471870fac4a8e920ab59a63379',1,'dnai::enums::QInstructionID']]]
-];

@@ -1,6 +1,0 @@
-<map id="dnai::models::gui::FlowLink" name="dnai::models::gui::FlowLink">
-<area shape="rect" id="node2" href="$classdnai_1_1interfaces_1_1_i_model_data.html" title="{dnai::interfaces::IModel\lData\&lt; data::FlowLink \&gt;\n||+ ~IModelData()\l+ data()\l+ setData()\l}" alt="" coords="5,176,163,297"/>
-<area shape="rect" id="node3" href="$classdnai_1_1interfaces_1_1_a_serializable.html" title="{dnai::interfaces::ASerializable\l\&lt; FlowLink \&gt;\n||+ ~ASerializable()\l+ serialize()\l+ serializeList()\l+ deserialize()\l# _deserialize()\l}" alt="" coords="187,161,381,312"/>
-<area shape="rect" id="node4" href="$classdnai_1_1interfaces_1_1_i_serializable.html" title="Allow inherited class to serialize and deserialize itself. " alt="" coords="190,5,378,112"/>
-<area shape="rect" id="node5" href="$structdnai_1_1models_1_1gui_1_1data_1_1_flow_link.html" title="{dnai::models::gui::\ldata::FlowLink\n|+ from\l+ to\l+ outIndex\l|+ operator=()\l+ operator!=()\l+ operator==()\l}" alt="" coords="406,161,535,312"/>
-</map>

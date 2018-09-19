@@ -1,7 +1,0 @@
-<map id="dnai::controllers::PropertyPanel" name="dnai::controllers::PropertyPanel">
-<area shape="rect" id="node2" href="$classdnai_1_1controllers_1_1_a_controller.html" title="dnai::controllers::\lAController\&lt; models\l::EntityList, void \&gt;" alt="" coords="545,82,685,138"/>
-<area shape="rect" id="node3" href="$classdnai_1_1controllers_1_1_i_controller.html" title="dnai::controllers::\lIController" alt="" coords="225,5,347,47"/>
-<area shape="rect" id="node4" href="$classdnai_1_1models_1_1_i_clone.html" title="dnai::models::IClone" alt="" coords="216,71,356,98"/>
-<area shape="rect" id="node5" href="$classdnai_1_1commands_1_1_i_command.html" title="dnai::commands::ICommand" alt="" coords="192,122,380,149"/>
-<area shape="rect" id="node6" href="$classdnai_1_1models_1_1_entity_list.html" title="dnai::models::EntityList" alt="" coords="207,173,365,199"/>
-</map>

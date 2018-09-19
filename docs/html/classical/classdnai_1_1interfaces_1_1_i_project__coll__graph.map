@@ -1,4 +1,0 @@
-<map id="dnai::interfaces::IProject" name="dnai::interfaces::IProject">
-<area shape="rect" id="node2" href="$classdnai_1_1interfaces_1_1_i_savable.html" title="{dnai::interfaces::ISavable\n||+ ~ISavable()\l+ save()\l}" alt="" coords="5,13,172,105"/>
-<area shape="rect" id="node3" href="$classdnai_1_1interfaces_1_1_i_serializable.html" title="Allow inherited class to serialize and deserialize itself. " alt="" coords="196,5,384,112"/>
-</map>

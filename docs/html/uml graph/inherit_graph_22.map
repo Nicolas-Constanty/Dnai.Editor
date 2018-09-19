@@ -1,9 +1,0 @@
-<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classdnai_1_1interfaces_1_1_i_linkable.html" title="dnai::interfaces::ILinkable" alt="" coords="5,70,175,97"/>
-<area shape="rect" id="node2" href="$classdnai_1_1interfaces_1_1_a_linkable.html" title="dnai::interfaces::ALinkable" alt="" coords="223,70,397,97"/>
-<area shape="rect" id="node3" href="$classdnai_1_1_base_linkable.html" title="dnai::BaseLinkable" alt="" coords="445,70,577,97"/>
-<area shape="rect" id="node4" href="$classdnai_1_1_base_io.html" title="dnai::BaseIo" alt="" coords="663,45,758,71"/>
-<area shape="rect" id="node7" href="$classdnai_1_1views_1_1_flow_backend.html" title="dnai::views::FlowBackend" alt="" coords="625,95,796,122"/>
-<area shape="rect" id="node5" href="$classdnai_1_1controllers_1_1_input_controller.html" title="dnai::controllers::\lInputController" alt="" coords="844,5,967,47"/>
-<area shape="rect" id="node6" href="$classdnai_1_1controllers_1_1_output_controller.html" title="dnai::controllers::\lOutputController" alt="" coords="844,71,967,112"/>
-</map>

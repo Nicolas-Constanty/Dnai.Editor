@@ -1,8 +1,0 @@
-digraph "dnai::views::BezierCurve"
-{
-  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
-  node [fontname="Helvetica",fontsize="10",shape=record];
-  Node1 [label="{dnai::views::BezierCurve\n|+ p1\l+ p2\l+ p3\l+ p4\l+ dotted\l+ lineWidth\l+ segmentCount\l+ fillColor\l+ dottedColor\l- m_p1\l- m_p2\l- m_p3\l- m_p4\l- m_lineWidth\l- m_segmentCount\l- m_dotted\l- m_fillColor\l- m_dottedColor\l- m_holdClick\l- m_scale\l- m_lastScale\l- m_saveWidth\l- m_saveHeight\l|+ BezierCurve()\l+ ~BezierCurve()\l+ updatePaintNode()\l+ setBack()\l+ p1()\l+ p2()\l+ p3()\l+ p4()\l+ dotted()\l+ lineWidth()\land 13 more...\l}",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
-  Node2 -> Node1 [dir="back",color="midnightblue",fontsize="10",style="solid",arrowtail="onormal",fontname="Helvetica"];
-  Node2 [label="{QQuickItem\n||}",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
-}

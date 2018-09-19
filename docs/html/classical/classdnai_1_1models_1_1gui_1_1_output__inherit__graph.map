@@ -1,6 +1,0 @@
-<map id="dnai::models::gui::Output" name="dnai::models::gui::Output">
-<area shape="rect" id="node3" href="$classdnai_1_1interfaces_1_1_i_variable.html" title="{dnai::interfaces::IVariable\n||+ ~IVariable()\l+ varType()\l+ setVarType()\l+ value()\l+ setValue()\l}" alt="" coords="101,167,269,303"/>
-<area shape="rect" id="node4" href="$classdnai_1_1interfaces_1_1_i_model_data.html" title="{dnai::interfaces::IModel\lData\&lt; data::Output \&gt;\n||+ ~IModelData()\l+ data()\l+ setData()\l}" alt="" coords="293,175,449,296"/>
-<area shape="rect" id="node5" href="$classdnai_1_1interfaces_1_1_a_serializable.html" title="{dnai::interfaces::ASerializable\l\&lt; Output \&gt;\n||+ ~ASerializable()\l+ serialize()\l+ serializeList()\l+ deserialize()\l# _deserialize()\l}" alt="" coords="474,160,669,311"/>
-<area shape="rect" id="node6" href="$classdnai_1_1interfaces_1_1_i_serializable.html" title="Allow inherited class to serialize and deserialize itself. " alt="" coords="477,5,665,112"/>
-</map>

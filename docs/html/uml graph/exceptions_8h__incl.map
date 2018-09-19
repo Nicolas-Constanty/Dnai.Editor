@@ -1,7 +1,0 @@
-<map id="Gui/app/include/exceptions.h" name="Gui/app/include/exceptions.h">
-<area shape="rect" id="node2" href="$coreexception_8h.html" title="dnai/exceptions/coreexception.h" alt="" coords="24,80,233,107"/>
-<area shape="rect" id="node3" href="$exception_8h.html" title="exception.h" alt="" coords="313,155,402,181"/>
-<area shape="rect" id="node5" href="$exceptionmanager_8h.html" title="dnai/exceptions/exceptionmanager.h" alt="" coords="727,80,962,107"/>
-<area shape="rect" id="node8" href="$guiexception_8h.html" title="dnai/exceptions/guiexception.h" alt="" coords="257,80,458,107"/>
-<area shape="rect" id="node9" href="$notimplemented_8h.html" title="dnai/exceptions/notimplemented.h" alt="" coords="482,80,702,107"/>
-</map>

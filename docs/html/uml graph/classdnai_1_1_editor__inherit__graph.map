@@ -1,4 +1,0 @@
-<map id="dnai::Editor" name="dnai::Editor">
-<area shape="rect" id="node3" href="$classdnai_1_1interfaces_1_1_i_editor.html" title="{dnai::interfaces::IEditor\n||+ IEditor()\l+ IEditor()\l+ operator=()\l+ operator=()\l+ ~IEditor()\l+ version()\l+ setVersion()\l+ restoreViewState()\l+ saveViewState()\l+ openSolution()\land 9 more...\l# IEditor()\l}" alt="" coords="101,145,255,384"/>
-<area shape="rect" id="node4" href="$classdnai_1_1interfaces_1_1_i_savable.html" title="{dnai::interfaces::ISavable\n||+ ~ISavable()\l+ save()\l}" alt="" coords="95,5,261,97"/>
-</map>

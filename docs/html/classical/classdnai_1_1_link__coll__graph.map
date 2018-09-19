@@ -1,5 +1,0 @@
-<map id="dnai::Link" name="dnai::Link">
-<area shape="rect" id="node2" href="$classdnai_1_1interfaces_1_1_a_linkable.html" title="{dnai::interfaces::ALinkable\n|# m_links\l|+ ~ALinkable()\l+ links()\l+ connect()\l+ asyncConnect()\l+ unlink()\l+ unlinkAll()\l+ addLink()\l+ removeLink()\l+ isLink()\l+ getLink()\l}" alt="" coords="5,330,180,539"/>
-<area shape="rect" id="node3" href="$classdnai_1_1interfaces_1_1_i_linkable.html" title="{dnai::interfaces::ILinkable\n||+ ~ILinkable()\l+ unlinkAll()\l+ isLink()\l}" alt="" coords="8,5,177,112"/>
-<area shape="rect" id="node4" href="$classdnai_1_1views_1_1_bezier_curve.html" title="{dnai::views::BezierCurve\n|+ p1\l+ p2\l+ p3\l+ p4\l+ dotted\l+ lineWidth\l+ segmentCount\l+ fillColor\l+ dottedColor\l&#45; m_p1\l&#45; m_p2\l&#45; m_p3\l&#45; m_p4\l&#45; m_lineWidth\l&#45; m_segmentCount\l&#45; m_dotted\l&#45; m_fillColor\l&#45; m_dottedColor\l&#45; m_holdClick\l&#45; m_scale\l&#45; m_lastScale\l&#45; m_saveWidth\l&#45; m_saveHeight\l|+ BezierCurve()\l+ ~BezierCurve()\l+ updatePaintNode()\l+ setBack()\l+ p1()\l+ p2()\l+ p3()\l+ p4()\l+ dotted()\l+ lineWidth()\land 13 more...\l}" alt="" coords="205,161,367,708"/>
-</map>

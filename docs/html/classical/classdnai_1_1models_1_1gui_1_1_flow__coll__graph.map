@@ -1,7 +1,0 @@
-<map id="dnai::models::gui::Flow" name="dnai::models::gui::Flow">
-<area shape="rect" id="node3" href="$classdnai_1_1interfaces_1_1_i_model_data.html" title="{dnai::interfaces::IModel\lData\&lt; data::Flow \&gt;\n||+ ~IModelData()\l+ data()\l+ setData()\l}" alt="" coords="100,205,256,327"/>
-<area shape="rect" id="node4" href="$classdnai_1_1interfaces_1_1_a_serializable.html" title="{dnai::interfaces::ASerializable\l\&lt; Flow \&gt;\n||+ ~ASerializable()\l+ serialize()\l+ serializeList()\l+ deserialize()\l# _deserialize()\l}" alt="" coords="281,191,475,341"/>
-<area shape="rect" id="node5" href="$classdnai_1_1interfaces_1_1_i_serializable.html" title="Allow inherited class to serialize and deserialize itself. " alt="" coords="284,20,472,127"/>
-<area shape="rect" id="node6" href="$structdnai_1_1models_1_1gui_1_1data_1_1_flow.html" title="{dnai::models::gui::\ldata::Flow\n||+ operator=()\l+ operator!=()\l+ operator==()\l}" alt="" coords="500,205,629,327"/>
-<area shape="rect" id="node7" href="$structdnai_1_1models_1_1gui_1_1data_1_1_linkable.html" title="{dnai::models::gui::\ldata::Linkable\n|+ id\l+ linkedId\l|+ operator=()\l+ operator!=()\l+ operator==()\l}" alt="" coords="500,5,629,141"/>
-</map>

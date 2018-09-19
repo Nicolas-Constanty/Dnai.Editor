@@ -1,6 +1,0 @@
-<map id="dnai::models::gui::Linkable" name="dnai::models::gui::Linkable">
-<area shape="rect" id="node3" href="$classdnai_1_1interfaces_1_1_i_model_data.html" title="{dnai::interfaces::IModel\lData\&lt; data::Linkable \&gt;\n||+ ~IModelData()\l+ data()\l+ setData()\l}" alt="" coords="100,176,256,297"/>
-<area shape="rect" id="node4" href="$classdnai_1_1interfaces_1_1_a_serializable.html" title="{dnai::interfaces::ASerializable\l\&lt; data::Linkable \&gt;\n||+ ~ASerializable()\l+ serialize()\l+ serializeList()\l+ deserialize()\l# _deserialize()\l}" alt="" coords="281,161,475,312"/>
-<area shape="rect" id="node5" href="$classdnai_1_1interfaces_1_1_i_serializable.html" title="Allow inherited class to serialize and deserialize itself. " alt="" coords="284,5,472,112"/>
-<area shape="rect" id="node6" href="$structdnai_1_1models_1_1gui_1_1data_1_1_linkable.html" title="{dnai::models::gui::\ldata::Linkable\n|+ id\l+ linkedId\l|+ operator=()\l+ operator!=()\l+ operator==()\l}" alt="" coords="500,169,629,305"/>
-</map>

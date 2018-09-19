@@ -1,6 +1,0 @@
-<map id="dnai::interfaces::ISolution" name="dnai::interfaces::ISolution">
-<area shape="rect" id="node5" href="$classdnai_1_1_solution.html" title="{dnai::Solution\n|+ selectedEntity\l&#45; m_selectedProject\l&#45; m_projects\l&#45; m_data\l&#45; m_description\l&#45; m_name\l&#45; m_version\l&#45; m_file\l&#45; m_filename\l&#45; m_selectedEntity\l|+ Solution()\l+ Solution()\l+ ~Solution()\l+ save()\l+ isProjectsSaved()\l+ load()\l+ path()\l+ close()\l+ version()\l+ setVersion()\land 19 more...\l# _deserialize()\l&#45; roleNames()\l}" alt="" coords="119,645,258,1031"/>
-<area shape="rect" id="node2" href="$classdnai_1_1interfaces_1_1_i_project.html" title="{dnai::interfaces::IProject\n||+ ~IProject()\l+ load()\l+ close()\l+ version()\l+ setVersion()\l+ fileName()\l+ setFileName()\l+ name()\l+ setName()\l+ description()\l+ setDescription()\l+ jsonData()\l}" alt="" coords="107,160,270,399"/>
-<area shape="rect" id="node3" href="$classdnai_1_1interfaces_1_1_i_savable.html" title="{dnai::interfaces::ISavable\n||+ ~ISavable()\l+ save()\l}" alt="" coords="5,13,172,105"/>
-<area shape="rect" id="node4" href="$classdnai_1_1interfaces_1_1_i_serializable.html" title="Allow inherited class to serialize and deserialize itself. " alt="" coords="196,5,384,112"/>
-</map>

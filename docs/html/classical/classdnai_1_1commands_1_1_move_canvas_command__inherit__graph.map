@@ -1,4 +1,0 @@
-<map id="dnai::commands::MoveCanvasCommand" name="dnai::commands::MoveCanvasCommand">
-<area shape="rect" id="node2" href="$classdnai_1_1commands_1_1_command.html" title="{dnai::commands::Command\n|# m_name\l# m_save\l&#45; CommandEvent\l|+ Command()\l+ execute()\l+ executeSave()\l+ unExcute()\l+ infos()\l+ isSave()\l+ name()\l}" alt="" coords="18,204,203,399"/>
-<area shape="rect" id="node4" href="$classdnai_1_1interfaces_1_1_i_command.html" title="{dnai::interfaces::ICommand\n||# ~ICommand()\l# execute()\l# executeSave()\l# unExcute()\l# infos()\l# isSave()\l}" alt="" coords="94,5,274,156"/>
-</map>

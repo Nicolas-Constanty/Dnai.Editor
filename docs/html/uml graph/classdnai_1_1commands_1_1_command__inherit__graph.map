@@ -1,8 +1,0 @@
-<map id="dnai::commands::Command" name="dnai::commands::Command">
-<area shape="rect" id="node4" href="$classdnai_1_1commands_1_1_core_command.html" title="{dnai::commands::CoreCommand\n|&#45; exec\l&#45; undo\l&#45; commandQueue\l|+ CoreCommand()\l+ ~CoreCommand()\l+ execute()\l+ executeSave()\l+ unExcute()\l+ Success()\l+ Error()\l}" alt="" coords="5,447,217,641"/>
-<area shape="rect" id="node5" href="$classdnai_1_1commands_1_1_generic_command.html" title="{dnai::commands::GenericCommand\l\&lt; Args \&gt;\n|&#45; m_model\l&#45; m_dofunc\l&#45; m_undo\l|# execute()\l# executeSave()\l# unExcute()\l# infos()\l# isSave()\l&#45; GenericCommand()\l}" alt="" coords="241,447,472,641"/>
-<area shape="rect" id="node6" href="$classdnai_1_1commands_1_1_move_canvas_command.html" title="{dnai::commands::MoveCanvas\lCommand\n|&#45; m_pos\l&#45; m_lastPos\l&#45; m_canvas\l|+ MoveCanvasCommand()\l+ execute()\l+ executeSave()\l+ unExcute()\l+ infos()\l}" alt="" coords="496,454,695,634"/>
-<area shape="rect" id="node7" href="$classdnai_1_1commands_1_1_move_node_command.html" title="MoveNodeCommand allow to move GenericNode in canvas. " alt="" coords="719,454,906,634"/>
-<area shape="rect" id="node8" href="$classdnai_1_1commands_1_1_zoom_canvas_command.html" title="{dnai::commands::ZoomCanvas\lCommand\n|&#45; m_canvas\l&#45; m_scale\l&#45; m_offset\l|+ ZoomCanvasCommand()\l+ execute()\l+ executeSave()\l+ unExcute()\l+ infos()\l}" alt="" coords="930,454,1130,634"/>
-<area shape="rect" id="node3" href="$classdnai_1_1interfaces_1_1_i_command.html" title="{dnai::interfaces::ICommand\n||# ~ICommand()\l# execute()\l# executeSave()\l# unExcute()\l# infos()\l# isSave()\l}" alt="" coords="579,5,759,156"/>
-</map>

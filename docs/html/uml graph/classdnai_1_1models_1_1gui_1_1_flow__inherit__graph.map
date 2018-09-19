@@ -1,5 +1,0 @@
-<map id="dnai::models::gui::Flow" name="dnai::models::gui::Flow">
-<area shape="rect" id="node3" href="$classdnai_1_1interfaces_1_1_i_model_data.html" title="{dnai::interfaces::IModel\lData\&lt; data::Flow \&gt;\n||+ ~IModelData()\l+ data()\l+ setData()\l}" alt="" coords="100,175,256,296"/>
-<area shape="rect" id="node4" href="$classdnai_1_1interfaces_1_1_a_serializable.html" title="{dnai::interfaces::ASerializable\l\&lt; Flow \&gt;\n||+ ~ASerializable()\l+ serialize()\l+ serializeList()\l+ deserialize()\l# _deserialize()\l}" alt="" coords="281,160,475,311"/>
-<area shape="rect" id="node5" href="$classdnai_1_1interfaces_1_1_i_serializable.html" title="Allow inherited class to serialize and deserialize itself. " alt="" coords="284,5,472,112"/>
-</map>

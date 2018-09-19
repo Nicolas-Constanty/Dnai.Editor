@@ -1,8 +1,0 @@
-digraph "dnai::interfaces::ILoadingClass"
-{
-  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
-  node [fontname="Helvetica",fontsize="10",shape=record];
-  Node1 [label="{dnai::interfaces::ILoading\lClass\n|- m_statusPercent\l- m_status\l- m_registeredEvents\l|+ statusPercent()\l+ status()\l+ registerBeforeStart()\l+ registerReady()\l+ registerUpdateStatus()\l+ ~ILoadingClass()\l+ load()\l# ILoadingClass()\l# init()\l# execAllEvent()\l}",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
-  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",arrowtail="onormal",fontname="Helvetica"];
-  Node2 [label="{dnai::App\n|- m_engine\l- m_processManager\l- m_session\l- m_currentVersionAPI\l- m_loadedNumbers\l- m_instance\l|+ App()\l+ ~App()\l+ loadMainWindow()\l+ initProcessManager()\l+ eventFilter()\l+ versionsUpdater()\l+ onNotifyVersionChanged()\l+ close()\l+ session()\l+ engine()\land 6 more...\l+ loadFonts()\l+ currentInstance()\l+ createQmlObject()\l+ getEngineInstance()\l+ loadSplashScreen()\l# init()\l- createQmlComponent()\l- initAppView()\l- setVersion()\l- setAPIVersion()\l- setupSettings()\l}",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classdnai_1_1_app.html"];
-}

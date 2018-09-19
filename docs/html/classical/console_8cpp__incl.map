@@ -1,6 +1,0 @@
-<map id="Gui/app/src/dnai/views/console.cpp" name="Gui/app/src/dnai/views/console.cpp">
-<area shape="rect" id="node2" href="$console_8h.html" title="dnai/views/console.h" alt="" coords="5,244,147,271"/>
-<area shape="rect" id="node4" href="$commandmanager_8h.html" title="dnai/commands/commandmanager.h" alt="" coords="250,95,486,121"/>
-<area shape="rect" id="node7" href="$icommand_8h.html" title="dnai/interfaces/icommand.h" alt="" coords="501,169,683,196"/>
-<area shape="rect" id="node9" href="$consolecontroller_8h.html" title="dnai/controllers/consolecontroller.h" alt="" coords="94,169,317,196"/>
-</map>

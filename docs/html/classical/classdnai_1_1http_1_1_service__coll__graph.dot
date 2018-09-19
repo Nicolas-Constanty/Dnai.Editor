@@ -1,8 +1,0 @@
-digraph "dnai::http::Service"
-{
-  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
-  node [fontname="Helvetica",fontsize="10",shape=record];
-  Node1 [label="{dnai::http::Service\n|- m_manager\l|+ Init()\l+ callInterceptors()\l+ addInterceptor()\l+ makeHttpPart()\l+ makeHttpPart()\l+ url()\l}",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
-  Node2 -> Node1 [color="grey25",fontsize="10",style="solid",label=" -m_config" ,arrowhead="odiamond",fontname="Helvetica"];
-  Node2 [label="{dnai::http::Config\n|+ base_url\l+ headers\l+ interceptors\l|}",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structdnai_1_1http_1_1_config.html"];
-}

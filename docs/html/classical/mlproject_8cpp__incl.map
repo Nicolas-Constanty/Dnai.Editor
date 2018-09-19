@@ -1,7 +1,0 @@
-<map id="Gui/app/src/dnai/models/ml/mlproject.cpp" name="Gui/app/src/dnai/models/ml/mlproject.cpp">
-<area shape="rect" id="node2" href="$mlproject_8h.html" title="dnai/models/ml/mlproject.h" alt="" coords="17,95,195,121"/>
-<area shape="rect" id="node4" href="$dataset_8h.html" title="dataset.h" alt="" coords="164,169,240,196"/>
-<area shape="rect" id="node11" href="$model_8h.html" title="model.h" alt="" coords="72,169,140,196"/>
-<area shape="rect" id="node6" href="$iserializable_8h.html" title="dnai/interfaces/iserializable.h" alt="" coords="101,244,290,271"/>
-<area shape="rect" id="node9" href="$iterableqqmlpropertymap_8h.html" title="dnai/utils/iterableqqmlpropertymap.h" alt="" coords="315,244,545,271"/>
-</map>

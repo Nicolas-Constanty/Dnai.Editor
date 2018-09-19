@@ -1,7 +1,0 @@
-<map id="dnai::Solution" name="dnai::Solution">
-<area shape="rect" id="node3" href="$classdnai_1_1interfaces_1_1_i_solution.html" title="{dnai::interfaces::ISolution\n||+ ~ISolution()\l+ projects()\l+ addProject()\l+ seletedProject()\l+ selectProject()\l+ path()\l}" alt="" coords="167,447,335,597"/>
-<area shape="rect" id="node4" href="$classdnai_1_1interfaces_1_1_i_project.html" title="{dnai::interfaces::IProject\n||+ ~IProject()\l+ load()\l+ close()\l+ version()\l+ setVersion()\l+ fileName()\l+ setFileName()\l+ name()\l+ setName()\l+ description()\l+ setDescription()\l+ jsonData()\l}" alt="" coords="150,160,313,399"/>
-<area shape="rect" id="node5" href="$classdnai_1_1interfaces_1_1_i_savable.html" title="{dnai::interfaces::ISavable\n||+ ~ISavable()\l+ save()\l}" alt="" coords="148,13,315,105"/>
-<area shape="rect" id="node6" href="$classdnai_1_1interfaces_1_1_i_serializable.html" title="Allow inherited class to serialize and deserialize itself. " alt="" coords="339,5,527,112"/>
-<area shape="rect" id="node7" href="$classdnai_1_1interfaces_1_1_a_serializable.html" title="{dnai::interfaces::ASerializable\l\&lt; Solution \&gt;\n||+ ~ASerializable()\l+ serialize()\l+ serializeList()\l+ deserialize()\l# _deserialize()\l}" alt="" coords="337,204,531,355"/>
-</map>

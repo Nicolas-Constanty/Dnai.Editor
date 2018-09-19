@@ -1,8 +1,0 @@
-<map id="dnai::ALinkable" name="dnai::ALinkable">
-<area shape="rect" id="node3" href="$classdnai_1_1_base_linkable.html" title="dnai::BaseLinkable" alt="" coords="153,155,285,181"/>
-<area shape="rect" id="node2" href="$classdnai_1_1_i_linkable.html" title="dnai::ILinkable" alt="" coords="166,5,271,32"/>
-<area shape="rect" id="node4" href="$classdnai_1_1_base_io.html" title="dnai::BaseIo" alt="" coords="93,229,187,256"/>
-<area shape="rect" id="node7" href="$classdnai_1_1views_1_1_flow_backend.html" title="dnai::views::FlowBackend" alt="" coords="212,229,383,256"/>
-<area shape="rect" id="node5" href="$classdnai_1_1controllers_1_1_input_controller.html" title="dnai::controllers::\lInputController" alt="" coords="5,304,128,345"/>
-<area shape="rect" id="node6" href="$classdnai_1_1controllers_1_1_output_controller.html" title="dnai::controllers::\lOutputController" alt="" coords="152,304,275,345"/>
-</map>

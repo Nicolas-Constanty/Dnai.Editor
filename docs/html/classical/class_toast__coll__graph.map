@@ -1,3 +1,0 @@
-<map id="Toast" name="Toast">
-<area shape="rect" id="node3" href="$class_toaster_manager_service.html" title="{ToasterManagerService\n|&#45; m_engine\l&#45; m_list\l|+ ToasterManagerService()\l+ ToasterManagerService()\l+ ToasterManagerService()\l+ operator=()\l+ operator=()\l+ timeout()\l+ notifyInformation()\l+ notifyError()\l+ notifyWarning()\l+ notifySuccess()\l+ removeOne()\l&#45; getYposition()\l&#45; createToast()\l}" alt="" coords="93,132,271,400"/>
-</map>

@@ -1,6 +1,0 @@
-<map id="Gui/app/src/dnai/ml/datasethandler.cpp" name="Gui/app/src/dnai/ml/datasethandler.cpp">
-<area shape="rect" id="node6" href="$datasethandler_8h.html" title="dnai/ml/datasethandler.h" alt="" coords="366,95,530,121"/>
-<area shape="rect" id="node8" href="$dataset_8h.html" title="dnai/models/ml/dataset.h" alt="" coords="484,169,652,196"/>
-<area shape="rect" id="node10" href="$iserializable_8h.html" title="dnai/interfaces/iserializable.h" alt="" coords="473,244,663,271"/>
-<area shape="rect" id="node13" href="$iterableqqmlpropertymap_8h.html" title="dnai/utils/iterableqqmlpropertymap.h" alt="" coords="687,244,918,271"/>
-</map>

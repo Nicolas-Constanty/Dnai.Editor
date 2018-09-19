@@ -1,6 +1,0 @@
-<map id="dnai::models::gui::declarable::Entity&lt; T, U &gt;" name="dnai::models::gui::declarable::Entity&lt; T, U &gt;">
-<area shape="rect" id="node2" href="$classdnai_1_1interfaces_1_1_i_entity.html" title="{dnai::interfaces::IEntity\n||+ ~IEntity()\l+ index()\l+ setIndex()\l+ listIndex()\l+ setListIndex()\l+ expanded()\l+ setExpanded()\l+ description()\l+ setDescription()\l}" alt="" coords="5,161,160,356"/>
-<area shape="rect" id="node3" href="$classdnai_1_1interfaces_1_1_i_serializable.html" title="Allow inherited class to serialize and deserialize itself. " alt="" coords="118,5,306,112"/>
-<area shape="rect" id="node5" href="$classdnai_1_1interfaces_1_1_a_serializable.html" title="{dnai::interfaces::ASerializable\&lt; U \&gt;\n||+ ~ASerializable()\l+ serialize()\l+ serializeList()\l+ deserialize()\l# _deserialize()\l}" alt="" coords="184,191,411,327"/>
-<area shape="rect" id="node4" href="$classdnai_1_1interfaces_1_1_i_model_data.html" title="{dnai::interfaces::IModel\lData\&lt; T \&gt;\n||+ ~IModelData()\l+ data()\l+ setData()\l}" alt="" coords="435,198,591,319"/>
-</map>

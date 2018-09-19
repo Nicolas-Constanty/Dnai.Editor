@@ -1,8 +1,0 @@
-<map id="dnai::BaseLinkable" name="dnai::BaseLinkable">
-<area shape="rect" id="node4" href="$classdnai_1_1_base_io.html" title="{dnai::BaseIo\n|# m_type\l|+ BaseIo()\l+ ~BaseIo()\l+ setType()\l+ getType()\l}" alt="" coords="98,689,193,811"/>
-<area shape="rect" id="node7" href="$classdnai_1_1views_1_1_flow_backend.html" title="{dnai::views::FlowBackend\n|# m_typeFlow\l|+ FlowBackend()\l+ getType()\l+ connect()\l+ asyncConnect()\l}" alt="" coords="217,689,388,811"/>
-<area shape="rect" id="node2" href="$classdnai_1_1interfaces_1_1_a_linkable.html" title="{dnai::interfaces::ALinkable\n|# m_links\l|+ ~ALinkable()\l+ links()\l+ connect()\l+ asyncConnect()\l+ unlink()\l+ unlinkAll()\l+ addLink()\l+ removeLink()\l+ isLink()\l+ getLink()\l}" alt="" coords="137,160,311,369"/>
-<area shape="rect" id="node3" href="$classdnai_1_1interfaces_1_1_i_linkable.html" title="{dnai::interfaces::ILinkable\n||+ ~ILinkable()\l+ unlinkAll()\l+ isLink()\l}" alt="" coords="139,5,309,112"/>
-<area shape="rect" id="node5" href="$classdnai_1_1controllers_1_1_input_controller.html" title="{dnai::controllers::\lInputController\n||+ InputController()\l+ connect()\l+ asyncConnect()\l}" alt="" coords="5,859,131,980"/>
-<area shape="rect" id="node6" href="$classdnai_1_1controllers_1_1_output_controller.html" title="{dnai::controllers::\lOutputController\n||+ OutputController()\l+ connect()\l+ asyncConnect()\l}" alt="" coords="155,859,291,980"/>
-</map>

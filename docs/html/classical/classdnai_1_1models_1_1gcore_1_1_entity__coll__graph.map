@@ -1,7 +1,0 @@
-<map id="dnai::models::gcore::Entity" name="dnai::models::gcore::Entity">
-<area shape="rect" id="node2" href="$classdnai_1_1models_1_1gcore_1_1_i_entity_core.html" title="{dnai::models::gcore\l::IEntityCore\n||+ ~IEntityCore()\l+ replicate()\l}" alt="" coords="5,220,141,327"/>
-<area shape="rect" id="node3" href="$classdnai_1_1interfaces_1_1_i_model_data.html" title="{dnai::interfaces::IModel\lData\&lt; EntityData \&gt;\n||+ ~IModelData()\l+ data()\l+ setData()\l}" alt="" coords="166,213,322,334"/>
-<area shape="rect" id="node4" href="$classdnai_1_1interfaces_1_1_a_serializable.html" title="{dnai::interfaces::ASerializable\l\&lt; Entity \&gt;\n||+ ~ASerializable()\l+ serialize()\l+ serializeList()\l+ deserialize()\l# _deserialize()\l}" alt="" coords="347,198,541,349"/>
-<area shape="rect" id="node5" href="$classdnai_1_1interfaces_1_1_i_serializable.html" title="Allow inherited class to serialize and deserialize itself. " alt="" coords="350,5,538,112"/>
-<area shape="rect" id="node6" href="$structdnai_1_1models_1_1gcore_1_1_entity_data.html" title="{dnai::models::gcore\l::EntityData\n|+ id\l+ containerId\l+ type\l+ name\l+ visibility\l|+ EntityData()\l+ EntityData()\l+ ~EntityData()\l+ operator=()\l+ operator!=()\l+ operator==()\l}" alt="" coords="565,161,701,385"/>
-</map>

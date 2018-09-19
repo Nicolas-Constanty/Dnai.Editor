@@ -1,8 +1,0 @@
-<map id="Gui/app/include/dnai/controllers/inputcontroller.h" name="Gui/app/include/dnai/controllers/inputcontroller.h">
-<area shape="rect" id="node2" href="$controllers_8h.html" title="Gui/app/include/controllers.h" alt="" coords="5,102,192,129"/>
-<area shape="rect" id="node5" href="$inputcontroller_8cpp.html" title="Gui/app/src/dnai/controllers\l/inputcontroller.cpp" alt="" coords="216,95,397,136"/>
-<area shape="rect" id="node6" href="$outputcontroller_8cpp.html" title="Gui/app/src/dnai/controllers\l/outputcontroller.cpp" alt="" coords="421,95,603,136"/>
-<area shape="rect" id="node7" href="$views_2input_8cpp.html" title="Gui/app/src/dnai/views\l/input.cpp" alt="" coords="627,95,779,136"/>
-<area shape="rect" id="node3" href="$dnai_8h.html" title="Gui/app/include/dnai.h" alt="" coords="23,184,174,211"/>
-<area shape="rect" id="node4" href="$main_8cpp.html" title="Gui/app/src/main.cpp" alt="" coords="25,259,172,285"/>
-</map>

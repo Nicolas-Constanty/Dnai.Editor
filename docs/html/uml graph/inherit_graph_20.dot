@@ -1,7 +1,0 @@
-digraph "Graphical Class Hierarchy"
-{
-  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
-  node [fontname="Helvetica",fontsize="10",shape=record];
-  rankdir="LR";
-  Node1 [label="dnai::interfaces::IFactory\l\< FactoryType, ClassIdentifier \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classdnai_1_1interfaces_1_1_i_factory.html",tooltip="This class allow you to create a factory for anytype of the Base class (FactoryType) with anytype of ..."];
-}

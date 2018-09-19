@@ -1,5 +1,0 @@
-<map id="dnai::models::gui::data::Variable" name="dnai::models::gui::data::Variable">
-<area shape="rect" id="node3" href="$structdnai_1_1models_1_1gui_1_1data_1_1_input.html" title="{dnai::models::gui::\ldata::Input\n|+ name\l|+ operator=()\l+ operator!=()\l+ operator==()\l}" alt="" coords="5,373,135,495"/>
-<area shape="rect" id="node4" href="$structdnai_1_1models_1_1gui_1_1data_1_1_output.html" title="{dnai::models::gui::\ldata::Output\n|+ name\l|+ operator=()\l+ operator!=()\l+ operator==()\l}" alt="" coords="159,373,288,495"/>
-<area shape="rect" id="node2" href="$structdnai_1_1models_1_1gui_1_1data_1_1_entity.html" title="{dnai::models::gui::\ldata::Entity\n|+ index\l+ listIndex\l+ description\l+ expanded\l|+ operator=()\l+ operator!=()\l+ operator==()\l}" alt="" coords="81,5,211,171"/>
-</map>

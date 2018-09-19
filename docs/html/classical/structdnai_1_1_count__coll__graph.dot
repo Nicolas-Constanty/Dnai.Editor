@@ -1,6 +1,0 @@
-digraph "dnai::Count"
-{
-  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
-  node [fontname="Helvetica",fontsize="10",shape=record];
-  Node1 [label="{dnai::Count\n|+ contexts\l+ classes\l+ nodes\l+ functions\l+ variables\l+ inputs\l+ outputs\l+ flows\l|}",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
-}

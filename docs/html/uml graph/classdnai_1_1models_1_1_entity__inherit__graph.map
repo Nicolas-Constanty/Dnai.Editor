@@ -1,7 +1,0 @@
-<map id="dnai::models::Entity" name="dnai::models::Entity">
-<area shape="rect" id="node7" href="$classdnai_1_1models_1_1_instruction.html" title="{dnai::models::Instruction\n|&#45; m_data\l|+ ~Instruction()\l+ coreModel()\l+ setCoreModel()\l}" alt="" coords="115,1240,279,1347"/>
-<area shape="rect" id="node2" href="$classdnai_1_1interfaces_1_1_i_model.html" title="{dnai::interfaces::IModel\l\&lt; Entity \&gt;\n||+ IModel()\l}" alt="" coords="119,520,275,612"/>
-<area shape="rect" id="node3" href="$classdnai_1_1models_1_1_generic_tree_item.html" title="{dnai::models::GenericTree\lItem\&lt; Entity \&gt;\n|&#45; m_childItems\l&#45; m_parentItem\l&#45; m_idx\l|+ GenericTreeItem()\l+ ~GenericTreeItem()\l+ appendChild()\l+ child()\l+ childrenItem()\l+ childCount()\l+ columnCount()\l+ row()\l+ parentItem()\l+ idxmodel()\l+ setIdx()\l+ removeOne()\l+ deleteChildren()\l+ removeChildren()\l}" alt="" coords="5,160,180,472"/>
-<area shape="rect" id="node5" href="$classdnai_1_1interfaces_1_1_a_serializable.html" title="{dnai::interfaces::ASerializable\l\&lt; Entity \&gt;\n||+ ~ASerializable()\l+ serialize()\l+ serializeList()\l+ deserialize()\l# _deserialize()\l}" alt="" coords="205,241,399,391"/>
-<area shape="rect" id="node6" href="$classdnai_1_1interfaces_1_1_i_serializable.html" title="Allow inherited class to serialize and deserialize itself. " alt="" coords="208,5,396,112"/>
-</map>

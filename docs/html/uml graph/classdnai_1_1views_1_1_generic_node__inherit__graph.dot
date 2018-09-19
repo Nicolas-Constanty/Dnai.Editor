@@ -1,8 +1,0 @@
-digraph "dnai::views::GenericNode"
-{
-  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
-  node [fontname="Helvetica",fontsize="10",shape=record];
-  Node1 [label="{dnai::views::GenericNode\n|+ header\l+ content\l+ selected\l- m_header\l- m_content\l- m_inputs\l- m_outputs\l- m_flowsOut\l- m_flowsIn\l- m_offset\l- m_holdClik\l- m_startPos\l- m_canvas\l- m_selected\l|+ GenericNode()\l+ createLink()\l+ createFlowLink()\l+ unlinkFlow()\l+ unlinkIo()\l+ updatePaintNode()\l+ componentComplete()\l+ resetBorderColor()\l+ move()\l+ startPos()\land 10 more...\l+ resetSelected()\l# mouseMoveEvent()\l# mousePressEvent()\l# mouseReleaseEvent()\l- updateInputs()\l- updateOutputs()\l- updateFlowsIn()\l- updateFlowsOut()\l}",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
-  Node2 -> Node1 [dir="back",color="midnightblue",fontsize="10",style="solid",arrowtail="onormal",fontname="Helvetica"];
-  Node2 [label="{QQuickItem\n||}",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
-}

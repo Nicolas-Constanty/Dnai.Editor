@@ -1,7 +1,0 @@
-<map id="dnai::Project" name="dnai::Project">
-<area shape="rect" id="node2" href="$classdnai_1_1models_1_1_entity_tree.html" title="{dnai::models::EntityTree\n|# m_rootItem\l|+ EntityTree()\l+ index()\l+ parent()\l+ rowCount()\l+ columnCount()\l+ data()\l+ getRoleKey()\l# getItem()\l# roleNames()\l}" alt="" coords="5,182,168,377"/>
-<area shape="rect" id="node4" href="$classdnai_1_1interfaces_1_1_a_serializable.html" title="{dnai::interfaces::ASerializable\l\&lt; Project \&gt;\n||+ ~ASerializable()\l+ serialize()\l+ serializeList()\l+ deserialize()\l# _deserialize()\l}" alt="" coords="192,204,387,355"/>
-<area shape="rect" id="node5" href="$classdnai_1_1interfaces_1_1_i_serializable.html" title="Allow inherited class to serialize and deserialize itself. " alt="" coords="195,5,383,112"/>
-<area shape="rect" id="node6" href="$classdnai_1_1interfaces_1_1_i_project.html" title="{dnai::interfaces::IProject\n||+ ~IProject()\l+ load()\l+ close()\l+ version()\l+ setVersion()\l+ fileName()\l+ setFileName()\l+ name()\l+ setName()\l+ description()\l+ setDescription()\l+ jsonData()\l}" alt="" coords="411,160,573,399"/>
-<area shape="rect" id="node7" href="$classdnai_1_1interfaces_1_1_i_savable.html" title="{dnai::interfaces::ISavable\n||+ ~ISavable()\l+ save()\l}" alt="" coords="409,13,575,105"/>
-</map>
