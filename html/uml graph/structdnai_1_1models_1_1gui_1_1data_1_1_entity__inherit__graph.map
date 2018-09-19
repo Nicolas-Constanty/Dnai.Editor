@@ -1,0 +1,10 @@
+<map id="dnai::models::gui::data::Entity" name="dnai::models::gui::data::Entity">
+<area shape="rect" id="node2" href="$structdnai_1_1models_1_1gui_1_1data_1_1_context.html" title="{dnai::models::gui::\ldata::Context\n|+ contexts\l+ classes\l+ variables\l+ functions\l+ enums\l+ listobjs\l|}" alt="" coords="5,233,135,399"/>
+<area shape="rect" id="node3" href="$structdnai_1_1models_1_1gui_1_1data_1_1_enum_type.html" title="{dnai::models::gui::\ldata::EnumType\n|+ names\l+ values\l|+ operator=()\l}" alt="" coords="159,263,288,369"/>
+<area shape="rect" id="node4" href="$structdnai_1_1models_1_1gui_1_1data_1_1_function.html" title="{dnai::models::gui::\ldata::Function\n|+ inputs\l+ outputs\l+ instructions\l+ variables\l+ iolinks\l+ flowlinks\l|+ operator=()\l+ operator!=()\l+ operator==()\l}" alt="" coords="312,219,441,413"/>
+<area shape="rect" id="node5" href="$structdnai_1_1models_1_1gui_1_1data_1_1_list_type.html" title="{dnai::models::gui::\ldata::ListType\n|+ stored_type\l|}" alt="" coords="465,270,595,362"/>
+<area shape="rect" id="node6" href="$structdnai_1_1models_1_1gui_1_1data_1_1_object_type.html" title="{dnai::models::gui::\ldata::ObjectType\n|+ attributes\l+ functions\l|}" alt="" coords="619,263,748,369"/>
+<area shape="rect" id="node7" href="$structdnai_1_1models_1_1gui_1_1data_1_1_variable.html" title="{dnai::models::gui::\ldata::Variable\n|+ varType\l+ value\l|}" alt="" coords="772,263,901,369"/>
+<area shape="rect" id="node8" href="$structdnai_1_1models_1_1gui_1_1data_1_1_input.html" title="{dnai::models::gui::\ldata::Input\n|+ name\l|+ operator=()\l+ operator!=()\l+ operator==()\l}" alt="" coords="695,461,824,583"/>
+<area shape="rect" id="node9" href="$structdnai_1_1models_1_1gui_1_1data_1_1_output.html" title="{dnai::models::gui::\ldata::Output\n|+ name\l|+ operator=()\l+ operator!=()\l+ operator==()\l}" alt="" coords="848,461,977,583"/>
+</map>

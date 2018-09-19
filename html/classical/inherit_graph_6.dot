@@ -1,0 +1,7 @@
+digraph "Graphical Class Hierarchy"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="dnai::commands::CommandManager\l::CommandStack",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classdnai_1_1commands_1_1_command_manager_1_1_command_stack.html",tooltip="The CommandStack class behaves like a stack of interface::ICommand * but allow to remove any command ..."];
+}

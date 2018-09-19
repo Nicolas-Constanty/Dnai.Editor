@@ -1,0 +1,5 @@
+<map id="dnai::models::ml::Dataset" name="dnai::models::ml::Dataset">
+<area shape="rect" id="node3" href="$classdnai_1_1interfaces_1_1_a_serializable.html" title="{dnai::interfaces::ASerializable\l\&lt; Dataset \&gt;\n||+ ~ASerializable()\l+ serialize()\l+ serializeList()\l+ deserialize()\l# _deserialize()\l}" alt="" coords="101,227,295,378"/>
+<area shape="rect" id="node4" href="$classdnai_1_1interfaces_1_1_i_serializable.html" title="Allow inherited class to serialize and deserialize itself. " alt="" coords="104,5,292,112"/>
+<area shape="rect" id="node5" href="$classdnai_1_1utils_1_1_iterable_q_qml_property_map.html" title="{dnai::utils::IterableQQml\lPropertyMap\n|&#45; m_map\l|+ IterableQQmlPropertyMap()\l+ rowCount()\l+ data()\l+ value()\l+ insert()\l+ clear()\l+ keys()\l+ count()\l+ size()\l+ isEmpty()\l+ contains()\l+ operator[]()\l+ operator[]()\l&#45; roleNames()\l}" alt="" coords="319,161,511,444"/>
+</map>

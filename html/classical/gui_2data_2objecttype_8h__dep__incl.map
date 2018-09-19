@@ -1,0 +1,9 @@
+<map id="DNAI/app/include/dnai/models/gui/data/objecttype.h" name="DNAI/app/include/dnai/models/gui/data/objecttype.h">
+<area shape="rect" id="node2" href="$gui_2declarable_2objecttype_8h.html" title="DNAI/app/include/dnai\l/models/gui/declarable\l/objecttype.h" alt="" coords="320,95,472,151"/>
+<area shape="rect" id="node3" href="$gui_2data_2context_8h.html" title="DNAI/app/include/dnai\l/models/gui/data/context.h" alt="" coords="204,199,380,240"/>
+<area shape="rect" id="node8" href="$objecttype_8cpp.html" title="DNAI/app/src/dnai/models\l/gui/declarable/objecttype.cpp" alt="" coords="404,199,599,240"/>
+<area shape="rect" id="node4" href="$gui_2declarable_2context_8h.html" title="DNAI/app/include/dnai\l/models/gui/declarable\l/context.h" alt="" coords="216,288,368,344"/>
+<area shape="rect" id="node5" href="$entity_8cpp.html" title="DNAI/app/src/dnai/models\l/entity.cpp" alt="" coords="5,392,179,433"/>
+<area shape="rect" id="node6" href="$context_8cpp.html" title="DNAI/app/src/dnai/models\l/gui/declarable/context.cpp" alt="" coords="203,392,381,433"/>
+<area shape="rect" id="node7" href="$project_8cpp.html" title="DNAI/app/src/dnai/project.cpp" alt="" coords="405,399,600,426"/>
+</map>

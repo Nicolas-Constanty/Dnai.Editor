@@ -1,0 +1,19 @@
+<map id="DNAI/app/GeneratedFiles/Debug/moc_testconnection.cpp" name="DNAI/app/GeneratedFiles/Debug/moc_testconnection.cpp">
+<area shape="rect" id="node2" href="$testconnection_8h.html" title="../../include/testconnection.h" alt="" coords="109,95,296,121"/>
+<area shape="rect" id="node6" href="$context_8h.html" title="dnai/models/context.h" alt="" coords="326,169,477,196"/>
+<area shape="rect" id="node7" href="$entity_8h.html" title="entity.h" alt="" coords="369,244,434,271"/>
+<area shape="rect" id="node8" href="$core_2entity_8h.html" title="dnai/models/core/entity.h" alt="" coords="259,326,427,353"/>
+<area shape="rect" id="node9" href="$core_8h.html" title="dnai/enums/core/core.h" alt="" coords="95,483,254,509"/>
+<area shape="rect" id="node17" href="$gui_2declarable_2entity_8h.html" title="dnai/models/gui/declarable\l/entity.h" alt="" coords="887,319,1063,360"/>
+<area shape="rect" id="node25" href="$imodel_8h.html" title="dnai/interfaces/imodel.h" alt="" coords="1157,326,1315,353"/>
+<area shape="rect" id="node10" href="$corecommand_8h.html" title="dnai/commands/corecommand.h" alt="" coords="352,408,563,435"/>
+<area shape="rect" id="node15" href="$entitydata_8h.html" title="entitydata.h" alt="" coords="237,408,328,435"/>
+<area shape="rect" id="node16" href="$imodeldata_8h.html" title="dnai/interfaces/imodeldata.h" alt="" coords="587,408,771,435"/>
+<area shape="rect" id="node11" href="$command_8h.html" title="command.h" alt="" coords="433,483,524,509"/>
+<area shape="rect" id="node13" href="$icommand_8h.html" title="dnai/interfaces/icommand.h" alt="" coords="388,565,569,591"/>
+<area shape="rect" id="node18" href="$iserializable_8h.html" title="dnai/interfaces/iserializable.h" alt="" coords="1141,408,1331,435"/>
+<area shape="rect" id="node21" href="$gui_2data_2entity_8h.html" title="dnai/models/gui/data\l/entity.h" alt="" coords="753,557,895,599"/>
+<area shape="rect" id="node22" href="$ientity_8h.html" title="dnai/interfaces/ientity.h" alt="" coords="1005,565,1161,591"/>
+<area shape="rect" id="node23" href="$notimplemented_8h.html" title="dnai/exceptions/notimplemented.h" alt="" coords="795,408,1015,435"/>
+<area shape="rect" id="node26" href="$generictreeitem_8h.html" title="dnai/models/generictreeitem.h" alt="" coords="1355,408,1551,435"/>
+</map>

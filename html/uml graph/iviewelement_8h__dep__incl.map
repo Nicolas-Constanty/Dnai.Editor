@@ -1,0 +1,14 @@
+<map id="Gui/app/include/dnai/interfaces/iviewelement.h" name="Gui/app/include/dnai/interfaces/iviewelement.h">
+<area shape="rect" id="node2" href="$viewelement_8h.html" title="Gui/app/include/dnai\l/views/viewelement.h" alt="" coords="223,95,366,136"/>
+<area shape="rect" id="node8" href="$iviewzone_8h.html" title="Gui/app/include/dnai\l/interfaces/iviewzone.h" alt="" coords="629,95,781,136"/>
+<area shape="rect" id="node12" href="$interfaces_8h.html" title="Gui/app/include/interfaces.h" alt="" coords="819,191,1002,218"/>
+<area shape="rect" id="node3" href="$moc__viewelement_8cpp.html" title="Gui/app/GeneratedFiles\l/Debug/moc_viewelement.cpp" alt="" coords="5,184,200,225"/>
+<area shape="rect" id="node4" href="$views_8h.html" title="Gui/app/include/views.h" alt="" coords="250,281,409,307"/>
+<area shape="rect" id="node7" href="$viewelement_8cpp.html" title="Gui/app/src/dnai/views\l/viewelement.cpp" alt="" coords="275,184,427,225"/>
+<area shape="rect" id="node5" href="$dnai_8h.html" title="Gui/app/include/dnai.h" alt="" coords="522,363,673,389"/>
+<area shape="rect" id="node6" href="$main_8cpp.html" title="Gui/app/src/main.cpp" alt="" coords="524,437,671,464"/>
+<area shape="rect" id="node9" href="$viewzone_8h.html" title="Gui/app/include/dnai\l/views/viewzone.h" alt="" coords="451,184,591,225"/>
+<area shape="rect" id="node13" href="$editor_8cpp.html" title="Gui/app/src/dnai/editor.cpp" alt="" coords="616,191,795,218"/>
+<area shape="rect" id="node10" href="$moc__viewzone_8cpp.html" title="Gui/app/GeneratedFiles\l/Debug/moc_viewzone.cpp" alt="" coords="433,273,609,315"/>
+<area shape="rect" id="node11" href="$viewzone_8cpp.html" title="Gui/app/src/dnai/views\l/viewzone.cpp" alt="" coords="633,273,785,315"/>
+</map>

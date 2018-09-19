@@ -1,0 +1,10 @@
+<map id="dnai::models::gui::Output" name="dnai::models::gui::Output">
+<area shape="rect" id="node3" href="$classdnai_1_1interfaces_1_1_i_variable.html" title="{dnai::interfaces::IVariable\n||+ ~IVariable()\l+ varType()\l+ setVarType()\l+ value()\l+ setValue()\l}" alt="" coords="101,413,269,549"/>
+<area shape="rect" id="node4" href="$classdnai_1_1interfaces_1_1_i_model_data.html" title="{dnai::interfaces::IModel\lData\&lt; data::Output \&gt;\n||+ ~IModelData()\l+ data()\l+ setData()\l}" alt="" coords="293,420,449,541"/>
+<area shape="rect" id="node5" href="$classdnai_1_1interfaces_1_1_a_serializable.html" title="{dnai::interfaces::ASerializable\l\&lt; Output \&gt;\n||+ ~ASerializable()\l+ serialize()\l+ serializeList()\l+ deserialize()\l# _deserialize()\l}" alt="" coords="474,405,669,556"/>
+<area shape="rect" id="node6" href="$classdnai_1_1interfaces_1_1_i_serializable.html" title="Allow inherited class to serialize and deserialize itself. " alt="" coords="477,235,665,341"/>
+<area shape="rect" id="node7" href="$structdnai_1_1models_1_1gui_1_1data_1_1_output.html" title="{dnai::models::gui::\ldata::Output\n|+ name\l|+ operator=()\l+ operator!=()\l+ operator==()\l}" alt="" coords="693,420,823,541"/>
+<area shape="rect" id="node8" href="$structdnai_1_1models_1_1gui_1_1data_1_1_variable.html" title="{dnai::models::gui::\ldata::Variable\n|+ varType\l+ value\l|}" alt="" coords="691,235,820,341"/>
+<area shape="rect" id="node9" href="$structdnai_1_1models_1_1gui_1_1data_1_1_entity.html" title="{dnai::models::gui::\ldata::Entity\n|+ index\l+ listIndex\l+ description\l+ expanded\l|+ operator=()\l+ operator!=()\l+ operator==()\l}" alt="" coords="691,5,820,171"/>
+<area shape="rect" id="node10" href="$structdnai_1_1models_1_1gui_1_1data_1_1_linkable.html" title="{dnai::models::gui::\ldata::Linkable\n|+ id\l+ linkedId\l|+ operator=()\l+ operator!=()\l+ operator==()\l}" alt="" coords="844,220,973,356"/>
+</map>

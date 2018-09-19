@@ -1,0 +1,9 @@
+<map id="dnai::controllers::IController" name="dnai::controllers::IController">
+<area shape="rect" id="node2" href="$classdnai_1_1controllers_1_1_a_controller.html" title="dnai::controllers::\lAController\&lt; models\l::Class, Reply::EntityDeclared\l const &amp; \&gt;" alt="" coords="176,5,373,76"/>
+<area shape="rect" id="node4" href="$classdnai_1_1controllers_1_1_a_controller.html" title="dnai::controllers::\lAController\&lt; models\l::Class, void \&gt;" alt="" coords="205,101,345,157"/>
+<area shape="rect" id="node6" href="$classdnai_1_1controllers_1_1_a_controller.html" title="dnai::controllers::\lAController\&lt; models\l::EntityList, void \&gt;" alt="" coords="205,181,345,237"/>
+<area shape="rect" id="node8" href="$classdnai_1_1controllers_1_1_a_controller.html" title="dnai::controllers::\lAController\&lt; T, U \&gt;" alt="" coords="207,261,342,303"/>
+<area shape="rect" id="node3" href="$classdnai_1_1controllers_1_1_context_controller.html" title="dnai::controllers::\lContextController" alt="" coords="421,20,544,61"/>
+<area shape="rect" id="node5" href="$classdnai_1_1controllers_1_1_class_controller.html" title="dnai::controllers::\lClassController" alt="" coords="421,108,544,149"/>
+<area shape="rect" id="node7" href="$classdnai_1_1controllers_1_1_property_panel.html" title="dnai::controllers::\lPropertyPanel" alt="" coords="421,188,544,229"/>
+</map>

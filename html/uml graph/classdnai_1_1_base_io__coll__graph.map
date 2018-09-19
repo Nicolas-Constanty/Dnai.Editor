@@ -1,0 +1,5 @@
+<map id="dnai::BaseIo" name="dnai::BaseIo">
+<area shape="rect" id="node2" href="$classdnai_1_1_base_linkable.html" title="{dnai::BaseLinkable\n|# m_parent\l|+ BaseLinkable()\l+ ~BaseLinkable()\l+ connect()\l+ asyncConnect()\l+ unlink()\l+ unlinkAll()\l+ addLink()\l+ removeLink()\l+ isLink()\l+ getLink()\l+ parent()\l}" alt="" coords="27,417,159,641"/>
+<area shape="rect" id="node3" href="$classdnai_1_1interfaces_1_1_a_linkable.html" title="{dnai::interfaces::ALinkable\n|# m_links\l|+ ~ALinkable()\l+ links()\l+ connect()\l+ asyncConnect()\l+ unlink()\l+ unlinkAll()\l+ addLink()\l+ removeLink()\l+ isLink()\l+ getLink()\l}" alt="" coords="5,160,180,369"/>
+<area shape="rect" id="node4" href="$classdnai_1_1interfaces_1_1_i_linkable.html" title="{dnai::interfaces::ILinkable\n||+ ~ILinkable()\l+ unlinkAll()\l+ isLink()\l}" alt="" coords="8,5,177,112"/>
+</map>

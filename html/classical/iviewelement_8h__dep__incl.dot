@@ -1,0 +1,33 @@
+digraph "Gui/app/include/dnai/interfaces/iviewelement.h"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="Gui/app/include/dnai\l/interfaces/iviewelement.h",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="Gui/app/include/dnai\l/views/viewelement.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$viewelement_8h.html"];
+  Node2 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="Gui/app/GeneratedFiles\l/Debug/moc_viewelement.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$moc__viewelement_8cpp.html"];
+  Node2 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="Gui/app/include/views.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$views_8h.html"];
+  Node4 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="Gui/app/include/dnai.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$dnai_8h.html"];
+  Node5 -> Node6 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="Gui/app/src/main.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$main_8cpp.html"];
+  Node2 -> Node7 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node7 [label="Gui/app/src/dnai/views\l/viewelement.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$viewelement_8cpp.html"];
+  Node1 -> Node8 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node8 [label="Gui/app/include/dnai\l/interfaces/iviewzone.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$iviewzone_8h.html"];
+  Node8 -> Node9 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node9 [label="Gui/app/include/dnai\l/views/viewzone.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$viewzone_8h.html"];
+  Node9 -> Node10 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node10 [label="Gui/app/GeneratedFiles\l/Debug/moc_viewzone.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$moc__viewzone_8cpp.html"];
+  Node9 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node9 -> Node11 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node11 [label="Gui/app/src/dnai/views\l/viewzone.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$viewzone_8cpp.html"];
+  Node8 -> Node12 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node12 [label="Gui/app/include/interfaces.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$interfaces_8h.html"];
+  Node12 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node8 -> Node13 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node13 [label="Gui/app/src/dnai/editor.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$editor_8cpp.html"];
+  Node1 -> Node12 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+}

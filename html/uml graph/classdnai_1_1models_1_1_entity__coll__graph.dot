@@ -1,0 +1,29 @@
+digraph "dnai::models::Entity"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="{dnai::models::Entity\n|+ id\l+ containerId\l+ guid\l+ isRoot\l+ index\l+ listIndex\l+ name\l+ visibility\l+ description\l+ guiProperties\l+ entityType\l+ expanded\l+ parentRef\l+ listColumn\l- m_isRoot\l- m_entityChildren\l- m_columns\l- m_columslist\l- m_varcolumns\l- m_guid\l|+ Entity()\l+ ~Entity()\l+ isRoot()\l+ id()\l+ containerId()\l+ entityType()\l+ name()\l+ fullName()\l+ childFullName()\l+ visibility()\land 33 more...\l}",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+  Node2 -> Node1 [dir="back",color="midnightblue",fontsize="10",style="solid",arrowtail="onormal",fontname="Helvetica"];
+  Node2 [label="{dnai::interfaces::IModel\l\< Entity \>\n||+ IModel()\l}",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classdnai_1_1interfaces_1_1_i_model.html"];
+  Node3 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",arrowtail="onormal",fontname="Helvetica"];
+  Node3 [label="{dnai::models::GenericTree\lItem\< Entity \>\n|- m_childItems\l- m_idx\l|+ GenericTreeItem()\l+ ~GenericTreeItem()\l+ appendChild()\l+ child()\l+ childrenItem()\l+ childCount()\l+ columnCount()\l+ row()\l+ parentItem()\l+ idxmodel()\l+ setIdx()\l+ removeOne()\l+ deleteChildren()\l+ removeChildren()\l}",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classdnai_1_1models_1_1_generic_tree_item.html"];
+  Node4 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",arrowtail="onormal",fontname="Helvetica"];
+  Node4 [label="{QObject\n||}",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
+  Node1 -> Node3 [color="grey25",fontsize="10",style="solid",label=" -m_parentItem" ,arrowhead="odiamond",fontname="Helvetica"];
+  Node5 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",arrowtail="onormal",fontname="Helvetica"];
+  Node5 [label="{dnai::interfaces::ASerializable\l\< Entity \>\n||+ ~ASerializable()\l+ serialize()\l+ serializeList()\l+ deserialize()\l# _deserialize()\l}",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classdnai_1_1interfaces_1_1_a_serializable.html"];
+  Node6 -> Node5 [dir="back",color="firebrick4",fontsize="10",style="solid",arrowtail="onormal",fontname="Helvetica"];
+  Node6 [label="{dnai::interfaces::ISerializable\n||+ ~ISerializable()\l+ serialize()\l# _deserialize()\l}",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classdnai_1_1interfaces_1_1_i_serializable.html",tooltip="Allow inherited class to serialize and deserialize itself. "];
+  Node7 -> Node1 [color="grey25",fontsize="10",style="solid",label=" -m_dataGUI" ,arrowhead="odiamond",fontname="Helvetica"];
+  Node7 [label="{dnai::interfaces::IEntity\n||+ ~IEntity()\l+ index()\l+ setIndex()\l+ listIndex()\l+ setListIndex()\l+ expanded()\l+ setExpanded()\l+ description()\l+ setDescription()\l}",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classdnai_1_1interfaces_1_1_i_entity.html"];
+  Node6 -> Node7 [dir="back",color="midnightblue",fontsize="10",style="solid",arrowtail="onormal",fontname="Helvetica"];
+  Node8 -> Node1 [color="grey25",fontsize="10",style="solid",label=" -m_dataCore" ,arrowhead="odiamond",fontname="Helvetica"];
+  Node8 [label="{dnai::models::gcore\l::Entity\n||+ Entity()\l+ Entity()\l+ Entity()\l+ Entity()\l+ ~Entity()\l+ setId()\l+ id()\l+ setEntityType()\l+ entityType()\l+ setContainerId()\land 10 more...\l# _deserialize()\l}",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classdnai_1_1models_1_1gcore_1_1_entity.html"];
+  Node9 -> Node8 [dir="back",color="midnightblue",fontsize="10",style="solid",arrowtail="onormal",fontname="Helvetica"];
+  Node9 [label="{dnai::models::gcore\l::IEntityCore\n||+ ~IEntityCore()\l+ replicate()\l}",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classdnai_1_1models_1_1gcore_1_1_i_entity_core.html"];
+  Node10 -> Node8 [dir="back",color="midnightblue",fontsize="10",style="solid",arrowtail="onormal",fontname="Helvetica"];
+  Node10 [label="{dnai::interfaces::IModel\lData\< EntityData \>\n||+ ~IModelData()\l+ data()\l+ setData()\l}",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classdnai_1_1interfaces_1_1_i_model_data.html"];
+  Node5 -> Node8 [dir="back",color="midnightblue",fontsize="10",style="solid",arrowtail="onormal",fontname="Helvetica"];
+  Node11 -> Node8 [color="grey25",fontsize="10",style="solid",label=" -m_data" ,arrowhead="odiamond",fontname="Helvetica"];
+  Node11 [label="{dnai::models::gcore\l::EntityData\n|+ id\l+ containerId\l+ type\l+ name\l+ visibility\l|+ EntityData()\l+ EntityData()\l+ ~EntityData()\l+ operator=()\l+ operator!=()\l+ operator==()\l}",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structdnai_1_1models_1_1gcore_1_1_entity_data.html"];
+}

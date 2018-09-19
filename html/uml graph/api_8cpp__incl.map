@@ -1,0 +1,26 @@
+<map id="Gui/app/src/dnai/api/api.cpp" name="Gui/app/src/dnai/api/api.cpp">
+<area shape="rect" id="node4" href="$dnai_2api_2api_8h.html" title="dnai/api/api.h" alt="" coords="141,95,240,121"/>
+<area shape="rect" id="node17" href="$app_8h.html" title="dnai/app.h" alt="" coords="1606,95,1689,121"/>
+<area shape="rect" id="node44" href="$service_8h.html" title="dnai/http/service.h" alt="" coords="452,95,579,121"/>
+<area shape="rect" id="node7" href="$observable_8h.html" title="dnai/http/observable.h" alt="" coords="190,244,338,271"/>
+<area shape="rect" id="node13" href="$config_8h.html" title="dnai/http/config.h" alt="" coords="80,169,202,196"/>
+<area shape="rect" id="node15" href="$types_8h.html" title="types.h" alt="" coords="100,244,166,271"/>
+<area shape="rect" id="node10" href="$response_8h.html" title="response.h" alt="" coords="516,319,603,345"/>
+<area shape="rect" id="node20" href="$processmanager_8h.html" title="processmanager.h" alt="" coords="632,244,762,271"/>
+<area shape="rect" id="node23" href="$iloadingclass_8h.html" title="dnai/interfaces/iloadingclass.h" alt="" coords="2387,169,2583,196"/>
+<area shape="rect" id="node27" href="$session_8h.html" title="session.h" alt="" coords="1023,169,1102,196"/>
+<area shape="rect" id="node29" href="$editor_8h.html" title="editor.h" alt="" coords="1558,169,1623,196"/>
+<area shape="rect" id="node28" href="$user_8h.html" title="dnai/models/user.h" alt="" coords="996,244,1128,271"/>
+<area shape="rect" id="node32" href="$ieditor_8h.html" title="interfaces/ieditor.h" alt="" coords="1952,244,2080,271"/>
+<area shape="rect" id="node37" href="$editorview_8h.html" title="dnai/views/editorview.h" alt="" coords="2104,244,2256,271"/>
+<area shape="rect" id="node38" href="$solution_8h.html" title="dnai/solution.h" alt="" coords="2280,244,2386,271"/>
+<area shape="rect" id="node40" href="$entity_8h.html" title="dnai/models/entity.h" alt="" coords="1332,244,1470,271"/>
+<area shape="rect" id="node41" href="$toastermanagerservice_8h.html" title="dnai/toastermanagerservice.h" alt="" coords="1495,244,1686,271"/>
+<area shape="rect" id="node42" href="$context_menu_model_8h.html" title="dnai/models/contextMenuModel.h" alt="" coords="1710,244,1927,271"/>
+<area shape="rect" id="node43" href="$mlhandler_8h.html" title="dnai/ml/mlhandler.h" alt="" coords="838,244,972,271"/>
+<area shape="rect" id="node34" href="$icommand_8h.html" title="icommand.h" alt="" coords="1668,319,1761,345"/>
+<area shape="rect" id="node35" href="$isavable_8h.html" title="isavable.h" alt="" coords="1958,319,2036,345"/>
+<area shape="rect" id="node36" href="$isolution_8h.html" title="isolution.h" alt="" coords="2176,319,2258,345"/>
+<area shape="rect" id="node39" href="$iserializable_8h.html" title="iserializable.h" alt="" coords="2282,319,2384,345"/>
+<area shape="rect" id="node49" href="$url_8h.html" title="url.h" alt="" coords="355,169,402,196"/>
+</map>

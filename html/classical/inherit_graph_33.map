@@ -1,0 +1,13 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" href="$structdnai_1_1models_1_1gui_1_1data_1_1_entity.html" title="dnai::models::gui::\ldata::Entity" alt="" coords="5,169,135,211"/>
+<area shape="rect" id="node2" href="$structdnai_1_1models_1_1gui_1_1data_1_1_context.html" title="dnai::models::gui::\ldata::Context" alt="" coords="183,201,312,243"/>
+<area shape="rect" id="node3" href="$structdnai_1_1models_1_1gui_1_1data_1_1_enum_type.html" title="dnai::models::gui::\ldata::EnumType" alt="" coords="183,267,312,308"/>
+<area shape="rect" id="node4" href="$structdnai_1_1models_1_1gui_1_1data_1_1_function.html" title="dnai::models::gui::\ldata::Function" alt="" coords="183,332,312,373"/>
+<area shape="rect" id="node5" href="$structdnai_1_1models_1_1gui_1_1data_1_1_list_type.html" title="dnai::models::gui::\ldata::ListType" alt="" coords="183,5,312,47"/>
+<area shape="rect" id="node6" href="$structdnai_1_1models_1_1gui_1_1data_1_1_object_type.html" title="dnai::models::gui::\ldata::ObjectType" alt="" coords="183,71,312,112"/>
+<area shape="rect" id="node7" href="$structdnai_1_1models_1_1gui_1_1data_1_1_variable.html" title="dnai::models::gui::\ldata::Variable" alt="" coords="183,136,312,177"/>
+<area shape="rect" id="node8" href="$structdnai_1_1models_1_1gui_1_1data_1_1_input.html" title="dnai::models::gui::\ldata::Input" alt="" coords="360,267,489,308"/>
+<area shape="rect" id="node9" href="$structdnai_1_1models_1_1gui_1_1data_1_1_output.html" title="dnai::models::gui::\ldata::Output" alt="" coords="360,169,489,211"/>
+<area shape="rect" id="node10" href="$structdnai_1_1models_1_1gui_1_1data_1_1_linkable.html" title="dnai::models::gui::\ldata::Linkable" alt="" coords="183,397,312,439"/>
+<area shape="rect" id="node11" href="$structdnai_1_1models_1_1gui_1_1data_1_1_flow.html" title="dnai::models::gui::\ldata::Flow" alt="" coords="360,397,489,439"/>
+</map>
