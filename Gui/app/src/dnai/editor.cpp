@@ -253,7 +253,15 @@ namespace dnai
         const QByteArray data = file.readAll();
 
         try {
-            const QJsonObject obj(QJsonDocument::fromJson(data).object());
+            QJsonDocument doc = QJsonDocument::fromJson(data);
+
+            if (doc.isNull() || doc.isEmpty())
+            {
+                qWarning() << "==Editor== Unable to parse default nodes for context menu model";
+            }
+
+            const QJsonObject obj(doc.object());
+
             m_contextMenuModel = new dnai::models::ContextMenuModel(obj);
         }
         catch (std::exception &e) {

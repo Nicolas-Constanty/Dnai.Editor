@@ -204,7 +204,9 @@ GenericNode {
                     borderColor: isHover ? innerColor : outerColor
                     fillColor: isLink || isHover ? outerColor : innerColor
                     onLinked: {
-                        if (instructionModel.getOutputType(name) === _node.instruction_model.getInputType(_inputDel.name))
+                        if (_node.instruction_model.getInputType(_inputDel.name) === '{0db5b2f0-38d0-8f54-9433-479d1d90a699}'
+                            || instructionModel.getOutputType(name) === '{0db5b2f0-38d0-8f54-9433-479d1d90a699}'
+                            || instructionModel.getOutputType(name) === _node.instruction_model.getInputType(_inputDel.name))
                         {
                             Controller.Function.instruction.linkData(_node.function_entity.id, instructionModel.uid, name, _node.instruction_model.uid, _inputDel.name);
                         }
@@ -346,7 +348,9 @@ GenericNode {
                     borderColor: isHover ? innerColor : outerColor
                     fillColor: isLink || isHover ? outerColor : innerColor
                     onLinked: {
-                        if (_node.instruction_model.getOutputType(_outputDel.name) === instructionModel.getInputType(name))
+                        if (_node.instruction_model.getInputType(_inputDel.name) === '{0db5b2f0-38d0-8f54-9433-479d1d90a699}'
+                            || instructionModel.getOutputType(name) === '{0db5b2f0-38d0-8f54-9433-479d1d90a699}'
+                            || _node.instruction_model.getOutputType(_outputDel.name) === instructionModel.getInputType(name))
                         {
                             console.log('in type: ', instructionModel.getInputType(name), ' vs out type: ', _node.instruction_model.getOutputType(_outputDel.name));
                             Controller.Function.instruction.linkData(_node.function_entity.id, _node.instruction_model.uid, _outputDel.name, instructionModel.uid, name);

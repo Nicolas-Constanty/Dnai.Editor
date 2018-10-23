@@ -496,7 +496,7 @@
                                         {
                                             "name": "LeftOperand",
                                             "type": "{dd0b3137-38d0-5521-879a-1abfc6a5c664}",
-                                            "display_name": "Value 1"
+                                            "display_name": "String"
                                         }
                                     ],
                                     "categories": {
@@ -509,14 +509,14 @@
                                                 {
                                                     "name": "RightOperand",
                                                     "type": "{149e81c5-fc6e-5cc7-a0a6-6f736a6487ca}",
-                                                    "display_name": "Value 2"
+                                                    "display_name": "Index"
                                                 }
                                             ],
                                             "outputs": [
                                                 {
                                                     "name": "result",
                                                     "type": "{22f34ba1-b80d-595b-b485-e1ff3d1e1283}",
-                                                    "display_name": "Result"
+                                                    "display_name": "Character"
                                                 }
                                             ]
                                         },
@@ -538,6 +538,38 @@
                                                     "name": "result",
                                                     "type": "{dd0b3137-38d0-5521-879a-1abfc6a5c664}",
                                                     "display_name": "Result"
+                                                }
+                                            ]
+                                        }
+                                    }
+                                },
+                                "dictionary": {
+                                    "type": 6,
+                                    "inputs": [
+                                        {
+                                            "name": "LeftOperand",
+                                            "type": "{907ad50a-5384-b80d-b485-f92bbf306aef}",
+                                            "display_name": "Dictionnary"
+                                        }
+                                    ],
+                                    "categories": {
+                                        "Access": {
+                                            "name": "Access",
+                                            "description": "Access to a specific key in a dictionnary",
+                                            "instruction_id": 8,
+                                            "construction": [6, 5, 7],
+                                            "inputs": [
+                                                {
+                                                    "name": "RightOperand",
+                                                    "type": "{dd0b3137-38d0-5521-879a-1abfc6a5c664}",
+                                                    "display_name": "Key"
+                                                }
+                                            ],
+                                            "outputs": [
+                                                {
+                                                    "name": "result",
+                                                    "type": "{0db5b2f0-38d0-8f54-9433-479d1d90a699}",
+                                                    "display_name": "Value"
                                                 }
                                             ]
                                         }
@@ -748,6 +780,244 @@
                     "construction": [],
                     "in": 1,
                     "out": 0
+                }
+            }
+        },
+        "Dictionary": {
+            "categories": {
+                "HasKey": {
+                    "type": 6,
+                    "name": "hasKey",
+                    "description": "Check the existence of a key in a dictionary",
+                    "instruction_id": 42,
+                    "construction": [],
+                    "inputs": [
+                        {
+                            "name": "reference",
+                            "type": "{907ad50a-5384-b80d-b485-f92bbf306aef}",
+                            "display_name": "Target"
+                        },
+                        {
+                            "name": "key",
+                            "type": "{dd0b3137-38d0-5521-879a-1abfc6a5c664}",
+                            "display_name": "Key"
+                        }
+                    ],
+                    "outputs": [
+                        {
+                            "name": "result",
+                            "type": "{907ad50a-8f54-51ea-8c68-479d1d90a699}",
+                            "display_name": "Result"
+                        }
+                    ]
+                },
+                "SetValueAtKey": {
+                    "type": 6,
+                    "name": "setValueAtKey",
+                    "description": "Set the dictionnary value with the given key",
+                    "instruction_id": 43,
+                    "construction": [],
+                    "inputs": [
+                        {
+                            "name": "reference",
+                            "type": "{907ad50a-5384-b80d-b485-f92bbf306aef}",
+                            "display_name": "Target"
+                        },
+                        {
+                            "name": "key",
+                            "type": "{dd0b3137-38d0-5521-879a-1abfc6a5c664}",
+                            "display_name": "Key"
+                        },
+                        {
+                            "name": "value",
+                            "type": "{0db5b2f0-38d0-8f54-9433-479d1d90a699}",
+                            "display_name": "Value"
+                        }
+                    ],
+                    "outputs": [
+                        {
+                            "name": "reference",
+                            "type": "{907ad50a-5384-b80d-b485-f92bbf306aef}",
+                            "display_name": "Target"
+                        }
+                    ]
+                },
+                "RemoveValueAtKey": {
+                    "type": 6,
+                    "name": "removeValueAtKey",
+                    "description": "Remove a key entry in a dictionnary",
+                    "instruction_id": 44,
+                    "construction": [],
+                    "inputs": [
+                        {
+                            "name": "reference",
+                            "type": "{907ad50a-5384-b80d-b485-f92bbf306aef}",
+                            "display_name": "Target"
+                        },
+                        {
+                            "name": "key",
+                            "type": "{dd0b3137-38d0-5521-879a-1abfc6a5c664}",
+                            "display_name": "Key"
+                        }
+                    ],
+                    "outputs": [
+                        {
+                            "name": "reference",
+                            "type": "{907ad50a-5384-b80d-b485-f92bbf306aef}",
+                            "display_name": "Target"
+                        }
+                    ]
+                }
+            }
+        },
+        "Utils": {
+            "categories": {
+                "Random": {
+                    "type": 0,
+                    "name": "random",
+                    "description": "Generate a random number between 0.0 and 1.0",
+                    "instruction_id": 46,
+                    "construction": [],
+                    "outputs": [
+                        {
+                            "name": "value",
+                            "type": "{0db5b2f0-5384-5579-9433-f92bbf306aef}",
+                            "display_name": "Value"
+                        }
+                    ]
+                },
+                "MachineLearningRunner": {
+                    "type": 0,
+                    "name": "machineLearningRunner",
+                    "description": "Run a machine learning model",
+                    "instruction_id": 45,
+                    "construction": [],
+                    "inputs": [
+                        {
+                            "name": "model",
+                            "type": "{dd0b3137-38d0-5521-879a-1abfc6a5c664}",
+                            "display_name": "Path to model"
+                        },
+                        {
+                            "name": "weights",
+                            "type": "{dd0b3137-38d0-5521-879a-1abfc6a5c664}",
+                            "display_name": "Path to weights"
+                        },
+                        {
+                            "name": "inputs",
+                            "type": "{907ad50a-5384-b80d-b485-f92bbf306aef}",
+                            "display_name": "Data to process"
+                        }
+                    ],
+                    "outputs": [
+                        {
+                            "name": "outputs",
+                            "type": "{907ad50a-5384-b80d-b485-f92bbf306aef}",
+                            "display_name": "Result"
+                        }
+                    ]
+                }
+            }
+        },
+        "Casts": {
+            "inputs": [
+                {
+                    "name": "reference",
+                    "type": "{0db5b2f0-38d0-8f54-9433-479d1d90a699}",
+                    "display_name": "Target"
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "succeed",
+                    "type": "{907ad50a-8f54-51ea-8c68-479d1d90a699}",
+                    "display_name": "Succeed"
+                }
+            ],
+            "categories": {
+                "ToBoolean": {
+                    "type": 0,
+                    "name": "toBoolean",
+                    "description": "Cast a value into boolean",
+                    "instruction_id": 47,
+                    "construction": [1],
+                    "outputs": [
+                        {
+                            "name": "value",
+                            "type": "{907ad50a-8f54-51ea-8c68-479d1d90a699}",
+                            "display_name": "Value"
+                        }
+                    ]
+                },
+                "ToInteger": {
+                    "type": 0,
+                    "name": "toInteger",
+                    "description": "Cast a value into integer",
+                    "instruction_id": 47,
+                    "construction": [2],
+                    "outputs": [
+                        {
+                            "name": "value",
+                            "type": "{149e81c5-fc6e-5cc7-a0a6-6f736a6487ca}",
+                            "display_name": "Value"
+                        }
+                    ]
+                },
+                "ToFloating": {
+                    "type": 0,
+                    "name": "toFloating",
+                    "description": "Cast a value into floating point number",
+                    "instruction_id": 47,
+                    "construction": [3],
+                    "outputs": [
+                        {
+                            "name": "value",
+                            "type": "{0db5b2f0-5384-5579-9433-f92bbf306aef}",
+                            "display_name": "Value"
+                        }
+                    ]
+                },
+                "ToCharacter": {
+                    "type": 0,
+                    "name": "toCharacter",
+                    "description": "Cast a value into character",
+                    "instruction_id": 47,
+                    "construction": [4],
+                    "outputs": [
+                        {
+                            "name": "value",
+                            "type": "{22f34ba1-b80d-595b-b485-e1ff3d1e1283}",
+                            "display_name": "Value"
+                        }
+                    ]
+                },
+                "ToString": {
+                    "type": 0,
+                    "name": "toString",
+                    "description": "Cast a value into string",
+                    "instruction_id": 47,
+                    "construction": [5],
+                    "outputs": [
+                        {
+                            "name": "value",
+                            "type": "{dd0b3137-38d0-5521-879a-1abfc6a5c664}",
+                            "display_name": "Value"
+                        }
+                    ]
+                },
+                "ToDictionary": {
+                    "type": 0,
+                    "name": "toDictionary",
+                    "description": "Cast a value into a dictionary",
+                    "instruction_id": 47,
+                    "construction": [6],
+                    "outpus": [
+                        {
+                            "name": "value",
+                            "type": "{907ad50a-5384-b80d-b485-f92bbf306aef}",
+                            "display_name": "Value"
+                        }
+                    ]
                 }
             }
         }

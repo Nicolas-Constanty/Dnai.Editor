@@ -11,6 +11,8 @@ namespace dnai
             addEntity(3, *(new models::Entity(new models::gcore::Entity("Floating", core::ENTITY::DATA_TYPE, 3), nullptr, nullptr, "{0db5b2f0-5384-5579-9433-f92bbf306aef}")));
             addEntity(4, *(new models::Entity(new models::gcore::Entity("Character", core::ENTITY::DATA_TYPE, 4), nullptr, nullptr, "{22f34ba1-b80d-595b-b485-e1ff3d1e1283}")));
             addEntity(5, *(new models::Entity(new models::gcore::Entity("String", core::ENTITY::DATA_TYPE, 5), nullptr, nullptr, "{dd0b3137-38d0-5521-879a-1abfc6a5c664}")));
+            addEntity(6, *(new models::Entity(new models::gcore::Entity("Dict", core::ENTITY::DATA_TYPE, 6), nullptr, nullptr, "{907ad50a-5384-b80d-b485-f92bbf306aef}")));
+            addEntity(7, *(new models::Entity(new models::gcore::Entity("Any", core::ENTITY::DATA_TYPE, 7), nullptr, nullptr, "{0db5b2f0-38d0-8f54-9433-479d1d90a699}")));
         }
 
         void EntityManager::addEntity(::core::EntityID id, models::Entity &entity)
