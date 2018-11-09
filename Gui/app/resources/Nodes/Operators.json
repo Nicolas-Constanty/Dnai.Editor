@@ -265,6 +265,42 @@
                                             "construction": [5, 5, 1]
                                         }
                                     }
+                                },
+                                "matrix": {
+                                    "type": 8,
+                                    "inputs": [
+                                        {
+                                            "name": "LeftOperand",
+                                            "type": "{dd0b3137-38d0-5cc7-9433-f92bbf306aef}",
+                                            "display_name": "Value 1"
+                                        },
+                                        {
+                                            "name": "RightOperand",
+                                            "type": "{dd0b3137-38d0-5cc7-9433-f92bbf306aef}",
+                                            "display_name": "Value 2"
+                                        }
+                                    ],
+                                    "outputs": [
+                                        {
+                                            "name": "result",
+                                            "type": "{907ad50a-8f54-51ea-8c68-479d1d90a699}",
+                                            "display_name": "Result"
+                                        }
+                                    ],
+                                    "categories": {
+                                        "Different": {
+                                            "name": "!=",
+                                            "description": "",
+                                            "instruction_id": 2,
+                                            "construction": [8, 8, 1]
+                                        },
+                                        "Equal": {
+                                            "name": "==",
+                                            "description": "",
+                                            "instruction_id": 3,
+                                            "construction": [8, 8, 1]
+                                        },
+                                    }
                                 }
                             }
                         },
@@ -574,6 +610,90 @@
                                             ]
                                         }
                                     }
+                                },
+                                "matrix": {
+                                    "type": 8,
+                                    "inputs": [
+                                        {
+                                            "name": "LeftOperand",
+                                            "type": "{dd0b3137-38d0-5cc7-9433-f92bbf306aef}",
+                                            "display_name": "Matrix"
+                                        }
+                                    ],
+                                    "outputs": [
+                                        {
+                                            "name": "result",
+                                            "type": "{dd0b3137-38d0-5cc7-9433-f92bbf306aef}",
+                                            "display_name": "Result"
+                                        }
+                                    ],
+                                    "categories": {
+                                        "Add": {
+                                            "name": "Add",
+                                            "description": "Add a single value to all matrix",
+                                            "instruction_id": 12,
+                                            "construction": [8, 3, 8],
+                                            "inputs": [
+                                                {
+                                                    "name": "RightOperand",
+                                                    "type": "{0db5b2f0-5384-5579-9433-f92bbf306aef}",
+                                                    "display_name": "Value"
+                                                }
+                                            ]
+                                        },
+                                        "Sub": {
+                                            "name": "Substract",
+                                            "description": "Substract a single value to all matrix",
+                                            "instruction_id": 13,
+                                            "construction": [8, 3, 8],
+                                            "inputs": [
+                                                {
+                                                    "name": "RightOperand",
+                                                    "type": "{0db5b2f0-5384-5579-9433-f92bbf306aef}",
+                                                    "display_name": "Value"
+                                                }
+                                            ]
+                                        },
+                                        "Div": {
+                                            "name": "Divide",
+                                            "description": "Divide a single value to all matrix",
+                                            "instruction_id": 14,
+                                            "construction": [8, 3, 8],
+                                            "inputs": [
+                                                {
+                                                    "name": "RightOperand",
+                                                    "type": "{0db5b2f0-5384-5579-9433-f92bbf306aef}",
+                                                    "display_name": "Value"
+                                                }
+                                            ]
+                                        },
+                                        "Mod": {
+                                            "name": "Modulo",
+                                            "description": "Apply modulus to all matrix",
+                                            "instruction_id": 16,
+                                            "construction": [8, 2, 8],
+                                            "inputs": [
+                                                {
+                                                    "name": "RightOperand",
+                                                    "type": "{149e81c5-fc6e-5cc7-a0a6-6f736a6487ca}",
+                                                    "display_name": "Value"
+                                                }
+                                            ]
+                                        },
+                                        "Mul": {
+                                            "name": "Multiply",
+                                            "description": "Multiply a single value to all matrix",
+                                            "instruction_id": 15,
+                                            "construction": [8, 3, 8],
+                                            "inputs": [
+                                                {
+                                                    "name": "RightOperand",
+                                                    "type": "{0db5b2f0-5384-5579-9433-f92bbf306aef}",
+                                                    "display_name": "Value"
+                                                }
+                                            ]
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -870,6 +990,103 @@
                 }
             }
         },
+        "Matrix": {
+            "categories": {
+                "GetShape": {
+                    "type": 8,
+                    "name": "getShape",
+                    "description": "Get the dimensions of the matrix",
+                    "instruction_id": 48,
+                    "construction": [],
+                    "inputs": [
+                        {
+                            "name": "reference",
+                            "type": "{dd0b3137-38d0-5cc7-9433-f92bbf306aef}",
+                            "display_name": "Target"
+                        }
+                    ],
+                    "outputs": [
+                        {
+                            "name": "ColumnCount",
+                            "type": "{149e81c5-fc6e-5cc7-a0a6-6f736a6487ca}",
+                            "display_name": "Columns"
+                        },
+                        {
+                            "name": "RowCount",
+                            "type": "{149e81c5-fc6e-5cc7-a0a6-6f736a6487ca}",
+                            "display_name": "Rows"
+                        }
+                    ]
+                },
+                "Resize": {
+                    "type": 8,
+                    "name": "resize",
+                    "description": "Resize shape of a matrix",
+                    "instruction_id": 50,
+                    "construction": [],
+                    "inputs": [
+                        {
+                            "name": "reference",
+                            "type": "{dd0b3137-38d0-5cc7-9433-f92bbf306aef}",
+                            "display_name": "Target"
+                        },
+                        {
+                            "name": "rowCount",
+                            "type": "{149e81c5-fc6e-5cc7-a0a6-6f736a6487ca}",
+                            "display_name": "New Rows"
+                        },
+                        {
+                            "name": "columnCount",
+                            "type": "{149e81c5-fc6e-5cc7-a0a6-6f736a6487ca}",
+                            "display_name": "New Columns"
+                        },
+                        {
+                            "name": "copy",
+                            "type": "{907ad50a-8f54-51ea-8c68-479d1d90a699}",
+                            "display_name": "Copy"
+                        }
+                    ],
+                    "outputs": [
+                        {
+                            "name": "result",
+                            "type": "{dd0b3137-38d0-5cc7-9433-f92bbf306aef}",
+                            "display_name": "Result"
+                        }
+                    ]
+                },
+                "GetIndex": {
+                    "type": 8,
+                    "name": "getIndex",
+                    "description": "Get a value at a given index",
+                    "instruction_id": 49,
+                    "construction": [],
+                    "inputs": [
+                        {
+                            "name": "reference",
+                            "type": "{dd0b3137-38d0-5cc7-9433-f92bbf306aef}",
+                            "display_name": "Target"
+                        },
+                        {
+                            "name": "row",
+                            "type": "{149e81c5-fc6e-5cc7-a0a6-6f736a6487ca}",
+                            "display_name": "Row"
+                        },
+                        {
+                            "name": "column",
+                            "type": "{149e81c5-fc6e-5cc7-a0a6-6f736a6487ca}",
+                            "display_name": "Column"
+                        }
+                    ],
+                    "outputs": [
+                        {
+                            "name": "value",
+                            "type": "{0db5b2f0-5384-5579-9433-f92bbf306aef}",
+                            "display_name": "Value"
+                        }
+                    ]
+                }
+            }
+        },
         "Utils": {
             "categories": {
                 "Random": {
@@ -886,10 +1103,10 @@
                         }
                     ]
                 },
-                "MachineLearningRunner": {
+                "Predict": {
                     "type": 0,
-                    "name": "machineLearningRunner",
-                    "description": "Run a machine learning model",
+                    "name": "predict",
+                    "description": "Predict value from ml model",
                     "instruction_id": 45,
                     "construction": [],
                     "inputs": [
@@ -905,14 +1122,14 @@
                         },
                         {
                             "name": "inputs",
-                            "type": "{907ad50a-5384-b80d-b485-f92bbf306aef}",
+                            "type": "{dd0b3137-38d0-5cc7-9433-f92bbf306aef}",
                             "display_name": "Data to process"
                         }
                     ],
                     "outputs": [
                         {
                             "name": "outputs",
-                            "type": "{907ad50a-5384-b80d-b485-f92bbf306aef}",
+                            "type": "{dd0b3137-38d0-5cc7-9433-f92bbf306aef}",
                             "display_name": "Result"
                         }
                     ]
@@ -1015,6 +1232,20 @@
                         {
                             "name": "value",
                             "type": "{907ad50a-5384-b80d-b485-f92bbf306aef}",
+                            "display_name": "Value"
+                        }
+                    ]
+                },
+                "ToMatrix": {
+                    "type": 0,
+                    "name": "toMatrix",
+                    "description": "Cast a value into matrix",
+                    "instruction_id": 47,
+                    "construction": [8],
+                    "outputs": [
+                        {
+                            "name": "value",
+                            "type": "{dd0b3137-38d0-5cc7-9433-f92bbf306aef}",
                             "display_name": "Value"
                         }
                     ]
