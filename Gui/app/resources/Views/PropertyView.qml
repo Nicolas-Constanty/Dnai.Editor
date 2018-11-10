@@ -121,8 +121,8 @@ Rectangle {
 
                                 Controller.variable.setType(propertyPanel.model.id, newTyp.id)
 
-                                if (propertyPanel.propvalue === null)
-                                    return;
+                                /*if (propertyPanel.propvalue === null)
+                                    return;*/
 
                                 if (propertyPanel.propvalue)
                                     propertyPanel.propvalue.destroy();

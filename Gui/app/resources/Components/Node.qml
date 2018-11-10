@@ -251,12 +251,13 @@ GenericNode {
 
                         anchors.left: _inputName.right
                         anchors.leftMargin: 5
+                        padding: 0
                         width: 50
                         height: parent.height
 
                         text: ""
                         placeholderText: ""
-                        font.pointSize: 7
+                        font.pointSize: 6
                         enableBar: false
 
                         Component.onCompleted: {

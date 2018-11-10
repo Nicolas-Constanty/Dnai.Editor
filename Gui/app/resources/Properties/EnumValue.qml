@@ -40,6 +40,7 @@ Item {
             width: _enumValue.width - _moveUpButton.width - _moveDownButton.width - _deleteButton.width - _row.spacing * 3
             height: _enumValue.contentHeight
             horizontalAlignment: TextInput.AlignLeft
+            font.pointSize: 7
             onAccepted: {
                 _enumValue.valueUpdated(_enumValue.value, _value.text);
                 /*if (_enumValue.updateValue === null)
@@ -52,7 +53,7 @@ Item {
             height: _enumValue.contentHeight
             width: _enumValue.contentHeight
             awesomeIcon.text: "\uf0d7"
-            awesomeIcon.size: 14
+            awesomeIcon.size: 7
             rotation: 180
             onClicked: {
                 _enumValue.movedUp();
@@ -63,7 +64,7 @@ Item {
             height: _enumValue.contentHeight
             width: _enumValue.contentHeight
             awesomeIcon.text: "\uf0d7"
-            awesomeIcon.size: 14
+            awesomeIcon.size: 7
             onClicked: {
                 _enumValue.movedDown();
             }
@@ -73,7 +74,7 @@ Item {
             height: _enumValue.contentHeight
             width: _enumValue.contentHeight
             awesomeIcon.text: "\uf2ed"
-            awesomeIcon.size: 14
+            awesomeIcon.size: 7
             onClicked: {
                 _enumValue.removed();
             }

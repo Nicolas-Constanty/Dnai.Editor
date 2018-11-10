@@ -960,7 +960,9 @@
                             "type": "{907ad50a-5384-b80d-b485-f92bbf306aef}",
                             "display_name": "Target"
                         }
-                    ]
+                    ],
+                    "in": 1,
+                    "out": 1
                 },
                 "RemoveValueAtKey": {
                     "type": 6,
@@ -986,7 +988,9 @@
                             "type": "{907ad50a-5384-b80d-b485-f92bbf306aef}",
                             "display_name": "Target"
                         }
-                    ]
+                    ],
+                    "in": 1,
+                    "out": 1
                 }
             }
         },
@@ -1052,7 +1056,9 @@
                             "type": "{dd0b3137-38d0-5cc7-9433-f92bbf306aef}",
                             "display_name": "Result"
                         }
-                    ]
+                    ],
+                    "in": 1,
+                    "out": 1
                 },
                 "GetIndex": {
                     "type": 8,
@@ -1132,7 +1138,52 @@
                             "type": "{dd0b3137-38d0-5cc7-9433-f92bbf306aef}",
                             "display_name": "Result"
                         }
-                    ]
+                    ],
+                    "in": 1,
+                    "out": 1
+                },
+                "Classify" : {
+                    "type": 0,
+                    "name": "classify",
+                    "description": "Classify data from ml model",
+                    "instruction_id": 51,
+                    "construction": [],
+                    "inputs": [
+                        {
+                            "name": "model",
+                            "type": "{dd0b3137-38d0-5521-879a-1abfc6a5c664}",
+                            "display_name": "Path to model"
+                        },
+                        {
+                            "name": "weights",
+                            "type": "{dd0b3137-38d0-5521-879a-1abfc6a5c664}",
+                            "display_name": "Path to weights"
+                        },
+                        {
+                            "name": "inputs",
+                            "type": "{dd0b3137-38d0-5cc7-9433-f92bbf306aef}",
+                            "display_name": "Data to process"
+                        }
+                    ],
+                    "outputs": [
+                        {
+                            "name": "outputs",
+                            "type": "{dd0b3137-38d0-5cc7-9433-f92bbf306aef}",
+                            "display_name": "Result"
+                        },
+                        {
+                            "name": "maxOutput",
+                            "type": "{0db5b2f0-5384-5579-9433-f92bbf306aef}",
+                            "display_name": "Max result"
+                        },
+                        {
+                            "name": "maxIndex",
+                            "type": "{149e81c5-fc6e-5cc7-a0a6-6f736a6487ca}",
+                            "display_name": "Max index"
+                        }
+                    ],
+                    "in": 1,
+                    "out": 1
                 }
             }
         },
