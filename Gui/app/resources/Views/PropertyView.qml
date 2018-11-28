@@ -111,6 +111,13 @@ Rectangle {
                         {
                             var t = md["guiProperties"]["varType"]
 
+                            console.log(md)
+
+                            for (var propnam in md["guiProperties"])
+                            {
+                                console.log('md["guiProperties"]["' + propnam + '"] = ', md["guiProperties"][propnam])
+                            }
+
                             var varTypeView = createProperty("resources/Properties/SetTypeProperty.qml", {
                                 "name": "Type",
                                 "model": md,
@@ -137,13 +144,23 @@ Rectangle {
                                 {
                                     propertyPanel.propvalue = createProperty("resources/Properties/BoolProperty.qml", { "value": false, "name" : "Value", "model": model, "prop": prop, "method": setVariableValue })
                                 }
+                                else if (valname === "Resource")
+                                {
+                                    propertyPanel.propvalue = createProperty("resources/Properties/ResourceProperty.qml", { "value": "", "name" : "Value", "model": model, "prop": prop, "method": setVariableValue });
+                                }
                                 else
                                 {
                                     propertyPanel.propvalue = createProperty("resources/Properties/StringProperty.qml", { "value": "", "name" : "Value", "model": model, "prop": prop, "method": setVariableValue })
                                 }
                             });
 
-                            var valname = Controller.getEntity(t).name;
+                            var type = Controller.getEntityGui(t)
+
+                            console.log("Variable type(", t, "): ", type)
+
+                            var valname = type.name;
+
+                            console.log('Creating value property for type: ', valname);
 
                             if (valname === "Integer")
                             {
@@ -152,6 +169,10 @@ Rectangle {
                             else if (valname === "Boolean")
                             {
                                 propertyPanel.propvalue = createProperty("resources/Properties/BoolProperty.qml", { "value": md["guiProperties"]["value"], "name" : "Value", "model": md["guiProperties"], "prop": "value", "method": setVariableValue })
+                            }
+                            else if (valname === "Resource")
+                            {
+                                propertyPanel.propvalue = createProperty("resources/Properties/ResourceProperty.qml", { "value": md["guiProperties"]["value"], "name" : "Value", "model": model, "prop": prop, "method": setVariableValue });
                             }
                             else
                             {

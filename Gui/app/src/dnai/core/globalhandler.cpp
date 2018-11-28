@@ -45,6 +45,9 @@ namespace dnai
         void GlobalHandler::onSaved(const QString &path)
         {
             qDebug() << "==Core== Global.Saved(" << path << ")";
+
+
+
             emit saved(path);
         }
 

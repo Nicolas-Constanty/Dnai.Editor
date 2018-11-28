@@ -4,7 +4,7 @@
 #include <QQmlProperty>
 #include <QQuickView>
 #include <QJsonDocument>
-
+#include <QDir>
 
 #include "dnai/editor.h"
 #include "dnai/solution.h"

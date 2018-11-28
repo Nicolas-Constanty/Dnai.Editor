@@ -153,7 +153,8 @@ SOURCES += \
     src/dnai/models/ml/hyperparameters.cpp \
     src/dnai/models/ml/mlproject.cpp \
     src/dnai/ml/mlhandler.cpp \
-    src/dnai/utils/iterableqqmlpropertymap.cpp
+    src/dnai/utils/iterableqqmlpropertymap.cpp \
+    src/dnai/core/resourcehandler.cpp
 
 
 RESOURCES += qml.qrc
@@ -330,7 +331,8 @@ HEADERS += \
     include/dnai/models/ml/hyperparameters.h \
     include/ml.h \
     include/dnai/utils/iterableqqmlpropertymap.h \
-    include/utils.h
+    include/utils.h \
+    include/dnai/core/resourcehandler.h
 
 
 #LIB
