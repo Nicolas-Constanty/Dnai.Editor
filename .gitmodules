@@ -25,3 +25,6 @@
 [submodule "Gui/plugins/Theme"]
 	path = Gui/plugins/Theme
 	url = https://github.com/Nicolas-Constanty/Dnai.SubModules.Libs.QtPlugins.Theme.git
+[submodule "Gui/lib/lquazip"]
+	path = Gui/lib/lquazip
+	url = git@github.com:stachenov/quazip.git
