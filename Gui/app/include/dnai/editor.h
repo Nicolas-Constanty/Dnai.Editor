@@ -98,6 +98,8 @@ namespace dnai
         Q_INVOKABLE void notifyWarning(QString const &text, std::function<void ()> func = []() {});
 
         Q_INVOKABLE void buildSolution();
+        Q_INVOKABLE bool packSolution();
+        Q_INVOKABLE QUrl unpackSolution(QUrl packagePath);
 
         Q_INVOKABLE void startApp();
         Q_INVOKABLE static void checkVersion();

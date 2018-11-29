@@ -36,6 +36,12 @@ ToolBar {
         shortcut: StandardKey.Open
     }
     Action {
+        id: importAction
+        text: qsTr("Import from Package")
+        onTriggered: Editor.mainView().importProjectId.open()
+        shortcut: "Ctrl+Shift+O"
+    }
+    Action {
         id: saveAction
         text: qsTr("Save")
         onTriggered: Editor.solution.selectedProject().save()
@@ -131,6 +137,11 @@ ToolBar {
                     DMenuItem {
                         action: openAction
                         iconItem.text: "\uf07c"
+                        iconItem.font.pointSize: 8
+                    }
+                    DMenuItem {
+                        action: importAction
+                        iconItem.text: "\uf56f"
                         iconItem.font.pointSize: 8
                     }
                     DMenuItem {

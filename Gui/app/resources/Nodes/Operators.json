@@ -1133,7 +1133,7 @@
                         },
                         {
                             "name": "shape",
-                            "type": "{907ad50a-5384-9433-9433-479d1d90a699}",
+                            "type": "{dd0b3137-38d0-5521-879a-1abfc6a5c664}",
                             "display_name": "Input shape"
                         }
 
@@ -1157,12 +1157,12 @@
                     "inputs": [
                         {
                             "name": "model",
-                            "type": "{dd0b3137-38d0-5521-879a-1abfc6a5c664}",
+                            "type": "{907ad50a-5384-9433-9433-479d1d90a699}",
                             "display_name": "Path to model"
                         },
                         {
                             "name": "weights",
-                            "type": "{dd0b3137-38d0-5521-879a-1abfc6a5c664}",
+                            "type": "{907ad50a-5384-9433-9433-479d1d90a699}",
                             "display_name": "Path to weights"
                         },
                         {
@@ -1172,7 +1172,7 @@
                         },
                         {
                             "name": "shape",
-                            "type": "{907ad50a-5384-9433-9433-479d1d90a699}",
+                            "type": "{dd0b3137-38d0-5521-879a-1abfc6a5c664}",
                             "display_name": "Input shape"
                         }
                     ],

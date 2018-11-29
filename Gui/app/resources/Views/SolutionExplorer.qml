@@ -54,7 +54,11 @@ Rectangle {
         Connections {
             target: Controller.global
             onSaved: {
-                Editor.notifySuccess("Solution built in: " + path);
+                if (Editor.packSolution())
+                {
+                    Editor.notifySuccess("Solution built in: " + path);
+                }
+
                 _buildButton.builded();
             }
             onSaveError: {

@@ -72,3 +72,11 @@ Gui/app/GeneratedFiles/
 *.dnai
 
 build/
+
+*.dll
+
+*.exp
+
+*.ilk
+
+*.prl
