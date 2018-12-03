@@ -1,5 +1,5 @@
 TARGET = quazip
-DESTDIR = $$PWD/../../
+DESTDIR = $$PWD/..
 TEMPLATE = lib
 CONFIG += qt warn_on
 QT -= gui
