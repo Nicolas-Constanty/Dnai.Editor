@@ -204,6 +204,8 @@ GenericNode {
                     borderColor: isHover ? innerColor : outerColor
                     fillColor: isLink || isHover ? outerColor : innerColor
                     onLinked: {
+                        console.log('Linking input(' + _node.name + ') of type', _node.instruction_model.getInputType(_inputDel.name),
+                                    'to output(' + name + ') of type', instructionModel.getOutputType(name))
                         if (_node.instruction_model.getInputType(_inputDel.name) === '{0db5b2f0-38d0-8f54-9433-479d1d90a699}'
                             || instructionModel.getOutputType(name) === '{0db5b2f0-38d0-8f54-9433-479d1d90a699}'
                             || instructionModel.getOutputType(name) === _node.instruction_model.getInputType(_inputDel.name))
@@ -349,7 +351,7 @@ GenericNode {
                     borderColor: isHover ? innerColor : outerColor
                     fillColor: isLink || isHover ? outerColor : innerColor
                     onLinked: {
-                        if (_node.instruction_model.getInputType(_inputDel.name) === '{0db5b2f0-38d0-8f54-9433-479d1d90a699}'
+                        if (_node.instruction_model.getInputType(_outputDel.name) === '{0db5b2f0-38d0-8f54-9433-479d1d90a699}'
                             || instructionModel.getOutputType(name) === '{0db5b2f0-38d0-8f54-9433-479d1d90a699}'
                             || _node.instruction_model.getOutputType(_outputDel.name) === instructionModel.getInputType(name))
                         {
