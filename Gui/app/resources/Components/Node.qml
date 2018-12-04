@@ -204,7 +204,11 @@ GenericNode {
                     borderColor: isHover ? innerColor : outerColor
                     fillColor: isLink || isHover ? outerColor : innerColor
                     onLinked: {
-                        if (instructionModel.getOutputType(name) === _node.instruction_model.getInputType(_inputDel.name))
+                        console.log('Linking input(' + _node.name + ') of type', _node.instruction_model.getInputType(_inputDel.name),
+                                    'to output(' + name + ') of type', instructionModel.getOutputType(name))
+                        if (_node.instruction_model.getInputType(_inputDel.name) === '{0db5b2f0-38d0-8f54-9433-479d1d90a699}'
+                            || instructionModel.getOutputType(name) === '{0db5b2f0-38d0-8f54-9433-479d1d90a699}'
+                            || instructionModel.getOutputType(name) === _node.instruction_model.getInputType(_inputDel.name))
                         {
                             Controller.Function.instruction.linkData(_node.function_entity.id, instructionModel.uid, name, _node.instruction_model.uid, _inputDel.name);
                         }
@@ -249,12 +253,13 @@ GenericNode {
 
                         anchors.left: _inputName.right
                         anchors.leftMargin: 5
+                        padding: 0
                         width: 50
                         height: parent.height
 
                         text: ""
                         placeholderText: ""
-                        font.pointSize: 7
+                        font.pointSize: 6
                         enableBar: false
 
                         Component.onCompleted: {
@@ -346,7 +351,9 @@ GenericNode {
                     borderColor: isHover ? innerColor : outerColor
                     fillColor: isLink || isHover ? outerColor : innerColor
                     onLinked: {
-                        if (_node.instruction_model.getOutputType(_outputDel.name) === instructionModel.getInputType(name))
+                        if (_node.instruction_model.getInputType(_outputDel.name) === '{0db5b2f0-38d0-8f54-9433-479d1d90a699}'
+                            || instructionModel.getOutputType(name) === '{0db5b2f0-38d0-8f54-9433-479d1d90a699}'
+                            || _node.instruction_model.getOutputType(_outputDel.name) === instructionModel.getInputType(name))
                         {
                             console.log('in type: ', instructionModel.getInputType(name), ' vs out type: ', _node.instruction_model.getOutputType(_outputDel.name));
                             Controller.Function.instruction.linkData(_node.function_entity.id, _node.instruction_model.uid, _outputDel.name, instructionModel.uid, name);

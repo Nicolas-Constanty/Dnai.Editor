@@ -4,7 +4,12 @@
 #include <QQmlProperty>
 #include <QQuickView>
 #include <QJsonDocument>
+#include <QDir>
 
+#ifdef _WIN32
+# include <quazip.h>
+# include <quazipfile.h>
+#endif
 
 #include "dnai/editor.h"
 #include "dnai/solution.h"
@@ -142,6 +147,164 @@ namespace dnai
         gcore::HandlerManager::Instance().Global().save(QUrl(path.replace(".dnaisolution", ".dnai")).toLocalFile());
     }
 
+    bool Editor::packSolution()
+    {
+        QString packPath = m_solution->path() + "/" + m_solution->name() + ".dnaipackage";
+        QDir solutionDir(m_solution->path());
+
+        #ifdef _WIN32
+        QuaZip  archive(packPath);
+
+        if (!archive.open(QuaZip::mdCreate))
+        {
+            notifyError("Couldn't create package: " + packPath);
+            return false;
+        }
+
+        for (QFileInfo fileInfo : solutionDir.entryInfoList(QDir::Files))
+        {
+            QString fileName = fileInfo.fileName();
+
+            if (fileInfo.suffix() == "dnaipackage")
+            {
+                continue;
+            }
+
+            QString filePath = fileInfo.absoluteFilePath();
+
+            QFile input(filePath);
+            QuaZipFile zipFile(&archive);
+            QuaZipNewInfo info(fileName, filePath);
+
+            if (!input.open(QIODevice::ReadOnly))
+            {
+                archive.close();
+                notifyError("Unable to open file " + fileName + ": " + input.errorString());
+                return false;
+            }
+
+            if (!zipFile.open(QIODevice::WriteOnly, info))
+            {
+                input.close();
+                archive.close();
+                notifyError("Unable to zip file " + fileName + ": " + zipFile.errorString());
+                return false;
+            }
+
+            zipFile.write(input.readAll());
+
+            zipFile.close();
+            input.close();
+        }
+
+        archive.close();
+        #else
+        QStringList args;
+        args << "-j" << "-q" << packPath;
+        for (QFileInfo fileInfo : solutionDir.entryInfoList(QDir::Files))
+        {
+            args.append(fileInfo.absoluteFilePath());
+        }
+        QString program = "zip";
+
+        QProcess *myProcess = new QProcess();
+        myProcess->start(program, args);
+
+        myProcess->waitForFinished();
+        #endif
+
+        return true;
+    }
+
+    QUrl Editor::unpackSolution(QUrl packageUrl)
+    {
+        QString packagePath = packageUrl.toLocalFile();
+        QString solutionPath;
+
+        #ifdef _WIN32
+        QuaZip archive(packagePath);
+
+        qDebug() << "==Editor== Unpacking package " << packagePath;
+
+        if (!archive.open(QuaZip::mdUnzip))
+        {
+            notifyError("Unable to open package: " + packagePath);
+            return QString();
+        }
+
+        QFileInfo packageInfo(packagePath);
+        QString projectDirPath = packageInfo.absolutePath() + "/" + packageInfo.baseName();
+        QDir projectDirectory(projectDirPath);
+
+        if (!projectDirectory.exists() && !projectDirectory.mkpath(projectDirPath))
+        {
+            notifyError("Unable to create directory entry: " + projectDirPath);
+            return QString();
+        }
+
+        QuaZipFileInfo currInfo;
+
+        archive.goToFirstFile();
+        while (archive.getCurrentFileInfo(&currInfo))
+        {
+            QString outFilePath = projectDirPath + "/" + currInfo.name;
+            QFile output(outFilePath);
+            QuaZipFile zipFile(&archive);
+
+            if (!output.open(QIODevice::WriteOnly))
+            {
+                notifyError("Unable to create file " + outFilePath + ": " + output.errorString());
+                return QString();
+            }
+
+            if (!zipFile.open(QIODevice::ReadOnly))
+            {
+                notifyError("Unable to read packed file: " + currInfo.name);
+                return QString();
+            }
+
+            output.write(zipFile.readAll());
+
+            output.close();
+            zipFile.close();
+
+            if (QFileInfo(outFilePath).suffix() == "dnaisolution")
+            {
+                solutionPath = outFilePath;
+            }
+
+            archive.goToNextFile();
+        }
+
+        qDebug() << "==Editor== Project unpacked at " << solutionPath;
+
+        archive.close();
+        #else
+
+        QFileInfo packageInfo(packagePath);
+        QString projectDirPath = packageInfo.absolutePath() + "/" + packageInfo.baseName();
+
+        QStringList args;
+        args << "-q" << "-o" << packagePath << "-d" << projectDirPath;
+        QString program = "unzip";
+
+        QProcess *myProcess = new QProcess(this);
+        myProcess->start(program, args);
+
+        myProcess->waitForFinished();
+        QDir outputFolder(projectDirPath);
+        QStringList filters;
+        filters << "*.dnaisolution";
+        auto entry = outputFolder.entryInfoList(filters, QDir::Files);
+        if (!entry.empty())
+        {
+            solutionPath = entry[0].absoluteFilePath();
+        }
+        #endif
+
+        return QUrl::fromLocalFile(solutionPath);
+    }
+
 	const QList<interfaces::ICommand*>& Editor::actions() const
 	{
 		return m_actions;
@@ -253,7 +416,16 @@ namespace dnai
         const QByteArray data = file.readAll();
 
         try {
-            const QJsonObject obj(QJsonDocument::fromJson(data).object());
+            QJsonParseError err;
+            QJsonDocument doc = QJsonDocument::fromJson(data, &err);
+
+            if (doc.isNull() || doc.isEmpty())
+            {
+                qWarning() << "==Editor== Unable to parse default nodes for context menu model: " << err.errorString();
+            }
+
+            const QJsonObject obj(doc.object());
+
             m_contextMenuModel = new dnai::models::ContextMenuModel(obj);
         }
         catch (std::exception &e) {

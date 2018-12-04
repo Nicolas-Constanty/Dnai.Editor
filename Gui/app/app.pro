@@ -153,7 +153,8 @@ SOURCES += \
     src/dnai/models/ml/hyperparameters.cpp \
     src/dnai/models/ml/mlproject.cpp \
     src/dnai/ml/mlhandler.cpp \
-    src/dnai/utils/iterableqqmlpropertymap.cpp
+    src/dnai/utils/iterableqqmlpropertymap.cpp \
+    src/dnai/core/resourcehandler.cpp
 
 
 RESOURCES += qml.qrc
@@ -309,7 +310,6 @@ HEADERS += \
     include/exceptions.h \
     include/interfaces.h \
     include/dnai/core/handlermanager.h \
-    $${PWD}/../lib/lcore_client/include/core.h \
     include/dnai/toastermanagerservice.h \
     include/dnai/views/toast.h \
     include/dnai/core/instructionhandler.h \
@@ -330,7 +330,8 @@ HEADERS += \
     include/dnai/models/ml/hyperparameters.h \
     include/ml.h \
     include/dnai/utils/iterableqqmlpropertymap.h \
-    include/utils.h
+    include/utils.h \
+    include/dnai/core/resourcehandler.h
 
 
 #LIB
@@ -355,6 +356,11 @@ INCLUDEPATH += $${PWD}/../lib/lcore_client/include/
 #begin library network
 LIBS += -L$${PWD}/../lib/ -lcore_client -levent_client -lcerealization
 
+win32 {
+    HEADERS += $${PWD}/../lib/lcore_client/include/core.h $${PWD}/../lib/quazip/quazip.h
+    INCLUDEPATH += $${PWD}/../lib/quazip/
+    LIBS +=  -lquazip
+}
 
 CONFIG(release, debug|release) {
 settingsfolder.path = $${OUT_PWD}/release/settings

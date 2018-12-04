@@ -40,6 +40,7 @@ BaseProperty {
             anchors.rightMargin: 5
             horizontalAlignment: TextInput.AlignRight
             enableBar: false
+            font.pointSize: 7
             onAccepted: {
                 if (_panel.method !== null)
                 {
