@@ -199,6 +199,18 @@ namespace dnai
 
         archive.close();
         #else
+        QStringList args;
+        args << "-j" << "-q" << packPath;
+        for (QFileInfo fileInfo : solutionDir.entryInfoList(QDir::Files))
+        {
+            args.append(fileInfo.absoluteFilePath());
+        }
+        QString program = "zip";
+
+        QProcess *myProcess = new QProcess();
+        myProcess->start(program, args);
+
+        myProcess->waitForFinished();
         #endif
 
         return true;
@@ -269,8 +281,25 @@ namespace dnai
         archive.close();
         #else
 
+        QFileInfo packageInfo(packagePath);
+        QString projectDirPath = packageInfo.absolutePath() + "/" + packageInfo.baseName();
 
+        QStringList args;
+        args << "-q" << "-o" << packagePath << "-d" << projectDirPath;
+        QString program = "unzip";
 
+        QProcess *myProcess = new QProcess(this);
+        myProcess->start(program, args);
+
+        myProcess->waitForFinished();
+        QDir outputFolder(projectDirPath);
+        QStringList filters;
+        filters << "*.dnaisolution";
+        auto entry = outputFolder.entryInfoList(filters, QDir::Files);
+        if (!entry.empty())
+        {
+            solutionPath = entry[0].absoluteFilePath();
+        }
         #endif
 
         return QUrl::fromLocalFile(solutionPath);

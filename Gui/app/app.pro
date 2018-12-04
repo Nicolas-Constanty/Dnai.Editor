@@ -310,8 +310,6 @@ HEADERS += \
     include/exceptions.h \
     include/interfaces.h \
     include/dnai/core/handlermanager.h \
-    $${PWD}/../lib/lcore_client/include/core.h \
-    $${PWD}/../lib/quazip/quazip.h \
     include/dnai/toastermanagerservice.h \
     include/dnai/views/toast.h \
     include/dnai/core/instructionhandler.h \
@@ -339,7 +337,6 @@ HEADERS += \
 #LIB
 DEPENDPATH += $${PWD}/../lib/
 INCLUDEPATH += $${PWD}/../lib/lcore_client/include/
-INCLUDEPATH += $${PWD}/../lib/quazip/
 
 #win32-msvc*{
 #    DEPENDPATH += $${PWD}/../lib/lwintoast/
@@ -357,8 +354,13 @@ INCLUDEPATH += $${PWD}/../lib/quazip/
 
 
 #begin library network
-LIBS += -L$${PWD}/../lib/ -lcore_client -levent_client -lcerealization -lquazip
+LIBS += -L$${PWD}/../lib/ -lcore_client -levent_client -lcerealization
 
+win32 {
+    HEADERS += $${PWD}/../lib/lcore_client/include/core.h $${PWD}/../lib/quazip/quazip.h
+    INCLUDEPATH += $${PWD}/../lib/quazip/
+    LIBS +=  -lquazip
+}
 
 CONFIG(release, debug|release) {
 settingsfolder.path = $${OUT_PWD}/release/settings
