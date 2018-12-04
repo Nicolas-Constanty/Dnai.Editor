@@ -6,8 +6,10 @@
 #include <QJsonDocument>
 #include <QDir>
 
-#include <quazip.h>
-#include <quazipfile.h>
+#ifdef _WIN32
+# include <quazip.h>
+# include <quazipfile.h>
+#endif
 
 #include "dnai/editor.h"
 #include "dnai/solution.h"
@@ -148,8 +150,10 @@ namespace dnai
     bool Editor::packSolution()
     {
         QString packPath = m_solution->path() + "/" + m_solution->name() + ".dnaipackage";
-        QuaZip  archive(packPath);
         QDir solutionDir(m_solution->path());
+
+        #ifdef _WIN32
+        QuaZip  archive(packPath);
 
         if (!archive.open(QuaZip::mdCreate))
         {
@@ -194,12 +198,18 @@ namespace dnai
         }
 
         archive.close();
+        #else
+        #endif
+
         return true;
     }
 
     QUrl Editor::unpackSolution(QUrl packageUrl)
     {
         QString packagePath = packageUrl.toLocalFile();
+        QString solutionPath;
+
+        #ifdef _WIN32
         QuaZip archive(packagePath);
 
         qDebug() << "==Editor== Unpacking package " << packagePath;
@@ -221,7 +231,6 @@ namespace dnai
         }
 
         QuaZipFileInfo currInfo;
-        QString solutionPath;
 
         archive.goToFirstFile();
         while (archive.getCurrentFileInfo(&currInfo))
@@ -258,6 +267,12 @@ namespace dnai
         qDebug() << "==Editor== Project unpacked at " << solutionPath;
 
         archive.close();
+        #else
+
+
+
+        #endif
+
         return QUrl::fromLocalFile(solutionPath);
     }
 
