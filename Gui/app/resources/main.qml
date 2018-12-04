@@ -22,6 +22,7 @@ Window {
 
     SettingParameters {
         id: _settingsParameters
+        prefix: "Dnai.Editor_" + Editor.version()
         themePaths: [
             ":/settings/themes/dark.json",
             ":/settings/themes/light.json"

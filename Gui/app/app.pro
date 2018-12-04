@@ -153,7 +153,8 @@ SOURCES += \
     src/dnai/models/ml/hyperparameters.cpp \
     src/dnai/models/ml/mlproject.cpp \
     src/dnai/ml/mlhandler.cpp \
-    src/dnai/utils/iterableqqmlpropertymap.cpp
+    src/dnai/utils/iterableqqmlpropertymap.cpp \
+    src/dnai/core/resourcehandler.cpp
 
 
 RESOURCES += qml.qrc
@@ -310,6 +311,7 @@ HEADERS += \
     include/interfaces.h \
     include/dnai/core/handlermanager.h \
     $${PWD}/../lib/lcore_client/include/core.h \
+    $${PWD}/../lib/quazip/quazip.h \
     include/dnai/toastermanagerservice.h \
     include/dnai/views/toast.h \
     include/dnai/core/instructionhandler.h \
@@ -330,12 +332,14 @@ HEADERS += \
     include/dnai/models/ml/hyperparameters.h \
     include/ml.h \
     include/dnai/utils/iterableqqmlpropertymap.h \
-    include/utils.h
+    include/utils.h \
+    include/dnai/core/resourcehandler.h
 
 
 #LIB
 DEPENDPATH += $${PWD}/../lib/
 INCLUDEPATH += $${PWD}/../lib/lcore_client/include/
+INCLUDEPATH += $${PWD}/../lib/quazip/
 
 #win32-msvc*{
 #    DEPENDPATH += $${PWD}/../lib/lwintoast/
@@ -353,7 +357,7 @@ INCLUDEPATH += $${PWD}/../lib/lcore_client/include/
 
 
 #begin library network
-LIBS += -L$${PWD}/../lib/ -lcore_client -levent_client -lcerealization
+LIBS += -L$${PWD}/../lib/ -lcore_client -levent_client -lcerealization -lquazip
 
 
 CONFIG(release, debug|release) {

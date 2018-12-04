@@ -321,7 +321,8 @@ namespace dnai
 
                 qDebug() << "==Core== Declarator.Removed(" << declarator << ", " << name << ", " << QList<EntityID>::fromStdList(rmvList) << ")";
 
-                for (EntityID id : rmvList) {
+                for (auto i = rmvList.rbegin(); i != rmvList.rend(); i++) {
+                    int id = *i;
                     models::Entity &rmd = manager.getEntity(id);
 
                     //this will trigger onEntityRemoved

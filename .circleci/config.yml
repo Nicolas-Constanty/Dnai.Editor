@@ -9,7 +9,7 @@ general:
 jobs:
   build:
     docker:
-      - image: babiole/xenial_qt5_10:v1
+      - image: babiole/xenial_qt5_10:v1.1
     steps:
       - checkout
       - run:

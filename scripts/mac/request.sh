@@ -2,7 +2,7 @@
 
 #VARIABLES
 baseURL='https://api.dnai.io/'
-dmg_path="$TRAVIS_BUILD_DIR/Application/"
+dmg_path="$TRAVIS_BUILD_DIR/"
 dmg_name="DNAI-Installer.dmg"
 slug="installer"
 #END

@@ -652,15 +652,34 @@ namespace dnai
 
             for (const QString &curr : data->attributes())
             {
-                QString attrType = dnai::gcore::HandlerManager::Instance().getEntity(data->getAttribute(curr))->guid().toString();
+                models::Entity *attype = dnai::gcore::HandlerManager::Instance().getEntity(data->getAttribute(curr));
+
+                if (attype == nullptr)
+                    continue;
+
+                QString attrType = attype->guid().toString();
 
                 getAttributes->addOutput(curr, attrType, curr);
                 setAttributes->addInput(curr, attrType, curr);
                 setAttributes->addOutput(curr, attrType, curr);
             }
 
+            /*
+             * Cast node
+             */
+            ContextMenuItem *castToObject = new ContextMenuItem();
+            castToObject->setName("To" + entity->fullName());
+            castToObject->setDescription("Cast a value into a " + entity->name());
+            castToObject->addInput("reference", "{0db5b2f0-38d0-8f54-9433-479d1d90a699}", "Target");
+            castToObject->addOutput("value", entity->guid().toString(), "Value");
+            castToObject->addOutput("succeed", "{907ad50a-8f54-51ea-8c68-479d1d90a699}", "Succeed");
+            castToObject->setType(entity->entityType());
+            castToObject->setInstructionId(dnai::enums::QInstructionID::CAST);
+            castToObject->setConstruction({entity->id()});
+
             addItem(getAttributes, entityCategory, entity);
             addItem(setAttributes, entityCategory, entity);
+            addItem(castToObject, m_hash["/" + m_root->name() + "/Casts"], entity);
         }
 
         void ContextMenuModel::appendList(Entity *entity)
@@ -824,6 +843,21 @@ namespace dnai
             setvalueatins->setConstruction({stored->id()});
 
             addItem(setvalueatins, entityCategory, entity);
+
+            /*
+             * Cast node
+             */
+            ContextMenuItem *castToList = new ContextMenuItem();
+            castToList->setName("To" + entity->fullName());
+            castToList->setDescription("Cast a value into a " + entity->name());
+            castToList->addInput("reference", "{0db5b2f0-38d0-8f54-9433-479d1d90a699}", "Target");
+            castToList->addOutput("value", entity->guid().toString(), "Value");
+            castToList->addOutput("succeed", "{907ad50a-8f54-51ea-8c68-479d1d90a699}", "Succeed");
+            castToList->setType(entity->entityType());
+            castToList->setInstructionId(dnai::enums::QInstructionID::CAST);
+            castToList->setConstruction({entity->id()});
+
+            addItem(castToList, m_hash["/" + m_root->name() + "/Casts"], entity);
 
             /*
              * Binary operators

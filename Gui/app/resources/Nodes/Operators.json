@@ -265,6 +265,42 @@
                                             "construction": [5, 5, 1]
                                         }
                                     }
+                                },
+                                "matrix": {
+                                    "type": 8,
+                                    "inputs": [
+                                        {
+                                            "name": "LeftOperand",
+                                            "type": "{dd0b3137-38d0-5cc7-9433-f92bbf306aef}",
+                                            "display_name": "Value 1"
+                                        },
+                                        {
+                                            "name": "RightOperand",
+                                            "type": "{dd0b3137-38d0-5cc7-9433-f92bbf306aef}",
+                                            "display_name": "Value 2"
+                                        }
+                                    ],
+                                    "outputs": [
+                                        {
+                                            "name": "result",
+                                            "type": "{907ad50a-8f54-51ea-8c68-479d1d90a699}",
+                                            "display_name": "Result"
+                                        }
+                                    ],
+                                    "categories": {
+                                        "Different": {
+                                            "name": "!=",
+                                            "description": "",
+                                            "instruction_id": 2,
+                                            "construction": [8, 8, 1]
+                                        },
+                                        "Equal": {
+                                            "name": "==",
+                                            "description": "",
+                                            "instruction_id": 3,
+                                            "construction": [8, 8, 1]
+                                        }
+                                    }
                                 }
                             }
                         },
@@ -496,7 +532,7 @@
                                         {
                                             "name": "LeftOperand",
                                             "type": "{dd0b3137-38d0-5521-879a-1abfc6a5c664}",
-                                            "display_name": "Value 1"
+                                            "display_name": "String"
                                         }
                                     ],
                                     "categories": {
@@ -509,14 +545,14 @@
                                                 {
                                                     "name": "RightOperand",
                                                     "type": "{149e81c5-fc6e-5cc7-a0a6-6f736a6487ca}",
-                                                    "display_name": "Value 2"
+                                                    "display_name": "Index"
                                                 }
                                             ],
                                             "outputs": [
                                                 {
                                                     "name": "result",
                                                     "type": "{22f34ba1-b80d-595b-b485-e1ff3d1e1283}",
-                                                    "display_name": "Result"
+                                                    "display_name": "Character"
                                                 }
                                             ]
                                         },
@@ -538,6 +574,122 @@
                                                     "name": "result",
                                                     "type": "{dd0b3137-38d0-5521-879a-1abfc6a5c664}",
                                                     "display_name": "Result"
+                                                }
+                                            ]
+                                        }
+                                    }
+                                },
+                                "dictionary": {
+                                    "type": 6,
+                                    "inputs": [
+                                        {
+                                            "name": "LeftOperand",
+                                            "type": "{907ad50a-5384-b80d-b485-f92bbf306aef}",
+                                            "display_name": "Dictionnary"
+                                        }
+                                    ],
+                                    "categories": {
+                                        "Access": {
+                                            "name": "Access",
+                                            "description": "Access to a specific key in a dictionnary",
+                                            "instruction_id": 8,
+                                            "construction": [6, 5, 7],
+                                            "inputs": [
+                                                {
+                                                    "name": "RightOperand",
+                                                    "type": "{dd0b3137-38d0-5521-879a-1abfc6a5c664}",
+                                                    "display_name": "Key"
+                                                }
+                                            ],
+                                            "outputs": [
+                                                {
+                                                    "name": "result",
+                                                    "type": "{0db5b2f0-38d0-8f54-9433-479d1d90a699}",
+                                                    "display_name": "Value"
+                                                }
+                                            ]
+                                        }
+                                    }
+                                },
+                                "matrix": {
+                                    "type": 8,
+                                    "inputs": [
+                                        {
+                                            "name": "LeftOperand",
+                                            "type": "{dd0b3137-38d0-5cc7-9433-f92bbf306aef}",
+                                            "display_name": "Matrix"
+                                        }
+                                    ],
+                                    "outputs": [
+                                        {
+                                            "name": "result",
+                                            "type": "{dd0b3137-38d0-5cc7-9433-f92bbf306aef}",
+                                            "display_name": "Result"
+                                        }
+                                    ],
+                                    "categories": {
+                                        "Add": {
+                                            "name": "Add",
+                                            "description": "Add a single value to all matrix",
+                                            "instruction_id": 12,
+                                            "construction": [8, 3, 8],
+                                            "inputs": [
+                                                {
+                                                    "name": "RightOperand",
+                                                    "type": "{0db5b2f0-5384-5579-9433-f92bbf306aef}",
+                                                    "display_name": "Value"
+                                                }
+                                            ]
+                                        },
+                                        "Sub": {
+                                            "name": "Substract",
+                                            "description": "Substract a single value to all matrix",
+                                            "instruction_id": 13,
+                                            "construction": [8, 3, 8],
+                                            "inputs": [
+                                                {
+                                                    "name": "RightOperand",
+                                                    "type": "{0db5b2f0-5384-5579-9433-f92bbf306aef}",
+                                                    "display_name": "Value"
+                                                }
+                                            ]
+                                        },
+                                        "Div": {
+                                            "name": "Divide",
+                                            "description": "Divide a single value to all matrix",
+                                            "instruction_id": 14,
+                                            "construction": [8, 3, 8],
+                                            "inputs": [
+                                                {
+                                                    "name": "RightOperand",
+                                                    "type": "{0db5b2f0-5384-5579-9433-f92bbf306aef}",
+                                                    "display_name": "Value"
+                                                }
+                                            ]
+                                        },
+                                        "Mod": {
+                                            "name": "Modulo",
+                                            "description": "Apply modulus to all matrix",
+                                            "instruction_id": 16,
+                                            "construction": [8, 2, 8],
+                                            "inputs": [
+                                                {
+                                                    "name": "RightOperand",
+                                                    "type": "{149e81c5-fc6e-5cc7-a0a6-6f736a6487ca}",
+                                                    "display_name": "Value"
+                                                }
+                                            ]
+                                        },
+                                        "Mul": {
+                                            "name": "Multiply",
+                                            "description": "Multiply a single value to all matrix",
+                                            "instruction_id": 15,
+                                            "construction": [8, 3, 8],
+                                            "inputs": [
+                                                {
+                                                    "name": "RightOperand",
+                                                    "type": "{0db5b2f0-5384-5579-9433-f92bbf306aef}",
+                                                    "display_name": "Value"
                                                 }
                                             ]
                                         }
@@ -736,7 +888,7 @@
                 "Continue": {
                     "name": "continue",
                     "description": "Continue the execution of a loop",
-                    "instructiond_id": 37,
+                    "instruction_id": 37,
                     "construction": [],
                     "in": 1,
                     "out": 0
@@ -748,6 +900,397 @@
                     "construction": [],
                     "in": 1,
                     "out": 0
+                }
+            }
+        },
+        "Dictionary": {
+            "categories": {
+                "HasKey": {
+                    "type": 6,
+                    "name": "hasKey",
+                    "description": "Check the existence of a key in a dictionary",
+                    "instruction_id": 42,
+                    "construction": [],
+                    "inputs": [
+                        {
+                            "name": "reference",
+                            "type": "{907ad50a-5384-b80d-b485-f92bbf306aef}",
+                            "display_name": "Target"
+                        },
+                        {
+                            "name": "key",
+                            "type": "{dd0b3137-38d0-5521-879a-1abfc6a5c664}",
+                            "display_name": "Key"
+                        }
+                    ],
+                    "outputs": [
+                        {
+                            "name": "result",
+                            "type": "{907ad50a-8f54-51ea-8c68-479d1d90a699}",
+                            "display_name": "Result"
+                        }
+                    ]
+                },
+                "SetValueAtKey": {
+                    "type": 6,
+                    "name": "setValueAtKey",
+                    "description": "Set the dictionnary value with the given key",
+                    "instruction_id": 43,
+                    "construction": [],
+                    "inputs": [
+                        {
+                            "name": "reference",
+                            "type": "{907ad50a-5384-b80d-b485-f92bbf306aef}",
+                            "display_name": "Target"
+                        },
+                        {
+                            "name": "key",
+                            "type": "{dd0b3137-38d0-5521-879a-1abfc6a5c664}",
+                            "display_name": "Key"
+                        },
+                        {
+                            "name": "value",
+                            "type": "{0db5b2f0-38d0-8f54-9433-479d1d90a699}",
+                            "display_name": "Value"
+                        }
+                    ],
+                    "outputs": [
+                        {
+                            "name": "reference",
+                            "type": "{907ad50a-5384-b80d-b485-f92bbf306aef}",
+                            "display_name": "Target"
+                        }
+                    ],
+                    "in": 1,
+                    "out": 1
+                },
+                "RemoveValueAtKey": {
+                    "type": 6,
+                    "name": "removeValueAtKey",
+                    "description": "Remove a key entry in a dictionnary",
+                    "instruction_id": 44,
+                    "construction": [],
+                    "inputs": [
+                        {
+                            "name": "reference",
+                            "type": "{907ad50a-5384-b80d-b485-f92bbf306aef}",
+                            "display_name": "Target"
+                        },
+                        {
+                            "name": "key",
+                            "type": "{dd0b3137-38d0-5521-879a-1abfc6a5c664}",
+                            "display_name": "Key"
+                        }
+                    ],
+                    "outputs": [
+                        {
+                            "name": "reference",
+                            "type": "{907ad50a-5384-b80d-b485-f92bbf306aef}",
+                            "display_name": "Target"
+                        }
+                    ],
+                    "in": 1,
+                    "out": 1
+                }
+            }
+        },
+        "Matrix": {
+            "categories": {
+                "GetShape": {
+                    "type": 8,
+                    "name": "getShape",
+                    "description": "Get the dimensions of the matrix",
+                    "instruction_id": 48,
+                    "construction": [],
+                    "inputs": [
+                        {
+                            "name": "reference",
+                            "type": "{dd0b3137-38d0-5cc7-9433-f92bbf306aef}",
+                            "display_name": "Target"
+                        }
+                    ],
+                    "outputs": [
+                        {
+                            "name": "ColumnCount",
+                            "type": "{149e81c5-fc6e-5cc7-a0a6-6f736a6487ca}",
+                            "display_name": "Columns"
+                        },
+                        {
+                            "name": "RowCount",
+                            "type": "{149e81c5-fc6e-5cc7-a0a6-6f736a6487ca}",
+                            "display_name": "Rows"
+                        }
+                    ]
+                },
+                "Resize": {
+                    "type": 8,
+                    "name": "resize",
+                    "description": "Resize shape of a matrix",
+                    "instruction_id": 50,
+                    "construction": [],
+                    "inputs": [
+                        {
+                            "name": "reference",
+                            "type": "{dd0b3137-38d0-5cc7-9433-f92bbf306aef}",
+                            "display_name": "Target"
+                        },
+                        {
+                            "name": "rowCount",
+                            "type": "{149e81c5-fc6e-5cc7-a0a6-6f736a6487ca}",
+                            "display_name": "New Rows"
+                        },
+                        {
+                            "name": "columnCount",
+                            "type": "{149e81c5-fc6e-5cc7-a0a6-6f736a6487ca}",
+                            "display_name": "New Columns"
+                        },
+                        {
+                            "name": "copy",
+                            "type": "{907ad50a-8f54-51ea-8c68-479d1d90a699}",
+                            "display_name": "Copy"
+                        }
+                    ],
+                    "outputs": [
+                        {
+                            "name": "result",
+                            "type": "{dd0b3137-38d0-5cc7-9433-f92bbf306aef}",
+                            "display_name": "Result"
+                        }
+                    ],
+                    "in": 1,
+                    "out": 1
+                },
+                "GetIndex": {
+                    "type": 8,
+                    "name": "getIndex",
+                    "description": "Get a value at a given index",
+                    "instruction_id": 49,
+                    "construction": [],
+                    "inputs": [
+                        {
+                            "name": "reference",
+                            "type": "{dd0b3137-38d0-5cc7-9433-f92bbf306aef}",
+                            "display_name": "Target"
+                        },
+                        {
+                            "name": "row",
+                            "type": "{149e81c5-fc6e-5cc7-a0a6-6f736a6487ca}",
+                            "display_name": "Row"
+                        },
+                        {
+                            "name": "column",
+                            "type": "{149e81c5-fc6e-5cc7-a0a6-6f736a6487ca}",
+                            "display_name": "Column"
+                        }
+                    ],
+                    "outputs": [
+                        {
+                            "name": "value",
+                            "type": "{0db5b2f0-5384-5579-9433-f92bbf306aef}",
+                            "display_name": "Value"
+                        }
+                    ]
+                }
+            }
+        },
+        "Utils": {
+            "categories": {
+                "Random": {
+                    "type": 0,
+                    "name": "random",
+                    "description": "Generate a random number between 0.0 and 1.0",
+                    "instruction_id": 46,
+                    "construction": [],
+                    "outputs": [
+                        {
+                            "name": "value",
+                            "type": "{0db5b2f0-5384-5579-9433-f92bbf306aef}",
+                            "display_name": "Value"
+                        }
+                    ]
+                },
+                "Predict": {
+                    "type": 0,
+                    "name": "predict",
+                    "description": "Predict value from ml model",
+                    "instruction_id": 45,
+                    "construction": [],
+                    "inputs": [
+                        {
+                            "name": "model",
+                            "type": "{907ad50a-5384-9433-9433-479d1d90a699}",
+                            "display_name": "Path to model"
+                        },
+                        {
+                            "name": "inputs",
+                            "type": "{dd0b3137-38d0-5cc7-9433-f92bbf306aef}",
+                            "display_name": "Data to process"
+                        }
+
+                    ],
+                    "outputs": [
+                        {
+                            "name": "outputs",
+                            "type": "{dd0b3137-38d0-5cc7-9433-f92bbf306aef}",
+                            "display_name": "Result"
+                        }
+                    ],
+                    "in": 1,
+                    "out": 1
+                },
+                "Classify" : {
+                    "type": 0,
+                    "name": "classify",
+                    "description": "Classify data from ml model",
+                    "instruction_id": 51,
+                    "construction": [],
+                    "inputs": [
+                        {
+                            "name": "model",
+                            "type": "{907ad50a-5384-9433-9433-479d1d90a699}",
+                            "display_name": "Path to model"
+                        },
+                        {
+                            "name": "inputs",
+                            "type": "{dd0b3137-38d0-5cc7-9433-f92bbf306aef}",
+                            "display_name": "Data to process"
+                        }
+                    ],
+                    "outputs": [
+                        {
+                            "name": "outputs",
+                            "type": "{dd0b3137-38d0-5cc7-9433-f92bbf306aef}",
+                            "display_name": "Result"
+                        },
+                        {
+                            "name": "maxOutput",
+                            "type": "{0db5b2f0-5384-5579-9433-f92bbf306aef}",
+                            "display_name": "Max result"
+                        },
+                        {
+                            "name": "maxIndex",
+                            "type": "{149e81c5-fc6e-5cc7-a0a6-6f736a6487ca}",
+                            "display_name": "Max index"
+                        }
+                    ],
+                    "in": 1,
+                    "out": 1
+                }
+            }
+        },
+        "Casts": {
+            "inputs": [
+                {
+                    "name": "reference",
+                    "type": "{0db5b2f0-38d0-8f54-9433-479d1d90a699}",
+                    "display_name": "Target"
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "succeed",
+                    "type": "{907ad50a-8f54-51ea-8c68-479d1d90a699}",
+                    "display_name": "Succeed"
+                }
+            ],
+            "categories": {
+                "ToBoolean": {
+                    "type": 0,
+                    "name": "toBoolean",
+                    "description": "Cast a value into boolean",
+                    "instruction_id": 47,
+                    "construction": [1],
+                    "outputs": [
+                        {
+                            "name": "value",
+                            "type": "{907ad50a-8f54-51ea-8c68-479d1d90a699}",
+                            "display_name": "Value"
+                        }
+                    ]
+                },
+                "ToInteger": {
+                    "type": 0,
+                    "name": "toInteger",
+                    "description": "Cast a value into integer",
+                    "instruction_id": 47,
+                    "construction": [2],
+                    "outputs": [
+                        {
+                            "name": "value",
+                            "type": "{149e81c5-fc6e-5cc7-a0a6-6f736a6487ca}",
+                            "display_name": "Value"
+                        }
+                    ]
+                },
+                "ToFloating": {
+                    "type": 0,
+                    "name": "toFloating",
+                    "description": "Cast a value into floating point number",
+                    "instruction_id": 47,
+                    "construction": [3],
+                    "outputs": [
+                        {
+                            "name": "value",
+                            "type": "{0db5b2f0-5384-5579-9433-f92bbf306aef}",
+                            "display_name": "Value"
+                        }
+                    ]
+                },
+                "ToCharacter": {
+                    "type": 0,
+                    "name": "toCharacter",
+                    "description": "Cast a value into character",
+                    "instruction_id": 47,
+                    "construction": [4],
+                    "outputs": [
+                        {
+                            "name": "value",
+                            "type": "{22f34ba1-b80d-595b-b485-e1ff3d1e1283}",
+                            "display_name": "Value"
+                        }
+                    ]
+                },
+                "ToString": {
+                    "type": 0,
+                    "name": "toString",
+                    "description": "Cast a value into string",
+                    "instruction_id": 47,
+                    "construction": [5],
+                    "outputs": [
+                        {
+                            "name": "value",
+                            "type": "{dd0b3137-38d0-5521-879a-1abfc6a5c664}",
+                            "display_name": "Value"
+                        }
+                    ]
+                },
+                "ToDictionary": {
+                    "type": 0,
+                    "name": "toDictionary",
+                    "description": "Cast a value into a dictionary",
+                    "instruction_id": 47,
+                    "construction": [6],
+                    "outpus": [
+                        {
+                            "name": "value",
+                            "type": "{907ad50a-5384-b80d-b485-f92bbf306aef}",
+                            "display_name": "Value"
+                        }
+                    ]
+                },
+                "ToMatrix": {
+                    "type": 0,
+                    "name": "toMatrix",
+                    "description": "Cast a value into matrix",
+                    "instruction_id": 47,
+                    "construction": [8],
+                    "outputs": [
+                        {
+                            "name": "value",
+                            "type": "{dd0b3137-38d0-5cc7-9433-f92bbf306aef}",
+                            "display_name": "Value"
+                        }
+                    ]
                 }
             }
         }

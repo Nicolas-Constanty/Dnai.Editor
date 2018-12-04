@@ -13,7 +13,8 @@ namespace dnai
             m_function(m_manager),
             m_global(),
             m_object(m_manager),
-            m_list(m_manager)
+            m_list(m_manager),
+            m_resource()
         {
 
         }
@@ -87,6 +88,11 @@ namespace dnai
         ListHandler *HandlerManager::List()
         {
             return &m_list;
+        }
+
+        ResourceHandler *HandlerManager::Resource()
+        {
+            return &m_resource;
         }
 
         ProjectHandler &HandlerManager::Project()

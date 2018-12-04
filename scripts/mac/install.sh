@@ -115,6 +115,7 @@ then
 
     $qmakebinary "VERSION_MAJOR=$VERSION_MAJOR" "VERSION_MINOR=$VERSION_MINOR" "VERSION_BUILD=$VERSION_BUILD" $dnaipropath
     make -j 8
+    make install
 
     mkdir $install_dir/settings
     cp -rf $dnaisettingpath $install_dir/settings
@@ -145,9 +146,11 @@ then
     mv $build_dir/plugins/Controls $install_dir../PlugIns
     mv $build_dir/plugins/FontAwesome $install_dir../PlugIns
     mv $build_dir/plugins/Settings $install_dir../PlugIns
+    mv $build_dir/plugins/Theme $install_dir../PlugIns
     install_name_tool -add_rpath @rpath/../PlugIns/Controls/libdnaicontrolsplugin.dylib $install_dir/DNAI
     install_name_tool -add_rpath @rpath/../PlugIns/FontAwesome/libdnaifontawesomeplugin.dylib $install_dir/DNAI
     install_name_tool -add_rpath @rpath/../PlugIns/Settings/libdnaisettingsplugin.dylib $install_dir/DNAI
+    install_name_tool -add_rpath @rpath/../PlugIns/Theme/libdnaithemeplugin.dylib $install_dir/DNAI
 
     mv -f $install_dir_app $final_dir
     cd $final_dir/DNAI.app/Contents/MacOS/

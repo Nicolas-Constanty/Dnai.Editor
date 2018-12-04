@@ -15,6 +15,7 @@ import "../JavaScript/CreateComponent.js" as Factory
 ApplicationWindow {
     id: _root
     property alias openProjectId: openProjectId
+    property alias importProjectId: importProjectId
     property alias newProjectPopup: newProjectPopup
     Component.onCompleted: {
         Editor.checkVersion()
@@ -116,6 +117,23 @@ ApplicationWindow {
 
         onAccepted: {
             openSolution(openProjectId.fileUrl);
+        }
+    }
+
+    FileDialog {
+        id: importProjectId
+        title: "Choose a package to import"
+        folder: Qt.resolvedUrl(StandardPath.writableLocation((StandardPath.HomeLocation)))
+        nameFilters: [ "DNAI packages (*.dnaipackage)" ]
+
+        onAccepted: {
+
+            var solution = Editor.unpackSolution(importProjectId.fileUrl);
+
+            if (solution)
+            {
+                openSolution(solution);
+            }
         }
     }
 

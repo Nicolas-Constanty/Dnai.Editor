@@ -59,7 +59,13 @@ public:
         CLEAR,
         FILL,
         SET_VALUE_AT,
-        RETURN
+        RETURN,
+        HAS_KEY,
+        SET_VALUE_AT_KEY,
+        REMOVE_VALUE_AT_KEY,
+        MACHINE_LEARNING_RUNNER,
+        RANDOM,
+        CAST
     };
     Q_ENUM(Instruction_ID)
 };

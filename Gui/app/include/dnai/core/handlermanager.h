@@ -13,6 +13,7 @@
 #include "enumhandler.h"
 #include "listhandler.h"
 #include "globalhandler.h"
+#include "resourcehandler.h"
 
 namespace dnai
 {
@@ -29,6 +30,7 @@ namespace dnai
             Q_PROPERTY(GlobalHandler *global READ global CONSTANT)
             Q_PROPERTY(ObjectHandler *Class READ getClass CONSTANT)
             Q_PROPERTY(ListHandler *List READ List CONSTANT)
+            Q_PROPERTY(ResourceHandler *Resource READ Resource CONSTANT)
 
             Q_PROPERTY(QList<QVariant> types READ types NOTIFY typesChanged)
 
@@ -53,6 +55,7 @@ namespace dnai
             GlobalHandler *global();
             ObjectHandler *getClass();
             ListHandler *List();
+            ResourceHandler *Resource();
 
             /*
              * Inner c++ properties
@@ -96,6 +99,7 @@ namespace dnai
             GlobalHandler m_global;
             ObjectHandler m_object;
             ListHandler m_list;
+            ResourceHandler m_resource;
 
         private:
             QList<models::Entity *>    m_types;
