@@ -131,8 +131,9 @@ then
     brew link --overwrite mono
     nuget restore $csprojcorepackagepath
     /Library/Frameworks/Mono.framework/Commands/msbuild $csprojcorepath /t:Rebuild /p:Configuration=Release;Platform=x64
+    cp "$TRAVIS_BUILD_DIR/dependencies/Duly/CorePackage/bin/Latest/*" $binarycorepath
     cd $binarycorepath
-    /Library/Frameworks/Mono.framework/Commands/mkbundle -o CoreDaemon --simple CoreDaemon.exe --nodeps
+    /Library/Frameworks/Mono.framework/Commands/mkbundle -o CoreDaemon --simple CoreDaemon.exe
     cd $build_dir
     cp -rf $binarycorepath/CoreDaemon $install_dir/Core/
     echo "---- Core generation END ----"
