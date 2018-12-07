@@ -59,7 +59,7 @@ echo $res
 #requete vers PUT MISSING THE FILE
 pwd
 
-res=$(curl -X PUT --upload-file "$dmg_path$dmg_name" "$baseURL"download/softwares/mac/$slug/$release_version -H "Authorization: Bearer $token" -H 'content-type: application/octect-stream')
+res=$(curl -X PUT --upload-file "$dmg_path$dmg_name" "$baseURL"download/softwares/mac/$slug/$release_version -H "Authorization: Bearer $token" -H 'content-type: application/octet-stream')
 
 echo $res
 
