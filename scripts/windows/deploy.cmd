@@ -18,4 +18,4 @@ DEL tmpSIGNIN
 (echo %contentsWindows% | jq-win64.exe -r "._id") > tmpTOKEN
 set /p id= < tmpTOKEN
 DEL tmpTOKEN
-curl -X PUT --upload-file %APPVEYOR_BUILD_FOLDER%\Windows_x64\%PACKAGE_NAME%.exe  %API_LINK%/download/softwares/windows/%SLUG%/%APPVEYOR_REPO_TAG_NAME% -H "authorization: Bearer %token%" -H "content-type: text/plain" 
+curl -X PUT --upload-file %APPVEYOR_BUILD_FOLDER%\Windows_x64\%PACKAGE_NAME%.exe  %API_LINK%/download/softwares/windows/%SLUG%/%APPVEYOR_REPO_TAG_NAME% -H "authorization: Bearer %token%" -H "content-type: application/octect-stream" 
