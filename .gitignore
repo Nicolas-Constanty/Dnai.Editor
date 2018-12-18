@@ -80,3 +80,5 @@ build/
 *.ilk
 
 *.prl
+
+pythonBackend\.zip
