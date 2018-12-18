@@ -35,7 +35,7 @@ before_build:
 # CHECKOUT
   - cd %APPVEYOR_BUILD_FOLDER%
   - git submodule update --init --recursive
-  - ps: if %APPVEYOR_REPO_TAG% equ true Invoke-WebRequest https://drive.google.com/file/d/1l5BymbNG0r6Fklq_Om_ucWw6sOeE6xRD/view?usp=sharing -OutFile ./pythonBackend.zip 
+  - if %APPVEYOR_REPO_TAG% equ true curl -fsSL -o pythonBackend.zip https://drive.google.com/file/d/1l5BymbNG0r6Fklq_Om_ucWw6sOeE6xRD/view?usp=sharing
   - if %APPVEYOR_REPO_TAG% equ true git clone https://github.com/Gouet/Software-updater.git
   - if %APPVEYOR_REPO_TAG% equ true git clone https://%AppVeyorToken%@duly-eip.visualstudio.com/_git/Duly
   - if %APPVEYOR_REPO_TAG% equ true git clone https://github.com/Gouet/DNAI_updaters.git
