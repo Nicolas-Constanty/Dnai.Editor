@@ -23,6 +23,7 @@ namespace dnai
 
         private:
             QList<QString> m_projectResources;
+            void convertModels(const QString &path);
         };
     }
 }

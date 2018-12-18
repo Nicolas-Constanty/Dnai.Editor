@@ -62,7 +62,7 @@ BaseProperty {
                 selectExisting: true
                 selectFolder: false
                 selectMultiple: false
-                nameFilters: ["CNTK models (*.dnn)"]
+                nameFilters: ["Keras models (*.h5)"]
 
                 onAccepted: {
                     /*

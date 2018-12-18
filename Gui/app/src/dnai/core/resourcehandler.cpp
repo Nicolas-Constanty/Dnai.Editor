@@ -1,3 +1,6 @@
+#include <QProcess>
+#include <QDir>
+#include <QGuiApplication>
 #include "dnai/core/resourcehandler.h"
 #include "dnai/interfaces/isolution.h"
 #include "dnai/editor.h"
@@ -37,6 +40,7 @@ namespace dnai
 
                     if (resource.copy(newPath))
                     {
+                        convertModels(newPath);
                         return QFileInfo(newPath).fileName();
                     }
                     else
@@ -51,6 +55,39 @@ namespace dnai
             }
 
             return QString();
+        }
+
+        void ResourceHandler::convertModels(const QString &path)
+        {
+            QList<QProcess *> converters;
+
+            auto pythonPath = QGuiApplication::applicationDirPath() + "/pythonBackend";
+            //Keras to cntk
+            auto kerasToCntk = new QProcess();
+            kerasToCntk->setProgram(pythonPath + "/python.exe");
+            kerasToCntk->setArguments(QStringList({ pythonPath + "/KerasToCntk.py", "-m", path}));
+            //Keras to tensorflow
+            auto kerasToTensorflow = new QProcess();
+            kerasToTensorflow->setProgram(pythonPath + "/python.exe");
+            kerasToTensorflow->setArguments(QStringList({  pythonPath + "/KerasToTensorflow.py", "-m", path}));
+
+            converters << kerasToCntk << kerasToTensorflow;
+            for (auto converter : converters)
+            {
+                converter->start();
+                if (!converter->waitForStarted())
+                    Editor::instance().notifyError("Couldn't start process: " + converter->errorString());
+            }
+
+            for (auto converter : converters)
+            {
+                converter->waitForFinished();
+            }
+
+            for (auto i = 0; i < converters.length(); i++)
+            {
+                delete converters[i];
+            }
         }
 
         bool ResourceHandler::deleteResource(QString value)
