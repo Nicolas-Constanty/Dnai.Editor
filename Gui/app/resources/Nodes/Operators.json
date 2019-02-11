@@ -1175,6 +1175,24 @@
                     ],
                     "in": 1,
                     "out": 1
+                },
+                "LoadModel" : {
+                    "type": 0,
+                    "name": "load model",
+                    "description": "Load a pre-trained model",
+                    "instruction_id": 52,
+                    "construction": [],
+                    "inputs": [
+                        {
+                            "name": "model",
+                            "type": "{907ad50a-5384-9433-9433-479d1d90a699}",
+                            "display_name": "Path to model"
+                        }
+                    ],
+                    "outputs": [
+                    ],
+                    "in": 1,
+                    "out": 1
                 }
             }
         },
