@@ -23,7 +23,9 @@ Our main goal is to provide a way to share "logics" over different solutions :
 <p align="center">
   <a href="https://www.youtube.com/watch?v=7lFM3htAfNI"><img src="https://raw.githubusercontent.com/Nicolas-Constanty/Dnai.Editor/master/images/youtube_demo.jpg" height="300" alt="IMAGE ALT TEXT"></a>
 </p>
-
+<p align="center">
+  <a href="https://www.youtube.com/watch?v=XM4f9FP0amE"><img src="https://raw.githubusercontent.com/Nicolas-Constanty/Dnai.Editor/master/images/youtube_demo.jpg" height="300" alt="IMAGE ALT TEXT"></a>
+</p>
 <p align="center">
   <img alt="Main view screenshot" src="https://raw.githubusercontent.com/Nicolas-Constanty/Dnai.Editor/master/images/mainview.png" height="300">
 </p>
